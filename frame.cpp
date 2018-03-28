@@ -1055,7 +1055,7 @@ void Frame::jsonDataUpdated(QString id)
         QString result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
-        if( result == "\"result\":null")
+        if( result != "\"result\":true")
         {
             normalLogin = new NormalLogin(this);
 
@@ -1072,7 +1072,7 @@ void Frame::jsonDataUpdated(QString id)
             setGeometry(0,0, normalLogin->width(), normalLogin->height());
             moveWidgetToScreenCenter(this);
         }
-        else if( result.startsWith("\"error\":{\"message\":\"wallet does not exist\""))
+        else
         {
             firstLogin = new FirstLogin(this);
             normalLogin = NULL;
@@ -1088,8 +1088,8 @@ void Frame::jsonDataUpdated(QString id)
             setGeometry(0,0, firstLogin->width(), firstLogin->height());
             moveWidgetToScreenCenter(this);
         }
-        else
-        {
+//        else
+//        {
 //            // 其他情况视为钱包数据损坏
 //            QDir dir(UBChain::getInstance()->appDataPath + "/wallets/wallet");
 //            if(!dir.exists())   return;
@@ -1111,7 +1111,7 @@ void Frame::jsonDataUpdated(QString id)
 //            commonDialog.pop();
 
 //            qApp->quit();
-        }
+//        }
 
         return;
     }

@@ -75,7 +75,7 @@ void NormalLogin::on_enterBtn_clicked()
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id_unlock_normallogin", toJsonFormat( "unlock", QStringList() << "99999999" << ui->pwdLineEdit->text() ));
+    UBChain::getInstance()->postRPC( "id-unlock-normallogin", toJsonFormat( "unlock", QStringList() << ui->pwdLineEdit->text() ));
 
     emit showShadowWidget();
     ui->pwdLineEdit->setEnabled(false);
@@ -129,7 +129,7 @@ void NormalLogin::on_pwdLineEdit_textChanged(const QString &arg1)
 
 void NormalLogin::pwdConfirmed(QString id)
 {
-    if( id == "id_unlock_normallogin" )
+    if( id == "id-unlock-normallogin" )
     {
 
         emit hideShadowWidget();

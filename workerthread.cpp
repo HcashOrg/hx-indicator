@@ -54,9 +54,10 @@ void WorkerThread::connectToClient()
 
 void WorkerThread::run()
 {
+    qDebug() <<"xxxxxxxxxxxx ";
     m_webSocket = new QWebSocket;
     connect(m_webSocket,SIGNAL(connected()),this,SLOT(onConnected()));
-    connect(m_webSocket,SIGNAL(textFrameReceived(QString,bool)),this,SLOT(onTextFrameReceived(QString,bool)));
+    connect(m_webSocket,SIGNAL(textFrameReceived(QString,bool)),this,SLOT(onTextFrameReceived(QString,bool)),Qt::QueuedConnection);
 
     connectToClient();
 
@@ -91,7 +92,11 @@ void WorkerThread::onTextFrameReceived(QString _message, bool _isLastFrame)
 
     if(_isLastFrame)
     {
-        UBChain::getInstance()->updateJsonDataMap(m_rpcId, m_buff);
+
+        QString result = m_buff.mid( m_buff.lastIndexOf(",") + 1);
+        result = result.left( result.size() - 1);
+
+        UBChain::getInstance()->updateJsonDataMap(m_rpcId, result);
         UBChain::getInstance()->rpcReceivedOrNotMapSetValue(m_rpcId, true);
 
         m_buff.clear();

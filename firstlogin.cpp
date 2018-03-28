@@ -92,7 +92,7 @@ void FirstLogin::on_createBtn_clicked()
 //        rpcThread->setWriteData( toJsonFormat( "id_create", "create", QStringList() << "wallet" << ui->pwdLineEdit->text() ));
 //        rpcThread->start();
 
-        UBChain::getInstance()->postRPC( "id_create", toJsonFormat( "create", QStringList() << "wallet" << ui->pwdLineEdit->text() ));
+        UBChain::getInstance()->postRPC( "id-set_password", toJsonFormat( "set_password", QStringList() <<  ui->pwdLineEdit->text() ));
     }
     else
     {
@@ -219,14 +219,13 @@ void FirstLogin::on_pwdLineEdit2_textChanged(const QString &arg1)
 
 void FirstLogin::jsonDataUpdated(QString id)
 {
-    if( id == "id_create")
+    if( id == "id-set_password")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << "id_create" << result;
+        qDebug() << "id-set_password" << result;
         if( result == "\"result\":null" )
         {
-            UBChain::getInstance()->postRPC( "id_unlock_firstlogin", toJsonFormat( "unlock", QStringList() << "99999999" << ui->pwdLineEdit->text() ));
-qDebug() << "id_unlock_firstlogin";
+            UBChain::getInstance()->postRPC( "id-unlock-firstlogin", toJsonFormat( "unlock", QStringList() << ui->pwdLineEdit->text() ));
             return;
         }
         else
@@ -237,14 +236,17 @@ qDebug() << "id_unlock_firstlogin";
 
     }
 
-    if( id == "id_unlock_firstlogin")
+    if( id == "id-unlock-firstlogin")
     {
         emit hideShadowWidget();
         ui->pwdLineEdit->setEnabled(true);
         ui->pwdLineEdit2->setEnabled(true);
 
-        qDebug() << "id_unlock_firstlogin" << UBChain::getInstance()->jsonDataValue(id);
-        if( UBChain::getInstance()->jsonDataValue(id) == "\"result\":null")
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+
+        qDebug() << id << result;
+        if( result == "\"result\":null")
         {
             emit login();
             this->close();
