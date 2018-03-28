@@ -1,6 +1,7 @@
 ﻿#include "lnk.h"
 #include "debug_log.h"
 #include "workerthreadmanager.h"
+#include "websocketmanager.h"
 #include "commondialog.h"
 
 
@@ -39,6 +40,8 @@ UBChain::UBChain()
     nodeProc = new QProcess;
     clientProc = new QProcess;
     isExiting = false;
+
+    wsManager = NULL;
 
     workerManager = NULL;
 
@@ -120,13 +123,18 @@ UBChain::~UBChain()
         threadForWorkerManager = NULL;
     }
 
+
     if( workerManager)
     {
         delete workerManager;
         workerManager = NULL;
     }
 
-    
+    if( wsManager)
+    {
+        delete wsManager;
+        wsManager = NULL;
+    }
 }
 
 UBChain*   UBChain::getInstance()
@@ -1398,6 +1406,16 @@ void UBChain::resetPosOfCurrentDialog()
     }
 }
 
+void UBChain::initWebSocketManager()
+{
+    wsManager = new WebSocketManager;
+    wsManager->start();
+    wsManager->moveToThread(wsManager);
+
+    connect(this, SIGNAL(rpcPosted(QString,QString)), wsManager, SLOT(processRPCs(QString,QString)));
+
+}
+
 void UBChain::initWorkerThreadManager()
 {
     qDebug() << "initWorkerThreadManager " << QThread::currentThreadId();
@@ -1415,23 +1433,6 @@ void UBChain::initWorkerThreadManager()
     workerManager = new WorkerThreadManager;
     workerManager->moveToThread(threadForWorkerManager);
     connect(this, SIGNAL(rpcPosted(QString,QString)), workerManager, SLOT(processRPCs(QString,QString)));
-
-}
-
-void UBChain::destroyWorkerThreadManager()
-{
-    qDebug() << "destroyWorkerThreadManager " << QThread::currentThreadId();
-    if( workerManager)
-    {
-        workerManager->deleteLater();
-        workerManager = NULL;
-
-        if( threadForWorkerManager)
-        {
-            threadForWorkerManager->deleteLater();
-            threadForWorkerManager = NULL;
-        }
-    }
 
 }
 
@@ -1607,6 +1608,6 @@ QString toJsonFormat(QString instruction,
         array.append(param);
     }
     object.insert("params",array);
-qDebug() << object;
+
     return QJsonDocument(object).toJson();
 }

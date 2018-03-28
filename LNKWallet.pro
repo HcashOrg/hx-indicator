@@ -114,7 +114,8 @@ SOURCES += main.cpp\
     extra/contractserverinfomanager.cpp \
     control/feedassetcellwidget.cpp \
     lnk.cpp \
-    neworimportwalletwidget.cpp
+    neworimportwalletwidget.cpp \
+    websocketmanager.cpp
 
 HEADERS  += firstlogin.h \
     normallogin.h \
@@ -198,7 +199,8 @@ HEADERS  += firstlogin.h \
     extra/contractserverinfomanager.h \
     control/feedassetcellwidget.h \
     lnk.h \
-    neworimportwalletwidget.h
+    neworimportwalletwidget.h \
+    websocketmanager.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \

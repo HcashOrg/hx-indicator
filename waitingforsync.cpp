@@ -4,6 +4,7 @@
 #include "debug_log.h"
 #include "commondialog.h"
 #include "workerthreadmanager.h"
+#include "websocketmanager.h"
 
 #include <QPainter>
 #include <QTimer>
@@ -34,8 +35,12 @@ WaitingForSync::WaitingForSync(QWidget *parent) :
     connect(timerForPic,SIGNAL(timeout()),this,SLOT(showPic()));
     timerForPic->start(25);
 
-    UBChain::getInstance()->initWorkerThreadManager();
-    connect(UBChain::getInstance()->workerManager,SIGNAL(allConnected()),this,SIGNAL(sync()));
+    UBChain::getInstance()->initWebSocketManager();
+    timerForWSConnected = new QTimer(this);
+    connect(timerForWSConnected,SIGNAL(timeout()),this,SLOT(checkConnected()));
+    timerForWSConnected->start(1000);
+//    UBChain::getInstance()->initWorkerThreadManager();
+//    connect(UBChain::getInstance()->workerManager,SIGNAL(allConnected()),this,SIGNAL(sync()));
 }
 
 WaitingForSync::~WaitingForSync()
@@ -47,6 +52,11 @@ WaitingForSync::~WaitingForSync()
 void WaitingForSync::on_closeBtn_clicked()
 {
     emit closeWallet();
+}
+
+void WaitingForSync::checkConnected()
+{
+    if(UBChain::getInstance()->wsManager->isConnected)      emit sync();
 }
 
 

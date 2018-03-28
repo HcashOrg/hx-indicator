@@ -590,6 +590,7 @@ void Frame::startTimerForAutoRefresh()
 void Frame::syncFinished()
 {
     qDebug() << "sync finished ";
+    waitingForSync->timerForWSConnected->stop();
 //    RpcThread* rpcThread = new RpcThread;
 //    connect(rpcThread,SIGNAL(finished()),rpcThread,SLOT(deleteLater()));
 //    rpcThread->setLogin("a","b");

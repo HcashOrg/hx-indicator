@@ -30,6 +30,11 @@ private slots:
     void on_closeBtn_clicked();
 
 
+public:
+    QTimer* timerForWSConnected;
+private slots:
+    void checkConnected();
+
 private:
     QTimer* timerForPic;
     int rotateNum;

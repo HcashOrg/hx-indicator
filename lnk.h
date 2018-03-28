@@ -69,6 +69,7 @@
 
 class QTimer;
 class WorkerThreadManager;
+class WebSocketManager;
 
 static QMutex mutexForJsonData;
 static QMutex mutexForPending;
@@ -286,9 +287,14 @@ public:
     void showCurrentDialog();
     void resetPosOfCurrentDialog();
 
+    WebSocketManager* wsManager;
+
+    void initWebSocketManager();
     WorkerThreadManager* workerManager;  // 处理rpc worker thread
     void initWorkerThreadManager();
-    void destroyWorkerThreadManager();
+    QThread* threadForWorkerManager;
+
+
     void postRPC(QString _rpcId, QString _rpcCmd);
 
     void getContactsFile();  // contacts.dat 改放到数据路径
@@ -305,7 +311,6 @@ public:
     QFile* contactsFile;
     QFile* pendingFile;
 
-    QThread* threadForWorkerManager;
 
     QDialog* currentDialog;  // 如果不为空 则指向当前最前面的不属于frame的dialog
                              // 为的是自动锁定的时候hide该dialog
