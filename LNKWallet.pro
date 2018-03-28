@@ -66,8 +66,6 @@ SOURCES += main.cpp\
     importdialog.cpp \
     ipcellwidget.cpp \
     control/myprogressbar.cpp \
-    workerthread.cpp \
-    workerthreadmanager.cpp \
     control/showbottombarwidget.cpp \
     control/rightclickmenudialog.cpp \
     control/chooseaddaccountdialog.cpp \
@@ -149,8 +147,6 @@ HEADERS  += firstlogin.h \
     importdialog.h \
     ipcellwidget.h \
     control/myprogressbar.h \
-    workerthread.h \
-    workerthreadmanager.h \
     control/showbottombarwidget.h \
     control/rightclickmenudialog.h \
     control/chooseaddaccountdialog.h \

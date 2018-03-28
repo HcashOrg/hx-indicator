@@ -3,7 +3,6 @@
 #include "lnk.h"
 #include "debug_log.h"
 #include "commondialog.h"
-#include "workerthreadmanager.h"
 #include "websocketmanager.h"
 
 #include <QPainter>

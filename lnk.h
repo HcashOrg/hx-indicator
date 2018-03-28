@@ -288,12 +288,7 @@ public:
     void resetPosOfCurrentDialog();
 
     WebSocketManager* wsManager;
-
     void initWebSocketManager();
-    WorkerThreadManager* workerManager;  // 处理rpc worker thread
-    void initWorkerThreadManager();
-    QThread* threadForWorkerManager;
-
 
     void postRPC(QString _rpcId, QString _rpcCmd);
 

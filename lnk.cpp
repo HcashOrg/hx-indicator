@@ -1,6 +1,5 @@
 ﻿#include "lnk.h"
 #include "debug_log.h"
-#include "workerthreadmanager.h"
 #include "websocketmanager.h"
 #include "commondialog.h"
 
@@ -43,11 +42,8 @@ UBChain::UBChain()
 
     wsManager = NULL;
 
-    workerManager = NULL;
-
     getSystemEnvironmentPath();
 
-    threadForWorkerManager = NULL;
     currentDialog = NULL;
     hasDelegateSalary = false;
     needToScan = false;
@@ -115,19 +111,6 @@ UBChain::~UBChain()
     {
         delete contactsFile;
         contactsFile = NULL;
-    }
-
-    if( threadForWorkerManager)
-    {
-        delete threadForWorkerManager;
-        threadForWorkerManager = NULL;
-    }
-
-
-    if( workerManager)
-    {
-        delete workerManager;
-        workerManager = NULL;
     }
 
     if( wsManager)
@@ -1413,26 +1396,6 @@ void UBChain::initWebSocketManager()
     wsManager->moveToThread(wsManager);
 
     connect(this, SIGNAL(rpcPosted(QString,QString)), wsManager, SLOT(processRPCs(QString,QString)));
-
-}
-
-void UBChain::initWorkerThreadManager()
-{
-    qDebug() << "initWorkerThreadManager " << QThread::currentThreadId();
-    if( workerManager)
-    {
-        delete workerManager;
-    }
-    if( threadForWorkerManager)
-    {
-        delete threadForWorkerManager;
-    }
-
-    threadForWorkerManager = new QThread;
-    threadForWorkerManager->start();
-    workerManager = new WorkerThreadManager;
-    workerManager->moveToThread(threadForWorkerManager);
-    connect(this, SIGNAL(rpcPosted(QString,QString)), workerManager, SLOT(processRPCs(QString,QString)));
 
 }
 
