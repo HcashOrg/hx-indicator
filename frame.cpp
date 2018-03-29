@@ -374,11 +374,11 @@ void Frame::getAccountInfo()
 {
 
 
-    UBChain::getInstance()->postRPC( "id_wallet_list_my_addresses", toJsonFormat( "wallet_list_my_addresses", QStringList() << ""));
+//    UBChain::getInstance()->postRPC( "id_wallet_list_my_addresses", toJsonFormat( "wallet_list_my_addresses", QStringList() << ""));
 
-    UBChain::getInstance()->postRPC( "id_balance", toJsonFormat( "balance", QStringList() << ""));
+//    UBChain::getInstance()->postRPC( "id_balance", toJsonFormat( "balance", QStringList() << ""));
 
-    UBChain::getInstance()->updateAllContractBalance();
+//    UBChain::getInstance()->updateAllContractBalance();
 
 //    UBChain::getInstance()->collectContracts();
 
@@ -1241,8 +1241,10 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id_blockchain_list_assets")
+    if( id == "id-list_assets")
     {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
         UBChain::getInstance()->parseAssetInfo();
 
         updateAssets();
@@ -1904,21 +1906,10 @@ void Frame::showNormalAndActive()
 // 提前载入，防止切换到别的界面显示不出来
 void Frame::init()
 {
-    
+    UBChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QStringList() << "A" << "100"));
 
-    UBChain::getInstance()->postRPC( "id_blockchain_list_pending_transactions", toJsonFormat( "blockchain_list_pending_transactions", QStringList() << "" ));
 
-    UBChain::getInstance()->postRPC(  "id_wallet_set_transaction_scanning", toJsonFormat( "wallet_set_transaction_scanning", QStringList() << "true" ) );
-
-    UBChain::getInstance()->postRPC(  "id_delegate_set_network_min_connection_count", toJsonFormat( "delegate_set_network_min_connection_count", QStringList() << "0" ) );
-
-    UBChain::getInstance()->postRPC(  "id_wallet_delegate_set_block_production", toJsonFormat( "wallet_delegate_set_block_production", QStringList() << "ALL" << "false" ) );
-
-    UBChain::getInstance()->postRPC( "id_blockchain_list_assets", toJsonFormat( "blockchain_list_assets", QStringList() << ""));
-
-//    UBChain::getInstance()->postRPC( "id_delegate_set_transaction_min_fee", toJsonFormat( "delegate_set_transaction_min_fee", QStringList() << "10"));
-
-    UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QStringList() << "" ));
+//    UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QStringList() << "" ));
 
 
     

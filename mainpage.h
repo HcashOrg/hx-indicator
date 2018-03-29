@@ -65,8 +65,6 @@ private slots:
 
     void showExportDialog(QString name);
 
-    void withdrawSalary(QString name, QString salary);
-
     void renameAccount(QString name);
 
     void deleteAccount(QString name);

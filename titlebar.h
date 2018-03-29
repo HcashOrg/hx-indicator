@@ -31,7 +31,6 @@ private slots:
 
     void jsonDataUpdated(QString id);
 
-    void onTimeOut();
 
 private:
     Ui::TitleBar *ui;

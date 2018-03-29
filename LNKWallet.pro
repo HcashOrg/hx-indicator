@@ -113,7 +113,8 @@ SOURCES += main.cpp\
     control/feedassetcellwidget.cpp \
     lnk.cpp \
     neworimportwalletwidget.cpp \
-    websocketmanager.cpp
+    websocketmanager.cpp \
+    dialog/backupwalletdialog.cpp
 
 HEADERS  += firstlogin.h \
     normallogin.h \
@@ -196,7 +197,8 @@ HEADERS  += firstlogin.h \
     control/feedassetcellwidget.h \
     lnk.h \
     neworimportwalletwidget.h \
-    websocketmanager.h
+    websocketmanager.h \
+    dialog/backupwalletdialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -264,7 +266,8 @@ FORMS    += firstlogin.ui \
     control/contacteditdialog.ui \
     dialog/functionbarchoicedialog.ui \
     control/feedassetcellwidget.ui \
-    neworimportwalletwidget.ui
+    neworimportwalletwidget.ui \
+    dialog/backupwalletdialog.ui
     
 win32{
     DISTFILES += logo.rc

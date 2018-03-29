@@ -41,7 +41,7 @@ NameDialog::NameDialog(QWidget *parent) :
 
     ui->cancelBtn->setText(tr("Cancel"));
 
-    QRegExp regx("[a-z][a-z0-9]+$");
+    QRegExp regx("[a-z][a-z0-9\-]+$");
     QValidator *validator = new QRegExpValidator(regx, this);
     ui->nameLineEdit->setValidator( validator );
 
@@ -135,7 +135,7 @@ void NameDialog::on_nameLineEdit_textChanged(const QString &arg1)
 //    rpcThread->setWriteData( toJsonFormat( "id_blockchain_get_account_" + addrName, "blockchain_get_account", QStringList() << addrName ));
 //    rpcThread->start();
 
-    UBChain::getInstance()->postRPC( "id_blockchain_get_account_" + addrName, toJsonFormat( "blockchain_get_account", QStringList() << addrName ));
+    UBChain::getInstance()->postRPC( "id-get_account-" + addrName, toJsonFormat( "get_account", QStringList() << addrName ));
     ui->gifLabel->show();
 }
 
@@ -148,14 +148,16 @@ void NameDialog::on_nameLineEdit_returnPressed()
 
 void NameDialog::jsonDataUpdated(QString id)
 {
-    if( id.mid(0,26) == "id_blockchain_get_account_")
+    if( id.startsWith("id-get_account-") )
     {
-        // 如果跟当前输入框中的内容不一样，则是过时的rpc返回，不用处理
-        if( id.mid(26) != ui->nameLineEdit->text())  return;
         QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        // 如果跟当前输入框中的内容不一样，则是过时的rpc返回，不用处理
+        if( id.mid(QString("id-get_account-").size()) != ui->nameLineEdit->text())  return;
+
         ui->gifLabel->hide();
 
-        if( result == "\"result\":null")
+        if( result.startsWith("\"result\":{\"id\":\"0.0.0\""))
         {
             ui->okBtn->setEnabled(true);
             ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#2be683>" + tr( "The name is available") + "</font></body>" );

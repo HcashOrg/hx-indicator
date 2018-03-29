@@ -77,7 +77,7 @@ void ExportDialog::on_cancelBtn_clicked()
 {
     CommonDialog commonDialog(CommonDialog::OkAndCancel);
 //    commonDialog.setText(QString::fromLocal8Bit("您还没有备份私钥，如果数据丢失/损坏 您将没有任何途径找回您的账户。是否确定取消备份?"));
-    commonDialog.setText(tr("You have not backup this private key.If your wallet data is lost or corrupted, you will have no way to get your account back.Sure to cancel?"));
+    commonDialog.setText(tr("You have not backup this wallet.If your wallet data is lost or corrupted, you will have no way to get your account back.Sure to cancel?"));
     if(commonDialog.pop())
     {
         close();

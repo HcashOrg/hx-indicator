@@ -24,12 +24,7 @@ TitleBar::TitleBar(QWidget *parent) :
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    timer = new QTimer(this);
-    connect( timer, SIGNAL(timeout()), this, SLOT(onTimeOut()));
-    timer->setInterval(10000);
-    timer->start();
 
-    onTimeOut();
 	
 }
 
@@ -81,39 +76,7 @@ void TitleBar::retranslator()
 
 void TitleBar::jsonDataUpdated(QString id)
 {
-    if( id == "id_blockchain_list_pending_transactions")
-    {
-        QString pendingTransactions = UBChain::getInstance()->jsonDataValue(id);
-        // 查询一遍 config中记录的交易ID
-        mutexForConfigFile.lock();
-        UBChain::getInstance()->configFile->beginGroup("/recordId");
-        QStringList keys = UBChain::getInstance()->configFile->childKeys();
-        UBChain::getInstance()->configFile->endGroup();
 
-        int numOfNews = 0;
-        foreach (QString key, keys)
-        {
-            if( UBChain::getInstance()->configFile->value("/recordId/" + key).toInt() == 2)
-            {
-                // 失效的交易
-                numOfNews++;
-                continue;
-            }
-
-            if( !pendingTransactions.contains(key))  // 如果不在pending区, 看看是否在链上
-            {
-                UBChain::getInstance()->postRPC( "id_blockchain_get_transaction_" + key, toJsonFormat( "blockchain_get_transaction", QStringList() << key  ));
-            }
-
-            if( UBChain::getInstance()->configFile->value("/recordId/" + key).toInt() == 1)
-            {
-                numOfNews++;
-            }
-        }
-        mutexForConfigFile.unlock();
-
-        return;
-    }
 
     if( id.startsWith("id_blockchain_get_transaction"))
     {
@@ -145,39 +108,6 @@ void TitleBar::jsonDataUpdated(QString id)
 
 }
 
-void TitleBar::onTimeOut()
-{
-    UBChain::getInstance()->postRPC( "id_blockchain_list_pending_transactions", toJsonFormat( "blockchain_list_pending_transactions", QStringList() << "" ));
-
-    mutexForConfigFile.lock();
-    UBChain::getInstance()->configFile->beginGroup("/applyingForDelegateAccount");
-    QStringList keys = UBChain::getInstance()->configFile->childKeys();
-    UBChain::getInstance()->configFile->endGroup();
-    foreach (QString key, keys)
-    {
-        // 如果申请代理的recordId 被删除了 或者被确认了（=1）或者失效了（=2） 则 删除applyingForDelegateAccount的记录
-        if( !UBChain::getInstance()->configFile->contains("/recordId/" + UBChain::getInstance()->configFile->value("/applyingForDelegateAccount/" + key).toString())
-            ||  UBChain::getInstance()->configFile->value("/recordId/" + UBChain::getInstance()->configFile->value("/applyingForDelegateAccount/" + key).toString()).toInt() != 0 )
-        {
-            UBChain::getInstance()->configFile->remove("/applyingForDelegateAccount/" + key);
-        }
-    }
-
-    UBChain::getInstance()->configFile->beginGroup("/registeringAccount");
-    keys = UBChain::getInstance()->configFile->childKeys();
-    UBChain::getInstance()->configFile->endGroup();
-    foreach (QString key, keys)
-    {
-        // 如果注册升级的recordId 被删除了 或者被确认了（=1）或者失效了（=2） 则 删除registeringAccount的记录
-        if( !UBChain::getInstance()->configFile->contains("/recordId/" + UBChain::getInstance()->configFile->value("/registeringAccount/" + key).toString())
-            ||  UBChain::getInstance()->configFile->value("/recordId/" + UBChain::getInstance()->configFile->value("/registeringAccount/" + key).toString()).toInt() != 0 )
-        {
-            UBChain::getInstance()->configFile->remove("/registeringAccount/" + key);
-        }
-    }
-
-    mutexForConfigFile.unlock();
-}
 
 void TitleBar::paintEvent(QPaintEvent *)
 {

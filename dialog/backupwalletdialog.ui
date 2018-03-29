@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>BackupWalletDialog</class>
+ <widget class="QDialog" name="BackupWalletDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>556</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>900</width>
+     <height>556</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="containerWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>170</y>
+      <width>380</width>
+      <height>240</height>
+     </rect>
+    </property>
+    <widget class="QToolButton" name="cancelBtn">
+     <property name="geometry">
+      <rect>
+       <x>196</x>
+       <y>169</y>
+       <width>120</width>
+       <height>36</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>取消</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="nameLabel">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>80</y>
+       <width>200</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="text">
+      <string>选择钱包备份路径</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="pathBtn">
+     <property name="geometry">
+      <rect>
+       <x>260</x>
+       <y>80</y>
+       <width>70</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QToolButton{font: 9pt &quot;微软雅黑&quot;;text-decoration: underline;background:transparent;color: rgb(192, 196, 212);}
+QToolButton:hover{color:white;}</string>
+     </property>
+     <property name="text">
+      <string>选择路径</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="backupBtn">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>169</y>
+       <width>120</width>
+       <height>36</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>备份</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="pathLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>110</y>
+       <width>280</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="contextMenuPolicy">
+      <enum>Qt::DefaultContextMenu</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="closeBtn">
+     <property name="geometry">
+      <rect>
+       <x>355</x>
+       <y>12</y>
+       <width>13</width>
+       <height>13</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

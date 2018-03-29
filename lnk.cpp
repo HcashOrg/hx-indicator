@@ -529,7 +529,7 @@ void UBChain::parseAssetInfo()
 {
     assetInfoMap.clear();
 
-    QString jsonResult = jsonDataValue("id_blockchain_list_assets");
+    QString jsonResult = jsonDataValue("id-list_assets");
     jsonResult.prepend("{");
     jsonResult.append("}");
 
@@ -551,26 +551,14 @@ void UBChain::parseAssetInfo()
                         AssetInfo assetInfo;
 
                         QJsonObject object = resultArray.at(i).toObject();
-                        assetInfo.id = object.take("id").toInt();
+                        assetInfo.id = object.take("id").toString().mid(4).toInt();
                         assetInfo.symbol = object.take("symbol").toString();
+                        assetInfo.issuer = object.take("issuer").toString();
+                        assetInfo.precision = object.take("precision").toInt();
 
-                        QJsonObject object2 = object.take("authority").toObject();
-                        assetInfo.owner = object2.take("owners").toArray().at(0).toString();
+                        QJsonObject object2 = object.take("options").toObject();
 
-                        assetInfo.name = object.take("name").toString();
-                        assetInfo.description = object.take("description").toString();
-
-                        QJsonValue value = object.take("precision");
-                        if( value.isString())
-                        {
-                            assetInfo.precision = value.toString().toULongLong();
-                        }
-                        else
-                        {
-                            assetInfo.precision = QString::number(value.toDouble(),'g',10).toULongLong();
-                        }
-
-                        QJsonValue value2 = object.take("max_supply");
+                        QJsonValue value2 = object2.take("max_supply");
                         if( value2.isString())
                         {
                             assetInfo.maxSupply = value2.toString().toULongLong();
@@ -580,20 +568,9 @@ void UBChain::parseAssetInfo()
                             assetInfo.maxSupply = QString::number(value2.toDouble(),'g',10).toULongLong();
                         }
 
-                        QJsonValue value3 = object.take("current_supply");
-                        if( value3.isString())
-                        {
-                            assetInfo.currentSupply = value3.toString().toULongLong();
-                        }
-                        else
-                        {
-                            assetInfo.currentSupply = QString::number(value3.toDouble(),'g',10).toULongLong();
-                        }
-
-                        assetInfo.registrationDate = object.take("registration_date").toString();
+                        qDebug() << assetInfo.id << assetInfo.symbol << assetInfo.issuer << assetInfo.precision << assetInfo.maxSupply;
 
                         assetInfoMap.insert(assetInfo.id,assetInfo);
-
                     }
                 }
             }
@@ -1337,20 +1314,20 @@ int UBChain::addressMapRemove(QString key)
     return number;
 }
 
-bool UBChain::rpcReceivedOrNotMapValue(QString key)
-{
-    mutexForRpcReceiveOrNot.lock();
-    bool received = rpcReceivedOrNotMap.value(key);
-    mutexForRpcReceiveOrNot.unlock();
-    return received;
-}
+//bool UBChain::rpcReceivedOrNotMapValue(QString key)
+//{
+//    mutexForRpcReceiveOrNot.lock();
+//    bool received = rpcReceivedOrNotMap.value(key);
+//    mutexForRpcReceiveOrNot.unlock();
+//    return received;
+//}
 
-void UBChain::rpcReceivedOrNotMapSetValue(QString key, bool received)
-{
-    mutexForRpcReceiveOrNot.lock();
-    rpcReceivedOrNotMap.insert(key, received);
-    mutexForRpcReceiveOrNot.unlock();
-}
+//void UBChain::rpcReceivedOrNotMapSetValue(QString key, bool received)
+//{
+//    mutexForRpcReceiveOrNot.lock();
+//    rpcReceivedOrNotMap.insert(key, received);
+//    mutexForRpcReceiveOrNot.unlock();
+//}
 
 
 void UBChain::appendCurrentDialogVector( QWidget * w)
@@ -1401,25 +1378,27 @@ void UBChain::initWebSocketManager()
 
 void UBChain::postRPC(QString _rpcId, QString _rpcCmd)
 {
-    if( rpcReceivedOrNotMap.contains( _rpcId))
-    {
-        if( rpcReceivedOrNotMap.value( _rpcId) == true)
-        {
-            rpcReceivedOrNotMapSetValue( _rpcId, false);
-            emit rpcPosted(_rpcId, _rpcCmd);
-        }
-        else
-        {
-            // 如果标识为未返回 则不重复排入事件队列
-            return;
-        }
-    }
-    else
-    {
-        rpcReceivedOrNotMapSetValue( _rpcId, false);
-        emit rpcPosted(_rpcId, _rpcCmd);
-    }
+//    if( rpcReceivedOrNotMap.contains( _rpcId))
+//    {
+//        if( rpcReceivedOrNotMap.value( _rpcId) == true)
+//        {
+//            rpcReceivedOrNotMapSetValue( _rpcId, false);
+//            emit rpcPosted(_rpcId, _rpcCmd);
+//        }
+//        else
+//        {
+//            // 如果标识为未返回 则不重复排入事件队列
+//            return;
+//        }
+//    }
+//    else
+//    {
+//        rpcReceivedOrNotMapSetValue( _rpcId, false);
 
+//        emit rpcPosted(_rpcId, _rpcCmd);
+//    }
+
+    emit rpcPosted(_rpcId, _rpcCmd);
 }
 
 double roundDown(double decimal, int precision)

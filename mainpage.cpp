@@ -18,6 +18,7 @@
 #include "control/rightclickmenudialog.h"
 #include "control/chooseaddaccountdialog.h"
 #include "dialog/renamedialog.h"
+#include "dialog/backupwalletdialog.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -106,38 +107,7 @@ void MainPage::addAccount()
 
     if( !name.isEmpty())
     {
-
-        emit showShadowWidget();
-        UBChain::getInstance()->write("wallet_account_create " + name + '\n');
-        QString result = UBChain::getInstance()->read();
-        emit hideShadowWidget();
-
-        if(result.left(5) == "20017")
-        {
-            qDebug() << "wallet_account_create " + name + '\n'  << result;
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Failed"));
-            commonDialog.pop();
-            return;
-        }
-        else
-        {
-
-            if( result.startsWith(ACCOUNT_ADDRESS_PREFIX))
-            {
-                UBChain::getInstance()->setRecollect();
-
-                CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText( tr("Please backup the private key of this account!!!") );
-                commonDialog.pop();
-
-                ExportDialog exportDialog(name);
-                exportDialog.pop();
-            }
-
-        }
-//        refresh();
-        emit newAccount(name);
+        UBChain::getInstance()->postRPC( "id-wallet_create_account-" + name, toJsonFormat( "wallet_create_account", QStringList() << name ));
 
     }
 
@@ -439,33 +409,36 @@ void MainPage::retranslator(QString language)
 
 void MainPage::jsonDataUpdated(QString id)
 {
-    if( id.mid(0,37) == "id_wallet_delegate_pay_balance_query_")
+    if( id.startsWith("id-wallet_create_account-") )
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << "mmmmmmmm " << id << result;
 
-        int pos = result.indexOf("\"pay_balance\":") + 14;
-        QString payBal = result.mid( pos, result.indexOf("}", pos) - pos );
-        payBal.remove("\"");
-        UBChain::getInstance()->delegateSalaryMap.insert(id.mid(37), payBal.toInt() /  (double)ASSET_PRECISION);
-        return;
-    }
+        QString name = id.mid(QString("id-wallet_create_account-").size());
 
-
-    if( id == "id_wallet_delegate_withdraw_pay")
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-        if( result.mid(0,9) == "\"result\":")
+        if(result.startsWith(QString("\"result\":\"%1").arg(ACCOUNT_ADDRESS_PREFIX)))
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Withdraw succeeded!") );
+            commonDialog.setText( tr("Please backup up the wallet!!!") );
             commonDialog.pop();
 
-            refresh();
+            BackupWalletDialog backupWalletDialog;
+            backupWalletDialog.pop();
+
         }
-        else if( result.mid(0,8) == "\"error\":")
+        else if(result.startsWith("\"error\":"))
+        {
+            int pos = result.indexOf("\"message\":\"") + 11;
+            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
+
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText( "Create account failed: " + errorMessage );
+            commonDialog.pop();
+        }
+        else
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Withdraw failed!") );
+            commonDialog.setText( tr("Failed"));
             commonDialog.pop();
         }
 
@@ -641,21 +614,7 @@ void MainPage::showExportDialog(QString name)
     exportDialog.pop();
 }
 
-void MainPage::withdrawSalary(QString name, QString salary)
-{
-//    double amount = salary.toDouble() - 0.01;
-//    if( amount > 0.000001)
-//    {
-//        CommonDialog commonDialog(CommonDialog::OkAndCancel);
-//        commonDialog.setText( tr("Sure to withdraw your salary?"));
-//        if( commonDialog.pop())
-//        {
-//            UBChain::getInstance()->postRPC( toJsonFormat( "id_wallet_delegate_withdraw_pay", "wallet_delegate_withdraw_pay",
-//                                                          QStringList() << name <<  name << QString::number(amount) ));
-//        }
-//    }
 
-}
 
 void MainPage::renameAccount(QString name)
 {

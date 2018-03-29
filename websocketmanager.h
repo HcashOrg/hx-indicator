@@ -22,6 +22,8 @@ public:
     void processRPC(QString _rpcId, QString _rpcCmd);
 public slots:
     void processRPCs(QString _rpcId, QString _rpcCmd);
+private:
+    int loopCount = 0;
 
 protected:
     void run();

@@ -89,13 +89,9 @@ struct AssetInfo
 {
     int id;
     QString symbol;
-    QString owner;
-    QString name;
-    QString description;
-    unsigned long long precision;
+    QString issuer;
+    int precision;
     unsigned long long maxSupply;
-    unsigned long long currentSupply;
-    QString registrationDate;
 };
 struct AssetAmount
 {
@@ -255,7 +251,6 @@ public:
     QStringList delegateList;
     bool hasDelegateSalary;
     QMap<QString,double> delegateSalaryMap;
-    QMap<QString,bool> rpcReceivedOrNotMap;  // 标识rpc指令是否已经返回了，如果还未返回则忽略
 
     TwoAddresses getAddress(QString);
     bool    isMyAddress(QString address);
@@ -278,8 +273,10 @@ public:
     TwoAddresses addressMapValue(QString key);
     void addressMapInsert(QString key, TwoAddresses value);
     int addressMapRemove(QString key);
-    bool rpcReceivedOrNotMapValue(QString key);
-    void rpcReceivedOrNotMapSetValue(QString key, bool received);
+
+//    QMap<QString,bool> rpcReceivedOrNotMap;  // 标识rpc指令是否已经返回了，如果还未返回则忽略
+//    bool rpcReceivedOrNotMapValue(QString key);
+//    void rpcReceivedOrNotMapSetValue(QString key, bool received);
 
     void appendCurrentDialogVector(QWidget*);
     void removeCurrentDialogVector(QWidget *);

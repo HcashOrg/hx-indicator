@@ -28,7 +28,6 @@ void WebSocketManager::connectToClient()
 void WebSocketManager::processRPC(QString _rpcId, QString _rpcCmd)
 {
     busy = true;
-
     m_rpcId = _rpcId;
     m_webSocket->sendTextMessage(_rpcCmd);
 }
@@ -46,8 +45,20 @@ retry:
 
     if( !processed)
     {
-        QThread::msleep(100);
-        goto retry;
+        if(loopCount > 10)
+        {
+            m_buff.clear();
+            m_rpcId.clear();
+            loopCount = 0;
+            return;
+        }
+        else
+        {
+            QThread::msleep(10);
+            loopCount++;
+            goto retry;
+        }
+
     }
 }
 
@@ -73,18 +84,20 @@ void WebSocketManager::onConnected()
 
 void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
 {
-    qDebug() << "message received: " << _message;
+    qDebug() << "message received: " << m_rpcId << _message;
 
     m_buff += _message;
+
+    loopCount = 0;
 
     if(_isLastFrame)
     {
 
-        QString result = m_buff.mid( m_buff.lastIndexOf(",") + 1);
+        QString result = m_buff.mid( QString("{\"id\":32800,\"jsonrpc\":\"2.0\",").size());
         result = result.left( result.size() - 1);
 
         UBChain::getInstance()->updateJsonDataMap(m_rpcId, result);
-        UBChain::getInstance()->rpcReceivedOrNotMapSetValue(m_rpcId, true);
+//        UBChain::getInstance()->rpcReceivedOrNotMapSetValue(m_rpcId, true);
 
         m_buff.clear();
         m_rpcId.clear();
