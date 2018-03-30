@@ -122,7 +122,13 @@ SOURCES += main.cpp\
     contact/ContactInfoWidget.cpp \
     contact/ContactSearchWidget.cpp \
     contact/ContactTreeWidget.cpp \
-    contact/ContactWidget.cpp
+    contact/ContactWidget.cpp \
+    control/accountdetailwidget.cpp \
+    dialog/dialogwithshadow.cpp \
+    applydelegatepage.cpp \
+    chooseupgradedialog.cpp \
+    delegatepage.cpp \
+    marketpage.cpp
 
 HEADERS  += firstlogin.h \
     normallogin.h \
@@ -214,7 +220,25 @@ HEADERS  += firstlogin.h \
     contact/ContactInfoWidget.h \
     contact/ContactSearchWidget.h \
     contact/ContactTreeWidget.h \
-    contact/ContactWidget.h
+    contact/ContactWidget.h \
+    control/accountdetailwidget.h \
+    dialog/dialogwithshadow.h \
+    leveldb/include/leveldb/c.h \
+    leveldb/include/leveldb/cache.h \
+    leveldb/include/leveldb/comparator.h \
+    leveldb/include/leveldb/db.h \
+    leveldb/include/leveldb/dumpfile.h \
+    leveldb/include/leveldb/env.h \
+    leveldb/include/leveldb/filter_policy.h \
+    leveldb/include/leveldb/iterator.h \
+    leveldb/include/leveldb/options.h \
+    leveldb/include/leveldb/slice.h \
+    leveldb/include/leveldb/status.h \
+    leveldb/include/leveldb/table.h \
+    leveldb/include/leveldb/table_builder.h \
+    leveldb/include/leveldb/write_batch.h \
+    chooseupgradedialog.h \
+    delegatepage.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -289,7 +313,10 @@ FORMS    += firstlogin.ui \
     contact/ContactInfoTitleWidget.ui \
     contact/ContactInfoWidget.ui \
     contact/ContactSearchWidget.ui \
-    contact/ContactWidget.ui
+    contact/ContactWidget.ui \
+    applydelegatepage.ui \
+    chooseupgradedialog.ui \
+    delegatepage.ui
     
 win32{
     DISTFILES += logo.rc
@@ -302,5 +329,19 @@ RESOURCES += \
 
 TRANSLATIONS +=   wallet_simplified_Chinese.ts  wallet_English.ts
 
+SUBDIRS += \
+    LNKWallet1.pro
+
 DISTFILES += \
-    contact/search.png
+    leveldb/leveldb.lib \
+    leveldb/ShLwApi.Lib \
+    libqrencode.a \
+    qrencode.lib \
+    pic2/Thumbs.db \
+    contact/search.png \
+    pic2/copyBtn.png \
+    LNK.ico \
+    .gitignore \
+    LICENSE \
+    wallet_English.ts \
+    wallet_simplified_Chinese.ts
