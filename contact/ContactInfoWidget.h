@@ -22,7 +22,8 @@ class ContactInfoWidget : public QWidget
 public:
     explicit ContactInfoWidget(QWidget *parent = 0);
     ~ContactInfoWidget();
-
+signals:
+    void gotoTransferPage(QString,QString);
 private slots:
     void transferAccountSlots();
 public:

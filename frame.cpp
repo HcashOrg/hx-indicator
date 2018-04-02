@@ -822,7 +822,7 @@ void Frame::showContactPage()
     //contactPage = new ContactPage(centralWidget);
     //connect(contactPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     //connect(contactPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
-    //connect(contactPage,SIGNAL(gotoTransferPage(QString,QString)),this,SLOT(showTransferPageWithAddress(QString,QString)));
+    connect(contactPage,SIGNAL(gotoTransferPage(QString,QString)),this,SLOT(showTransferPageWithAddress(QString,QString)));
     //contactPage->setAttribute(Qt::WA_DeleteOnClose);
     contactPage->show();
     currentPageNum = 4;

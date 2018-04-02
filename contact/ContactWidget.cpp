@@ -63,9 +63,14 @@ void ContactWidget::AddNewContactSlots()
 
 void ContactWidget::ShowContactInfoSlots(const QString &address)
 {
+    if(!_p->contactInfoWidget)
+    {
+        disconnect(_p->contactInfoWidget,&ContactInfoWidget::gotoTransferPage,this,&ContactWidget::gotoTransferPage);
+    }
     _p->contactInfoWidget = new ContactInfoWidget();
     _p->contactInfoWidget->setData(_p->contactSheet->findPerson(address));
     ui->scrollArea_rightBottom->setWidget(_p->contactInfoWidget);
+    connect(_p->contactInfoWidget,&ContactInfoWidget::gotoTransferPage,this,&ContactWidget::gotoTransferPage);
 }
 
 void ContactWidget::InitWidget()

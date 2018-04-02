@@ -304,3 +304,7 @@ TRANSLATIONS +=   wallet_simplified_Chinese.ts  wallet_English.ts
 
 DISTFILES += \
     contact/search.png
+
+//release版生成调试信息
+QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
+QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO

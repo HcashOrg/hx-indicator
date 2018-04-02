@@ -20,7 +20,8 @@ class ContactWidget : public QWidget
 public:
     explicit ContactWidget(QWidget *parent = 0);
     ~ContactWidget();
-
+signals:
+    void gotoTransferPage(QString,QString);
 private slots:
     void AddNewContactSlots();
     void ShowContactInfoSlots(const QString &address);

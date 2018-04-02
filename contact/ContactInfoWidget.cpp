@@ -38,7 +38,7 @@ ContactInfoWidget::~ContactInfoWidget()
 void ContactInfoWidget::transferAccountSlots()
 {
     if(!_p->person) return;
-
+    emit gotoTransferPage(_p->person->address,_p->person->name);
 }
 
 void ContactInfoWidget::setData(const std::shared_ptr<ContactPerson> &person)
