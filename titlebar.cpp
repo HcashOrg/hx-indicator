@@ -4,7 +4,7 @@
 #include "titlebar.h"
 #include "ui_titlebar.h"
 
-#include "lnk.h"
+#include "wallet.h"
 #include "commondialog.h"
 
 TitleBar::TitleBar(QWidget *parent) :

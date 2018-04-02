@@ -38,7 +38,7 @@
 
 #define ASSET_NAME "LNK"
 #define ACCOUNT_ADDRESS_PREFIX  "LNK"
-#define ASSET_PRECISION 100000
+#define ASSET_PRECISION 5
 #define WALLET_VERSION "1.0.0"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 
@@ -82,22 +82,33 @@ static QMutex mutexForBalanceMap;
 static QMutex mutexForAddressMap;
 static QMutex mutexForRpcReceiveOrNot;
 
+struct AssetAmount
+{
+    QString assetId;
+    unsigned long long amount = 0;
+};
+typedef QMap<QString,AssetAmount> AssetAmountMap;
+struct AccountInfo
+{
+    QString name;
+    QString address;
+    QString id;
+
+    AssetAmountMap   assetAmountMap;
+};
+
 
 typedef QMap<int,unsigned long long>  AssetBalanceMap;
 typedef QMap<QString,unsigned long long>  ContractBalanceMap;
 struct AssetInfo
 {
-    int id;
+    QString id;
     QString symbol;
     QString issuer;
     int precision;
     unsigned long long maxSupply;
 };
-struct AssetAmount
-{
-    int assetId;
-    unsigned long long amount = 0;
-};
+
 struct ERC20TokenInfo
 {
     QString contractAddress;
@@ -223,7 +234,6 @@ public:
     bool isExiting;
     void quit();
     QString read();
-    QProcess* proc;
     QProcess* nodeProc;
     QProcess* clientProc;
 private slots:
@@ -314,12 +324,16 @@ public:
     QString localIP;   // 保存 peerinfo 获得的本机IP和端口
 
 
+    QMap<QString,AccountInfo>   accountInfoMap;
+    void parseAccountInfo();
+    void getAccountBalances(QString _accountName);
+
     QMap<QString,AssetBalanceMap> accountBalanceMap;
     void parseBalance();
 
-    QMap<int,AssetInfo>  assetInfoMap;
+    QMap<QString,AssetInfo>  assetInfoMap;
     void parseAssetInfo();
-    int getAssetId(QString symbol);
+    QString getAssetId(QString symbol);
 
     QMap<QString,TransactionsInfoVector> transactionsMap;   // key是 "账户名_资产符号" 形式
     void parseTransactions(QString result, QString accountName = "ALL");
@@ -414,7 +428,7 @@ private:
 QString doubleTo5Decimals(double number);
 double roundDown(double decimal, int precision = 0);        // 根据精度 向下取"整"
 QString removeLastZeros(QString number);        // qstring::number() 对小数的处理有问题  使用std::to_string() 然后把后面的0去掉
-QString getBigNumberString(unsigned long long number,unsigned long long precision);
+QString getBigNumberString(unsigned long long number,int precision);
 
 enum AddressType
 {

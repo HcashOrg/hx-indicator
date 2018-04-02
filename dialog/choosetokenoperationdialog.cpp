@@ -1,7 +1,7 @@
 ﻿#include "choosetokenoperationdialog.h"
 #include "ui_choosetokenoperationdialog.h"
 
-#include "lnk.h"
+#include "wallet.h"
 #include "../commondialog.h"
 
 #include <QDebug>

@@ -1,7 +1,7 @@
 #include "functionbarchoicedialog.h"
 #include "ui_functionbarchoicedialog.h"
 
-#include "lnk.h"
+#include "wallet.h"
 #include "../commondialog.h"
 
 #include <QDebug>

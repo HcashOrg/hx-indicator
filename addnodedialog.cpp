@@ -1,6 +1,6 @@
 #include "addnodedialog.h"
 #include "ui_addnodedialog.h"
-#include "lnk.h"
+#include "wallet.h"
 
 AddNodeDialog::AddNodeDialog(QWidget *parent) :
     QDialog(parent),

@@ -1,7 +1,7 @@
 ﻿#include "feedpricedialog.h"
 #include "ui_feedpricedialog.h"
 
-#include "lnk.h"
+#include "wallet.h"
 #include "../commondialog.h"
 #include "checkpwddialog.h"
 

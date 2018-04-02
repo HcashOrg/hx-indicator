@@ -1,6 +1,6 @@
 #include "exportdialog.h"
 #include "ui_exportdialog.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "commondialog.h"
 #include "dialog/exportsetpwddialog.h"
 #include "AES/aesencryptor.h"

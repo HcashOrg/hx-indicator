@@ -1,6 +1,6 @@
 ﻿#include "importdialog.h"
 #include "ui_importdialog.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "commondialog.h"
 #include "namedialog.h"
 #include "control/shadowwidget.h"

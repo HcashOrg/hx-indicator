@@ -7,7 +7,7 @@
 
 #include "firstlogin.h"
 #include "ui_firstlogin.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "debug_log.h"
 #include "commondialog.h"
 

@@ -7,7 +7,7 @@
 #include <QListView>
 
 
-#include "lnk.h"
+#include "wallet.h"
 #include "../commondialog.h"
 #include "multisiginfodialog.h"
 #include "dialog/checkpwddialog.h"

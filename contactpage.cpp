@@ -1,6 +1,6 @@
 ﻿#include "contactpage.h"
 #include "ui_contactpage.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "debug_log.h"
 #include "editremarkdialog.h"
 #include "addcontactdialog.h"

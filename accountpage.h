@@ -2,7 +2,7 @@
 #define ACCOUNTPAGE_H
 
 #include <QWidget>
-#include "lnk.h"
+#include "wallet.h"
 
 namespace Ui {
 class AccountPage;

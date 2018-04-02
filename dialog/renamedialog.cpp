@@ -1,6 +1,6 @@
 #include "renamedialog.h"
 #include "ui_renamedialog.h"
-#include "../lnk.h"
+#include "../wallet.h"
 
 #include <QDebug>
 #include <QMovie>

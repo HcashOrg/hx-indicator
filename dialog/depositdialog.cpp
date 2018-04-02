@@ -7,7 +7,7 @@
 #include <QJsonArray>
 #include <QTextCodec>
 
-#include "lnk.h"
+#include "wallet.h"
 #include "../commondialog.h"
 #include "checkpwddialog.h"
 

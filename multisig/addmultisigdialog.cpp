@@ -6,7 +6,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 
-#include "lnk.h"
+#include "wallet.h"
 #include "../commondialog.h"
 
 AddMultiSigDialog::AddMultiSigDialog(QWidget *parent) :

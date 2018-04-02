@@ -1,7 +1,7 @@
 #include "createtokendialog.h"
 #include "ui_createtokendialog.h"
 
-#include "lnk.h"
+#include "wallet.h"
 #include "commondialog.h"
 #include "checkpwddialog.h"
 

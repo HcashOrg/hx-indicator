@@ -1,7 +1,7 @@
 ﻿#include "feedpage.h"
 #include "ui_feedpage.h"
 
-#include "lnk.h"
+#include "wallet.h"
 #include "dialog/feedpricedialog.h"
 #include "showcontentdialog.h"
 #include "control/feedassetcellwidget.h"

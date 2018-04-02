@@ -1,6 +1,6 @@
 #include "ipcellwidget.h"
 #include "ui_ipcellwidget.h"
-#include "lnk.h"
+#include "wallet.h"
 #include <QDebug>
 
 IpCellWidget::IpCellWidget(QString ip, bool flag, QWidget *parent) :

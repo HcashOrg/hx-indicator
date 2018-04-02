@@ -1,6 +1,6 @@
 #include "consoledialog.h"
 #include "ui_consoledialog.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "debug_log.h"
 
 #include <QTextCodec>
@@ -52,7 +52,7 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
 
 //    mouse_press = false;
 
-//    ui->checkBox->hide();  // rpc选项隐藏
+    ui->checkBox->hide();  // rpc选项隐藏
     
 }
 
@@ -188,8 +188,8 @@ void ConsoleDialog::on_consoleLineEdit_returnPressed()
         cmdIndex = cmdVector.size();
     }
 
-    if( ui->checkBox->isChecked())
-    {
+//    if( ui->checkBox->isChecked())
+//    {
         QString str = ui->consoleLineEdit->text();
         str = str.simplified();
         QStringList paramaters = str.split(' ');
@@ -197,18 +197,18 @@ void ConsoleDialog::on_consoleLineEdit_returnPressed()
         paramaters.removeFirst();
         if( paramaters.isEmpty())  paramaters << "";
 
-        UBChain::getInstance()->postRPC( "console_" + str, toJsonFormat( command, paramaters ));
+        UBChain::getInstance()->postRPC( "console-" + str, toJsonFormat( command, paramaters ));
 
         ui->consoleLineEdit->clear();
         return;
-    }
+//    }
 
-    QString str = ui->consoleLineEdit->text() + '\n';
-    UBChain::getInstance()->write(str);
-    QString result = UBChain::getInstance()->read();
-    ui->consoleBrowser->append(">>>" + str);
-    ui->consoleBrowser->append(result);
-    ui->consoleLineEdit->clear();
+//    QString str = ui->consoleLineEdit->text() + '\n';
+//    UBChain::getInstance()->write(str);
+//    QString result = UBChain::getInstance()->read();
+//    ui->consoleBrowser->append(">>>" + str);
+//    ui->consoleBrowser->append(result);
+//    ui->consoleLineEdit->clear();
     
 }
 
@@ -219,7 +219,7 @@ void ConsoleDialog::on_consoleLineEdit_returnPressed()
 
 void ConsoleDialog::jsonDataUpdated(QString id)
 {
-    if( id.startsWith("console_"))
+    if( id.startsWith("console-"))
     {
         ui->consoleBrowser->append(">>>" + id.mid(8));
         ui->consoleBrowser->append( UBChain::getInstance()->jsonDataValue(id));

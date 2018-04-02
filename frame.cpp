@@ -17,7 +17,7 @@
 #include "lockpage.h"
 #include "titlebar.h"
 #include "frame.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "debug_log.h"
 #include "waitingforsync.h"
 #include <QDesktopWidget>
@@ -374,7 +374,7 @@ void Frame::getAccountInfo()
 {
 
 
-//    UBChain::getInstance()->postRPC( "id_wallet_list_my_addresses", toJsonFormat( "wallet_list_my_addresses", QStringList() << ""));
+    UBChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QStringList() << ""));
 
 //    UBChain::getInstance()->postRPC( "id_balance", toJsonFormat( "balance", QStringList() << ""));
 
@@ -604,24 +604,18 @@ void Frame::syncFinished()
         UBChain::getInstance()->getContactsFile();
     }
 
-    UBChain::getInstance()->postRPC("id-is_new", toJsonFormat( "is_new", QStringList() << "" ));
+    UBChain::getInstance()->postRPC("id-is_new", toJsonFormat( "is_new", QStringList() ));
 }
 
 void Frame::setCurrentAccount(QString accountName)
 {
     UBChain::getInstance()->currentAccount = accountName;
 
-    if(functionBar != NULL)
-    {
-        functionBar->setCurrentAccount(accountName);
-    }
 }
 
 void Frame::setCurrentToken(QString tokenAddress)
 {
     UBChain::getInstance()->currentTokenAddress = tokenAddress;
-
-    functionBar->updateAssetComboBox();
 }
 
 void Frame::closeCurrentPage()
@@ -1117,78 +1111,69 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id_wallet_list_my_addresses")
+    if( id == "id-list_my_accounts")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
-        QStringList accountList;
+        qDebug() << id << result;
 
-        QStringList strList = result.split("},{");
+        UBChain::getInstance()->parseAccountInfo();
 
-        foreach (QString str, strList)
+        foreach (QString accountName, UBChain::getInstance()->accountInfoMap.keys())
         {
-            int pos = str.indexOf("\"name\":\"") + 8;
-            if( pos == 7)  break;   // 如果还没有账号
-
-            accountList += str.mid(pos, str.indexOf("\",", pos) - pos);
+            UBChain::getInstance()->getAccountBalances(accountName);
         }
 
-        mutexForConfigFile.lock();
-        UBChain::getInstance()->configFile->beginGroup("/accountInfo");
-        QStringList keys = UBChain::getInstance()->configFile->childKeys();
-        UBChain::getInstance()->configFile->endGroup();
-
-
-        foreach (QString key, keys)
-        {
-            QString addName = UBChain::getInstance()->configFile->value("/accountInfo/" + key).toString();
-            if( !accountList.contains( addName) && !addName.isEmpty())
-            {
-                // 如果config记录的账户钱包中没有 则清除config文件中记录以及内存中各map
-                UBChain::getInstance()->deleteAccountInConfigFile( addName);
-                UBChain::getInstance()->addressMapRemove( addName);
-                UBChain::getInstance()->balanceMapRemove( addName);
-                UBChain::getInstance()->registerMapRemove( addName);
-            }
-        }
-
-        UBChain::getInstance()->configFile->beginGroup("/accountInfo");
-        keys = UBChain::getInstance()->configFile->childKeys();
-
-        foreach (QString key, keys)
-        {
-            QString addName = UBChain::getInstance()->configFile->value(key).toString();
-            UBChain::getInstance()->balanceMapInsert(addName, UBChain::getInstance()->getBalance( addName));
-            UBChain::getInstance()->registerMapInsert(addName, UBChain::getInstance()->getRegisterTime( addName));
-            UBChain::getInstance()->addressMapInsert(addName, UBChain::getInstance()->getAddress (addName));
-            accountList.removeAll( addName);     // 如果钱包中有账号 config中未记录， 保留在accountList里
-        }
-        UBChain::getInstance()->configFile->endGroup();
-
-        if( !accountList.isEmpty())    // 把config中没有记录的账号写入config中
-        {
-            for( int i = 0; i < accountList.size(); i++)
-            {
-                QString addName = accountList.at(i);
-                mutexForBalanceMap.lock();
-                QString accountName = QString(QString::fromLocal8Bit("账户") + toThousandFigure(UBChain::getInstance()->balanceMap.size() + 1));
-                mutexForBalanceMap.unlock();
-                UBChain::getInstance()->configFile->setValue("/accountInfo/" + accountName, addName);
-                UBChain::getInstance()->balanceMapInsert(addName, UBChain::getInstance()->getBalance( addName));
-                UBChain::getInstance()->registerMapInsert(addName, UBChain::getInstance()->getRegisterTime( addName));
-                UBChain::getInstance()->addressMapInsert(addName, UBChain::getInstance()->getAddress ( addName));
-            }
-        }
-        mutexForConfigFile.unlock();
-
-        if( needToRefresh)
-        {
-            refresh();
-            needToRefresh = false;
-        }
+//        if( needToRefresh)
+//        {
+//            refresh();
+//            needToRefresh = false;
+//        }
 
         return;
     }
+
+    if( id.startsWith("id-get_account_balances-") )
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        qDebug() << "bbbbbbbbbbb  " << id << result;
+
+        if(result.startsWith("\"result\":["))
+        {
+            QString accountName = id.mid(id.indexOf("-",10) + 1);
+
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonArray array = jsonObject.take("result").toArray();
+            for(int i = 0; i < array.size(); i++)
+            {
+                QJsonObject object = array.at(i).toObject();
+                AssetAmount assetAmount;
+                assetAmount.assetId = object.take("asset_id").toString();
+
+                QJsonValue value = object.take("amount");
+                if(value.isString())
+                {
+                    assetAmount.amount = value.toString().toULongLong();
+                }
+                else
+                {
+                    assetAmount.amount = QString::number(value.toDouble(),'g',12).toULongLong();
+                }
+
+                UBChain::getInstance()->accountInfoMap[accountName].assetAmountMap.insert(assetAmount.assetId,assetAmount);
+            }
+        }
+
+
+
+        return;
+    }
+
 
 
     if( id == "id_lock")

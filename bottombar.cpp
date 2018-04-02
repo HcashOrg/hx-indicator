@@ -3,7 +3,7 @@
 
 
 #include "consoledialog.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "commontip.h"
 #include "commondialog.h"
 #include "extra/dynamicmove.h"

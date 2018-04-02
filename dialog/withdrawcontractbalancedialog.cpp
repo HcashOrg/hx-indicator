@@ -3,7 +3,7 @@
 
 #include <QDebug>
 
-#include "lnk.h"
+#include "wallet.h"
 #include "../commondialog.h"
 
 WithdrawContractBalanceDialog::WithdrawContractBalanceDialog(QString address, QWidget *parent) :

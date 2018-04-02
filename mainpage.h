@@ -32,13 +32,6 @@ public slots:
     void updateAccountList();
 
 
-private:
-    int sortMode = 0;       // 0 金额降序   1 金额升序
-    void sortAccountsByBalance(QStringList& accounts);
-
-private slots:
-    void changeSortMode(int _section);
-
 signals:
     void openAccountPage(QString);
     void showShadowWidget();
@@ -73,6 +66,8 @@ private slots:
 
 //    void hideDetailWidget();
 
+
+    void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::MainPage *ui;

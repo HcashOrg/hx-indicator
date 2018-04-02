@@ -3,7 +3,7 @@
 
 #include <QThread>
 #include <QWebSocket>
-
+#include <QTimer>
 
 
 class WebSocketManager : public QThread
@@ -31,15 +31,18 @@ protected:
 signals:
 
 private slots:
+    void onTimer();
     void onConnected();
     void onTextFrameReceived(QString _message, bool _isLastFrame);
 
 
 
 private:
+    QTimer* timer;
     QWebSocket* m_webSocket;
     QString m_buff;
     QString m_rpcId;
+    QStringList   pendingRpcs;
 
     bool busy;
 };

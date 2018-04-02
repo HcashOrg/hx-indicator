@@ -279,40 +279,40 @@ void MultiSigTransactionPage::showTransactions()
         ui->transactionsTableWidget->setItem(i,3,new QTableWidgetItem( UBChain::getInstance()->addressToName(detail.opposite)));
         ui->transactionsTableWidget->item(i,3)->setTextColor(QColor(192,196,212));
 
-        // 金额
-        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(detail.assetAmount.assetId);
-        unsigned long long amount = 0;
-        if( !detail.includeFee || transactionInfo.isConfirmed == false)
-        {
-            amount = detail.assetAmount.amount;
-        }
-        else
-        {
-            amount = detail.assetAmount.amount - transactionInfo.fee;
-        }
+//        // 金额
+//        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(detail.assetAmount.assetId);
+//        unsigned long long amount = 0;
+//        if( !detail.includeFee || transactionInfo.isConfirmed == false)
+//        {
+//            amount = detail.assetAmount.amount;
+//        }
+//        else
+//        {
+//            amount = detail.assetAmount.amount - transactionInfo.fee;
+//        }
 
-        if( detail.type == 1)
-        {
-            ui->transactionsTableWidget->setItem(i,4,new QTableWidgetItem( "-" + getBigNumberString(amount,assetInfo.precision) + " "
-                                                                                  + assetInfo.symbol));
-            ui->transactionsTableWidget->item(i,4)->setTextColor(QColor(239,104,60));
-        }
-        else if( detail.type == 2)
-        {
-            ui->transactionsTableWidget->setItem(i,4,new QTableWidgetItem( "+" + getBigNumberString(amount,assetInfo.precision) + " "
-                                                                                  + assetInfo.symbol));
-            ui->transactionsTableWidget->item(i,4)->setTextColor(QColor(113,203,90));
-        }
-        else
-        {
-            ui->transactionsTableWidget->setItem(i,4,new QTableWidgetItem( getBigNumberString(amount,assetInfo.precision) + " "
-                                                                                  + assetInfo.symbol));
-        }
+//        if( detail.type == 1)
+//        {
+//            ui->transactionsTableWidget->setItem(i,4,new QTableWidgetItem( "-" + getBigNumberString(amount,assetInfo.precision) + " "
+//                                                                                  + assetInfo.symbol));
+//            ui->transactionsTableWidget->item(i,4)->setTextColor(QColor(239,104,60));
+//        }
+//        else if( detail.type == 2)
+//        {
+//            ui->transactionsTableWidget->setItem(i,4,new QTableWidgetItem( "+" + getBigNumberString(amount,assetInfo.precision) + " "
+//                                                                                  + assetInfo.symbol));
+//            ui->transactionsTableWidget->item(i,4)->setTextColor(QColor(113,203,90));
+//        }
+//        else
+//        {
+//            ui->transactionsTableWidget->setItem(i,4,new QTableWidgetItem( getBigNumberString(amount,assetInfo.precision) + " "
+//                                                                                  + assetInfo.symbol));
+//        }
 
-        if( transactionInfo.isConfirmed == false)
-        {
-            ui->transactionsTableWidget->item(i,4)->setTextColor(QColor(200,200,200));
-        }
+//        if( transactionInfo.isConfirmed == false)
+//        {
+//            ui->transactionsTableWidget->item(i,4)->setTextColor(QColor(200,200,200));
+//        }
 
         // 手续费
         ui->transactionsTableWidget->setItem(i,5,new QTableWidgetItem( getBigNumberString(transactionInfo.fee,ASSET_PRECISION)));

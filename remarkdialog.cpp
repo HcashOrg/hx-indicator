@@ -1,6 +1,6 @@
 #include "remarkdialog.h"
 #include "ui_remarkdialog.h"
-#include "lnk.h"
+#include "wallet.h"
 #include <QTextStream>
 #include <QDebug>
 #include "debug_log.h"

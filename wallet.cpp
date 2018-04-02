@@ -1,4 +1,4 @@
-﻿#include "lnk.h"
+﻿#include "wallet.h"
 #include "debug_log.h"
 #include "websocketmanager.h"
 #include "commondialog.h"
@@ -34,8 +34,6 @@ UBChain* UBChain::goo = 0;
 
 UBChain::UBChain()
 {
-    
-    proc = new QProcess;
     nodeProc = new QProcess;
     clientProc = new QProcess;
     isExiting = false;
@@ -203,8 +201,8 @@ qint64 UBChain::write(QString cmd)
 {
     QTextCodec* gbkCodec = QTextCodec::codecForName("GBK");
     QByteArray cmdBa = gbkCodec->fromUnicode(cmd);  // 转为gbk的bytearray
-    proc->readAll();
-    return proc->write(cmdBa.data());
+    clientProc->readAll();
+    return clientProc->write(cmdBa.data());
 }
 
 QString UBChain::read()
@@ -215,10 +213,10 @@ QString UBChain::read()
     QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
     while ( !result.contains(">>>"))        // 确保读取全部输出
     {
-        proc->waitForReadyRead(50);
-        str = gbkCodec->toUnicode(proc->readAll());
+        clientProc->waitForReadyRead(50);
+        str = gbkCodec->toUnicode(clientProc->readAll());
         result += str;
-        if( str.right(2) == ": " )  break;
+//        if( str.right(2) == ": " )  break;
 
         //  手动调用处理未处理的事件，防止界面阻塞
 //        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
@@ -458,7 +456,46 @@ void UBChain::getContactsFile()
 //        {
 //            // 如果都没有 则使用钱包路径下的
 //        }
-//    }
+    //    }
+}
+
+void UBChain::parseAccountInfo()
+{
+    QString jsonResult = jsonDataValue("id-list_my_accounts");
+    jsonResult.prepend("{");
+    jsonResult.append("}");
+
+
+    QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonResult.toLatin1());
+    QJsonObject jsonObject = parse_doucment.object();
+    if( jsonObject.contains("result"))
+    {
+        QJsonValue resultValue = jsonObject.take("result");
+        if( resultValue.isArray())
+        {
+            accountInfoMap.clear();
+
+            QJsonArray resultArray = resultValue.toArray();
+            for( int i = 0; i < resultArray.size(); i++)
+            {
+                AccountInfo accountInfo;
+
+                QJsonObject object = resultArray.at(i).toObject();
+                accountInfo.id = object.take("id").toString();
+                accountInfo.name = object.take("name").toString();
+                accountInfo.address = object.take("addr").toString();
+
+                accountInfoMap.insert(accountInfo.name,accountInfo);
+
+                getAccountBalances(accountInfo.name);
+            }
+        }
+    }
+}
+
+void UBChain::getAccountBalances(QString _accountName)
+{
+    postRPC( "id-get_account_balances-" + _accountName, toJsonFormat( "get_account_balances", QStringList() << _accountName));
 }
 
 void UBChain::parseBalance()
@@ -551,7 +588,7 @@ void UBChain::parseAssetInfo()
                         AssetInfo assetInfo;
 
                         QJsonObject object = resultArray.at(i).toObject();
-                        assetInfo.id = object.take("id").toString().mid(4).toInt();
+                        assetInfo.id = object.take("id").toString();
                         assetInfo.symbol = object.take("symbol").toString();
                         assetInfo.issuer = object.take("issuer").toString();
                         assetInfo.precision = object.take("precision").toInt();
@@ -579,10 +616,10 @@ void UBChain::parseAssetInfo()
 
 }
 
-int UBChain::getAssetId(QString symbol)
+QString UBChain::getAssetId(QString symbol)
 {
-    int id = -1;
-    foreach (int key, UBChain::getInstance()->assetInfoMap.keys())
+    QString id;
+    foreach (QString key, UBChain::getInstance()->assetInfoMap.keys())
     {
         AssetInfo info = UBChain::getInstance()->assetInfoMap.value(key);
         if( info.symbol == symbol)
@@ -1444,10 +1481,10 @@ QString removeLastZeros(QString number)     // 去掉小数最后面的0
     return number;
 }
 
-QString getBigNumberString(unsigned long long number, unsigned long long precision)
+QString getBigNumberString(unsigned long long number, int precision)
 {
     QString str = QString::number(number);
-    int size = QString::number(precision).size() - 1;
+    int size = precision;
     if( size < 0)  return "";
     if( size == 0) return str;
 

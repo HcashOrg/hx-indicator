@@ -15,7 +15,7 @@
 
 #include "transferpage.h"
 #include "ui_transferpage.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "debug_log.h"
 #include "contactdialog.h"
 #include "remarkdialog.h"
@@ -141,118 +141,118 @@ void TransferPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 
 void TransferPage::on_sendBtn_clicked()
 {
-    if(ui->amountLineEdit->text().size() == 0 || ui->sendtoLineEdit->text().size() == 0)
-    {      
-        CommonDialog tipDialog(CommonDialog::OkOnly);
-        tipDialog.setText( tr("Please enter the amount and address."));
-        tipDialog.pop();
-        return;
-    }
+//    if(ui->amountLineEdit->text().size() == 0 || ui->sendtoLineEdit->text().size() == 0)
+//    {
+//        CommonDialog tipDialog(CommonDialog::OkOnly);
+//        tipDialog.setText( tr("Please enter the amount and address."));
+//        tipDialog.pop();
+//        return;
+//    }
 
-    if( ui->amountLineEdit->text().toDouble()  <= 0)
-    {    
-        CommonDialog tipDialog(CommonDialog::OkOnly);
-        tipDialog.setText( tr("The amount can not be 0"));
-        tipDialog.pop();
-        return;
-    }
+//    if( ui->amountLineEdit->text().toDouble()  <= 0)
+//    {
+//        CommonDialog tipDialog(CommonDialog::OkOnly);
+//        tipDialog.setText( tr("The amount can not be 0"));
+//        tipDialog.pop();
+//        return;
+//    }
 
-    if( ui->feeLineEdit->text().toDouble() <= 0)
-    {
-        CommonDialog tipDialog(CommonDialog::OkOnly);
-        tipDialog.setText( tr("The fee can not be 0"));
-        tipDialog.pop();
-        return;
-    }
-
-
-    QString remark = ui->memoTextEdit->toPlainText();
-//    remark.remove(' ');
-    if( remark.size() == 0)    // 转地址如果没有备注 会自动添加 TO ...   所以添加空格
-    {
-        remark = " ";
-    }
-
-    QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
-    QByteArray ba = utfCodec->fromUnicode(remark);
-    if( ba.size() > 40)
-    {
-        CommonDialog tipDialog(CommonDialog::OkOnly);
-        tipDialog.setText( tr("Message length more than 40 bytes!"));
-        tipDialog.pop();
-        return;
-    }
+//    if( ui->feeLineEdit->text().toDouble() <= 0)
+//    {
+//        CommonDialog tipDialog(CommonDialog::OkOnly);
+//        tipDialog.setText( tr("The fee can not be 0"));
+//        tipDialog.pop();
+//        return;
+//    }
 
 
-    AddressType type = checkAddress(ui->sendtoLineEdit->text(),AccountAddress | MultiSigAddress);
-    if( type == AccountAddress)
-    {
-        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), ui->feeLineEdit->text(), remark, ui->assetComboBox->currentText());
-        bool yOrN = transferConfirmDialog.pop();
-        if( yOrN)
-        {
-            //        QString str = "wallet_set_transaction_fee " + ui->feeLineEdit->text() + '\n';
-            //        Hcash::getInstance()->write(str);
-            //        QString result = Hcash::getInstance()->read();
+//    QString remark = ui->memoTextEdit->toPlainText();
+////    remark.remove(' ');
+//    if( remark.size() == 0)    // 转地址如果没有备注 会自动添加 TO ...   所以添加空格
+//    {
+//        remark = " ";
+//    }
 
-            if( !ui->sendtoLineEdit->text().isEmpty())
-            {
-                int assetIndex = ui->assetComboBox->currentIndex();
-                if( assetIndex <= 0)
-                {
-                    assetIndex = 0;
-                    AssetInfo info = UBChain::getInstance()->assetInfoMap.value(assetIndex);
-
-                    UBChain::getInstance()->postRPC( "id_wallet_transfer_to_address_" + accountName,
-                                                     toJsonFormat( "wallet_transfer_to_address",
-                                                                   QStringList() << ui->amountLineEdit->text() << info.symbol << accountName
-                                                                   << ui->sendtoLineEdit->text() << remark ));
-                }
-                else
-                {
-                    // 如果是合约资产
-                    QStringList contracts = UBChain::getInstance()->ERC20TokenInfoMap.keys();
-                    QString contractAddress = contracts.at(assetIndex - 1);
-
-                    ERC20TokenInfo info = UBChain::getInstance()->ERC20TokenInfoMap.value(contractAddress);
-                    QString accountAddress = ui->sendtoLineEdit->text();
-
-                    UBChain::getInstance()->postRPC( "id_contract_call_transfer+" + contractAddress + "+" + accountAddress,
-                                                     toJsonFormat( "contract_call",
-                                                                   QStringList() << contractAddress << ui->accountComboBox->currentText()<< "transfer" << accountAddress + "," + QString::number( ui->amountLineEdit->text().toDouble() * info.precision,'f',0)
-                                                                   << ASSET_NAME << ui->callContractFeeLabel->text()
-                                                                   ));
-
-                }
-            }
-        }
-
-    }
-    else if(type == MultiSigAddress)
-    {
-        if(ui->assetComboBox->currentIndex() != 0)
-        {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("You can only send %1s to multisig address currently.").arg(ASSET_NAME));
-            commonDialog.pop();
-        }
-        else
-        {
-            TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), ui->feeLineEdit->text(), remark, ui->assetComboBox->currentText());
-            bool yOrN = transferConfirmDialog.pop();
-            if(yOrN)
-            {
-                AssetInfo info = UBChain::getInstance()->assetInfoMap.value(0);
-                UBChain::getInstance()->postRPC( "id_wallet_multisig_deposit+" + accountName,
-                                                 toJsonFormat( "wallet_multisig_deposit",
-                                                               QStringList() << ui->amountLineEdit->text() << info.symbol << accountName
-                                                               << ui->sendtoLineEdit->text() << remark ));
-            }
-
-        }
+//    QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
+//    QByteArray ba = utfCodec->fromUnicode(remark);
+//    if( ba.size() > 40)
+//    {
+//        CommonDialog tipDialog(CommonDialog::OkOnly);
+//        tipDialog.setText( tr("Message length more than 40 bytes!"));
+//        tipDialog.pop();
+//        return;
+//    }
 
 
-    }
+//    AddressType type = checkAddress(ui->sendtoLineEdit->text(),AccountAddress | MultiSigAddress);
+//    if( type == AccountAddress)
+//    {
+//        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), ui->feeLineEdit->text(), remark, ui->assetComboBox->currentText());
+//        bool yOrN = transferConfirmDialog.pop();
+//        if( yOrN)
+//        {
+//            //        QString str = "wallet_set_transaction_fee " + ui->feeLineEdit->text() + '\n';
+//            //        Hcash::getInstance()->write(str);
+//            //        QString result = Hcash::getInstance()->read();
+
+//            if( !ui->sendtoLineEdit->text().isEmpty())
+//            {
+//                int assetIndex = ui->assetComboBox->currentIndex();
+//                if( assetIndex <= 0)
+//                {
+//                    assetIndex = 0;
+//                    AssetInfo info = UBChain::getInstance()->assetInfoMap.value(assetIndex);
+
+//                    UBChain::getInstance()->postRPC( "id_wallet_transfer_to_address_" + accountName,
+//                                                     toJsonFormat( "wallet_transfer_to_address",
+//                                                                   QStringList() << ui->amountLineEdit->text() << info.symbol << accountName
+//                                                                   << ui->sendtoLineEdit->text() << remark ));
+//                }
+//                else
+//                {
+//                    // 如果是合约资产
+//                    QStringList contracts = UBChain::getInstance()->ERC20TokenInfoMap.keys();
+//                    QString contractAddress = contracts.at(assetIndex - 1);
+
+//                    ERC20TokenInfo info = UBChain::getInstance()->ERC20TokenInfoMap.value(contractAddress);
+//                    QString accountAddress = ui->sendtoLineEdit->text();
+
+//                    UBChain::getInstance()->postRPC( "id_contract_call_transfer+" + contractAddress + "+" + accountAddress,
+//                                                     toJsonFormat( "contract_call",
+//                                                                   QStringList() << contractAddress << ui->accountComboBox->currentText()<< "transfer" << accountAddress + "," + QString::number( ui->amountLineEdit->text().toDouble() * info.precision,'f',0)
+//                                                                   << ASSET_NAME << ui->callContractFeeLabel->text()
+//                                                                   ));
+
+//                }
+//            }
+//        }
+
+//    }
+//    else if(type == MultiSigAddress)
+//    {
+//        if(ui->assetComboBox->currentIndex() != 0)
+//        {
+//            CommonDialog commonDialog(CommonDialog::OkOnly);
+//            commonDialog.setText(tr("You can only send %1s to multisig address currently.").arg(ASSET_NAME));
+//            commonDialog.pop();
+//        }
+//        else
+//        {
+//            TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), ui->feeLineEdit->text(), remark, ui->assetComboBox->currentText());
+//            bool yOrN = transferConfirmDialog.pop();
+//            if(yOrN)
+//            {
+//                AssetInfo info = UBChain::getInstance()->assetInfoMap.value(0);
+//                UBChain::getInstance()->postRPC( "id_wallet_multisig_deposit+" + accountName,
+//                                                 toJsonFormat( "wallet_multisig_deposit",
+//                                                               QStringList() << ui->amountLineEdit->text() << info.symbol << accountName
+//                                                               << ui->sendtoLineEdit->text() << remark ));
+//            }
+
+//        }
+
+
+//    }
 }
 
 

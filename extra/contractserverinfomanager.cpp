@@ -1,6 +1,6 @@
 #include "contractserverinfomanager.h"
 
-#include "lnk.h"
+#include "wallet.h"
 
 #include <QFile>
 #include <QDir>

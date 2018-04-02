@@ -1,6 +1,6 @@
 #include "editremarkdialog.h"
 #include "ui_editremarkdialog.h"
-#include "lnk.h"
+#include "wallet.h"
 
 EditRemarkDialog::EditRemarkDialog(QString remark, QWidget *parent) :
     QDialog(parent),

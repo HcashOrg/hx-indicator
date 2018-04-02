@@ -3,7 +3,7 @@
 
 #include <QPainter>
 
-#include "lnk.h"
+#include "wallet.h"
 #include "commondialog.h"
 #include "addmultisigdialog.h"
 #include "showcontentdialog.h"

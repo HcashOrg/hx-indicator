@@ -13,7 +13,7 @@
 #include <QDir>
 
 
-#include "lnk.h"
+#include "wallet.h"
 #include "frame.h"
 #include "debug_log.h"
 

@@ -2,7 +2,7 @@
 #define MULTISIGTRANSACTIONPAGE_H
 
 #include <QWidget>
-#include "lnk.h"
+#include "wallet.h"
 
 namespace Ui {
 class MultiSigTransactionPage;
