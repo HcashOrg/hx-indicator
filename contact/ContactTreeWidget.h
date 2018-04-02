@@ -29,6 +29,9 @@ signals:
 
     //组修改信号（增删改）
     void GroupModifyFinishedSignal();
+
+    //联系人名称修改信号
+    void PersonModifyFinishedSignal();
 public slots:
     //执行查询（会选中符合查询的联系人）
     void QueryPersonSlots(const QString &queryString);
@@ -41,7 +44,7 @@ private:
     bool delGroup(QTreeWidgetItem *topItem);
 
     void addPerson(const std::shared_ptr<ContactPerson> &person = nullptr,QTreeWidgetItem *groupItem = nullptr);
-    void editPerson(QTreeWidgetItem *personItem);
+    bool editPerson(QTreeWidgetItem *personItem);
     void delPerson(QTreeWidgetItem *personItem);
 
     void moveToGroup(QTreeWidgetItem *sourceItem,QTreeWidgetItem *targetItem);
@@ -57,6 +60,7 @@ private slots:
     void moveToGroupSlots(bool checked);
 
     void editGroupFinishSlots();
+    void editPersonFinishSlots();
 public:
     //////////////////////////////////////////////////////////////////////////
     ///<summary>设置联系人数据 </summary>

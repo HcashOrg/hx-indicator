@@ -58,6 +58,6 @@ void ContactSearchWidget::InitWidget()
     connect(pSearchButton, &QPushButton::clicked, this, &ContactSearchWidget::StartSearchSlots);
 
     connect(ui->lineEdit,&QLineEdit::editingFinished,this, &ContactSearchWidget::StartSearchSlots);
-    //conect(ui->lineEdit,&QLineEdit::editingFinished,this, &ContactSearchWidget::StartSearchSlots);
-    //conect(ui->lineEdit,&QLineEdit::editingFinished,this, &ContactSearchWidget::StartSearchSlots);
+
+    //setStyleSheet("QWidget{border: none;background-color: rgb(40, 46, 66);}");
 }

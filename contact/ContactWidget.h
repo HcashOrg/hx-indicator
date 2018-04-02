@@ -21,9 +21,12 @@ public:
     explicit ContactWidget(QWidget *parent = 0);
     ~ContactWidget();
 signals:
+    //发送转账信号（frame中链接对应的槽函数，显示转账界面）
     void gotoTransferPage(QString,QString);
 private slots:
+    //添加联系人
     void AddNewContactSlots();
+    //显示联系人
     void ShowContactInfoSlots(const QString &address);
 private:
     void InitWidget();

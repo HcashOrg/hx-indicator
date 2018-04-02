@@ -4,6 +4,8 @@
 #include <QRegExpValidator>
 #include "ContactDataUtil.h"
 
+#include "lnk.h"
+
 Q_DECLARE_METATYPE(std::shared_ptr<ContactGroup>)
 
 class ContactAddWidget::ContactAddWidgetPrivate
@@ -90,8 +92,16 @@ bool ContactAddWidget::validateAddress(const QString &address)
     if(!_p->contactSheet) return false;
     if(!_p->contactSheet->validateAddress(address)) return false;
     //调用全局检测函数
+    AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
+    if( type == AccountAddress)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 
-    return true;
 }
 
 void ContactAddWidget::InitWidget()

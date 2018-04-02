@@ -30,6 +30,9 @@ private slots:
 public:
     //设置数据
     void setData(const std::shared_ptr<ContactPerson> &person);
+
+    //修改名称（树节点修改名字时使用）
+    void refreshName();
 private:
     void InitWidget();
 private:

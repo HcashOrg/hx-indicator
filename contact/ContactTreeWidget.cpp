@@ -170,8 +170,22 @@ void ContactTreeWidget::addPerson(const std::shared_ptr<ContactPerson> &person,Q
 
 }
 
-void ContactTreeWidget::editPerson(QTreeWidgetItem *personItem)
+bool ContactTreeWidget::editPerson(QTreeWidgetItem *personItem)
 {
+    if(!personItem) return false;
+
+    std::shared_ptr<ContactPerson> person = personItem->data(0,Qt::UserRole).value<std::shared_ptr<ContactPerson>>();
+    if(!person) return false;
+    QLineEdit *lineEdit = new QLineEdit(person->name);
+    lineEdit->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+
+    lineEdit->setGeometry(QRect(mapToGlobal(pos())+visualRect(currentIndex()).topLeft(),
+                                visualRect(currentIndex()).size()));
+    lineEdit->show();
+    lineEdit->selectAll();
+    lineEdit->setFocus(Qt::OtherFocusReason);
+    connect(lineEdit,&QLineEdit::editingFinished,this,&ContactTreeWidget::editPersonFinishSlots);
+    return true;
 
 }
 
@@ -235,7 +249,7 @@ void ContactTreeWidget::delGroupSlots(bool checked)
 
 void ContactTreeWidget::editPersonSlots(bool checked)
 {
-
+    editPerson(currentItem());
 }
 
 void ContactTreeWidget::delPersonSlots(bool checked)
@@ -283,6 +297,27 @@ void ContactTreeWidget::editGroupFinishSlots()
     lineEdit->close();
 }
 
+void ContactTreeWidget::editPersonFinishSlots()
+{
+    QLineEdit * lineEdit =qobject_cast<QLineEdit *>(sender());
+    if(!lineEdit) return;
+
+    disconnect(lineEdit,&QLineEdit::editingFinished,this,&ContactTreeWidget::editPersonFinishSlots);
+    QString newName = lineEdit->text();
+
+    std::shared_ptr<ContactPerson> person = currentItem()->data(0,Qt::UserRole).value<std::shared_ptr<ContactPerson>>();
+    if(!person)
+    {
+        lineEdit->close();
+        return;
+    }
+
+    person->name = newName;
+    currentItem()->setText(0,newName);
+    emit PersonModifyFinishedSignal();
+    lineEdit->close();
+}
+
 void ContactTreeWidget::initContactSheet(std::shared_ptr<ContactSheet> data)
 {
     _p->contactSheet = data;
@@ -293,6 +328,11 @@ void ContactTreeWidget::initTreeStyle()
 {
     setHeaderHidden(true);
     setSelectionMode(QAbstractItemView::SingleSelection);
+    setStyleSheet("QTreeWidget{border: none;}");
+//    setStyleSheet("QTreeWidget{border: none;background-color: rgb(40, 46, 66);}\
+//    QHeaderView{background-color:rgb(40,46,66);min-height:30;color:white;}\
+//    QHeaderView::section{background-color: rgb(56,63,93);border: 1px solid rgb(40,46,66);\
+//    }");
 }
 
 void ContactTreeWidget::initContextMenu()

@@ -8,6 +8,8 @@
 #include "ContactAddWidget.h"
 #include "ContactInfoWidget.h"
 
+#include "lnk.h"
+
 class ContactWidget::ContactWidgetPrivate
 {
 public:
@@ -18,17 +20,27 @@ public:
         ,contactAddWidget(nullptr)
         ,contactInfoWidget(nullptr)
         ,contactSheet(nullptr)
+        ,contactFilePath("")
     {
-
+        if( UBChain::getInstance()->configFile->contains("/settings/chainPath"))
+        {
+            contactFilePath = UBChain::getInstance()->configFile->value("/settings/chainPath").toString() + "/contacts.dat";
+        }
+        else
+        {
+            contactFilePath = UBChain::getInstance()->appDataPath + "/contacts.dat";
+        }
     }
 public:
-    ContactTreeWidget *contactTreeWidget;
-    ContactSearchWidget *contactSearchWidget;
-    ContactBriefWidget *contactBriefWidget;
-    ContactAddWidget *contactAddWidget;
-    ContactInfoWidget *contactInfoWidget;
+    ContactTreeWidget *contactTreeWidget;//联系人编组树
+    ContactSearchWidget *contactSearchWidget;//搜索界面
+    ContactBriefWidget *contactBriefWidget;//右上角简介界面
+    ContactAddWidget *contactAddWidget;//新增界面
+    ContactInfoWidget *contactInfoWidget;//联系人显示界面
 
-    std::shared_ptr<ContactSheet> contactSheet;
+    std::shared_ptr<ContactSheet> contactSheet;//数据源
+
+    QString contactFilePath;
 };
 
 ContactWidget::ContactWidget(QWidget *parent) :
@@ -71,10 +83,12 @@ void ContactWidget::ShowContactInfoSlots(const QString &address)
     _p->contactInfoWidget->setData(_p->contactSheet->findPerson(address));
     ui->scrollArea_rightBottom->setWidget(_p->contactInfoWidget);
     connect(_p->contactInfoWidget,&ContactInfoWidget::gotoTransferPage,this,&ContactWidget::gotoTransferPage);
+    connect(_p->contactTreeWidget,&ContactTreeWidget::PersonModifyFinishedSignal,_p->contactInfoWidget,&ContactInfoWidget::PersonModifyFinishedSlots);
 }
 
 void ContactWidget::InitWidget()
 {
+    setStyleSheet("QWidget{background-color: rgb(40, 46, 66);}");
     ui->scrollArea_leftBottom->setWidget(_p->contactTreeWidget);
     ui->scrollArea_leftTop->setWidget(_p->contactSearchWidget);
     ui->scrollArea_rightTop->setWidget(_p->contactBriefWidget);
@@ -86,13 +100,14 @@ void ContactWidget::InitWidget()
 
 void ContactWidget::InitData()
 {
-     ContactDataUtil::readContactSheetFromPath("E:\\Project\\json2.txt",_p->contactSheet);
-     _p->contactTreeWidget->initContactSheet(_p->contactSheet);
+    //qDebug()<<_p->contactFilePath;
+    ContactDataUtil::readContactSheetFromPath(_p->contactFilePath,_p->contactSheet);
+    _p->contactTreeWidget->initContactSheet(_p->contactSheet);
 }
 
 void ContactWidget::SaveData()
 {
-    ContactDataUtil::writeContactSheetToPath("E:\\Project\\json2.txt",_p->contactSheet);
+    ContactDataUtil::writeContactSheetToPath(_p->contactFilePath,_p->contactSheet);
 }
 
 void ContactWidget::closeEvent(QCloseEvent *event)

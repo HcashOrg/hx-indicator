@@ -47,12 +47,24 @@ void ContactInfoTitleWidget::transferAccountSlots()
 void ContactInfoTitleWidget::setData(const std::shared_ptr<ContactPerson> &person)
 {
     _p->person = person;
+    if(!_p->person) return;
     ui->label_name->setText(_p->person->name);
     ui->label_address->setText(_p->person->address);
 }
 
+void ContactInfoTitleWidget::refreshName()
+{
+    if(!_p->person) return;
+    ui->label_name->setText(_p->person->name);
+}
+
 void ContactInfoTitleWidget::InitWidget()
 {
+    //setStyleSheet("background-color:rgba(10, 10, 10,100);");
+
+    ui->pushButton_copy->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                               "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
+
     connect(ui->pushButton_copy,&QPushButton::clicked,this,&ContactInfoTitleWidget::copyAdressSlots);
     connect(ui->pushButton_transfer,&QPushButton::clicked,this,&ContactInfoTitleWidget::transferAccountSlots);
 }

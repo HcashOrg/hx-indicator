@@ -24,6 +24,8 @@ public:
     ~ContactInfoWidget();
 signals:
     void gotoTransferPage(QString,QString);
+public slots:
+    void PersonModifyFinishedSlots();
 private slots:
     void transferAccountSlots();
 public:
@@ -32,6 +34,8 @@ public:
 private:
     void InitWidget();
     void RefreshWidget();
+protected:
+    //void paintEvent(QPaintEvent *);
 private:
     class ContactInfoWidgetPrivate;
     ContactInfoWidgetPrivate *_p;
