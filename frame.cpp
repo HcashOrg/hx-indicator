@@ -23,7 +23,8 @@
 #include <QDesktopWidget>
 
 #include "functionbar.h"
-#include "contactpage.h"
+//#include "contactpage.h"
+#include "contact/ContactWidget.h"
 #include "selectwalletpathwidget.h"
 #include "control/shadowwidget.h"
 #include "control/showbottombarwidget.h"
@@ -809,13 +810,14 @@ void Frame::showTransferPage()
 
 void Frame::showContactPage()
 {
-    closeCurrentPage();    
-    getAccountInfo();
-    contactPage = new ContactPage(centralWidget);
-    connect(contactPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
-    connect(contactPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
+    closeCurrentPage();
+    contactPage = new ContactWidget(centralWidget);
+    //getAccountInfo();
+    //contactPage = new ContactPage(centralWidget);
+    //connect(contactPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
+    //connect(contactPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(contactPage,SIGNAL(gotoTransferPage(QString,QString)),this,SLOT(showTransferPageWithAddress(QString,QString)));
-    contactPage->setAttribute(Qt::WA_DeleteOnClose);
+    //contactPage->setAttribute(Qt::WA_DeleteOnClose);
     contactPage->show();
     currentPageNum = 4;
 }

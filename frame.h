@@ -36,6 +36,7 @@ class MultiSigPage;
 class MultiSigTransactionPage;
 class NewOrImportWalletWidget;
 
+class ContactWidget;
 class Frame:public QFrame
 {
     Q_OBJECT
@@ -151,7 +152,8 @@ private:
     void closeEvent(QCloseEvent* e);
     void init();
 
-    ContactPage* contactPage;
+    //ContactPage* contactPage;
+    ContactWidget *contactPage;
     UpgradePage* upgradePage;
 
     QTranslator translator;         //  选择语言
