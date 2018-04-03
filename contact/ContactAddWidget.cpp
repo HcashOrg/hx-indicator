@@ -4,7 +4,7 @@
 #include <QRegExpValidator>
 #include "ContactDataUtil.h"
 
-#include "lnk.h"
+#include "wallet.h"
 
 Q_DECLARE_METATYPE(std::shared_ptr<ContactGroup>)
 

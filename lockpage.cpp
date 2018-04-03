@@ -76,7 +76,7 @@ void LockPage::on_enterBtn_clicked()
     }
 
 
-    UBChain::getInstance()->postRPC( "id_unlock_lockpage", toJsonFormat( "unlock", QStringList() << "99999999" << ui->pwdLineEdit->text() ));
+    UBChain::getInstance()->postRPC( "id-unlock-lockpage", toJsonFormat( "unlock", QStringList()  << ui->pwdLineEdit->text() ));
  qDebug() << "id_unlock_lockpage" ;
     emit showShadowWidget();
     ui->pwdLineEdit->setEnabled(false);
@@ -134,7 +134,7 @@ void LockPage::on_pwdLineEdit_textChanged(const QString &arg1)
 
 void LockPage::jsonDataUpdated(QString id)
 {
-    if( id == "id_unlock_lockpage")
+    if( id == "id-unlock-lockpage")
     {
         emit hideShadowWidget();
         ui->pwdLineEdit->clear();
@@ -142,6 +142,7 @@ void LockPage::jsonDataUpdated(QString id)
         ui->pwdLineEdit->setFocus();
 
         QString  result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
 
         if( result == "\"result\":null")
         {

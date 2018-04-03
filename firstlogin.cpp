@@ -244,8 +244,6 @@ void FirstLogin::jsonDataUpdated(QString id)
 
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
-
-        qDebug() << id << result;
         if( result == "\"result\":null")
         {
             emit login();

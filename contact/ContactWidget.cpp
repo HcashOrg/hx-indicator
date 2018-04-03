@@ -8,7 +8,7 @@
 #include "ContactAddWidget.h"
 #include "ContactInfoWidget.h"
 
-#include "lnk.h"
+#include "wallet.h"
 
 class ContactWidget::ContactWidgetPrivate
 {
