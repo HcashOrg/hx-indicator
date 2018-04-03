@@ -33,16 +33,12 @@ private slots:
 
     void on_privateKeyLineEdit_textChanged(const QString &arg1);
 
-    void on_privateKeyLineEdit_returnPressed();
-
     void on_closeBtn_clicked();
 
 private:
     Ui::ImportDialog *ui;
     ShadowWidget* shadowWidget;
-    QString privateKey;
 
-    bool accountNameAlreadyExisted(QString name);
 };
 
 #endif // IMPORTDIALOG_H

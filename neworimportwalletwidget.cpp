@@ -1,7 +1,7 @@
 #include "neworimportwalletwidget.h"
 #include "ui_neworimportwalletwidget.h"
 
-#include "lnk.h"
+#include "wallet.h"
 
 #include <QFileDialog>
 #include <QPainter>

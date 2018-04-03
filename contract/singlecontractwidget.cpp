@@ -4,7 +4,7 @@
 #include <QPainter>
 #include <QDebug>
 
-#include "lnk.h"
+#include "wallet.h"
 
 SingleContractWidget::SingleContractWidget(QWidget *parent) :
     QWidget(parent),

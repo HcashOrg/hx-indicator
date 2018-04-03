@@ -1,5 +1,5 @@
 #include "debug_log.h"
-#include "lnk.h"
+#include "wallet.h"
 
 void outputMessage(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {

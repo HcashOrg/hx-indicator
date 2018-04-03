@@ -21,6 +21,7 @@ public:
 public:
     void retranslator();
 signals:
+    //兼容以前的信号---将来需要删除
     void showMainPage();
     void showAccountPage();
     void showSmartContractPage();
@@ -32,6 +33,12 @@ signals:
     void assetChanged(int);
 
     void lock();
+signals:
+    //点击大按钮的信号
+    void showAccountSignal();
+    void showContactSignal();
+    void showAdvanceSignal();
+    //点击二级按钮的信号
 
 signals:
     void ShrinkSignal();

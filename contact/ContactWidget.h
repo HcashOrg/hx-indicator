@@ -29,6 +29,7 @@ private slots:
     //显示联系人
     void ShowContactInfoSlots(const QString &address);
 private:
+    void InitStyle();
     void InitWidget();
     void InitData();
     void SaveData();

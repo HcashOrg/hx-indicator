@@ -1,6 +1,6 @@
 ﻿#include "deleteaccountdialog.h"
 #include "ui_deleteaccountdialog.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "commondialog.h"
 
 #include <QDebug>

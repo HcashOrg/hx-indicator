@@ -1,5 +1,5 @@
 #include "transactioindb.h"
-#include "lnk.h"
+#include "wallet.h"
 
 
 TransactioinDB::TransactioinDB()

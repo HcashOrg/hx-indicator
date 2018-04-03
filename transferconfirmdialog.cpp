@@ -1,7 +1,7 @@
 ﻿#include "transferconfirmdialog.h"
 #include "ui_transferconfirmdialog.h"
 
-#include "lnk.h"
+#include "wallet.h"
 #include "commondialog.h"
 
 #include <QDebug>

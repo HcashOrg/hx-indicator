@@ -7,7 +7,7 @@
 
 #include "setdialog.h"
 #include "ui_setdialog.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "debug_log.h"
 #include "commondialog.h"
 

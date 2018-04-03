@@ -2,7 +2,7 @@
 #include "ui_commondialog.h"
 #include <QDebug>
 #include "debug_log.h"
-#include "lnk.h"
+#include "wallet.h"
 
 CommonDialog::CommonDialog(commonDialogType type, QWidget *parent) :
     QDialog(parent),

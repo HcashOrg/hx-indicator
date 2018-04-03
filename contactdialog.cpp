@@ -1,6 +1,6 @@
 ﻿#include "contactdialog.h"
 #include "ui_contactdialog.h"
-#include "lnk.h"
+#include "wallet.h"
 #include <QDebug>
 #include "debug_log.h"
 

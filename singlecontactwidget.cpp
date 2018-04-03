@@ -1,7 +1,7 @@
 ﻿#include "singlecontactwidget.h"
 #include "ui_singlecontactwidget.h"
 
-#include "lnk.h"
+#include "wallet.h"
 #include "commondialog.h"
 #include "control/contacteditdialog.h"
 

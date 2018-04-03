@@ -2,7 +2,7 @@
 #include "ui_addcontactdialog.h"
 
 
-#include "lnk.h"
+#include "wallet.h"
 #include "dialog/checkpwddialog.h"
 
 #include <QDebug>

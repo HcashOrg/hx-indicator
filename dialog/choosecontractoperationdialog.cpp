@@ -1,7 +1,7 @@
 #include "choosecontractoperationdialog.h"
 #include "ui_choosecontractoperationdialog.h"
 
-#include "lnk.h"
+#include "wallet.h"
 #include "../commondialog.h"
 
 #include <QDebug>

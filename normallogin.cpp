@@ -7,7 +7,7 @@
 
 #include "normallogin.h"
 #include "ui_normallogin.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "debug_log.h"
 #include "commondialog.h"
 

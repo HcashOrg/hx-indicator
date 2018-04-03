@@ -19,19 +19,11 @@ public:
     int currentPageIndex = 0;     // 1 账户列表  2 转账  3 联系人  4 账单页  5 智能合约  6 喂价页  7 多重签名
     void choosePage(int);
 
-    bool assetUpdating = false;
-    void updateAssetComboBox();
-    void updateTotalBalance();
-
     void retranslator();
-
-    void setCurrentAccount(QString accountName);
 
 private:
     QTimer* timerForScanLabel;
     int scanLabelCount;
-private slots:
-    void showScanPic();
 
 
 public slots:
@@ -45,8 +37,6 @@ signals:
     void showContactPage();
     void showFeedPage();
     void showMultiSigPage();
-
-    void assetChanged(int);
 
     void lock();
 
@@ -69,15 +59,12 @@ private slots:
 
     void on_billInfoBtn_clicked();
 
-    void on_assetComboBox_currentIndexChanged(int index);
-
     void on_choiceBtn_clicked();
 
 private:
     Ui::FunctionBar *ui;
 
     void paintEvent(QPaintEvent*);
-    bool eventFilter(QObject *watched, QEvent *e);
 };
 
 #endif // FUNCTIONBAR_H

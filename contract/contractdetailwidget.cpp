@@ -6,7 +6,7 @@
 #include <QUrl>
 #include <QDebug>
 
-#include "lnk.h"
+#include "wallet.h"
 #include "dialog/choosecontractoperationdialog.h"
 #include "dialog/depositdialog.h"
 #include "dialog/destroydialog.h"

@@ -1,6 +1,6 @@
 #include "websocketmanager.h"
 
-#include "lnk.h"
+#include "wallet.h"
 
 WebSocketManager::WebSocketManager(QObject *parent)
     : QThread(parent)
@@ -29,50 +29,96 @@ void WebSocketManager::processRPC(QString _rpcId, QString _rpcCmd)
 {
     busy = true;
     m_rpcId = _rpcId;
+    m_buff.clear();
     m_webSocket->sendTextMessage(_rpcCmd);
 }
 
 void WebSocketManager::processRPCs(QString _rpcId, QString _rpcCmd)
 {
-    bool processed = false;
+    if(pendingRpcs.contains(_rpcId))      return;
 
-retry:
-    if(!busy)
-    {
-        processRPC(_rpcId,_rpcCmd);
-        processed = true;
-    }
+    pendingRpcs.append(_rpcId + "***" + _rpcCmd);
 
-    if( !processed)
+    if(busy)
     {
-        if(loopCount > 10)
+        if(pendingRpcs.size() > 0)
         {
-            m_buff.clear();
-            m_rpcId.clear();
-            loopCount = 0;
-            return;
-        }
-        else
-        {
-            QThread::msleep(10);
-            loopCount++;
-            goto retry;
+            qDebug() << "busy is " << pendingRpcs.at(0);
         }
 
+        return;
     }
+
+//retry:
+//    if(!busy)
+//    {
+//        processRPC(_rpcId,_rpcCmd);
+//    }
+//    else
+//    {
+//        qDebug() << "busy is " << m_rpcId;
+//    }
+
+//    if( !processed)
+//    {
+//        if(loopCount > 100)
+//        {
+//            m_buff.clear();
+//            m_rpcId.clear();
+//            loopCount = 0;
+
+//            busy = false;
+//            return;
+//        }
+//        else
+//        {
+//            QThread::msleep(100);
+//            loopCount++;
+//            goto retry;
+//        }
+
+//    }
 }
 
 void WebSocketManager::run()
 {
+    timer = new QTimer(this);
+    connect(timer,SIGNAL(timeout()),this,SLOT(onTimer()));
+    timer->start(100);
+
     m_webSocket = new QWebSocket;
     connect(m_webSocket,SIGNAL(connected()),this,SLOT(onConnected()));
-    connect(m_webSocket,SIGNAL(textFrameReceived(QString,bool)),this,SLOT(onTextFrameReceived(QString,bool)),Qt::QueuedConnection);
+    connect(m_webSocket,SIGNAL(textFrameReceived(QString,bool)),this,SLOT(onTextFrameReceived(QString,bool)));
 
     connectToClient();
 
     busy = false;
 
     exec();
+}
+
+void WebSocketManager::onTimer()
+{
+    if(pendingRpcs.size() > 0)
+    {
+        if(!busy)
+        {
+            QStringList rpc = pendingRpcs.at(0).split("***");
+            processRPC(rpc.at(0),rpc.at(1));
+        }
+        else
+        {
+            qDebug() << "busy is " << pendingRpcs.at(0);
+        }
+
+        loopCount++;
+        if(loopCount > 10)
+        {
+            pendingRpcs.removeFirst();
+            busy = false;
+        }
+    }
+
 }
 
 void WebSocketManager::onConnected()
@@ -84,7 +130,8 @@ void WebSocketManager::onConnected()
 
 void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
 {
-    qDebug() << "message received: " << m_rpcId << _message;
+    if(pendingRpcs.size() <= 0)   return;
+//    qDebug() << "message received: " << pendingRpcs.at(0) << _message;
 
     m_buff += _message;
 
@@ -96,11 +143,12 @@ void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
         QString result = m_buff.mid( QString("{\"id\":32800,\"jsonrpc\":\"2.0\",").size());
         result = result.left( result.size() - 1);
 
-        UBChain::getInstance()->updateJsonDataMap(m_rpcId, result);
-//        UBChain::getInstance()->rpcReceivedOrNotMapSetValue(m_rpcId, true);
+        UBChain::getInstance()->updateJsonDataMap(pendingRpcs.at(0).split("***").at(0), result);
+
+        pendingRpcs.removeFirst();
 
         m_buff.clear();
-        m_rpcId.clear();
+
         busy = false;
     }
 }

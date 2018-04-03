@@ -5,11 +5,10 @@
 #include <QTextCodec>
 #include <QScrollBar>
 #include <QListView>
+#include <QClipboard>
 
 #include "accountpage.h"
 #include "ui_accountpage.h"
-#include "debug_log.h"
-#include <QClipboard>
 #include "commondialog.h"
 #include "showcontentdialog.h"
 #include "control/remarkcellwidget.h"
@@ -349,50 +348,50 @@ void AccountPage::showNormalTransactions()
         ui->accountTransactionsTableWidget->setItem(i,3,new QTableWidgetItem( UBChain::getInstance()->addressToName(detail.opposite)));
         ui->accountTransactionsTableWidget->item(i,3)->setTextColor(QColor(192,196,212));
 
-        // 金额
-        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(detail.assetAmount.assetId);
-        unsigned long long amount = 0;
-        if( !detail.includeFee || transactionInfo.isConfirmed == false)
-        {
-            amount = detail.assetAmount.amount;
-        }
-        else
-        {
-            amount = detail.assetAmount.amount - transactionInfo.fee;
-        }
+//        // 金额
+//        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(detail.assetAmount.assetId);
+//        unsigned long long amount = 0;
+//        if( !detail.includeFee || transactionInfo.isConfirmed == false)
+//        {
+//            amount = detail.assetAmount.amount;
+//        }
+//        else
+//        {
+//            amount = detail.assetAmount.amount - transactionInfo.fee;
+//        }
 
-        if( detail.type == 1 || detail.type == 7 || detail.type == 9)
-        {
-            if(amount > 0)
-            {
-                ui->accountTransactionsTableWidget->setItem(i,4,new QTableWidgetItem( "-" + getBigNumberString(amount,assetInfo.precision) + " "
-                                                                                      + assetInfo.symbol));
-                ui->accountTransactionsTableWidget->item(i,4)->setTextColor(QColor(255,34,76));
-            }
-            else
-            {
-                ui->accountTransactionsTableWidget->setItem(i,4,new QTableWidgetItem( getBigNumberString(amount,assetInfo.precision) + " "
-                                                                                      + assetInfo.symbol));
-                ui->accountTransactionsTableWidget->item(i,4)->setTextColor(QColor(192,196,212));
-            }
-        }
-        else if( detail.type == 2 || detail.type == 8 || detail.type == 3 || detail.type == 4)
-        {
-            ui->accountTransactionsTableWidget->setItem(i,4,new QTableWidgetItem( "+" + getBigNumberString(amount,assetInfo.precision) + " "
-                                                                                  + assetInfo.symbol));
-            ui->accountTransactionsTableWidget->item(i,4)->setTextColor(QColor(113,203,90));
-        }
-        else
-        {
-            ui->accountTransactionsTableWidget->setItem(i,4,new QTableWidgetItem( getBigNumberString(amount,assetInfo.precision) + " "
-                                                                                  + assetInfo.symbol));
-            ui->accountTransactionsTableWidget->item(i,4)->setTextColor(QColor(192,196,212));
-        }
+//        if( detail.type == 1 || detail.type == 7 || detail.type == 9)
+//        {
+//            if(amount > 0)
+//            {
+//                ui->accountTransactionsTableWidget->setItem(i,4,new QTableWidgetItem( "-" + getBigNumberString(amount,assetInfo.precision) + " "
+//                                                                                      + assetInfo.symbol));
+//                ui->accountTransactionsTableWidget->item(i,4)->setTextColor(QColor(255,34,76));
+//            }
+//            else
+//            {
+//                ui->accountTransactionsTableWidget->setItem(i,4,new QTableWidgetItem( getBigNumberString(amount,assetInfo.precision) + " "
+//                                                                                      + assetInfo.symbol));
+//                ui->accountTransactionsTableWidget->item(i,4)->setTextColor(QColor(192,196,212));
+//            }
+//        }
+//        else if( detail.type == 2 || detail.type == 8 || detail.type == 3 || detail.type == 4)
+//        {
+//            ui->accountTransactionsTableWidget->setItem(i,4,new QTableWidgetItem( "+" + getBigNumberString(amount,assetInfo.precision) + " "
+//                                                                                  + assetInfo.symbol));
+//            ui->accountTransactionsTableWidget->item(i,4)->setTextColor(QColor(113,203,90));
+//        }
+//        else
+//        {
+//            ui->accountTransactionsTableWidget->setItem(i,4,new QTableWidgetItem( getBigNumberString(amount,assetInfo.precision) + " "
+//                                                                                  + assetInfo.symbol));
+//            ui->accountTransactionsTableWidget->item(i,4)->setTextColor(QColor(192,196,212));
+//        }
 
-        if( transactionInfo.isConfirmed == false)
-        {
-            ui->accountTransactionsTableWidget->item(i,4)->setTextColor(QColor(200,200,200));
-        }
+//        if( transactionInfo.isConfirmed == false)
+//        {
+//            ui->accountTransactionsTableWidget->item(i,4)->setTextColor(QColor(200,200,200));
+//        }
 
         // 手续费
         if( detail.type == 9)

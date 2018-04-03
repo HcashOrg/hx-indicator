@@ -9,7 +9,7 @@
 #include "ContactAddWidget.h"
 #include "ContactInfoWidget.h"
 
-#include "lnk.h"
+#include "wallet.h"
 
 class ContactWidget::ContactWidgetPrivate
 {
@@ -87,7 +87,7 @@ void ContactWidget::ShowContactInfoSlots(const QString &address)
     connect(_p->contactTreeWidget,&ContactTreeWidget::PersonModifyFinishedSignal,_p->contactInfoWidget,&ContactInfoWidget::PersonModifyFinishedSlots);
 }
 
-void ContactWidget::InitWidget()
+void ContactWidget::InitStyle()
 {
     //setWindowFlags(Qt::FramelessWindowHint);
     //
@@ -99,6 +99,12 @@ void ContactWidget::InitWidget()
     setStyleSheet("QWidget{background-color:rgb(40,46,66);border:none;color:white;}");
     //setStyleSheet("QWidget{background-color:rgb(40,46,66);color:white;}");
     //setStyleSheet("QWidget{background-color:rgb(24,28,45);border:none;}");
+}
+
+void ContactWidget::InitWidget()
+{
+    InitStyle();
+
     ui->scrollArea_leftBottom->setWidget(_p->contactTreeWidget);
     ui->scrollArea_leftTop->setWidget(_p->contactSearchWidget);
     ui->scrollArea_rightTop->setWidget(_p->contactBriefWidget);
@@ -110,7 +116,6 @@ void ContactWidget::InitWidget()
 
 void ContactWidget::InitData()
 {
-    //qDebug()<<_p->contactFilePath;
     ContactDataUtil::readContactSheetFromPath(_p->contactFilePath,_p->contactSheet);
     _p->contactTreeWidget->initContactSheet(_p->contactSheet);
 }

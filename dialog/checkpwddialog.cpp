@@ -1,7 +1,7 @@
 #include "checkpwddialog.h"
 #include "ui_checkpwddialog.h"
 
-#include "lnk.h"
+#include "wallet.h"
 #include "../commondialog.h"
 
 

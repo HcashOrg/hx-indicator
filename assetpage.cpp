@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QPainter>
 
-#include "lnk.h"
+#include "wallet.h"
 #include "commondialog.h"
 #include "dialog/addtokendialog.h"
 #include "dialog/choosetokenoperationdialog.h"

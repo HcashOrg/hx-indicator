@@ -7,7 +7,7 @@
 #include "functionBar/FunctionAdvanceWidget.h"
 
 #include "setdialog.h"
-#include "lnk.h"
+#include "wallet.h"
 
 class FunctionWidget::FunctionWidgetPrivate
 {
@@ -45,45 +45,32 @@ void FunctionWidget::retranslator()
 
 void FunctionWidget::ShowContactWidgetSlots()
 {
-    if(ui->stackedWidget->isVisible())
-    {
-        //move(125,0);
-        //this->resize(95,this->size().height());
-        //this->setMaximumWidth(_p->initWidth/2);
-        ui->stackedWidget->setVisible(false);
-        emit showContactPage();
-        emit ShrinkSignal();
-    }
+    ui->stackedWidget->setVisible(false);
 
+    emit showContactSignal();
+    emit showContactPage();
+    emit ShrinkSignal();
 }
 
 void FunctionWidget::ShowAccountWidgetSlots()
 {
-    if(ui->stackedWidget->currentWidget() != _p->accountBar)
-    {
-        ui->stackedWidget->setCurrentWidget(_p->accountBar);
-    }
+    ui->stackedWidget->setCurrentWidget(_p->accountBar);
+    emit showAccountSignal();
     emit showAccountPage();
 
-    if(!ui->stackedWidget->isVisible())
-    {
-        ui->stackedWidget->setVisible(true);
-        emit RestoreSignal();
-    }
+    ui->stackedWidget->setVisible(true);
+    emit RestoreSignal();
 }
 
 void FunctionWidget::ShowAdvanceWidgetSlots()
 {
-    if(ui->stackedWidget->currentWidget() != _p->advanceBar)
-    {
-        ui->stackedWidget->setCurrentWidget(_p->advanceBar);
-    }
+    ui->stackedWidget->setCurrentWidget(_p->advanceBar);
 
-    if(!ui->stackedWidget->isVisible())
-    {
-        ui->stackedWidget->setVisible(true);
-        emit RestoreSignal();
-    }
+    emit showAdvanceSignal();
+
+    ui->stackedWidget->setVisible(true);
+    emit RestoreSignal();
+
 }
 
 void FunctionWidget::ShowSettingWidgetSlots()

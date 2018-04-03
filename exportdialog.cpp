@@ -1,6 +1,6 @@
 #include "exportdialog.h"
 #include "ui_exportdialog.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "commondialog.h"
 #include "dialog/exportsetpwddialog.h"
 #include "AES/aesencryptor.h"
@@ -87,25 +87,29 @@ void ExportDialog::on_cancelBtn_clicked()
 
 void ExportDialog::getPrivateKey()
 {
-    UBChain::getInstance()->postRPC( "id_wallet_dump_account_private_key_" + accoutName, toJsonFormat( "wallet_dump_account_private_key", QStringList() << accoutName << "0" ));
+    UBChain::getInstance()->postRPC( "id-dump_private_key-" + accoutName, toJsonFormat( "dump_private_key", QStringList() << accoutName << "0" ));
 }
 
 void ExportDialog::jsonDataUpdated(QString id)
 {
-    if( id == "id_wallet_dump_account_private_key_" + accoutName)
+    if( id == "id-dump_private_key-" + accoutName)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << "eeeeeeeeeeee " << id << result;
 
         ui->exportBtn->setEnabled(true);
 
-        if( result.mid(0,8) == "\"error\":")
-        {
-            qDebug() << "wallet_dump_account_private_key " + accoutName + " ERROR: " + result;
-        }
-        else
-        {
-            privateKey = result.mid(10,51);
+        result.prepend("{");
+        result.append("}");
 
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonArray array = jsonObject.take("result").toArray();
+        if(array.size() > 0)
+        {
+            QJsonArray array2 = array.at(0).toArray();
+
+            QString privateKey = array2.at(1).toString();
             QFile file( path);
             QString fName = file.fileName();
 #ifdef WIN32
@@ -138,7 +142,7 @@ void ExportDialog::jsonDataUpdated(QString id)
 
                 QString input = "privateKey=" + privateKey;
                 QString output = QString::fromStdString( aes.EncryptString( input.toStdString()) );
-
+qDebug() << "iiiiiiiiiiiii  " << input;
                 file.resize(0);
                 QTextStream ts( &file);
                 ts << output.toUtf8();
@@ -158,7 +162,7 @@ void ExportDialog::jsonDataUpdated(QString id)
             close();
 
             CommonDialog tipDialog(CommonDialog::OkOnly);
-//            tipDialog.setText( tr( "Export to ") + fName + tr(" succeeded!") + QString::fromLocal8Bit("请妥善保管您的私钥，绝对不要丢失或泄露给任何人!") );
+            //            tipDialog.setText( tr( "Export to ") + fName + tr(" succeeded!") + QString::fromLocal8Bit("请妥善保管您的私钥，绝对不要丢失或泄露给任何人!") );
             tipDialog.setText( tr( "Export to ") + fName + tr(" succeeded!") + tr("Please keep your private key properly.Never lose or leak it to anyone!") );
             tipDialog.pop();
 
@@ -172,6 +176,10 @@ void ExportDialog::jsonDataUpdated(QString id)
             dirPath = dirPath.left( dirPath.lastIndexOf("/") );
             QProcess::startDetached("open \"" + dirPath + "\"");
 #endif
+        }
+        else
+        {
+            qDebug() << "dump_private_key " + accoutName + " ERROR: " + result;
         }
 
 

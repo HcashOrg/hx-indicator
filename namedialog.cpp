@@ -1,7 +1,7 @@
 ﻿#include "namedialog.h"
 #include "ui_namedialog.h"
 #include "debug_log.h"
-#include "lnk.h"
+#include "wallet.h"
 
 #include <QMovie>
 

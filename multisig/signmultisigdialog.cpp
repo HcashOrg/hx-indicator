@@ -5,7 +5,7 @@
 #include <QFileDialog>
 #include <QClipboard>
 
-#include "lnk.h"
+#include "wallet.h"
 #include "../commondialog.h"
 #include "multisiginfodialog.h"
 #include "showcontentdialog.h"

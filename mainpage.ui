@@ -84,7 +84,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>60</y>
+     <y>90</y>
      <width>660</width>
      <height>363</height>
     </rect>
@@ -152,7 +152,7 @@ font: 12px &quot;微软雅黑&quot;;}
    </attribute>
    <column>
     <property name="text">
-     <string>账户</string>
+     <string>币种</string>
     </property>
     <property name="font">
      <font>
@@ -165,7 +165,7 @@ font: 12px &quot;微软雅黑&quot;;}
    </column>
    <column>
     <property name="text">
-     <string>地址</string>
+     <string>数量</string>
     </property>
     <property name="font">
      <font>
@@ -178,80 +178,29 @@ font: 12px &quot;微软雅黑&quot;;}
    </column>
    <column>
     <property name="text">
-     <string>余额/UB</string>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-     </font>
-    </property>
-    <property name="textAlignment">
-     <set>AlignCenter</set>
+     <string/>
     </property>
    </column>
-  </widget>
-  <widget class="QWidget" name="loadingWidget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>200</y>
-     <width>461</width>
-     <height>171</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <widget class="QLabel" name="loadingLabel">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>10</y>
-      <width>211</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: rgb(192, 196, 212);</string>
-    </property>
+   <column>
     <property name="text">
-     <string>请稍等...</string>
+     <string/>
     </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
     </property>
-   </widget>
-  </widget>
-  <widget class="QLabel" name="initLabel">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>220</y>
-     <width>401</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
-   </property>
-   <property name="text">
-    <string>您当前还没有账户，请添加</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+   </column>
   </widget>
   <widget class="QToolButton" name="importAccountBtn">
    <property name="geometry">
@@ -287,6 +236,233 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
     <string>导入账户</string>
    </property>
   </widget>
+  <widget class="QToolButton" name="copyBtn">
+   <property name="geometry">
+    <rect>
+     <x>552</x>
+     <y>46</y>
+     <width>11</width>
+     <height>11</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="accountComboBox">
+   <property name="geometry">
+    <rect>
+     <x>92</x>
+     <y>40</y>
+     <width>90</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>40</y>
+     <width>60</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(192, 196, 212);</string>
+   </property>
+   <property name="text">
+    <string>当前账户</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="addressLabel">
+   <property name="geometry">
+    <rect>
+     <x>262</x>
+     <y>40</y>
+     <width>280</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <underline>false</underline>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(192, 196, 212);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="addressLabel2">
+   <property name="geometry">
+    <rect>
+     <x>202</x>
+     <y>40</y>
+     <width>60</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(192, 196, 212);</string>
+   </property>
+   <property name="text">
+    <string>地址</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="qrcodeBtn">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>46</y>
+     <width>11</width>
+     <height>11</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="backupWalletBtn">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>10</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
+background-color: transparent;
+font: 12px &quot;微软雅黑&quot;;}
+QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
+   </property>
+   <property name="text">
+    <string>备份钱包</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="exportBtn">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>10</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
+background-color: transparent;
+font: 12px &quot;微软雅黑&quot;;}
+QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
+   </property>
+   <property name="text">
+    <string>导出账户</string>
+   </property>
+  </widget>
+  <zorder>addressLabel</zorder>
+  <zorder>accountListLabel</zorder>
+  <zorder>addAccountBtn</zorder>
+  <zorder>accountTableWidget</zorder>
+  <zorder>importAccountBtn</zorder>
+  <zorder>copyBtn</zorder>
+  <zorder>accountComboBox</zorder>
+  <zorder>label</zorder>
+  <zorder>addressLabel2</zorder>
+  <zorder>qrcodeBtn</zorder>
+  <zorder>backupWalletBtn</zorder>
+  <zorder>exportBtn</zorder>
  </widget>
  <resources/>
  <connections/>

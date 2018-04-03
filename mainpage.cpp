@@ -4,10 +4,12 @@
 #include <QMouseEvent>
 #include <QScrollBar>
 #include <QMovie>
+#include <QClipboard>
+
 
 #include "mainpage.h"
 #include "ui_mainpage.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "debug_log.h"
 #include "namedialog.h"
 #include "deleteaccountdialog.h"
@@ -19,6 +21,7 @@
 #include "control/chooseaddaccountdialog.h"
 #include "dialog/renamedialog.h"
 #include "dialog/backupwalletdialog.h"
+#include "control/qrcodedialog.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -47,11 +50,21 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->accountTableWidget->horizontalHeader()->setVisible(true);
     ui->accountTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-    connect(ui->accountTableWidget->horizontalHeader(), SIGNAL(sectionClicked(int)), this, SLOT(changeSortMode(int)));
 
-    ui->accountTableWidget->setColumnWidth(0,160);
-    ui->accountTableWidget->setColumnWidth(1,320);
-    ui->accountTableWidget->setColumnWidth(2,160);
+    ui->accountTableWidget->setColumnWidth(0,100);
+    ui->accountTableWidget->setColumnWidth(1,100);
+    ui->accountTableWidget->setColumnWidth(2,80);
+    ui->accountTableWidget->setColumnWidth(3,80);
+    ui->accountTableWidget->setColumnWidth(4,80);
+    ui->accountTableWidget->setColumnWidth(5,80);
+    ui->accountTableWidget->setColumnWidth(6,80);
+
+    ui->copyBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                               "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
+    ui->copyBtn->setToolTip(tr("copy to clipboard"));
+
+    ui->qrcodeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/qrcode.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                                 "QToolButton:hover{background-image:url(:/ui/wallet_ui/qrcode_hover.png);}");
 
     QString language = UBChain::getInstance()->language;
     if( language.isEmpty())
@@ -67,12 +80,6 @@ MainPage::MainPage(QWidget *parent) :
     // 由于首页是第一个页面，第一次打开先等待x秒钟 再 updateAccountList
     QTimer::singleShot(500, this, SLOT(init()));
 
-    ui->accountTableWidget->hide();
-
-    ui->loadingWidget->setGeometry(0,93,827,448);
-    ui->loadingLabel->move(314,101);
-
-    ui->initLabel->hide();
 
 }
 
@@ -117,130 +124,51 @@ void MainPage::addAccount()
 
 void MainPage::updateAccountList()
 {
+    AccountInfo info = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+    ui->addressLabel->setText(info.address);
 
-    mutexForConfigFile.lock();
-    UBChain::getInstance()->configFile->beginGroup("/accountInfo");
-    QStringList keys = UBChain::getInstance()->configFile->childKeys();
+    AssetAmountMap map = info.assetAmountMap;
+    QStringList keys = map.keys();
 
-    QStringList accounts;
-    foreach (QString key, keys)
+    int size = keys.size();
+    ui->accountTableWidget->setRowCount(size);
+
+    for(int i = 0; i < size; i++)
     {
-        accounts.append(UBChain::getInstance()->configFile->value(key).toString());
-    }
-    UBChain::getInstance()->configFile->endGroup();
-    mutexForConfigFile.unlock();
+        ui->accountTableWidget->setRowHeight(i,37);
 
-    sortAccountsByBalance(accounts);
+        QString assetId = keys.at(i);
+        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
 
-    int size = accounts.size();
-    if( size == 0)  // 如果还没有账户
-    {
-        ui->initLabel->show();
-        ui->accountTableWidget->hide();
-        ui->loadingWidget->hide();
+        //资产名
+        QString symbol = assetInfo.symbol;
+        ui->accountTableWidget->setItem(i,0,new QTableWidgetItem(symbol));
 
-        return;
-    }
-    else
-    {
-        ui->initLabel->hide();
-        ui->accountTableWidget->show();
-        ui->loadingWidget->show();
-    }
+        //数量
+        ui->accountTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(map.value(assetId).amount, assetInfo.precision)));
 
+        ui->accountTableWidget->setItem(i,2,new QTableWidgetItem(tr("transfer")));
+        ui->accountTableWidget->setItem(i,3,new QTableWidgetItem(tr("deposit")));
+        ui->accountTableWidget->setItem(i,4,new QTableWidgetItem(tr("withdraw")));
+        ui->accountTableWidget->setItem(i,5,new QTableWidgetItem(tr("trade")));
+        ui->accountTableWidget->setItem(i,6,new QTableWidgetItem(tr("exchange")));
 
-    if( UBChain::getInstance()->currentTokenAddress.isEmpty())
-    {
-        AssetInfo info = UBChain::getInstance()->assetInfoMap.value(0);
-        QTableWidgetItem* item = ui->accountTableWidget->horizontalHeaderItem(2);
-        item->setText(tr("Balance/") + info.symbol);
-
-        ui->accountTableWidget->setRowCount(size);
-        for( int i = size - 1; i > -1; i--)
+        for(int j = 0; j < 7; j++)
         {
-            QString accountName = accounts.at(i);
-            int rowNum = i;
+            ui->accountTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+            ui->accountTableWidget->item(i,j)->setTextColor(QColor(192,196,212));
 
-            ui->accountTableWidget->setRowHeight(rowNum,37);
-            ui->accountTableWidget->setItem(rowNum,0,new QTableWidgetItem(accountName));
-            ui->accountTableWidget->setItem(rowNum,1,new QTableWidgetItem(UBChain::getInstance()->addressMapValue(accountName).ownerAddress));
-
-
-            AssetBalanceMap map = UBChain::getInstance()->accountBalanceMap.value(accountName);
-            ui->accountTableWidget->setItem(rowNum,2,new QTableWidgetItem(getBigNumberString(map.value(0),info.precision)));
-
-
-            ui->accountTableWidget->item(rowNum,0)->setTextColor(QColor(192,196,212));
-            ui->accountTableWidget->item(rowNum,1)->setTextColor(QColor(192,196,212));
-            ui->accountTableWidget->item(rowNum,2)->setTextColor(QColor(24,250,239));
-
-            for( int j = 0; j < 3; j++)
+            if(i % 2)
             {
-                ui->accountTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-
-                if(i % 2)
-                {
-                    ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(43,49,69));
-                }
-                else
-                {
-                    ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(40,46,66));
-                }
-            }
-
-        }
-
-    }
-    else
-    {
-        // 如果是合约资产
-        QString contractAddress = UBChain::getInstance()->currentTokenAddress;
-
-        ERC20TokenInfo info = UBChain::getInstance()->ERC20TokenInfoMap.value(contractAddress);
-        QTableWidgetItem* item = ui->accountTableWidget->horizontalHeaderItem(2);
-        item->setText(tr("Balance/") + info.contractName);
-
-        ui->accountTableWidget->setRowCount(size);
-        for( int i = size - 1; i > -1; i--)
-        {
-            QString accountName = accounts.at(i);
-            int rowNum = i;
-
-            ui->accountTableWidget->setRowHeight(rowNum,37);
-            ui->accountTableWidget->setItem(rowNum,0,new QTableWidgetItem(accountName));
-            ui->accountTableWidget->setItem(rowNum,1,new QTableWidgetItem(UBChain::getInstance()->addressMapValue(accountName).ownerAddress));
-
-
-            ContractBalanceMap map = UBChain::getInstance()->accountContractBalanceMap.value(UBChain::getInstance()->addressMap.value(accountName).ownerAddress);
-            ui->accountTableWidget->setItem(rowNum,2,new QTableWidgetItem(getBigNumberString(map.value(contractAddress),info.precision)));
-    //        ui->accountTableWidget->setItem(rowNum,2,new QTableWidgetItem(UBChain::getInstance()->balanceMapValue(accountName).remove(ASSET_NAME)));
-            ui->accountTableWidget->item(rowNum,0)->setTextAlignment(Qt::AlignCenter);
-            ui->accountTableWidget->item(rowNum,1)->setTextAlignment(Qt::AlignCenter);
-            ui->accountTableWidget->item(rowNum,2)->setTextAlignment(Qt::AlignCenter);
-
-            ui->accountTableWidget->item(rowNum,0)->setTextColor(QColor(192,196,212));
-            ui->accountTableWidget->item(rowNum,1)->setTextColor(QColor(192,196,212));
-            ui->accountTableWidget->item(rowNum,2)->setTextColor(QColor(24,250,239));
-
-            if(rowNum % 2)
-            {
-                for( int i = 0; i < 3; i++)
-                {
-                    ui->accountTableWidget->item(rowNum,i)->setBackgroundColor(QColor(43,49,69));
-                }
+                ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(43,49,69));
             }
             else
             {
-                for( int i = 0; i < 3; i++)
-                {
-                    ui->accountTableWidget->item(rowNum,i)->setBackgroundColor(QColor(40,46,66));
-                }
+                ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(40,46,66));
             }
         }
-
     }
 
-    ui->loadingWidget->hide();    
 }
 
 void MainPage::on_addAccountBtn_clicked()
@@ -326,63 +254,28 @@ int tableWidgetPosToRow(QPoint pos, QTableWidget* table);
 
 void MainPage::refresh()
 {
-    qDebug() << "mainpage refresh"   << refreshOrNot;
-    if( !refreshOrNot) return;
+//    qDebug() << "mainpage refresh"   << refreshOrNot;
+//    if( !refreshOrNot) return;
 
     updateAccountList();
-    updateTotalBalance();
 
 }
 
 void MainPage::init()
 {
-    refreshOrNot = false;
+//    refreshOrNot = false;
 
     updateAccountList();
-    updateTotalBalance();
+//    updateTotalBalance();
 
-    refreshOrNot = true;
-}
+//    refreshOrNot = true;
 
-void MainPage::sortAccountsByBalance(QStringList &accounts)
-{
-    for(int i = 0; i < accounts.size(); i++)
-    {
-        for(int j = 0; j < accounts.size() - i - 1; j++)
-        {
-            QString account1 = accounts.at(j);
-            unsigned long long balance1 = UBChain::getInstance()->accountBalanceMap.value(account1).value(0);
+     QStringList accounts = UBChain::getInstance()->accountInfoMap.keys();
+     ui->accountComboBox->addItems(accounts);
 
-            QString account2 = accounts.at(j + 1);
-            unsigned long long balance2 = UBChain::getInstance()->accountBalanceMap.value(account2).value(0);
-
-            if(sortMode == 0)
-            {
-                if( balance1 < balance2)
-                {
-                    accounts[j] = account2;
-                    accounts[j + 1] = account1;
-                }
-            }
-            else
-            {
-                if( balance1 > balance2)
-                {
-                    accounts[j] = account2;
-                    accounts[j + 1] = account1;
-                }
-            }
-        }
-    }
 
 }
 
-void MainPage::changeSortMode(int _section)
-{
-    if(_section != 2)   return;
-    sortMode = !sortMode;
-    updateAccountList();
-}
 
 void MainPage::paintEvent(QPaintEvent *)
 {
@@ -414,9 +307,6 @@ void MainPage::jsonDataUpdated(QString id)
     if( id.startsWith("id-wallet_create_account-") )
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << "mmmmmmmm " << id << result;
-
-        QString name = id.mid(QString("id-wallet_create_account-").size());
 
         if(result.startsWith(QString("\"result\":\"%1").arg(ACCOUNT_ADDRESS_PREFIX)))
         {
@@ -449,44 +339,6 @@ void MainPage::jsonDataUpdated(QString id)
 
 }
 
-void MainPage::updateTotalBalance()
-{
-//    unsigned long long totalBalance = 0;
-//    int assetIndex = ui->assetComboBox->currentIndex();
-//    if( assetIndex == 0)
-//    {
-//        AssetInfo info = UBChain::getInstance()->assetInfoMap.value(assetIndex);
-//        foreach (QString key, UBChain::getInstance()->accountBalanceMap.keys())
-//        {
-//            AssetBalanceMap map = UBChain::getInstance()->accountBalanceMap.value(key);
-//            totalBalance += map.value(assetIndex);
-//        }
-//        ui->totalBalanceLabel->setText( "<body><font style=\"font-size:18px\" color=#ff0000>" + getBigNumberString(totalBalance,info.precision) + "</font><font style=\"font-size:12px\" color=#000000> " + info.symbol +"</font></body>" );
-//        ui->totalBalanceLabel->adjustSize();
-//        ui->scanBtn->move(ui->totalBalanceLabel->x() + ui->totalBalanceLabel->width() + 10,ui->totalBalanceLabel->y() + 7);
-//        ui->scanLabel->move(ui->totalBalanceLabel->x() + ui->totalBalanceLabel->width() + 10,ui->totalBalanceLabel->y() + 7);
-
-//    }
-//    else
-//    {
-//        // 如果是合约资产
-//        QStringList contracts = UBChain::getInstance()->ERC20TokenInfoMap.keys();
-//        QString contractAddress = contracts.at(assetIndex - 1);
-
-//        ERC20TokenInfo info = UBChain::getInstance()->ERC20TokenInfoMap.value(contractAddress);
-
-//        QStringList keys = UBChain::getInstance()->addressMap.keys();
-//        foreach (QString key, keys)
-//        {
-//            QString accountAddress = UBChain::getInstance()->addressMap.value(key).ownerAddress;
-//            totalBalance += UBChain::getInstance()->accountContractBalanceMap.value(accountAddress).value(contractAddress);
-//        }
-//        ui->totalBalanceLabel->setText( "<body><font style=\"font-size:18px\" color=#ff0000>" + getBigNumberString(totalBalance,info.precision) + "</font><font style=\"font-size:12px\" color=#000000> " + info.contractName +"</font></body>" );
-//        ui->totalBalanceLabel->adjustSize();
-//        ui->scanBtn->move(ui->totalBalanceLabel->x() + ui->totalBalanceLabel->width() + 10,ui->totalBalanceLabel->y() + 7);
-//        ui->scanLabel->move(ui->totalBalanceLabel->x() + ui->totalBalanceLabel->width() + 10,ui->totalBalanceLabel->y() + 7);
-//    }
-}
 
 void MainPage::updatePending()
 {
@@ -579,31 +431,31 @@ int tableWidgetPosToRow(QPoint pos, QTableWidget* table)
 
 bool MainPage::eventFilter(QObject *watched, QEvent *e)
 {
-    if( watched == ui->accountTableWidget)
-    {
-        if( e->type() == QEvent::ContextMenu)
-        {
-            QContextMenuEvent* contextMenuEvent = static_cast<QContextMenuEvent*>(e);
-            QPoint pos = contextMenuEvent->pos();
-            pos -= QPoint(0,47);
-            int row = ui->accountTableWidget->row(ui->accountTableWidget->itemAt(pos));
-            if( row == -1)    return false;
+//    if( watched == ui->accountTableWidget)
+//    {
+//        if( e->type() == QEvent::ContextMenu)
+//        {
+//            QContextMenuEvent* contextMenuEvent = static_cast<QContextMenuEvent*>(e);
+//            QPoint pos = contextMenuEvent->pos();
+//            pos -= QPoint(0,47);
+//            int row = ui->accountTableWidget->row(ui->accountTableWidget->itemAt(pos));
+//            if( row == -1)    return false;
 
-            if( ui->accountTableWidget->item(row,0) == NULL)   return false;
-            QString name = ui->accountTableWidget->item(row,0)->text();
-            RightClickMenuDialog* rightClickMenuDialog = new RightClickMenuDialog( name, this);
-            rightClickMenuDialog->move( ui->accountTableWidget->mapToGlobal(contextMenuEvent->pos()) );
-            connect( rightClickMenuDialog, SIGNAL(transferFromAccount(QString)), this, SIGNAL(showTransferPage(QString)));
-            connect( rightClickMenuDialog, SIGNAL(renameAccount(QString)), this, SLOT(renameAccount(QString)));
-            connect( rightClickMenuDialog, SIGNAL(exportAccount(QString)), this, SLOT(showExportDialog(QString)));
-            connect( rightClickMenuDialog, SIGNAL(deleteAccount(QString)), this, SLOT(deleteAccount(QString)));
-            rightClickMenuDialog->exec();
+//            if( ui->accountTableWidget->item(row,0) == NULL)   return false;
+//            QString name = ui->accountTableWidget->item(row,0)->text();
+//            RightClickMenuDialog* rightClickMenuDialog = new RightClickMenuDialog( name, this);
+//            rightClickMenuDialog->move( ui->accountTableWidget->mapToGlobal(contextMenuEvent->pos()) );
+//            connect( rightClickMenuDialog, SIGNAL(transferFromAccount(QString)), this, SIGNAL(showTransferPage(QString)));
+//            connect( rightClickMenuDialog, SIGNAL(renameAccount(QString)), this, SLOT(renameAccount(QString)));
+//            connect( rightClickMenuDialog, SIGNAL(exportAccount(QString)), this, SLOT(showExportDialog(QString)));
+//            connect( rightClickMenuDialog, SIGNAL(deleteAccount(QString)), this, SLOT(deleteAccount(QString)));
+//            rightClickMenuDialog->exec();
 
-            return true;
+//            return true;
 
 
-        }
-    }
+//        }
+//    }
 
     return QWidget::eventFilter(watched,e);
 }
@@ -611,7 +463,6 @@ bool MainPage::eventFilter(QObject *watched, QEvent *e)
 
 void MainPage::showExportDialog(QString name)
 {
-
     ExportDialog exportDialog(name);
     exportDialog.pop();
 }
@@ -670,16 +521,36 @@ void MainPage::deleteAccount(QString name)
 }
 
 
-//void MainPage::hideDetailWidget()
-//{
-//    detailOrNot = false;
+void MainPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
+{
+    updateAccountList();
+}
 
-//    ui->accountTableWidget->setColumnWidth(0,173);
-//    ui->accountTableWidget->setColumnWidth(1,424);
-//    ui->accountTableWidget->setColumnWidth(2,154);
+void MainPage::on_copyBtn_clicked()
+{
+    QClipboard* clipBoard = QApplication::clipboard();
+    clipBoard->setText(ui->addressLabel->text());
 
-//    ui->addAccountBtn->move(675,422);
+    CommonDialog commonDialog(CommonDialog::OkOnly);
+    commonDialog.setText(tr("Copy to clipboard"));
+    commonDialog.pop();
+}
 
-//    detailWidget->dynamicHide();
-//}
+void MainPage::on_qrcodeBtn_clicked()
+{
+    AccountInfo info = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+    QRCodeDialog qrcodeDialog(info.address);
+    qrcodeDialog.move(ui->qrcodeBtn->mapToGlobal( QPoint(20,0)));
+    qrcodeDialog.exec();
+}
 
+void MainPage::on_exportBtn_clicked()
+{
+    showExportDialog(ui->accountComboBox->currentText());
+}
+
+void MainPage::on_backupWalletBtn_clicked()
+{
+    BackupWalletDialog backupWalletDialog;
+    backupWalletDialog.pop();
+}

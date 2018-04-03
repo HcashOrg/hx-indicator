@@ -111,10 +111,10 @@ SOURCES += main.cpp\
     extra/guiutil.cpp \
     extra/contractserverinfomanager.cpp \
     control/feedassetcellwidget.cpp \
-    lnk.cpp \
     neworimportwalletwidget.cpp \
     websocketmanager.cpp \
     dialog/backupwalletdialog.cpp \
+    wallet.cpp \
     contact/ContactAddWidget.cpp \
     contact/ContactBriefWidget.cpp \
     contact/ContactDataUtil.cpp \
@@ -206,10 +206,10 @@ HEADERS  += firstlogin.h \
     extra/guiutil.h \
     extra/contractserverinfomanager.h \
     control/feedassetcellwidget.h \
-    lnk.h \
     neworimportwalletwidget.h \
     websocketmanager.h \
     dialog/backupwalletdialog.h \
+    wallet.h \
     contact/ContactAddWidget.h \
     contact/ContactBriefWidget.h \
     contact/ContactDataUtil.h \

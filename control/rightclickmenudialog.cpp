@@ -1,6 +1,6 @@
 #include "rightclickmenudialog.h"
 #include "ui_rightclickmenudialog.h"
-#include "../lnk.h"
+#include "../wallet.h"
 #include "commondialog.h"
 
 #ifdef WIN32

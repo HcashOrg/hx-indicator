@@ -1,6 +1,6 @@
 #include "waitingforsync.h"
 #include "ui_waitingforsync.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "debug_log.h"
 #include "commondialog.h"
 #include "websocketmanager.h"

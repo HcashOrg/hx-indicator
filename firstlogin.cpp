@@ -7,7 +7,7 @@
 
 #include "firstlogin.h"
 #include "ui_firstlogin.h"
-#include "lnk.h"
+#include "wallet.h"
 #include "debug_log.h"
 #include "commondialog.h"
 
@@ -244,8 +244,6 @@ void FirstLogin::jsonDataUpdated(QString id)
 
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
-
-        qDebug() << id << result;
         if( result == "\"result\":null")
         {
             emit login();
