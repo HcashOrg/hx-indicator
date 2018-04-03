@@ -239,7 +239,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
   <widget class="QToolButton" name="copyBtn">
    <property name="geometry">
     <rect>
-     <x>372</x>
+     <x>552</x>
      <y>46</y>
      <width>11</width>
      <height>11</height>
@@ -312,7 +312,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
     <rect>
      <x>262</x>
      <y>40</y>
-     <width>100</width>
+     <width>280</width>
      <height>24</height>
     </rect>
    </property>
@@ -332,7 +332,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
     <bool>true</bool>
    </property>
    <property name="textInteractionFlags">
-    <set>Qt::NoTextInteraction</set>
+    <set>Qt::TextSelectableByMouse</set>
    </property>
   </widget>
   <widget class="QLabel" name="addressLabel2">
@@ -362,7 +362,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
   <widget class="QToolButton" name="qrcodeBtn">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>570</x>
      <y>46</y>
      <width>11</width>
      <height>11</height>
@@ -383,6 +383,86 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
     <string/>
    </property>
   </widget>
+  <widget class="QToolButton" name="backupWalletBtn">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>10</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
+background-color: transparent;
+font: 12px &quot;微软雅黑&quot;;}
+QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
+   </property>
+   <property name="text">
+    <string>备份钱包</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="exportBtn">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>10</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
+background-color: transparent;
+font: 12px &quot;微软雅黑&quot;;}
+QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
+   </property>
+   <property name="text">
+    <string>导出账户</string>
+   </property>
+  </widget>
+  <zorder>addressLabel</zorder>
+  <zorder>accountListLabel</zorder>
+  <zorder>addAccountBtn</zorder>
+  <zorder>accountTableWidget</zorder>
+  <zorder>importAccountBtn</zorder>
+  <zorder>copyBtn</zorder>
+  <zorder>accountComboBox</zorder>
+  <zorder>label</zorder>
+  <zorder>addressLabel2</zorder>
+  <zorder>qrcodeBtn</zorder>
+  <zorder>backupWalletBtn</zorder>
+  <zorder>exportBtn</zorder>
  </widget>
  <resources/>
  <connections/>

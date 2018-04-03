@@ -44,7 +44,6 @@ UBChain::UBChain()
 
     currentDialog = NULL;
     hasDelegateSalary = false;
-    needToScan = false;
     currentPort = CLIENT_RPC_PORT;
     currentAccount = "";
     currentTokenAddress = "";

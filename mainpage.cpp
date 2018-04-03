@@ -4,6 +4,8 @@
 #include <QMouseEvent>
 #include <QScrollBar>
 #include <QMovie>
+#include <QClipboard>
+
 
 #include "mainpage.h"
 #include "ui_mainpage.h"
@@ -19,6 +21,7 @@
 #include "control/chooseaddaccountdialog.h"
 #include "dialog/renamedialog.h"
 #include "dialog/backupwalletdialog.h"
+#include "control/qrcodedialog.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -48,9 +51,20 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->horizontalHeader()->setVisible(true);
     ui->accountTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->accountTableWidget->setColumnWidth(0,160);
-    ui->accountTableWidget->setColumnWidth(1,320);
-    ui->accountTableWidget->setColumnWidth(2,160);
+    ui->accountTableWidget->setColumnWidth(0,100);
+    ui->accountTableWidget->setColumnWidth(1,100);
+    ui->accountTableWidget->setColumnWidth(2,80);
+    ui->accountTableWidget->setColumnWidth(3,80);
+    ui->accountTableWidget->setColumnWidth(4,80);
+    ui->accountTableWidget->setColumnWidth(5,80);
+    ui->accountTableWidget->setColumnWidth(6,80);
+
+    ui->copyBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                               "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
+    ui->copyBtn->setToolTip(tr("copy to clipboard"));
+
+    ui->qrcodeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/qrcode.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                                 "QToolButton:hover{background-image:url(:/ui/wallet_ui/qrcode_hover.png);}");
 
     QString language = UBChain::getInstance()->language;
     if( language.isEmpty())
@@ -115,8 +129,6 @@ void MainPage::updateAccountList()
 
     AssetAmountMap map = info.assetAmountMap;
     QStringList keys = map.keys();
-    qDebug() << "kkkkkkkkkkk  " << keys;
-    qDebug() << "aaaaaaaaaaaa  " << UBChain::getInstance()->assetInfoMap.keys();
 
     int size = keys.size();
     ui->accountTableWidget->setRowCount(size);
@@ -135,7 +147,26 @@ void MainPage::updateAccountList()
         //数量
         ui->accountTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(map.value(assetId).amount, assetInfo.precision)));
 
+        ui->accountTableWidget->setItem(i,2,new QTableWidgetItem(tr("transfer")));
+        ui->accountTableWidget->setItem(i,3,new QTableWidgetItem(tr("deposit")));
+        ui->accountTableWidget->setItem(i,4,new QTableWidgetItem(tr("withdraw")));
+        ui->accountTableWidget->setItem(i,5,new QTableWidgetItem(tr("trade")));
+        ui->accountTableWidget->setItem(i,6,new QTableWidgetItem(tr("exchange")));
 
+        for(int j = 0; j < 7; j++)
+        {
+            ui->accountTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+            ui->accountTableWidget->item(i,j)->setTextColor(QColor(192,196,212));
+
+            if(i % 2)
+            {
+                ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(43,49,69));
+            }
+            else
+            {
+                ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(40,46,66));
+            }
+        }
     }
 
 }
@@ -430,7 +461,6 @@ bool MainPage::eventFilter(QObject *watched, QEvent *e)
 
 void MainPage::showExportDialog(QString name)
 {
-
     ExportDialog exportDialog(name);
     exportDialog.pop();
 }
@@ -491,6 +521,28 @@ void MainPage::deleteAccount(QString name)
 
 void MainPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
+    updateAccountList();
+}
 
+void MainPage::on_copyBtn_clicked()
+{
+    QClipboard* clipBoard = QApplication::clipboard();
+    clipBoard->setText(ui->addressLabel->text());
 
+    CommonDialog commonDialog(CommonDialog::OkOnly);
+    commonDialog.setText(tr("Copy to clipboard"));
+    commonDialog.pop();
+}
+
+void MainPage::on_qrcodeBtn_clicked()
+{
+    AccountInfo info = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+    QRCodeDialog qrcodeDialog(info.address);
+    qrcodeDialog.move(ui->qrcodeBtn->mapToGlobal( QPoint(20,0)));
+    qrcodeDialog.exec();
+}
+
+void MainPage::on_exportBtn_clicked()
+{
+    showExportDialog(ui->accountComboBox->currentText());
 }

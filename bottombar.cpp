@@ -91,17 +91,7 @@ void BottomBar::jsonDataUpdated(QString id)
         ui->syncLabel->setText( num + " / " + QString::number( num.toInt() + numToSync) );
         UBChain::getInstance()->currentBlockHeight = num.toInt();
 
-        int pos3 = result.indexOf( "\"wallet_scan_progress\":") + 23;
-        QString scanProgress = result.mid( pos3, result.indexOf(",\"wallet_block_production_enabled\":") - pos3);
 
-        scanProgress.remove('\"');
-        double scanPercent = scanProgress.toDouble();
-
-        if( UBChain::getInstance()->needToScan && scanPercent > 0.99999)
-        {
-            UBChain::getInstance()->postRPC( "id_scan", toJsonFormat( "scan", QStringList() << "0"));
-            UBChain::getInstance()->needToScan = false;
-        }
 
         return;
     }

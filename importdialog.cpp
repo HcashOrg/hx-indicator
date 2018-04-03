@@ -82,6 +82,9 @@ void ImportDialog::on_pathBtn_clicked()
 
 void ImportDialog::on_importBtn_clicked()
 {
+    if(ui->accountNameLineEdit->text().isEmpty())   return;
+    if(ui->privateKeyLineEdit->text().isEmpty())    return;
+
     // 如果输入框中是 私钥文件的地址
     if( ui->privateKeyLineEdit->text().endsWith(".key") )
     {
@@ -91,9 +94,8 @@ void ImportDialog::on_importBtn_clicked()
             QByteArray rd = file.readAll();
             QByteArray ba = QByteArray::fromBase64( rd);
             QString str(ba);
-            privateKey = str;
 
-            UBChain::getInstance()->postRPC( "id_wallet_import_private_key", toJsonFormat( "wallet_import_private_key", QStringList() << str));
+            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QStringList() << ui->accountNameLineEdit->text() << str));
             ui->importBtn->setEnabled(false);
             shadowWidget->show();
 
@@ -131,9 +133,8 @@ void ImportDialog::on_importBtn_clicked()
                     file.close();
 
                     QString pk = output.mid( QString("privateKey=").size());
-                    privateKey = pk;
 
-                    UBChain::getInstance()->postRPC( "id_wallet_import_private_key", toJsonFormat( "wallet_import_private_key", QStringList() << pk));
+                    UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QStringList() << ui->accountNameLineEdit->text() << pk));
                     ui->importBtn->setEnabled(false);
                     shadowWidget->show();
                 }
@@ -166,9 +167,9 @@ void ImportDialog::on_importBtn_clicked()
     {
         QString privateKey = ui->privateKeyLineEdit->text();
         privateKey = privateKey.simplified();
-        if( (privateKey.size() == 51 || privateKey.size() == 52) && (privateKey.startsWith("5") || privateKey.startsWith("KL")) )
+        if( (privateKey.size() == 51 || privateKey.size() == 52) && (privateKey.startsWith("5") ) )
         {
-            UBChain::getInstance()->postRPC( "id_wallet_import_private_key", toJsonFormat( "wallet_import_private_key", QStringList() << privateKey));
+            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QStringList() << ui->accountNameLineEdit->text() << privateKey));
 
              ui->importBtn->setEnabled(false);
              shadowWidget->show();
@@ -189,146 +190,36 @@ QString toThousandFigure( int);
 
 void ImportDialog::jsonDataUpdated(QString id)
 {
-    if( id == "id_wallet_import_private_key")
+    if( id == "id-import_key")
     {
         shadowWidget->hide();
 
         QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << "pppppppp " << id << result;
         if( result.mid(0,9) == "\"result\":")
         {
             ui->importBtn->setEnabled(true);
 
-            UBChain::getInstance()->needToScan = true;  // 导入成功，需要scan
+            emit accountImported();
 
-            QString name = result.mid(10, result.indexOf("\"", 10) - 10);
-            if( accountNameAlreadyExisted(name))        //  如果已存在该账号
-            {
-                CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText( name + tr(" already existed") );
-                commonDialog.pop();
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText( ui->accountNameLineEdit->text() + tr( " has been imported!"));
+            commonDialog.pop();
 
-            }
-            else
-            {
-                mutexForAddressMap.lock();
-                int size = UBChain::getInstance()->addressMap.size();
-                mutexForAddressMap.unlock();
-
-                mutexForConfigFile.lock();
-                UBChain::getInstance()->configFile->setValue( QString("/accountInfo/") + QString::fromLocal8Bit("账户") + toThousandFigure(size+1),name);
-                mutexForConfigFile.unlock();
-                UBChain::getInstance()->balanceMapInsert( name, "0.00000 " + QString(ASSET_NAME));
-                UBChain::getInstance()->registerMapInsert( name, "UNKNOWN");
-                UBChain::getInstance()->addressMapInsert( name, UBChain::getInstance()->getAddress(name));
-
-                emit accountImported();
-
-                UBChain::getInstance()->setRecollect();
-
-                CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText( name + tr( " has been imported!"));
-                commonDialog.pop();
-
-//                RpcThread* rpcThread = new RpcThread;
-//                connect(rpcThread,SIGNAL(finished()),rpcThread,SLOT(deleteLater()));
-//                rpcThread->setLogin("a","b");
-//                rpcThread->setWriteData( toJsonFormat( "id_scan", "scan", QStringList() << "0" ));
-//                rpcThread->setWriteData( toJsonFormat( "id_wallet_scan_transaction", "wallet_scan_transaction", QStringList() << "ALL" << "true" ));
-//                rpcThread->start();
-
-                UBChain::getInstance()->postRPC( "id_scan", toJsonFormat( "scan", QStringList() << "0" ));
-                UBChain::getInstance()->postRPC( "id_wallet_scan_transaction", toJsonFormat( "wallet_scan_transaction", QStringList() << "ALL" << "true" ));
-
-
-                close();
-//                emit accepted();
-            }
-
+            close();
         }
         else if( result.mid(0,8) == "\"error\":")
         {
             qDebug() << "import error: " << result;
-
-            if( !result.contains("Unknown key! You must specify an account name!") )
-            {
-                // 如果不是未注册账户 是错误的私钥格式
-                CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText( tr("Illegal private key!"));
-                commonDialog.pop();
-
-                ui->importBtn->setEnabled(true);
-                return;
-            }
-
-            NameDialog nameDialog;
-            QString name = nameDialog.pop();
-
-            if( name.isEmpty())    // 如果取消 命名
-            {
-                ui->importBtn->setEnabled(true);
-                return;
-            }
-
-            if( ui->privateKeyLineEdit->text().endsWith(".key") || ui->privateKeyLineEdit->text().endsWith(".upk") )  // 如果是路径
-            {
-                UBChain::getInstance()->postRPC( "id_wallet_import_private_key_" + name, toJsonFormat( "wallet_import_private_key", QStringList() << privateKey << name << "true"));
-                shadowWidget->show();
-                return;
-            }
-            else // 如果输入框中是 私钥
-            {
-                UBChain::getInstance()->postRPC( "id_wallet_import_private_key_" + name, toJsonFormat( "wallet_import_private_key", QStringList() << ui->privateKeyLineEdit->text() << name << "true" ));
-                shadowWidget->show();
-            }
-        }
-
-        return;
-    }
-
-    if( id.startsWith("id_wallet_import_private_key_") )
-    {
-        ui->importBtn->setEnabled(true);
-        shadowWidget->hide();
-
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if( result.mid(0,9) == "\"result\":")
-        {
-            UBChain::getInstance()->needToScan = true;  // 导入成功，需要scan
-
-            QString name = result.mid(10, result.indexOf("\"", 10) - 10);
-
-            mutexForAddressMap.lock();
-            int size = UBChain::getInstance()->addressMap.size();
-            mutexForAddressMap.unlock();
-
-            mutexForConfigFile.lock();
-            UBChain::getInstance()->configFile->setValue( QString("/accountInfo/") + QString::fromLocal8Bit("账户") + toThousandFigure(size+1),name);
-            mutexForConfigFile.unlock();
-            UBChain::getInstance()->balanceMapInsert( name, "0.00000 " + QString(ASSET_NAME));
-            UBChain::getInstance()->registerMapInsert( name, "NO");
-            UBChain::getInstance()->addressMapInsert( name, UBChain::getInstance()->getAddress(name));
-
-            emit accountImported();
-
-            UBChain::getInstance()->setRecollect();
+            int pos = result.indexOf("\"message\":\"") + 11;
+            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
 
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( name + tr(" has been imported!") );
+            commonDialog.setText( tr("Import key error: ") + errorMessage);
             commonDialog.pop();
 
-            UBChain::getInstance()->postRPC( "id_scan", toJsonFormat( "scan", QStringList() << "0" ));
-            UBChain::getInstance()->postRPC( "id_wallet_scan_transaction", toJsonFormat( "wallet_scan_transaction", QStringList() << "ALL" << "true" ));
-
-
-            close();
-//            emit accepted();
-        }
-        else if( result.mid(0,8) == "\"error\":")
-        {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Illegal private key!"));
-            commonDialog.pop();
+            ui->importBtn->setEnabled(true);
+            return;
         }
 
         return;
@@ -336,27 +227,7 @@ void ImportDialog::jsonDataUpdated(QString id)
 
 }
 
-bool ImportDialog::accountNameAlreadyExisted(QString name)
-{
-    mutexForConfigFile.lock();
-    UBChain::getInstance()->configFile->beginGroup("/accountInfo");
 
-    QStringList keys = UBChain::getInstance()->configFile->childKeys();
-    QString str;
-    bool existed = false;
-    foreach (str, keys)
-    {
-        if( UBChain::getInstance()->configFile->value(str) == name)
-        {
-            existed = true;
-            break;
-        }
-    }
-    UBChain::getInstance()->configFile->endGroup();
-    mutexForConfigFile.unlock();
-    return existed;
-
-}
 
 void ImportDialog::on_privateKeyLineEdit_textChanged(const QString &arg1)
 {
@@ -368,14 +239,6 @@ void ImportDialog::on_privateKeyLineEdit_textChanged(const QString &arg1)
     else
     {
         ui->importBtn->setEnabled(true);
-    }
-}
-
-void ImportDialog::on_privateKeyLineEdit_returnPressed()
-{
-    if( ui->importBtn->isEnabled())
-    {
-        on_importBtn_clicked();
     }
 }
 

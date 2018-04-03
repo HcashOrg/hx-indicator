@@ -443,7 +443,7 @@ void Frame::showLockPage()
     shadowWidgetShow();
 
 
-    UBChain::getInstance()->postRPC( "id_lock", toJsonFormat( "lock", QStringList() << "" ));
+    UBChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QStringList() ));
 qDebug() << "lock ";
 
 }
@@ -453,7 +453,7 @@ void Frame::autoLock()
 
     timer->stop();
 
-    UBChain::getInstance()->postRPC( "id_lock", toJsonFormat( "lock", QStringList() << "" ));
+    UBChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QStringList()  ));
 qDebug() << "autolock ";
 
 }
@@ -1139,8 +1139,6 @@ void Frame::jsonDataUpdated(QString id)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
-        qDebug() << "bbbbbbbbbbb  " << id << result;
-
         if(result.startsWith("\"result\":["))
         {
             QString accountName = id.mid(id.indexOf("-",10) + 1);
@@ -1178,7 +1176,7 @@ void Frame::jsonDataUpdated(QString id)
 
 
 
-    if( id == "id_lock")
+    if( id == "id-lock")
     {
         if( lockPage )
         {
@@ -1187,6 +1185,8 @@ void Frame::jsonDataUpdated(QString id)
         }
 
         QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        qDebug() << "kkkkkkkkk " << id << result;
         if( result == "\"result\":null")
         {
             shadowWidgetHide();

@@ -69,6 +69,12 @@ private slots:
 
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
+    void on_copyBtn_clicked();
+
+    void on_qrcodeBtn_clicked();
+
+    void on_exportBtn_clicked();
+
 private:
     Ui::MainPage *ui;
     int previousColorRow;

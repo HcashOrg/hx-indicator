@@ -5,11 +5,10 @@
 #include <QTextCodec>
 #include <QScrollBar>
 #include <QListView>
+#include <QClipboard>
 
 #include "accountpage.h"
 #include "ui_accountpage.h"
-#include "debug_log.h"
-#include <QClipboard>
 #include "commondialog.h"
 #include "showcontentdialog.h"
 #include "control/remarkcellwidget.h"
