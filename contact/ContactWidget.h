@@ -34,6 +34,7 @@ private:
     void SaveData();
 protected:
     void closeEvent(QCloseEvent *event);
+    //void paintEvent(QPaintEvent *event);
 private:
     Ui::ContactWidget *ui;
 private:

@@ -1,6 +1,7 @@
 #include "ContactWidget.h"
 #include "ui_ContactWidget.h"
 
+#include <QPainter>
 #include "ContactDataUtil.h"
 #include "ContactTreeWidget.h"
 #include "ContactSearchWidget.h"
@@ -88,7 +89,16 @@ void ContactWidget::ShowContactInfoSlots(const QString &address)
 
 void ContactWidget::InitWidget()
 {
-    setStyleSheet("QWidget{background-color: rgb(40, 46, 66);}");
+    //setWindowFlags(Qt::FramelessWindowHint);
+    //
+    //setAutoFillBackground(true);
+    //QPalette palette;
+    //palette.setColor(QPalette::Background, QColor(40,46,66));
+    //setPalette(palette);
+
+    setStyleSheet("QWidget{background-color:rgb(40,46,66);border:none;color:white;}");
+    //setStyleSheet("QWidget{background-color:rgb(40,46,66);color:white;}");
+    //setStyleSheet("QWidget{background-color:rgb(24,28,45);border:none;}");
     ui->scrollArea_leftBottom->setWidget(_p->contactTreeWidget);
     ui->scrollArea_leftTop->setWidget(_p->contactSearchWidget);
     ui->scrollArea_rightTop->setWidget(_p->contactBriefWidget);
@@ -115,3 +125,11 @@ void ContactWidget::closeEvent(QCloseEvent *event)
     SaveData();
     QWidget::closeEvent(event);
 }
+
+//void ContactWidget::paintEvent(QPaintEvent *event)
+//{
+//    //QPainter painter(this);
+//    //painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
+//    //painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
+//    //painter.drawRect(rect());
+//}

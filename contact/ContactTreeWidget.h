@@ -16,12 +16,14 @@ class ContactGroup;
 class QTreeWidgetItem;
 class QMouseEvent;
 class QContextMenuEvent;
-
+namespace Ui {
+    class ContactTreeWidget;
+}
 class ContactTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 public:
-    ContactTreeWidget();
+    explicit ContactTreeWidget(QWidget *parent = 0);
     ~ContactTreeWidget();
 signals:
     //显示联系人信息事件
@@ -87,6 +89,7 @@ protected:
     void contextMenuEvent(QContextMenuEvent *event);
 
     void mousePressEvent(QMouseEvent *event);
+    //void paintEvent(QPaintEvent *event);
 private:
     //////////////////////////////////////////////////////////////////////////
     ///<summary>根据数据生成节点 </summary>
@@ -98,6 +101,8 @@ private:
 private:
     class ContactTreeWidgetPrivate;
     ContactTreeWidgetPrivate *_p;
+private:
+    Ui::ContactTreeWidget *ui;
 };
 
 #endif // CONTACTTREEWIDGET_H

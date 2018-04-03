@@ -114,5 +114,6 @@ void TitleBar::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setBrush(QColor(40,46,66));
     painter.setPen(QColor(40,46,66));
-    painter.drawRect(QRect(0,0,680,35));
+    painter.drawRect(rect());
+    //painter.drawRect(QRect(0,0,900,35));
 }

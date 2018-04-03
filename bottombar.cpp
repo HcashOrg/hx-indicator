@@ -114,7 +114,15 @@ void BottomBar::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setBrush(QColor(40,46,66));
     painter.setPen(QColor(40,46,66));
-    painter.drawRect(QRect(0,0,680,53));
+    painter.drawRect(rect());
+    //painter.drawRect(QRect(0,0,900,40));
+
+    if(rect().width() > 680)
+    {
+        painter.setBrush(QColor(24,28,45));
+        painter.setPen(QColor(24,28,45));
+        painter.drawRect(0,0,124,40);
+    }
 }
 
 void BottomBar::refresh()

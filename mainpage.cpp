@@ -389,7 +389,9 @@ void MainPage::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
     painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
-    painter.drawRect(0,0,680,482);
+
+    painter.drawRect(rect());
+    //painter.drawRect(0,0,680,482);
 
 }
 

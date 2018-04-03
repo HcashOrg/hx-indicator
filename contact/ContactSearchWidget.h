@@ -21,6 +21,8 @@ public:
     ~ContactSearchWidget();
 signals:
     void searchSignal(const QString &searchString);
+protected:
+    void paintEvent(QPaintEvent *event);
 private slots:
     void StartSearchSlots();
 private:

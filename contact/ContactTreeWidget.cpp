@@ -1,5 +1,7 @@
 #include "ContactTreeWidget.h"
+#include "ui_ContactTreeWidget.h"
 
+#include <QPainter>
 #include <QTreeWidgetItem>
 #include <QMenu>
 #include <QLineEdit>
@@ -37,9 +39,12 @@ public:
     std::vector<QAction *> movePersonAction;//移动人员动作（每次变化）
 };
 
-ContactTreeWidget::ContactTreeWidget()
-    :_p(new ContactTreeWidgetPrivate())
+ContactTreeWidget::ContactTreeWidget(QWidget *parent)
+    :QTreeWidget(parent)
+    ,ui(new Ui::ContactTreeWidget)
+    ,_p(new ContactTreeWidgetPrivate())
 {
+    ui->setupUi(this);
     initTreeStyle();
     initContextMenu();
 }
@@ -326,13 +331,10 @@ void ContactTreeWidget::initContactSheet(std::shared_ptr<ContactSheet> data)
 
 void ContactTreeWidget::initTreeStyle()
 {
+    setWindowFlags(Qt::FramelessWindowHint);//无边框
+    setStyleSheet("QWidget{background-color:rgb(24,28,45);border:none;}");
     setHeaderHidden(true);
     setSelectionMode(QAbstractItemView::SingleSelection);
-    setStyleSheet("QTreeWidget{border: none;}");
-//    setStyleSheet("QTreeWidget{border: none;background-color: rgb(40, 46, 66);}\
-//    QHeaderView{background-color:rgb(40,46,66);min-height:30;color:white;}\
-//    QHeaderView::section{background-color: rgb(56,63,93);border: 1px solid rgb(40,46,66);\
-//    }");
 }
 
 void ContactTreeWidget::initContextMenu()
@@ -458,3 +460,11 @@ void ContactTreeWidget::initTreeData()
     }
     expandAll();
 }
+
+//void ContactTreeWidget::paintEvent(QPaintEvent *event)
+//{
+//    //QPainter painter(this);
+//    //painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
+//    //painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
+//    //painter.drawRect(rect());
+//}

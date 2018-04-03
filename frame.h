@@ -37,6 +37,8 @@ class MultiSigTransactionPage;
 class NewOrImportWalletWidget;
 
 class ContactWidget;
+class FunctionWidget;
+
 class Frame:public QFrame
 {
     Q_OBJECT
@@ -146,7 +148,8 @@ private:
     void  getAccountInfo();
     void startTimerForAutoRefresh();      // 自动刷新
     QTimer* timerForAutoRefresh;
-    FunctionBar* functionBar;
+    //FunctionBar* functionBar;
+    FunctionWidget *functionBar;
     void closeCurrentPage();
     bool eventFilter(QObject *watched, QEvent *e);
     void closeEvent(QCloseEvent* e);
@@ -168,6 +171,9 @@ private:
 private:
     void paintEvent(QPaintEvent* e);
     QPixmap _pixmap;
+private slots:
+    void EnlargeRightPart();
+    void RestoreRightPart();
 };
 
 

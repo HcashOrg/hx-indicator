@@ -122,7 +122,10 @@ SOURCES += main.cpp\
     contact/ContactInfoWidget.cpp \
     contact/ContactSearchWidget.cpp \
     contact/ContactTreeWidget.cpp \
-    contact/ContactWidget.cpp
+    contact/ContactWidget.cpp \
+    functionBar/FunctionAccountWidget.cpp \
+    functionBar/FunctionAdvanceWidget.cpp \
+    functionBar/FunctionWidget.cpp
 
 HEADERS  += firstlogin.h \
     normallogin.h \
@@ -214,7 +217,10 @@ HEADERS  += firstlogin.h \
     contact/ContactInfoWidget.h \
     contact/ContactSearchWidget.h \
     contact/ContactTreeWidget.h \
-    contact/ContactWidget.h
+    contact/ContactWidget.h \
+    functionBar/FunctionAccountWidget.h \
+    functionBar/FunctionAdvanceWidget.h \
+    functionBar/FunctionWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -289,7 +295,11 @@ FORMS    += firstlogin.ui \
     contact/ContactInfoTitleWidget.ui \
     contact/ContactInfoWidget.ui \
     contact/ContactSearchWidget.ui \
-    contact/ContactWidget.ui
+    contact/ContactWidget.ui \
+    functionBar/FunctionAccountWidget.ui \
+    functionBar/FunctionAdvanceWidget.ui \
+    functionBar/FunctionWidget.ui \
+    contact/ContactTreeWidget.ui
     
 win32{
     DISTFILES += logo.rc
@@ -305,6 +315,5 @@ TRANSLATIONS +=   wallet_simplified_Chinese.ts  wallet_English.ts
 DISTFILES += \
     contact/search.png
 
-//release版生成调试信息
 QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
 QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO

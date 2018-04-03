@@ -66,10 +66,10 @@ void ContactInfoWidget::RefreshWidget()
     _p->infoTitleWidget->setData(_p->person);
 }
 
-//void ContactInfoWidget::paintEvent(QPaintEvent *)
-//{
-//    QStyleOption opt;
-//      opt.init(this);
-//      QPainter p(this);
-//      style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-//}
+void ContactInfoWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
+    painter.drawRect(rect());
+}

@@ -34,6 +34,7 @@ private:
     //验证地址合法性
     bool validateAddress(const QString &address);
 private:
+    void InitStyle();
     void InitWidget();
 
     void InitComboBox();

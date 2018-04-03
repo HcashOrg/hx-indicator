@@ -1,6 +1,7 @@
 #include "ContactSearchWidget.h"
 #include "ui_ContactSearchWidget.h"
 
+#include <QPainter>
 #include <QPushButton>
 class ContactSearchWidget::ContactSearchWidgetPrivate
 {
@@ -35,6 +36,16 @@ void ContactSearchWidget::StartSearchSlots()
 
 void ContactSearchWidget::InitWidget()
 {
+
+//    setWindowFlags(Qt::FramelessWindowHint);//无边框
+
+//    setAutoFillBackground(true);
+//    QPalette palette;
+//    palette.setColor(QPalette::Background, QColor(40,46,66));
+//    setPalette(palette);
+
+    //setStyleSheet("QWidget{background-color:rgb(24,28,45);border:none;}");
+
     QPushButton *pSearchButton = new QPushButton(this);
 
     pSearchButton->setCursor(Qt::PointingHandCursor);
@@ -60,4 +71,12 @@ void ContactSearchWidget::InitWidget()
     connect(ui->lineEdit,&QLineEdit::editingFinished,this, &ContactSearchWidget::StartSearchSlots);
 
     //setStyleSheet("QWidget{border: none;background-color: rgb(40, 46, 66);}");
+}
+
+void ContactSearchWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    painter.setPen(QPen(QColor(24,28,45),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(24,28,45),Qt::SolidPattern));
+    painter.drawRect(rect());
 }

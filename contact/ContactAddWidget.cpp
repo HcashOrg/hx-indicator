@@ -1,6 +1,7 @@
 #include "ContactAddWidget.h"
 #include "ui_ContactAddWidget.h"
 
+#include <QPainter>
 #include <QRegExpValidator>
 #include "ContactDataUtil.h"
 
@@ -104,8 +105,21 @@ bool ContactAddWidget::validateAddress(const QString &address)
 
 }
 
+void ContactAddWidget::InitStyle()
+{
+    //setAutoFillBackground(true);
+    //QPalette palette;
+    //palette.setColor(QPalette::Background, QColor(40,46,66));
+    //setPalette(palette);
+
+    //ui->pushButton->setStyleSheet("QPushButton{background-color:rgb(70,82,113);color:white;border:1px solid rgb(70,82,113);border-top-right-radius: 12px;border-bottom-right-radius: 12px;}");
+
+}
+
 void ContactAddWidget::InitWidget()
 {
+    InitStyle();
+
     ui->pushButton->setEnabled(false);
 
     QRegExp regx("[a-zA-Z0-9\-\.\ \n]+$");

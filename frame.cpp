@@ -23,6 +23,7 @@
 #include <QDesktopWidget>
 
 #include "functionbar.h"
+#include "functionBar/FunctionWidget.h"
 //#include "contactpage.h"
 #include "contact/ContactWidget.h"
 #include "selectwalletpathwidget.h"
@@ -282,18 +283,21 @@ void Frame::alreadyLogin()
     moveWidgetToScreenCenter(this);
 
     titleBar = new TitleBar(this);
-    titleBar->setGeometry(220,0,680,34);
+    titleBar->resize(900,34);
+    titleBar->move(0,0);
+    titleBar->show();
+
     connect(titleBar,SIGNAL(minimum()),this,SLOT(showMinimized()));
     connect(titleBar,SIGNAL(closeWallet()),qApp,SLOT(quit()));
     connect(titleBar,SIGNAL(tray()),this,SLOT(hide()));
 
-    titleBar->show();
-
     centralWidget = new QWidget(this);
-    centralWidget->setGeometry(220,34,680,482);
+    centralWidget->resize(680,482);
+    centralWidget->move(220,34);
     centralWidget->show();
 
     bottomBar = new BottomBar(this);
+    bottomBar->resize(680,40);
     bottomBar->move(220,516);
     bottomBar->show();
 
@@ -302,8 +306,9 @@ void Frame::alreadyLogin()
 //    connect(showBottomBarWidget, SIGNAL(showBottomBar()), bottomBar, SLOT(dynamicShow()) );
 //    showBottomBarWidget->show();
 
-    functionBar = new FunctionBar(this);
-    functionBar->move(0,0);
+    functionBar = new FunctionWidget(this);
+    functionBar->resize(220,522);
+    functionBar->move(0,34);
     functionBar->show();
     connect(functionBar, SIGNAL(showMainPage()), this, SLOT( showMainPage()));
     connect(functionBar, SIGNAL(showAccountPage()), this, SLOT( showAccountPage()));
@@ -314,9 +319,12 @@ void Frame::alreadyLogin()
     connect(functionBar, SIGNAL(showMultiSigPage()), this, SLOT(showMultiSigPage()));
     connect(functionBar,SIGNAL(lock()),this,SLOT(showLockPage()));
 
+    connect(functionBar,&FunctionWidget::ShrinkSignal,this,&Frame::EnlargeRightPart);
+    connect(functionBar,&FunctionWidget::RestoreSignal,this,&Frame::RestoreRightPart);
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
+    mainPage->resize(680,482);
     mainPage->setAttribute(Qt::WA_DeleteOnClose);
 //    QTimer::singleShot(1000,mainPage,SLOT(show()));
     mainPage->show();
@@ -344,6 +352,7 @@ void Frame::alreadyLogin()
 
     UBChain::getInstance()->contractServerInfoManager.getContractInfoFromLocalFile();
     UBChain::getInstance()->contractServerInfoManager.getContractInfoFromServer();
+
 }
 
 
@@ -388,6 +397,7 @@ void Frame::getAccountInfo()
 void Frame::showAccountPage()
 {
     QStringList accounts = UBChain::getInstance()->addressMap.keys();
+    showAccountPage("sadfa");//朱正天测试用
     if( accounts.size() < 1)    return;
     showAccountPage(accounts.at(0));
 }
@@ -409,7 +419,7 @@ void Frame::showAccountPage(QString accountName)
     connect(accountPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(functionBar,SIGNAL(assetChanged(int)),this,SLOT(refresh()));
 
-    functionBar->choosePage(4);
+    //朱正天functionBar->choosePage(4);
 
 }
 
@@ -430,7 +440,7 @@ void Frame::showTransferPage(QString accountName)
     transferPage->show();
 
     currentPageNum = 3;
-    functionBar->choosePage(2);
+    //朱正天functionBar->choosePage(2);
 
 
 }
@@ -614,7 +624,7 @@ void Frame::setCurrentAccount(QString accountName)
 
     if(functionBar != NULL)
     {
-        functionBar->setCurrentAccount(accountName);
+       //朱正天 functionBar->setCurrentAccount(accountName);
     }
 }
 
@@ -622,7 +632,7 @@ void Frame::setCurrentToken(QString tokenAddress)
 {
     UBChain::getInstance()->currentTokenAddress = tokenAddress;
 
-    functionBar->updateAssetComboBox();
+   //朱正天 functionBar->updateAssetComboBox();
 }
 
 void Frame::closeCurrentPage()
@@ -718,7 +728,7 @@ void Frame::autoRefresh()
     UBChain::getInstance()->saveAllAccountContractTransactions();
 
     bottomBar->refresh();
-    functionBar->refresh();
+   //朱正天 functionBar->refresh();
 
     switch (currentPageNum) {
     case 0:
@@ -810,7 +820,7 @@ void Frame::showTransferPage()
     connect(functionBar,SIGNAL(assetChanged(int)),transferPage,SLOT(onAssetChanged(int)));
     transferPage->show();
     currentPageNum = 3;
-    functionBar->choosePage(2);
+   //朱正天 functionBar->choosePage(2);
 }
 
 
@@ -818,6 +828,7 @@ void Frame::showContactPage()
 {
     closeCurrentPage();
     contactPage = new ContactWidget(centralWidget);
+
     //getAccountInfo();
     //contactPage = new ContactPage(centralWidget);
     //connect(contactPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
@@ -887,7 +898,7 @@ void Frame::showTransferPageWithAddress(QString address, QString remark)
     connect(functionBar,SIGNAL(assetChanged(int)),transferPage,SLOT(onAssetChanged(int)));
     transferPage->show();
     currentPageNum = 3;
-    functionBar->choosePage(2);
+   //朱正天 functionBar->choosePage(2);
 }
 
 void Frame::setLanguage(QString language)
@@ -1021,7 +1032,7 @@ void Frame::showFeedPage()
     feedPage->setAttribute(Qt::WA_DeleteOnClose);
     feedPage->show();
     currentPageNum = 6;
-    functionBar->choosePage(6);
+   //朱正天 functionBar->choosePage(6);
 }
 
 void Frame::showMultiSigPage()
@@ -1033,7 +1044,7 @@ void Frame::showMultiSigPage()
     multiSigPage->setAttribute(Qt::WA_DeleteOnClose);
     multiSigPage->show();
     currentPageNum = 9;
-    functionBar->choosePage(7);
+   //朱正天 functionBar->choosePage(7);
 }
 
 void Frame::showMultiSigTransactionPage(QString _multiSigAddress)
@@ -1044,7 +1055,7 @@ void Frame::showMultiSigTransactionPage(QString _multiSigAddress)
     multiSigTransactionPage->setAttribute(Qt::WA_DeleteOnClose);
     multiSigTransactionPage->show();
     currentPageNum = 10;
-    functionBar->choosePage(7);
+  //朱正天  functionBar->choosePage(7);
 }
 
 void Frame::jsonDataUpdated(QString id)
@@ -1934,6 +1945,40 @@ void Frame::paintEvent(QPaintEvent *e)
 //        style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 //        QWidget::paintEvent(e);
 
+}
+
+void Frame::EnlargeRightPart()
+{
+    functionBar->resize(95,functionBar->height());
+
+    centralWidget->resize(805,centralWidget->height());
+
+    centralWidget->move(95,34);
+//    if(QWidget *widget = centralWidget->childAt(10,10))
+//    {
+//        widget->resize(805,centralWidget->height());
+//    }
+
+    contactPage->resize(805,centralWidget->height());
+
+
+    bottomBar->resize(805,40);
+    bottomBar->move(95,516);
+}
+
+void Frame::RestoreRightPart()
+{
+    functionBar->resize(220,functionBar->height());
+
+    centralWidget->move(220,34);
+    if(QWidget *widget = centralWidget->childAt(10,10))
+    {
+        widget->resize(680,centralWidget->height());
+    }
+    centralWidget->resize(680,centralWidget->height());
+
+    bottomBar->resize(680,40);
+    bottomBar->move(220,516);
 }
 
 void Frame::onTimerForCollectContractTransaction()

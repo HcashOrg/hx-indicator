@@ -36,6 +36,7 @@ private:
     void RefreshWidget();
 protected:
     //void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent *event);
 private:
     class ContactInfoWidgetPrivate;
     ContactInfoWidgetPrivate *_p;
