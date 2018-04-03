@@ -75,6 +75,8 @@ private slots:
 
     void on_exportBtn_clicked();
 
+    void on_backupWalletBtn_clicked();
+
 private:
     Ui::MainPage *ui;
     int previousColorRow;

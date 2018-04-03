@@ -546,3 +546,9 @@ void MainPage::on_exportBtn_clicked()
 {
     showExportDialog(ui->accountComboBox->currentText());
 }
+
+void MainPage::on_backupWalletBtn_clicked()
+{
+    BackupWalletDialog backupWalletDialog;
+    backupWalletDialog.pop();
+}

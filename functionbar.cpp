@@ -74,7 +74,7 @@ void FunctionBar::on_accountBtn_clicked()
 void FunctionBar::on_transferBtn_clicked()
 {
     mutexForAddressMap.lock();
-    int size = UBChain::getInstance()->addressMap.size();
+    int size = UBChain::getInstance()->accountInfoMap.keys().size();
     mutexForAddressMap.unlock();
     if( size > 0)   // 有至少一个账户
     {
