@@ -20,15 +20,11 @@ public:
     void refresh();
 
 private slots:
-
-    void updateNumOfConnections();
-
     void jsonDataUpdated(QString id);
 
 private:
     Ui::BottomBar *ui;
     int numOfConnections;
-    QTimer* timer;
     CommonTip* connectionTip;
 
     void paintEvent(QPaintEvent*);

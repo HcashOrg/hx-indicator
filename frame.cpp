@@ -407,8 +407,6 @@ void Frame::showAccountPage(QString accountName)
 
 void Frame::showTransferPage(QString accountName)
 {
-
-
     closeCurrentPage();
     getAccountInfo();
     UBChain::getInstance()->mainFrame->setCurrentAccount(accountName);
@@ -418,7 +416,6 @@ void Frame::showTransferPage(QString accountName)
     connect(transferPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     connect(transferPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(transferPage,SIGNAL(showAccountPage(QString)),this,SLOT(showAccountPage(QString)));
-    connect(functionBar,SIGNAL(assetChanged(int)),transferPage,SLOT(onAssetChanged(int)));
     transferPage->show();
 
     currentPageNum = 3;
@@ -603,11 +600,6 @@ void Frame::syncFinished()
 void Frame::setCurrentAccount(QString accountName)
 {
     UBChain::getInstance()->currentAccount = accountName;
-
-    if(functionBar != NULL)
-    {
-       //朱正天 functionBar->setCurrentAccount(accountName);
-    }
 }
 
 
@@ -770,7 +762,6 @@ void Frame::showTransferPage()
     connect(transferPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     connect(transferPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(transferPage,SIGNAL(showAccountPage(QString)),this,SLOT(showAccountPage(QString)));
-    connect(functionBar,SIGNAL(assetChanged(int)),transferPage,SLOT(onAssetChanged(int)));
     transferPage->show();
     currentPageNum = 3;
    //朱正天 functionBar->choosePage(2);
@@ -848,7 +839,6 @@ void Frame::showTransferPageWithAddress(QString address, QString remark)
     connect(transferPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     connect(transferPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(transferPage,SIGNAL(showAccountPage(QString)),this,SLOT(showAccountPage(QString)));
-    connect(functionBar,SIGNAL(assetChanged(int)),transferPage,SLOT(onAssetChanged(int)));
     transferPage->show();
     currentPageNum = 3;
    //朱正天 functionBar->choosePage(2);

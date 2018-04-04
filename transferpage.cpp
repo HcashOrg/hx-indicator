@@ -49,7 +49,7 @@ TransferPage::TransferPage(QString name,QWidget *parent) :
     }
 
     // 账户下拉框按字母顺序排序
-    QStringList keys = UBChain::getInstance()->addressMap.keys();
+    QStringList keys = UBChain::getInstance()->accountInfoMap.keys();
     ui->accountComboBox->addItems( keys);
     if( accountName.isEmpty() )
     {
@@ -97,7 +97,7 @@ TransferPage::TransferPage(QString name,QWidget *parent) :
     getContactsList();
     getAssets();
 
-    ui->sendBtn->setEnabled(false);
+//    ui->sendBtn->setEnabled(false);
 
     inited = true;
 
@@ -120,8 +120,7 @@ void TransferPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 
     accountName = arg1;
     UBChain::getInstance()->mainFrame->setCurrentAccount(accountName);
-    QString showName = UBChain::getInstance()->addressMapValue(accountName).ownerAddress;
-    ui->addressLabel->setText(showName);
+    ui->addressLabel->setText(UBChain::getInstance()->accountInfoMap.value(accountName).address);
 
     on_amountLineEdit_textChanged(ui->amountLineEdit->text());
 }
@@ -129,21 +128,21 @@ void TransferPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 
 void TransferPage::on_sendBtn_clicked()
 {
-//    if(ui->amountLineEdit->text().size() == 0 || ui->sendtoLineEdit->text().size() == 0)
-//    {
-//        CommonDialog tipDialog(CommonDialog::OkOnly);
-//        tipDialog.setText( tr("Please enter the amount and address."));
-//        tipDialog.pop();
-//        return;
-//    }
+    if(ui->amountLineEdit->text().size() == 0 || ui->sendtoLineEdit->text().size() == 0)
+    {
+        CommonDialog tipDialog(CommonDialog::OkOnly);
+        tipDialog.setText( tr("Please enter the amount and address."));
+        tipDialog.pop();
+        return;
+    }
 
-//    if( ui->amountLineEdit->text().toDouble()  <= 0)
-//    {
-//        CommonDialog tipDialog(CommonDialog::OkOnly);
-//        tipDialog.setText( tr("The amount can not be 0"));
-//        tipDialog.pop();
-//        return;
-//    }
+    if( ui->amountLineEdit->text().toDouble()  <= 0)
+    {
+        CommonDialog tipDialog(CommonDialog::OkOnly);
+        tipDialog.setText( tr("The amount can not be 0"));
+        tipDialog.pop();
+        return;
+    }
 
 //    if( ui->feeLineEdit->text().toDouble() <= 0)
 //    {
@@ -154,12 +153,7 @@ void TransferPage::on_sendBtn_clicked()
 //    }
 
 
-//    QString remark = ui->memoTextEdit->toPlainText();
-////    remark.remove(' ');
-//    if( remark.size() == 0)    // 转地址如果没有备注 会自动添加 TO ...   所以添加空格
-//    {
-//        remark = " ";
-//    }
+    QString remark = ui->memoTextEdit->toPlainText();
 
 //    QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
 //    QByteArray ba = utfCodec->fromUnicode(remark);
@@ -172,50 +166,31 @@ void TransferPage::on_sendBtn_clicked()
 //    }
 
 
-//    AddressType type = checkAddress(ui->sendtoLineEdit->text(),AccountAddress | MultiSigAddress);
-//    if( type == AccountAddress)
-//    {
-//        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), ui->feeLineEdit->text(), remark, ui->assetComboBox->currentText());
-//        bool yOrN = transferConfirmDialog.pop();
-//        if( yOrN)
-//        {
-//            //        QString str = "wallet_set_transaction_fee " + ui->feeLineEdit->text() + '\n';
-//            //        Hcash::getInstance()->write(str);
-//            //        QString result = Hcash::getInstance()->read();
+    AddressType type = checkAddress(ui->sendtoLineEdit->text(),AccountAddress | MultiSigAddress);
+    if( type == AccountAddress)
+    {
+        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), ui->feeLineEdit->text(), remark, ui->assetComboBox->currentText());
+        bool yOrN = transferConfirmDialog.pop();
+        if( yOrN)
+        {
+            //        QString str = "wallet_set_transaction_fee " + ui->feeLineEdit->text() + '\n';
+            //        Hcash::getInstance()->write(str);
+            //        QString result = Hcash::getInstance()->read();
 
-//            if( !ui->sendtoLineEdit->text().isEmpty())
-//            {
-//                int assetIndex = ui->assetComboBox->currentIndex();
-//                if( assetIndex <= 0)
-//                {
-//                    assetIndex = 0;
-//                    AssetInfo info = UBChain::getInstance()->assetInfoMap.value(assetIndex);
 
-//                    UBChain::getInstance()->postRPC( "id_wallet_transfer_to_address_" + accountName,
-//                                                     toJsonFormat( "wallet_transfer_to_address",
-//                                                                   QStringList() << ui->amountLineEdit->text() << info.symbol << accountName
-//                                                                   << ui->sendtoLineEdit->text() << remark ));
-//                }
-//                else
-//                {
-//                    // 如果是合约资产
-//                    QStringList contracts = UBChain::getInstance()->ERC20TokenInfoMap.keys();
-//                    QString contractAddress = contracts.at(assetIndex - 1);
+            AssetInfo info = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentText());
 
-//                    ERC20TokenInfo info = UBChain::getInstance()->ERC20TokenInfoMap.value(contractAddress);
-//                    QString accountAddress = ui->sendtoLineEdit->text();
+            UBChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
+                                             toJsonFormat( "transfer_to_address",
+                                                           QStringList() << accountName << ui->sendtoLineEdit->text()
+                                                           << ui->amountLineEdit->text() << info.symbol
+                                                           << remark << "true" ));
 
-//                    UBChain::getInstance()->postRPC( "id_contract_call_transfer+" + contractAddress + "+" + accountAddress,
-//                                                     toJsonFormat( "contract_call",
-//                                                                   QStringList() << contractAddress << ui->accountComboBox->currentText()<< "transfer" << accountAddress + "," + QString::number( ui->amountLineEdit->text().toDouble() * info.precision,'f',0)
-//                                                                   << ASSET_NAME << ui->callContractFeeLabel->text()
-//                                                                   ));
 
-//                }
-//            }
-//        }
 
-//    }
+        }
+
+    }
 //    else if(type == MultiSigAddress)
 //    {
 //        if(ui->assetComboBox->currentIndex() != 0)
@@ -255,29 +230,29 @@ void TransferPage::paintEvent(QPaintEvent *)
 
 void TransferPage::on_amountLineEdit_textChanged(const QString &arg1)
 {
-    double amount = ui->amountLineEdit->text().toDouble();
-    double fee = ui->feeLineEdit->text().toDouble();
-    QString strBalanceTemp = UBChain::getInstance()->balanceMapValue(accountName).remove(",");
-    strBalanceTemp = strBalanceTemp.remove(" " + QString(ASSET_NAME));
-    double dBalance = strBalanceTemp.remove(",").toDouble();
+//    double amount = ui->amountLineEdit->text().toDouble();
+//    double fee = ui->feeLineEdit->text().toDouble();
+//    QString strBalanceTemp = UBChain::getInstance()->balanceMapValue(accountName).remove(",");
+//    strBalanceTemp = strBalanceTemp.remove(" " + QString(ASSET_NAME));
+//    double dBalance = strBalanceTemp.remove(",").toDouble();
 
 
-    if( ui->assetComboBox->currentIndex() == 0)
-    {
-        if( amount + fee > dBalance )
-        {
-            ui->tipLabel3->show();
-            ui->tipLabel3->setText( "UB" + tr(" not enough"));
+//    if( ui->assetComboBox->currentIndex() == 0)
+//    {
+//        if( amount + fee > dBalance )
+//        {
+//            ui->tipLabel3->show();
+//            ui->tipLabel3->setText( "UB" + tr(" not enough"));
 
-            ui->sendBtn->setEnabled(false);
-        }
-        else
-        {
-            ui->tipLabel3->hide();
+//            ui->sendBtn->setEnabled(false);
+//        }
+//        else
+//        {
+//            ui->tipLabel3->hide();
 
-            ui->sendBtn->setEnabled(true);
-        }
-    }
+//            ui->sendBtn->setEnabled(true);
+//        }
+//    }
 
 }
 
@@ -286,10 +261,6 @@ void TransferPage::refresh()
 
 }
 
-void TransferPage::onAssetChanged(int)
-{
-    ui->assetComboBox->setCurrentText(ASSET_NAME);
-}
 
 void TransferPage::contactSelected(QString remark, QString contact)
 {
@@ -333,29 +304,6 @@ void TransferPage::getContactsList()
 
 }
 
-void TransferPage::checkIsFeeEnough()
-{
-    double fee = ui->feeLineEdit->text().toDouble();
-    QString strBalanceTemp = UBChain::getInstance()->balanceMapValue(accountName).remove(",");
-    strBalanceTemp = strBalanceTemp.remove(" " + QString(ASSET_NAME));
-    double dBalance = strBalanceTemp.remove(",").toDouble();
-
-    if(fee + ui->callContractFeeLabel->text().toDouble() > dBalance)
-    {
-        ui->tipLabel3->show();
-        ui->tipLabel3->setText( "UB" + tr(" not enough"));
-
-        ui->sendBtn->setEnabled(false);
-    }
-    else
-    {
-        ui->tipLabel3->hide();
-
-        ui->sendBtn->setEnabled(true);
-    }
-
-}
-
 void TransferPage::setAmountPrecision()
 {
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(ASSET_PRECISION));
@@ -392,8 +340,11 @@ void TransferPage::getAssets()
 //    if( index < 0 )   index = 0;
 //    ui->assetComboBox->setCurrentIndex(index);
 
-    ui->assetComboBox->clear();
-    ui->assetComboBox->addItem("UB");
+    QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
+    foreach (QString key, keys)
+    {
+        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(key).symbol);
+    }
 
 
     assetUpdating = false;
@@ -408,11 +359,10 @@ void TransferPage::updateTransactionFee()
 
 void TransferPage::jsonDataUpdated(QString id)
 {
-    if( id == "id_wallet_transfer_to_address_" + accountName
-        || id == "id_wallet_transfer_to_public_account_" + accountName)
+    if( id == "id-transfer_to_address-" + accountName)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-qDebug() << id << result;
+qDebug() << "ttttttttttttttttt " <<  id << result;
         if( result.mid(0,18) == "\"result\":{\"index\":")             // 成功
         {
             QString recordId = result.mid( result.indexOf("\"entry_id\"") + 12, 40);
@@ -524,119 +474,119 @@ qDebug() << id << result;
 
 
 
-    if( id == "id_wallet_multisig_deposit+" + accountName)
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
-        if( result.mid(0,18) == "\"result\":{\"index\":")             // 成功
-        {
-            QString recordId = result.mid( result.indexOf("\"entry_id\"") + 12, 40);
+//    if( id == "id_wallet_multisig_deposit+" + accountName)
+//    {
+//        QString result = UBChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result;
+//        if( result.mid(0,18) == "\"result\":{\"index\":")             // 成功
+//        {
+//            QString recordId = result.mid( result.indexOf("\"entry_id\"") + 12, 40);
 
-            mutexForPendingFile.lock();
+//            mutexForPendingFile.lock();
 
-            mutexForConfigFile.lock();
-            UBChain::getInstance()->configFile->setValue("/recordId/" + recordId , 0);
-            mutexForConfigFile.unlock();
+//            mutexForConfigFile.lock();
+//            UBChain::getInstance()->configFile->setValue("/recordId/" + recordId , 0);
+//            mutexForConfigFile.unlock();
 
-            if( !UBChain::getInstance()->pendingFile->open(QIODevice::ReadWrite))
-            {
-                qDebug() << "pending.dat open fail";
-                return;
-            }
+//            if( !UBChain::getInstance()->pendingFile->open(QIODevice::ReadWrite))
+//            {
+//                qDebug() << "pending.dat open fail";
+//                return;
+//            }
 
-            QByteArray ba = QByteArray::fromBase64( UBChain::getInstance()->pendingFile->readAll());
-            ba += QString( recordId + "," + accountName + "," + ui->sendtoLineEdit->text() + "," + ui->amountLineEdit->text() + "," + ui->feeLineEdit->text() + ";").toUtf8();
-            ba = ba.toBase64();
-            UBChain::getInstance()->pendingFile->resize(0);
-            QTextStream ts(UBChain::getInstance()->pendingFile);
-            ts << ba;
+//            QByteArray ba = QByteArray::fromBase64( UBChain::getInstance()->pendingFile->readAll());
+//            ba += QString( recordId + "," + accountName + "," + ui->sendtoLineEdit->text() + "," + ui->amountLineEdit->text() + "," + ui->feeLineEdit->text() + ";").toUtf8();
+//            ba = ba.toBase64();
+//            UBChain::getInstance()->pendingFile->resize(0);
+//            QTextStream ts(UBChain::getInstance()->pendingFile);
+//            ts << ba;
 
-            UBChain::getInstance()->pendingFile->close();
+//            UBChain::getInstance()->pendingFile->close();
 
-            mutexForPendingFile.unlock();
+//            mutexForPendingFile.unlock();
 
-            CommonDialog tipDialog(CommonDialog::OkOnly);
-            tipDialog.setText( tr("Transaction has been sent,please wait for confirmation"));
-            tipDialog.pop();
+//            CommonDialog tipDialog(CommonDialog::OkOnly);
+//            tipDialog.setText( tr("Transaction has been sent,please wait for confirmation"));
+//            tipDialog.pop();
 
-            if( !contactsList.contains( ui->sendtoLineEdit->text()))
-            {
-                CommonDialog commonDialog(CommonDialog::OkAndCancel);
-                commonDialog.setText(tr("Add this address to contacts?"));
-                if( commonDialog.pop())
-                {
-                    RemarkDialog remarkDialog( ui->sendtoLineEdit->text());
-                    remarkDialog.pop();
-                    getContactsList();
-                }
-            }
-            emit showAccountPage(accountName);
-        }
-        else
-        {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-            qDebug() << "errorMessage : " << errorMessage;
+//            if( !contactsList.contains( ui->sendtoLineEdit->text()))
+//            {
+//                CommonDialog commonDialog(CommonDialog::OkAndCancel);
+//                commonDialog.setText(tr("Add this address to contacts?"));
+//                if( commonDialog.pop())
+//                {
+//                    RemarkDialog remarkDialog( ui->sendtoLineEdit->text());
+//                    remarkDialog.pop();
+//                    getContactsList();
+//                }
+//            }
+//            emit showAccountPage(accountName);
+//        }
+//        else
+//        {
+//            int pos = result.indexOf("\"message\":\"") + 11;
+//            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
+//            qDebug() << "errorMessage : " << errorMessage;
 
-            if( errorMessage == "Assert Exception")
-            {
-                if( result.contains("\"format\":\"my->is_receive_account( from_account_name ): Invalid account name\","))
-                {
-                    CommonDialog tipDialog(CommonDialog::OkOnly);
-                    tipDialog.setText( tr("This name has been registered, please rename this account!"));
-                    tipDialog.pop();
-                }
-                else
-                {
-                    CommonDialog tipDialog(CommonDialog::OkOnly);
-                    tipDialog.setText( tr("Wrong address!"));
-                    tipDialog.pop();
-                }
+//            if( errorMessage == "Assert Exception")
+//            {
+//                if( result.contains("\"format\":\"my->is_receive_account( from_account_name ): Invalid account name\","))
+//                {
+//                    CommonDialog tipDialog(CommonDialog::OkOnly);
+//                    tipDialog.setText( tr("This name has been registered, please rename this account!"));
+//                    tipDialog.pop();
+//                }
+//                else
+//                {
+//                    CommonDialog tipDialog(CommonDialog::OkOnly);
+//                    tipDialog.setText( tr("Wrong address!"));
+//                    tipDialog.pop();
+//                }
 
 
-            }
-            else if( errorMessage == "imessage size bigger than soft_max_lenth")
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Message too long!"));
-                tipDialog.pop();
+//            }
+//            else if( errorMessage == "imessage size bigger than soft_max_lenth")
+//            {
+//                CommonDialog tipDialog(CommonDialog::OkOnly);
+//                tipDialog.setText( tr("Message too long!"));
+//                tipDialog.pop();
 
-            }
-            else if( errorMessage == "invalid transaction expiration")
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Failed: You need to wait for synchronization to complete"));
-                tipDialog.pop();
-            }
-            else if( errorMessage == "insufficient funds")
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Not enough balance!"));
-                tipDialog.pop();
-            }
-            else if( errorMessage == "Out of Range")
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Wrong address!"));
-                tipDialog.pop();
-            }
-            else if( errorMessage == "Parse Error")
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Wrong address!"));
-                tipDialog.pop();
-            }
-            else
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Transaction sent failed"));
-                tipDialog.pop();
-            }
+//            }
+//            else if( errorMessage == "invalid transaction expiration")
+//            {
+//                CommonDialog tipDialog(CommonDialog::OkOnly);
+//                tipDialog.setText( tr("Failed: You need to wait for synchronization to complete"));
+//                tipDialog.pop();
+//            }
+//            else if( errorMessage == "insufficient funds")
+//            {
+//                CommonDialog tipDialog(CommonDialog::OkOnly);
+//                tipDialog.setText( tr("Not enough balance!"));
+//                tipDialog.pop();
+//            }
+//            else if( errorMessage == "Out of Range")
+//            {
+//                CommonDialog tipDialog(CommonDialog::OkOnly);
+//                tipDialog.setText( tr("Wrong address!"));
+//                tipDialog.pop();
+//            }
+//            else if( errorMessage == "Parse Error")
+//            {
+//                CommonDialog tipDialog(CommonDialog::OkOnly);
+//                tipDialog.setText( tr("Wrong address!"));
+//                tipDialog.pop();
+//            }
+//            else
+//            {
+//                CommonDialog tipDialog(CommonDialog::OkOnly);
+//                tipDialog.setText( tr("Transaction sent failed"));
+//                tipDialog.pop();
+//            }
 
-        }
-        return;
+//        }
+//        return;
 
-    }
+//    }
 }
 
 

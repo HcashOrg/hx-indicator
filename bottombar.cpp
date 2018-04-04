@@ -24,13 +24,6 @@ BottomBar::BottomBar(QWidget *parent) :
     ui->syncLabel->setToolTip(tr("Local block height / Network block height(estimated)"));
 
     connect(UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)),this, SLOT(jsonDataUpdated(QString)));
-    jsonDataUpdated("id-info");
-
-
-    timer = new QTimer(this);
-    timer->start(5000);
-    connect(timer,SIGNAL(timeout()),this,SLOT(updateNumOfConnections()));
-    updateNumOfConnections();
 
     connectionTip = new CommonTip;
 
@@ -40,25 +33,6 @@ BottomBar::BottomBar(QWidget *parent) :
 BottomBar::~BottomBar()
 {
     delete ui;
-    delete timer;  
-}
-
-
-
-void BottomBar::updateNumOfConnections()
-{
-//    
-
-    QString result = UBChain::getInstance()->jsonDataValue("id-info");
-    if( result.isEmpty())  return;
-
-    int pos = result.indexOf("\"network_num_connections\"") + 26;
-    QString num = result.mid( pos, result.indexOf("," , pos) - pos);
-
-    ui->nodeNumLabel->setText(num);
-
-
-//    
 }
 
 
@@ -91,22 +65,7 @@ void BottomBar::jsonDataUpdated(QString id)
         UBChain::getInstance()->walletInfo.blockAge = object.take("head_block_age").toString();
         UBChain::getInstance()->walletInfo.chainId = object.take("chain_id").toString();
 
-
-
-
-
-
-        int pos = result.indexOf( "\"blockchain_head_block_age\":") + 28;
-        QString seconds = result.mid( pos, result.indexOf("\"blockchain_head_block_timestamp\":") - pos - 1);
-
-        int pos2 = result.indexOf( "\"blockchain_head_block_num\":") + 28;
-        QString num = result.mid( pos2, result.indexOf("\"blockchain_head_block_age\":") - pos2 - 1);
-
-        if( seconds.toInt() < 0)  seconds = "0";
-        int numToSync = seconds.toInt()/ 10;
-
-        ui->syncLabel->setText( num + " / " + QString::number( num.toInt() + numToSync) );
-
+        ui->syncLabel->setText(QString::number(UBChain::getInstance()->walletInfo.blockHeight));
 
         return;
     }

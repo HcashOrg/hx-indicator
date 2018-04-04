@@ -68,7 +68,7 @@ private slots:
     void alreadyLogin();
     void showAccountPage();
     void showAccountPage(QString);
-    void showTransferPage(QString);
+
     void showLockPage();
     void autoLock();
     void unlock();
@@ -79,9 +79,12 @@ private slots:
     void jsonDataUpdated(QString id);
 
     void showMainPage();
+
     void showTransferPage();
-    void showContactPage();
+    void showTransferPage(QString);
     void showTransferPageWithAddress(QString, QString remark = "");
+
+    void showContactPage();
     void showMultiSigPage();
     void showMultiSigTransactionPage(QString _multiSigAddress);
     void showWaittingForSyncWidget();

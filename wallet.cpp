@@ -117,7 +117,7 @@ void UBChain:: startExe()
 
     QStringList strList;
     strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString()
-            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT);
+            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)  << "--replay";
 qDebug() << "ddddddddddddd " << strList
             ;
     if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())

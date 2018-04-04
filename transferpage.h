@@ -40,8 +40,6 @@ signals:
 public slots:
     void refresh();
 
-    void onAssetChanged(int);
-
 private slots:
 
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
@@ -72,7 +70,6 @@ private:
     void paintEvent(QPaintEvent*);
 //    void addContact(QString,QString);
 
-    void checkIsFeeEnough();
     void setAmountPrecision();
 };
 

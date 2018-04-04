@@ -52,7 +52,7 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->accountTableWidget->setColumnWidth(0,100);
-    ui->accountTableWidget->setColumnWidth(1,100);
+    ui->accountTableWidget->setColumnWidth(1,140);
     ui->accountTableWidget->setColumnWidth(2,80);
     ui->accountTableWidget->setColumnWidth(3,80);
     ui->accountTableWidget->setColumnWidth(4,80);
@@ -128,7 +128,7 @@ void MainPage::updateAccountList()
     ui->addressLabel->setText(info.address);
 
     AssetAmountMap map = info.assetAmountMap;
-    QStringList keys = map.keys();
+    QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
 
     int size = keys.size();
     ui->accountTableWidget->setRowCount(size);
@@ -175,11 +175,11 @@ void MainPage::on_addAccountBtn_clicked()
 {
     addAccount();
 
-//    ChooseAddAccountDialog* chooseAddAccountDialog = new ChooseAddAccountDialog(this);
-//    chooseAddAccountDialog->move( ui->addAccountBtn->mapToGlobal( QPoint(10,-79) ) );
-//    connect( chooseAddAccountDialog, SIGNAL(newAccount()), this, SLOT( addAccount()));
-//    connect( chooseAddAccountDialog, SIGNAL(importAccount()), this, SLOT( importAccount()));
-//    chooseAddAccountDialog->exec();
+    //    ChooseAddAccountDialog* chooseAddAccountDialog = new ChooseAddAccountDialog(this);
+    //    chooseAddAccountDialog->move( ui->addAccountBtn->mapToGlobal( QPoint(10,-79) ) );
+    //    connect( chooseAddAccountDialog, SIGNAL(newAccount()), this, SLOT( addAccount()));
+    //    connect( chooseAddAccountDialog, SIGNAL(importAccount()), this, SLOT( importAccount()));
+    //    chooseAddAccountDialog->exec();
 }
 
 void MainPage::on_importAccountBtn_clicked()
@@ -190,37 +190,17 @@ void MainPage::on_importAccountBtn_clicked()
 
 void MainPage::on_accountTableWidget_cellClicked(int row, int column)
 {
-    
+    if(column == 0 || column == 1)
+    {
+        emit openAccountPage( ui->accountTableWidget->item(row,0)->text());
+        return;
+    }
 
-//    AccountCellWidget* cellWidget = static_cast<AccountCellWidget*>( ui->accountTableWidget->cellWidget(row,0) );
-
-//    emit openAccountPage( cellWidget->accountName);
-
-    emit openAccountPage( ui->accountTableWidget->item(row,0)->text());
-
-    //    showDetailWidget( cellWidget->accountName );
-
-//        showDetailWidget( ui->accountTableWidget->item(row,0)->text() );
-
-//    if( currentAccountIndex >= 0 && currentAccountIndex != row)
-//    {
-//        AccountCellWidget* cellWidget2 = static_cast<AccountCellWidget*>( ui->accountTableWidget->cellWidget(currentAccountIndex,0) );
-//        cellWidget2->setBackgroundColor( 255,255,255);
-//        for( int i = 1; i < 3; i++)
-//        {
-//            ui->accountTableWidget->item(currentAccountIndex,i)->setBackgroundColor(QColor(255,255,255));
-//        }
-//    }
-
-//    cellWidget->setBackgroundColor( 245,248,248,150);
-//    for( int i = 1; i < 3; i++)
-//    {
-//        ui->accountTableWidget->item(row,i)->setBackgroundColor(QColor(245,248,248,150));
-//    }
-
-//    currentAccountIndex = row;
-
-	
+    if(column == 2)
+    {
+        showTransferPage( ui->accountTableWidget->item(row,0)->text());
+        return;
+    }
 }
 
 
