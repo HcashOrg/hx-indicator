@@ -5,11 +5,6 @@
 #include "dialog/exportsetpwddialog.h"
 #include "AES/aesencryptor.h"
 
-#include <QDir>
-#include <QFileDialog>
-#include <QDebug>
-#include <QFile>
-
 
 ExportDialog::ExportDialog( QString name, QWidget *parent) :
     QDialog(parent),

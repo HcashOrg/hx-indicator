@@ -1,12 +1,12 @@
 ﻿#include "contactpage.h"
 #include "ui_contactpage.h"
 #include "wallet.h"
-#include "debug_log.h"
+
 #include "editremarkdialog.h"
 #include "addcontactdialog.h"
 
 #include <QDebug>
-#include <QPainter>
+
 
 ContactPage::ContactPage(QWidget *parent) :
     QWidget(parent),

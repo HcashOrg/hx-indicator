@@ -5,17 +5,15 @@
 #include "tchar.h"
 #include "ShlObj.h"
 #endif
-#include <QDebug>
+
 #include <qapplication.h>
 #include <QTranslator>
 #include <QThread>
-#include <QTextCodec>
-#include <QDir>
 
 
 #include "wallet.h"
 #include "frame.h"
-#include "debug_log.h"
+
 
 #ifdef WIN32
 bool checkOnly()
@@ -115,8 +113,8 @@ int main(int argc, char *argv[])
 //    translator.load(QString(":/qm/qt_zh_cn"));
 //    a.installTranslator(&translator);
     UBChain::getInstance();  // 在frame创建前先创建实例，读取language
-    qDebug() <<  "db init: " << UBChain::getInstance()->transactionDB.init();
-    QStringList keys = UBChain::getInstance()->transactionDB.keys();
+//    qDebug() <<  "db init: " << UBChain::getInstance()->transactionDB.init();
+//    QStringList keys = UBChain::getInstance()->transactionDB.keys();
 
 //    qInstallMessageHandler(outputMessage);  // 重定向qebug 到log.txt
 //    removeUpdateDeleteFile();
@@ -134,7 +132,6 @@ int main(int argc, char *argv[])
 
 
     int result = a.exec();
-    UBChain::getInstance()->saveAllAccountContractTransactions();
     UBChain::getInstance()->quit();
 
     return result;

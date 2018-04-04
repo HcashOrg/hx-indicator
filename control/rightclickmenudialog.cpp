@@ -9,7 +9,7 @@
 
 #include <QDebug>
 #include <QClipboard>
-#include <QPainter>
+
 
 RightClickMenuDialog::RightClickMenuDialog( QString name, QWidget *parent) :
     QDialog(parent),

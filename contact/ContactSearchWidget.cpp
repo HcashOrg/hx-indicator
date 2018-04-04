@@ -3,6 +3,7 @@
 
 #include <QPainter>
 #include <QPushButton>
+
 class ContactSearchWidget::ContactSearchWidgetPrivate
 {
 public:

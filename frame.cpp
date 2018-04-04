@@ -1,4 +1,4 @@
-﻿#include <QPainter>
+﻿
 #include <QLayout>
 #include <QMouseEvent>
 #include <QKeyEvent>
@@ -18,7 +18,7 @@
 #include "titlebar.h"
 #include "frame.h"
 #include "wallet.h"
-#include "debug_log.h"
+
 #include "waitingforsync.h"
 #include <QDesktopWidget>
 
@@ -29,9 +29,7 @@
 #include "selectwalletpathwidget.h"
 #include "control/shadowwidget.h"
 #include "control/showbottombarwidget.h"
-#include "contract/smartcontractpage.h"
 #include "commondialog.h"
-#include "feedpage.h"
 #include "multisig/multisigpage.h"
 #include "multisig/multisigtransactionpage.h"
 #include "neworimportwalletwidget.h"
@@ -53,12 +51,9 @@ Frame::Frame(): timer(NULL),
     waitingForSync(NULL),
     selectWalletPathWidget(NULL),
     newOrImportWalletWidget(NULL),
-    smartContractPage(NULL),
-    feedPage(NULL),
     multiSigPage(NULL),
     multiSigTransactionPage(NULL),
-    needToRefresh(false),
-    timerForCollectContractTransaction(NULL)
+    needToRefresh(false)
 {
 
 #ifdef TARGET_OS_MAC
@@ -312,10 +307,8 @@ void Frame::alreadyLogin()
     functionBar->show();
     connect(functionBar, SIGNAL(showMainPage()), this, SLOT( showMainPage()));
     connect(functionBar, SIGNAL(showAccountPage()), this, SLOT( showAccountPage()));
-    connect(functionBar, SIGNAL(showSmartContractPage()), this, SLOT( showSmartContractPage()));
     connect(functionBar, SIGNAL(showTransferPage()), this, SLOT( showTransferPage()));
     connect(functionBar, SIGNAL(showContactPage()), this, SLOT( showContactPage()));
-    connect(functionBar, SIGNAL(showFeedPage()), this, SLOT( showFeedPage()));
     connect(functionBar, SIGNAL(showMultiSigPage()), this, SLOT(showMultiSigPage()));
     connect(functionBar,SIGNAL(lock()),this,SLOT(showLockPage()));
 
@@ -347,14 +340,8 @@ void Frame::alreadyLogin()
     }
 
     startTimerForAutoRefresh();              // 自动刷新
-    startTimerForCollectContractTransaction();
 
     init();
-
-    QTimer::singleShot(5000,UBChain::getInstance(),SLOT(readAllAccountContractTransactions()));
-
-    UBChain::getInstance()->contractServerInfoManager.getContractInfoFromLocalFile();
-    UBChain::getInstance()->contractServerInfoManager.getContractInfoFromServer();
 
 }
 
@@ -385,16 +372,9 @@ QString toThousandFigure( int number)     // 转换为0001,0015  这种数字格
 
 void Frame::getAccountInfo()
 {
-
-
     UBChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QStringList() << ""));
 
 //    UBChain::getInstance()->postRPC( "id_balance", toJsonFormat( "balance", QStringList() << ""));
-
-//    UBChain::getInstance()->updateAllContractBalance();
-
-//    UBChain::getInstance()->collectContracts();
-
 }
 
 void Frame::showAccountPage()
@@ -630,13 +610,6 @@ void Frame::setCurrentAccount(QString accountName)
     }
 }
 
-void Frame::setCurrentToken(QString tokenAddress)
-{
-    UBChain::getInstance()->currentTokenAddress = tokenAddress;
-
-   //朱正天 functionBar->updateAssetComboBox();
-
-}
 
 void Frame::closeCurrentPage()
 {
@@ -663,12 +636,8 @@ void Frame::closeCurrentPage()
 
         break;
     case 6:
-        feedPage->close();
-        feedPage = NULL;
         break;
     case 8:
-        smartContractPage->close();
-        smartContractPage = NULL;
         break;
     case 9:
         multiSigPage->close();
@@ -724,12 +693,6 @@ void Frame::autoRefresh()
 {
     getAccountInfo();
 
-    UBChain::getInstance()->getTokensType();
-    UBChain::getInstance()->getFeeders();
-
-    UBChain::getInstance()->startCollectContractTransactions();
-    UBChain::getInstance()->saveAllAccountContractTransactions();
-
     bottomBar->refresh();
    //朱正天 functionBar->refresh();
 
@@ -759,13 +722,11 @@ void Frame::autoRefresh()
 //        }
         break;
     case 6:
-        feedPage->refresh();
         break;
     case 7:
 //        showUpgradePage();
         break;
     case 8:
-        smartContractPage->refresh();
         break;
     case 9:
         multiSigPage->refresh();
@@ -798,17 +759,6 @@ void Frame::showMainPage()
 
 }
 
-
-void Frame::showSmartContractPage()
-{
-    closeCurrentPage();
-    getAccountInfo();
-
-    smartContractPage = new SmartContractPage(centralWidget);
-    smartContractPage->setAttribute(Qt::WA_DeleteOnClose);
-    smartContractPage->show();
-    currentPageNum = 8;
-}
 
 void Frame::showTransferPage()
 {
@@ -955,14 +905,12 @@ void Frame::setLanguage(QString language)
         case 5:
             break;
         case 6:
-            showFeedPage();
             break;
         case 7:
 //            upgradePage->retranslator();
 //            showUpgradePage(currentAccount);
             break;
         case 8:
-            showSmartContractPage();
             break;
         case 9:
             showMultiSigPage();
@@ -1028,15 +976,6 @@ void Frame::showNewOrImportWalletWidget()
     moveWidgetToScreenCenter(this);
 }
 
-void Frame::showFeedPage()
-{
-    closeCurrentPage();
-    feedPage = new FeedPage(centralWidget);
-    feedPage->setAttribute(Qt::WA_DeleteOnClose);
-    feedPage->show();
-    currentPageNum = 6;
-   //朱正天 functionBar->choosePage(6);
-}
 
 void Frame::showMultiSigPage()
 {
@@ -1254,524 +1193,6 @@ void Frame::jsonDataUpdated(QString id)
         qDebug() << id << result;
         UBChain::getInstance()->parseAssetInfo();
 
-        updateAssets();
-
-        UBChain::getInstance()->updateAllToken();
-
-        return;
-    }
-
-    if( id == "id_balance")
-    {
-        UBChain::getInstance()->parseBalance();
-        return;
-    }
-
-    if( id.startsWith( "id_contract_get_info+") )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if( result.startsWith("\"result\":"))
-        {
-            QString contract = id.mid(QString("id_contract_get_info+").size());
-
-            result.prepend("{");
-            result.append("}");
-
-            QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
-            QByteArray ba = utfCodec->fromUnicode(result);
-
-            QJsonParseError json_error;
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(ba, &json_error);
-            if(json_error.error == QJsonParseError::NoError)
-            {
-                if( parse_doucment.isObject())
-                {
-                    QJsonObject jsonObject = parse_doucment.object();
-                    if( jsonObject.contains("result"))
-                    {
-                        QJsonValue resultValue = jsonObject.take("result");
-                        if( resultValue.isObject())
-                        {
-                            QJsonObject resultObject = resultValue.toObject();
-                            QString contractName = resultObject.take("contract_name").toString();
-                            QString level = resultObject.take("level").toString();
-                            QString id = resultObject.take("id").toString();
-                            QString description = resultObject.take("description").toString();
-                            if(level == "forever")
-                            {
-                                UBChain::getInstance()->ERC20TokenInfoMap[id].contractAddress = id;
-                                UBChain::getInstance()->ERC20TokenInfoMap[id].contractName = contractName;
-                                UBChain::getInstance()->ERC20TokenInfoMap[id].level = level;
-                                UBChain::getInstance()->ERC20TokenInfoMap[id].description = description;
-
-                                ContractServerInfoMap* map = &UBChain::getInstance()->contractServerInfoManager.contractServerInfoSlice.map;
-                                if(map->keys().contains(id))
-                                {
-                                    UBChain::getInstance()->ERC20TokenInfoMap[id].website = map->value(id).website;
-                                    UBChain::getInstance()->ERC20TokenInfoMap[id].hotValue = map->value(id).hotValue;
-                                    UBChain::getInstance()->ERC20TokenInfoMap[id].logoPath = UBChain::getInstance()->contractServerInfoManager.serverPathToLocalPath(map->value(id).logoPath);
-                                    UBChain::getInstance()->ERC20TokenInfoMap[id].logoVersion = map->value(id).logoVersion;
-                                    UBChain::getInstance()->ERC20TokenInfoMap[id].summary = map->value(id).summary;
-                                }
-
-                                UBChain::getInstance()->postRPC( "id_contract_call_offline_state+" + id,
-                                                       toJsonFormat( "contract_call_offline", QStringList() << id
-                                                       << UBChain::getInstance()->addressMap.keys().at(0) << "state" << ""
-                                                       ));
-
-                            }
-
-                        }
-                    }
-                }
-            }
-        }
-        return;
-    }
-
-    if( id.startsWith( "id_contract_call_offline_state+") )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if( result.startsWith( "\"result\":"))
-        {
-            QString contractAddress = id.mid(31);
-
-            if( !UBChain::getInstance()->ERC20TokenInfoMap.contains(contractAddress))        return;
-
-            QString state = result.mid(9);
-            state.remove('\"');
-            UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].state = state;
-
-            if( state == "NOT_INITED")
-            {
-                return;
-            }
-            else
-            {
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].contractAddress = contractAddress;
-//                UBChain::getInstance()->configFile->setValue("/AddedContractToken/" + contractAddress,1);
-                UBChain::getInstance()->postRPC( "id_contract_call_offline_+mortgageRate+" + contractAddress,
-                                                 toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                               << UBChain::getInstance()->addressMap.keys().at(0) << "mortgageRate" << ""
-                                                               ));
-            }
-        }
-        return;
-    }
-
-    if( id.startsWith( "id_contract_call_offline_+mortgageRate+") )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        int pos = 26;
-        QString contractAddress = id.mid(id.indexOf("+" , pos) + 1);
-        if( !UBChain::getInstance()->ERC20TokenInfoMap.contains(contractAddress))        return;
-
-        if( result.startsWith("\"result\":"))
-        {
-            QString mortgageRate = result.mid(9);
-            mortgageRate.remove('\"');
-            UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].isSmart = true;
-            UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].mortgageRate = mortgageRate;
-
-            UBChain::getInstance()->postRPC( "id_contract_call_offline_+anchorTokenSymbol+" + contractAddress,
-                                             toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                       << UBChain::getInstance()->addressMap.keys().at(0) << "anchorTokenSymbol" << ""
-                                                       ));
-
-            UBChain::getInstance()->postRPC( "id_contract_call_offline_+anchorTokenPrecision+" + contractAddress,
-                                             toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                       << UBChain::getInstance()->addressMap.keys().at(0) << "anchorTokenPrecision" << ""
-                                                       ));
-
-            UBChain::getInstance()->postRPC( "id_contract_call_offline_+anchorRatio+" + contractAddress,
-                                             toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                       << UBChain::getInstance()->addressMap.keys().at(0) << "anchorRatio" << ""
-                                                       ));
-
-            UBChain::getInstance()->postRPC( "id_contract_call_offline_+contractBalance+" + contractAddress,
-                                             toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                       << UBChain::getInstance()->addressMap.keys().at(0) << "contractBalance" << ""
-                                                       ));
-
-            UBChain::getInstance()->postRPC( "id_contract_call_offline_+lastTransferBlockNumber+" + contractAddress,
-                                             toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                       << UBChain::getInstance()->addressMap.keys().at(0) << "lastTransferBlockNumber" << ""
-                                                       ));
-
-            UBChain::getInstance()->postRPC( "id_contract_call_offline_+query_can_mint+" + contractAddress,
-                                             toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                       << UBChain::getInstance()->addressMap.keys().at(0) << "query_can_mint" << ""
-                                                       ));
-
-            UBChain::getInstance()->postRPC( "id_contract_call_offline_+base_mortgage_rate+" + contractAddress,
-                                             toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                       << UBChain::getInstance()->addressMap.keys().at(0) << "base_mortgage_rate" << ""
-                                                       ));
-
-            UBChain::getInstance()->postRPC( "id_contract_call_offline_+unusedBalance+" + contractAddress,
-                                             toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                       << UBChain::getInstance()->addressMap.keys().at(0) << "unusedBalance" << ""
-                                                       ));
-        }
-        else
-        {
-            UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].isSmart = false;
-        }
-
-
-        UBChain::getInstance()->postRPC( "id_contract_call_offline_+tokenName+" + contractAddress,
-                                         toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                   << UBChain::getInstance()->addressMap.keys().at(0) << "tokenName" << ""
-                                                   ));
-
-        UBChain::getInstance()->postRPC( "id_contract_call_offline_+precision+" + contractAddress,
-                                         toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                   << UBChain::getInstance()->addressMap.keys().at(0) << "precision" << ""
-                                                   ));
-
-        UBChain::getInstance()->postRPC( "id_contract_call_offline_+admin+" + contractAddress,
-                                         toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                   << UBChain::getInstance()->addressMap.keys().at(0) << "admin" << ""
-                                                   ));
-
-        UBChain::getInstance()->postRPC( "id_contract_call_offline_+tokenSymbol+" + contractAddress,
-                                         toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                   << UBChain::getInstance()->addressMap.keys().at(0) << "tokenSymbol" << ""
-                                                   ));
-
-        UBChain::getInstance()->postRPC( "id_contract_call_offline_+totalSupply+" + contractAddress,
-                                         toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                   << UBChain::getInstance()->addressMap.keys().at(0) << "totalSupply" << ""
-                                                   ));
-
-        UBChain::getInstance()->postRPC( "id_contract_call_offline_+state+" + contractAddress,
-                                         toJsonFormat( "contract_call_offline", QStringList() << contractAddress
-                                                   << UBChain::getInstance()->addressMap.keys().at(0) << "state" << ""
-                                                   ));
-
-        return;
-    }
-
-    if( id.startsWith( "id_contract_call_offline_+") )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if( result.startsWith("\"result\":"))
-        {
-            int pos = 26;
-            QString func = id.mid( pos, id.indexOf("+" , pos) - pos);
-            QString contractAddress = id.mid(id.indexOf("+" , pos) + 1);
-            if( !UBChain::getInstance()->ERC20TokenInfoMap.contains(contractAddress))        return;
-
-            if( func == "tokenName")
-            {
-                QString tokenName = result.mid(9);
-                tokenName.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].name = tokenName;
-            }
-            else if( func == "precision")
-            {
-                QString precision = result.mid(9);
-                precision.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].precision = precision.toDouble();
-            }
-            else if( func == "admin")
-            {
-                QString admin = result.mid(9);
-                admin.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].admin = admin;
-            }
-            else if( func == "tokenSymbol")
-            {
-                QString tokenSymbol = result.mid(9);
-                tokenSymbol.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].symbol = tokenSymbol;
-            }
-            else if( func == "totalSupply")
-            {
-                QString totalSupply = result.mid(9);
-                totalSupply.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].totalSupply = totalSupply.toULongLong();
-            }
-            else if( func == "anchorTokenSymbol")
-            {
-                QString anchorTokenSymbol = result.mid(9);
-                anchorTokenSymbol.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].anchorTokenSymbol = anchorTokenSymbol;
-            }
-            else if( func == "anchorTokenPrecision")
-            {
-                QString anchorTokenPrecision = result.mid(9);
-                anchorTokenPrecision.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].anchorTokenPrecision = anchorTokenPrecision.toULongLong();
-            }
-            else if( func == "anchorRatio")
-            {
-                QString anchorRatio = result.mid(9);
-                anchorRatio.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].anchorRatio = anchorRatio.toULongLong();
-            }
-            else if( func == "contractBalance")
-            {
-                QString contractBalance = result.mid(9);
-                contractBalance.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].contractBalance = contractBalance.toULongLong();
-            }
-            else if( func == "lastTransferBlockNumber")
-            {
-                QString lastTransferBlockNumber = result.mid(9);
-                lastTransferBlockNumber.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].lastTransferBlockNumber = lastTransferBlockNumber.toInt();
-            }
-            else if( func == "state")
-            {
-                QString state = result.mid(9);
-                state.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].state = state;
-            }
-            else if( func == "query_can_mint")
-            {
-                QString amountCanMint = result.mid(9);
-                amountCanMint.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].amountCanMint = amountCanMint.toULongLong();
-            }
-            else if( func == "base_mortgage_rate")
-            {
-                QString baseMortgageRate = result.mid(9);
-                baseMortgageRate.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].baseMortgageRate = baseMortgageRate.toInt();
-            }
-            else if( func == "unusedBalance")
-            {
-                QString unusedBalance = result.mid(9);
-                unusedBalance.remove('\"');
-                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].unusedBalance = unusedBalance.toULongLong();
-            }
-
-        }
-
-        return;
-    }
-
-    if( id.startsWith( "id_contract_call_offline_balanceOf+") )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        int pos = QString("id_contract_call_offline_balanceOf+").size();
-        QString contractAddress = id.mid( pos, id.indexOf("+" , pos) - pos);
-        QString accountAddress = id.mid(id.indexOf("+" , pos) + 1);
-
-        if( result.startsWith("\"result\":"))
-        {
-            result = result.mid(9);
-            result.remove('\"');
-            double balance = result.toDouble();
-
-            ContractBalanceMap map;
-            if( UBChain::getInstance()->accountContractBalanceMap.contains(accountAddress))
-            {
-                map = UBChain::getInstance()->accountContractBalanceMap[accountAddress];
-            }
-            map.insert(contractAddress,balance);
-            UBChain::getInstance()->accountContractBalanceMap.insert(accountAddress,map);
-        }
-
-
-        return;
-    }
-
-    if( id.startsWith( "id_blockchain_list_contract_transaction_history+") )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if( result.startsWith("\"result\":"))
-        {
-            int pos = QString("id_blockchain_list_contract_transaction_history+").size();
-            QString contractAddress = id.mid( pos, id.indexOf("+" , pos) - pos);
-            QString collectCount = id.mid(id.indexOf("+" , pos) + 1);
-            if( !UBChain::getInstance()->ERC20TokenInfoMap.contains(contractAddress)) return;
-
-            int collected = UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].collectedBlockHeight + collectCount.toInt();
-            if(collected > UBChain::getInstance()->currentBlockHeight)   collected = UBChain::getInstance()->currentBlockHeight;
-            qDebug() << contractAddress << collected;
-
-            UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].collectedBlockHeight = collected;
-            UBChain::getInstance()->setContractCollectedBlockHeight(contractAddress,UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].collectedBlockHeight);
-
-
-            int fromBlockHeight = UBChain::getInstance()->ERC20TokenInfoMap.value(contractAddress).collectedBlockHeight + 1;
-            if(fromBlockHeight > UBChain::getInstance()->currentBlockHeight)
-            {
-                UBChain::getInstance()->isCollecting = false;
-
-                UBChain::getInstance()->startCollectContractTransactions();
-            }
-            else
-            {
-                UBChain::getInstance()->postRPC( "id_blockchain_list_contract_transaction_history+" + contractAddress + "+" + QString::number(ONCE_COLLECT_COUNT),
-                                       toJsonFormat( "blockchain_list_contract_transaction_history",
-                                       QStringList() << QString::number(fromBlockHeight) << QString::number(ONCE_COLLECT_COUNT)
-                                       << contractAddress  << "14"  ));
-                UBChain::getInstance()->isCollecting = true;
-            }
-
-
-
-//            UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].noResponseTimes = 0;
-//            if(UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].interval < MAX_COLLECT_COUNT)
-//            {
-//                UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].interval *= 10;
-//                if(UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].interval > MAX_COLLECT_COUNT)
-//                {
-//                    UBChain::getInstance()->ERC20TokenInfoMap[contractAddress].interval = MAX_COLLECT_COUNT;
-//                }
-//            }
-
-            result.prepend("{");
-            result.append("}");
-
-            QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
-            QByteArray ba = utfCodec->fromUnicode(result);
-
-            QJsonParseError json_error;
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(ba, &json_error);
-            if(json_error.error == QJsonParseError::NoError)
-            {
-                if( parse_doucment.isObject())
-                {
-                    QJsonObject jsonObject = parse_doucment.object();
-                    if( jsonObject.contains("result"))
-                    {
-                        QJsonValue resultValue = jsonObject.take("result");
-                        if( resultValue.isArray())
-                        {
-                            QJsonArray resultArray = resultValue.toArray();
-                            for( int i = 0; i < resultArray.size(); i++)
-                            {
-                                QJsonObject object          = resultArray.at(i).toObject();
-                                QString trxId               = object.take("result_trx_id").toString();
-
-                                UBChain::getInstance()->postRPC( "id_blockchain_get_pretty_contract_transaction+" + trxId,
-                                                                 toJsonFormat( "blockchain_get_pretty_contract_transaction",
-                                                                             QStringList() << trxId
-                                                                             ));
-
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-        return;
-    }
-
-    if( id.startsWith( "id_blockchain_get_pretty_contract_transaction+") )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if( result.startsWith("\"result\":"))
-        {
-            result.prepend("{");
-            result.append("}");
-
-            QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
-            QByteArray ba = utfCodec->fromUnicode(result);
-
-            QJsonParseError json_error;
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(ba, &json_error);
-            if(json_error.error == QJsonParseError::NoError)
-            {
-                if( parse_doucment.isObject())
-                {
-                    QJsonObject jsonObject = parse_doucment.object();
-                    if( jsonObject.contains("result"))
-                    {
-                        ContractTransaction contractTransaction;
-                        QJsonObject object = jsonObject.take("result").toObject();
-                        contractTransaction.trxId = object.take("result_trx_id").toString();
-                        contractTransaction.blockNum = object.take("block_num").toInt();
-                        contractTransaction.timeStamp   = object.take("timestamp").toString();
-
-                        QJsonObject object2 = object.take("to_contract_ledger_entry").toObject();
-                        contractTransaction.fromAddress = object2.take("from_account").toString();
-                        contractTransaction.contractAddress = object2.take("to_account").toString();
-                        QJsonValue feeValue = object2.take("fee").toObject().take("amount");
-                        if( feeValue.isString())
-                        {
-                            contractTransaction.fee = feeValue.toString().toULongLong();
-                        }
-                        else
-                        {
-                            contractTransaction.fee = QString::number(feeValue.toDouble(),'g',10).toULongLong();
-                        }
-
-                        QJsonArray array = object.take("reserved").toArray();
-                        contractTransaction.method = array.at(0).toString();
-                        QStringList params = array.at(1).toString().split(",");
-
-                        if( contractTransaction.method == "transfer")
-                        {
-                            if(params.size() != 2)  return;
-                            contractTransaction.toAddress = params.at(0);
-                            contractTransaction.amount = params.at(1).toULongLong();
-                        }
-                        else if( contractTransaction.method == "init_token")
-                        {
-                            if(params.size() == 4)          //  无抵押合约  有4个变量 第3个是totalsupply
-                            {
-                                contractTransaction.amount = params.at(2).toULongLong();
-                            }
-                            else if(params.size() == 5)     //  有抵押合约  有5个变量 第2个是totalsupply
-                            {
-                                contractTransaction.amount = params.at(1).toULongLong();
-                            }
-                            else
-                            {
-                                return;
-                            }
-                        }
-                        else if( contractTransaction.method == "mint")
-                        {
-                            if(params.size() != 1)  return;
-                            contractTransaction.amount = params.at(0).toULongLong();
-                        }
-                        else if( contractTransaction.method == "destroy")
-                        {
-                            if(params.size() != 1)  return;
-                            contractTransaction.amount = params.at(0).toULongLong();
-                        }
-                        else if( contractTransaction.method == "retire")
-                        {
-                        }
-                        else
-                        {
-                            return;
-                        }
-
-                        if( UBChain::getInstance()->isMyAddress(contractTransaction.fromAddress))
-                        {
-                            QString key = contractTransaction.fromAddress + "-" + contractTransaction.contractAddress;
-                            if(UBChain::getInstance()->checkContractTransactionExist(key,contractTransaction.trxId))    return;
-                            UBChain::getInstance()->accountContractTransactionMap[key].transactionVector.append(contractTransaction);
-                        }
-
-                        if( UBChain::getInstance()->isMyAddress(contractTransaction.toAddress) && contractTransaction.fromAddress != contractTransaction.toAddress)
-                        {
-                            QString key = contractTransaction.toAddress + "-" + contractTransaction.contractAddress;
-                            if(UBChain::getInstance()->checkContractTransactionExist(key,contractTransaction.trxId))    return;
-                            UBChain::getInstance()->accountContractTransactionMap[key].transactionVector.append(contractTransaction);
-                        }
-
-                    }
-                }
-
-            }
-
-        }
         return;
     }
 
@@ -1791,66 +1212,6 @@ void Frame::jsonDataUpdated(QString id)
             {
                 transferPage->updateTransactionFee();
             }
-        }
-
-        return;
-    }
-
-    if( id == QString("id_contract_call_offline_") + FEEDER_CONTRACT_ADDRESS + "_to_feed_tokens")
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if(result.startsWith("\"result\":"))
-        {
-            QString str = result.mid(9);
-            str.remove("[");
-            str.remove("]");
-            str.remove("\"");
-            str.remove("\\");
-            UBChain::getInstance()->tokens = str.split(",");
-
-
-            foreach (QString token, UBChain::getInstance()->tokens)
-            {
-                UBChain::getInstance()->postRPC( QString("id_contract_call_offline_") + FEEDER_CONTRACT_ADDRESS + "_price_of_tokens_" + token,
-                                                 toJsonFormat( "contract_call_offline",
-                                                               QStringList() << FEEDER_CONTRACT_ADDRESS << UBChain::getInstance()->addressMap.keys().at(0)
-                                                               << "price_of_token" << token));
-            }
-        }
-
-        return;
-    }
-
-    if( id.startsWith( QString("id_contract_call_offline_") + FEEDER_CONTRACT_ADDRESS + "_price_of_tokens_") )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        QString token = id.mid(42 + QString(FEEDER_CONTRACT_ADDRESS).size());
-
-        if(result.startsWith("\"result\":"))
-        {
-            QString str = result.mid(9);
-            str.remove("\"");
-            UBChain::getInstance()->tokenPriceMap.insert(token,str);
-
-        }
-
-        return;
-    }
-
-    if( id == QString("id_contract_call_offline_") + FEEDER_CONTRACT_ADDRESS + "_feeders")
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if(result.startsWith("\"result\":"))
-        {
-            QString str = result.mid(9);
-            str.remove("[");
-            str.remove("]");
-            str.remove("\"");
-            str.remove("\\");
-            UBChain::getInstance()->feeders = str.split(",");
         }
 
         return;
@@ -1922,12 +1283,6 @@ void Frame::init()
     
 }
 
-void Frame::startTimerForCollectContractTransaction()
-{
-    timerForCollectContractTransaction = new QTimer(this);
-    connect(timerForCollectContractTransaction,SIGNAL(timeout()),this,SLOT(onTimerForCollectContractTransaction()));
-    timerForCollectContractTransaction->start(COLLECT_CONTRACT_TRANSACTION_INTERVAL);
-}
 
 void Frame::paintEvent(QPaintEvent *e)
 {
@@ -1975,31 +1330,10 @@ void Frame::RestoreRightPart()
     bottomBar->move(220,516);
 }
 
-void Frame::onTimerForCollectContractTransaction()
-{
-    UBChain::getInstance()->collectContracts();
-}
-
-void Frame::scan()
-{
-    UBChain::getInstance()->postRPC( "id_scan", toJsonFormat( "scan", QStringList() << "0"));
-}
-
 void Frame::newAccount(QString name)
 {
 //    UBChain::getInstance()->postRPC( toJsonFormat( "id_wallet_get_account_public_address-" + name, "wallet_get_account_public_address", QStringList() << name));
 
     getAccountInfo();
-}
-
-void Frame::updateAssets()
-{
-
-//    if( assetPage != NULL)
-//    {
-//        assetPage->updateAssetInfo();
-//        assetPage->updateMyAsset();
-//        return;
-//    }
 }
 

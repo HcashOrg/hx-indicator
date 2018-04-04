@@ -1,11 +1,6 @@
 #include "addmultisigdialog.h"
 #include "ui_addmultisigdialog.h"
 
-#include <QDebug>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
-
 #include "wallet.h"
 #include "../commondialog.h"
 
@@ -95,8 +90,6 @@ void AddMultiSigDialog::jsonDataUpdated(QString id)
                                 UBChain::getInstance()->multiSigInfoMap[address].multiSigAddress = address;
                                 UBChain::getInstance()->multiSigInfoMap[address].requires = resultObject.take("requires").toInt();
                                 UBChain::getInstance()->multiSigInfoMap[address].owners = owners;
-
-                                UBChain::getInstance()->scan();
 
                                 CommonDialog commonDialog(CommonDialog::OkOnly);
                                 commonDialog.setText(tr("This multisig address has been imported!"));

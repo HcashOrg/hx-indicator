@@ -2,7 +2,7 @@
 #include "ui_contactdialog.h"
 #include "wallet.h"
 #include <QDebug>
-#include "debug_log.h"
+
 
 ContactDialog::ContactDialog(QWidget *parent) :
     QDialog(parent),

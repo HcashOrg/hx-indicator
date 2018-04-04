@@ -1,8 +1,6 @@
 #include "signmultisigdialog.h"
 #include "ui_signmultisigdialog.h"
 
-#include <QDebug>
-#include <QFileDialog>
 #include <QClipboard>
 
 #include "wallet.h"

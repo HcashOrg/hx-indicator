@@ -1,4 +1,4 @@
-﻿#include <QPainter>
+﻿
 #include <QKeyEvent>
 #include <QDebug>
 #ifdef WIN32
@@ -8,7 +8,7 @@
 #include "normallogin.h"
 #include "ui_normallogin.h"
 #include "wallet.h"
-#include "debug_log.h"
+
 #include "commondialog.h"
 
 NormalLogin::NormalLogin(QWidget *parent) :

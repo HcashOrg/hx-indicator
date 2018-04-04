@@ -5,9 +5,6 @@
 #include "wallet.h"
 #include "dialog/checkpwddialog.h"
 
-#include <QDebug>
-#include <QPainter>
-
 
 AddContactDialog::AddContactDialog(QWidget *parent) :
     QDialog(parent),

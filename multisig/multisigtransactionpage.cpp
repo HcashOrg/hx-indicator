@@ -2,7 +2,6 @@
 #include "ui_multisigtransactionpage.h"
 
 #include <QClipboard>
-#include <QPainter>
 #include <QListView>
 
 #include "commondialog.h"

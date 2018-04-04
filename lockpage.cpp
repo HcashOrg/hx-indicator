@@ -1,4 +1,4 @@
-﻿#include <QPainter>
+﻿
 #include <QKeyEvent>
 #include <QDebug>
 #include <QFileInfo>
@@ -9,7 +9,7 @@
 #include "lockpage.h"
 #include "ui_lockpage.h"
 #include "wallet.h"
-#include "debug_log.h"
+
 #include "commondialog.h"
 
 LockPage::LockPage(QWidget *parent) :

@@ -2,7 +2,7 @@
 #include "ui_FunctionWidget.h"
 
 #include <QMenu>
-#include <QPainter>
+
 #include "functionBar/FunctionAccountWidget.h"
 #include "functionBar/FunctionAdvanceWidget.h"
 

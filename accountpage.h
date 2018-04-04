@@ -75,7 +75,6 @@ private:
     void init();
     void showTransactions();
     void showNormalTransactions();
-    void showContractTransactions();
 
 
     struct TransactionDetail

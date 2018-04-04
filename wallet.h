@@ -23,18 +23,24 @@
 
 #ifndef LNK_H
 #define LNK_H
-#include <QObject>
 #include <QMap>
 #include <QSettings>
-#include <QFile>
 #include <QProcess>
 #include <QMutex>
 #include <QDialog>
+#include <QDebug>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QTextCodec>
+#include <QDir>
+#include <QFileDialog>
+#include <QFile>
+#include <QPainter>
+#include <QDateTime>
 
-#include "extra/transactioindb.h"
 #include "frame.h"
 #include "extra/style.h"
-#include "extra/contractserverinfomanager.h"
 
 #define ASSET_NAME "LNK"
 #define ACCOUNT_ADDRESS_PREFIX  "LNK"
@@ -55,16 +61,10 @@
 #endif
 
 
-#define COLLECT_CONTRACT_TRANSACTION_INTERVAL  1000   // 采集合约交易时间间隔
-#define ONCE_COLLECT_COUNT                      10    // 一次最多采集多少块
-
-
 //  密码输入错误5次后 锁定一段时间 (秒)
 #define PWD_LOCK_TIME  7200
 #define NODE_RPC_PORT   50320
 #define CLIENT_RPC_PORT 50321
-
-#define FEEDER_CONTRACT_ADDRESS "price_feeder"      // 喂价合约地址
 
 
 class QTimer;
@@ -97,9 +97,16 @@ struct AccountInfo
     AssetAmountMap   assetAmountMap;
 };
 
+struct WalletInfo
+{
+    int blockHeight = 0;
+    QString blockId;
+    QString blockAge;
+    QString chainId;
+};
+
 
 typedef QMap<int,unsigned long long>  AssetBalanceMap;
-typedef QMap<QString,unsigned long long>  ContractBalanceMap;
 struct AssetInfo
 {
     QString id;
@@ -109,42 +116,6 @@ struct AssetInfo
     unsigned long long maxSupply;
 };
 
-struct ERC20TokenInfo
-{
-    QString contractAddress;
-    QString contractName;
-    QString level;
-    QString symbol;
-    QString name;
-    QString admin;
-    QString state;
-    QString description;
-    unsigned long long precision = 1;
-    unsigned long long totalSupply = 0;
-    int collectedBlockHeight = 0;   // 该合约已经采集到的高度
-//    int interval = MAX_COLLECT_COUNT;             // 每次采集块数
-//    int noResponseTimes = 0;        // 无返回次数 超过30重新发起 并且interval减半
-
-    bool    isSmart = false;        // 是否是智能资产
-    QString mortgageRate;       // 准备金率
-    QString anchorTokenSymbol;
-    unsigned long long amountCanMint;
-    unsigned long long anchorTokenPrecision;
-    unsigned long long anchorRatio;
-    unsigned long long contractBalance;
-    unsigned long long unusedBalance;
-    int     baseMortgageRate = 0;
-    int     lastTransferBlockNumber;
-
-
-    QString price;      // 以下来自服务端
-    QString website;
-    int hotValue = 0;
-    QString logoPath;
-    int logoVersion = 0;
-    QString summary;
-
-};
 
 struct Entry
 {
@@ -173,35 +144,6 @@ struct TransactionInfo
     QString timeStamp;
 };
 typedef QVector<TransactionInfo>  TransactionsInfoVector;
-
-struct ContractTransaction
-{
-    QString contractAddress;
-    QString method;
-    QString trxId;
-    int blockNum;
-    QString fromAddress;
-    QString toAddress;
-    unsigned long long amount;
-    QString timeStamp;
-    unsigned long long fee;
-
-public:
-
-    friend QDataStream& operator >>(QDataStream &in,ContractTransaction& data);
-    friend QDataStream& operator <<(QDataStream &out,const ContractTransaction& data);
-};
-
-typedef QVector<ContractTransaction>  ContractTransactionVector;
-struct AccountContractTransactions
-{
-    int collectedBlockNum = 0;
-    ContractTransactionVector transactionVector;
-
-public:
-    friend QDataStream& operator >>(QDataStream &in,AccountContractTransactions& data);
-    friend QDataStream& operator <<(QDataStream &out,const AccountContractTransactions& data);
-};
 
 
 
@@ -244,6 +186,7 @@ signals:
 
 
 public:
+    WalletInfo walletInfo;
     int lockMinutes;   // 自动锁定时间
     bool notProduce;   // 是否产块/记账
     bool minimizeToTray;  // 是否最小化到托盘
@@ -251,7 +194,6 @@ public:
     bool resyncNextTime;    // 下次启动时是否重新同步
     QString language;   // 语言
     QString currentAccount; // 保存当前账户  切换页面的时候默认选择当前账户
-    QString currentTokenAddress;   // 当前选择的资产
     unsigned long long transactionFee;
 
     QMap<QString,QString> balanceMap;
@@ -282,10 +224,6 @@ public:
     TwoAddresses addressMapValue(QString key);
     void addressMapInsert(QString key, TwoAddresses value);
     int addressMapRemove(QString key);
-
-//    QMap<QString,bool> rpcReceivedOrNotMap;  // 标识rpc指令是否已经返回了，如果还未返回则忽略
-//    bool rpcReceivedOrNotMapValue(QString key);
-//    void rpcReceivedOrNotMapSetValue(QString key, bool received);
 
     void appendCurrentDialogVector(QWidget*);
     void removeCurrentDialogVector(QWidget *);
@@ -319,16 +257,12 @@ public:
     Frame* mainFrame = NULL; // 指向主窗口的指针
 
     int currentPort;          // 当前rpc 端口
-
     QString localIP;   // 保存 peerinfo 获得的本机IP和端口
 
 
     QMap<QString,AccountInfo>   accountInfoMap;
     void parseAccountInfo();
     void getAccountBalances(QString _accountName);
-
-    QMap<QString,AssetBalanceMap> accountBalanceMap;
-    void parseBalance();
 
     QMap<QString,AssetInfo>  assetInfoMap;
     void parseAssetInfo();
@@ -337,67 +271,11 @@ public:
     QMap<QString,TransactionsInfoVector> transactionsMap;   // key是 "账户名_资产符号" 形式
     void parseTransactions(QString result, QString accountName = "ALL");
 
-    void scanLater();
-
-
-    // 合约资产
-    QMap<QString,ContractBalanceMap> accountContractBalanceMap;
-    void updateAccountContractBalance(QString accountAddress, QString contractAddress);
-    void updateAllContractBalance();
-
-    QMap<QString,ERC20TokenInfo>  ERC20TokenInfoMap;
-    void updateERC20TokenInfo(QString contract);
-    void updateAllToken();
-
-    int currentBlockHeight = 0;     // info 获得的当前区块高度
-
 public:
-    ContractServerInfoManager contractServerInfoManager;
-
-public:
-    TransactioinDB transactionDB;
-    QMap<QString,AccountContractTransactions> accountContractTransactionMap;  // key是 "账户地址-合约地址" 形式
-    void collectContractTransactions(QString contractAddress);
-    void collectContracts();
-    void getAllContractCollectedBlockHeight();
-    void setContractCollectedBlockHeight(QString _contractAddress, int _blockHeight);
-    QString currentCollectingContractAddress;
-    void setCurrentCollectingContract(QString _contractAddress);
-    bool isCollecting = false;
-    void startCollectContractTransactions();
-    bool checkContractTransactionExist(QString _key, QString _trxId);
-    void setRecollect();        // 创建账户以及导入账户后 每个合约重新采集
-
-public slots:
-    void readAllAccountContractTransactions();              // 数据从db => 内存
-    void saveAllAccountContractTransactions();              // 数据从内存 => db
-
-public:
-    QMap<QString,QString>   tokenPriceMap;      // 当前喂价
-    QStringList feeders;
-    QStringList getMyFeederAccount(); // 返回钱包中是feeder的账户
-    QStringList tokens;
-    void getTokensType();
-    void getFeeders();
-
-    QStringList delegateAccounts;
-
-    QStringList   myConcernedContracts;
-    QStringList   getConcernedContracts();
-    void          addConcernedContract(QString contractAddress);
-    void          removeConcernedContract(QString contractAddress);
-
-    QStringList   allowedContractHashList;
-
-
     QMap<QString,MultiSigInfo>  multiSigInfoMap;
 
     QMap<QString,TransactionsInfoVector> multiSigTransactionsMap;   // key是多签地址
     void parseMultiSigTransactions(QString result, QString multiSigAddress);
-
-public slots:
-    void scan();
-
 
 signals:
     void jsonDataUpdated(QString);

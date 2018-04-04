@@ -1,12 +1,8 @@
 ﻿#include "wallet.h"
-#include "debug_log.h"
+
 #include "websocketmanager.h"
 #include "commondialog.h"
 
-
-#include <QTextCodec>
-#include <QDebug>
-#include <QObject>
 #ifdef WIN32
 #include <Windows.h>
 #endif
@@ -14,10 +10,6 @@
 #include <QThread>
 #include <QApplication>
 #include <QFrame>
-#include <QDir>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
 #include <QDesktopWidget>
 
 UBChain* UBChain::goo = 0;
@@ -46,7 +38,6 @@ UBChain::UBChain()
     hasDelegateSalary = false;
     currentPort = CLIENT_RPC_PORT;
     currentAccount = "";
-    currentTokenAddress = "";
     transactionFee = 0;
 
     configFile = new QSettings( walletConfigPath + "/config.ini", QSettings::IniFormat);
@@ -77,8 +68,6 @@ UBChain::UBChain()
 
     }
 
-    getConcernedContracts();
-
     QFile file( walletConfigPath + "/log.txt");       // 每次启动清空 log.txt文件
     file.open(QIODevice::Truncate | QIODevice::WriteOnly);
     file.close();
@@ -87,10 +76,6 @@ UBChain::UBChain()
     contactsFile = NULL;
 
     pendingFile  = new QFile( walletConfigPath + "/pending.dat");
-
-    delegateAccounts << "ubinit0" << "ubinit1" << "ubinit2" << "ubinit3" << "ubinit4" << "ubinit5" << "ubinit6" << "ubinit7" << "ubinit8";
-
-    allowedContractHashList << "45337709c727325eb67bd90c6b2eb068664ebcf2"  << "fb9e7e27462a6be3af552c0c200dfb95bf42b738";
 
 }
 
@@ -497,69 +482,6 @@ void UBChain::getAccountBalances(QString _accountName)
     postRPC( "id-get_account_balances-" + _accountName, toJsonFormat( "get_account_balances", QStringList() << _accountName));
 }
 
-void UBChain::parseBalance()
-{
-    accountBalanceMap.clear();
-
-    QString jsonResult = jsonDataValue("id_balance");
-    jsonResult.prepend("{");
-    jsonResult.append("}");
-
-    QJsonParseError json_error;
-    QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonResult.toLatin1(), &json_error);
-    if(json_error.error == QJsonParseError::NoError)
-    {
-        if( parse_doucment.isObject())
-        {
-            QJsonObject jsonObject = parse_doucment.object();
-            if( jsonObject.contains("result"))
-            {
-                QJsonValue resultValue = jsonObject.take("result");
-                if( resultValue.isArray())
-                {
-                    QJsonArray resultArray = resultValue.toArray();
-                    for( int i = 0; i < resultArray.size(); i++)
-                    {
-                        QJsonValue resultArrayValue = resultArray.at(i);
-                        if( resultArrayValue.isArray())
-                        {
-                            QJsonArray array = resultArrayValue.toArray();
-                            QJsonValue value = array.at(0);
-                            QString account = value.toString();
-                            AssetBalanceMap assetBalanceMap;
-
-                            QJsonArray array2 = array.at(1).toArray();
-
-                            for( int i = 0; i < array2.size(); i++)
-                            {
-                                QJsonArray array3 = array2.at(i).toArray();
-                                int asset = array3.at(0).toInt();
-
-                                unsigned long long balance;
-                                if( array3.at(1).isString())
-                                {
-                                    balance = array3.at(1).toString().toULongLong();
-                                }
-                                else
-                                {
-                                    balance = QString::number(array3.at(1).toDouble(),'g',10).toULongLong();
-                                }
-
-                                assetBalanceMap.insert(asset, balance);
-
-                            }
-                            accountBalanceMap.insert(account,assetBalanceMap);
-                        }
-                    }
-                }
-
-            }
-        }
-    }
-
-
-}
-
 
 void UBChain::parseAssetInfo()
 {
@@ -738,322 +660,6 @@ void UBChain::parseTransactions(QString result, QString accountName)
     }
 }
 
-void UBChain::scanLater()
-{
-    QTimer::singleShot(10000,this,SLOT(scan()));
-}
-
-void UBChain::updateAccountContractBalance(QString accountAddress, QString contractAddress)
-{
-    if( addressMap.keys().size() < 1) return;
-    postRPC( "id_contract_call_offline_balanceOf+" + contractAddress + "+" + accountAddress,
-             toJsonFormat( "contract_call_offline",
-                           QStringList() << contractAddress << addressMap.keys().at(0) << "balanceOf" << accountAddress
-                           ));
-}
-
-void UBChain::updateAllContractBalance()
-{
-    QStringList keys = UBChain::getInstance()->addressMap.keys();
-    QStringList contracts = ERC20TokenInfoMap.keys();
-    foreach (QString key, keys)
-    {
-        foreach (QString contract, contracts)
-        {
-            updateAccountContractBalance(UBChain::getInstance()->addressMap.value(key).ownerAddress,contract);
-        }
-    }
-}
-
-void UBChain::updateERC20TokenInfo(QString contract)
-{
-    if( addressMap.keys().size() < 1) return;
-    postRPC( "id_contract_get_info+" + contract, toJsonFormat( "contract_get_info", QStringList() << contract
-                           ));
-}
-
-void UBChain::updateAllToken()
-{
-//    configFile->beginGroup("/AddedContractToken");
-//    QStringList keys = configFile->childKeys();
-//    foreach (QString key, keys)
-//    {
-//        updateERC20TokenInfo(key);
-//    }
-//    configFile->endGroup();
-
-    foreach (QString address, myConcernedContracts)
-    {
-        updateERC20TokenInfo(address);
-    }
-
-    foreach (QString address, contractServerInfoManager.contractServerInfoSlice.map.keys())
-    {
-        updateERC20TokenInfo(address);
-    }
-}
-
-void UBChain::readAllAccountContractTransactions()
-{
-    accountContractTransactionMap.clear();
-
-    QStringList keys = UBChain::getInstance()->transactionDB.keys();
-
-    QStringList accounts = UBChain::getInstance()->addressMap.keys();
-    foreach (QString account, accounts)
-    {
-        QString accountAddress = UBChain::getInstance()->addressMap.value(account).ownerAddress;
-
-        QStringList contracts = UBChain::getInstance()->ERC20TokenInfoMap.keys();
-
-        foreach (QString contract, contracts)
-        {
-            QString key = accountAddress + "-" + contract;
-            if(keys.contains(key))
-            {
-                accountContractTransactionMap.insert(key, transactionDB.getContractTransactions(key));
-            }
-            else
-            {
-                AccountContractTransactions transactions;
-                transactions.collectedBlockNum = 0;
-                accountContractTransactionMap.insert(key, transactions);
-            }
-        }
-    }
-
-    getAllContractCollectedBlockHeight();
-}
-
-void UBChain::saveAllAccountContractTransactions()
-{
-    QStringList keys = accountContractTransactionMap.keys();
-
-    foreach (QString key, keys)
-    {
-        transactionDB.insertContractTransactions(key,accountContractTransactionMap.value(key));
-    }
-}
-
-void UBChain::collectContractTransactions(QString contractAddress)
-{
-//    if( ERC20TokenInfoMap.keys().contains(contractAddress))
-//    {
-//        if( ERC20TokenInfoMap.value(contractAddress).collectedBlockHeight >= currentBlockHeight)    return;
-//        if( ERC20TokenInfoMap.value(contractAddress).noResponseTimes == 0)
-//        {
-//            int fromBlockHeight = ERC20TokenInfoMap.value(contractAddress).collectedBlockHeight + 1;
-//            int collectCount = ERC20TokenInfoMap.value(contractAddress).interval;
-//            if( fromBlockHeight + collectCount > currentBlockHeight)     collectCount = currentBlockHeight - fromBlockHeight;
-
-//            if( collectCount < 1)    return;
-//            postRPC( toJsonFormat( "id_blockchain_list_contract_transaction_history+" + contractAddress + "+" + QString::number(collectCount),
-//                                   "blockchain_list_contract_transaction_history",
-//                                   QStringList() << QString::number(fromBlockHeight) << QString::number(collectCount)
-//                                   << contractAddress  << "14"  ));
-//            ERC20TokenInfoMap[contractAddress].noResponseTimes = 1;
-
-//        }
-//        else if( ERC20TokenInfoMap.value(contractAddress).noResponseTimes < 30)
-//        {
-//            ERC20TokenInfoMap[contractAddress].noResponseTimes++;
-//            return;
-//        }
-//        else
-//        {
-//            ERC20TokenInfoMap[contractAddress].noResponseTimes = 0;
-//            ERC20TokenInfoMap[contractAddress].interval = ERC20TokenInfoMap.value(contractAddress).interval / 10;
-//            if( ERC20TokenInfoMap.value(contractAddress).interval < 1)   ERC20TokenInfoMap[contractAddress].interval = 1;
-//            return;
-//        }
-
-
-//    }
-}
-
-void UBChain::collectContracts()
-{
-    foreach (QString key, ERC20TokenInfoMap.keys())
-    {
-//        collectContractTransactions(key);
-    }
-}
-
-void UBChain::getAllContractCollectedBlockHeight()
-{
-    QStringList keys = accountContractTransactionMap.keys();
-    if(keys.size() < 1)     return;
-
-    QStringList contracts = ERC20TokenInfoMap.keys();
-    foreach (QString contract, contracts)
-    {
-        int collectedBlockHeight = -1;
-        foreach (QString key, keys)
-        {
-            if(key.endsWith(contract))
-            {
-                if(collectedBlockHeight == -1)
-                {
-                    collectedBlockHeight = accountContractTransactionMap.value(key).collectedBlockNum;
-                    continue;
-                }
-
-                if( accountContractTransactionMap.value(key).collectedBlockNum < collectedBlockHeight)
-                {
-                    collectedBlockHeight = accountContractTransactionMap.value(key).collectedBlockNum;
-                }
-            }
-        }
-
-        if(collectedBlockHeight == -1)  collectedBlockHeight = 0;
-        ERC20TokenInfoMap[contract].collectedBlockHeight = collectedBlockHeight;
-    }
-}
-
-void UBChain::setContractCollectedBlockHeight(QString _contractAddress, int _blockHeight)
-{
-    QStringList keys = accountContractTransactionMap.keys();
-    foreach (QString key, keys)
-    {
-        if(key.endsWith(_contractAddress))
-        {
-            if(_blockHeight > accountContractTransactionMap.value(key).collectedBlockNum)
-            {
-                accountContractTransactionMap[key].collectedBlockNum = _blockHeight;
-            }
-        }
-    }
-}
-
-void UBChain::setCurrentCollectingContract(QString _contractAddress)
-{
-    currentCollectingContractAddress = _contractAddress;
-}
-
-void UBChain::startCollectContractTransactions()
-{
-    if(isCollecting)    return;
-
-    QStringList contracts = ERC20TokenInfoMap.keys();
-    if(contracts.size() < 1)    return;
-
-    bool needToCollect = false;
-    foreach (QString contract, contracts)
-    {
-//        qDebug() << "contract collected block height:   " << contract << ERC20TokenInfoMap.value(contract).collectedBlockHeight;
-        if(ERC20TokenInfoMap.value(contract).collectedBlockHeight < currentBlockHeight)
-        {
-            setCurrentCollectingContract(contract);
-            needToCollect = true;
-            break;
-        }
-    }
-
-    if(needToCollect)
-    {
-        int fromBlockHeight = ERC20TokenInfoMap.value(currentCollectingContractAddress).collectedBlockHeight + 1;
-        postRPC( "id_blockchain_list_contract_transaction_history+" + currentCollectingContractAddress + "+" + QString::number(ONCE_COLLECT_COUNT),
-                 toJsonFormat(  "blockchain_list_contract_transaction_history",
-                                QStringList() << QString::number(fromBlockHeight) << QString::number(ONCE_COLLECT_COUNT)
-                                << currentCollectingContractAddress  << "14"  ));
-
-        isCollecting = true;
-    }
-    else
-    {
-        isCollecting = false;
-    }
-
-}
-
-bool UBChain::checkContractTransactionExist(QString _key, QString _trxId)
-{
-    bool result = false;
-    AccountContractTransactions transactions = accountContractTransactionMap.value(_key);
-    foreach (ContractTransaction transaction, transactions.transactionVector)
-    {
-        if(transaction.trxId == _trxId)
-        {
-            result = true;
-            break;
-        }
-    }
-
-    return result;
-}
-
-void UBChain::setRecollect()
-{
-    QStringList contracts = ERC20TokenInfoMap.keys();
-    foreach (QString contract, contracts)
-    {
-        ERC20TokenInfoMap[contract].collectedBlockHeight = 0;
-    }
-}
-
-QStringList UBChain::getMyFeederAccount()
-{
-    QStringList myFeederAccounts;
-    foreach (QString feederAddress, UBChain::getInstance()->feeders)
-    {
-        if( UBChain::getInstance()->isMyAddress(feederAddress))
-        {
-            myFeederAccounts += UBChain::getInstance()->addressToName(feederAddress);
-        }
-    }
-
-    return myFeederAccounts;
-}
-
-void UBChain::getTokensType()
-{
-    if(UBChain::getInstance()->addressMap.size() == 0)  return;
-    UBChain::getInstance()->postRPC( QString("id_contract_call_offline_") + FEEDER_CONTRACT_ADDRESS + "_to_feed_tokens",
-                                     toJsonFormat( "contract_call_offline",
-                                                   QStringList() << FEEDER_CONTRACT_ADDRESS << UBChain::getInstance()->addressMap.keys().at(0)
-                                                   << "to_feed_tokens" << ""));
-}
-
-void UBChain::getFeeders()
-{
-    if(UBChain::getInstance()->addressMap.size() == 0)  return;
-    UBChain::getInstance()->postRPC( QString("id_contract_call_offline_") + FEEDER_CONTRACT_ADDRESS + "_feeders",
-                                     toJsonFormat( "contract_call_offline",
-                                                   QStringList() << FEEDER_CONTRACT_ADDRESS << UBChain::getInstance()->addressMap.keys().at(0)
-                                                   << "feeders" << ""));
-}
-
-QStringList UBChain::getConcernedContracts()
-{
-    myConcernedContracts.clear();
-
-    configFile->beginGroup("/AddedContractToken");
-    QStringList keys = configFile->childKeys();
-    foreach (QString key, keys)
-    {
-        myConcernedContracts.append(key);
-    }
-    configFile->endGroup();
-
-    return myConcernedContracts;
-}
-
-void UBChain::addConcernedContract(QString contractAddress)
-{
-    UBChain::getInstance()->configFile->setValue("/AddedContractToken/" + contractAddress,1);
-    if(!myConcernedContracts.contains(contractAddress))     myConcernedContracts.append(contractAddress);
-
-}
-
-void UBChain::removeConcernedContract(QString contractAddress)
-{
-
-    UBChain::getInstance()->configFile->remove("/AddedContractToken/" + contractAddress);
-    if(myConcernedContracts.contains(contractAddress))     myConcernedContracts.removeAll(contractAddress);
-
-
-}
-
 void UBChain::parseMultiSigTransactions(QString result, QString multiSigAddress)
 {
     multiSigTransactionsMap.remove(multiSigAddress);
@@ -1162,13 +768,6 @@ void UBChain::parseMultiSigTransactions(QString result, QString multiSigAddress)
         }
     }
 }
-
-void UBChain::scan()
-{
-    postRPC( "id_scan", toJsonFormat( "scan", QStringList() << "0"));
-}
-
-
 
 void UBChain::quit()
 {
@@ -1538,33 +1137,6 @@ AddressType checkAddress(QString address, AddressFlags type)
     }
 
     return InvalidAddress;
-}
-
-
-QDataStream &operator >>(QDataStream &in, ContractTransaction &data)
-{
-    in >> data.contractAddress >> data.method >> data.trxId >> data.blockNum >> data.fromAddress >> data.toAddress
-            >> data.amount >> data.timeStamp >> data.fee;
-    return in;
-}
-
-QDataStream &operator <<(QDataStream &out, const ContractTransaction &data)
-{
-    out << data.contractAddress << data.method << data.trxId << data.blockNum << data.fromAddress << data.toAddress
-            << data.amount << data.timeStamp << data.fee;
-    return out;
-}
-
-QDataStream &operator >>(QDataStream &in, AccountContractTransactions &data)
-{
-    in >> data.collectedBlockNum >> data.transactionVector;
-    return in;
-}
-
-QDataStream &operator <<(QDataStream &out, const AccountContractTransactions &data)
-{
-    out << data.collectedBlockNum << data.transactionVector;
-    return out;
 }
 
 void moveWidgetToScreenCenter(QWidget *w)

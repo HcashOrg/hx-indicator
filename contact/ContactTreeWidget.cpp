@@ -1,7 +1,7 @@
 #include "ContactTreeWidget.h"
 #include "ui_ContactTreeWidget.h"
 
-#include <QPainter>
+
 #include <QTreeWidgetItem>
 #include <QMenu>
 #include <QLineEdit>

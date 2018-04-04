@@ -7,7 +7,7 @@
 #include "setdialog.h"
 #include "consoledialog.h"
 
-#include <QPainter>
+
 #include <QDebug>
 #include <QLineEdit>
 #include <QListView>

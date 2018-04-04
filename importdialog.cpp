@@ -7,11 +7,6 @@
 #include "dialog/importenterpwddialog.h"
 #include "AES/aesencryptor.h"
 
-#include <QDir>
-#include <QFileDialog>
-#include <QDebug>
-#include <QFile>
-
 ImportDialog::ImportDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ImportDialog)

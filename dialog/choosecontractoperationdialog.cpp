@@ -5,7 +5,7 @@
 #include "../commondialog.h"
 
 #include <QDebug>
-#include <QPainter>
+
 
 ChooseContractOperationDialog::ChooseContractOperationDialog(QWidget *parent) :
     QDialog(parent),

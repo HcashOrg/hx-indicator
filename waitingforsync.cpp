@@ -1,11 +1,11 @@
 #include "waitingforsync.h"
 #include "ui_waitingforsync.h"
 #include "wallet.h"
-#include "debug_log.h"
+
 #include "commondialog.h"
 #include "websocketmanager.h"
 
-#include <QPainter>
+
 #include <QTimer>
 #include <QDebug>
 #include <QMovie>

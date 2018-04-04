@@ -1,7 +1,8 @@
 #include "qrcodewidget.h"
 
-#include <QPainter>
+
 #include <QDebug>
+#include <QPainter>
 
 QRCodeWidget::QRCodeWidget(QWidget *parent) : QWidget(parent)
 {

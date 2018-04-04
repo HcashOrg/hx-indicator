@@ -1,7 +1,7 @@
 #include "multisigpage.h"
 #include "ui_multisigpage.h"
 
-#include <QPainter>
+
 
 #include "wallet.h"
 #include "commondialog.h"

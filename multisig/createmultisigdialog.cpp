@@ -252,7 +252,7 @@ void CreateMultiSigDialog::on_addBtn_clicked()
 
 void CreateMultiSigDialog::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
-    ui->balanceLabel->setText( getBigNumberString(UBChain::getInstance()->accountBalanceMap.value(arg1).value(0),ASSET_PRECISION) + " UB");
+    ui->balanceLabel->setText( getBigNumberString(UBChain::getInstance()->accountInfoMap.value(arg1).assetAmountMap.value("1.3.0").amount,ASSET_PRECISION) + " UB");
 }
 
 void CreateMultiSigDialog::on_ownersTableWidget_cellPressed(int row, int column)

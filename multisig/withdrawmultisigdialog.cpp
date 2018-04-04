@@ -1,8 +1,6 @@
 #include "withdrawmultisigdialog.h"
 #include "ui_withdrawmultisigdialog.h"
 
-#include <QDebug>
-#include <QFileDialog>
 #include <QClipboard>
 #include <QListView>
 

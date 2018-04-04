@@ -3,10 +3,7 @@
 #include "wallet.h"
 #include "commondialog.h"
 
-#include <QFileDialog>
-#include <QDebug>
 #include <QDesktopServices>
-#include <QPainter>
 
 SelectWalletPathWidget::SelectWalletPathWidget(QWidget *parent) :
     QWidget(parent),

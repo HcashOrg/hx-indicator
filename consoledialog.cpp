@@ -1,10 +1,8 @@
 #include "consoledialog.h"
 #include "ui_consoledialog.h"
 #include "wallet.h"
-#include "debug_log.h"
 
-#include <QTextCodec>
-#include <QPainter>
+
 #include <QKeyEvent>
 #include <QDesktopWidget>
 

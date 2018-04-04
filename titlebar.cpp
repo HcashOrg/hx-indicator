@@ -1,5 +1,5 @@
 ﻿#include <QDebug>
-#include <QPainter>
+
 
 #include "titlebar.h"
 #include "ui_titlebar.h"

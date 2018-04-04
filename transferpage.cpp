@@ -1,11 +1,4 @@
-﻿#include <QDebug>
-#include <QPainter>
-#include <QTextCodec>
-#include <QDir>
-#include <QListView>
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QJsonArray>
+﻿#include <QListView>
 
 #ifdef WIN32
 #include <windows.h>
@@ -16,7 +9,7 @@
 #include "transferpage.h"
 #include "ui_transferpage.h"
 #include "wallet.h"
-#include "debug_log.h"
+
 #include "contactdialog.h"
 #include "remarkdialog.h"
 #include "commondialog.h"
@@ -103,11 +96,6 @@ TransferPage::TransferPage(QString name,QWidget *parent) :
 
     getContactsList();
     getAssets();
-
-    if( !UBChain::getInstance()->currentTokenAddress.isEmpty())
-    {
-        ui->assetComboBox->setCurrentText(UBChain::getInstance()->ERC20TokenInfoMap.value(UBChain::getInstance()->currentTokenAddress).contractName);
-    }
 
     ui->sendBtn->setEnabled(false);
 
@@ -273,11 +261,8 @@ void TransferPage::on_amountLineEdit_textChanged(const QString &arg1)
     strBalanceTemp = strBalanceTemp.remove(" " + QString(ASSET_NAME));
     double dBalance = strBalanceTemp.remove(",").toDouble();
 
-    if( ui->assetComboBox->currentIndex() < 0)
-    {
-        return;
-    }
-    else if( ui->assetComboBox->currentIndex() == 0)
+
+    if( ui->assetComboBox->currentIndex() == 0)
     {
         if( amount + fee > dBalance )
         {
@@ -293,36 +278,6 @@ void TransferPage::on_amountLineEdit_textChanged(const QString &arg1)
             ui->sendBtn->setEnabled(true);
         }
     }
-    else
-    {
-        // 如果是合约资产
-        QStringList contracts = UBChain::getInstance()->ERC20TokenInfoMap.keys();
-
-        QString contractAddress = contracts.at(ui->assetComboBox->currentIndex() - 1);
-
-        ERC20TokenInfo info = UBChain::getInstance()->ERC20TokenInfoMap.value(contractAddress);
-
-        QString accountAddress = UBChain::getInstance()->addressMap.value(ui->accountComboBox->currentText()).ownerAddress;
-        double balance;
-        balance = UBChain::getInstance()->accountContractBalanceMap.value(accountAddress).value(contractAddress);
-        balance = balance / info.precision;
-
-        if( amount > balance )
-        {
-            ui->tipLabel3->show();
-            ui->tipLabel3->setText( ui->assetComboBox->currentText() + tr(" not enough"));
-
-            ui->sendBtn->setEnabled(false);
-            ui->callContractFeeLabel->clear();
-        }
-        else
-        {
-            if( checkAddress(ui->sendtoLineEdit->text()))
-            {
-                calculateCallContractFee();
-            }
-        }
-    }
 
 }
 
@@ -333,14 +288,7 @@ void TransferPage::refresh()
 
 void TransferPage::onAssetChanged(int)
 {
-    if( !UBChain::getInstance()->currentTokenAddress.isEmpty())
-    {
-        ui->assetComboBox->setCurrentText(UBChain::getInstance()->ERC20TokenInfoMap.value(UBChain::getInstance()->currentTokenAddress).contractName);
-    }
-    else
-    {
-        ui->assetComboBox->setCurrentText(ASSET_NAME);
-    }
+    ui->assetComboBox->setCurrentText(ASSET_NAME);
 }
 
 void TransferPage::contactSelected(QString remark, QString contact)
@@ -385,24 +333,6 @@ void TransferPage::getContactsList()
 
 }
 
-void TransferPage::calculateCallContractFee()
-{
-    ui->callContractFeeLabel->clear();
-
-    int assetIndex = ui->assetComboBox->currentIndex();
-    if( assetIndex <= 0)    return;
-    QStringList contracts = UBChain::getInstance()->ERC20TokenInfoMap.keys();
-    QString contractAddress = contracts.at(assetIndex - 1);
-
-    ERC20TokenInfo info = UBChain::getInstance()->ERC20TokenInfoMap.value(contractAddress);
-    QString accountAddress = ui->sendtoLineEdit->text();
-
-    UBChain::getInstance()->postRPC( "id_contract_call_testing_transfer+" + contractAddress + "+" + accountAddress,
-                                     toJsonFormat( "contract_call_testing",
-                                                 QStringList() << contractAddress << ui->accountComboBox->currentText()<< "transfer" << accountAddress + "," + QString::number( ui->amountLineEdit->text().toDouble() * info.precision,'f',0)
-                                                   ));
-}
-
 void TransferPage::checkIsFeeEnough()
 {
     double fee = ui->feeLineEdit->text().toDouble();
@@ -428,22 +358,9 @@ void TransferPage::checkIsFeeEnough()
 
 void TransferPage::setAmountPrecision()
 {
-    if(UBChain::getInstance()->currentTokenAddress.isEmpty())
-    {
-        QRegExp rx1("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,4})?$|(^\\t?$)");
-        QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
-        ui->amountLineEdit->setValidator(pReg1);
-    }
-    else
-    {
-        QString precisionStr = QString::number(UBChain::getInstance()->ERC20TokenInfoMap.value(UBChain::getInstance()->currentTokenAddress).precision);
-
-        QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(precisionStr.size() - 1));
-        QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
-        ui->amountLineEdit->setValidator(pReg1);
-    }
-
-
+    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(ASSET_PRECISION));
+    QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
+    ui->amountLineEdit->setValidator(pReg1);
 }
 
 QString TransferPage::getCurrentAccount()
@@ -477,10 +394,7 @@ void TransferPage::getAssets()
 
     ui->assetComboBox->clear();
     ui->assetComboBox->addItem("UB");
-    foreach (QString key, UBChain::getInstance()->ERC20TokenInfoMap.keys())
-    {
-        ui->assetComboBox->addItem( UBChain::getInstance()->ERC20TokenInfoMap.value(key).contractName);
-    }
+
 
     assetUpdating = false;
 }
@@ -608,96 +522,6 @@ qDebug() << id << result;
         return;
     }
 
-    if( id.startsWith("id_contract_call_transfer+"))
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if( result.startsWith("\"result\":"))
-        {
-            CommonDialog tipDialog(CommonDialog::OkOnly);
-            tipDialog.setText( tr("Transaction has been sent,please wait for confirmation"));
-            tipDialog.pop();
-
-            if( !contactsList.contains( ui->sendtoLineEdit->text()))
-            {
-                CommonDialog commonDialog(CommonDialog::OkAndCancel);
-                commonDialog.setText(tr("Add this address to contacts?"));
-                if( commonDialog.pop())
-                {
-                    RemarkDialog remarkDialog( ui->sendtoLineEdit->text());
-                    remarkDialog.pop();
-                    getContactsList();
-                }
-            }
-
-            emit showAccountPage(accountName);
-
-        }
-        else if( result.startsWith("\"error\":"))
-        {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            if( errorMessage == "lua lvm internal error")
-            {
-                pos = result.indexOf("\"exception_msg\":\"") + 17;
-                errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-                if( errorMessage == "?:132: address format error")
-                {
-                    errorMessage = tr("Wrong address!");
-                }
-                else if( errorMessage == "?:341: you have not enoungh amount to transfer out")
-                {
-                    errorMessage = tr("Not enough balance!");
-                }
-            }
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Failed: " + errorMessage);
-            commonDialog.pop();
-        }
-
-        return;
-    }
-
-
-    if( id.startsWith("id_contract_call_testing_transfer+"))
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if( result.startsWith("\"result\":"))
-        {
-            result.prepend("{");
-            result.append("}");
-
-            QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
-            QByteArray ba = utfCodec->fromUnicode(result);
-
-            QJsonParseError json_error;
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(ba, &json_error);
-
-            unsigned long long feeAmount = 0;
-            if(json_error.error == QJsonParseError::NoError)
-            {
-                if( parse_doucment.isObject())
-                {
-                    QJsonObject jsonObject = parse_doucment.object();
-                    QJsonValue resultValue = jsonObject.take("result");
-                    QJsonArray array = resultValue.toArray();
-                    if( array.size() != 2)  return;
-                    QJsonValue amount = array.at(1).toObject().take("amount");
-                    feeAmount = QString::number(amount.toInt(),'g',10).toULongLong();
-
-                    ui->callContractFeeLabel->setText( getBigNumberString(feeAmount,ASSET_PRECISION));
-                    checkIsFeeEnough();
-                }
-            }
-
-        }
-
-        return;
-    }
 
 
     if( id == "id_wallet_multisig_deposit+" + accountName)
@@ -820,14 +644,6 @@ void TransferPage::on_assetComboBox_currentIndexChanged(int index)
 {
     if( assetUpdating)  return;
 
-    if( index == 0)
-    {
-        UBChain::getInstance()->mainFrame->setCurrentToken("");
-    }
-    else
-    {
-        UBChain::getInstance()->mainFrame->setCurrentToken(UBChain::getInstance()->ERC20TokenInfoMap.keys().at(index - 1));
-    }
 
     if( index == 0)
     {
@@ -876,7 +692,7 @@ void TransferPage::on_sendtoLineEdit_textEdited(const QString &arg1)
         ui->tipLabel4->setText(tr("Valid account address."));
         ui->tipLabel4->setStyleSheet("color: rgb(43,230,131);");
         ui->tipLabel4->show();
-        calculateCallContractFee();
+//        calculateCallContractFee();
     }
     else if( type == ContractAddress)
     {

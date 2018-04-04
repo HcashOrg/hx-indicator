@@ -3,9 +3,6 @@
 
 #include "wallet.h"
 
-#include <QFileDialog>
-#include <QPainter>
-
 NewOrImportWalletWidget::NewOrImportWalletWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::NewOrImportWalletWidget)

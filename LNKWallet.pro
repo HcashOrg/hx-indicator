@@ -45,7 +45,6 @@ SOURCES += main.cpp\
     lockpage.cpp \
     consoledialog.cpp \
     titlebar.cpp \
-    debug_log.cpp \
     contactdialog.cpp \
     waitingforsync.cpp \
     remarkdialog.cpp \
@@ -73,17 +72,8 @@ SOURCES += main.cpp\
     extra/dynamicmove.cpp \
     control/remarkcellwidget.cpp \
     control/shadowwidget.cpp \
-    assetpage.cpp \
     selectwalletpathwidget.cpp \
-    dialog/addtokendialog.cpp \
-    feedpage.cpp \
-    dialog/feedpricedialog.cpp \
     dialog/choosetokenoperationdialog.cpp \
-    dialog/depositdialog.cpp \
-    dialog/destroydialog.cpp \
-    dialog/mintdialog.cpp \
-    dialog/withdrawcontractbalancedialog.cpp \
-    dialog/createtokendialog.cpp \
     control/mycheckbtn.cpp \
     dialog/choosecontractoperationdialog.cpp \
     control/qrcodedialog.cpp \
@@ -98,18 +88,13 @@ SOURCES += main.cpp\
     multisig/signmultisigdialog.cpp \
     multisig/multisigtransactionpage.cpp \
     dialog/checkpwddialog.cpp \
-    extra/transactioindb.cpp \
     AES/aes.cpp \
     AES/aesencryptor.cpp \
     dialog/exportsetpwddialog.cpp \
     dialog/importenterpwddialog.cpp \
-    contract/contractdetailwidget.cpp \
-    contract/singlecontractwidget.cpp \
-    contract/smartcontractpage.cpp \
     control/contacteditdialog.cpp \
     dialog/functionbarchoicedialog.cpp \
     extra/guiutil.cpp \
-    extra/contractserverinfomanager.cpp \
     control/feedassetcellwidget.cpp \
     neworimportwalletwidget.cpp \
     websocketmanager.cpp \
@@ -137,7 +122,6 @@ HEADERS  += firstlogin.h \
     setdialog.h \
     lockpage.h \
     consoledialog.h \
-    debug_log.h \
     titlebar.h \
     contactdialog.h \
     waitingforsync.h \
@@ -166,17 +150,8 @@ HEADERS  += firstlogin.h \
     extra/dynamicmove.h \
     control/remarkcellwidget.h \
     control/shadowwidget.h \
-    assetpage.h \
     selectwalletpathwidget.h \
-    dialog/addtokendialog.h \
-    feedpage.h \
-    dialog/feedpricedialog.h \
     dialog/choosetokenoperationdialog.h \
-    dialog/depositdialog.h \
-    dialog/destroydialog.h \
-    dialog/mintdialog.h \
-    dialog/withdrawcontractbalancedialog.h \
-    dialog/createtokendialog.h \
     control/mycheckbtn.h \
     dialog/choosecontractoperationdialog.h \
     control/qrcodedialog.h \
@@ -192,19 +167,14 @@ HEADERS  += firstlogin.h \
     multisig/signmultisigdialog.h \
     multisig/multisigtransactionpage.h \
     dialog/checkpwddialog.h \
-    extra/transactioindb.h \
     AES/aes.h \
     AES/aesencryptor.h \
     dialog/exportsetpwddialog.h \
     dialog/importenterpwddialog.h \
-    contract/contractdetailwidget.h \
-    contract/singlecontractwidget.h \
-    contract/smartcontractpage.h \
     control/contacteditdialog.h \
     dialog/functionbarchoicedialog.h \
     extra/style.h \
     extra/guiutil.h \
-    extra/contractserverinfomanager.h \
     control/feedassetcellwidget.h \
     neworimportwalletwidget.h \
     websocketmanager.h \
@@ -257,17 +227,9 @@ FORMS    += firstlogin.ui \
     dialog/renamedialog.ui \
     control/remarkcellwidget.ui \
     control/shadowwidget.ui \
-    assetpage.ui \
     selectwalletpathwidget.ui \
     dialog/addtokendialog.ui \
-    feedpage.ui \
-    dialog/feedpricedialog.ui \
     dialog/choosetokenoperationdialog.ui \
-    dialog/depositdialog.ui \
-    dialog/destroydialog.ui \
-    dialog/mintdialog.ui \
-    dialog/withdrawcontractbalancedialog.ui \
-    dialog/createtokendialog.ui \
     dialog/choosecontractoperationdialog.ui \
     control/qrcodedialog.ui \
     multisig/multisigpage.ui \
@@ -282,9 +244,6 @@ FORMS    += firstlogin.ui \
     dialog/checkpwddialog.ui \
     dialog/exportsetpwddialog.ui \
     dialog/importenterpwddialog.ui \
-    contract/contractdetailwidget.ui \
-    contract/singlecontractwidget.ui \
-    contract/smartcontractpage.ui \
     control/contacteditdialog.ui \
     dialog/functionbarchoicedialog.ui \
     control/feedassetcellwidget.ui \

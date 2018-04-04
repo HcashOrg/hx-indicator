@@ -5,7 +5,7 @@
 #include "commondialog.h"
 #include "control/contacteditdialog.h"
 
-#include <QPainter>
+
 #include <QDebug>
 
 SingleContactWidget::SingleContactWidget(int num,QString address,QString remarkName,QWidget *parent) :

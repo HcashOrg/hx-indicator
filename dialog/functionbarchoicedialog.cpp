@@ -5,7 +5,7 @@
 #include "../commondialog.h"
 
 #include <QDebug>
-#include <QPainter>
+
 
 FunctionBarChoiceDialog::FunctionBarChoiceDialog(QWidget *parent) :
     QDialog(parent),

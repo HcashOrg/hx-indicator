@@ -1,5 +1,5 @@
 ﻿#include <QDebug>
-#include <QPainter>
+
 #include <QTimer>
 #include <QMouseEvent>
 #include <QScrollBar>
@@ -10,7 +10,7 @@
 #include "mainpage.h"
 #include "ui_mainpage.h"
 #include "wallet.h"
-#include "debug_log.h"
+
 #include "namedialog.h"
 #include "deleteaccountdialog.h"
 #include "exportdialog.h"

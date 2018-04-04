@@ -1,6 +1,6 @@
 #include "commontip.h"
 #include "ui_commontip.h"
-#include "debug_log.h"
+
 
 CommonTip::CommonTip( QWidget *parent) :
     QDialog(parent),

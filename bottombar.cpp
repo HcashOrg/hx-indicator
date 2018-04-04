@@ -8,7 +8,7 @@
 #include "commondialog.h"
 #include "extra/dynamicmove.h"
 
-#include <QPainter>
+
 #include <QTimer>
 #include <QMovie>
 #include <QMouseEvent>
@@ -24,7 +24,7 @@ BottomBar::BottomBar(QWidget *parent) :
     ui->syncLabel->setToolTip(tr("Local block height / Network block height(estimated)"));
 
     connect(UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)),this, SLOT(jsonDataUpdated(QString)));
-    jsonDataUpdated("id_info");
+    jsonDataUpdated("id-info");
 
 
     timer = new QTimer(this);
@@ -49,7 +49,7 @@ void BottomBar::updateNumOfConnections()
 {
 //    
 
-    QString result = UBChain::getInstance()->jsonDataValue("id_info");
+    QString result = UBChain::getInstance()->jsonDataValue("id-info");
     if( result.isEmpty())  return;
 
     int pos = result.indexOf("\"network_num_connections\"") + 26;
@@ -72,12 +72,29 @@ void BottomBar::retranslator()
 
 void BottomBar::jsonDataUpdated(QString id)
 {
-    if( id == "id_info")
+    if( id == "id-info")
     {
-        UBChain::getInstance()->parseBalance();
+//        UBChain::getInstance()->parseBalance();
 
         QString result = UBChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() )  return;
+
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonObject object = jsonObject.take("result").toObject();
+        UBChain::getInstance()->walletInfo.blockHeight = object.take("head_block_num").toInt();
+        UBChain::getInstance()->walletInfo.blockId = object.take("head_block_id").toString();
+        UBChain::getInstance()->walletInfo.blockAge = object.take("head_block_age").toString();
+        UBChain::getInstance()->walletInfo.chainId = object.take("chain_id").toString();
+
+
+
+
+
 
         int pos = result.indexOf( "\"blockchain_head_block_age\":") + 28;
         QString seconds = result.mid( pos, result.indexOf("\"blockchain_head_block_timestamp\":") - pos - 1);
@@ -89,8 +106,6 @@ void BottomBar::jsonDataUpdated(QString id)
         int numToSync = seconds.toInt()/ 10;
 
         ui->syncLabel->setText( num + " / " + QString::number( num.toInt() + numToSync) );
-        UBChain::getInstance()->currentBlockHeight = num.toInt();
-
 
 
         return;
@@ -117,9 +132,9 @@ void BottomBar::paintEvent(QPaintEvent *)
 
 void BottomBar::refresh()
 {
-    UBChain::getInstance()->postRPC( "id_info", toJsonFormat( "info", QStringList() << ""));
+    UBChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QStringList() ));
 
-    UBChain::getInstance()->postRPC( "id_blockchain_list_assets", toJsonFormat( "blockchain_list_assets", QStringList() << ""));
+//    UBChain::getInstance()->postRPC( "id_blockchain_list_assets", toJsonFormat( "blockchain_list_assets", QStringList() << ""));
 
 //    UBChain::getInstance()->postRPC( toJsonFormat( "id_balance", "balance", QStringList() << ""));
 

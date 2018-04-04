@@ -1,7 +1,7 @@
 #include "ContactAddWidget.h"
 #include "ui_ContactAddWidget.h"
 
-#include <QPainter>
+
 #include <QRegExpValidator>
 #include "ContactDataUtil.h"
 

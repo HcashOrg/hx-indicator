@@ -1,7 +1,7 @@
 #include "ContactWidget.h"
 #include "ui_ContactWidget.h"
 
-#include <QPainter>
+
 #include "ContactDataUtil.h"
 #include "ContactTreeWidget.h"
 #include "ContactSearchWidget.h"

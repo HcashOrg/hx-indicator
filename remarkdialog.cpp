@@ -3,7 +3,7 @@
 #include "wallet.h"
 #include <QTextStream>
 #include <QDebug>
-#include "debug_log.h"
+
 
 RemarkDialog::RemarkDialog(QString address, QWidget *parent) :
     QDialog(parent),

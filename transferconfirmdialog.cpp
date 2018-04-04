@@ -5,7 +5,7 @@
 #include "commondialog.h"
 
 #include <QDebug>
-#include <QPainter>
+
 
 TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QString fee, QString remark, QString assetSymbol, QWidget *parent) :
     QDialog(parent),

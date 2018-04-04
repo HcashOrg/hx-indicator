@@ -72,7 +72,6 @@ private:
     void paintEvent(QPaintEvent*);
 //    void addContact(QString,QString);
 
-    void calculateCallContractFee();
     void checkIsFeeEnough();
     void setAmountPrecision();
 };

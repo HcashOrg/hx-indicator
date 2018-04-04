@@ -1,7 +1,7 @@
 #include "ContactBriefWidget.h"
 #include "ui_ContactBriefWidget.h"
 
-#include <QPainter>
+
 
 class ContactBriefWidget::ContactBriefWidgetPrivate
 {

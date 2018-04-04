@@ -1,5 +1,5 @@
 ﻿#include <QDebug>
-#include <QPainter>
+
 #include <QKeyEvent>
 #ifdef WIN32
 #include <windows.h>
@@ -8,7 +8,7 @@
 #include "firstlogin.h"
 #include "ui_firstlogin.h"
 #include "wallet.h"
-#include "debug_log.h"
+
 #include "commondialog.h"
 
 FirstLogin::FirstLogin(QWidget *parent) :

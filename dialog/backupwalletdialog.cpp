@@ -4,7 +4,6 @@
 #include "wallet.h"
 #include "commondialog.h"
 
-#include <QFileDialog>
 
 BackupWalletDialog::BackupWalletDialog(QWidget *parent) :
     QDialog(parent),

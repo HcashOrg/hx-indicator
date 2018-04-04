@@ -31,7 +31,6 @@ class SelectWalletPathWidget;
 class ShowBottomBarWidget;
 class ShadowWidget;
 class SmartContractPage;
-class FeedPage;
 class MultiSigPage;
 class MultiSigTransactionPage;
 class NewOrImportWalletWidget;
@@ -61,7 +60,6 @@ public slots:
     void syncFinished();
 
     void setCurrentAccount(QString accountName);
-    void setCurrentToken(QString tokenAddress);
 
 signals:
     void delegateListUpdated();
@@ -81,11 +79,9 @@ private slots:
     void jsonDataUpdated(QString id);
 
     void showMainPage();
-    void showSmartContractPage();
     void showTransferPage();
     void showContactPage();
     void showTransferPageWithAddress(QString, QString remark = "");
-    void showFeedPage();
     void showMultiSigPage();
     void showMultiSigTransactionPage(QString _multiSigAddress);
     void showWaittingForSyncWidget();
@@ -94,13 +90,7 @@ private slots:
     void iconIsActived(QSystemTrayIcon::ActivationReason reason);
     void showNormalAndActive();
 
-    void scan();
-
     void newAccount(QString name);
-
-    void updateAssets();
-
-    void onTimerForCollectContractTransaction();
 
 private:
     bool mouse_press;
@@ -111,9 +101,7 @@ private:
 
     MainPage*   mainPage;
     AccountPage* accountPage;
-    SmartContractPage* smartContractPage;
     TransferPage* transferPage;
-    FeedPage* feedPage;
     MultiSigPage* multiSigPage;
     MultiSigTransactionPage* multiSigTransactionPage;
 
@@ -164,9 +152,6 @@ private:
     QTranslator translatorForTextBrowser;   // QTextBrowser的右键菜单翻译
 
     bool needToRefresh;
-
-    QTimer* timerForCollectContractTransaction;
-    void startTimerForCollectContractTransaction();
 
 private:
     void paintEvent(QPaintEvent* e);
