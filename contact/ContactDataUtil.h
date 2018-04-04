@@ -160,6 +160,22 @@ public:
             (*it)->number = i++;
         }
     }
+    //重新设置默认分组（每张表只有一个默认分组，多了修改为普通，少了添加一个普通）
+    void ReGroupType()
+    {
+        bool hasDefault = false;
+        for(auto group : groups)
+        {
+            if(ContactGroup::GroupType_Default == group->groupType )
+            {
+                hasDefault ? hasDefault = true : group->groupType = ContactGroup::GroupType_Normal;
+            }
+        }
+        if(!hasDefault && !groups.empty())
+        {
+            groups.front()->groupType = ContactGroup::GroupType_Default;
+        }
+    }
 };
 
 class ContactDataUtil

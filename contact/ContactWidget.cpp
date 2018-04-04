@@ -116,7 +116,15 @@ void ContactWidget::InitWidget()
 
 void ContactWidget::InitData()
 {
-    ContactDataUtil::readContactSheetFromPath(_p->contactFilePath,_p->contactSheet);
+    if(!ContactDataUtil::readContactSheetFromPath(_p->contactFilePath,_p->contactSheet))
+    {//联系人文件解析失败，自己新建一个联系人名单
+       _p->contactSheet = std::make_shared<ContactSheet>();
+       _p->contactSheet->sheetName = tr("New Sheet");
+       std::shared_ptr<ContactGroup> group = std::make_shared<ContactGroup>();
+       group->groupName = tr("Default Group");
+       group->groupType = ContactGroup::GroupType_Default;
+       _p->contactSheet->addGroup(group);
+    }
     _p->contactTreeWidget->initContactSheet(_p->contactSheet);
 }
 
