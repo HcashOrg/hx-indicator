@@ -7,6 +7,7 @@
 #include "functionBar/FunctionAdvanceWidget.h"
 
 #include "setdialog.h"
+#include "consoledialog.h"
 #include "wallet.h"
 
 class FunctionWidget::FunctionWidgetPrivate
@@ -80,6 +81,12 @@ void FunctionWidget::ShowSettingWidgetSlots()
     setDialog.pop();
 }
 
+void FunctionWidget::ShowConsoleWidgetSlots()
+{
+    ConsoleDialog consoleDialog;
+    consoleDialog.pop();
+}
+
 void FunctionWidget::InitWidget()
 {
     InitStyle();
@@ -91,6 +98,7 @@ void FunctionWidget::InitWidget()
     QMenu *menu = new QMenu();
     QAction* actionSet = menu->addAction("Setting");
     QAction* actionLock = menu->addAction("Lock");
+    QAction* actionConsole = menu->addAction("Console");
     QMenu *helpMenu = new QMenu("Help");
     menu->addMenu(helpMenu);
     QAction* actionAbout = helpMenu->addAction("About Us");
@@ -105,6 +113,7 @@ void FunctionWidget::InitWidget()
 
     connect(actionLock,&QAction::triggered,this,&FunctionWidget::lock);
     connect(actionSet,&QAction::triggered,this,&FunctionWidget::ShowSettingWidgetSlots);
+    connect(actionConsole,&QAction::triggered,this,&FunctionWidget::ShowConsoleWidgetSlots);
 
     connect(_p->advanceBar,&FunctionAdvanceWidget::showFeedPage,this,&FunctionWidget::showFeedPage);
     connect(_p->advanceBar,&FunctionAdvanceWidget::showMultiSigPage,this,&FunctionWidget::showMultiSigPage);

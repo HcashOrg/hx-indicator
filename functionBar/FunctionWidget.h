@@ -49,6 +49,7 @@ private slots:
     void ShowAdvanceWidgetSlots();
 
     void ShowSettingWidgetSlots();
+    void ShowConsoleWidgetSlots();
 private:
     void InitWidget();
     void InitStyle();
