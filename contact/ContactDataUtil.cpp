@@ -126,6 +126,7 @@ bool ContactDataUtil::readContactSheetFromPath(const QString &filePath, std::sha
         return left->number < right->number;
     });
     results->ReNumberGroup();
+    results->ReGroupType();
     return true;
 }
 
