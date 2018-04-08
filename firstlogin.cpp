@@ -89,10 +89,10 @@ void FirstLogin::on_createBtn_clicked()
 //        RpcThread* rpcThread = new RpcThread;
 //        connect(rpcThread,SIGNAL(finished()),rpcThread,SLOT(deleteLater()));
 //        rpcThread->setLogin("a","b");
-//        rpcThread->setWriteData( toJsonFormat( "id_create", "create", QStringList() << "wallet" << ui->pwdLineEdit->text() ));
+//        rpcThread->setWriteData( toJsonFormat( "id_create", "create", QJsonArray() << "wallet" << ui->pwdLineEdit->text() ));
 //        rpcThread->start();
 
-        UBChain::getInstance()->postRPC( "id-set_password", toJsonFormat( "set_password", QStringList() <<  ui->pwdLineEdit->text() ));
+        UBChain::getInstance()->postRPC( "id-set_password", toJsonFormat( "set_password", QJsonArray() <<  ui->pwdLineEdit->text() ));
     }
     else
     {
@@ -225,7 +225,7 @@ void FirstLogin::jsonDataUpdated(QString id)
         qDebug() << "id-set_password" << result;
         if( result == "\"result\":null" )
         {
-            UBChain::getInstance()->postRPC( "id-unlock-firstlogin", toJsonFormat( "unlock", QStringList() << ui->pwdLineEdit->text() ));
+            UBChain::getInstance()->postRPC( "id-unlock-firstlogin", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text() ));
             return;
         }
         else

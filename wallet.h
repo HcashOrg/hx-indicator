@@ -321,7 +321,7 @@ AddressType   checkAddress(QString address, AddressFlags type = AccountAddress);
 
 void moveWidgetToScreenCenter(QWidget* w);
 
-QString toJsonFormat(QString instruction, QStringList parameters);
+QString toJsonFormat(QString instruction, QJsonArray parameters);
 
 #endif // LNK_H
 

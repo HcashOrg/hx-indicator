@@ -230,14 +230,14 @@ void SignMultiSigDialog::on_nextBtn_clicked()
     {
         UBChain::getInstance()->postRPC( "id_wallet_builder_file_get_multisig_detail",
                                          toJsonFormat( "wallet_builder_file_get_multisig_detail",
-                                                       QStringList() << ui->pathLineEdit->text()));
+                                                       QJsonArray() << ui->pathLineEdit->text()));
 
     }
     else
     {
         UBChain::getInstance()->postRPC( "id_wallet_builder_get_multisig_detail",
                                          toJsonFormat( "wallet_builder_get_multisig_detail",
-                                                       QStringList() << ui->transactionBrowser->toPlainText()));
+                                                       QJsonArray() << ui->transactionBrowser->toPlainText()));
 
     }
 }
@@ -315,14 +315,14 @@ void SignMultiSigDialog::on_signBtn_clicked()
     {
         UBChain::getInstance()->postRPC( "id_wallet_builder_file_add_signature",
                                          toJsonFormat( "wallet_builder_file_add_signature",
-                                                       QStringList() << ui->pathLineEdit->text() << "true"));
+                                                       QJsonArray() << ui->pathLineEdit->text() << "true"));
 
     }
     else
     {        
         UBChain::getInstance()->postRPC( "id_wallet_builder_add_signature",
                                          toJsonFormat( "wallet_builder_add_signature",
-                                                       QStringList() << ui->transactionBrowser->toPlainText() << "true"));
+                                                       QJsonArray() << ui->transactionBrowser->toPlainText() << "true"));
     }
 }
 

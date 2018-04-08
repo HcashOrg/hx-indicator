@@ -90,7 +90,7 @@ void ImportDialog::on_importBtn_clicked()
             QByteArray ba = QByteArray::fromBase64( rd);
             QString str(ba);
 
-            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QStringList() << ui->accountNameLineEdit->text() << str));
+            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << str));
             ui->importBtn->setEnabled(false);
             shadowWidget->show();
 
@@ -129,7 +129,7 @@ void ImportDialog::on_importBtn_clicked()
 
                     QString pk = output.mid( QString("privateKey=").size());
 
-                    UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QStringList() << ui->accountNameLineEdit->text() << pk));
+                    UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << pk));
                     ui->importBtn->setEnabled(false);
                     shadowWidget->show();
                 }
@@ -164,7 +164,7 @@ void ImportDialog::on_importBtn_clicked()
         privateKey = privateKey.simplified();
         if( (privateKey.size() == 51 || privateKey.size() == 52) && (privateKey.startsWith("5") ) )
         {
-            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QStringList() << ui->accountNameLineEdit->text() << privateKey));
+            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << privateKey));
 
              ui->importBtn->setEnabled(false);
              shadowWidget->show();

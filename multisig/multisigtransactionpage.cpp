@@ -85,7 +85,7 @@ void MultiSigTransactionPage::updateTransactionsList()
     foreach (QString key, keys)
     {
         UBChain::getInstance()->postRPC( "id_wallet_multisig_account_history+" + key, toJsonFormat( "wallet_multisig_account_history",
-                                                       QStringList() << key
+                                                       QJsonArray() << key
                                                    ));
     }
 }

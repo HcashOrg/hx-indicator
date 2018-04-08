@@ -114,7 +114,7 @@ void MainPage::addAccount()
 
     if( !name.isEmpty())
     {
-        UBChain::getInstance()->postRPC( "id-wallet_create_account-" + name, toJsonFormat( "wallet_create_account", QStringList() << name ));
+        UBChain::getInstance()->postRPC( "id-wallet_create_account-" + name, toJsonFormat( "wallet_create_account", QJsonArray() << name ));
 
     }
 

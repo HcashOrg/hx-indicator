@@ -217,7 +217,7 @@ void CreateMultiSigDialog::on_createBtn_clicked()
 
     UBChain::getInstance()->postRPC( "id_wallet_create_multisig_account",
                                      toJsonFormat( "wallet_create_multisig_account",
-                                                   QStringList() << getBigNumberString(1,ASSET_PRECISION) << ASSET_NAME
+                                                   QJsonArray() << getBigNumberString(1,ASSET_PRECISION) << ASSET_NAME
                                                    << ui->accountComboBox->currentText() << QString::number(requires)
                                                    << str << ""
                                                    ));

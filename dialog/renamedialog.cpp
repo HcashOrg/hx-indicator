@@ -122,7 +122,7 @@ void RenameDialog::on_nameLineEdit_textChanged(const QString &arg1)
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id_blockchain_get_account_" + addrName, toJsonFormat( "blockchain_get_account", QStringList() << addrName ));
+    UBChain::getInstance()->postRPC( "id_blockchain_get_account_" + addrName, toJsonFormat( "blockchain_get_account", QJsonArray() << addrName ));
     ui->gifLabel->show();
 }
 

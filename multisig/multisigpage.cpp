@@ -50,7 +50,7 @@ MultiSigPage::~MultiSigPage()
 
 void MultiSigPage::refresh()
 {
-    UBChain::getInstance()->postRPC( "id_wallet_multisig_account_balance", toJsonFormat( "wallet_multisig_account_balance", QStringList() << ""
+    UBChain::getInstance()->postRPC( "id_wallet_multisig_account_balance", toJsonFormat( "wallet_multisig_account_balance", QJsonArray()
                                                    ));
 
 }
@@ -161,7 +161,7 @@ void MultiSigPage::jsonDataUpdated(QString id)
 
                                 UBChain::getInstance()->postRPC( "id_wallet_import_multisig_account+" + info.multiSigAddress,
                                                                  toJsonFormat( "wallet_import_multisig_account",
-                                                                               QStringList() << info.multiSigAddress
+                                                                               QJsonArray() << info.multiSigAddress
                                                                            ));
 
 

@@ -193,9 +193,14 @@ void ConsoleDialog::on_consoleLineEdit_returnPressed()
         QStringList paramaters = str.split(' ');
         QString command = paramaters.at(0);
         paramaters.removeFirst();
-        if( paramaters.isEmpty())  paramaters << "";
 
-        UBChain::getInstance()->postRPC( "console-" + str, toJsonFormat( command, paramaters ));
+        QJsonArray array;
+        foreach (QString param, paramaters)
+        {
+            array << param;
+        }
+
+        UBChain::getInstance()->postRPC( "console-" + str, toJsonFormat( command, array ));
 
         ui->consoleLineEdit->clear();
         return;

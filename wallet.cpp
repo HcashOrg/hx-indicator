@@ -479,7 +479,7 @@ void UBChain::parseAccountInfo()
 
 void UBChain::getAccountBalances(QString _accountName)
 {
-    postRPC( "id-get_account_balances-" + _accountName, toJsonFormat( "get_account_balances", QStringList() << _accountName));
+    postRPC( "id-get_account_balances-" + _accountName, toJsonFormat( "get_account_balances", QJsonArray() << _accountName));
 }
 
 
@@ -1147,17 +1147,12 @@ void moveWidgetToScreenCenter(QWidget *w)
 }
 
 QString toJsonFormat(QString instruction,
-                      QStringList parameters)
+                      QJsonArray parameters)
 {
     QJsonObject object;
     object.insert("id", 32800);
     object.insert("method", instruction);
-    QJsonArray array;
-    foreach (QString param, parameters)
-    {
-        array.append(param);
-    }
-    object.insert("params",array);
+    object.insert("params",parameters);
 
     return QJsonDocument(object).toJson();
 }
