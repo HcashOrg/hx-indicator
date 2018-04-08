@@ -138,7 +138,8 @@ void FunctionWidget::InitStyle()
     ui->toolButton_advanced->setStyleSheet("background:transparent;border:none;");
     ui->toolButton_more->setStyleSheet("background:transparent;border:none;");
 
-    ui->toolButton_account->setIcon(QIcon(":/ui/wallet_ui/accountBtn_unselected.png"));
+    //ui->toolButton_contact->setStyleSheet("QToolButton:hover{background:transparent;border:none;border-image:url(:/ui/wallet_ui/contactBtn.png);}");
+    ui->toolButton_account->setIcon(QIcon(":/ui/wallet_ui/accountBtn.png"));
 
     ui->toolButton_advanced->setIcon(QIcon(":/ui/wallet_ui/transferBtn_unselected.png"));
 
