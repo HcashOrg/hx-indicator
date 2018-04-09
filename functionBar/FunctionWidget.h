@@ -23,12 +23,12 @@ public:
 signals:
     //兼容以前的信号---将来需要删除
     void showMainPage();
-    void showAccountPage();
+    //void showAccountPage();
     void showSmartContractPage();
     void showTransferPage();
-    void showContactPage();
+    //void showContactPage();
     void showFeedPage();
-    void showMultiSigPage();
+    //void showMultiSigPage();
 
     void assetChanged(int);
 
@@ -39,6 +39,8 @@ signals:
     void showContactSignal();
     void showAdvanceSignal();
     //点击二级按钮的信号
+    void showPoundageSignal();
+    void showMultiSigSignal();
 
 signals:
     void ShrinkSignal();

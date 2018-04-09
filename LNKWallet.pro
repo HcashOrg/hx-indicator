@@ -110,7 +110,10 @@ SOURCES += main.cpp\
     contact/ContactWidget.cpp \
     functionBar/FunctionAccountWidget.cpp \
     functionBar/FunctionAdvanceWidget.cpp \
-    functionBar/FunctionWidget.cpp
+    functionBar/FunctionWidget.cpp \
+    poundage/PoundageWidget.cpp \
+    poundage/PublishPoundageWidget.cpp \
+    poundage/PoundageDataUtil.cpp
 
 HEADERS  += firstlogin.h \
     normallogin.h \
@@ -190,7 +193,10 @@ HEADERS  += firstlogin.h \
     contact/ContactWidget.h \
     functionBar/FunctionAccountWidget.h \
     functionBar/FunctionAdvanceWidget.h \
-    functionBar/FunctionWidget.h
+    functionBar/FunctionWidget.h \
+    poundage/PoundageWidget.h \
+    poundage/PublishPoundageWidget.h \
+    poundage/PoundageDataUtil.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -258,7 +264,9 @@ FORMS    += firstlogin.ui \
     functionBar/FunctionAccountWidget.ui \
     functionBar/FunctionAdvanceWidget.ui \
     functionBar/FunctionWidget.ui \
-    contact/ContactTreeWidget.ui
+    contact/ContactTreeWidget.ui \
+    poundage/PoundageWidget.ui \
+    poundage/PublishPoundageWidget.ui
     
 win32{
     DISTFILES += logo.rc

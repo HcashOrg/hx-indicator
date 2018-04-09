@@ -29,7 +29,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QPushButton" name="pushButton_feedPage">
+    <widget class="QPushButton" name="pushButton_poundage">
      <property name="text">
       <string>手续费承兑单</string>
      </property>
