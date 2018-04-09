@@ -91,7 +91,7 @@ void CheckPwdDialog::on_okBtn_clicked()
 
     if(!ui->okBtn->isEnabled())     return;
 
-    UBChain::getInstance()->postRPC( "id_wallet_check_passphrase", toJsonFormat( "wallet_check_passphrase", QStringList() << ui->pwdLineEdit->text()
+    UBChain::getInstance()->postRPC( "id_wallet_check_passphrase", toJsonFormat( "wallet_check_passphrase", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }
 

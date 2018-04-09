@@ -91,10 +91,10 @@ void BottomBar::paintEvent(QPaintEvent *)
 
 void BottomBar::refresh()
 {
-    UBChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QStringList() ));
+    UBChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QJsonArray()));
 
-//    UBChain::getInstance()->postRPC( "id_blockchain_list_assets", toJsonFormat( "blockchain_list_assets", QStringList() << ""));
+//    UBChain::getInstance()->postRPC( "id_blockchain_list_assets", toJsonFormat( "blockchain_list_assets", QJsonArray()));
 
-//    UBChain::getInstance()->postRPC( toJsonFormat( "id_balance", "balance", QStringList() << ""));
+//    UBChain::getInstance()->postRPC( toJsonFormat( "id_balance", "balance", QJsonArray()));
 
 }

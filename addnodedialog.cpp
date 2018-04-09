@@ -47,10 +47,10 @@ void AddNodeDialog::on_addBtn_clicked()
 {
 //    RpcThread* rpcThread = new RpcThread;
 //    connect(rpcThread,SIGNAL(finished()),rpcThread,SLOT(deleteLater()));
-//    rpcThread->setWriteData( toJsonFormat( "id_addnode", "addnode", QStringList() << ui->ipLineEdit->text() + ":" + ui->portLineEdit->text() << "add" ));
+//    rpcThread->setWriteData( toJsonFormat( "id_addnode", "addnode", QJsonArray() << ui->ipLineEdit->text() + ":" + ui->portLineEdit->text() << "add" ));
 //    rpcThread->start();
 
-    UBChain::getInstance()->postRPC( "id_addnode", toJsonFormat( "addnode", QStringList() << ui->ipLineEdit->text() + ":" + ui->portLineEdit->text() << "add" ));
+    UBChain::getInstance()->postRPC( "id_addnode", toJsonFormat( "addnode", QJsonArray() << ui->ipLineEdit->text() + ":" + ui->portLineEdit->text() << "add" ));
 
     close();
 }

@@ -142,14 +142,14 @@ void AccountPage::updateTransactionsList()
 {
 
     UBChain::getInstance()->postRPC(  "id_history_" + accountName + "_" + ASSET_NAME, toJsonFormat("history",
-                                                QStringList() << accountName << ASSET_NAME  << "9999999" ));
+                                                QJsonArray() << accountName << ASSET_NAME  << "9999999" ));
 
 }
 
 
 void AccountPage::updateContractFee()
 {
-    UBChain::getInstance()->postRPC( "id_wallet_get_account_contract_fee_" + accountName, toJsonFormat( "wallet_get_account_contract_fee", QStringList() << accountName));
+    UBChain::getInstance()->postRPC( "id_wallet_get_account_contract_fee_" + accountName, toJsonFormat( "wallet_get_account_contract_fee", QJsonArray() << accountName));
 }
 
 
@@ -642,7 +642,7 @@ void AccountPage::on_withdrawBtn_clicked()
         if(!checkPwdDialog.pop())   return;
 
         unsigned long long feeToWithdraw = contractFee.toDouble() * ASSET_PRECISION - UBChain::getInstance()->transactionFee;
-        UBChain::getInstance()->postRPC( "id_wallet_get_contract_fee_" + accountName, toJsonFormat( "wallet_get_contract_fee", QStringList() << accountName << getBigNumberString(feeToWithdraw,ASSET_PRECISION) ));
+        UBChain::getInstance()->postRPC( "id_wallet_get_contract_fee_" + accountName, toJsonFormat( "wallet_get_contract_fee", QJsonArray() << accountName << getBigNumberString(feeToWithdraw,ASSET_PRECISION) ));
     }
     else
     {

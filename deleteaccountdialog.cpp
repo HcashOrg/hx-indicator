@@ -61,7 +61,7 @@ void DeleteAccountDialog::on_okBtn_clicked()
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id_wallet_check_passphrase", toJsonFormat( "wallet_check_passphrase", QStringList() << ui->pwdLineEdit->text()
+    UBChain::getInstance()->postRPC( "id_wallet_check_passphrase", toJsonFormat( "wallet_check_passphrase", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 
 
@@ -112,7 +112,7 @@ void DeleteAccountDialog::jsonDataUpdated(QString id)
 
         if( result == "\"result\":true")
         {
-            UBChain::getInstance()->postRPC( "id_wallet_account_delete", toJsonFormat( "wallet_account_delete", QStringList() << accountName
+            UBChain::getInstance()->postRPC( "id_wallet_account_delete", toJsonFormat( "wallet_account_delete", QJsonArray() << accountName
                                                        ));
 
         }

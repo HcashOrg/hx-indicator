@@ -178,15 +178,12 @@ void TransferPage::on_sendBtn_clicked()
             //        QString result = Hcash::getInstance()->read();
 
 
-            AssetInfo info = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentText());
 
             UBChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
                                              toJsonFormat( "transfer_to_address",
-                                                           QStringList() << accountName << ui->sendtoLineEdit->text()
-                                                           << ui->amountLineEdit->text() << info.symbol
-                                                           << remark << "true" ));
-
-
+                                                           QJsonArray() << accountName << ui->sendtoLineEdit->text()
+                                                           << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                                                           << remark << true ));
 
         }
 
@@ -208,7 +205,7 @@ void TransferPage::on_sendBtn_clicked()
 //                AssetInfo info = UBChain::getInstance()->assetInfoMap.value(0);
 //                UBChain::getInstance()->postRPC( "id_wallet_multisig_deposit+" + accountName,
 //                                                 toJsonFormat( "wallet_multisig_deposit",
-//                                                               QStringList() << ui->amountLineEdit->text() << info.symbol << accountName
+//                                                               QJsonArray() << ui->amountLineEdit->text() << info.symbol << accountName
 //                                                               << ui->sendtoLineEdit->text() << remark ));
 //            }
 
@@ -362,111 +359,59 @@ void TransferPage::jsonDataUpdated(QString id)
     if( id == "id-transfer_to_address-" + accountName)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-qDebug() << "ttttttttttttttttt " <<  id << result;
-        if( result.mid(0,18) == "\"result\":{\"index\":")             // 成功
+
+        if( result.startsWith("\"result\":{"))             // 成功
         {
-            QString recordId = result.mid( result.indexOf("\"entry_id\"") + 12, 40);
+//            QString recordId = result.mid( result.indexOf("\"entry_id\"") + 12, 40);
 
-            mutexForPendingFile.lock();
+//            mutexForPendingFile.lock();
 
-            mutexForConfigFile.lock();
-            UBChain::getInstance()->configFile->setValue("/recordId/" + recordId , 0);
-            mutexForConfigFile.unlock();
+//            mutexForConfigFile.lock();
+//            UBChain::getInstance()->configFile->setValue("/recordId/" + recordId , 0);
+//            mutexForConfigFile.unlock();
 
-            if( !UBChain::getInstance()->pendingFile->open(QIODevice::ReadWrite))
-            {
-                qDebug() << "pending.dat open fail";
-                return;
-            }
+//            if( !UBChain::getInstance()->pendingFile->open(QIODevice::ReadWrite))
+//            {
+//                qDebug() << "pending.dat open fail";
+//                return;
+//            }
 
-            QByteArray ba = QByteArray::fromBase64( UBChain::getInstance()->pendingFile->readAll());
-            ba += QString( recordId + "," + accountName + "," + ui->sendtoLineEdit->text() + "," + ui->amountLineEdit->text() + "," + ui->feeLineEdit->text() + ";").toUtf8();
-            ba = ba.toBase64();
-            UBChain::getInstance()->pendingFile->resize(0);
-            QTextStream ts(UBChain::getInstance()->pendingFile);
-            ts << ba;
+//            QByteArray ba = QByteArray::fromBase64( UBChain::getInstance()->pendingFile->readAll());
+//            ba += QString( recordId + "," + accountName + "," + ui->sendtoLineEdit->text() + "," + ui->amountLineEdit->text() + "," + ui->feeLineEdit->text() + ";").toUtf8();
+//            ba = ba.toBase64();
+//            UBChain::getInstance()->pendingFile->resize(0);
+//            QTextStream ts(UBChain::getInstance()->pendingFile);
+//            ts << ba;
 
-            UBChain::getInstance()->pendingFile->close();
+//            UBChain::getInstance()->pendingFile->close();
 
-            mutexForPendingFile.unlock();
+//            mutexForPendingFile.unlock();
 
             CommonDialog tipDialog(CommonDialog::OkOnly);
             tipDialog.setText( tr("Transaction has been sent,please wait for confirmation"));
             tipDialog.pop();
 
-            if( !contactsList.contains( ui->sendtoLineEdit->text()))
-            {
-                CommonDialog commonDialog(CommonDialog::OkAndCancel);
-                commonDialog.setText(tr("Add this address to contacts?"));
-                if( commonDialog.pop())
-                {
-                    RemarkDialog remarkDialog( ui->sendtoLineEdit->text());
-                    remarkDialog.pop();
-                    getContactsList();
-                }
-            }
-            emit showAccountPage(accountName);
+//            if( !contactsList.contains( ui->sendtoLineEdit->text()))
+//            {
+//                CommonDialog commonDialog(CommonDialog::OkAndCancel);
+//                commonDialog.setText(tr("Add this address to contacts?"));
+//                if( commonDialog.pop())
+//                {
+//                    RemarkDialog remarkDialog( ui->sendtoLineEdit->text());
+//                    remarkDialog.pop();
+//                    getContactsList();
+//                }
+//            }
+//            emit showAccountPage(accountName);
         }
         else
         {
             int pos = result.indexOf("\"message\":\"") + 11;
             QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-            qDebug() << "errorMessage : " << errorMessage;
 
-            if( errorMessage == "Assert Exception")
-            {
-                if( result.contains("\"format\":\"my->is_receive_account( from_account_name ): Invalid account name\","))
-                {
-                    CommonDialog tipDialog(CommonDialog::OkOnly);
-                    tipDialog.setText( tr("This name has been registered, please rename this account!"));
-                    tipDialog.pop();
-                }
-                else
-                {
-                    CommonDialog tipDialog(CommonDialog::OkOnly);
-                    tipDialog.setText( tr("Wrong address!"));
-                    tipDialog.pop();
-                }
-
-
-            }
-            else if( errorMessage == "imessage size bigger than soft_max_lenth")
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Message too long!"));
-                tipDialog.pop();
-
-            }
-            else if( errorMessage == "invalid transaction expiration")
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Failed: You need to wait for synchronization to complete"));
-                tipDialog.pop();
-            }
-            else if( errorMessage == "insufficient funds")
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Not enough balance!"));
-                tipDialog.pop();
-            }
-            else if( errorMessage == "Out of Range")
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Wrong address!"));
-                tipDialog.pop();
-            }
-            else if( errorMessage == "Parse Error")
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Wrong address!"));
-                tipDialog.pop();
-            }
-            else
-            {
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr("Transaction sent failed"));
-                tipDialog.pop();
-            }
+            CommonDialog tipDialog(CommonDialog::OkOnly);
+            tipDialog.setText( tr("Transaction sent failed: %1").arg(errorMessage));
+            tipDialog.pop();
 
         }
         return;

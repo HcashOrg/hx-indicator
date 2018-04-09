@@ -142,7 +142,7 @@ void AddMultiSigDialog::on_okBtn_clicked()
 
 
     UBChain::getInstance()->postRPC( "id_wallet_import_multisig_account-AddMultiSigDialog+" + address,
-                                     toJsonFormat( "wallet_import_multisig_account", QStringList() << address
+                                     toJsonFormat( "wallet_import_multisig_account", QJsonArray() << address
                                                ));
 }
 

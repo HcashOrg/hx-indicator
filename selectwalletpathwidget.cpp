@@ -65,7 +65,7 @@ void SelectWalletPathWidget::on_okBtn_clicked()
         emit newOrImportWallet();
     }
 
-//    UBChain::getInstance()->proc->start(WALLET_EXE_FILE,QStringList() << "--data-dir" << ui->pathLineEdit->text()
+//    UBChain::getInstance()->proc->start(WALLET_EXE_FILE,QJsonArray() << "--data-dir" << ui->pathLineEdit->text()
 //                                       << "--rpcuser" << "a" << "--rpcpassword" << "b" << "--rpcport" << QString::number( RPC_PORT) << "--server" );
 
 //    if( UBChain::getInstance()->proc->waitForStarted())

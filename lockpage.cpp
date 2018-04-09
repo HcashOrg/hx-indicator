@@ -76,7 +76,7 @@ void LockPage::on_enterBtn_clicked()
     }
 
 
-    UBChain::getInstance()->postRPC( "id-unlock-lockpage", toJsonFormat( "unlock", QStringList()  << ui->pwdLineEdit->text() ));
+    UBChain::getInstance()->postRPC( "id-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text() ));
  qDebug() << "id_unlock_lockpage" ;
     emit showShadowWidget();
     ui->pwdLineEdit->setEnabled(false);

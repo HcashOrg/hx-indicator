@@ -190,7 +190,7 @@ void SetDialog::on_saveBtn_clicked()
 
     mutexForConfigFile.unlock();
 
-    UBChain::getInstance()->postRPC( "id_wallet_set_transaction_fee", toJsonFormat( "wallet_set_transaction_fee", QStringList() << ui->feeLineEdit->text() ));
+    UBChain::getInstance()->postRPC( "id_wallet_set_transaction_fee", toJsonFormat( "wallet_set_transaction_fee", QJsonArray() << ui->feeLineEdit->text() ));
 
     emit settingSaved();
 
@@ -267,7 +267,7 @@ void SetDialog::on_confirmBtn_clicked()
 {
     ui->tipLabel3->clear();
 
-    UBChain::getInstance()->postRPC( "id_wallet_check_passphrase", toJsonFormat( "wallet_check_passphrase", QStringList() << ui->oldPwdLineEdit->text() ));
+    UBChain::getInstance()->postRPC( "id_wallet_check_passphrase", toJsonFormat( "wallet_check_passphrase", QJsonArray() << ui->oldPwdLineEdit->text() ));
 
 }
 
@@ -387,7 +387,7 @@ void SetDialog::jsonDataUpdated(QString id)
 
         if( result == "\"result\":true")
         {
-            UBChain::getInstance()->postRPC( "id_wallet_change_passphrase", toJsonFormat( "wallet_change_passphrase", QStringList() << ui->oldPwdLineEdit->text() <<  ui->newPwdLineEdit->text() ));
+            UBChain::getInstance()->postRPC( "id_wallet_change_passphrase", toJsonFormat( "wallet_change_passphrase", QJsonArray() << ui->oldPwdLineEdit->text() <<  ui->newPwdLineEdit->text() ));
         }
         else
         {
@@ -424,7 +424,7 @@ void SetDialog::jsonDataUpdated(QString id)
 
         if( result.startsWith("\"result\":"))
         {
-            UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QStringList() << "" ));
+            UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QJsonArray()));
 
             close();
         }

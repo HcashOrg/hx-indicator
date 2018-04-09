@@ -194,7 +194,7 @@ void WithdrawMultiSigDialog::on_okBtn_clicked()
 
         UBChain::getInstance()->postRPC( "id_wallet_multisig_withdraw_start+" + filePath,
                                          toJsonFormat( "wallet_multisig_withdraw_start",
-                                                       QStringList() << ui->amountLineEdit->text() << ASSET_NAME << ui->multiSigAddressComboBox->currentText()
+                                                       QJsonArray() << ui->amountLineEdit->text() << ASSET_NAME << ui->multiSigAddressComboBox->currentText()
                                                        << ui->sendtoLineEdit->text() << remark << filePath));
     }
     else

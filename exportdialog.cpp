@@ -82,7 +82,7 @@ void ExportDialog::on_cancelBtn_clicked()
 
 void ExportDialog::getPrivateKey()
 {
-    UBChain::getInstance()->postRPC( "id-dump_private_key-" + accoutName, toJsonFormat( "dump_private_key", QStringList() << accoutName << "0" ));
+    UBChain::getInstance()->postRPC( "id-dump_private_key-" + accoutName, toJsonFormat( "dump_private_key", QJsonArray() << accoutName << "0" ));
 }
 
 void ExportDialog::jsonDataUpdated(QString id)

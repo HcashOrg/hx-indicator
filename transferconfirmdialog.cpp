@@ -105,7 +105,7 @@ void TransferConfirmDialog::on_okBtn_clicked()
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id-unlock-TransferConfirmDialog", toJsonFormat( "unlock", QStringList() << ui->pwdLineEdit->text()
+    UBChain::getInstance()->postRPC( "id-unlock-TransferConfirmDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 
 }

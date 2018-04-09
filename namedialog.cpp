@@ -132,10 +132,10 @@ void NameDialog::on_nameLineEdit_textChanged(const QString &arg1)
     //检查地址名是否已经在链上注册了 blockchain_get_account(accountName)
 //    RpcThread* rpcThread = new RpcThread;
 //    connect(rpcThread,SIGNAL(finished()),rpcThread,SLOT(deleteLater()));
-//    rpcThread->setWriteData( toJsonFormat( "id_blockchain_get_account_" + addrName, "blockchain_get_account", QStringList() << addrName ));
+//    rpcThread->setWriteData( toJsonFormat( "id_blockchain_get_account_" + addrName, "blockchain_get_account", QJsonArray() << addrName ));
 //    rpcThread->start();
 
-    UBChain::getInstance()->postRPC( "id-get_account-" + addrName, toJsonFormat( "get_account", QStringList() << addrName ));
+    UBChain::getInstance()->postRPC( "id-get_account-" + addrName, toJsonFormat( "get_account", QJsonArray() << addrName ));
     ui->gifLabel->show();
 }
 

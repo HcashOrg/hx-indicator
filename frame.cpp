@@ -375,9 +375,9 @@ QString toThousandFigure( int number)     // 转换为0001,0015  这种数字格
 
 void Frame::getAccountInfo()
 {
-    UBChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QStringList() << ""));
+    UBChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QJsonArray()));
 
-//    UBChain::getInstance()->postRPC( "id_balance", toJsonFormat( "balance", QStringList() << ""));
+//    UBChain::getInstance()->postRPC( "id_balance", toJsonFormat( "balance", QJsonArray()));
 }
 
 void Frame::showAccountPage()
@@ -435,7 +435,7 @@ void Frame::showLockPage()
     shadowWidgetShow();
 
 
-    UBChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QStringList() ));
+    UBChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray()));
 qDebug() << "lock ";
 
 }
@@ -445,7 +445,7 @@ void Frame::autoLock()
 
     timer->stop();
 
-    UBChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QStringList()  ));
+    UBChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray() ));
 qDebug() << "autolock ";
 
 }
@@ -587,7 +587,7 @@ void Frame::syncFinished()
 //    RpcThread* rpcThread = new RpcThread;
 //    connect(rpcThread,SIGNAL(finished()),rpcThread,SLOT(deleteLater()));
 //    rpcThread->setLogin("a","b");
-//    rpcThread->setWriteData( toJsonFormat( "id_open", "open", QStringList() << "wallet" ));
+//    rpcThread->setWriteData( toJsonFormat( "id_open", "open", QJsonArray() << "wallet" ));
 //    rpcThread->start();
 
 //    UBChain::getInstance()->initWorkerThreadManager();
@@ -597,7 +597,7 @@ void Frame::syncFinished()
         UBChain::getInstance()->getContactsFile();
     }
 
-    UBChain::getInstance()->postRPC("id-is_new", toJsonFormat( "is_new", QStringList() ));
+    UBChain::getInstance()->postRPC("id-is_new", toJsonFormat( "is_new", QJsonArray()));
 }
 
 void Frame::setCurrentAccount(QString accountName)
@@ -1049,7 +1049,7 @@ void Frame::jsonDataUpdated(QString id)
 //            // 其他情况视为钱包数据损坏
 //            QDir dir(UBChain::getInstance()->appDataPath + "/wallets/wallet");
 //            if(!dir.exists())   return;
-//            QFileInfoList fileInfos = dir.entryInfoList( QStringList() << "*.log");
+//            QFileInfoList fileInfos = dir.entryInfoList( QJsonArray() << "*.log");
 //            for(int i= 0; i < fileInfos.size(); i++)
 //            {
 //                QString path = fileInfos.at(i).absoluteFilePath();
@@ -1274,10 +1274,10 @@ void Frame::showNormalAndActive()
 // 提前载入，防止切换到别的界面显示不出来
 void Frame::init()
 {
-    UBChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QStringList() << "A" << "100"));
+    UBChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
 
-//    UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QStringList() << "" ));
+//    UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QJsonArray()));
 
 
     
@@ -1332,7 +1332,7 @@ void Frame::RestoreRightPart()
 
 void Frame::newAccount(QString name)
 {
-//    UBChain::getInstance()->postRPC( toJsonFormat( "id_wallet_get_account_public_address-" + name, "wallet_get_account_public_address", QStringList() << name));
+//    UBChain::getInstance()->postRPC( toJsonFormat( "id_wallet_get_account_public_address-" + name, "wallet_get_account_public_address", QJsonArray() << name));
 
     getAccountInfo();
 }
