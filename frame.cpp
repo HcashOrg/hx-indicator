@@ -26,6 +26,7 @@
 #include "functionBar/FunctionWidget.h"
 //#include "contactpage.h"
 #include "contact/ContactWidget.h"
+#include "poundage/PoundageWidget.h"
 #include "selectwalletpathwidget.h"
 #include "control/shadowwidget.h"
 #include "control/showbottombarwidget.h"
@@ -306,15 +307,17 @@ void Frame::alreadyLogin()
     functionBar->move(0,34);
     functionBar->show();
     connect(functionBar, SIGNAL(showMainPage()), this, SLOT( showMainPage()));
-    connect(functionBar, SIGNAL(showAccountPage()), this, SLOT( showAccountPage()));
+    //connect(functionBar, SIGNAL(showAccountPage()), this, SLOT( showAccountPage()));
     connect(functionBar, SIGNAL(showTransferPage()), this, SLOT( showTransferPage()));
-    connect(functionBar, SIGNAL(showContactPage()), this, SLOT( showContactPage()));
-    connect(functionBar, SIGNAL(showMultiSigPage()), this, SLOT(showMultiSigPage()));
+    //connect(functionBar, SIGNAL(showContactPage()), this, SLOT( showContactPage()));
+    //connect(functionBar, SIGNAL(showMultiSigPage()), this, SLOT(showMultiSigPage()));
     connect(functionBar,SIGNAL(lock()),this,SLOT(showLockPage()));
 
     connect(functionBar,&FunctionWidget::showAccountSignal,this,&Frame::showMainPage);
     connect(functionBar,&FunctionWidget::showContactSignal,this,&Frame::showContactPage);
     connect(functionBar,&FunctionWidget::showAdvanceSignal,this,&Frame::showMainPage);
+    connect(functionBar,&FunctionWidget::showMultiSigSignal,this,&Frame::showMultiSigPage);
+    connect(functionBar,&FunctionWidget::showPoundageSignal,this,&Frame::showPoundagePage);
     connect(functionBar,&FunctionWidget::ShrinkSignal,this,&Frame::EnlargeRightPart);
     connect(functionBar,&FunctionWidget::RestoreSignal,this,&Frame::RestoreRightPart);
     getAccountInfo();
@@ -976,7 +979,14 @@ void Frame::showMultiSigPage()
     multiSigPage->setAttribute(Qt::WA_DeleteOnClose);
     multiSigPage->show();
     currentPageNum = 9;
-   //朱正天 functionBar->choosePage(7);
+    //朱正天 functionBar->choosePage(7);
+}
+
+void Frame::showPoundagePage()
+{
+    PoundageWidget *poundage = new PoundageWidget(centralWidget);
+    poundage->resize(centralWidget->size());
+    poundage->show();
 }
 
 void Frame::showMultiSigTransactionPage(QString _multiSigAddress)

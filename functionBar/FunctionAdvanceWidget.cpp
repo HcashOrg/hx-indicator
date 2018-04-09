@@ -21,6 +21,6 @@ void FunctionAdvanceWidget::InitWidget()
     palette.setColor(QPalette::Background, QColor(24,28,45));
     setPalette(palette);
 
-    connect(ui->pushButton_feedPage,&QPushButton::clicked,this,&FunctionAdvanceWidget::showFeedPage);
-    connect(ui->pushButton_multiSig,&QPushButton::clicked,this,&FunctionAdvanceWidget::showMultiSigPage);
+    connect(ui->pushButton_poundage,&QPushButton::clicked,this,&FunctionAdvanceWidget::showPoundageSignal);
+    connect(ui->pushButton_multiSig,&QPushButton::clicked,this,&FunctionAdvanceWidget::showMultiSigSignal);
 }

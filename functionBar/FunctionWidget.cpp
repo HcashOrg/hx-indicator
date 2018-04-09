@@ -49,7 +49,7 @@ void FunctionWidget::ShowContactWidgetSlots()
     ui->stackedWidget->setVisible(false);
 
     emit showContactSignal();
-    emit showContactPage();
+    //emit showContactPage();
     emit ShrinkSignal();
 }
 
@@ -57,7 +57,7 @@ void FunctionWidget::ShowAccountWidgetSlots()
 {
     ui->stackedWidget->setCurrentWidget(_p->accountBar);
     emit showAccountSignal();
-    emit showAccountPage();
+    //emit showAccountPage();
 
     ui->stackedWidget->setVisible(true);
     emit RestoreSignal();
@@ -115,8 +115,8 @@ void FunctionWidget::InitWidget()
     connect(actionSet,&QAction::triggered,this,&FunctionWidget::ShowSettingWidgetSlots);
     connect(actionConsole,&QAction::triggered,this,&FunctionWidget::ShowConsoleWidgetSlots);
 
-    connect(_p->advanceBar,&FunctionAdvanceWidget::showFeedPage,this,&FunctionWidget::showFeedPage);
-    connect(_p->advanceBar,&FunctionAdvanceWidget::showMultiSigPage,this,&FunctionWidget::showMultiSigPage);
+    connect(_p->advanceBar,&FunctionAdvanceWidget::showPoundageSignal,this,&FunctionWidget::showPoundageSignal);
+    connect(_p->advanceBar,&FunctionAdvanceWidget::showMultiSigSignal,this,&FunctionWidget::showMultiSigSignal);
 
 
 }

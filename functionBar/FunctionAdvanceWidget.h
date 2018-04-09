@@ -15,8 +15,8 @@ public:
     explicit FunctionAdvanceWidget(QWidget *parent = 0);
     ~FunctionAdvanceWidget();
 signals:
-    void showFeedPage();
-    void showMultiSigPage();
+    void showPoundageSignal();
+    void showMultiSigSignal();
 private:
     void InitWidget();
 private:
