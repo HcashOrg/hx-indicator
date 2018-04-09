@@ -1186,26 +1186,26 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id_wallet_get_transaction_fee" )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+//    if( id == "id_wallet_get_transaction_fee" )
+//    {
+//        QString result = UBChain::getInstance()->jsonDataValue(id);
 
-        if( result.startsWith("\"result\":"))
-        {
-            int pos = result.indexOf("\"amount\":") + 9;
-            QString amount = result.mid(pos, result.indexOf(",", pos) - pos);
-            amount.remove("\"");
+//        if( result.startsWith("\"result\":"))
+//        {
+//            int pos = result.indexOf("\"amount\":") + 9;
+//            QString amount = result.mid(pos, result.indexOf(",", pos) - pos);
+//            amount.remove("\"");
 
-            UBChain::getInstance()->transactionFee = amount.toULongLong();
+//            UBChain::getInstance()->transactionFee = amount.toULongLong();
 
-            if( currentPageNum == 3 && transferPage != NULL)
-            {
-                transferPage->updateTransactionFee();
-            }
-        }
+//            if( currentPageNum == 3 && transferPage != NULL)
+//            {
+//                transferPage->updateTransactionFee();
+//            }
+//        }
 
-        return;
-    }
+//        return;
+//    }
 }
 
 void Frame::closeEvent(QCloseEvent *e)

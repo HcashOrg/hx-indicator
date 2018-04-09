@@ -87,10 +87,7 @@ void TransferConfirmDialog::jsonDataUpdated(QString id)
         }
         else if(result.startsWith("\"error\":"))
         {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + errorMessage + "</font></body>" );
+            ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
         }
 
         return;
