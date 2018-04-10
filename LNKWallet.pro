@@ -113,7 +113,10 @@ SOURCES += main.cpp\
     functionBar/FunctionWidget.cpp \
     poundage/PoundageWidget.cpp \
     poundage/PublishPoundageWidget.cpp \
-    poundage/PoundageDataUtil.cpp
+    poundage/PoundageDataUtil.cpp \
+    poundage/PoundageShowWidget.cpp \
+    poundage/PoundageShowTableModel.cpp \
+    poundage/GeneralComboBoxDelegate.cpp
 
 HEADERS  += firstlogin.h \
     normallogin.h \
@@ -196,7 +199,10 @@ HEADERS  += firstlogin.h \
     functionBar/FunctionWidget.h \
     poundage/PoundageWidget.h \
     poundage/PublishPoundageWidget.h \
-    poundage/PoundageDataUtil.h
+    poundage/PoundageDataUtil.h \
+    poundage/PoundageShowWidget.h \
+    poundage/PoundageShowTableModel.h \
+    poundage/GeneralComboBoxDelegate.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -266,7 +272,8 @@ FORMS    += firstlogin.ui \
     functionBar/FunctionWidget.ui \
     contact/ContactTreeWidget.ui \
     poundage/PoundageWidget.ui \
-    poundage/PublishPoundageWidget.ui
+    poundage/PublishPoundageWidget.ui \
+    poundage/PoundageShowWidget.ui
     
 win32{
     DISTFILES += logo.rc

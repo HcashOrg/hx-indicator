@@ -16,6 +16,11 @@ public:
     ~PublishPoundageWidget();
 private slots:
     void ConfirmPublishSlots();
+    void ChangeAccountSlots();//修改账户项
+private:
+    void InitAccount();
+    void InitTargetCoin();
+    void RefreshAllData();//初始化comboBox等必须项
 private:
     void InitWidget();
     void InitStyle();

@@ -18,11 +18,26 @@ class PoundageWidget : public QWidget
 public:
     explicit PoundageWidget(QWidget *parent = 0);
     ~PoundageWidget();
+public slots:
+    void autoRefreshSlots();
 private slots:
     void PublishPoundageSlots();
+    void ShowAllPoundageSlots();
+    void ShowMyPoundageSlots();
+
+    void SortByStuffSlots();
+    //void
+    void jsonDataUpdated(QString id);
+
+    //删除自己的承税单
+    void DeletePoundageSlots(const QString &orderID);
+private:
+    void RefreshAllPoundageWidget(const QString &jsonIncome);
+    void RefreshMyPoundageWidget(const QString &jsonIncome);
 private:
     void InitWidget();
     void InitStyle();
+    void InitCoinType();
 private:
     Ui::PoundageWidget *ui;
 private:
