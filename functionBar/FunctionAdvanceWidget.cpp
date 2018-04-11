@@ -14,13 +14,47 @@ FunctionAdvanceWidget::~FunctionAdvanceWidget()
     delete ui;
 }
 
+void FunctionAdvanceWidget::PoundageShowSlots()
+{
+    ui->toolButton_poundage->setChecked(true);
+    ui->toolButton_multiSig->setChecked(false);
+    emit showPoundageSignal();
+}
+
+void FunctionAdvanceWidget::MultiSigShowSlots()
+{
+    ui->toolButton_poundage->setChecked(false);
+    ui->toolButton_multiSig->setChecked(true);
+    emit showMultiSigSignal();
+}
+
 void FunctionAdvanceWidget::InitWidget()
+{
+    InitStyle();
+    ui->toolButton_poundage->setCheckable(true);
+    ui->toolButton_multiSig->setCheckable(true);
+    connect(ui->toolButton_poundage,&QToolButton::clicked,this,&FunctionAdvanceWidget::PoundageShowSlots);
+    connect(ui->toolButton_multiSig,&QToolButton::clicked,this,&FunctionAdvanceWidget::MultiSigShowSlots);
+}
+
+void FunctionAdvanceWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(24,28,45));
+    palette.setColor(QPalette::Background, QColor(94,116,235));
     setPalette(palette);
 
-    connect(ui->pushButton_poundage,&QPushButton::clicked,this,&FunctionAdvanceWidget::showPoundageSignal);
-    connect(ui->pushButton_multiSig,&QPushButton::clicked,this,&FunctionAdvanceWidget::showMultiSigSignal);
+    QFont font("MicrosoftYaHeiLight",14,63);
+    ui->label->setFont(font);
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,QColor(248,249,254));
+    ui->label->setPalette(pa);
+
+    //ui->pushButton_multiSig->setFlat(true);
+    //ui->pushButton_poundage->setFlat(true);
+
+    setStyleSheet("QToolButton{background: rgb(94,116,235);border:none;color:white;font:MicrosoftYaHeiLight;}\
+                   QToolButton:hover{background-color: rgb(0,210, 255);}\
+                   QToolButton:pressed{background-color: rgb(130,157, 255);}\
+                   QToolButton:checked{background-color: rgb(130,157, 255);}");
 }

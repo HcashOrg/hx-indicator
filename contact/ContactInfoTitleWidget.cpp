@@ -60,7 +60,7 @@ void ContactInfoTitleWidget::refreshName()
 
 void ContactInfoTitleWidget::InitWidget()
 {
-    //setStyleSheet("background-color:rgba(10, 10, 10,100);");
+    //setStyleSheet("background-color:#FFFFFF;");
 
     ui->pushButton_copy->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");

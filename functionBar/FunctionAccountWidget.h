@@ -14,8 +14,12 @@ class FunctionAccountWidget : public QWidget
 public:
     explicit FunctionAccountWidget(QWidget *parent = 0);
     ~FunctionAccountWidget();
+private slots:
+    void AssetShowSlots();
+    void MinerShowSlots();
 private:
     void InitWidget();
+    void InitStyle();
 private:
     Ui::FunctionAccountWidget *ui;
 };

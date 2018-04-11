@@ -51,6 +51,8 @@ void FunctionWidget::ShowContactWidgetSlots()
     emit showContactSignal();
     //emit showContactPage();
     emit ShrinkSignal();
+
+    updateCheckState(1);
 }
 
 void FunctionWidget::ShowAccountWidgetSlots()
@@ -61,6 +63,8 @@ void FunctionWidget::ShowAccountWidgetSlots()
 
     ui->stackedWidget->setVisible(true);
     emit RestoreSignal();
+
+    updateCheckState(0);
 }
 
 void FunctionWidget::ShowAdvanceWidgetSlots()
@@ -72,6 +76,12 @@ void FunctionWidget::ShowAdvanceWidgetSlots()
     ui->stackedWidget->setVisible(true);
     emit RestoreSignal();
 
+    updateCheckState(2);
+}
+
+void FunctionWidget::ShowMoreWidgetSlots()
+{
+    updateCheckState(3);
 }
 
 void FunctionWidget::ShowSettingWidgetSlots()
@@ -87,9 +97,22 @@ void FunctionWidget::ShowConsoleWidgetSlots()
     consoleDialog.pop();
 }
 
+void FunctionWidget::updateCheckState(int buttonNumber)
+{
+    ui->toolButton_account->setChecked(0 == buttonNumber);
+    ui->toolButton_contact->setChecked(1 == buttonNumber);
+    ui->toolButton_advanced->setChecked(2 == buttonNumber);
+    ui->toolButton_more->setChecked(3 == buttonNumber);
+}
+
 void FunctionWidget::InitWidget()
 {
     InitStyle();
+
+    ui->toolButton_contact->setCheckable(true);
+    ui->toolButton_account->setCheckable(true);
+    ui->toolButton_advanced->setCheckable(true);
+    ui->toolButton_more->setCheckable(true);
 
     ui->stackedWidget->addWidget(_p->accountBar);
     ui->stackedWidget->addWidget(_p->advanceBar);
@@ -104,12 +127,14 @@ void FunctionWidget::InitWidget()
     QAction* actionAbout = helpMenu->addAction("About Us");
     QAction* actionUpdate = helpMenu->addAction("Update");
     ui->toolButton_more->setMenu(menu);
+    //ui->toolButton_more->setArrowType(Qt::RightArrow);
     ui->toolButton_more->setPopupMode(QToolButton::InstantPopup );
 
     //链接信号槽
     connect(ui->toolButton_contact,&QToolButton::clicked,this,&FunctionWidget::ShowContactWidgetSlots);
     connect(ui->toolButton_account,&QToolButton::clicked,this,&FunctionWidget::ShowAccountWidgetSlots);
     connect(ui->toolButton_advanced,&QToolButton::clicked,this,&FunctionWidget::ShowAdvanceWidgetSlots);
+    connect(ui->toolButton_more,&QToolButton::clicked,this,&FunctionWidget::ShowMoreWidgetSlots);
 
     connect(actionLock,&QAction::triggered,this,&FunctionWidget::lock);
     connect(actionSet,&QAction::triggered,this,&FunctionWidget::ShowSettingWidgetSlots);
@@ -117,47 +142,39 @@ void FunctionWidget::InitWidget()
 
     connect(_p->advanceBar,&FunctionAdvanceWidget::showPoundageSignal,this,&FunctionWidget::showPoundageSignal);
     connect(_p->advanceBar,&FunctionAdvanceWidget::showMultiSigSignal,this,&FunctionWidget::showMultiSigSignal);
-
-
 }
 
 void FunctionWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(16,17,24));
+    palette.setColor(QPalette::Background, QColor(72,97,220));
     setPalette(palette);
 
-    ui->toolButton_contact->setIconSize(QSize(94,94));
-    ui->toolButton_account->setIconSize(QSize(94,94));
-    ui->toolButton_advanced->setIconSize(QSize(94,94));
-    ui->toolButton_more->setIconSize(QSize(94,94));
+    setStyleSheet("\
+    QToolButton{min-height:24px;min-width:24pt;background: rgb(72,97,220);border:none;color:white;font:MicrosoftYaHeiLight;}\
+    QToolButton:hover{background-color: rgb(0,210, 255);}\
+    QToolButton:pressed{background-color: rgb(84,116, 235);}\
+    QToolButton:checked{background-color: rgb(84,116, 235);}\
+                  ");
+                  /*
+                      QToolButton#toolButton_account{border-image:url(:/ui/wallet_ui/accountBtn_unselected.png);}\
+                      QToolButton#toolButton_account:checked{border-image:url(:/ui/wallet_ui/accountBtn.png);}\*/
 
-    ui->toolButton_contact->setStyleSheet("background:transparent;border:none;");
-    ui->toolButton_account->setStyleSheet("background:transparent;border:none;");
-    ui->toolButton_advanced->setStyleSheet("background:transparent;border:none;");
-    ui->toolButton_more->setStyleSheet("background:transparent;border:none;");
+
+
+    //ui->toolButton_contact->setStyleSheet("background:transparent;border:none;");
+    //ui->toolButton_account->setStyleSheet("background:transparent;border:none;");
+    //ui->toolButton_advanced->setStyleSheet("background:transparent;border:none;");
+    //ui->toolButton_more->setStyleSheet("background:transparent;border:none;");
 
     //ui->toolButton_contact->setStyleSheet("QToolButton:hover{background:transparent;border:none;border-image:url(:/ui/wallet_ui/contactBtn.png);}");
-    ui->toolButton_account->setIcon(QIcon(":/ui/wallet_ui/accountBtn.png"));
+    //ui->toolButton_account->setIcon(QIcon(":/ui/wallet_ui/accountBtn.png"));
 
-    ui->toolButton_advanced->setIcon(QIcon(":/ui/wallet_ui/transferBtn_unselected.png"));
-
-    ui->toolButton_contact->setIcon(QIcon(":/ui/wallet_ui/contactBtn_unselected.png"));
-
-    ui->toolButton_more->setIcon(QIcon(":/ui/wallet_ui/advanceBtn.png"));
-
-}
-
-void FunctionWidget::paintEvent(QPaintEvent *)
-{
-    //QPainter painter(this);
-    //painter.setPen(QPen(QColor(16,17,24),Qt::SolidLine));
-    //painter.setBrush(QBrush(QColor(16,17,24),Qt::SolidPattern));
+    //ui->toolButton_advanced->setIcon(QIcon(":/ui/wallet_ui/transferBtn_unselected.png"));
     //
-    //painter.drawRect(0,0,94,556);
+    //ui->toolButton_contact->setIcon(QIcon(":/ui/wallet_ui/contactBtn_unselected.png"));
     //
-    //painter.setPen(QPen(QColor(24,28,45),Qt::SolidLine));
-    //painter.setBrush(QBrush(QColor(24,28,45),Qt::SolidPattern));
-    //painter.drawRect(95,0,125,556);
+    //ui->toolButton_more->setIcon(QIcon(":/ui/wallet_ui/advanceBtn.png"));
+
 }

@@ -133,10 +133,10 @@ void PoundageShowWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(40,46,66));
+    palette.setColor(QPalette::Background, QColor(248,249,253));
     setPalette(palette);
 
-
+    ui->tableView->setPalette(palette);
 //    QHeaderView *header = new QHeaderView(Qt::Horizontal,ui->tableView);
 //    header->setModel(_p->tableModel);
 
@@ -166,6 +166,11 @@ void PoundageShowWidget::InitStyle()
     ui->lastPageBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/lastPage.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
                                    "QToolButton:hover{background-image:url(:/ui/wallet_ui/lastPage_hover.png);}");
 
+    ui->tableView->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border_radius:20px;\
+                                    }\
+                                  QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}\
+                                  QHeaderView:section{border:none;background-color:#FFFFFF;}\
+    ");
 }
 
 void PoundageShowWidget::InitContextMenu()

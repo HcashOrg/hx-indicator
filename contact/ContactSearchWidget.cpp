@@ -42,7 +42,7 @@ void ContactSearchWidget::InitWidget()
 
 //    setAutoFillBackground(true);
 //    QPalette palette;
-//    palette.setColor(QPalette::Background, QColor(40,46,66));
+//    palette.setColor(QPalette::Background, QColor(130,157,255));
 //    setPalette(palette);
 
     //setStyleSheet("QWidget{background-color:rgb(24,28,45);border:none;}");
@@ -50,7 +50,7 @@ void ContactSearchWidget::InitWidget()
     QPushButton *pSearchButton = new QPushButton(this);
 
     pSearchButton->setCursor(Qt::PointingHandCursor);
-    pSearchButton->setFixedSize(23, 23);
+    pSearchButton->setFixedSize(12, 12);
     pSearchButton->setToolTip(tr("Search"));
 
     pSearchButton->setStyleSheet("QPushButton{border-image:url(:/search.png); background:transparent;}");
@@ -77,7 +77,7 @@ void ContactSearchWidget::InitWidget()
 void ContactSearchWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(24,28,45),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(24,28,45),Qt::SolidPattern));
+    painter.setPen(QPen(QColor(130,157,255),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(130,157,255),Qt::SolidPattern));
     painter.drawRect(rect());
 }

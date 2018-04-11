@@ -102,7 +102,7 @@ Frame::Frame(): timer(NULL),
         setLanguage(language);
     }
 
-    setGeometry(0,0, 900, 556);
+    setGeometry(0,0, 960, 580);
     moveWidgetToScreenCenter(this);
 
     shadowWidget = new ShadowWidget(this);
@@ -275,11 +275,11 @@ qDebug() << "~Frame end;";
 
 void Frame::alreadyLogin()
 {
-    setGeometry(0,0, 900, 556);
+    setGeometry(0,0, 960, 580);
     moveWidgetToScreenCenter(this);
 
     titleBar = new TitleBar(this);
-    titleBar->resize(900,34);
+    titleBar->resize(960,50);
     titleBar->move(0,0);
     titleBar->show();
 
@@ -288,13 +288,14 @@ void Frame::alreadyLogin()
     connect(titleBar,SIGNAL(tray()),this,SLOT(hide()));
 
     centralWidget = new QWidget(this);
-    centralWidget->resize(680,482);
-    centralWidget->move(220,34);
+    centralWidget->resize(770,530);
+    centralWidget->move(190,50);
     centralWidget->show();
 
     bottomBar = new BottomBar(this);
-    bottomBar->resize(680,40);
-    bottomBar->move(220,516);
+    bottomBar->resize(160,40);
+    bottomBar->move(800,540);
+    bottomBar->raise();
     bottomBar->show();
 
 //    showBottomBarWidget = new ShowBottomBarWidget(centralWidget);
@@ -303,8 +304,8 @@ void Frame::alreadyLogin()
 //    showBottomBarWidget->show();
 
     functionBar = new FunctionWidget(this);
-    functionBar->resize(220,522);
-    functionBar->move(0,34);
+    functionBar->resize(190,530);
+    functionBar->move(0,50);
     functionBar->show();
     connect(functionBar, SIGNAL(showMainPage()), this, SLOT( showMainPage()));
     //connect(functionBar, SIGNAL(showAccountPage()), this, SLOT( showAccountPage()));
@@ -323,7 +324,7 @@ void Frame::alreadyLogin()
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
-    mainPage->resize(680,482);
+    mainPage->resize(770,530);
     mainPage->setAttribute(Qt::WA_DeleteOnClose);
 //    QTimer::singleShot(1000,mainPage,SLOT(show()));
     mainPage->show();
@@ -452,7 +453,7 @@ qDebug() << "autolock ";
 
 void Frame::unlock()
 {
-    setGeometry(0,0, 900, 556);
+    setGeometry(0,0, 960, 580);
     moveWidgetToScreenCenter(this);
 
     if( UBChain::getInstance()->notProduce)
@@ -1298,36 +1299,36 @@ void Frame::paintEvent(QPaintEvent *e)
 
 void Frame::EnlargeRightPart()
 {
-    functionBar->resize(95,functionBar->height());
+    functionBar->resize(70,functionBar->height());
 
-    centralWidget->resize(805,centralWidget->height());
+    centralWidget->resize(890,centralWidget->height());
 
-    centralWidget->move(95,34);
+    centralWidget->move(70,50);
 //    if(QWidget *widget = centralWidget->childAt(10,10))
 //    {
 //        widget->resize(805,centralWidget->height());
 //    }
 
-    contactPage->resize(805,centralWidget->height());
+    contactPage->resize(890,centralWidget->height());
 
 
-    bottomBar->resize(805,40);
-    bottomBar->move(95,516);
+    //bottomBar->resize(805,40);
+    //bottomBar->move(95,516);
 }
 
 void Frame::RestoreRightPart()
 {
-    functionBar->resize(220,functionBar->height());
+    functionBar->resize(190,functionBar->height());
 
-    centralWidget->move(220,34);
+    centralWidget->move(190,50);
     if(QWidget *widget = centralWidget->childAt(10,10))
     {
-        widget->resize(680,centralWidget->height());
+        widget->resize(770,centralWidget->height());
     }
-    centralWidget->resize(680,centralWidget->height());
+    centralWidget->resize(770,centralWidget->height());
 
-    bottomBar->resize(680,40);
-    bottomBar->move(220,516);
+    //bottomBar->resize(680,40);
+    //bottomBar->move(220,516);
 }
 
 void Frame::newAccount(QString name)

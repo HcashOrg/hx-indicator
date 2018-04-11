@@ -75,12 +75,17 @@ void PoundageWidget::PublishPoundageSlots()
 
 void PoundageWidget::ShowAllPoundageSlots()
 {
+    ui->toolButton_allPoundage->setChecked(true);
+    ui->toolButton_myPoundage->setChecked(false);
     autoRefreshSlots();
     ui->stackedWidget->setCurrentWidget(_p->allPoundageWidget);
 }
 
 void PoundageWidget::ShowMyPoundageSlots()
 {
+    ui->toolButton_allPoundage->setChecked(false);
+    ui->toolButton_myPoundage->setChecked(true);
+
     autoRefreshSlots();
     ui->stackedWidget->setCurrentWidget(_p->myPoundageWidget);
 }
@@ -123,7 +128,6 @@ void PoundageWidget::jsonDataUpdated(QString id)
 
         //刷新承税单
         autoRefreshSlots();
-        return;
     }
     else if("id_list_guarantee_order" == id)
     {
@@ -153,6 +157,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
         result.prepend("{");
         result.append("}");
         qDebug()<<result;
+        autoRefreshSlots();
     }
 }
 
@@ -166,6 +171,7 @@ void PoundageWidget::DeletePoundageSlots(const QString &orderID)
 
 void PoundageWidget::RefreshAllPoundageWidget(const QString &jsonIncome)
 {
+    _p->allPoundageSheet->clear();
     PoundageDataUtil::convertJsonToPoundage(jsonIncome,_p->allPoundageSheet);
     SortByStuffSlots();
     _p->allPoundageWidget->InitData(_p->allPoundageSheet);
@@ -182,6 +188,11 @@ void PoundageWidget::RefreshMyPoundageWidget(const QString &jsonIncome)
 void PoundageWidget::InitWidget()
 {
     InitStyle();
+
+    //
+    ui->toolButton_allPoundage->setCheckable(true);
+    ui->toolButton_allPoundage->setChecked(true);
+    ui->toolButton_myPoundage->setCheckable(true);
 
     //初始化排序comboBox
     ui->comboBox_sortType->clear();
@@ -202,8 +213,8 @@ void PoundageWidget::InitWidget()
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &PoundageWidget::jsonDataUpdated);
 
     connect(ui->pushButton_publishPoundage,&QPushButton::clicked,this,&PoundageWidget::PublishPoundageSlots); 
-    connect(ui->pushButton_all,&QPushButton::clicked,this,&PoundageWidget::ShowAllPoundageSlots);
-    connect(ui->pushButton_mine,&QPushButton::clicked,this,&PoundageWidget::ShowMyPoundageSlots);
+    connect(ui->toolButton_allPoundage,&QPushButton::clicked,this,&PoundageWidget::ShowAllPoundageSlots);
+    connect(ui->toolButton_myPoundage,&QPushButton::clicked,this,&PoundageWidget::ShowMyPoundageSlots);
 
     connect(ui->comboBox_sortType,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&PoundageWidget::SortByStuffSlots);
 
@@ -215,8 +226,43 @@ void PoundageWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(40,46,66));
+    palette.setColor(QPalette::Background, QColor(248,249,253));
     setPalette(palette);
+
+    QFont font("MicrosoftYaHeiLight",20,63);
+    ui->label->setFont(font);
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,QColor(0,0,0));
+    ui->label->setPalette(pa);
+
+    setStyleSheet("QToolButton#toolButton_allPoundage{background:transparent;color:rgb(144,144,144);\
+                                                      font-family: MicrosoftYaHei;font:14px;font-weight:600;}\
+                   QToolButton#toolButton_allPoundage:checked{color:rgb(0,0,0);}\
+                   QToolButton#toolButton_myPoundage{background:transparent;color:rgb(144,144,144);\
+                                                     font-family: MicrosoftYaHei;font:14px;font-weight:600;}\
+                   QToolButton#toolButton_myPoundage:checked{color:rgb(0,0,0);}\
+                   \
+                   QComboBox{    \
+                   border: none;\
+                   background:transparent;\
+                   font-size: 10pt;\
+                   font-family: MicrosoftYaHei;\
+                   background-position: center left;\
+                   color: black;\
+                   selection-background-color: darkgray;}\
+                   \
+                   QPushButton#pushButton_publishPoundage{\
+                   color:white;\
+                   border: none;\
+                   border-radius: 10px;\
+                   background-color:rgb(0,210,255);} \
+                   QPushButton#pushButton_publishPoundage:hover{\
+                   background-color:#5474EB;}\
+    ");
+//                  QComboBox::down-arrow {\
+//                   image: url(:/misc/down_arrow_2);\
+//                 }\
+
 }
 
 void PoundageWidget::InitCoinType()
