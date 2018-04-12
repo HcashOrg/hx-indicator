@@ -16,12 +16,21 @@ class PageScrollWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit PageScrollWidget(QWidget *parent = 0);
+    explicit PageScrollWidget(unsigned int buttonNumber = 5,QWidget *parent = 0);
     ~PageScrollWidget();
 public:
     void SetTotalPage(unsigned int number);
+signals:
+    void currentPageChangeSignal(unsigned int);
+private slots:
+    void buttonClickSlots();
+    void LineEditFinishSlots();
 private:
+    void RefreshData();
     void RefreshButton();
+private:
+    void SwitchMoreButton();
+    void RearrangePage();
 private:
     void InitWidget();
     void InitStyle();

@@ -34,16 +34,7 @@ private slots:
 private:
     void RefreshNumber();
 private slots:
-    //跳转页面
-    void GotoFirstPageSlots();
-    void GotoLastPageSlots();
-
-    void GotoNextPageSlots();
-    void GotoPrePageSlots();
-
-    void GotoLineEditSlots();
-private:
-    void RefreshLineEdit();
+    void changeCurrentPageSlots(unsigned int currentPage);
 private:
     void InitWidget();
     void InitStyle();

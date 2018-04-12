@@ -11,7 +11,7 @@ public:
     PoundageShowTableModelPrivate()
         :data(std::make_shared<PoundageSheet>())
         ,currentPage(0)
-        ,pageMaxRow(10)
+        ,pageMaxRow(1)
         ,maxPage(0)
     {
 

@@ -8,6 +8,7 @@
 
 #include "PoundageShowTableModel.h"
 #include "GeneralComboBoxDelegate.h"
+#include "PageScrollWidget.h"
 
 Q_DECLARE_METATYPE(std::shared_ptr<PoundageUnit>)
 
@@ -18,11 +19,13 @@ public:
         :tableModel(new PoundageShowTableModel())
         ,isContextMenuEnabled(false)
         ,contextMenu(nullptr)
+        ,pageWidget(new PageScrollWidget(5))
     {
 
     }
 public:
     PoundageShowTableModel *tableModel;
+    PageScrollWidget *pageWidget;
     bool isContextMenuEnabled;
     QMenu *contextMenu;
 };
@@ -44,7 +47,7 @@ PoundageShowWidget::~PoundageShowWidget()
 void PoundageShowWidget::InitData(const std::shared_ptr<PoundageSheet> &data)
 {
     _p->tableModel->InitData(data);
-    RefreshNumber();
+    _p->pageWidget->SetTotalPage(_p->tableModel->GetMaxPage()+1);
 }
 
 void PoundageShowWidget::DeletePoundageSlots()
@@ -62,48 +65,9 @@ void PoundageShowWidget::EnableContextMenu(bool enable)
      _p->isContextMenuEnabled = enable;
 }
 
-void PoundageShowWidget::RefreshNumber()
+void PoundageShowWidget::changeCurrentPageSlots(unsigned int currentPage)
 {
-    QIntValidator *validator = new QIntValidator(1,_p->tableModel->GetMaxPage()+1,this);
-    ui->pageLineEdit->setValidator( validator );
-    ui->pageLabel->setText("/ "+QString::number(_p->tableModel->GetMaxPage()+1));
-    ui->numberLabel->setText(QString::number(_p->tableModel->GetTotalNumber()));
-    ui->pageLineEdit->setText(QString::number(_p->tableModel->GetCurrentPage()+1));
-}
-
-void PoundageShowWidget::GotoFirstPageSlots()
-{
-    _p->tableModel->SetCurrentPage(0);
-    RefreshLineEdit();
-}
-
-void PoundageShowWidget::GotoLastPageSlots()
-{
-    _p->tableModel->SetCurrentPage(_p->tableModel->GetMaxPage());
-    RefreshLineEdit();
-}
-
-void PoundageShowWidget::GotoNextPageSlots()
-{
-    _p->tableModel->SetCurrentPage(_p->tableModel->GetCurrentPage()==_p->tableModel->GetMaxPage()?0:_p->tableModel->GetCurrentPage()+1);
-    RefreshLineEdit();
-}
-
-void PoundageShowWidget::GotoPrePageSlots()
-{
-    _p->tableModel->SetCurrentPage(_p->tableModel->GetCurrentPage()==0?_p->tableModel->GetMaxPage():_p->tableModel->GetCurrentPage()-1);
-    RefreshLineEdit();
-}
-
-void PoundageShowWidget::GotoLineEditSlots()
-{
-    _p->tableModel->SetCurrentPage(ui->pageLineEdit->text().toInt()-1);
-    RefreshLineEdit();
-}
-
-void PoundageShowWidget::RefreshLineEdit()
-{
-    ui->pageLineEdit->setText(QString::number(_p->tableModel->GetCurrentPage()+1));
+    _p->tableModel->SetCurrentPage(static_cast<unsigned int>(currentPage));
 }
 
 void PoundageShowWidget::InitWidget()
@@ -115,18 +79,9 @@ void PoundageShowWidget::InitWidget()
     ui->tableView->hideColumn(3);
     ui->tableView->hideColumn(2);
 
-    ui->numberLabel->hide();
-
-    ui->pageLineEdit->setText("1");
-    QIntValidator *validator = new QIntValidator(1,1,this);
-    ui->pageLineEdit->setValidator( validator );
-    ui->pageLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
-
-    connect(ui->firstPageBtn,&QToolButton::clicked,this,&PoundageShowWidget::GotoFirstPageSlots);
-    connect(ui->lastPageBtn,&QToolButton::clicked,this,&PoundageShowWidget::GotoLastPageSlots);
-    connect(ui->nextPageBtn,&QToolButton::clicked,this,&PoundageShowWidget::GotoNextPageSlots);
-    connect(ui->prePageBtn,&QToolButton::clicked,this,&PoundageShowWidget::GotoPrePageSlots);
-    connect(ui->pageLineEdit,&QLineEdit::editingFinished,this,&PoundageShowWidget::GotoLineEditSlots);
+    ui->stackedWidget_pageBar->addWidget(_p->pageWidget);
+    ui->stackedWidget_pageBar->setCurrentWidget(_p->pageWidget);
+    connect(_p->pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&PoundageShowWidget::changeCurrentPageSlots);
 }
 
 void PoundageShowWidget::InitStyle()
@@ -155,16 +110,6 @@ void PoundageShowWidget::InitStyle()
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->verticalHeader()->setVisible(false);
     ui->tableView->setShowGrid(false);
-
-
-    ui->firstPageBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/firstPage.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
-                                    "QToolButton:hover{background-image:url(:/ui/wallet_ui/firstPage_hover.png);}");
-    ui->prePageBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/prePage.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
-                                  "QToolButton:hover{background-image:url(:/ui/wallet_ui/prePage_hover.png);}");
-    ui->nextPageBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/nextPage.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
-                                   "QToolButton:hover{background-image:url(:/ui/wallet_ui/nextPage_hover.png);}");
-    ui->lastPageBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/lastPage.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
-                                   "QToolButton:hover{background-image:url(:/ui/wallet_ui/lastPage_hover.png);}");
 
     ui->tableView->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border_radius:20px;\
                                     }\

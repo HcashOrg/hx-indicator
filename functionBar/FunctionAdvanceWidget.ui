@@ -45,8 +45,20 @@
      <x>0</x>
      <y>60</y>
      <width>120</width>
-     <height>32</height>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>120</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>120</width>
+     <height>30</height>
+    </size>
    </property>
    <property name="text">
     <string>多重签名    </string>
@@ -56,10 +68,22 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>91</y>
+     <y>90</y>
      <width>120</width>
-     <height>32</height>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>120</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>120</width>
+     <height>30</height>
+    </size>
    </property>
    <property name="text">
     <string>手续费承兑单</string>
