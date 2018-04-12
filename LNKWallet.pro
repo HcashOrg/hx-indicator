@@ -117,7 +117,12 @@ SOURCES += main.cpp\
     miner/minerpage.cpp \
     miner/registerdialog.cpp \
     miner/locktominerdialog.cpp \
-    miner/foreclosedialog.cpp
+    miner/foreclosedialog.cpp   \
+    poundage/PoundageShowWidget.cpp \
+    poundage/PoundageShowTableModel.cpp \
+    poundage/GeneralComboBoxDelegate.cpp \
+    poundage/PageScrollWidget.cpp
+
 
 HEADERS  += firstlogin.h \
     normallogin.h \
@@ -204,7 +209,11 @@ HEADERS  += firstlogin.h \
     miner/minerpage.h \
     miner/registerdialog.h \
     miner/locktominerdialog.h \
-    miner/foreclosedialog.h
+    miner/foreclosedialog.h \
+    poundage/PoundageShowWidget.h \
+    poundage/PoundageShowTableModel.h \
+    poundage/GeneralComboBoxDelegate.h \
+    poundage/PageScrollWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -277,7 +286,9 @@ FORMS    += firstlogin.ui \
     miner/minerpage.ui \
     miner/registerdialog.ui \
     miner/locktominerdialog.ui \
-    miner/foreclosedialog.ui
+    miner/foreclosedialog.ui    \
+    poundage/PoundageShowWidget.ui \
+    poundage/PageScrollWidget.ui
     
 win32{
     DISTFILES += logo.rc

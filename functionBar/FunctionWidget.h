@@ -50,14 +50,15 @@ private slots:
     void ShowContactWidgetSlots();
     void ShowAccountWidgetSlots();
     void ShowAdvanceWidgetSlots();
+    void ShowMoreWidgetSlots();
 
     void ShowSettingWidgetSlots();
     void ShowConsoleWidgetSlots();
 private:
+    void updateCheckState(int buttonNumber);
+private:
     void InitWidget();
     void InitStyle();
-protected:
-    void paintEvent(QPaintEvent *);
 private:
     Ui::FunctionWidget *ui;
 private:

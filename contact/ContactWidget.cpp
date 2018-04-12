@@ -93,10 +93,10 @@ void ContactWidget::InitStyle()
     //
     //setAutoFillBackground(true);
     //QPalette palette;
-    //palette.setColor(QPalette::Background, QColor(40,46,66));
+    //palette.setColor(QPalette::Background, QColor(255,255,255));
     //setPalette(palette);
 
-    setStyleSheet("QWidget{background-color:rgb(40,46,66);border:none;color:white;}");
+    setStyleSheet("QWidget{border:none;}");
     //setStyleSheet("QWidget{background-color:rgb(40,46,66);color:white;}");
     //setStyleSheet("QWidget{background-color:rgb(24,28,45);border:none;}");
 }

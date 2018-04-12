@@ -112,8 +112,11 @@ void TitleBar::jsonDataUpdated(QString id)
 void TitleBar::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setBrush(QColor(40,46,66));
-    painter.setPen(QColor(40,46,66));
+    painter.setBrush(QColor(255,255,255));
+    painter.setPen(QColor(255,255,255));
     painter.drawRect(rect());
-    //painter.drawRect(QRect(0,0,900,35));
+
+    painter.setBrush(QColor(0,210,255));
+    painter.setPen(QColor(0,210,255));
+    painter.drawRect(QRect(0,0,190,50));
 }

@@ -17,8 +17,12 @@ public:
 signals:
     void showPoundageSignal();
     void showMultiSigSignal();
+private slots:
+    void PoundageShowSlots();
+    void MultiSigShowSlots();
 private:
     void InitWidget();
+    void InitStyle();
 private:
     Ui::FunctionAdvanceWidget *ui;
 };

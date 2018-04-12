@@ -6,13 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>140</width>
-    <height>356</height>
+    <width>120</width>
+    <height>530</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>120</width>
+    <height>530</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>120</width>
+    <height>530</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+<<<<<<< HEAD
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
@@ -83,6 +96,86 @@
     </spacer>
    </item>
   </layout>
+=======
+  <widget class="QLabel" name="label_normal">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>120</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>普通账户</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_advance">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>92</y>
+     <width>120</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>高级用户</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="toolButton_asset">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>60</y>
+     <width>120</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>  资产管理</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="toolButton_miner">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>153</y>
+     <width>120</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>  挖矿管理</string>
+   </property>
+  </widget>
+>>>>>>> bb3273ae82a92d28cc7d77c7cfdcc1f04d525643
  </widget>
  <resources/>
  <connections/>
