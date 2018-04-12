@@ -40,17 +40,17 @@ void ContactSearchWidget::InitWidget()
 
 //    setWindowFlags(Qt::FramelessWindowHint);//无边框
 
-//    setAutoFillBackground(true);
-//    QPalette palette;
-//    palette.setColor(QPalette::Background, QColor(130,157,255));
-//    setPalette(palette);
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setColor(QPalette::Background, QColor(130,157,255));
+    setPalette(palette);
 
     //setStyleSheet("QWidget{background-color:rgb(24,28,45);border:none;}");
 
     QPushButton *pSearchButton = new QPushButton(this);
 
     pSearchButton->setCursor(Qt::PointingHandCursor);
-    pSearchButton->setFixedSize(12, 12);
+    pSearchButton->setFixedSize(32, 32);
     pSearchButton->setToolTip(tr("Search"));
 
     pSearchButton->setStyleSheet("QPushButton{border-image:url(:/search.png); background:transparent;}");
@@ -64,14 +64,16 @@ void ContactSearchWidget::InitWidget()
     pSearchLayout->addStretch();
     pSearchLayout->addWidget(pSearchButton);
     pSearchLayout->setSpacing(0);
+    pSearchLayout->setDirection(QBoxLayout::RightToLeft);
     pSearchLayout->setContentsMargins(0, 0, 0, 0);
     ui->lineEdit->setLayout(pSearchLayout);
+    ui->lineEdit->setTextMargins(32,0,0,0);
 
     connect(pSearchButton, &QPushButton::clicked, this, &ContactSearchWidget::StartSearchSlots);
 
     connect(ui->lineEdit,&QLineEdit::editingFinished,this, &ContactSearchWidget::StartSearchSlots);
 
-    //setStyleSheet("QWidget{border: none;background-color: rgb(40, 46, 66);}");
+    ui->lineEdit->setStyleSheet("QLineEdit{background:transparent;font-size:14px;}");
 }
 
 void ContactSearchWidget::paintEvent(QPaintEvent *event)

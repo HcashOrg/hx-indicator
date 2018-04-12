@@ -332,9 +332,11 @@ void ContactTreeWidget::initContactSheet(std::shared_ptr<ContactSheet> data)
 void ContactTreeWidget::initTreeStyle()
 {
     setWindowFlags(Qt::FramelessWindowHint);//无边框
-    setStyleSheet("QWidget{background-color:rgb(94,116,235);border:none;}");
     setHeaderHidden(true);
     setSelectionMode(QAbstractItemView::SingleSelection);
+
+    setStyleSheet("QWidget{background-color:rgb(94,116,235);border:none;}");
+
 }
 
 void ContactTreeWidget::initContextMenu()
