@@ -37,6 +37,7 @@ class NewOrImportWalletWidget;
 
 class ContactWidget;
 class FunctionWidget;
+class MinerPage;
 
 class Frame:public QFrame
 {
@@ -68,6 +69,8 @@ private slots:
     void alreadyLogin();
     void showAccountPage();
     void showAccountPage(QString);
+
+    void showMinerPage();
 
     void showLockPage();
     void autoLock();
@@ -108,6 +111,7 @@ private:
     TransferPage* transferPage;
     MultiSigPage* multiSigPage;
     MultiSigTransactionPage* multiSigTransactionPage;
+    MinerPage* minerPage;
 
 
     BottomBar* bottomBar;
@@ -121,7 +125,7 @@ private:
     NewOrImportWalletWidget* newOrImportWalletWidget;
 
     int currentPageNum;  //  0:mainPage   1:accountPage  2:delegatePgae  3:transferPage    4:contactPage
-                         //   6: feedPage   7:upgradePage   8: SmartContract     9: multiSigPage   10: multiSigTransactionPage
+                         //   6: feedPage   7:minerPage   8: SmartContract     9: multiSigPage   10: multiSigTransactionPage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;
     void createTrayIconActions();

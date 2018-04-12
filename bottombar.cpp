@@ -65,6 +65,13 @@ void BottomBar::jsonDataUpdated(QString id)
         UBChain::getInstance()->walletInfo.blockAge = object.take("head_block_age").toString();
         UBChain::getInstance()->walletInfo.chainId = object.take("chain_id").toString();
 
+//        UBChain::getInstance()->walletInfo.activeMiners.clear();
+//        QJsonArray array = object.take("active_miners").toArray();
+//        foreach (QJsonValue v, array)
+//        {
+//            UBChain::getInstance()->walletInfo.activeMiners += v.toString();
+//        }
+
         ui->syncLabel->setText(QString::number(UBChain::getInstance()->walletInfo.blockHeight));
 
         return;

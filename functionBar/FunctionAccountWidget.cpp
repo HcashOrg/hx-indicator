@@ -21,3 +21,8 @@ void FunctionAccountWidget::InitWidget()
     palette.setColor(QPalette::Background, QColor(24,28,45));
     setPalette(palette);
 }
+
+void FunctionAccountWidget::on_minerInfoBtn_clicked()
+{
+    emit showMinerSignal();
+}

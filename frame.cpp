@@ -18,6 +18,7 @@
 #include "titlebar.h"
 #include "frame.h"
 #include "wallet.h"
+#include "miner/minerpage.h"
 
 #include "waitingforsync.h"
 #include <QDesktopWidget>
@@ -54,6 +55,7 @@ Frame::Frame(): timer(NULL),
     newOrImportWalletWidget(NULL),
     multiSigPage(NULL),
     multiSigTransactionPage(NULL),
+    minerPage(NULL),
     needToRefresh(false)
 {
 
@@ -312,6 +314,7 @@ void Frame::alreadyLogin()
     //connect(functionBar, SIGNAL(showContactPage()), this, SLOT( showContactPage()));
     //connect(functionBar, SIGNAL(showMultiSigPage()), this, SLOT(showMultiSigPage()));
     connect(functionBar,SIGNAL(lock()),this,SLOT(showLockPage()));
+    connect(functionBar,SIGNAL(showMinerSignal()),this,SLOT(showMinerPage()));
 
     connect(functionBar,&FunctionWidget::showAccountSignal,this,&Frame::showMainPage);
     connect(functionBar,&FunctionWidget::showContactSignal,this,&Frame::showContactPage);
@@ -406,6 +409,17 @@ void Frame::showAccountPage(QString accountName)
 
     //朱正天functionBar->choosePage(4);
 
+}
+
+void Frame::showMinerPage()
+{
+    closeCurrentPage();
+
+    minerPage = new MinerPage(centralWidget);
+    minerPage->setAttribute(Qt::WA_DeleteOnClose);
+    minerPage->show();
+
+    currentPageNum = 7;
 }
 
 void Frame::showTransferPage(QString accountName)
@@ -630,7 +644,9 @@ void Frame::closeCurrentPage()
     case 5:
 
         break;
-    case 6:
+    case 7:
+        minerPage->close();
+        minerPage = NULL;
         break;
     case 8:
         break;
@@ -675,7 +691,7 @@ void Frame::refresh()
     case 6:
         break;
     case 7:
-//        showUpgradePage();
+
         break;
     case 8:
         break;
@@ -719,7 +735,7 @@ void Frame::autoRefresh()
     case 6:
         break;
     case 7:
-//        showUpgradePage();
+        minerPage->refresh();
         break;
     case 8:
         break;
@@ -1076,8 +1092,6 @@ void Frame::jsonDataUpdated(QString id)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
-        qDebug() << id << result;
-
         UBChain::getInstance()->parseAccountInfo();
 
         foreach (QString accountName, UBChain::getInstance()->accountInfoMap.keys())
@@ -1145,7 +1159,6 @@ void Frame::jsonDataUpdated(QString id)
 
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
-        qDebug() << "kkkkkkkkk " << id << result;
         if( result == "\"result\":null")
         {
             shadowWidgetHide();
@@ -1192,6 +1205,32 @@ void Frame::jsonDataUpdated(QString id)
         QString result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         UBChain::getInstance()->parseAssetInfo();
+
+        return;
+    }
+
+    if( id == "id-list_miners")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonArray array = jsonObject.take("result").toArray();
+
+        UBChain::getInstance()->minersVector.clear();
+        foreach (QJsonValue v, array)
+        {
+            QJsonArray array2 = v.toArray();
+
+            Miner miner;
+            miner.name = array2.at(0).toString();
+            miner.minerId = array2.at(1).toString();
+            UBChain::getInstance()->minersVector.append(miner);
+        }
 
         return;
     }
@@ -1276,7 +1315,7 @@ void Frame::init()
 {
     UBChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
-
+    UBChain::getInstance()->postRPC( "id-list_miners", toJsonFormat( "list_miners", QJsonArray() << "A" << "100"));
 //    UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QJsonArray()));
 
 

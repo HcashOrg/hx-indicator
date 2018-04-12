@@ -113,7 +113,11 @@ SOURCES += main.cpp\
     functionBar/FunctionWidget.cpp \
     poundage/PoundageWidget.cpp \
     poundage/PublishPoundageWidget.cpp \
-    poundage/PoundageDataUtil.cpp
+    poundage/PoundageDataUtil.cpp \
+    miner/minerpage.cpp \
+    miner/registerdialog.cpp \
+    miner/locktominerdialog.cpp \
+    miner/foreclosedialog.cpp
 
 HEADERS  += firstlogin.h \
     normallogin.h \
@@ -196,7 +200,11 @@ HEADERS  += firstlogin.h \
     functionBar/FunctionWidget.h \
     poundage/PoundageWidget.h \
     poundage/PublishPoundageWidget.h \
-    poundage/PoundageDataUtil.h
+    poundage/PoundageDataUtil.h \
+    miner/minerpage.h \
+    miner/registerdialog.h \
+    miner/locktominerdialog.h \
+    miner/foreclosedialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -234,7 +242,6 @@ FORMS    += firstlogin.ui \
     control/remarkcellwidget.ui \
     control/shadowwidget.ui \
     selectwalletpathwidget.ui \
-    dialog/addtokendialog.ui \
     dialog/choosetokenoperationdialog.ui \
     dialog/choosecontractoperationdialog.ui \
     control/qrcodedialog.ui \
@@ -266,7 +273,11 @@ FORMS    += firstlogin.ui \
     functionBar/FunctionWidget.ui \
     contact/ContactTreeWidget.ui \
     poundage/PoundageWidget.ui \
-    poundage/PublishPoundageWidget.ui
+    poundage/PublishPoundageWidget.ui \
+    miner/minerpage.ui \
+    miner/registerdialog.ui \
+    miner/locktominerdialog.ui \
+    miner/foreclosedialog.ui
     
 win32{
     DISTFILES += logo.rc

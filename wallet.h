@@ -38,6 +38,7 @@
 #include <QFile>
 #include <QPainter>
 #include <QDateTime>
+#include <QVector>
 
 #include "frame.h"
 #include "extra/style.h"
@@ -103,8 +104,14 @@ struct WalletInfo
     QString blockId;
     QString blockAge;
     QString chainId;
+//    QStringList activeMiners;
 };
 
+struct Miner
+{
+    QString name;
+    QString minerId;
+};
 
 typedef QMap<int,unsigned long long>  AssetBalanceMap;
 struct AssetInfo
@@ -187,6 +194,10 @@ signals:
 
 public:
     WalletInfo walletInfo;
+
+    QVector<Miner> minersVector;
+    QString getMinerNameFromId(QString _minerId);
+
     int lockMinutes;   // 自动锁定时间
     bool notProduce;   // 是否产块/记账
     bool minimizeToTray;  // 是否最小化到托盘
@@ -263,6 +274,8 @@ public:
     QMap<QString,AccountInfo>   accountInfoMap;
     void parseAccountInfo();
     void getAccountBalances(QString _accountName);
+    QStringList getRegisteredAccounts();
+    QStringList getUnregisteredAccounts();
 
     QMap<QString,AssetInfo>  assetInfoMap;
     void parseAssetInfo();
