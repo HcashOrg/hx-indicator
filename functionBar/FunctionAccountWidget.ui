@@ -25,7 +25,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-<<<<<<< HEAD
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
@@ -96,7 +95,6 @@
     </spacer>
    </item>
   </layout>
-=======
   <widget class="QLabel" name="label_normal">
    <property name="geometry">
     <rect>
@@ -175,7 +173,6 @@
     <string>  挖矿管理</string>
    </property>
   </widget>
->>>>>>> bb3273ae82a92d28cc7d77c7cfdcc1f04d525643
  </widget>
  <resources/>
  <connections/>
