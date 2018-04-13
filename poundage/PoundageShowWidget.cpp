@@ -129,7 +129,7 @@ void PoundageShowWidget::InitStyle()
 
     ui->tableView->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
                                  "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
-                                 "QHeaderView:section{border:none;background-color:#FFFFFF;}"
+                                 "QHeaderView:section{height:30px;border:none;background-color:#FFFFFF;}"
                                  "QTableView:item{min-height:60px;}"
                                  );
 }

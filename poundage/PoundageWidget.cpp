@@ -218,6 +218,7 @@ void PoundageWidget::InitWidget()
     connect(ui->toolButton_myPoundage,&QPushButton::clicked,this,&PoundageWidget::ShowMyPoundageSlots);
 
     connect(ui->comboBox_sortType,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&PoundageWidget::SortByStuffSlots);
+    connect(ui->comboBox_coinType,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&PoundageWidget::autoRefreshSlots);
 
     connect(_p->myPoundageWidget,&PoundageShowWidget::DeletePoundageSignal,this,&PoundageWidget::DeletePoundageSlots);
     autoRefreshSlots();
