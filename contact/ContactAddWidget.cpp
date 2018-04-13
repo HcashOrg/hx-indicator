@@ -56,7 +56,7 @@ void ContactAddWidget::addressChangeSlots(const QString &address)
 
     if( validateAddress(ui->lineEdit_address->text()))
     {
-        ui->label_tip->setVisible(true);
+        ui->label_tip->setVisible(false);
         ui->label_tip->setText(tr("address available"));
         QPalette pa;
         pa.setColor(QPalette::WindowText,Qt::green);
@@ -65,7 +65,7 @@ void ContactAddWidget::addressChangeSlots(const QString &address)
     }
     else
     {
-        ui->label_tip->setVisible(true);
+        ui->label_tip->setVisible(false);
         ui->label_tip->setText(tr("address illegal or conflict "));
         QPalette pa;
         pa.setColor(QPalette::WindowText,Qt::red);
@@ -107,13 +107,18 @@ bool ContactAddWidget::validateAddress(const QString &address)
 
 void ContactAddWidget::InitStyle()
 {
-    //setAutoFillBackground(true);
-    //QPalette palette;
-    //palette.setColor(QPalette::Background, QColor(40,46,66));
-    //setPalette(palette);
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setColor(QPalette::Background, QColor(248,249,253));
+    setPalette(palette);
 
-    //ui->pushButton->setStyleSheet("QPushButton{background-color:rgb(70,82,113);color:white;border:1px solid rgb(70,82,113);border-top-right-radius: 12px;border-bottom-right-radius: 12px;}");
-
+    setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+                  "Qline{color:#5474EB;background:#5474EB;}"
+                  "QComboBox{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:3px;}"
+                  "QPushButton{border:none;background-color:#5474EB;color:white;width:60px;height:20px;\
+                   border-radius:10px;font-size:12pt;}"
+                  "QPushButton::hover{background-color:#00D2FF;}"
+                  "QLabel{background:transparent;color:black:font-family:MicrosoftYaHeiLight;}");
 }
 
 void ContactAddWidget::InitWidget()
@@ -147,4 +152,31 @@ void ContactAddWidget::InitComboBox()
     {
         ui->comboBox_group->addItem((*it)->groupName,QVariant::fromValue<std::shared_ptr<ContactGroup>>(*it));
     }
+}
+
+void ContactAddWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+    painter.save();
+    const qreal radius = 10;
+    QPainterPath path;
+    QRectF rect = QRect(50, 5, 670, 270);
+    QRectF rect1 = QRect(45,0,680,280);
+
+    QRadialGradient radial(385, 385, 770, 385,385);
+    radial.setColorAt(0, QColor(0,0,0,15));
+    radial.setColorAt(1, QColor(218,255,248,15));
+
+    painter.setBrush(radial);
+    painter.setPen(Qt::NoPen);
+    painter.drawRoundedRect(rect1,radius,radius);
+
+    painter.setBrush(QBrush(Qt::white));
+    painter.setPen(Qt::NoPen);
+    painter.drawRoundedRect(rect,radius,radius);
+
+    painter.restore();
+    QWidget::paintEvent(event);
 }

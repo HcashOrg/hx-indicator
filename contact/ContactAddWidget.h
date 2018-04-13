@@ -26,6 +26,8 @@ signals:
     void addContactFinishedSignal(const QString &address);
 public slots:
     void groupModifySlots();
+protected:
+    void paintEvent(QPaintEvent *event);
 private slots:
     void addressChangeSlots(const QString &address);
 

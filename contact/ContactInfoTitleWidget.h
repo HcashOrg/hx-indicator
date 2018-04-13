@@ -35,6 +35,10 @@ public:
     void refreshName();
 private:
     void InitWidget();
+    void InitStyle();
+protected:
+    void paintEvent(QPaintEvent *event);
+    void mousePressEvent(QMouseEvent *event);
 private:
     class ContactInfoTitleWidgetPrivate;
     ContactInfoTitleWidgetPrivate *_p;

@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>525</width>
-    <height>417</height>
+    <width>770</width>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,3">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,3">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -31,6 +31,18 @@
    </property>
    <item>
     <widget class="QScrollArea" name="scrollArea_top">
+     <property name="minimumSize">
+      <size>
+       <width>770</width>
+       <height>80</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>770</width>
+       <height>80</height>
+      </size>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -39,18 +51,11 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>523</width>
-        <height>102</height>
+        <width>768</width>
+        <height>78</height>
        </rect>
       </property>
      </widget>
-    </widget>
-   </item>
-   <item>
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
     </widget>
    </item>
    <item>
@@ -63,8 +68,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>523</width>
-        <height>308</height>
+        <width>768</width>
+        <height>368</height>
        </rect>
       </property>
      </widget>

@@ -13,36 +13,32 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="spacing">
-    <number>0</number>
+  <widget class="QTableView" name="tableView">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>8</y>
+     <width>680</width>
+     <height>300</height>
+    </rect>
    </property>
-   <property name="leftMargin">
-    <number>0</number>
+  </widget>
+  <widget class="QStackedWidget" name="stackedWidget_pageBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>310</y>
+     <width>770</width>
+     <height>40</height>
+    </rect>
    </property>
-   <property name="topMargin">
-    <number>0</number>
+   <property name="maximumSize">
+    <size>
+     <width>16777215</width>
+     <height>40</height>
+    </size>
    </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
-   <item>
-    <widget class="QTableView" name="tableView"/>
-   </item>
-   <item>
-    <widget class="QStackedWidget" name="stackedWidget_pageBar">
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>40</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-  </layout>
+  </widget>
  </widget>
  <resources/>
  <connections/>

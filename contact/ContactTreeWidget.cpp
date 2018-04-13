@@ -56,6 +56,7 @@ ContactTreeWidget::~ContactTreeWidget()
 
 void ContactTreeWidget::QueryPersonSlots(const QString &queryString)
 {
+    if(queryString.isEmpty()) return;
     clearSelection();
     setSelectionMode(QAbstractItemView::MultiSelection);
     QList<QTreeWidgetItem*> findItems;
@@ -77,6 +78,10 @@ void ContactTreeWidget::QueryPersonSlots(const QString &queryString)
             //qDebug()<<(*it)->text(0);
         }
         ++it;
+    }
+    if(!findItems.isEmpty())
+    {
+        emit ShowContactPerson(findItems.front()->data(0,Qt::UserRole).value<std::shared_ptr<ContactPerson>>()->address);
     }
 }
 
@@ -335,7 +340,20 @@ void ContactTreeWidget::initTreeStyle()
     setHeaderHidden(true);
     setSelectionMode(QAbstractItemView::SingleSelection);
 
-    setStyleSheet("QWidget{background-color:rgb(94,116,235);border:none;}");
+    setStyleSheet("QWidget{border:none;}"
+                  "QTreeView{background-color:rgb(94,116,235);border:none;\
+                      color:white;font-size:16px;outline:0px;}"
+                  "QTreeView::branch{background:rgb(94,116,235);}"
+                  "QTreeView::item{height:30px;}"
+                  "QTreeView::item::selected{background:#829DFF;border:none;color:white;}"
+                  "QTreeView::branch::selected::adjoins-item,QTreeView::branch::selected::!adjoins-item{background:#829DFF;}"
+                  "QTreeView::branch::hover::adjoins-item,QTreeView::branch::hover::!adjoins-item,QTreeView::item::hover{background:#829DFF;}"
+                  "QMenu{border: none;border-radius:15px;}"
+                  "QMenu::item {border:none;background-color:#FFFFFF;color:black;border-bottom:1px solid #DBDBDB;}"
+                  "QMenu::item::selected{border:none;background-color: #829DFF;}"
+                  "QMenu::indicator{margin:0px 4px;}"
+
+                 );
 
 }
 
@@ -436,6 +454,7 @@ QTreeWidgetItem *ContactTreeWidget::createItemWithPerson(const std::shared_ptr<C
 {
     if(!person) return nullptr;
     QTreeWidgetItem *personItem = new QTreeWidgetItem(QStringList()<<person->name);
+    personItem->setToolTip(0,person->name);
     personItem->setData(0,Qt::UserRole,QVariant::fromValue<std::shared_ptr<ContactPerson>>(person));
     return personItem;
 }
@@ -444,6 +463,7 @@ QTreeWidgetItem *ContactTreeWidget::createItemWithGroup(const std::shared_ptr<Co
 {
     if(!group) return nullptr;
     QTreeWidgetItem *groupItem = new QTreeWidgetItem(QStringList()<<group->groupName);
+    groupItem->setToolTip(0,group->groupName);
     groupItem->setData(0,Qt::UserRole,QVariant::fromValue<std::shared_ptr<ContactGroup>>(group));
     return groupItem;
 }

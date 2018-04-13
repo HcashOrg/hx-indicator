@@ -20,10 +20,9 @@ public:
     ~ContactBriefWidget();
 signals:
     void addNewContactSignal();
-protected:
-    //void paintEvent(QPaintEvent *event);
 private:
     void InitWidget();
+    void InitStyle();
 private:
     Ui::ContactBriefWidget *ui;
 private:

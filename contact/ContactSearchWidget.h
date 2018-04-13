@@ -21,12 +21,11 @@ public:
     ~ContactSearchWidget();
 signals:
     void searchSignal(const QString &searchString);
-protected:
-    void paintEvent(QPaintEvent *event);
 private slots:
     void StartSearchSlots();
 private:
     void InitWidget();
+    void InitStyle();
 private:
     Ui::ContactSearchWidget *ui;
 private:

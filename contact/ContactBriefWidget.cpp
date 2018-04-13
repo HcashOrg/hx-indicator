@@ -1,7 +1,7 @@
 #include "ContactBriefWidget.h"
 #include "ui_ContactBriefWidget.h"
 
-
+#include <QPainter>
 
 class ContactBriefWidget::ContactBriefWidgetPrivate
 {
@@ -31,22 +31,31 @@ ContactBriefWidget::~ContactBriefWidget()
 
 void ContactBriefWidget::InitWidget()
 {
-//    setAutoFillBackground(true);
-//    QPalette palette;
-//    palette.setColor(QPalette::Background, QColor(40,46,66));
-//    setPalette(palette);
-
-    //setStyleSheet("QWidget{background-color:rgb(24,28,45);border:none;}");
+    InitStyle();
 
     connect(ui->pushButton,&QPushButton::clicked,[this](){
        this->emit addNewContactSignal();
     });
 }
 
-//void ContactBriefWidget::paintEvent(QPaintEvent *event)
-//{
-//    QPainter painter(this);
-//    painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
-//    painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
-//    painter.drawRect(rect());
-//}
+void ContactBriefWidget::InitStyle()
+{
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setColor(QPalette::Background, QColor(248,249,253));
+    setPalette(palette);
+
+    QFont font("MicrosoftYaHeiLight",20,63);
+    ui->label->setFont(font);
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,Qt::black);
+    ui->label->setPalette(pa);
+
+    ui->pushButton->setStyleSheet("QPushButton{border-top-left-radius:10px;  \
+                                  border-top-right-radius:10px; \
+                                  border-bottom-left-radius:10px;  \
+                                  border-bottom-right-radius:10px; \
+                                  border:none;\
+                                  background-color:#00D2FF;\}"
+                                  "QPushButton::hover{background-color:#4861DC;}");
+}

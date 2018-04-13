@@ -41,6 +41,7 @@ private:
     void InitContextMenu();
 protected:
     void contextMenuEvent(QContextMenuEvent *event);
+    void paintEvent(QPaintEvent *event);
 private:
     Ui::PoundageShowWidget *ui;
 private:

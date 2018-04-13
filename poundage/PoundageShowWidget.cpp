@@ -5,6 +5,7 @@
 #include <QAction>
 #include <QMenu>
 #include <QContextMenuEvent>
+#include <QPainter>
 
 #include "PoundageShowTableModel.h"
 #include "GeneralComboBoxDelegate.h"
@@ -111,7 +112,7 @@ void PoundageShowWidget::InitStyle()
     ui->tableView->verticalHeader()->setVisible(false);
     ui->tableView->setShowGrid(false);
 
-    ui->tableView->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border_radius:20px;\
+    ui->tableView->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;\
                                     }\
                                   QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}\
                                   QHeaderView:section{border:none;background-color:#FFFFFF;}\
@@ -139,4 +140,27 @@ void PoundageShowWidget::contextMenuEvent(QContextMenuEvent *event)
     if(!unit) return;
 
     _p->contextMenu->exec(QCursor::pos());
+}
+
+void PoundageShowWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+    painter.save();
+    const qreal radius = 10;
+    //QPainterPath path;
+    //QRectF rect = QRect(50, 5, 670, 270);
+    QRectF rect1 = QRect(40,0,696,310);
+
+    QRadialGradient radial(385, 385, 770, 385,385);
+    radial.setColorAt(0, QColor(198,202,212,10));
+    radial.setColorAt(1, QColor(218,255,248,10));
+
+    painter.setBrush(radial);
+    painter.setPen(Qt::NoPen);
+    painter.drawRoundedRect(rect1,radius,radius);
+
+    painter.restore();
+    QWidget::paintEvent(event);
 }

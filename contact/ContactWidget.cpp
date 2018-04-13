@@ -96,7 +96,16 @@ void ContactWidget::InitStyle()
     //palette.setColor(QPalette::Background, QColor(255,255,255));
     //setPalette(palette);
 
-    setStyleSheet("QWidget{border:none;}");
+    //ui->scrollArea_rightBottom->widget()->setAutoFillBackground(true);
+    //QPalette palette;
+    //palette.setColor(QPalette::Background, QColor(248,249,253));
+    //ui->scrollArea_rightBottom->widget()->setPalette(palette);
+
+    setStyleSheet("QScrollArea{border:none;}");
+    //ui->scrollArea_leftBottom->setStyleSheet("QScrollArea{border:none;}");
+    //ui->scrollArea_leftTop->setStyleSheet("QWidget{border:none;}");
+    //ui->scrollArea_rightTop->setStyleSheet("QWidget{border:none;}");
+    //ui->scrollArea_rightBottom->setStyleSheet("QScrollArea{border:none;}");
     //setStyleSheet("QWidget{background-color:rgb(40,46,66);color:white;}");
     //setStyleSheet("QWidget{background-color:rgb(24,28,45);border:none;}");
 }
