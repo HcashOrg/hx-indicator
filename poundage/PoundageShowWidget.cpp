@@ -120,16 +120,18 @@ void PoundageShowWidget::InitStyle()
 //    ui->tableView->setHorizontalHeader(header);
 
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    //ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->tableView->verticalHeader()->setMinimumSectionSize(40);
     ui->tableView->verticalHeader()->setVisible(false);
     ui->tableView->setShowGrid(false);
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 
-    ui->tableView->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;\
-                                    }\
-                                  QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}\
-                                  QHeaderView:section{border:none;background-color:#FFFFFF;}\
-    ");
+    ui->tableView->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
+                                 "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
+                                 "QHeaderView:section{border:none;background-color:#FFFFFF;}"
+                                 "QTableView:item{min-height:60px;}"
+                                 );
 }
 
 void PoundageShowWidget::InitContextMenu()
