@@ -218,8 +218,6 @@ public:
     bool    isMyAddress(QString address);
     QString addressToName(QString address);
 
-    QString getBalance(QString);
-    QString getRegisterTime(QString);
     void deleteAccountInConfigFile(QString);
     void updateJsonDataMap(QString id, QString data);
     QString jsonDataValue(QString id);

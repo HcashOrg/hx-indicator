@@ -15,7 +15,6 @@ public:
     explicit FunctionAccountWidget(QWidget *parent = 0);
     ~FunctionAccountWidget();
 private slots:
-    void on_minerInfoBtn_clicked();
     void AssetShowSlots();
     void MinerShowSlots();
 

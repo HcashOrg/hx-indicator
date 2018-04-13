@@ -24,6 +24,8 @@ void FunctionAccountWidget::MinerShowSlots()
 {
     ui->toolButton_miner->setChecked(true);
     ui->toolButton_asset->setChecked(false);
+
+    emit showMinerSignal();
 }
 
 void FunctionAccountWidget::InitWidget()
@@ -55,9 +57,4 @@ void FunctionAccountWidget::InitStyle()
                    QToolButton:hover{background-color: rgb(0,210, 255);}\
                    QToolButton:pressed{background-color: rgb(130,157, 255);}\
                    QToolButton:checked{background-color: rgb(130,157, 255);}");
-}
-
-void FunctionAccountWidget::on_minerInfoBtn_clicked()
-{
-    emit showMinerSignal();
 }

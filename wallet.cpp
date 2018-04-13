@@ -316,58 +316,6 @@ QString UBChain::addressToName(QString address)
     return address;
 }
 
-QString UBChain::getBalance(QString name)
-{
-    if( name.isEmpty())
-    {
-        return NULL;
-    }
-
-
-    QString result = jsonDataValue("id_balance");
-
-    int p = result.indexOf( "[\"" + name + "\",");
-    if( p != -1)  // 如果balance中存在
-    {
-        int pos = p + 8 + name.size();
-        QString str = result.mid( pos, result.indexOf( "]", pos) - pos);
-        str.remove("\"");
-
-        double amount = str.toDouble() / ASSET_PRECISION;
-
-        return doubleTo5Decimals( amount) + " " + QString(ASSET_NAME);
-    }
-
-    // balance中不存在
-    return "0.00000 " + QString(ASSET_NAME);
-}
-
-QString UBChain::getRegisterTime(QString name)
-{
-    if( name.isEmpty())
-    {
-        return NULL;
-    }
-
-    QString result = jsonDataValue("id_wallet_list_my_addresses");
-    int pos = result.indexOf( "\"name\":\"" + name + "\",") ;
-    if( pos != -1)  // 如果 wallet_list_my_addresses 中存在
-    {
-        int pos2 = result.indexOf( "\"registration_date\":", pos) + 21;
-        QString registerTime = result.mid( pos2, result.indexOf( "\"", pos2) - pos2);
-
-        if( registerTime != "1970-01-01T00:00:00")
-        {
-            return registerTime;
-        }
-        else
-        {
-            return "NO";
-        }
-    }
-
-    return "WRONGACCOUNTNAME";
-}
 
 void UBChain::getSystemEnvironmentPath()
 {
