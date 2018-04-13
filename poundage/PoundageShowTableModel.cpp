@@ -11,7 +11,7 @@ public:
     PoundageShowTableModelPrivate()
         :data(std::make_shared<PoundageSheet>())
         ,currentPage(0)
-        ,pageMaxRow(1)
+        ,pageMaxRow(6)
         ,maxPage(0)
     {
 
@@ -154,6 +154,7 @@ void PoundageShowTableModel::InitData(const std::shared_ptr<PoundageSheet> &shee
     beginResetModel();
     _p->data = sheet;
     adjustMaxPage();
+    _p->currentPage = 0;
     qDebug()<<_p->maxPage;
     endResetModel();
 }
