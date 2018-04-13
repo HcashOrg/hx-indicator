@@ -17,7 +17,8 @@ public:
         ,allPoundageSheet(std::make_shared<PoundageSheet>())
         ,myPoundageSheet(std::make_shared<PoundageSheet>())
     {
-        myPoundageWidget->EnableContextMenu(true);
+        myPoundageWidget->EnableDeleteAction(true);
+        allPoundageWidget->EnableDeleteAction(false);
     }
 public:
     PoundageShowWidget *allPoundageWidget;

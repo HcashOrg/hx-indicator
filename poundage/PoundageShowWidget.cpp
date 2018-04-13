@@ -18,9 +18,12 @@ class PoundageShowWidget::PoundageShowWidgetPrivate
 public:
     PoundageShowWidgetPrivate()
         :tableModel(new PoundageShowTableModel())
-        ,isContextMenuEnabled(false)
+        ,isContextMenuEnabled(true)
         ,contextMenu(nullptr)
         ,pageWidget(new PageScrollWidget(5))
+        ,isDeleteActionEnabled(false)
+        ,deleteAction(nullptr)
+        ,defaultAction(nullptr)
     {
 
     }
@@ -29,6 +32,9 @@ public:
     PageScrollWidget *pageWidget;
     bool isContextMenuEnabled;
     QMenu *contextMenu;
+    QAction *defaultAction;
+    QAction *deleteAction;
+    bool isDeleteActionEnabled;
 };
 
 PoundageShowWidget::PoundageShowWidget(QWidget *parent) :
@@ -63,7 +69,12 @@ void PoundageShowWidget::SetDefaultPoundageSlots()
 
 void PoundageShowWidget::EnableContextMenu(bool enable)
 {
-     _p->isContextMenuEnabled = enable;
+    _p->isContextMenuEnabled = enable;
+}
+
+void PoundageShowWidget::EnableDeleteAction(bool enable)
+{
+    _p->isDeleteActionEnabled = enable;
 }
 
 void PoundageShowWidget::changeCurrentPageSlots(unsigned int currentPage)
@@ -111,6 +122,8 @@ void PoundageShowWidget::InitStyle()
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->verticalHeader()->setVisible(false);
     ui->tableView->setShowGrid(false);
+    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 
     ui->tableView->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;\
                                     }\
@@ -122,14 +135,22 @@ void PoundageShowWidget::InitStyle()
 void PoundageShowWidget::InitContextMenu()
 {
    _p->contextMenu = new QMenu(this);
-   QAction *defaultAction = new QAction(tr("setDefault"),this);
-   QAction *deleteAction = new QAction(tr("delete"),this);
+   _p->defaultAction = new QAction(tr("setDefault"),this);
+   _p->deleteAction = new QAction(tr("delete"),this);
 
-   _p->contextMenu->addAction(defaultAction);
-   _p->contextMenu->addAction(deleteAction);
+   connect(_p->defaultAction,&QAction::triggered,this,&PoundageShowWidget::SetDefaultPoundageSlots);
+   connect(_p->deleteAction,&QAction::triggered,this,&PoundageShowWidget::DeletePoundageSlots);
+}
 
-   connect(defaultAction,&QAction::triggered,this,&PoundageShowWidget::SetDefaultPoundageSlots);
-   connect(deleteAction,&QAction::triggered,this,&PoundageShowWidget::DeletePoundageSlots);
+void PoundageShowWidget::RefreshMenu()
+{
+    _p->contextMenu->clear();
+    _p->contextMenu->addAction(_p->defaultAction);
+
+    if(_p->isDeleteActionEnabled)
+    {
+        _p->contextMenu->addAction(_p->deleteAction);
+    }
 }
 
 void PoundageShowWidget::contextMenuEvent(QContextMenuEvent *event)
@@ -139,6 +160,7 @@ void PoundageShowWidget::contextMenuEvent(QContextMenuEvent *event)
     std::shared_ptr<PoundageUnit> unit = ui->tableView->currentIndex().data(Qt::UserRole).value<std::shared_ptr<PoundageUnit>>();
     if(!unit) return;
 
+    RefreshMenu();
     _p->contextMenu->exec(QCursor::pos());
 }
 

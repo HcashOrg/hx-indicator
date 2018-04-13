@@ -25,6 +25,7 @@ public:
     void InitData(const std::shared_ptr<PoundageSheet> &data);
 
     void EnableContextMenu(bool enable = false);
+    void EnableDeleteAction(bool enable = false);
 signals:
     void DeletePoundageSignal(const QString &orderID);
     void SetDefaultPoundageSignal(const QString &orderID);
@@ -39,6 +40,7 @@ private:
     void InitWidget();
     void InitStyle();
     void InitContextMenu();
+    void RefreshMenu();
 protected:
     void contextMenuEvent(QContextMenuEvent *event);
     void paintEvent(QPaintEvent *event);
