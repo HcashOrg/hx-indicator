@@ -16,12 +16,14 @@ public:
     FunctionWidgetPrivate()
         :accountBar(new FunctionAccountWidget())
         ,advanceBar(new FunctionAdvanceWidget())
+        ,contextMenu(new QMenu())
     {
 
     }
 public:
     FunctionAccountWidget *accountBar;
     FunctionAdvanceWidget *advanceBar;
+    QMenu *contextMenu;
 };
 
 FunctionWidget::FunctionWidget(QWidget *parent) :
@@ -81,6 +83,7 @@ void FunctionWidget::ShowAdvanceWidgetSlots()
 
 void FunctionWidget::ShowMoreWidgetSlots()
 {
+    _p->contextMenu->exec(mapToGlobal(QPoint(70,height()-136)));
     updateCheckState(3);
 }
 
@@ -118,17 +121,17 @@ void FunctionWidget::InitWidget()
     ui->stackedWidget->addWidget(_p->advanceBar);
 
     //设置更多按钮
-    QMenu *menu = new QMenu();
-    QAction* actionSet = menu->addAction("Setting");
-    QAction* actionLock = menu->addAction("Lock");
-    QAction* actionConsole = menu->addAction("Console");
-    QMenu *helpMenu = new QMenu("Help");
-    menu->addMenu(helpMenu);
+    QAction* actionSet = _p->contextMenu->addAction("Setting");
+    QAction* actionLock = _p->contextMenu->addAction("Lock");
+    QAction* actionConsole = _p->contextMenu->addAction("Console");
+    QMenu *helpMenu = new QMenu("Help",_p->contextMenu);
+    _p->contextMenu->addMenu(helpMenu);
     QAction* actionAbout = helpMenu->addAction("About Us");
     QAction* actionUpdate = helpMenu->addAction("Update");
-    ui->toolButton_more->setMenu(menu);
-    //ui->toolButton_more->setArrowType(Qt::RightArrow);
-    ui->toolButton_more->setPopupMode(QToolButton::InstantPopup );
+
+    //ui->toolButton_more->setMenu(_p->contextMenu);
+    ////ui->toolButton_more->setArrowType(Qt::RightArrow);
+    //ui->toolButton_more->setPopupMode(QToolButton::InstantPopup );
 
     //链接信号槽
     connect(ui->toolButton_contact,&QToolButton::clicked,this,&FunctionWidget::ShowContactWidgetSlots);
@@ -158,7 +161,12 @@ void FunctionWidget::InitStyle()
     QToolButton:hover{background-color: rgb(0,210, 255);}\
     QToolButton:pressed{background-color: rgb(84,116, 235);}\
     QToolButton:checked{background-color: rgb(84,116, 235);}\
-                  ");
+                  "
+                  );
+    _p->contextMenu->setStyleSheet("QMenu{background-color:rgb(238,241,253);border: none;border-radius:10px;}"
+                                   "QMenu::item {border:none;background-color:rgb(238,241,253);color:black;border-bottom:1px solid #DBDBDB;}"
+                                   "QMenu::item::selected{border:none;background-color: #829DFF;}"
+                                   "QMenu::indicator{margin:0px 4px;}");
                   /*
                       QToolButton#toolButton_account{border-image:url(:/ui/wallet_ui/accountBtn_unselected.png);}\
                       QToolButton#toolButton_account:checked{border-image:url(:/ui/wallet_ui/accountBtn.png);}\*/

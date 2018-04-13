@@ -72,7 +72,7 @@
     </font>
    </property>
    <property name="text">
-    <string>发行承税单</string>
+    <string>发行承兑单</string>
    </property>
   </widget>
   <widget class="QComboBox" name="comboBox_sortType">

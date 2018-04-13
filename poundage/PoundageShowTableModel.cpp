@@ -1,6 +1,7 @@
 #include "PoundageShowTableModel.h"
 
 #include <QDebug>
+#include <QFont>
 #include "PoundageDataUtil.h"
 
 Q_DECLARE_METATYPE(std::shared_ptr<PoundageUnit>)
@@ -137,6 +138,8 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
             }
         case Qt::TextAlignmentRole:
             return Qt::AlignCenter;
+        case Qt::FontRole:
+        return QFont("MicrosoftYaHeiLight",12,50);
         case Qt::ForegroundRole:
             break;
         case Qt::UserRole:
