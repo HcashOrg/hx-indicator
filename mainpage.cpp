@@ -25,6 +25,7 @@
 #include "exchange/exchangewidget.h"
 
 #include "depositpage/DepositPage.h"
+#include "withdrawpage/WithdrawPage.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -205,12 +206,22 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         return;
     }
 
-    if(column == 3)
+    if( 3 == column )
     {//充值界面
         DepositPage *deposit = new DepositPage(DepositPage::DepositDataInput(ui->accountComboBox->currentText(),
                                                ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text()),this);
         deposit->show();
         deposit->raise();
+        return;
+    }
+
+    if( 4 == column )
+    {//提现界面
+        WithdrawPage *withdraw = new WithdrawPage(WithdrawPage::WithdrawDataInput(ui->accountComboBox->currentText(),
+                                                  ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text(),
+                                                  ui->accountTableWidget->item(row,1)->text().toDouble()),this);
+        withdraw->show();
+        withdraw->raise();
         return;
     }
 

@@ -126,7 +126,10 @@ SOURCES += main.cpp\
     depositpage/DepositDataUtil.cpp \
     depositpage/DepositQrcodeWidget.cpp \
     depositpage/DepositRecrdWideget.cpp\
-    exchange/exchangewidget.cpp
+    exchange/exchangewidget.cpp \
+    withdrawpage/WithdrawPage.cpp \
+    withdrawpage/WithdrawDataUtil.cpp \
+    withdrawpage/WithdrawInputWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -223,7 +226,10 @@ HEADERS  += firstlogin.h \
     depositpage/DepositDataUtil.h \
     depositpage/DepositQrcodeWidget.h \
     depositpage/DepositRecrdWideget.h\
-    exchange/exchangewidget.h
+    exchange/exchangewidget.h \
+    withdrawpage/WithdrawPage.h \
+    withdrawpage/WithdrawDataUtil.h \
+    withdrawpage/WithdrawInputWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -301,7 +307,9 @@ FORMS    += firstlogin.ui \
     depositpage/DepositPage.ui \
     depositpage/DepositQrcodeWidget.ui \
     depositpage/DepositRecrdWideget.ui\
-    exchange/exchangewidget.ui
+    exchange/exchangewidget.ui \
+    withdrawpage/WithdrawPage.ui \
+    withdrawpage/WithdrawInputWidget.ui
     
 win32{
     DISTFILES += logo.rc
