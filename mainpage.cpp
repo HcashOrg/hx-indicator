@@ -22,6 +22,7 @@
 #include "dialog/renamedialog.h"
 #include "dialog/backupwalletdialog.h"
 #include "control/qrcodedialog.h"
+#include "exchange/exchangewidget.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -201,6 +202,12 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         showTransferPage( ui->accountTableWidget->item(row,0)->text());
         return;
     }
+
+    if(column == 6)
+    {
+        showExchangeWidget();
+        return;
+    }
 }
 
 
@@ -280,6 +287,14 @@ void MainPage::retranslator(QString language)
     {
 
     }
+}
+
+void MainPage::showExchangeWidget()
+{
+    ExchangeWidget* exchangeWidget = new ExchangeWidget(this);
+    exchangeWidget->move(0,0);
+    exchangeWidget->show();
+    exchangeWidget->raise();
 }
 
 void MainPage::jsonDataUpdated(QString id)

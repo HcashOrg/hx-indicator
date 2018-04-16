@@ -121,7 +121,9 @@ SOURCES += main.cpp\
     poundage/PoundageShowWidget.cpp \
     poundage/PoundageShowTableModel.cpp \
     poundage/GeneralComboBoxDelegate.cpp \
-    poundage/PageScrollWidget.cpp
+    poundage/PageScrollWidget.cpp \
+    dialog/dialogwithshadow.cpp \
+    exchange/exchangewidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -213,7 +215,23 @@ HEADERS  += firstlogin.h \
     poundage/PoundageShowWidget.h \
     poundage/PoundageShowTableModel.h \
     poundage/GeneralComboBoxDelegate.h \
-    poundage/PageScrollWidget.h
+    poundage/PageScrollWidget.h \
+    dialog/dialogwithshadow.h \
+    leveldb/include/leveldb/c.h \
+    leveldb/include/leveldb/cache.h \
+    leveldb/include/leveldb/comparator.h \
+    leveldb/include/leveldb/db.h \
+    leveldb/include/leveldb/dumpfile.h \
+    leveldb/include/leveldb/env.h \
+    leveldb/include/leveldb/filter_policy.h \
+    leveldb/include/leveldb/iterator.h \
+    leveldb/include/leveldb/options.h \
+    leveldb/include/leveldb/slice.h \
+    leveldb/include/leveldb/status.h \
+    leveldb/include/leveldb/table.h \
+    leveldb/include/leveldb/table_builder.h \
+    leveldb/include/leveldb/write_batch.h \
+    exchange/exchangewidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -244,7 +262,6 @@ FORMS    += firstlogin.ui \
     exportdialog.ui \
     importdialog.ui \
     ipcellwidget.ui \
-    control/accountdetailwidget.ui \
     control/rightclickmenudialog.ui \
     control/chooseaddaccountdialog.ui \
     dialog/renamedialog.ui \
@@ -288,7 +305,9 @@ FORMS    += firstlogin.ui \
     miner/locktominerdialog.ui \
     miner/foreclosedialog.ui    \
     poundage/PoundageShowWidget.ui \
-    poundage/PageScrollWidget.ui
+    poundage/PageScrollWidget.ui \
+    applydelegatepage.ui \
+    exchange/exchangewidget.ui
     
 win32{
     DISTFILES += logo.rc
@@ -302,7 +321,18 @@ RESOURCES += \
 TRANSLATIONS +=   wallet_simplified_Chinese.ts  wallet_English.ts
 
 DISTFILES += \
-    contact/search.png
+    contact/search.png \
+    leveldb/leveldb.lib \
+    leveldb/ShLwApi.Lib \
+    libqrencode.a \
+    qrencode.lib \
+    pic2/Thumbs.db \
+    pic2/copyBtn.png \
+    LNK.ico \
+    .gitignore \
+    LICENSE \
+    wallet_English.ts \
+    wallet_simplified_Chinese.ts
 
 QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
 QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
