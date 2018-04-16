@@ -38,6 +38,7 @@ class NewOrImportWalletWidget;
 class ContactWidget;
 class FunctionWidget;
 class MinerPage;
+class MyExchangeContractPage;
 
 class Frame:public QFrame
 {
@@ -90,6 +91,7 @@ private slots:
     void showContactPage();
     void showMultiSigPage();
     void showPoundagePage();//显示手续费承税单--朱正天
+    void showMyExchangeContractPage();
     void showMultiSigTransactionPage(QString _multiSigAddress);
     void showWaittingForSyncWidget();
     void showNewOrImportWalletWidget();
@@ -112,6 +114,7 @@ private:
     MultiSigPage* multiSigPage;
     MultiSigTransactionPage* multiSigTransactionPage;
     MinerPage* minerPage;
+    MyExchangeContractPage* myExchangeContractPage;
 
 
     BottomBar* bottomBar;
@@ -124,7 +127,7 @@ private:
     WaitingForSync* waitingForSync;
     NewOrImportWalletWidget* newOrImportWalletWidget;
 
-    int currentPageNum;  //  0:mainPage   1:accountPage  2:delegatePgae  3:transferPage    4:contactPage
+    int currentPageNum;  //  0:mainPage   1:accountPage  2:delegatePgae  3:transferPage    4:contactPage    5:myExchangeContractPage
                          //   6: feedPage   7:minerPage   8: SmartContract     9: multiSigPage   10: multiSigTransactionPage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;

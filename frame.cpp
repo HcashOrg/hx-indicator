@@ -35,6 +35,7 @@
 #include "multisig/multisigpage.h"
 #include "multisig/multisigtransactionpage.h"
 #include "neworimportwalletwidget.h"
+#include "exchange/myexchangecontractpage.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -324,6 +325,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showPoundageSignal,this,&Frame::showPoundagePage);
     connect(functionBar,&FunctionWidget::ShrinkSignal,this,&Frame::EnlargeRightPart);
     connect(functionBar,&FunctionWidget::RestoreSignal,this,&Frame::RestoreRightPart);
+    connect(functionBar,&FunctionWidget::showMyExchangeContractSignal,this,&Frame::showMyExchangeContractPage);
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
@@ -643,7 +645,8 @@ void Frame::closeCurrentPage()
         contactPage = NULL;
         break;
     case 5:
-
+        myExchangeContractPage->close();
+        myExchangeContractPage = NULL;
         break;
     case 7:
         minerPage->close();
@@ -913,6 +916,7 @@ void Frame::setLanguage(QString language)
             showContactPage();
             break;
         case 5:
+            showMyExchangeContractPage();
             break;
         case 6:
             break;
@@ -1004,6 +1008,17 @@ void Frame::showPoundagePage()
     PoundageWidget *poundage = new PoundageWidget(centralWidget);
     poundage->resize(centralWidget->size());
     poundage->show();
+}
+
+void Frame::showMyExchangeContractPage()
+{
+    closeCurrentPage();
+    myExchangeContractPage = new MyExchangeContractPage(centralWidget);
+    myExchangeContractPage->setAttribute(Qt::WA_DeleteOnClose);
+    myExchangeContractPage->show();
+    currentPageNum = 5;
+
+    RestoreRightPart();
 }
 
 void Frame::showMultiSigTransactionPage(QString _multiSigAddress)

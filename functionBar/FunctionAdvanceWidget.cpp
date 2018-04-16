@@ -18,6 +18,7 @@ void FunctionAdvanceWidget::PoundageShowSlots()
 {
     ui->toolButton_poundage->setChecked(true);
     ui->toolButton_multiSig->setChecked(false);
+    ui->toolButton_myExchangeContract->setChecked(false);
     emit showPoundageSignal();
 }
 
@@ -25,7 +26,16 @@ void FunctionAdvanceWidget::MultiSigShowSlots()
 {
     ui->toolButton_poundage->setChecked(false);
     ui->toolButton_multiSig->setChecked(true);
+    ui->toolButton_myExchangeContract->setChecked(false);
     emit showMultiSigSignal();
+}
+
+void FunctionAdvanceWidget::MyExchangeContractSlots()
+{
+    ui->toolButton_poundage->setChecked(false);
+    ui->toolButton_multiSig->setChecked(false);
+    ui->toolButton_myExchangeContract->setChecked(true);
+    emit showMyExchangeContractSignal();
 }
 
 void FunctionAdvanceWidget::InitWidget()
@@ -33,8 +43,10 @@ void FunctionAdvanceWidget::InitWidget()
     InitStyle();
     ui->toolButton_poundage->setCheckable(true);
     ui->toolButton_multiSig->setCheckable(true);
+    ui->toolButton_myExchangeContract->setCheckable(true);
     connect(ui->toolButton_poundage,&QToolButton::clicked,this,&FunctionAdvanceWidget::PoundageShowSlots);
     connect(ui->toolButton_multiSig,&QToolButton::clicked,this,&FunctionAdvanceWidget::MultiSigShowSlots);
+    connect(ui->toolButton_myExchangeContract,&QToolButton::clicked,this,&FunctionAdvanceWidget::MyExchangeContractSlots);
 }
 
 void FunctionAdvanceWidget::InitStyle()

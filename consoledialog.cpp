@@ -200,7 +200,7 @@ void ConsoleDialog::on_consoleLineEdit_returnPressed()
             array << param;
         }
 
-//        UBChain::getInstance()->postRPC( "console-" + str, toJsonFormat( command, array ));
+        UBChain::getInstance()->postRPC( "console-" + str, toJsonFormat( command, array ));
 
         ui->consoleLineEdit->clear();
         return;

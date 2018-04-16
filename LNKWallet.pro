@@ -124,7 +124,8 @@ SOURCES += main.cpp\
     poundage/PageScrollWidget.cpp \
     dialog/dialogwithshadow.cpp \
     exchange/exchangewidget.cpp \
-    depositpage/DepositPage.cpp
+    depositpage/DepositPage.cpp \
+    exchange/myexchangecontractpage.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -218,7 +219,8 @@ HEADERS  += firstlogin.h \
     poundage/GeneralComboBoxDelegate.h \
     poundage/PageScrollWidget.h \
     exchange/exchangewidget.h   \
-    depositpage/DepositPage.h
+    depositpage/DepositPage.h \
+    exchange/myexchangecontractpage.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -294,7 +296,8 @@ FORMS    += firstlogin.ui \
     poundage/PoundageShowWidget.ui \
     poundage/PageScrollWidget.ui \
     exchange/exchangewidget.ui  \
-    depositpage/DepositPage.ui
+    depositpage/DepositPage.ui \
+    exchange/myexchangecontractpage.ui
     
 win32{
     DISTFILES += logo.rc

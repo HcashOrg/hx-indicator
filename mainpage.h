@@ -83,6 +83,7 @@ private slots:
 
 private:
     Ui::MainPage *ui;
+    bool inited = false;
     int previousColorRow;
     bool hasDelegateOrNot;
     bool refreshOrNot;

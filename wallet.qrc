@@ -99,5 +99,6 @@
         <file>wallet_ui/success.png</file>
         <file>wallet_ui/peers.png</file>
         <file>wallet_ui/LNK.ico</file>
+        <file>wallet_ui/back.png</file>
     </qresource>
 </RCC>

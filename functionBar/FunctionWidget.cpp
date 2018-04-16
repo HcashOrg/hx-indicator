@@ -147,6 +147,7 @@ void FunctionWidget::InitWidget()
 
     connect(_p->advanceBar,&FunctionAdvanceWidget::showPoundageSignal,this,&FunctionWidget::showPoundageSignal);
     connect(_p->advanceBar,&FunctionAdvanceWidget::showMultiSigSignal,this,&FunctionWidget::showMultiSigSignal);
+    connect(_p->advanceBar,&FunctionAdvanceWidget::showMyExchangeContractSignal,this,&FunctionWidget::showMyExchangeContractSignal);
 }
 
 void FunctionWidget::InitStyle()

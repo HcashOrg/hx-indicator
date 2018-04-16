@@ -89,6 +89,31 @@
     <string>手续费承兑单</string>
    </property>
   </widget>
+  <widget class="QToolButton" name="toolButton_myExchangeContract">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>120</y>
+     <width>120</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>120</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>120</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>我的挂单</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
