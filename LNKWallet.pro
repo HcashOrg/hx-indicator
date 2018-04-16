@@ -121,7 +121,8 @@ SOURCES += main.cpp\
     poundage/PoundageShowWidget.cpp \
     poundage/PoundageShowTableModel.cpp \
     poundage/GeneralComboBoxDelegate.cpp \
-    poundage/PageScrollWidget.cpp
+    poundage/PageScrollWidget.cpp \
+    depositpage/DepositPage.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -213,7 +214,8 @@ HEADERS  += firstlogin.h \
     poundage/PoundageShowWidget.h \
     poundage/PoundageShowTableModel.h \
     poundage/GeneralComboBoxDelegate.h \
-    poundage/PageScrollWidget.h
+    poundage/PageScrollWidget.h \
+    depositpage/DepositPage.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -288,7 +290,8 @@ FORMS    += firstlogin.ui \
     miner/locktominerdialog.ui \
     miner/foreclosedialog.ui    \
     poundage/PoundageShowWidget.ui \
-    poundage/PageScrollWidget.ui
+    poundage/PageScrollWidget.ui \
+    depositpage/DepositPage.ui
     
 win32{
     DISTFILES += logo.rc
