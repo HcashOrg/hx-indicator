@@ -2,7 +2,11 @@
 #define DEPOSITPAGE_H
 
 #include <QWidget>
-
+//////////////////////////////////////////////////////////////////////////
+///<summary>充值界面 </summary>
+///
+///<remarks> 2018.04.16 --朱正天  </remarks>/////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 namespace Ui {
 class DepositPage;
 }
@@ -20,13 +24,26 @@ public:
         QString assetID;//1.3.1  1.3.2 ...
     };
 public:
-    explicit DepositPage(DepositDataInput data,QWidget *parent = 0);
+    explicit DepositPage(const DepositDataInput &data,QWidget *parent = 0);
     ~DepositPage();
+private slots:
+    void jsonDataUpdated(QString id);
+
+    void ShowRecordSlots();
+private:
+    void GenerateAddress();
+
+    void QueryDepositRecord();
+private:
+    void RefreshQRWidget(const QString &queryResult);
 private:
     void InitWidget();
     void InitStyle();
 private:
     Ui::DepositPage *ui;
+private:
+    class DepositPagePrivate;
+    DepositPagePrivate *_p;
 };
 
 #endif // DEPOSITPAGE_H
