@@ -24,6 +24,10 @@ public:
     void retranslator(QString language);
 
 
+private:
+    void showExchangeWidget();
+
+
 public slots:
     void refresh();
 

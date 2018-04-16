@@ -184,7 +184,10 @@ void TransferPage::on_sendBtn_clicked()
                                                            QJsonArray() << accountName << ui->sendtoLineEdit->text()
                                                            << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
                                                            << remark << true ));
-
+qDebug() << toJsonFormat( "transfer_to_address",
+                          QJsonArray() << accountName << ui->sendtoLineEdit->text()
+                          << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                          << remark << true );
         }
 
     }
@@ -359,7 +362,7 @@ void TransferPage::jsonDataUpdated(QString id)
     if( id == "id-transfer_to_address-" + accountName)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-
+qDebug() << id << result;
         if( result.startsWith("\"result\":{"))             // 成功
         {
 //            QString recordId = result.mid( result.indexOf("\"entry_id\"") + 12, 40);

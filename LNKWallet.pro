@@ -125,7 +125,8 @@ SOURCES += main.cpp\
     depositpage/DepositPage.cpp \
     depositpage/DepositDataUtil.cpp \
     depositpage/DepositQrcodeWidget.cpp \
-    depositpage/DepositRecrdWideget.cpp
+    depositpage/DepositRecrdWideget.cpp\
+    exchange/exchangewidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -221,7 +222,8 @@ HEADERS  += firstlogin.h \
     depositpage/DepositPage.h \
     depositpage/DepositDataUtil.h \
     depositpage/DepositQrcodeWidget.h \
-    depositpage/DepositRecrdWideget.h
+    depositpage/DepositRecrdWideget.h\
+    exchange/exchangewidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -252,7 +254,6 @@ FORMS    += firstlogin.ui \
     exportdialog.ui \
     importdialog.ui \
     ipcellwidget.ui \
-    control/accountdetailwidget.ui \
     control/rightclickmenudialog.ui \
     control/chooseaddaccountdialog.ui \
     dialog/renamedialog.ui \
@@ -299,7 +300,8 @@ FORMS    += firstlogin.ui \
     poundage/PageScrollWidget.ui \
     depositpage/DepositPage.ui \
     depositpage/DepositQrcodeWidget.ui \
-    depositpage/DepositRecrdWideget.ui
+    depositpage/DepositRecrdWideget.ui\
+    exchange/exchangewidget.ui
     
 win32{
     DISTFILES += logo.rc
@@ -313,7 +315,18 @@ RESOURCES += \
 TRANSLATIONS +=   wallet_simplified_Chinese.ts  wallet_English.ts
 
 DISTFILES += \
-    contact/search.png
+    contact/search.png \
+    leveldb/leveldb.lib \
+    leveldb/ShLwApi.Lib \
+    libqrencode.a \
+    qrencode.lib \
+    pic2/Thumbs.db \
+    pic2/copyBtn.png \
+    LNK.ico \
+    .gitignore \
+    LICENSE \
+    wallet_English.ts \
+    wallet_simplified_Chinese.ts
 
 QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
 QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO

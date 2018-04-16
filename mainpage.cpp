@@ -22,6 +22,7 @@
 #include "dialog/renamedialog.h"
 #include "dialog/backupwalletdialog.h"
 #include "control/qrcodedialog.h"
+#include "exchange/exchangewidget.h"
 
 #include "depositpage/DepositPage.h"
 
@@ -212,6 +213,12 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         deposit->raise();
         return;
     }
+
+    if(column == 6)
+    {
+        showExchangeWidget();
+        return;
+    }
 }
 
 
@@ -291,6 +298,14 @@ void MainPage::retranslator(QString language)
     {
 
     }
+}
+
+void MainPage::showExchangeWidget()
+{
+    ExchangeWidget* exchangeWidget = new ExchangeWidget(this);
+    exchangeWidget->move(0,0);
+    exchangeWidget->show();
+    exchangeWidget->raise();
 }
 
 void MainPage::jsonDataUpdated(QString id)
