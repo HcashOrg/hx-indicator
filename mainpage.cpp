@@ -24,6 +24,8 @@
 #include "control/qrcodedialog.h"
 #include "exchange/exchangewidget.h"
 
+#include "depositpage/DepositPage.h"
+
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
     hasDelegateOrNot(false),
@@ -199,7 +201,16 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
 
     if(column == 2)
     {
-        showTransferPage( ui->accountTableWidget->item(row,0)->text());
+        emit showTransferPage( ui->accountTableWidget->item(row,0)->text());
+        return;
+    }
+
+    if(column == 3)
+    {//充值界面
+        DepositPage *deposit = new DepositPage(DepositPage::DepositDataInput(ui->accountComboBox->currentText(),
+                                               ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text()),this);
+        deposit->show();
+        deposit->raise();
         return;
     }
 

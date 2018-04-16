@@ -123,7 +123,8 @@ SOURCES += main.cpp\
     poundage/GeneralComboBoxDelegate.cpp \
     poundage/PageScrollWidget.cpp \
     dialog/dialogwithshadow.cpp \
-    exchange/exchangewidget.cpp
+    exchange/exchangewidget.cpp \
+    depositpage/DepositPage.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -216,22 +217,8 @@ HEADERS  += firstlogin.h \
     poundage/PoundageShowTableModel.h \
     poundage/GeneralComboBoxDelegate.h \
     poundage/PageScrollWidget.h \
-    dialog/dialogwithshadow.h \
-    leveldb/include/leveldb/c.h \
-    leveldb/include/leveldb/cache.h \
-    leveldb/include/leveldb/comparator.h \
-    leveldb/include/leveldb/db.h \
-    leveldb/include/leveldb/dumpfile.h \
-    leveldb/include/leveldb/env.h \
-    leveldb/include/leveldb/filter_policy.h \
-    leveldb/include/leveldb/iterator.h \
-    leveldb/include/leveldb/options.h \
-    leveldb/include/leveldb/slice.h \
-    leveldb/include/leveldb/status.h \
-    leveldb/include/leveldb/table.h \
-    leveldb/include/leveldb/table_builder.h \
-    leveldb/include/leveldb/write_batch.h \
-    exchange/exchangewidget.h
+    exchange/exchangewidget.h   \
+    depositpage/DepositPage.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -306,8 +293,8 @@ FORMS    += firstlogin.ui \
     miner/foreclosedialog.ui    \
     poundage/PoundageShowWidget.ui \
     poundage/PageScrollWidget.ui \
-    applydelegatepage.ui \
-    exchange/exchangewidget.ui
+    exchange/exchangewidget.ui  \
+    depositpage/DepositPage.ui
     
 win32{
     DISTFILES += logo.rc
