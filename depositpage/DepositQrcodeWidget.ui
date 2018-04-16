@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DepositQrcodeWidget</class>
+ <widget class="QWidget" name="DepositQrcodeWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>770</width>
+    <height>450</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label_qrcode">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>60</y>
+     <width>150</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>qrcode</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_warning">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>350</y>
+     <width>531</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>*重要提示:禁止向BTC地址充值除BTC之外的资产，任何充入BTC地址的非BTC资产将不可找回！</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_mark">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>240</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>充值地址：</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_address">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>240</y>
+     <width>411</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="toolButton">
+   <property name="geometry">
+    <rect>
+     <x>355</x>
+     <y>290</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>复制</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

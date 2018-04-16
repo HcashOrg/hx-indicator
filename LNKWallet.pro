@@ -122,10 +122,16 @@ SOURCES += main.cpp\
     poundage/PoundageShowTableModel.cpp \
     poundage/GeneralComboBoxDelegate.cpp \
     poundage/PageScrollWidget.cpp \
-    dialog/dialogwithshadow.cpp \
+    depositpage/DepositPage.cpp \
+    depositpage/DepositDataUtil.cpp \
+    depositpage/DepositQrcodeWidget.cpp \
+    depositpage/DepositRecrdWideget.cpp\
     exchange/exchangewidget.cpp \
     depositpage/DepositPage.cpp \
-    exchange/myexchangecontractpage.cpp
+    exchange/myexchangecontractpage.cpp \
+    withdrawpage/WithdrawPage.cpp \
+    withdrawpage/WithdrawDataUtil.cpp \
+    withdrawpage/WithdrawInputWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -220,7 +226,15 @@ HEADERS  += firstlogin.h \
     poundage/PageScrollWidget.h \
     exchange/exchangewidget.h   \
     depositpage/DepositPage.h \
-    exchange/myexchangecontractpage.h
+    exchange/myexchangecontractpage.h   \
+    depositpage/DepositPage.h \
+    depositpage/DepositDataUtil.h \
+    depositpage/DepositQrcodeWidget.h \
+    depositpage/DepositRecrdWideget.h\
+    exchange/exchangewidget.h \
+    withdrawpage/WithdrawPage.h \
+    withdrawpage/WithdrawDataUtil.h \
+    withdrawpage/WithdrawInputWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -297,7 +311,13 @@ FORMS    += firstlogin.ui \
     poundage/PageScrollWidget.ui \
     exchange/exchangewidget.ui  \
     depositpage/DepositPage.ui \
-    exchange/myexchangecontractpage.ui
+    exchange/myexchangecontractpage.ui  \
+    depositpage/DepositPage.ui \
+    depositpage/DepositQrcodeWidget.ui \
+    depositpage/DepositRecrdWideget.ui\
+    exchange/exchangewidget.ui \
+    withdrawpage/WithdrawPage.ui \
+    withdrawpage/WithdrawInputWidget.ui
     
 win32{
     DISTFILES += logo.rc
