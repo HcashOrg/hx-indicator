@@ -329,7 +329,8 @@ win32{
 
 RESOURCES += \
     wallet.qrc \
-    contact/resources.qrc
+    contact/resources.qrc \
+    functionBar/functionbar.qrc
 
 TRANSLATIONS +=   wallet_simplified_Chinese.ts  wallet_English.ts
 

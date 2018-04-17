@@ -70,7 +70,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-image: url(:/ui/wallet_ui/peers.png);</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string/>

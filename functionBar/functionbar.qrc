@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/functionBar">
+        <file>account.png</file>
+        <file>advance.png</file>
+        <file>contact.png</file>
+        <file>more.png</file>
+    </qresource>
+</RCC>

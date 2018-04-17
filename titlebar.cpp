@@ -20,7 +20,7 @@ TitleBar::TitleBar(QWidget *parent) :
 
 //    ui->divLineLabel->setPixmap(QPixmap("pic2/divLine.png"));
 //    ui->divLineLabel->setScaledContents(true);
-
+    ui->label->setPixmap(QPixmap(":/ui/wallet_ui/Linklogo.png").scaled(130,30));
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 

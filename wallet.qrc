@@ -100,5 +100,7 @@
         <file>wallet_ui/peers.png</file>
         <file>wallet_ui/LNK.ico</file>
         <file>wallet_ui/back.png</file>
+        <file>wallet_ui/Linklogo.png</file>
+        <file>wallet_ui/net.png</file>
     </qresource>
 </RCC>
