@@ -132,7 +132,9 @@ SOURCES += main.cpp\
     withdrawpage/WithdrawPage.cpp \
     withdrawpage/WithdrawDataUtil.cpp \
     withdrawpage/WithdrawInputWidget.cpp \
-    withdrawpage/WithdrawConfirmWidget.cpp
+    withdrawpage/WithdrawConfirmWidget.cpp \
+    capitalTransferPage/CapitalTransferPage.cpp \
+    capitalTransferPage/PasswordConfirmWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -236,7 +238,9 @@ HEADERS  += firstlogin.h \
     withdrawpage/WithdrawPage.h \
     withdrawpage/WithdrawDataUtil.h \
     withdrawpage/WithdrawInputWidget.h \
-    withdrawpage/WithdrawConfirmWidget.h
+    withdrawpage/WithdrawConfirmWidget.h \
+    capitalTransferPage/CapitalTransferPage.h \
+    capitalTransferPage/PasswordConfirmWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -320,7 +324,9 @@ FORMS    += firstlogin.ui \
     exchange/exchangewidget.ui \
     withdrawpage/WithdrawPage.ui \
     withdrawpage/WithdrawInputWidget.ui \
-    withdrawpage/WithdrawConfirmWidget.ui
+    withdrawpage/WithdrawConfirmWidget.ui \
+    capitalTransferPage/CapitalTransferPage.ui \
+    capitalTransferPage/PasswordConfirmWidget.ui
     
 win32{
     DISTFILES += logo.rc
