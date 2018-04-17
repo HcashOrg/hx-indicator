@@ -3,6 +3,7 @@
 
 #include <QPainter>
 
+#include "PasswordConfirmWidget.h"
 #include "wallet.h"
 
 class CapitalTransferPage::CapitalTransferPagePrivate
@@ -38,8 +39,13 @@ CapitalTransferPage::~CapitalTransferPage()
 
 void CapitalTransferPage::ConfirmSlots()
 {
-
-    close();
+    hide();
+    PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget(this);
+    confirmWidget->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Dialog | Qt::FramelessWindowHint);
+    confirmWidget->setWindowModality(Qt::WindowModal);
+    confirmWidget->setAttribute(Qt::WA_DeleteOnClose);
+    confirmWidget->move(mapToGlobal(QPoint(0,0)));
+    confirmWidget->show();
 }
 
 void CapitalTransferPage::radioChangedSlots()
@@ -125,7 +131,7 @@ void CapitalTransferPage::InitStyle()
                   "QToolButton#toolButton_close{border:none;background:transparent;color:#4861DC;}"
                   "QRadioButton{color:#4861DC;}"
                   "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-);
+                  );
 }
 
 void CapitalTransferPage::paintEvent(QPaintEvent *event)

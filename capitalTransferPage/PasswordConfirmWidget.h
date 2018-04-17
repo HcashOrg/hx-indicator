@@ -14,7 +14,18 @@ class PasswordConfirmWidget : public QWidget
 public:
     explicit PasswordConfirmWidget(QWidget *parent = 0);
     ~PasswordConfirmWidget();
+private slots:
+    void ConfirmSlots();
+    void CancelSlots();
 
+    void passwordChangeSlots(const QString &address);
+
+    void jsonDataUpdated(QString id);
+protected:
+    void paintEvent(QPaintEvent *event);
+private:
+    void InitWidget();
+    void InitStyle();
 private:
     Ui::PasswordConfirmWidget *ui;
 };
