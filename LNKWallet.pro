@@ -127,6 +127,8 @@ SOURCES += main.cpp\
     depositpage/DepositQrcodeWidget.cpp \
     depositpage/DepositRecrdWideget.cpp\
     exchange/exchangewidget.cpp \
+    depositpage/DepositPage.cpp \
+    exchange/myexchangecontractpage.cpp \
     withdrawpage/WithdrawPage.cpp \
     withdrawpage/WithdrawDataUtil.cpp \
     withdrawpage/WithdrawInputWidget.cpp \
@@ -223,6 +225,9 @@ HEADERS  += firstlogin.h \
     poundage/PoundageShowTableModel.h \
     poundage/GeneralComboBoxDelegate.h \
     poundage/PageScrollWidget.h \
+    exchange/exchangewidget.h   \
+    depositpage/DepositPage.h \
+    exchange/myexchangecontractpage.h   \
     depositpage/DepositPage.h \
     depositpage/DepositDataUtil.h \
     depositpage/DepositQrcodeWidget.h \
@@ -306,6 +311,9 @@ FORMS    += firstlogin.ui \
     miner/foreclosedialog.ui    \
     poundage/PoundageShowWidget.ui \
     poundage/PageScrollWidget.ui \
+    exchange/exchangewidget.ui  \
+    depositpage/DepositPage.ui \
+    exchange/myexchangecontractpage.ui  \
     depositpage/DepositPage.ui \
     depositpage/DepositQrcodeWidget.ui \
     depositpage/DepositRecrdWideget.ui\

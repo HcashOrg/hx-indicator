@@ -282,7 +282,12 @@ void MainPage::init()
      QStringList accounts = UBChain::getInstance()->accountInfoMap.keys();
      ui->accountComboBox->addItems(accounts);
 
+     if(accounts.contains(UBChain::getInstance()->currentAccount))
+     {
+         ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+     }
 
+     inited = true;
 }
 
 
@@ -540,6 +545,9 @@ void MainPage::deleteAccount(QString name)
 
 void MainPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
+    if(!inited)     return;
+    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+
     updateAccountList();
 }
 

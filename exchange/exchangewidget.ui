@@ -146,7 +146,7 @@
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="backBtn">
+  <widget class="QToolButton" name="backBtn">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -154,6 +154,9 @@
      <width>21</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/ui/wallet_ui/back.png);</string>
    </property>
    <property name="text">
     <string/>

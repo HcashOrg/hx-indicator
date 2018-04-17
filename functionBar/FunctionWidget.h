@@ -41,6 +41,7 @@ signals:
     //点击二级按钮的信号
     void showPoundageSignal();
     void showMultiSigSignal();
+    void showMyExchangeContractSignal();
     void showMinerSignal();
 
 signals:
