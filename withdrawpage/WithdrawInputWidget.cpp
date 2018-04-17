@@ -20,7 +20,8 @@ WithdrawInputWidget::~WithdrawInputWidget()
 void WithdrawInputWidget::setMaxAmmount(double number)
 {
     ui->lineEdit_ammount->setPlaceholderText(ui->lineEdit_ammount->placeholderText().replace("0",QString::number(number)));
-    QDoubleValidator *validator = new QDoubleValidator(0,number,0.0001,ui->lineEdit_ammount);
+    QDoubleValidator *validator = new QDoubleValidator(0,number,10,this);
+    validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_ammount->setValidator( validator );
 }
 
@@ -52,6 +53,16 @@ void WithdrawInputWidget::addressChangeSlots(const QString &address)
     }
 }
 
+void WithdrawInputWidget::maxButtonSlots()
+{
+    ui->lineEdit_ammount->setText(QString::number(dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()))->top()));
+}
+
+void WithdrawInputWidget::confirmButtonSlots()
+{
+    emit withdrawSignal(ui->lineEdit_address->text(),ui->lineEdit_ammount->text().toDouble());
+}
+
 void WithdrawInputWidget::InitWidget()
 {
     InitStyle();
@@ -61,6 +72,8 @@ void WithdrawInputWidget::InitWidget()
 
     ui->toolButton_confirm->setEnabled(false);
     connect(ui->lineEdit_address,&QLineEdit::textEdited,this,&WithdrawInputWidget::addressChangeSlots);
+    connect(ui->toolButton_all,&QToolButton::clicked,this,&WithdrawInputWidget::maxButtonSlots);
+    connect(ui->toolButton_confirm,&QToolButton::clicked,this,&WithdrawInputWidget::confirmButtonSlots);
 }
 
 void WithdrawInputWidget::InitStyle()

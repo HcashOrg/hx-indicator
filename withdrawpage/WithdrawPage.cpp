@@ -43,6 +43,11 @@ void WithdrawPage::ShowRecordSlots()
 
 }
 
+void WithdrawPage::ShowConfirmWidget(const QString &address, double ammount)
+{//收到提现信号
+
+}
+
 void WithdrawPage::InitWidget()
 {
     InitStyle();
@@ -52,6 +57,7 @@ void WithdrawPage::InitWidget()
     _p->inputWidget->setSymbol(_p->assetSymbol);
 
     connect(ui->toolButton,&QToolButton::clicked,this,&WithdrawPage::ShowRecordSlots);
+    connect(_p->inputWidget,&WithdrawInputWidget::withdrawSignal,this,&WithdrawPage::ShowConfirmWidget);
 }
 
 void WithdrawPage::InitStyle()

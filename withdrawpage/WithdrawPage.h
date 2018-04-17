@@ -29,6 +29,8 @@ public:
     ~WithdrawPage();
 private slots:
     void ShowRecordSlots();
+
+    void ShowConfirmWidget(const QString &address,double ammount);
 private:
     void InitWidget();
     void InitStyle();
