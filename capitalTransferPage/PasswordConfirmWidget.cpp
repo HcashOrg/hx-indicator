@@ -18,11 +18,13 @@ PasswordConfirmWidget::~PasswordConfirmWidget()
 
 void PasswordConfirmWidget::ConfirmSlots()
 {
+    emit confirmSignal();
     close();
 }
 
 void PasswordConfirmWidget::CancelSlots()
 {
+    emit cancelSignal();
     close();
 }
 
@@ -35,13 +37,13 @@ void PasswordConfirmWidget::passwordChangeSlots(const QString &address)
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->lineEdit->text() ));
+    UBChain::getInstance()->postRPC( "id_unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->lineEdit->text() ));
 
 }
 
 void PasswordConfirmWidget::jsonDataUpdated(QString id)
 {
-    if( id == "id-unlock-lockpage")
+    if( id == "id_unlock-lockpage")
     {
         QString  result = UBChain::getInstance()->jsonDataValue(id);
         if( result == "\"result\":null")

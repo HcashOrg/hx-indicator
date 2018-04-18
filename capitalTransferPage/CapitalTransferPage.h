@@ -12,12 +12,13 @@ class CapitalTransferPage : public QWidget
     Q_OBJECT
 public:
     struct CapitalTransferInput{
-        CapitalTransferInput(const QString &_account,const QString &_symbol)
-            :account(_account),symbol(_symbol)
+        CapitalTransferInput(const QString &accountname,const QString &_account_address,const QString &_symbol)
+            :account_name(accountname),account_address(_account_address),symbol(_symbol)
         {
 
         }
-        QString account;
+        QString account_name;
+        QString account_address;
         QString symbol;
     };
 
@@ -30,6 +31,13 @@ private slots:
     void radioChangedSlots();
 
     void jsonDataUpdated(QString id);
+
+    void passwordConfirmSlots();
+    void passwordCancelSlots();
+
+    void numberChangeSlots(const QString &number);
+
+    void addressChangeSlots(const QString &address);
 private:
     void updateData();
 protected:

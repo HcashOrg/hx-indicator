@@ -54,8 +54,17 @@ void DepositPage::jsonDataUpdated(QString id)
         if( result.isEmpty() )  return;
         result.prepend("{");
         result.append("}");
+        //qDebug()<<"crossAddress"<<result;
 
         RefreshQRWidget(result);
+    }
+    else if("id_bind_tunnel_account" == id)
+    {
+        QString result = UBChain::getInstance()->jsonDataValue( id);
+        if( result.isEmpty() )  return;
+        result.prepend("{");
+        result.append("}");
+        //qDebug()<<"tunnelrunnel"<<result;
     }
 }
 
@@ -85,7 +94,7 @@ void DepositPage::RefreshQRWidget(const QString &queryResult)
     //绑定账户
     UBChain::getInstance()->postRPC("id_bind_tunnel_account",
                                     toJsonFormat("bind_tunnel_account",
-                                                 QJsonArray()<<_p->address<<_p->tunnelData->address<<_p->assetSymbol<<true));
+                                                 QJsonArray()<<_p->name<<_p->tunnelData->address<<_p->assetSymbol<<true));
 }
 
 void DepositPage::InitWidget()

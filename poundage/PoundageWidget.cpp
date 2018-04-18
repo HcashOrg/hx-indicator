@@ -127,7 +127,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
         result.prepend("{");
         result.append("}");
 
-        qDebug()<<"chargecccccc"<<result;
+        //qDebug()<<"chargecccccc"<<result;
         //刷新承税单
         autoRefreshSlots();
     }

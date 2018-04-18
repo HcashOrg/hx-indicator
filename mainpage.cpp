@@ -229,7 +229,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
     if( 5 == column)
     {//资金划转界面
         CapitalTransferPage *capital = new CapitalTransferPage(CapitalTransferPage::CapitalTransferInput(
-                                           ui->accountComboBox->currentText(),ui->accountTableWidget->item(row,0)->text()),this);
+                                           ui->accountComboBox->currentText(),ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text()),this);
         capital->show();
         capital->raise();
         return;

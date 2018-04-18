@@ -134,7 +134,8 @@ SOURCES += main.cpp\
     withdrawpage/WithdrawInputWidget.cpp \
     withdrawpage/WithdrawConfirmWidget.cpp \
     capitalTransferPage/CapitalTransferPage.cpp \
-    capitalTransferPage/PasswordConfirmWidget.cpp
+    capitalTransferPage/PasswordConfirmWidget.cpp \
+    capitalTransferPage/CapitalTransferDataUtil.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -240,7 +241,8 @@ HEADERS  += firstlogin.h \
     withdrawpage/WithdrawInputWidget.h \
     withdrawpage/WithdrawConfirmWidget.h \
     capitalTransferPage/CapitalTransferPage.h \
-    capitalTransferPage/PasswordConfirmWidget.h
+    capitalTransferPage/PasswordConfirmWidget.h \
+    capitalTransferPage/CapitalTransferDataUtil.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
