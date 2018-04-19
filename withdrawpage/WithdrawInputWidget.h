@@ -26,6 +26,8 @@ private slots:
 
     void confirmButtonSlots();
 private:
+    bool validateAddress(const QString &address);
+private:
     void InitWidget();
     void InitStyle();
 private:

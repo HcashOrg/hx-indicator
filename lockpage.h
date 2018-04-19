@@ -37,7 +37,9 @@ private slots:
     void on_pwdLineEdit_textChanged(const QString &arg1);
 
     void jsonDataUpdated(QString id);
-
+private:
+    void InitWidget();
+    void InitStyle();
 private:
     Ui::LockPage *ui;
 

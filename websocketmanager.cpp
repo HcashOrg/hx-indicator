@@ -84,7 +84,7 @@ void WebSocketManager::run()
 {
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(onTimer()));
-    timer->start(100);
+    timer->start(10);
 
     m_webSocket = new QWebSocket;
     connect(m_webSocket,SIGNAL(connected()),this,SLOT(onConnected()));

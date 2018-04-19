@@ -1048,7 +1048,7 @@ void Frame::jsonDataUpdated(QString id)
             normalLogin = new NormalLogin(this);
 
             firstLogin = NULL;
-            normalLogin->setGeometry(0,0,240,320);
+            normalLogin->setGeometry(0,0,960,580);
             normalLogin->show();
             connect( normalLogin,SIGNAL(login()), this, SLOT(alreadyLogin()));
             connect( normalLogin,SIGNAL(minimum()),this,SLOT(showMinimized()));
@@ -1181,7 +1181,7 @@ void Frame::jsonDataUpdated(QString id)
 
             lockPage = new LockPage(this);
             lockPage->setAttribute(Qt::WA_DeleteOnClose);
-            lockPage->setGeometry(0,0,240,320);
+            lockPage->setGeometry(0,0,960,580);
             connect( lockPage,SIGNAL(unlock()),this,SLOT(unlock()));
             connect( lockPage,SIGNAL(minimum()),this,SLOT(showMinimized()));
             connect( lockPage,SIGNAL(closeWallet()),qApp,SLOT(quit()));

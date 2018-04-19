@@ -208,8 +208,8 @@ void CapitalTransferPage::addressChangeSlots(const QString &address)
         return;
     }
 
-    AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
-    if( type == AccountAddress)
+    //AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
+    if( validateAddress(address))
     {
         ui->lineEdit_number->setPlaceholderText(tr("input number"));
         ui->lineEdit_address->setStyleSheet("color:#5474EB");
@@ -249,6 +249,11 @@ void CapitalTransferPage::updateData()
     ui->lineEdit_number->setValidator(validator);
 }
 
+bool CapitalTransferPage::validateAddress(const QString &address)
+{
+    return !address.isEmpty();
+}
+
 void CapitalTransferPage::InitWidget()
 {
     InitStyle();
@@ -284,7 +289,7 @@ void CapitalTransferPage::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
     setStyleSheet("QToolButton#toolButton_confirm{color:white;\

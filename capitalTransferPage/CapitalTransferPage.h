@@ -40,6 +40,7 @@ private slots:
     void addressChangeSlots(const QString &address);
 private:
     void updateData();
+    bool validateAddress(const QString &address);
 protected:
     void paintEvent(QPaintEvent *event);
 private:

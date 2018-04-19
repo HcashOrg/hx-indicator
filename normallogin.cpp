@@ -1,4 +1,4 @@
-﻿
+﻿#include <QPainter>
 #include <QKeyEvent>
 #include <QDebug>
 #ifdef WIN32
@@ -15,14 +15,11 @@ NormalLogin::NormalLogin(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::NormalLogin)
 {
-
-
     ui->setupUi(this);
 
     connect( UBChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(pwdConfirmed(QString)));
 
-    setStyleSheet("NormalLogin{background-image:url(:/ui/wallet_ui/loginBg.png);}");
-
+    InitWidget();
 
 #ifdef TARGET_OS_MAC
     ui->pwdLineEdit->setAttribute(Qt::WA_MacShowFocusRect,false);
@@ -30,15 +27,6 @@ NormalLogin::NormalLogin(QWidget *parent) :
     ui->pwdLineEdit->setFocus();
     ui->pwdLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
     ui->pwdLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
-    ui->pwdLineEdit->setStyleSheet("color:white;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;");
-
-
-    ui->logoLabel->setPixmap(QPixmap(":/ui/wallet_ui/logo_52x34.png"));
-    ui->label->setPixmap(QPixmap(":/ui/wallet_ui/passwordLineEditBg.png"));
-
-    ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: repeat-xy;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
-
 
 #ifdef WIN32
     if( GetKeyState(VK_CAPITAL) )
@@ -152,6 +140,34 @@ void NormalLogin::pwdConfirmed(QString id)
     }
 }
 
+void NormalLogin::InitWidget()
+{
+    InitStyle();
+}
+
+void NormalLogin::InitStyle()
+{
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
+    setPalette(palette);
+
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
+    ui->label_wel->setPalette(pa);
+    ui->label_bloc->setPalette(pa);
+    ui->label_version->setPalette(pa);
+
+    ui->pwdLineEdit->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;");
+
+    ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: repeat-xy;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
+    ui->enterBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
+                                "QToolButton:hover{background-color:#00D2FF;}");
+    ui->forgetBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;border-radius:15px;color: #C6CAD4;}"
+                                 "QToolButton:hover{background-color:#00D2FF;}");
+}
+
 
 void NormalLogin::keyPressEvent(QKeyEvent *e)
 {
@@ -176,11 +192,8 @@ void NormalLogin::keyPressEvent(QKeyEvent *e)
 
 void NormalLogin::paintEvent(QPaintEvent *e)
 {
-    QStyleOption opt;
-
-    opt.init(this);
-    QPainter p(this);
-    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    QPainter painter(this);
+    painter.drawPixmap(255,150,450,280,QPixmap(":/ui/wallet_ui/login.png").scaled(450,280));
 
     QWidget::paintEvent(e);
 }

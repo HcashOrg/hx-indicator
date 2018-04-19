@@ -154,11 +154,11 @@ void FunctionWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(72,97,220));
+    palette.setColor(QPalette::Window, QColor(72,97,220));
     setPalette(palette);
 
     setStyleSheet("\
-    QToolButton{min-height:24px;min-width:24px;background: rgb(72,97,220);border:none;color:white;font:MicrosoftYaHeiLight;}\
+    QToolButton{min-height:24px;min-width:24px;background: rgb(72,97,220);border:none;color:white;font:Microsoft YaHei UI Light;}\
     QToolButton:hover{background-color: rgb(0,210, 255);}\
     QToolButton:pressed{background-color: rgb(84,116, 235);}\
     QToolButton:checked{background-color: rgb(84,116, 235);}\

@@ -48,10 +48,10 @@ void DepositQrcodeWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("MicrosoftYaHeiLight",14,50);
+    QFont font("Microsoft YaHei UI Light",14,50);
     ui->label_mark->setFont(font);
     ui->label_address->setFont(font);
     QPalette pa;
@@ -59,7 +59,7 @@ void DepositQrcodeWidget::InitStyle()
     ui->label_mark->setPalette(pa);
     ui->label_address->setPalette(pa);
 
-    QFont font1("MicrosoftYaHeiLight",10,50);
+    QFont font1("Microsoft YaHei UI Light",10,50);
     ui->label_warning->setFont(font1);
     QPalette pe;
     pe.setColor(QPalette::WindowText,Qt::red);

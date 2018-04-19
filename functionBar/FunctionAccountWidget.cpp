@@ -42,10 +42,10 @@ void FunctionAccountWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(94,116,235));
+    palette.setColor(QPalette::Window, QColor(94,116,235));
     setPalette(palette);
 
-    QFont font("MicrosoftYaHeiLight",14,63);
+    QFont font("Microsoft YaHei UI Light",14,63);
     ui->label_normal->setFont(font);
     ui->label_advance->setFont(font);
     QPalette pa;

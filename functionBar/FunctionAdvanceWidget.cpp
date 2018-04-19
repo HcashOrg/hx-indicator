@@ -53,10 +53,10 @@ void FunctionAdvanceWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(94,116,235));
+    palette.setColor(QPalette::Window, QColor(94,116,235));
     setPalette(palette);
 
-    QFont font("MicrosoftYaHeiLight",16,63);
+    QFont font("Microsoft YaHei UI Light",16,63);
     ui->label->setFont(font);
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(248,249,254));
@@ -65,7 +65,7 @@ void FunctionAdvanceWidget::InitStyle()
     //ui->pushButton_multiSig->setFlat(true);
     //ui->pushButton_poundage->setFlat(true);
 
-    setStyleSheet("QToolButton{background: rgb(94,116,235);font-size:14px;font-family:MicrosoftYaHeiLight;}\
+    setStyleSheet("QToolButton{background: rgb(94,116,235);font-size:14px;font-family:Microsoft YaHei UI Light;}\
                    QToolButton:hover{background-color: rgb(0,210, 255);}\
                    QToolButton:pressed{background-color: rgb(130,157, 255);}\
                    QToolButton:checked{background-color: rgb(130,157, 255);}");

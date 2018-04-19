@@ -32,25 +32,36 @@ void WithdrawInputWidget::setSymbol(const QString &symbol)
 
 void WithdrawInputWidget::addressChangeSlots(const QString &address)
 {
-    ui->lineEdit_address->setText( ui->lineEdit_address->text().remove(" "));
-    ui->lineEdit_address->setText( ui->lineEdit_address->text().remove("\n"));
-    if( ui->lineEdit_address->text().isEmpty())
-    {
-        ui->toolButton_confirm->setEnabled(false);
-        return;
-    }
-
-    AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
-    if( type == AccountAddress)
+    if(validateAddress(address))
     {
         ui->toolButton_confirm->setEnabled(true);
-        return;
     }
     else
     {
         ui->toolButton_confirm->setEnabled(false);
-        return;
     }
+    //ui->lineEdit_address->setText( ui->lineEdit_address->text().remove(" "));
+    //ui->lineEdit_address->setText( ui->lineEdit_address->text().remove("\n"));
+    //qDebug()<<"fffffffff"<<ui->lineEdit_address->text();
+    //if( ui->lineEdit_address->text().isEmpty())
+    //{
+    //    ui->toolButton_confirm->setEnabled(false);
+    //    return;
+    //}
+    //
+    //AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
+    //qDebug()<<"dddd"<<address << "type"<<type << "size" << address.size();
+    //
+    //if( type == AccountAddress)
+    //{
+    //    ui->toolButton_confirm->setEnabled(true);
+    //    return;
+    //}
+    //else
+    //{
+    //    ui->toolButton_confirm->setEnabled(false);
+    //    return;
+    //}
 }
 
 void WithdrawInputWidget::maxButtonSlots()
@@ -61,6 +72,11 @@ void WithdrawInputWidget::maxButtonSlots()
 void WithdrawInputWidget::confirmButtonSlots()
 {
     emit withdrawSignal(ui->lineEdit_address->text(),ui->lineEdit_ammount->text().toDouble());
+}
+
+bool WithdrawInputWidget::validateAddress(const QString &address)
+{
+    return !address.isEmpty();
 }
 
 void WithdrawInputWidget::InitWidget()
@@ -80,7 +96,7 @@ void WithdrawInputWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
     setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
@@ -89,5 +105,5 @@ void WithdrawInputWidget::InitStyle()
                   "QToolButton#toolButton_all{border:none;background-color:transparent;border-radius:10px;color:#5474EB;font-size:9pt;}"
                   "QToolButton#toolButton_confirm::hover,QToolButton#toolButton_all::hover{background-color:#00D2FF;}"
                   "QToolButton#toolButton_confirm{border:none;background-color:#5474EB;color:white;border-radius:10px;font-size:12pt;}"
-                  "QLabel{background:transparent;color:black:font-family:MicrosoftYaHeiLight;}");
+                  "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
 }

@@ -28,6 +28,8 @@ public:
 
     DepositQrcodeWidget *qrcodeWidget;
     DepositRecrdWideget *recordWidget;
+
+    QString tunnle_address;
 };
 
 DepositPage::DepositPage(const DepositDataInput & data,QWidget *parent) :
@@ -47,23 +49,54 @@ DepositPage::~DepositPage()
 
 void DepositPage::jsonDataUpdated(QString id)
 {
-    if("id_wallet_create_crosschain_symbol" == id)
+    if("id_get_binding_account" == id)
+    {
+        QString result = UBChain::getInstance()->jsonDataValue( id);
+        result.prepend("{");
+        result.append("}");
+    //提取通道账户地址
+        _p->tunnle_address = DepositDataUtil::parseTunnelAddress(result);
+        if(_p->tunnle_address.isEmpty())
+        {
+            //生成通道账户
+            GenerateAddress();
+        }
+        else
+        {
+            _p->qrcodeWidget->SetQRString(_p->tunnle_address);
+        }
+
+    }
+    else if("id_wallet_create_crosschain_symbol" == id)
     {
         //解析返回的通道地址，并且绑定地址
         QString result = UBChain::getInstance()->jsonDataValue( id);
-        if( result.isEmpty() )  return;
+        if( result.isEmpty() || result.startsWith("\"error"))
+        {
+            _p->qrcodeWidget->SetQRString(tr("cannot generate tunnel account"));
+            return;
+        }
         result.prepend("{");
         result.append("}");
         //qDebug()<<"crossAddress"<<result;
 
-        RefreshQRWidget(result);
+        DepositDataUtil::ParseTunnelData(result,_p->tunnelData);
+        //绑定账户
+        UBChain::getInstance()->postRPC("id_bind_tunnel_account",
+                                        toJsonFormat("bind_tunnel_account",
+                                                     QJsonArray()<<_p->name<<_p->tunnelData->address<<_p->assetSymbol<<true));
     }
     else if("id_bind_tunnel_account" == id)
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
-        if( result.isEmpty() )  return;
+        if( result.isEmpty() || result.startsWith("\"error"))
+        {
+            _p->qrcodeWidget->SetQRString(tr("cannot bind tunnel account"));
+            return;
+        }
         result.prepend("{");
         result.append("}");
+        _p->qrcodeWidget->SetQRString(_p->tunnelData->address);
         //qDebug()<<"tunnelrunnel"<<result;
     }
 }
@@ -87,16 +120,6 @@ void DepositPage::QueryDepositRecord()
 
 }
 
-void DepositPage::RefreshQRWidget(const QString &queryResult)
-{
-    DepositDataUtil::ParseTunnelData(queryResult,_p->tunnelData);
-    _p->qrcodeWidget->SetQRString(_p->tunnelData->address);
-    //绑定账户
-    UBChain::getInstance()->postRPC("id_bind_tunnel_account",
-                                    toJsonFormat("bind_tunnel_account",
-                                                 QJsonArray()<<_p->name<<_p->tunnelData->address<<_p->assetSymbol<<true));
-}
-
 void DepositPage::InitWidget()
 {
     InitStyle();
@@ -105,7 +128,11 @@ void DepositPage::InitWidget()
     ui->stackedWidget->setCurrentWidget(_p->qrcodeWidget);
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &DepositPage::jsonDataUpdated);
 
-    GenerateAddress();
+    //查询通道账户，
+    UBChain::getInstance()->postRPC( "id_get_binding_account",
+                                     toJsonFormat( "get_binding_account", QJsonArray()
+                                     << _p->name<<_p->assetSymbol ));
+
 
     _p->qrcodeWidget->SetSymbol(_p->assetSymbol);
 }
@@ -114,10 +141,10 @@ void DepositPage::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("MicrosoftYaHeiLight",20,63);
+    QFont font("Microsoft YaHei UI Light",20,63);
     ui->label->setFont(font);
     QPalette pa;
     pa.setColor(QPalette::WindowText,Qt::black);

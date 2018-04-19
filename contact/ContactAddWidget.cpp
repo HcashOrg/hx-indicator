@@ -93,15 +93,16 @@ bool ContactAddWidget::validateAddress(const QString &address)
     if(!_p->contactSheet) return false;
     if(!_p->contactSheet->validateAddress(address)) return false;
     //调用全局检测函数
-    AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
-    if( type == AccountAddress)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return true;
+    //AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
+    //if( type == AccountAddress)
+    //{
+    //    return true;
+    //}
+    //else
+    //{
+    //    return false;
+    //}
 
 }
 
@@ -109,7 +110,7 @@ void ContactAddWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
     setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
@@ -118,7 +119,7 @@ void ContactAddWidget::InitStyle()
                   "QPushButton{border:none;background-color:#5474EB;color:white;width:60px;height:20px;\
                    border-radius:10px;font-size:12pt;}"
                   "QPushButton::hover{background-color:#00D2FF;}"
-                  "QLabel{background:transparent;color:black:font-family:MicrosoftYaHeiLight;}");
+                  "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
 }
 
 void ContactAddWidget::InitWidget()
