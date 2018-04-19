@@ -25,7 +25,9 @@ private slots:
     void on_importWalletBtn_clicked();
 
     void on_closeBtn_clicked();
-
+private:
+    void InitWidget();
+    void InitStyle();
 private:
     Ui::NewOrImportWalletWidget *ui;
 
