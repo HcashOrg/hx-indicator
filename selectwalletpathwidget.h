@@ -48,6 +48,10 @@ private:
     QString getXmlElementText(QDomDocument& doc, QString name);
 
     void paintEvent(QPaintEvent*);
+private:
+    void InitWidget();
+    void InitStyle();
+
 };
 
 int compareVersion( QString a, QString b);

@@ -13,20 +13,12 @@ SelectWalletPathWidget::SelectWalletPathWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setStyleSheet("SelectWalletPathWidget{background-image:url(:/ui/wallet_ui/loginBg.png);}");
-
 #ifdef TARGET_OS_MAC
     ui->pwdLineEdit->setAttribute(Qt::WA_MacShowFocusRect,false);
 #endif
-    ui->logoLabel->setPixmap(QPixmap(":/ui/wallet_ui/logo_52x34.png"));
-
-    ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: repeat-xy;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
 
 
-    ui->pathLineEdit->setText( UBChain::getInstance()->appDataPath);
-
-
+    InitWidget();
 //    getUpdateXml();
 }
 
@@ -86,13 +78,49 @@ void SelectWalletPathWidget::on_okBtn_clicked()
 
 void SelectWalletPathWidget::paintEvent(QPaintEvent *e)
 {
-    QStyleOption opt;
-
-    opt.init(this);
-    QPainter p(this);
-    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    QPainter painter(this);
+    painter.drawPixmap(238,130,490,320,QPixmap(":/ui/wallet_ui/login.png").scaled(490,320));
 
     QWidget::paintEvent(e);
+}
+
+void SelectWalletPathWidget::InitWidget()
+{
+    InitStyle();
+    ui->pathLineEdit->setText( UBChain::getInstance()->appDataPath);
+}
+
+void SelectWalletPathWidget::InitStyle()
+{
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
+    setPalette(palette);
+
+    QFont font("黑体",14,70);
+    ui->label_wel->setFont(font);
+
+    QFont fontb("黑体",21,100);
+    ui->label_bloc->setFont(fontb);
+
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
+    ui->label_wel->setPalette(pa);
+    ui->label_bloc->setPalette(pa);
+    ui->label_version->setPalette(pa);
+
+    ui->closeBtn->setIconSize(QSize(12,12));
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
+                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+    ui->okBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
+                                "QToolButton:hover{background-color:#00D2FF;}");
+
+    ui->selectPathBtn->setStyleSheet("QPushButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                                "QPushButton:hover{background-color:#00D2FF;}");
+
+    ui->pathLineEdit->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;\
+                                    font-size:12pt;");
 }
 
 
