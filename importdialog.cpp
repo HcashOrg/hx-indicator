@@ -38,9 +38,9 @@ ImportDialog::ImportDialog(QWidget *parent) :
 
     ui->privateKeyLineEdit->setFocus();
 
-//    shadowWidget = new ShadowWidget(this);
-//    shadowWidget->init(this->size());
-//    shadowWidget->hide();
+    shadowWidget = new ShadowWidget(this);
+    shadowWidget->init(this->size());
+    shadowWidget->hide();
 }
 
 ImportDialog::~ImportDialog()
@@ -57,7 +57,7 @@ void ImportDialog::pop()
 //    connect(this,SIGNAL(accepted()),&loop,SLOT(quit()));
 //    loop.exec();  //进入事件 循环处理，阻塞
 
-    //move(190,50);
+    move(0,0);
     exec();
 }
 
@@ -94,7 +94,7 @@ void ImportDialog::on_importBtn_clicked()
 
             UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << str));
             ui->importBtn->setEnabled(false);
-//            shadowWidget->show();
+            shadowWidget->show();
 
             file.close();
             return;
@@ -133,7 +133,7 @@ void ImportDialog::on_importBtn_clicked()
 
                     UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << pk));
                     ui->importBtn->setEnabled(false);
-//                    shadowWidget->show();
+                    shadowWidget->show();
                 }
                 else
                 {
@@ -169,7 +169,7 @@ void ImportDialog::on_importBtn_clicked()
             UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << privateKey));
 
              ui->importBtn->setEnabled(false);
-//             shadowWidget->show();
+             shadowWidget->show();
         }
         else
         {
@@ -189,7 +189,7 @@ void ImportDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-import_key")
     {
-//        shadowWidget->hide();
+        shadowWidget->hide();
 
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
@@ -247,8 +247,8 @@ void ImportDialog::on_closeBtn_clicked()
 void ImportDialog::InitWidget()
 {
     InitStyle();
-    setWindowFlags( Qt::Dialog | Qt::FramelessWindowHint);
-    setWindowModality(Qt::WindowModal);
+    setWindowFlags(  Qt::FramelessWindowHint);
+    //setWindowModality(Qt::WindowModal);
     setAttribute(Qt::WA_TranslucentBackground, true);
 
 }
@@ -276,12 +276,12 @@ void ImportDialog::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(rect());
+    painter.setBrush(QColor(255,255,255,235));//最后一位是设置透明属性（在0-255取值）
+    painter.drawRect(QRect(190,50,770,530));
 
 
     painter.setBrush(QColor(255,255,255,255));
-    painter.drawRoundedRect(QRect(200,155,380,220),10,10);
+    painter.drawRoundedRect(QRect(385,200,380,220),10,10);
     QDialog::paintEvent(event);
 
 

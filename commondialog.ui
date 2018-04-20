@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>556</height>
+    <width>960</width>
+    <height>580</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>900</width>
-     <height>556</height>
+     <width>960</width>
+     <height>580</height>
     </rect>
    </property>
    <widget class="QWidget" name="containerWidget" native="true">
@@ -114,8 +114,8 @@
       <rect>
        <x>315</x>
        <y>12</y>
-       <width>13</width>
-       <height>13</height>
+       <width>18</width>
+       <height>18</height>
       </rect>
      </property>
      <property name="cursor">

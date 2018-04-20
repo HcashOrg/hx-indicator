@@ -105,8 +105,7 @@ void MainPage::importAccount()
 
     ImportDialog importDialog;
     connect(&importDialog,SIGNAL(accountImported()),this,SLOT(refresh()));
-    importDialog.move(mapToGlobal(QPoint(0,0)));
-    importDialog.exec();
+    importDialog.pop();
 
     emit refreshAccountInfo();
 
