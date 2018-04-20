@@ -17,28 +17,30 @@ ImportDialog::ImportDialog(QWidget *parent) :
 
     setParent(UBChain::getInstance()->mainFrame);
 
-    setAttribute(Qt::WA_TranslucentBackground, true);
-    setWindowFlags(Qt::FramelessWindowHint);
+    InitWidget();
 
-    ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
+//    setAttribute(Qt::WA_TranslucentBackground, true);
+//    setWindowFlags(Qt::FramelessWindowHint);
 
-    ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
+//    ui->widget->setObjectName("widget");
+//    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
+
+//    ui->containerWidget->setObjectName("containerwidget");
+//    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->importBtn->setEnabled(false);
 
-    ui->importBtn->setStyleSheet(OKBTN_STYLE);
-    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
-    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+//    ui->importBtn->setStyleSheet(OKBTN_STYLE);
+//    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
+//    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     ui->privateKeyLineEdit->setFocus();
 
-    shadowWidget = new ShadowWidget(this);
-    shadowWidget->init(this->size());
-    shadowWidget->hide();
+//    shadowWidget = new ShadowWidget(this);
+//    shadowWidget->init(this->size());
+//    shadowWidget->hide();
 }
 
 ImportDialog::~ImportDialog()
@@ -55,7 +57,7 @@ void ImportDialog::pop()
 //    connect(this,SIGNAL(accepted()),&loop,SLOT(quit()));
 //    loop.exec();  //进入事件 循环处理，阻塞
 
-    move(0,0);
+    //move(190,50);
     exec();
 }
 
@@ -92,7 +94,7 @@ void ImportDialog::on_importBtn_clicked()
 
             UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << str));
             ui->importBtn->setEnabled(false);
-            shadowWidget->show();
+//            shadowWidget->show();
 
             file.close();
             return;
@@ -131,7 +133,7 @@ void ImportDialog::on_importBtn_clicked()
 
                     UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << pk));
                     ui->importBtn->setEnabled(false);
-                    shadowWidget->show();
+//                    shadowWidget->show();
                 }
                 else
                 {
@@ -167,7 +169,7 @@ void ImportDialog::on_importBtn_clicked()
             UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << privateKey));
 
              ui->importBtn->setEnabled(false);
-             shadowWidget->show();
+//             shadowWidget->show();
         }
         else
         {
@@ -187,7 +189,7 @@ void ImportDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-import_key")
     {
-        shadowWidget->hide();
+//        shadowWidget->hide();
 
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
@@ -240,4 +242,47 @@ void ImportDialog::on_privateKeyLineEdit_textChanged(const QString &arg1)
 void ImportDialog::on_closeBtn_clicked()
 {
     on_cancelBtn_clicked();
+}
+
+void ImportDialog::InitWidget()
+{
+    InitStyle();
+    setWindowFlags( Qt::Dialog | Qt::FramelessWindowHint);
+    setWindowModality(Qt::WindowModal);
+    setAttribute(Qt::WA_TranslucentBackground, true);
+
+}
+
+void ImportDialog::InitStyle()
+{
+    ui->closeBtn->setIconSize(QSize(12,12));
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
+                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+
+    setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+                  "Qline{color:#5474EB;background:#5474EB;}"
+                  "QToolButton{border:none;color:white;border-radius:10px;font-size:12pt;}"
+                  "QToolButton#pathBtn{color:gray;}"
+                  "QToolButton#importBtn{background-color:#5474EB;}"
+                  "QToolButton#cancelBtn::hover,QToolButton#importBtn::hover{background-color:#00D2FF;}"
+                  "QToolButton#cancelBtn{background-color:#E5E5E5;}"
+                  "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
+
+}
+
+void ImportDialog::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
+    painter.drawRect(rect());
+
+
+    painter.setBrush(QColor(255,255,255,255));
+    painter.drawRoundedRect(QRect(200,155,380,220),10,10);
+    QDialog::paintEvent(event);
+
+
 }

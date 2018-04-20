@@ -105,5 +105,6 @@
         <file>wallet_ui/background.png</file>
         <file>wallet_ui/login.png</file>
         <file>wallet_ui/close.png</file>
+        <file>wallet_ui/whitebord.png</file>
     </qresource>
 </RCC>

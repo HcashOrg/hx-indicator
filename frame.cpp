@@ -1064,7 +1064,7 @@ void Frame::jsonDataUpdated(QString id)
         {
             firstLogin = new FirstLogin(this);
             normalLogin = NULL;
-            firstLogin->setGeometry(0,0,240,320);
+            firstLogin->setGeometry(0,0,960,580);
             firstLogin->show();
             connect( firstLogin,SIGNAL(login()), this, SLOT(alreadyLogin()));
             connect( firstLogin,SIGNAL(minimum()),this,SLOT(showMinimized()));

@@ -18,13 +18,9 @@ WaitingForSync::WaitingForSync(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setStyleSheet("WaitingForSync{background-image:url(:/ui/wallet_ui/loginBg.png);}");
+    InitWidget();
 
-
-    ui->logoLabel->setPixmap(QPixmap(":/ui/wallet_ui/logo_52x34.png"));
-
-    ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: repeat-xy;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
+//    ui->logoLabel->setPixmap(QPixmap(":/ui/wallet_ui/logo_52x34.png"));
 
     ui->picLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
@@ -69,6 +65,40 @@ void WaitingForSync::showPic()
     matrix.rotate(rotateNum);
 
     ui->picLabel->setPixmap(QPixmap(":/ui/wallet_ui/loading.png").transformed(matrix,Qt::SmoothTransformation));
+
+}
+
+void WaitingForSync::InitWidget()
+{
+    InitStyle();
+}
+
+void WaitingForSync::InitStyle()
+{
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
+    setPalette(palette);
+
+    QFont font("黑体",14,70);
+    ui->label_wel->setFont(font);
+
+    QFont fontb("黑体",21,100);
+    ui->label_bloc->setFont(fontb);
+
+    ui->loadingLabel->setFont(QFont("黑体",12,53));
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
+    ui->label_wel->setPalette(pa);
+    ui->label_bloc->setPalette(pa);
+    ui->label_version->setPalette(pa);
+
+    ui->loadingLabel->setPalette(pa);
+
+    ui->closeBtn->setIconSize(QSize(12,12));
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
+                                "QToolButton:hover{background-color:rgb(208,228,255);}");
 
 }
 
@@ -124,6 +154,10 @@ void WaitingForSync::paintEvent(QPaintEvent *e)
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+
+    QPainter painter(this);
+    painter.drawPixmap(238,130,490,320,QPixmap(":/ui/wallet_ui/login.png").scaled(490,320));
+
 
     QWidget::paintEvent(e);
 }
