@@ -29,7 +29,8 @@ private slots:
     void jsonDataUpdated(QString id);
 
     void on_closeBtn_clicked();
-
+protected:
+    void paintEvent(QPaintEvent *event);
 private:
     Ui::NameDialog *ui;
     bool yesOrNO;

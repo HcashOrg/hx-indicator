@@ -17,6 +17,8 @@ public:
 
     void  pop();
 
+protected:
+    void paintEvent(QPaintEvent *event);
 private slots:
     void on_backupBtn_clicked();
 

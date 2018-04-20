@@ -5,6 +5,7 @@
 #include "ContactDataUtil.h"
 
 #include "ContactInfoTitleWidget.h"
+#include "ContactInfoHistoryWidget.h"
 
 class ContactInfoWidget::ContactInfoWidgetPrivate
 {
@@ -12,6 +13,7 @@ public:
     ContactInfoWidgetPrivate()
         :person(nullptr)
         ,infoTitleWidget(new ContactInfoTitleWidget())
+        ,infoHistoryWidget(new ContactInfoHistoryWidget())
     {
 
     }
@@ -19,6 +21,7 @@ public:
     std::shared_ptr<ContactPerson> person;
 
     ContactInfoTitleWidget *infoTitleWidget;
+    ContactInfoHistoryWidget *infoHistoryWidget;
 };
 
 ContactInfoWidget::ContactInfoWidget(QWidget *parent) :
@@ -58,6 +61,7 @@ void ContactInfoWidget::InitWidget()
    // _p->infoTitleWidget->setStyleSheet("background-color:rgba(10, 10, 10,100);");
 
     ui->scrollArea_top->setWidget(_p->infoTitleWidget);
+    ui->scrollArea_bottom->setWidget(_p->infoHistoryWidget);
     connect(_p->infoTitleWidget,&ContactInfoTitleWidget::transferAccountSignal,this,&ContactInfoWidget::transferAccountSlots);
 }
 
@@ -72,4 +76,6 @@ void ContactInfoWidget::paintEvent(QPaintEvent *event)
     painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
     painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
     painter.drawRect(rect());
+
+    QWidget::paintEvent(event);
 }

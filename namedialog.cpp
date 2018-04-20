@@ -19,15 +19,21 @@ NameDialog::NameDialog(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
+//    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
 
-    ui->okBtn->setStyleSheet(OKBTN_STYLE);
-    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
-    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->okBtn->setStyleSheet("QToolButton#okBtn{border:none;color:white;border-radius:10px;font-size:12pt;background-color:#5474EB;}"
+                             "QToolButton#okBtn::hover{background-color:#00D2FF;}");
+    ui->cancelBtn->setStyleSheet("QToolButton#cancelBtn{border:none;color:white;border-radius:10px;font-size:12pt;background-color:#E5E5E5;}"
+                                 "QToolButton#cancelBtn::hover{background-color:#00D2FF;}");
 
+    ui->closeBtn->setIconSize(QSize(12,12));
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
+                                "QToolButton:hover{background-color:rgb(208,228,255);}");
 
+    ui->nameLineEdit->setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}");
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     yesOrNO = true;
@@ -176,4 +182,15 @@ void NameDialog::jsonDataUpdated(QString id)
 void NameDialog::on_closeBtn_clicked()
 {
     on_cancelBtn_clicked();
+}
+
+void NameDialog::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(255,255,255,235));//最后一位是设置透明属性（在0-255取值）
+    painter.drawRect(QRect(190,50,770,530));
+
+    QWidget::paintEvent(event);
 }

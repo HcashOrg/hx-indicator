@@ -44,6 +44,8 @@ void ContactSearchWidget::InitWidget()
     pSearchButton->setCursor(Qt::PointingHandCursor);
     pSearchButton->setFixedSize(32, 32);
     pSearchButton->setToolTip(tr("Search"));
+    pSearchButton->setIconSize(QSize(20,20));
+    pSearchButton->setIcon(QIcon(":/search.png"));
 
     //防止文本框输入内容位于按钮之下
     QMargins margins = ui->lineEdit->textMargins();
@@ -57,7 +59,7 @@ void ContactSearchWidget::InitWidget()
     pSearchLayout->setDirection(QBoxLayout::RightToLeft);
     pSearchLayout->setContentsMargins(0, 0, 0, 0);
     ui->lineEdit->setLayout(pSearchLayout);
-    ui->lineEdit->setTextMargins(32,0,0,0);
+    ui->lineEdit->setTextMargins(25,0,0,0);
 
     connect(pSearchButton, &QPushButton::clicked, this, &ContactSearchWidget::StartSearchSlots);
 
@@ -73,8 +75,9 @@ void ContactSearchWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(94,116,235));
     setPalette(palette);
 
-    setStyleSheet("QPushButton{border-image:url(:/search.png); background:transparent;}"
-                  "QLineEdit{background:rgb(130,157,255);font-size:14px;border:none;}"
+
+    setStyleSheet("QPushButton{ background:transparent;}"
+                  "QLineEdit{background:rgb(130,157,255);font-size:11px;border:none;color:white;}"
                   );
 
 }

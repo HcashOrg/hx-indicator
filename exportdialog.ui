@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>556</height>
+    <width>960</width>
+    <height>580</height>
    </rect>
   </property>
   <property name="font">
@@ -23,26 +23,26 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>900</width>
-     <height>556</height>
+     <width>960</width>
+     <height>580</height>
     </rect>
    </property>
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>170</y>
+      <x>385</x>
+      <y>208</y>
       <width>380</width>
-      <height>240</height>
+      <height>220</height>
      </rect>
     </property>
     <widget class="QToolButton" name="cancelBtn">
      <property name="geometry">
       <rect>
-       <x>196</x>
-       <y>169</y>
-       <width>120</width>
-       <height>36</height>
+       <x>260</x>
+       <y>170</y>
+       <width>100</width>
+       <height>30</height>
       </rect>
      </property>
      <property name="cursor">
@@ -58,8 +58,8 @@
     <widget class="QLabel" name="nameLabel">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>50</y>
+       <x>40</x>
+       <y>70</y>
        <width>211</width>
        <height>20</height>
       </rect>
@@ -71,10 +71,10 @@
     <widget class="QToolButton" name="pathBtn">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>80</y>
+       <x>290</x>
+       <y>95</y>
        <width>70</width>
-       <height>20</height>
+       <height>31</height>
       </rect>
      </property>
      <property name="font">
@@ -84,15 +84,14 @@
        <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
-       <underline>true</underline>
+       <underline>false</underline>
       </font>
      </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">QToolButton{font: 9pt &quot;微软雅黑&quot;;text-decoration: underline;background:transparent;color: rgb(192, 196, 212);}
-QToolButton:hover{color:white;}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>选择路径</string>
@@ -101,10 +100,10 @@ QToolButton:hover{color:white;}</string>
     <widget class="QToolButton" name="exportBtn">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>169</y>
-       <width>120</width>
-       <height>36</height>
+       <x>150</x>
+       <y>170</y>
+       <width>100</width>
+       <height>30</height>
       </rect>
      </property>
      <property name="cursor">
@@ -120,9 +119,9 @@ QToolButton:hover{color:white;}</string>
     <widget class="QLineEdit" name="pathLineEdit">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>110</y>
-       <width>280</width>
+       <x>30</x>
+       <y>96</y>
+       <width>261</width>
        <height>30</height>
       </rect>
      </property>
@@ -148,8 +147,8 @@ QToolButton:hover{color:white;}</string>
     <widget class="QCheckBox" name="encryptCheckBox">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>80</y>
+       <x>40</x>
+       <y>130</y>
        <width>200</width>
        <height>20</height>
       </rect>
@@ -161,10 +160,10 @@ QToolButton:hover{color:white;}</string>
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>355</x>
-       <y>12</y>
-       <width>13</width>
-       <height>13</height>
+       <x>335</x>
+       <y>20</y>
+       <width>18</width>
+       <height>18</height>
       </rect>
      </property>
      <property name="cursor">
@@ -178,6 +177,19 @@ QToolButton:hover{color:white;}</string>
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="Line" name="line">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>116</y>
+       <width>320</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </widget>
