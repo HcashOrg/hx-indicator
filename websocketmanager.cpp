@@ -43,7 +43,7 @@ void WebSocketManager::processRPCs(QString _rpcId, QString _rpcCmd)
     {
         if(pendingRpcs.size() > 0)
         {
-            qDebug() << "busy is " << pendingRpcs.at(0);
+//            qDebug() << "busy is " << pendingRpcs.at(0);
         }
 
         return;
@@ -84,7 +84,7 @@ void WebSocketManager::run()
 {
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(onTimer()));
-    timer->start(100);
+    timer->start(10);
 
     m_webSocket = new QWebSocket;
     connect(m_webSocket,SIGNAL(connected()),this,SLOT(onConnected()));
@@ -108,11 +108,11 @@ void WebSocketManager::onTimer()
         }
         else
         {
-            qDebug() << "busy is " << pendingRpcs.at(0);
+//            qDebug() << "busy is " << pendingRpcs.at(0);
         }
 
         loopCount++;
-        if(loopCount > 10)
+        if(loopCount > 100)
         {
             pendingRpcs.removeFirst();
             busy = false;

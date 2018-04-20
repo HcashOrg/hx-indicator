@@ -89,6 +89,13 @@ struct AssetAmount
     unsigned long long amount = 0;
 };
 typedef QMap<QString,AssetAmount> AssetAmountMap;
+
+struct ContractInfo
+{
+    QString contractAddress;
+    QString hashValue;
+};
+
 struct AccountInfo
 {
     QString name;
@@ -96,6 +103,7 @@ struct AccountInfo
     QString id;
 
     AssetAmountMap   assetAmountMap;
+    QVector<ContractInfo> contractsVector;
 };
 
 struct WalletInfo
@@ -114,6 +122,7 @@ struct Miner
 };
 
 typedef QMap<int,unsigned long long>  AssetBalanceMap;
+typedef QMap<QString,unsigned long long>     ExchangeContractBalances;
 struct AssetInfo
 {
     QString id;
@@ -159,6 +168,8 @@ struct TwoAddresses     // owner_address 和 active_address
     QString ownerAddress;
     QString activeAddress;
 };
+
+
 
 struct MultiSigInfo
 {
@@ -270,12 +281,17 @@ public:
 
 
     QMap<QString,AccountInfo>   accountInfoMap;
+    QMap<QString,ExchangeContractBalances>  accountExchangeContractBalancesMap;
     void parseAccountInfo();
-    void getAccountBalances(QString _accountName);
+    void fetchAccountBalances(QString _accountName);
+    void fetchMyContracts();
+    QString getAccountBalance(QString _accountName, QString _assetSymbol);
     QStringList getRegisteredAccounts();
     QStringList getUnregisteredAccounts();
+    QString getExchangeContractAddress(QString _accountName);   // 没有兑换合约则返回空  有多个返回第一个
 
-    QMap<QString,AssetInfo>  assetInfoMap;
+
+    QMap<QString,AssetInfo>   assetInfoMap;
     void parseAssetInfo();
     QString getAssetId(QString symbol);
 
@@ -317,6 +333,7 @@ QString doubleTo5Decimals(double number);
 double roundDown(double decimal, int precision = 0);        // 根据精度 向下取"整"
 QString removeLastZeros(QString number);        // qstring::number() 对小数的处理有问题  使用std::to_string() 然后把后面的0去掉
 QString getBigNumberString(unsigned long long number,int precision);
+QString decimalToIntegerStr(QString number, int precision);
 
 enum AddressType
 {

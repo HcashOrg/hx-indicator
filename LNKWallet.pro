@@ -131,7 +131,10 @@ SOURCES += main.cpp\
     exchange/myexchangecontractpage.cpp \
     withdrawpage/WithdrawPage.cpp \
     withdrawpage/WithdrawDataUtil.cpp \
-    withdrawpage/WithdrawInputWidget.cpp
+    withdrawpage/WithdrawInputWidget.cpp \
+    exchange/selldialog.cpp \
+    exchange/depositexchangecontractdialog.cpp \
+    exchange/withdrawexchangecontractdialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -234,7 +237,10 @@ HEADERS  += firstlogin.h \
     exchange/exchangewidget.h \
     withdrawpage/WithdrawPage.h \
     withdrawpage/WithdrawDataUtil.h \
-    withdrawpage/WithdrawInputWidget.h
+    withdrawpage/WithdrawInputWidget.h \
+    exchange/selldialog.h \
+    exchange/depositexchangecontractdialog.h \
+    exchange/withdrawexchangecontractdialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -317,7 +323,10 @@ FORMS    += firstlogin.ui \
     depositpage/DepositRecrdWideget.ui\
     exchange/exchangewidget.ui \
     withdrawpage/WithdrawPage.ui \
-    withdrawpage/WithdrawInputWidget.ui
+    withdrawpage/WithdrawInputWidget.ui \
+    exchange/selldialog.ui \
+    exchange/depositexchangecontractdialog.ui \
+    exchange/withdrawexchangecontractdialog.ui
     
 win32{
     DISTFILES += logo.rc

@@ -125,7 +125,6 @@ int main(int argc, char *argv[])
     UBChain::getInstance()->mainFrame = &frame;   // 一个全局的指向主窗口的指针
     frame.show();
 
-
     a.installEventFilter(&frame);
 
     CommonHelper::setStyle(":/ui/qss/style.qss");

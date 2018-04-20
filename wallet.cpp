@@ -12,6 +12,8 @@
 #include <QFrame>
 #include <QDesktopWidget>
 
+#define EXCHANGE_CONTRACT_HASH  "c39fa7c6b023299be422e7eb70cab9c8f24f58d4"
+
 UBChain* UBChain::goo = 0;
 //QMutex mutexForJsonData;
 //QMutex mutexForPending;
@@ -113,21 +115,21 @@ UBChain*   UBChain::getInstance()
 
 void UBChain:: startExe()
 {
-    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
+//    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
-    QStringList strList;
-    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString()
-            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)  << "--replay";
+//    QStringList strList;
+//    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString()
+//            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)  << "--replay";
 
-    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
-    {
-        strList << "--resync-blockchain";
-    }
-    UBChain::getInstance()->configFile->setValue("settings/resyncNextTime",false);
+//    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+//    {
+//        strList << "--resync-blockchain";
+//    }
+//    UBChain::getInstance()->configFile->setValue("settings/resyncNextTime",false);
 
-    nodeProc->start("lnk_node.exe",strList);
+//    nodeProc->start("lnk_node.exe",strList);
 
-    emit exeStarted();
+//    emit exeStarted();
 }
 
 void UBChain::onNodeExeStateChanged()
@@ -434,15 +436,24 @@ void UBChain::parseAccountInfo()
 
                 accountInfoMap.insert(accountInfo.name,accountInfo);
 
-                getAccountBalances(accountInfo.name);
+                fetchAccountBalances(accountInfo.name);
             }
         }
     }
 }
 
-void UBChain::getAccountBalances(QString _accountName)
+void UBChain::fetchAccountBalances(QString _accountName)
 {
     postRPC( "id-get_account_balances-" + _accountName, toJsonFormat( "get_account_balances", QJsonArray() << _accountName));
+}
+
+QString UBChain::getAccountBalance(QString _accountName, QString _assetSymbol)
+{
+    AssetAmountMap map = accountInfoMap.value(_accountName).assetAmountMap;
+    QString assetId = getAssetId(_assetSymbol);
+    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
+
+    return getBigNumberString(map.value(assetId).amount, assetInfo.precision);
 }
 
 QStringList UBChain::getRegisteredAccounts()
@@ -473,6 +484,21 @@ QStringList UBChain::getUnregisteredAccounts()
     }
 
     return accounts;
+}
+
+QString UBChain::getExchangeContractAddress(QString _accountName)
+{
+    QString result;
+    foreach (ContractInfo info, accountInfoMap.value(_accountName).contractsVector)
+    {
+        if(info.hashValue == EXCHANGE_CONTRACT_HASH)
+        {
+            result = info.contractAddress;
+            break;
+        }
+    }
+
+    return result;
 }
 
 
@@ -650,6 +676,14 @@ void UBChain::parseTransactions(QString result, QString accountName)
                 }
             }
         }
+    }
+}
+
+void UBChain::fetchMyContracts()
+{
+    foreach (QString accountName, accountInfoMap.keys())
+    {
+        postRPC( "id-get_contracts_hash_entry_by_owner-" + accountName, toJsonFormat( "get_contracts_hash_entry_by_owner", QJsonArray() << accountName));
     }
 }
 
@@ -1072,6 +1106,18 @@ QString removeLastZeros(QString number)     // 去掉小数最后面的0
     return number;
 }
 
+QString removeFrontZeros(QString number)     // 去掉整数最前面的0
+{
+    while (number.startsWith('0'))
+    {
+        number.remove(0,1);
+    }
+
+    if( number.isEmpty())   number = "0";
+
+    return number;
+}
+
 QString getBigNumberString(unsigned long long number, int precision)
 {
     QString str = QString::number(number);
@@ -1093,6 +1139,24 @@ QString getBigNumberString(unsigned long long number, int precision)
     }
 
     return removeLastZeros(str);
+}
+
+
+QString decimalToIntegerStr(QString number, int precision)
+{
+    int pos = number.indexOf(".");
+    if( pos == -1)  pos = number.size();
+
+    number.remove(".");
+    int size = number.size();
+
+    QString zeroStr;
+    zeroStr.fill('0', precision - (size - pos) );
+
+    number.append(zeroStr);
+    number = number.mid(0, pos + precision);     // 万一原数据小数位数超过precision  舍去超过的部分
+
+    return removeFrontZeros(number);
 }
 
 AddressType checkAddress(QString address, AddressFlags type)

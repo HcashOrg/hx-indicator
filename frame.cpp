@@ -1112,8 +1112,10 @@ void Frame::jsonDataUpdated(QString id)
 
         foreach (QString accountName, UBChain::getInstance()->accountInfoMap.keys())
         {
-            UBChain::getInstance()->getAccountBalances(accountName);
+            UBChain::getInstance()->fetchAccountBalances(accountName);
         }
+
+        UBChain::getInstance()->fetchMyContracts();
 
 //        if( needToRefresh)
 //        {
@@ -1271,6 +1273,38 @@ void Frame::jsonDataUpdated(QString id)
 
 //        return;
 //    }
+
+    if( id.startsWith("id-get_contracts_hash_entry_by_owner-"))
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        if(result.startsWith("\"result\":"))
+        {
+            QString accountName = id.mid(QString("id-get_contracts_hash_entry_by_owner-").size());
+//qDebug() << id << result;
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonArray array = jsonObject.take("result").toArray();
+
+            UBChain::getInstance()->accountInfoMap[accountName].contractsVector.clear();
+            foreach (QJsonValue v, array)
+            {
+                QJsonObject object = v.toObject();
+
+                ContractInfo contractInfo;
+                contractInfo.contractAddress    = object.take("contract_address").toString();
+                contractInfo.hashValue          = object.take("hash").toString();
+
+                UBChain::getInstance()->accountInfoMap[accountName].contractsVector.append(contractInfo);
+            }
+        }
+
+
+        return;
+    }
 }
 
 void Frame::closeEvent(QCloseEvent *e)
@@ -1335,7 +1369,7 @@ void Frame::init()
 //    UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QJsonArray()));
 
 
-    UBChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.195:5333") ));
+    UBChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.121:9040") ));
 }
 
 
