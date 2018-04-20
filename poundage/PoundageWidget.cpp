@@ -46,23 +46,31 @@ PoundageWidget::~PoundageWidget()
 
 void PoundageWidget::autoRefreshSlots()
 {
-    _p->allPoundageSheet->clear();
-    _p->myPoundageSheet->clear();
-    //刷新目前对应的承税单
-    UBChain::getInstance()->postRPC("id_list_guarantee_order",
-                                    toJsonFormat("list_guarantee_order",
-                                                 QJsonArray()<<ui->comboBox_coinType->currentText()<<false
-                                                 )
-                                    );
-    //获取自己账户的所有信息
-    foreach(QString key,UBChain::getInstance()->accountInfoMap.keys())
+    if(ui->toolButton_allPoundage->isChecked())
     {
-        UBChain::getInstance()->postRPC("id_get_my_guarantee_order",
-                                        toJsonFormat("get_my_guarantee_order",
-                                                     QJsonArray()<<key<<false
+        _p->allPoundageSheet->clear();
+        //刷新目前对应的承税单
+        UBChain::getInstance()->postRPC("id_list_guarantee_order",
+                                        toJsonFormat("list_guarantee_order",
+                                                     QJsonArray()<<ui->comboBox_coinType->currentText()<<false
                                                      )
                                         );
     }
+    else if(ui->toolButton_myPoundage->isChecked())
+    {
+        _p->myPoundageSheet->clear();
+
+        //获取自己账户的所有信息
+        foreach(QString key,UBChain::getInstance()->accountInfoMap.keys())
+        {
+            UBChain::getInstance()->postRPC("id_get_my_guarantee_order",
+                                            toJsonFormat("get_my_guarantee_order",
+                                                         QJsonArray()<<key<<false
+                                                         )
+                                            );
+        }
+    }
+
 }
 
 void PoundageWidget::PublishPoundageSlots()
@@ -127,7 +135,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
         result.prepend("{");
         result.append("}");
 
-        qDebug()<<"chargecccccc"<<result;
+        //qDebug()<<"chargecccccc"<<result;
         //刷新承税单
         autoRefreshSlots();
     }
@@ -195,7 +203,7 @@ void PoundageWidget::InitWidget()
     ui->toolButton_allPoundage->setCheckable(true);
     ui->toolButton_allPoundage->setChecked(true);
     ui->toolButton_myPoundage->setCheckable(true);
-
+    ui->toolButton_myPoundage->setChecked(false);
     //初始化排序comboBox
     ui->comboBox_sortType->clear();
     ui->comboBox_sortType->addItem(tr("时间由早到晚"),0);
@@ -229,10 +237,10 @@ void PoundageWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("MicrosoftYaHeiLight",20,63);
+    QFont font("Microsoft YaHei UI Light",20,63);
     ui->label->setFont(font);
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(0,0,0));

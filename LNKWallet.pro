@@ -134,7 +134,11 @@ SOURCES += main.cpp\
     withdrawpage/WithdrawInputWidget.cpp \
     exchange/selldialog.cpp \
     exchange/depositexchangecontractdialog.cpp \
-    exchange/withdrawexchangecontractdialog.cpp
+    exchange/withdrawexchangecontractdialog.cpp \
+    withdrawpage/WithdrawConfirmWidget.cpp \
+    capitalTransferPage/CapitalTransferPage.cpp \
+    capitalTransferPage/PasswordConfirmWidget.cpp \
+    capitalTransferPage/CapitalTransferDataUtil.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -240,7 +244,11 @@ HEADERS  += firstlogin.h \
     withdrawpage/WithdrawInputWidget.h \
     exchange/selldialog.h \
     exchange/depositexchangecontractdialog.h \
-    exchange/withdrawexchangecontractdialog.h
+    exchange/withdrawexchangecontractdialog.h \
+    withdrawpage/WithdrawConfirmWidget.h \
+    capitalTransferPage/CapitalTransferPage.h \
+    capitalTransferPage/PasswordConfirmWidget.h \
+    capitalTransferPage/CapitalTransferDataUtil.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -326,8 +334,11 @@ FORMS    += firstlogin.ui \
     withdrawpage/WithdrawInputWidget.ui \
     exchange/selldialog.ui \
     exchange/depositexchangecontractdialog.ui \
-    exchange/withdrawexchangecontractdialog.ui
-    
+    exchange/withdrawexchangecontractdialog.ui \
+    withdrawpage/WithdrawConfirmWidget.ui \
+    capitalTransferPage/CapitalTransferPage.ui \
+    capitalTransferPage/PasswordConfirmWidget.ui
+
 win32{
     DISTFILES += logo.rc
     RC_FILE = logo.rc
@@ -335,7 +346,8 @@ win32{
 
 RESOURCES += \
     wallet.qrc \
-    contact/resources.qrc
+    contact/resources.qrc \
+    functionBar/functionbar.qrc
 
 TRANSLATIONS +=   wallet_simplified_Chinese.ts  wallet_English.ts
 

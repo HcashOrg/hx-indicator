@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>qrcode</string>
+    <string>generating</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_warning">

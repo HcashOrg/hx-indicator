@@ -35,8 +35,6 @@ private:
 
     void QueryDepositRecord();
 private:
-    void RefreshQRWidget(const QString &queryResult);
-private:
     void InitWidget();
     void InitStyle();
 private:

@@ -1163,7 +1163,8 @@ AddressType checkAddress(QString address, AddressFlags type)
 {
     if(type & AccountAddress)
     {
-        if(address.startsWith(ACCOUNT_ADDRESS_PREFIX)  && address.size() == QString(ACCOUNT_ADDRESS_PREFIX).size() + 33)
+        if(address.startsWith(ACCOUNT_ADDRESS_PREFIX)  && (address.size() == QString(ACCOUNT_ADDRESS_PREFIX).size() + 33 ||
+                                                           address.size() == QString(ACCOUNT_ADDRESS_PREFIX).size() + 32))
         {
             return AccountAddress;
         }

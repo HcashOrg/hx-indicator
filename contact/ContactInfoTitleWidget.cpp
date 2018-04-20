@@ -75,7 +75,7 @@ void ContactInfoTitleWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
     setStyleSheet("QPushButton#pushButton_transfer{color:white;font-size:11px;font-weight:bold;\

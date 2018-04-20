@@ -19,7 +19,8 @@ FirstLogin::FirstLogin(QWidget *parent) :
 
     connect(UBChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(jsonDataUpdated(QString)));
 
-    setStyleSheet("FirstLogin{background-image:url(:/ui/wallet_ui/loginBg.png);}");
+    InitWidget();
+    //setStyleSheet("FirstLogin{background-image:url(:/ui/wallet_ui/loginBg.png);}");
 
 
 #ifdef TARGET_OS_MAC
@@ -32,14 +33,6 @@ FirstLogin::FirstLogin(QWidget *parent) :
     ui->pwdLineEdit2->setContextMenuPolicy(Qt::NoContextMenu);
     ui->pwdLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
     ui->pwdLineEdit2->setAttribute(Qt::WA_InputMethodEnabled, false);
-    ui->pwdLineEdit->setStyleSheet("color:white;background:transparent;border-width:0;border-style:outset;");
-    ui->pwdLineEdit2->setStyleSheet("color:white;background:transparent;border-width:0;border-style:outset;");
-
-    ui->logoLabel->setPixmap(QPixmap(":/ui/wallet_ui/logo_52x34.png"));
-    ui->label->setPixmap(QPixmap(":/ui/wallet_ui/passwordLineEditBg.png"));
-
-    ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: repeat-xy;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
 
 //    ui->correctLabel->setPixmap( QPixmap(":/pic/pic2/correct2.png"));
 //    ui->correctLabel2->setPixmap( QPixmap(":/pic/pic2/correct2.png"));
@@ -110,6 +103,10 @@ void FirstLogin::paintEvent(QPaintEvent *e)
     opt.init(this);
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+
+    QPainter painter(this);
+    painter.drawPixmap(238,130,490,320,QPixmap(":/ui/wallet_ui/whitebord.png").scaled(490,320));
+
 
     QWidget::paintEvent(e);
 
@@ -251,6 +248,39 @@ void FirstLogin::jsonDataUpdated(QString id)
         }
         return;
     }
+
+}
+
+void FirstLogin::InitWidget()
+{
+    InitStyle();
+}
+
+void FirstLogin::InitStyle()
+{
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
+    setPalette(palette);
+
+    QFont font("黑体",14,70);
+    ui->label_wel->setFont(font);
+
+    QFont fontb("黑体",21,100);
+    ui->label_bloc->setFont(fontb);
+
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
+    ui->label_wel->setPalette(pa);
+    ui->label_bloc->setPalette(pa);
+    ui->pwdLineEdit->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;");
+    ui->pwdLineEdit2->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;");
+    ui->closeBtn->setIconSize(QSize(12,12));
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
+                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+    ui->createBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
+                                "QToolButton:hover{background-color:#00D2FF;}");
 
 }
 

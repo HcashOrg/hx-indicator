@@ -27,7 +27,7 @@ BottomBar::BottomBar(QWidget *parent) :
 
     connectionTip = new CommonTip;
 
-    
+    ui->networkLabel->setPixmap(QPixmap(":/ui/wallet_ui/net.png").scaled(20,20));
 }
 
 BottomBar::~BottomBar()

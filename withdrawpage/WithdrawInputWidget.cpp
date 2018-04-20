@@ -20,7 +20,8 @@ WithdrawInputWidget::~WithdrawInputWidget()
 void WithdrawInputWidget::setMaxAmmount(double number)
 {
     ui->lineEdit_ammount->setPlaceholderText(ui->lineEdit_ammount->placeholderText().replace("0",QString::number(number)));
-    QDoubleValidator *validator = new QDoubleValidator(0,number,0.0001,ui->lineEdit_ammount);
+    QDoubleValidator *validator = new QDoubleValidator(0,number,10,this);
+    validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_ammount->setValidator( validator );
 }
 
@@ -31,25 +32,51 @@ void WithdrawInputWidget::setSymbol(const QString &symbol)
 
 void WithdrawInputWidget::addressChangeSlots(const QString &address)
 {
-    ui->lineEdit_address->setText( ui->lineEdit_address->text().remove(" "));
-    ui->lineEdit_address->setText( ui->lineEdit_address->text().remove("\n"));
-    if( ui->lineEdit_address->text().isEmpty())
-    {
-        ui->toolButton_confirm->setEnabled(false);
-        return;
-    }
-
-    AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
-    if( type == AccountAddress)
+    if(validateAddress(address))
     {
         ui->toolButton_confirm->setEnabled(true);
-        return;
     }
     else
     {
         ui->toolButton_confirm->setEnabled(false);
-        return;
     }
+    //ui->lineEdit_address->setText( ui->lineEdit_address->text().remove(" "));
+    //ui->lineEdit_address->setText( ui->lineEdit_address->text().remove("\n"));
+    //qDebug()<<"fffffffff"<<ui->lineEdit_address->text();
+    //if( ui->lineEdit_address->text().isEmpty())
+    //{
+    //    ui->toolButton_confirm->setEnabled(false);
+    //    return;
+    //}
+    //
+    //AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
+    //qDebug()<<"dddd"<<address << "type"<<type << "size" << address.size();
+    //
+    //if( type == AccountAddress)
+    //{
+    //    ui->toolButton_confirm->setEnabled(true);
+    //    return;
+    //}
+    //else
+    //{
+    //    ui->toolButton_confirm->setEnabled(false);
+    //    return;
+    //}
+}
+
+void WithdrawInputWidget::maxButtonSlots()
+{
+    ui->lineEdit_ammount->setText(QString::number(dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()))->top()));
+}
+
+void WithdrawInputWidget::confirmButtonSlots()
+{
+    emit withdrawSignal(ui->lineEdit_address->text(),ui->lineEdit_ammount->text().toDouble());
+}
+
+bool WithdrawInputWidget::validateAddress(const QString &address)
+{
+    return !address.isEmpty();
 }
 
 void WithdrawInputWidget::InitWidget()
@@ -61,13 +88,15 @@ void WithdrawInputWidget::InitWidget()
 
     ui->toolButton_confirm->setEnabled(false);
     connect(ui->lineEdit_address,&QLineEdit::textEdited,this,&WithdrawInputWidget::addressChangeSlots);
+    connect(ui->toolButton_all,&QToolButton::clicked,this,&WithdrawInputWidget::maxButtonSlots);
+    connect(ui->toolButton_confirm,&QToolButton::clicked,this,&WithdrawInputWidget::confirmButtonSlots);
 }
 
 void WithdrawInputWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
     setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
@@ -76,5 +105,5 @@ void WithdrawInputWidget::InitStyle()
                   "QToolButton#toolButton_all{border:none;background-color:transparent;border-radius:10px;color:#5474EB;font-size:9pt;}"
                   "QToolButton#toolButton_confirm::hover,QToolButton#toolButton_all::hover{background-color:#00D2FF;}"
                   "QToolButton#toolButton_confirm{border:none;background-color:#5474EB;color:white;border-radius:10px;font-size:12pt;}"
-                  "QLabel{background:transparent;color:black:font-family:MicrosoftYaHeiLight;}");
+                  "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
 }

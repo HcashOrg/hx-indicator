@@ -70,7 +70,7 @@ void ContactSearchWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(94,116,235));
+    palette.setColor(QPalette::Window, QColor(94,116,235));
     setPalette(palette);
 
     setStyleSheet("QPushButton{border-image:url(:/search.png); background:transparent;}"

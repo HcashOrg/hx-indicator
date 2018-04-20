@@ -42,10 +42,10 @@ void ContactBriefWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("MicrosoftYaHeiLight",20,63);
+    QFont font("Microsoft YaHei UI Light",20,63);
     ui->label->setFont(font);
     QPalette pa;
     pa.setColor(QPalette::WindowText,Qt::black);

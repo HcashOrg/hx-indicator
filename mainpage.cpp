@@ -26,6 +26,7 @@
 
 #include "depositpage/DepositPage.h"
 #include "withdrawpage/WithdrawPage.h"
+#include "capitalTransferPage/CapitalTransferPage.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -225,6 +226,15 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         return;
     }
 
+    if( 5 == column)
+    {//资金划转界面
+        CapitalTransferPage *capital = new CapitalTransferPage(CapitalTransferPage::CapitalTransferInput(
+                                           ui->accountComboBox->currentText(),ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text()),this);
+        capital->show();
+        capital->raise();
+        return;
+
+    }
     if(column == 6)
     {
         showExchangeWidget();

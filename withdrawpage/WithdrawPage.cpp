@@ -2,6 +2,7 @@
 #include "ui_WithdrawPage.h"
 
 #include "WithdrawInputWidget.h"
+#include "WithdrawConfirmWidget.h"
 
 class WithdrawPage::WithdrawPagePrivate
 {
@@ -43,6 +44,17 @@ void WithdrawPage::ShowRecordSlots()
 
 }
 
+void WithdrawPage::ShowConfirmWidget(const QString &address, double ammount)
+{//收到提现信号，弹出确认窗口
+    WithdrawConfirmWidget *confirm = new WithdrawConfirmWidget(WithdrawConfirmWidget::WithdrawConfirmInput(
+                                                               _p->name,QString::number(ammount),_p->assetSymbol,address),this);
+    confirm->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Dialog | Qt::FramelessWindowHint);
+    confirm->setWindowModality(Qt::WindowModal);
+    confirm->setAttribute(Qt::WA_DeleteOnClose);
+    confirm->move(mapToGlobal(QPoint(0,0)));
+    confirm->show();
+}
+
 void WithdrawPage::InitWidget()
 {
     InitStyle();
@@ -52,16 +64,17 @@ void WithdrawPage::InitWidget()
     _p->inputWidget->setSymbol(_p->assetSymbol);
 
     connect(ui->toolButton,&QToolButton::clicked,this,&WithdrawPage::ShowRecordSlots);
+    connect(_p->inputWidget,&WithdrawInputWidget::withdrawSignal,this,&WithdrawPage::ShowConfirmWidget);
 }
 
 void WithdrawPage::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("MicrosoftYaHeiLight",20,63);
+    QFont font("Microsoft YaHei UI Light",20,63);
     ui->label->setFont(font);
     QPalette pa;
     pa.setColor(QPalette::WindowText,Qt::black);

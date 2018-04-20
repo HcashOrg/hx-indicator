@@ -154,15 +154,16 @@ void FunctionWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Background, QColor(72,97,220));
+    palette.setColor(QPalette::Window, QColor(72,97,220));
     setPalette(palette);
 
     setStyleSheet("\
-    QToolButton{min-height:24px;min-width:24pt;background: rgb(72,97,220);border:none;color:white;font:MicrosoftYaHeiLight;}\
+    QToolButton{min-height:24px;min-width:24px;background: rgb(72,97,220);border:none;color:white;font:Microsoft YaHei UI Light;}\
     QToolButton:hover{background-color: rgb(0,210, 255);}\
     QToolButton:pressed{background-color: rgb(84,116, 235);}\
     QToolButton:checked{background-color: rgb(84,116, 235);}\
                   "
+
                   );
     _p->contextMenu->setStyleSheet("QMenu{background-color:rgb(238,241,253);border: none;border-radius:10px;}"
                                    "QMenu::item {border:none;background-color:rgb(238,241,253);color:black;border-bottom:1px solid #DBDBDB;}"
@@ -172,7 +173,7 @@ void FunctionWidget::InitStyle()
                       QToolButton#toolButton_account{border-image:url(:/ui/wallet_ui/accountBtn_unselected.png);}\
                       QToolButton#toolButton_account:checked{border-image:url(:/ui/wallet_ui/accountBtn.png);}\*/
 
-
+    //setStyleSheet("QToolButton#toolButton_account{border-image:/functionBar/账户.png}");
 
     //ui->toolButton_contact->setStyleSheet("background:transparent;border:none;");
     //ui->toolButton_account->setStyleSheet("background:transparent;border:none;");
@@ -180,12 +181,17 @@ void FunctionWidget::InitStyle()
     //ui->toolButton_more->setStyleSheet("background:transparent;border:none;");
 
     //ui->toolButton_contact->setStyleSheet("QToolButton:hover{background:transparent;border:none;border-image:url(:/ui/wallet_ui/contactBtn.png);}");
-    //ui->toolButton_account->setIcon(QIcon(":/ui/wallet_ui/accountBtn.png"));
+    ui->toolButton_account->setIconSize(QSize(24,24));
+    ui->toolButton_advanced->setIconSize(QSize(24,24));
+    ui->toolButton_contact->setIconSize(QSize(24,24));
+    ui->toolButton_more->setIconSize(QSize(24,24));
 
-    //ui->toolButton_advanced->setIcon(QIcon(":/ui/wallet_ui/transferBtn_unselected.png"));
-    //
-    //ui->toolButton_contact->setIcon(QIcon(":/ui/wallet_ui/contactBtn_unselected.png"));
-    //
-    //ui->toolButton_more->setIcon(QIcon(":/ui/wallet_ui/advanceBtn.png"));
+    ui->toolButton_account->setIcon(QIcon(":/functionBar/account.png"));
+
+    ui->toolButton_advanced->setIcon(QIcon(":/functionBar/advance.png"));
+
+    ui->toolButton_contact->setIcon(QIcon(":/functionBar/contact.png"));
+
+    ui->toolButton_more->setIcon(QIcon(":/functionBar/more.png"));
 
 }

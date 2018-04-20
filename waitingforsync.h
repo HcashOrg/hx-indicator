@@ -40,7 +40,9 @@ private:
     int rotateNum;
 private slots:
     void showPic();
-
+private:
+    void InitWidget();
+    void InitStyle();
 private:
     Ui::WaitingForSync *ui;
 

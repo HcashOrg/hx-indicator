@@ -225,7 +225,7 @@ void PageScrollWidget::InitStyle()
                   max-width:20 px;\
                   min-height:20 px;\
                   min-width:20 px;\
-                  font:MicrosoftYaHeiLight;\
+                  font:Microsoft YaHei UI Light;\
                   font-size:12px;\
                   font-weight:580;\
                   border-top-left-radius:10px;  \
@@ -242,7 +242,7 @@ void PageScrollWidget::InitStyle()
                    max-width:30 px;\
                    min-height:20 px;\
                    min-width:30 px;\
-                   font:MicrosoftYaHeiLight;\
+                   font:Microsoft YaHei UI Light;\
                    font-size:12px;\
                    font-weight:bold;\
                    border-top-left-radius:5px;  \

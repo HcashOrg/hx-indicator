@@ -16,13 +16,11 @@ LockPage::LockPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::LockPage)
 {
-	
-
     ui->setupUi(this);
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    setStyleSheet("LockPage{background-image:url(:/ui/wallet_ui/loginBg.png);}");
+    InitWidget();
 
 
 #ifdef TARGET_OS_MAC
@@ -31,14 +29,6 @@ LockPage::LockPage(QWidget *parent) :
     ui->pwdLineEdit->setFocus();
     ui->pwdLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
     ui->pwdLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
-    ui->pwdLineEdit->setStyleSheet("color:white;background:transparent;border-width:0;border-style:outset;");
-
-
-    ui->logoLabel->setPixmap(QPixmap(":/ui/wallet_ui/logo_52x34.png"));
-    ui->label->setPixmap(QPixmap(":/ui/wallet_ui/passwordLineEditBg.png"));
-
-    ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: repeat-xy;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
 
 #ifdef WIN32
     if( GetKeyState(VK_CAPITAL) )
@@ -159,6 +149,42 @@ void LockPage::jsonDataUpdated(QString id)
 
 }
 
+void LockPage::InitWidget()
+{
+    InitStyle();
+}
+
+void LockPage::InitStyle()
+{
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
+    setPalette(palette);
+
+    QFont font("黑体",14,70);
+    ui->label_wel->setFont(font);
+
+    QFont fontb("黑体",21,100);
+    ui->label_bloc->setFont(fontb);
+
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
+    ui->label_wel->setPalette(pa);
+    ui->label_bloc->setPalette(pa);
+    ui->label_version->setPalette(pa);
+
+    ui->pwdLineEdit->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;");
+
+    ui->closeBtn->setIconSize(QSize(12,12));
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
+                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+    ui->enterBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
+                                "QToolButton:hover{background-color:#00D2FF;}");
+    ui->forgetBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;border-radius:15px;color: #C6CAD4;}"
+                                 "QToolButton:hover{background-color:#00D2FF;}");
+}
+
 void LockPage::keyPressEvent(QKeyEvent *e)
 {
 #ifdef WIN32
@@ -181,11 +207,8 @@ void LockPage::keyPressEvent(QKeyEvent *e)
 
 void LockPage::paintEvent(QPaintEvent *e)
 {
-    QStyleOption opt;
-
-    opt.init(this);
-    QPainter p(this);
-    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    QPainter painter(this);
+    painter.drawPixmap(238,130,490,320,QPixmap(":/ui/wallet_ui/login.png").scaled(490,320));
 
     QWidget::paintEvent(e);
 }

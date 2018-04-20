@@ -39,7 +39,9 @@ signals:
     void tray();
     void showShadowWidget();
     void hideShadowWidget();
-
+private:
+    void InitWidget();
+    void InitStyle();
 private:
     Ui::NormalLogin *ui;
 
