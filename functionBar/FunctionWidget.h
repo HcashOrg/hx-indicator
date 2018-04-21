@@ -30,8 +30,6 @@ signals:
     void showFeedPage();
     //void showMultiSigPage();
 
-    void assetChanged(int);
-
     void lock();
 signals:
     //点击大按钮的信号

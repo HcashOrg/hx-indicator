@@ -52,6 +52,11 @@ void MyExchangeContractPage::init()
     on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
 }
 
+void MyExchangeContractPage::refresh()
+{
+    on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
+}
+
 void MyExchangeContractPage::showOrders()
 {
     SellOrders orders = accountSellOrdersMap.value(ui->accountComboBox->currentText());
@@ -274,7 +279,6 @@ void MyExchangeContractPage::on_accountComboBox_currentIndexChanged(const QStrin
         UBChain::getInstance()->postRPC( "id-invoke_contract_offline-owner_assets-" + ui->accountComboBox->currentText(), toJsonFormat( "invoke_contract_offline",
                                                                                QJsonArray() << ui->accountComboBox->currentText() << contractAddress
                                                                                << "owner_assets"  << ""));
-        qDebug() << "cccccccccccccc   " << contractAddress;
     }
 
 }

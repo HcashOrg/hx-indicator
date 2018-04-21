@@ -68,7 +68,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <widget class="QToolButton" name="okBtn">
@@ -149,7 +149,7 @@
         <rect>
          <x>160</x>
          <y>130</y>
-         <width>280</width>
+         <width>200</width>
          <height>30</height>
         </rect>
        </property>
@@ -250,7 +250,7 @@
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>180</y>
+         <y>190</y>
          <width>120</width>
          <height>30</height>
         </rect>
@@ -269,7 +269,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>180</y>
+         <y>190</y>
          <width>100</width>
          <height>30</height>
         </rect>
@@ -291,6 +291,19 @@
        </property>
        <property name="textInteractionFlags">
         <set>Qt::NoTextInteraction</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="tipLabel">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>165</y>
+         <width>200</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </widget>

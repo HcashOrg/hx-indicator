@@ -37,6 +37,22 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->lockBalancesTableWidget->setColumnWidth(5,80);
 
 
+    ui->incomeTableWidget->installEventFilter(this);
+    ui->incomeTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->incomeTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->incomeTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->incomeTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->incomeTableWidget->setMouseTracking(true);
+    ui->incomeTableWidget->setShowGrid(false);//隐藏表格线
+
+    ui->incomeTableWidget->horizontalHeader()->setSectionsClickable(true);
+    ui->incomeTableWidget->horizontalHeader()->setFixedHeight(30);
+    ui->incomeTableWidget->horizontalHeader()->setVisible(true);
+    ui->incomeTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+
+    ui->incomeTableWidget->setColumnWidth(0,140);
+    ui->incomeTableWidget->setColumnWidth(1,140);
+    ui->incomeTableWidget->setColumnWidth(2,80);
 
     init();
 }
@@ -48,7 +64,8 @@ MinerPage::~MinerPage()
 
 void MinerPage::refresh()
 {
-    getLockBalance();
+    fetchLockBalance();
+    fetchAccountIncome();
 }
 
 void MinerPage::jsonDataUpdated(QString id)
@@ -56,8 +73,6 @@ void MinerPage::jsonDataUpdated(QString id)
     if( id == "id-get_account_lock_balance-" + ui->accountComboBox->currentText())
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        qDebug() << id << result;
 
         result.prepend("{");
         result.append("}");
@@ -116,19 +131,87 @@ void MinerPage::jsonDataUpdated(QString id)
 
         return;
     }
+
+    if( id == "id-get_address_pay_back_balance-" + ui->accountComboBox->currentText())
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonArray array = jsonObject.take("result").toArray();
+        int size = array.size();
+        ui->incomeTableWidget->setRowCount(0);
+        ui->incomeTableWidget->setRowCount(size);
+
+        for(int i = 0; i < size; i++)
+        {
+            QJsonObject object = array.at(i).toObject();
+            QString assetId = object.take("asset_id").toString();
+            unsigned long long amount = 0;
+            QJsonValue value = object.take("amount");
+            if(value.isString())
+            {
+                amount = value.toString().toULongLong();
+            }
+            else
+            {
+                amount = QString::number(value.toDouble(),'g',10).toULongLong();
+            }
+
+            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
+            ui->incomeTableWidget->setItem(i,0,new QTableWidgetItem(assetInfo.symbol));
+
+            ui->incomeTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(amount,assetInfo.precision)));
+
+            ui->incomeTableWidget->setItem(i,2,new QTableWidgetItem(tr("obtain")));
+
+        }
+
+
+        return;
+    }
+
+    if( id == "id-obtain_pay_back_balance")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":{"))
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("The transaction of obtain-income has been sent out!"));
+            commonDialog.pop();
+        }
+
+        return;
+    }
 }
 
 void MinerPage::on_registerBtn_clicked()
 {
-    RegisterDialog registerDialog;
-    registerDialog.pop();
+    if(UBChain::getInstance()->getUnregisteredAccounts().isEmpty())
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText(tr("There are no unregistered accounts in the wallet!"));
+        commonDialog.pop();
+    }
+    else
+    {
+        RegisterDialog registerDialog;
+        registerDialog.pop();
+    }
+
 }
 
 void MinerPage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
+    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
 
     painter.drawRect(rect());
 }
@@ -138,25 +221,47 @@ void MinerPage::init()
     if( UBChain::getInstance()->getRegisteredAccounts().isEmpty())
     {
         ui->tipLabel->show();
+        ui->stackedWidget->hide();
+        ui->incomeInfoBtn->hide();
+        ui->forecloseInfoBtn->hide();
+        ui->lockToMinerBtn->hide();
+        ui->accountComboBox->hide();
+        ui->accountLabel->hide();
     }
     else
     {
         ui->tipLabel->hide();
+        ui->stackedWidget->show();
+        ui->incomeInfoBtn->show();
+        ui->forecloseInfoBtn->show();
+        ui->lockToMinerBtn->show();
+        ui->accountComboBox->show();
+        ui->accountLabel->show();
 
         QStringList keys = UBChain::getInstance()->getRegisteredAccounts();
         ui->accountComboBox->addItems(keys);
     }
+
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
-void MinerPage::getLockBalance()
+void MinerPage::fetchLockBalance()
 {
     UBChain::getInstance()->postRPC( "id-get_account_lock_balance-" + ui->accountComboBox->currentText(),
                                      toJsonFormat( "get_account_lock_balance",QJsonArray() << ui->accountComboBox->currentText()));
 }
 
+void MinerPage::fetchAccountIncome()
+{
+    QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+    UBChain::getInstance()->postRPC( "id-get_address_pay_back_balance-" + ui->accountComboBox->currentText(),
+                                     toJsonFormat( "get_address_pay_back_balance",QJsonArray() << address << ""));
+}
+
 void MinerPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
-    getLockBalance();
+    fetchLockBalance();
+    fetchAccountIncome();
 }
 
 void MinerPage::on_lockToMinerBtn_clicked()
@@ -192,4 +297,35 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
 
         return;
     }
+}
+
+void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
+{
+    if(column == 2)
+    {
+        CommonDialog commonDialog(CommonDialog::OkAndCancel);
+        commonDialog.setText(tr("Sure to obtain all the current income?"));
+        if(commonDialog.pop())
+        {
+            QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+            UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
+                                             toJsonFormat( "obtain_pay_back_balance",
+                                                           QJsonArray() << address
+                                                           << ui->incomeTableWidget->item(row,1)->text()
+                                                           << ui->incomeTableWidget->item(row,0)->text()
+                                                           << true ));
+        }
+
+        return;
+    }
+}
+
+void MinerPage::on_incomeInfoBtn_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+void MinerPage::on_forecloseInfoBtn_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
 }

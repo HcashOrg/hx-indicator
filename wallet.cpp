@@ -115,21 +115,21 @@ UBChain*   UBChain::getInstance()
 
 void UBChain:: startExe()
 {
-    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
+//    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
-    QStringList strList;
-    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString()
-            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)  << "--replay";
+//    QStringList strList;
+//    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString()
+//            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)  << "--replay";
 
-    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
-    {
-        strList << "--resync-blockchain";
-    }
-    UBChain::getInstance()->configFile->setValue("settings/resyncNextTime",false);
+//    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+//    {
+//        strList << "--resync-blockchain";
+//    }
+//    UBChain::getInstance()->configFile->setValue("settings/resyncNextTime",false);
 
-    nodeProc->start("lnk_node.exe",strList);
+//    nodeProc->start("lnk_node.exe",strList);
 
-    emit exeStarted();
+//    emit exeStarted();
 }
 
 void UBChain::onNodeExeStateChanged()

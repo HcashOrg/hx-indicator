@@ -26,6 +26,8 @@ public:
 
     void init();
 
+    void refresh();
+
 private:
     QMap<QString,SellOrders> accountSellOrdersMap;
     void showOrders();

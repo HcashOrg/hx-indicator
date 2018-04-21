@@ -54,7 +54,6 @@ protected:
 
 public slots:
     void refreshAccountInfo();
-    void refresh();
     void autoRefresh();
     void shadowWidgetShow();
     void shadowWidgetHide();

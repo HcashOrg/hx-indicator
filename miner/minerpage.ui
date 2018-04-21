@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
-    <height>482</height>
+    <width>770</width>
+    <height>530</height>
    </rect>
   </property>
   <property name="font">
@@ -18,35 +18,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>30</y>
-     <width>101</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>账户信息</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="tipLabel">
-   <property name="geometry">
-    <rect>
-     <x>140</x>
-     <y>180</y>
-     <width>361</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>您的钱包内还没有注册账户,请先注册。</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
   <widget class="QToolButton" name="registerBtn">
    <property name="geometry">
     <rect>
@@ -81,11 +52,11 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
     <string>注册</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="accountLabel">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>80</y>
+     <y>30</y>
      <width>60</width>
      <height>24</height>
     </rect>
@@ -109,7 +80,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>80</y>
+     <y>30</y>
      <width>90</width>
      <height>30</height>
     </rect>
@@ -162,131 +133,314 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
     <string>质押资产</string>
    </property>
   </widget>
-  <widget class="QTableWidget" name="lockBalancesTableWidget">
+  <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
      <y>110</y>
-     <width>640</width>
-     <height>300</height>
+     <width>700</width>
+     <height>400</height>
     </rect>
    </property>
-   <property name="cursor" stdset="0">
+   <property name="currentIndex">
+    <number>1</number>
+   </property>
+   <widget class="QWidget" name="incomePage">
+    <widget class="QTableWidget" name="incomeTableWidget">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>640</width>
+       <height>300</height>
+      </rect>
+     </property>
+     <property name="cursor" stdset="0">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="autoScroll">
+      <bool>true</bool>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::NoSelection</enum>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>19</width>
+       <height>12</height>
+      </size>
+     </property>
+     <property name="showGrid">
+      <bool>true</bool>
+     </property>
+     <property name="gridStyle">
+      <enum>Qt::SolidLine</enum>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderHighlightSections">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderHighlightSections">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>币种</string>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>数量</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string/>
+      </property>
+     </column>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="foreclosePage">
+    <widget class="QTableWidget" name="lockBalancesTableWidget">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>40</y>
+       <width>640</width>
+       <height>300</height>
+      </rect>
+     </property>
+     <property name="cursor" stdset="0">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="autoScroll">
+      <bool>true</bool>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::NoSelection</enum>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>19</width>
+       <height>12</height>
+      </size>
+     </property>
+     <property name="showGrid">
+      <bool>true</bool>
+     </property>
+     <property name="gridStyle">
+      <enum>Qt::SolidLine</enum>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderHighlightSections">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderHighlightSections">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>质押miner账户</string>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>质押币种</string>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>质押数量</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>操作</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string/>
+      </property>
+     </column>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QToolButton" name="incomeInfoBtn">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>80</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
-   <property name="layoutDirection">
-    <enum>Qt::LeftToRight</enum>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">QTableWidget{border: none;gridline-color: rgb(241,241,248);background-color: rgb(40, 46, 66);}
-QHeaderView{background-color:rgb(40,46,66);min-height:30;color:white;}
-QHeaderView::section{background-color: rgb(56,63,93);border: 1px solid rgb(40,46,66);
+    <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
+background-color: transparent;
 font: 12px &quot;微软雅黑&quot;;}
-</string>
+QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
    </property>
-   <property name="frameShape">
-    <enum>QFrame::Box</enum>
+   <property name="text">
+    <string>收益信息</string>
    </property>
-   <property name="frameShadow">
-    <enum>QFrame::Plain</enum>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAsNeeded</enum>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="autoScroll">
-    <bool>true</bool>
-   </property>
-   <property name="editTriggers">
-    <set>QAbstractItemView::NoEditTriggers</set>
-   </property>
-   <property name="selectionMode">
-    <enum>QAbstractItemView::NoSelection</enum>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>19</width>
-     <height>12</height>
-    </size>
-   </property>
-   <property name="showGrid">
-    <bool>true</bool>
-   </property>
-   <property name="gridStyle">
-    <enum>Qt::SolidLine</enum>
-   </property>
-   <attribute name="horizontalHeaderVisible">
-    <bool>false</bool>
-   </attribute>
-   <attribute name="horizontalHeaderCascadingSectionResizes">
-    <bool>false</bool>
-   </attribute>
-   <attribute name="horizontalHeaderHighlightSections">
-    <bool>false</bool>
-   </attribute>
-   <attribute name="verticalHeaderVisible">
-    <bool>false</bool>
-   </attribute>
-   <attribute name="verticalHeaderHighlightSections">
-    <bool>false</bool>
-   </attribute>
-   <column>
-    <property name="text">
-     <string>质押miner账户</string>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-     </font>
-    </property>
-    <property name="textAlignment">
-     <set>AlignCenter</set>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>质押币种</string>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-     </font>
-    </property>
-    <property name="textAlignment">
-     <set>AlignCenter</set>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>质押数量</string>
-    </property>
-    <property name="textAlignment">
-     <set>AlignCenter</set>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>操作</string>
-    </property>
-    <property name="textAlignment">
-     <set>AlignCenter</set>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string/>
-    </property>
-   </column>
   </widget>
-  <zorder>lockBalancesTableWidget</zorder>
-  <zorder>label</zorder>
-  <zorder>tipLabel</zorder>
-  <zorder>registerBtn</zorder>
-  <zorder>label_2</zorder>
-  <zorder>accountComboBox</zorder>
-  <zorder>lockToMinerBtn</zorder>
+  <widget class="QToolButton" name="forecloseInfoBtn">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>80</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
+background-color: transparent;
+font: 12px &quot;微软雅黑&quot;;}
+QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
+   </property>
+   <property name="text">
+    <string>质押信息</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="tipLabel">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>250</y>
+     <width>361</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>您的钱包内还没有注册账户,请先注册。</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

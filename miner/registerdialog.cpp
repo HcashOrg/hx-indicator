@@ -39,6 +39,8 @@ void RegisterDialog::pop()
 
 void RegisterDialog::init()
 {
+    ui->okBtn->setEnabled(false);
+
     QStringList keys = UBChain::getInstance()->getUnregisteredAccounts();
     ui->accountComboBox->addItems(keys);
 
@@ -53,13 +55,35 @@ void RegisterDialog::jsonDataUpdated(QString id)
 
         if(result == "\"result\":null")
         {
+            if(ui->accountComboBox->currentText() != ui->registerNameLineEdit->text())
+            {
+                // 如果注册的名字和当前名字不一样 先改为注册的名字
+                UBChain::getInstance()->postRPC(  "id-change_account_name", toJsonFormat("change_account_name",
+                                               QJsonArray() << ui->accountComboBox->currentText() << ui->registerNameLineEdit->text() ));
+            }
+            else
+            {
                 UBChain::getInstance()->postRPC(  "id-register_account", toJsonFormat("register_account",
-                                                            QJsonArray() << ui->accountComboBox->currentText() << true ));
+                                                                                      QJsonArray() << ui->accountComboBox->currentText() << true ));
+            }
 
         }
         else if(result.startsWith("\"error\":"))
         {
             ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
+        }
+
+        return;
+    }
+
+    if( id == "id-change_account_name")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        if(result.startsWith("\"result\":{\"id\":\"0.0.0\""))
+        {
+            UBChain::getInstance()->postRPC(  "id-register_account", toJsonFormat("register_account",
+                                                                                  QJsonArray() << ui->registerNameLineEdit->text() << true ));
         }
 
         return;
@@ -80,6 +104,28 @@ void RegisterDialog::jsonDataUpdated(QString id)
 
         return;
     }
+
+    if( id.startsWith("id-get_account-") )
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        // 如果跟当前输入框中的内容不一样，则是过时的rpc返回，不用处理
+        if( id.mid(QString("id-get_account-").size()) != ui->registerNameLineEdit->text())  return;
+;
+
+        if( result.startsWith("\"result\":{\"id\":\"0.0.0\""))
+        {
+            ui->okBtn->setEnabled(true);
+            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#2be683>" + tr( "The name is available") + "</font></body>" );
+        }
+        else
+        {
+            ui->okBtn->setEnabled(false);
+            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr( "This name has been used") + "</font></body>" );
+        }
+
+        return;
+    }
 }
 
 void RegisterDialog::on_closeBtn_clicked()
@@ -90,15 +136,27 @@ void RegisterDialog::on_closeBtn_clicked()
 void RegisterDialog::on_okBtn_clicked()
 {
     if(ui->accountComboBox->currentText().isEmpty())    return;
-    if(ui->registerNameLineEdit->text().isEmpty())      return;
 
-    ui->stackedWidget->setCurrentIndex(1);
+    if(ui->accountComboBox->currentText() != ui->registerNameLineEdit->text())
+    {
+        CommonDialog commonDialog(CommonDialog::OkAndCancel);
+        commonDialog.setText(tr("The name that will be registered is not the same as current name. Sure to change the name of this account?"));
+        if(commonDialog.pop())
+        {
+            ui->stackedWidget->setCurrentIndex(1);
+        }
+    }
+    else
+    {
+        ui->stackedWidget->setCurrentIndex(1);
+    }
 
 }
 
 void RegisterDialog::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     ui->addressLabel->setText(UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address);
+    ui->registerNameLineEdit->setText(ui->accountComboBox->currentText());
 }
 
 void RegisterDialog::on_okBtn2_clicked()
@@ -107,4 +165,20 @@ void RegisterDialog::on_okBtn2_clicked()
 
     UBChain::getInstance()->postRPC( "id-unlock-RegisterDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
+}
+
+void RegisterDialog::on_cancelBtn_clicked()
+{
+    close();
+}
+
+void RegisterDialog::on_registerNameLineEdit_textChanged(const QString &arg1)
+{
+    UBChain::getInstance()->postRPC( "id-get_account-" + ui->registerNameLineEdit->text(),
+                                     toJsonFormat( "get_account", QJsonArray() << ui->registerNameLineEdit->text() ));
+}
+
+void RegisterDialog::on_cancelBtn2_clicked()
+{
+    close();
 }

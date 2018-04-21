@@ -30,6 +30,12 @@ private slots:
 
     void on_okBtn2_clicked();
 
+    void on_cancelBtn_clicked();
+
+    void on_registerNameLineEdit_textChanged(const QString &arg1);
+
+    void on_cancelBtn2_clicked();
+
 private:
     Ui::RegisterDialog *ui;
 };

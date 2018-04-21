@@ -18,6 +18,8 @@ void FunctionAccountWidget::AssetShowSlots()
 {
     ui->toolButton_miner->setChecked(false);
     ui->toolButton_asset->setChecked(true);
+
+    emit showAccountSignal();
 }
 
 void FunctionAccountWidget::MinerShowSlots()

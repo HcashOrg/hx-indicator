@@ -19,6 +19,7 @@ private slots:
     void MinerShowSlots();
 
 signals:
+    void showAccountSignal();
     void showMinerSignal();
 
 private:

@@ -339,7 +339,6 @@ void Frame::alreadyLogin()
     connect(mainPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(mainPage,SIGNAL(showTransferPage(QString)),this,SLOT(showTransferPage(QString)));
     connect(mainPage,SIGNAL(newAccount(QString)),this,SLOT(newAccount(QString)));
-    connect(functionBar,SIGNAL(assetChanged(int)),mainPage,SLOT(updateAccountList()));
 
     timer = new QTimer(this);               //  自动锁定
     connect(timer,SIGNAL(timeout()),this,SLOT(autoLock()));
@@ -408,7 +407,6 @@ void Frame::showAccountPage(QString accountName)
     connect(accountPage,SIGNAL(accountChanged(QString)),this,SLOT(showAccountPage(QString)));
     connect(accountPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     connect(accountPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
-    connect(functionBar,SIGNAL(assetChanged(int)),this,SLOT(refresh()));
 
     //朱正天functionBar->choosePage(4);
 
@@ -669,40 +667,6 @@ void Frame::closeCurrentPage()
 
 }
 
-void Frame::refresh()
-{
-//    getAccountInfo();
-
-    switch (currentPageNum) {
-    case 0:
-        mainPage->refresh();
-        break;
-    case 1:
-        accountPage->refresh();
-        break;
-    case 2:
-
-        break;
-    case 3:
-        transferPage->refresh();
-        break;
-    case 4:
-        break;
-    case 5:
-//        showAccountPage(currentAccount);
-
-        break;
-    case 6:
-        break;
-    case 7:
-
-        break;
-    case 8:
-        break;
-    default:
-        break;
-    }
-}
 
 void Frame::autoRefresh()
 {
@@ -730,11 +694,7 @@ void Frame::autoRefresh()
     case 4:
         break;
     case 5:
-//        showAccountPage(currentAccount);
-//        if( lockPage == NULL)     // 锁定的时候 refresh会崩溃
-//        {
-//            accountPage->refresh();
-//        }
+        myExchangeContractPage->refresh();
         break;
     case 6:
         break;
@@ -770,7 +730,6 @@ void Frame::showMainPage()
 //    connect(mainPage,SIGNAL(refreshAccountInfo()),this,SLOT(refreshAccountInfo()));
     connect(mainPage,SIGNAL(showTransferPage(QString)),this,SLOT(showTransferPage(QString)));
     connect(mainPage,SIGNAL(newAccount(QString)),this,SLOT(newAccount(QString)));
-    connect(functionBar,SIGNAL(assetChanged(int)),mainPage,SLOT(updateAccountList()));
 
 }
 

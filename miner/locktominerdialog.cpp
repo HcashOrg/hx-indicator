@@ -117,3 +117,8 @@ void LockToMinerDialog::on_assetComboBox_currentIndexChanged(const QString &arg1
 
     ui->amountLineEdit->setPlaceholderText(tr("total %1 %2").arg(amountStr).arg(ui->assetComboBox->currentText()) );
 }
+
+void LockToMinerDialog::on_closeBtn_clicked()
+{
+    close();
+}

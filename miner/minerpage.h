@@ -28,14 +28,20 @@ private slots:
 
     void on_lockBalancesTableWidget_cellPressed(int row, int column);
 
+    void on_incomeTableWidget_cellPressed(int row, int column);
+
+    void on_incomeInfoBtn_clicked();
+
+    void on_forecloseInfoBtn_clicked();
+
 private:
     Ui::MinerPage *ui;
 
     void paintEvent(QPaintEvent*);
     void init();
 
-    void getLockBalance();
-
+    void fetchLockBalance();
+    void fetchAccountIncome();
 };
 
 #endif // MINERPAGE_H
