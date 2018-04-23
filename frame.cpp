@@ -156,6 +156,9 @@ Frame::Frame(): timer(NULL),
             UBChain::getInstance()->notProduce      =  true;
             UBChain::getInstance()->configFile->setValue("/settings/language","English");
             UBChain::getInstance()->language = "English";
+            UBChain::getInstance()->configFile->setValue("/settings/feeType","LNK");
+            UBChain::getInstance()->feeType = "LNK";
+
             UBChain::getInstance()->minimizeToTray  = false;
             UBChain::getInstance()->configFile->setValue("/settings/minimizeToTray",false);
             UBChain::getInstance()->closeToMinimize = false;

@@ -4,8 +4,8 @@ QComboBox::drop-down {background:transparent;border:none;}
 QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}
 QComboBox::down-arrow:on {image: url(:/ui/wallet_ui/downArrow_on.png);}
 QComboBox QAbstractItemView {outline: 0px;}
-QComboBox QAbstractItemView::item { min-height: 30px;color:rgb(192,196,212);selection-color: white;background-color: rgb(58,62,82);selection-background-color: rgb(44,48,67);}
-QComboBox QAbstractItemView::item:hover {color: white;background-color: rgb(44,48,67);}
+#QComboBox QAbstractItemView::item { min-height: 30px;color:rgb(192,196,212);selection-color: white;background-color: rgb(58,62,82);selection-background-color: rgb(44,48,67);}
+#QComboBox QAbstractItemView::item:hover {color: white;background-color: rgb(44,48,67);}
 
 QMenu {background-color:rgb(89,87,87);border: 1px solid rgb(192, 196, 212);}
 QMenu::item {color: rgb(225,225,225);border: 0px solid rgb(192, 196, 212);background-color:rgb(58,62,82);padding:8px 8px;}

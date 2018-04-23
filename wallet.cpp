@@ -51,6 +51,8 @@ UBChain::UBChain()
         notProduce      =  true;
         configFile->setValue("/settings/language","English");
         language = "English";
+        configFile->setValue("/settings/feeType","LNK");
+        feeType = "LNK";
         minimizeToTray  = false;
         configFile->setValue("/settings/minimizeToTray",false);
         closeToMinimize = false;
@@ -66,6 +68,7 @@ UBChain::UBChain()
         minimizeToTray  = configFile->value("/settings/minimizeToTray").toBool();
         closeToMinimize = configFile->value("/settings/closeToMinimize").toBool();
         language        = configFile->value("/settings/language").toString();
+        feeType         = configFile->value("/settings/feeType").toString();
         resyncNextTime  = configFile->value("/settings/resyncNextTime",false).toBool();
 
     }

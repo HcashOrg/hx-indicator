@@ -40,6 +40,8 @@ private slots:
 
     void on_safeBtn_clicked();
 
+    void on_accountBtn_clicked();
+
     void on_confirmBtn_clicked();
 
     void on_newPwdLineEdit_textChanged(const QString &arg1);
@@ -50,6 +52,12 @@ private slots:
 
     void jsonDataUpdated(QString id);
 
+    void on_toolButton_set_clicked();
+    void on_toolButton_help_clicked();
+private:
+    void updateButtonIcon(int buttonNumber);
+protected:
+    void paintEvent(QPaintEvent *event);
 private:
     Ui::SetDialog *ui;
     bool eventFilter(QObject *watched, QEvent *e);
