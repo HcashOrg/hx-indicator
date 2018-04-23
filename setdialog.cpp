@@ -8,6 +8,7 @@
 #include "setdialog.h"
 #include "ui_setdialog.h"
 #include "wallet.h"
+#include "AccountManagerWidget.h"
 
 #include "commondialog.h"
 
@@ -170,6 +171,10 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->toolButton_set->setCheckable(true);
     ui->toolButton_set->setChecked(true);
     ui->toolButton_help->setChecked(false);
+
+    //新建账户管理页面
+    AccountManagerWidget *accountManage = new AccountManagerWidget(this);
+    ui->stackedWidget->addWidget(accountManage);
 }
 
 SetDialog::~SetDialog()
@@ -340,7 +345,7 @@ void SetDialog::on_safeBtn_clicked()
 
 void SetDialog::on_accountBtn_clicked()
 {
-    //ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(2);
     updateButtonIcon(2);
 }
 
