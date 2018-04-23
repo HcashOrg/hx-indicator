@@ -53,6 +53,8 @@ private slots:
 
     void ShowSettingWidgetSlots();
     void ShowConsoleWidgetSlots();
+    void ShowAboutWidgetSlots();
+    void ShowUpdateWidgetSlots();
 private:
     void updateCheckState(int buttonNumber);
 private:

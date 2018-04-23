@@ -808,25 +808,6 @@
         <enum>Qt::ToolButtonTextUnderIcon</enum>
        </property>
       </widget>
-      <widget class="QToolButton" name="closeBtn">
-       <property name="geometry">
-        <rect>
-         <x>625</x>
-         <y>16</y>
-         <width>18</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
       <widget class="QToolButton" name="accountBtn">
        <property name="geometry">
         <rect>
@@ -884,6 +865,25 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_help"/>
+   </widget>
+   <widget class="QToolButton" name="closeBtn">
+    <property name="geometry">
+     <rect>
+      <x>865</x>
+      <y>140</y>
+      <width>18</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
  </widget>

@@ -141,7 +141,8 @@ SOURCES += main.cpp\
     capitalTransferPage/CapitalTransferDataUtil.cpp \
     contact/ContactInfoHistoryWidget.cpp \
     AccountManagerWidget.cpp \
-    ToolButtonWidget.cpp
+    ToolButtonWidget.cpp \
+    HelpWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -254,7 +255,8 @@ HEADERS  += firstlogin.h \
     capitalTransferPage/CapitalTransferDataUtil.h \
     contact/ContactInfoHistoryWidget.h \
     AccountManagerWidget.h \
-    ToolButtonWidget.h
+    ToolButtonWidget.h \
+    HelpWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -346,7 +348,8 @@ FORMS    += firstlogin.ui \
     capitalTransferPage/PasswordConfirmWidget.ui \
     contact/ContactInfoHistoryWidget.ui \
     AccountManagerWidget.ui \
-    ToolButtonWidget.ui
+    ToolButtonWidget.ui \
+    HelpWidget.ui
 
 win32{
     DISTFILES += logo.rc

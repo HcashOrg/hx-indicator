@@ -9,6 +9,7 @@
 #include "ui_setdialog.h"
 #include "wallet.h"
 #include "AccountManagerWidget.h"
+#include "HelpWidget.h"
 
 #include "commondialog.h"
 
@@ -175,6 +176,10 @@ SetDialog::SetDialog(QWidget *parent) :
     //新建账户管理页面
     AccountManagerWidget *accountManage = new AccountManagerWidget(this);
     ui->stackedWidget->addWidget(accountManage);
+
+    //帮助页面
+    HelpWidget *helpWidget = new HelpWidget();
+    ui->stackedWidget_2->insertWidget(1,helpWidget);
 }
 
 SetDialog::~SetDialog()
@@ -194,6 +199,15 @@ void SetDialog::pop()
 
     move(0,0);
     exec();
+}
+
+void SetDialog::setHelpFirst(bool helpfirst)
+{
+    if(helpfirst)
+    {
+        on_toolButton_help_clicked();
+    }
+
 }
 
 

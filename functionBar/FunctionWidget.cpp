@@ -100,6 +100,24 @@ void FunctionWidget::ShowConsoleWidgetSlots()
     consoleDialog.pop();
 }
 
+void FunctionWidget::ShowAboutWidgetSlots()
+{
+    SetDialog setDialog;
+    setDialog.setHelpFirst(true);
+    connect(&setDialog,SIGNAL(settingSaved()),UBChain::getInstance()->mainFrame,SLOT(settingSaved()));
+    setDialog.pop();
+
+}
+
+void FunctionWidget::ShowUpdateWidgetSlots()
+{
+    SetDialog setDialog;
+    setDialog.setHelpFirst(true);
+    connect(&setDialog,SIGNAL(settingSaved()),UBChain::getInstance()->mainFrame,SLOT(settingSaved()));
+    setDialog.pop();
+
+}
+
 void FunctionWidget::updateCheckState(int buttonNumber)
 {
     ui->toolButton_account->setChecked(0 == buttonNumber);
@@ -142,6 +160,8 @@ void FunctionWidget::InitWidget()
     connect(actionLock,&QAction::triggered,this,&FunctionWidget::lock);
     connect(actionSet,&QAction::triggered,this,&FunctionWidget::ShowSettingWidgetSlots);
     connect(actionConsole,&QAction::triggered,this,&FunctionWidget::ShowConsoleWidgetSlots);
+    connect(actionAbout,&QAction::triggered,this,&FunctionWidget::ShowAboutWidgetSlots);
+    connect(actionUpdate,&QAction::triggered,this,&FunctionWidget::ShowUpdateWidgetSlots);
 
     connect(_p->accountBar,&FunctionAccountWidget::showAccountSignal,this,&FunctionWidget::showAccountSignal);
     connect(_p->accountBar,&FunctionAccountWidget::showMinerSignal,this,&FunctionWidget::showMinerSignal);

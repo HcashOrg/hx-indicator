@@ -18,7 +18,7 @@ class AccountManagerWidget::AccountManagerWidgetPrivate
 {
 public:
     AccountManagerWidgetPrivate()
-        :pageWidget(new PageScrollWidget(4))
+        :pageWidget(new PageScrollWidget(5))
     {
 
     }
@@ -50,6 +50,9 @@ void AccountManagerWidget::deleteButtonSlots()
 {
     int row = ui->tableWidget->rowAt(ui->tableWidget->mapFromGlobal(QCursor::pos()).y());
     qDebug()<<"clicked          "<<row;
+    UBChain::getInstance()->postRPC( "id-remove_local_account",
+                                     toJsonFormat( "remove_local_account", QJsonArray()
+                                     <<ui->tableWidget->item(row,0)->data(Qt::UserRole).value<AccountInfo>().name));
 }
 
 void AccountManagerWidget::exportButtonSlots()
@@ -136,4 +139,5 @@ void AccountManagerWidget::InitStyle()
     ui->toolButton->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                                   "QToolButton:hover{background-color:#00D2FF;}");
 
+    ui->tableWidget->setFocusPolicy(Qt::NoFocus);
 }

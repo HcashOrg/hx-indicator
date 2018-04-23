@@ -18,7 +18,7 @@ public:
 //    virtual void setVisible(bool visiable);
 
     void pop();
-
+    void setHelpFirst(bool helpfirst = true);
 //protected:
 //    void mousePressEvent(QMouseEvent*event);
 //    void mouseMoveEvent(QMouseEvent *event);
