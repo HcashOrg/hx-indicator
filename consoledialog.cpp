@@ -222,6 +222,7 @@ void ConsoleDialog::on_consoleLineEdit_returnPressed()
 
 void ConsoleDialog::jsonDataUpdated(QString id)
 {
+
     if( id.startsWith("console-"))
     {
         ui->consoleBrowser->append(">>>" + id.mid(8));

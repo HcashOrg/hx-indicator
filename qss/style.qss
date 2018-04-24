@@ -13,13 +13,13 @@ QMenu::item:selected {background-color:rgb(44,48,67);}
 QMenu::separator {height: 2px;background-color: rgb(192, 196, 212);}
 
 
-QScrollBar:vertical{border:none; width:20px;background:transparent;padding:20px 4px 20px 8px;}
-QScrollBar::handle:vertical{width:8px;background:rgba(20,25,41);border-radius:4px;min-height:20;}
-QScrollBar::handle:vertical:hover{background:rgb(10,15,31);}
-QScrollBar::add-line:vertical{height:0px;}
-QScrollBar::sub-line:vertical{height:0px;}
-QScrollBar::sub-page:vertical {background: transparent;}
-QScrollBar::add-page:vertical {background: transparent;}
+#QScrollBar:vertical{border:none; width:20px;background:transparent;padding:20px 4px 20px 8px;}
+#QScrollBar::handle:vertical{width:8px;background:rgba(20,25,41);border-radius:4px;min-height:20;}
+#QScrollBar::handle:vertical:hover{background:rgb(10,15,31);}
+#QScrollBar::add-line:vertical{height:0px;}
+#QScrollBar::sub-line:vertical{height:0px;}
+#QScrollBar::sub-page:vertical {background: transparent;}
+#QScrollBar::add-page:vertical {background: transparent;}
 
 QCheckBox{color:rgb(192,196,212);}
 QCheckBox::indicator{ image:url(:/ui/wallet_ui/checkBox_unchecked.png);}

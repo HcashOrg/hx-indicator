@@ -29,6 +29,8 @@ private:
 public:
     class PublishPoundageWidgetPrivate;
     PublishPoundageWidgetPrivate *_p;
+protected:
+    void paintEvent(QPaintEvent *event);
 };
 
 #endif // PUBLISHPOUNDAGEWIDGET_H
