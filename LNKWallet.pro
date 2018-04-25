@@ -139,13 +139,10 @@ SOURCES += main.cpp\
     capitalTransferPage/PasswordConfirmWidget.cpp \
     capitalTransferPage/CapitalTransferDataUtil.cpp \
     contact/ContactInfoHistoryWidget.cpp \
-<<<<<<< HEAD
-    extra/transactiondb.cpp
-=======
+    extra/transactiondb.cpp         \
     AccountManagerWidget.cpp \
     ToolButtonWidget.cpp \
     HelpWidget.cpp
->>>>>>> eef991a3631f59c531f779d07082e2803fce4211
 
 
 HEADERS  += firstlogin.h \
@@ -256,13 +253,10 @@ HEADERS  += firstlogin.h \
     capitalTransferPage/PasswordConfirmWidget.h \
     capitalTransferPage/CapitalTransferDataUtil.h \
     contact/ContactInfoHistoryWidget.h \
-<<<<<<< HEAD
-    extra/transactiondb.h
-=======
+    extra/transactiondb.h \
     AccountManagerWidget.h \
     ToolButtonWidget.h \
     HelpWidget.h
->>>>>>> eef991a3631f59c531f779d07082e2803fce4211
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
