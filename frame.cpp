@@ -12,7 +12,7 @@
 #include "normallogin.h"
 #include "mainpage.h"
 #include "accountpage.h"
-#include "transferpage.h"
+#include "transfer/transferpage.h"
 #include "bottombar.h"
 #include "lockpage.h"
 #include "titlebar.h"

@@ -60,6 +60,8 @@ private slots:
 
     void on_contactComboBox_currentIndexChanged(int index);
 
+    void on_transferRecordBtn_clicked();
+
 private:
     Ui::TransferPage *ui;
     QString accountName;

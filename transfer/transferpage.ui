@@ -570,6 +570,19 @@ QTextEdit:focus{border:1px solid rgb(93,107,144);}
     <string notr="true"/>
    </property>
   </widget>
+  <widget class="QToolButton" name="transferRecordBtn">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>20</y>
+     <width>61</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>转账记录</string>
+   </property>
+  </widget>
   <zorder>memoTextEdit</zorder>
   <zorder>addressLabel2</zorder>
   <zorder>addressLabel</zorder>
@@ -595,6 +608,7 @@ QTextEdit:focus{border:1px solid rgb(93,107,144);}
   <zorder>callContractFeeLabel3</zorder>
   <zorder>amountAssetLabel</zorder>
   <zorder>contactComboBox</zorder>
+  <zorder>transferRecordBtn</zorder>
  </widget>
  <tabstops>
   <tabstop>amountLineEdit</tabstop>

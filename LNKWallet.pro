@@ -39,7 +39,6 @@ SOURCES += main.cpp\
     frame.cpp \
     mainpage.cpp \
     accountpage.cpp \
-    transferpage.cpp \
     bottombar.cpp \
     setdialog.cpp \
     lockpage.cpp \
@@ -55,7 +54,6 @@ SOURCES += main.cpp\
     showcontentdialog.cpp \
     namedialog.cpp \
     deleteaccountdialog.cpp \
-    transferconfirmdialog.cpp \
     commontip.cpp \
     searchoptionwidget.cpp \
     addnodedialog.cpp \
@@ -142,7 +140,10 @@ SOURCES += main.cpp\
     extra/transactiondb.cpp         \
     AccountManagerWidget.cpp \
     ToolButtonWidget.cpp \
-    HelpWidget.cpp
+    HelpWidget.cpp \
+    transfer/transferconfirmdialog.cpp \
+    transfer/transferpage.cpp \
+    transfer/transferrecordwidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -150,7 +151,6 @@ HEADERS  += firstlogin.h \
     frame.h \
     mainpage.h \
     accountpage.h \
-    transferpage.h \
     bottombar.h \
     setdialog.h \
     lockpage.h \
@@ -166,7 +166,6 @@ HEADERS  += firstlogin.h \
     showcontentdialog.h \
     namedialog.h \
     deleteaccountdialog.h \
-    transferconfirmdialog.h \
     commontip.h \
     searchoptionwidget.h \
     addnodedialog.h \
@@ -256,13 +255,16 @@ HEADERS  += firstlogin.h \
     extra/transactiondb.h \
     AccountManagerWidget.h \
     ToolButtonWidget.h \
-    HelpWidget.h
+    HelpWidget.h \
+    transfer/transferconfirmdialog.h \
+    transfer/transferpage.h \
+    transfer/transferrecordwidget.h \
+    extra/transactiontype.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
     mainpage.ui \
     accountpage.ui \
-    transferpage.ui \
     bottombar.ui \
     setdialog.ui \
     lockpage.ui \
@@ -278,7 +280,6 @@ FORMS    += firstlogin.ui \
     showcontentdialog.ui \
     namedialog.ui \
     deleteaccountdialog.ui \
-    transferconfirmdialog.ui \
     commontip.ui \
     searchoptionwidget.ui \
     addnodedialog.ui \
@@ -349,7 +350,10 @@ FORMS    += firstlogin.ui \
     contact/ContactInfoHistoryWidget.ui \
     AccountManagerWidget.ui \
     ToolButtonWidget.ui \
-    HelpWidget.ui
+    HelpWidget.ui \
+    transfer/transferconfirmdialog.ui \
+    transfer/transferpage.ui \
+    transfer/transferrecordwidget.ui
 
 win32{
     DISTFILES += logo.rc
