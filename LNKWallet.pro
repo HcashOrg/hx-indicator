@@ -69,7 +69,6 @@ SOURCES += main.cpp\
     control/rightclickmenudialog.cpp \
     control/chooseaddaccountdialog.cpp \
     dialog/renamedialog.cpp \
-    extra/dynamicmove.cpp \
     control/remarkcellwidget.cpp \
     control/shadowwidget.cpp \
     selectwalletpathwidget.cpp \
@@ -139,7 +138,8 @@ SOURCES += main.cpp\
     capitalTransferPage/CapitalTransferPage.cpp \
     capitalTransferPage/PasswordConfirmWidget.cpp \
     capitalTransferPage/CapitalTransferDataUtil.cpp \
-    contact/ContactInfoHistoryWidget.cpp
+    contact/ContactInfoHistoryWidget.cpp \
+    extra/transactiondb.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -177,7 +177,6 @@ HEADERS  += firstlogin.h \
     control/rightclickmenudialog.h \
     control/chooseaddaccountdialog.h \
     dialog/renamedialog.h \
-    extra/dynamicmove.h \
     control/remarkcellwidget.h \
     control/shadowwidget.h \
     selectwalletpathwidget.h \
@@ -250,7 +249,8 @@ HEADERS  += firstlogin.h \
     capitalTransferPage/CapitalTransferPage.h \
     capitalTransferPage/PasswordConfirmWidget.h \
     capitalTransferPage/CapitalTransferDataUtil.h \
-    contact/ContactInfoHistoryWidget.h
+    contact/ContactInfoHistoryWidget.h \
+    extra/transactiondb.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \

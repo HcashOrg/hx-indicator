@@ -258,6 +258,30 @@ void MyExchangeContractPage::paintEvent(QPaintEvent *)
     painter.drawRect(rect());
 }
 
+void MyExchangeContractPage::registerContract()
+{
+    // 如果还没有兑换合约  先注册
+    CommonDialog commonDialog(CommonDialog::OkAndCancel);
+    commonDialog.setText(tr("You don't have an exchange contract at the moment. Will you create it?"));
+    if(commonDialog.pop())
+    {
+        QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange2.lua.gpc";
+        QFileInfo fileInfo(filePath);
+        if(fileInfo.exists())
+        {
+            UBChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
+                                                                                   QJsonArray() << ui->accountComboBox->currentText() << "0.001"
+                                                                                   << "10000"  << filePath));
+        }
+        else
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Can not find file contracts/blocklink_exchange.glua.gpc!"));
+            commonDialog.pop();
+        }
+    }
+}
+
 void MyExchangeContractPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     if(!inited)     return;
@@ -299,26 +323,7 @@ void MyExchangeContractPage::on_sellBtn_clicked()
 
     if(contractAddress.isEmpty())
     {
-        // 如果还没有兑换合约  先注册
-        CommonDialog commonDialog(CommonDialog::OkAndCancel);
-        commonDialog.setText(tr("You don't have an exchange contract at the moment. Will you create it?"));
-        if(commonDialog.pop())
-        {
-            QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange2.lua.gpc";
-            QFileInfo fileInfo(filePath);
-            if(fileInfo.exists())
-            {
-                UBChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
-                                                                                       QJsonArray() << ui->accountComboBox->currentText() << "0.001"
-                                                                                       << "10000"  << filePath));
-            }
-            else
-            {
-                CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText(tr("Can not find file contracts/blocklink_exchange.glua.gpc!"));
-                commonDialog.pop();
-            }
-        }
+        registerContract();
     }
     else
     {
@@ -402,4 +407,19 @@ void MyExchangeContractPage::on_withdrawAllBtn_clicked()
                                                                            << contractAddress
                                                                            << "cancelSellOrderPair"  << params));
 
+}
+
+void MyExchangeContractPage::on_depositBtn_clicked()
+{
+    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+
+    if(contractAddress.isEmpty())
+    {
+        registerContract();
+    }
+    else
+    {
+        DepositExchangeContractDialog depositExchangeContractDialog;
+        depositExchangeContractDialog.pop();
+    }
 }

@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 //    translator.load(QString(":/qm/qt_zh_cn"));
 //    a.installTranslator(&translator);
     UBChain::getInstance();  // 在frame创建前先创建实例，读取language
-//    qDebug() <<  "db init: " << UBChain::getInstance()->transactionDB.init();
+    qDebug() <<  "db init: " << UBChain::getInstance()->transactionDB.init();
 //    QStringList keys = UBChain::getInstance()->transactionDB.keys();
 
 //    qInstallMessageHandler(outputMessage);  // 重定向qebug 到log.txt
@@ -128,7 +128,6 @@ int main(int argc, char *argv[])
     a.installEventFilter(&frame);
 
     CommonHelper::setStyle(":/ui/qss/style.qss");
-
 
     int result = a.exec();
     UBChain::getInstance()->quit();

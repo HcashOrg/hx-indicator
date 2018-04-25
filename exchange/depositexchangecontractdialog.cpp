@@ -56,6 +56,30 @@ void DepositExchangeContractDialog::setCurrentAsset(QString _assetSymbol)
 
 void DepositExchangeContractDialog::jsonDataUpdated(QString id)
 {
+    if( id.startsWith( "id-unlock-DepositExchangeContractDialog") )
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result == "\"result\":null")
+        {
+            QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+
+            UBChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
+                                                                                   QJsonArray() << ui->accountNameLabel->text() << contractAddress
+                                                                                   << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                                                                                   << "deposit to exchange contract" << 0.001 << 1000 << true
+                                                                                   ));
+        }
+        else if(result.startsWith("\"error\":"))
+        {
+            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
+        }
+
+        return;
+    }
+
+
     if( id == "id-transfer_to_contract")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
@@ -86,14 +110,10 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
 void DepositExchangeContractDialog::on_okBtn_clicked()
 {
     if(ui->amountLineEdit->text().toDouble() <= 0)  return;
+    if(ui->pwdLineEdit->text().isEmpty())           return;
 
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
-
-    UBChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
-                                                                           QJsonArray() << ui->accountNameLabel->text() << contractAddress
-                                                                           << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
-                                                                           << "deposit to exchange contract" << 0.001 << 1000 << true
-                                                                           ));
+    UBChain::getInstance()->postRPC( "id-unlock-DepositExchangeContractDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+                                               ));
 
 }
 

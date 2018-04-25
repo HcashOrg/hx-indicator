@@ -36,6 +36,7 @@
 #include "multisig/multisigtransactionpage.h"
 #include "neworimportwalletwidget.h"
 #include "exchange/myexchangecontractpage.h"
+#include "extra/transactiondb.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -1264,6 +1265,97 @@ void Frame::jsonDataUpdated(QString id)
 
         return;
     }
+
+    if( id == "id-list_transactions")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        if(result.startsWith("\"result\":"))
+        {
+            qDebug() << id << result;
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonArray array = jsonObject.take("result").toArray();
+
+            foreach (QJsonValue v, array)
+            {
+                QString transactionId = v.toString();
+                TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
+                qDebug() << "ttttttt " <<  ts.type << ts.transactionId;
+
+                if(ts.type == -1)
+                {
+                    UBChain::getInstance()->postRPC( "id-get_transaction-" + transactionId, toJsonFormat( "get_transaction", QJsonArray() << transactionId));
+                }
+            }
+        }
+
+
+        return;
+    }
+
+    if( id.startsWith("id-get_transaction-"))
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        if(result.startsWith("\"result\":"))
+        {
+            QString transactionId = id.mid(QString("id-get_transaction-").size());
+            qDebug() << id << result << transactionId;
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonObject object = jsonObject.take("result").toObject();
+
+            TransactionStruct ts;
+            ts.transactionId = transactionId;
+            ts.blockNum = object.take("ref_block_num").toInt();
+            ts.expirationTime = object.take("expiration").toString();
+
+            QJsonArray array = object.take("operations").toArray().at(0).toArray();
+            ts.type = array.at(0).toInt();
+            QJsonObject operationObject = array.at(1).toObject();
+            ts.operationStr = QJsonDocument(operationObject).toJson();
+
+            UBChain::getInstance()->transactionDB.insertTransactionStruct(transactionId,ts);
+
+            TransactionTypeId typeId;
+            typeId.type = ts.type;
+            typeId.transactionId = transactionId;
+            switch (typeId.type)
+            {
+            case 0:
+            {
+
+                // 普通交易
+                QString fromAddress = operationObject.take("from_addr").toString();
+                QString toAddress   = operationObject.take("to_addr").toString();
+
+
+                if(UBChain::getInstance()->isMyAddress(fromAddress))
+                {
+                    UBChain::getInstance()->transactionDB.addAccountTransactionId(fromAddress, typeId);
+                }
+
+                if(UBChain::getInstance()->isMyAddress(toAddress))
+                {
+                    UBChain::getInstance()->transactionDB.addAccountTransactionId(fromAddress, typeId);
+                }
+            }
+                break;
+            default:
+                break;
+            }
+        }
+
+
+        return;
+    }
 }
 
 void Frame::closeEvent(QCloseEvent *e)
@@ -1329,6 +1421,8 @@ void Frame::init()
 
 
     UBChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.121:9040") ));
+
+    UBChain::getInstance()->fetchTransactions();
 }
 
 

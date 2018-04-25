@@ -99,34 +99,6 @@ MainPage::~MainPage()
 
 QString toThousandFigure( int);
 
-void MainPage::importAccount()
-{
-    
-
-    ImportDialog importDialog;
-    connect(&importDialog,SIGNAL(accountImported()),this,SLOT(refresh()));
-    importDialog.pop();
-
-    emit refreshAccountInfo();
-
-    
-}
-
-void MainPage::addAccount()
-{
-    NameDialog nameDialog;
-    QString name = nameDialog.pop();
-
-    if( !name.isEmpty())
-    {
-        UBChain::getInstance()->postRPC( "id-wallet_create_account-" + name, toJsonFormat( "wallet_create_account", QJsonArray() << name ));
-
-    }
-
-
-}
-
-
 void MainPage::updateAccountList()
 {
     AccountInfo info = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
@@ -178,18 +150,24 @@ void MainPage::updateAccountList()
 
 void MainPage::on_addAccountBtn_clicked()
 {
-    addAccount();
+    NameDialog nameDialog;
+    QString name = nameDialog.pop();
 
-    //    ChooseAddAccountDialog* chooseAddAccountDialog = new ChooseAddAccountDialog(this);
-    //    chooseAddAccountDialog->move( ui->addAccountBtn->mapToGlobal( QPoint(10,-79) ) );
-    //    connect( chooseAddAccountDialog, SIGNAL(newAccount()), this, SLOT( addAccount()));
-    //    connect( chooseAddAccountDialog, SIGNAL(importAccount()), this, SLOT( importAccount()));
-    //    chooseAddAccountDialog->exec();
+    if( !name.isEmpty())
+    {
+        UBChain::getInstance()->postRPC( "id-wallet_create_account-" + name, toJsonFormat( "wallet_create_account", QJsonArray() << name ));
+
+    }
+
 }
 
 void MainPage::on_importAccountBtn_clicked()
 {
-    importAccount();
+    ImportDialog importDialog;
+    connect(&importDialog,SIGNAL(accountImported()),this,SLOT(refresh()));
+    importDialog.pop();
+
+    emit refreshAccountInfo();
 }
 
 
@@ -349,6 +327,22 @@ void MainPage::jsonDataUpdated(QString id)
             BackupWalletDialog backupWalletDialog;
             backupWalletDialog.pop();
 
+
+            // 写入 track-address
+            result.prepend("{");
+            result.append("}");
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QString address = jsonObject.take("result").toString();
+            UBChain::getInstance()->addTrackAddress(address);
+
+            UBChain::getInstance()->resyncNextTime = true;
+            UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);
+
+            CommonDialog commonDialog2(CommonDialog::OkOnly);
+            commonDialog2.setText( tr("Everytime a new account is created or imported, the wallet will rescan the blockchain data when launched next time."
+                                     " After that the transactions of the account will be shown.") );
+            commonDialog2.pop();
         }
         else if(result.startsWith("\"error\":"))
         {

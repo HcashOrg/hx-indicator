@@ -54,11 +54,14 @@ private slots:
 
     void on_withdrawAllBtn_clicked();
 
+    void on_depositBtn_clicked();
+
 private:
     Ui::MyExchangeContractPage *ui;
     bool inited = false;
 
     void paintEvent(QPaintEvent*);
+    void registerContract();
 };
 
 #endif // MYEXCHANGECONTRACTPAGE_H

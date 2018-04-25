@@ -37,32 +37,19 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
-   <property name="text">
-    <string>普通账户</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_advance">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>92</y>
-     <width>120</width>
-     <height>60</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>14</pointsize>
-    </font>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(248, 249, 253);
+font: 16px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
-    <string>高级用户</string>
+    <string>账户管理</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -90,7 +77,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>153</y>
+     <y>90</y>
      <width>120</width>
      <height>32</height>
     </rect>

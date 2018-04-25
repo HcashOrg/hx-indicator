@@ -192,7 +192,7 @@ void ImportDialog::jsonDataUpdated(QString id)
         shadowWidget->hide();
 
         QString result = UBChain::getInstance()->jsonDataValue(id);
-
+qDebug()  << id << result;
         if( result.mid(0,9) == "\"result\":")
         {
             ui->importBtn->setEnabled(true);
