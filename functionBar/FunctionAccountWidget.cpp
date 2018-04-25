@@ -47,14 +47,6 @@ void FunctionAccountWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(94,116,235));
     setPalette(palette);
 
-    QFont font("Microsoft YaHei UI Light",14,63);
-    ui->label_normal->setFont(font);
-    ui->label_advance->setFont(font);
-    QPalette pa;
-    pa.setColor(QPalette::WindowText,QColor(248,249,254));
-    ui->label_normal->setPalette(pa);
-    ui->label_advance->setPalette(pa);
-
     setStyleSheet("QToolButton{background:rgb(94,116,235);border:none;}\
                    QToolButton:hover{background-color: rgb(0,210, 255);}\
                    QToolButton:pressed{background-color: rgb(130,157, 255);}\

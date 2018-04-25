@@ -88,7 +88,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="page"/>
    <widget class="QWidget" name="myOrderPage">
@@ -240,7 +240,7 @@
      <property name="geometry">
       <rect>
        <x>70</x>
-       <y>60</y>
+       <y>90</y>
        <width>511</width>
        <height>192</height>
       </rect>
@@ -289,6 +289,19 @@
        <string/>
       </property>
      </column>
+    </widget>
+    <widget class="QPushButton" name="depositBtn">
+     <property name="geometry">
+      <rect>
+       <x>480</x>
+       <y>40</y>
+       <width>100</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>充值合约</string>
+     </property>
     </widget>
    </widget>
   </widget>

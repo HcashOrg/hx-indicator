@@ -6,7 +6,6 @@
 #include "wallet.h"
 #include "commontip.h"
 #include "commondialog.h"
-#include "extra/dynamicmove.h"
 
 
 #include <QTimer>

@@ -663,3 +663,8 @@ void TransferPage::on_contactComboBox_currentIndexChanged(int index)
     ui->sendtoLineEdit->setText(address);
     on_sendtoLineEdit_textEdited(ui->sendtoLineEdit->text());
 }
+
+void TransferPage::on_transferRecordBtn_clicked()
+{
+
+}

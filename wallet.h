@@ -42,6 +42,7 @@
 
 #include "frame.h"
 #include "extra/style.h"
+#include "extra/transactiondb.h"
 
 #define ASSET_NAME "LNK"
 #define ACCOUNT_ADDRESS_PREFIX  "LNK"
@@ -72,16 +73,13 @@ class QTimer;
 class WorkerThreadManager;
 class WebSocketManager;
 
+
 static QMutex mutexForJsonData;
 static QMutex mutexForPending;
 static QMutex mutexForConfigFile;
-static QMutex mutexForMainpage;
-static QMutex mutexForPendingFile;
-static QMutex mutexForDelegateList;
 static QMutex mutexForRegisterMap;
 static QMutex mutexForBalanceMap;
 static QMutex mutexForAddressMap;
-static QMutex mutexForRpcReceiveOrNot;
 
 struct AssetAmount
 {
@@ -130,6 +128,35 @@ struct AssetInfo
     QString issuer;
     int precision;
     unsigned long long maxSupply;
+};
+
+struct TransactionStruct
+{
+    QString transactionId;
+    int     type = -1;
+    int     blockNum = -1;
+    QString expirationTime;
+    QString operationStr;
+
+public:
+
+    friend QDataStream& operator >>(QDataStream &in,TransactionStruct& data);
+    friend QDataStream& operator <<(QDataStream &out,const TransactionStruct& data);
+};
+
+struct TransactionTypeId
+{
+    int type;
+    QString transactionId;
+
+public:
+    bool operator ==(const TransactionTypeId &_transactionTypeId) const
+    {
+        return this->transactionId == _transactionTypeId.transactionId;
+    }
+
+    friend QDataStream& operator >>(QDataStream &in,TransactionTypeId& data);
+    friend QDataStream& operator <<(QDataStream &out,const TransactionTypeId& data);
 };
 
 
@@ -227,7 +254,6 @@ public:
     QMap<QString,double> delegateSalaryMap;
 
     TwoAddresses getAddress(QString);
-    bool    isMyAddress(QString address);
     QString addressToName(QString address);
 
     void deleteAccountInConfigFile(QString);
@@ -286,6 +312,7 @@ public:
     void parseAccountInfo();
     void fetchAccountBalances(QString _accountName);
     void fetchMyContracts();
+    bool    isMyAddress(QString _address);
     QString getAccountBalance(QString _accountName, QString _assetSymbol);
     QStringList getRegisteredAccounts();
     QStringList getUnregisteredAccounts();
@@ -298,6 +325,14 @@ public:
 
     QMap<QString,TransactionsInfoVector> transactionsMap;   // key是 "账户名_资产符号" 形式
     void parseTransactions(QString result, QString accountName = "ALL");
+
+public:
+    void addTrackAddress(QString _address);     // 在chaindata/config.ini中添加 track-address
+
+
+public:
+    TransactionDB transactionDB;
+    void fetchTransactions();
 
 public:
     QMap<QString,MultiSigInfo>  multiSigInfoMap;

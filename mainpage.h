@@ -47,10 +47,6 @@ signals:
 
     void backBtnVisible(bool isShow);
 private slots:
-    void importAccount();
-
-    void addAccount();
-
     void on_addAccountBtn_clicked();
 
     void on_importAccountBtn_clicked();

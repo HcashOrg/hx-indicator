@@ -118,21 +118,21 @@ UBChain*   UBChain::getInstance()
 
 void UBChain:: startExe()
 {
-    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
+//    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
-    QStringList strList;
-    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString()
-            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)  << "--replay";
+//    QStringList strList;
+//    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
+//            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT) ;
 
-    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
-    {
-        strList << "--resync-blockchain";
-    }
-    UBChain::getInstance()->configFile->setValue("settings/resyncNextTime",false);
+//    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+//    {
+//        strList << "--replay";
+//    }
+//    UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
-    nodeProc->start("lnk_node.exe",strList);
+//    nodeProc->start("lnk_node.exe",strList);
 
-    emit exeStarted();
+//    emit exeStarted();
 }
 
 void UBChain::onNodeExeStateChanged()
@@ -153,7 +153,7 @@ void UBChain::onNodeExeStateChanged()
         strList << "--wallet-file=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/") + "/wallet.json"
                 << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
                 << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
-
+qDebug() << strList;
         clientProc->start("lnk_client.exe",strList);
     }
     else if(nodeProc->state() == QProcess::NotRunning)
@@ -288,25 +288,7 @@ TwoAddresses UBChain::getAddress(QString name)
     return twoAddresses;
 }
 
-bool UBChain::isMyAddress(QString address)
-{
-    if( address.isEmpty())
-    {
-        return false;
-    }
 
-    bool result = false;
-    foreach (QString key, addressMap.keys())
-    {
-         if( addressMap.value(key).ownerAddress == address || addressMap.value(key).activeAddress == address)
-         {
-             result = true;
-             break;
-         }
-    }
-
-    return result;
-}
 
 QString UBChain::addressToName(QString address)
 {
@@ -682,12 +664,56 @@ void UBChain::parseTransactions(QString result, QString accountName)
     }
 }
 
+void UBChain::addTrackAddress(QString _address)
+{
+    QFile file(UBChain::getInstance()->appDataPath + "/config.ini");
+    if(file.exists())
+    {
+        if(file.open(QIODevice::ReadWrite))
+        {
+            QString str = file.readAll();
+#ifdef WIN32
+            QString str2 = "track-address = \"" + _address + "\"\r\n";
+#else
+            QString str2 = "track-address = \"" + _address + "\"\n";
+#endif
+            str.prepend(str2);
+
+            file.resize(0);
+            QTextStream ts(&file);
+            ts << str.toLatin1();
+            file.close();
+        }
+    }
+    else
+    {
+        qDebug() << "can not find chaindata/config.ini ";
+    }
+}
+
+void UBChain::fetchTransactions()
+{
+    postRPC( "id-list_transactions", toJsonFormat( "list_transactions", QJsonArray() << 0 << -1));
+}
+
 void UBChain::fetchMyContracts()
 {
     foreach (QString accountName, accountInfoMap.keys())
     {
         postRPC( "id-get_contracts_hash_entry_by_owner-" + accountName, toJsonFormat( "get_contracts_hash_entry_by_owner", QJsonArray() << accountName));
     }
+}
+
+bool UBChain::isMyAddress(QString _address)
+{
+    QStringList keys = accountInfoMap.keys();
+    bool result = false;
+    foreach (QString key, keys)
+    {
+        if(accountInfoMap.value(key).address == _address)   result = true;
+    }
+
+    return result;
 }
 
 void UBChain::parseMultiSigTransactions(QString result, QString multiSigAddress)
@@ -1216,4 +1242,30 @@ QString toJsonFormat(QString instruction,
     object.insert("params",parameters);
 
     return QJsonDocument(object).toJson();
+}
+
+QDataStream &operator >>(QDataStream &in, TransactionStruct &data)
+{
+    in >> data.transactionId >> data.type >> data.blockNum >> data.expirationTime >> data.operationStr;
+    return in;
+}
+
+QDataStream &operator <<(QDataStream &out, const TransactionStruct &data)
+{
+    out << data.transactionId << data.type << data.blockNum << data.expirationTime << data.operationStr;
+    return out;
+}
+
+QDataStream &operator >>(QDataStream &in, TransactionTypeId &data)
+{
+    in >> data.type >> data.transactionId;
+    return in;
+
+}
+
+QDataStream &operator <<(QDataStream &out, const TransactionTypeId &data)
+{
+    out << data.type << data.transactionId;
+    return out;
+
 }
