@@ -31,6 +31,9 @@ private slots:
 
     //删除自己的承税单
     void DeletePoundageSlots(const QString &orderID);
+
+    //设置默认承税单
+    void SetDefaultPoundageSlots(const QString &orderID);
 private:
     void RefreshAllPoundageWidget(const QString &jsonIncome);
     void RefreshMyPoundageWidget(const QString &jsonIncome);

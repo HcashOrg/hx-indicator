@@ -91,6 +91,8 @@ void WithdrawInputWidget::InitWidget()
     connect(ui->lineEdit_address,&QLineEdit::textEdited,this,&WithdrawInputWidget::addressChangeSlots);
     connect(ui->toolButton_all,&QToolButton::clicked,this,&WithdrawInputWidget::maxButtonSlots);
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&WithdrawInputWidget::confirmButtonSlots);
+
+    ui->lineEdit_address->setFocus();
 }
 
 void WithdrawInputWidget::InitStyle()

@@ -180,6 +180,13 @@ void PoundageWidget::DeletePoundageSlots(const QString &orderID)
                                     );
 }
 
+void PoundageWidget::SetDefaultPoundageSlots(const QString &orderID)
+{
+    //往配置文件里写入
+    UBChain::getInstance()->configFile->setValue("/settings/feeOrderID", orderID);
+    UBChain::getInstance()->feeOrderID = orderID;
+}
+
 void PoundageWidget::RefreshAllPoundageWidget(const QString &jsonIncome)
 {
     _p->allPoundageSheet->clear();
@@ -231,6 +238,8 @@ void PoundageWidget::InitWidget()
     connect(ui->comboBox_coinType,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&PoundageWidget::autoRefreshSlots);
 
     connect(_p->myPoundageWidget,&PoundageShowWidget::DeletePoundageSignal,this,&PoundageWidget::DeletePoundageSlots);
+    connect(_p->allPoundageWidget,&PoundageShowWidget::SetDefaultPoundageSignal,this,&PoundageWidget::SetDefaultPoundageSlots);
+    connect(_p->myPoundageWidget,&PoundageShowWidget::SetDefaultPoundageSignal,this,&PoundageWidget::SetDefaultPoundageSlots);
     autoRefreshSlots();
 }
 

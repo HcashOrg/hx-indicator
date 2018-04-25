@@ -268,7 +268,7 @@ void SetDialog::on_saveBtn_clicked()
     }
 
     UBChain::getInstance()->configFile->setValue("/settings/feeType", ui->comboBox_fee->currentText());
-    UBChain::getInstance()->language = ui->comboBox_fee->currentText();
+    UBChain::getInstance()->feeType = ui->comboBox_fee->currentText();
 
     UBChain::getInstance()->minimizeToTray = ui->minimizeCheckBox->isChecked();
     UBChain::getInstance()->configFile->setValue("/settings/minimizeToTray", UBChain::getInstance()->minimizeToTray);
