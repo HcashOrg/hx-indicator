@@ -17,9 +17,31 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
+    ui->widget->setStyleSheet("#widget {background-color:rgba(251, 251, 254,100);}");
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
+
+    ui->closeBtn->setIconSize(QSize(12,12));
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
+                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+
+
+    setStyleSheet("QToolButton#okBtn,QToolButton#okBtn2{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QToolButton#okBtn:hover,QToolButton#okBtn2:hover{background-color:#00D2FF;}"
+                  "QToolButton#cancelBtn,QToolButton#cancelBtn2{background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QToolButton#cancelBtn:hover,QToolButton#cancelBtn2:hover{background-color:#5474EB;}"
+                  "QComboBox{    \
+                  border: none;\
+                  background:transparent;\
+                  font-size: 10pt;\
+                  font-family: MicrosoftYaHei;\
+                  background-position: center left;\
+                  color: black;\
+                  selection-background-color: darkgray;}"
+                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+                  "QLineEdit:focus{border:none;}"
+                  );
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 

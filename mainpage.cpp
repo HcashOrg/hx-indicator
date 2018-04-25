@@ -592,6 +592,10 @@ void MainPage::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
+    QPalette pe;
+    pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
+    ui->label_op->setPalette(pe);
+
     ui->accountTableWidget->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
                                  "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
                                  "QHeaderView:section{height:30px;border:none;background-color:#FFFFFF;}"

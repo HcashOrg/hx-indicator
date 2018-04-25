@@ -25,8 +25,8 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>168</y>
+      <x>320</x>
+      <y>190</y>
       <width>420</width>
       <height>300</height>
      </rect>
