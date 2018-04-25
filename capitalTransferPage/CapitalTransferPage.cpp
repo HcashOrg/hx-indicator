@@ -26,7 +26,7 @@ public:
 
     QString multisig_address;
 
-    QString trade_detail;
+    QJsonObject trade_detail;
 };
 
 CapitalTransferPage::CapitalTransferPage(const CapitalTransferInput &data,QWidget *parent) :
