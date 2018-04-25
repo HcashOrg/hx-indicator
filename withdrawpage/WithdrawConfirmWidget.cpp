@@ -63,6 +63,7 @@ void WithdrawConfirmWidget::ConfirmSlots()
 {
     UBChain::getInstance()->postRPC( "id-withdraw_cross_chain_transaction", toJsonFormat( "withdraw_cross_chain_transaction",
                                      QJsonArray() << _p->account<<_p->ammount<<_p->symbol<<_p->crosschain_account<<""<<true ));
+    qDebug()<<_p->account << _p->ammount << _p->symbol << _p->crosschain_account;
     close();
 
 }
@@ -136,7 +137,7 @@ void WithdrawConfirmWidget::InitStyle()
     pa2.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
     ui->label_totalNumber->setPalette(pa2);
 
-    setStyleSheet("QLineEdit{border:none;background:transparent;color:red;font-size:12pt;margin-left:2px;}"
+    setStyleSheet("QLineEdit{border:none;background:transparent;color:red;font-size:10pt;margin-left:2px;}"
                   "Qline{color:#5474EB;background:#5474EB;}"
                   "QToolButton{border:none;color:white;border-radius:10px;font-size:12pt;}"
                   "QToolButton#toolButton_cancel::hover,QToolButton#toolButton_confirm::hover{background-color:#00D2FF;}"

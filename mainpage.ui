@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
-    <height>482</height>
+    <width>770</width>
+    <height>530</height>
    </rect>
   </property>
   <property name="font">
@@ -24,8 +24,8 @@
   <widget class="QLabel" name="accountListLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>5</y>
+     <x>70</x>
+     <y>45</y>
      <width>120</width>
      <height>21</height>
     </rect>
@@ -40,17 +40,17 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: white;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
-    <string>账户</string>
+    <string>资产管理</string>
    </property>
   </widget>
   <widget class="QToolButton" name="addAccountBtn">
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>7</y>
+     <x>650</x>
+     <y>100</y>
      <width>80</width>
      <height>24</height>
     </rect>
@@ -58,7 +58,6 @@
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
@@ -71,10 +70,7 @@
     <enum>Qt::NoFocus</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
-background-color: transparent;
-font: 12px &quot;微软雅黑&quot;;}
-QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>创建账户</string>
@@ -83,10 +79,10 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
   <widget class="QTableWidget" name="accountTableWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>90</y>
-     <width>660</width>
-     <height>363</height>
+     <x>50</x>
+     <y>140</y>
+     <width>674</width>
+     <height>322</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -96,11 +92,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
     <enum>Qt::LeftToRight</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">QTableWidget{border: none;gridline-color: rgb(241,241,248);background-color: rgb(40, 46, 66);}
-QHeaderView{background-color:rgb(40,46,66);min-height:30;color:white;}
-QHeaderView::section{background-color: rgb(56,63,93);border: 1px solid rgb(40,46,66);
-font: 12px &quot;微软雅黑&quot;;}
-</string>
+    <string notr="true"/>
    </property>
    <property name="frameShape">
     <enum>QFrame::Box</enum>
@@ -165,7 +157,7 @@ font: 12px &quot;微软雅黑&quot;;}
    </column>
    <column>
     <property name="text">
-     <string>数量</string>
+     <string>资产</string>
     </property>
     <property name="font">
      <font>
@@ -205,8 +197,8 @@ font: 12px &quot;微软雅黑&quot;;}
   <widget class="QToolButton" name="importAccountBtn">
    <property name="geometry">
     <rect>
-     <x>570</x>
-     <y>7</y>
+     <x>550</x>
+     <y>100</y>
      <width>80</width>
      <height>24</height>
     </rect>
@@ -214,7 +206,6 @@ font: 12px &quot;微软雅黑&quot;;}
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
@@ -227,10 +218,7 @@ font: 12px &quot;微软雅黑&quot;;}
     <enum>Qt::NoFocus</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
-background-color: transparent;
-font: 12px &quot;微软雅黑&quot;;}
-QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>导入账户</string>
@@ -239,8 +227,8 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
   <widget class="QToolButton" name="copyBtn">
    <property name="geometry">
     <rect>
-     <x>552</x>
-     <y>46</y>
+     <x>512</x>
+     <y>110</y>
      <width>11</width>
      <height>11</height>
     </rect>
@@ -263,9 +251,9 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>92</x>
-     <y>40</y>
-     <width>90</width>
+     <x>60</x>
+     <y>100</y>
+     <width>111</width>
      <height>30</height>
     </rect>
    </property>
@@ -286,8 +274,8 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>32</x>
-     <y>40</y>
+     <x>70</x>
+     <y>80</y>
      <width>60</width>
      <height>24</height>
     </rect>
@@ -301,7 +289,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
     <string notr="true">color: rgb(192, 196, 212);</string>
    </property>
    <property name="text">
-    <string>当前账户</string>
+    <string>当前账号</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -310,8 +298,8 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
   <widget class="QLabel" name="addressLabel">
    <property name="geometry">
     <rect>
-     <x>262</x>
-     <y>40</y>
+     <x>226</x>
+     <y>104</y>
      <width>280</width>
      <height>24</height>
     </rect>
@@ -338,8 +326,8 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
   <widget class="QLabel" name="addressLabel2">
    <property name="geometry">
     <rect>
-     <x>202</x>
-     <y>40</y>
+     <x>166</x>
+     <y>104</y>
      <width>60</width>
      <height>24</height>
     </rect>
@@ -362,8 +350,8 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
   <widget class="QToolButton" name="qrcodeBtn">
    <property name="geometry">
     <rect>
-     <x>570</x>
-     <y>46</y>
+     <x>530</x>
+     <y>110</y>
      <width>11</width>
      <height>11</height>
     </rect>

@@ -76,7 +76,8 @@ private slots:
     void on_exportBtn_clicked();
 
     void on_backupWalletBtn_clicked();
-
+private:
+    void InitStyle();
 private:
     Ui::MainPage *ui;
     bool inited = false;

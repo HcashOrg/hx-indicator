@@ -51,6 +51,8 @@ UBChain::UBChain()
         notProduce      =  true;
         configFile->setValue("/settings/language","English");
         language = "English";
+        configFile->setValue("/settings/feeType","LNK");
+        feeType = "LNK";
         minimizeToTray  = false;
         configFile->setValue("/settings/minimizeToTray",false);
         closeToMinimize = false;
@@ -66,6 +68,7 @@ UBChain::UBChain()
         minimizeToTray  = configFile->value("/settings/minimizeToTray").toBool();
         closeToMinimize = configFile->value("/settings/closeToMinimize").toBool();
         language        = configFile->value("/settings/language").toString();
+        feeType         = configFile->value("/settings/feeType").toString();
         resyncNextTime  = configFile->value("/settings/resyncNextTime",false).toBool();
 
     }
@@ -115,21 +118,21 @@ UBChain*   UBChain::getInstance()
 
 void UBChain:: startExe()
 {
-//    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
+    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
-//    QStringList strList;
-//    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
-//            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT) ;
+    QStringList strList;
+    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
+            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT) ;
 
-//    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
-//    {
-//        strList << "--replay";
-//    }
-//    UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
+    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+    {
+        strList << "--replay";
+    }
+    UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
-//    nodeProc->start("lnk_node.exe",strList);
+    nodeProc->start("lnk_node.exe",strList);
 
-//    emit exeStarted();
+    emit exeStarted();
 }
 
 void UBChain::onNodeExeStateChanged()

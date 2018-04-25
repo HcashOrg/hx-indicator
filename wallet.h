@@ -242,6 +242,7 @@ public:
     bool closeToMinimize; // 是否点击关闭最小化
     bool resyncNextTime;    // 下次启动时是否重新同步
     QString language;   // 语言
+    QString feeType;//手续费币种
     QString currentAccount; // 保存当前账户  切换页面的时候默认选择当前账户
     unsigned long long transactionFee;
 

@@ -38,7 +38,7 @@ MainPage::MainPage(QWidget *parent) :
 	
 
     ui->setupUi(this);
-
+    InitStyle();
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 
@@ -56,20 +56,15 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->horizontalHeader()->setVisible(true);
     ui->accountTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->accountTableWidget->setColumnWidth(0,100);
-    ui->accountTableWidget->setColumnWidth(1,140);
-    ui->accountTableWidget->setColumnWidth(2,80);
-    ui->accountTableWidget->setColumnWidth(3,80);
-    ui->accountTableWidget->setColumnWidth(4,80);
-    ui->accountTableWidget->setColumnWidth(5,80);
-    ui->accountTableWidget->setColumnWidth(6,80);
+    ui->accountTableWidget->setColumnWidth(0,150);
+    ui->accountTableWidget->setColumnWidth(1,150);
+    ui->accountTableWidget->setColumnWidth(2,70);
+    ui->accountTableWidget->setColumnWidth(3,70);
+    ui->accountTableWidget->setColumnWidth(4,70);
+    ui->accountTableWidget->setColumnWidth(5,70);
+    ui->accountTableWidget->setColumnWidth(6,70);
+    ui->accountTableWidget->horizontalHeader()->setStretchLastSection(true);
 
-    ui->copyBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
-                               "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
-    ui->copyBtn->setToolTip(tr("copy to clipboard"));
-
-    ui->qrcodeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/qrcode.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
-                                 "QToolButton:hover{background-image:url(:/ui/wallet_ui/qrcode_hover.png);}");
 
     QString language = UBChain::getInstance()->language;
     if( language.isEmpty())
@@ -133,16 +128,16 @@ void MainPage::updateAccountList()
         for(int j = 0; j < 7; j++)
         {
             ui->accountTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-            ui->accountTableWidget->item(i,j)->setTextColor(QColor(192,196,212));
-
-            if(i % 2)
-            {
-                ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(43,49,69));
-            }
-            else
-            {
-                ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(40,46,66));
-            }
+            //ui->accountTableWidget->item(i,j)->setTextColor(QColor(192,196,212));
+            //
+            //if(i % 2)
+            //{
+            //    ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(43,49,69));
+            //}
+            //else
+            //{
+            //    ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(40,46,66));
+            //}
         }
     }
 
@@ -281,11 +276,11 @@ void MainPage::init()
 
 void MainPage::paintEvent(QPaintEvent *)
 {
-    QPainter painter(this);
-    painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
-
-    painter.drawRect(rect());
+    //QPainter painter(this);
+    //painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
+    //painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
+    //
+    //painter.drawRect(rect());
     //painter.drawRect(0,0,680,482);
 
 }
@@ -582,4 +577,38 @@ void MainPage::on_backupWalletBtn_clicked()
 {
     BackupWalletDialog backupWalletDialog;
     backupWalletDialog.pop();
+}
+
+void MainPage::InitStyle()
+{
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setColor(QPalette::Window, QColor(248,249,253));
+    setPalette(palette);
+
+    ui->accountTableWidget->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
+                                 "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
+                                 "QHeaderView:section{height:30px;border:none;background-color:#FFFFFF;}"
+                                 "QTableView:item{min-height:60px;}"
+                                 );
+
+
+    ui->copyBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                               "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
+    ui->copyBtn->setToolTip(tr("copy to clipboard"));
+
+    ui->qrcodeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/qrcode.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                                 "QToolButton:hover{background-image:url(:/ui/wallet_ui/qrcode_hover.png);}");
+
+    ui->exportBtn->setVisible(false);
+    ui->backupWalletBtn->setVisible(false);
+
+    ui->importAccountBtn->setStyleSheet("QToolButton{background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+             "QToolButton:hover{background-color:#5474EB;}");
+    ui->addAccountBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+             "QToolButton:hover{background-color:#00D2FF;}");
+    ui->accountComboBox->setStyleSheet("QComboBox{border: none;background:transparent;font: 13pt Microsoft YaHei UI;\
+               background-position: center left;color: black;selection-background-color: darkgray;}");
+
+
 }

@@ -95,6 +95,10 @@ void ContactWidget::InitStyle()
     //QPalette palette;
     //palette.setColor(QPalette::Background, QColor(255,255,255));
     //setPalette(palette);
+//    QFile fileExit("Config/styleSheet/NJHRGroupTreeView.qss");
+//	fileExit.open(QIODevice::ReadOnly);
+//	QString qss = fileExit.readAll();
+//	setStyleSheet(qss);
 
     QWidget *widget = new QWidget(ui->scrollArea_rightBottom);
     widget->setAutoFillBackground(true);

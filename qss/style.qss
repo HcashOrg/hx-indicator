@@ -4,8 +4,8 @@ QComboBox::drop-down {background:transparent;border:none;}
 QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}
 QComboBox::down-arrow:on {image: url(:/ui/wallet_ui/downArrow_on.png);}
 QComboBox QAbstractItemView {outline: 0px;}
-QComboBox QAbstractItemView::item { min-height: 30px;color:rgb(192,196,212);selection-color: white;background-color: rgb(58,62,82);selection-background-color: rgb(44,48,67);}
-QComboBox QAbstractItemView::item:hover {color: white;background-color: rgb(44,48,67);}
+#QComboBox QAbstractItemView::item { min-height: 30px;color:rgb(192,196,212);selection-color: white;background-color: rgb(58,62,82);selection-background-color: rgb(44,48,67);}
+#QComboBox QAbstractItemView::item:hover {color: white;background-color: rgb(44,48,67);}
 
 QMenu {background-color:rgb(89,87,87);border: 1px solid rgb(192, 196, 212);}
 QMenu::item {color: rgb(225,225,225);border: 0px solid rgb(192, 196, 212);background-color:rgb(58,62,82);padding:8px 8px;}
@@ -13,13 +13,13 @@ QMenu::item:selected {background-color:rgb(44,48,67);}
 QMenu::separator {height: 2px;background-color: rgb(192, 196, 212);}
 
 
-QScrollBar:vertical{border:none; width:20px;background:transparent;padding:20px 4px 20px 8px;}
-QScrollBar::handle:vertical{width:8px;background:rgba(20,25,41);border-radius:4px;min-height:20;}
-QScrollBar::handle:vertical:hover{background:rgb(10,15,31);}
-QScrollBar::add-line:vertical{height:0px;}
-QScrollBar::sub-line:vertical{height:0px;}
-QScrollBar::sub-page:vertical {background: transparent;}
-QScrollBar::add-page:vertical {background: transparent;}
+#QScrollBar:vertical{border:none; width:20px;background:transparent;padding:20px 4px 20px 8px;}
+#QScrollBar::handle:vertical{width:8px;background:rgba(20,25,41);border-radius:4px;min-height:20;}
+#QScrollBar::handle:vertical:hover{background:rgb(10,15,31);}
+#QScrollBar::add-line:vertical{height:0px;}
+#QScrollBar::sub-line:vertical{height:0px;}
+#QScrollBar::sub-page:vertical {background: transparent;}
+#QScrollBar::add-page:vertical {background: transparent;}
 
 QCheckBox{color:rgb(192,196,212);}
 QCheckBox::indicator{ image:url(:/ui/wallet_ui/checkBox_unchecked.png);}

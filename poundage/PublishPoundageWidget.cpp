@@ -76,6 +76,7 @@ void PublishPoundageWidget::InitAccount()
 
     for(auto it = UBChain::getInstance()->accountInfoMap.constBegin();it != UBChain::getInstance()->accountInfoMap.constEnd();++it)
     {
+        AccountInfo dd = it.value();
         ui->comboBox_accounts->addItem(it.key(),QVariant::fromValue<AccountInfo>(it.value()));
     }
     ui->comboBox_accounts->setCurrentIndex(0);
@@ -110,5 +111,62 @@ void PublishPoundageWidget::InitWidget()
 
 void PublishPoundageWidget::InitStyle()
 {
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setColor(QPalette::Window, QColor(248,249,253));
+    setPalette(palette);
 
+    QFont font("Microsoft YaHei UI Light",12,50);
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,QColor(0,0,0));
+    ui->label->setPalette(pa);
+    ui->label->setFont(font);
+    ui->label_2->setPalette(pa);
+    ui->label_2->setFont(font);
+    ui->label_3->setPalette(pa);
+    ui->label_3->setFont(font);
+    ui->label_4->setPalette(pa);
+    ui->label_4->setFont(font);
+
+    setStyleSheet("QPushButton#pushButton_confirm{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QPushButton#pushButton_confirm:hover{background-color:#00D2FF;}"
+
+                  "QPushButton#pushButton_cancel{background-color:#E5E5E5; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QPushButton#pushButton_cancel:hover{background-color:#00D2FF;}"
+
+                  "QDoubleSpinBox::up-button {width:0;height:0;}"
+                  "QDoubleSpinBox::down-button {width:0;height:0;}"
+                  "QDoubleSpinBox::up-arrow {width:0;height:0;}"
+                  "QDoubleSpinBox::down-arrow {width:0;height:0;}"
+                  "QDoubleSpinBox{background-color: transparent;border:none;color:black;font-size:12pt;}"
+                  "QDoubleSpinBox:focus{border:none;}"
+                  "QDoubleSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:none;}"
+                  "QComboBox{border: none;background:transparent;font-size: 12pt;font-family: MicrosoftYaHei;\
+                             background-position: center left;color: black;selection-background-color: darkgray;}"
+
+                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+                  "QLineEdit:focus{border:none;}"
+                );
+}
+
+void PublishPoundageWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+
+//    painter.setPen(Qt::NoPen);
+//    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
+//    painter.drawRect(rect());
+
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(255,255,255,255));
+    painter.drawRoundedRect(QRect(50,120,674,287),10,10);
+
+    QRadialGradient radial(385, 265, 380, 385,265);
+    radial.setColorAt(0, QColor(0,0,0,15));
+    radial.setColorAt(1, QColor(218,255,248,15));
+    painter.setBrush(radial);
+    painter.setPen(Qt::NoPen);
+    painter.drawRoundedRect(QRect(45,115,684,297),10,10);
+
+    QWidget::paintEvent(event);
 }

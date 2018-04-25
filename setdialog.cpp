@@ -8,6 +8,8 @@
 #include "setdialog.h"
 #include "ui_setdialog.h"
 #include "wallet.h"
+#include "AccountManagerWidget.h"
+#include "HelpWidget.h"
 
 #include "commondialog.h"
 
@@ -33,13 +35,66 @@ SetDialog::SetDialog(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
+    ui->widget->setStyleSheet("#widget {background-color:transparent;}");
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
+    //ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
 
-    ui->saveBtn->setStyleSheet(OKBTN_STYLE);
-    ui->confirmBtn->setStyleSheet(OKBTN_STYLE);
-    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->generalBtn->setCheckable(true);
+    ui->safeBtn->setCheckable(true);
+    ui->accountBtn->setCheckable(true);
+
+    ui->generalBtn->setChecked(false);
+
+    ui->generalBtn->setIconSize(QSize(20,20));
+    ui->generalBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
+
+    ui->safeBtn->setIconSize(QSize(20,20));
+    ui->safeBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
+
+    ui->accountBtn->setIconSize(QSize(20,20));
+    ui->accountBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
+
+    setStyleSheet("QToolButton{background-color:transparent;border:none;color:#C6CAD4;}"
+                  "QToolButton::hover{color:black;}"
+                  "QToolButton::checked{color:black;}"
+
+                  "QToolButton#toolButton_help,QToolButton#toolButton_set{background-color:#F8F9FD;border:none;color:#C6CAD4;border-top-left-radius::10px;border-top-right-radius:10px;}"
+                  "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{background-color:white;color:black;}"
+
+                  "QCheckBox{color:rgb(192,196,212);}"
+                  "QCheckBox::checked{ color:black;}"
+
+                  "QSpinBox::up-button {width:0;height:0;}"
+                  "QSpinBox::down-button {width:0;height:0;}"
+                  "QSpinBox::up-arrow {width:0;height:0;}"
+                  "QSpinBox::down-arrow {width:0;height:0;}"
+                  "QSpinBox{background-color: transparent;border:none;color:black}"
+                  "QSpinBox:focus{border:none;}"
+                  "QSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:none;}"
+
+                  "QComboBox{    \
+                  border: none;\
+                  background:transparent;\
+                  font-size: 10pt;\
+                  font-family: MicrosoftYaHei;\
+                  background-position: center left;\
+                  color: black;\
+                  selection-background-color: darkgray;}"
+                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+                  "QLineEdit:focus{border:none;}"
+                  );
+    ui->saveBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
+                                "QToolButton:hover{background-color:#00D2FF;}");
+
+    ui->confirmBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
+                                  "QToolButton:hover{background-color:#00D2FF;}");
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
+                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+
+    ui->feeLineEdit->setVisible(false);
+    ui->unitLabel2->setVisible(false);
 
     ui->languageComboBox->setView(new QListView());
 
@@ -78,6 +133,19 @@ SetDialog::SetDialog(QWidget *parent) :
         ui->languageComboBox->setCurrentIndex(0);
     }
 
+    QString fee = UBChain::getInstance()->feeType;
+    if("LNK" == fee){
+        ui->comboBox_fee->setCurrentIndex(0);
+    }
+    else if("BTC" == fee)
+    {
+        ui->comboBox_fee->setCurrentIndex(1);
+    }
+    else if("LTC" == fee)
+    {
+        ui->comboBox_fee->setCurrentIndex(2);
+    }
+
     ui->minimizeCheckBox->setChecked( UBChain::getInstance()->minimizeToTray);
     ui->closeCheckBox->setChecked( UBChain::getInstance()->closeToMinimize);
     ui->resyncCheckBox->setChecked( UBChain::getInstance()->resyncNextTime);
@@ -100,6 +168,18 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->confirmPwdLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
     ui->lockTimeSpinBox->setAttribute(Qt::WA_InputMethodEnabled, false);
 
+    ui->toolButton_help->setCheckable(true);
+    ui->toolButton_set->setCheckable(true);
+    ui->toolButton_set->setChecked(true);
+    ui->toolButton_help->setChecked(false);
+
+    //新建账户管理页面
+    AccountManagerWidget *accountManage = new AccountManagerWidget(this);
+    ui->stackedWidget->addWidget(accountManage);
+
+    //帮助页面
+    HelpWidget *helpWidget = new HelpWidget();
+    ui->stackedWidget_2->insertWidget(1,helpWidget);
 }
 
 SetDialog::~SetDialog()
@@ -121,6 +201,15 @@ void SetDialog::pop()
     exec();
 }
 
+void SetDialog::setHelpFirst(bool helpfirst)
+{
+    if(helpfirst)
+    {
+        on_toolButton_help_clicked();
+    }
+
+}
+
 
 bool SetDialog::eventFilter(QObject *watched, QEvent *e)
 {
@@ -128,17 +217,17 @@ bool SetDialog::eventFilter(QObject *watched, QEvent *e)
     {
         if( e->type() == QEvent::Paint)
         {
-            QPainter painter(ui->containerWidget);
-            painter.setPen(QPen(QColor(40,45,66),Qt::SolidLine));
-            painter.setBrush(QBrush(QColor(40,45,66),Qt::SolidPattern));
-            painter.drawRoundedRect(0,20,600,400,10,10);
-
-            painter.setPen(QPen(QColor(32,36,54),Qt::SolidLine));
-            painter.setBrush(QBrush(QColor(32,36,54),Qt::SolidPattern));
-            painter.drawRoundedRect(0,0,600,37,10,10);
-            painter.drawRect(0,20,600,17);
-
-            return true;
+            //QPainter painter(ui->containerWidget);
+            //painter.setPen(QPen(QColor(40,45,66),Qt::SolidLine));
+            //painter.setBrush(QBrush(QColor(40,45,66),Qt::SolidPattern));
+            //painter.drawRoundedRect(0,20,600,400,10,10);
+            //
+            //painter.setPen(QPen(QColor(32,36,54),Qt::SolidLine));
+            //painter.setBrush(QBrush(QColor(32,36,54),Qt::SolidPattern));
+            //painter.drawRoundedRect(0,0,600,37,10,10);
+            //painter.drawRect(0,20,600,17);
+            //
+            //return true;
         }
     }
 
@@ -178,6 +267,8 @@ void SetDialog::on_saveBtn_clicked()
         UBChain::getInstance()->language = "English";
     }
 
+    UBChain::getInstance()->configFile->setValue("/settings/feeType", ui->comboBox_fee->currentText());
+    UBChain::getInstance()->language = ui->comboBox_fee->currentText();
 
     UBChain::getInstance()->minimizeToTray = ui->minimizeCheckBox->isChecked();
     UBChain::getInstance()->configFile->setValue("/settings/minimizeToTray", UBChain::getInstance()->minimizeToTray);
@@ -252,15 +343,24 @@ void SetDialog::on_lockTimeSpinBox_valueChanged(const QString &arg1)
 void SetDialog::on_generalBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
-    ui->generalBtn->setStyleSheet(SETDIALOG_GENERALBTN_SELECTED_STYLE);
-    ui->safeBtn->setStyleSheet(SETDIALOG_SAVEBTN_UNSELECTED_STYLE);
+    updateButtonIcon(0);
+    //ui->generalBtn->setStyleSheet(SETDIALOG_GENERALBTN_SELECTED_STYLE);
+    //ui->safeBtn->setStyleSheet(SETDIALOG_SAVEBTN_UNSELECTED_STYLE);
 }
 
 void SetDialog::on_safeBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
-    ui->generalBtn->setStyleSheet(SETDIALOG_GENERALBTN_UNSELECTED_STYLE);
-    ui->safeBtn->setStyleSheet(SETDIALOG_SAVEBTN_SELECTED_STYLE);
+    updateButtonIcon(1);
+
+    //ui->generalBtn->setStyleSheet(SETDIALOG_GENERALBTN_UNSELECTED_STYLE);
+    //ui->safeBtn->setStyleSheet(SETDIALOG_SAVEBTN_SELECTED_STYLE);
+}
+
+void SetDialog::on_accountBtn_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+    updateButtonIcon(2);
 }
 
 void SetDialog::on_confirmBtn_clicked()
@@ -449,7 +549,47 @@ void SetDialog::jsonDataUpdated(QString id)
 //        }
 
 //        return;
-//    }
+    //    }
+}
+
+void SetDialog::on_toolButton_set_clicked()
+{
+    ui->toolButton_set->setChecked(true);
+    ui->toolButton_help->setChecked(false);
+    ui->stackedWidget_2->setCurrentIndex(0);
+
+}
+
+void SetDialog::on_toolButton_help_clicked()
+{
+    ui->toolButton_set->setChecked(false);
+    ui->toolButton_help->setChecked(true);
+    ui->stackedWidget_2->setCurrentIndex(1);
+}
+
+void SetDialog::updateButtonIcon(int buttonNumber)
+{
+    QIcon gray(":/ui/wallet_ui/gray-circle.png");
+    QIcon blue(":/ui/wallet_ui/blue-circle.png");
+    ui->generalBtn->setChecked(0 == buttonNumber);
+    ui->safeBtn->setChecked(1 == buttonNumber);
+    ui->accountBtn->setChecked(2 == buttonNumber);
+
+    ui->generalBtn->setIcon(0 == buttonNumber ? blue : gray);
+    ui->safeBtn->setIcon(1 == buttonNumber ? blue : gray);
+    ui->accountBtn->setIcon(2 == buttonNumber ? blue : gray);
+}
+
+void SetDialog::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(248,249,253,255));//最后一位是设置透明属性（在0-255取值）
+    painter.drawRect(QRect(190,50,770,530));
+
+    QWidget::paintEvent(event);
+
 }
 
 
