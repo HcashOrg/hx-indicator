@@ -55,6 +55,8 @@ void WithdrawConfirmWidget::jsonDataUpdated(QString id)
     {
         QString  result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << id <<"asdfsdfsdfasdf"<< result;
+
+        close();
     }
 
 }
@@ -64,7 +66,7 @@ void WithdrawConfirmWidget::ConfirmSlots()
     UBChain::getInstance()->postRPC( "id-withdraw_cross_chain_transaction", toJsonFormat( "withdraw_cross_chain_transaction",
                                      QJsonArray() << _p->account<<_p->ammount<<_p->symbol<<_p->crosschain_account<<""<<true ));
     qDebug()<<_p->account << _p->ammount << _p->symbol << _p->crosschain_account;
-    close();
+    //close();
 
 }
 
@@ -88,6 +90,8 @@ void WithdrawConfirmWidget::InitData()
 {
     ui->label_address->setText(_p->crosschain_account);
     ui->label_totalNumber->setText(_p->ammount + "  " + _p->symbol);
+    ui->label_feeNumber->setText("0.001 " + _p->symbol);
+    ui->label_actualNumber->setText(QString::number(_p->ammount.toDouble()-0.001)+" "+_p->symbol);
 }
 
 void WithdrawConfirmWidget::InitWidget()
@@ -103,11 +107,11 @@ void WithdrawConfirmWidget::InitWidget()
 
 void WithdrawConfirmWidget::InitStyle()
 {
-    setAttribute(Qt::WA_TranslucentBackground, true);
-    //setAutoFillBackground(true);
-    //QPalette palette;
-    //palette.setColor(QPalette::Background, QColor(0xFF,0xFF,0xFF,200));
-    //setPalette(palette);
+    //setAttribute(Qt::WA_TranslucentBackground, true);
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setColor(QPalette::Background, QColor(0xFF,0xFF,0xFF,200));
+    setPalette(palette);
 
     QFont font("Microsoft YaHei UI Light",10,50);
     QPalette pa;
@@ -123,19 +127,33 @@ void WithdrawConfirmWidget::InitStyle()
     ui->label_5->setPalette(pa);
     ui->label_5->setFont(font);
 
+
     QFont font1("Microsoft YaHei UI Light",14,50);
     QPalette pa1;
     pa1.setColor(QPalette::WindowText,Qt::black);
-    ui->label_address->setPalette(pa1);
-    ui->label_address->setFont(font1);
     ui->label_actualNumber->setPalette(pa1);
     ui->label_actualNumber->setFont(font1);
     ui->label_feeNumber->setPalette(pa1);
     ui->label_feeNumber->setFont(font1);
     ui->label_totalNumber->setFont(font1);
+
+    QPalette paw;
+    paw.setColor(QPalette::WindowText,Qt::white);
+    QFont fontw("Microsoft YaHei UI Light",14,63);
+    ui->label_title->setFont(fontw);
+    ui->label_title->setPalette(paw);
+
     QPalette pa2;
     pa2.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
     ui->label_totalNumber->setPalette(pa2);
+
+    QFont fontad("Microsoft YaHei UI Light",10,50);
+    QPalette paad;
+    paad.setColor(QPalette::WindowText,Qt::black);
+
+    ui->label_address->setPalette(paad);
+    ui->label_address->setFont(fontad);
+
 
     setStyleSheet("QLineEdit{border:none;background:transparent;color:red;font-size:10pt;margin-left:2px;}"
                   "Qline{color:#5474EB;background:#5474EB;}"
@@ -152,10 +170,13 @@ void WithdrawConfirmWidget::paintEvent(QPaintEvent *event)
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(rect());
+    painter.drawRect(QRect(-190,-50,960,580));
 
 
-    painter.setBrush(QColor(255,255,255,255));
-    painter.drawRect(220,60,320,425);
+//    painter.setBrush(QColor(255,255,255,255));
+//    painter.drawRect(220,60,320,425);
+
+    painter.drawPixmap(220,40,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
+
     QWidget::paintEvent(event);
 }

@@ -198,12 +198,14 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
 
     if(column == 2)
     {
+        emit backBtnVisible(true);
         emit showTransferPage( ui->accountTableWidget->item(row,0)->text());
         return;
     }
 
     if( 3 == column )
     {//充值界面
+        emit backBtnVisible(true);
         DepositPage *deposit = new DepositPage(DepositPage::DepositDataInput(ui->accountComboBox->currentText(),
                                                ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text()),this);
         deposit->show();
@@ -213,6 +215,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
 
     if( 4 == column )
     {//提现界面
+        emit backBtnVisible(true);
         WithdrawPage *withdraw = new WithdrawPage(WithdrawPage::WithdrawDataInput(ui->accountComboBox->currentText(),
                                                   ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text(),
                                                   ui->accountTableWidget->item(row,1)->text().toDouble()),this);
@@ -223,6 +226,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
 
     if( 5 == column)
     {//资金划转界面
+        emit backBtnVisible(true);
         CapitalTransferPage *capital = new CapitalTransferPage(CapitalTransferPage::CapitalTransferInput(
                                            ui->accountComboBox->currentText(),ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text()),this);
         capital->show();
@@ -232,6 +236,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
     }
     if(column == 6)
     {
+        emit backBtnVisible(true);
         showExchangeWidget();
         return;
     }

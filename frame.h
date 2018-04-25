@@ -64,7 +64,7 @@ public slots:
 
 signals:
     void delegateListUpdated();
-
+    void titleBackVisible(bool);
 private slots:
     void alreadyLogin();
     void showAccountPage();

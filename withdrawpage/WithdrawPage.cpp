@@ -89,3 +89,5 @@ void WithdrawPage::InitStyle()
                                   background-color:#00D2FF;\}"
                                   "QToolButton::hover{background-color:#4861DC;}");
 }
+
+

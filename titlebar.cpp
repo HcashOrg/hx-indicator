@@ -21,9 +21,11 @@ TitleBar::TitleBar(QWidget *parent) :
 //    ui->divLineLabel->setPixmap(QPixmap("pic2/divLine.png"));
 //    ui->divLineLabel->setScaledContents(true);
     ui->label->setPixmap(QPixmap(":/ui/wallet_ui/Linklogo.png").scaled(130,30));
+    ui->backBtn->setVisible(false);
+    ui->backBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/back.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}");
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
-
+    connect(ui->backBtn,&QToolButton::clicked,this,&TitleBar::back);
 
 	
 }
@@ -72,6 +74,12 @@ void TitleBar::on_closeBtn_clicked()
 void TitleBar::retranslator()
 {
     ui->retranslateUi(this);
+}
+
+void TitleBar::backBtnVis(bool isVisible)
+{
+    ui->backBtn->setVisible(isVisible);
+
 }
 
 void TitleBar::jsonDataUpdated(QString id)

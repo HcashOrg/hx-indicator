@@ -59,7 +59,6 @@ void CapitalTransferPage::ConfirmSlots()
 
 void CapitalTransferPage::radioChangedSlots()
 {
-    ui->lineEdit_number->clear();
     if(ui->radioButton_deposit->isChecked())
     {
         ui->label_addressTitle->setText(ui->label_addressTitle->text().replace(_p->symbol,"Tunnel"));
@@ -69,6 +68,7 @@ void CapitalTransferPage::radioChangedSlots()
             ui->lineEdit_address->setText(_p->tunnel_account_address);
         }
         ui->lineEdit_address->setEnabled(false);
+        ui->lineEdit_number->setEnabled(true);
     }
     else if(ui->radioButton_withdraw->isChecked())
     {
@@ -76,6 +76,7 @@ void CapitalTransferPage::radioChangedSlots()
         ui->lineEdit_address->setPlaceholderText(tr("please input withdraw address..."));
         ui->lineEdit_address->setEnabled(true);
         ui->lineEdit_address->clear();
+        ui->lineEdit_number->clear();
         ui->lineEdit_number->setEnabled(false);
         ui->lineEdit_number->setPlaceholderText(tr("input address first..."));
     }
@@ -104,7 +105,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         }
 
     }
-    else if("id-get_current_multi_address_obj" == id)
+    else if("id-get_multisig_account_pair" == id)
     {//获取到多签地址
         QString result = UBChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() || result.startsWith("\"error"))
@@ -122,15 +123,17 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
     else if("id-createrawtransaction" == id)
     {//获取到创建交易信息
         QString result = UBChain::getInstance()->jsonDataValue( id);
+        qDebug()<<"transaction"<<result;
+
         if( result.isEmpty() || result.startsWith("\"error"))
         {
-            ui->toolButton_confirm->setEnabled(false);
+            ui->toolButton_confirm->setVisible(false);
             return;
         }
         result.prepend("{");
         result.append("}");
-        qDebug()<<"transaction"<<result;
         _p->trade_detail = CapitalTransferDataUtil::parseTradeDetail(result);
+        qDebug()<<"detail"<<_p->trade_detail;
     //获取交易结果信息
         QString transaction = CapitalTransferDataUtil::parseTransaction(result);
         UBChain::getInstance()->postRPC( "id-decoderawtransaction",
@@ -142,7 +145,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         QString result = UBChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() || result.startsWith("\"error"))
         {
-            ui->toolButton_confirm->setEnabled(false);
+            ui->toolButton_confirm->setVisible(false);
             return;
         }
         result.prepend("{");
@@ -152,6 +155,10 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         //刷新界面
 
         ui->toolButton_confirm->setVisible(true);
+    }
+    else if("id-signrawtransaction" == id)
+    {
+        qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);
     }
 }
 
@@ -258,6 +265,8 @@ void CapitalTransferPage::InitWidget()
 {
     InitStyle();
 
+    ui->label_fee->setText("0.001 "+_p->symbol);
+
     ui->toolButton_confirm->setVisible(false);
     ui->label_addressTitle->setText(ui->label_addressTitle->text().replace("X","Tunnel"));
     ui->radioButton_deposit->setChecked(true);
@@ -278,9 +287,9 @@ void CapitalTransferPage::InitWidget()
     UBChain::getInstance()->postRPC( "id-get_binding_account",
                                      toJsonFormat( "get_binding_account", QJsonArray()
                                      << _p->account_name<<_p->symbol ));
-    UBChain::getInstance()->postRPC( "id-get_current_multi_address_obj",
-                                     toJsonFormat( "get_current_multi_address_obj", QJsonArray()
-                                     << _p->symbol<<UBChain::getInstance()->accountInfoMap["guard0"].id ));
+    UBChain::getInstance()->postRPC( "id-get_multisig_account_pair",
+                                     toJsonFormat( "get_multisig_account_pair", QJsonArray()
+                                     << _p->symbol));
 
 
 }

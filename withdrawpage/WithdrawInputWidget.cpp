@@ -1,6 +1,7 @@
 #include "WithdrawInputWidget.h"
 #include "ui_WithdrawInputWidget.h"
 
+#include <QPainter>
 #include <QDoubleValidator>
 #include "wallet.h"
 
@@ -106,4 +107,30 @@ void WithdrawInputWidget::InitStyle()
                   "QToolButton#toolButton_confirm::hover,QToolButton#toolButton_all::hover{background-color:#00D2FF;}"
                   "QToolButton#toolButton_confirm{border:none;background-color:#5474EB;color:white;border-radius:10px;font-size:12pt;}"
                   "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
+}
+void WithdrawInputWidget::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+    painter.save();
+    const qreal radius = 10;
+    QPainterPath path;
+    QRectF rect = QRect(50, 10, 680, 220);
+    QRectF rect1 = QRect(45,5,690,230);
+
+    QRadialGradient radial(375, 200, 375, 375,200);
+    radial.setColorAt(0, QColor(0,0,0,15));
+    radial.setColorAt(1, QColor(218,255,248,15));
+
+    painter.setBrush(radial);
+    painter.setPen(Qt::NoPen);
+    painter.drawRoundedRect(rect1,radius,radius);
+
+    painter.setBrush(QBrush(Qt::white));
+    painter.setPen(Qt::NoPen);
+    painter.drawRoundedRect(rect,radius,radius);
+
+    painter.restore();
+    QWidget::paintEvent(event);
 }

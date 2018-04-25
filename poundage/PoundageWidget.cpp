@@ -76,10 +76,10 @@ void PoundageWidget::autoRefreshSlots()
 void PoundageWidget::PublishPoundageSlots()
 {
     PublishPoundageWidget *publishWidget = new PublishPoundageWidget(this);
-    publishWidget->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Dialog | Qt::FramelessWindowHint);
-    publishWidget->setWindowModality(Qt::WindowModal);
+    publishWidget->setWindowFlags(Qt::WindowStaysOnTopHint /*| Qt::Dialog*/ | Qt::FramelessWindowHint);
+//    publishWidget->setWindowModality(Qt::WindowModal);
     publishWidget->setAttribute(Qt::WA_DeleteOnClose);
-    publishWidget->move(mapToGlobal(QPoint(0,0)));
+    publishWidget->move(QPoint(0,0));
     publishWidget->show();
 }
 

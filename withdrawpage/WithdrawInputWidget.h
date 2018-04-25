@@ -19,6 +19,8 @@ signals:
 public:
     void setMaxAmmount(double number);
     void setSymbol(const QString &symbol);
+protected:
+    void paintEvent(QPaintEvent *event);
 private slots:
     void addressChangeSlots(const QString &address);
 
