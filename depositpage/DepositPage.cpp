@@ -67,7 +67,7 @@ void DepositPage::jsonDataUpdated(QString id)
         }
 
     }
-    else if("id_wallet_create_crosschain_symbol" == id)
+    else if("id_create_crosschain_symbol" == id)
     {
         //解析返回的通道地址，并且绑定地址
         QString result = UBChain::getInstance()->jsonDataValue( id);
@@ -109,8 +109,8 @@ void DepositPage::ShowRecordSlots()
 
 void DepositPage::GenerateAddress()
 {
-    UBChain::getInstance()->postRPC("id_wallet_create_crosschain_symbol",
-                                    toJsonFormat("wallet_create_crosschain_symbol",
+    UBChain::getInstance()->postRPC("id_create_crosschain_symbol",
+                                    toJsonFormat("create_crosschain_symbol",
                                                  QJsonArray()<<_p->assetSymbol)
                                     );
 }

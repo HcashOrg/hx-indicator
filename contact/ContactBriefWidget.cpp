@@ -51,6 +51,8 @@ void ContactBriefWidget::InitStyle()
     pa.setColor(QPalette::WindowText,Qt::black);
     ui->label->setPalette(pa);
 
+    ui->pushButton->setIconSize(QSize(18,18));
+    ui->pushButton->setIcon(QIcon(":/ui/wallet_ui/addContact.png"));
     ui->pushButton->setStyleSheet("QPushButton{border-top-left-radius:10px;  \
                                   border-top-right-radius:10px; \
                                   border-bottom-left-radius:10px;  \

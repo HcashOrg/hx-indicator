@@ -78,6 +78,7 @@ void ContactInfoTitleWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
+    ui->label_pic->setPixmap(QPixmap(":/ui/wallet_ui/contactPic.png").scaled(ui->label_pic->size()));
     setStyleSheet("QPushButton#pushButton_transfer{color:white;font-size:11px;font-weight:bold;\
                   border-top-left-radius:10px;  \
                   border-top-right-radius:10px; \

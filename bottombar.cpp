@@ -40,7 +40,7 @@ void BottomBar::retranslator()
     ui->retranslateUi(this);
 
     ui->syncLabel->setToolTip(tr("Local block height / Network block height(estimated)"));
-
+    ui->nodeNumLabel->setToolTip(tr("connected nodes number"));
 }
 
 void BottomBar::jsonDataUpdated(QString id)
@@ -75,6 +75,22 @@ void BottomBar::jsonDataUpdated(QString id)
 
         return;
     }
+    else if("id-network_get_connected_peers" == id)
+    {
+        QString result = UBChain::getInstance()->jsonDataValue( id);
+        if( result.isEmpty() )
+        {
+            ui->nodeNumLabel->setText("0");
+            return;
+        }
+
+        result.prepend("{");
+        result.append("}");
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        ui->nodeNumLabel->setText(QString::number(jsonObject.value("result").toArray().size()));
+
+    }
 
 
 }
@@ -98,6 +114,8 @@ void BottomBar::paintEvent(QPaintEvent *)
 void BottomBar::refresh()
 {
     UBChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QJsonArray()));
+
+    UBChain::getInstance()->postRPC( "id-network_get_connected_peers", toJsonFormat( "network_get_connected_peers", QJsonArray()));
 
 //    UBChain::getInstance()->postRPC( "id_blockchain_list_assets", toJsonFormat( "blockchain_list_assets", QJsonArray()));
 

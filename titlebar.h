@@ -24,6 +24,9 @@ signals:
     void closeWallet();
     void tray();
 
+    void back();
+public slots:
+    void backBtnVis(bool isVisible = true);
 private slots:
     void on_minBtn_clicked();
 

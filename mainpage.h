@@ -45,6 +45,7 @@ signals:
     void showTransferPage(QString);
     void newAccount(QString);
 
+    void backBtnVisible(bool isShow);
 private slots:
     void on_addAccountBtn_clicked();
 

@@ -293,6 +293,8 @@ void Frame::alreadyLogin()
     connect(titleBar,SIGNAL(minimum()),this,SLOT(showMinimized()));
     connect(titleBar,SIGNAL(closeWallet()),qApp,SLOT(quit()));
     connect(titleBar,SIGNAL(tray()),this,SLOT(hide()));
+    connect(titleBar,&TitleBar::back,this,&Frame::showMainPage);
+    connect(this,&Frame::titleBackVisible,titleBar,&TitleBar::backBtnVis);
 
     centralWidget = new QWidget(this);
     centralWidget->resize(770,530);
@@ -343,6 +345,7 @@ void Frame::alreadyLogin()
     connect(mainPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(mainPage,SIGNAL(showTransferPage(QString)),this,SLOT(showTransferPage(QString)));
     connect(mainPage,SIGNAL(newAccount(QString)),this,SLOT(newAccount(QString)));
+    connect(mainPage,&MainPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
 
     timer = new QTimer(this);               //  自动锁定
     connect(timer,SIGNAL(timeout()),this,SLOT(autoLock()));
@@ -721,6 +724,7 @@ void Frame::autoRefresh()
 
 void Frame::showMainPage()
 {
+    emit titleBackVisible(false);
     closeCurrentPage();
     getAccountInfo();
 
@@ -734,7 +738,7 @@ void Frame::showMainPage()
 //    connect(mainPage,SIGNAL(refreshAccountInfo()),this,SLOT(refreshAccountInfo()));
     connect(mainPage,SIGNAL(showTransferPage(QString)),this,SLOT(showTransferPage(QString)));
     connect(mainPage,SIGNAL(newAccount(QString)),this,SLOT(newAccount(QString)));
-
+    connect(mainPage,&MainPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
 }
 
 
@@ -756,6 +760,7 @@ void Frame::showTransferPage()
 
 void Frame::showContactPage()
 {
+    emit titleBackVisible(false);
     closeCurrentPage();
     contactPage = new ContactWidget(centralWidget);
 
