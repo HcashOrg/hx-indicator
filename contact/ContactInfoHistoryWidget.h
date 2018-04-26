@@ -14,6 +14,12 @@ class ContactInfoHistoryWidget : public QWidget
 public:
     explicit ContactInfoHistoryWidget(QWidget *parent = 0);
     ~ContactInfoHistoryWidget();
+
+    void showTransferRecord(QString _accountAddress, QString _assetId = "ALL");
+
+private slots:
+    void on_assetComboBox_currentIndexChanged(const QString &arg1);
+
 private:
     void InitWidget();
     void InitStyle();
@@ -22,6 +28,8 @@ private:
 private:
     class ContactInfoHistoryWidgetPrivate;
     ContactInfoHistoryWidgetPrivate *_p;
+
+    QString accountAddress;
 };
 
 #endif // CONTACTINFOHISTORYWIDGET_H

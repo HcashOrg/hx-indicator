@@ -21,6 +21,7 @@ public:
 
     void insertTransactionStruct(QString _transactionId, TransactionStruct _struct);
     TransactionStruct getTransactionStruct(QString _transactionId);
+    QVector<TransactionStruct>  lookupTransactionStruct(QString _address, int _type = 0);   // 查找地址(不一定是本钱包账户)相关的交易
 
     void insertAccountTransactionTypeIds(QString _accountAddress, TransactionTypeIds _transactionTypeIds);
     void addAccountTransactionId(QString _accountAddress, TransactionTypeId _transactionTypeId);
@@ -29,6 +30,8 @@ public:
 
     bool writeToDB(leveldb::DB* _db, QString _key, QByteArray _value);
     QByteArray readFromDB(leveldb::DB* _db, QString _key);
+
+    QStringList getKeys(leveldb::DB* _db);
 
 private:
     leveldb::DB* m_transactionStructDB;

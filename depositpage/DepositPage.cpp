@@ -52,6 +52,7 @@ void DepositPage::jsonDataUpdated(QString id)
     if("id_get_binding_account" == id)
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
+        qDebug() << id << result;
         result.prepend("{");
         result.append("}");
     //提取通道账户地址
@@ -71,6 +72,7 @@ void DepositPage::jsonDataUpdated(QString id)
     {
         //解析返回的通道地址，并且绑定地址
         QString result = UBChain::getInstance()->jsonDataValue( id);
+        qDebug() << id << result;
         if( result.isEmpty() || result.startsWith("\"error"))
         {
             _p->qrcodeWidget->SetQRString(tr("cannot generate tunnel account"));
@@ -89,6 +91,7 @@ void DepositPage::jsonDataUpdated(QString id)
     else if("id_bind_tunnel_account" == id)
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
+        qDebug() << id << result;
         if( result.isEmpty() || result.startsWith("\"error"))
         {
             _p->qrcodeWidget->SetQRString(tr("cannot bind tunnel account"));
@@ -150,7 +153,7 @@ void DepositPage::InitStyle()
     pa.setColor(QPalette::WindowText,Qt::black);
     ui->label->setPalette(pa);
 
-    ui->toolButton->setStyleSheet("QToolButton{color:white;\
+    ui->depositRecordBtn->setStyleSheet("QToolButton{color:white;\
                                   border-top-left-radius:10px;  \
                                   border-top-right-radius:10px; \
                                   border-bottom-left-radius:10px;  \
@@ -158,4 +161,9 @@ void DepositPage::InitStyle()
                                   border:none;\
                                   background-color:#00D2FF;\}"
                                   "QToolButton::hover{background-color:#4861DC;}");
+}
+
+void DepositPage::on_depositRecordBtn_clicked()
+{
+
 }

@@ -3,6 +3,7 @@
 
 #include "WithdrawInputWidget.h"
 #include "WithdrawConfirmWidget.h"
+#include "withdrawrecordwidget.h"
 
 class WithdrawPage::WithdrawPagePrivate
 {
@@ -63,7 +64,7 @@ void WithdrawPage::InitWidget()
     _p->inputWidget->setMaxAmmount(_p->ammount);
     _p->inputWidget->setSymbol(_p->assetSymbol);
 
-    connect(ui->toolButton,&QToolButton::clicked,this,&WithdrawPage::ShowRecordSlots);
+    connect(ui->withdrawRecordBtn,&QToolButton::clicked,this,&WithdrawPage::ShowRecordSlots);
     connect(_p->inputWidget,&WithdrawInputWidget::withdrawSignal,this,&WithdrawPage::ShowConfirmWidget);
 }
 
@@ -80,7 +81,7 @@ void WithdrawPage::InitStyle()
     pa.setColor(QPalette::WindowText,Qt::black);
     ui->label->setPalette(pa);
 
-    ui->toolButton->setStyleSheet("QToolButton{color:white;\
+    ui->withdrawRecordBtn->setStyleSheet("QToolButton{color:white;\
                                   border-top-left-radius:10px;  \
                                   border-top-right-radius:10px; \
                                   border-bottom-left-radius:10px;  \
@@ -91,3 +92,11 @@ void WithdrawPage::InitStyle()
 }
 
 
+
+void WithdrawPage::on_withdrawRecordBtn_clicked()
+{
+    WithdrawRecordWidget* widget = new WithdrawRecordWidget(this);
+    widget->move(0,0);
+    widget->show();
+    widget->showWithdrawRecord(_p->address);
+}

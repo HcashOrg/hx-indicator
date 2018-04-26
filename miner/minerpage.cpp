@@ -54,6 +54,22 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->incomeTableWidget->setColumnWidth(1,140);
     ui->incomeTableWidget->setColumnWidth(2,80);
 
+    ui->incomeRecordTableWidget->installEventFilter(this);
+    ui->incomeRecordTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->incomeRecordTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->incomeRecordTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->incomeRecordTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->incomeRecordTableWidget->setMouseTracking(true);
+    ui->incomeRecordTableWidget->setShowGrid(false);//隐藏表格线
+
+    ui->incomeRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
+    ui->incomeRecordTableWidget->horizontalHeader()->setFixedHeight(30);
+    ui->incomeRecordTableWidget->horizontalHeader()->setVisible(true);
+    ui->incomeRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+
+    ui->incomeRecordTableWidget->setColumnWidth(0,140);
+    ui->incomeRecordTableWidget->setColumnWidth(1,140);
+
     init();
 }
 
@@ -66,6 +82,7 @@ void MinerPage::refresh()
 {
     fetchLockBalance();
     fetchAccountIncome();
+    showIncomeRecord();
 }
 
 void MinerPage::jsonDataUpdated(QString id)
@@ -258,10 +275,43 @@ void MinerPage::fetchAccountIncome()
                                      toJsonFormat( "get_address_pay_back_balance",QJsonArray() << address << ""));
 }
 
+void MinerPage::showIncomeRecord()
+{
+    QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+    TransactionTypeIds typeIds = UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(address,TRANSACTION_TYPE_MINE_INCOME);
+
+    int size = typeIds.size();
+    ui->incomeRecordTableWidget->setRowCount(0);
+    ui->incomeRecordTableWidget->setRowCount(size);
+
+    for(int i = 0; i < size; i++)
+    {
+        QString transactionId = typeIds.at(size - i - 1).transactionId;
+        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
+        if(ts.type == -1)
+        {
+            qDebug() << "can not find transaction in transactionstruct db: " << transactionId;
+            continue;
+        }
+
+
+        QJsonObject object = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
+        QJsonObject amountObject = object.take("pay_back_balance").toArray().at(0).toArray().at(1).toObject();
+        unsigned long long amount = jsonValueToULL(amountObject.take("amount"));
+        QString amountAssetId = amountObject.take("asset_id").toString();
+        AssetInfo amountAssetInfo = UBChain::getInstance()->assetInfoMap.value(amountAssetId);
+
+        ui->incomeRecordTableWidget->setItem(i,0, new QTableWidgetItem(QString::number(ts.blockNum)));
+        ui->incomeRecordTableWidget->setItem(i,1, new QTableWidgetItem(getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol));
+
+    }
+}
+
 void MinerPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     fetchLockBalance();
     fetchAccountIncome();
+    showIncomeRecord();
 }
 
 void MinerPage::on_lockToMinerBtn_clicked()
@@ -328,4 +378,9 @@ void MinerPage::on_incomeInfoBtn_clicked()
 void MinerPage::on_forecloseInfoBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MinerPage::on_incomeRecordBtn_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
 }

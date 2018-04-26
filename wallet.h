@@ -43,6 +43,7 @@
 #include "frame.h"
 #include "extra/style.h"
 #include "extra/transactiondb.h"
+#include "extra/transactiontype.h"
 
 #define ASSET_NAME "LNK"
 #define ACCOUNT_ADDRESS_PREFIX  "LNK"
@@ -386,6 +387,7 @@ AddressType   checkAddress(QString address, AddressFlags type = AccountAddress);
 void moveWidgetToScreenCenter(QWidget* w);
 
 QString toJsonFormat(QString instruction, QJsonArray parameters);
+unsigned long long jsonValueToULL(QJsonValue v);
 
 #endif // LNK_H
 

@@ -41,7 +41,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QToolButton" name="toolButton">
+  <widget class="QToolButton" name="withdrawRecordBtn">
    <property name="geometry">
     <rect>
      <x>638</x>

@@ -1269,3 +1269,18 @@ QDataStream &operator <<(QDataStream &out, const TransactionTypeId &data)
     return out;
 
 }
+
+unsigned long long jsonValueToULL(QJsonValue v)
+{
+    unsigned long long result = 0;
+    if(v.isString())
+    {
+        result = v.toString().toULongLong();
+    }
+    else
+    {
+        result = QString::number(v.toDouble(),'g',12).toULongLong();
+    }
+
+    return result;
+}

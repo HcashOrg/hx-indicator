@@ -68,6 +68,7 @@ void ContactInfoWidget::InitWidget()
 void ContactInfoWidget::RefreshWidget()
 {
     _p->infoTitleWidget->setData(_p->person);
+    _p->infoHistoryWidget->showTransferRecord(_p->person->address);
 }
 
 void ContactInfoWidget::paintEvent(QPaintEvent *event)

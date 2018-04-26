@@ -389,7 +389,7 @@ void Frame::getAccountInfo()
 {
     UBChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QJsonArray()));
 
-//    UBChain::getInstance()->postRPC( "id_balance", toJsonFormat( "balance", QJsonArray()));
+    UBChain::getInstance()->fetchTransactions();
 }
 
 void Frame::showAccountPage()
@@ -1280,7 +1280,6 @@ void Frame::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":"))
         {
-            qDebug() << id << result;
             result.prepend("{");
             result.append("}");
 
@@ -1337,9 +1336,8 @@ void Frame::jsonDataUpdated(QString id)
             typeId.transactionId = transactionId;
             switch (typeId.type)
             {
-            case 0:
+            case TRANSACTION_TYPE_NORMAL:
             {
-
                 // 普通交易
                 QString fromAddress = operationObject.take("from_addr").toString();
                 QString toAddress   = operationObject.take("to_addr").toString();
@@ -1352,8 +1350,32 @@ void Frame::jsonDataUpdated(QString id)
 
                 if(UBChain::getInstance()->isMyAddress(toAddress))
                 {
-                    UBChain::getInstance()->transactionDB.addAccountTransactionId(fromAddress, typeId);
+                    UBChain::getInstance()->transactionDB.addAccountTransactionId(toAddress, typeId);
                 }
+            }
+                break;
+            case TRANSACTION_TYPE_WITHDRAW:
+            {
+                // 提现交易
+                QString withdrawAddress = operationObject.take("withdraw_account").toString();
+
+                if(UBChain::getInstance()->isMyAddress(withdrawAddress))
+                {
+                    UBChain::getInstance()->transactionDB.addAccountTransactionId(withdrawAddress, typeId);
+                }
+
+            }
+                break;
+            case TRANSACTION_TYPE_MINE_INCOME:
+            {
+                // 质押挖矿收入
+                QString owner = operationObject.take("pay_back_owner").toString();
+
+                if(UBChain::getInstance()->isMyAddress(owner))
+                {
+                    UBChain::getInstance()->transactionDB.addAccountTransactionId(owner, typeId);
+                }
+
             }
                 break;
             default:

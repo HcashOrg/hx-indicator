@@ -34,6 +34,8 @@ private slots:
 
     void on_forecloseInfoBtn_clicked();
 
+    void on_incomeRecordBtn_clicked();
+
 private:
     Ui::MinerPage *ui;
 
@@ -42,6 +44,7 @@ private:
 
     void fetchLockBalance();
     void fetchAccountIncome();
+    void showIncomeRecord();
 };
 
 #endif // MINERPAGE_H

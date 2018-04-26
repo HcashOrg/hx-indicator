@@ -143,7 +143,8 @@ SOURCES += main.cpp\
     HelpWidget.cpp \
     transfer/transferconfirmdialog.cpp \
     transfer/transferpage.cpp \
-    transfer/transferrecordwidget.cpp
+    transfer/transferrecordwidget.cpp \
+    withdrawpage/withdrawrecordwidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -259,7 +260,8 @@ HEADERS  += firstlogin.h \
     transfer/transferconfirmdialog.h \
     transfer/transferpage.h \
     transfer/transferrecordwidget.h \
-    extra/transactiontype.h
+    extra/transactiontype.h \
+    withdrawpage/withdrawrecordwidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -353,7 +355,8 @@ FORMS    += firstlogin.ui \
     HelpWidget.ui \
     transfer/transferconfirmdialog.ui \
     transfer/transferpage.ui \
-    transfer/transferrecordwidget.ui
+    transfer/transferrecordwidget.ui \
+    withdrawpage/withdrawrecordwidget.ui
 
 win32{
     DISTFILES += logo.rc

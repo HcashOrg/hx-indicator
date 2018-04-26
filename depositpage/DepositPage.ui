@@ -31,7 +31,7 @@
     <string>充值</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="toolButton">
+  <widget class="QToolButton" name="depositRecordBtn">
    <property name="geometry">
     <rect>
      <x>638</x>

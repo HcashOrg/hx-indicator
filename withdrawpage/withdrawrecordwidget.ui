@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TransferRecordWidget</class>
- <widget class="QWidget" name="TransferRecordWidget">
+ <class>WithdrawRecordWidget</class>
+ <widget class="QWidget" name="WithdrawRecordWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,17 +13,17 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTableWidget" name="transferRecordTableWidget">
+  <widget class="QTableWidget" name="withdrawRecordTableWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>100</y>
+     <x>40</x>
+     <y>140</y>
      <width>700</width>
      <height>281</height>
     </rect>
    </property>
    <attribute name="horizontalHeaderVisible">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <attribute name="verticalHeaderVisible">
     <bool>false</bool>
@@ -43,7 +43,7 @@
    </column>
    <column>
     <property name="text">
-     <string>对方地址</string>
+     <string>提现地址</string>
     </property>
     <property name="font">
      <font>
@@ -107,21 +107,11 @@
     </property>
    </column>
   </widget>
-  <widget class="QComboBox" name="assetComboBox">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>30</y>
-     <width>120</width>
-     <height>30</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>30</y>
+     <x>140</x>
+     <y>70</y>
      <width>60</width>
      <height>30</height>
     </rect>
@@ -131,6 +121,16 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="assetComboBox">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>70</y>
+     <width>120</width>
+     <height>30</height>
+    </rect>
    </property>
   </widget>
  </widget>

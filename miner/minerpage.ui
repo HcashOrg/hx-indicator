@@ -143,7 +143,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="incomePage">
     <widget class="QTableWidget" name="incomeTableWidget">
@@ -356,6 +356,96 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
      </column>
     </widget>
    </widget>
+   <widget class="QWidget" name="incomeRecordPage">
+    <widget class="QTableWidget" name="incomeRecordTableWidget">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>50</y>
+       <width>640</width>
+       <height>300</height>
+      </rect>
+     </property>
+     <property name="cursor" stdset="0">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="autoScroll">
+      <bool>true</bool>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::NoSelection</enum>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>19</width>
+       <height>12</height>
+      </size>
+     </property>
+     <property name="showGrid">
+      <bool>true</bool>
+     </property>
+     <property name="gridStyle">
+      <enum>Qt::SolidLine</enum>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderHighlightSections">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="verticalHeaderHighlightSections">
+      <bool>false</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>区块高度</string>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>数量</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+    </widget>
+   </widget>
   </widget>
   <widget class="QToolButton" name="incomeInfoBtn">
    <property name="geometry">
@@ -388,13 +478,13 @@ font: 12px &quot;微软雅黑&quot;;}
 QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
    </property>
    <property name="text">
-    <string>收益信息</string>
+    <string>当前收益</string>
    </property>
   </widget>
   <widget class="QToolButton" name="forecloseInfoBtn">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>140</x>
      <y>80</y>
      <width>80</width>
      <height>24</height>
@@ -439,6 +529,40 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="incomeRecordBtn">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>80</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
+background-color: transparent;
+font: 12px &quot;微软雅黑&quot;;}
+QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
+   </property>
+   <property name="text">
+    <string>收益记录</string>
    </property>
   </widget>
  </widget>

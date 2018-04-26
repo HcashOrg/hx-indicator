@@ -68,6 +68,38 @@ TransactionStruct TransactionDB::getTransactionStruct(QString _transactionId)
     return transactionStruct;
 }
 
+QVector<TransactionStruct> TransactionDB::lookupTransactionStruct(QString _address, int _type)
+{
+    QVector<TransactionStruct> result;
+
+    QStringList keys = getKeys(m_transactionStructDB);
+    foreach (QString key, keys)
+    {
+        TransactionStruct ts = getTransactionStruct(key);
+        if(ts.type == _type)
+        {
+            switch (ts.type)
+            {
+            case 0:
+            {
+                QJsonObject object = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
+                QString fromAddress = object.take("from_addr").toString();
+                QString toAddress   = object.take("to_addr").toString();
+                if(fromAddress == _address || toAddress == _address)
+                {
+                    result.append(ts);
+                }
+            }
+                break;
+            default:
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
 void TransactionDB::insertAccountTransactionTypeIds(QString _accountAddress, TransactionTypeIds _transactionTypeIds)
 {
     QByteArray ba;
@@ -85,13 +117,11 @@ void TransactionDB::insertAccountTransactionTypeIds(QString _accountAddress, Tra
 void TransactionDB::addAccountTransactionId(QString _accountAddress, TransactionTypeId _transactionTypeId)
 {
     TransactionTypeIds typeIds = getAccountTransactionTypeIds(_accountAddress);
-    qDebug() << "111111111111  " << typeIds.size() ;
 
     if(!typeIds.contains(_transactionTypeId))
     {
         typeIds.append(_transactionTypeId);
     }
-    qDebug() << "222222222222  " << typeIds.size();
 
     insertAccountTransactionTypeIds(_accountAddress, typeIds);
 }
@@ -152,5 +182,18 @@ QByteArray TransactionDB::readFromDB(leveldb::DB* _db, QString _key)
     leveldb::Slice key = stdStr;
     _db->Get(leveldb::ReadOptions(), key, &strValue);
     return QByteArray::fromStdString(strValue);
+}
+
+QStringList TransactionDB::getKeys(leveldb::DB *_db)
+{
+    leveldb::Iterator* it = _db->NewIterator(leveldb::ReadOptions());
+    QStringList keys;
+    for (it->SeekToFirst(); it->Valid(); it->Next())
+    {
+        keys.append(QString::fromStdString(it->key().ToString()));
+    }
+    delete it;
+
+    return   keys;
 }
 

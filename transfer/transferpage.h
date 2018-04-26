@@ -65,6 +65,7 @@ private slots:
 private:
     Ui::TransferPage *ui;
     QString accountName;
+    QWidget* currentTopWidget;  // 保存当前顶层窗口
 
     bool inited;
     bool assetUpdating;

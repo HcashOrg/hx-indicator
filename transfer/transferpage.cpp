@@ -14,6 +14,7 @@
 #include "remarkdialog.h"
 #include "commondialog.h"
 #include "transferconfirmdialog.h"
+#include "transferrecordwidget.h"
 
 
 TransferPage::TransferPage(QString name,QWidget *parent) :
@@ -22,6 +23,7 @@ TransferPage::TransferPage(QString name,QWidget *parent) :
     inited(false),
     assetUpdating(false),
     contactUpdating(false),
+    currentTopWidget(NULL),
     ui(new Ui::TransferPage)
 {
 	
@@ -225,7 +227,7 @@ void TransferPage::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
     painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
-    painter.drawRect(0,0,680,482);
+    painter.drawRect(0,0,770,530);
 }
 
 void TransferPage::on_amountLineEdit_textChanged(const QString &arg1)
@@ -666,5 +668,8 @@ void TransferPage::on_contactComboBox_currentIndexChanged(int index)
 
 void TransferPage::on_transferRecordBtn_clicked()
 {
-
+    currentTopWidget = new TransferRecordWidget(this);
+    currentTopWidget->move(0,0);
+    currentTopWidget->show();
+    static_cast<TransferRecordWidget*>(currentTopWidget)->showTransferRecord(UBChain::getInstance()->accountInfoMap.value(accountName).address);
 }
