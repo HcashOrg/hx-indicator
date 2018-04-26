@@ -46,6 +46,11 @@ void FunctionWidget::retranslator()
     ui->retranslateUi(this);
 }
 
+void FunctionWidget::contactShowTransferPageSlots()
+{
+    ShowAccountWidgetSlots();
+}
+
 void FunctionWidget::ShowContactWidgetSlots()
 {
     ui->stackedWidget->setVisible(false);

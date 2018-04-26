@@ -29,10 +29,10 @@
   <widget class="QLabel" name="label_warning">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>100</x>
      <y>350</y>
-     <width>531</width>
-     <height>16</height>
+     <width>551</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
