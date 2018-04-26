@@ -26,7 +26,7 @@ public:
 
     QString multisig_address;
 
-    QString trade_detail;
+    QJsonObject trade_detail;
 };
 
 CapitalTransferPage::CapitalTransferPage(const CapitalTransferInput &data,QWidget *parent) :
@@ -105,7 +105,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         }
 
     }
-    else if("id-get_multisig_account_pair" == id)
+    else if("id-get_current_multi_address" == id)
     {//获取到多签地址
         QString result = UBChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() || result.startsWith("\"error"))
@@ -119,6 +119,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         result.append("}");
     //提取多签地址
         _p->multisig_address = CapitalTransferDataUtil::parseMutiAddress(result);
+        qDebug()<<"多签地址"<<_p->multisig_address;
     }
     else if("id-createrawtransaction" == id)
     {//获取到创建交易信息
@@ -287,8 +288,8 @@ void CapitalTransferPage::InitWidget()
     UBChain::getInstance()->postRPC( "id-get_binding_account",
                                      toJsonFormat( "get_binding_account", QJsonArray()
                                      << _p->account_name<<_p->symbol ));
-    UBChain::getInstance()->postRPC( "id-get_multisig_account_pair",
-                                     toJsonFormat( "get_multisig_account_pair", QJsonArray()
+    UBChain::getInstance()->postRPC( "id-get_current_multi_address",
+                                     toJsonFormat( "get_current_multi_address", QJsonArray()
                                      << _p->symbol));
 
 

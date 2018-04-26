@@ -31,6 +31,8 @@ signals:
     //void showMultiSigPage();
 
     void lock();
+public slots:
+    void contactShowTransferPageSlots();//额外槽函数，接受联系人界面转账点击信号，functionbar恢复到账户页面
 signals:
     //点击大按钮的信号
     void showAccountSignal();

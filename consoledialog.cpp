@@ -26,9 +26,20 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
      this->setAutoFillBackground(true);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,10);}");
+    ui->widget->setStyleSheet("#widget {background-color:rgba(251, 251, 254,100);border-radius:10px;}");
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(180,250,250);border-radius:10px;}");
+
+    ui->closeBtn->setIconSize(QSize(12,12));
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
+                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+
+    setStyleSheet("QToolButton#clearBtn{background-color:#5474EB; border:none;border-radius:5px;color: rgb(255, 255, 255);}"
+                  "QToolButton#clearBtn:hover{background-color:#00D2FF;}"
+                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+                  "QLineEdit:focus{border:none;}"
+                  );
 
     ui->containerWidget->installEventFilter(this);
 
@@ -37,7 +48,6 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
 //    ui->consoleLineEdit->setStyleSheet("color:black;border:1px solid #CCCCCC;border-radius:3px;");
 //    ui->consoleLineEdit->setTextMargins(8,0,0,0);
@@ -85,15 +95,15 @@ bool ConsoleDialog::eventFilter(QObject *watched, QEvent *e)
     {
         if( e->type() == QEvent::Paint)
         {
-            QPainter painter(ui->containerWidget);
-            painter.setPen(QPen(QColor(40,45,66),Qt::SolidLine));
-            painter.setBrush(QBrush(QColor(40,45,66),Qt::SolidPattern));
-            painter.drawRoundedRect(0,20,600,400,10,10);
+//            QPainter painter(ui->containerWidget);
+//            painter.setPen(Qt::NoPen);
 
-            painter.setPen(QPen(QColor(32,36,54),Qt::SolidLine));
-            painter.setBrush(QBrush(QColor(32,36,54),Qt::SolidPattern));
-            painter.drawRoundedRect(0,0,600,37,10,10);
-            painter.drawRect(0,20,600,17);
+//            painter.setBrush(QBrush(QColor(251,251,254),Qt::SolidPattern));
+//            painter.drawRoundedRect(0,20,600,400,10,10);
+
+//            painter.setBrush(QBrush(QColor(84,116,235),Qt::SolidPattern));
+//            painter.drawRoundedRect(0,0,600,37,10,10);
+//            painter.drawRect(0,20,600,17);
 
             return true;
         }

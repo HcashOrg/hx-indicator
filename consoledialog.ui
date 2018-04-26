@@ -65,8 +65,7 @@
       <enum>Qt::DefaultContextMenu</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">QTextBrowser{background-color: rgb(32,36,54);color: rgb(192, 196, 212);border:1px solid rgb(28, 32, 46);padding: 0px 0px 0px 6px;}
-QTextBrowser:focus{border:1px solid rgb(93,107,144);}</string>
+      <string notr="true"/>
      </property>
     </widget>
     <widget class="QToolButton" name="clearBtn">
@@ -92,8 +91,7 @@ QTextBrowser:focus{border:1px solid rgb(93,107,144);}</string>
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">QToolButton{font: 9pt &quot;微软雅黑&quot;;text-decoration: underline;background:transparent;color: rgb(192, 196, 212);}
-QToolButton:hover{color:white;}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>清空</string>
@@ -138,7 +136,7 @@ QToolButton:hover{color:white;}</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(192,196,212);</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>控制台</string>
@@ -152,8 +150,8 @@ QToolButton:hover{color:white;}</string>
       <rect>
        <x>575</x>
        <y>12</y>
-       <width>13</width>
-       <height>13</height>
+       <width>18</width>
+       <height>18</height>
       </rect>
      </property>
      <property name="cursor">
@@ -203,15 +201,19 @@ QToolButton:hover{color:white;}</string>
       <string>RPC方式</string>
      </property>
     </widget>
-    <zorder>consoleBrowser</zorder>
-    <zorder>clearBtn</zorder>
-    <zorder>consoleLineEdit</zorder>
-    <zorder>label</zorder>
-    <zorder>closeBtn</zorder>
-    <zorder>label_2</zorder>
-    <zorder>checkBox</zorder>
-    <zorder>widget</zorder>
-    <zorder>widget</zorder>
+    <widget class="Line" name="line">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>370</y>
+       <width>521</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

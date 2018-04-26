@@ -768,6 +768,7 @@ void Frame::showContactPage()
     //contactPage = new ContactPage(centralWidget);
     //connect(contactPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     //connect(contactPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
+    connect(contactPage,SIGNAL(gotoTransferPage(QString,QString)),functionBar,SLOT(contactShowTransferPageSlots()));
     connect(contactPage,SIGNAL(gotoTransferPage(QString,QString)),this,SLOT(showTransferPageWithAddress(QString,QString)));
     //contactPage->setAttribute(Qt::WA_DeleteOnClose);
     contactPage->show();
@@ -1450,7 +1451,7 @@ void Frame::init()
 //    UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QJsonArray()));
 
 
-    UBChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.121:9040") ));
+    UBChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.254:9030") ));
 
     UBChain::getInstance()->fetchTransactions();
 }

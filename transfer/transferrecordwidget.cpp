@@ -121,6 +121,7 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
 
         rowCount++;
     }
+
 }
 
 void TransferRecordWidget::paintEvent(QPaintEvent *)

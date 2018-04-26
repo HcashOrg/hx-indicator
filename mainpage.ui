@@ -439,6 +439,25 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
     <string>导出账户</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_op">
+   <property name="geometry">
+    <rect>
+     <x>525</x>
+     <y>143</y>
+     <width>71</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>操作</string>
+   </property>
+  </widget>
   <zorder>addressLabel</zorder>
   <zorder>accountListLabel</zorder>
   <zorder>addAccountBtn</zorder>
@@ -451,6 +470,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
   <zorder>qrcodeBtn</zorder>
   <zorder>backupWalletBtn</zorder>
   <zorder>exportBtn</zorder>
+  <zorder>label_op</zorder>
  </widget>
  <resources/>
  <connections/>

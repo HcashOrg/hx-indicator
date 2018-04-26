@@ -2,6 +2,7 @@
 #define CAPITALTRANSFERDATAUTIL_H
 
 #include <QString>
+#include <QJsonObject>
 
 class CapitalTransferDataUtil
 {
@@ -12,7 +13,7 @@ public:
 
     static QString parseMutiAddress(const QString &jsonString);
 
-    static QString parseTradeDetail(const QString &jsonString);
+    static QJsonObject parseTradeDetail(const QString &jsonString);
 
     static QString parseTransaction(const QString &jsonString);
 };
