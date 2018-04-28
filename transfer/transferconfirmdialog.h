@@ -32,6 +32,8 @@ private slots:
 
     void on_closeBtn_clicked();
 
+protected:
+    void paintEvent(QPaintEvent *event);
 private:
     Ui::TransferConfirmDialog *ui;
     QString address;

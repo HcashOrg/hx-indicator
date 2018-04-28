@@ -90,6 +90,7 @@ void PoundageShowWidget::InitWidget()
     ui->tableView->setModel(_p->tableModel);
     ui->tableView->hideColumn(3);
     ui->tableView->hideColumn(2);
+    ui->tableView->hideColumn(6);
 
     ui->stackedWidget_pageBar->addWidget(_p->pageWidget);
     ui->stackedWidget_pageBar->setCurrentWidget(_p->pageWidget);

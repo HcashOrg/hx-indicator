@@ -66,6 +66,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     connect(ui->toolButton_chooseContact,&QToolButton::clicked,this,&TransferPage::chooseContactSlots);
+    connect(ui->checkBox,&QCheckBox::stateChanged,this,&TransferPage::checkStateChangedSlots);
 
     ui->amountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
     setAmountPrecision();
@@ -88,6 +89,8 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     inited = true;
 	
     updateAmountSlots();
+
+    updatePoundage();
 }
 
 TransferPage::~TransferPage()
@@ -200,6 +203,22 @@ void TransferPage::InitStyle()
                                                 "QToolButton:hover{background-color:#5474EB;}");
 }
 
+void TransferPage::updatePoundage()
+{//查询配置文件中的手续费设置
+    QString feeID = UBChain::getInstance()->configFile->value("/settings/feeOrderID").toString();
+    if(feeID.isEmpty())
+    {
+        ui->checkBox->setChecked(false);
+        ui->checkBox->setEnabled(true);
+        ui->toolButton->setText(tr("poundage doesn't exist!"));
+        ui->toolButton->setEnabled(false);
+    }
+    else
+    {
+        //查询承兑单
+    }
+}
+
 QString TransferPage::getCurrentAccount()
 {
     return accountName;
@@ -267,7 +286,7 @@ void TransferPage::on_assetComboBox_currentIndexChanged(int index)
     updateAmountSlots();
 }
 
-void TransferPage::on_sendtoLineEdit_textEdited(const QString &arg1)
+void TransferPage::on_sendtoLineEdit_textChanged(const QString &arg1)
 {
     if( ui->sendtoLineEdit->text().contains(" ") || ui->sendtoLineEdit->text().contains("\n"))   // 不判断就remove的话 右键菜单撤销看起来等于不能用
     {
@@ -348,10 +367,17 @@ void TransferPage::chooseContactSlots()
     ContactChooseWidget *wi = new ContactChooseWidget(this);
     BlurWidget *blur = new BlurWidget(this);
     connect(wi,&ContactChooseWidget::closeSignal,blur,&BlurWidget::close);
+    connect(wi,&ContactChooseWidget::selectContactSignal,this,&TransferPage::selectContactSlots);
+
     blur->show();
     wi->move(QPoint(160,140));
     wi->show();
     wi->raise();
+}
+
+void TransferPage::selectContactSlots(const QString &name, const QString &address)
+{
+    ui->sendtoLineEdit->setText(address);
 }
 
 void TransferPage::updateAmountSlots()
@@ -393,4 +419,16 @@ void TransferPage::updateAmountSlots()
      {
          ui->amountLineEdit->setPlaceholderText(tr("max muber: 0"));
      }
+}
+
+void TransferPage::checkStateChangedSlots(int state)
+{
+    if(state == Qt::Checked)
+    {
+        ui->toolButton->setEnabled(true);
+    }
+    else
+    {
+        ui->toolButton->setEnabled(false);
+    }
 }

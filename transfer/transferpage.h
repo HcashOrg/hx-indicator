@@ -47,15 +47,18 @@ private slots:
 
     void on_assetComboBox_currentIndexChanged(int index);
 
-    void on_sendtoLineEdit_textEdited(const QString &arg1);
+    void on_sendtoLineEdit_textChanged(const QString &arg1);
 
     void on_memoTextEdit_textChanged();
 
     void on_transferRecordBtn_clicked();
 
     void chooseContactSlots();
+    void selectContactSlots(const QString &name,const QString &address);
 
     void updateAmountSlots();
+
+    void checkStateChangedSlots(int state);
 private:
     Ui::TransferPage *ui;
     QString accountName;
@@ -68,6 +71,8 @@ private:
     void setAmountPrecision();
 private:
     void InitStyle();
+
+    void updatePoundage();//刷新手续费相关
 };
 
 #endif // TRANSFERPAGE_H

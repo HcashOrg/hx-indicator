@@ -25,13 +25,19 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
-    ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
+//    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
+//    ui->containerWidget->setObjectName("containerwidget");
+//    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
-    ui->okBtn->setStyleSheet(OKBTN_STYLE);
-    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
+    ui->okBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                             "QToolButton:hover{background-color:#00D2FF;}");
+    ui->cancelBtn->setStyleSheet("QToolButton{background-color:#E5E5E5; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                                 "QToolButton:hover{background-color:#00D2FF;}");
+
+    setStyleSheet("QLineEdit{color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;}");
+
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->closeBtn->setVisible(false);
 
     ui->containerWidget->installEventFilter(this);
 
@@ -41,7 +47,7 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
     ui->addressLabel->setText( address);
     ui->amountLabel->setText( "<body><B>" + amount + "</B> " + assetSymbol + "</body>");
     ui->feeLabel->setText( "<body>" + fee + " " + ASSET_NAME +"</body>");
-    ui->remarkLabel->setText( remark);
+    ui->remarkLabel->setText( remark.isEmpty()?tr("none"):remark);
 
 
     ui->okBtn->setText(tr("Ok"));
@@ -146,4 +152,19 @@ void TransferConfirmDialog::on_pwdLineEdit_textEdited(const QString &arg1)
 void TransferConfirmDialog::on_closeBtn_clicked()
 {
     on_cancelBtn_clicked();
+}
+
+void TransferConfirmDialog::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+
+
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(255,255,255,100));//最后一位是设置透明属性（在0-255取值）
+    painter.drawRect(rect());
+
+    painter.drawPixmap(410,80,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
+
+    QWidget::paintEvent(event);
+
 }

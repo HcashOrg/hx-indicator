@@ -55,7 +55,7 @@ QVariant PoundageShowTableModel::headerData(int section, Qt::Orientation orienta
                 case 4:
                     return tr("汇率");
                 case 5:
-                    return tr("余额");
+                    return tr("余额(LNK)");
                 case 6:
                     return tr("总额");
                 default:
@@ -130,7 +130,7 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
             }
             else if(index.column() == 5)
             {
-                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->balanceNumber;
+                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->calSourceLeftNumber();
             }
             else if(index.column() == 6)
             {

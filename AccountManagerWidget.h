@@ -21,6 +21,8 @@ private slots:
     void exportButtonSlots();
 
     void backupButtonSlots();
+
+    void jsonDataUpdated(QString id);
 private:
     void RefreshTableShow(unsigned int page);
 private:

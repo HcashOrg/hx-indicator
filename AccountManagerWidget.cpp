@@ -6,6 +6,7 @@
 #include "wallet.h"
 
 #include "ExportDialog.h"
+#include "commondialog.h"
 #include "dialog/BackupWalletDialog.h"
 
 #include <ToolButtonWidget.h>
@@ -48,11 +49,34 @@ void AccountManagerWidget::pageChangeSlot(unsigned int page)
 
 void AccountManagerWidget::deleteButtonSlots()
 {
+    //提醒用户是否需要删除
+
     int row = ui->tableWidget->rowAt(ui->tableWidget->mapFromGlobal(QCursor::pos()).y());
-    qDebug()<<"clicked          "<<row;
-    UBChain::getInstance()->postRPC( "id-remove_local_account",
-                                     toJsonFormat( "remove_local_account", QJsonArray()
-                                     <<ui->tableWidget->item(row,0)->data(Qt::UserRole).value<AccountInfo>().name));
+    QString accountNmae = ui->tableWidget->item(row,0)->data(Qt::UserRole).value<AccountInfo>().name;
+
+    CommonDialog commonDialog(CommonDialog::OkAndCancel);
+    commonDialog.setText(tr("Are you sure to delete account ") + accountNmae);
+    if(commonDialog.pop())
+    {
+        qDebug()<<"clicked          "<<row;
+        UBChain::getInstance()->postRPC( "id-remove_local_account",
+                                         toJsonFormat( "remove_local_account", QJsonArray()
+                                         <<accountNmae));
+        //刷新页码等
+        ui->tableWidget->removeRow(row);
+        int totalnumber = ui->tableWidget->rowCount();
+        int page = (totalnumber%3==0 && totalnumber != 0) ? totalnumber/3 : totalnumber/3+1;
+        if(static_cast<unsigned int>(page) != _p->pageWidget->GetTotalPage())
+        {
+            _p->pageWidget->SetTotalPage(page);
+            if(page > 1)
+            {
+                int curpage = std::min<unsigned int>(row,totalnumber-1)/3;
+                _p->pageWidget->SetCurrentPage(static_cast<unsigned int>(curpage));
+            }
+
+        }
+    }
 }
 
 void AccountManagerWidget::exportButtonSlots()
@@ -67,6 +91,16 @@ void AccountManagerWidget::backupButtonSlots()
 {
     BackupWalletDialog backupWalletDialog;
     backupWalletDialog.pop();
+}
+
+void AccountManagerWidget::jsonDataUpdated(QString id)
+{
+    if("id-remove_local_account" == id)
+    {
+        QString  result = UBChain::getInstance()->jsonDataValue(id);
+
+        qDebug()<<result;
+    }
 }
 
 void AccountManagerWidget::RefreshTableShow(unsigned int page)
@@ -93,7 +127,8 @@ void AccountManagerWidget::InitWidget()
     InitStyle();
 
     //初始化账户信息
-    int totalPage = UBChain::getInstance()->accountInfoMap.size()%3 == 0 ?
+    int totalPage = (UBChain::getInstance()->accountInfoMap.size()%3 == 0 &&
+                     !UBChain::getInstance()->accountInfoMap.empty())?
                     UBChain::getInstance()->accountInfoMap.size()/3 :
                     UBChain::getInstance()->accountInfoMap.size()/3 + 1;
     _p->pageWidget->SetTotalPage(totalPage);
@@ -122,6 +157,9 @@ void AccountManagerWidget::InitWidget()
     RefreshTableShow(0);
     connect(_p->pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&AccountManagerWidget::pageChangeSlot);
     connect(ui->toolButton,&QToolButton::clicked,this,&AccountManagerWidget::backupButtonSlots);
+
+    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &AccountManagerWidget::jsonDataUpdated);
+
 }
 
 void AccountManagerWidget::InitStyle()

@@ -19,9 +19,13 @@ public:
     explicit PageScrollWidget(unsigned int buttonNumber = 5,QWidget *parent = 0);
     ~PageScrollWidget();
 public:
-    void SetTotalPage(unsigned int number);
+    void SetTotalPage(unsigned int number);//count
+
+    void SetCurrentPage(unsigned int number);///--totalpage
+
+    unsigned int GetTotalPage()const;
 signals:
-    void currentPageChangeSignal(unsigned int);
+    void currentPageChangeSignal(unsigned int);//0-->totalpage-1
 private slots:
     void buttonClickSlots();
     void LineEditFinishSlots();

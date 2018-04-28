@@ -24,9 +24,15 @@ public:
     QString chainType;//发行税单类型
     QString sourceCoinID;//源币类型
     QString targetCoinID;//目标币类型
-    double sourceCoinNumber;//源币数量
+    double sourceCoinNumber;//源币数量LNK
     double targetCoinNumber;//目标币数量
-    double balanceNumber;//账户余额
+    double balanceNumber;//账户余额,目标币剩余数量
+public:
+    double calSourceLeftNumber()
+    {
+        if(targetCoinNumber < 1e-20) return 0;
+        return balanceNumber/targetCoinNumber*sourceCoinNumber;
+    }
 };
 
 class PoundageSheet

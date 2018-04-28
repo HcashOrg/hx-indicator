@@ -55,6 +55,19 @@ void PageScrollWidget::SetTotalPage(unsigned int number)
     ui->lineEdit->setText("1");
 }
 
+void PageScrollWidget::SetCurrentPage(unsigned int number)
+{
+    _p->currentPage = std::min<unsigned int>(_p->totalPage-1,std::max<unsigned int>(0,number));
+    RefreshData();
+    ui->lineEdit->setText(QString::number(_p->currentPage+1));
+    emit currentPageChangeSignal(_p->currentPage);
+}
+
+unsigned int PageScrollWidget::GetTotalPage() const
+{
+    return _p->totalPage;
+}
+
 void PageScrollWidget::buttonClickSlots()
 {
     _p->isMoreClicked = false;

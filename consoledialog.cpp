@@ -28,7 +28,7 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
     ui->widget->setObjectName("widget");
     ui->widget->setStyleSheet("#widget {background-color:rgba(251, 251, 254,100);border-radius:10px;}");
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(180,250,250);border-radius:10px;}");
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(0,210,255);border-radius:10px;}");
 
     ui->closeBtn->setIconSize(QSize(12,12));
     ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));

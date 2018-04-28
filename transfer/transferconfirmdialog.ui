@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>556</height>
+    <width>960</width>
+    <height>580</height>
    </rect>
   </property>
   <property name="font">
@@ -23,29 +23,30 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>900</width>
-     <height>556</height>
+     <width>960</width>
+     <height>580</height>
     </rect>
    </property>
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>285</x>
-      <y>65</y>
-      <width>330</width>
-      <height>440</height>
+      <x>390</x>
+      <y>80</y>
+      <width>360</width>
+      <height>490</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>微软雅黑</family>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <widget class="QLineEdit" name="pwdLineEdit">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>310</y>
+       <x>50</x>
+       <y>330</y>
        <width>180</width>
        <height>30</height>
       </rect>
@@ -57,8 +58,8 @@
     <widget class="QLabel" name="tipLabel2">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>340</y>
+       <x>50</x>
+       <y>370</y>
        <width>200</width>
        <height>24</height>
       </rect>
@@ -70,11 +71,16 @@
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
       <rect>
-       <x>35</x>
-       <y>370</y>
-       <width>120</width>
-       <height>36</height>
+       <x>70</x>
+       <y>400</y>
+       <width>96</width>
+       <height>30</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
@@ -83,16 +89,16 @@
       <string notr="true"/>
      </property>
      <property name="text">
-      <string/>
+      <string>确认</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>140</y>
+       <x>50</x>
+       <y>145</y>
        <width>81</width>
-       <height>30</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
@@ -103,7 +109,7 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(83,90,109);</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>发往地址:</string>
@@ -115,9 +121,9 @@
     <widget class="QLabel" name="pwdLabel">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>310</y>
-       <width>91</width>
+       <x>50</x>
+       <y>302</y>
+       <width>51</width>
        <height>30</height>
       </rect>
      </property>
@@ -125,7 +131,7 @@
       <string notr="true">color: rgb(192,196,212);</string>
      </property>
      <property name="text">
-      <string>钱包密码</string>
+      <string>交易密码</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -134,10 +140,10 @@
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>265</y>
+       <x>50</x>
+       <y>250</y>
        <width>40</width>
-       <height>30</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
@@ -148,7 +154,7 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(83,90,109);</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>备注:</string>
@@ -160,10 +166,10 @@
     <widget class="QLabel" name="feeLabel">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>235</y>
-       <width>240</width>
-       <height>30</height>
+       <x>218</x>
+       <y>230</y>
+       <width>91</width>
+       <height>21</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -176,10 +182,10 @@
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>50</x>
        <y>205</y>
        <width>60</width>
-       <height>30</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
@@ -190,7 +196,7 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(83,90,109);</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>转账金额:</string>
@@ -202,26 +208,26 @@
     <widget class="QLabel" name="remarkLabel">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>265</y>
+       <x>50</x>
+       <y>275</y>
        <width>260</width>
-       <height>30</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(192,196,212);</string>
      </property>
      <property name="text">
-      <string/>
+      <string>无</string>
      </property>
     </widget>
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>110</y>
-       <width>170</width>
-       <height>30</height>
+       <x>150</x>
+       <y>75</y>
+       <width>71</width>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
@@ -230,7 +236,7 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(83,90,109);</string>
+      <string notr="true">color:white;</string>
      </property>
      <property name="text">
       <string>账单确认</string>
@@ -242,11 +248,16 @@
     <widget class="QToolButton" name="cancelBtn">
      <property name="geometry">
       <rect>
-       <x>175</x>
-       <y>370</y>
-       <width>120</width>
-       <height>36</height>
+       <x>180</x>
+       <y>400</y>
+       <width>96</width>
+       <height>30</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
      </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
@@ -255,16 +266,16 @@
       <string notr="true"/>
      </property>
      <property name="text">
-      <string/>
+      <string>取消</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>235</y>
+       <x>215</x>
+       <y>205</y>
        <width>60</width>
-       <height>30</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
@@ -275,7 +286,7 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(83,90,109);</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>手续费:</string>
@@ -287,16 +298,14 @@
     <widget class="QLabel" name="addressLabel">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>50</x>
        <y>170</y>
        <width>290</width>
        <height>30</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color:rgb(32,36,54);
-color: rgb(83, 90, 109);
-padding: 0px 10px 0px 6px;</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string/>
@@ -308,30 +317,14 @@ padding: 0px 10px 0px 6px;</string>
     <widget class="QLabel" name="amountLabel">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>205</y>
-       <width>240</width>
-       <height>30</height>
+       <x>50</x>
+       <y>230</y>
+       <width>71</width>
+       <height>21</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(255, 34, 76);</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="warningLabel">
-     <property name="geometry">
-      <rect>
-       <x>135</x>
-       <y>35</y>
-       <width>60</width>
-       <height>60</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-image: url(:/ui/wallet_ui/warning.png);</string>
      </property>
      <property name="text">
       <string/>
@@ -354,6 +347,19 @@ padding: 0px 10px 0px 6px;</string>
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="Line" name="line">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>350</y>
+       <width>201</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </widget>
