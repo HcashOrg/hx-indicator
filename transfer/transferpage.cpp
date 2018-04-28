@@ -15,11 +15,13 @@
 #include "commondialog.h"
 #include "transferconfirmdialog.h"
 #include "transferrecordwidget.h"
+#include "ContactChooseWidget.h"
+#include "BlurWidget.h"
 
-
-TransferPage::TransferPage(QString name,QWidget *parent) :
+TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     QWidget(parent),
     accountName(name),
+    assetType(assettype),
     inited(false),
     assetUpdating(false),
     contactUpdating(false),
@@ -30,12 +32,23 @@ TransferPage::TransferPage(QString name,QWidget *parent) :
 
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    InitStyle();
 
-    ui->accountComboBox->setView(new QListView());
-    ui->assetComboBox->setView(new QListView());
-    ui->contactComboBox->setView(new QListView());
-
+    //初始化账户comboBox
+    // 账户下拉框按字母顺序排序
+    QStringList keys = UBChain::getInstance()->accountInfoMap.keys();
+    ui->accountComboBox->addItems( keys);
+    if(ui->accountComboBox->count() != 0)
+    {
+        if( accountName.isEmpty() )
+        {
+            ui->accountComboBox->setCurrentIndex(0);
+        }
+        else
+        {
+            ui->accountComboBox->setCurrentText( accountName);
+        }
+    }
 
     if( accountName.isEmpty())  // 如果是点击账单跳转
     {
@@ -50,21 +63,9 @@ TransferPage::TransferPage(QString name,QWidget *parent) :
         }
     }
 
-    // 账户下拉框按字母顺序排序
-    QStringList keys = UBChain::getInstance()->accountInfoMap.keys();
-    ui->accountComboBox->addItems( keys);
-    if( accountName.isEmpty() )
-    {
-        ui->accountComboBox->setCurrentIndex(0);
-    }
-    else
-    {
-        ui->accountComboBox->setCurrentText( accountName);
-    }
+    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    QString showName = UBChain::getInstance()->addressMapValue(accountName).ownerAddress;
-    ui->addressLabel->setText(showName);
-
+    connect(ui->toolButton_chooseContact,&QToolButton::clicked,this,&TransferPage::chooseContactSlots);
 
     ui->amountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
     setAmountPrecision();
@@ -74,44 +75,24 @@ TransferPage::TransferPage(QString name,QWidget *parent) :
     ui->sendtoLineEdit->setValidator( validator );
     ui->sendtoLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
 
-    ui->feeLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
-    ui->feeLineEdit->setReadOnly(true);
-    updateTransactionFee();
-
-    QRegExp rx("^([0]|[1-9][0-9]{0,5})(?:\\.\\d{0,4})?$|(^\\t?$)");
-    QRegExpValidator *pReg = new QRegExpValidator(rx, this);
-    ui->feeLineEdit->setValidator(pReg);
-
-//    ui->messageLineEdit->setStyleSheet("color:black;border:1px solid #CCCCCC;border-radius:3px;");
-//    ui->messageLineEdit->setTextMargins(8,0,0,0);
-
     ui->tipLabel3->hide();
     ui->tipLabel4->hide();
     ui->tipLabel6->hide();
-    ui->callContractFeeLabel->hide();
-    ui->callContractFeeLabel2->hide();
-    ui->callContractFeeLabel3->hide();
 
-
-    on_amountLineEdit_textChanged(ui->amountLineEdit->text());
-
-
-    getContactsList();
     getAssets();
-
-//    ui->sendBtn->setEnabled(false);
+    if(!assetType.isEmpty())
+    {
+        ui->assetComboBox->setCurrentText(assetType);
+    }
 
     inited = true;
-
 	
+    updateAmountSlots();
 }
 
 TransferPage::~TransferPage()
 {
-	
     delete ui;
-
-	
 }
 
 
@@ -122,9 +103,9 @@ void TransferPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 
     accountName = arg1;
     UBChain::getInstance()->mainFrame->setCurrentAccount(accountName);
-    ui->addressLabel->setText(UBChain::getInstance()->accountInfoMap.value(accountName).address);
 
-    on_amountLineEdit_textChanged(ui->amountLineEdit->text());
+    ui->amountLineEdit->clear();
+    updateAmountSlots();
 }
 
 
@@ -146,40 +127,17 @@ void TransferPage::on_sendBtn_clicked()
         return;
     }
 
-//    if( ui->feeLineEdit->text().toDouble() <= 0)
-//    {
-//        CommonDialog tipDialog(CommonDialog::OkOnly);
-//        tipDialog.setText( tr("The fee can not be 0"));
-//        tipDialog.pop();
-//        return;
-//    }
-
 
     QString remark = ui->memoTextEdit->toPlainText();
-
-//    QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
-//    QByteArray ba = utfCodec->fromUnicode(remark);
-//    if( ba.size() > 40)
-//    {
-//        CommonDialog tipDialog(CommonDialog::OkOnly);
-//        tipDialog.setText( tr("Message length more than 40 bytes!"));
-//        tipDialog.pop();
-//        return;
-//    }
 
 
     AddressType type = checkAddress(ui->sendtoLineEdit->text(),AccountAddress | MultiSigAddress);
     if( type == AccountAddress)
     {
-        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), ui->feeLineEdit->text(), remark, ui->assetComboBox->currentText());
+        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), "20", remark, ui->assetComboBox->currentText());
         bool yOrN = transferConfirmDialog.pop();
         if( yOrN)
         {
-            //        QString str = "wallet_set_transaction_fee " + ui->feeLineEdit->text() + '\n';
-            //        Hcash::getInstance()->write(str);
-            //        QString result = Hcash::getInstance()->read();
-
-
 
             UBChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
                                              toJsonFormat( "transfer_to_address",
@@ -193,68 +151,10 @@ qDebug() << toJsonFormat( "transfer_to_address",
         }
 
     }
-//    else if(type == MultiSigAddress)
-//    {
-//        if(ui->assetComboBox->currentIndex() != 0)
-//        {
-//            CommonDialog commonDialog(CommonDialog::OkOnly);
-//            commonDialog.setText(tr("You can only send %1s to multisig address currently.").arg(ASSET_NAME));
-//            commonDialog.pop();
-//        }
-//        else
-//        {
-//            TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), ui->feeLineEdit->text(), remark, ui->assetComboBox->currentText());
-//            bool yOrN = transferConfirmDialog.pop();
-//            if(yOrN)
-//            {
-//                AssetInfo info = UBChain::getInstance()->assetInfoMap.value(0);
-//                UBChain::getInstance()->postRPC( "id_wallet_multisig_deposit+" + accountName,
-//                                                 toJsonFormat( "wallet_multisig_deposit",
-//                                                               QJsonArray() << ui->amountLineEdit->text() << info.symbol << accountName
-//                                                               << ui->sendtoLineEdit->text() << remark ));
-//            }
-
-//        }
-
-
-//    }
-}
-
-
-
-void TransferPage::paintEvent(QPaintEvent *)
-{
-    QPainter painter(this);
-    painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
-    painter.drawRect(0,0,770,530);
 }
 
 void TransferPage::on_amountLineEdit_textChanged(const QString &arg1)
 {
-//    double amount = ui->amountLineEdit->text().toDouble();
-//    double fee = ui->feeLineEdit->text().toDouble();
-//    QString strBalanceTemp = UBChain::getInstance()->balanceMapValue(accountName).remove(",");
-//    strBalanceTemp = strBalanceTemp.remove(" " + QString(ASSET_NAME));
-//    double dBalance = strBalanceTemp.remove(",").toDouble();
-
-
-//    if( ui->assetComboBox->currentIndex() == 0)
-//    {
-//        if( amount + fee > dBalance )
-//        {
-//            ui->tipLabel3->show();
-//            ui->tipLabel3->setText( "UB" + tr(" not enough"));
-
-//            ui->sendBtn->setEnabled(false);
-//        }
-//        else
-//        {
-//            ui->tipLabel3->hide();
-
-//            ui->sendBtn->setEnabled(true);
-//        }
-//    }
 
 }
 
@@ -263,54 +163,41 @@ void TransferPage::refresh()
 
 }
 
-
-void TransferPage::contactSelected(QString remark, QString contact)
-{
-    ui->sendtoLineEdit->setText(contact);
-    on_sendtoLineEdit_textEdited(ui->sendtoLineEdit->text());
-}
-
-
-void TransferPage::getContactsList()
-{
-    contactUpdating = true;
-
-    if( !UBChain::getInstance()->contactsFile->open(QIODevice::ReadOnly))
-    {
-        qDebug() << "contact.dat not exist";
-    }
-    QString str = QByteArray::fromBase64( UBChain::getInstance()->contactsFile->readAll());
-    UBChain::getInstance()->contactsFile->close();
-
-    QStringList strList = str.split(";");
-    strList.removeLast();
-    int size = strList.size();
-
-    for( int i = 0; i < size; i++)
-    {
-        QString str2 = strList.at(i);
-        contactsList += str2.left( str2.indexOf("="));
-        if( str2.size() - 1 == str2.indexOf("="))    // 如果没有备注，text为地址  data为空
-        {
-            ui->contactComboBox->addItem( str2.left( str2.indexOf("=")),"");
-        }
-        else                                         // 如果有备注，text为备注  data为地址
-        {
-            ui->contactComboBox->addItem( str2.mid( str2.indexOf("=") + 1), str2.left( str2.indexOf("=")));
-        }
-    }
-
-    ui->contactComboBox->setCurrentIndex(-1);
-
-    contactUpdating = false;
-
-}
-
 void TransferPage::setAmountPrecision()
 {
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(ASSET_PRECISION));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
+}
+
+void TransferPage::InitStyle()
+{
+    setAutoFillBackground(true);
+    QPalette palette;
+    palette.setColor(QPalette::Window, QColor(248,249,253));
+    setPalette(palette);
+    setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;margin-left:2px;}"
+                  "Qline{color:#5474EB;background:#5474EB;}"
+                  "QComboBox{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:3px;}"
+                  "QPushButton{border:none;background-color:#5474EB;color:white;width:60px;height:20px;\
+                   border-radius:10px;font-size:12pt;}"
+                  "QPushButton::hover{background-color:#00D2FF;}"
+                  "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}"
+                  );
+    ui->sendBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                               "QToolButton:hover{background-color:#00D2FF;}");
+    ui->toolButton->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                                  "QToolButton:hover{background-color:#00D2FF;}");
+
+    ui->transferRecordBtn->setStyleSheet("QToolButton{background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                                         "QToolButton:hover{background-color:#5474EB;}");
+
+    ui->toolButton_chooseContact->setIconSize(QSize(14,14));
+    ui->toolButton_chooseContact->setIcon(QIcon(":/ui/wallet_ui/tans.png"));
+    ui->memoTextEdit->setStyleSheet("border:none;background:none;color:#5474EB;");
+
+    ui->toolButton_chooseContact->setStyleSheet("QToolButton{background-color:black; border:none;border-radius:7px;color: rgb(255, 255, 255);}"
+                                                "QToolButton:hover{background-color:#5474EB;}");
 }
 
 QString TransferPage::getCurrentAccount()
@@ -323,24 +210,10 @@ void TransferPage::setAddress(QString address)
     ui->sendtoLineEdit->setText(address);
 }
 
-void TransferPage::setContact(QString contactRemark)
-{
-    ui->contactComboBox->setCurrentText(contactRemark);
-}
 
 void TransferPage::getAssets()
 {
     assetUpdating = true;
-
-//    int index = ui->assetComboBox->currentIndex();
-//    ui->assetComboBox->clear();
-//    foreach (int key, UBChain::getInstance()->assetInfoMap.keys())
-//    {
-//        ui->assetComboBox->addItem( UBChain::getInstance()->assetInfoMap.value(key).symbol);
-//    }
-
-//    if( index < 0 )   index = 0;
-//    ui->assetComboBox->setCurrentIndex(index);
 
     QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
     foreach (QString key, keys)
@@ -353,12 +226,6 @@ void TransferPage::getAssets()
 }
 
 
-void TransferPage::updateTransactionFee()
-{
-    ui->feeLineEdit->setText( getBigNumberString(UBChain::getInstance()->transactionFee,ASSET_PRECISION));
-}
-
-
 void TransferPage::jsonDataUpdated(QString id)
 {
     if( id == "id-transfer_to_address-" + accountName)
@@ -367,47 +234,11 @@ void TransferPage::jsonDataUpdated(QString id)
 qDebug() << id << result;
         if( result.startsWith("\"result\":{"))             // 成功
         {
-//            QString recordId = result.mid( result.indexOf("\"entry_id\"") + 12, 40);
-
-//            mutexForPendingFile.lock();
-
-//            mutexForConfigFile.lock();
-//            UBChain::getInstance()->configFile->setValue("/recordId/" + recordId , 0);
-//            mutexForConfigFile.unlock();
-
-//            if( !UBChain::getInstance()->pendingFile->open(QIODevice::ReadWrite))
-//            {
-//                qDebug() << "pending.dat open fail";
-//                return;
-//            }
-
-//            QByteArray ba = QByteArray::fromBase64( UBChain::getInstance()->pendingFile->readAll());
-//            ba += QString( recordId + "," + accountName + "," + ui->sendtoLineEdit->text() + "," + ui->amountLineEdit->text() + "," + ui->feeLineEdit->text() + ";").toUtf8();
-//            ba = ba.toBase64();
-//            UBChain::getInstance()->pendingFile->resize(0);
-//            QTextStream ts(UBChain::getInstance()->pendingFile);
-//            ts << ba;
-
-//            UBChain::getInstance()->pendingFile->close();
-
-//            mutexForPendingFile.unlock();
 
             CommonDialog tipDialog(CommonDialog::OkOnly);
             tipDialog.setText( tr("Transaction has been sent,please wait for confirmation"));
             tipDialog.pop();
 
-//            if( !contactsList.contains( ui->sendtoLineEdit->text()))
-//            {
-//                CommonDialog commonDialog(CommonDialog::OkAndCancel);
-//                commonDialog.setText(tr("Add this address to contacts?"));
-//                if( commonDialog.pop())
-//                {
-//                    RemarkDialog remarkDialog( ui->sendtoLineEdit->text());
-//                    remarkDialog.pop();
-//                    getContactsList();
-//                }
-//            }
-//            emit showAccountPage(accountName);
         }
         else
         {
@@ -423,120 +254,6 @@ qDebug() << id << result;
     }
 
 
-
-//    if( id == "id_wallet_multisig_deposit+" + accountName)
-//    {
-//        QString result = UBChain::getInstance()->jsonDataValue(id);
-//        qDebug() << id << result;
-//        if( result.mid(0,18) == "\"result\":{\"index\":")             // 成功
-//        {
-//            QString recordId = result.mid( result.indexOf("\"entry_id\"") + 12, 40);
-
-//            mutexForPendingFile.lock();
-
-//            mutexForConfigFile.lock();
-//            UBChain::getInstance()->configFile->setValue("/recordId/" + recordId , 0);
-//            mutexForConfigFile.unlock();
-
-//            if( !UBChain::getInstance()->pendingFile->open(QIODevice::ReadWrite))
-//            {
-//                qDebug() << "pending.dat open fail";
-//                return;
-//            }
-
-//            QByteArray ba = QByteArray::fromBase64( UBChain::getInstance()->pendingFile->readAll());
-//            ba += QString( recordId + "," + accountName + "," + ui->sendtoLineEdit->text() + "," + ui->amountLineEdit->text() + "," + ui->feeLineEdit->text() + ";").toUtf8();
-//            ba = ba.toBase64();
-//            UBChain::getInstance()->pendingFile->resize(0);
-//            QTextStream ts(UBChain::getInstance()->pendingFile);
-//            ts << ba;
-
-//            UBChain::getInstance()->pendingFile->close();
-
-//            mutexForPendingFile.unlock();
-
-//            CommonDialog tipDialog(CommonDialog::OkOnly);
-//            tipDialog.setText( tr("Transaction has been sent,please wait for confirmation"));
-//            tipDialog.pop();
-
-//            if( !contactsList.contains( ui->sendtoLineEdit->text()))
-//            {
-//                CommonDialog commonDialog(CommonDialog::OkAndCancel);
-//                commonDialog.setText(tr("Add this address to contacts?"));
-//                if( commonDialog.pop())
-//                {
-//                    RemarkDialog remarkDialog( ui->sendtoLineEdit->text());
-//                    remarkDialog.pop();
-//                    getContactsList();
-//                }
-//            }
-//            emit showAccountPage(accountName);
-//        }
-//        else
-//        {
-//            int pos = result.indexOf("\"message\":\"") + 11;
-//            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-//            qDebug() << "errorMessage : " << errorMessage;
-
-//            if( errorMessage == "Assert Exception")
-//            {
-//                if( result.contains("\"format\":\"my->is_receive_account( from_account_name ): Invalid account name\","))
-//                {
-//                    CommonDialog tipDialog(CommonDialog::OkOnly);
-//                    tipDialog.setText( tr("This name has been registered, please rename this account!"));
-//                    tipDialog.pop();
-//                }
-//                else
-//                {
-//                    CommonDialog tipDialog(CommonDialog::OkOnly);
-//                    tipDialog.setText( tr("Wrong address!"));
-//                    tipDialog.pop();
-//                }
-
-
-//            }
-//            else if( errorMessage == "imessage size bigger than soft_max_lenth")
-//            {
-//                CommonDialog tipDialog(CommonDialog::OkOnly);
-//                tipDialog.setText( tr("Message too long!"));
-//                tipDialog.pop();
-
-//            }
-//            else if( errorMessage == "invalid transaction expiration")
-//            {
-//                CommonDialog tipDialog(CommonDialog::OkOnly);
-//                tipDialog.setText( tr("Failed: You need to wait for synchronization to complete"));
-//                tipDialog.pop();
-//            }
-//            else if( errorMessage == "insufficient funds")
-//            {
-//                CommonDialog tipDialog(CommonDialog::OkOnly);
-//                tipDialog.setText( tr("Not enough balance!"));
-//                tipDialog.pop();
-//            }
-//            else if( errorMessage == "Out of Range")
-//            {
-//                CommonDialog tipDialog(CommonDialog::OkOnly);
-//                tipDialog.setText( tr("Wrong address!"));
-//                tipDialog.pop();
-//            }
-//            else if( errorMessage == "Parse Error")
-//            {
-//                CommonDialog tipDialog(CommonDialog::OkOnly);
-//                tipDialog.setText( tr("Wrong address!"));
-//                tipDialog.pop();
-//            }
-//            else
-//            {
-//                CommonDialog tipDialog(CommonDialog::OkOnly);
-//                tipDialog.setText( tr("Transaction sent failed"));
-//                tipDialog.pop();
-//            }
-
-//        }
-//        return;
-
-//    }
 }
 
 
@@ -544,31 +261,10 @@ void TransferPage::on_assetComboBox_currentIndexChanged(int index)
 {
     if( assetUpdating)  return;
 
-
-    if( index == 0)
-    {
-        ui->memoLabel->show();
-        ui->memoTextEdit->show();
-        ui->callContractFeeLabel->hide();
-        ui->callContractFeeLabel2->hide();
-        ui->callContractFeeLabel3->hide();
-    }
-    else
-    {
-        ui->memoLabel->hide();
-        ui->memoTextEdit->hide();
-        ui->callContractFeeLabel->show();
-        ui->callContractFeeLabel2->show();
-        ui->callContractFeeLabel3->show();
-    }
-
-    ui->amountAssetLabel->setText(ui->assetComboBox->currentText());
-    ui->amountLineEdit->clear();
-
     setAmountPrecision();
 
-    on_amountLineEdit_textChanged(ui->amountLineEdit->text());
-
+    ui->amountLineEdit->clear();
+    updateAmountSlots();
 }
 
 void TransferPage::on_sendtoLineEdit_textEdited(const QString &arg1)
@@ -582,7 +278,6 @@ void TransferPage::on_sendtoLineEdit_textEdited(const QString &arg1)
     if( ui->sendtoLineEdit->text().isEmpty()  )
     {
         ui->tipLabel4->hide();
-        ui->callContractFeeLabel->clear();
         return;
     }
 
@@ -599,7 +294,6 @@ void TransferPage::on_sendtoLineEdit_textEdited(const QString &arg1)
         ui->tipLabel4->setText(tr("Sending coins to contract address is not supported currently."));
         ui->tipLabel4->setStyleSheet("color: rgb(255,34,76);");
         ui->tipLabel4->show();
-        ui->callContractFeeLabel->clear();
     }
     else if( type == MultiSigAddress)
     {
@@ -608,14 +302,12 @@ void TransferPage::on_sendtoLineEdit_textEdited(const QString &arg1)
             ui->tipLabel4->setText(tr("You can only send %1s to multisig address currently.").arg(ASSET_NAME));
             ui->tipLabel4->setStyleSheet("color: rgb(255,34,76);");
             ui->tipLabel4->show();
-            ui->callContractFeeLabel->clear();
         }
         else
         {
             ui->tipLabel4->setText(tr("Valid multisig address."));
             ui->tipLabel4->setStyleSheet("color: rgb(43,230,131);");
             ui->tipLabel4->show();
-            ui->callContractFeeLabel->clear();
         }
     }
     else
@@ -623,7 +315,6 @@ void TransferPage::on_sendtoLineEdit_textEdited(const QString &arg1)
         ui->tipLabel4->setText(tr("Invalid address."));
         ui->tipLabel4->setStyleSheet("color: rgb(255,34,76);");
         ui->tipLabel4->show();
-        ui->callContractFeeLabel->clear();
     }
 
 
@@ -644,32 +335,62 @@ void TransferPage::on_memoTextEdit_textChanged()
     }
 }
 
-void TransferPage::on_contactComboBox_currentIndexChanged(int index)
-{
-    if(contactUpdating)     return;
-
-    QString data = ui->contactComboBox->currentData().toString();
-    QString address;
-    QString remark;
-    if(data.isEmpty())
-    {
-        address = ui->contactComboBox->currentText();
-        remark = "";
-    }
-    else
-    {
-        address = ui->contactComboBox->currentData().toString();
-        remark = ui->contactComboBox->currentText();
-    }
-
-    ui->sendtoLineEdit->setText(address);
-    on_sendtoLineEdit_textEdited(ui->sendtoLineEdit->text());
-}
-
 void TransferPage::on_transferRecordBtn_clicked()
 {
     currentTopWidget = new TransferRecordWidget(this);
     currentTopWidget->move(0,0);
     currentTopWidget->show();
     static_cast<TransferRecordWidget*>(currentTopWidget)->showTransferRecord(UBChain::getInstance()->accountInfoMap.value(accountName).address);
+}
+
+void TransferPage::chooseContactSlots()
+{
+    ContactChooseWidget *wi = new ContactChooseWidget(this);
+    BlurWidget *blur = new BlurWidget(this);
+    connect(wi,&ContactChooseWidget::closeSignal,blur,&BlurWidget::close);
+    blur->show();
+    wi->move(QPoint(160,140));
+    wi->show();
+    wi->raise();
+}
+
+void TransferPage::updateAmountSlots()
+{//根据当前账户、资产类型，判断最大转账数量
+    QString name = ui->accountComboBox->currentText();
+    QString assetType = ui->assetComboBox->currentText();
+
+    QString assetID ;
+    int assetPrecision ;
+    foreach (AssetInfo in, UBChain::getInstance()->assetInfoMap) {
+        if(in.symbol == assetType){
+            assetID = in.id;
+            assetPrecision = in.precision;
+            break;
+        }
+    }
+
+    //获取数量
+    bool isFindAmmount = false;
+    QMapIterator<QString, AccountInfo> i(UBChain::getInstance()->accountInfoMap);
+      while (i.hasNext()) {
+          i.next();
+          if(isFindAmmount) break;
+          if(i.key() != name) continue;
+          AccountInfo info = i.value();
+          QMapIterator<QString,AssetAmount> am(info.assetAmountMap);
+          while(am.hasNext()){
+              am.next();
+              if(am.key() == assetID)
+              {
+                  ui->amountLineEdit->setPlaceholderText(tr("max muber:") + QString::number(
+                       am.value().amount/pow(10,assetPrecision)));
+                  isFindAmmount = true;
+                  break;
+              }
+          }
+      }
+     if(!isFindAmmount)
+     {
+         ui->amountLineEdit->setPlaceholderText(tr("max muber: 0"));
+     }
 }

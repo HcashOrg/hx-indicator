@@ -59,6 +59,14 @@ void PasswordConfirmWidget::jsonDataUpdated(QString id)
     }
 }
 
+void PasswordConfirmWidget::passwordReturnPressed()
+{
+    if(ui->toolButton_confirm->isEnabled())
+    {
+        ConfirmSlots();
+    }
+}
+
 void PasswordConfirmWidget::InitWidget()
 {
     InitStyle();
@@ -69,6 +77,7 @@ void PasswordConfirmWidget::InitWidget()
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&PasswordConfirmWidget::ConfirmSlots);
     connect(ui->toolButton_cancel,&QToolButton::clicked,this,&PasswordConfirmWidget::CancelSlots);
     connect(ui->lineEdit,&QLineEdit::textEdited,this,&PasswordConfirmWidget::passwordChangeSlots);
+    connect(ui->lineEdit,&QLineEdit::returnPressed,this,&PasswordConfirmWidget::passwordReturnPressed);
 
 }
 

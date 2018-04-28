@@ -145,7 +145,9 @@ SOURCES += main.cpp\
     transfer/transferpage.cpp \
     transfer/transferrecordwidget.cpp \
     withdrawpage/withdrawrecordwidget.cpp \
-    functionBar/FunctionExchangeWidget.cpp
+    functionBar/FunctionExchangeWidget.cpp \
+    transfer/ContactChooseWidget.cpp \
+    transfer/BlurWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -263,7 +265,9 @@ HEADERS  += firstlogin.h \
     transfer/transferrecordwidget.h \
     extra/transactiontype.h \
     withdrawpage/withdrawrecordwidget.h \
-    functionBar/FunctionExchangeWidget.h
+    functionBar/FunctionExchangeWidget.h \
+    transfer/ContactChooseWidget.h \
+    transfer/BlurWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -359,7 +363,9 @@ FORMS    += firstlogin.ui \
     transfer/transferpage.ui \
     transfer/transferrecordwidget.ui \
     withdrawpage/withdrawrecordwidget.ui \
-    functionBar/FunctionExchangeWidget.ui
+    functionBar/FunctionExchangeWidget.ui \
+    transfer/ContactChooseWidget.ui \
+    transfer/BlurWidget.ui
 
 win32{
     DISTFILES += logo.rc

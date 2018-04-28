@@ -316,9 +316,9 @@ void Frame::alreadyLogin()
     functionBar->resize(190,530);
     functionBar->move(0,50);
     functionBar->show();
-    connect(functionBar, SIGNAL(showMainPage()), this, SLOT( showMainPage()));
+    //connect(functionBar, SIGNAL(showMainPage()), this, SLOT( showMainPage()));
     //connect(functionBar, SIGNAL(showAccountPage()), this, SLOT( showAccountPage()));
-    connect(functionBar, SIGNAL(showTransferPage()), this, SLOT( showTransferPage()));
+    //connect(functionBar, SIGNAL(showTransferPage()), this, SLOT( showTransferPage()));
     //connect(functionBar, SIGNAL(showContactPage()), this, SLOT( showContactPage()));
     //connect(functionBar, SIGNAL(showMultiSigPage()), this, SLOT(showMultiSigPage()));
     connect(functionBar,SIGNAL(lock()),this,SLOT(showLockPage()));
@@ -344,7 +344,7 @@ void Frame::alreadyLogin()
     connect(mainPage,SIGNAL(openAccountPage(QString)),this,SLOT(showAccountPage(QString)));
     connect(mainPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     connect(mainPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
-    connect(mainPage,SIGNAL(showTransferPage(QString)),this,SLOT(showTransferPage(QString)));
+    connect(mainPage,SIGNAL(showTransferPage(QString,QString)),this,SLOT(showTransferPage(QString,QString)));
     connect(mainPage,SIGNAL(newAccount(QString)),this,SLOT(newAccount(QString)));
     connect(mainPage,&MainPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
 
@@ -431,14 +431,14 @@ void Frame::showMinerPage()
     currentPageNum = 7;
 }
 
-void Frame::showTransferPage(QString accountName)
+void Frame::showTransferPage(QString accountName,QString assetType)
 {
     closeCurrentPage();
     getAccountInfo();
     UBChain::getInstance()->mainFrame->setCurrentAccount(accountName);
-    transferPage = new TransferPage(accountName,centralWidget);
+    transferPage = new TransferPage(accountName,centralWidget,assetType);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
-    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
+//    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
     connect(transferPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     connect(transferPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(transferPage,SIGNAL(showAccountPage(QString)),this,SLOT(showAccountPage(QString)));
@@ -737,7 +737,7 @@ void Frame::showMainPage()
     connect(mainPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     connect(mainPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
 //    connect(mainPage,SIGNAL(refreshAccountInfo()),this,SLOT(refreshAccountInfo()));
-    connect(mainPage,SIGNAL(showTransferPage(QString)),this,SLOT(showTransferPage(QString)));
+    connect(mainPage,SIGNAL(showTransferPage(QString,QString)),this,SLOT(showTransferPage(QString,QString)));
     connect(mainPage,SIGNAL(newAccount(QString)),this,SLOT(newAccount(QString)));
     connect(mainPage,&MainPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
 }
@@ -749,7 +749,7 @@ void Frame::showTransferPage()
     getAccountInfo();
     transferPage = new TransferPage(UBChain::getInstance()->currentAccount,centralWidget);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
-    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
+//    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
     connect(transferPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     connect(transferPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(transferPage,SIGNAL(showAccountPage(QString)),this,SLOT(showAccountPage(QString)));
@@ -827,8 +827,7 @@ void Frame::showTransferPageWithAddress(QString address, QString remark)
     transferPage = new TransferPage(UBChain::getInstance()->currentAccount,centralWidget);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
     transferPage->setAddress(address);
-    transferPage->setContact(remark);
-    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
+//    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
     connect(transferPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     connect(transferPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(transferPage,SIGNAL(showAccountPage(QString)),this,SLOT(showAccountPage(QString)));
@@ -879,7 +878,7 @@ void Frame::setLanguage(QString language)
             break;
         case 3:
 //            transferPage->retranslator(language);
-            showTransferPage(currentAccount);
+            showTransferPage(currentAccount,"");
             break;
         case 4:
 //            contactPage->retranslator(language);

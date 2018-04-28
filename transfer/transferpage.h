@@ -14,21 +14,16 @@ class TransferPage : public QWidget
     Q_OBJECT
 
 public:
-    explicit TransferPage(QString name,QWidget *parent = 0);
+    explicit TransferPage(QString name="",QWidget *parent = 0,QString assetType = "");
     ~TransferPage();
 
     QString getCurrentAccount();
     void setAddress(QString);
-    void setContact(QString contactRemark);
 
     void getAssets();
 
-    void updateTransactionFee();
-
 private:
-    QStringList contactsList;
     bool contactUpdating;
-    void getContactsList();
 
 signals:
     void accountChanged(QString);
@@ -48,8 +43,6 @@ private slots:
 
     void on_amountLineEdit_textChanged(const QString &arg1);
 
-    void contactSelected(QString remark, QString contact);
-
     void jsonDataUpdated(QString id);
 
     void on_assetComboBox_currentIndexChanged(int index);
@@ -58,22 +51,23 @@ private slots:
 
     void on_memoTextEdit_textChanged();
 
-    void on_contactComboBox_currentIndexChanged(int index);
-
     void on_transferRecordBtn_clicked();
 
+    void chooseContactSlots();
+
+    void updateAmountSlots();
 private:
     Ui::TransferPage *ui;
     QString accountName;
+    QString assetType;
     QWidget* currentTopWidget;  // 保存当前顶层窗口
 
     bool inited;
     bool assetUpdating;
 
-    void paintEvent(QPaintEvent*);
-//    void addContact(QString,QString);
-
     void setAmountPrecision();
+private:
+    void InitStyle();
 };
 
 #endif // TRANSFERPAGE_H
