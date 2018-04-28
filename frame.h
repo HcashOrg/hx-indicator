@@ -84,8 +84,8 @@ private slots:
     void showMainPage();
 
     void showTransferPage();
-    void showTransferPage(QString);
-    void showTransferPageWithAddress(QString, QString remark = "");
+    void showTransferPage(QString,QString);
+    void showTransferPageWithAddress(QString, QString remark = "");//对方地址
 
     void showContactPage();
     void showMultiSigPage();

@@ -49,7 +49,7 @@ void ContactSearchWidget::InitWidget()
 
     //防止文本框输入内容位于按钮之下
     QMargins margins = ui->lineEdit->textMargins();
-    ui->lineEdit->setTextMargins(margins.left(), margins.top(), pSearchButton->width(), margins.bottom());
+    ui->lineEdit->setTextMargins(10+ pSearchButton->width(), margins.top(),margins.right() , margins.bottom());
     ui->lineEdit->setPlaceholderText(tr("input name or address"));
 
     QHBoxLayout *pSearchLayout = new QHBoxLayout();
@@ -59,7 +59,6 @@ void ContactSearchWidget::InitWidget()
     pSearchLayout->setDirection(QBoxLayout::RightToLeft);
     pSearchLayout->setContentsMargins(0, 0, 0, 0);
     ui->lineEdit->setLayout(pSearchLayout);
-    ui->lineEdit->setTextMargins(25,0,0,0);
 
     connect(pSearchButton, &QPushButton::clicked, this, &ContactSearchWidget::StartSearchSlots);
 

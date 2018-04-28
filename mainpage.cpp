@@ -178,7 +178,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
     if(column == 2)
     {
         emit backBtnVisible(true);
-        emit showTransferPage( ui->accountTableWidget->item(row,0)->text());
+        emit showTransferPage( ui->accountComboBox->currentText(),ui->accountTableWidget->item(row,0)->text());
         return;
     }
 

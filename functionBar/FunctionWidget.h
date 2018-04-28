@@ -22,12 +22,12 @@ public:
     void retranslator();
 signals:
     //兼容以前的信号---将来需要删除
-    void showMainPage();
+    //void showMainPage();
     //void showAccountPage();
-    void showSmartContractPage();
-    void showTransferPage();
+    //void showSmartContractPage();
+    //void showTransferPage();
     //void showContactPage();
-    void showFeedPage();
+    //void showFeedPage();
     //void showMultiSigPage();
 
     void lock();

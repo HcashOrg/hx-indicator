@@ -54,5 +54,11 @@ QJsonObject CapitalTransferDataUtil::parseTradeDetail(const QString &jsonString)
 
 QString CapitalTransferDataUtil::parseTransaction(const QString &jsonString)
 {
-    return "";
+    QJsonParseError json_error;
+    QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonString.toLatin1(),&json_error);
+    if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return "";
+    QJsonObject jsonObject = parse_doucment.object();
+    qDebug()<<jsonString;
+
+    return jsonObject.value("result").toObject().value("hex").toString();
 }

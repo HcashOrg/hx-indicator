@@ -112,5 +112,6 @@
         <file>wallet_ui/tradeConfirm.png</file>
         <file>wallet_ui/addContact.png</file>
         <file>wallet_ui/contactPic.png</file>
+        <file>wallet_ui/tans.png</file>
     </qresource>
 </RCC>

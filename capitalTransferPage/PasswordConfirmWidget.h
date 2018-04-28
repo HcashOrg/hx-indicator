@@ -28,8 +28,11 @@ private slots:
     void passwordChangeSlots(const QString &address);
 
     void jsonDataUpdated(QString id);
+
+    void passwordReturnPressed();
 protected:
     void paintEvent(QPaintEvent *event);
+
 private:
     void InitWidget();
     void InitStyle();

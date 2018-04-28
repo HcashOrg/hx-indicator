@@ -42,7 +42,7 @@ signals:
     void hideShadowWidget();
     void showApplyDelegatePage(QString);
     void refreshAccountInfo();
-    void showTransferPage(QString);
+    void showTransferPage(QString,QString);//账户名，资产类型
     void newAccount(QString);
 
     void backBtnVisible(bool isShow);
