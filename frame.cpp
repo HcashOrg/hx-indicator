@@ -992,7 +992,7 @@ void Frame::showMyExchangeContractPage()
     myExchangeContractPage->show();
     currentPageNum = 5;
 
-    RestoreRightPart();
+    //RestoreRightPart();不用自己调用，functionbar已连接该槽
 }
 
 void Frame::showMultiSigTransactionPage(QString _multiSigAddress)
