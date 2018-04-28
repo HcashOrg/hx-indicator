@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FunctionAdvanceWidget</class>
- <widget class="QWidget" name="FunctionAdvanceWidget">
+ <class>FunctionExchangeWidget</class>
+ <widget class="QWidget" name="FunctionExchangeWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -10,15 +10,10 @@
     <height>530</height>
    </rect>
   </property>
-  <property name="font">
-   <font>
-    <pointsize>12</pointsize>
-   </font>
-  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="label_normal">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -29,17 +24,25 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(248, 249, 253);
+font: 16px &quot;微软雅黑&quot;;</string>
+   </property>
    <property name="text">
-    <string>高级    </string>
+    <string>挂单中心</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QToolButton" name="toolButton_multiSig">
+  <widget class="QToolButton" name="onchainOrderBtn">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -48,45 +51,31 @@
      <height>30</height>
     </rect>
    </property>
-   <property name="minimumSize">
-    <size>
-     <width>120</width>
-     <height>30</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>120</width>
-     <height>30</height>
-    </size>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
-    <string>多重签名    </string>
+    <string>  链上挂单</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="toolButton_poundage">
+  <widget class="QToolButton" name="myOrderBtn">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>90</y>
      <width>120</width>
-     <height>30</height>
+     <height>32</height>
     </rect>
    </property>
-   <property name="minimumSize">
-    <size>
-     <width>120</width>
-     <height>30</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>120</width>
-     <height>30</height>
-    </size>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
-    <string>手续费承兑单</string>
+    <string>  我的挂单</string>
    </property>
   </widget>
  </widget>

@@ -29,13 +29,11 @@ public:
 private slots:
     void jsonDataUpdated(QString id);
 
-    void ShowRecordSlots();
     void on_depositRecordBtn_clicked();
 
 private:
     void GenerateAddress();
 
-    void QueryDepositRecord();
 private:
     void InitWidget();
     void InitStyle();

@@ -5,6 +5,7 @@
 
 #include "functionBar/FunctionAccountWidget.h"
 #include "functionBar/FunctionAdvanceWidget.h"
+#include "functionBar/FunctionExchangeWidget.h"
 
 #include "setdialog.h"
 #include "consoledialog.h"
@@ -16,6 +17,7 @@ public:
     FunctionWidgetPrivate()
         :accountBar(new FunctionAccountWidget())
         ,advanceBar(new FunctionAdvanceWidget())
+        ,exchangeBar(new FunctionExchangeWidget())
         ,contextMenu(new QMenu())
     {
 
@@ -23,6 +25,7 @@ public:
 public:
     FunctionAccountWidget *accountBar;
     FunctionAdvanceWidget *advanceBar;
+    FunctionExchangeWidget *exchangeBar;
     QMenu *contextMenu;
 };
 
@@ -86,10 +89,22 @@ void FunctionWidget::ShowAdvanceWidgetSlots()
     updateCheckState(2);
 }
 
+void FunctionWidget::ShowExchangeWidgetSlots()
+{
+    ui->stackedWidget->setCurrentWidget(_p->exchangeBar);
+
+    emit showExchangeSignal();
+
+    ui->stackedWidget->setVisible(true);
+    emit RestoreSignal();
+
+    updateCheckState(3);
+}
+
 void FunctionWidget::ShowMoreWidgetSlots()
 {
     _p->contextMenu->exec(mapToGlobal(QPoint(70,height()-136)));
-    updateCheckState(3);
+    updateCheckState(4);
 }
 
 void FunctionWidget::ShowSettingWidgetSlots()
@@ -128,7 +143,8 @@ void FunctionWidget::updateCheckState(int buttonNumber)
     ui->toolButton_account->setChecked(0 == buttonNumber);
     ui->toolButton_contact->setChecked(1 == buttonNumber);
     ui->toolButton_advanced->setChecked(2 == buttonNumber);
-    ui->toolButton_more->setChecked(3 == buttonNumber);
+    ui->toolButton_exchange->setChecked(3 == buttonNumber);
+    ui->toolButton_more->setChecked(4 == buttonNumber);
 }
 
 void FunctionWidget::InitWidget()
@@ -138,10 +154,12 @@ void FunctionWidget::InitWidget()
     ui->toolButton_contact->setCheckable(true);
     ui->toolButton_account->setCheckable(true);
     ui->toolButton_advanced->setCheckable(true);
+    ui->toolButton_exchange->setCheckable(true);
     ui->toolButton_more->setCheckable(true);
 
     ui->stackedWidget->addWidget(_p->accountBar);
     ui->stackedWidget->addWidget(_p->advanceBar);
+    ui->stackedWidget->addWidget(_p->exchangeBar);
 
     //设置更多按钮
     QAction* actionSet = _p->contextMenu->addAction("Setting");
@@ -160,6 +178,7 @@ void FunctionWidget::InitWidget()
     connect(ui->toolButton_contact,&QToolButton::clicked,this,&FunctionWidget::ShowContactWidgetSlots);
     connect(ui->toolButton_account,&QToolButton::clicked,this,&FunctionWidget::ShowAccountWidgetSlots);
     connect(ui->toolButton_advanced,&QToolButton::clicked,this,&FunctionWidget::ShowAdvanceWidgetSlots);
+    connect(ui->toolButton_exchange,&QToolButton::clicked,this,&FunctionWidget::ShowExchangeWidgetSlots);
     connect(ui->toolButton_more,&QToolButton::clicked,this,&FunctionWidget::ShowMoreWidgetSlots);
 
     connect(actionLock,&QAction::triggered,this,&FunctionWidget::lock);
@@ -173,7 +192,10 @@ void FunctionWidget::InitWidget()
 
     connect(_p->advanceBar,&FunctionAdvanceWidget::showPoundageSignal,this,&FunctionWidget::showPoundageSignal);
     connect(_p->advanceBar,&FunctionAdvanceWidget::showMultiSigSignal,this,&FunctionWidget::showMultiSigSignal);
-    connect(_p->advanceBar,&FunctionAdvanceWidget::showMyExchangeContractSignal,this,&FunctionWidget::showMyExchangeContractSignal);
+
+    connect(_p->exchangeBar,&FunctionExchangeWidget::showOnchainOrderSignal,this,&FunctionWidget::showOnchainOrderSignal);
+    connect(_p->exchangeBar,&FunctionExchangeWidget::showMyOrderSignal,this,&FunctionWidget::showMyOrderSignal);
+
 }
 
 void FunctionWidget::InitStyle()
@@ -195,29 +217,17 @@ void FunctionWidget::InitStyle()
                                    "QMenu::item {border:none;background-color:rgb(238,241,253);color:black;border-bottom:1px solid #DBDBDB;}"
                                    "QMenu::item::selected{border:none;background-color: #829DFF;}"
                                    "QMenu::indicator{margin:0px 4px;}");
-                  /*
-                      QToolButton#toolButton_account{border-image:url(:/ui/wallet_ui/accountBtn_unselected.png);}\
-                      QToolButton#toolButton_account:checked{border-image:url(:/ui/wallet_ui/accountBtn.png);}\*/
 
-    //setStyleSheet("QToolButton#toolButton_account{border-image:/functionBar/账户.png}");
-
-    //ui->toolButton_contact->setStyleSheet("background:transparent;border:none;");
-    //ui->toolButton_account->setStyleSheet("background:transparent;border:none;");
-    //ui->toolButton_advanced->setStyleSheet("background:transparent;border:none;");
-    //ui->toolButton_more->setStyleSheet("background:transparent;border:none;");
-
-    //ui->toolButton_contact->setStyleSheet("QToolButton:hover{background:transparent;border:none;border-image:url(:/ui/wallet_ui/contactBtn.png);}");
     ui->toolButton_account->setIconSize(QSize(24,24));
     ui->toolButton_advanced->setIconSize(QSize(24,24));
     ui->toolButton_contact->setIconSize(QSize(24,24));
+    ui->toolButton_exchange->setIconSize(QSize(24,24));
     ui->toolButton_more->setIconSize(QSize(24,24));
 
     ui->toolButton_account->setIcon(QIcon(":/functionBar/account.png"));
-
     ui->toolButton_advanced->setIcon(QIcon(":/functionBar/advance.png"));
-
     ui->toolButton_contact->setIcon(QIcon(":/functionBar/contact.png"));
-
+    ui->toolButton_exchange->setIcon(QIcon(":/functionBar/exchange.png"));
     ui->toolButton_more->setIcon(QIcon(":/functionBar/more.png"));
 
 }

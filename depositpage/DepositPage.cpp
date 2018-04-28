@@ -104,10 +104,10 @@ void DepositPage::jsonDataUpdated(QString id)
     }
 }
 
-void DepositPage::ShowRecordSlots()
+void DepositPage::on_depositRecordBtn_clicked()
 {
-    QueryDepositRecord();
     ui->stackedWidget->setCurrentWidget(_p->recordWidget);
+    _p->recordWidget->showDepositRecord(_p->tunnle_address);
 }
 
 void DepositPage::GenerateAddress()
@@ -118,16 +118,12 @@ void DepositPage::GenerateAddress()
                                     );
 }
 
-void DepositPage::QueryDepositRecord()
-{
-
-}
-
 void DepositPage::InitWidget()
 {
     InitStyle();
 
     ui->stackedWidget->addWidget(_p->qrcodeWidget);
+    ui->stackedWidget->addWidget(_p->recordWidget);
     ui->stackedWidget->setCurrentWidget(_p->qrcodeWidget);
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &DepositPage::jsonDataUpdated);
 
@@ -161,9 +157,4 @@ void DepositPage::InitStyle()
                                   border:none;\
                                   background-color:#00D2FF;\}"
                                   "QToolButton::hover{background-color:#4861DC;}");
-}
-
-void DepositPage::on_depositRecordBtn_clicked()
-{
-
 }

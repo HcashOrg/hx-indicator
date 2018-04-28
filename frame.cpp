@@ -331,7 +331,8 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showPoundageSignal,this,&Frame::showPoundagePage);
     connect(functionBar,&FunctionWidget::ShrinkSignal,this,&Frame::EnlargeRightPart);
     connect(functionBar,&FunctionWidget::RestoreSignal,this,&Frame::RestoreRightPart);
-    connect(functionBar,&FunctionWidget::showMyExchangeContractSignal,this,&Frame::showMyExchangeContractPage);
+    connect(functionBar,&FunctionWidget::showOnchainOrderSignal,this,&Frame::showMyExchangeContractPage);
+    connect(functionBar,&FunctionWidget::showMyOrderSignal,this,&Frame::showMyExchangeContractPage);
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
@@ -979,6 +980,11 @@ void Frame::showPoundagePage()
     poundage->show();
 }
 
+void Frame::showOnchainOrderPage()
+{
+
+}
+
 void Frame::showMyExchangeContractPage()
 {
     closeCurrentPage();
@@ -1353,6 +1359,15 @@ void Frame::jsonDataUpdated(QString id)
                 {
                     UBChain::getInstance()->transactionDB.addAccountTransactionId(toAddress, typeId);
                 }
+            }
+                break;
+            case TRANSACTION_TYPE_DEPOSIT:
+            {
+                // 充值交易
+                QJsonObject crossChainTrxObject = operationObject.take("cross_chain_trx").toObject();
+                QString fromTunnelAddress = crossChainTrxObject.take("from_account").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(fromTunnelAddress, typeId);
             }
                 break;
             case TRANSACTION_TYPE_WITHDRAW:

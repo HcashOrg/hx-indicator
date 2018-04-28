@@ -168,15 +168,15 @@ void MainPage::on_importAccountBtn_clicked()
 
 void MainPage::on_accountTableWidget_cellClicked(int row, int column)
 {
-    if(column == 0 || column == 1)
-    {
-        emit backBtnVisible(true);
-        emit openAccountPage( ui->accountTableWidget->item(row,0)->text());
-        return;
-    }
+//    if(column == 0 || column == 1)
+//    {
+//        emit backBtnVisible(true);
+//        emit openAccountPage( ui->accountTableWidget->item(row,0)->text());
+//        return;
+//    }
 
     if(column == 2)
-    {
+    {//转账界面
         emit backBtnVisible(true);
         emit showTransferPage( ui->accountTableWidget->item(row,0)->text());
         return;
@@ -277,6 +277,8 @@ void MainPage::init()
      }
 
      inited = true;
+
+     refresh();
 }
 
 

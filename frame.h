@@ -90,6 +90,7 @@ private slots:
     void showContactPage();
     void showMultiSigPage();
     void showPoundagePage();//显示手续费承税单--朱正天
+    void showOnchainOrderPage();
     void showMyExchangeContractPage();
     void showMultiSigTransactionPage(QString _multiSigAddress);
     void showWaittingForSyncWidget();

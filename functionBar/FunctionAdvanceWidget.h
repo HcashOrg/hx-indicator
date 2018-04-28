@@ -17,11 +17,9 @@ public:
 signals:
     void showPoundageSignal();
     void showMultiSigSignal();
-    void showMyExchangeContractSignal();
 private slots:
     void PoundageShowSlots();
     void MultiSigShowSlots();
-    void MyExchangeContractSlots();
 private:
     void InitWidget();
     void InitStyle();
