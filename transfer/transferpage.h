@@ -9,6 +9,7 @@ class TransferPage;
 
 #define MODULE_TRAHSFER_PAGE "TRAHSFER_PAGE"
 
+class FeeChooseWidget;
 class TransferPage : public QWidget
 {
     Q_OBJECT
@@ -58,14 +59,15 @@ private slots:
 
     void updateAmountSlots();
 
-    void checkStateChangedSlots(int state);
+    //void checkStateChangedSlots(int state);
 private:
     Ui::TransferPage *ui;
     QString accountName;
     QString assetType;
     QWidget* currentTopWidget;  // 保存当前顶层窗口
 
-    QString feeID;//手续费承兑单id
+    FeeChooseWidget *feeWidget;
+    //QString feeID;//手续费承兑单id
     bool inited;
     bool assetUpdating;
 
@@ -73,7 +75,7 @@ private:
 private:
     void InitStyle();
 
-    void updatePoundage();//刷新手续费相关
+   // void updatePoundage();//刷新手续费相关
 };
 
 #endif // TRANSFERPAGE_H

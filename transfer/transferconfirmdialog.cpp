@@ -13,6 +13,7 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
     amount(amount),
     fee(fee),
     remark(remark),
+    feeType(assetSymbol),
     yesOrNo(false),
     ui(new Ui::TransferConfirmDialog)
 {
@@ -61,7 +62,7 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
 
     ui->addressLabel->setText( address);
     ui->amountLabel->setText( "<body><B>" + amount + "</B> " + assetSymbol + "</body>");
-    ui->feeLabel->setText( "<body>" + fee + " " + ASSET_NAME +"</body>");
+    ui->feeLabel->setText( "<body>" + fee + " " + feeType +"</body>");
     ui->remarkLabel->setText( remark.isEmpty()?tr("none"):remark);
 
 

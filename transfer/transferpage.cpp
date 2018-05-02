@@ -19,6 +19,7 @@
 #include "BlurWidget.h"
 
 #include "poundage/PoundageDataUtil.h"
+#include "FeeChooseWidget.h"
 
 TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     QWidget(parent),
@@ -28,12 +29,14 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     assetUpdating(false),
     contactUpdating(false),
     currentTopWidget(NULL),
-    ui(new Ui::TransferPage)
+    ui(new Ui::TransferPage),
+    feeWidget(new FeeChooseWidget(20,UBChain::getInstance()->configFile->value("/settings/feeType").toString()))
 {
 	
 
     ui->setupUi(this);
-
+    ui->stackedWidget->addWidget(feeWidget);
+    ui->stackedWidget->setCurrentWidget(feeWidget);
     InitStyle();
 
     //初始化账户comboBox
@@ -68,7 +71,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     connect(ui->toolButton_chooseContact,&QToolButton::clicked,this,&TransferPage::chooseContactSlots);
-    connect(ui->checkBox,&QCheckBox::stateChanged,this,&TransferPage::checkStateChangedSlots);
+    //connect(ui->checkBox,&QCheckBox::stateChanged,this,&TransferPage::checkStateChangedSlots);
 
     ui->amountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
     setAmountPrecision();
@@ -92,7 +95,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 	
     updateAmountSlots();
 
-    updatePoundage();
+    //updatePoundage();
 }
 
 TransferPage::~TransferPage()
@@ -139,17 +142,19 @@ void TransferPage::on_sendBtn_clicked()
     AddressType type = checkAddress(ui->sendtoLineEdit->text(),AccountAddress | MultiSigAddress);
     if( type == AccountAddress)
     {
-        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), "20", remark, ui->assetComboBox->currentText());
+        qDebug()<<feeWidget->GetFeeNumber();
+        qDebug()<<feeWidget->GetFeeType();
+        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), feeWidget->GetFeeNumber(), remark, feeWidget->GetFeeType());
         bool yOrN = transferConfirmDialog.pop();
         if( yOrN)
         {
-            if(!feeID.isEmpty() && ui->checkBox->checkState() == Qt::Checked)
+            if(feeWidget && !feeWidget->GetFeeID().isEmpty())
             {
                 UBChain::getInstance()->postRPC( "id-set_guarantee_id",
                                                  toJsonFormat( "set_guarantee_id",
-                                                               QJsonArray() << feeID ));
+                                                               QJsonArray() << feeWidget->GetFeeID() ));
                 qDebug()<<"id-set_guarantee_id"<<toJsonFormat( "set_guarantee_id",
-                                                               QJsonArray() << feeID );
+                                                               QJsonArray() << feeWidget->GetFeeID() );
             }
 
             UBChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
@@ -199,8 +204,8 @@ void TransferPage::InitStyle()
                   );
     ui->sendBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                                "QToolButton:hover{background-color:#00D2FF;}");
-    ui->toolButton->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                                  "QToolButton:hover{background-color:#00D2FF;}");
+//    ui->toolButton->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+//                                  "QToolButton:hover{background-color:#00D2FF;}");
 
     ui->transferRecordBtn->setStyleSheet("QToolButton{background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                                          "QToolButton:hover{background-color:#5474EB;}");
@@ -213,26 +218,26 @@ void TransferPage::InitStyle()
                                                 "QToolButton:hover{background-color:#5474EB;}");
 }
 
-void TransferPage::updatePoundage()
-{//查询配置文件中的手续费设置
-    ui->checkBox->setChecked(false);
-    ui->checkBox->setEnabled(true);
-    ui->toolButton->setEnabled(false);
+//void TransferPage::updatePoundage()
+//{//查询配置文件中的手续费设置
+//    ui->checkBox->setChecked(false);
+//    ui->checkBox->setEnabled(true);
+//    ui->toolButton->setEnabled(false);
 
-    feeID = UBChain::getInstance()->configFile->value("/settings/feeOrderID").toString();
-    if(feeID.isEmpty())
-    {
-        ui->toolButton->setText(tr("poundage doesn't exist!"));
-    }
-    else
-    {
-        //查询承兑单
-        UBChain::getInstance()->postRPC( "id-get_guarantee_order",
-                                         toJsonFormat( "get_guarantee_order",
-                                                       QJsonArray() << feeID));
+//    feeID = UBChain::getInstance()->configFile->value("/settings/feeOrderID").toString();
+//    if(feeID.isEmpty())
+//    {
+//        ui->toolButton->setText(tr("poundage doesn't exist!"));
+//    }
+//    else
+//    {
+//        //查询承兑单
+//        UBChain::getInstance()->postRPC( "id-get_guarantee_order",
+//                                         toJsonFormat( "get_guarantee_order",
+//                                                       QJsonArray() << feeID));
 
-    }
-}
+//    }
+//}
 
 QString TransferPage::getCurrentAccount()
 {
@@ -286,54 +291,54 @@ qDebug() << id << result;
         }
         return;
     }
-    else if("id-get_guarantee_order" == id)
-    {//查询承兑单id是否还有余额
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+//    else if("id-get_guarantee_order" == id)
+//    {//查询承兑单id是否还有余额
+//        QString result = UBChain::getInstance()->jsonDataValue(id);
 
-        if(result.isEmpty() || result.startsWith("\"error"))
-        {
-            feeID.clear();
-            ui->toolButton->setText(tr("poundage doesn't exist!"));
-            return;
-        }
-        result.prepend("{");
-        result.append("}");
+//        if(result.isEmpty() || result.startsWith("\"error"))
+//        {
+//            feeID.clear();
+//            ui->toolButton->setText(tr("poundage doesn't exist!"));
+//            return;
+//        }
+//        result.prepend("{");
+//        result.append("}");
 
-        QJsonParseError json_error;
-        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1(),&json_error);
-        if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject())
-        {
-            feeID.clear();
-            ui->toolButton->setText(tr("poundage doesn't exist!"));
-            return;
-        }
-        QJsonObject jsonObject = parse_doucment.object().value("result").toObject();
-        std::shared_ptr<PoundageUnit> unit = std::make_shared<PoundageUnit>();
-        if(PoundageDataUtil::ParseJsonObjToUnit(jsonObject,unit))
-        {
-            if(unit->poundageFinished)
-            {
-                feeID.clear();
-                ui->toolButton->setText(tr("poundage doesn't exist!"));
-            }
-            else
-            {
-                ui->checkBox->setChecked(true);
-                double exchangeRate = unit->sourceCoinNumber/unit->targetCoinNumber;
-                ui->toolButton->setText(ui->toolButton->text().replace("@",QString::number(exchangeRate))
-                                        .replace("#",unit->chainType).replace("$",QString::number(unit->calSourceLeftNumber())));
-            }
-        }
+//        QJsonParseError json_error;
+//        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1(),&json_error);
+//        if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject())
+//        {
+//            feeID.clear();
+//            ui->toolButton->setText(tr("poundage doesn't exist!"));
+//            return;
+//        }
+//        QJsonObject jsonObject = parse_doucment.object().value("result").toObject();
+//        std::shared_ptr<PoundageUnit> unit = std::make_shared<PoundageUnit>();
+//        if(PoundageDataUtil::ParseJsonObjToUnit(jsonObject,unit))
+//        {
+//            if(unit->poundageFinished)
+//            {
+//                feeID.clear();
+//                ui->toolButton->setText(tr("poundage doesn't exist!"));
+//            }
+//            else
+//            {
+//                ui->checkBox->setChecked(true);
+//                double exchangeRate = unit->sourceCoinNumber/unit->targetCoinNumber;
+//                ui->toolButton->setText(ui->toolButton->text().replace("@",QString::number(exchangeRate))
+//                                        .replace("#",unit->chainType).replace("$",QString::number(unit->calSourceLeftNumber())));
+//            }
+//        }
 
-        qDebug()<<"承兑单余额---"<<result;
+//        qDebug()<<"承兑单余额---"<<result;
 
-    }
-    else if("id-set_guarantee_id" == id)
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+//    }
+//    else if("id-set_guarantee_id" == id)
+//    {
+//        QString result = UBChain::getInstance()->jsonDataValue(id);
 
-        qDebug()<<"设置承兑单id---"<<result;
-    }
+//        qDebug()<<"设置承兑单id---"<<result;
+//    }
 
 }
 
@@ -483,19 +488,19 @@ void TransferPage::updateAmountSlots()
      }
 }
 
-void TransferPage::checkStateChangedSlots(int state)
-{
-    if(state == Qt::Checked)
-    {
-        ui->toolButton->setEnabled(true);
+//void TransferPage::checkStateChangedSlots(int state)
+//{
+//    if(state == Qt::Checked)
+//    {
+//        ui->toolButton->setEnabled(true);
 
-//        UBChain::getInstance()->postRPC( "id-set_guarantee_id",
-//                                         toJsonFormat( "set_guarantee_id",
-//                                                       QJsonArray() << "0" ));
+////        UBChain::getInstance()->postRPC( "id-set_guarantee_id",
+////                                         toJsonFormat( "set_guarantee_id",
+////                                                       QJsonArray() << "0" ));
 
-    }
-    else
-    {
-        ui->toolButton->setEnabled(false);
-    }
-}
+//    }
+//    else
+//    {
+//        ui->toolButton->setEnabled(false);
+//    }
+//}

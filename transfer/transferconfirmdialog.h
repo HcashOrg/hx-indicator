@@ -39,6 +39,7 @@ private:
     QString address;
     QString amount;
     QString fee;
+    QString feeType;
     QString remark;
     bool yesOrNo;
 

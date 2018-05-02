@@ -167,28 +167,6 @@
     <string>最多转账金额：1</string>
    </property>
   </widget>
-  <widget class="QLabel" name="feeLabel">
-   <property name="geometry">
-    <rect>
-     <x>460</x>
-     <y>105</y>
-     <width>60</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>手续费</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="tipLabel3">
    <property name="geometry">
     <rect>
@@ -439,37 +417,6 @@ p, li { white-space: pre-wrap; }
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>465</x>
-     <y>134</y>
-     <width>61</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>20  LNK</string>
-   </property>
-  </widget>
-  <widget class="Line" name="line_4">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>150</y>
-     <width>211</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
   <widget class="Line" name="line_5">
    <property name="geometry">
     <rect>
@@ -481,50 +428,6 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox">
-   <property name="geometry">
-    <rect>
-     <x>460</x>
-     <y>180</y>
-     <width>121</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>是否使用承兑单</string>
-   </property>
-  </widget>
-  <widget class="Line" name="line_6">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>233</y>
-     <width>211</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="toolButton">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>208</y>
-     <width>211</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>汇率:@   币种:#   余额:$</string>
    </property>
   </widget>
   <widget class="Line" name="line_7">
@@ -540,6 +443,16 @@ p, li { white-space: pre-wrap; }
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>103</y>
+     <width>240</width>
+     <height>140</height>
+    </rect>
+   </property>
+  </widget>
   <zorder>memoTextEdit</zorder>
   <zorder>changeAccountLabel</zorder>
   <zorder>memoLabel</zorder>
@@ -547,7 +460,6 @@ p, li { white-space: pre-wrap; }
   <zorder>amountLabel</zorder>
   <zorder>sendBtn</zorder>
   <zorder>amountLineEdit</zorder>
-  <zorder>feeLabel</zorder>
   <zorder>tipLabel3</zorder>
   <zorder>tipLabel4</zorder>
   <zorder>delegateLabel2</zorder>
@@ -561,13 +473,9 @@ p, li { white-space: pre-wrap; }
   <zorder>line</zorder>
   <zorder>line_2</zorder>
   <zorder>line_3</zorder>
-  <zorder>label_2</zorder>
-  <zorder>line_4</zorder>
   <zorder>line_5</zorder>
-  <zorder>checkBox</zorder>
-  <zorder>line_6</zorder>
-  <zorder>toolButton</zorder>
   <zorder>line_7</zorder>
+  <zorder>stackedWidget</zorder>
  </widget>
  <tabstops>
   <tabstop>amountLineEdit</tabstop>
