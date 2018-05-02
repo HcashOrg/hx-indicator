@@ -2,7 +2,6 @@
 #define SELECTWALLETPATHWIDGET_H
 
 #include <QWidget>
-#include <QtNetwork>
 #include <QDomDocument>
 
 namespace Ui {
@@ -24,12 +23,6 @@ private slots:
 
     void on_closeBtn_clicked();
 
-    void httpFinished();
-
-    void getUpdateExeFinished();
-
-    void getUpdateExeReadyRead();
-
 signals:
     void enter();
     void newOrImportWallet();
@@ -37,15 +30,6 @@ signals:
 
 private:
     Ui::SelectWalletPathWidget *ui;
-    QNetworkReply *reply;
-    QDomDocument localXml;
-    QDomDocument serverXml;
-    QNetworkAccessManager qnam;
-    bool updateOrNot;
-    QFile* updateExe;
-
-    void getUpdateXml();
-    QString getXmlElementText(QDomDocument& doc, QString name);
 
     void paintEvent(QPaintEvent*);
 private:
