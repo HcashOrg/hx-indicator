@@ -75,6 +75,7 @@ public:
     //按链类型删选
     void filterByChainType(const QString &chainType)
     {
+        if("all" == chainType || "All" == chainType || "ALL" == chainType) return;
         poundages.erase(std::remove_if(poundages.begin(),poundages.end(),[chainType](std::shared_ptr<PoundageUnit> info){
                                        return info->chainType != chainType;})
                         ,poundages.end());

@@ -16,6 +16,7 @@ FunctionExchangeWidget::~FunctionExchangeWidget()
 
 void FunctionExchangeWidget::InitWidget()
 {
+    InitStyle();
     ui->onchainOrderBtn->setCheckable(true);
     ui->myOrderBtn->setCheckable(true);
 }

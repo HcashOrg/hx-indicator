@@ -35,9 +35,6 @@ private slots:
     //设置默认承税单
     void SetDefaultPoundageSlots(const QString &orderID);
 private:
-    void RefreshAllPoundageWidget(const QString &jsonIncome);
-    void RefreshMyPoundageWidget(const QString &jsonIncome);
-private:
     void InitWidget();
     void InitStyle();
     void InitCoinType();
