@@ -50,11 +50,29 @@ void PoundageWidget::autoRefreshSlots()
     {
         _p->allPoundageSheet->clear();
         //刷新目前对应的承税单
-        UBChain::getInstance()->postRPC("id_list_guarantee_order",
-                                        toJsonFormat("list_guarantee_order",
-                                                     QJsonArray()<<ui->comboBox_coinType->currentText()<<false
-                                                     )
-                                        );
+        if(ui->comboBox_coinType->currentData().toString() == "0")
+        {
+            //查询所有承兑单
+            foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+                if(asset.id == "1.3.0") continue;
+                UBChain::getInstance()->postRPC("id_list_guarantee_order",
+                                                toJsonFormat("list_guarantee_order",
+                                                             QJsonArray()<<asset.symbol<<false
+                                                             )
+                                                );
+            }
+
+        }
+        else
+        {
+            UBChain::getInstance()->postRPC("id_list_guarantee_order",
+                                            toJsonFormat("list_guarantee_order",
+                                                         QJsonArray()<<ui->comboBox_coinType->currentText()<<false
+                                                         )
+                                            );
+        }
+        UBChain::getInstance()->postRPC("id_finish_all_list",toJsonFormat("finish_all_list",QJsonArray()));
+
     }
     else if(ui->toolButton_myPoundage->isChecked())
     {
@@ -69,6 +87,8 @@ void PoundageWidget::autoRefreshSlots()
                                                          )
                                             );
         }
+        UBChain::getInstance()->postRPC("id_finish_my_list",toJsonFormat("finish_all_list",QJsonArray()));
+
     }
 
 }
@@ -147,7 +167,14 @@ void PoundageWidget::jsonDataUpdated(QString id)
         if( result.isEmpty() )  return;
         result.prepend("{");
         result.append("}");
-        RefreshAllPoundageWidget(result);
+
+        PoundageDataUtil::convertJsonToPoundage(result,_p->allPoundageSheet);
+    }
+    else if("id_finish_all_list" == id)
+    {
+        SortByStuffSlots();
+        _p->allPoundageWidget->InitData(_p->allPoundageSheet);
+
     }
     else if("id_get_my_guarantee_order" == id)
     {
@@ -157,7 +184,14 @@ void PoundageWidget::jsonDataUpdated(QString id)
         result.prepend("{");
         result.append("}");
 
-        RefreshMyPoundageWidget(result);
+        PoundageDataUtil::convertJsonToPoundage(result,_p->myPoundageSheet);
+
+    }
+    else if("id_finish_my_list" == id)
+    {
+        _p->myPoundageSheet->filterByChainType(ui->comboBox_coinType->currentText());
+        SortByStuffSlots();
+        _p->myPoundageWidget->InitData(_p->myPoundageSheet);
 
     }
     else if("id_cancel_guarantee_order" == id)
@@ -185,22 +219,6 @@ void PoundageWidget::SetDefaultPoundageSlots(const QString &orderID)
     //往配置文件里写入
     UBChain::getInstance()->configFile->setValue("/settings/feeOrderID", orderID);
     UBChain::getInstance()->feeOrderID = orderID;
-}
-
-void PoundageWidget::RefreshAllPoundageWidget(const QString &jsonIncome)
-{
-    _p->allPoundageSheet->clear();
-    PoundageDataUtil::convertJsonToPoundage(jsonIncome,_p->allPoundageSheet);
-    SortByStuffSlots();
-    _p->allPoundageWidget->InitData(_p->allPoundageSheet);
-}
-
-void PoundageWidget::RefreshMyPoundageWidget(const QString &jsonIncome)
-{
-    PoundageDataUtil::convertJsonToPoundage(jsonIncome,_p->myPoundageSheet);
-    _p->myPoundageSheet->filterByChainType(ui->comboBox_coinType->currentText());
-    SortByStuffSlots();
-    _p->myPoundageWidget->InitData(_p->myPoundageSheet);
 }
 
 void PoundageWidget::InitWidget()
@@ -294,6 +312,7 @@ void PoundageWidget::InitCoinType()
         if(asset.id == "1.3.0") continue;
         ui->comboBox_coinType->addItem(asset.symbol,asset.id);
     }
+    ui->comboBox_coinType->insertItem(0,"All","0");
     if(ui->comboBox_coinType->count() > 0)
     {
         ui->comboBox_coinType->setCurrentIndex(0);

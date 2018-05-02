@@ -136,8 +136,9 @@ void AccountManagerWidget::InitWidget()
     ui->stackedWidget->setCurrentWidget(_p->pageWidget);
 
     foreach (AccountInfo info, UBChain::getInstance()->accountInfoMap) {
-        QTableWidgetItem *item = new QTableWidgetItem(info.name+"\n"+info.address);
+        QTableWidgetItem *item = new QTableWidgetItem("\n"+info.name+"\n"+info.address);
         item->setData(Qt::UserRole,QVariant::fromValue<AccountInfo>(info));
+        item->setTextAlignment(Qt::AlignHCenter);
         ui->tableWidget->insertRow(ui->tableWidget->rowCount());
         ui->tableWidget->setRowHeight(ui->tableWidget->rowCount()-1,90);
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,0,item);

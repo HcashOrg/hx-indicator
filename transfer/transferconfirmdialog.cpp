@@ -29,6 +29,21 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
 //    ui->containerWidget->setObjectName("containerwidget");
 //    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
+    QFont font("Microsoft YaHei UI Light",10,50);
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,QColor(0xC6,0xCA,0xD4));
+
+    ui->label_2->setPalette(pa);
+    ui->label_2->setFont(font);
+    ui->label_3->setPalette(pa);
+    ui->label_3->setFont(font);
+    ui->label_4->setPalette(pa);
+    ui->label_4->setFont(font);
+    ui->label_5->setPalette(pa);
+    ui->label_5->setFont(font);
+    ui->label_6->setPalette(pa);
+    ui->label_6->setFont(font);
+
     ui->okBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                              "QToolButton:hover{background-color:#00D2FF;}");
     ui->cancelBtn->setStyleSheet("QToolButton{background-color:#E5E5E5; border:none;border-radius:10px;color: rgb(255, 255, 255);}"

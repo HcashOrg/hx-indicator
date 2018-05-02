@@ -18,6 +18,8 @@
 #include "ContactChooseWidget.h"
 #include "BlurWidget.h"
 
+#include "poundage/PoundageDataUtil.h"
+
 TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     QWidget(parent),
     accountName(name),
@@ -141,6 +143,14 @@ void TransferPage::on_sendBtn_clicked()
         bool yOrN = transferConfirmDialog.pop();
         if( yOrN)
         {
+            if(!feeID.isEmpty() && ui->checkBox->checkState() == Qt::Checked)
+            {
+                UBChain::getInstance()->postRPC( "id-set_guarantee_id",
+                                                 toJsonFormat( "set_guarantee_id",
+                                                               QJsonArray() << feeID ));
+                qDebug()<<"id-set_guarantee_id"<<toJsonFormat( "set_guarantee_id",
+                                                               QJsonArray() << feeID );
+            }
 
             UBChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
                                              toJsonFormat( "transfer_to_address",
@@ -205,17 +215,22 @@ void TransferPage::InitStyle()
 
 void TransferPage::updatePoundage()
 {//查询配置文件中的手续费设置
-    QString feeID = UBChain::getInstance()->configFile->value("/settings/feeOrderID").toString();
+    ui->checkBox->setChecked(false);
+    ui->checkBox->setEnabled(true);
+    ui->toolButton->setEnabled(false);
+
+    feeID = UBChain::getInstance()->configFile->value("/settings/feeOrderID").toString();
     if(feeID.isEmpty())
     {
-        ui->checkBox->setChecked(false);
-        ui->checkBox->setEnabled(true);
         ui->toolButton->setText(tr("poundage doesn't exist!"));
-        ui->toolButton->setEnabled(false);
     }
     else
     {
         //查询承兑单
+        UBChain::getInstance()->postRPC( "id-get_guarantee_order",
+                                         toJsonFormat( "get_guarantee_order",
+                                                       QJsonArray() << feeID));
+
     }
 }
 
@@ -271,7 +286,54 @@ qDebug() << id << result;
         }
         return;
     }
+    else if("id-get_guarantee_order" == id)
+    {//查询承兑单id是否还有余额
+        QString result = UBChain::getInstance()->jsonDataValue(id);
 
+        if(result.isEmpty() || result.startsWith("\"error"))
+        {
+            feeID.clear();
+            ui->toolButton->setText(tr("poundage doesn't exist!"));
+            return;
+        }
+        result.prepend("{");
+        result.append("}");
+
+        QJsonParseError json_error;
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1(),&json_error);
+        if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject())
+        {
+            feeID.clear();
+            ui->toolButton->setText(tr("poundage doesn't exist!"));
+            return;
+        }
+        QJsonObject jsonObject = parse_doucment.object().value("result").toObject();
+        std::shared_ptr<PoundageUnit> unit = std::make_shared<PoundageUnit>();
+        if(PoundageDataUtil::ParseJsonObjToUnit(jsonObject,unit))
+        {
+            if(unit->poundageFinished)
+            {
+                feeID.clear();
+                ui->toolButton->setText(tr("poundage doesn't exist!"));
+            }
+            else
+            {
+                ui->checkBox->setChecked(true);
+                double exchangeRate = unit->sourceCoinNumber/unit->targetCoinNumber;
+                ui->toolButton->setText(ui->toolButton->text().replace("@",QString::number(exchangeRate))
+                                        .replace("#",unit->chainType).replace("$",QString::number(unit->calSourceLeftNumber())));
+            }
+        }
+
+        qDebug()<<"承兑单余额---"<<result;
+
+    }
+    else if("id-set_guarantee_id" == id)
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        qDebug()<<"设置承兑单id---"<<result;
+    }
 
 }
 
@@ -426,6 +488,11 @@ void TransferPage::checkStateChangedSlots(int state)
     if(state == Qt::Checked)
     {
         ui->toolButton->setEnabled(true);
+
+//        UBChain::getInstance()->postRPC( "id-set_guarantee_id",
+//                                         toJsonFormat( "set_guarantee_id",
+//                                                       QJsonArray() << "0" ));
+
     }
     else
     {

@@ -19,8 +19,13 @@ signals:
     void closeSignal();
 private slots:
     void itemClickedSlots(QTreeWidgetItem *item);
+    void itemDoubleClickedSlots(QTreeWidgetItem *item);
 
     void confirmSlots();
+
+    //执行查询（会选中符合查询的联系人）
+    void QueryPersonSlots();
+
 private:
     void updateUI();
 private:

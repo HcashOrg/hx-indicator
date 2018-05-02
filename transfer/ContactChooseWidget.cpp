@@ -55,9 +55,23 @@ void ContactChooseWidget::itemClickedSlots(QTreeWidgetItem *item)
     std::shared_ptr<ContactPerson> person = item->data(0,Qt::UserRole).value<std::shared_ptr<ContactPerson>>();
     if(!person) return;
 
+    ui->treeWidget->setSelectionMode(QAbstractItemView::SingleSelection);
     _p->contactName = person->name;
     _p->contactAddress = person->address;
     updateUI();
+}
+
+void ContactChooseWidget::itemDoubleClickedSlots(QTreeWidgetItem *item)
+{
+    if(!item) return;
+    std::shared_ptr<ContactPerson> person = item->data(0,Qt::UserRole).value<std::shared_ptr<ContactPerson>>();
+    if(!person) return;
+
+    ui->treeWidget->setSelectionMode(QAbstractItemView::SingleSelection);
+    _p->contactName = person->name;
+    _p->contactAddress = person->address;
+    updateUI();
+    confirmSlots();
 }
 
 void ContactChooseWidget::confirmSlots()
@@ -65,6 +79,38 @@ void ContactChooseWidget::confirmSlots()
     emit selectContactSignal(_p->contactName,_p->contactAddress);
     emit closeSignal();
     close();
+}
+
+void ContactChooseWidget::QueryPersonSlots()
+{
+    QString queryString = ui->lineEdit->text();
+    if(queryString.isEmpty()) return;
+    ui->treeWidget->clearSelection();
+    ui->treeWidget->setSelectionMode(QAbstractItemView::MultiSelection);
+    QList<QTreeWidgetItem*> findItems;
+    QTreeWidgetItemIterator it(ui->treeWidget);
+    while(*it)
+    {
+        std::shared_ptr<ContactPerson> person = (*it)->data(0,Qt::UserRole).value<std::shared_ptr<ContactPerson>>();
+        if(!(*it)->parent() || !person)
+        {
+            ++it;
+            continue;
+        }
+
+        if(-1 != (*it)->text(0).indexOf(queryString,0,Qt::CaseInsensitive) || queryString == person->address)
+        {
+            findItems.push_back(*it);
+            (*it)->parent()->setExpanded(true);
+            (*it)->setSelected(true);
+            //qDebug()<<(*it)->text(0);
+        }
+        ++it;
+    }
+    if(!findItems.isEmpty())
+    {
+        itemClickedSlots(findItems.front());
+    }
 }
 
 void ContactChooseWidget::updateUI()
@@ -100,11 +146,17 @@ void ContactChooseWidget::InitWidget()
 
 
     connect(ui->treeWidget,&QTreeWidget::itemClicked,this,&ContactChooseWidget::itemClickedSlots);
+    connect(ui->treeWidget,&QTreeWidget::itemDoubleClicked,this,&ContactChooseWidget::itemDoubleClickedSlots);
     connect(ui->toolButton_cancel,&QToolButton::clicked,this,&ContactChooseWidget::closeSignal);
     connect(ui->toolButton_close,&QToolButton::clicked,this,&ContactChooseWidget::closeSignal);
     connect(ui->toolButton_cancel,&QToolButton::clicked,this,&ContactChooseWidget::close);
     connect(ui->toolButton_close,&QToolButton::clicked,this,&ContactChooseWidget::close);
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&ContactChooseWidget::confirmSlots);
+
+    connect(pSearchButton, &QPushButton::clicked, this, &ContactChooseWidget::QueryPersonSlots);
+
+    connect(ui->lineEdit,&QLineEdit::textChanged,this, &ContactChooseWidget::QueryPersonSlots);
+
 }
 
 void ContactChooseWidget::InitStyle()
