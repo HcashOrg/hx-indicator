@@ -12,7 +12,7 @@ class TransferConfirmDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit TransferConfirmDialog(QString address, QString amount, QString fee, QString remark, QString assetSymbol, QWidget *parent = 0);
+    explicit TransferConfirmDialog(QString address, QString amount, QString assetSymbol,QString fee, QString remark, QString feeSymbol, QWidget *parent = 0);
     ~TransferConfirmDialog();
 
     bool pop();
@@ -38,6 +38,7 @@ private:
     Ui::TransferConfirmDialog *ui;
     QString address;
     QString amount;
+    QString assetType;
     QString fee;
     QString feeType;
     QString remark;

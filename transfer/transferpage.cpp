@@ -142,9 +142,7 @@ void TransferPage::on_sendBtn_clicked()
     AddressType type = checkAddress(ui->sendtoLineEdit->text(),AccountAddress | MultiSigAddress);
     if( type == AccountAddress)
     {
-        qDebug()<<feeWidget->GetFeeNumber();
-        qDebug()<<feeWidget->GetFeeType();
-        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(), ui->amountLineEdit->text(), feeWidget->GetFeeNumber(), remark, feeWidget->GetFeeType());
+        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(),ui->amountLineEdit->text(), ui->assetComboBox->currentText(), feeWidget->GetFeeNumber(), feeWidget->GetFeeType(), remark);
         bool yOrN = transferConfirmDialog.pop();
         if( yOrN)
         {
