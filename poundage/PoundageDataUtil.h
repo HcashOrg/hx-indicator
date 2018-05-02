@@ -14,6 +14,7 @@ public:
         ,chainType("BTC")
         ,sourceCoinNumber(0)
         ,targetCoinNumber(0)
+        ,poundageFinished(false)
     {
 
     }
@@ -27,6 +28,7 @@ public:
     double sourceCoinNumber;//源币数量LNK
     double targetCoinNumber;//目标币数量
     double balanceNumber;//账户余额,目标币剩余数量
+    bool  poundageFinished;//承兑单是否已经用完余额
 public:
     double calSourceLeftNumber()
     {
@@ -91,6 +93,7 @@ public:
     std::vector<std::shared_ptr<PoundageUnit>> poundages;
 };
 
+class QJsonObject;
 class PoundageDataUtil
 {
 public:
@@ -98,6 +101,7 @@ public:
 public:
     static bool convertJsonToPoundage(const QString &jsonString,std::shared_ptr<PoundageSheet> &sheet);
 
+    static bool ParseJsonObjToUnit(QJsonObject jsonObj, std::shared_ptr<PoundageUnit> &poundageUnit);
 };
 
 #endif // POUNDAGEDATAUTIL_H

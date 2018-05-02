@@ -519,12 +519,12 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>450</x>
      <y>208</y>
-     <width>181</width>
+     <width>211</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>汇率:1   币种:2</string>
+    <string>汇率:@   币种:#   余额:$</string>
    </property>
   </widget>
   <widget class="Line" name="line_7">

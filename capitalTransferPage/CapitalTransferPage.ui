@@ -106,8 +106,8 @@
     <rect>
      <x>540</x>
      <y>100</y>
-     <width>21</width>
-     <height>19</height>
+     <width>18</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -116,7 +116,7 @@
     </font>
    </property>
    <property name="text">
-    <string>X</string>
+    <string/>
    </property>
   </widget>
   <widget class="Line" name="line">

@@ -65,6 +65,7 @@ private:
     QString assetType;
     QWidget* currentTopWidget;  // 保存当前顶层窗口
 
+    QString feeID;//手续费承兑单id
     bool inited;
     bool assetUpdating;
 

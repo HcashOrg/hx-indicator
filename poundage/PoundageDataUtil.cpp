@@ -11,7 +11,7 @@ PoundageDataUtil::PoundageDataUtil()
 
 }
 
-static bool ParseJsonObjToUnit(QJsonObject jsonObj,std::shared_ptr<PoundageUnit>& poundageUnit)
+bool PoundageDataUtil::ParseJsonObjToUnit(QJsonObject jsonObj,std::shared_ptr<PoundageUnit>& poundageUnit)
 {
     if(!poundageUnit) return false;
     poundageUnit->poundageID = jsonObj.value("id").toString();
@@ -31,6 +31,8 @@ static bool ParseJsonObjToUnit(QJsonObject jsonObj,std::shared_ptr<PoundageUnit>
 
     QJsonObject finishObj = jsonObj.value("asset_finished").toObject();
     poundageUnit->balanceNumber = poundageUnit->targetCoinNumber - finishObj.value("amount").toDouble()/pow(10,tarPre);
+
+    poundageUnit->poundageFinished = jsonObj.value("finished").toBool();
     return true;
 }
 
