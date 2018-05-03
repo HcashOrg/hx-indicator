@@ -2,7 +2,6 @@
 #define WAITINGFORSYNC_H
 
 #include <QWidget>
-#include <QtNetwork>
 #include <QDomDocument>
 
 namespace Ui {

@@ -38,6 +38,7 @@ class NewOrImportWalletWidget;
 class ContactWidget;
 class FunctionWidget;
 class MinerPage;
+class OnchainOrderPage;
 class MyExchangeContractPage;
 
 class Frame:public QFrame
@@ -114,6 +115,7 @@ private:
     MultiSigPage* multiSigPage;
     MultiSigTransactionPage* multiSigTransactionPage;
     MinerPage* minerPage;
+    OnchainOrderPage* onchainOrderPage;
     MyExchangeContractPage* myExchangeContractPage;
 
 
@@ -128,7 +130,7 @@ private:
     NewOrImportWalletWidget* newOrImportWalletWidget;
 
     int currentPageNum;  //  0:mainPage   1:accountPage  2:delegatePgae  3:transferPage    4:contactPage    5:myExchangeContractPage
-                         //   6: feedPage   7:minerPage   8: SmartContract     9: multiSigPage   10: multiSigTransactionPage
+                         //   6: onchainOrderPage   7:minerPage   8: SmartContract     9: multiSigPage   10: multiSigTransactionPage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;
     void createTrayIconActions();

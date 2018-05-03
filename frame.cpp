@@ -35,6 +35,7 @@
 #include "multisig/multisigpage.h"
 #include "multisig/multisigtransactionpage.h"
 #include "neworimportwalletwidget.h"
+#include "exchange/OnchainOrderPage.h"
 #include "exchange/myexchangecontractpage.h"
 #include "extra/transactiondb.h"
 
@@ -331,7 +332,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showPoundageSignal,this,&Frame::showPoundagePage);
     connect(functionBar,&FunctionWidget::ShrinkSignal,this,&Frame::EnlargeRightPart);
     connect(functionBar,&FunctionWidget::RestoreSignal,this,&Frame::RestoreRightPart);
-    connect(functionBar,&FunctionWidget::showOnchainOrderSignal,this,&Frame::showMyExchangeContractPage);
+    connect(functionBar,&FunctionWidget::showOnchainOrderSignal,this,&Frame::showOnchainOrderPage);
     connect(functionBar,&FunctionWidget::showMyOrderSignal,this,&Frame::showMyExchangeContractPage);
     getAccountInfo();
 
@@ -654,6 +655,10 @@ void Frame::closeCurrentPage()
         myExchangeContractPage->close();
         myExchangeContractPage = NULL;
         break;
+    case 6:
+        onchainOrderPage->close();
+        onchainOrderPage = NULL;
+        break;
     case 7:
         minerPage->close();
         minerPage = NULL;
@@ -888,6 +893,7 @@ void Frame::setLanguage(QString language)
             showMyExchangeContractPage();
             break;
         case 6:
+            showOnchainOrderPage();
             break;
         case 7:
 //            upgradePage->retranslator();
@@ -981,7 +987,11 @@ void Frame::showPoundagePage()
 
 void Frame::showOnchainOrderPage()
 {
-
+    closeCurrentPage();
+    onchainOrderPage = new OnchainOrderPage(centralWidget);
+    onchainOrderPage->setAttribute(Qt::WA_DeleteOnClose);
+    onchainOrderPage->show();
+    currentPageNum = 6;
 }
 
 void Frame::showMyExchangeContractPage()
@@ -1297,7 +1307,6 @@ void Frame::jsonDataUpdated(QString id)
             {
                 QString transactionId = v.toString();
                 TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
-                qDebug() << "ttttttt " <<  ts.type << ts.transactionId;
 
                 if(ts.type == -1)
                 {

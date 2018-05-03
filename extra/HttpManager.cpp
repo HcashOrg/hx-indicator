@@ -4,7 +4,7 @@
 
 HttpManager::HttpManager()
 {
-    httpRequest.setRawHeader("application/json",QNetworkRequest::ContentTypeHeader);
+    httpRequest.setRawHeader("Content-Type","application/json");
 
     connect(&networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(requestFinished(QNetworkReply*))); //关联信号和槽
 }
@@ -34,7 +34,7 @@ void HttpManager::requestFinished(QNetworkReply *reply)
 
     if(reply->error() == QNetworkReply::NoError)
     {
-        qDebug() << reply->readAll();
+        emit httpReplied(reply->readAll(),statusCode);
     }
     else
     {
