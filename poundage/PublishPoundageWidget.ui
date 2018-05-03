@@ -69,7 +69,7 @@
    <property name="geometry">
     <rect>
      <x>275</x>
-     <y>320</y>
+     <y>360</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -87,7 +87,7 @@
    <property name="geometry">
     <rect>
      <x>400</x>
-     <y>320</y>
+     <y>360</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -191,6 +191,51 @@
      <width>211</width>
      <height>22</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="Line" name="line_5">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>304</y>
+     <width>251</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>85</x>
+     <y>255</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>手续费:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_fee">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>290</y>
+     <width>191</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft JhengHei UI</family>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>20 LNK</string>
    </property>
   </widget>
  </widget>

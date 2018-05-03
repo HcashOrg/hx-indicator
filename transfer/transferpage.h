@@ -33,6 +33,7 @@ signals:
     void showAccountPage(QString);
     void back();
 
+    void feeChangeSignal(double);
 public slots:
     void refresh();
 

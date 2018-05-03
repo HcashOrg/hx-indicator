@@ -54,6 +54,12 @@ QString FeeChooseWidget::GetFeeNumber() const
     return QString::number(_p->coinNumber);
 }
 
+void FeeChooseWidget::updateFeeNumberSlots(double feeNumber)
+{
+    _p->feeNumber = std::max<double>(0,feeNumber);
+    feeTypeChanged();
+}
+
 void FeeChooseWidget::jsonDataUpdated(QString id)
 {
     if("id_list_guarantee_order" == id)
@@ -68,7 +74,7 @@ void FeeChooseWidget::jsonDataUpdated(QString id)
         std::shared_ptr<PoundageUnit> unit = nullptr;
         if(!allPoundageSheet->poundages.empty())
         {
-            allPoundageSheet->sortByRate(true);
+            allPoundageSheet->sortByRate(false);
 
             for(auto it = allPoundageSheet->poundages.begin();it != allPoundageSheet->poundages.end();++it)
             {
@@ -128,7 +134,8 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
     _p->feeType = poundage->chainType;
     _p->coinNumber = poundage->targetCoinNumber/poundage->sourceCoinNumber*_p->feeNumber;
     _p->poundageID = poundage->poundageID;
-    _p->poundageTip = tr("已选择最优承兑单");
+    double rate = poundage->sourceCoinNumber/poundage->targetCoinNumber;
+    _p->poundageTip = "支付:"+QString::number(_p->coinNumber)+" "+_p->feeType + "  汇率:"+QString::number(rate);
     refreshUI();
 }
 
@@ -159,7 +166,8 @@ void FeeChooseWidget::refreshUI()
         }
     }
 
-    ui->label_fee->setText(QString::number(_p->coinNumber) + " " + _p->feeType);
+    //ui->label_fee->setText(QString::number(_p->coinNumber) + " " + _p->feeType);
+    ui->label_fee->setText(QString::number(_p->feeNumber)+" LNK");
 }
 
 void FeeChooseWidget::InitCoinType()
@@ -188,6 +196,7 @@ void FeeChooseWidget::InitWidget()
     if(_p->feeType == "LNK")
     {
         ui->checkBox->setChecked(false);
+        feeTypeChanged();
     }
     else
     {
@@ -205,5 +214,11 @@ void FeeChooseWidget::InitWidget()
 
 void FeeChooseWidget::InitStyle()
 {
+    QFont font("Microsoft YaHei UI Light",10,50);
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
+    ui->label_poundage->setPalette(pa);
+    ui->label_poundage->setFont(font);
+
     setStyleSheet("QCheckBox::checked{color:black;}");
 }

@@ -128,6 +128,11 @@ void PublishPoundageWidget::InitStyle()
     ui->label_4->setPalette(pa);
     ui->label_4->setFont(font);
 
+    QPalette feepa;
+    feepa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
+    ui->label_fee->setPalette(feepa);
+
+
     setStyleSheet("QPushButton#pushButton_confirm{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                   "QPushButton#pushButton_confirm:hover{background-color:#00D2FF;}"
 

@@ -73,6 +73,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     connect(ui->toolButton_chooseContact,&QToolButton::clicked,this,&TransferPage::chooseContactSlots);
     //connect(ui->checkBox,&QCheckBox::stateChanged,this,&TransferPage::checkStateChangedSlots);
 
+    connect(this,&TransferPage::feeChangeSignal,feeWidget,&FeeChooseWidget::updateFeeNumberSlots);
     ui->amountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
     setAmountPrecision();
 
@@ -409,14 +410,17 @@ void TransferPage::on_memoTextEdit_textChanged()
 {
     QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
     QByteArray ba = utfCodec->fromUnicode(ui->memoTextEdit->toPlainText());
-    if( ba.size() > 40)
-    {
-        ui->tipLabel6->show();
-    }
-    else
-    {
-        ui->tipLabel6->hide();
-    }
+    //取消40个字的限制
+//    if( ba.size() > 40)
+//    {
+//        ui->tipLabel6->show();
+//    }
+//    else
+//    {
+//        ui->tipLabel6->hide();
+//    }
+    double fee = static_cast<double>(ba.size())*10/1024 + 20;
+    emit feeChangeSignal(fee);
 }
 
 void TransferPage::on_transferRecordBtn_clicked()
