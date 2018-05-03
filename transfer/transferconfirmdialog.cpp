@@ -7,12 +7,14 @@
 #include <QDebug>
 
 
-TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QString fee, QString remark, QString assetSymbol, QWidget *parent) :
+TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QString assetSymbol,QString fee, QString feeSymbol, QString remark, QWidget *parent) :
     QDialog(parent),
     address(address),
     amount(amount),
+    assetType(assetSymbol),
     fee(fee),
     remark(remark),
+    feeType(feeSymbol),
     yesOrNo(false),
     ui(new Ui::TransferConfirmDialog)
 {
@@ -61,7 +63,7 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
 
     ui->addressLabel->setText( address);
     ui->amountLabel->setText( "<body><B>" + amount + "</B> " + assetSymbol + "</body>");
-    ui->feeLabel->setText( "<body>" + fee + " " + ASSET_NAME +"</body>");
+    ui->feeLabel->setText( "<body>" + fee + " " + feeSymbol +"</body>");
     ui->remarkLabel->setText( remark.isEmpty()?tr("none"):remark);
 
 
