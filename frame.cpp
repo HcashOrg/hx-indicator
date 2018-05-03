@@ -19,6 +19,7 @@
 #include "frame.h"
 #include "wallet.h"
 #include "miner/minerpage.h"
+#include "depositpage/DepositAutomatic.h"
 
 #include "waitingforsync.h"
 #include <QDesktopWidget>
@@ -160,6 +161,9 @@ Frame::Frame(): timer(NULL),
             UBChain::getInstance()->language = "English";
             UBChain::getInstance()->configFile->setValue("/settings/feeType","LNK");
             UBChain::getInstance()->feeType = "LNK";
+            UBChain::getInstance()->configFile->setValue("/settings/autoDeposit",false);
+            UBChain::getInstance()->autoDeposit = false;
+
 
             UBChain::getInstance()->minimizeToTray  = false;
             UBChain::getInstance()->configFile->setValue("/settings/minimizeToTray",false);
@@ -226,7 +230,8 @@ Frame::Frame(): timer(NULL),
     createTrayIconActions();
     createTrayIcon();
 
-
+    //朱正天--自动转账
+    autoDeposit = new DepositAutomatic(this);
 }
 
 Frame::~Frame()

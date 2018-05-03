@@ -245,6 +245,7 @@ public:
     QString language;   // 语言
     QString feeType;//手续费币种
     QString feeOrderID;//承兑单id
+    bool autoDeposit;//充值自动划转
     QString currentAccount; // 保存当前账户  切换页面的时候默认选择当前账户
     unsigned long long transactionFee;
 

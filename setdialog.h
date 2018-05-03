@@ -38,6 +38,8 @@ private slots:
 
     void on_generalBtn_clicked();
 
+    void on_depositBtn_clicked();
+
     void on_safeBtn_clicked();
 
     void on_accountBtn_clicked();

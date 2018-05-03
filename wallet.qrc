@@ -113,5 +113,7 @@
         <file>wallet_ui/addContact.png</file>
         <file>wallet_ui/contactPic.png</file>
         <file>wallet_ui/tans.png</file>
+        <file>wallet_ui/off.png</file>
+        <file>wallet_ui/on.png</file>
     </qresource>
 </RCC>

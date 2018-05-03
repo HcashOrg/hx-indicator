@@ -150,7 +150,8 @@ SOURCES += main.cpp\
     transfer/BlurWidget.cpp \
     extra/HttpManager.cpp \
     exchange/OnchainOrderPage.cpp \
-    FeeChooseWidget.cpp
+    FeeChooseWidget.cpp \
+    depositpage/DepositAutomatic.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -273,7 +274,8 @@ HEADERS  += firstlogin.h \
     transfer/BlurWidget.h \
     extra/HttpManager.h \
     exchange/OnchainOrderPage.h \
-    FeeChooseWidget.h
+    FeeChooseWidget.h \
+    depositpage/DepositAutomatic.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
