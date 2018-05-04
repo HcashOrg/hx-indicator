@@ -56,15 +56,15 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->horizontalHeader()->setVisible(true);
     ui->accountTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->accountTableWidget->setColumnWidth(0,150);
-    ui->accountTableWidget->setColumnWidth(1,150);
+    ui->accountTableWidget->setColumnWidth(0,185);
+    ui->accountTableWidget->setColumnWidth(1,185);
     ui->accountTableWidget->setColumnWidth(2,70);
     ui->accountTableWidget->setColumnWidth(3,70);
     ui->accountTableWidget->setColumnWidth(4,70);
     ui->accountTableWidget->setColumnWidth(5,70);
     ui->accountTableWidget->setColumnWidth(6,70);
     ui->accountTableWidget->horizontalHeader()->setStretchLastSection(true);
-
+    ui->accountTableWidget->hideColumn(6);
 
     QString language = UBChain::getInstance()->language;
     if( language.isEmpty())

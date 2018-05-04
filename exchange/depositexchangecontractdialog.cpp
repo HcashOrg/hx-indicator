@@ -68,8 +68,9 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
             UBChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
                                                                                    QJsonArray() << ui->accountNameLabel->text() << contractAddress
                                                                                    << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
-                                                                                   << "deposit to exchange contract" << 0.001 << 1000 << true
+                                                                                   << "deposit to exchange contract" << "0.001" << 1000 << true
                                                                                    ));
+
         }
         else if(result.startsWith("\"error\":"))
         {

@@ -12,7 +12,7 @@
 #include <QFrame>
 #include <QDesktopWidget>
 
-#define EXCHANGE_CONTRACT_HASH  "c39fa7c6b023299be422e7eb70cab9c8f24f58d4"
+#define EXCHANGE_CONTRACT_HASH  "f138267ad4c454097a06fb2d80518ea7e8ef7370"
 
 UBChain* UBChain::goo = 0;
 //QMutex mutexForJsonData;

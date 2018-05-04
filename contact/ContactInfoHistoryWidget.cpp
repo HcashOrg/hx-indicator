@@ -2,16 +2,19 @@
 #include "ui_ContactInfoHistoryWidget.h"
 
 #include "wallet.h"
+#include "poundage/PageScrollWidget.h"
 
+static const int ROWNUMBER = 5;
 class ContactInfoHistoryWidget::ContactInfoHistoryWidgetPrivate
 {
 public:
     ContactInfoHistoryWidgetPrivate()
+        :pageWidget(new PageScrollWidget())
     {
 
     }
 public:
-
+    PageScrollWidget *pageWidget;
 };
 
 ContactInfoHistoryWidget::ContactInfoHistoryWidget(QWidget *parent) :
@@ -21,25 +24,6 @@ ContactInfoHistoryWidget::ContactInfoHistoryWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->transferRecordTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
-    ui->transferRecordTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->transferRecordTableWidget->setFocusPolicy(Qt::NoFocus);
-//    ui->transferRecordTableWidget->setFrameShape(QFrame::NoFrame);
-    ui->transferRecordTableWidget->setMouseTracking(true);
-    ui->transferRecordTableWidget->setShowGrid(false);//隐藏表格线
-
-    ui->transferRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->transferRecordTableWidget->horizontalHeader()->setFixedHeight(30);
-    ui->transferRecordTableWidget->horizontalHeader()->setVisible(true);
-    ui->transferRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-
-
-//    ui->transferRecordTableWidget->setColumnWidth(0,90);
-//    ui->transferRecordTableWidget->setColumnWidth(1,70);
-//    ui->transferRecordTableWidget->setColumnWidth(2,100);
-//    ui->transferRecordTableWidget->setColumnWidth(3,100);
-//    ui->transferRecordTableWidget->setColumnWidth(4,110);
-//    ui->transferRecordTableWidget->setColumnWidth(5,70);
 
     InitWidget();
 }
@@ -124,10 +108,16 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
 
         rowCount++;
     }
+    int page = (ui->transferRecordTableWidget->rowCount()%ROWNUMBER==0 && ui->transferRecordTableWidget->rowCount() != 0) ?
+                ui->transferRecordTableWidget->rowCount()/ROWNUMBER : ui->transferRecordTableWidget->rowCount()/ROWNUMBER+1;
+    _p->pageWidget->SetTotalPage(page);
+    pageChangeSlot(0);
 }
 
 void ContactInfoHistoryWidget::InitWidget()
 {
+    InitStyle();
+
     ui->assetComboBox->addItem(tr("ALL"), "ALL");
     QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
@@ -135,7 +125,9 @@ void ContactInfoHistoryWidget::InitWidget()
         ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
-    InitStyle();
+    ui->stackedWidget->addWidget(_p->pageWidget);
+    connect(_p->pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ContactInfoHistoryWidget::pageChangeSlot);
+
 }
 
 void ContactInfoHistoryWidget::InitStyle()
@@ -145,9 +137,63 @@ void ContactInfoHistoryWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
+    QFont font("Microsoft YaHei UI Light",14,63);
+    ui->label->setFont(font);
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,Qt::black);
+    ui->label->setPalette(pa);
+
+
+    ui->transferRecordTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->transferRecordTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->transferRecordTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->transferRecordTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->transferRecordTableWidget->setMouseTracking(true);
+    ui->transferRecordTableWidget->setShowGrid(false);//隐藏表格线
+
+    ui->transferRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
+    ui->transferRecordTableWidget->horizontalHeader()->setFixedHeight(30);
+    ui->transferRecordTableWidget->horizontalHeader()->setVisible(true);
+    ui->transferRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+
+//    ui->transferRecordTableWidget->setColumnWidth(0,90);
+//    ui->transferRecordTableWidget->setColumnWidth(1,70);
+//    ui->transferRecordTableWidget->setColumnWidth(2,100);
+//    ui->transferRecordTableWidget->setColumnWidth(3,100);
+//    ui->transferRecordTableWidget->setColumnWidth(4,110);
+//    ui->transferRecordTableWidget->setColumnWidth(5,70);
+
+    ui->transferRecordTableWidget->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
+                                 "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
+                                 "QHeaderView:section{height:30px;border:none;background-color:#FFFFFF;}"
+                                 "QTableView:item{min-height:40px;}"
+                                 );
+
+
 }
 
 void ContactInfoHistoryWidget::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
     showTransferRecord(accountAddress, ui->assetComboBox->currentData().toString());
+}
+
+void ContactInfoHistoryWidget::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->transferRecordTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->transferRecordTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->transferRecordTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->transferRecordTableWidget->setRowHidden(i,true);
+        }
+    }
+
 }

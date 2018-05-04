@@ -9,8 +9,6 @@
 #include "depositexchangecontractdialog.h"
 #include "withdrawexchangecontractdialog.h"
 
-#define EXCHANGE_CONTRACT_HASH  "1897a3046537f0610851192a9bf1853a9b1732b1"
-
 MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MyExchangeContractPage)

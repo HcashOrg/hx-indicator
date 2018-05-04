@@ -6,7 +6,7 @@ class PageScrollWidget::PageScrollWidgetPrivate
 public:
     PageScrollWidgetPrivate()
         :buttonNumber(5)
-        ,totalPage(10)
+        ,totalPage(1)
         ,isShowPre(false)
         ,isShowNext(false)
         ,currentPage(0)

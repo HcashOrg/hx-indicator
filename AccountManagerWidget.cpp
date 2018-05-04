@@ -19,7 +19,7 @@ class AccountManagerWidget::AccountManagerWidgetPrivate
 {
 public:
     AccountManagerWidgetPrivate()
-        :pageWidget(new PageScrollWidget(5))
+        :pageWidget(new PageScrollWidget())
     {
 
     }
