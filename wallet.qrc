@@ -116,4 +116,8 @@
         <file>wallet_ui/off.png</file>
         <file>wallet_ui/on.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>notifyWidget/close.png</file>
+        <file>notifyWidget/logo.png</file>
+    </qresource>
 </RCC>
