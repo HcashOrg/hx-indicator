@@ -65,7 +65,7 @@ void FeeChooseWidget::updateFeeNumberSlots(double feeNumber)
 
 void FeeChooseWidget::jsonDataUpdated(QString id)
 {
-    if("id_list_guarantee_order" == id)
+    if("feechoose_list_guarantee_order" == id)
     {
         std::lock_guard<std::mutex> lock(_p->mutex);
         //转化为结构体
@@ -117,7 +117,7 @@ void FeeChooseWidget::feeTypeChanged()
 
 void FeeChooseWidget::QueryPoundage(const QString &type)
 {
-    UBChain::getInstance()->postRPC("id_list_guarantee_order",
+    UBChain::getInstance()->postRPC("feechoose_list_guarantee_order",
                                     toJsonFormat("list_guarantee_order",
                                                  QJsonArray()<<type<<false
                                                  )
