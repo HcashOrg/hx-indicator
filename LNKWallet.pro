@@ -150,7 +150,8 @@ SOURCES += main.cpp\
     transfer/BlurWidget.cpp \
     extra/HttpManager.cpp \
     exchange/OnchainOrderPage.cpp \
-    FeeChooseWidget.cpp
+    FeeChooseWidget.cpp \
+    exchange/BuyOrderWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -273,7 +274,8 @@ HEADERS  += firstlogin.h \
     transfer/BlurWidget.h \
     extra/HttpManager.h \
     exchange/OnchainOrderPage.h \
-    FeeChooseWidget.h
+    FeeChooseWidget.h \
+    exchange/BuyOrderWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -373,7 +375,8 @@ FORMS    += firstlogin.ui \
     transfer/ContactChooseWidget.ui \
     transfer/BlurWidget.ui \
     exchange/OnchainOrderPage.ui \
-    FeeChooseWidget.ui
+    FeeChooseWidget.ui \
+    exchange/BuyOrderWidget.ui
 
 win32{
     DISTFILES += logo.rc

@@ -265,7 +265,7 @@ void MyExchangeContractPage::registerContract()
     commonDialog.setText(tr("You don't have an exchange contract at the moment. Will you create it?"));
     if(commonDialog.pop())
     {
-        QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange2.lua.gpc";
+        QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
         QFileInfo fileInfo(filePath);
         if(fileInfo.exists())
         {

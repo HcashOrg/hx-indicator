@@ -24,9 +24,17 @@ private slots:
 
     void httpReplied(QByteArray _data, int _status);
 
+    void on_assetComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_assetComboBox2_currentIndexChanged(const QString &arg1);
+
+    void on_ordersTableWidget_cellPressed(int row, int column);
+
 private:
     Ui::OnchainOrderPage *ui;
     HttpManager httpManager;
+
+    void queryContractOrders();
 
     void paintEvent(QPaintEvent*);
 };
