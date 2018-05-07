@@ -35,6 +35,7 @@ class MultiSigPage;
 class MultiSigTransactionPage;
 class NewOrImportWalletWidget;
 
+class DepositAutomatic;
 class ContactWidget;
 class FunctionWidget;
 class MinerPage;
@@ -172,6 +173,9 @@ private:
 private slots:
     void EnlargeRightPart();
     void RestoreRightPart();
+
+private:
+    DepositAutomatic *autoDeposit;
 };
 
 

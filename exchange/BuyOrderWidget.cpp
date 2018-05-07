@@ -19,12 +19,7 @@ BuyOrderWidget::~BuyOrderWidget()
 
 void BuyOrderWidget::init()
 {
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
-    foreach (QString assetId, assetIds)
-    {
-        ui->sellComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
-        ui->buyComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
-    }
+
 }
 
 void BuyOrderWidget::setAccount(QString _accountName)
@@ -34,12 +29,10 @@ void BuyOrderWidget::setAccount(QString _accountName)
 
 void BuyOrderWidget::setSellAsset(QString _assetSymbol)
 {
-    ui->sellComboBox->setCurrentText(_assetSymbol);
 }
 
 void BuyOrderWidget::setBuyAsset(QString _assetSymbol)
 {
-    ui->buyComboBox->setCurrentText(_assetSymbol);
 }
 
 void BuyOrderWidget::paintEvent(QPaintEvent *)
@@ -70,7 +63,4 @@ void BuyOrderWidget::on_cancelBtn_clicked()
 
 void BuyOrderWidget::on_sellComboBox_currentIndexChanged(const QString &arg1)
 {
-    AssetInfo sellAssetInfo = UBChain::getInstance()->assetInfoMap.value(ui->sellComboBox->currentData().toString());
-    unsigned long long balanceAmount = UBChain::getInstance()->accountInfoMap.value(accountName).assetAmountMap.value(sellAssetInfo.id).amount;
-    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(getBigNumberString(balanceAmount,sellAssetInfo.precision)));
 }

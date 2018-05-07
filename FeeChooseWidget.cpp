@@ -2,6 +2,7 @@
 #include "ui_FeeChooseWidget.h"
 
 #include <algorithm>
+#include <mutex>
 #include "poundage/PoundageDataUtil.h"
 #include "wallet.h"
 
@@ -22,6 +23,8 @@ public:
     QString poundageID;
 
     QString poundageTip;
+
+    std::mutex mutex;
 };
 
 FeeChooseWidget::FeeChooseWidget(double feeNumber,const QString &coinType,QWidget *parent) :
@@ -62,8 +65,9 @@ void FeeChooseWidget::updateFeeNumberSlots(double feeNumber)
 
 void FeeChooseWidget::jsonDataUpdated(QString id)
 {
-    if("id_list_guarantee_order" == id)
+    if("feechoose_list_guarantee_order" == id)
     {
+        std::lock_guard<std::mutex> lock(_p->mutex);
         //转化为结构体
         QString result = UBChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
@@ -113,7 +117,7 @@ void FeeChooseWidget::feeTypeChanged()
 
 void FeeChooseWidget::QueryPoundage(const QString &type)
 {
-    UBChain::getInstance()->postRPC("id_list_guarantee_order",
+    UBChain::getInstance()->postRPC("feechoose_list_guarantee_order",
                                     toJsonFormat("list_guarantee_order",
                                                  QJsonArray()<<type<<false
                                                  )
@@ -128,14 +132,16 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
         _p->coinNumber = _p->feeNumber;
         _p->poundageID = "";
         _p->poundageTip = tr("cannot find proper poundage!");
-        return;
     }
+    else
+    {
+        _p->feeType = poundage->chainType;
+        _p->coinNumber = poundage->targetCoinNumber/poundage->sourceCoinNumber*_p->feeNumber;
+        _p->poundageID = poundage->poundageID;
+        double rate = poundage->sourceCoinNumber/poundage->targetCoinNumber;
+        _p->poundageTip = "支付:"+QString::number(_p->coinNumber)+" "+_p->feeType + "  汇率:"+QString::number(rate);
 
-    _p->feeType = poundage->chainType;
-    _p->coinNumber = poundage->targetCoinNumber/poundage->sourceCoinNumber*_p->feeNumber;
-    _p->poundageID = poundage->poundageID;
-    double rate = poundage->sourceCoinNumber/poundage->targetCoinNumber;
-    _p->poundageTip = "支付:"+QString::number(_p->coinNumber)+" "+_p->feeType + "  汇率:"+QString::number(rate);
+    }
     refreshUI();
 }
 
@@ -189,14 +195,9 @@ void FeeChooseWidget::InitWidget()
     InitStyle();
     InitCoinType();
 
-    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &FeeChooseWidget::jsonDataUpdated);
-    connect(ui->comboBox_coinType,static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),this,&FeeChooseWidget::coinTypeChanged);
-    connect(ui->checkBox,&QCheckBox::stateChanged,this,&FeeChooseWidget::feeTypeChanged);
-
     if(_p->feeType == "LNK")
     {
         ui->checkBox->setChecked(false);
-        feeTypeChanged();
     }
     else
     {
@@ -210,6 +211,12 @@ void FeeChooseWidget::InitWidget()
         }
         ui->checkBox->setChecked(true);
     }
+
+    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &FeeChooseWidget::jsonDataUpdated);
+    connect(ui->comboBox_coinType,static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),this,&FeeChooseWidget::coinTypeChanged);
+    connect(ui->checkBox,&QCheckBox::stateChanged,this,&FeeChooseWidget::feeTypeChanged);
+
+    feeTypeChanged();
 }
 
 void FeeChooseWidget::InitStyle()

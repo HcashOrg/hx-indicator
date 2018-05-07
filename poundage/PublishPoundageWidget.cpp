@@ -58,11 +58,13 @@ void PublishPoundageWidget::ChangeAccountSlots()
 
     if(accountInfo.assetAmountMap.empty())return;
 
+    ui->doubleSpinBox_sourceNumber->setToolTip("maxNumber: 0");
     for(auto it = accountInfo.assetAmountMap.constBegin();it != accountInfo.assetAmountMap.constEnd();++it)
     {
         if(it.key() == "1.3.0")
         {
-            ui->doubleSpinBox_sourceNumber->setRange(0,it.value().amount);
+            ui->doubleSpinBox_sourceNumber->setRange(0,it.value().amount/100000.);
+            ui->doubleSpinBox_sourceNumber->setToolTip("maxNumber: "+QString::number(it.value().amount/100000.));
             break;
         }
     }
@@ -72,6 +74,7 @@ void PublishPoundageWidget::InitAccount()
 {
     ui->comboBox_accounts->clear();
     ui->doubleSpinBox_sourceNumber->setRange(0,0);
+    ui->doubleSpinBox_sourceNumber->setToolTip("maxNumber: 0");
     if(UBChain::getInstance()->accountInfoMap.empty()) return;
 
     for(auto it = UBChain::getInstance()->accountInfoMap.constBegin();it != UBChain::getInstance()->accountInfoMap.constEnd();++it)
@@ -80,7 +83,6 @@ void PublishPoundageWidget::InitAccount()
         ui->comboBox_accounts->addItem(it.key(),QVariant::fromValue<AccountInfo>(it.value()));
     }
     ui->comboBox_accounts->setCurrentIndex(0);
-
 }
 
 void PublishPoundageWidget::InitTargetCoin()
@@ -107,6 +109,9 @@ void PublishPoundageWidget::InitWidget()
     connect(ui->pushButton_confirm,&QPushButton::clicked,this,&PublishPoundageWidget::ConfirmPublishSlots);
     connect(ui->pushButton_cancel,&QPushButton::clicked,this,&PublishPoundageWidget::close);
     connect(ui->comboBox_accounts, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),this,&PublishPoundageWidget::ChangeAccountSlots);
+
+
+    ChangeAccountSlots();
 }
 
 void PublishPoundageWidget::InitStyle()

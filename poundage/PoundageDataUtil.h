@@ -88,7 +88,13 @@ public:
                            : left->sourceCoinNumber/left->targetCoinNumber > right->sourceCoinNumber/right->targetCoinNumber;
         });
     }
-
+    //判断是否已有该id
+    bool isIdExisted(const QString &id)
+    {
+        return poundages.end() != std::find_if(poundages.begin(),poundages.end(),[id](const std::shared_ptr<PoundageUnit> &info){
+            return info->poundageID == id;
+        });
+    }
 
 public:
     std::vector<std::shared_ptr<PoundageUnit>> poundages;

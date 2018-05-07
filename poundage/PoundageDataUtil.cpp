@@ -50,7 +50,10 @@ bool PoundageDataUtil::convertJsonToPoundage(const QString &jsonString,std::shar
         std::shared_ptr<PoundageUnit> unit = std::make_shared<PoundageUnit>();
         if(ParseJsonObjToUnit(unitObj,unit))
         {
-            sheet->push_back(unit);
+            if(!sheet->isIdExisted(unit->poundageID))
+            {
+                sheet->push_back(unit);
+            }
         }
 
     }

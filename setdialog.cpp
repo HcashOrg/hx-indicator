@@ -43,6 +43,12 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->generalBtn->setCheckable(true);
     ui->safeBtn->setCheckable(true);
     ui->accountBtn->setCheckable(true);
+    ui->depositBtn->setCheckable(true);
+
+    ui->depositBtn->setChecked(UBChain::getInstance()->autoDeposit);
+    ui->depositBtn->setIconSize(QSize(26,12));
+    ui->depositBtn->setIcon(ui->depositBtn->isChecked()?QIcon(":/ui/wallet_ui/on.png"):QIcon(":/ui/wallet_ui/off.png"));
+    ui->depositBtn->setText(ui->depositBtn->isChecked()?tr("on"):tr("off"));
 
     ui->generalBtn->setChecked(false);
 
@@ -55,12 +61,15 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->accountBtn->setIconSize(QSize(20,20));
     ui->accountBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
 
+
     setStyleSheet("QToolButton{background-color:transparent;border:none;color:#C6CAD4;}"
                   "QToolButton::hover{color:black;}"
                   "QToolButton::checked{color:black;}"
 
                   "QToolButton#toolButton_help,QToolButton#toolButton_set{background-color:#F8F9FD;border:none;color:#C6CAD4;border-top-left-radius::10px;border-top-right-radius:10px;}"
                   "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{background-color:white;color:black;}"
+
+                  "QToolButton#depositBtn{color:black;}"
 
                   "QCheckBox{color:rgb(192,196,212);}"
                   "QCheckBox::checked{ color:black;}"
@@ -270,6 +279,10 @@ void SetDialog::on_saveBtn_clicked()
     UBChain::getInstance()->configFile->setValue("/settings/feeType", ui->comboBox_fee->currentText());
     UBChain::getInstance()->feeType = ui->comboBox_fee->currentText();
 
+    UBChain::getInstance()->configFile->setValue("/settings/autoDeposit", ui->depositBtn->isChecked());
+    UBChain::getInstance()->autoDeposit = ui->depositBtn->isChecked();
+
+
     UBChain::getInstance()->minimizeToTray = ui->minimizeCheckBox->isChecked();
     UBChain::getInstance()->configFile->setValue("/settings/minimizeToTray", UBChain::getInstance()->minimizeToTray);
 
@@ -346,6 +359,20 @@ void SetDialog::on_generalBtn_clicked()
     updateButtonIcon(0);
     //ui->generalBtn->setStyleSheet(SETDIALOG_GENERALBTN_SELECTED_STYLE);
     //ui->safeBtn->setStyleSheet(SETDIALOG_SAVEBTN_UNSELECTED_STYLE);
+}
+
+void SetDialog::on_depositBtn_clicked()
+{
+    if(ui->depositBtn->isChecked())
+    {
+        ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/on.png"));
+        ui->depositBtn->setText(tr("on"));
+    }
+    else
+    {
+        ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/off.png"));
+        ui->depositBtn->setText(tr("off"));
+    }
 }
 
 void SetDialog::on_safeBtn_clicked()

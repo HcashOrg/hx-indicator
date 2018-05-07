@@ -54,7 +54,9 @@ UBChain::UBChain()
         configFile->setValue("/settings/feeType","LNK");
         feeType = "LNK";
         configFile->setValue("/settings/feeOrderID","");
-        feeType = "";
+        feeOrderID = "";
+        configFile->setValue("/settings/autoDeposit",false);
+        autoDeposit = false;
         minimizeToTray  = false;
         configFile->setValue("/settings/minimizeToTray",false);
         closeToMinimize = false;
@@ -72,6 +74,7 @@ UBChain::UBChain()
         language        = configFile->value("/settings/language").toString();
         feeType         = configFile->value("/settings/feeType").toString();
         feeOrderID      = configFile->value("/settings/feeOrderID").toString();
+        autoDeposit     = configFile->value("/settings/autoDeposit").toBool();
         resyncNextTime  = configFile->value("/settings/resyncNextTime",false).toBool();
 
     }
