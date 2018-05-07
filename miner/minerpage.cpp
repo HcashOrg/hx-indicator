@@ -9,6 +9,7 @@
 #include "commondialog.h"
 
 #include "poundage/PageScrollWidget.h"
+#include "ToolButtonWidget.h"
 
 static const int ROWNUMBER = 4;
 MinerPage::MinerPage(QWidget *parent) :
@@ -140,11 +141,22 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->lockBalancesTableWidget->setItem(i,2,new QTableWidgetItem(getBigNumberString(lockAmount,assetInfo.precision)));
 
             ui->lockBalancesTableWidget->setItem(i,3,new QTableWidgetItem(tr("add")));
+
+            ToolButtonWidget *buttonAdd = new ToolButtonWidget();
+            buttonAdd->setText(ui->lockBalancesTableWidget->item(i,3)->text());
+            ui->lockBalancesTableWidget->setCellWidget(i,3,buttonAdd);
+            connect(buttonAdd,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_lockBalancesTableWidget_cellPressed,this,i,3));
+
             ui->lockBalancesTableWidget->setItem(i,4,new QTableWidgetItem(tr("foreclose")));
+            ToolButtonWidget *buttonfore = new ToolButtonWidget();
+            buttonfore->setInitGray(true);
+            buttonfore->setText(ui->lockBalancesTableWidget->item(i,4)->text());
+            ui->lockBalancesTableWidget->setCellWidget(i,4,buttonfore);
+            connect(buttonfore,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_lockBalancesTableWidget_cellPressed,this,i,4));
 
         }
         pageWidget_fore->SetTotalPage(calPage(ui->lockBalancesTableWidget));
-
+        setTextCenter(ui->lockBalancesTableWidget);
 
         return;
     }
@@ -200,10 +212,15 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->incomeTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(amount,assetInfo.precision)));
 
             ui->incomeTableWidget->setItem(i,2,new QTableWidgetItem(tr("obtain")));
+            ToolButtonWidget *buttonInc = new ToolButtonWidget();
+            buttonInc->setText(ui->incomeTableWidget->item(i,2)->text());
+            ui->incomeTableWidget->setCellWidget(i,2,buttonInc);
+            connect(buttonInc,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_incomeTableWidget_cellPressed,this,i,2));
+
 
         }
         pageWidget_income->SetTotalPage(calPage(ui->incomeTableWidget));
-
+        setTextCenter(ui->incomeTableWidget);
 
         return;
     }
@@ -324,6 +341,7 @@ void MinerPage::showIncomeRecord()
 
     }
     pageWidget_record->SetTotalPage(calPage(ui->incomeRecordTableWidget));
+    setTextCenter(ui->incomeRecordTableWidget);
 }
 
 void MinerPage::InitStyle()
@@ -359,6 +377,18 @@ unsigned int MinerPage::calPage(const QTableWidget * const table) const
     int page = (table->rowCount()%ROWNUMBER==0 && table->rowCount() != 0) ?
                 table->rowCount()/ROWNUMBER : table->rowCount()/ROWNUMBER+1;
 
+}
+
+void MinerPage::setTextCenter(QTableWidget * const table)
+{
+    if(!table) return;
+    for(int i = 0;i < table->rowCount();++i)
+    {
+        for(int j = 0;j < table->columnCount();++j)
+        {
+            table->item(i,j)->setTextAlignment(Qt::AlignCenter);
+        }
+    }
 }
 
 void MinerPage::on_accountComboBox_currentIndexChanged(const QString &arg1)

@@ -53,6 +53,8 @@ private:
     void updateCheckState(int number);//0 1 2
 
     unsigned int calPage(const QTableWidget *const table)const;
+    void setTextCenter(QTableWidget *const table);
+
     PageScrollWidget *pageWidget_income;
     PageScrollWidget *pageWidget_fore;
     PageScrollWidget *pageWidget_record;
