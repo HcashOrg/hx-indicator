@@ -83,6 +83,7 @@ private slots:
 
     void jsonDataUpdated(QString id);
 
+    void onBack();
     void showMainPage();
 
     void showTransferPage();

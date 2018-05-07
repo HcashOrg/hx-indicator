@@ -36,6 +36,7 @@ private:
     Ui::ExportDialog *ui;
     QString accoutName;
     QString privateKey;
+//    QMap<QString,QString>   assetTunnelPrivateKeyMap;
     bool isEncrypt = true;
     QString pwd;
     QString path;

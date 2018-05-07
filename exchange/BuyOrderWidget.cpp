@@ -51,7 +51,7 @@ void BuyOrderWidget::on_okBtn_clicked()
 //    UBChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
 //                                                                           QJsonArray() << ui->accountNameLabel->text() << contractAddress
 //                                                                           << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
-//                                                                           << "deposit to exchange contract" << 0.001 << 1000 << true
+//                                                                           << "deposit to exchange contract" << "0.001" << 1000 << true
 //                                                                           ));
 
 }
@@ -59,8 +59,4 @@ void BuyOrderWidget::on_okBtn_clicked()
 void BuyOrderWidget::on_cancelBtn_clicked()
 {
     close();
-}
-
-void BuyOrderWidget::on_sellComboBox_currentIndexChanged(const QString &arg1)
-{
 }

@@ -299,7 +299,7 @@ void Frame::alreadyLogin()
     connect(titleBar,SIGNAL(minimum()),this,SLOT(showMinimized()));
     connect(titleBar,SIGNAL(closeWallet()),qApp,SLOT(quit()));
     connect(titleBar,SIGNAL(tray()),this,SLOT(hide()));
-    connect(titleBar,&TitleBar::back,this,&Frame::showMainPage);
+    connect(titleBar,&TitleBar::back,this,SLOT(onBack()));
     connect(this,&Frame::titleBackVisible,titleBar,&TitleBar::backBtnVis);
 
     centralWidget = new QWidget(this);
@@ -1415,6 +1415,51 @@ void Frame::jsonDataUpdated(QString id)
 
         return;
     }
+}
+
+void Frame::onBack()
+{
+//    switch (currentPageNum) {
+//    case 0:
+//        showMainPage();
+//        break;
+//    case 1:
+//        break;
+//    case 2:
+//        break;
+//    case 3:
+//        showMainPage();
+//        break;
+//    case 4:
+//        contactPage->close();
+//        contactPage = NULL;
+//        break;
+//    case 5:
+//        myExchangeContractPage->close();
+//        myExchangeContractPage = NULL;
+//        break;
+//    case 6:
+//        onchainOrderPage->close();
+//        onchainOrderPage = NULL;
+//        break;
+//    case 7:
+//        minerPage->close();
+//        minerPage = NULL;
+//        break;
+//    case 8:
+//        break;
+//    case 9:
+//        multiSigPage->close();
+//        multiSigPage = NULL;
+//        break;
+//    case 10:
+//        multiSigTransactionPage->close();
+//        multiSigTransactionPage = NULL;
+//        break;
+//    default:
+//        break;
+//    }
+
 }
 
 void Frame::closeEvent(QCloseEvent *e)

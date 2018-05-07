@@ -70,7 +70,7 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
                     .arg(decimalToIntegerStr(ui->amountLineEdit->text(), assetInfo.precision));
 
             UBChain::getInstance()->postRPC( "id-invoke_contract-withdrawAsset", toJsonFormat( "invoke_contract",
-                                                                                   QJsonArray() << ui->accountNameLabel->text() << 0.001 << 1000
+                                                                                   QJsonArray() << ui->accountNameLabel->text() << "0.001" << 1000
                                                                                    << contractAddress
                                                                                    << "withdrawAsset"  << params));
         }

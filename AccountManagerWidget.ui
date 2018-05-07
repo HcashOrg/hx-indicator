@@ -38,12 +38,12 @@
     <rect>
      <x>576</x>
      <y>282</y>
-     <width>60</width>
+     <width>80</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>备份</string>
+    <string>备份钱包</string>
    </property>
   </widget>
  </widget>

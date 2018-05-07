@@ -26,8 +26,6 @@ private slots:
 
     void on_cancelBtn_clicked();
 
-    void on_sellComboBox_currentIndexChanged(const QString &arg1);
-
 private:
     Ui::BuyOrderWidget *ui;
     QString accountName;

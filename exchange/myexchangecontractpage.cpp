@@ -220,7 +220,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
     if( id == "id-invoke_contract-cancelSellOrder" )
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-
+        qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
@@ -234,7 +234,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
     if( id == "id-invoke_contract-cancelSellOrderPair" )
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-
+        qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
@@ -384,7 +384,7 @@ void MyExchangeContractPage::on_ordersTableWidget_cellPressed(int row, int colum
                     .arg(assetInfo2.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(row,1)->text(), assetInfo2.precision));
 
             UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrder", toJsonFormat( "invoke_contract",
-                                                                                   QJsonArray() << ui->accountComboBox->currentText() << 0.001 << 1000
+                                                                                   QJsonArray() << ui->accountComboBox->currentText() << "0.001" << 1000
                                                                                    << contractAddress
                                                                                    << "cancelSellOrder"  << params));
 
@@ -401,7 +401,7 @@ void MyExchangeContractPage::on_withdrawAllBtn_clicked()
     QString params = QString("%1,%2").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText());
 
     UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrderPair", toJsonFormat( "invoke_contract",
-                                                                           QJsonArray() << ui->accountComboBox->currentText() << 0.001 << 1000
+                                                                           QJsonArray() << ui->accountComboBox->currentText() << "0.001" << 1000
                                                                            << contractAddress
                                                                            << "cancelSellOrderPair"  << params));
 

@@ -119,11 +119,18 @@ void SellDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
     ExchangeContractBalances balances = UBChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text());
     qDebug() << "bbbbbbbbbbb " << balances.keys();
-    QString balanceStr = UBChain::getInstance()->getAccountBalance(ui->accountNameLabel->text(), ui->assetComboBox->currentText());
+    unsigned long long balanceAmount = 0;
+    if(balances.contains(ui->assetComboBox->currentText()))
+    {
+        balanceAmount = balances.value(ui->assetComboBox->currentText());
+    }
+
+    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+
+    QString balanceStr = getBigNumberString(balanceAmount,assetInfo.precision);
 
     ui->sellAmountLineEdit->setPlaceholderText(tr("Total %1 %2").arg(balanceStr).arg(ui->assetComboBox->currentText()));
 
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(assetInfo.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);

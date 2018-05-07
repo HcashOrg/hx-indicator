@@ -92,11 +92,21 @@ void ExportDialog::on_cancelBtn_clicked()
 void ExportDialog::getPrivateKey()
 {
     UBChain::getInstance()->postRPC( "id-dump_private_key-" + accoutName, toJsonFormat( "dump_private_key", QJsonArray() << accoutName << "0" ));
+
+//    QStringList assets = UBChain::getInstance()->assetInfoMap.keys();
+//    foreach (QString asset, assets)
+//    {
+//        AssetInfo info = UBChain::getInstance()->assetInfoMap.value(asset);
+//        UBChain::getInstance()->postRPC( "id-get_binding_account-" + accountName + "-" + info.symbol,
+//                                         toJsonFormat( "get_binding_account", QJsonArray()
+//                                         << accountName << info.symbol ));
+//    }
+
 }
 
 void ExportDialog::jsonDataUpdated(QString id)
 {
-    if( id == "id-dump_private_key-" + accoutName)
+    if( id.startsWith("id-dump_private_key-" + accoutName))
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << "eeeeeeeeeeee " << id << result;
