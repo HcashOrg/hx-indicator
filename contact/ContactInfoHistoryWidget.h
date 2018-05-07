@@ -20,6 +20,7 @@ public:
 private slots:
     void on_assetComboBox_currentIndexChanged(const QString &arg1);
 
+    void pageChangeSlot(unsigned int page);
 private:
     void InitWidget();
     void InitStyle();

@@ -20,7 +20,7 @@ public:
         :tableModel(new PoundageShowTableModel())
         ,isContextMenuEnabled(true)
         ,contextMenu(nullptr)
-        ,pageWidget(new PageScrollWidget(5))
+        ,pageWidget(new PageScrollWidget())
         ,isDeleteActionEnabled(false)
         ,deleteAction(nullptr)
         ,defaultAction(nullptr)

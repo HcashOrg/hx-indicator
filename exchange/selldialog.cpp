@@ -104,7 +104,7 @@ void SellDialog::on_okBtn_clicked()
     QString params = QString("%1,%2,%3,%4").arg(ui->assetComboBox->currentText()).arg(decimalToIntegerStr(ui->sellAmountLineEdit->text(), assetInfo.precision))
             .arg(ui->assetComboBox2->currentText()).arg(decimalToIntegerStr(ui->buyAmountLineEdit->text(), assetInfo2.precision));
     UBChain::getInstance()->postRPC( "id-invoke_contract-putOnSellOrder", toJsonFormat( "invoke_contract",
-                                                                           QJsonArray() << ui->accountNameLabel->text() << 0.001 << 1000
+                                                                           QJsonArray() << ui->accountNameLabel->text() << "0.001" << 1000
                                                                            << contractAddress
                                                                            << "putOnSellOrder"  << params));
 }
