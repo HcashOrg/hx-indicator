@@ -151,7 +151,7 @@ void PublishPoundageWidget::InitStyle()
                   "QDoubleSpinBox{background-color: transparent;border:none;color:black;font-size:12pt;}"
                   "QDoubleSpinBox:focus{border:none;}"
                   "QDoubleSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:none;}"
-                  "QComboBox{border: none;background:transparent;font-size: 12pt;font-family: MicrosoftYaHei;\
+                  "QComboBox{border: none;background:transparent;font-size: 12pt;font-family: Microsoft YaHei UI;\
                              background-position: center left;color: black;selection-background-color: darkgray;}"
 
                   "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"

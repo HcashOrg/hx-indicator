@@ -2,6 +2,9 @@
 #include "ui_DepositRecrdWideget.h"
 
 #include "wallet.h"
+#include "poundage/PageScrollWidget.h"
+
+static const int ROWNUMBER = 4;
 
 DepositRecrdWideget::DepositRecrdWideget(QWidget *parent) :
     QWidget(parent),
@@ -17,10 +20,15 @@ DepositRecrdWideget::DepositRecrdWideget(QWidget *parent) :
     ui->depositRecordTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->depositRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->depositRecordTableWidget->horizontalHeader()->setFixedHeight(30);
+    ui->depositRecordTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->depositRecordTableWidget->horizontalHeader()->setVisible(true);
-    ui->depositRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->depositRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+    ui->depositRecordTableWidget->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
+                                 "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
+                                 "QHeaderView:section{height:40px;border:none;background-color:#FFFFFF;}"
+                                 "QTableView:item{min-height:40px;}"
+                                 );
 
 //    ui->depositRecordTableWidget->setColumnWidth(0,90);
 //    ui->depositRecordTableWidget->setColumnWidth(1,70);
@@ -29,6 +37,7 @@ DepositRecrdWideget::DepositRecrdWideget(QWidget *parent) :
 //    ui->depositRecordTableWidget->setColumnWidth(4,110);
 //    ui->depositRecordTableWidget->setColumnWidth(5,70);
 
+    pageWidget = new PageScrollWidget();
     init();
 }
 
@@ -39,6 +48,9 @@ DepositRecrdWideget::~DepositRecrdWideget()
 
 void DepositRecrdWideget::init()
 {
+
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&DepositRecrdWideget::pageChangeSlot);
 
 }
 
@@ -81,6 +93,19 @@ void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
         ui->depositRecordTableWidget->setItem(i,4, new QTableWidgetItem(tr("confirmed")));
 
     }
+    //设置表格内容居中
+    for(int i = 0;i < ui->depositRecordTableWidget->rowCount();++i)
+    {
+        for(int j = 0;j < ui->depositRecordTableWidget->columnCount();++j)
+        {
+            ui->depositRecordTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+        }
+
+    }
+    int page = (ui->depositRecordTableWidget->rowCount()%ROWNUMBER==0 && ui->depositRecordTableWidget->rowCount() != 0) ?
+                ui->depositRecordTableWidget->rowCount()/ROWNUMBER : ui->depositRecordTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageChangeSlot(0);
 
 }
 
@@ -92,3 +117,22 @@ void DepositRecrdWideget::paintEvent(QPaintEvent *)
     painter.drawRect(0,0,770,530);
 }
 
+void DepositRecrdWideget::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->depositRecordTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->depositRecordTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->depositRecordTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->depositRecordTableWidget->setRowHidden(i,true);
+        }
+    }
+
+}

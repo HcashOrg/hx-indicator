@@ -7,6 +7,7 @@ namespace Ui {
 class WithdrawRecordWidget;
 }
 
+class PageScrollWidget;
 class WithdrawRecordWidget : public QWidget
 {
     Q_OBJECT
@@ -22,12 +23,14 @@ public:
 private slots:
     void on_assetComboBox_currentIndexChanged(const QString &arg1);
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::WithdrawRecordWidget *ui;
 
     QString accountAddress;
 
     void paintEvent(QPaintEvent*);
+    PageScrollWidget *pageWidget;
 };
 
 #endif // WITHDRAWRECORDWIDGET_H

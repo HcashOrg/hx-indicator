@@ -8,6 +8,9 @@
 #include "foreclosedialog.h"
 #include "commondialog.h"
 
+#include "poundage/PageScrollWidget.h"
+
+static const int ROWNUMBER = 4;
 MinerPage::MinerPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MinerPage)
@@ -70,6 +73,18 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->incomeRecordTableWidget->setColumnWidth(0,140);
     ui->incomeRecordTableWidget->setColumnWidth(1,140);
 
+
+    pageWidget_income = new PageScrollWidget();
+    ui->stackedWidget_income->addWidget(pageWidget_income);
+    pageWidget_fore = new PageScrollWidget();
+    ui->stackedWidget_fore->addWidget(pageWidget_fore);
+    pageWidget_record = new PageScrollWidget();
+    ui->stackedWidget_record->addWidget(pageWidget_record);
+    connect(pageWidget_income,&PageScrollWidget::currentPageChangeSignal,this,&MinerPage::pageChangeSlot);
+    connect(pageWidget_fore,&PageScrollWidget::currentPageChangeSignal,this,&MinerPage::pageChangeSlot);
+    connect(pageWidget_record,&PageScrollWidget::currentPageChangeSignal,this,&MinerPage::pageChangeSlot);
+
+    InitStyle();
     init();
 }
 
@@ -128,6 +143,7 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->lockBalancesTableWidget->setItem(i,4,new QTableWidgetItem(tr("foreclose")));
 
         }
+        pageWidget_fore->SetTotalPage(calPage(ui->lockBalancesTableWidget));
 
 
         return;
@@ -186,6 +202,7 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->incomeTableWidget->setItem(i,2,new QTableWidgetItem(tr("obtain")));
 
         }
+        pageWidget_income->SetTotalPage(calPage(ui->incomeTableWidget));
 
 
         return;
@@ -260,6 +277,7 @@ void MinerPage::init()
     }
 
     ui->stackedWidget->setCurrentIndex(0);
+    updateCheckState(0);
 }
 
 void MinerPage::fetchLockBalance()
@@ -305,6 +323,42 @@ void MinerPage::showIncomeRecord()
         ui->incomeRecordTableWidget->setItem(i,1, new QTableWidgetItem(getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol));
 
     }
+    pageWidget_record->SetTotalPage(calPage(ui->incomeRecordTableWidget));
+}
+
+void MinerPage::InitStyle()
+{
+    ui->forecloseInfoBtn->setCheckable(true);
+    ui->incomeInfoBtn->setCheckable(true);
+    ui->incomeRecordBtn->setCheckable(true);
+
+    setStyleSheet("QToolButton#forecloseInfoBtn,QToolButton#incomeInfoBtn,QToolButton#incomeRecordBtn{border:none;background:transparent;color:#C6CAD4;}"
+                  "QToolButton#forecloseInfoBtn::checked,QToolButton#incomeInfoBtn::checked,QToolButton#incomeRecordBtn::checked{color:black;}"
+                  "QToolButton#lockToMinerBtn{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QToolButton#lockToMinerBtn::hover{background-color:#00D2FF;}"
+                  "QToolButton#registerBtn{background-color:#E5E5E5; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QToolButton#registerBtn::hover{background-color:#00D2FF;}"
+
+                  "QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
+                  "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
+                  "QHeaderView:section{height:40px;border:none;background-color:#FFFFFF;}"
+                  "QTableView:item{min-height:40px;}");
+
+}
+
+void MinerPage::updateCheckState(int number)
+{
+    ui->incomeInfoBtn->setChecked(0 == number);
+    ui->forecloseInfoBtn->setChecked(1 == number);
+    ui->incomeRecordBtn->setChecked(2 == number);
+}
+
+unsigned int MinerPage::calPage(const QTableWidget * const table) const
+{
+    if(!table) return 0;
+    int page = (table->rowCount()%ROWNUMBER==0 && table->rowCount() != 0) ?
+                table->rowCount()/ROWNUMBER : table->rowCount()/ROWNUMBER+1;
+
 }
 
 void MinerPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
@@ -373,14 +427,51 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
 void MinerPage::on_incomeInfoBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+    updateCheckState(0);
 }
 
 void MinerPage::on_forecloseInfoBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+    updateCheckState(1);
 }
 
 void MinerPage::on_incomeRecordBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
+    updateCheckState(2);
+}
+
+void MinerPage::pageChangeSlot(unsigned int page)
+{
+    QTableWidget *table = nullptr;
+    if(sender() == pageWidget_income)
+    {//当前收益翻页
+        table = ui->incomeTableWidget;
+    }
+    else if(sender() == pageWidget_fore)
+    {
+        table = ui->lockBalancesTableWidget;
+    }
+    else if(sender() == pageWidget_record)
+    {
+        table = ui->incomeRecordTableWidget;
+    }
+    if(!table) return;
+
+    for(int i = 0;i < table->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            table->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            table->setRowHidden(i,false);
+        }
+        else
+        {
+            table->setRowHidden(i,true);
+        }
+    }
 }

@@ -7,6 +7,8 @@ namespace Ui {
 class MinerPage;
 }
 
+class PageScrollWidget;
+class QTableWidget;
 class MinerPage : public QWidget
 {
     Q_OBJECT
@@ -36,6 +38,7 @@ private slots:
 
     void on_incomeRecordBtn_clicked();
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::MinerPage *ui;
 
@@ -45,6 +48,14 @@ private:
     void fetchLockBalance();
     void fetchAccountIncome();
     void showIncomeRecord();
+
+    void InitStyle();
+    void updateCheckState(int number);//0 1 2
+
+    unsigned int calPage(const QTableWidget *const table)const;
+    PageScrollWidget *pageWidget_income;
+    PageScrollWidget *pageWidget_fore;
+    PageScrollWidget *pageWidget_record;
 };
 
 #endif // MINERPAGE_H

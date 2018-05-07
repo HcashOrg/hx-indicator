@@ -425,7 +425,8 @@ void TransferPage::on_memoTextEdit_textChanged()
 
 void TransferPage::on_transferRecordBtn_clicked()
 {
-    currentTopWidget = new TransferRecordWidget(this);
+    currentTopWidget = new TransferRecordWidget();
+    currentTopWidget->setParent(this);
     currentTopWidget->move(0,0);
     currentTopWidget->show();
     static_cast<TransferRecordWidget*>(currentTopWidget)->showTransferRecord(UBChain::getInstance()->accountInfoMap.value(accountName).address);

@@ -35,7 +35,7 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
                   border: none;\
                   background:transparent;\
                   font-size: 10pt;\
-                  font-family: MicrosoftYaHei;\
+                  font-family: Microsoft YaHei UI;\
                   background-position: center left;\
                   color: black;\
                   selection-background-color: darkgray;}"

@@ -2,6 +2,9 @@
 #include "ui_withdrawrecordwidget.h"
 
 #include "wallet.h"
+#include "poundage/PageScrollWidget.h"
+
+static const int ROWNUMBER = 4;
 
 WithdrawRecordWidget::WithdrawRecordWidget(QWidget *parent) :
     QWidget(parent),
@@ -19,7 +22,13 @@ WithdrawRecordWidget::WithdrawRecordWidget(QWidget *parent) :
     ui->withdrawRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->withdrawRecordTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->withdrawRecordTableWidget->horizontalHeader()->setVisible(true);
-    ui->withdrawRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->withdrawRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    ui->withdrawRecordTableWidget->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
+                                 "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
+                                 "QHeaderView:section{height:40px;border:none;background-color:#FFFFFF;}"
+                                 "QTableView:item{min-height:40px;}"
+                                 );
 
 
 //    ui->withdrawRecordTableWidget->setColumnWidth(0,90);
@@ -29,6 +38,7 @@ WithdrawRecordWidget::WithdrawRecordWidget(QWidget *parent) :
 //    ui->withdrawRecordTableWidget->setColumnWidth(4,110);
 //    ui->withdrawRecordTableWidget->setColumnWidth(5,70);
 
+    pageWidget = new PageScrollWidget();
     init();
 }
 
@@ -45,6 +55,9 @@ void WithdrawRecordWidget::init()
     {
         ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&WithdrawRecordWidget::pageChangeSlot);
+
 }
 
 void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _assetId)
@@ -100,6 +113,20 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
 
         rowCount++;
     }
+    //设置表格内容居中
+    for(int i = 0;i < ui->withdrawRecordTableWidget->rowCount();++i)
+    {
+        for(int j = 0;j < ui->withdrawRecordTableWidget->columnCount();++j)
+        {
+            ui->withdrawRecordTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+        }
+
+    }
+    int page = (ui->withdrawRecordTableWidget->rowCount()%ROWNUMBER==0 && ui->withdrawRecordTableWidget->rowCount() != 0) ?
+                ui->withdrawRecordTableWidget->rowCount()/ROWNUMBER : ui->withdrawRecordTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageChangeSlot(0);
+
 }
 
 void WithdrawRecordWidget::paintEvent(QPaintEvent *)
@@ -115,3 +142,24 @@ void WithdrawRecordWidget::on_assetComboBox_currentIndexChanged(const QString &a
     showWithdrawRecord(accountAddress, ui->assetComboBox->currentData().toString());
 
 }
+
+void WithdrawRecordWidget::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->withdrawRecordTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->withdrawRecordTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->withdrawRecordTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->withdrawRecordTableWidget->setRowHidden(i,true);
+        }
+    }
+
+}
+

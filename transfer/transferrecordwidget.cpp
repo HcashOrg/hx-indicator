@@ -2,7 +2,9 @@
 #include "ui_transferrecordwidget.h"
 
 #include "wallet.h"
+#include "poundage/PageScrollWidget.h"
 
+static const int ROWNUMBER = 4;
 TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TransferRecordWidget)
@@ -17,11 +19,17 @@ TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
     ui->transferRecordTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->transferRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->transferRecordTableWidget->horizontalHeader()->setFixedHeight(30);
+    ui->transferRecordTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->transferRecordTableWidget->horizontalHeader()->setVisible(true);
-    ui->transferRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->transferRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 
+    ui->transferRecordTableWidget->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
+                                 "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
+                                 "QHeaderView:section{height:40px;border:none;background-color:#FFFFFF;}"
+                                 "QTableView:item{min-height:40px;}"
+                                 );
+    ui->assetComboBox->setStyleSheet("QComboBox{color:black;}");
 //    ui->transferRecordTableWidget->setColumnWidth(0,90);
 //    ui->transferRecordTableWidget->setColumnWidth(1,70);
 //    ui->transferRecordTableWidget->setColumnWidth(2,100);
@@ -29,6 +37,7 @@ TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
 //    ui->transferRecordTableWidget->setColumnWidth(4,110);
 //    ui->transferRecordTableWidget->setColumnWidth(5,70);
 
+    pageWidget = new PageScrollWidget();
     init();
 }
 
@@ -45,6 +54,10 @@ void TransferRecordWidget::init()
     {
         ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
+
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&TransferRecordWidget::pageChangeSlot);
+
 }
 
 void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _assetId)
@@ -121,7 +134,19 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
 
         rowCount++;
     }
+    //设置表格内容居中
+    for(int i = 0;i < ui->transferRecordTableWidget->rowCount();++i)
+    {
+        for(int j = 0;j < ui->transferRecordTableWidget->columnCount();++j)
+        {
+            ui->transferRecordTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+        }
 
+    }
+    int page = (ui->transferRecordTableWidget->rowCount()%ROWNUMBER==0 && ui->transferRecordTableWidget->rowCount() != 0) ?
+                ui->transferRecordTableWidget->rowCount()/ROWNUMBER : ui->transferRecordTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageChangeSlot(0);
 }
 
 void TransferRecordWidget::paintEvent(QPaintEvent *)
@@ -135,4 +160,24 @@ void TransferRecordWidget::paintEvent(QPaintEvent *)
 void TransferRecordWidget::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
     showTransferRecord(accountAddress, ui->assetComboBox->currentData().toString());
+}
+
+void TransferRecordWidget::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->transferRecordTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->transferRecordTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->transferRecordTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->transferRecordTableWidget->setRowHidden(i,true);
+        }
+    }
+
 }
