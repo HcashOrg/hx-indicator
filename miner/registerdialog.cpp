@@ -31,16 +31,19 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
                   "QToolButton#cancelBtn,QToolButton#cancelBtn2{background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                   "QToolButton#cancelBtn:hover,QToolButton#cancelBtn2:hover{background-color:#5474EB;}"
                   "QComboBox{    \
-                  border: none;\
+                  border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;\
                   background:transparent;\
                   font-size: 10pt;\
                   font-family: Microsoft YaHei UI;\
                   background-position: center left;\
                   color: black;\
                   selection-background-color: darkgray;}"
-                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  "QLineEdit:focus{border:none;}"
+                  "QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+                  "QLineEdit:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;}"
                   );
+    ui->line->setVisible(false);
+    ui->line_3->setVisible(false);
+    ui->line_5->setVisible(false);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     init();

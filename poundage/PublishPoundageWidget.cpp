@@ -137,6 +137,7 @@ void PublishPoundageWidget::InitStyle()
     feepa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
     ui->label_fee->setPalette(feepa);
 
+    //ui->label_fee->setFrameShape(QFrame::Box);
 
     setStyleSheet("QPushButton#pushButton_confirm{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                   "QPushButton#pushButton_confirm:hover{background-color:#00D2FF;}"
@@ -148,15 +149,21 @@ void PublishPoundageWidget::InitStyle()
                   "QDoubleSpinBox::down-button {width:0;height:0;}"
                   "QDoubleSpinBox::up-arrow {width:0;height:0;}"
                   "QDoubleSpinBox::down-arrow {width:0;height:0;}"
-                  "QDoubleSpinBox{background-color: transparent;border:none;color:black;font-size:12pt;}"
-                  "QDoubleSpinBox:focus{border:none;}"
+                  "QDoubleSpinBox{background-color: transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;color:black;font-size:12pt;}"
+                  "QDoubleSpinBox:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;}"
                   "QDoubleSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:none;}"
-                  "QComboBox{border: none;background:transparent;font-size: 12pt;font-family: Microsoft YaHei UI;\
+                  "QComboBox{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;font-size: 12pt;font-family: Microsoft YaHei UI;\
                              background-position: center left;color: black;selection-background-color: darkgray;}"
 
-                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  "QLineEdit:focus{border:none;}"
+                  "QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+                  "QLineEdit:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;}"
+                  "QLable#label_fee{border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;}"
                 );
+    ui->line->setVisible(false);
+    ui->line_2->setVisible(false);
+    ui->line_3->setVisible(false);
+    ui->line_4->setVisible(false);
+    //ui->line_5->setVisible(false);
 }
 
 void PublishPoundageWidget::paintEvent(QPaintEvent *event)

@@ -113,13 +113,18 @@ void ContactAddWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+    setStyleSheet("QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;\
+                   background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
                   "Qline{color:#5474EB;background:#5474EB;}"
-                  "QComboBox{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:3px;}"
+                  "QComboBox{border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;\
+                   background:transparent;color:#5474EB;font-size:12pt;margin-left:3px;}"
                   "QPushButton{border:none;background-color:#5474EB;color:white;width:60px;height:20px;\
                    border-radius:10px;font-size:12pt;}"
                   "QPushButton::hover{background-color:#00D2FF;}"
                   "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
+    ui->line->setVisible(false);
+    ui->line_2->setVisible(false);
+    ui->line_3->setVisible(false);
 }
 
 void ContactAddWidget::InitWidget()

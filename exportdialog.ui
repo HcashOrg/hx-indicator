@@ -68,35 +68,6 @@
       <string/>
      </property>
     </widget>
-    <widget class="QToolButton" name="pathBtn">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>95</y>
-       <width>70</width>
-       <height>31</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>微软雅黑</family>
-       <pointsize>9</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-       <underline>false</underline>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>选择路径</string>
-     </property>
-    </widget>
     <widget class="QToolButton" name="exportBtn">
      <property name="geometry">
       <rect>
@@ -119,9 +90,9 @@
     <widget class="QLineEdit" name="pathLineEdit">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>40</x>
        <y>96</y>
-       <width>261</width>
+       <width>321</width>
        <height>30</height>
       </rect>
      </property>
@@ -190,6 +161,35 @@
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="pathBtn">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>92</y>
+       <width>70</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>选择路径</string>
      </property>
     </widget>
    </widget>

@@ -117,9 +117,9 @@
   <widget class="QComboBox" name="comboBox_accounts">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>70</x>
      <y>170</y>
-     <width>221</width>
+     <width>251</width>
      <height>22</height>
     </rect>
    </property>
@@ -140,9 +140,9 @@
   <widget class="QDoubleSpinBox" name="doubleSpinBox_sourceNumber">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>70</x>
      <y>230</y>
-     <width>221</width>
+     <width>251</width>
      <height>23</height>
     </rect>
    </property>
@@ -163,9 +163,9 @@
   <widget class="QDoubleSpinBox" name="doubleSpinBox_targetNumber">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>400</x>
      <y>170</y>
-     <width>231</width>
+     <width>251</width>
      <height>23</height>
     </rect>
    </property>
@@ -186,9 +186,9 @@
   <widget class="QComboBox" name="comboBox_targetType">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>400</x>
      <y>230</y>
-     <width>211</width>
+     <width>251</width>
      <height>22</height>
     </rect>
    </property>
@@ -222,9 +222,9 @@
   <widget class="QLabel" name="label_fee">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>70</x>
      <y>290</y>
-     <width>191</width>
+     <width>251</width>
      <height>16</height>
     </rect>
    </property>
