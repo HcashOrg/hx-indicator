@@ -42,14 +42,14 @@ void ContactSearchWidget::InitWidget()
     QPushButton *pSearchButton = new QPushButton(this);
 
     pSearchButton->setCursor(Qt::PointingHandCursor);
-    pSearchButton->setFixedSize(32, 32);
+    pSearchButton->setFixedSize(14, 14);
     pSearchButton->setToolTip(tr("Search"));
-    pSearchButton->setIconSize(QSize(20,20));
+    pSearchButton->setIconSize(QSize(14,14));
     pSearchButton->setIcon(QIcon(":/search.png"));
 
     //防止文本框输入内容位于按钮之下
     QMargins margins = ui->lineEdit->textMargins();
-    ui->lineEdit->setTextMargins(pSearchButton->width(), margins.top(),margins.right() , margins.bottom());
+    ui->lineEdit->setTextMargins(pSearchButton->width()+5, margins.top(),margins.right() , margins.bottom());
     ui->lineEdit->setPlaceholderText(tr("input name or address"));
 
     QHBoxLayout *pSearchLayout = new QHBoxLayout();
@@ -57,7 +57,7 @@ void ContactSearchWidget::InitWidget()
     pSearchLayout->addWidget(pSearchButton);
     pSearchLayout->setSpacing(0);
     pSearchLayout->setDirection(QBoxLayout::RightToLeft);
-    pSearchLayout->setContentsMargins(0, 0, 0, 0);
+    pSearchLayout->setContentsMargins(5, 0, 0, 0);
     ui->lineEdit->setLayout(pSearchLayout);
 
     connect(pSearchButton, &QPushButton::clicked, this, &ContactSearchWidget::StartSearchSlots);

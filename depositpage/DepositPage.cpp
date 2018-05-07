@@ -106,7 +106,10 @@ void DepositPage::jsonDataUpdated(QString id)
 
 void DepositPage::on_depositRecordBtn_clicked()
 {
-    ui->stackedWidget->setCurrentWidget(_p->recordWidget);
+    //ui->stackedWidget->setCurrentWidget(_p->recordWidget);
+    _p->recordWidget->setParent(this);
+    _p->recordWidget->move(0,0);
+    _p->recordWidget->show();
     _p->recordWidget->showDepositRecord(_p->tunnle_address);
 }
 

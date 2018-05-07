@@ -27,6 +27,7 @@
 #include "depositpage/DepositPage.h"
 #include "withdrawpage/WithdrawPage.h"
 #include "capitalTransferPage/CapitalTransferPage.h"
+#include "ToolButtonWidget.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -138,6 +139,14 @@ void MainPage::updateAccountList()
             //{
             //    ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(40,46,66));
             //}
+        }
+        for(int j = 2;j < 7;++j)
+        {
+            ToolButtonWidget *toolButton = new ToolButtonWidget();
+            toolButton->setInitGray(j%2 != 0);
+            toolButton->setText(ui->accountTableWidget->item(i,j)->text());
+            ui->accountTableWidget->setCellWidget(i,j,toolButton);
+            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&MainPage::on_accountTableWidget_cellClicked,this,i,j));
         }
     }
 

@@ -18,44 +18,12 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QToolButton" name="pathBtn">
-   <property name="geometry">
-    <rect>
-     <x>670</x>
-     <y>324</y>
-     <width>70</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <pointsize>9</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-     <underline>false</underline>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>选择路径</string>
-   </property>
-  </widget>
   <widget class="QLineEdit" name="privateKeyLineEdit">
    <property name="geometry">
     <rect>
      <x>430</x>
      <y>322</y>
-     <width>201</width>
+     <width>301</width>
      <height>30</height>
     </rect>
    </property>
@@ -211,7 +179,7 @@
     <rect>
      <x>430</x>
      <y>262</y>
-     <width>201</width>
+     <width>301</width>
      <height>30</height>
     </rect>
    </property>
@@ -258,6 +226,38 @@
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="pathBtn">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>321</y>
+     <width>70</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>9</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+     <underline>false</underline>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>选择路径</string>
    </property>
   </widget>
  </widget>

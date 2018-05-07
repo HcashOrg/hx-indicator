@@ -81,7 +81,7 @@ Qt::ItemFlags PoundageShowTableModel::flags(const QModelIndex &index) const
 {
     if (index.isValid())
     {
-        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable ;
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable ;
     }
     return Qt::ItemIsEnabled;
 }

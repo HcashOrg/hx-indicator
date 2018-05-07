@@ -34,8 +34,8 @@ ExportDialog::ExportDialog( QString name, QWidget *parent) :
                                 "QToolButton:hover{background-color:rgb(208,228,255);}");
 
     ui->pathBtn->setStyleSheet("QToolButton#pathBtn{border:none;color:gray;border-radius:10px;font-size:12pt;background-color:transparent;}");
-    ui->pathLineEdit->setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}");
-
+    ui->pathLineEdit->setStyleSheet("QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;padding-right:80px;}");
+    ui->line->setVisible(false);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 

@@ -78,20 +78,20 @@ SetDialog::SetDialog(QWidget *parent) :
                   "QSpinBox::down-button {width:0;height:0;}"
                   "QSpinBox::up-arrow {width:0;height:0;}"
                   "QSpinBox::down-arrow {width:0;height:0;}"
-                  "QSpinBox{background-color: transparent;border:none;color:black}"
-                  "QSpinBox:focus{border:none;}"
+                  "QSpinBox{background-color: transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;;color:black}"
+                  "QSpinBox:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;}"
                   "QSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:none;}"
 
                   "QComboBox{    \
-                  border: none;\
+                  border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;\
                   background:transparent;\
                   font-size: 10pt;\
-                  font-family: MicrosoftYaHei;\
+                  font-family: Microsoft YaHei UI;\
                   background-position: center left;\
                   color: black;\
                   selection-background-color: darkgray;}"
-                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  "QLineEdit:focus{border:none;}"
+                  "QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+                  "QLineEdit:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;}"
                   );
     ui->saveBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
                                 "QToolButton:hover{background-color:#00D2FF;}");
@@ -101,6 +101,13 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
     ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
                                 "QToolButton:hover{background-color:rgb(208,228,255);}");
+
+    ui->line_3->setVisible(false);
+    ui->line_4->setVisible(false);
+    ui->line_5->setVisible(false);
+    ui->line_6->setVisible(false);
+    ui->line_7->setVisible(false);
+    ui->line_8->setVisible(false);
 
     ui->feeLineEdit->setVisible(false);
     ui->unitLabel2->setVisible(false);

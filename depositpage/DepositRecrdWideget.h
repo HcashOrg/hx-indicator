@@ -7,6 +7,7 @@ namespace Ui {
 class DepositRecrdWideget;
 }
 
+class PageScrollWidget;
 class DepositRecrdWideget : public QWidget
 {
     Q_OBJECT
@@ -19,12 +20,15 @@ public:
 
     void showDepositRecord(QString _tunnelAddress);
 
+private slots:
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::DepositRecrdWideget *ui;
 
     QString tunnelAddress;
 
     void paintEvent(QPaintEvent*);
+    PageScrollWidget *pageWidget;
 };
 
 #endif // DEPOSITRECRDWIDEGET_H

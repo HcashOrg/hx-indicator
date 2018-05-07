@@ -260,7 +260,8 @@ void ImportDialog::InitStyle()
     ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
                                 "QToolButton:hover{background-color:rgb(208,228,255);}");
 
-    setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+    setStyleSheet("QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;\
+                   background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
                   "Qline{color:#5474EB;background:#5474EB;}"
                   "QToolButton{border:none;color:white;border-radius:10px;font-size:12pt;}"
                   "QToolButton#pathBtn{color:gray;}"
@@ -268,6 +269,8 @@ void ImportDialog::InitStyle()
                   "QToolButton#cancelBtn::hover,QToolButton#importBtn::hover{background-color:#00D2FF;}"
                   "QToolButton#cancelBtn{background-color:#E5E5E5;}"
                   "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
+    ui->line->setVisible(false);
+    ui->line_2->setVisible(false);
 
 }
 

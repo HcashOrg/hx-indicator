@@ -7,6 +7,7 @@ namespace Ui {
 class TransferRecordWidget;
 }
 
+class PageScrollWidget;
 class TransferRecordWidget : public QWidget
 {
     Q_OBJECT
@@ -22,12 +23,15 @@ public:
 private slots:
     void on_assetComboBox_currentIndexChanged(const QString &arg1);
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::TransferRecordWidget *ui;
 
     QString accountAddress;
 
     void paintEvent(QPaintEvent*);
+
+    PageScrollWidget *pageWidget;
 };
 
 #endif // TRANSFERRECORDWIDGET_H

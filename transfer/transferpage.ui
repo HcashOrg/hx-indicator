@@ -253,9 +253,9 @@
   <widget class="QLineEdit" name="sendtoLineEdit">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>78</x>
      <y>210</y>
-     <width>270</width>
+     <width>281</width>
      <height>30</height>
     </rect>
    </property>

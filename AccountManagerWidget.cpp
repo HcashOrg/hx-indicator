@@ -139,6 +139,7 @@ void AccountManagerWidget::InitWidget()
         QTableWidgetItem *item = new QTableWidgetItem("\n"+info.name+"\n"+info.address);
         item->setData(Qt::UserRole,QVariant::fromValue<AccountInfo>(info));
         item->setTextAlignment(Qt::AlignHCenter);
+        item->setFlags(Qt::ItemIsEnabled);
         ui->tableWidget->insertRow(ui->tableWidget->rowCount());
         ui->tableWidget->setRowHeight(ui->tableWidget->rowCount()-1,90);
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,0,item);

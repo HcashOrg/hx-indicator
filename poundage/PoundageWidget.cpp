@@ -275,17 +275,17 @@ void PoundageWidget::InitStyle()
     ui->label->setPalette(pa);
 
     setStyleSheet("QToolButton#toolButton_allPoundage{background:transparent;color:rgb(144,144,144);\
-                                                      font-family: MicrosoftYaHei;font:14px;font-weight:600;}\
+                                                      font-family: Microsoft YaHei UI;font:14px;font-weight:600;}\
                    QToolButton#toolButton_allPoundage:checked{color:rgb(0,0,0);}\
                    QToolButton#toolButton_myPoundage{background:transparent;color:rgb(144,144,144);\
-                                                     font-family: MicrosoftYaHei;font:14px;font-weight:600;}\
+                                                     font-family: Microsoft YaHei UI;font:14px;font-weight:600;}\
                    QToolButton#toolButton_myPoundage:checked{color:rgb(0,0,0);}\
                    \
                    QComboBox{    \
                    border: none;\
                    background:transparent;\
                    font-size: 10pt;\
-                   font-family: MicrosoftYaHei;\
+                   font-family: Microsoft YaHei UI;\
                    background-position: center left;\
                    color: black;\
                    selection-background-color: darkgray;}\
