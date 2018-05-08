@@ -30,7 +30,8 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     contactUpdating(false),
     currentTopWidget(NULL),
     ui(new Ui::TransferPage),
-    feeWidget(new FeeChooseWidget(20,UBChain::getInstance()->configFile->value("/settings/feeType").toString()))
+    feeWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),
+                                  UBChain::getInstance()->configFile->value("/settings/feeType").toString()))
 {
 	
 
@@ -147,14 +148,14 @@ void TransferPage::on_sendBtn_clicked()
         bool yOrN = transferConfirmDialog.pop();
         if( yOrN)
         {
-            if(feeWidget && !feeWidget->GetFeeID().isEmpty())
-            {
-                UBChain::getInstance()->postRPC( "id-set_guarantee_id",
-                                                 toJsonFormat( "set_guarantee_id",
-                                                               QJsonArray() << feeWidget->GetFeeID() ));
-                qDebug()<<"id-set_guarantee_id"<<toJsonFormat( "set_guarantee_id",
-                                                               QJsonArray() << feeWidget->GetFeeID() );
-            }
+//            if(feeWidget && !feeWidget->GetFeeID().isEmpty())
+//            {
+//                UBChain::getInstance()->postRPC( "id-set_guarantee_id",
+//                                                 toJsonFormat( "set_guarantee_id",
+//                                                               QJsonArray() << feeWidget->GetFeeID() ));
+//                qDebug()<<"id-set_guarantee_id"<<toJsonFormat( "set_guarantee_id",
+//                                                               QJsonArray() << feeWidget->GetFeeID() );
+//            }
 
             UBChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
                                              toJsonFormat( "transfer_to_address",
@@ -419,7 +420,7 @@ void TransferPage::on_memoTextEdit_textChanged()
 //    {
 //        ui->tipLabel6->hide();
 //    }
-    double fee = static_cast<double>(ba.size())*10/1024 + 20;
+    double fee = static_cast<double>(ba.size())*10/1024 + UBChain::getInstance()->feeChargeInfo.transferFee.toDouble();
     emit feeChangeSignal(fee);
 }
 

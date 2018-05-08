@@ -56,7 +56,7 @@
      <property name="geometry">
       <rect>
        <x>220</x>
-       <y>220</y>
+       <y>250</y>
        <width>120</width>
        <height>36</height>
       </rect>
@@ -83,7 +83,7 @@
      <property name="geometry">
       <rect>
        <x>80</x>
-       <y>220</y>
+       <y>250</y>
        <width>120</width>
        <height>36</height>
       </rect>
@@ -187,7 +187,7 @@
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>100</y>
+       <y>30</y>
        <width>120</width>
        <height>30</height>
       </rect>
@@ -202,8 +202,8 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>30</y>
+       <x>40</x>
+       <y>170</y>
        <width>120</width>
        <height>30</height>
       </rect>
@@ -218,9 +218,9 @@
     <widget class="QComboBox" name="assetComboBox">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>60</y>
-       <width>151</width>
+       <x>40</x>
+       <y>200</y>
+       <width>131</width>
        <height>30</height>
       </rect>
      </property>
@@ -242,8 +242,8 @@
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>130</y>
-       <width>150</width>
+       <y>60</y>
+       <width>171</width>
        <height>30</height>
       </rect>
      </property>
@@ -273,9 +273,9 @@
     <widget class="Line" name="line_2">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>80</y>
-       <width>151</width>
+       <x>40</x>
+       <y>220</y>
+       <width>131</width>
        <height>16</height>
       </rect>
      </property>
@@ -287,8 +287,8 @@
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>150</y>
-       <width>151</width>
+       <y>80</y>
+       <width>171</width>
        <height>16</height>
       </rect>
      </property>
@@ -307,6 +307,16 @@
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>100</y>
+       <width>171</width>
+       <height>121</height>
+      </rect>
      </property>
     </widget>
    </widget>

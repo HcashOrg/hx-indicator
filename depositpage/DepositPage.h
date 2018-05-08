@@ -32,8 +32,9 @@ private slots:
     void on_depositRecordBtn_clicked();
 
 private:
+    void GetBindTunnelAccount();
     void GenerateAddress();
-
+    void BindTunnelAccount();
 private:
     void InitWidget();
     void InitStyle();

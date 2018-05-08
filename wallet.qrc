@@ -120,5 +120,6 @@
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>
         <file>notifyWidget/logo.png</file>
+        <file>config/feeCharge.config</file>
     </qresource>
 </RCC>

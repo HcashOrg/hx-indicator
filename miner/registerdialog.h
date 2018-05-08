@@ -35,7 +35,8 @@ private slots:
     void on_registerNameLineEdit_textChanged(const QString &arg1);
 
     void on_cancelBtn2_clicked();
-
+protected:
+    void paintEvent(QPaintEvent *event);
 private:
     Ui::RegisterDialog *ui;
 };

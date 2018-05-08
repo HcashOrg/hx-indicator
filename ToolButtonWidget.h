@@ -19,6 +19,8 @@ signals:
 public:
     void setText(const QString &text);
     void setInitGray(bool gray = false);
+    void setInitNone(bool non = false);
+    void setInitColor(const QColor color);
 private:
     void InitWidget();
     void InitStyle();

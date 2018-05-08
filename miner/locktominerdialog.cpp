@@ -4,6 +4,8 @@
 #include "wallet.h"
 #include "commondialog.h"
 
+#include "FeeChooseWidget.h"
+
 LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
     QDialog(parent),
     m_accountName(_accountName),
@@ -17,7 +19,7 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(251, 251, 254,100);}");
+    ui->widget->setStyleSheet("#widget {background-color:rgba(251, 251, 254,180);}");
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
 
@@ -47,6 +49,9 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
     ui->line_4->setVisible(false);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
+    ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
+                                                     "LNK"));
+    ui->stackedWidget->setCurrentIndex(0);
     init();
 }
 

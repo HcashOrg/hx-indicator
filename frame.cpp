@@ -300,7 +300,6 @@ void Frame::alreadyLogin()
     connect(titleBar,SIGNAL(closeWallet()),qApp,SLOT(quit()));
     connect(titleBar,SIGNAL(tray()),this,SLOT(hide()));
     connect(titleBar,&TitleBar::back,this,&Frame::onBack);
-//    connect(titleBar,&TitleBar::back,this,&Frame::showMainPage);
     connect(this,&Frame::titleBackVisible,titleBar,&TitleBar::backBtnVis);
 
     centralWidget = new QWidget(this);

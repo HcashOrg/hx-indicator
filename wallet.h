@@ -197,7 +197,30 @@ struct TwoAddresses     // owner_address 和 active_address
     QString activeAddress;
 };
 
+//朱正天---手续费
+struct FeeChargeInfo
+{
+    FeeChargeInfo()
+    {
+        minerRegisterFee = "0";
+        minerIncomeFee = "0";
+        minerForeCloseFee = "0";
+        minerRedeemFee = "0";
+        tunnelBindFee = "0";
+        poundagePublishFee = "0";
+        poundageCancelFee = "0";
+        transferFee = "0";
+    }
 
+    QString minerRegisterFee;//挖矿注册手续费
+    QString minerIncomeFee;//领取收益手续费
+    QString minerForeCloseFee;//质押资产手续费
+    QString minerRedeemFee;//赎回资产手续费
+    QString tunnelBindFee;//绑定通道账户手续费
+    QString poundagePublishFee;//发布承兑单手续费
+    QString poundageCancelFee;//撤销承兑单手续费
+    QString transferFee;//转账手续费
+};
 
 struct MultiSigInfo
 {
@@ -247,6 +270,7 @@ public:
     QString feeOrderID;//承兑单id
     bool autoDeposit;//充值自动划转
     QString currentAccount; // 保存当前账户  切换页面的时候默认选择当前账户
+    FeeChargeInfo feeChargeInfo;//手续费情况
     unsigned long long transactionFee;
 
     QMap<QString,QString> balanceMap;
@@ -328,7 +352,8 @@ public:
 
     QMap<QString,TransactionsInfoVector> transactionsMap;   // key是 "账户名_资产符号" 形式
     void parseTransactions(QString result, QString accountName = "ALL");
-
+private:
+    void InitFeeCharge();//设置手续费
 public:
     void addTrackAddress(QString _address);     // 在chaindata/config.ini中添加 track-address
 

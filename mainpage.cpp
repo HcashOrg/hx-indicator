@@ -121,14 +121,21 @@ void MainPage::updateAccountList()
         ui->accountTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(map.value(assetId).amount, assetInfo.precision)));
 
         ui->accountTableWidget->setItem(i,2,new QTableWidgetItem(tr("transfer")));
-        ui->accountTableWidget->setItem(i,3,new QTableWidgetItem(tr("deposit")));
-        ui->accountTableWidget->setItem(i,4,new QTableWidgetItem(tr("withdraw")));
-        ui->accountTableWidget->setItem(i,5,new QTableWidgetItem(tr("trade")));
-        ui->accountTableWidget->setItem(i,6,new QTableWidgetItem(tr("exchange")));
+        if(ui->accountTableWidget->item(i,0)->text() != "LNK")
+        {
+            ui->accountTableWidget->setItem(i,3,new QTableWidgetItem(tr("deposit")));
+            ui->accountTableWidget->setItem(i,4,new QTableWidgetItem(tr("withdraw")));
+            ui->accountTableWidget->setItem(i,5,new QTableWidgetItem(tr("trade")));
+            ui->accountTableWidget->setItem(i,6,new QTableWidgetItem(tr("exchange")));
+        }
 
         for(int j = 0; j < 7; j++)
         {
-            ui->accountTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+            if(ui->accountTableWidget->item(i,j))
+            {
+                ui->accountTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+            }
+
             //ui->accountTableWidget->item(i,j)->setTextColor(QColor(192,196,212));
             //
             //if(i % 2)
@@ -142,11 +149,14 @@ void MainPage::updateAccountList()
         }
         for(int j = 2;j < 7;++j)
         {
-            ToolButtonWidget *toolButton = new ToolButtonWidget();
-            toolButton->setInitGray(j%2 != 0);
-            toolButton->setText(ui->accountTableWidget->item(i,j)->text());
-            ui->accountTableWidget->setCellWidget(i,j,toolButton);
-            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&MainPage::on_accountTableWidget_cellClicked,this,i,j));
+            if(ui->accountTableWidget->item(i,j) &&ui->accountTableWidget->item(i,0)->text() != "LNK")
+            {
+                ToolButtonWidget *toolButton = new ToolButtonWidget();
+                toolButton->setInitNone(true);
+                toolButton->setText(ui->accountTableWidget->item(i,j)->text());
+                ui->accountTableWidget->setCellWidget(i,j,toolButton);
+                connect(toolButton,&ToolButtonWidget::clicked,std::bind(&MainPage::on_accountTableWidget_cellClicked,this,i,j));
+            }
         }
     }
 
@@ -184,6 +194,10 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
 //        return;
 //    }
 
+    if(ui->accountTableWidget->item(row,0)->text() == "LNK")
+    {
+        return;
+    }
     if(column == 2)
     {//转账界面
         emit backBtnVisible(true);
@@ -196,6 +210,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         emit backBtnVisible(true);
         DepositPage *deposit = new DepositPage(DepositPage::DepositDataInput(ui->accountComboBox->currentText(),
                                                ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text()),this);
+        deposit->setAttribute(Qt::WA_DeleteOnClose);
         deposit->show();
         deposit->raise();
         return;
@@ -207,6 +222,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         WithdrawPage *withdraw = new WithdrawPage(WithdrawPage::WithdrawDataInput(ui->accountComboBox->currentText(),
                                                   ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text(),
                                                   ui->accountTableWidget->item(row,1)->text().toDouble()),this);
+        withdraw->setAttribute(Qt::WA_DeleteOnClose);
         withdraw->show();
         withdraw->raise();
         return;
@@ -217,6 +233,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         emit backBtnVisible(true);
         CapitalTransferPage *capital = new CapitalTransferPage(CapitalTransferPage::CapitalTransferInput(
                                            ui->accountComboBox->currentText(),ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text()),this);
+        capital->setAttribute(Qt::WA_DeleteOnClose);
         capital->show();
         capital->raise();
         return;

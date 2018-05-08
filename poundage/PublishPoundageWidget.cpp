@@ -112,6 +112,8 @@ void PublishPoundageWidget::InitWidget()
 
 
     ChangeAccountSlots();
+
+    ui->label_fee->setText("  "+UBChain::getInstance()->feeChargeInfo.poundagePublishFee+" LNK");
 }
 
 void PublishPoundageWidget::InitStyle()

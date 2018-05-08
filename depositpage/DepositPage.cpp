@@ -5,6 +5,7 @@
 #include "DepositQrcodeWidget.h"
 #include "DepositRecrdWideget.h"
 #include "DepositDataUtil.h"
+#include "FeeChargeWidget.h"
 
 class DepositPage::DepositPagePrivate
 {
@@ -16,7 +17,6 @@ public:
         ,recordWidget(new DepositRecrdWideget())
         ,tunnelData(std::make_shared<TunnelData>())
     {
-
     }
 public:
     QString address;//地址
@@ -30,6 +30,7 @@ public:
     DepositRecrdWideget *recordWidget;
 
     QString tunnle_address;
+    FeeChargeWidget *fee ;
 };
 
 DepositPage::DepositPage(const DepositDataInput & data,QWidget *parent) :
@@ -49,7 +50,7 @@ DepositPage::~DepositPage()
 
 void DepositPage::jsonDataUpdated(QString id)
 {
-    if("id_get_binding_account" == id)
+    if("deposit_get_binding_account" == id)
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
         qDebug() << id << result;
@@ -68,7 +69,7 @@ void DepositPage::jsonDataUpdated(QString id)
         }
 
     }
-    else if("id_create_crosschain_symbol" == id)
+    else if("deposit_create_crosschain_symbol" == id)
     {
         //解析返回的通道地址，并且绑定地址
         QString result = UBChain::getInstance()->jsonDataValue( id);
@@ -83,12 +84,10 @@ void DepositPage::jsonDataUpdated(QString id)
         //qDebug()<<"crossAddress"<<result;
 
         DepositDataUtil::ParseTunnelData(result,_p->tunnelData);
-        //绑定账户
-        UBChain::getInstance()->postRPC("id_bind_tunnel_account",
-                                        toJsonFormat("bind_tunnel_account",
-                                                     QJsonArray()<<_p->name<<_p->tunnelData->address<<_p->assetSymbol<<true));
+        //询问是否绑定账户，需要花费20LNK
+        _p->fee->isHidden()?_p->fee->show():0;
     }
-    else if("id_bind_tunnel_account" == id)
+    else if("deposit_bind_tunnel_account" == id)
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
         qDebug() << id << result;
@@ -113,12 +112,28 @@ void DepositPage::on_depositRecordBtn_clicked()
     _p->recordWidget->showDepositRecord(_p->tunnle_address);
 }
 
+void DepositPage::GetBindTunnelAccount()
+{
+    UBChain::getInstance()->postRPC( "deposit_get_binding_account",
+                                     toJsonFormat( "get_binding_account", QJsonArray()
+                                     << _p->name<<_p->assetSymbol ));
+
+}
+
 void DepositPage::GenerateAddress()
 {
-    UBChain::getInstance()->postRPC("id_create_crosschain_symbol",
+    UBChain::getInstance()->postRPC("deposit_create_crosschain_symbol",
                                     toJsonFormat("create_crosschain_symbol",
                                                  QJsonArray()<<_p->assetSymbol)
                                     );
+}
+
+void DepositPage::BindTunnelAccount()
+{
+    //绑定账户
+    UBChain::getInstance()->postRPC("deposit_bind_tunnel_account",
+                                    toJsonFormat("bind_tunnel_account",
+                                                 QJsonArray()<<_p->name<<_p->tunnelData->address<<_p->assetSymbol<<true));
 }
 
 void DepositPage::InitWidget()
@@ -130,11 +145,15 @@ void DepositPage::InitWidget()
     ui->stackedWidget->setCurrentWidget(_p->qrcodeWidget);
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &DepositPage::jsonDataUpdated);
 
-    //查询通道账户，
-    UBChain::getInstance()->postRPC( "id_get_binding_account",
-                                     toJsonFormat( "get_binding_account", QJsonArray()
-                                     << _p->name<<_p->assetSymbol ));
 
+    _p->fee = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.tunnelBindFee.toDouble(),"LNK",
+                                                    UBChain::getInstance()->mainFrame);
+    _p->fee->raise();
+    connect(_p->fee,&FeeChargeWidget::cancelSignal,this,&DepositPage::close);
+    connect(_p->fee,&FeeChargeWidget::confirmSignal,this,&DepositPage::BindTunnelAccount);
+
+    //查询通道账户，
+    GetBindTunnelAccount();
 
     _p->qrcodeWidget->SetSymbol(_p->assetSymbol);
 }

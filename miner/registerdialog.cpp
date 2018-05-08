@@ -1,9 +1,10 @@
 #include "registerdialog.h"
 #include "ui_registerdialog.h"
 
+#include <QPainter>
 #include "wallet.h"
 #include "commondialog.h"
-
+#include "FeeChooseWidget.h"
 RegisterDialog::RegisterDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RegisterDialog)
@@ -16,7 +17,7 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(251, 251, 254,100);}");
+    ui->widget->setStyleSheet("#widget {background-color:rgba(251, 251, 254,180);}");
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
 
@@ -46,8 +47,10 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
     ui->line_5->setVisible(false);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
+    ui->stackedWidget_fee->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerRegisterFee.toDouble(),"LNK"));
+    ui->stackedWidget_fee->setCurrentIndex(0);
     init();
-
+    ui->registerNameLineEdit->setMaxLength(63);
 }
 
 RegisterDialog::~RegisterDialog()
@@ -205,4 +208,11 @@ void RegisterDialog::on_registerNameLineEdit_textChanged(const QString &arg1)
 void RegisterDialog::on_cancelBtn2_clicked()
 {
     close();
+}
+
+void RegisterDialog::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    //painter.drawPixmap(ui->containerWidget->rect().topLeft(),QPixmap(":/ui/wallet_ui/whitebord.png").scaled(ui->containerWidget->size()*1.2));
+    QDialog::paintEvent(event);
 }

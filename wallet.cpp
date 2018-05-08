@@ -88,6 +88,9 @@ UBChain::UBChain()
 
     pendingFile  = new QFile( walletConfigPath + "/pending.dat");
 
+    //初始化手续费
+    InitFeeCharge();
+
 }
 
 UBChain::~UBChain()
@@ -124,21 +127,21 @@ UBChain*   UBChain::getInstance()
 
 void UBChain:: startExe()
 {
-//    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
+    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
-//    QStringList strList;
-//    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
-//            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT) ;
+    QStringList strList;
+    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
+            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT) ;
 
-//    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
-//    {
-//        strList << "--replay";
-//    }
-//    UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
+    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+    {
+        strList << "--replay";
+    }
+    UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
-//    nodeProc->start("lnk_node.exe",strList);
+    nodeProc->start("lnk_node.exe",strList);
 
-//    emit exeStarted();
+    emit exeStarted();
 }
 
 void UBChain::onNodeExeStateChanged()
@@ -668,6 +671,35 @@ void UBChain::parseTransactions(QString result, QString accountName)
             }
         }
     }
+}
+
+void UBChain::InitFeeCharge()
+{//读取手续费文件
+    QFile fileExit(":/config/feeCharge.config");
+    if(!fileExit.open(QIODevice::ReadOnly)) return ;
+
+    QString jsonStr(fileExit.readAll());
+    fileExit.close();
+
+    QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
+    QByteArray ba = utfCodec->fromUnicode(jsonStr);
+
+    QJsonParseError json_error;
+    QJsonDocument parse_doucment = QJsonDocument::fromJson(ba, &json_error);
+
+    if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return ;
+
+    QJsonObject jsonObject = parse_doucment.object();
+    //开始分析
+    QJsonObject feeObj = jsonObject.value("LNKFee").toObject();
+    feeChargeInfo.tunnelBindFee = feeObj.value("BindTunnel").toString();
+    feeChargeInfo.minerIncomeFee = feeObj.value("MinerIncome").toString();
+    feeChargeInfo.minerForeCloseFee = feeObj.value("MinerForeClose").toString();
+    feeChargeInfo.minerRedeemFee = feeObj.value("MinerRedeem").toString();
+    feeChargeInfo.minerRegisterFee = feeObj.value("MinerRegister").toString();
+    feeChargeInfo.poundagePublishFee = feeObj.value("PoundagePublish").toString();
+    feeChargeInfo.poundageCancelFee = feeObj.value("PoundageCancel").toString();
+    feeChargeInfo.transferFee = feeObj.value("Transfer").toString();
 }
 
 void UBChain::addTrackAddress(QString _address)
