@@ -45,3 +45,16 @@ void ToolButtonWidget::InitStyle()
     setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
              "QToolButton:hover{background-color:#00D2FF;}");
 }
+
+ToolButtonWidgetItem::ToolButtonWidgetItem(int _row, int _column, QWidget *parent)
+{
+    row = _row;
+    column = _column;
+
+    connect(this,SIGNAL(clicked(bool)),this,SLOT(onButtonClicked()));
+}
+
+void ToolButtonWidgetItem::onButtonClicked()
+{
+    emit itemClicked(row,column);
+}

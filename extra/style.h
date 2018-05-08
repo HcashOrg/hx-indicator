@@ -14,6 +14,11 @@
 #define CONTAINERWIDGET_STYLE   "#containerwidget{background-color:rgb(40,45,66);border-radius:10px;}"  \
                                 "QLabel{color:rgb(192,196,212);}"
 
+#define TOOLBUTTON_STYLE_1      "QToolButton{font: 11px \"微软雅黑\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}" \
+                                "QToolButton:hover{background-color:#5474EB;}"
 
+#define TABLEWIDGET_STYLE_1     "QTableView{background-color:#FFFFFF;border:1px solid white;border-radius:15px;}" \
+                                "QHeaderView{border:none;color:#C6CAD4;font: 12px \"微软雅黑\";}" \
+                                "QHeaderView:section{height:35px;border:none;background-color:#FFFFFF;}"
 
 #endif // STYLE_H

@@ -26,4 +26,22 @@ private:
     Ui::ToolButtonWidget *ui;
 };
 
+class ToolButtonWidgetItem : public ToolButtonWidget
+{
+    Q_OBJECT
+
+public:
+    explicit ToolButtonWidgetItem(int _row, int _column, QWidget *parent = 0);
+
+signals:
+    void itemClicked(int,int);
+
+private slots:
+    void onButtonClicked();
+
+private:
+    int row;
+    int column;
+};
+
 #endif // TOOLBUTTONWIDGET_H

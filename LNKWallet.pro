@@ -153,7 +153,8 @@ SOURCES += main.cpp\
     FeeChooseWidget.cpp \
     exchange/BuyOrderWidget.cpp \
     depositpage/DepositAutomatic.cpp \
-    notifyWidget/MessageNotifyWidget.cpp
+    notifyWidget/MessageNotifyWidget.cpp \
+    exchange/contractbalancewidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -279,7 +280,8 @@ HEADERS  += firstlogin.h \
     FeeChooseWidget.h \
     exchange/BuyOrderWidget.h \
     depositpage/DepositAutomatic.h \
-    notifyWidget/MessageNotifyWidget.h
+    notifyWidget/MessageNotifyWidget.h \
+    exchange/contractbalancewidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -381,7 +383,8 @@ FORMS    += firstlogin.ui \
     exchange/OnchainOrderPage.ui \
     FeeChooseWidget.ui \
     exchange/BuyOrderWidget.ui \
-    notifyWidget/MessageNotifyWidget.ui
+    notifyWidget/MessageNotifyWidget.ui \
+    exchange/contractbalancewidget.ui
 
 win32{
     DISTFILES += logo.rc

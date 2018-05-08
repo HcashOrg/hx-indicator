@@ -299,7 +299,8 @@ void Frame::alreadyLogin()
     connect(titleBar,SIGNAL(minimum()),this,SLOT(showMinimized()));
     connect(titleBar,SIGNAL(closeWallet()),qApp,SLOT(quit()));
     connect(titleBar,SIGNAL(tray()),this,SLOT(hide()));
-    connect(titleBar,&TitleBar::back,this,SLOT(onBack()));
+    connect(titleBar,&TitleBar::back,this,&Frame::onBack);
+//    connect(titleBar,&TitleBar::back,this,&Frame::showMainPage);
     connect(this,&Frame::titleBackVisible,titleBar,&TitleBar::backBtnVis);
 
     centralWidget = new QWidget(this);
@@ -1003,6 +1004,7 @@ void Frame::showMyExchangeContractPage()
 {
     closeCurrentPage();
     myExchangeContractPage = new MyExchangeContractPage(centralWidget);
+    connect(myExchangeContractPage,&MyExchangeContractPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
     myExchangeContractPage->setAttribute(Qt::WA_DeleteOnClose);
     myExchangeContractPage->show();
     currentPageNum = 5;
@@ -1419,46 +1421,36 @@ void Frame::jsonDataUpdated(QString id)
 
 void Frame::onBack()
 {
-//    switch (currentPageNum) {
-//    case 0:
-//        showMainPage();
-//        break;
-//    case 1:
-//        break;
-//    case 2:
-//        break;
-//    case 3:
-//        showMainPage();
-//        break;
-//    case 4:
-//        contactPage->close();
-//        contactPage = NULL;
-//        break;
-//    case 5:
-//        myExchangeContractPage->close();
-//        myExchangeContractPage = NULL;
-//        break;
-//    case 6:
-//        onchainOrderPage->close();
-//        onchainOrderPage = NULL;
-//        break;
-//    case 7:
-//        minerPage->close();
-//        minerPage = NULL;
-//        break;
-//    case 8:
-//        break;
-//    case 9:
-//        multiSigPage->close();
-//        multiSigPage = NULL;
-//        break;
-//    case 10:
-//        multiSigTransactionPage->close();
-//        multiSigTransactionPage = NULL;
-//        break;
-//    default:
-//        break;
-//    }
+    switch (currentPageNum) {
+    case 0:
+        showMainPage();
+        break;
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        showMainPage();
+        break;
+    case 4:
+        break;
+    case 5:
+        myExchangeContractPage->onBack();
+        emit titleBackVisible(false);
+        break;
+    case 6:
+        break;
+    case 7:
+        break;
+    case 8:
+        break;
+    case 9:
+        break;
+    case 10:
+        break;
+    default:
+        break;
+    }
 
 }
 

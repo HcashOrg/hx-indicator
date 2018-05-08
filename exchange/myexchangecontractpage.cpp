@@ -6,16 +6,41 @@
 #include "wallet.h"
 #include "commondialog.h"
 #include "selldialog.h"
-#include "depositexchangecontractdialog.h"
-#include "withdrawexchangecontractdialog.h"
+#include "contractbalancewidget.h"
+#include "ToolButtonWidget.h"
 
 MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     QWidget(parent),
+    currentWidget(NULL),
     ui(new Ui::MyExchangeContractPage)
 {
     ui->setupUi(this);
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+
+    ui->ordersTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->ordersTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->ordersTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->ordersTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->ordersTableWidget->setMouseTracking(true);
+    ui->ordersTableWidget->setShowGrid(false);//隐藏表格线
+    ui->ordersTableWidget->horizontalHeader()->setSectionsClickable(true);
+    ui->ordersTableWidget->horizontalHeader()->setFixedHeight(35);
+    ui->ordersTableWidget->horizontalHeader()->setVisible(true);
+    ui->ordersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->ordersTableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->ordersTableWidget->verticalHeader()->setVisible(false);
+    ui->ordersTableWidget->setColumnWidth(0,160);
+    ui->ordersTableWidget->setColumnWidth(1,160);
+    ui->ordersTableWidget->setColumnWidth(2,160);
+    ui->ordersTableWidget->setColumnWidth(3,90);
+    ui->ordersTableWidget->setColumnWidth(4,90);
+
+    ui->ordersTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+
+    ui->balanceBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->sellBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->withdrawAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
 
     init();
@@ -28,8 +53,6 @@ MyExchangeContractPage::~MyExchangeContractPage()
 
 void MyExchangeContractPage::init()
 {
-    ui->stackedWidget->setCurrentIndex(1);
-
     QStringList accounts = UBChain::getInstance()->accountInfoMap.keys();
     ui->accountComboBox->addItems(accounts);
 
@@ -55,6 +78,15 @@ void MyExchangeContractPage::refresh()
     on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
 }
 
+void MyExchangeContractPage::onBack()
+{
+    if(currentWidget)
+    {
+        currentWidget->close();
+        currentWidget = NULL;
+    }
+}
+
 void MyExchangeContractPage::showOrders()
 {
     SellOrders orders = accountSellOrdersMap.value(ui->accountComboBox->currentText());
@@ -78,29 +110,30 @@ void MyExchangeContractPage::showOrders()
         ui->ordersTableWidget->setItem(i,2, new QTableWidgetItem(QString::number(price,'g',12)));
         ui->ordersTableWidget->setItem(i,3, new QTableWidgetItem(tr("withdraw")));
         ui->ordersTableWidget->setItem(i,4, new QTableWidgetItem(tr("add")));
+
+        for(int j = 0; j < 5; j++)
+        {
+            ui->ordersTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+            if(i%2)
+            {
+                ui->ordersTableWidget->item(i,j)->setBackgroundColor(QColor(255,255,255));
+            }
+            else
+            {
+                ui->ordersTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
+            }
+        }
+
+        for(int j = 3;j < 5;++j)
+        {
+            ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
+            toolButtonItem->setInitGray(j%2 != 0);
+            toolButtonItem->setText(ui->ordersTableWidget->item(i,j)->text());
+            ui->ordersTableWidget->setCellWidget(i,j,toolButtonItem);
+            connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
+        }
     }
 
-}
-
-void MyExchangeContractPage::showContractBalances()
-{
-    ExchangeContractBalances balances = UBChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountComboBox->currentText());
-
-    QStringList keys = balances.keys();
-    int size = keys.size();
-    ui->balancesTableWidget->setRowCount(0);
-    ui->balancesTableWidget->setRowCount(size);
-
-    for(int i = 0; i < size; i++)
-    {
-        QString key = keys.at(i);
-        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(key));
-
-        ui->balancesTableWidget->setItem(i,0, new QTableWidgetItem(key));
-        ui->balancesTableWidget->setItem(i,1, new QTableWidgetItem(getBigNumberString(balances.value(key), assetInfo.precision)));
-        ui->balancesTableWidget->setItem(i,2, new QTableWidgetItem(tr("deposit")));
-        ui->balancesTableWidget->setItem(i,3, new QTableWidgetItem(tr("withdraw")));
-    }
 }
 
 
@@ -175,47 +208,6 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id.startsWith("id-invoke_contract_offline-owner_assets-") )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
-
-        QString accountName = id.mid(QString("id-invoke_contract_offline-owner_assets-").size());
-
-        if(result.startsWith("\"result\":"))
-        {
-            result.prepend("{");
-            result.append("}");
-
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-            QJsonObject jsonObject = parse_doucment.object();
-            QJsonObject object = QJsonDocument::fromJson(jsonObject.take("result").toString().toLatin1()).object();
-
-            ExchangeContractBalances balances;
-            foreach (QString key, object.keys())
-            {
-                QJsonValue amountValue = object.take(key);
-                unsigned long long amount = 0;
-
-                if(amountValue.isString())
-                {
-                    amount = amountValue.toString().toULongLong();
-                }
-                else
-                {
-                    amount = QString::number(amountValue.toDouble(),'g',12).toULongLong();
-                }
-
-                balances.insert(key,amount);
-            }
-
-            UBChain::getInstance()->accountExchangeContractBalancesMap.insert(accountName,balances);
-        }
-
-        showContractBalances();
-
-        return;
-    }
 
     if( id == "id-invoke_contract-cancelSellOrder" )
     {
@@ -296,11 +288,6 @@ void MyExchangeContractPage::on_accountComboBox_currentIndexChanged(const QStrin
         UBChain::getInstance()->postRPC( "id-invoke_contract_offline-sell_orders-" + ui->accountComboBox->currentText(), toJsonFormat( "invoke_contract_offline",
                                                                                QJsonArray() << ui->accountComboBox->currentText() << contractAddress
                                                                                << "sell_orders"  << ""));
-
-
-        UBChain::getInstance()->postRPC( "id-invoke_contract_offline-owner_assets-" + ui->accountComboBox->currentText(), toJsonFormat( "invoke_contract_offline",
-                                                                               QJsonArray() << ui->accountComboBox->currentText() << contractAddress
-                                                                               << "owner_assets"  << ""));
     }
 
 }
@@ -336,64 +323,17 @@ void MyExchangeContractPage::on_sellBtn_clicked()
 
 void MyExchangeContractPage::on_balanceBtn_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(2);
+    ContractBalanceWidget* contractBalanceWidget = new ContractBalanceWidget(this);
+    contractBalanceWidget->setAccount(ui->accountComboBox->currentText());
+    contractBalanceWidget->move(0,0);
+    contractBalanceWidget->show();
+
+    currentWidget = contractBalanceWidget;
+
+    emit backBtnVisible(true);
 }
 
-void MyExchangeContractPage::on_myOrdersBtn_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
 
-void MyExchangeContractPage::on_balancesTableWidget_cellPressed(int row, int column)
-{
-    if(column == 2)
-    {
-        // 合约充值
-        DepositExchangeContractDialog depositExchangeContractDialog;
-        depositExchangeContractDialog.setCurrentAsset(ui->balancesTableWidget->item(row,0)->text());
-        depositExchangeContractDialog.pop();
-
-        return;
-    }
-
-    if(column == 3)
-    {
-        // 合约提现
-        WithdrawExchangeContractDialog withdrawExchangeContractDialog;
-        withdrawExchangeContractDialog.setCurrentAsset(ui->balancesTableWidget->item(row,0)->text());
-        withdrawExchangeContractDialog.pop();
-
-        return;
-    }
-}
-
-void MyExchangeContractPage::on_ordersTableWidget_cellPressed(int row, int column)
-{
-    if(column == 3)
-    {
-        // 撤销挂单
-        CommonDialog commonDialog(CommonDialog::OkAndCancel);
-        commonDialog.setText( tr("Sure to withdraw this order?") );
-        if(commonDialog.pop())
-        {
-            QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
-            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
-            AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
-
-            QString params = QString("%1,%2,%3,%4").arg(assetInfo.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(row,0)->text(), assetInfo.precision))
-                    .arg(assetInfo2.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(row,1)->text(), assetInfo2.precision));
-
-            UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrder", toJsonFormat( "invoke_contract",
-                                                                                   QJsonArray() << ui->accountComboBox->currentText() << "0.001" << 1000
-                                                                                   << contractAddress
-                                                                                   << "cancelSellOrder"  << params));
-
-
-        }
-
-        return;
-    }
-}
 
 void MyExchangeContractPage::on_withdrawAllBtn_clicked()
 {
@@ -407,17 +347,36 @@ void MyExchangeContractPage::on_withdrawAllBtn_clicked()
 
 }
 
-void MyExchangeContractPage::on_depositBtn_clicked()
+void MyExchangeContractPage::onItemClicked(int _row, int _column)
 {
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+    if(_column == 3)
+    {
+        // 撤销挂单
+        CommonDialog commonDialog(CommonDialog::OkAndCancel);
+        commonDialog.setText( tr("Sure to withdraw this order?") );
+        if(commonDialog.pop())
+        {
+            QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
+            AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
 
-    if(contractAddress.isEmpty())
-    {
-        registerContract();
+            QString params = QString("%1,%2,%3,%4").arg(assetInfo.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(_row,0)->text(), assetInfo.precision))
+                    .arg(assetInfo2.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(_row,1)->text(), assetInfo2.precision));
+
+            UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrder", toJsonFormat( "invoke_contract",
+                                                                                   QJsonArray() << ui->accountComboBox->currentText() << "0.001" << 1000
+                                                                                   << contractAddress
+                                                                                   << "cancelSellOrder"  << params));
+
+
+        }
+
+        return;
     }
-    else
+
+    if(_column == 4)
     {
-        DepositExchangeContractDialog depositExchangeContractDialog;
-        depositExchangeContractDialog.pop();
+
+        return;
     }
 }

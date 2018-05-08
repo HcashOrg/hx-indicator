@@ -28,10 +28,14 @@ public:
 
     void refresh();
 
+    void onBack();
+
+signals:
+    void backBtnVisible(bool isShow);
+
 private:
     QMap<QString,SellOrders> accountSellOrdersMap;
     void showOrders();
-    void showContractBalances();
 
 private slots:
     void jsonDataUpdated(QString id);
@@ -46,19 +50,14 @@ private slots:
 
     void on_balanceBtn_clicked();
 
-    void on_myOrdersBtn_clicked();
-
-    void on_balancesTableWidget_cellPressed(int row, int column);
-
-    void on_ordersTableWidget_cellPressed(int row, int column);
-
     void on_withdrawAllBtn_clicked();
 
-    void on_depositBtn_clicked();
+    void onItemClicked(int _row, int _column);
 
 private:
     Ui::MyExchangeContractPage *ui;
     bool inited = false;
+    QWidget* currentWidget;
 
     void paintEvent(QPaintEvent*);
     void registerContract();
