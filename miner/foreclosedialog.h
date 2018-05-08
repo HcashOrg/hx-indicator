@@ -22,6 +22,7 @@ private slots:
 
     void on_cancelBtn_clicked();
 
+    void on_closeBtn_clicked();
 private:
     Ui::ForecloseDialog *ui;
     bool yesOrNo;

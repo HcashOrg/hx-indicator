@@ -149,7 +149,7 @@ void MainPage::updateAccountList()
         }
         for(int j = 2;j < 7;++j)
         {
-            if(ui->accountTableWidget->item(i,j) &&ui->accountTableWidget->item(i,0)->text() != "LNK")
+            if(ui->accountTableWidget->item(i,j))
             {
                 ToolButtonWidget *toolButton = new ToolButtonWidget();
                 toolButton->setInitNone(true);
@@ -194,7 +194,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
 //        return;
 //    }
 
-    if(ui->accountTableWidget->item(row,0)->text() == "LNK")
+    if(!ui->accountTableWidget->item(row,column))
     {
         return;
     }

@@ -8,6 +8,7 @@
 
 #include "wallet.h"
 #include "commondialog.h"
+#include "depositpage/FeeChargeWidget.h"
 
 class PoundageWidget::PoundageWidgetPrivate
 {
@@ -221,10 +222,17 @@ void PoundageWidget::jsonDataUpdated(QString id)
 
 void PoundageWidget::DeletePoundageSlots(const QString &orderID)
 {
-    UBChain::getInstance()->postRPC("id_cancel_guarantee_order",
-                                    toJsonFormat("cancel_guarantee_order",
-                                                 QJsonArray()<<orderID<<true)
-                                    );
+    FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.poundageCancelFee.toDouble(),"LNK",
+                                                     UBChain::getInstance()->mainFrame);
+    feeCharge->setAttribute(Qt::WA_DeleteOnClose);
+    feeCharge->show();
+    connect(feeCharge,&FeeChargeWidget::confirmSignal,[orderID](){
+        UBChain::getInstance()->postRPC("id_cancel_guarantee_order",
+                                        toJsonFormat("cancel_guarantee_order",
+                                                     QJsonArray()<<orderID<<true)
+                                        );
+    });
+
 }
 
 void PoundageWidget::SetDefaultPoundageSlots(const QString &orderID)

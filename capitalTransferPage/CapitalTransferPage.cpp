@@ -85,43 +85,61 @@ void CapitalTransferPage::radioChangedSlots()
 
 void CapitalTransferPage::jsonDataUpdated(QString id)
 {
-    if("id-get_binding_account" == id)
+    if("captial-get_binding_account" == id)
     {//获取到当前账户绑定的通道账户
         QString result = UBChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() || result.startsWith("\"error"))
         {
             ui->radioButton_deposit->setEnabled(false);
             ui->radioButton_withdraw->setEnabled(false);
-            ui->lineEdit_number->setEnabled(true);
+            ui->lineEdit_number->setEnabled(false);
+            ui->lineEdit_address->setText(tr("Cannot find tunnelAddress!"));
             return;
         }
         result.prepend("{");
         result.append("}");
     //提取通道账户地址
         _p->tunnel_account_address = CapitalTransferDataUtil::parseTunnelAddress(result);
+        if( _p->tunnel_account_address.isEmpty())
+        {
+            ui->radioButton_deposit->setEnabled(false);
+            ui->radioButton_withdraw->setEnabled(false);
+            ui->lineEdit_number->setEnabled(false);
+            ui->lineEdit_address->setText(tr("Cannot find tunnelAddress!"));
+            return;
+        }
         if(ui->radioButton_deposit->isChecked())
         {
             ui->lineEdit_address->setText(_p->tunnel_account_address);
         }
 
     }
-    else if("id-get_current_multi_address" == id)
+    else if("captial-get_current_multi_address" == id)
     {//获取到多签地址
         QString result = UBChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() || result.startsWith("\"error"))
         {
             ui->radioButton_deposit->setEnabled(false);
             ui->radioButton_withdraw->setEnabled(false);
-            ui->lineEdit_number->setEnabled(true);
+            ui->lineEdit_number->setEnabled(false);
+            ui->lineEdit_address->setText(tr("Cannot find multiAddress!"));
             return;
         }
         result.prepend("{");
         result.append("}");
     //提取多签地址
-        _p->multisig_address = CapitalTransferDataUtil::parseMutiAddress(result);
+        _p->multisig_address = CapitalTransferDataUtil::parseMutiAddress(result);\
+        if( _p->multisig_address.isEmpty())
+        {
+            ui->radioButton_deposit->setEnabled(false);
+            ui->radioButton_withdraw->setEnabled(false);
+            ui->lineEdit_number->setEnabled(false);
+            ui->lineEdit_address->setText(tr("Cannot find multiAddress!"));
+            return;
+        }
         qDebug()<<"多签地址"<<_p->multisig_address;
     }
-    else if("id-createrawtransaction" == id)
+    else if("captial-createrawtransaction" == id)
     {//获取到创建交易信息
         QString result = UBChain::getInstance()->jsonDataValue( id);
         qDebug()<<"transaction"<<result;
@@ -137,11 +155,11 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         qDebug()<<"detail"<<_p->trade_detail;
     //获取交易结果信息
         QString transaction = CapitalTransferDataUtil::parseTransaction(result);
-        UBChain::getInstance()->postRPC( "id-decoderawtransaction",
+        UBChain::getInstance()->postRPC( "captial-decoderawtransaction",
                                          toJsonFormat( "decoderawtransaction", QJsonArray()
                                          <<transaction<<_p->symbol ));
     }
-    else if("id-decoderawtransaction" == id)
+    else if("captial-decoderawtransaction" == id)
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() || result.startsWith("\"error"))
@@ -157,7 +175,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
 
         ui->toolButton_confirm->setVisible(true);
     }
-    else if("id-signrawtransaction" == id)
+    else if("captial-signrawtransaction" == id)
     {
         qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);
     }
@@ -167,13 +185,13 @@ void CapitalTransferPage::passwordConfirmSlots()
 {//提交充值或提现指令
     if(ui->radioButton_deposit->isChecked())
     {//充值，对已有交易进行签名
-        UBChain::getInstance()->postRPC( "id-signrawtransaction",
+        UBChain::getInstance()->postRPC( "captial-signrawtransaction",
                                          toJsonFormat( "signrawtransaction", QJsonArray()
                                          <<_p->tunnel_account_address<<_p->symbol<<_p->trade_detail<<true ));
     }
     else if(ui->radioButton_withdraw->isChecked())
     {//提现
-        UBChain::getInstance()->postRPC( "id-signrawtransaction",
+        UBChain::getInstance()->postRPC( "captial-signrawtransaction",
                                          toJsonFormat( "signrawtransaction", QJsonArray()
                                          <<_p->tunnel_account_address<<_p->symbol<<_p->trade_detail<<true ));
     }
@@ -189,7 +207,7 @@ void CapitalTransferPage::numberChangeSlots(const QString &number)
 {
     if(ui->radioButton_deposit->isChecked())
     {//充值修改，发送充值指令问题
-        UBChain::getInstance()->postRPC( "id-createrawtransaction",
+        UBChain::getInstance()->postRPC( "captial-createrawtransaction",
                                          toJsonFormat( "createrawtransaction", QJsonArray()
                                          << _p->tunnel_account_address<<_p->multisig_address<<number<<_p->symbol ));
         //UBChain::getInstance()->postRPC( "id-createrawtransaction",
@@ -198,7 +216,7 @@ void CapitalTransferPage::numberChangeSlots(const QString &number)
     }
     else if(ui->radioButton_withdraw->isChecked())
     {
-        UBChain::getInstance()->postRPC( "id-createrawtransaction",
+        UBChain::getInstance()->postRPC( "captial-createrawtransaction",
                                          toJsonFormat( "createrawtransaction", QJsonArray()
                                          << _p->tunnel_account_address<<ui->lineEdit_address->text()<<number<<_p->symbol ));
     }
@@ -285,10 +303,10 @@ void CapitalTransferPage::InitWidget()
     connect(ui->lineEdit_address,&QLineEdit::textEdited,this,&CapitalTransferPage::addressChangeSlots);
 
     //获取通道账户，获取多签地址，用于充值使用
-    UBChain::getInstance()->postRPC( "id-get_binding_account",
+    UBChain::getInstance()->postRPC( "captial-get_binding_account",
                                      toJsonFormat( "get_binding_account", QJsonArray()
                                      << _p->account_name<<_p->symbol ));
-    UBChain::getInstance()->postRPC( "id-get_current_multi_address",
+    UBChain::getInstance()->postRPC( "captial-get_current_multi_address",
                                      toJsonFormat( "get_current_multi_address", QJsonArray()
                                      << _p->symbol));
 

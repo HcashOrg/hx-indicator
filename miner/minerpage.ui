@@ -60,6 +60,7 @@
    <property name="font">
     <font>
      <family>微软雅黑</family>
+     <pointsize>10</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -84,6 +85,7 @@
    <property name="font">
     <font>
      <family>微软雅黑</family>
+     <pointsize>10</pointsize>
      <weight>50</weight>
      <bold>false</bold>
     </font>
