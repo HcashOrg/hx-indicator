@@ -365,7 +365,9 @@ void MinerPage::InitStyle()
                   "QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
                   "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
                   "QHeaderView:section{height:40px;border:none;background-color:#FFFFFF;}"
-                  "QTableView:item{min-height:40px;}");
+                  "QTableView:item{min-height:40px;}"
+
+                  "QComboBox{font-size:14px;}");
 
 }
 

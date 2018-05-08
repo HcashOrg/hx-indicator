@@ -37,7 +37,7 @@ WithdrawConfirmWidget::~WithdrawConfirmWidget()
 }
 void WithdrawConfirmWidget::jsonDataUpdated(QString id)
 {
-    if( id == "id-unlock-lockpage")
+    if( id == "withdraw-unlock-lockpage")
     {
         QString  result = UBChain::getInstance()->jsonDataValue(id);
         if( result == "\"result\":null")
@@ -51,7 +51,7 @@ void WithdrawConfirmWidget::jsonDataUpdated(QString id)
             ui->toolButton_confirm->setEnabled(false);
         }
     }
-    else if("id-withdraw_cross_chain_transaction" == id)
+    else if("withdraw-withdraw_cross_chain_transaction" == id)
     {
         QString  result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << id <<"asdfsdfsdfasdf"<< result;
@@ -63,7 +63,7 @@ void WithdrawConfirmWidget::jsonDataUpdated(QString id)
 
 void WithdrawConfirmWidget::ConfirmSlots()
 {
-    UBChain::getInstance()->postRPC( "id-withdraw_cross_chain_transaction", toJsonFormat( "withdraw_cross_chain_transaction",
+    UBChain::getInstance()->postRPC( "withdraw-withdraw_cross_chain_transaction", toJsonFormat( "withdraw_cross_chain_transaction",
                                      QJsonArray() << _p->account<<_p->ammount<<_p->symbol<<_p->crosschain_account<<""<<true ));
     qDebug()<<_p->account << _p->ammount << _p->symbol << _p->crosschain_account;
     //close();
@@ -83,7 +83,7 @@ void WithdrawConfirmWidget::passwordChangeSlots(const QString &address)
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->lineEdit->text() ));
+    UBChain::getInstance()->postRPC( "withdraw-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->lineEdit->text() ));
 }
 
 void WithdrawConfirmWidget::InitData()
