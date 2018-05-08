@@ -7,6 +7,7 @@
 #include "PoundageShowWidget.h"
 
 #include "wallet.h"
+#include "commondialog.h"
 
 class PoundageWidget::PoundageWidgetPrivate
 {
@@ -152,7 +153,13 @@ void PoundageWidget::jsonDataUpdated(QString id)
     if("id_create_guarantee_order" == id)
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
-        if( result.isEmpty() )  return;
+        if( result.isEmpty() || result.startsWith("\"error"))
+        {
+            CommonDialog dia(CommonDialog::OkOnly);
+            dia.setText(result);
+            dia.pop();
+            return;
+        }
         result.prepend("{");
         result.append("}");
 
@@ -198,7 +205,13 @@ void PoundageWidget::jsonDataUpdated(QString id)
     {
         //转化为结构体
         QString result = UBChain::getInstance()->jsonDataValue( id);
-        if( result.isEmpty() )  return;
+        if( result.isEmpty() || result.startsWith("\"error"))
+        {
+            CommonDialog dia(CommonDialog::OkOnly);
+            dia.setText(result);
+            dia.pop();
+            return;
+        }
         result.prepend("{");
         result.append("}");
         qDebug()<<result;

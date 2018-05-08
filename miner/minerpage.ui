@@ -456,6 +456,14 @@
        <set>AlignCenter</set>
       </property>
      </column>
+     <column>
+      <property name="text">
+       <string>操作</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
     </widget>
     <widget class="QStackedWidget" name="stackedWidget_record">
      <property name="geometry">

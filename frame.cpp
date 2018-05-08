@@ -299,7 +299,7 @@ void Frame::alreadyLogin()
     connect(titleBar,SIGNAL(minimum()),this,SLOT(showMinimized()));
     connect(titleBar,SIGNAL(closeWallet()),qApp,SLOT(quit()));
     connect(titleBar,SIGNAL(tray()),this,SLOT(hide()));
-    connect(titleBar,&TitleBar::back,this,SLOT(onBack()));
+    connect(titleBar,&TitleBar::back,this,&Frame::onBack);
     connect(this,&Frame::titleBackVisible,titleBar,&TitleBar::backBtnVis);
 
     centralWidget = new QWidget(this);

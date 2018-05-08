@@ -10,6 +10,7 @@
 
 #include "poundage/PageScrollWidget.h"
 #include "ToolButtonWidget.h"
+#include "depositpage/FeeChargeWidget.h"
 
 static const int ROWNUMBER = 4;
 MinerPage::MinerPage(QWidget *parent) :
@@ -31,7 +32,7 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->lockBalancesTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->lockBalancesTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->lockBalancesTableWidget->horizontalHeader()->setVisible(true);
-    ui->lockBalancesTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->lockBalancesTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->lockBalancesTableWidget->setColumnWidth(0,140);
     ui->lockBalancesTableWidget->setColumnWidth(1,140);
@@ -52,7 +53,7 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->incomeTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->incomeTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->incomeTableWidget->horizontalHeader()->setVisible(true);
-    ui->incomeTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->incomeTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->incomeTableWidget->setColumnWidth(0,140);
     ui->incomeTableWidget->setColumnWidth(1,140);
@@ -69,7 +70,7 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->incomeRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->incomeRecordTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->incomeRecordTableWidget->horizontalHeader()->setVisible(true);
-    ui->incomeRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->incomeRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->incomeRecordTableWidget->setColumnWidth(0,140);
     ui->incomeRecordTableWidget->setColumnWidth(1,140);
@@ -143,13 +144,15 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->lockBalancesTableWidget->setItem(i,3,new QTableWidgetItem(tr("add")));
 
             ToolButtonWidget *buttonAdd = new ToolButtonWidget();
+            buttonAdd->setInitNone(true);
             buttonAdd->setText(ui->lockBalancesTableWidget->item(i,3)->text());
             ui->lockBalancesTableWidget->setCellWidget(i,3,buttonAdd);
             connect(buttonAdd,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_lockBalancesTableWidget_cellPressed,this,i,3));
 
             ui->lockBalancesTableWidget->setItem(i,4,new QTableWidgetItem(tr("foreclose")));
             ToolButtonWidget *buttonfore = new ToolButtonWidget();
-            buttonfore->setInitGray(true);
+            buttonfore->setInitNone(true);
+            //buttonfore->setInitGray(true);
             buttonfore->setText(ui->lockBalancesTableWidget->item(i,4)->text());
             ui->lockBalancesTableWidget->setCellWidget(i,4,buttonfore);
             connect(buttonfore,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_lockBalancesTableWidget_cellPressed,this,i,4));
@@ -212,7 +215,9 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->incomeTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(amount,assetInfo.precision)));
 
             ui->incomeTableWidget->setItem(i,2,new QTableWidgetItem(tr("obtain")));
+
             ToolButtonWidget *buttonInc = new ToolButtonWidget();
+            buttonInc->setInitNone(true);
             buttonInc->setText(ui->incomeTableWidget->item(i,2)->text());
             ui->incomeTableWidget->setCellWidget(i,2,buttonInc);
             connect(buttonInc,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_incomeTableWidget_cellPressed,this,i,2));
@@ -437,18 +442,32 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
 {
     if(column == 2)
     {
-        CommonDialog commonDialog(CommonDialog::OkAndCancel);
-        commonDialog.setText(tr("Sure to obtain all the current income?"));
-        if(commonDialog.pop())
-        {
-            QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+        QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+
+        FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),"LNK",
+                                                         UBChain::getInstance()->mainFrame);
+        connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address,row](){
             UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
                                              toJsonFormat( "obtain_pay_back_balance",
                                                            QJsonArray() << address
-                                                           << ui->incomeTableWidget->item(row,1)->text()
-                                                           << ui->incomeTableWidget->item(row,0)->text()
+                                                           << this->ui->incomeTableWidget->item(row,1)->text()
+                                                           << this->ui->incomeTableWidget->item(row,0)->text()
                                                            << true ));
-        }
+        });
+        feeCharge->show();
+
+//        CommonDialog commonDialog(CommonDialog::OkAndCancel);
+//        commonDialog.setText(tr("Sure to obtain all the current income?"));
+//        if(commonDialog.pop())
+//        {
+//            QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+//            UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
+//                                             toJsonFormat( "obtain_pay_back_balance",
+//                                                           QJsonArray() << address
+//                                                           << ui->incomeTableWidget->item(row,1)->text()
+//                                                           << ui->incomeTableWidget->item(row,0)->text()
+//                                                           << true ));
+//        }
 
         return;
     }
