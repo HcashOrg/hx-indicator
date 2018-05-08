@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SellDialog</class>
- <widget class="QDialog" name="SellDialog">
+ <class>WithdrawOrderDialog</class>
+ <widget class="QDialog" name="WithdrawOrderDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -30,16 +30,16 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>230</x>
       <y>130</y>
       <width>500</width>
-      <height>340</height>
+      <height>320</height>
      </rect>
     </property>
     <widget class="QToolButton" name="cancelBtn">
      <property name="geometry">
       <rect>
-       <x>236</x>
+       <x>290</x>
        <y>249</y>
        <width>96</width>
        <height>30</height>
@@ -58,7 +58,7 @@
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>180</x>
        <y>249</y>
        <width>96</width>
        <height>30</height>
@@ -74,142 +74,61 @@
       <string>确定</string>
      </property>
     </widget>
-    <widget class="QComboBox" name="assetComboBox">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>70</y>
-       <width>90</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>微软雅黑</family>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>230</x>
-       <y>70</y>
-       <width>40</width>
+       <x>40</x>
+       <y>180</y>
+       <width>100</width>
        <height>30</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <family>微软雅黑</family>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(192, 196, 212);</string>
-     </property>
      <property name="text">
-      <string>换成</string>
+      <string>输入钱包密码：</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QComboBox" name="assetComboBox2">
+    <widget class="QLineEdit" name="pwdLineEdit">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>70</y>
-       <width>90</width>
+       <x>150</x>
+       <y>180</y>
+       <width>240</width>
        <height>30</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <family>微软雅黑</family>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>110</y>
-       <width>54</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>卖数量</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>110</y>
-       <width>54</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>买数量</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="sellAmountLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>110</y>
-       <width>160</width>
-       <height>30</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="buyAmountLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>110</y>
-       <width>160</width>
-       <height>30</height>
-      </rect>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
      </property>
     </widget>
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>30</y>
-       <width>60</width>
-       <height>30</height>
+       <x>100</x>
+       <y>50</y>
+       <width>300</width>
+       <height>40</height>
       </rect>
      </property>
      <property name="text">
-      <string>当前账户</string>
+      <string>确定撤销该挂单吗？您将需要支付一笔手续费</string>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLabel" name="accountNameLabel">
+    <widget class="QLabel" name="tipLabel">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>30</y>
-       <width>120</width>
-       <height>30</height>
+       <x>160</x>
+       <y>220</y>
+       <width>200</width>
+       <height>16</height>
       </rect>
      </property>
      <property name="text">
@@ -236,6 +155,38 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>120</y>
+       <width>100</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>预计手续费：</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="feeLabel">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>120</y>
+       <width>240</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
    </widget>

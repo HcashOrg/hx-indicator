@@ -20,6 +20,13 @@ WithdrawExchangeContractDialog::WithdrawExchangeContractDialog(QWidget *parent) 
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
+    ui->closeBtn->setIconSize(QSize(12,12));
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
+                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+
+    ui->okBtn->setStyleSheet(OKBTN_STYLE);
+    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
@@ -144,4 +151,9 @@ void WithdrawExchangeContractDialog::on_withdrawAllBtn_clicked()
     AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
 
     ui->amountLineEdit->setText(getBigNumberString(maxAmount, assetInfo.precision));
+}
+
+void WithdrawExchangeContractDialog::on_closeBtn_clicked()
+{
+    close();
 }

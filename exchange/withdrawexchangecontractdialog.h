@@ -15,7 +15,7 @@ public:
     explicit WithdrawExchangeContractDialog(QWidget *parent = 0);
     ~WithdrawExchangeContractDialog();
 
-    void  pop();
+    void pop();
 
     void init();
 
@@ -31,6 +31,8 @@ private slots:
     void on_assetComboBox_currentIndexChanged(const QString &arg1);
 
     void on_withdrawAllBtn_clicked();
+
+    void on_closeBtn_clicked();
 
 private:
     Ui::WithdrawExchangeContractDialog *ui;

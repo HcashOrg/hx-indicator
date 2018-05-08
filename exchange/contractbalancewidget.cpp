@@ -159,29 +159,6 @@ void ContractBalanceWidget::showContractBalances()
 
 }
 
-void ContractBalanceWidget::on_balancesTableWidget_cellPressed(int row, int column)
-{
-    if(column == 2)
-    {
-        // 合约充值
-        DepositExchangeContractDialog depositExchangeContractDialog;
-        depositExchangeContractDialog.setCurrentAsset(ui->balancesTableWidget->item(row,0)->text());
-        depositExchangeContractDialog.pop();
-
-        return;
-    }
-
-    if(column == 3)
-    {
-        // 合约提现
-        WithdrawExchangeContractDialog withdrawExchangeContractDialog;
-        withdrawExchangeContractDialog.setCurrentAsset(ui->balancesTableWidget->item(row,0)->text());
-        withdrawExchangeContractDialog.pop();
-
-        return;
-    }
-}
-
 void ContractBalanceWidget::on_depositBtn_clicked()
 {
     QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(accountName);
@@ -196,4 +173,16 @@ void ContractBalanceWidget::on_depositBtn_clicked()
         depositExchangeContractDialog.pop();
     }
 
+}
+
+void ContractBalanceWidget::onItemClicked(int _row, int _column)
+{
+    if(_column == 2)
+    {
+        // 合约提现
+        WithdrawExchangeContractDialog withdrawExchangeContractDialog;
+        withdrawExchangeContractDialog.setCurrentAsset(ui->balancesTableWidget->item(_row,0)->text());
+        withdrawExchangeContractDialog.pop();
+        return;
+    }
 }

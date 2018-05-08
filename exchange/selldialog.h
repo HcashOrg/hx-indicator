@@ -33,6 +33,8 @@ private slots:
 
     void on_assetComboBox2_currentIndexChanged(const QString &arg1);
 
+    void on_closeBtn_clicked();
+
 private:
     Ui::SellDialog *ui;
 

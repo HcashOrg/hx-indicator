@@ -30,6 +30,8 @@ private slots:
 
     void on_assetComboBox_currentIndexChanged(const QString &arg1);
 
+    void on_closeBtn_clicked();
+
 private:
     Ui::DepositExchangeContractDialog *ui;
 };

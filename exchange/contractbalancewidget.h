@@ -22,9 +22,9 @@ public:
 private slots:
     void jsonDataUpdated(QString id);
 
-    void on_balancesTableWidget_cellPressed(int row, int column);
-
     void on_depositBtn_clicked();
+
+    void onItemClicked(int _row, int _column);
 
 private:
     Ui::ContractBalanceWidget *ui;
