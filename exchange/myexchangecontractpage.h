@@ -36,6 +36,7 @@ signals:
 private:
     QMap<QString,SellOrders> accountSellOrdersMap;
     void showOrders();
+    void updateTableHeaders();
 
 private slots:
     void jsonDataUpdated(QString id);
