@@ -623,6 +623,15 @@ void MainPage::InitStyle()
     QPalette pe;
     pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
     ui->label_op->setPalette(pe);
+    //QFont font("Microsoft YaHei UI ",20,50);
+    //font.setPixelSize(12);
+    //ui->label_op->setFont(font);
+
+
+
+    QFont fontLabel("Microsoft YaHei UI Light",20,55);
+    fontLabel.setPixelSize(21);
+    ui->accountListLabel->setFont(fontLabel);
 
     ui->accountTableWidget->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
                                  "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
@@ -641,11 +650,11 @@ void MainPage::InitStyle()
     ui->exportBtn->setVisible(false);
     ui->backupWalletBtn->setVisible(false);
 
-    ui->importAccountBtn->setStyleSheet("QToolButton{background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+    ui->importAccountBtn->setStyleSheet("QToolButton{background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);font-size:11px;}"
              "QToolButton:hover{background-color:#5474EB;}");
-    ui->addAccountBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+    ui->addAccountBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);font-size:11px;}"
              "QToolButton:hover{background-color:#00D2FF;}");
-    ui->accountComboBox->setStyleSheet("QComboBox{border: none;background:transparent;font: 13pt Microsoft YaHei UI;\
+    ui->accountComboBox->setStyleSheet("QComboBox{border: none;background:transparent;font: 12pt Microsoft YaHei UI;\
                background-position: center left;color: black;selection-background-color: darkgray;}");
 
 

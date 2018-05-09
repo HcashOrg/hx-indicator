@@ -78,8 +78,16 @@ void ContactInfoTitleWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
+    QFont font("Microsoft YaHei UI Light",20,63);
+    font.setPixelSize(20);
+    ui->label_name->setFont(font);
+    QFont font1("Microsoft YaHei UI Light",10,50);
+    font1.setPixelSize(10);
+    ui->label_address->setFont(font1);
+    ui->label_addressTitle->setFont(font1);
+
     ui->label_pic->setPixmap(QPixmap(":/ui/wallet_ui/contactPic.png").scaled(ui->label_pic->size()));
-    setStyleSheet("QPushButton#pushButton_transfer{color:white;font-size:11px;font-weight:bold;\
+    setStyleSheet("QPushButton#pushButton_transfer{color:white;font-size:11px;\
                   border-top-left-radius:10px;  \
                   border-top-right-radius:10px; \
                   border-bottom-left-radius:10px;  \

@@ -10,6 +10,11 @@
     <height>80</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Microsoft JhengHei UI</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -50,8 +55,8 @@
   <widget class="QLabel" name="label_address">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>52</y>
+     <x>170</x>
+     <y>54</y>
      <width>331</width>
      <height>16</height>
     </rect>
@@ -87,8 +92,13 @@
      <height>20</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Microsoft JhengHei UI</family>
+    </font>
+   </property>
    <property name="text">
-    <string>转账</string>
+    <string>转 账</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_name">

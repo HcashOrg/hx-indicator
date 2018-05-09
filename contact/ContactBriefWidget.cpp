@@ -46,6 +46,7 @@ void ContactBriefWidget::InitStyle()
     setPalette(palette);
 
     QFont font("Microsoft YaHei UI Light",20,63);
+    font.setPixelSize(20);
     ui->label->setFont(font);
     QPalette pa;
     pa.setColor(QPalette::WindowText,Qt::black);

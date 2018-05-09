@@ -147,6 +147,7 @@ void ContactInfoHistoryWidget::InitStyle()
     setPalette(palette);
 
     QFont font("Microsoft YaHei UI Light",14,63);
+    font.setPixelSize(20);
     ui->label->setFont(font);
     QPalette pa;
     pa.setColor(QPalette::WindowText,Qt::black);
