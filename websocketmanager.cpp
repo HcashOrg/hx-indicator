@@ -43,7 +43,7 @@ void WebSocketManager::processRPCs(QString _rpcId, QString _rpcCmd)
     {
         if(pendingRpcs.size() > 0)
         {
-//            qDebug() << "busy is " << pendingRpcs.at(0);
+            qDebug() << "busy is " << pendingRpcs.at(0);
         }
 
         return;

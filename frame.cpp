@@ -995,6 +995,7 @@ void Frame::showOnchainOrderPage()
 {
     closeCurrentPage();
     onchainOrderPage = new OnchainOrderPage(centralWidget);
+    connect(onchainOrderPage,&OnchainOrderPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
     onchainOrderPage->setAttribute(Qt::WA_DeleteOnClose);
     onchainOrderPage->show();
     currentPageNum = 6;
@@ -1439,6 +1440,8 @@ void Frame::onBack()
         emit titleBackVisible(false);
         break;
     case 6:
+        onchainOrderPage->onBack();
+        emit titleBackVisible(false);
         break;
     case 7:
         break;

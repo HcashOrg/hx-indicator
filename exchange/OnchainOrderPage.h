@@ -19,6 +19,11 @@ public:
 
     void init();
 
+    void onBack();
+
+signals:
+    void backBtnVisible(bool isShow);
+
 private slots:
     void jsonDataUpdated(QString id);
 
@@ -28,15 +33,16 @@ private slots:
 
     void on_assetComboBox2_currentIndexChanged(const QString &arg1);
 
-    void on_ordersTableWidget_cellPressed(int row, int column);
+    void onItemClicked(int _row, int _column);
 
 private:
     Ui::OnchainOrderPage *ui;
     HttpManager httpManager;
-
-    void queryContractOrders();
+    QWidget* currentWidget;
 
     void paintEvent(QPaintEvent*);
+    void queryContractOrders();
+    void updateTableHeaders();
 };
 
 #endif // ONCHAINORDERPAGE_H

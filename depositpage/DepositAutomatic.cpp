@@ -135,6 +135,7 @@ void DepositAutomatic::PostQueryTunnelMoney(const QString &tunnelAddress)
 void DepositAutomatic::PostCreateTransaction(const QString &fromAddress, const QString &toAddress,
                                              const QString &number, const QString &symbol)
 {
+    if(fromAddress.isEmpty() || toAddress.isEmpty() || number.isEmpty() || symbol.isEmpty())    return;
     UBChain::getInstance()->postRPC( "automatic-createrawtransaction",
                                      toJsonFormat( "createrawtransaction", QJsonArray()
                                      << fromAddress<<toAddress<<number<<symbol ));

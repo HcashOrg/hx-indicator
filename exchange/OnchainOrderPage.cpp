@@ -3,6 +3,7 @@
 
 #include "wallet.h"
 #include "BuyOrderWidget.h"
+#include "ToolButtonWidget.h"
 
 #include <QtMath>
 
@@ -13,6 +14,25 @@ OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
     ui->setupUi(this);
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+
+    ui->ordersTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->ordersTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->ordersTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->ordersTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->ordersTableWidget->setMouseTracking(true);
+    ui->ordersTableWidget->setShowGrid(false);//隐藏表格线
+    ui->ordersTableWidget->horizontalHeader()->setSectionsClickable(true);
+    ui->ordersTableWidget->horizontalHeader()->setFixedHeight(35);
+    ui->ordersTableWidget->horizontalHeader()->setVisible(true);
+    ui->ordersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->ordersTableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->ordersTableWidget->verticalHeader()->setVisible(false);
+    ui->ordersTableWidget->setColumnWidth(0,160);
+    ui->ordersTableWidget->setColumnWidth(1,160);
+    ui->ordersTableWidget->setColumnWidth(2,160);
+    ui->ordersTableWidget->setColumnWidth(3,180);
+
+    ui->ordersTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     init();
 }
@@ -40,6 +60,15 @@ void OnchainOrderPage::init()
     }
 
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
+}
+
+void OnchainOrderPage::onBack()
+{
+    if(currentWidget)
+    {
+        currentWidget->close();
+        currentWidget = NULL;
+    }
 }
 
 void OnchainOrderPage::jsonDataUpdated(QString id)
@@ -78,6 +107,28 @@ void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
         ui->ordersTableWidget->setItem(i,2,item);
 
         ui->ordersTableWidget->setItem(i,3, new QTableWidgetItem(tr("buy")));
+
+        for(int j = 0; j < 4; j++)
+        {
+            ui->ordersTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+            if(i%2)
+            {
+                ui->ordersTableWidget->item(i,j)->setBackgroundColor(QColor(255,255,255));
+            }
+            else
+            {
+                ui->ordersTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
+            }
+        }
+
+        for(int j = 3;j < 4;++j)
+        {
+            ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
+            toolButtonItem->setInitGray(j%2 == 0);
+            toolButtonItem->setText(ui->ordersTableWidget->item(i,j)->text());
+            ui->ordersTableWidget->setCellWidget(i,j,toolButtonItem);
+            connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
+        }
     }
 }
 
@@ -93,6 +144,7 @@ void OnchainOrderPage::paintEvent(QPaintEvent *)
 void OnchainOrderPage::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
     ui->ordersTableWidget->setRowCount(0);
+    updateTableHeaders();
     if(ui->assetComboBox->currentText().isEmpty() || ui->assetComboBox2->currentText().isEmpty()
             || ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())       return;
 
@@ -102,6 +154,7 @@ void OnchainOrderPage::on_assetComboBox_currentIndexChanged(const QString &arg1)
 void OnchainOrderPage::on_assetComboBox2_currentIndexChanged(const QString &arg1)
 {
     ui->ordersTableWidget->setRowCount(0);
+    updateTableHeaders();
     if(ui->assetComboBox->currentText().isEmpty() || ui->assetComboBox2->currentText().isEmpty()
             || ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())       return;
 
@@ -122,10 +175,26 @@ void OnchainOrderPage::queryContractOrders()
     httpManager.post("http://192.168.1.121:5005/api",QJsonDocument(object).toJson());
 }
 
-
-void OnchainOrderPage::on_ordersTableWidget_cellPressed(int row, int column)
+void OnchainOrderPage::updateTableHeaders()
 {
-    if(column == 3)
+    if(ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())
+    {
+        ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("Sell"));
+        ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("Buy"));
+        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("Price"));
+    }
+    else
+    {
+        ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("Sell / %1").arg(ui->assetComboBox->currentText()));
+        ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("Buy / %1").arg(ui->assetComboBox2->currentText()));
+        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("Price (%1/%2)").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()));
+    }
+
+}
+
+void OnchainOrderPage::onItemClicked(int _row, int _column)
+{
+    if(_column == 3)
     {
         BuyOrderWidget* buyOrderWidget = new BuyOrderWidget(this);
         buyOrderWidget->setAccount(ui->accountComboBox->currentText());
@@ -134,6 +203,10 @@ void OnchainOrderPage::on_ordersTableWidget_cellPressed(int row, int column)
         buyOrderWidget->move(0,0);
         buyOrderWidget->show();
         buyOrderWidget->raise();
+
+        currentWidget = buyOrderWidget;
+
+        emit backBtnVisible(true);
 
         return;
     }
