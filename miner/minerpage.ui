@@ -137,7 +137,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="incomePage">
     <widget class="QTableWidget" name="incomeTableWidget">
@@ -229,7 +229,10 @@
      </column>
      <column>
       <property name="text">
-       <string/>
+       <string>操作</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
       </property>
      </column>
     </widget>
@@ -347,10 +350,7 @@
      </column>
      <column>
       <property name="text">
-       <string>操作</string>
-      </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
+       <string/>
       </property>
      </column>
      <column>
@@ -367,6 +367,25 @@
        <width>770</width>
        <height>40</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_op">
+     <property name="geometry">
+      <rect>
+       <x>575</x>
+       <y>33</y>
+       <width>71</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI</family>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>操作</string>
      </property>
     </widget>
    </widget>

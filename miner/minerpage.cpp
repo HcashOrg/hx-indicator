@@ -33,7 +33,7 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->lockBalancesTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->lockBalancesTableWidget->horizontalHeader()->setVisible(true);
     ui->lockBalancesTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-
+    //ui->lockBalancesTableWidget->setColumnCount(5);
     ui->lockBalancesTableWidget->setColumnWidth(0,140);
     ui->lockBalancesTableWidget->setColumnWidth(1,140);
     ui->lockBalancesTableWidget->setColumnWidth(2,80);
@@ -74,6 +74,7 @@ MinerPage::MinerPage(QWidget *parent) :
 
     ui->incomeRecordTableWidget->setColumnWidth(0,140);
     ui->incomeRecordTableWidget->setColumnWidth(1,140);
+
 
 
     pageWidget_income = new PageScrollWidget();
@@ -368,6 +369,9 @@ void MinerPage::InitStyle()
                   "QTableView:item{min-height:40px;}"
 
                   "QComboBox{font-size:14px;}");
+    QPalette pe;
+    pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
+    ui->label_op->setPalette(pe);
 
 }
 
@@ -393,7 +397,12 @@ void MinerPage::setTextCenter(QTableWidget * const table)
     {
         for(int j = 0;j < table->columnCount();++j)
         {
-            table->item(i,j)->setTextAlignment(Qt::AlignCenter);
+            if(table->item(i,j))
+            {
+                //qDebug()<<i<<"-----------"<<j;
+                table->item(i,j)->setTextAlignment(Qt::AlignCenter);
+
+            }
         }
     }
 }
