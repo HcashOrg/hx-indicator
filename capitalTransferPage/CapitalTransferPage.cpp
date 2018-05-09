@@ -115,7 +115,8 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         {
             ui->lineEdit_address->setText(_p->tunnel_account_address);
         }
-
+        //查询tunnel地址的余额
+        PostQueryTunnelMoney(_p->symbol,_p->tunnel_account_address);
     }
     else if("captial-get_current_multi_address" == id)
     {//获取到多签地址
@@ -140,8 +141,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             ui->lineEdit_address->setText(tr("Cannot find multiAddress!"));
             return;
         }
-        //查询多签地址的余额
-        PostQueryTunnelMoney(_p->symbol,_p->multisig_address);
+
         qDebug()<<"多签地址"<<_p->multisig_address;
     }
     else if("captial-createrawtransaction" == id)
