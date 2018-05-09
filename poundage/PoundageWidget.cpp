@@ -293,6 +293,7 @@ void PoundageWidget::InitStyle()
     setPalette(palette);
 
     QFont font("Microsoft YaHei UI Light",20,63);
+    font.setPixelSize(22);
     ui->label->setFont(font);
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(0,0,0));
