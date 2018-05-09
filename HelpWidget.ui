@@ -24,8 +24,15 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 20px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>关于我们</string>
@@ -64,8 +71,15 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 18px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>检查更新</string>
@@ -76,14 +90,21 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>230</x>
      <y>340</y>
-     <width>171</width>
+     <width>211</width>
      <height>16</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 18px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>Windows桌面版 v1.0.1</string>

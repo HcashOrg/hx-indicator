@@ -62,7 +62,7 @@ void ContactSearchWidget::InitWidget()
 
     connect(pSearchButton, &QPushButton::clicked, this, &ContactSearchWidget::StartSearchSlots);
 
-    connect(ui->lineEdit,&QLineEdit::editingFinished,this, &ContactSearchWidget::StartSearchSlots);
+    connect(ui->lineEdit,&QLineEdit::textEdited,this, &ContactSearchWidget::StartSearchSlots);
 
     //ui->lineEdit->setStyleSheet();
 }
