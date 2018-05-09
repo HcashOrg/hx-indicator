@@ -85,7 +85,7 @@ void FeeChargeWidget::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
+    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
     painter.drawRect(rect());
 
 

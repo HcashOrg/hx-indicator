@@ -126,8 +126,8 @@ void BackupWalletDialog::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(255,255,255,235));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(QRect(190,50,770,530));
+    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
+    painter.drawRect(QRect(0,0,960,580));
 
     QWidget::paintEvent(event);
 }

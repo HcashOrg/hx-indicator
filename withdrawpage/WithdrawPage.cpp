@@ -52,7 +52,7 @@ void WithdrawPage::ShowConfirmWidget(const QString &address, double ammount)
     confirm->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Dialog | Qt::FramelessWindowHint);
     confirm->setWindowModality(Qt::WindowModal);
     confirm->setAttribute(Qt::WA_DeleteOnClose);
-    confirm->move(mapToGlobal(QPoint(0,0)));
+    confirm->move(mapToGlobal(QPoint(-190,-50)));
     confirm->show();
 }
 

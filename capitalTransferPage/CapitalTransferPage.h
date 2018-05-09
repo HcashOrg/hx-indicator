@@ -31,6 +31,7 @@ private slots:
     void radioChangedSlots();
 
     void jsonDataUpdated(QString id);
+    void httpReplied(QByteArray _data, int _status);
 
     void passwordConfirmSlots();
     void passwordCancelSlots();
@@ -41,6 +42,9 @@ private slots:
 private:
     void updateData();
     bool validateAddress(const QString &address);
+
+    void PostQueryTunnelMoney(const QString &symbol,const QString &tunnelAddress);
+
 protected:
     void paintEvent(QPaintEvent *event);
 private:

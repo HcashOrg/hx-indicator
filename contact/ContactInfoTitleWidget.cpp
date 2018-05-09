@@ -82,7 +82,7 @@ void ContactInfoTitleWidget::InitStyle()
     font.setPixelSize(20);
     ui->label_name->setFont(font);
     QFont font1("Microsoft YaHei UI Light",10,50);
-    font1.setPixelSize(10);
+    font1.setPixelSize(11);
     ui->label_address->setFont(font1);
     ui->label_addressTitle->setFont(font1);
 

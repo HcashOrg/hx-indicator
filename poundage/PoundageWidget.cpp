@@ -164,6 +164,9 @@ void PoundageWidget::jsonDataUpdated(QString id)
         result.prepend("{");
         result.append("}");
 
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr("Operation successfully done!"));
+        dia.pop();
         //qDebug()<<"chargecccccc"<<result;
         //刷新承税单
         autoRefreshSlots();
@@ -253,8 +256,8 @@ void PoundageWidget::InitWidget()
     ui->toolButton_myPoundage->setChecked(false);
     //初始化排序comboBox
     ui->comboBox_sortType->clear();
-    ui->comboBox_sortType->addItem(tr("时间由早到晚"),0);
-    ui->comboBox_sortType->addItem(tr("时间由晚到早"),1);
+//    ui->comboBox_sortType->addItem(tr("时间由早到晚"),0);
+//    ui->comboBox_sortType->addItem(tr("时间由晚到早"),1);
     ui->comboBox_sortType->addItem(tr("汇率由低到高"),2);
     ui->comboBox_sortType->addItem(tr("汇率由高到低"),3);
     ui->comboBox_sortType->setCurrentIndex(0);

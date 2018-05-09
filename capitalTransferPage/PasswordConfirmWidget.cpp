@@ -83,10 +83,12 @@ void PasswordConfirmWidget::InitWidget()
 
 void PasswordConfirmWidget::InitStyle()
 {
-    setAutoFillBackground(true);
-    QPalette palette;
-    palette.setColor(QPalette::Window, QColor(248,249,253));
-    setPalette(palette);
+    setAttribute(Qt::WA_TranslucentBackground, true);
+
+//    setAutoFillBackground(true);
+//    QPalette palette;
+//    palette.setColor(QPalette::Window, QColor(10,10,10,100));
+//    setPalette(palette);
 
     setStyleSheet("QToolButton#toolButton_confirm{color:white;\
                                       border-top-left-radius:10px;  \
@@ -107,20 +109,20 @@ void PasswordConfirmWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
 
-//    painter.setPen(Qt::NoPen);
-//    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
-//    painter.drawRect(rect());
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
+    painter.drawRect(rect());
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(255,255,255,255));
-    painter.drawRoundedRect(QRect(195,170,380,185),10,10);
+    painter.drawRoundedRect(QRect(385,220,380,185),10,10);
 
     QRadialGradient radial(385, 385, 390, 385,385);
     radial.setColorAt(0, QColor(0,0,0,15));
     radial.setColorAt(1, QColor(218,255,248,15));
     painter.setBrush(radial);
     painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(QRect(190,165,390,195),10,10);
+    painter.drawRoundedRect(QRect(380,215,390,195),10,10);
 
     QWidget::paintEvent(event);
 }

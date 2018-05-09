@@ -263,7 +263,7 @@ void ImportDialog::InitStyle()
     setStyleSheet("QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;\
                    background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
                   "Qline{color:#5474EB;background:#5474EB;}"
-                  "QToolButton{border:none;color:white;border-radius:10px;font-size:12pt;}"
+                  "QToolButton{border:none;color:white;border-radius:15px;font-size:12pt;}"
                   "QToolButton#pathBtn{color:gray;}"
                   "QToolButton#importBtn{background-color:#5474EB;}"
                   "QToolButton#cancelBtn::hover,QToolButton#importBtn::hover{background-color:#00D2FF;}"
@@ -279,8 +279,8 @@ void ImportDialog::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(255,255,255,200));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(QRect(190,50,770,530));
+    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
+    painter.drawRect(QRect(0,0,960,580));
 
 
     painter.setBrush(QColor(255,255,255,255));

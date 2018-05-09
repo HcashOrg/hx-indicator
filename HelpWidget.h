@@ -17,6 +17,8 @@ public:
 private:
     void InitWidget();
     void InitStyle();
+protected:
+    void paintEvent(QPaintEvent *event);
 private:
     Ui::HelpWidget *ui;
 };

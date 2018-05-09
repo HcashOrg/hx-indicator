@@ -8,6 +8,8 @@
 #include "CapitalTransferDataUtil.h"
 #include "wallet.h"
 
+#include "extra/HttpManager.h"
+#include "commondialog.h"
 class CapitalTransferPage::CapitalTransferPagePrivate
 {
 public:
@@ -27,6 +29,7 @@ public:
     QString multisig_address;
 
     QJsonObject trade_detail;
+    HttpManager httpManager;////用于查询通道账户余额
 };
 
 CapitalTransferPage::CapitalTransferPage(const CapitalTransferInput &data,QWidget *parent) :
@@ -47,13 +50,13 @@ CapitalTransferPage::~CapitalTransferPage()
 void CapitalTransferPage::ConfirmSlots()
 {
     hide();
-    PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget(this);
+    PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget();
     connect(confirmWidget,&PasswordConfirmWidget::confirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
     connect(confirmWidget,&PasswordConfirmWidget::cancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
     confirmWidget->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Dialog | Qt::FramelessWindowHint);
     confirmWidget->setWindowModality(Qt::WindowModal);
     confirmWidget->setAttribute(Qt::WA_DeleteOnClose);
-    confirmWidget->move(mapToGlobal(QPoint(0,0)));
+    confirmWidget->move(mapToGlobal(QPoint(-190,-50)));
     confirmWidget->show();
 }
 
@@ -137,6 +140,8 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             ui->lineEdit_address->setText(tr("Cannot find multiAddress!"));
             return;
         }
+        //查询多签地址的余额
+        PostQueryTunnelMoney(_p->symbol,_p->multisig_address);
         qDebug()<<"多签地址"<<_p->multisig_address;
     }
     else if("captial-createrawtransaction" == id)
@@ -178,7 +183,25 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
     else if("captial-signrawtransaction" == id)
     {
         qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);
+
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(UBChain::getInstance()->jsonDataValue( id));
+        dia.pop();
     }
+}
+
+void CapitalTransferPage::httpReplied(QByteArray _data, int _status)
+{
+    qDebug() << "auto--http-- " << _data << _status;
+
+    QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
+    _p->asset_max_ammount = QString::number(object.value("balance").toDouble(),'g',8);
+    ui->label_number->setText(_p->asset_max_ammount + " "+_p->symbol);
+
+    QDoubleValidator *validator = new QDoubleValidator(0,_p->asset_max_ammount.toDouble(),10,this);
+    validator->setNotation(QDoubleValidator::StandardNotation);
+    ui->lineEdit_number->setValidator(validator);
+
 }
 
 void CapitalTransferPage::passwordConfirmSlots()
@@ -280,6 +303,23 @@ bool CapitalTransferPage::validateAddress(const QString &address)
     return !address.isEmpty();
 }
 
+void CapitalTransferPage::PostQueryTunnelMoney(const QString &symbol, const QString &tunnelAddress)
+{
+    if(symbol.isEmpty() || tunnelAddress.isEmpty()) return;
+    QJsonObject object;
+    object.insert("jsonrpc","2.0");
+    object.insert("id",45);
+    object.insert("method","Zchain.Address.GetBalance");
+    QJsonObject paramObject;
+    paramObject.insert("chainId",symbol);
+    paramObject.insert("addr",tunnelAddress);
+    object.insert("params",paramObject);
+    _p->httpManager.post("http://192.168.1.121:5005/api",QJsonDocument(object).toJson());
+
+    qDebug()<<object;//
+
+}
+
 void CapitalTransferPage::InitWidget()
 {
     InitStyle();
@@ -294,6 +334,8 @@ void CapitalTransferPage::InitWidget()
     ui->lineEdit_number->setPlaceholderText(tr("money"));
 
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &CapitalTransferPage::jsonDataUpdated);
+    connect(&_p->httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
+
     connect(ui->toolButton_close,&QToolButton::clicked,this,&CapitalTransferPage::close);
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&CapitalTransferPage::ConfirmSlots);
     connect(ui->radioButton_deposit,&QRadioButton::toggled,this,&CapitalTransferPage::radioChangedSlots);
@@ -309,7 +351,6 @@ void CapitalTransferPage::InitWidget()
     UBChain::getInstance()->postRPC( "captial-get_current_multi_address",
                                      toJsonFormat( "get_current_multi_address", QJsonArray()
                                      << _p->symbol));
-
 
 }
 
