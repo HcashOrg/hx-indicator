@@ -10,6 +10,11 @@
     <height>530</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -35,14 +40,14 @@
      <x>50</x>
      <y>100</y>
      <width>670</width>
-     <height>350</height>
+     <height>280</height>
     </rect>
    </property>
    <widget class="QLabel" name="priceLabel2">
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>70</y>
+      <y>50</y>
       <width>100</width>
       <height>20</height>
      </rect>
@@ -55,7 +60,7 @@
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>100</y>
+      <y>80</y>
       <width>280</width>
       <height>30</height>
      </rect>
@@ -65,7 +70,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>100</y>
+      <y>80</y>
       <width>200</width>
       <height>20</height>
      </rect>
@@ -78,7 +83,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>160</y>
+      <y>140</y>
       <width>280</width>
       <height>30</height>
      </rect>
@@ -88,7 +93,7 @@
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>230</y>
+      <y>210</y>
       <width>96</width>
       <height>30</height>
      </rect>
@@ -107,10 +112,13 @@
     <property name="geometry">
      <rect>
       <x>260</x>
-      <y>165</y>
+      <y>145</y>
       <width>60</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="text">
      <string>全部兑换</string>
@@ -120,7 +128,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>130</y>
+      <y>110</y>
       <width>100</width>
       <height>20</height>
      </rect>
@@ -133,7 +141,7 @@
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>70</y>
+      <y>50</y>
       <width>100</width>
       <height>20</height>
      </rect>
@@ -146,7 +154,7 @@
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>230</y>
+      <y>210</y>
       <width>96</width>
       <height>30</height>
      </rect>
@@ -165,7 +173,7 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>10</y>
+      <y>20</y>
       <width>100</width>
       <height>20</height>
      </rect>
@@ -178,7 +186,7 @@
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>10</y>
+      <y>20</y>
       <width>300</width>
       <height>20</height>
      </rect>
@@ -186,31 +194,8 @@
     <property name="text">
      <string/>
     </property>
-   </widget>
-   <widget class="QLabel" name="label_8">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>40</y>
-      <width>100</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>挂单人地址</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="ownerAddressLabel">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>40</y>
-      <width>300</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
+    <property name="textInteractionFlags">
+     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
     </property>
    </widget>
   </widget>

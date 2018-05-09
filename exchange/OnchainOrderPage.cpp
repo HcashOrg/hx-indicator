@@ -197,12 +197,15 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
     if(_column == 3)
     {
         BuyOrderWidget* buyOrderWidget = new BuyOrderWidget(this);
-        buyOrderWidget->setAccount(ui->accountComboBox->currentText());
-        buyOrderWidget->setSellAsset(ui->assetComboBox->currentText());
-        buyOrderWidget->setBuyAsset(ui->assetComboBox2->currentText());
         buyOrderWidget->move(0,0);
         buyOrderWidget->show();
         buyOrderWidget->raise();
+
+        buyOrderWidget->setAccount(ui->accountComboBox->currentText());
+        QString contractAddress = ui->ordersTableWidget->item(_row,2)->data(Qt::UserRole).toString();
+        buyOrderWidget->setContractAddress(contractAddress);
+        QString price = ui->ordersTableWidget->item(_row,2)->text();
+        buyOrderWidget->setPrice(price, ui->assetComboBox->currentText(), ui->assetComboBox2->currentText());
 
         currentWidget = buyOrderWidget;
 

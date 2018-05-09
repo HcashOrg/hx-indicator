@@ -18,17 +18,22 @@ public:
     void init();
 
     void setAccount(QString _accountName);
-    void setSellAsset(QString _assetSymbol);
-    void setBuyAsset(QString _assetSymbol);
+    void setPrice(QString _price, QString _assetSymbol, QString _assetSymbol2);
+    void setContractAddress(QString _contractAddress);
 
 private slots:
+    void jsonDataUpdated(QString id);
+
     void on_okBtn_clicked();
 
     void on_cancelBtn_clicked();
 
+    void on_allBtn_clicked();
+
 private:
     Ui::BuyOrderWidget *ui;
     QString accountName;
+    QString payAsset;
 
     void paintEvent(QPaintEvent*);
 };
