@@ -650,12 +650,10 @@ void MainPage::InitStyle()
     ui->exportBtn->setVisible(false);
     ui->backupWalletBtn->setVisible(false);
 
-    ui->importAccountBtn->setStyleSheet("QToolButton{background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);font-size:11px;}"
-             "QToolButton:hover{background-color:#5474EB;}");
-    ui->addAccountBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);font-size:11px;}"
-             "QToolButton:hover{background-color:#00D2FF;}");
-    ui->accountComboBox->setStyleSheet("QComboBox{border: none;background:transparent;font: 12pt Microsoft YaHei UI;\
-               background-position: center left;color: black;selection-background-color: darkgray;}");
+    ui->importAccountBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->addAccountBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+//    ui->accountComboBox->setStyleSheet("QComboBox{border: none;background:transparent;font: 12pt Microsoft YaHei UI;\
+//               background-position: center left;color: black;selection-background-color: darkgray;}");
 
 
 }
