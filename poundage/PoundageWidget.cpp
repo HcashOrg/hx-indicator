@@ -260,7 +260,7 @@ void PoundageWidget::InitWidget()
 //    ui->comboBox_sortType->addItem(tr("时间由晚到早"),1);
     ui->comboBox_sortType->addItem(tr("汇率由低到高"),2);
     ui->comboBox_sortType->addItem(tr("汇率由高到低"),3);
-    ui->comboBox_sortType->setCurrentIndex(0);
+    ui->comboBox_sortType->setCurrentIndex(1);
 
     //初始化币种
     InitCoinType();
