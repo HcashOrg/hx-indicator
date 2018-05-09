@@ -358,10 +358,10 @@ void MinerPage::InitStyle()
 
     setStyleSheet("QToolButton#forecloseInfoBtn,QToolButton#incomeInfoBtn,QToolButton#incomeRecordBtn{border:none;background:transparent;color:#C6CAD4;}"
                   "QToolButton#forecloseInfoBtn::checked,QToolButton#incomeInfoBtn::checked,QToolButton#incomeRecordBtn::checked{color:black;}"
-                  "QToolButton#lockToMinerBtn{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                  "QToolButton#lockToMinerBtn::hover{background-color:#00D2FF;}"
-                  "QToolButton#registerBtn{background-color:#E5E5E5; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                  "QToolButton#registerBtn::hover{background-color:#00D2FF;}"
+                  "QToolButton#lockToMinerBtn{font: 11px \"微软雅黑\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QToolButton#lockToMinerBtn::hover{background-color:#5474EB;}"
+                  "QToolButton#registerBtn{font: 11px \"微软雅黑\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QToolButton#registerBtn::hover{background-color:#5474EB;}"
 
                   "QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
                   "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"

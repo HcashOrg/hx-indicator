@@ -38,7 +38,7 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->widget->setStyleSheet("#widget {background-color:transparent;}");
     ui->containerWidget->setObjectName("containerwidget");
     //ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-top-right-radius:10px;border-bottom-right-radius:10px;border-bottom-left-radius:10px;}");
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
 
     ui->generalBtn->setCheckable(true);
     ui->safeBtn->setCheckable(true);
@@ -47,7 +47,7 @@ SetDialog::SetDialog(QWidget *parent) :
 
     ui->depositBtn->setChecked(UBChain::getInstance()->autoDeposit);
     ui->depositBtn->setIconSize(QSize(26,12));
-    ui->depositBtn->setIcon(ui->depositBtn->isChecked()?QIcon(":/ui/wallet_ui/on.png"):QIcon(":/ui/wallet_ui/off.png"));
+    ui->depositBtn->setIcon(ui->depositBtn->isChecked()?QIcon(":/ui/wallet_ui/off.png"):QIcon(":/ui/wallet_ui/on.png"));
     ui->depositBtn->setText(ui->depositBtn->isChecked()?tr("on"):tr("off"));
 
     ui->generalBtn->setChecked(false);
@@ -66,8 +66,9 @@ SetDialog::SetDialog(QWidget *parent) :
                   "QToolButton::hover{color:black;}"
                   "QToolButton::checked{color:black;}"
 
-                  "QToolButton#toolButton_help,QToolButton#toolButton_set{background-color:#F8F9FD;border:none;color:#C6CAD4;border-top-left-radius:10px;border-top-right-radius:10px;}"
-                  "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{background-color:white;color:black;}"
+                  "QToolButton#toolButton_help,QToolButton#toolButton_set{border:none;background:transparent;color:#C6CAD4;}"
+                  "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{color:black;}"
+
 
                   "QToolButton#depositBtn{color:black;}"
 
@@ -90,8 +91,6 @@ SetDialog::SetDialog(QWidget *parent) :
                   background-position: center left;\
                   color: black;\
                   selection-background-color: darkgray;}"
-                  "QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  "QLineEdit:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;}"
                   );
     ui->saveBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
                                 "QToolButton:hover{background-color:#00D2FF;}");
@@ -372,12 +371,12 @@ void SetDialog::on_depositBtn_clicked()
 {
     if(ui->depositBtn->isChecked())
     {
-        ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/on.png"));
+        ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/off.png"));
         ui->depositBtn->setText(tr("on"));
     }
     else
     {
-        ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/off.png"));
+        ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/on.png"));
         ui->depositBtn->setText(tr("off"));
     }
 }

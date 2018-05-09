@@ -305,16 +305,6 @@ void PoundageWidget::InitStyle()
                    QToolButton#toolButton_myPoundage{background:transparent;color:rgb(144,144,144);\
                                                      font-family: Microsoft YaHei UI;font:14px;font-weight:600;}\
                    QToolButton#toolButton_myPoundage:checked{color:rgb(0,0,0);}\
-                   \
-                   QComboBox{    \
-                   border: none;\
-                   background:transparent;\
-                   font-size: 10pt;\
-                   font-family: Microsoft YaHei UI;\
-                   background-position: center left;\
-                   color: black;\
-                   selection-background-color: darkgray;}\
-                   \
                    QPushButton#pushButton_publishPoundage{\
                    color:white;\
                    border: none;\

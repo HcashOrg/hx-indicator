@@ -152,6 +152,7 @@ void LockPage::jsonDataUpdated(QString id)
 void LockPage::InitWidget()
 {
     InitStyle();
+    ui->forgetBtn->setVisible(false);
 }
 
 void LockPage::InitStyle()
@@ -173,7 +174,6 @@ void LockPage::InitStyle()
     ui->label_bloc->setPalette(pa);
     ui->label_version->setPalette(pa);
 
-    ui->pwdLineEdit->setStyleSheet("color:blue;background:transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;border-style:outset;lineedit-password-mask-delay: 1000;");
     ui->line->setVisible(false);
     ui->closeBtn->setIconSize(QSize(12,12));
     ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
