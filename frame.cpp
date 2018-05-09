@@ -333,6 +333,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showAccountSignal,this,&Frame::showMainPage);
     connect(functionBar,&FunctionWidget::showContactSignal,this,&Frame::showContactPage);
     connect(functionBar,&FunctionWidget::showAdvanceSignal,this,&Frame::showMainPage);
+    connect(functionBar,&FunctionWidget::showExchangeSignal,this,&Frame::showMainPage);
     connect(functionBar,&FunctionWidget::showMultiSigSignal,this,&Frame::showMultiSigPage);
     connect(functionBar,&FunctionWidget::showPoundageSignal,this,&Frame::showPoundagePage);
     connect(functionBar,&FunctionWidget::ShrinkSignal,this,&Frame::EnlargeRightPart);
