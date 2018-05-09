@@ -11,6 +11,8 @@
 #include <QJsonObject>
 #include <QJsonValue>
 
+#include "extra/HttpManager.h"
+
 class DepositAutomatic::DataPrivate
 {
 public:
@@ -19,7 +21,7 @@ public:
         accountInfo()
             :transactionFinished(false)
         {
-            assetNumber = "0.1";
+
         }
 
         QString accountAddress;
@@ -40,12 +42,14 @@ public:
 
     }
 public:
-    bool isInUpdate;
-    bool autoDeposit;
-    std::mutex mutexLock;
-    std::list<std::shared_ptr<accountInfo>> accounts;
-    std::list<QString> assetSymbols;
+    bool isInUpdate;//是否处于更新阶段，防止重复更新
+    bool autoDeposit;//是否自动充值
+    std::mutex mutexLock;//数据修改锁
+    std::list<std::shared_ptr<accountInfo>> accounts;//所有账户信息
+    std::list<QString> assetSymbols;//资产类型
     QTimer *timer;
+    HttpManager httpManager;////用于查询通道账户余额
+
 public:
     //是否已有通道地址
     bool findTunel(const QString &tunnel){
@@ -76,6 +80,24 @@ public:
             }
         }
     }
+    //更新账户余额
+    void updateMoney(const QString &tunnelAddress,const QString &number){
+        std::lock_guard<std::mutex> lockguard(mutexLock);
+        for(auto it = accounts.begin();it != accounts.end();++it){
+            if(tunnelAddress == (*it)->tunnelAddress){
+                (*it)->assetNumber = number;
+            }
+        }
+    }
+    //更新交易详情
+    void updateDetail(const QString &tunnelAddress,const QJsonObject &obj){
+        std::lock_guard<std::mutex> lockguard(mutexLock);
+        for(auto it = accounts.begin();it != accounts.end();++it){
+            if(tunnelAddress == (*it)->tunnelAddress){
+                (*it)->transactionDetail = obj;
+            }
+        }
+    }
 };
 
 DepositAutomatic::DepositAutomatic(QObject *parent)
@@ -84,10 +106,11 @@ DepositAutomatic::DepositAutomatic(QObject *parent)
 {
     _p->timer = new QTimer(this);
     connect(_p->timer,&QTimer::timeout,this,&DepositAutomatic::autoDeposit);
-    _p->timer->start(2000);
+    _p->timer->start(20000);
 
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &DepositAutomatic::jsonDataUpdated);
 
+    connect(&_p->httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
     //test
     autoDeposit();
 }
@@ -103,39 +126,48 @@ void DepositAutomatic::autoDeposit()
     _p->autoDeposit = UBChain::getInstance()->autoDeposit;
     if(_p->autoDeposit && !_p->isInUpdate)
     {
+        //_p->timer->stop();
         updateData();
     }
 }
 
 void DepositAutomatic::PostQueryTunnelAddress(const QString &accountName, const QString &symbol)
 {
+    if(accountName.isEmpty() || symbol.isEmpty()) return;
     UBChain::getInstance()->postRPC( "automatic-get_binding_account",
                                      toJsonFormat( "get_binding_account", QJsonArray()
                                      << accountName<<symbol ));
-    //qDebug()<<"ququququ-----"<<accountName<<symbol;
 
 }
 
 void DepositAutomatic::PostQueryMultiAddress(const QString &symbol)
 {
+    if(symbol.isEmpty()) return;
     UBChain::getInstance()->postRPC( "automatic-get_current_multi_address",
                                      toJsonFormat( "get_current_multi_address", QJsonArray()
                                      << symbol));
 
 }
 
-void DepositAutomatic::PostQueryTunnelMoney(const QString &tunnelAddress)
+void DepositAutomatic::PostQueryTunnelMoney(const QString &symbol,const QString &tunnelAddress)
 {
-    UBChain::getInstance()->postRPC( "automatic-get_tunnel_money",
-                                     toJsonFormat( "get_tunnel_money", QJsonArray()
-                                     << tunnelAddress));
-
+    if(symbol.isEmpty() || tunnelAddress.isEmpty()) return;
+    QJsonObject object;
+    object.insert("jsonrpc","2.0");
+    object.insert("id",45);
+    object.insert("method","Zchain.Address.GetBalance");
+    QJsonObject paramObject;
+    paramObject.insert("chainId",symbol);
+    paramObject.insert("addr",tunnelAddress);
+    object.insert("params",paramObject);
+    _p->httpManager.post("http://192.168.1.121:5005/api",QJsonDocument(object).toJson());
 }
 
 void DepositAutomatic::PostCreateTransaction(const QString &fromAddress, const QString &toAddress,
                                              const QString &number, const QString &symbol)
 {
-    if(fromAddress.isEmpty() || toAddress.isEmpty() || number.isEmpty() || symbol.isEmpty())    return;
+
+    if(fromAddress.isEmpty() || toAddress.isEmpty() || number.isEmpty() || symbol.isEmpty()) return;
     UBChain::getInstance()->postRPC( "automatic-createrawtransaction",
                                      toJsonFormat( "createrawtransaction", QJsonArray()
                                      << fromAddress<<toAddress<<number<<symbol ));
@@ -145,6 +177,7 @@ void DepositAutomatic::PostCreateTransaction(const QString &fromAddress, const Q
 void DepositAutomatic::PostSignTrasaction(const QString &fromAddress, const QString &symbol,
                                           const QString &detail)
 {
+    if(fromAddress.isEmpty() || symbol.isEmpty() || detail.isEmpty()) return;
     UBChain::getInstance()->postRPC( "automatic-signrawtransaction",
                                      toJsonFormat( "signrawtransaction", QJsonArray()
                                      <<fromAddress<<symbol<<detail<<true ));
@@ -215,17 +248,10 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
     else if("automatic-finish-multi" == id)
     {//开始查找余额
         std::for_each(_p->accounts.begin(),_p->accounts.end(),[this](const std::shared_ptr<DepositAutomatic::DataPrivate::accountInfo>& info){
-            this->PostQueryTunnelMoney(info->tunnelAddress);
+            this->PostQueryTunnelMoney(info->assetSymbol,info->tunnelAddress);
         });
         //结束查找余额
         FinishQueryMoney();
-    }
-    else if("automatic-get_tunnel_money" == id)
-    {
-        QString result = UBChain::getInstance()->jsonDataValue( id);
-        result.prepend("{");
-        result.append("}");
-
     }
     else if("automatic-finish-money" == id)
     {//开始创建交易
@@ -254,6 +280,18 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
     {//结束签名,可以进行刷新
         _p->isInUpdate = false;
     }
+}
+
+void DepositAutomatic::httpReplied(QByteArray _data, int _status)
+{//解析查询余额的返回，补全账户信息
+    qDebug() << "auto--http-- " << _data << _status;
+
+    QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
+    QString tunnel   = object.value("address").toString();
+    QString number = QString::number(object.value("balance").toDouble(),'g',8);
+    _p->updateMoney(tunnel,number);
+
+    qDebug()<<"tunnel--money--"<<tunnel<<number;
 }
 
 void DepositAutomatic::updateData()
@@ -300,7 +338,7 @@ void DepositAutomatic::updateData()
 
 void DepositAutomatic::ParseTunnel(const QString &jsonString)
 {
-    //qDebug()<<jsonString;
+    qDebug()<< "auto--"<<jsonString;
     QJsonParseError json_error;
     QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonString.toLatin1(),&json_error);
     if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return ;
@@ -321,7 +359,7 @@ void DepositAutomatic::ParseTunnel(const QString &jsonString)
 
 void DepositAutomatic::ParseMutli(const QString &jsonString)
 {
-    //qDebug()<<jsonString;
+    qDebug()<< "auto--"<<jsonString;
     QJsonParseError json_error;
     QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonString.toLatin1(),&json_error);
     if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return ;
@@ -341,11 +379,12 @@ void DepositAutomatic::ParseMutli(const QString &jsonString)
 
 void DepositAutomatic::ParseTransaction(const QString &jsonString)
 {
+    qDebug()<< "auto--transaction--"<<jsonString;
     QJsonParseError json_error;
     QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonString.toLatin1(),&json_error);
     if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return ;
     QJsonObject jsonObject = parse_doucment.object();
-    //qDebug()<<jsonString;
+
 
     QJsonObject obj =  jsonObject.value("result").toObject();
 }

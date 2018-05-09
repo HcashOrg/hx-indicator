@@ -38,7 +38,7 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->widget->setStyleSheet("#widget {background-color:transparent;}");
     ui->containerWidget->setObjectName("containerwidget");
     //ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-top-right-radius:10px;border-bottom-right-radius:10px;border-bottom-left-radius:10px;}");
 
     ui->generalBtn->setCheckable(true);
     ui->safeBtn->setCheckable(true);
@@ -66,7 +66,7 @@ SetDialog::SetDialog(QWidget *parent) :
                   "QToolButton::hover{color:black;}"
                   "QToolButton::checked{color:black;}"
 
-                  "QToolButton#toolButton_help,QToolButton#toolButton_set{background-color:#F8F9FD;border:none;color:#C6CAD4;border-top-left-radius::10px;border-top-right-radius:10px;}"
+                  "QToolButton#toolButton_help,QToolButton#toolButton_set{background-color:#F8F9FD;border:none;color:#C6CAD4;border-top-left-radius:10px;border-top-right-radius:10px;}"
                   "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{background-color:white;color:black;}"
 
                   "QToolButton#depositBtn{color:black;}"
@@ -619,8 +619,8 @@ void SetDialog::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(248,249,253,255));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(QRect(190,50,770,530));
+    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
+    painter.drawRect(rect());
 
     QWidget::paintEvent(event);
 

@@ -107,11 +107,11 @@ void WithdrawConfirmWidget::InitWidget()
 
 void WithdrawConfirmWidget::InitStyle()
 {
-    //setAttribute(Qt::WA_TranslucentBackground, true);
-    setAutoFillBackground(true);
-    QPalette palette;
-    palette.setColor(QPalette::Background, QColor(0xFF,0xFF,0xFF,200));
-    setPalette(palette);
+    setAttribute(Qt::WA_TranslucentBackground, true);
+    //setAutoFillBackground(true);
+    //QPalette palette;
+    //palette.setColor(QPalette::Background, QColor(10,10,10,100));
+    //setPalette(palette);
 
     QFont font("Microsoft YaHei UI Light",10,50);
     QPalette pa;
@@ -169,14 +169,14 @@ void WithdrawConfirmWidget::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(QRect(-190,-50,960,580));
+    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
+    painter.drawRect(QRect(0,0,960,580));
 
 
 //    painter.setBrush(QColor(255,255,255,255));
 //    painter.drawRect(220,60,320,425);
 
-    painter.drawPixmap(220,40,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
+    painter.drawPixmap(410,90,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
 
     QWidget::paintEvent(event);
 }

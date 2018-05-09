@@ -20,7 +20,7 @@ public slots:
 private:
     void PostQueryTunnelAddress(const QString &accountName,const QString &symbol);
     void PostQueryMultiAddress(const QString &symbol);
-    void PostQueryTunnelMoney(const QString &tunnelAddress);
+    void PostQueryTunnelMoney(const QString &symbol,const QString &tunnelAddress);
     void PostCreateTransaction(const QString &fromAddress,const QString &toAddress,
                                const QString &number,const QString &symbol);
     void PostSignTrasaction(const QString &fromAddress,const QString &symbol,const QString &detail);
@@ -32,6 +32,7 @@ private:
     void FinishSign();
 private slots:
     void jsonDataUpdated(const QString &id);
+    void httpReplied(QByteArray _data, int _status);
 private:
     void updateData();
 private:
