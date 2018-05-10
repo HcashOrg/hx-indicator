@@ -128,7 +128,7 @@
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QToolButton" name="saveBtn">
@@ -190,7 +190,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>142</y>
+           <y>148</y>
            <width>261</width>
            <height>22</height>
           </rect>
@@ -279,7 +279,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>114</y>
+           <y>120</y>
            <width>101</width>
            <height>20</height>
           </rect>
@@ -326,7 +326,7 @@
          <property name="geometry">
           <rect>
            <x>370</x>
-           <y>111</y>
+           <y>160</y>
            <width>171</width>
            <height>21</height>
           </rect>
@@ -351,7 +351,7 @@
          <property name="geometry">
           <rect>
            <x>370</x>
-           <y>132</y>
+           <y>181</y>
            <width>211</width>
            <height>21</height>
           </rect>
@@ -376,7 +376,7 @@
          <property name="geometry">
           <rect>
            <x>370</x>
-           <y>154</y>
+           <y>203</y>
            <width>211</width>
            <height>21</height>
           </rect>
@@ -428,10 +428,10 @@
         <widget class="QLabel" name="unitLabel2">
          <property name="geometry">
           <rect>
-           <x>510</x>
-           <y>220</y>
-           <width>150</width>
-           <height>16</height>
+           <x>590</x>
+           <y>125</y>
+           <width>35</width>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -443,15 +443,15 @@
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>UB</string>
+          <string>LNK</string>
          </property>
         </widget>
-        <widget class="QLineEdit" name="feeLineEdit">
+        <widget class="QLineEdit" name="contractFeeLineEdit">
          <property name="geometry">
           <rect>
-           <x>490</x>
-           <y>250</y>
-           <width>200</width>
+           <x>370</x>
+           <y>120</y>
+           <width>260</width>
            <height>30</height>
           </rect>
          </property>
@@ -539,7 +539,7 @@
          <property name="geometry">
           <rect>
            <x>40</x>
-           <y>190</y>
+           <y>196</y>
            <width>101</width>
            <height>20</height>
           </rect>
@@ -567,7 +567,7 @@
          <property name="geometry">
           <rect>
            <x>220</x>
-           <y>190</y>
+           <y>196</y>
            <width>81</width>
            <height>20</height>
           </rect>
@@ -593,6 +593,54 @@
           <enum>Qt::ToolButtonTextBesideIcon</enum>
          </property>
         </widget>
+        <widget class="QLabel" name="label_5">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>90</y>
+           <width>131</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <pointsize>-1</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 12px &quot;微软雅黑&quot;;</string>
+         </property>
+         <property name="text">
+          <string>单步合约执行费用</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <zorder>contractFeeLineEdit</zorder>
+        <zorder>saveBtn</zorder>
+        <zorder>label_2</zorder>
+        <zorder>languageComboBox</zorder>
+        <zorder>nolockCheckBox</zorder>
+        <zorder>lockTimeSpinBox</zorder>
+        <zorder>label_6</zorder>
+        <zorder>label_3</zorder>
+        <zorder>minimizeCheckBox</zorder>
+        <zorder>closeCheckBox</zorder>
+        <zorder>resyncCheckBox</zorder>
+        <zorder>label_4</zorder>
+        <zorder>unitLabel2</zorder>
+        <zorder>line_3</zorder>
+        <zorder>line_4</zorder>
+        <zorder>comboBox_fee</zorder>
+        <zorder>line_5</zorder>
+        <zorder>label_10</zorder>
+        <zorder>depositBtn</zorder>
+        <zorder>label_5</zorder>
        </widget>
        <widget class="QWidget" name="page_2">
         <widget class="QLineEdit" name="newPwdLineEdit">
