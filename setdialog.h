@@ -56,6 +56,9 @@ private slots:
 
     void on_toolButton_set_clicked();
     void on_toolButton_help_clicked();
+
+    void on_contractFeeLineEdit_editingFinished();
+
 private:
     void updateButtonIcon(int buttonNumber);
 protected:

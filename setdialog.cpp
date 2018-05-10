@@ -3,7 +3,7 @@
 #include <QUrl>
 #include <QDesktopServices>
 #include <QListView>
-
+#include <QtMath>
 
 #include "setdialog.h"
 #include "ui_setdialog.h"
@@ -13,6 +13,8 @@
 
 #include "commondialog.h"
 
+#define MIN_CONTRACT_FEE    1
+#define MAX_CONTRACT_FEE    100
 
 #define SETDIALOG_GENERALBTN_SELECTED_STYLE     "QToolButton{background-color:rgb(70,82,113);color:white;border:1px solid rgb(70,82,113);border-top-left-radius: 12px;border-bottom-left-radius: 12px;}"
 #define SETDIALOG_GENERALBTN_UNSELECTED_STYLE   "QToolButton{background:transparent;color:rgb(192,196,212);border:1px solid rgb(70,82,113);border-top-left-radius: 12px;border-bottom-left-radius: 12px;}"
@@ -108,9 +110,6 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->line_7->setVisible(false);
     ui->line_8->setVisible(false);
 
-    ui->feeLineEdit->setVisible(false);
-    ui->unitLabel2->setVisible(false);
-
     ui->languageComboBox->setView(new QListView());
 
 
@@ -165,12 +164,12 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->closeCheckBox->setChecked( UBChain::getInstance()->closeToMinimize);
     ui->resyncCheckBox->setChecked( UBChain::getInstance()->resyncNextTime);
 
-    ui->feeLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
-    ui->feeLineEdit->setText( getBigNumberString(UBChain::getInstance()->transactionFee,ASSET_PRECISION));
+    ui->contractFeeLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
+    ui->contractFeeLineEdit->setText( getBigNumberString(UBChain::getInstance()->contractFee,ASSET_PRECISION));
 
-    QRegExp rx(QString("^([0]|[1-9][0-9]{0,2})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(QString::number(ASSET_PRECISION).size() - 1));
+    QRegExp rx(QString("^([0]|[1-9][0-9]{0,2})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(ASSET_PRECISION));
     QRegExpValidator *pReg = new QRegExpValidator(rx, this);
-    ui->feeLineEdit->setValidator(pReg);
+    ui->contractFeeLineEdit->setValidator(pReg);
 
     ui->confirmBtn->setEnabled(false);
 
@@ -257,7 +256,8 @@ void SetDialog::on_closeBtn_clicked()
 
 void SetDialog::on_saveBtn_clicked()
 {
-	
+    on_contractFeeLineEdit_editingFinished();
+
     mutexForConfigFile.lock();
     UBChain::getInstance()->lockMinutes = ui->lockTimeSpinBox->value();
     UBChain::getInstance()->configFile->setValue("/settings/lockMinutes", UBChain::getInstance()->lockMinutes);
@@ -297,6 +297,9 @@ void SetDialog::on_saveBtn_clicked()
 
     UBChain::getInstance()->resyncNextTime = ui->resyncCheckBox->isChecked();
     UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime", UBChain::getInstance()->resyncNextTime);
+
+    UBChain::getInstance()->contractFee = ui->contractFeeLineEdit->text().toDouble() * qPow(10,ASSET_PRECISION);
+    UBChain::getInstance()->configFile->setValue("/settings/contractFee", UBChain::getInstance()->contractFee);
 
     mutexForConfigFile.unlock();
 
@@ -633,3 +636,16 @@ void SetDialog::paintEvent(QPaintEvent *event)
 ////    qDebug() << "setvisible " << visiable;
 //    QWidget::setVisible(visiable);
 //}
+
+void SetDialog::on_contractFeeLineEdit_editingFinished()
+{
+    if(ui->contractFeeLineEdit->text().toDouble() < getBigNumberString(MIN_CONTRACT_FEE,ASSET_PRECISION).toDouble())
+    {
+        ui->contractFeeLineEdit->setText(getBigNumberString(MIN_CONTRACT_FEE,ASSET_PRECISION));
+    }
+    else if(ui->contractFeeLineEdit->text().toDouble() > getBigNumberString(MAX_CONTRACT_FEE,ASSET_PRECISION).toDouble())
+    {
+        ui->contractFeeLineEdit->setText(getBigNumberString(MAX_CONTRACT_FEE,ASSET_PRECISION));
+    }
+
+}

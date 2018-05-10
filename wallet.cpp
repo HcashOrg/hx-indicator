@@ -63,7 +63,8 @@ UBChain::UBChain()
         configFile->setValue("/settings/closeToMinimize",false);
         resyncNextTime = false;
         configFile->setValue("settings/resyncNextTime",false);
-
+        contractFee = 1;
+        configFile->setValue("settings/contractFee",1);
     }
     else
     {
@@ -76,7 +77,7 @@ UBChain::UBChain()
         feeOrderID      = configFile->value("/settings/feeOrderID").toString();
         autoDeposit     = configFile->value("/settings/autoDeposit").toBool();
         resyncNextTime  = configFile->value("/settings/resyncNextTime",false).toBool();
-
+        contractFee     = configFile->value("/settings/contractFee",1).toULongLong();
     }
 
     QFile file( walletConfigPath + "/log.txt");       // 每次启动清空 log.txt文件

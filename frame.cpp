@@ -163,7 +163,8 @@ Frame::Frame(): timer(NULL),
             UBChain::getInstance()->feeType = "LNK";
             UBChain::getInstance()->configFile->setValue("/settings/autoDeposit",false);
             UBChain::getInstance()->autoDeposit = false;
-
+            UBChain::getInstance()->configFile->setValue("/settings/contractFee",1);
+            UBChain::getInstance()->contractFee = 1;
 
             UBChain::getInstance()->minimizeToTray  = false;
             UBChain::getInstance()->configFile->setValue("/settings/minimizeToTray",false);
