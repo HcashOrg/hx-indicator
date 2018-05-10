@@ -33,6 +33,7 @@ signals:
     void lock();
 public slots:
     void contactShowTransferPageSlots();//额外槽函数，接受联系人界面转账点击信号，functionbar恢复到账户页面
+    void DefaultShow();
 signals:
     //点击大按钮的信号
     void showAccountSignal();
@@ -50,6 +51,11 @@ signals:
 signals:
     void ShrinkSignal();
     void RestoreSignal();
+
+    //默认打开二级菜单对应界面信号
+    void AccountDefaultSignal();
+    void AdvanceDefaultSignal();
+    void ExchangeDefaultSignal();
 private slots:
     void ShowContactWidgetSlots();
     void ShowAccountWidgetSlots();

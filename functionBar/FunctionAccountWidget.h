@@ -14,6 +14,9 @@ class FunctionAccountWidget : public QWidget
 public:
     explicit FunctionAccountWidget(QWidget *parent = 0);
     ~FunctionAccountWidget();
+
+public slots:
+    void DefaultShow();
 private slots:
     void AssetShowSlots();
     void MinerShowSlots();

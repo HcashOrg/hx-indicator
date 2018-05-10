@@ -14,6 +14,11 @@ FunctionExchangeWidget::~FunctionExchangeWidget()
     delete ui;
 }
 
+void FunctionExchangeWidget::DefaultShow()
+{
+    on_onchainOrderBtn_clicked();
+}
+
 void FunctionExchangeWidget::InitWidget()
 {
     InitStyle();

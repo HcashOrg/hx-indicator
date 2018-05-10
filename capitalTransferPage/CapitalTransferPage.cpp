@@ -52,13 +52,13 @@ CapitalTransferPage::~CapitalTransferPage()
 void CapitalTransferPage::ConfirmSlots()
 {
     hide();
-    PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget();
+    PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget(UBChain::getInstance()->mainFrame);
     connect(confirmWidget,&PasswordConfirmWidget::confirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
     connect(confirmWidget,&PasswordConfirmWidget::cancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
-    confirmWidget->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
-    confirmWidget->setWindowModality(Qt::WindowModal);
-    confirmWidget->setAttribute(Qt::WA_DeleteOnClose);
-    confirmWidget->move(mapToGlobal(QPoint(-190,-50)));
+    //confirmWidget->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+    //confirmWidget->setWindowModality(Qt::WindowModal);
+    //confirmWidget->setAttribute(Qt::WA_DeleteOnClose);
+    //confirmWidget->move(mapToGlobal(QPoint(-190,-50)));
     confirmWidget->show();
 }
 

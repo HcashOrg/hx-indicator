@@ -366,7 +366,7 @@ void Frame::alreadyLogin()
     startTimerForAutoRefresh();              // 自动刷新
 
     init();
-
+    functionBar->DefaultShow();
 }
 
 

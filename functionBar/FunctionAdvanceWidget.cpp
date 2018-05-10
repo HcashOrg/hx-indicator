@@ -14,6 +14,11 @@ FunctionAdvanceWidget::~FunctionAdvanceWidget()
     delete ui;
 }
 
+void FunctionAdvanceWidget::DefaultShow()
+{
+    PoundageShowSlots();
+}
+
 void FunctionAdvanceWidget::PoundageShowSlots()
 {
     ui->toolButton_poundage->setChecked(true);

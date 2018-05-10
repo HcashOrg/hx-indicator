@@ -14,7 +14,8 @@ class FunctionExchangeWidget : public QWidget
 public:
     explicit FunctionExchangeWidget(QWidget *parent = 0);
     ~FunctionExchangeWidget();
-
+public slots:
+    void DefaultShow();
 private:
     void InitWidget();
     void InitStyle();

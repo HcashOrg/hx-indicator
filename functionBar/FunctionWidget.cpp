@@ -54,6 +54,11 @@ void FunctionWidget::contactShowTransferPageSlots()
     ShowAccountWidgetSlots();
 }
 
+void FunctionWidget::DefaultShow()
+{
+    ShowAccountWidgetSlots();
+}
+
 void FunctionWidget::ShowContactWidgetSlots()
 {
     ui->stackedWidget->setVisible(false);
@@ -75,6 +80,8 @@ void FunctionWidget::ShowAccountWidgetSlots()
     emit RestoreSignal();
 
     updateCheckState(0);
+
+    emit AccountDefaultSignal();
 }
 
 void FunctionWidget::ShowAdvanceWidgetSlots()
@@ -87,6 +94,7 @@ void FunctionWidget::ShowAdvanceWidgetSlots()
     emit RestoreSignal();
 
     updateCheckState(2);
+    emit AdvanceDefaultSignal();
 }
 
 void FunctionWidget::ShowExchangeWidgetSlots()
@@ -99,6 +107,7 @@ void FunctionWidget::ShowExchangeWidgetSlots()
     emit RestoreSignal();
 
     updateCheckState(3);
+    emit ExchangeDefaultSignal();
 }
 
 void FunctionWidget::ShowMoreWidgetSlots()
@@ -116,8 +125,8 @@ void FunctionWidget::ShowSettingWidgetSlots()
 
 void FunctionWidget::ShowConsoleWidgetSlots()
 {
-    ConsoleDialog consoleDialog;
-    consoleDialog.pop();
+    ConsoleDialog *consoleDialog = new ConsoleDialog();
+    consoleDialog->show();
 }
 
 void FunctionWidget::ShowAboutWidgetSlots()
@@ -196,6 +205,10 @@ void FunctionWidget::InitWidget()
     connect(_p->exchangeBar,&FunctionExchangeWidget::showOnchainOrderSignal,this,&FunctionWidget::showOnchainOrderSignal);
     connect(_p->exchangeBar,&FunctionExchangeWidget::showMyOrderSignal,this,&FunctionWidget::showMyOrderSignal);
 
+    //链接二级菜单默认单机情况
+    connect(this,&FunctionWidget::AccountDefaultSignal,_p->accountBar,&FunctionAccountWidget::DefaultShow);
+    connect(this,&FunctionWidget::AdvanceDefaultSignal,_p->advanceBar,&FunctionAdvanceWidget::DefaultShow);
+    connect(this,&FunctionWidget::ExchangeDefaultSignal,_p->exchangeBar,&FunctionExchangeWidget::DefaultShow);
 }
 
 void FunctionWidget::InitStyle()

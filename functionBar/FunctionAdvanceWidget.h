@@ -14,6 +14,8 @@ class FunctionAdvanceWidget : public QWidget
 public:
     explicit FunctionAdvanceWidget(QWidget *parent = 0);
     ~FunctionAdvanceWidget();
+public slots:
+    void DefaultShow();
 signals:
     void showPoundageSignal();
     void showMultiSigSignal();

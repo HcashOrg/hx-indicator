@@ -4,6 +4,7 @@
 #include "WithdrawInputWidget.h"
 #include "WithdrawConfirmWidget.h"
 #include "withdrawrecordwidget.h"
+#include "wallet.h"
 
 class WithdrawPage::WithdrawPagePrivate
 {
@@ -45,15 +46,16 @@ void WithdrawPage::ShowRecordSlots()
 
 }
 
-void WithdrawPage::ShowConfirmWidget(const QString &address, double ammount)
+void WithdrawPage::ShowConfirmWidget(const QString &address, const QString & ammount)
 {//收到提现信号，弹出确认窗口
     WithdrawConfirmWidget *confirm = new WithdrawConfirmWidget(WithdrawConfirmWidget::WithdrawConfirmInput(
-                                                               _p->name,QString::number(ammount),_p->assetSymbol,address),this);
+                                                               _p->name,ammount,_p->assetSymbol,address),
+                                                               UBChain::getInstance()->mainFrame);
     connect(confirm,&WithdrawConfirmWidget::closeSelf,this,&WithdrawPage::close);
-    confirm->setWindowFlags( Qt::Dialog | Qt::FramelessWindowHint);
-    confirm->setWindowModality(Qt::WindowModal);
+    //confirm->setWindowFlags( Qt::Dialog | Qt::FramelessWindowHint);
+    //confirm->setWindowModality(Qt::WindowModal);
     confirm->setAttribute(Qt::WA_DeleteOnClose);
-    confirm->move(mapToGlobal(QPoint(-190,-50)));
+    //confirm->move(mapToGlobal(QPoint(-190,-50)));
     confirm->show();
 }
 

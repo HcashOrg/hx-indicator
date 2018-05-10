@@ -15,7 +15,7 @@ public:
     explicit WithdrawInputWidget(QWidget *parent = 0);
     ~WithdrawInputWidget();
 signals:
-    void withdrawSignal(const QString &address,double ammount);
+    void withdrawSignal(const QString &address,const QString & ammount);
 public:
     void setMaxAmmount(double number);
     void setSymbol(const QString &symbol);
