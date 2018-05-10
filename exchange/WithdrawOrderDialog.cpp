@@ -36,19 +36,57 @@ WithdrawOrderDialog::~WithdrawOrderDialog()
     delete ui;
 }
 
-void WithdrawOrderDialog::pop()
+bool WithdrawOrderDialog::pop()
 {
     move(0,0);
     exec();
+
+    return yesOrNo;
+}
+
+void WithdrawOrderDialog::setText(QString _text)
+{
+
+}
+
+void WithdrawOrderDialog::setContractFee(QString _feeStr)
+{
+    ui->feeLabel->setText(_feeStr);
+}
+
+void WithdrawOrderDialog::jsonDataUpdated(QString id)
+{
+    if( id.startsWith( "id-unlock-WithdrawOrderDialog") )
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result == "\"result\":null")
+        {
+            yesOrNo = true;
+            close();
+        }
+        else if(result.startsWith("\"error\":"))
+        {
+            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
+        }
+
+        return;
+    }
 }
 
 void WithdrawOrderDialog::on_okBtn_clicked()
 {
+    if(ui->pwdLineEdit->text().isEmpty())           return;
+
+    UBChain::getInstance()->postRPC( "id-unlock-WithdrawOrderDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+                                               ));
 
 }
 
 void WithdrawOrderDialog::on_cancelBtn_clicked()
 {
+    yesOrNo = false;
     close();
 }
 

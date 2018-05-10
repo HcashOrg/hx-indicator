@@ -30,7 +30,7 @@ void HttpManager::requestFinished(QNetworkReply *reply)
 {
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
-    qDebug() << "HttpManager statusCode: " << statusCode;
+//    qDebug() << "HttpManager statusCode: " << statusCode;
 
     if(reply->error() == QNetworkReply::NoError)
     {

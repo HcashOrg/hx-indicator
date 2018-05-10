@@ -32,8 +32,13 @@ private slots:
 
     void on_closeBtn_clicked();
 
+    void on_amountLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::DepositExchangeContractDialog *ui;
+    int stepCount = 0;      // 合约执行步数
+
+    void estimateContractFee();
 };
 
 #endif // DEPOSITEXCHANGECONTRACTDIALOG_H

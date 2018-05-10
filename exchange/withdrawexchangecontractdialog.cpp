@@ -77,7 +77,8 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
                     .arg(decimalToIntegerStr(ui->amountLineEdit->text(), assetInfo.precision));
 
             UBChain::getInstance()->postRPC( "id-invoke_contract-withdrawAsset", toJsonFormat( "invoke_contract",
-                                                                                   QJsonArray() << ui->accountNameLabel->text() << "0.001" << 1000
+                                                                                   QJsonArray() << ui->accountNameLabel->text()
+                                                                                   << UBChain::getInstance()->currentContractFee() << stepCount
                                                                                    << contractAddress
                                                                                    << "withdrawAsset"  << params));
         }
@@ -110,6 +111,21 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
             CommonDialog commonDialog(CommonDialog::OkOnly);
             commonDialog.setText( "Withdraw from the exchange contract failed: " + errorMessage );
             commonDialog.pop();
+        }
+
+        return;
+    }
+
+    if( id == "id-invoke_contract_testing-withdrawAsset")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            stepCount = result.mid(QString("\"result\":").size()).toInt();
+            ui->contractFeeLabel->setText(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+                                          + " " + ASSET_NAME);
         }
 
         return;
@@ -156,4 +172,25 @@ void WithdrawExchangeContractDialog::on_withdrawAllBtn_clicked()
 void WithdrawExchangeContractDialog::on_closeBtn_clicked()
 {
     close();
+}
+
+void WithdrawExchangeContractDialog::estimateContractFee()
+{
+    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+
+    QString params = QString("%1,%2").arg(ui->assetComboBox->currentText())
+            .arg(decimalToIntegerStr(ui->amountLineEdit->text(), assetInfo.precision));
+
+    UBChain::getInstance()->postRPC( "id-invoke_contract_testing-withdrawAsset", toJsonFormat( "invoke_contract_testing",
+                                                                           QJsonArray() << ui->accountNameLabel->text()
+                                                                           << contractAddress
+                                                                           << "withdrawAsset"  << params));
+
+
+}
+
+void WithdrawExchangeContractDialog::on_amountLineEdit_textChanged(const QString &arg1)
+{
+    estimateContractFee();
 }

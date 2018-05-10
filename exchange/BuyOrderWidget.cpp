@@ -77,7 +77,9 @@ void BuyOrderWidget::on_okBtn_clicked()
     UBChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
                                                                            QJsonArray() << accountName << ui->contractAddressLabel->text()
                                                                            << ui->amountLineEdit->text() << payAsset
-                                                                           << "deposit to exchange contract" << "0.001" << 1000 << true
+                                                                           << "deposit to exchange contract"
+                                                                           << UBChain::getInstance()->currentContractFee() << 1000
+                                                                           << true
                                                                            ));
 
 }

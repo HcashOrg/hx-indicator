@@ -97,6 +97,50 @@ void SellDialog::jsonDataUpdated(QString id)
 
         return;
     }
+
+    if( id == "id-invoke_contract_testing-putOnSellOrder")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            stepCount = result.mid(QString("\"result\":").size()).toInt();
+            ui->contractFeeLabel->setText(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+                                          + " " + ASSET_NAME);
+
+        }
+
+        return;
+    }
+
+    if( id.startsWith( "id-unlock-SellDialog") )
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result == "\"result\":null")
+        {
+            QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+
+            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
+            AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
+
+            QString params = QString("%1,%2,%3,%4").arg(ui->assetComboBox->currentText()).arg(decimalToIntegerStr(ui->sellAmountLineEdit->text(), assetInfo.precision))
+                    .arg(ui->assetComboBox2->currentText()).arg(decimalToIntegerStr(ui->buyAmountLineEdit->text(), assetInfo2.precision));
+            UBChain::getInstance()->postRPC( "id-invoke_contract-putOnSellOrder", toJsonFormat( "invoke_contract",
+                                                                                   QJsonArray() << ui->accountNameLabel->text()
+                                                                                   << UBChain::getInstance()->currentContractFee() << stepCount
+                                                                                   << contractAddress
+                                                                                   << "putOnSellOrder"  << params));
+        }
+        else if(result.startsWith("\"error\":"))
+        {
+            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
+        }
+
+        return;
+    }
 }
 
 void SellDialog::on_okBtn_clicked()
@@ -104,17 +148,8 @@ void SellDialog::on_okBtn_clicked()
     if(ui->sellAmountLineEdit->text().toDouble() <= 0)  return;
     if(ui->buyAmountLineEdit->text().toDouble() <= 0)  return;
 
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
-
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
-    AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
-
-    QString params = QString("%1,%2,%3,%4").arg(ui->assetComboBox->currentText()).arg(decimalToIntegerStr(ui->sellAmountLineEdit->text(), assetInfo.precision))
-            .arg(ui->assetComboBox2->currentText()).arg(decimalToIntegerStr(ui->buyAmountLineEdit->text(), assetInfo2.precision));
-    UBChain::getInstance()->postRPC( "id-invoke_contract-putOnSellOrder", toJsonFormat( "invoke_contract",
-                                                                           QJsonArray() << ui->accountNameLabel->text() << "0.001" << 1000
-                                                                           << contractAddress
-                                                                           << "putOnSellOrder"  << params));
+    UBChain::getInstance()->postRPC( "id-unlock-SellDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+                                               ));
 }
 
 void SellDialog::on_cancelBtn_clicked()
@@ -159,4 +194,32 @@ void SellDialog::on_assetComboBox2_currentIndexChanged(const QString &arg1)
 void SellDialog::on_closeBtn_clicked()
 {
     close();
+}
+
+void SellDialog::estimateContractFee()
+{
+    if(ui->sellAmountLineEdit->text().toDouble() <= 0)  return;
+    if(ui->buyAmountLineEdit->text().toDouble() <= 0)  return;
+
+    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+
+    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
+    AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
+
+    QString params = QString("%1,%2,%3,%4").arg(ui->assetComboBox->currentText()).arg(decimalToIntegerStr(ui->sellAmountLineEdit->text(), assetInfo.precision))
+            .arg(ui->assetComboBox2->currentText()).arg(decimalToIntegerStr(ui->buyAmountLineEdit->text(), assetInfo2.precision));
+    UBChain::getInstance()->postRPC( "id-invoke_contract_testing-putOnSellOrder", toJsonFormat( "invoke_contract_testing",
+                                                                           QJsonArray() << ui->accountNameLabel->text()
+                                                                           << contractAddress
+                                                                           << "putOnSellOrder"  << params));
+}
+
+void SellDialog::on_sellAmountLineEdit_textChanged(const QString &arg1)
+{
+    estimateContractFee();
+}
+
+void SellDialog::on_buyAmountLineEdit_textChanged(const QString &arg1)
+{
+    estimateContractFee();
 }

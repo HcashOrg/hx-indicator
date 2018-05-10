@@ -210,6 +210,11 @@ QString UBChain::getMinerNameFromId(QString _minerId)
     return name;
 }
 
+QString UBChain::currentContractFee()
+{
+    return getBigNumberString(contractFee,ASSET_PRECISION);
+}
+
 
 qint64 UBChain::write(QString cmd)
 {

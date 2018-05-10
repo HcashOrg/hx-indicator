@@ -15,9 +15,14 @@ public:
     explicit WithdrawOrderDialog(QWidget *parent = 0);
     ~WithdrawOrderDialog();
 
-    void pop();
+    bool pop();
+
+    void setText(QString _text);
+    void setContractFee(QString _feeStr);
 
 private slots:
+    void jsonDataUpdated(QString id);
+
     void on_okBtn_clicked();
 
     void on_cancelBtn_clicked();
@@ -26,6 +31,7 @@ private slots:
 
 private:
     Ui::WithdrawOrderDialog *ui;
+    bool yesOrNo = false;
 };
 
 #endif // WITHDRAWORDERDIALOG_H

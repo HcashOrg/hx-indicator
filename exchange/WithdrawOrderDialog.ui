@@ -113,7 +113,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>确定撤销该挂单吗？您将需要支付一笔手续费</string>
+      <string/>
      </property>
      <property name="scaledContents">
       <bool>false</bool>

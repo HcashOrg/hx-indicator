@@ -35,9 +35,15 @@ private slots:
 
     void on_closeBtn_clicked();
 
+    void on_sellAmountLineEdit_textChanged(const QString &arg1);
+
+    void on_buyAmountLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::SellDialog *ui;
+    int stepCount = 0;      // 合约执行步数
 
+    void estimateContractFee();
 };
 
 #endif // SELLDIALOG_H

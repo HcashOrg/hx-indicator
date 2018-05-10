@@ -8,6 +8,7 @@
 #include "selldialog.h"
 #include "contractbalancewidget.h"
 #include "ToolButtonWidget.h"
+#include "WithdrawOrderDialog.h"
 
 MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     QWidget(parent),
@@ -184,7 +185,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
     if( id.startsWith("id-invoke_contract_offline-sell_orders-"))
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         QString accountName = id.mid(QString("id-invoke_contract_offline-sell_orders-").size());
 
@@ -224,12 +225,31 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-invoke_contract_testing-cancelSellOrder" )
+    if( id.startsWith("id-invoke_contract_testing-cancelSellOrder-") )
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
+            WithdrawOrderDialog withdrawOrderDialog;
+            int count = result.mid(QString("\"result\":").size()).toInt();
+            withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+                                               + " " + ASSET_NAME);
+            withdrawOrderDialog.setText(tr("Sure to withdraw this order? You need to pay the fee for contract execution."));
+            if(withdrawOrderDialog.pop())
+            {
+                QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+
+                QString params = id.mid(QString("id-invoke_contract_testing-cancelSellOrder-").size());
+
+                UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrder", toJsonFormat( "invoke_contract",
+                                                                                       QJsonArray() << ui->accountComboBox->currentText()
+                                                                                       << UBChain::getInstance()->currentContractFee() << count
+                                                                                       << contractAddress
+                                                                                       << "cancelSellOrder"  << params));
+            }
+
+
 
         }
 
@@ -243,8 +263,38 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":"))
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Transaction of withdraw-all has been sent out!");
+            commonDialog.setText( "Transaction of withdraw-order has been sent out!");
             commonDialog.pop();
+        }
+
+        return;
+    }
+
+    if( id.startsWith("id-invoke_contract_testing-cancelSellOrderPair-") )
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+        if(result.startsWith("\"result\":"))
+        {
+            WithdrawOrderDialog withdrawOrderDialog;
+            int count = result.mid(QString("\"result\":").size()).toInt();
+            withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+                                               + " " + ASSET_NAME);
+            withdrawOrderDialog.setText(tr("You need to pay the fee for contract execution."));
+            if(withdrawOrderDialog.pop())
+            {
+                QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+                QString params = id.mid(QString("id-invoke_contract_testing-cancelSellOrderPair-").size());
+
+                UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrderPair", toJsonFormat( "invoke_contract",
+                                                                                                         QJsonArray() << ui->accountComboBox->currentText()
+                                                                                                         << UBChain::getInstance()->currentContractFee() << count
+                                                                                                         << contractAddress
+                                                                                                         << "cancelSellOrderPair"  << params));
+
+
+            }
+
         }
 
         return;
@@ -257,7 +307,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":"))
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Transaction of withdraw-order has been sent out!");
+            commonDialog.setText( "Transaction of withdraw-order-pair has been sent out!");
             commonDialog.pop();
         }
 
@@ -287,7 +337,7 @@ void MyExchangeContractPage::registerContract()
         if(fileInfo.exists())
         {
             UBChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
-                                                                                   QJsonArray() << ui->accountComboBox->currentText() << "0.001"
+                                                                                   QJsonArray() << ui->accountComboBox->currentText() << UBChain::getInstance()->currentContractFee()
                                                                                    << "10000"  << filePath));
         }
         else
@@ -377,8 +427,8 @@ void MyExchangeContractPage::on_withdrawAllBtn_clicked()
         QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
         QString params = QString("%1,%2").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText());
 
-        UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrderPair", toJsonFormat( "invoke_contract",
-                                                                                                 QJsonArray() << ui->accountComboBox->currentText() << "0.001" << 1000
+        UBChain::getInstance()->postRPC( "id-invoke_contract_testing-cancelSellOrderPair-" + params, toJsonFormat( "invoke_contract_testing",
+                                                                                                 QJsonArray() << ui->accountComboBox->currentText()
                                                                                                  << contractAddress
                                                                                                  << "cancelSellOrderPair"  << params));
     }
@@ -389,29 +439,19 @@ void MyExchangeContractPage::onItemClicked(int _row, int _column)
     if(_column == 3)
     {
         // 撤销挂单
-        CommonDialog commonDialog(CommonDialog::OkAndCancel);
-        commonDialog.setText( tr("Sure to withdraw this order?") );
-        if(commonDialog.pop())
-        {
-            QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
-            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
-            AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
+        QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
+        AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
 
-            QString params = QString("%1,%2,%3,%4").arg(assetInfo.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(_row,0)->text(), assetInfo.precision))
-                    .arg(assetInfo2.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(_row,1)->text(), assetInfo2.precision));
-
-            UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrder", toJsonFormat( "invoke_contract",
-                                                                                   QJsonArray() << ui->accountComboBox->currentText() << "0.001" << 1000
-                                                                                   << contractAddress
-                                                                                   << "cancelSellOrder"  << params));
-
-//            UBChain::getInstance()->postRPC( "id-invoke_contract_testing-cancelSellOrder", toJsonFormat( "invoke_contract_testing",
-//                                                                                   QJsonArray() << ui->accountComboBox->currentText()
-//                                                                                   << contractAddress
-//                                                                                   << "cancelSellOrder"  << params));
+        QString params = QString("%1,%2,%3,%4").arg(assetInfo.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(_row,0)->text(), assetInfo.precision))
+                .arg(assetInfo2.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(_row,1)->text(), assetInfo2.precision));
 
 
-        }
+        UBChain::getInstance()->postRPC( "id-invoke_contract_testing-cancelSellOrder-" + params, toJsonFormat( "invoke_contract_testing",
+                                                                                                               QJsonArray() << ui->accountComboBox->currentText()
+                                                                                                               << contractAddress
+                                                                                                               << "cancelSellOrder"  << params));
+
 
         return;
     }

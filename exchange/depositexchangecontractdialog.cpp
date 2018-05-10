@@ -76,7 +76,9 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
             UBChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
                                                                                    QJsonArray() << ui->accountNameLabel->text() << contractAddress
                                                                                    << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
-                                                                                   << "deposit to exchange contract" << "0.001" << 1000 << true
+                                                                                   << "deposit to exchange contract"
+                                                                                   << UBChain::getInstance()->currentContractFee() << stepCount
+                                                                                   << true
                                                                                    ));
 
         }
@@ -114,6 +116,22 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
 
         return;
     }
+
+    if( id == "id-transfer_to_contract_testing-DepositExchangeContractDialog")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            stepCount = result.mid(QString("\"result\":").size()).toInt();
+            ui->contractFeeLabel->setText(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+                                          + " " + ASSET_NAME);
+        }
+
+
+        return;
+    }
 }
 
 void DepositExchangeContractDialog::on_okBtn_clicked()
@@ -147,4 +165,21 @@ void DepositExchangeContractDialog::on_assetComboBox_currentIndexChanged(const Q
 void DepositExchangeContractDialog::on_closeBtn_clicked()
 {
     close();
+}
+
+void DepositExchangeContractDialog::estimateContractFee()
+{
+    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+
+    UBChain::getInstance()->postRPC( "id-transfer_to_contract_testing-DepositExchangeContractDialog", toJsonFormat( "transfer_to_contract_testing",
+                                                                           QJsonArray() << ui->accountNameLabel->text() << contractAddress
+                                                                           << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                                                                           << "deposit to exchange contract"
+                                                                           ));
+
+}
+
+void DepositExchangeContractDialog::on_amountLineEdit_textChanged(const QString &arg1)
+{
+    estimateContractFee();
 }

@@ -53,6 +53,8 @@ void ContractBalanceWidget::setAccount(QString _accountName)
 
     QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(accountName);
 
+    ui->contractAddressLabel->setText(contractAddress);
+
     if(contractAddress.isEmpty())
     {
     }
