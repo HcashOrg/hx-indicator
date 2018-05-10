@@ -18,7 +18,7 @@ public:
     void showTransferRecord(QString _accountAddress, QString _assetId = "ALL");
 
 private slots:
-    void on_assetComboBox_currentIndexChanged(const QString &arg1);
+    void assetComboBox_currentIndexChanged(const QString &arg1);
 
     void pageChangeSlot(unsigned int page);
 private:
