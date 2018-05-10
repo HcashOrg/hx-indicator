@@ -169,9 +169,9 @@ void ContactChooseWidget::InitStyle()
     ui->treeWidget->setHeaderHidden(true);
     ui->treeWidget->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->treeWidget->setStyleSheet(
-                  "QTreeView{background-color:white;border:none;\
+                  "QTreeView{background-color:transparent;border:none;\
                       color:black;font-size:16px;outline:0px;margin:0 0 0 20px;}"
-                  "QTreeView::branch{background:white;}"
+                  "QTreeView::branch{background:transparent;}"
                   "QTreeView::item{height:20px;}"
                   "QTreeView::item::selected{background:#829DFF;border:none;color:white;}"
                   "QTreeView::branch::selected::adjoins-item,QTreeView::branch::selected::!adjoins-item{background:#829DFF;}"

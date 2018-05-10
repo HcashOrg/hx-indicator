@@ -210,6 +210,9 @@ struct FeeChargeInfo
         poundagePublishFee = "0";
         poundageCancelFee = "0";
         transferFee = "0";
+
+        withDrawFee = "0";
+        capitalFee = "0";
     }
 
     QString minerRegisterFee;//挖矿注册手续费
@@ -220,6 +223,9 @@ struct FeeChargeInfo
     QString poundagePublishFee;//发布承兑单手续费
     QString poundageCancelFee;//撤销承兑单手续费
     QString transferFee;//转账手续费
+
+    QString withDrawFee;//提现手续费--
+    QString capitalFee;//资金划转手续费
 };
 
 struct MultiSigInfo

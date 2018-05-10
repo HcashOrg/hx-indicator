@@ -72,7 +72,7 @@ void WithdrawInputWidget::maxButtonSlots()
 
 void WithdrawInputWidget::confirmButtonSlots()
 {
-    emit withdrawSignal(ui->lineEdit_address->text(),ui->lineEdit_ammount->text().toDouble());
+    emit withdrawSignal(ui->lineEdit_address->text(),ui->lineEdit_ammount->text());
 }
 
 bool WithdrawInputWidget::validateAddress(const QString &address)

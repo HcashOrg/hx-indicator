@@ -4,6 +4,7 @@
 #include <QPainter>
 
 #include "wallet.h"
+#include "commondialog.h"
 
 class WithdrawConfirmWidget::WithdrawConfirmWidgetPrivate
 {
@@ -56,6 +57,10 @@ void WithdrawConfirmWidget::jsonDataUpdated(QString id)
         QString  result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << id <<"asdfsdfsdfasdf"<< result;
 
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(result);
+        dia.pop();
+        emit closeSelf();
         close();
     }
 

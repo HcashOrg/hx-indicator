@@ -33,9 +33,7 @@ void ContactBriefWidget::InitWidget()
 {
     InitStyle();
 
-    connect(ui->pushButton,&QPushButton::clicked,[this](){
-       this->emit addNewContactSignal();
-    });
+    connect(ui->pushButton,&QPushButton::clicked,this,&ContactBriefWidget::addNewContactSignal);
 }
 
 void ContactBriefWidget::InitStyle()

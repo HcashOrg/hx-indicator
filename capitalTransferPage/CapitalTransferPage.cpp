@@ -15,6 +15,7 @@ class CapitalTransferPage::CapitalTransferPagePrivate
 public:
     CapitalTransferPagePrivate(const CapitalTransferInput &data)
         :account_name(data.account_name),account_address(data.account_address),symbol(data.symbol)
+        ,fee(UBChain::getInstance()->feeChargeInfo.capitalFee)
     {
 
     }
@@ -25,6 +26,7 @@ public:
 
     QString tunnel_account_address;
     QString asset_max_ammount;
+    QString fee;
 
     QString multisig_address;
 
@@ -50,13 +52,13 @@ CapitalTransferPage::~CapitalTransferPage()
 void CapitalTransferPage::ConfirmSlots()
 {
     hide();
-    PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget();
+    PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget(UBChain::getInstance()->mainFrame);
     connect(confirmWidget,&PasswordConfirmWidget::confirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
     connect(confirmWidget,&PasswordConfirmWidget::cancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
-    confirmWidget->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Dialog | Qt::FramelessWindowHint);
-    confirmWidget->setWindowModality(Qt::WindowModal);
-    confirmWidget->setAttribute(Qt::WA_DeleteOnClose);
-    confirmWidget->move(mapToGlobal(QPoint(-190,-50)));
+    //confirmWidget->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+    //confirmWidget->setWindowModality(Qt::WindowModal);
+    //confirmWidget->setAttribute(Qt::WA_DeleteOnClose);
+    //confirmWidget->move(mapToGlobal(QPoint(-190,-50)));
     confirmWidget->show();
 }
 
@@ -83,7 +85,7 @@ void CapitalTransferPage::radioChangedSlots()
         ui->lineEdit_number->setEnabled(false);
         ui->lineEdit_number->setPlaceholderText(tr("input address first..."));
     }
-
+    ui->toolButton_confirm->setVisible(false);
 }
 
 void CapitalTransferPage::jsonDataUpdated(QString id)
@@ -157,12 +159,16 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         result.prepend("{");
         result.append("}");
         _p->trade_detail = CapitalTransferDataUtil::parseTradeDetail(result);
+
+        //创建交易成功后，显示确认按钮
+        ui->toolButton_confirm->setVisible(true);
+
         qDebug()<<"detail"<<_p->trade_detail;
-    //获取交易结果信息
-        QString transaction = CapitalTransferDataUtil::parseTransaction(result);
-        UBChain::getInstance()->postRPC( "captial-decoderawtransaction",
-                                         toJsonFormat( "decoderawtransaction", QJsonArray()
-                                         <<transaction<<_p->symbol ));
+//    //获取交易结果信息
+//        QString transaction = CapitalTransferDataUtil::parseTransaction(result);
+//        UBChain::getInstance()->postRPC( "captial-decoderawtransaction",
+//                                         toJsonFormat( "decoderawtransaction", QJsonArray()
+//                                         <<transaction<<_p->symbol ));
     }
     else if("captial-decoderawtransaction" == id)
     {
@@ -185,8 +191,9 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);
 
         CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(UBChain::getInstance()->jsonDataValue( id));
+        dia.setText(tr("Operation Done!"));
         dia.pop();
+        close();
     }
 }
 
@@ -195,7 +202,7 @@ void CapitalTransferPage::httpReplied(QByteArray _data, int _status)
 //    qDebug() << "auto--http-- " << _data << _status;
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
-    _p->asset_max_ammount = QString::number(object.value("balance").toDouble(),'g',8);
+    _p->asset_max_ammount = QString::number(std::max<double>(0,object.value("balance").toDouble()- _p->fee.toDouble()),'g',8) ;
     ui->label_number->setText(_p->asset_max_ammount + " "+_p->symbol);
 
     QDoubleValidator *validator = new QDoubleValidator(0,_p->asset_max_ammount.toDouble(),10,this);
@@ -218,7 +225,6 @@ void CapitalTransferPage::passwordConfirmSlots()
                                          toJsonFormat( "signrawtransaction", QJsonArray()
                                          <<_p->tunnel_account_address<<_p->symbol<<_p->trade_detail<<true ));
     }
-    close();
 }
 
 void CapitalTransferPage::passwordCancelSlots()
@@ -324,7 +330,7 @@ void CapitalTransferPage::InitWidget()
 {
     InitStyle();
 
-    ui->label_fee->setText("0.001 "+_p->symbol);
+    ui->label_fee->setText(_p->fee +_p->symbol);
 
     ui->toolButton_confirm->setVisible(false);
     ui->label_addressTitle->setText(ui->label_addressTitle->text().replace("X","Tunnel"));

@@ -3,7 +3,7 @@
 
 #include "wallet.h"
 #include "poundage/PageScrollWidget.h"
-
+#include <mutex>
 static const int ROWNUMBER = 5;
 class ContactInfoHistoryWidget::ContactInfoHistoryWidgetPrivate
 {
@@ -15,6 +15,7 @@ public:
     }
 public:
     PageScrollWidget *pageWidget;
+    std::mutex mutexLock;
 };
 
 ContactInfoHistoryWidget::ContactInfoHistoryWidget(QWidget *parent) :
@@ -137,6 +138,7 @@ void ContactInfoHistoryWidget::InitWidget()
     ui->stackedWidget->addWidget(_p->pageWidget);
     connect(_p->pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ContactInfoHistoryWidget::pageChangeSlot);
 
+    connect(ui->assetComboBox,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),this,&ContactInfoHistoryWidget::assetComboBox_currentIndexChanged);
 }
 
 void ContactInfoHistoryWidget::InitStyle()
@@ -183,8 +185,9 @@ void ContactInfoHistoryWidget::InitStyle()
 
 }
 
-void ContactInfoHistoryWidget::on_assetComboBox_currentIndexChanged(const QString &arg1)
+void ContactInfoHistoryWidget::assetComboBox_currentIndexChanged(const QString &arg1)
 {
+    std::lock_guard<std::mutex> guard(_p->mutexLock);
     showTransferRecord(accountAddress, ui->assetComboBox->currentData().toString());
 }
 

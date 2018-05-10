@@ -14,6 +14,11 @@ FunctionAccountWidget::~FunctionAccountWidget()
     delete ui;
 }
 
+void FunctionAccountWidget::DefaultShow()
+{
+    AssetShowSlots();
+}
+
 void FunctionAccountWidget::AssetShowSlots()
 {
     ui->toolButton_miner->setChecked(false);

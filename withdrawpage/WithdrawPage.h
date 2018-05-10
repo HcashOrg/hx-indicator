@@ -30,7 +30,7 @@ public:
 private slots:
     void ShowRecordSlots();
 
-    void ShowConfirmWidget(const QString &address,double ammount);
+    void ShowConfirmWidget(const QString &address,const QString & ammount);
     void on_withdrawRecordBtn_clicked();
 
 private:
