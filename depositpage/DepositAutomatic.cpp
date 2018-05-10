@@ -365,13 +365,10 @@ void DepositAutomatic::ParseMutli(const QString &jsonString)
     if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return ;
     QJsonObject jsonObject = parse_doucment.object();
 
-    if(!jsonObject.value("result").isArray())
+    if(!jsonObject.value("result").isObject())
     {
-        return ;
+        return;
     }
-
-    QJsonArray object = jsonObject.value("result").toArray();
-    if(object.isEmpty()) return ;
     QString symbol = jsonObject.value("result").toObject().value("chain_type").toString();
     QString multi = jsonObject.value("result").toObject().value("bind_account_hot").toString();
     _p->updateMulti(symbol,multi);
@@ -387,6 +384,19 @@ void DepositAutomatic::ParseTransaction(const QString &jsonString)
 
 
     QJsonObject obj =  jsonObject.value("result").toObject();
+    //获取对应通道地址
+    QString tunnelAddress;
+    QJsonArray arr = obj.value("trx").toObject().value("vout").toArray();
+    foreach (QJsonValue val, arr) {
+        if(!val.isObject()) continue;
+        QJsonObject valObj = val.toObject();
+        if(valObj.value("n").toInt() == 0)
+        {
+            tunnelAddress = valObj.value("scriptPubKey").toObject().value("addresses").toArray()[0].toString();
+            break;
+        }
+    }
+    _p->updateDetail(tunnelAddress,obj);
 }
 
 

@@ -27,6 +27,8 @@ public:
 public:
     explicit WithdrawConfirmWidget(const WithdrawConfirmInput &data,QWidget *parent = 0);
     ~WithdrawConfirmWidget();
+signals:
+    void closeSelf();
 private slots:
     void ConfirmSlots();
     void CancelSlots();

@@ -700,6 +700,11 @@ void UBChain::InitFeeCharge()
     feeChargeInfo.poundagePublishFee = feeObj.value("PoundagePublish").toString();
     feeChargeInfo.poundageCancelFee = feeObj.value("PoundageCancel").toString();
     feeChargeInfo.transferFee = feeObj.value("Transfer").toString();
+
+    //其他费用
+    QJsonObject crossfeeObj = jsonObject.value("CrossFee").toObject();
+    feeChargeInfo.withDrawFee = crossfeeObj.value("WithDraw").toString();
+    feeChargeInfo.capitalFee = crossfeeObj.value("Capital").toString();
 }
 
 void UBChain::addTrackAddress(QString _address)

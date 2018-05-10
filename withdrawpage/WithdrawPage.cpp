@@ -49,7 +49,8 @@ void WithdrawPage::ShowConfirmWidget(const QString &address, double ammount)
 {//收到提现信号，弹出确认窗口
     WithdrawConfirmWidget *confirm = new WithdrawConfirmWidget(WithdrawConfirmWidget::WithdrawConfirmInput(
                                                                _p->name,QString::number(ammount),_p->assetSymbol,address),this);
-    confirm->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::Dialog | Qt::FramelessWindowHint);
+    connect(confirm,&WithdrawConfirmWidget::closeSelf,this,&WithdrawPage::close);
+    confirm->setWindowFlags( Qt::Dialog | Qt::FramelessWindowHint);
     confirm->setWindowModality(Qt::WindowModal);
     confirm->setAttribute(Qt::WA_DeleteOnClose);
     confirm->move(mapToGlobal(QPoint(-190,-50)));
