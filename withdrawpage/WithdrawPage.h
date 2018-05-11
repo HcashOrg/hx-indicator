@@ -16,12 +16,12 @@ class WithdrawPage : public QWidget
     Q_OBJECT
 public:
     struct WithdrawDataInput{
-        WithdrawDataInput(QString name,QString address,QString type,double ammount = 0,QString id="")
+        WithdrawDataInput(QString name,QString address,QString type,QString ammount,QString id="")
             :accountName(name),accountAddress(address),assetSymbol(type),assetAmmount(ammount),assetID(id){}
         QString accountName;
         QString accountAddress;
         QString assetSymbol;//BTC LTC...
-        double assetAmmount;
+        QString assetAmmount;
         QString assetID;//1.3.1  1.3.2 ...
     };
 public:

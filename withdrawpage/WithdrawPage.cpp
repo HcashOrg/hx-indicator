@@ -20,7 +20,7 @@ public:
     QString address;//地址
     QString name;
     QString assetSymbol;
-    double ammount;
+    QString ammount;
     QString assetID;
 
     WithdrawInputWidget *inputWidget;
@@ -64,8 +64,7 @@ void WithdrawPage::InitWidget()
     InitStyle();
 
     ui->stackedWidget->addWidget(_p->inputWidget);
-    _p->inputWidget->setMaxAmmount(_p->ammount);
-    _p->inputWidget->setSymbol(_p->assetSymbol);
+    _p->inputWidget->InitData(_p->ammount,_p->assetSymbol);
 
     connect(ui->withdrawRecordBtn,&QToolButton::clicked,this,&WithdrawPage::ShowRecordSlots);
     connect(_p->inputWidget,&WithdrawInputWidget::withdrawSignal,this,&WithdrawPage::ShowConfirmWidget);

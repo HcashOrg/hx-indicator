@@ -221,7 +221,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         emit backBtnVisible(true);
         WithdrawPage *withdraw = new WithdrawPage(WithdrawPage::WithdrawDataInput(ui->accountComboBox->currentText(),
                                                   ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text(),
-                                                  ui->accountTableWidget->item(row,1)->text().toDouble()),this);
+                                                  ui->accountTableWidget->item(row,1)->text()),this);
         withdraw->setAttribute(Qt::WA_DeleteOnClose);
         withdraw->show();
         withdraw->raise();
@@ -623,9 +623,9 @@ void MainPage::InitStyle()
     QPalette pe;
     pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
     ui->label_op->setPalette(pe);
-    //QFont font("Microsoft YaHei UI ",20,50);
-    //font.setPixelSize(12);
-    //ui->label_op->setFont(font);
+    QFont font("Microsoft YaHei UI ",20,50);
+    font.setPixelSize(12);
+    ui->label_op->setFont(font);
 
 
 

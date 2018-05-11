@@ -11,14 +11,22 @@ class WithdrawConfirmWidget::WithdrawConfirmWidgetPrivate
 public:
     WithdrawConfirmWidgetPrivate(const WithdrawConfirmInput &data)
         :account(data.account),ammount(data.ammount),symbol(data.symbol),crosschain_account(data.crosschain_account)
+        ,pre(5)
     {
-
+        foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+            if(asset.symbol == symbol)
+            {
+                pre = asset.precision;
+                break;
+            }
+        }
     }
 public:
     QString account;
     QString ammount;
     QString symbol;
     QString crosschain_account;
+    int pre;
 };
 
 WithdrawConfirmWidget::WithdrawConfirmWidget(const WithdrawConfirmInput &data,QWidget *parent) :

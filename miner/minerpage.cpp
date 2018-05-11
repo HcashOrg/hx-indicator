@@ -366,6 +366,10 @@ void MinerPage::InitStyle()
                   TABLEWIDGET_STYLE_1);
     QPalette pe;
     pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
+
+    QFont font("Microsoft YaHei UI",12,50);
+    font.setPixelSize(12);
+    ui->label_op->setFont(font);
     ui->label_op->setPalette(pe);
 
 }

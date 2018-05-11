@@ -126,6 +126,8 @@ void DepositPage::GenerateAddress()
                                     toJsonFormat("create_crosschain_symbol",
                                                  QJsonArray()<<_p->assetSymbol)
                                     );
+//    qDebug()<<toJsonFormat("create_crosschain_symbol",
+//                           QJsonArray()<<_p->assetSymbol);
 }
 
 void DepositPage::BindTunnelAccount()

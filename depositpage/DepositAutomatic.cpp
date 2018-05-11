@@ -85,7 +85,7 @@ public:
         std::lock_guard<std::mutex> lockguard(mutexLock);
         for(auto it = accounts.begin();it != accounts.end();++it){
             if(tunnelAddress == (*it)->tunnelAddress){
-                (*it)->assetNumber = number;
+                (*it)->assetNumber = QString::number(number.toDouble()-UBChain::getInstance()->feeChargeInfo.capitalFee.toDouble());
             }
         }
     }
@@ -288,7 +288,7 @@ void DepositAutomatic::httpReplied(QByteArray _data, int _status)
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
     QString tunnel   = object.value("address").toString();
-    QString number = QString::number(object.value("balance").toDouble(),'g',8);
+    QString number = QString::number(object.value("balance").toDouble(),'f',10);
     _p->updateMoney(tunnel,number);
 
 //    qDebug()<<"tunnel--money--"<<tunnel<<number;

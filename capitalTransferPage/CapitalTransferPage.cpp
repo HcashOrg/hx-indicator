@@ -18,8 +18,15 @@ public:
         :account_name(data.account_name),account_address(data.account_address),symbol(data.symbol)
         ,fee(UBChain::getInstance()->feeChargeInfo.capitalFee)
         ,actualNumber("0")
+        ,precision(5)
     {
-
+        foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+            if(asset.symbol == symbol)
+            {
+                precision = asset.precision;
+                break;
+            }
+        }
     }
 public:
     QString account_name;
@@ -29,6 +36,8 @@ public:
     QString tunnel_account_address;
     QString asset_max_ammount;
     QString fee;
+
+    int precision;
 
     QString multisig_address;
 
@@ -190,13 +199,13 @@ void CapitalTransferPage::httpReplied(QByteArray _data, int _status)
     qDebug() << "auto--http-- " << _data << _status;
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
-    _p->asset_max_ammount = QString::number(std::max<double>(0,object.value("balance").toDouble()),'g',10) ;
+    _p->asset_max_ammount = QString::number(std::max<double>(0,object.value("balance").toDouble()),'f',_p->precision) ;
     ui->label_number->setText(_p->asset_max_ammount + " "+_p->symbol);
 
-    QDoubleValidator *validator = new QDoubleValidator(0,_p->asset_max_ammount.toDouble(),10,this);
+    QDoubleValidator *validator = new QDoubleValidator(0,_p->asset_max_ammount.toDouble(),_p->precision,this);
     validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_number->setValidator(validator);
-    ui->lineEdit_number->setPlaceholderText(tr("max:")+QString::number(validator->top(),'g',10));
+    ui->lineEdit_number->setPlaceholderText(tr("max:")+QString::number(validator->top(),'f',_p->precision));
 
 }
 
