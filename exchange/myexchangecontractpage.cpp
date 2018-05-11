@@ -233,6 +233,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         {
             WithdrawOrderDialog withdrawOrderDialog;
             int count = result.mid(QString("\"result\":").size()).toInt();
+            withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION).toDouble());
             withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION)
                                                + " " + ASSET_NAME);
             withdrawOrderDialog.setText(tr("Sure to withdraw this order? You need to pay the fee for contract execution."));

@@ -6,7 +6,7 @@
 namespace Ui {
 class WithdrawOrderDialog;
 }
-
+class FeeChooseWidget;
 class WithdrawOrderDialog : public QDialog
 {
     Q_OBJECT
@@ -19,7 +19,7 @@ public:
 
     void setText(QString _text);
     void setContractFee(QString _feeStr);
-
+    void setContractFee(double _fee);
 private slots:
     void jsonDataUpdated(QString id);
 
@@ -32,6 +32,7 @@ private slots:
 private:
     Ui::WithdrawOrderDialog *ui;
     bool yesOrNo = false;
+    FeeChooseWidget *feeChoose;
 };
 
 #endif // WITHDRAWORDERDIALOG_H
