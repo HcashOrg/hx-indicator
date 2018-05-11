@@ -10,6 +10,7 @@
 #include "PoundageShowTableModel.h"
 #include "GeneralComboBoxDelegate.h"
 #include "PageScrollWidget.h"
+#include "wallet.h"
 
 Q_DECLARE_METATYPE(std::shared_ptr<PoundageUnit>)
 
@@ -114,11 +115,7 @@ void PoundageShowWidget::InitStyle()
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 
-    ui->tableView->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
-                                 "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;border-radius:10px;}"
-                                 "QHeaderView:section{height:30px;border:none;background-color:#FFFFFF;}"
-                                 "QTableView:item{min-height:60px;}"
-                                 );
+    ui->tableView->setStyleSheet(TABLEWIDGET_STYLE_1);
     setStyleSheet("QMenu{border: none;border-radius:15px;}"
                   "QMenu::item {border:none;background-color:#FFFFFF;color:black;border-bottom:1px solid #DBDBDB;}"
                   "QMenu::item::selected{border:none;background-color: #829DFF;}"

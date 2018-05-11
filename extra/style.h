@@ -17,8 +17,9 @@
 #define TOOLBUTTON_STYLE_1      "QToolButton{font: 11px \"微软雅黑\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}" \
                                 "QToolButton:hover{background-color:#5474EB;}"
 
-#define TABLEWIDGET_STYLE_1     "QTableView{background-color:#FFFFFF;border:1px solid white;border-radius:15px;}" \
-                                "QHeaderView{border:none;color:#C6CAD4;font: 12px \"微软雅黑\";}" \
-                                "QHeaderView:section{height:35px;border:none;background-color:#FFFFFF;}"
-
+#define TABLEWIDGET_STYLE_1     "QTableView{background-color:white;border:1px solid rgb(236,238,251);border-radius:15px;}" \
+                                "QHeaderView{border:none;border-top-left-radius:15px;border-top-right-radius:15px;background-color:white;color:#C6CAD4;font: 12px \"微软雅黑\";}" \
+                                "QHeaderView:section{height:35px;border:none;background-color:white;}" \
+                                "QHeaderView:section:first{border-top-left-radius:15px;}" \
+                                "QHeaderView:section:last{border-top-right-radius:15px;}"
 #endif // STYLE_H

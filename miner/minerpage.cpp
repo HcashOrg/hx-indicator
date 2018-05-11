@@ -362,13 +362,8 @@ void MinerPage::InitStyle()
                   "QToolButton#lockToMinerBtn::hover{background-color:#5474EB;}"
                   "QToolButton#registerBtn{font: 11px \"微软雅黑\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                   "QToolButton#registerBtn::hover{background-color:#5474EB;}"
-
-                  "QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
-                  "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
-                  "QHeaderView:section{height:40px;border:none;background-color:#FFFFFF;}"
-                  "QTableView:item{min-height:40px;}"
-
-                  "QComboBox{font-size:14px;}");
+                  "QComboBox{font-size:14px;}"
+                  TABLEWIDGET_STYLE_1);
     QPalette pe;
     pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
     ui->label_op->setPalette(pe);

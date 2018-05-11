@@ -633,11 +633,7 @@ void MainPage::InitStyle()
     fontLabel.setPixelSize(21);
     ui->accountListLabel->setFont(fontLabel);
 
-    ui->accountTableWidget->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
-                                 "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
-                                 "QHeaderView:section{height:30px;border:none;background-color:#FFFFFF;}"
-                                 "QTableView:item{min-height:60px;}"
-                                 );
+    ui->accountTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
 
     ui->copyBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"

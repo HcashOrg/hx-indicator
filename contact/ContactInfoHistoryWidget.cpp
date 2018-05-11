@@ -176,12 +176,7 @@ void ContactInfoHistoryWidget::InitStyle()
 //    ui->transferRecordTableWidget->setColumnWidth(4,110);
 //    ui->transferRecordTableWidget->setColumnWidth(5,70);
 
-    ui->transferRecordTableWidget->setStyleSheet("QTableView{background-color:#FFFFFF;border:none;border-radius:10px;}"
-                                 "QHeaderView{border:none;color:#C6CAD4;font-size:12pt;}"
-                                 "QHeaderView:section{height:30px;border:none;background-color:#FFFFFF;}"
-                                 "QTableView:item{min-height:40px;}"
-                                 );
-
+    ui->transferRecordTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
 }
 
