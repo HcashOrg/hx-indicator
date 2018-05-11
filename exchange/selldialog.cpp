@@ -3,7 +3,7 @@
 
 #include "wallet.h"
 #include "commondialog.h"
-
+#include "FeeChooseWidget.h"
 SellDialog::SellDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SellDialog)
@@ -28,6 +28,11 @@ SellDialog::SellDialog(QWidget *parent) :
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
 
+    feeChoose = new FeeChooseWidget(0,"LNK");
+    ui->stackedWidget->addWidget(feeChoose);
+    ui->stackedWidget->setCurrentIndex(0);
+    ui->label_5->setVisible(false);
+    ui->contractFeeLabel->setVisible(false);
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
@@ -106,6 +111,10 @@ void SellDialog::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":"))
         {
             stepCount = result.mid(QString("\"result\":").size()).toInt();
+
+            feeChoose->updateFeeNumberSlots(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION).toDouble());
+
+
             ui->contractFeeLabel->setText(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION)
                                           + " " + ASSET_NAME);
 

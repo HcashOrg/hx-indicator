@@ -3,6 +3,7 @@
 
 #include "wallet.h"
 #include "commondialog.h"
+#include "FeeChooseWidget.h"
 
 WithdrawExchangeContractDialog::WithdrawExchangeContractDialog(QWidget *parent) :
     QDialog(parent),
@@ -28,8 +29,14 @@ WithdrawExchangeContractDialog::WithdrawExchangeContractDialog(QWidget *parent) 
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
 
+    feeChoose = new FeeChooseWidget(0,"LNK");
+    ui->stackedWidget->addWidget(feeChoose);
+    ui->stackedWidget->setCurrentIndex(0);
+
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
+    ui->label_3->setVisible(false);
+    ui->contractFeeLabel->setVisible(false);
     init();
 }
 
@@ -124,6 +131,7 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":"))
         {
             stepCount = result.mid(QString("\"result\":").size()).toInt();
+            feeChoose->updateFeeNumberSlots(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION).toDouble());
             ui->contractFeeLabel->setText(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION)
                                           + " " + ASSET_NAME);
         }

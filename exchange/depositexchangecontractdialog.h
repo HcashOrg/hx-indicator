@@ -6,7 +6,7 @@
 namespace Ui {
 class DepositExchangeContractDialog;
 }
-
+class FeeChooseWidget;
 class DepositExchangeContractDialog : public QDialog
 {
     Q_OBJECT
@@ -39,6 +39,8 @@ private:
     int stepCount = 0;      // 合约执行步数
 
     void estimateContractFee();
+
+    FeeChooseWidget *feeChoose;
 };
 
 #endif // DEPOSITEXCHANGECONTRACTDIALOG_H

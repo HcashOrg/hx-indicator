@@ -77,7 +77,7 @@
     <widget class="QComboBox" name="assetComboBox">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>40</x>
        <y>70</y>
        <width>90</width>
        <height>30</height>
@@ -100,7 +100,7 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>230</x>
+       <x>140</x>
        <y>70</y>
        <width>40</width>
        <height>30</height>
@@ -124,7 +124,7 @@
     <widget class="QComboBox" name="assetComboBox2">
      <property name="geometry">
       <rect>
-       <x>270</x>
+       <x>180</x>
        <y>70</y>
        <width>90</width>
        <height>30</height>
@@ -147,7 +147,7 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>50</x>
        <y>110</y>
        <width>54</width>
        <height>30</height>
@@ -160,8 +160,8 @@
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>270</x>
-       <y>110</y>
+       <x>50</x>
+       <y>147</y>
        <width>54</width>
        <height>30</height>
       </rect>
@@ -173,9 +173,9 @@
     <widget class="QLineEdit" name="sellAmountLineEdit">
      <property name="geometry">
       <rect>
-       <x>90</x>
+       <x>99</x>
        <y>110</y>
-       <width>160</width>
+       <width>171</width>
        <height>30</height>
       </rect>
      </property>
@@ -183,9 +183,9 @@
     <widget class="QLineEdit" name="buyAmountLineEdit">
      <property name="geometry">
       <rect>
-       <x>330</x>
-       <y>110</y>
-       <width>160</width>
+       <x>99</x>
+       <y>147</y>
+       <width>171</width>
        <height>30</height>
       </rect>
      </property>
@@ -193,7 +193,7 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>40</x>
        <y>30</y>
        <width>60</width>
        <height>30</height>
@@ -206,7 +206,7 @@
     <widget class="QLabel" name="accountNameLabel">
      <property name="geometry">
       <rect>
-       <x>90</x>
+       <x>100</x>
        <y>30</y>
        <width>120</width>
        <height>30</height>
@@ -242,7 +242,7 @@
      <property name="geometry">
       <rect>
        <x>150</x>
-       <y>160</y>
+       <y>320</y>
        <width>240</width>
        <height>20</height>
       </rect>
@@ -258,7 +258,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>160</y>
+       <y>320</y>
        <width>100</width>
        <height>20</height>
       </rect>
@@ -273,14 +273,14 @@
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>190</y>
+       <x>-10</x>
+       <y>184</y>
        <width>100</width>
        <height>30</height>
       </rect>
      </property>
      <property name="text">
-      <string>输入钱包密码：</string>
+      <string>输入钱包密码</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -289,9 +289,9 @@
     <widget class="QLineEdit" name="pwdLineEdit">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>190</y>
-       <width>240</width>
+       <x>100</x>
+       <y>184</y>
+       <width>171</width>
        <height>30</height>
       </rect>
      </property>
@@ -302,14 +302,37 @@
     <widget class="QLabel" name="tipLabel">
      <property name="geometry">
       <rect>
-       <x>160</x>
-       <y>230</y>
-       <width>200</width>
+       <x>110</x>
+       <y>224</y>
+       <width>161</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
       <string/>
+     </property>
+    </widget>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="geometry">
+      <rect>
+       <x>296</x>
+       <y>71</y>
+       <width>181</width>
+       <height>151</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="Line" name="line">
+     <property name="geometry">
+      <rect>
+       <x>271</x>
+       <y>70</y>
+       <width>20</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
     </widget>
    </widget>

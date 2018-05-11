@@ -6,7 +6,7 @@
 namespace Ui {
 class SellDialog;
 }
-
+class FeeChooseWidget;
 class SellDialog : public QDialog
 {
     Q_OBJECT
@@ -44,6 +44,7 @@ private:
     int stepCount = 0;      // 合约执行步数
 
     void estimateContractFee();
+    FeeChooseWidget *feeChoose;
 };
 
 #endif // SELLDIALOG_H

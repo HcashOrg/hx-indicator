@@ -2,6 +2,7 @@
 #include "ui_WithdrawOrderDialog.h"
 
 #include "wallet.h"
+#include "FeeChooseWidget.h"
 
 WithdrawOrderDialog::WithdrawOrderDialog(QWidget *parent) :
     QDialog(parent),
@@ -27,6 +28,12 @@ WithdrawOrderDialog::WithdrawOrderDialog(QWidget *parent) :
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
 
+    feeChoose = new FeeChooseWidget(0,"LNK");
+    ui->stackedWidget->addWidget(feeChoose);
+    ui->stackedWidget->setCurrentIndex(0);
+
+    ui->feeLabel->setVisible(false);
+    ui->label_3->setVisible(false);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 }
@@ -46,12 +53,17 @@ bool WithdrawOrderDialog::pop()
 
 void WithdrawOrderDialog::setText(QString _text)
 {
-
+    ui->textLabel->setText(_text);
 }
 
 void WithdrawOrderDialog::setContractFee(QString _feeStr)
 {
     ui->feeLabel->setText(_feeStr);
+}
+
+void WithdrawOrderDialog::setContractFee(double _fee)
+{
+    feeChoose->updateFeeNumberSlots(_fee);
 }
 
 void WithdrawOrderDialog::jsonDataUpdated(QString id)
