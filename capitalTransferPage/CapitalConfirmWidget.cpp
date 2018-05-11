@@ -1,44 +1,41 @@
-#include "WithdrawConfirmWidget.h"
-#include "ui_WithdrawConfirmWidget.h"
-
-#include <QPainter>
+#include "CapitalConfirmWidget.h"
+#include "ui_CapitalConfirmWidget.h"
 
 #include "wallet.h"
-#include "commondialog.h"
-
-class WithdrawConfirmWidget::WithdrawConfirmWidgetPrivate
+class CapitalConfirmWidget::DataPrivate
 {
 public:
-    WithdrawConfirmWidgetPrivate(const WithdrawConfirmInput &data)
-        :account(data.account),ammount(data.ammount),symbol(data.symbol),crosschain_account(data.crosschain_account)
+    DataPrivate(const CapitalConfirmWidget::CapitalConfirmInput &data)
+        :address(data.address),fee(data.fee),actual(data.actual),total(data.total)
     {
 
     }
 public:
-    QString account;
-    QString ammount;
-    QString symbol;
-    QString crosschain_account;
+    QString address;
+    QString fee;
+    QString actual;
+    QString total;
+
 };
 
-WithdrawConfirmWidget::WithdrawConfirmWidget(const WithdrawConfirmInput &data,QWidget *parent) :
+CapitalConfirmWidget::CapitalConfirmWidget(const CapitalConfirmInput &input,QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::WithdrawConfirmWidget),
-    _p(new WithdrawConfirmWidgetPrivate(data))
+    ui(new Ui::CapitalConfirmWidget),
+    _p(new DataPrivate(input))
 {
     ui->setupUi(this);
     InitWidget();
-    InitData();
 }
 
-WithdrawConfirmWidget::~WithdrawConfirmWidget()
+CapitalConfirmWidget::~CapitalConfirmWidget()
 {
     delete _p;
     delete ui;
 }
-void WithdrawConfirmWidget::jsonDataUpdated(QString id)
+
+void CapitalConfirmWidget::jsonDataUpdated(QString id)
 {
-    if( id == "withdraw-unlock-lockpage")
+    if( id == "capital-unlock-lockpage")
     {
         QString  result = UBChain::getInstance()->jsonDataValue(id);
         if( result == "\"result\":null")
@@ -52,35 +49,23 @@ void WithdrawConfirmWidget::jsonDataUpdated(QString id)
             ui->toolButton_confirm->setEnabled(false);
         }
     }
-    else if("withdraw-withdraw_cross_chain_transaction" == id)
-    {
-        QString  result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id <<"asdfsdfsdfasdf"<< result;
-
-        CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(result);
-        dia.pop();
-        emit closeSelf();
-        close();
-    }
 
 }
 
-void WithdrawConfirmWidget::ConfirmSlots()
+void CapitalConfirmWidget::ConfirmSlots()
 {
-    UBChain::getInstance()->postRPC( "withdraw-withdraw_cross_chain_transaction", toJsonFormat( "withdraw_cross_chain_transaction",
-                                     QJsonArray() << _p->account<<_p->ammount<<_p->symbol<<_p->crosschain_account<<""<<true ));
-    qDebug()<<_p->account << _p->ammount << _p->symbol << _p->crosschain_account;
-    //close();
+    emit ConfirmSignal();
+    close();
 
 }
 
-void WithdrawConfirmWidget::CancelSlots()
+void CapitalConfirmWidget::CancelSlots()
 {
+    emit CancelSignal();
     close();
 }
 
-void WithdrawConfirmWidget::passwordChangeSlots(const QString &address)
+void CapitalConfirmWidget::passwordChangeSlots(const QString &address)
 {
     if( ui->lineEdit->text().size() < 8)
     {
@@ -88,30 +73,32 @@ void WithdrawConfirmWidget::passwordChangeSlots(const QString &address)
         return;
     }
 
-    UBChain::getInstance()->postRPC( "withdraw-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->lineEdit->text() ));
+    UBChain::getInstance()->postRPC( "capital-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->lineEdit->text() ));
 }
 
-void WithdrawConfirmWidget::InitData()
+void CapitalConfirmWidget::InitData()
 {
-    ui->label_address->setText(_p->crosschain_account);
-    ui->label_totalNumber->setText(_p->ammount + "  " + _p->symbol);
-    ui->label_feeNumber->setText(UBChain::getInstance()->feeChargeInfo.withDrawFee + " " + _p->symbol);
-    ui->label_actualNumber->setText(QString::number(_p->ammount.toDouble()-UBChain::getInstance()->feeChargeInfo.withDrawFee.toDouble())+" "+_p->symbol);
-}
+    ui->label_address->setText(_p->address);
+    ui->label_totalNumber->setText(_p->total);
+    ui->label_feeNumber->setText(_p->fee);
+    ui->label_actualNumber->setText(_p->actual);
 
-void WithdrawConfirmWidget::InitWidget()
+}
+void CapitalConfirmWidget::InitWidget()
 {
     InitStyle();
 
+    InitData();
     ui->toolButton_confirm->setEnabled(false);
-    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &WithdrawConfirmWidget::jsonDataUpdated);
-    connect(ui->toolButton_confirm,&QToolButton::clicked,this,&WithdrawConfirmWidget::ConfirmSlots);
-    connect(ui->toolButton_cancel,&QToolButton::clicked,this,&WithdrawConfirmWidget::CancelSlots);
-    connect(ui->lineEdit,&QLineEdit::textEdited,this,&WithdrawConfirmWidget::passwordChangeSlots);
+    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &CapitalConfirmWidget::jsonDataUpdated);
+    connect(ui->toolButton_confirm,&QToolButton::clicked,this,&CapitalConfirmWidget::ConfirmSlots);
+    connect(ui->toolButton_cancel,&QToolButton::clicked,this,&CapitalConfirmWidget::CancelSlots);
+    connect(ui->lineEdit,&QLineEdit::textEdited,this,&CapitalConfirmWidget::passwordChangeSlots);
 }
 
-void WithdrawConfirmWidget::InitStyle()
+void CapitalConfirmWidget::InitStyle()
 {
+
     setAttribute(Qt::WA_TranslucentBackground, true);
     //setAutoFillBackground(true);
     //QPalette palette;
@@ -169,7 +156,7 @@ void WithdrawConfirmWidget::InitStyle()
                   "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
 }
 
-void WithdrawConfirmWidget::paintEvent(QPaintEvent *event)
+void CapitalConfirmWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
 

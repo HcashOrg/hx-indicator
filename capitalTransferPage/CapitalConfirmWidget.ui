@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>WithdrawConfirmWidget</class>
- <widget class="QWidget" name="WithdrawConfirmWidget">
+ <class>CapitalConfirmWidget</class>
+ <widget class="QWidget" name="CapitalConfirmWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,17 +13,134 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>438</x>
+     <y>440</y>
+     <width>261</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_feeNumber">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>316</y>
+     <width>141</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>address</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="toolButton_cancel">
+   <property name="geometry">
+    <rect>
+     <x>590</x>
+     <y>480</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>取消</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_actualNumber">
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>220</y>
+     <y>316</y>
+     <width>151</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>address</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_totalNumber">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>376</y>
+     <width>131</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>address</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_address">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>246</y>
+     <width>361</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>address</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>350</y>
      <width>71</width>
      <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>提至地址</string>
+    <string>共需支付</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="toolButton_confirm">
+   <property name="geometry">
+    <rect>
+     <x>464</x>
+     <y>480</y>
+     <width>100</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确认</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>410</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>交易密码</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_1">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>290</y>
+     <width>71</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>到账数额</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_title">
@@ -45,32 +162,6 @@
     <string>交易确认</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_address">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>246</y>
-     <width>361</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>address</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_1">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>290</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>提现数额</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
@@ -81,85 +172,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>提现手续费</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>350</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>共需支付</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>410</y>
-     <width>71</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>交易密码</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit">
-   <property name="geometry">
-    <rect>
-     <x>438</x>
-     <y>440</y>
-     <width>261</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="echoMode">
-    <enum>QLineEdit::Password</enum>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_actualNumber">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>316</y>
-     <width>151</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>address</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_feeNumber">
-   <property name="geometry">
-    <rect>
-     <x>610</x>
-     <y>316</y>
-     <width>141</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>address</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_totalNumber">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>376</y>
-     <width>131</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>address</string>
+    <string>手续费</string>
    </property>
   </widget>
   <widget class="Line" name="line">
@@ -175,30 +188,17 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QToolButton" name="toolButton_confirm">
+  <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>464</x>
-     <y>480</y>
-     <width>100</width>
-     <height>30</height>
+     <x>440</x>
+     <y>220</y>
+     <width>71</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="text">
-    <string>确认</string>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="toolButton_cancel">
-   <property name="geometry">
-    <rect>
-     <x>590</x>
-     <y>480</y>
-     <width>100</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>取消</string>
+    <string>到账地址</string>
    </property>
   </widget>
  </widget>
