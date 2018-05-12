@@ -50,6 +50,7 @@
 #define ASSET_PRECISION 5
 #define WALLET_VERSION "1.0.0"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
+#define EXCHANGE_CONTRACT_HASH  "f138267ad4c454097a06fb2d80518ea7e8ef7370"
 
 #ifdef  TEST_WALLET
 #define WALLET_EXE_SUFFIX   "_test"
@@ -93,6 +94,7 @@ struct ContractInfo
 {
     QString contractAddress;
     QString hashValue;
+    QString state;
 };
 
 struct AccountInfo
@@ -353,7 +355,7 @@ public:
     QStringList getRegisteredAccounts();
     QStringList getUnregisteredAccounts();
     QString getExchangeContractAddress(QString _accountName);   // 没有兑换合约则返回空  有多个返回第一个
-
+    QString getExchangeContractState(QString _accountName);   // 没有兑换合约则返回空  有多个返回第一个
 
     QMap<QString,AssetInfo>   assetInfoMap;
     void parseAssetInfo();

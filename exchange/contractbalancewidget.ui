@@ -120,6 +120,22 @@
     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
    </property>
   </widget>
+  <widget class="QToolButton" name="openForUsersBtn">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>50</y>
+     <width>80</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="text">
+    <string>开放合约</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

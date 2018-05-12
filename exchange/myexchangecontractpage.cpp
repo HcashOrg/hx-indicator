@@ -164,7 +164,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":"))
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Create exchange contract successfully! Please wait for the confirmation of the block chain.") );
+            commonDialog.setText( tr("Create exchange contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.") );
             commonDialog.pop();
 
         }
@@ -407,20 +407,31 @@ void MyExchangeContractPage::on_sellBtn_clicked()
 
 void MyExchangeContractPage::on_balanceBtn_clicked()
 {
-    ContractBalanceWidget* contractBalanceWidget = new ContractBalanceWidget(this);
-    contractBalanceWidget->setAccount(ui->accountComboBox->currentText());
-    contractBalanceWidget->move(0,0);
-    contractBalanceWidget->show();
+    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
 
-    currentWidget = contractBalanceWidget;
+    if(contractAddress.isEmpty())
+    {
+        registerContract();
+    }
+    else
+    {
+        ContractBalanceWidget* contractBalanceWidget = new ContractBalanceWidget(this);
+        contractBalanceWidget->setAccount(ui->accountComboBox->currentText());
+        contractBalanceWidget->move(0,0);
+        contractBalanceWidget->show();
 
-    emit backBtnVisible(true);
+        currentWidget = contractBalanceWidget;
+
+        emit backBtnVisible(true);
+    }
 }
 
 
 
 void MyExchangeContractPage::on_withdrawAllBtn_clicked()
 {
+    if(ui->ordersTableWidget->rowCount() < 1)   return;
+
     CommonDialog commonDialog(CommonDialog::OkAndCancel);
     commonDialog.setText( tr("Sure to withdraw all orders of %1-to-%2 ?").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()) );
     if(commonDialog.pop())

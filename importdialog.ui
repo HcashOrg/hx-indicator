@@ -21,8 +21,8 @@
   <widget class="QLineEdit" name="privateKeyLineEdit">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>322</y>
+     <x>335</x>
+     <y>302</y>
      <width>301</width>
      <height>30</height>
     </rect>
@@ -49,8 +49,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>425</x>
-     <y>296</y>
+     <x>330</x>
+     <y>276</y>
      <width>180</width>
      <height>30</height>
     </rect>
@@ -70,8 +70,8 @@
   <widget class="QToolButton" name="importBtn">
    <property name="geometry">
     <rect>
-     <x>535</x>
-     <y>372</y>
+     <x>440</x>
+     <y>352</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -94,8 +94,8 @@
   <widget class="QToolButton" name="cancelBtn">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>372</y>
+     <x>545</x>
+     <y>352</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -113,8 +113,8 @@
   <widget class="QLabel" name="tipLabel">
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>453</y>
+     <x>385</x>
+     <y>433</y>
      <width>200</width>
      <height>16</height>
     </rect>
@@ -134,8 +134,8 @@
   <widget class="QToolButton" name="closeBtn">
    <property name="geometry">
     <rect>
-     <x>720</x>
-     <y>235</y>
+     <x>625</x>
+     <y>215</y>
      <width>18</width>
      <height>18</height>
     </rect>
@@ -156,8 +156,8 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>425</x>
-     <y>235</y>
+     <x>330</x>
+     <y>215</y>
      <width>180</width>
      <height>30</height>
     </rect>
@@ -177,8 +177,8 @@
   <widget class="QLineEdit" name="accountNameLineEdit">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>262</y>
+     <x>335</x>
+     <y>242</y>
      <width>301</width>
      <height>30</height>
     </rect>
@@ -202,37 +202,11 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>425</x>
-     <y>282</y>
-     <width>311</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_2">
-   <property name="geometry">
-    <rect>
-     <x>425</x>
-     <y>344</y>
-     <width>311</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
   <widget class="QToolButton" name="pathBtn">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>321</y>
+     <x>575</x>
+     <y>301</y>
      <width>70</width>
      <height>31</height>
     </rect>

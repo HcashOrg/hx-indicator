@@ -56,16 +56,6 @@
      <string>价格</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="feeLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>360</x>
-      <y>80</y>
-      <width>280</width>
-      <height>30</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="priceLabel">
     <property name="geometry">
      <rect>
@@ -196,6 +186,19 @@
     </property>
     <property name="textInteractionFlags">
      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="feeLabel">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>80</y>
+      <width>200</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

@@ -269,8 +269,7 @@ void ImportDialog::InitStyle()
                   "QToolButton#cancelBtn::hover,QToolButton#importBtn::hover{background-color:#00D2FF;}"
                   "QToolButton#cancelBtn{background-color:#E5E5E5;}"
                   "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
-    ui->line->setVisible(false);
-    ui->line_2->setVisible(false);
+
 
 }
 
@@ -284,7 +283,7 @@ void ImportDialog::paintEvent(QPaintEvent *event)
 
 
     painter.setBrush(QColor(255,255,255,255));
-    painter.drawRoundedRect(QRect(385,200,380,220),10,10);
+    painter.drawRoundedRect(QRect(290,180,380,220),10,10);
     QDialog::paintEvent(event);
 
 

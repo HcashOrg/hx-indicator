@@ -1291,10 +1291,47 @@ void Frame::jsonDataUpdated(QString id)
                 contractInfo.contractAddress    = object.take("contract_address").toString();
                 contractInfo.hashValue          = object.take("hash").toString();
 
+                if(contractInfo.hashValue == EXCHANGE_CONTRACT_HASH)
+                {
+                    UBChain::getInstance()->postRPC( "id-invoke_contract_offline-state-" + accountName + "-" + contractInfo.contractAddress, toJsonFormat( "invoke_contract_offline",
+                                                                                           QJsonArray() << accountName << contractInfo.contractAddress
+                                                                                           << "state"  << ""));
+                }
+
                 UBChain::getInstance()->accountInfoMap[accountName].contractsVector.append(contractInfo);
             }
         }
 
+
+        return;
+    }
+
+    if( id.startsWith("id-invoke_contract_offline-state-"))
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+
+        if(result.startsWith("\"result\":"))
+        {
+            QString str = id.mid(QString("id-invoke_contract_offline-state-").size());
+            QStringList strList = str.split("-");
+            QString accountName = strList.at(0);
+            QString contractAddress = strList.at(1);
+
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QString state = jsonObject.take("result").toString();
+
+            for(int i = 0; i < UBChain::getInstance()->accountInfoMap[accountName].contractsVector.size(); i++)
+            {
+                if(UBChain::getInstance()->accountInfoMap[accountName].contractsVector[i].contractAddress == contractAddress)
+                {
+                    UBChain::getInstance()->accountInfoMap[accountName].contractsVector[i].state = state;
+                }
+            }
+        }
 
         return;
     }

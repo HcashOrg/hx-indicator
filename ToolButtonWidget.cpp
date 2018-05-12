@@ -50,6 +50,11 @@ void ToolButtonWidget::setInitColor(const QColor color)
     setStyleSheet(BUTTONSTYLESHEET.arg(color.red()).arg(color.green()).arg(color.blue()));
 }
 
+void ToolButtonWidget::setEnabled(bool enabled)
+{
+    ui->toolButton->setEnabled(enabled);
+}
+
 void ToolButtonWidget::InitWidget()
 {
     InitStyle();
@@ -68,6 +73,15 @@ ToolButtonWidgetItem::ToolButtonWidgetItem(int _row, int _column, QWidget *paren
     column = _column;
 
     connect(this,SIGNAL(clicked(bool)),this,SLOT(onButtonClicked()));
+}
+
+void ToolButtonWidgetItem::setBtnEnabled(bool enabled)
+{
+    setEnabled(enabled);
+    setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QToolButton:hover{background-color:#00D2FF;color:white;}"
+                  "QToolButton:disabled{background-color:rgb(229,229,229);color:white;}"
+                  );
 }
 
 void ToolButtonWidgetItem::onButtonClicked()

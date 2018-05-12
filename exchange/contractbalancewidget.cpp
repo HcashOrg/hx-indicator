@@ -2,9 +2,11 @@
 #include "ui_contractbalancewidget.h"
 
 #include "wallet.h"
+#include "commondialog.h"
 #include "depositexchangecontractdialog.h"
 #include "withdrawexchangecontractdialog.h"
 #include "ToolButtonWidget.h"
+#include "WithdrawOrderDialog.h"
 
 ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
     QWidget(parent),
@@ -33,6 +35,10 @@ ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
     ui->balancesTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->depositBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->openForUsersBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+
+    ui->openForUsersBtn->setToolTip(tr("Before you open your contract for all users, other users can not buy your sell-orders."));
+    ui->openForUsersBtn->hide();
 
     init();
 }
@@ -65,6 +71,10 @@ void ContractBalanceWidget::setAccount(QString _accountName)
                                                                                << "owner_assets"  << ""));
     }
 
+    if(UBChain::getInstance()->getExchangeContractState(accountName) == "NOT_INITED")
+    {
+        ui->openForUsersBtn->show();
+    }
 }
 
 void ContractBalanceWidget::jsonDataUpdated(QString id)
@@ -105,6 +115,66 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
         }
 
         showContractBalances();
+
+        return;
+    }
+
+    if( id == "id-invoke_contract_testing-openForUsers-" + accountName )
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+        if(result.startsWith("\"result\":"))
+        {
+            WithdrawOrderDialog withdrawOrderDialog;
+            int count = result.mid(QString("\"result\":").size()).toInt();
+            withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION).toDouble());
+            withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+                                               + " " + ASSET_NAME);
+            withdrawOrderDialog.setText(tr("You need to pay the fee for contract execution."));
+            if(withdrawOrderDialog.pop())
+            {
+                QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(accountName);
+
+                UBChain::getInstance()->postRPC( "id-invoke_contract-openForUsers", toJsonFormat( "invoke_contract",
+                                                                                    QJsonArray() << accountName
+                                                                                    << UBChain::getInstance()->currentContractFee() << count
+                                                                                    << contractAddress
+                                                                                    << "openForUsers"  << ""));
+
+            }
+
+        }
+        else if(result.contains("no sell order"))
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText( tr("Please put on at least 1 sell-order!") );
+            commonDialog.pop();
+        }
+
+        return;
+    }
+
+    if( id == "id-invoke_contract-openForUsers")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText( tr("Execute the function of the contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.") );
+            commonDialog.pop();
+
+        }
+        else if(result.startsWith("\"error\":"))
+        {
+            int pos = result.indexOf("\"message\":\"") + 11;
+            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
+
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText( "Create exchange contract failed: " + errorMessage );
+            commonDialog.pop();
+        }
 
         return;
     }
@@ -187,4 +257,14 @@ void ContractBalanceWidget::onItemClicked(int _row, int _column)
         withdrawExchangeContractDialog.pop();
         return;
     }
+}
+
+void ContractBalanceWidget::on_openForUsersBtn_clicked()
+{
+    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(accountName);
+
+    UBChain::getInstance()->postRPC( "id-invoke_contract_testing-openForUsers-" + accountName, toJsonFormat( "invoke_contract_testing",
+                                                                           QJsonArray() << accountName << contractAddress
+                                                                           << "openForUsers"  << ""));
+
 }

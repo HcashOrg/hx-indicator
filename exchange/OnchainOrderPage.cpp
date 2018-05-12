@@ -78,8 +78,6 @@ void OnchainOrderPage::jsonDataUpdated(QString id)
 
 void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
 {
-    qDebug() << "rrrrrrrrrrrrrr " << _data << _status;
-
     QJsonObject object  = QJsonDocument::fromJson(_data).object();
     QJsonArray  array   = object.take("result").toObject().take("data").toArray();
 
@@ -124,8 +122,18 @@ void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
         for(int j = 3;j < 4;++j)
         {
             ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
-            toolButtonItem->setInitGray(j%2 == 0);
-            toolButtonItem->setText(ui->ordersTableWidget->item(i,j)->text());
+
+            if(UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText()) == contractAddress)
+            {
+                toolButtonItem->setBtnEnabled(false);
+                toolButtonItem->setText(tr("my own order"));
+            }
+            else
+            {
+                toolButtonItem->setBtnEnabled(true);
+                toolButtonItem->setText(ui->ordersTableWidget->item(i,j)->text());
+            }
+
             ui->ordersTableWidget->setCellWidget(i,j,toolButtonItem);
             connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
         }

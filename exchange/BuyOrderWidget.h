@@ -30,12 +30,16 @@ private slots:
 
     void on_allBtn_clicked();
 
+    void on_amountLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::BuyOrderWidget *ui;
     QString accountName;
     QString payAsset;
+    int stepCount = 0;      // 合约执行步数
 
     void paintEvent(QPaintEvent*);
+    void estimateContractFee();
 };
 
 #endif // BUYORDERWIDGET_H

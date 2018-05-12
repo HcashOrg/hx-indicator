@@ -2,6 +2,7 @@
 #include "ui_BuyOrderWidget.h"
 
 #include "wallet.h"
+#include "commondialog.h"
 
 BuyOrderWidget::BuyOrderWidget(QWidget *parent) :
     QWidget(parent),
@@ -52,10 +53,44 @@ void BuyOrderWidget::setContractAddress(QString _contractAddress)
 
 void BuyOrderWidget::jsonDataUpdated(QString id)
 {
-    if("id-transfer_to_contract")
+    if( id == "id-transfer_to_contract-BuyOrderWidget")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            close();
+
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Transaction of buy-order has been sent out!"));
+            commonDialog.pop();
+        }
+        else if(result.startsWith("\"error\":"))
+        {
+            int pos = result.indexOf("\"message\":\"") + 11;
+            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
+
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText( "Transfer to exchange contract failed: " + errorMessage );
+            commonDialog.pop();
+        }
+
+        return;
+    }
+
+    if( id == "id-transfer_to_contract_testing-BuyOrderWidget")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            stepCount = result.mid(QString("\"result\":").size()).toInt();
+            ui->feeLabel->setText(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+                                          + " " + ASSET_NAME);
+        }
+
 
         return;
     }
@@ -70,15 +105,26 @@ void BuyOrderWidget::paintEvent(QPaintEvent *)
     painter.drawRect(rect());
 }
 
+void BuyOrderWidget::estimateContractFee()
+{
+    if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty() || payAsset.isEmpty())   return;
+
+    UBChain::getInstance()->postRPC( "id-transfer_to_contract_testing-BuyOrderWidget", toJsonFormat( "transfer_to_contract_testing",
+                                                                           QJsonArray() << accountName << ui->contractAddressLabel->text()
+                                                                           << ui->amountLineEdit->text() << payAsset
+                                                                           << "deposit to exchange contract"
+                                                                           ));
+}
+
 void BuyOrderWidget::on_okBtn_clicked()
 {
     if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty() || payAsset.isEmpty())   return;
 
-    UBChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
+    UBChain::getInstance()->postRPC( "id-transfer_to_contract-BuyOrderWidget", toJsonFormat( "transfer_to_contract",
                                                                            QJsonArray() << accountName << ui->contractAddressLabel->text()
                                                                            << ui->amountLineEdit->text() << payAsset
                                                                            << "deposit to exchange contract"
-                                                                           << UBChain::getInstance()->currentContractFee() << 1000
+                                                                           << UBChain::getInstance()->currentContractFee() << stepCount
                                                                            << true
                                                                            ));
 
@@ -92,4 +138,9 @@ void BuyOrderWidget::on_cancelBtn_clicked()
 void BuyOrderWidget::on_allBtn_clicked()
 {
     ui->amountLineEdit->setText(UBChain::getInstance()->getAccountBalance(accountName,payAsset));
+}
+
+void BuyOrderWidget::on_amountLineEdit_textChanged(const QString &arg1)
+{
+    estimateContractFee();
 }

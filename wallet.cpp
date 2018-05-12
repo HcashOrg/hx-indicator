@@ -12,7 +12,6 @@
 #include <QFrame>
 #include <QDesktopWidget>
 
-#define EXCHANGE_CONTRACT_HASH  "f138267ad4c454097a06fb2d80518ea7e8ef7370"
 
 UBChain* UBChain::goo = 0;
 //QMutex mutexForJsonData;
@@ -489,11 +488,30 @@ QStringList UBChain::getUnregisteredAccounts()
 QString UBChain::getExchangeContractAddress(QString _accountName)
 {
     QString result;
+    qDebug() << "cccccccccccc " << _accountName;
+
+    foreach (ContractInfo info, accountInfoMap.value(_accountName).contractsVector)
+    {
+        qDebug() << "dddddddddd " << info.contractAddress << info.hashValue << info.state;
+
+        if(info.hashValue == EXCHANGE_CONTRACT_HASH)
+        {
+            result = info.contractAddress;
+            break;
+        }
+    }
+
+    return result;
+}
+
+QString UBChain::getExchangeContractState(QString _accountName)
+{
+    QString result;
     foreach (ContractInfo info, accountInfoMap.value(_accountName).contractsVector)
     {
         if(info.hashValue == EXCHANGE_CONTRACT_HASH)
         {
-            result = info.contractAddress;
+            result = info.state;
             break;
         }
     }

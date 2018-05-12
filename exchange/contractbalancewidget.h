@@ -26,6 +26,8 @@ private slots:
 
     void onItemClicked(int _row, int _column);
 
+    void on_openForUsersBtn_clicked();
+
 private:
     Ui::ContractBalanceWidget *ui;
     QString accountName;

@@ -186,11 +186,6 @@ void DepositExchangeContractDialog::estimateContractFee()
                                                                            << "deposit to exchange contract"
                                                                            ));
 
-    qDebug() <<toJsonFormat( "transfer_to_contract_testing",
-                             QJsonArray() << ui->accountNameLabel->text() << contractAddress
-                             << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
-                             << "deposit to exchange contract"
-                             );
 
 }
 
