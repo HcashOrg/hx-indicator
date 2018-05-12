@@ -6,6 +6,7 @@
 
 #include "PasswordConfirmWidget.h"
 #include "CapitalTransferDataUtil.h"
+#include "CapitalConfirmWidget.h"
 #include "wallet.h"
 
 #include "extra/HttpManager.h"
@@ -16,8 +17,16 @@ public:
     CapitalTransferPagePrivate(const CapitalTransferInput &data)
         :account_name(data.account_name),account_address(data.account_address),symbol(data.symbol)
         ,fee(UBChain::getInstance()->feeChargeInfo.capitalFee)
+        ,actualNumber("0")
+        ,precision(5)
     {
-
+        foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+            if(asset.symbol == symbol)
+            {
+                precision = asset.precision;
+                break;
+            }
+        }
     }
 public:
     QString account_name;
@@ -28,8 +37,11 @@ public:
     QString asset_max_ammount;
     QString fee;
 
+    int precision;
+
     QString multisig_address;
 
+    QString actualNumber;
     QJsonObject trade_detail;
     HttpManager httpManager;////用于查询通道账户余额
 };
@@ -52,9 +64,16 @@ CapitalTransferPage::~CapitalTransferPage()
 void CapitalTransferPage::ConfirmSlots()
 {
     hide();
-    PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget(UBChain::getInstance()->mainFrame);
-    connect(confirmWidget,&PasswordConfirmWidget::confirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
-    connect(confirmWidget,&PasswordConfirmWidget::cancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
+    QString actualShow = _p->actualNumber + " "+_p->symbol;
+    QString feeShow = ui->label_fee->text();
+    QString totalShow = ui->lineEdit_number->text() + " "+_p->symbol;
+    CapitalConfirmWidget *confirmWidget = new CapitalConfirmWidget(CapitalConfirmWidget::CapitalConfirmInput(_p->account_address,
+                                                                   actualShow,feeShow,totalShow),UBChain::getInstance()->mainFrame);
+    connect(confirmWidget,&CapitalConfirmWidget::ConfirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
+    connect(confirmWidget,&CapitalConfirmWidget::CancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
+    //PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget(UBChain::getInstance()->mainFrame);
+    //connect(confirmWidget,&PasswordConfirmWidget::confirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
+    //connect(confirmWidget,&PasswordConfirmWidget::cancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
     //confirmWidget->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
     //confirmWidget->setWindowModality(Qt::WindowModal);
     //confirmWidget->setAttribute(Qt::WA_DeleteOnClose);
@@ -73,7 +92,6 @@ void CapitalTransferPage::radioChangedSlots()
             ui->lineEdit_address->setText(_p->tunnel_account_address);
         }
         ui->lineEdit_address->setEnabled(false);
-        ui->lineEdit_number->setEnabled(true);
     }
     else if(ui->radioButton_withdraw->isChecked())
     {
@@ -81,10 +99,9 @@ void CapitalTransferPage::radioChangedSlots()
         ui->lineEdit_address->setPlaceholderText(tr("please input withdraw address..."));
         ui->lineEdit_address->setEnabled(true);
         ui->lineEdit_address->clear();
-        ui->lineEdit_number->clear();
-        ui->lineEdit_number->setEnabled(false);
-        ui->lineEdit_number->setPlaceholderText(tr("input address first..."));
     }
+
+    ui->lineEdit_number->clear();
     ui->toolButton_confirm->setVisible(false);
 }
 
@@ -164,27 +181,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         ui->toolButton_confirm->setVisible(true);
 
         qDebug()<<"detail"<<_p->trade_detail;
-//    //获取交易结果信息
-//        QString transaction = CapitalTransferDataUtil::parseTransaction(result);
-//        UBChain::getInstance()->postRPC( "captial-decoderawtransaction",
-//                                         toJsonFormat( "decoderawtransaction", QJsonArray()
-//                                         <<transaction<<_p->symbol ));
-    }
-    else if("captial-decoderawtransaction" == id)
-    {
-        QString result = UBChain::getInstance()->jsonDataValue( id);
-        if( result.isEmpty() || result.startsWith("\"error"))
-        {
-            ui->toolButton_confirm->setVisible(false);
-            return;
-        }
-        result.prepend("{");
-        result.append("}");
-        qDebug()<<"decodede"<<result;
 
-        //刷新界面
-
-        ui->toolButton_confirm->setVisible(true);
     }
     else if("captial-signrawtransaction" == id)
     {
@@ -199,15 +196,16 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
 
 void CapitalTransferPage::httpReplied(QByteArray _data, int _status)
 {
-//    qDebug() << "auto--http-- " << _data << _status;
+    qDebug() << "auto--http-- " << _data << _status;
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
-    _p->asset_max_ammount = QString::number(std::max<double>(0,object.value("balance").toDouble()- _p->fee.toDouble()),'g',8) ;
+    _p->asset_max_ammount = QString::number(std::max<double>(0,object.value("balance").toDouble()),'f',_p->precision) ;
     ui->label_number->setText(_p->asset_max_ammount + " "+_p->symbol);
 
-    QDoubleValidator *validator = new QDoubleValidator(0,_p->asset_max_ammount.toDouble(),10,this);
+    QDoubleValidator *validator = new QDoubleValidator(0,_p->asset_max_ammount.toDouble(),_p->precision,this);
     validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_number->setValidator(validator);
+    ui->lineEdit_number->setPlaceholderText(tr("max:")+QString::number(validator->top(),'f',_p->precision));
 
 }
 
@@ -234,74 +232,23 @@ void CapitalTransferPage::passwordCancelSlots()
 
 void CapitalTransferPage::numberChangeSlots(const QString &number)
 {
-    if(ui->radioButton_deposit->isChecked())
-    {//充值修改，发送充值指令问题
-        UBChain::getInstance()->postRPC( "captial-createrawtransaction",
-                                         toJsonFormat( "createrawtransaction", QJsonArray()
-                                         << _p->tunnel_account_address<<_p->multisig_address<<number<<_p->symbol ));
-        //UBChain::getInstance()->postRPC( "id-createrawtransaction",
-        //                                 toJsonFormat( "createrawtransaction", QJsonArray()
-        //                                 <<"1DtwbG4u7VkRTiKpEjzVJWorhRuYBu4MUr"<<_p->multisig_address<<number<<_p->symbol ));
-    }
-    else if(ui->radioButton_withdraw->isChecked())
-    {
-        UBChain::getInstance()->postRPC( "captial-createrawtransaction",
-                                         toJsonFormat( "createrawtransaction", QJsonArray()
-                                         << _p->tunnel_account_address<<ui->lineEdit_address->text()<<number<<_p->symbol ));
-    }
+    CreateTransaction();
 }
 
 void CapitalTransferPage::addressChangeSlots(const QString &address)
 {
     ui->lineEdit_address->setText( ui->lineEdit_address->text().remove(" "));
     ui->lineEdit_address->setText( ui->lineEdit_address->text().remove("\n"));
-    if( ui->lineEdit_address->text().isEmpty())
+    if( ui->lineEdit_address->text().isEmpty() || !validateAddress(address) )
     {
-        ui->lineEdit_number->setPlaceholderText(tr("input address first..."));
         ui->lineEdit_address->setStyleSheet("color:red");
-        ui->lineEdit_number->setEnabled(false);
-        return;
-    }
-
-    //AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
-    if( validateAddress(address))
-    {
-        ui->lineEdit_number->setPlaceholderText(tr("input number"));
-        ui->lineEdit_address->setStyleSheet("color:#5474EB");
-        ui->lineEdit_number->setEnabled(true);
-        return;
     }
     else
     {
-        ui->lineEdit_number->setPlaceholderText(tr("input address first..."));
-        ui->lineEdit_address->setStyleSheet("color:red");
-        ui->lineEdit_number->setEnabled(false);
-        return;
-    }
-}
-
-void CapitalTransferPage::updateData()
-{
-    ui->label_number->setText(_p->asset_max_ammount + "  " + _p->symbol);
-
-    if(ui->radioButton_deposit->isChecked())
-    {
-        ui->lineEdit_address->setPlaceholderText(tr("please wait"));
-        if(!_p->tunnel_account_address.isEmpty())
-        {
-            ui->lineEdit_address->setText(_p->tunnel_account_address);
-        }
-        ui->lineEdit_address->setEnabled(false);
-    }
-    else if(ui->radioButton_withdraw->isChecked())
-    {
-        ui->lineEdit_address->setPlaceholderText(tr("please input withdraw address..."));
-        ui->lineEdit_address->setEnabled(true);
+        ui->lineEdit_address->setStyleSheet("color:#5474EB");
     }
 
-    QDoubleValidator *validator = new QDoubleValidator(0,_p->asset_max_ammount.toDouble(),10,this);
-    validator->setNotation(QDoubleValidator::StandardNotation);
-    ui->lineEdit_number->setValidator(validator);
+    CreateTransaction();
 }
 
 bool CapitalTransferPage::validateAddress(const QString &address)
@@ -321,8 +268,31 @@ void CapitalTransferPage::PostQueryTunnelMoney(const QString &symbol, const QStr
     paramObject.insert("addr",tunnelAddress);
     object.insert("params",paramObject);
     _p->httpManager.post("http://192.168.1.121:5005/api",QJsonDocument(object).toJson());
+}
 
-    qDebug()<<object;//
+void CapitalTransferPage::CreateTransaction()
+{
+    _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble());
+    if(_p->tunnel_account_address.isEmpty() || _p->multisig_address.isEmpty() ||
+       _p->symbol.isEmpty() || _p->actualNumber.isEmpty() || _p->actualNumber.toDouble() < 1e-20)
+    {
+        _p->actualNumber = "0";
+        ui->toolButton_confirm->setVisible(false);
+        return;
+    }
+
+    if(ui->radioButton_deposit->isChecked())
+    {//充值修改，发送充值指令问题
+        UBChain::getInstance()->postRPC( "captial-createrawtransaction",
+                                         toJsonFormat( "createrawtransaction", QJsonArray()
+                                         << _p->tunnel_account_address<<_p->multisig_address<<_p->actualNumber<<_p->symbol ));
+    }
+    else if(ui->radioButton_withdraw->isChecked())
+    {
+        UBChain::getInstance()->postRPC( "captial-createrawtransaction",
+                                         toJsonFormat( "createrawtransaction", QJsonArray()
+                                         << _p->tunnel_account_address<<ui->lineEdit_address->text()<<_p->actualNumber<<_p->symbol ));
+    }
 
 }
 
@@ -337,7 +307,7 @@ void CapitalTransferPage::InitWidget()
     ui->radioButton_deposit->setChecked(true);
     ui->lineEdit_address->setPlaceholderText(tr("please wait"));
     ui->lineEdit_address->setEnabled(false);
-    ui->lineEdit_number->setPlaceholderText(tr("money"));
+    ui->lineEdit_number->setPlaceholderText(tr("please wait"));
 
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &CapitalTransferPage::jsonDataUpdated);
     connect(&_p->httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));

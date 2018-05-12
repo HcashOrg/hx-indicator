@@ -40,11 +40,11 @@ private slots:
 
     void addressChangeSlots(const QString &address);
 private:
-    void updateData();
     bool validateAddress(const QString &address);
 
     void PostQueryTunnelMoney(const QString &symbol,const QString &tunnelAddress);
 
+    void CreateTransaction();
 protected:
     void paintEvent(QPaintEvent *event);
 private:

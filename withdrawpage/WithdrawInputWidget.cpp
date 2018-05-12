@@ -18,16 +18,22 @@ WithdrawInputWidget::~WithdrawInputWidget()
     delete ui;
 }
 
-void WithdrawInputWidget::setMaxAmmount(double number)
+void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
 {
-    ui->lineEdit_ammount->setPlaceholderText(ui->lineEdit_ammount->placeholderText().replace("0",QString::number(number)));
-    QDoubleValidator *validator = new QDoubleValidator(0,number,10,this);
+    ui->lineEdit_ammount->setPlaceholderText(ui->lineEdit_ammount->placeholderText().replace("0",number));
+    int pre = 5;
+    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+        if(asset.symbol == symbol)
+        {
+            pre = asset.precision;
+            break;
+        }
+    }
+
+    QDoubleValidator *validator = new QDoubleValidator(0,number.toDouble(),pre,this);
     validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_ammount->setValidator( validator );
-}
 
-void WithdrawInputWidget::setSymbol(const QString &symbol)
-{
     ui->label_symbol->setText(symbol);
 }
 
@@ -41,28 +47,6 @@ void WithdrawInputWidget::addressChangeSlots(const QString &address)
     {
         ui->toolButton_confirm->setEnabled(false);
     }
-    //ui->lineEdit_address->setText( ui->lineEdit_address->text().remove(" "));
-    //ui->lineEdit_address->setText( ui->lineEdit_address->text().remove("\n"));
-    //qDebug()<<"fffffffff"<<ui->lineEdit_address->text();
-    //if( ui->lineEdit_address->text().isEmpty())
-    //{
-    //    ui->toolButton_confirm->setEnabled(false);
-    //    return;
-    //}
-    //
-    //AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
-    //qDebug()<<"dddd"<<address << "type"<<type << "size" << address.size();
-    //
-    //if( type == AccountAddress)
-    //{
-    //    ui->toolButton_confirm->setEnabled(true);
-    //    return;
-    //}
-    //else
-    //{
-    //    ui->toolButton_confirm->setEnabled(false);
-    //    return;
-    //}
 }
 
 void WithdrawInputWidget::maxButtonSlots()

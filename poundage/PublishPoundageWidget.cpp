@@ -63,11 +63,17 @@ void PublishPoundageWidget::ChangeAccountSlots()
     {
         if(it.key() == "1.3.0")
         {
-            ui->doubleSpinBox_sourceNumber->setRange(0,it.value().amount/100000.);
-            ui->doubleSpinBox_sourceNumber->setToolTip("maxNumber: "+QString::number(it.value().amount/100000.));
+            ui->doubleSpinBox_sourceNumber->setRange(0,it.value().amount/pow(10.,ASSET_PRECISION));
+            ui->doubleSpinBox_sourceNumber->setToolTip("maxNumber: "+QString::number(it.value().amount/pow(10.,ASSET_PRECISION)));
             break;
         }
     }
+}
+
+void PublishPoundageWidget::ChangeAssetSlots()
+{
+    int pre = ui->comboBox_targetType->currentData(Qt::UserRole).value<int>();
+    ui->doubleSpinBox_targetNumber->setDecimals(pre);
 }
 
 void PublishPoundageWidget::InitAccount()
@@ -92,7 +98,8 @@ void PublishPoundageWidget::InitTargetCoin()
     if(UBChain::getInstance()->assetInfoMap.empty()) return;
     foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
         if(asset.id == "1.3.0") continue;
-        ui->comboBox_targetType->addItem(asset.symbol,asset.id);
+
+        ui->comboBox_targetType->addItem(asset.symbol,asset.precision);
     }
 
     ui->comboBox_targetType->setCurrentIndex(0);
@@ -103,15 +110,17 @@ void PublishPoundageWidget::InitWidget()
 {
     InitStyle();
 
+    ui->doubleSpinBox_sourceNumber->setDecimals(ASSET_PRECISION);
     InitAccount();
     InitTargetCoin();
 
     connect(ui->pushButton_confirm,&QPushButton::clicked,this,&PublishPoundageWidget::ConfirmPublishSlots);
     connect(ui->pushButton_cancel,&QPushButton::clicked,this,&PublishPoundageWidget::close);
     connect(ui->comboBox_accounts, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),this,&PublishPoundageWidget::ChangeAccountSlots);
-
+    connect(ui->comboBox_targetType,static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),this,&PublishPoundageWidget::ChangeAssetSlots);
 
     ChangeAccountSlots();
+    ChangeAssetSlots();
 
     ui->label_fee->setText("  "+UBChain::getInstance()->feeChargeInfo.poundagePublishFee+" LNK");
 }

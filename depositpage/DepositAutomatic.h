@@ -7,6 +7,7 @@
 ///
 ///<remarks> 2018.05.03 --朱正天  </remarks>/////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
+#include <QJsonObject>
 class DepositAutomatic : public QObject
 {
     Q_OBJECT
@@ -23,7 +24,7 @@ private:
     void PostQueryTunnelMoney(const QString &symbol,const QString &tunnelAddress);
     void PostCreateTransaction(const QString &fromAddress,const QString &toAddress,
                                const QString &number,const QString &symbol);
-    void PostSignTrasaction(const QString &fromAddress,const QString &symbol,const QString &detail);
+    void PostSignTrasaction(const QString &fromAddress,const QString &symbol,const QJsonObject &detail);
 
     void FinishQueryTunnel();
     void FinishQueryMoney();
@@ -42,7 +43,7 @@ private:
     //工具
     void ParseTunnel(const QString &jsonString);
     void ParseMutli(const QString &jsonString);
-    void ParseTransaction(const QString &jsonString);
+    void ParseTransaction(const QString &address,const QString &jsonString);
 };
 
 #endif // DEPOSITAUTOMATIC_H

@@ -17,6 +17,7 @@ public:
 private slots:
     void ConfirmPublishSlots();
     void ChangeAccountSlots();//修改账户项
+    void ChangeAssetSlots();//修改承兑的币种
 private:
     void InitAccount();
     void InitTargetCoin();

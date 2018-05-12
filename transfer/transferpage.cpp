@@ -200,7 +200,6 @@ void TransferPage::InitStyle()
                   "QPushButton{border:none;background-color:#5474EB;color:white;width:60px;height:20px;\
                    border-radius:10px;font-size:12pt;}"
                   "QPushButton::hover{background-color:#00D2FF;}"
-                  "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}"
                   );
     ui->sendBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                                "QToolButton:hover{background-color:#00D2FF;}");

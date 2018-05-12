@@ -17,8 +17,7 @@ public:
 signals:
     void withdrawSignal(const QString &address,const QString & ammount);
 public:
-    void setMaxAmmount(double number);
-    void setSymbol(const QString &symbol);
+    void InitData(const QString &number,const QString &symol);
 protected:
     void paintEvent(QPaintEvent *event);
 private slots:
