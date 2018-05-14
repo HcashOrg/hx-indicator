@@ -151,7 +151,7 @@ void PoundageWidget::SortByStuffSlots()
 
 void PoundageWidget::jsonDataUpdated(QString id)
 {
-    if("id_create_guarantee_order" == id)
+    if("publish_create_guarantee_order" == id)
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() || result.startsWith("\"error"))
@@ -165,7 +165,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
         result.append("}");
 
         CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(tr("Operation successfully done!"));
+        dia.setText(result);
         dia.pop();
         //qDebug()<<"chargecccccc"<<result;
         //刷新承税单
