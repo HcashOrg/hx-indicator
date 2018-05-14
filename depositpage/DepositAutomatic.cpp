@@ -120,7 +120,7 @@ DepositAutomatic::DepositAutomatic(QObject *parent)
 {
     _p->timer = new QTimer(this);
     connect(_p->timer,&QTimer::timeout,this,&DepositAutomatic::autoDeposit);
-    _p->timer->start(20000);
+    _p->timer->start(30000);
 
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &DepositAutomatic::jsonDataUpdated);
 
@@ -140,7 +140,7 @@ void DepositAutomatic::autoDeposit()
     _p->autoDeposit = UBChain::getInstance()->autoDeposit;
     if(_p->autoDeposit && !_p->isInUpdate)
     {
-        _p->timer->stop();
+        //_p->timer->stop();
         updateData();
     }
 }
@@ -254,7 +254,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
     {
         //先排除没有tunnel的账户
         _p->clearEmptyTunnel();
-        qDebug()<<_p->accounts.size();
+        //qDebug()<<_p->accounts.size();
         //开始查找多签地址
         std::for_each(_p->assetSymbols.begin(),_p->assetSymbols.end(),[this](const QString &symbol){
             this->PostQueryMultiAddress(symbol);
@@ -345,13 +345,6 @@ void DepositAutomatic::httpReplied(QByteArray _data, int _status)
     }
 
     _p->updateMoney(tunnel,number);
-
-    for(auto it = _p->accounts.begin();it != _p->accounts.end();++it)
-    {
-        qDebug()<<"justaparse--tunnel-money"<<(*it)->tunnelAddress<<(*it)->assetSymbol<<(*it)->assetMultiAddress<<(*it)->assetNumber;
-    }
-
-    qDebug()<<"tunnel--money--"<<tunnel<<number;
 
 }
 

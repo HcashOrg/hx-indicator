@@ -45,7 +45,7 @@ void PublishPoundageWidget::ConfirmPublishSlots()
     QString targetCoinType = ui->comboBox_targetType->currentText();
     if(accountName.isEmpty() || targetCoinType.isEmpty()) return;
     
-    UBChain::getInstance()->postRPC("id_create_guarantee_order",
+    UBChain::getInstance()->postRPC("publish_create_guarantee_order",
                                     toJsonFormat("create_guarantee_order",
                                                  QJsonArray()<<accountName<<sourceNumber<<targetNumber<<targetCoinType<<true));
     close();
