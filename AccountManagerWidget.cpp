@@ -52,16 +52,16 @@ void AccountManagerWidget::deleteButtonSlots()
     //提醒用户是否需要删除
 
     int row = ui->tableWidget->rowAt(ui->tableWidget->mapFromGlobal(QCursor::pos()).y());
-    QString accountNmae = ui->tableWidget->item(row,0)->data(Qt::UserRole).value<AccountInfo>().name;
+    QString accountName = ui->tableWidget->item(row,0)->data(Qt::UserRole).value<AccountInfo>().name;
 
     CommonDialog commonDialog(CommonDialog::OkAndCancel);
-    commonDialog.setText(tr("Are you sure to delete account ") + accountNmae);
+    commonDialog.setText(tr("Are you sure to delete account %1 ?").arg(accountName) + accountName);
     if(commonDialog.pop())
     {
         qDebug()<<"clicked          "<<row;
         UBChain::getInstance()->postRPC( "id-remove_local_account",
                                          toJsonFormat( "remove_local_account", QJsonArray()
-                                         <<accountNmae));
+                                         <<accountName));
         //刷新页码等
         ui->tableWidget->removeRow(row);
         int totalnumber = ui->tableWidget->rowCount();

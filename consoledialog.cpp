@@ -196,33 +196,30 @@ void ConsoleDialog::on_consoleLineEdit_returnPressed()
         cmdIndex = cmdVector.size();
     }
 
-//    if( ui->checkBox->isChecked())
-//    {
-        QString str = ui->consoleLineEdit->text();
-        str = str.simplified();
-        QStringList paramaters = str.split(' ');
-        QString command = paramaters.at(0);
-        paramaters.removeFirst();
+    QString str = ui->consoleLineEdit->text();
+    str = str.simplified();
+    QStringList paramaters = str.split(' ');
+    QString command = paramaters.at(0);
+    paramaters.removeFirst();
 
-        QJsonArray array;
-        foreach (QString param, paramaters)
+    QJsonArray array;
+    foreach (QString param, paramaters)
+    {
+        if(param.startsWith("[") && param.endsWith("]"))
+        {
+            array << QJsonDocument::fromJson(param.toLatin1()).array();
+        }
+        else
         {
             array << param;
         }
+    }
 
-        UBChain::getInstance()->postRPC( "console-" + str, toJsonFormat( command, array ));
+    UBChain::getInstance()->postRPC( "console-" + str, toJsonFormat( command, array ));
 
-        ui->consoleLineEdit->clear();
-        return;
-//    }
+    ui->consoleLineEdit->clear();
 
-//    QString str = ui->consoleLineEdit->text() + '\n';
-//    UBChain::getInstance()->write(str);
-//    QString result = UBChain::getInstance()->read();
-//    ui->consoleBrowser->append(">>>" + str);
-//    ui->consoleBrowser->append(result);
-//    ui->consoleLineEdit->clear();
-    
+    return;
 }
 
 //void ConsoleDialog::setVisible(bool visiable)

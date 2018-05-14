@@ -8,7 +8,7 @@ QT       += core gui xml network websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = UBWallet
+TARGET = LNKWallet
 TEMPLATE = app
 
 DEFINES += TEST_WALLET
