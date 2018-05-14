@@ -23,7 +23,7 @@
     </rect>
    </property>
    <attribute name="horizontalHeaderVisible">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <attribute name="verticalHeaderVisible">
     <bool>false</bool>
@@ -94,19 +94,19 @@
     </property>
    </column>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>30</y>
+     <y>50</y>
      <width>121</width>
-     <height>31</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Microsoft YaHei UI</family>
-     <pointsize>20</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">

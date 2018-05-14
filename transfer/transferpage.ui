@@ -202,19 +202,19 @@
     <string>无效地址</string>
    </property>
   </widget>
-  <widget class="QLabel" name="delegateLabel2">
+  <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>45</y>
+     <y>50</y>
      <width>80</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>14</pointsize>
+     <pointsize>12</pointsize>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
@@ -462,7 +462,7 @@ p, li { white-space: pre-wrap; }
   <zorder>amountLineEdit</zorder>
   <zorder>tipLabel3</zorder>
   <zorder>tipLabel4</zorder>
-  <zorder>delegateLabel2</zorder>
+  <zorder>title_label</zorder>
   <zorder>accountComboBox</zorder>
   <zorder>sendtoLineEdit</zorder>
   <zorder>tipLabel6</zorder>

@@ -292,12 +292,6 @@ void PoundageWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("Microsoft YaHei UI Light",20,63);
-    font.setPixelSize(22);
-    ui->label->setFont(font);
-    QPalette pa;
-    pa.setColor(QPalette::WindowText,QColor(0,0,0));
-    ui->label->setPalette(pa);
 
     setStyleSheet("QToolButton#toolButton_allPoundage{background:transparent;color:rgb(144,144,144);\
                                                       font-family: Microsoft YaHei UI;font:14px;font-weight:600;}\

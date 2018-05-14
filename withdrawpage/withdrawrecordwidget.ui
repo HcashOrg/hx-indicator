@@ -153,19 +153,19 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>40</y>
+     <y>50</y>
      <width>131</width>
-     <height>41</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Microsoft JhengHei UI</family>
-     <pointsize>20</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">

@@ -36,7 +36,7 @@
 font: 16px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
-    <string>挂单中心</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -57,7 +57,7 @@ font: 16px &quot;微软雅黑&quot;;</string>
     </font>
    </property>
    <property name="text">
-    <string>  链上挂单</string>
+    <string>挂单中心</string>
    </property>
   </widget>
   <widget class="QToolButton" name="myOrderBtn">

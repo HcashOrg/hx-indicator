@@ -42,3 +42,4 @@ QSpinBox::up-arrow:hover {image: url(:/ui/wallet_ui/spinUpArrow_hover.png);}
 QSpinBox::down-arrow {image: url(:/ui/wallet_ui/spinDownArrow.png); width: 5px;height: 3px;}
 QSpinBox::down-arrow:hover {image: url(:/ui/wallet_ui/spinDownArrow_hover.png);}
 
+#title_label{font: 75 20px \"微软雅黑\";}

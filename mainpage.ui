@@ -21,19 +21,19 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <widget class="QLabel" name="accountListLabel">
+  <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>40</y>
+     <y>50</y>
      <width>120</width>
-     <height>31</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>14</pointsize>
+     <pointsize>12</pointsize>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
@@ -459,7 +459,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
    </property>
   </widget>
   <zorder>addressLabel</zorder>
-  <zorder>accountListLabel</zorder>
+  <zorder>title_label</zorder>
   <zorder>addAccountBtn</zorder>
   <zorder>accountTableWidget</zorder>
   <zorder>importAccountBtn</zorder>
