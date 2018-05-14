@@ -87,7 +87,9 @@ void DepositPage::jsonDataUpdated(QString id)
 
         DepositDataUtil::ParseTunnelData(result,_p->tunnelData);
         //询问是否绑定账户，需要花费20LNK
-        _p->fee->isHidden()?_p->fee->show():0;
+        //_p->fee->isHidden()?_p->fee->show():0;
+        //绑定通道账户
+        BindTunnelAccount();
     }
     else if("deposit_bind_tunnel_account" == id)
     {
