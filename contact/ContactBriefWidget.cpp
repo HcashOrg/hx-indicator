@@ -43,12 +43,6 @@ void ContactBriefWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("Microsoft YaHei UI Light",20,63);
-    font.setPixelSize(20);
-    ui->label->setFont(font);
-    QPalette pa;
-    pa.setColor(QPalette::WindowText,Qt::black);
-    ui->label->setPalette(pa);
 
     ui->pushButton->setIconSize(QSize(18,18));
     ui->pushButton->setIcon(QIcon(":/ui/wallet_ui/addContact.png"));

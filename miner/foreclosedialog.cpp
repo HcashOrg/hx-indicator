@@ -35,7 +35,8 @@ ForecloseDialog::ForecloseDialog(QWidget *parent) :
     ui->amountLineEdit->setStyleSheet("QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;\
                                      background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;padding-right:80px;}");
 
-    ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),"LNK"));
+    ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
+                                                     UBChain::getInstance()->feeType));
     ui->stackedWidget->setCurrentIndex(0);
 }
 

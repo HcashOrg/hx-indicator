@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑</family>
+    <family>微软雅黑 Light</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -80,7 +80,7 @@
       </property>
       <property name="font">
        <font>
-        <family>微软雅黑</family>
+        <family>微软雅黑 Light</family>
        </font>
       </property>
       <property name="styleSheet">
@@ -97,7 +97,7 @@
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑</family>
+         <family>微软雅黑 Light</family>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -142,7 +142,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
           </font>
          </property>
          <property name="cursor">
@@ -169,7 +169,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
@@ -177,7 +177,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 12px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 12px &quot;微软雅黑 Light&quot;;</string>
          </property>
          <property name="text">
           <string>钱包自动锁定时间</string>
@@ -197,7 +197,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
           </font>
          </property>
          <property name="focusPolicy">
@@ -228,7 +228,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>9</pointsize>
           </font>
          </property>
@@ -253,7 +253,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
           </font>
          </property>
          <property name="focusPolicy">
@@ -286,7 +286,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
@@ -294,7 +294,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 12px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 12px &quot;微软雅黑 Light&quot;;</string>
          </property>
          <property name="text">
           <string>界面语言</string>
@@ -314,7 +314,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>10</pointsize>
           </font>
          </property>
@@ -333,7 +333,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>9</pointsize>
           </font>
          </property>
@@ -358,7 +358,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>9</pointsize>
           </font>
          </property>
@@ -383,7 +383,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>9</pointsize>
           </font>
          </property>
@@ -408,7 +408,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
@@ -416,7 +416,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 12px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 12px &quot;微软雅黑 Light&quot;;</string>
          </property>
          <property name="text">
           <string>手续费币种</string>
@@ -436,7 +436,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
           </font>
          </property>
          <property name="styleSheet">
@@ -546,7 +546,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
@@ -554,7 +554,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 12px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 12px &quot;微软雅黑 Light&quot;;</string>
          </property>
          <property name="text">
           <string>充值自动划转</string>
@@ -574,7 +574,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
           </font>
          </property>
          <property name="cursor">
@@ -604,7 +604,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
@@ -612,7 +612,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 12px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 12px &quot;微软雅黑 Light&quot;;</string>
          </property>
          <property name="text">
           <string>单步合约执行费用</string>
@@ -654,7 +654,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
           </font>
          </property>
          <property name="contextMenuPolicy">
@@ -675,7 +675,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
           </font>
          </property>
          <property name="contextMenuPolicy">
@@ -721,7 +721,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
@@ -729,7 +729,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 12px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 12px &quot;微软雅黑 Light&quot;;</string>
          </property>
          <property name="text">
           <string>再次输入：</string>
@@ -765,7 +765,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
@@ -773,7 +773,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 12px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 12px &quot;微软雅黑 Light&quot;;</string>
          </property>
          <property name="text">
           <string>旧密码：</string>
@@ -809,7 +809,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
@@ -817,7 +817,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 12px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 12px &quot;微软雅黑 Light&quot;;</string>
          </property>
          <property name="text">
           <string>新密码：</string>
@@ -853,7 +853,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
           </font>
          </property>
          <property name="contextMenuPolicy">
@@ -874,7 +874,7 @@
          </property>
          <property name="font">
           <font>
-           <family>微软雅黑</family>
+           <family>微软雅黑 Light</family>
            <pointsize>-1</pointsize>
            <weight>50</weight>
            <italic>false</italic>
@@ -882,7 +882,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 20px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 20px &quot;微软雅黑 Light&quot;;</string>
          </property>
          <property name="text">
           <string>修改钱包密码</string>

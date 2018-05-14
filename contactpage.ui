@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑</family>
+    <family>微软雅黑 Light</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
     </font>
    </property>
    <property name="styleSheet">
@@ -61,7 +61,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="styleSheet">
@@ -79,7 +79,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>微软雅黑 Light</family>
        <pointsize>12</pointsize>
       </font>
      </property>
@@ -106,7 +106,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -115,7 +115,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-font: 18px &quot;微软雅黑&quot;;</string>
+font: 18px &quot;微软雅黑 Light&quot;;</string>
    </property>
    <property name="text">
     <string>联系人</string>
@@ -132,7 +132,7 @@ font: 18px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -148,7 +148,7 @@ font: 18px &quot;微软雅黑&quot;;</string>
    <property name="styleSheet">
     <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
 background-color: transparent;
-font: 12px &quot;微软雅黑&quot;;background-origin: content;background-image: url(&quot;:/ui/wallet_ui/contactAdd.png&quot;);background-repeat: no-repeat; background-position: center left;padding:0px 0px 0px 12px;}
+font: 12px &quot;微软雅黑 Light&quot;;background-origin: content;background-image: url(&quot;:/ui/wallet_ui/contactAdd.png&quot;);background-repeat: no-repeat; background-position: center left;padding:0px 0px 0px 12px;}
 QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);background-image: url(&quot;:/ui/wallet_ui/contactAdd_hover.png&quot;);}</string>
    </property>
    <property name="text">

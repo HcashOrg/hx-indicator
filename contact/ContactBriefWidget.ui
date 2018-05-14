@@ -13,25 +13,25 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>36</y>
+     <y>50</y>
      <width>91</width>
-     <height>31</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">
     <string>联系人</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">

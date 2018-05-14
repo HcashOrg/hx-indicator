@@ -28,7 +28,7 @@ SellDialog::SellDialog(QWidget *parent) :
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
 
-    feeChoose = new FeeChooseWidget(0,"LNK");
+    feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
     ui->stackedWidget->addWidget(feeChoose);
     ui->stackedWidget->setCurrentIndex(0);
     ui->label_5->setVisible(false);

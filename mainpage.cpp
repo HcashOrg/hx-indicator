@@ -628,11 +628,6 @@ void MainPage::InitStyle()
     ui->label_op->setFont(font);
 
 
-
-    QFont fontLabel("Microsoft YaHei UI Light",20,55);
-    fontLabel.setPixelSize(21);
-    ui->accountListLabel->setFont(fontLabel);
-
     ui->accountTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
 

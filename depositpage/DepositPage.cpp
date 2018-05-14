@@ -169,12 +169,6 @@ void DepositPage::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("Microsoft YaHei UI Light",20,63);
-    font.setPixelSize(20);
-    ui->label->setFont(font);
-    QPalette pa;
-    pa.setColor(QPalette::WindowText,Qt::black);
-    ui->label->setPalette(pa);
 
     ui->depositRecordBtn->setStyleSheet("QToolButton{color:white;\
                                   border-top-left-radius:10px;  \

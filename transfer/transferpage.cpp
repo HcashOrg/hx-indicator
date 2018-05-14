@@ -31,7 +31,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     currentTopWidget(NULL),
     ui(new Ui::TransferPage),
     feeWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),
-                                  UBChain::getInstance()->configFile->value("/settings/feeType").toString()))
+                                  UBChain::getInstance()->feeType))
 {
 	
 

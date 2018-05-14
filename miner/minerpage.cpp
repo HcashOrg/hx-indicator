@@ -358,9 +358,9 @@ void MinerPage::InitStyle()
 
     setStyleSheet("QToolButton#forecloseInfoBtn,QToolButton#incomeInfoBtn,QToolButton#incomeRecordBtn{border:none;background:transparent;color:#C6CAD4;}"
                   "QToolButton#forecloseInfoBtn::checked,QToolButton#incomeInfoBtn::checked,QToolButton#incomeRecordBtn::checked{color:black;}"
-                  "QToolButton#lockToMinerBtn{font: 11px \"微软雅黑\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QToolButton#lockToMinerBtn{font: 11px \"微软雅黑 Light\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                   "QToolButton#lockToMinerBtn::hover{background-color:#5474EB;}"
-                  "QToolButton#registerBtn{font: 11px \"微软雅黑\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                  "QToolButton#registerBtn{font: 11px \"微软雅黑 Light\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                   "QToolButton#registerBtn::hover{background-color:#5474EB;}"
                   "QComboBox{font-size:14px;}"
                   TABLEWIDGET_STYLE_1);

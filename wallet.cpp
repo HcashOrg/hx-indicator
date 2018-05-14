@@ -493,11 +493,11 @@ QStringList UBChain::getUnregisteredAccounts()
 QString UBChain::getExchangeContractAddress(QString _accountName)
 {
     QString result;
-    qDebug() << "cccccccccccc " << _accountName;
+//    qDebug() << "cccccccccccc " << _accountName;
 
     foreach (ContractInfo info, accountInfoMap.value(_accountName).contractsVector)
     {
-        qDebug() << "dddddddddd " << info.contractAddress << info.hashValue << info.state;
+//        qDebug() << "dddddddddd " << info.contractAddress << info.hashValue << info.state;
 
         if(info.hashValue == EXCHANGE_CONTRACT_HASH)
         {

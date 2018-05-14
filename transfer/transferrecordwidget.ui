@@ -37,7 +37,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -50,7 +50,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -63,7 +63,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -76,7 +76,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -89,7 +89,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -102,7 +102,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -146,19 +146,19 @@
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>75</x>
-     <y>40</y>
+     <x>70</x>
+     <y>50</y>
      <width>121</width>
-     <height>41</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Microsoft JhengHei UI</family>
-     <pointsize>20</pointsize>
+     <pointsize>12</pointsize>
     </font>
    </property>
    <property name="text">

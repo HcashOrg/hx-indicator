@@ -23,18 +23,18 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>73</x>
-     <y>41</y>
+     <x>70</x>
+     <y>50</y>
      <width>201</width>
-     <height>41</height>
+     <height>22</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
+     <pointsize>12</pointsize>
      <kerning>true</kerning>
     </font>
    </property>
