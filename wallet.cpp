@@ -195,6 +195,11 @@ void UBChain::onClientExeStateChanged()
     }
 }
 
+void UBChain::ShowBubbleMessage(const QString &title, const QString &context, int msecs, QSystemTrayIcon::MessageIcon icon)
+{
+    emit showBubbleSignal(title,context,icon,msecs);
+}
+
 QString UBChain::getMinerNameFromId(QString _minerId)
 {
     QString name;

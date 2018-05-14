@@ -47,7 +47,8 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
     ui->line_5->setVisible(false);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    ui->stackedWidget_fee->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerRegisterFee.toDouble(),"LNK"));
+    ui->stackedWidget_fee->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerRegisterFee.toDouble(),
+                                                         UBChain::getInstance()->feeType));
     ui->stackedWidget_fee->setCurrentIndex(0);
     init();
     ui->registerNameLineEdit->setMaxLength(63);

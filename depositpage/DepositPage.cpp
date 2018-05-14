@@ -40,6 +40,8 @@ DepositPage::DepositPage(const DepositDataInput & data,QWidget *parent) :
 {
     ui->setupUi(this);
     InitWidget();
+
+    //UBChain::getInstance()->ShowBubbleMessage("fdfd","fdsfds",5);
 }
 
 DepositPage::~DepositPage()

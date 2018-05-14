@@ -261,7 +261,9 @@ private slots:
 signals:
     void exeStarted();
 
-
+    void showBubbleSignal(const QString &,const QString &,QSystemTrayIcon::MessageIcon, int);
+public:
+    void ShowBubbleMessage(const QString &title,const QString &context, int msecs = 10000,QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information);
 public:
     WalletInfo walletInfo;
 

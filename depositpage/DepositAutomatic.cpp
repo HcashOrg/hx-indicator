@@ -45,6 +45,7 @@ public:
     bool isInUpdate;//是否处于更新阶段，防止重复更新
     bool autoDeposit;//是否自动充值
     std::mutex mutexLock;//数据修改锁
+    std::mutex updateMutexLock;//更新标志锁
     std::list<std::shared_ptr<accountInfo>> accounts;//所有账户信息
     std::list<QString> assetSymbols;//资产类型
     QTimer *timer;
@@ -97,6 +98,10 @@ public:
             if(tunnelAddress == (*it)->tunnelAddress){
                 (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-UBChain::getInstance()->feeChargeInfo.capitalFee.toDouble()));
                 //qDebug()<<"update-money---"<<tunnelAddress<<(*it)->assetMultiAddress<<(*it)->assetNumber;
+                if((*it)->assetNumber.toDouble() < 1e-11)
+                {
+                    accounts.erase(it);
+                }
                 break;
             }
         }
@@ -111,6 +116,17 @@ public:
                 break;
             }
         }
+    }
+    //设置正在更新
+    void SetInUpdateTrue()
+    {
+        std::lock_guard<std::mutex> lockguard(updateMutexLock);
+        isInUpdate = true;
+    }
+    void SetInUpdateFalse()
+    {
+        std::lock_guard<std::mutex> lockguard(updateMutexLock);
+        isInUpdate = false;
     }
 };
 
@@ -284,10 +300,6 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
     else if("automatic-finish-money" == id)
     {//开始创建交易
 
-//        for(auto it = _p->accounts.begin();it != _p->accounts.end();++it)
-//        {
-//            qDebug()<<"beforetransaction"<<(*it)->tunnelAddress<<(*it)->assetSymbol<<(*it)->assetMultiAddress<<(*it)->assetNumber;
-//        }
         std::for_each(_p->accounts.begin(),_p->accounts.end(),[this](const std::shared_ptr<DepositAutomatic::DataPrivate::accountInfo>& info){
             this->PostCreateTransaction(info->tunnelAddress,info->assetMultiAddress,info->assetNumber,info->assetSymbol);
             //qDebug()<<"postdata"<<info->tunnelAddress<<info->assetMultiAddress<<info->assetNumber<<info->assetSymbol;
@@ -319,7 +331,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
     }
     else if("automatic-finish-sign" == id)
     {//结束签名,可以进行刷新
-        _p->isInUpdate = false;
+        _p->SetInUpdateFalse();
     }
 }
 
@@ -351,7 +363,7 @@ void DepositAutomatic::httpReplied(QByteArray _data, int _status)
 void DepositAutomatic::updateData()
 {
     std::lock_guard<std::mutex> guard(_p->mutexLock);
-    _p->isInUpdate = true;
+    _p->SetInUpdateTrue();
     _p->accounts.clear();
     _p->assetSymbols.clear();
     _p->autoDeposit = UBChain::getInstance()->autoDeposit;
@@ -380,7 +392,7 @@ void DepositAutomatic::updateData()
 
     if(_p->accounts.empty())
     {
-        _p->isInUpdate = false;
+       _p->SetInUpdateFalse();
         return;
     }
     //发送寻找多签地址、以及对应通道地址
