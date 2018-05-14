@@ -37,7 +37,6 @@ public slots:
 
 
 signals:
-    void openAccountPage(QString);
     void showShadowWidget();
     void hideShadowWidget();
     void showApplyDelegatePage(QString);

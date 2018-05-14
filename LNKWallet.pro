@@ -38,7 +38,6 @@ SOURCES += main.cpp\
     normallogin.cpp \
     frame.cpp \
     mainpage.cpp \
-    accountpage.cpp \
     bottombar.cpp \
     setdialog.cpp \
     lockpage.cpp \
@@ -48,7 +47,6 @@ SOURCES += main.cpp\
     waitingforsync.cpp \
     remarkdialog.cpp \
     functionbar.cpp \
-    contactpage.cpp \
     singlecontactwidget.cpp \
     commondialog.cpp \
     showcontentdialog.cpp \
@@ -56,9 +54,7 @@ SOURCES += main.cpp\
     deleteaccountdialog.cpp \
     commontip.cpp \
     searchoptionwidget.cpp \
-    addnodedialog.cpp \
     editremarkdialog.cpp \
-    addcontactdialog.cpp \
     exportdialog.cpp \
     importdialog.cpp \
     ipcellwidget.cpp \
@@ -164,7 +160,6 @@ HEADERS  += firstlogin.h \
     normallogin.h \
     frame.h \
     mainpage.h \
-    accountpage.h \
     bottombar.h \
     setdialog.h \
     lockpage.h \
@@ -174,7 +169,6 @@ HEADERS  += firstlogin.h \
     waitingforsync.h \
     remarkdialog.h \
     functionbar.h \
-    contactpage.h \
     singlecontactwidget.h \
     commondialog.h \
     showcontentdialog.h \
@@ -182,9 +176,7 @@ HEADERS  += firstlogin.h \
     deleteaccountdialog.h \
     commontip.h \
     searchoptionwidget.h \
-    addnodedialog.h \
     editremarkdialog.h \
-    addcontactdialog.h \
     exportdialog.h \
     importdialog.h \
     ipcellwidget.h \
@@ -292,7 +284,6 @@ HEADERS  += firstlogin.h \
 FORMS    += firstlogin.ui \
     normallogin.ui \
     mainpage.ui \
-    accountpage.ui \
     bottombar.ui \
     setdialog.ui \
     lockpage.ui \
@@ -302,7 +293,6 @@ FORMS    += firstlogin.ui \
     waitingforsync.ui \
     remarkdialog.ui \
     functionbar.ui \
-    contactpage.ui \
     singlecontactwidget.ui \
     commondialog.ui \
     showcontentdialog.ui \
@@ -310,9 +300,7 @@ FORMS    += firstlogin.ui \
     deleteaccountdialog.ui \
     commontip.ui \
     searchoptionwidget.ui \
-    addnodedialog.ui \
     editremarkdialog.ui \
-    addcontactdialog.ui \
     exportdialog.ui \
     importdialog.ui \
     ipcellwidget.ui \

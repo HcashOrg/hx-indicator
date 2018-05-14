@@ -30,7 +30,6 @@ signals:
     void accountChanged(QString);
     void showShadowWidget();
     void hideShadowWidget();
-    void showAccountPage(QString);
     void back();
 
     void feeChangeSignal(double);

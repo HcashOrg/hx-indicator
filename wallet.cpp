@@ -95,13 +95,13 @@ UBChain::UBChain()
 
 UBChain::~UBChain()
 {
-    
 
-	if (configFile)
-	{
-		delete configFile;
-		configFile = NULL;
-	}
+
+    if (configFile)
+    {
+        delete configFile;
+        configFile = NULL;
+    }
 
     if( contactsFile)
     {
@@ -156,14 +156,7 @@ void UBChain::onNodeExeStateChanged()
     {
         qDebug() << QString("%1 is running").arg("lnk_node.exe");
 
-        connect(clientProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onClientExeStateChanged()));
-
-        QStringList strList;
-        strList << "--wallet-file=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/") + "/wallet.json"
-                << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
-                << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
-qDebug() << strList;
-        clientProc->start("lnk_client.exe",strList);
+        QTimer::singleShot(3000,this,SLOT(delayedLaunchClient()));
     }
     else if(nodeProc->state() == QProcess::NotRunning)
     {
@@ -185,6 +178,7 @@ void UBChain::onClientExeStateChanged()
     {
         qDebug() << QString("%1 is running").arg("lnk_client.exe");
 
+        UBChain::getInstance()->initWebSocketManager();
         emit exeStarted();
     }
     else if(clientProc->state() == QProcess::NotRunning)
@@ -193,6 +187,18 @@ void UBChain::onClientExeStateChanged()
         commonDialog.setText(tr("Fail to launch %1 !").arg("lnk_client.exe"));
         commonDialog.pop();
     }
+}
+
+void UBChain::delayedLaunchClient()
+{
+    connect(clientProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onClientExeStateChanged()));
+
+    QStringList strList;
+    strList << "--wallet-file=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/") + "/wallet.json"
+            << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
+qDebug() << strList;
+    clientProc->start("lnk_client.exe",strList);
 }
 
 void UBChain::ShowBubbleMessage(const QString &title, const QString &context, int msecs, QSystemTrayIcon::MessageIcon icon)
@@ -254,7 +260,7 @@ QString UBChain::read()
 
 void UBChain::deleteAccountInConfigFile(QString accountName)
 {
-    
+
     mutexForConfigFile.lock();
     configFile->beginGroup("/accountInfo");
     QStringList keys = configFile->childKeys();
@@ -278,7 +284,7 @@ void UBChain::deleteAccountInConfigFile(QString accountName)
     configFile->endGroup();
     mutexForConfigFile.unlock();
 
-    
+
 }
 
 

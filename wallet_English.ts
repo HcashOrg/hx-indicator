@@ -94,57 +94,35 @@
 <context>
     <name>AccountPage</name>
     <message>
-        <location filename="accountpage.ui" line="20"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.ui" line="43"/>
         <source>地址</source>
         <oldsource>地址：</oldsource>
-        <translation type="unfinished">Addr:</translation>
+        <translation type="obsolete">Addr:</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="341"/>
         <source>区块ID</source>
-        <translation type="unfinished">Block</translation>
+        <translation type="obsolete">Block</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="354"/>
         <source>交易ID</source>
-        <translation type="unfinished">Transaction ID</translation>
+        <translation type="obsolete">Transaction ID</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="367"/>
         <source>对方账户</source>
-        <translation type="unfinished">Opposite</translation>
+        <translation type="obsolete">Opposite</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="380"/>
         <source>金额</source>
-        <translation type="unfinished">Amount</translation>
+        <translation type="obsolete">Amount</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="393"/>
         <source>手续费/UB</source>
         <oldsource>手续费/HYP</oldsource>
-        <translation type="unfinished">Fee/UB</translation>
+        <translation type="obsolete">Fee/UB</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="456"/>
         <source>手续费收入</source>
         <oldsource>合约手续费</oldsource>
-        <translation type="unfinished">Income</translation>
-    </message>
-    <message>
-        <location filename="accountpage.ui" line="480"/>
-        <source>0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.ui" line="604"/>
-        <source>Total</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Income</translation>
     </message>
     <message>
         <source>资产类型</source>
@@ -155,9 +133,8 @@
         <translation type="obsolete">Amout of the fee to be received</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="505"/>
         <source>领取</source>
-        <translation type="unfinished">Receive</translation>
+        <translation type="obsolete">Receive</translation>
     </message>
     <message>
         <source>交易金额/GOP</source>
@@ -172,24 +149,16 @@
         <translation type="obsolete">Balance</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="238"/>
-        <source>/100</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.ui" line="437"/>
         <source>没有查询到交易记录</source>
-        <translation type="unfinished">No transactions.</translation>
+        <translation type="obsolete">No transactions.</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="146"/>
         <source>账单</source>
-        <translation type="unfinished">Bill</translation>
+        <translation type="obsolete">Bill</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="167"/>
         <source>当前账户</source>
-        <translation type="unfinished">Account</translation>
+        <translation type="obsolete">Account</translation>
     </message>
     <message>
         <source>筛选</source>
@@ -236,9 +205,8 @@
         <translation type="obsolete">Delegate Set</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="328"/>
         <source>时间</source>
-        <translation type="unfinished">Time</translation>
+        <translation type="obsolete">Time</translation>
     </message>
     <message>
         <source>来自</source>
@@ -257,9 +225,8 @@
         <translation type="obsolete">Fee/GOP</translation>
     </message>
     <message>
-        <location filename="accountpage.ui" line="406"/>
         <source>备注</source>
-        <translation type="unfinished">Memo</translation>
+        <translation type="obsolete">Memo</translation>
     </message>
     <message>
         <source>下一页</source>
@@ -282,83 +249,23 @@
         <translation type="obsolete">Added to the clipboard</translation>
     </message>
     <message>
-        <location filename="accountpage.cpp" line="67"/>
-        <source>copy to clipboard</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.cpp" line="246"/>
-        <source>Receive the fee successfully!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.cpp" line="255"/>
-        <source>Fail to receive the fee: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.cpp" line="305"/>
-        <source>Total </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.cpp" line="436"/>
-        <source>contract refund</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.cpp" line="448"/>
-        <source>receive contract fee</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.cpp" line="458"/>
-        <source>delegate receive salary</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.cpp" line="485"/>
-        <location filename="accountpage.cpp" line="493"/>
-        <source>call contract</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="accountpage.cpp" line="650"/>
-        <source>You can not receive any contract fee!</source>
-        <oldsource>You can not receive any contract fee.</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Withdraw</source>
         <translation type="obsolete">Withdraw</translation>
-    </message>
-    <message>
-        <location filename="accountpage.cpp" line="177"/>
-        <source>Copy to clipboard</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>AddContactDialog</name>
     <message>
-        <location filename="addcontactdialog.ui" line="19"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="addcontactdialog.ui" line="82"/>
         <source>账户地址：</source>
-        <translation type="unfinished">Address:</translation>
+        <translation type="obsolete">Address:</translation>
     </message>
     <message>
-        <location filename="addcontactdialog.ui" line="104"/>
         <source>备注名：</source>
-        <translation type="unfinished">Remark:</translation>
+        <translation type="obsolete">Remark:</translation>
     </message>
     <message>
-        <location filename="addcontactdialog.ui" line="208"/>
         <source>选填</source>
-        <translation type="unfinished">Optional</translation>
+        <translation type="obsolete">Optional</translation>
     </message>
     <message>
         <source>添加联系人</source>
@@ -370,30 +277,12 @@
         <translation type="obsolete">Address:</translation>
     </message>
     <message>
-        <location filename="addcontactdialog.ui" line="166"/>
         <source>确定</source>
-        <translation type="unfinished">Ok</translation>
+        <translation type="obsolete">Ok</translation>
     </message>
     <message>
-        <location filename="addcontactdialog.ui" line="63"/>
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
-    </message>
-    <message>
-        <location filename="addcontactdialog.cpp" line="34"/>
-        <source>Please enter an account address.</source>
-        <oldsource>Please enter an account address or a registered account name.</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="addcontactdialog.cpp" line="110"/>
-        <source>can not be empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="addcontactdialog.cpp" line="138"/>
-        <source>Already existed</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Cancel</translation>
     </message>
 </context>
 <context>
@@ -445,29 +334,16 @@
 <context>
     <name>AddNodeDialog</name>
     <message>
-        <location filename="addnodedialog.ui" line="19"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="addnodedialog.ui" line="31"/>
-        <source>IP</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="addnodedialog.ui" line="57"/>
         <source>端口</source>
-        <translation type="unfinished">Port</translation>
+        <translation type="obsolete">Port</translation>
     </message>
     <message>
-        <location filename="addnodedialog.ui" line="91"/>
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="obsolete">Cancel</translation>
     </message>
     <message>
-        <location filename="addnodedialog.ui" line="112"/>
         <source>添加</source>
-        <translation type="unfinished">Add</translation>
+        <translation type="obsolete">Add</translation>
     </message>
 </context>
 <context>
@@ -675,17 +551,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="dialog/backupwalletdialog.ui" line="68"/>
         <source>选择钱包备份路径</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Select the backup path</translation>
     </message>
     <message>
         <location filename="dialog/backupwalletdialog.ui" line="97"/>
         <source>选择路径</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">select</translation>
     </message>
     <message>
         <location filename="dialog/backupwalletdialog.ui" line="116"/>
         <source>备份</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Backup</translation>
     </message>
     <message>
         <location filename="dialog/backupwalletdialog.cpp" line="64"/>
@@ -1478,24 +1354,16 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>ContactPage</name>
     <message>
-        <location filename="contactpage.ui" line="19"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="contactpage.ui" line="90"/>
         <source>当前没有联系人</source>
-        <translation type="unfinished">No contacts.</translation>
+        <translation type="obsolete">No contacts.</translation>
     </message>
     <message>
-        <location filename="contactpage.ui" line="121"/>
         <source>联系人</source>
-        <translation type="unfinished">Contacts</translation>
+        <translation type="obsolete">Contacts</translation>
     </message>
     <message>
-        <location filename="contactpage.ui" line="155"/>
         <source>添加联系人</source>
-        <translation type="unfinished">Add</translation>
+        <translation type="obsolete">Add</translation>
     </message>
     <message>
         <source>备注名：</source>
@@ -2178,12 +2046,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="79"/>
+        <location filename="depositpage/DepositPage.cpp" line="81"/>
         <source>cannot generate tunnel account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="96"/>
+        <location filename="depositpage/DepositPage.cpp" line="98"/>
         <source>cannot bind tunnel account</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2707,17 +2575,17 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1524"/>
+        <location filename="frame.cpp" line="1487"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1527"/>
+        <location filename="frame.cpp" line="1490"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1530"/>
+        <location filename="frame.cpp" line="1493"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3379,27 +3247,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="353"/>
+        <location filename="mainpage.cpp" line="347"/>
         <source>Please backup up the wallet!!!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="372"/>
+        <location filename="mainpage.cpp" line="366"/>
         <source>Everytime a new account is created or imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="388"/>
+        <location filename="mainpage.cpp" line="382"/>
         <source>Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="593"/>
+        <location filename="mainpage.cpp" line="587"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="636"/>
+        <location filename="mainpage.cpp" line="630"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4460,27 +4328,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Password:</translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="100"/>
+        <location filename="miner/registerdialog.cpp" line="101"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="128"/>
+        <location filename="miner/registerdialog.cpp" line="129"/>
         <source>Register transaction has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="146"/>
+        <location filename="miner/registerdialog.cpp" line="147"/>
         <source>The name is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="151"/>
+        <location filename="miner/registerdialog.cpp" line="152"/>
         <source>This name has been used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="170"/>
+        <location filename="miner/registerdialog.cpp" line="171"/>
         <source>The name that will be registered is not the same as current name. Sure to change the name of this account?</source>
         <translation type="unfinished"></translation>
     </message>

@@ -187,12 +187,6 @@ void MainPage::on_importAccountBtn_clicked()
 
 void MainPage::on_accountTableWidget_cellClicked(int row, int column)
 {
-//    if(column == 0 || column == 1)
-//    {
-//        emit backBtnVisible(true);
-//        emit openAccountPage( ui->accountTableWidget->item(row,0)->text());
-//        return;
-//    }
 
     if(!ui->accountTableWidget->item(row,column))
     {

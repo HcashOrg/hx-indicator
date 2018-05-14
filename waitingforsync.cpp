@@ -30,7 +30,7 @@ WaitingForSync::WaitingForSync(QWidget *parent) :
     connect(timerForPic,SIGNAL(timeout()),this,SLOT(showPic()));
     timerForPic->start(25);
 
-    UBChain::getInstance()->initWebSocketManager();
+
     timerForWSConnected = new QTimer(this);
     connect(timerForWSConnected,SIGNAL(timeout()),this,SLOT(checkConnected()));
     timerForWSConnected->start(1000);
@@ -51,6 +51,8 @@ void WaitingForSync::on_closeBtn_clicked()
 
 void WaitingForSync::checkConnected()
 {
+    if(UBChain::getInstance()->wsManager == NULL)   return;
+    qDebug() << "ccccccccc " << UBChain::getInstance()->wsManager->isConnected;
     if(UBChain::getInstance()->wsManager->isConnected)      emit sync();
 }
 

@@ -16,7 +16,6 @@ namespace Ui {
 class FirstLogin;
 class NormalLogin;
 class MainPage;
-class AccountPage;
 class TransferPage;
 class BottomBar;
 class LockPage;
@@ -24,7 +23,6 @@ class TitleBar;
 class QMenu;
 class WaitingForSync;
 class FunctionBar;
-class ContactPage;
 class UpgradePage;
 class ApplyDelegatePage;
 class SelectWalletPathWidget;
@@ -69,8 +67,6 @@ signals:
     void titleBackVisible(bool);
 private slots:
     void alreadyLogin();
-    void showAccountPage();
-    void showAccountPage(QString);
 
     void showMinerPage();
 
@@ -114,7 +110,6 @@ private:
     NormalLogin* normalLogin;
 
     MainPage*   mainPage;
-    AccountPage* accountPage;
     TransferPage* transferPage;
     MultiSigPage* multiSigPage;
     MultiSigTransactionPage* multiSigTransactionPage;
@@ -133,7 +128,7 @@ private:
     WaitingForSync* waitingForSync;
     NewOrImportWalletWidget* newOrImportWalletWidget;
 
-    int currentPageNum;  //  0:mainPage   1:accountPage  2:delegatePgae  3:transferPage    4:contactPage    5:myExchangeContractPage
+    int currentPageNum;  //  0:mainPage   1:  2:delegatePgae  3:transferPage    4:contactPage    5:myExchangeContractPage
                          //   6: onchainOrderPage   7:minerPage   8: SmartContract     9: multiSigPage   10: multiSigTransactionPage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;
@@ -160,7 +155,6 @@ private:
     void closeEvent(QCloseEvent* e);
     void init();
 
-    //ContactPage* contactPage;
     ContactWidget *contactPage;
     UpgradePage* upgradePage;
 

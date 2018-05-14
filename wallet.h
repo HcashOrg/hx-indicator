@@ -258,6 +258,7 @@ public:
 private slots:
     void onNodeExeStateChanged();
     void onClientExeStateChanged();
+    void delayedLaunchClient();
 signals:
     void exeStarted();
 
