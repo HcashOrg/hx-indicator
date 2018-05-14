@@ -33,7 +33,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <widget class="QToolButton" name="cancelBtn">
@@ -47,7 +47,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>微软雅黑 Light</family>
       </font>
      </property>
      <property name="cursor">
@@ -71,7 +71,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>微软雅黑 Light</family>
       </font>
      </property>
      <property name="cursor">
@@ -108,7 +108,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>微软雅黑 Light</family>
       </font>
      </property>
      <property name="styleSheet">
@@ -164,7 +164,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>微软雅黑 Light</family>
       </font>
      </property>
      <property name="styleSheet">

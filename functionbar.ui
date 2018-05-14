@@ -18,7 +18,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑</family>
+    <family>微软雅黑 Light</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -38,7 +38,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -66,7 +66,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -91,7 +91,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -116,7 +116,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -144,7 +144,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -169,7 +169,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -194,7 +194,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -222,7 +222,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -250,7 +250,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -310,7 +310,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(255, 255, 255);
-font: 75 20px &quot;微软雅黑&quot;;</string>
+font: 75 20px &quot;微软雅黑 Light&quot;;</string>
    </property>
    <property name="text">
     <string>Account</string>
@@ -330,7 +330,7 @@ font: 75 20px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>

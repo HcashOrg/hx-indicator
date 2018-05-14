@@ -28,7 +28,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -41,7 +41,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -54,7 +54,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -94,7 +94,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <weight>50</weight>
      <bold>false</bold>
     </font>
@@ -117,7 +117,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
     </font>
    </property>
    <property name="styleSheet">
@@ -141,7 +141,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <weight>50</weight>
      <bold>false</bold>
     </font>
@@ -164,7 +164,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
     </font>
    </property>
    <property name="styleSheet">
@@ -189,7 +189,7 @@ background-image: url(:/ui/wallet_ui/switch.png);</string>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <weight>50</weight>
      <bold>false</bold>
     </font>
@@ -212,7 +212,7 @@ background-image: url(:/ui/wallet_ui/switch.png);</string>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
     </font>
    </property>
    <property name="styleSheet">

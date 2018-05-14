@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑</family>
+    <family>微软雅黑 Light</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>12</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -148,7 +148,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -161,7 +161,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>微软雅黑 Light</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -235,7 +235,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
     </font>
    </property>
    <property name="cursor">
@@ -259,7 +259,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <weight>50</weight>
      <bold>false</bold>
     </font>
@@ -282,7 +282,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
     </font>
    </property>
    <property name="styleSheet">
@@ -306,7 +306,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <underline>false</underline>
     </font>
    </property>
@@ -334,7 +334,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
     </font>
    </property>
    <property name="styleSheet">
@@ -358,7 +358,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
     </font>
    </property>
    <property name="cursor">
@@ -382,7 +382,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -398,7 +398,7 @@
    <property name="styleSheet">
     <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
 background-color: transparent;
-font: 12px &quot;微软雅黑&quot;;}
+font: 12px &quot;微软雅黑 Light&quot;;}
 QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
    </property>
    <property name="text">
@@ -416,7 +416,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -432,7 +432,7 @@ QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(
    <property name="styleSheet">
     <string notr="true">QToolButton{color:rgb(192,196,212);border:1px solid  rgb(70,82,113);border-radius:12px;
 background-color: transparent;
-font: 12px &quot;微软雅黑&quot;;}
+font: 12px &quot;微软雅黑 Light&quot;;}
 QToolButton:hover{color:white;border-color:rgb(24,140,249);background-color:rgb(24,140,249);}</string>
    </property>
    <property name="text">

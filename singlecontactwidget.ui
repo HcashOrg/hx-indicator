@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑</family>
+    <family>微软雅黑 Light</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(40, 45, 66);
-font: 12px &quot;微软雅黑&quot;;</string>
+font: 12px &quot;微软雅黑 Light&quot;;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -52,7 +52,7 @@ font: 12px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>11</pointsize>
      <weight>75</weight>
      <italic>false</italic>
@@ -80,7 +80,7 @@ font: 12px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>

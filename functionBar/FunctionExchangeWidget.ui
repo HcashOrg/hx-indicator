@@ -24,7 +24,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>微软雅黑 Light</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -33,7 +33,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(248, 249, 253);
-font: 16px &quot;微软雅黑&quot;;</string>
+font: 16px &quot;微软雅黑 Light&quot;;</string>
    </property>
    <property name="text">
     <string/>
