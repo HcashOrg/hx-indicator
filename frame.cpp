@@ -97,6 +97,7 @@ Frame::Frame(): timer(NULL),
 
     connect(UBChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(jsonDataUpdated(QString)));
 
+    connect(UBChain::getInstance(),&UBChain::showBubbleSignal,this,&Frame::ShowBubbleMessage);
     QString language = UBChain::getInstance()->language;
     if( language.isEmpty())
     {
@@ -1614,5 +1615,10 @@ void Frame::newAccount(QString name)
 //    UBChain::getInstance()->postRPC( toJsonFormat( "id_wallet_get_account_public_address-" + name, "wallet_get_account_public_address", QJsonArray() << name));
 
     getAccountInfo();
+}
+
+void Frame::ShowBubbleMessage(const QString &title, const QString &context,QSystemTrayIcon::MessageIcon icon, int msecs)
+{
+    trayIcon->showMessage(title,context,icon,msecs);
 }
 
