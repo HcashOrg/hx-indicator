@@ -10,7 +10,6 @@
 #include "ui_transferpage.h"
 #include "wallet.h"
 
-#include "remarkdialog.h"
 #include "commondialog.h"
 #include "transferconfirmdialog.h"
 #include "transferrecordwidget.h"
@@ -477,8 +476,7 @@ void TransferPage::updateAmountSlots()
               am.next();
               if(am.key() == assetID)
               {
-                  ui->amountLineEdit->setPlaceholderText(tr("max muber:") + QString::number(
-                       am.value().amount/pow(10,assetPrecision)));
+                  ui->amountLineEdit->setPlaceholderText(tr("Max: %1").arg(QString::number(am.value().amount/pow(10,assetPrecision))));
                   isFindAmmount = true;
                   break;
               }
@@ -486,7 +484,7 @@ void TransferPage::updateAmountSlots()
       }
      if(!isFindAmmount)
      {
-         ui->amountLineEdit->setPlaceholderText(tr("max muber: 0"));
+         ui->amountLineEdit->setPlaceholderText(tr("Max: 0"));
      }
 }
 

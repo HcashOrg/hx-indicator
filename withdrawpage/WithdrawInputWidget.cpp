@@ -21,7 +21,7 @@ WithdrawInputWidget::~WithdrawInputWidget()
 
 void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
 {
-    ui->lineEdit_ammount->setPlaceholderText(ui->lineEdit_ammount->placeholderText().replace("0",number));
+    ui->lineEdit_ammount->setPlaceholderText(tr("Max: %1").arg(number));
     int pre = 5;
     foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
         if(asset.symbol == symbol)

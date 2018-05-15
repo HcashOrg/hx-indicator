@@ -149,7 +149,7 @@ font: 12px &quot;微软雅黑 Light&quot;;</string>
     </font>
    </property>
    <property name="text">
-    <string>BlocLink</string>
+    <string>BlockLink</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_version">
@@ -186,7 +186,7 @@ font: 12px &quot;微软雅黑 Light&quot;;</string>
     </font>
    </property>
    <property name="text">
-    <string>Welcom,</string>
+    <string>Welcome,</string>
    </property>
   </widget>
   <widget class="Line" name="line">

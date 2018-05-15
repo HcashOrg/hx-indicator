@@ -264,7 +264,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>预计手续费：</string>
+      <string>预计手续费</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

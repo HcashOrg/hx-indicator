@@ -25,7 +25,7 @@ void NewOrImportWalletWidget::on_newWalletBtn_clicked()
 
 void NewOrImportWalletWidget::on_importWalletBtn_clicked()
 {
-    QString file = QFileDialog::getOpenFileName(this, tr("Choose your wallet file."),"","(*.json)");
+    QString file = QFileDialog::getOpenFileName(this, tr("Select your wallet file."),"","(*.json)");
 #ifdef WIN32
     file.replace("\\","/");
 #endif

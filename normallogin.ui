@@ -198,7 +198,7 @@
     </font>
    </property>
    <property name="text">
-    <string>BlocLink</string>
+    <string>BlockLink</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_wel">

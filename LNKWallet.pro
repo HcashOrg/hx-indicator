@@ -44,21 +44,15 @@ SOURCES += main.cpp\
     consoledialog.cpp \
     titlebar.cpp \
     waitingforsync.cpp \
-    remarkdialog.cpp \
-    functionbar.cpp \
     commondialog.cpp \
     showcontentdialog.cpp \
     namedialog.cpp \
     deleteaccountdialog.cpp \
-    searchoptionwidget.cpp \
     exportdialog.cpp \
     importdialog.cpp \
-    ipcellwidget.cpp \
     control/myprogressbar.cpp \
     control/showbottombarwidget.cpp \
-    control/rightclickmenudialog.cpp \
     dialog/renamedialog.cpp \
-    control/remarkcellwidget.cpp \
     control/shadowwidget.cpp \
     selectwalletpathwidget.cpp \
     control/mycheckbtn.cpp \
@@ -157,21 +151,15 @@ HEADERS  += firstlogin.h \
     consoledialog.h \
     titlebar.h \
     waitingforsync.h \
-    remarkdialog.h \
-    functionbar.h \
     commondialog.h \
     showcontentdialog.h \
     namedialog.h \
     deleteaccountdialog.h \
-    searchoptionwidget.h \
     exportdialog.h \
     importdialog.h \
-    ipcellwidget.h \
     control/myprogressbar.h \
     control/showbottombarwidget.h \
-    control/rightclickmenudialog.h \
     dialog/renamedialog.h \
-    control/remarkcellwidget.h \
     control/shadowwidget.h \
     selectwalletpathwidget.h \
     control/mycheckbtn.h \
@@ -271,19 +259,13 @@ FORMS    += firstlogin.ui \
     consoledialog.ui \
     titlebar.ui \
     waitingforsync.ui \
-    remarkdialog.ui \
-    functionbar.ui \
     commondialog.ui \
     showcontentdialog.ui \
     namedialog.ui \
     deleteaccountdialog.ui \
-    searchoptionwidget.ui \
     exportdialog.ui \
     importdialog.ui \
-    ipcellwidget.ui \
-    control/rightclickmenudialog.ui \
     dialog/renamedialog.ui \
-    control/remarkcellwidget.ui \
     control/shadowwidget.ui \
     selectwalletpathwidget.ui \
     control/qrcodedialog.ui \

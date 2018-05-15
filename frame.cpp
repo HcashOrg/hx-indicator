@@ -23,7 +23,6 @@
 #include "waitingforsync.h"
 #include <QDesktopWidget>
 
-#include "functionbar.h"
 #include "functionBar/FunctionWidget.h"
 #include "contact/ContactWidget.h"
 #include "poundage/PoundageWidget.h"

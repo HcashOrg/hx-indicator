@@ -107,7 +107,7 @@ void LockToMinerDialog::jsonDataUpdated(QString id)
             close();
 
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Lock balance to miner successfully!"));
+            commonDialog.setText(tr("Pledge asset to miner successfully!"));
             commonDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
@@ -144,7 +144,7 @@ void LockToMinerDialog::on_assetComboBox_currentIndexChanged(const QString &arg1
     AssetAmount assetAmount = UBChain::getInstance()->accountInfoMap.value(m_accountName).assetAmountMap.value(ui->assetComboBox->currentData().toString());
     QString amountStr = getBigNumberString(assetAmount.amount, UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString()).precision);
 
-    ui->amountLineEdit->setPlaceholderText(tr("total %1 %2").arg(amountStr).arg(ui->assetComboBox->currentText()) );
+    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(amountStr).arg(ui->assetComboBox->currentText()) );
 }
 
 void LockToMinerDialog::on_closeBtn_clicked()

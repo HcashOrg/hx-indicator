@@ -109,7 +109,7 @@ void MyExchangeContractPage::showOrders()
 
         double price = ((double)amount.sellAmount / qPow(10,assetInfo.precision)) / (amount.buyAmount / qPow(10,assetInfo2.precision) );
         ui->ordersTableWidget->setItem(i,2, new QTableWidgetItem(QString::number(price,'g',12)));
-        ui->ordersTableWidget->setItem(i,3, new QTableWidgetItem(tr("withdraw")));
+        ui->ordersTableWidget->setItem(i,3, new QTableWidgetItem(tr("cancel")));
         ui->ordersTableWidget->setItem(i,4, new QTableWidgetItem(tr("add")));
 
         for(int j = 0; j < 5; j++)
@@ -236,7 +236,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION).toDouble());
             withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION)
                                                + " " + ASSET_NAME);
-            withdrawOrderDialog.setText(tr("Sure to withdraw this order? You need to pay the fee for contract execution."));
+            withdrawOrderDialog.setText(tr("Sure to cancel this order? You need to pay the fee for contract execution."));
             if(withdrawOrderDialog.pop())
             {
                 QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
@@ -433,7 +433,7 @@ void MyExchangeContractPage::on_withdrawAllBtn_clicked()
     if(ui->ordersTableWidget->rowCount() < 1)   return;
 
     CommonDialog commonDialog(CommonDialog::OkAndCancel);
-    commonDialog.setText( tr("Sure to withdraw all orders of %1-to-%2 ?").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()) );
+    commonDialog.setText( tr("Sure to cancel all orders of %1-to-%2 ?").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()) );
     if(commonDialog.pop())
     {
         QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());

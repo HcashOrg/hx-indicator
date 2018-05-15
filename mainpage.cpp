@@ -16,7 +16,6 @@
 #include "importdialog.h"
 #include "commondialog.h"
 #include "showcontentdialog.h"
-#include "control/rightclickmenudialog.h"
 #include "dialog/renamedialog.h"
 #include "dialog/backupwalletdialog.h"
 #include "control/qrcodedialog.h"
@@ -60,9 +59,7 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->setColumnWidth(3,70);
     ui->accountTableWidget->setColumnWidth(4,70);
     ui->accountTableWidget->setColumnWidth(5,70);
-    ui->accountTableWidget->setColumnWidth(6,70);
     ui->accountTableWidget->horizontalHeader()->setStretchLastSection(true);
-    ui->accountTableWidget->hideColumn(6);
 
     QString language = UBChain::getInstance()->language;
     if( language.isEmpty())
@@ -122,8 +119,7 @@ void MainPage::updateAccountList()
         {
             ui->accountTableWidget->setItem(i,3,new QTableWidgetItem(tr("deposit")));
             ui->accountTableWidget->setItem(i,4,new QTableWidgetItem(tr("withdraw")));
-            ui->accountTableWidget->setItem(i,5,new QTableWidgetItem(tr("trade")));
-            ui->accountTableWidget->setItem(i,6,new QTableWidgetItem(tr("exchange")));
+            ui->accountTableWidget->setItem(i,5,new QTableWidgetItem(tr("allot")));
         }
 
         for(int j = 0; j < 7; j++)
@@ -572,16 +568,6 @@ void MainPage::on_qrcodeBtn_clicked()
     qrcodeDialog.exec();
 }
 
-void MainPage::on_exportBtn_clicked()
-{
-    showExportDialog(ui->accountComboBox->currentText());
-}
-
-void MainPage::on_backupWalletBtn_clicked()
-{
-    BackupWalletDialog backupWalletDialog;
-    backupWalletDialog.pop();
-}
 
 void MainPage::InitStyle()
 {
@@ -608,8 +594,6 @@ void MainPage::InitStyle()
     ui->qrcodeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/qrcode.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
                                  "QToolButton:hover{background-image:url(:/ui/wallet_ui/qrcode_hover.png);}");
 
-    ui->exportBtn->setVisible(false);
-    ui->backupWalletBtn->setVisible(false);
 
     ui->importAccountBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->addAccountBtn->setStyleSheet(TOOLBUTTON_STYLE_1);

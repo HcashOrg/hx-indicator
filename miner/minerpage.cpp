@@ -174,7 +174,7 @@ void MinerPage::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":{"))
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Foreclose balance from miner successfully!"));
+            commonDialog.setText(tr("Foreclose asset from miner successfully!"));
             commonDialog.pop();
         }
 

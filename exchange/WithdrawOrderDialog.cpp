@@ -33,7 +33,6 @@ WithdrawOrderDialog::WithdrawOrderDialog(QWidget *parent) :
     ui->stackedWidget->setCurrentIndex(0);
 
     ui->feeLabel->setVisible(false);
-    ui->label_3->setVisible(false);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 }

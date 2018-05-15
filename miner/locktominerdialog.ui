@@ -25,10 +25,10 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>190</y>
+      <x>270</x>
+      <y>120</y>
       <width>420</width>
-      <height>300</height>
+      <height>340</height>
      </rect>
     </property>
     <property name="font">
@@ -56,7 +56,7 @@
      <property name="geometry">
       <rect>
        <x>220</x>
-       <y>250</y>
+       <y>270</y>
        <width>120</width>
        <height>36</height>
       </rect>
@@ -83,7 +83,7 @@
      <property name="geometry">
       <rect>
        <x>80</x>
-       <y>250</y>
+       <y>270</y>
        <width>120</width>
        <height>36</height>
       </rect>
@@ -149,7 +149,7 @@
       <rect>
        <x>40</x>
        <y>100</y>
-       <width>81</width>
+       <width>120</width>
        <height>30</height>
       </rect>
      </property>

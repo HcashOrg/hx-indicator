@@ -166,7 +166,7 @@ void WithdrawExchangeContractDialog::on_assetComboBox_currentIndexChanged(const 
     ui->amountLineEdit->clear();
 
     unsigned long long maxAmount = UBChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value(ui->assetComboBox->currentText());
-    ui->amountLineEdit->setPlaceholderText(tr("total %1 %2").arg(getBigNumberString(maxAmount, assetInfo.precision)).arg(assetInfo.symbol));
+    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(getBigNumberString(maxAmount, assetInfo.precision)).arg(assetInfo.symbol));
 }
 
 void WithdrawExchangeContractDialog::on_withdrawAllBtn_clicked()

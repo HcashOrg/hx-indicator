@@ -188,7 +188,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Welcom,</string>
+    <string>Welcome,</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_bloc">
@@ -207,7 +207,7 @@
     </font>
    </property>
    <property name="text">
-    <string>BlocLink</string>
+    <string>BlockLink</string>
    </property>
   </widget>
   <widget class="Line" name="line">

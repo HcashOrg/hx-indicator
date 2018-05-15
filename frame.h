@@ -22,7 +22,6 @@ class LockPage;
 class TitleBar;
 class QMenu;
 class WaitingForSync;
-class FunctionBar;
 class UpgradePage;
 class ApplyDelegatePage;
 class SelectWalletPathWidget;

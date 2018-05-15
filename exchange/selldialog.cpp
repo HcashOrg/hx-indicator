@@ -181,7 +181,7 @@ void SellDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 
     QString balanceStr = getBigNumberString(balanceAmount,assetInfo.precision);
 
-    ui->sellAmountLineEdit->setPlaceholderText(tr("Total %1 %2").arg(balanceStr).arg(ui->assetComboBox->currentText()));
+    ui->sellAmountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(balanceStr).arg(ui->assetComboBox->currentText()));
 
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(assetInfo.precision));
