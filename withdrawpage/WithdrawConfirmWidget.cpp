@@ -104,7 +104,15 @@ void WithdrawConfirmWidget::InitData()
     ui->label_address->setText(_p->crosschain_account);
     ui->label_totalNumber->setText(_p->ammount + "  " + _p->symbol);
     ui->label_feeNumber->setText(UBChain::getInstance()->feeChargeInfo.withDrawFee + " " + _p->symbol);
-    ui->label_actualNumber->setText(QString::number(_p->ammount.toDouble()-UBChain::getInstance()->feeChargeInfo.withDrawFee.toDouble())+" "+_p->symbol);
+    int pre = 5;
+    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+        if(asset.symbol == _p->symbol)
+        {
+            pre = asset.precision;
+            break;
+        }
+    }
+    ui->label_actualNumber->setText(QString::number(_p->ammount.toDouble()-UBChain::getInstance()->feeChargeInfo.withDrawFee.toDouble(),'f',pre)+" "+_p->symbol);
 }
 
 void WithdrawConfirmWidget::InitWidget()

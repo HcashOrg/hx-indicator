@@ -96,7 +96,16 @@ public:
         std::lock_guard<std::mutex> lockguard(mutexLock);
         for(auto it = accounts.begin();it != accounts.end();++it){
             if(tunnelAddress == (*it)->tunnelAddress){
-                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-UBChain::getInstance()->feeChargeInfo.capitalFee.toDouble()));
+                int pre = 5;
+                foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+                    if(asset.symbol == (*it)->assetSymbol)
+                    {
+                        pre = asset.precision;
+                        break;
+                    }
+                }
+                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-UBChain::getInstance()->feeChargeInfo.capitalFee.toDouble())
+                                                     ,'f',pre);
                 //qDebug()<<"update-money---"<<tunnelAddress<<(*it)->assetMultiAddress<<(*it)->assetNumber;
                 if((*it)->assetNumber.toDouble() < 1e-11)
                 {

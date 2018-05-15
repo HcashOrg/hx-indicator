@@ -181,7 +181,15 @@ void TransferPage::refresh()
 
 void TransferPage::setAmountPrecision()
 {
-    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(ASSET_PRECISION));
+    int pre = ASSET_PRECISION;
+    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+        if(asset.symbol == ui->assetComboBox->currentText())
+        {
+            pre = asset.precision;
+            break;
+        }
+    }
+    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(pre));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
 }

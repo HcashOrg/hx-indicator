@@ -34,7 +34,6 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
     QDoubleValidator *validator = new QDoubleValidator(0.001,number.toDouble(),pre,this);
     validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_ammount->setValidator( validator );
-
     ui->label_symbol->setText(symbol);
 }
 
@@ -52,7 +51,11 @@ void WithdrawInputWidget::addressChangeSlots(const QString &address)
 
 void WithdrawInputWidget::maxButtonSlots()
 {
-    ui->lineEdit_ammount->setText(QString::number(dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()))->top()));
+    QDoubleValidator* vali = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()));
+    if(vali)
+    {
+        ui->lineEdit_ammount->setText(QString::number(vali->top(),'f',vali->decimals()));
+    }
 }
 
 void WithdrawInputWidget::confirmButtonSlots()
