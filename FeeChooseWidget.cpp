@@ -49,12 +49,21 @@ const QString &FeeChooseWidget::GetFeeID() const
 
 const QString &FeeChooseWidget::GetFeeType() const
 {
+
     return _p->feeType;
 }
 
 QString FeeChooseWidget::GetFeeNumber() const
 {
-    return QString::number(_p->coinNumber);
+    int pre = 5;
+    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+        if(asset.symbol == _p->feeType)
+        {
+            pre = asset.precision;
+            break;
+        }
+    }
+    return QString::number(_p->coinNumber,'f',pre);
 }
 
 void FeeChooseWidget::updateFeeNumberSlots(double feeNumber)
@@ -151,7 +160,15 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
         _p->coinNumber = poundage->targetCoinNumber/poundage->sourceCoinNumber*_p->feeNumber;
         _p->poundageID = poundage->poundageID;
         double rate = poundage->sourceCoinNumber/poundage->targetCoinNumber;
-        _p->poundageTip = "支付:"+QString::number(_p->coinNumber)+" "+_p->feeType + "  汇率:"+QString::number(rate);
+        int pre = 5;
+        foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+            if(asset.symbol == _p->feeType)
+            {
+                pre = asset.precision;
+                break;
+            }
+        }
+        _p->poundageTip = "支付:"+QString::number(_p->coinNumber,'f',pre)+" "+_p->feeType + "  汇率:"+QString::number(rate);
 
     }
     refreshUI();
