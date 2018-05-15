@@ -43,32 +43,25 @@ SOURCES += main.cpp\
     lockpage.cpp \
     consoledialog.cpp \
     titlebar.cpp \
-    contactdialog.cpp \
     waitingforsync.cpp \
     remarkdialog.cpp \
     functionbar.cpp \
-    singlecontactwidget.cpp \
     commondialog.cpp \
     showcontentdialog.cpp \
     namedialog.cpp \
     deleteaccountdialog.cpp \
-    commontip.cpp \
     searchoptionwidget.cpp \
-    editremarkdialog.cpp \
     exportdialog.cpp \
     importdialog.cpp \
     ipcellwidget.cpp \
     control/myprogressbar.cpp \
     control/showbottombarwidget.cpp \
     control/rightclickmenudialog.cpp \
-    control/chooseaddaccountdialog.cpp \
     dialog/renamedialog.cpp \
     control/remarkcellwidget.cpp \
     control/shadowwidget.cpp \
     selectwalletpathwidget.cpp \
-    dialog/choosetokenoperationdialog.cpp \
     control/mycheckbtn.cpp \
-    dialog/choosecontractoperationdialog.cpp \
     control/qrcodedialog.cpp \
     control/qrcodewidget.cpp \
     multisig/multisigpage.cpp \
@@ -85,7 +78,6 @@ SOURCES += main.cpp\
     AES/aesencryptor.cpp \
     dialog/exportsetpwddialog.cpp \
     dialog/importenterpwddialog.cpp \
-    control/contacteditdialog.cpp \
     dialog/functionbarchoicedialog.cpp \
     extra/guiutil.cpp \
     control/feedassetcellwidget.cpp \
@@ -119,7 +111,6 @@ SOURCES += main.cpp\
     depositpage/DepositDataUtil.cpp \
     depositpage/DepositQrcodeWidget.cpp \
     depositpage/DepositRecrdWideget.cpp\
-    exchange/exchangewidget.cpp \
     depositpage/DepositPage.cpp \
     exchange/myexchangecontractpage.cpp \
     withdrawpage/WithdrawPage.cpp \
@@ -165,32 +156,25 @@ HEADERS  += firstlogin.h \
     lockpage.h \
     consoledialog.h \
     titlebar.h \
-    contactdialog.h \
     waitingforsync.h \
     remarkdialog.h \
     functionbar.h \
-    singlecontactwidget.h \
     commondialog.h \
     showcontentdialog.h \
     namedialog.h \
     deleteaccountdialog.h \
-    commontip.h \
     searchoptionwidget.h \
-    editremarkdialog.h \
     exportdialog.h \
     importdialog.h \
     ipcellwidget.h \
     control/myprogressbar.h \
     control/showbottombarwidget.h \
     control/rightclickmenudialog.h \
-    control/chooseaddaccountdialog.h \
     dialog/renamedialog.h \
     control/remarkcellwidget.h \
     control/shadowwidget.h \
     selectwalletpathwidget.h \
-    dialog/choosetokenoperationdialog.h \
     control/mycheckbtn.h \
-    dialog/choosecontractoperationdialog.h \
     control/qrcodedialog.h \
     control/qrcodewidget.h \
     control/qrencode.h \
@@ -208,7 +192,6 @@ HEADERS  += firstlogin.h \
     AES/aesencryptor.h \
     dialog/exportsetpwddialog.h \
     dialog/importenterpwddialog.h \
-    control/contacteditdialog.h \
     dialog/functionbarchoicedialog.h \
     extra/style.h \
     extra/guiutil.h \
@@ -239,14 +222,12 @@ HEADERS  += firstlogin.h \
     poundage/PoundageShowTableModel.h \
     poundage/GeneralComboBoxDelegate.h \
     poundage/PageScrollWidget.h \
-    exchange/exchangewidget.h   \
     depositpage/DepositPage.h \
     exchange/myexchangecontractpage.h   \
     depositpage/DepositPage.h \
     depositpage/DepositDataUtil.h \
     depositpage/DepositQrcodeWidget.h \
     depositpage/DepositRecrdWideget.h\
-    exchange/exchangewidget.h \
     withdrawpage/WithdrawPage.h \
     withdrawpage/WithdrawDataUtil.h \
     withdrawpage/WithdrawInputWidget.h \
@@ -289,29 +270,22 @@ FORMS    += firstlogin.ui \
     lockpage.ui \
     consoledialog.ui \
     titlebar.ui \
-    contactdialog.ui \
     waitingforsync.ui \
     remarkdialog.ui \
     functionbar.ui \
-    singlecontactwidget.ui \
     commondialog.ui \
     showcontentdialog.ui \
     namedialog.ui \
     deleteaccountdialog.ui \
-    commontip.ui \
     searchoptionwidget.ui \
-    editremarkdialog.ui \
     exportdialog.ui \
     importdialog.ui \
     ipcellwidget.ui \
     control/rightclickmenudialog.ui \
-    control/chooseaddaccountdialog.ui \
     dialog/renamedialog.ui \
     control/remarkcellwidget.ui \
     control/shadowwidget.ui \
     selectwalletpathwidget.ui \
-    dialog/choosetokenoperationdialog.ui \
-    dialog/choosecontractoperationdialog.ui \
     control/qrcodedialog.ui \
     multisig/multisigpage.ui \
     multisig/addmultisigdialog.ui \
@@ -325,7 +299,6 @@ FORMS    += firstlogin.ui \
     dialog/checkpwddialog.ui \
     dialog/exportsetpwddialog.ui \
     dialog/importenterpwddialog.ui \
-    control/contacteditdialog.ui \
     dialog/functionbarchoicedialog.ui \
     control/feedassetcellwidget.ui \
     neworimportwalletwidget.ui \
@@ -348,13 +321,11 @@ FORMS    += firstlogin.ui \
     miner/foreclosedialog.ui    \
     poundage/PoundageShowWidget.ui \
     poundage/PageScrollWidget.ui \
-    exchange/exchangewidget.ui  \
     depositpage/DepositPage.ui \
     exchange/myexchangecontractpage.ui  \
     depositpage/DepositPage.ui \
     depositpage/DepositQrcodeWidget.ui \
     depositpage/DepositRecrdWideget.ui\
-    exchange/exchangewidget.ui \
     withdrawpage/WithdrawPage.ui \
     withdrawpage/WithdrawInputWidget.ui \
     exchange/selldialog.ui \

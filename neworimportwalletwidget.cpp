@@ -31,7 +31,12 @@ void NewOrImportWalletWidget::on_importWalletBtn_clicked()
 #endif
 
     if(file.isEmpty())      return;
-    ui->walletFilePathLabel->setText(file);
+
+    QDir dir(UBChain::getInstance()->appDataPath);
+    if(!dir.exists())
+    {
+        qDebug() << dir.mkdir(UBChain::getInstance()->appDataPath);
+    }
 
     qDebug() << "copy wallet.json to chaindata path : " << QFile::copy(file, UBChain::getInstance()->appDataPath + "/wallet.json");
 

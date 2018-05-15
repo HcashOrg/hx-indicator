@@ -36,8 +36,6 @@ DepositExchangeContractDialog::DepositExchangeContractDialog(QWidget *parent) :
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    ui->label_3->setVisible(false);
-    ui->contractFeeLabel->setVisible(false);
     init();
 }
 
@@ -134,8 +132,6 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
             stepCount = result.mid(QString("\"result\":").size()).toInt();
 
             feeChoose->updateFeeNumberSlots(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION).toDouble());
-            ui->contractFeeLabel->setText(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION)
-                                          + " " + ASSET_NAME);
         }
 
 

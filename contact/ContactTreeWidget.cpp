@@ -364,11 +364,11 @@ void ContactTreeWidget::initContextMenu()
 
     _p->addGroupAction = new QAction(tr("AddGroup"),this);
 
-    _p->editGroupAction = new QAction(tr("EidtGroup"),this);
+    _p->editGroupAction = new QAction(tr("EditGroup"),this);
     _p->delGroupAction = new QAction(tr("DeleteGroup"),this);
 
-    _p->editPersonAction = new QAction(tr("EditPerson"),this);
-    _p->delPersonAction = new QAction(tr("DeletePerson"),this);
+    _p->editPersonAction = new QAction(tr("EditContact"),this);
+    _p->delPersonAction = new QAction(tr("DeleteContact"),this);
 
     connect(_p->addGroupAction,&QAction::triggered,this,&ContactTreeWidget::addGroupSlots);
     connect(_p->editGroupAction,&QAction::triggered,this,&ContactTreeWidget::editGroupSlots);

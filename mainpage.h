@@ -24,10 +24,6 @@ public:
     void retranslator(QString language);
 
 
-private:
-    void showExchangeWidget();
-
-
 public slots:
     void refresh();
 
@@ -60,7 +56,6 @@ private slots:
 
     void renameAccount(QString name);
 
-    void deleteAccount(QString name);
 
 //    void showDetailWidget(QString name);
 

@@ -116,7 +116,7 @@ void ContactChooseWidget::QueryPersonSlots()
 void ContactChooseWidget::updateUI()
 {
     ui->name->setText(_p->contactName);
-    ui->address->setText(_p->contactAddress);
+    ui->addressLabel->setText(_p->contactAddress);
 }
 
 void ContactChooseWidget::InitWidget()

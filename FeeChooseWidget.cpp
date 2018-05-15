@@ -143,7 +143,7 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
         _p->feeType = "LNK";
         _p->coinNumber = _p->feeNumber;
         _p->poundageID = "";
-        _p->poundageTip = tr("cannot find proper poundage!");
+        _p->poundageTip = tr("cannot find proper acceptance!");
     }
     else
     {

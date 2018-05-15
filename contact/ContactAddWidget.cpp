@@ -136,9 +136,9 @@ void ContactAddWidget::InitWidget()
     QRegExp regx("[a-zA-Z0-9\-\.\ \n]+$");
     QValidator *validator = new QRegExpValidator(regx, this);
     ui->lineEdit_address->setValidator( validator );
-    ui->lineEdit_address->setPlaceholderText( tr("Please enter an account address."));
+    ui->lineEdit_address->setPlaceholderText( tr("Please enter an address."));
 
-    ui->lineEdit_remark->setPlaceholderText(tr("input note name.(empty input avaliable)"));
+    ui->lineEdit_remark->setPlaceholderText(tr("optional"));
 
     ui->label_tip->setVisible(false);
 

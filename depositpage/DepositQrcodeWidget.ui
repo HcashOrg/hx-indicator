@@ -30,13 +30,16 @@
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>350</y>
+     <y>340</y>
      <width>551</width>
-     <height>20</height>
+     <height>40</height>
     </rect>
    </property>
    <property name="text">
     <string>*重要提示:禁止向BTC地址充值除BTC之外的资产，任何充入BTC地址的非BTC资产将不可找回！</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_mark">

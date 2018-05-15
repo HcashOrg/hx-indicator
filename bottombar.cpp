@@ -4,7 +4,6 @@
 
 #include "consoledialog.h"
 #include "wallet.h"
-#include "commontip.h"
 #include "commondialog.h"
 
 
@@ -23,8 +22,6 @@ BottomBar::BottomBar(QWidget *parent) :
     ui->syncLabel->setToolTip(tr("Local block height / Network block height(estimated)"));
 
     connect(UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)),this, SLOT(jsonDataUpdated(QString)));
-
-    connectionTip = new CommonTip;
 
     ui->networkLabel->setPixmap(QPixmap(":/ui/wallet_ui/net.png").scaled(20,20));
 }

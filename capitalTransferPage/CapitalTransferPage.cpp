@@ -85,7 +85,7 @@ void CapitalTransferPage::radioChangedSlots()
 {
     if(ui->radioButton_deposit->isChecked())
     {
-        ui->label_addressTitle->setText(ui->label_addressTitle->text().replace(_p->symbol,"Tunnel"));
+        ui->label_addressTitle->setText(tr("%1 address").arg("Tunnel"));
         ui->lineEdit_address->setPlaceholderText(tr("please wait"));
         if(!_p->tunnel_account_address.isEmpty())
         {
@@ -95,7 +95,7 @@ void CapitalTransferPage::radioChangedSlots()
     }
     else if(ui->radioButton_withdraw->isChecked())
     {
-        ui->label_addressTitle->setText(ui->label_addressTitle->text().replace("Tunnel",_p->symbol));
+        ui->label_addressTitle->setText(tr("%1 address").arg(_p->symbol));
         ui->lineEdit_address->setPlaceholderText(tr("please input withdraw address..."));
         ui->lineEdit_address->setEnabled(true);
         ui->lineEdit_address->clear();
@@ -115,7 +115,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             ui->radioButton_deposit->setEnabled(false);
             ui->radioButton_withdraw->setEnabled(false);
             ui->lineEdit_number->setEnabled(false);
-            ui->lineEdit_address->setText(tr("Cannot find tunnelAddress!"));
+            ui->lineEdit_address->setText(tr("Can not find tunnel address!"));
             return;
         }
         result.prepend("{");
@@ -127,7 +127,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             ui->radioButton_deposit->setEnabled(false);
             ui->radioButton_withdraw->setEnabled(false);
             ui->lineEdit_number->setEnabled(false);
-            ui->lineEdit_address->setText(tr("Cannot find tunnelAddress!"));
+            ui->lineEdit_address->setText(tr("Can not find tunnel address!"));
             return;
         }
         if(ui->radioButton_deposit->isChecked())
@@ -145,7 +145,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             ui->radioButton_deposit->setEnabled(false);
             ui->radioButton_withdraw->setEnabled(false);
             ui->lineEdit_number->setEnabled(false);
-            ui->lineEdit_address->setText(tr("Cannot find multiAddress!"));
+            ui->lineEdit_address->setText(tr("Can not find multi-address!"));
             return;
         }
         result.prepend("{");
@@ -157,7 +157,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             ui->radioButton_deposit->setEnabled(false);
             ui->radioButton_withdraw->setEnabled(false);
             ui->lineEdit_number->setEnabled(false);
-            ui->lineEdit_address->setText(tr("Cannot find multiAddress!"));
+            ui->lineEdit_address->setText(tr("Can not find multi-address!"));
             return;
         }
 
@@ -303,7 +303,7 @@ void CapitalTransferPage::InitWidget()
     ui->label_fee->setText(_p->fee +_p->symbol);
 
     ui->toolButton_confirm->setVisible(false);
-    ui->label_addressTitle->setText(ui->label_addressTitle->text().replace("X","Tunnel"));
+    ui->label_addressTitle->setText(tr("%1 address").arg("Tunnel"));
     ui->radioButton_deposit->setChecked(true);
     ui->lineEdit_address->setPlaceholderText(tr("please wait"));
     ui->lineEdit_address->setEnabled(false);

@@ -52,19 +52,6 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="walletFilePathLabel">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>230</y>
-     <width>241</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_wel">
    <property name="geometry">
     <rect>
@@ -108,7 +95,7 @@
     <rect>
      <x>295</x>
      <y>230</y>
-     <width>141</width>
+     <width>160</width>
      <height>31</height>
     </rect>
    </property>
@@ -119,7 +106,7 @@
     </font>
    </property>
    <property name="text">
-    <string>BlocLink</string>
+    <string>BlockLink</string>
    </property>
   </widget>
  </widget>

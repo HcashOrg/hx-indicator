@@ -7,7 +7,6 @@ namespace Ui {
 class BottomBar;
 }
 
-class CommonTip;
 
 class BottomBar : public QWidget
 {
@@ -25,7 +24,6 @@ private slots:
 private:
     Ui::BottomBar *ui;
     int numOfConnections;
-    CommonTip* connectionTip;
 
     void paintEvent(QPaintEvent*);
 };

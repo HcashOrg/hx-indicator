@@ -10,7 +10,6 @@
 #include "ui_transferpage.h"
 #include "wallet.h"
 
-#include "contactdialog.h"
 #include "remarkdialog.h"
 #include "commondialog.h"
 #include "transferconfirmdialog.h"

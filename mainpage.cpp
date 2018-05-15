@@ -12,17 +12,14 @@
 #include "wallet.h"
 
 #include "namedialog.h"
-#include "deleteaccountdialog.h"
 #include "exportdialog.h"
 #include "importdialog.h"
 #include "commondialog.h"
 #include "showcontentdialog.h"
 #include "control/rightclickmenudialog.h"
-#include "control/chooseaddaccountdialog.h"
 #include "dialog/renamedialog.h"
 #include "dialog/backupwalletdialog.h"
 #include "control/qrcodedialog.h"
-#include "exchange/exchangewidget.h"
 
 #include "depositpage/DepositPage.h"
 #include "withdrawpage/WithdrawPage.h"
@@ -233,12 +230,6 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         return;
 
     }
-    if(column == 6)
-    {
-        emit backBtnVisible(true);
-        showExchangeWidget();
-        return;
-    }
 }
 
 
@@ -325,14 +316,6 @@ void MainPage::retranslator(QString language)
     {
 
     }
-}
-
-void MainPage::showExchangeWidget()
-{
-    ExchangeWidget* exchangeWidget = new ExchangeWidget(this);
-    exchangeWidget->move(0,0);
-    exchangeWidget->show();
-    exchangeWidget->raise();
 }
 
 void MainPage::jsonDataUpdated(QString id)
@@ -562,13 +545,6 @@ void MainPage::renameAccount(QString name)
 
     }
 }
-
-void MainPage::deleteAccount(QString name)
-{
-    DeleteAccountDialog deleteACcountDialog( name);
-    deleteACcountDialog.pop();
-}
-
 
 void MainPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
