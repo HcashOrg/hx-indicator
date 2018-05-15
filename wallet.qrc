@@ -121,5 +121,6 @@
         <file>notifyWidget/close.png</file>
         <file>notifyWidget/logo.png</file>
         <file>config/feeCharge.config</file>
+        <file>transfer/search.png</file>
     </qresource>
 </RCC>
