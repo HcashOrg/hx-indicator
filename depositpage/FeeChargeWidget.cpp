@@ -25,6 +25,8 @@ FeeChargeWidget::FeeChargeWidget(double feeNumber,const QString &feeType,QWidget
 {
     ui->setupUi(this);
     _p->chooseWidget = new FeeChooseWidget(feeNumber,feeType);
+    ui->label_2->setText(_p->tip.arg(feeNumber).arg("LNK"));
+
     InitWidget();
 }
 
@@ -52,7 +54,6 @@ void FeeChargeWidget::InitWidget()
 {
     InitStyle();
     ui->stackedWidget->addWidget(_p->chooseWidget);
-    ui->label_2->setText(_p->tip.arg(_p->chooseWidget->GetFeeNumber()).arg(_p->chooseWidget->GetFeeType()));
 
     connect(ui->toolButton_cancel,&QToolButton::clicked,this,&FeeChargeWidget::CancelSlots);
     connect(ui->toolButton_close,&QToolButton::clicked,this,&FeeChargeWidget::CancelSlots);

@@ -30,7 +30,7 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
         }
     }
 
-    QDoubleValidator *validator = new QDoubleValidator(0,number.toDouble(),pre,this);
+    QDoubleValidator *validator = new QDoubleValidator(0.001,number.toDouble(),pre,this);
     validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_ammount->setValidator( validator );
 
