@@ -454,7 +454,8 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
     {
         QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
-        FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),"LNK",
+        FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
+                                                         UBChain::getInstance()->feeType,
                                                          UBChain::getInstance()->mainFrame);
         connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address,row](){
             UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance",

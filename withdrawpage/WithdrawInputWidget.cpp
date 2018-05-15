@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QDoubleValidator>
 #include "wallet.h"
+#include "commondialog.h"
 
 WithdrawInputWidget::WithdrawInputWidget(QWidget *parent) :
     QWidget(parent),
@@ -30,7 +31,7 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
         }
     }
 
-    QDoubleValidator *validator = new QDoubleValidator(0,number.toDouble(),pre,this);
+    QDoubleValidator *validator = new QDoubleValidator(0.001,number.toDouble(),pre,this);
     validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_ammount->setValidator( validator );
 
@@ -56,7 +57,29 @@ void WithdrawInputWidget::maxButtonSlots()
 
 void WithdrawInputWidget::confirmButtonSlots()
 {
-    emit withdrawSignal(ui->lineEdit_address->text(),ui->lineEdit_ammount->text());
+    QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()));
+    if(!via)
+    {
+        return;
+    }
+    if(ui->lineEdit_ammount->text().toDouble() < via->bottom()
+       )
+    {
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr(QString("number < %1!").arg(via->bottom()).toStdString().c_str()));
+        dia.pop();
+    }
+    else if(ui->lineEdit_ammount->text().toDouble() > via->top())
+    {
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr(QString("number > %1!").arg(via->top()).toStdString().c_str()));
+        dia.pop();
+    }
+    else
+    {
+        emit withdrawSignal(ui->lineEdit_address->text(),ui->lineEdit_ammount->text());
+    }
+
 }
 
 bool WithdrawInputWidget::validateAddress(const QString &address)

@@ -130,7 +130,7 @@ void ContactChooseWidget::InitWidget()
     pSearchButton->setFixedSize(20, 20);
     pSearchButton->setToolTip(tr("Search"));
     pSearchButton->setIconSize(QSize(18,18));
-    pSearchButton->setIcon(QIcon(":/search.png"));
+    pSearchButton->setIcon(QIcon(":/transfer/search.png"));
 
     //防止文本框输入内容位于按钮之下
     QMargins margins = ui->lineEdit->textMargins();
