@@ -12,7 +12,7 @@ TitleBar::TitleBar(QWidget *parent) :
     ui(new Ui::TitleBar)
 {
 
-    ui->setupUi(this);    
+    ui->setupUi(this);
 
     ui->minBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/minimizeBtn.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}");
     ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
@@ -27,7 +27,7 @@ TitleBar::TitleBar(QWidget *parent) :
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
     connect(ui->backBtn,&QToolButton::clicked,this,&TitleBar::back);
 
-	
+
 }
 
 TitleBar::~TitleBar()
@@ -39,10 +39,11 @@ void TitleBar::on_minBtn_clicked()
 {
     if( UBChain::getInstance()->minimizeToTray)
     {
+
         emit tray();
     }
     else
-    {  
+    {
         emit minimum();
     }
 }
@@ -51,6 +52,7 @@ void TitleBar::on_closeBtn_clicked()
 {
     if( UBChain::getInstance()->closeToMinimize)
     {
+
         emit tray();
     }
     else
@@ -61,6 +63,10 @@ void TitleBar::on_closeBtn_clicked()
 
         if( choice)
         {
+
+//            AttachConsole((uint)UBChain::getInstance()->nodeProc->processId());
+//            SetConsoleCtrlHandler(NULL, true);
+//            GenerateConsoleCtrlEvent( CTRL_C_EVENT ,0);
             emit closeWallet();
         }
         else
