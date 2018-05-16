@@ -305,10 +305,10 @@ void PoundageWidget::InitStyle()
 
 
     setStyleSheet("QToolButton#toolButton_allPoundage{background:transparent;color:rgb(144,144,144);\
-                                                      font-family: Microsoft YaHei UI;font:14px;font-weight:600;}\
+                                                      font-family: Microsoft YaHei UI;font:14px;font-weight:600;text-align:left;}\
                    QToolButton#toolButton_allPoundage:checked{color:rgb(0,0,0);}\
                    QToolButton#toolButton_myPoundage{background:transparent;color:rgb(144,144,144);\
-                                                     font-family: Microsoft YaHei UI;font:14px;font-weight:600;}\
+                                                     font-family: Microsoft YaHei UI;font:14px;font-weight:600;text-align:left;}\
                    QToolButton#toolButton_myPoundage:checked{color:rgb(0,0,0);}\
                    QPushButton#pushButton_publishPoundage{\
                    color:white;\
