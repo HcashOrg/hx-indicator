@@ -39,6 +39,7 @@
 #include <QPainter>
 #include <QDateTime>
 #include <QVector>
+#include <QTimer>
 
 #include "frame.h"
 #include "extra/style.h"
@@ -70,8 +71,6 @@
 #define NODE_RPC_PORT   50320
 #define CLIENT_RPC_PORT 50321
 
-
-class QTimer;
 class WorkerThreadManager;
 class WebSocketManager;
 
@@ -255,10 +254,12 @@ public:
     QString read();
     QProcess* nodeProc;
     QProcess* clientProc;
+    QTimer    timerForStartExe;
 private slots:
     void onNodeExeStateChanged();
     void onClientExeStateChanged();
     void delayedLaunchClient();
+    void checkNodeExeIsReady();
 signals:
     void exeStarted();
 

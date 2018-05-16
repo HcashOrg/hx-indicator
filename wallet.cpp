@@ -158,8 +158,8 @@ void UBChain::onNodeExeStateChanged()
     else if(nodeProc->state() == QProcess::Running)
     {
         qDebug() << QString("%1 is running").arg("lnk_node.exe");
-
-        QTimer::singleShot(3000,this,SLOT(delayedLaunchClient()));
+        connect(&timerForStartExe,SIGNAL(timeout()),this,SLOT(checkNodeExeIsReady()));
+        timerForStartExe.start(1000);
     }
     else if(nodeProc->state() == QProcess::NotRunning)
     {
@@ -200,8 +200,19 @@ void UBChain::delayedLaunchClient()
     strList << "--wallet-file=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/") + "/wallet.json"
             << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
-qDebug() << strList;
+
     clientProc->start("lnk_client.exe",strList);
+}
+
+void UBChain::checkNodeExeIsReady()
+{
+    QString str = nodeProc->readAllStandardError();
+    qDebug() << "node exe standardError: " << str ;
+    if(str.contains("Chain ID is"))
+    {
+        timerForStartExe.stop();
+        QTimer::singleShot(1000,this,SLOT(delayedLaunchClient()));
+    }
 }
 
 void UBChain::ShowBubbleMessage(const QString &title, const QString &context, int msecs, QSystemTrayIcon::MessageIcon icon)
