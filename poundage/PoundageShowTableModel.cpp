@@ -125,12 +125,12 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
             }
             else if(index.column() == 4)
             {
-                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->sourceCoinNumber/
-                        _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->targetCoinNumber;
+                return QString::number(_p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->sourceCoinNumber/
+                        _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->targetCoinNumber,'f',5);
             }
             else if(index.column() == 5)
             {
-                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->calSourceLeftNumber();
+                return QString::number(_p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->calSourceLeftNumber(),'f',5);
             }
             else if(index.column() == 6)
             {

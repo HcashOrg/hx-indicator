@@ -206,6 +206,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
         result.prepend("{");
         result.append("}");
 
+        qDebug()<<result;
         PoundageDataUtil::convertJsonToPoundage(result,_p->myPoundageSheet);
 
     }

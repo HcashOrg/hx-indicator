@@ -40,8 +40,8 @@ void PublishPoundageWidget::ConfirmPublishSlots()
     //发送指令，创建承税单
 
     QString accountName = ui->comboBox_accounts->currentText();
-    QString sourceNumber = QString::number(ui->doubleSpinBox_sourceNumber->value());
-    QString targetNumber = QString::number(ui->doubleSpinBox_targetNumber->value());
+    QString sourceNumber = QString::number(ui->doubleSpinBox_sourceNumber->value(),'f',ASSET_PRECISION);
+    QString targetNumber = QString::number(ui->doubleSpinBox_targetNumber->value(),'f',ui->comboBox_targetType->currentData().toInt());
     QString targetCoinType = ui->comboBox_targetType->currentText();
     if(accountName.isEmpty() || targetCoinType.isEmpty()) return;
     
