@@ -94,14 +94,9 @@ SetDialog::SetDialog(QWidget *parent) :
                   color: black;\
                   selection-background-color: darkgray;}"
                   );
-    ui->saveBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
-                                "QToolButton:hover{background-color:#00D2FF;}");
-
-    ui->confirmBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
-                                  "QToolButton:hover{background-color:#00D2FF;}");
-    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
-                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+    ui->saveBtn->setStyleSheet(OKBTN_STYLE);
+    ui->confirmBtn->setStyleSheet(OKBTN_STYLE);
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     ui->line_3->setVisible(false);
     ui->line_4->setVisible(false);

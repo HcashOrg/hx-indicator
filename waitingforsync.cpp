@@ -97,10 +97,7 @@ void WaitingForSync::InitStyle()
 
     ui->loadingLabel->setPalette(pa);
 
-    ui->closeBtn->setIconSize(QSize(12,12));
-    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
-                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
 }
 

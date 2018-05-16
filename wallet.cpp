@@ -64,6 +64,8 @@ UBChain::UBChain()
         configFile->setValue("settings/resyncNextTime",false);
         contractFee = 1;
         configFile->setValue("settings/contractFee",1);
+        middlewarePath = "http://192.168.1.121:5005/api";
+        configFile->setValue("settings/middlewarePath",middlewarePath);
     }
     else
     {
@@ -77,6 +79,7 @@ UBChain::UBChain()
         autoDeposit     = configFile->value("/settings/autoDeposit").toBool();
         resyncNextTime  = configFile->value("/settings/resyncNextTime",false).toBool();
         contractFee     = configFile->value("/settings/contractFee",1).toULongLong();
+        middlewarePath  = configFile->value("/settings/middlewarePath","http://192.168.1.121:5005/api").toString();
     }
 
     QFile file( walletConfigPath + "/log.txt");       // 每次启动清空 log.txt文件

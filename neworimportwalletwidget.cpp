@@ -78,11 +78,8 @@ void NewOrImportWalletWidget::InitStyle()
     ui->importWalletBtn->setStyleSheet("QPushButton{background-color:transparent;border:none;border-radius:15px;color: #5474EB;font-family:Microsoft YaHei UI Light;}"
                                  "QPushButton:hover{background-color:#00D2FF;color: rgb(255, 255, 255);}");
 
-    ui->closeBtn->setIconSize(QSize(12,12));
-    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
 
-    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
-                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 }
 
 void NewOrImportWalletWidget::paintEvent(QPaintEvent *e)

@@ -20,13 +20,9 @@ SellDialog::SellDialog(QWidget *parent) :
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
-    ui->closeBtn->setIconSize(QSize(12,12));
-    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
-                                "QToolButton:hover{background-color:rgb(208,228,255);}");
-
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
     ui->stackedWidget->addWidget(feeChoose);

@@ -29,15 +29,9 @@ CommonDialog::CommonDialog(commonDialogType type, QWidget *parent) :
     ui->okBtn->setText(tr("Ok"));
     ui->cancelBtn->setText(tr("Cancel"));
 
-    ui->okBtn->setStyleSheet("QToolButton#okBtn{border:none;color:white;border-radius:10px;font-size:12pt;background-color:#5474EB;}"
-                             "QToolButton#okBtn::hover{background-color:#00D2FF;}");
-    ui->cancelBtn->setStyleSheet("QToolButton#cancelBtn{border:none;color:white;border-radius:10px;font-size:12pt;background-color:#E5E5E5;}"
-                                 "QToolButton#cancelBtn::hover{background-color:#00D2FF;}");
-
-    ui->closeBtn->setIconSize(QSize(12,12));
-    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
-                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+    ui->okBtn->setStyleSheet(OKBTN_STYLE);
+    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
 
     yesOrNO = false;

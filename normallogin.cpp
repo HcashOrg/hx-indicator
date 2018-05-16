@@ -166,11 +166,7 @@ void NormalLogin::InitStyle()
     ui->label_version->setPalette(pa);
 
     ui->line->setVisible(false);
-    ui->closeBtn->setIconSize(QSize(12,12));
-    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-
-    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
-                                "QToolButton:hover{background-color:rgb(208,228,255);}");
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     ui->enterBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
                                 "QToolButton:hover{background-color:#00D2FF;}");

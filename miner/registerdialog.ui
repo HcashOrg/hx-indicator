@@ -25,9 +25,9 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>289</x>
-      <y>120</y>
-      <width>511</width>
+      <x>230</x>
+      <y>110</y>
+      <width>500</width>
       <height>360</height>
      </rect>
     </property>
@@ -39,8 +39,8 @@
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>480</x>
-       <y>12</y>
+       <x>455</x>
+       <y>20</y>
        <width>18</width>
        <height>18</height>
       </rect>
@@ -63,7 +63,7 @@
       <rect>
        <x>0</x>
        <y>39</y>
-       <width>511</width>
+       <width>500</width>
        <height>321</height>
       </rect>
      </property>
@@ -257,45 +257,6 @@
        </property>
        <property name="text">
         <string/>
-       </property>
-      </widget>
-      <widget class="Line" name="line">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>120</y>
-         <width>151</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="Line" name="line_2">
-       <property name="geometry">
-        <rect>
-         <x>90</x>
-         <y>38</y>
-         <width>351</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="Line" name="line_3">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>200</y>
-         <width>151</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
       <widget class="QStackedWidget" name="stackedWidget_fee">

@@ -180,7 +180,7 @@ void OnchainOrderPage::queryContractOrders()
     paramObject.insert("to_asset",ui->assetComboBox2->currentText());
     paramObject.insert("limit",10);
     object.insert("params",paramObject);
-    httpManager.post("http://192.168.1.121:5005/api",QJsonDocument(object).toJson());
+    httpManager.post(UBChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
 void OnchainOrderPage::updateTableHeaders()

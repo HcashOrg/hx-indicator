@@ -25,17 +25,17 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>200</y>
-      <width>340</width>
-      <height>180</height>
+      <x>290</x>
+      <y>180</y>
+      <width>380</width>
+      <height>220</height>
      </rect>
     </property>
     <widget class="QLabel" name="textLabel">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>10</y>
+       <x>80</x>
+       <y>40</y>
        <width>220</width>
        <height>100</height>
       </rect>
@@ -64,8 +64,8 @@
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>120</y>
+       <x>60</x>
+       <y>160</y>
        <width>120</width>
        <height>36</height>
       </rect>
@@ -88,8 +88,8 @@
     <widget class="QToolButton" name="cancelBtn">
      <property name="geometry">
       <rect>
-       <x>180</x>
-       <y>120</y>
+       <x>200</x>
+       <y>160</y>
        <width>120</width>
        <height>36</height>
       </rect>
@@ -112,7 +112,7 @@
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>315</x>
+       <x>335</x>
        <y>12</y>
        <width>18</width>
        <height>18</height>

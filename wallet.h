@@ -347,6 +347,7 @@ public:
     int currentPort;          // 当前rpc 端口
     QString localIP;   // 保存 peerinfo 获得的本机IP和端口
 
+    QString middlewarePath;     // 中间件
 
     QMap<QString,AccountInfo>   accountInfoMap;
     QMap<QString,ExchangeContractBalances>  accountExchangeContractBalancesMap;

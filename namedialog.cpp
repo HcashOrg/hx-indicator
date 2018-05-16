@@ -23,19 +23,11 @@ NameDialog::NameDialog(QWidget *parent) :
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
 
-    ui->okBtn->setStyleSheet("QToolButton#okBtn{border:none;color:white;border-radius:10px;font-size:12pt;background-color:#5474EB;}"
-                             "QToolButton#okBtn::hover{background-color:#00D2FF;}");
-    ui->cancelBtn->setStyleSheet("QToolButton#cancelBtn{border:none;color:white;border-radius:10px;font-size:12pt;background-color:#E5E5E5;}"
-                                 "QToolButton#cancelBtn::hover{background-color:#00D2FF;}");
+    ui->okBtn->setStyleSheet(OKBTN_STYLE);
+    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    ui->closeBtn->setIconSize(QSize(12,12));
-    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
-                                "QToolButton:hover{background-color:rgb(208,228,255);}");
-
-    ui->nameLineEdit->setStyleSheet("QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}");
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
-    ui->line->setVisible(false);
     yesOrNO = true;
 
     ui->nameLineEdit->setPlaceholderText( tr("Beginning with letter,letters or numbers"));
@@ -65,21 +57,18 @@ NameDialog::NameDialog(QWidget *parent) :
 NameDialog::~NameDialog()
 {
     delete ui;
-//    UBChain::getInstance()->removeCurrentDialogVector(this);
 }
 
 void NameDialog::on_okBtn_clicked()
 {
     yesOrNO = true;
     close();
-//    emit accepted();
 }
 
 void NameDialog::on_cancelBtn_clicked()
 {
     yesOrNO = false;
     close();
-//    emit accepted();
 }
 
 QString NameDialog::pop()
@@ -134,12 +123,6 @@ void NameDialog::on_nameLineEdit_textChanged(const QString &arg1)
         ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr( "This name has been used") + "</font></body>" );
         return;
     }
-
-    //检查地址名是否已经在链上注册了 blockchain_get_account(accountName)
-//    RpcThread* rpcThread = new RpcThread;
-//    connect(rpcThread,SIGNAL(finished()),rpcThread,SLOT(deleteLater()));
-//    rpcThread->setWriteData( toJsonFormat( "id_blockchain_get_account_" + addrName, "blockchain_get_account", QJsonArray() << addrName ));
-//    rpcThread->start();
 
     UBChain::getInstance()->postRPC( "id-get_account-" + addrName, toJsonFormat( "get_account", QJsonArray() << addrName ));
     ui->gifLabel->show();

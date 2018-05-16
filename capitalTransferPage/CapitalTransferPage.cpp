@@ -267,7 +267,7 @@ void CapitalTransferPage::PostQueryTunnelMoney(const QString &symbol, const QStr
     paramObject.insert("chainId",symbol);
     paramObject.insert("addr",tunnelAddress);
     object.insert("params",paramObject);
-    _p->httpManager.post("http://192.168.1.121:5005/api",QJsonDocument(object).toJson());
+    _p->httpManager.post(UBChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
 void CapitalTransferPage::CreateTransaction()

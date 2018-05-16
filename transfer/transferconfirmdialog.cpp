@@ -46,15 +46,12 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
     ui->label_6->setPalette(pa);
     ui->label_6->setFont(font);
 
-    ui->okBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                             "QToolButton:hover{background-color:#00D2FF;}");
-    ui->cancelBtn->setStyleSheet("QToolButton{background-color:#E5E5E5; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                                 "QToolButton:hover{background-color:#00D2FF;}");
-
-    setStyleSheet("QLineEdit{color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;}");
-
+    ui->okBtn->setStyleSheet(OKBTN_STYLE);
+    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
     ui->closeBtn->setVisible(false);
+
+    setStyleSheet("QLineEdit{color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;}");
 
     ui->containerWidget->installEventFilter(this);
 

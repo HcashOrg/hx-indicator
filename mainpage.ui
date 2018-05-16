@@ -26,7 +26,7 @@
     <rect>
      <x>70</x>
      <y>50</y>
-     <width>120</width>
+     <width>200</width>
      <height>22</height>
     </rect>
    </property>
@@ -222,7 +222,7 @@
   <widget class="QToolButton" name="copyBtn">
    <property name="geometry">
     <rect>
-     <x>512</x>
+     <x>522</x>
      <y>110</y>
      <width>11</width>
      <height>11</height>
@@ -246,7 +246,7 @@
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>70</x>
      <y>100</y>
      <width>111</width>
      <height>30</height>
@@ -271,8 +271,8 @@
     <rect>
      <x>70</x>
      <y>80</y>
-     <width>60</width>
-     <height>24</height>
+     <width>100</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -293,7 +293,7 @@
   <widget class="QLabel" name="addressLabel">
    <property name="geometry">
     <rect>
-     <x>226</x>
+     <x>236</x>
      <y>104</y>
      <width>280</width>
      <height>24</height>
@@ -321,7 +321,7 @@
   <widget class="QLabel" name="addressLabel2">
    <property name="geometry">
     <rect>
-     <x>166</x>
+     <x>176</x>
      <y>104</y>
      <width>60</width>
      <height>24</height>
@@ -345,7 +345,7 @@
   <widget class="QToolButton" name="qrcodeBtn">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>540</x>
      <y>110</y>
      <width>11</width>
      <height>11</height>

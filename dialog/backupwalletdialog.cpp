@@ -20,17 +20,11 @@ BackupWalletDialog::BackupWalletDialog(QWidget *parent) :
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
 
-    ui->backupBtn->setStyleSheet("QToolButton#backupBtn{border:none;color:white;border-radius:10px;font-size:12pt;background-color:#5474EB;}"
-                             "QToolButton#backupBtn::hover{background-color:#00D2FF;}");
-    ui->cancelBtn->setStyleSheet("QToolButton#cancelBtn{border:none;color:white;border-radius:10px;font-size:12pt;background-color:#E5E5E5;}"
-                                 "QToolButton#cancelBtn::hover{background-color:#00D2FF;}");
+    ui->backupBtn->setStyleSheet(OKBTN_STYLE);
+    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    ui->closeBtn->setIconSize(QSize(12,12));
-    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-    ui->closeBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
-                                "QToolButton:hover{background-color:rgb(208,228,255);}");
-
-    ui->pathBtn->setStyleSheet("QToolButton#pathBtn{border:none;color:gray;border-radius:10px;font-size:9pt;background-color:transparent;}");
+    ui->pathBtn->setStyleSheet(SELECTBTN_STYLE);
     ui->pathLineEdit->setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}");
 }
 

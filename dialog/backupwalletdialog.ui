@@ -25,8 +25,8 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>385</x>
-      <y>208</y>
+      <x>290</x>
+      <y>170</y>
       <width>380</width>
       <height>240</height>
      </rect>
@@ -71,10 +71,10 @@
     <widget class="QToolButton" name="pathBtn">
      <property name="geometry">
       <rect>
-       <x>290</x>
-       <y>99</y>
-       <width>61</width>
-       <height>31</height>
+       <x>285</x>
+       <y>102</y>
+       <width>60</width>
+       <height>24</height>
       </rect>
      </property>
      <property name="font">
@@ -121,7 +121,7 @@
       <rect>
        <x>30</x>
        <y>100</y>
-       <width>261</width>
+       <width>320</width>
        <height>30</height>
       </rect>
      </property>
@@ -166,19 +166,12 @@
       <string/>
      </property>
     </widget>
-    <widget class="Line" name="line">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>120</y>
-       <width>321</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
+    <zorder>pathLineEdit</zorder>
+    <zorder>cancelBtn</zorder>
+    <zorder>nameLabel</zorder>
+    <zorder>pathBtn</zorder>
+    <zorder>backupBtn</zorder>
+    <zorder>closeBtn</zorder>
    </widget>
   </widget>
  </widget>
