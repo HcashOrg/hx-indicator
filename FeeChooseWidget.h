@@ -26,6 +26,7 @@ public:
     QString GetFeeNumber()const;//获取手续费数量--供显示用，所以为string
 public slots:
     void updateFeeNumberSlots(double feeNumber);
+    void updatePoundageID();
 private slots:
     void jsonDataUpdated(QString id);
 
@@ -35,7 +36,6 @@ private slots:
 private:
     void QueryPoundage(const QString &type);
 
-    void updatePoundageID();
 
     void ParsePoundage(const std::shared_ptr<PoundageUnit> &poundage);
 

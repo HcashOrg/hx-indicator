@@ -332,6 +332,17 @@ void ContactTreeWidget::initContactSheet(std::shared_ptr<ContactSheet> data)
 {
     _p->contactSheet = data;
     initTreeData();
+    //默认选中第一个
+    if( 0 < topLevelItemCount() && 0 < topLevelItem(0)->childCount())
+    {
+        QTreeWidgetItem *item = topLevelItem(0)->child(0);
+        if(item)
+        {
+            setItemSelected(item,true);
+            emit ShowContactPerson(item->data(0,Qt::UserRole).value<std::shared_ptr<ContactPerson>>()->address);
+        }
+
+    }
 }
 
 void ContactTreeWidget::initTreeStyle()

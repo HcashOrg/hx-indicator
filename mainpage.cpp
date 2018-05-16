@@ -347,7 +347,7 @@ void MainPage::jsonDataUpdated(QString id)
             commonDialog2.setText( tr("Everytime a new account is created or imported, the wallet will rescan the blockchain data when launched next time."
                                      " After that the transactions of the account will be shown.") );
             commonDialog2.pop();
-            QTimer::singleShot(500,this,&MainPage::init);
+            QTimer::singleShot(1000,this,&MainPage::init);
         }
         else if(result.startsWith("\"error\":"))
         {

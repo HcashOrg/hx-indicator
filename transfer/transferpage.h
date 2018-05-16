@@ -33,6 +33,7 @@ signals:
     void back();
 
     void feeChangeSignal(double);
+    void usePoundage();
 public slots:
     void refresh();
 
