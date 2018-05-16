@@ -322,9 +322,9 @@ void MainPage::jsonDataUpdated(QString id)
 
         if(result.startsWith(QString("\"result\":\"%1").arg(ACCOUNT_ADDRESS_PREFIX)))
         {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Please backup up the wallet!!!") );
-            commonDialog.pop();
+//            CommonDialog commonDialog(CommonDialog::OkOnly);
+//            commonDialog.setText( tr("Please backup up the wallet!!!") );
+//            commonDialog.pop();
 
             BackupWalletDialog backupWalletDialog;
             backupWalletDialog.pop();
