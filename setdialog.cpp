@@ -302,7 +302,7 @@ void SetDialog::on_saveBtn_clicked()
 
     emit settingSaved();
 
-//    close();
+    close();
 //    emit accepted();
 
 	
