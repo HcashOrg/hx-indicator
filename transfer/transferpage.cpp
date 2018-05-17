@@ -203,20 +203,9 @@ void TransferPage::InitStyle()
     QPalette palette;
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
-    setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;margin-left:2px;}"
-                  "Qline{color:#5474EB;background:#5474EB;}"
-                  "QComboBox{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:3px;}"
-                  "QPushButton{border:none;background-color:#5474EB;color:white;width:60px;height:20px;\
-                   border-radius:10px;font-size:12pt;}"
-                  "QPushButton::hover{background-color:#00D2FF;}"
-                  );
-    ui->sendBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                               "QToolButton:hover{background-color:#00D2FF;}");
-//    ui->toolButton->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-//                                  "QToolButton:hover{background-color:#00D2FF;}");
 
-    ui->transferRecordBtn->setStyleSheet("QToolButton{background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                                         "QToolButton:hover{background-color:#5474EB;}");
+    ui->sendBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->transferRecordBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     ui->toolButton_chooseContact->setIconSize(QSize(14,14));
     ui->toolButton_chooseContact->setIcon(QIcon(":/ui/wallet_ui/tans.png"));

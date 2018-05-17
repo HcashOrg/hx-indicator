@@ -5,6 +5,7 @@
 #include <QPaintEvent>
 #include <QPainter>
 
+#include "wallet.h"
 #include "DepositDataUtil.h"
 
 DepositQrcodeWidget::DepositQrcodeWidget(QWidget *parent) :
@@ -65,14 +66,7 @@ void DepositQrcodeWidget::InitStyle()
     pe.setColor(QPalette::WindowText,Qt::red);
     ui->label_warning->setPalette(pe);
 
-    ui->toolButton->setStyleSheet("QToolButton{color:white;\
-                                  border-top-left-radius:10px;  \
-                                  border-top-right-radius:10px; \
-                                  border-bottom-left-radius:10px;  \
-                                  border-bottom-right-radius:10px; \
-                                  border:none;\
-                                  background-color:#5474EB;\}"
-                                  "QToolButton::hover{background-color:#00D2FF;}");
+    ui->toolButton->setStyleSheet(TOOLBUTTON_STYLE_1);
 }
 
 void DepositQrcodeWidget::paintEvent(QPaintEvent *event)

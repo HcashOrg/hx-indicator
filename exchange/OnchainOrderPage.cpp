@@ -225,3 +225,8 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
         return;
     }
 }
+
+void OnchainOrderPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
+{
+    on_assetComboBox_currentIndexChanged(ui->assetComboBox->currentText());
+}

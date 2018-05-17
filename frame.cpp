@@ -389,6 +389,8 @@ void Frame::getAccountInfo()
 {
     UBChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QJsonArray()));
 
+    UBChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
+
     UBChain::getInstance()->fetchTransactions();
 }
 
@@ -1167,7 +1169,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id == "id-list_assets")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
         UBChain::getInstance()->parseAssetInfo();
 
         return;

@@ -55,6 +55,7 @@ void BuyOrderWidget::setOrderInfo(unsigned long long _buyAmount, QString _buySym
 
     ui->priceLabel->setText(QString::number(price,'g',8) + " " + tr("%1/%2").arg(buySymbol).arg(sellSymbol));
 
+    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(UBChain::getInstance()->getAccountBalance(accountName,sellSymbol)).arg(sellSymbol));
 }
 
 void BuyOrderWidget::setContractAddress(QString _contractAddress)
@@ -97,8 +98,10 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":"))
         {
-            stepCount = result.mid(QString("\"result\":").size()).toInt();
-            ui->feeLabel->setText(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            stepCount = totalFee.step;
+            unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
+            ui->feeLabel->setText(getBigNumberString(totalAmount,ASSET_PRECISION)
                                           + " " + ASSET_NAME);
         }
 

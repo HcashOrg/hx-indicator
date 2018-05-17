@@ -288,6 +288,13 @@ public:
     unsigned long long contractFee;     // 合约单步执行费用
     QString currentContractFee();
 
+    struct TotalContractFee
+    {
+        unsigned long long baseAmount = 0;
+        int step;
+    };
+    TotalContractFee parseTotalContractFee(QString result);
+
     QMap<QString,QString> balanceMap;
     QMap<QString,TwoAddresses> addressMap;
     QMap<QString,QString> registerMap;
