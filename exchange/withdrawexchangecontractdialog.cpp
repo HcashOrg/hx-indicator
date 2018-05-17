@@ -126,9 +126,12 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":"))
         {
-            stepCount = result.mid(QString("\"result\":").size()).toInt();
-            feeChoose->updateFeeNumberSlots(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION).toDouble());
-            ui->contractFeeLabel->setText(getBigNumberString(stepCount * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            stepCount = totalFee.step;
+            unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
+
+            feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
+            ui->contractFeeLabel->setText(getBigNumberString(totalAmount, ASSET_PRECISION)
                                           + " " + ASSET_NAME);
         }
 

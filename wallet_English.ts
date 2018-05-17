@@ -2000,7 +2000,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="depositpage/DepositPage.ui" line="44"/>
         <source>充值记录</source>
-        <translation type="unfinished">Deposit record</translation>
+        <translation type="unfinished">Record</translation>
     </message>
     <message>
         <location filename="depositpage/DepositPage.cpp" line="81"/>
@@ -2033,7 +2033,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="depositpage/DepositQrcodeWidget.ui" line="60"/>
         <source>充值地址：</source>
-        <translation type="unfinished">Deposit address</translation>
+        <translation type="unfinished">Deposit address:</translation>
     </message>
     <message>
         <location filename="depositpage/DepositQrcodeWidget.ui" line="78"/>

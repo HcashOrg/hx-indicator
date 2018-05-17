@@ -232,10 +232,13 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
+            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            int stepCount = totalFee.step;
+            unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
+
             WithdrawOrderDialog withdrawOrderDialog;
-            int count = result.mid(QString("\"result\":").size()).toInt();
-            withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION).toDouble());
-            withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+            withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
+            withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION)
                                                + " " + ASSET_NAME);
             withdrawOrderDialog.setText(tr("Sure to cancel this order? You need to pay the fee for contract execution."));
             if(withdrawOrderDialog.pop())
@@ -246,7 +249,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
                 UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrder", toJsonFormat( "invoke_contract",
                                                                                        QJsonArray() << ui->accountComboBox->currentText()
-                                                                                       << UBChain::getInstance()->currentContractFee() << count
+                                                                                       << UBChain::getInstance()->currentContractFee() << stepCount
                                                                                        << contractAddress
                                                                                        << "cancelSellOrder"  << params));
             }
@@ -278,9 +281,12 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
+            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            int stepCount = totalFee.step;
+            unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
+
             WithdrawOrderDialog withdrawOrderDialog;
-            int count = result.mid(QString("\"result\":").size()).toInt();
-            withdrawOrderDialog.setContractFee(getBigNumberString(count * UBChain::getInstance()->contractFee, ASSET_PRECISION)
+            withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION)
                                                + " " + ASSET_NAME);
             withdrawOrderDialog.setText(tr("You need to pay the fee for contract execution."));
             if(withdrawOrderDialog.pop())
@@ -290,7 +296,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
                 UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrderPair", toJsonFormat( "invoke_contract",
                                                                                                          QJsonArray() << ui->accountComboBox->currentText()
-                                                                                                         << UBChain::getInstance()->currentContractFee() << count
+                                                                                                         << UBChain::getInstance()->currentContractFee() << stepCount
                                                                                                          << contractAddress
                                                                                                          << "cancelSellOrderPair"  << params));
 

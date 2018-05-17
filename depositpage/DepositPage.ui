@@ -40,6 +40,9 @@
      <height>20</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="text">
     <string>充值记录</string>
    </property>

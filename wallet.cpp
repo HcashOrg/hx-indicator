@@ -143,6 +143,7 @@ void UBChain:: startExe()
     UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
     nodeProc->start("lnk_node.exe",strList);
+    qDebug() << "start lnk_node.exe " << strList;
 
     emit exeStarted();
 }
@@ -239,6 +240,24 @@ QString UBChain::currentContractFee()
     return getBigNumberString(contractFee,ASSET_PRECISION);
 }
 
+UBChain::TotalContractFee UBChain::parseTotalContractFee(QString result)
+{
+    result.prepend("{");
+    result.append("}");
+
+    QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
+    QByteArray ba = utfCodec->fromUnicode(result);
+
+    QJsonDocument parse_doucment = QJsonDocument::fromJson(ba);
+    QJsonObject object = parse_doucment.object();
+    QJsonArray array = object.take("result").toArray();
+
+    UBChain::TotalContractFee totalFee;
+    totalFee.baseAmount = jsonValueToULL(array.at(0).toObject().take("amount"));
+    totalFee.step = array.at(1).toInt();
+
+    return totalFee;
+}
 
 qint64 UBChain::write(QString cmd)
 {

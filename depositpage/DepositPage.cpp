@@ -172,12 +172,5 @@ void DepositPage::InitStyle()
     setPalette(palette);
 
 
-    ui->depositRecordBtn->setStyleSheet("QToolButton{color:white;\
-                                  border-top-left-radius:10px;  \
-                                  border-top-right-radius:10px; \
-                                  border-bottom-left-radius:10px;  \
-                                  border-bottom-right-radius:10px; \
-                                  border:none;\
-                                  background-color:#00D2FF;\}"
-                                  "QToolButton::hover{background-color:#4861DC;}");
+    ui->depositRecordBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 }

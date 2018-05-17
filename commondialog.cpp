@@ -42,7 +42,7 @@ CommonDialog::CommonDialog(commonDialogType type, QWidget *parent) :
     else if( type == OkOnly)
     {
         ui->cancelBtn->hide();
-        ui->okBtn->move(110,120);
+        ui->okBtn->move(130,160);
     }
     else if( type == YesOrNo)
     {

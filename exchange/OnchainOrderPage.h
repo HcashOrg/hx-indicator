@@ -35,6 +35,8 @@ private slots:
 
     void onItemClicked(int _row, int _column);
 
+    void on_accountComboBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::OnchainOrderPage *ui;
     HttpManager httpManager;
