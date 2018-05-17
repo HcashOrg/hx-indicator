@@ -62,7 +62,7 @@ void PoundageWidget::autoRefreshSlots()
             //查询所有承兑单
             foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
                 if(asset.id == "1.3.0") continue;
-                UBChain::getInstance()->postRPC("poundage_list_guarantee_order",
+                UBChain::getInstance()->postRPC("poundage_list_guarantee_order_"+asset.symbol,
                                                 toJsonFormat("list_guarantee_order",
                                                              QJsonArray()<<asset.symbol<<false
                                                              )
@@ -92,7 +92,7 @@ void PoundageWidget::autoRefreshSlots()
         //获取自己账户的所有信息
         foreach(QString key,UBChain::getInstance()->accountInfoMap.keys())
         {
-            UBChain::getInstance()->postRPC("poundage_get_my_guarantee_order",
+            UBChain::getInstance()->postRPC("poundage_get_my_guarantee_order_"+key,
                                             toJsonFormat("get_my_guarantee_order",
                                                          QJsonArray()<<key<<false
                                                          )
@@ -133,29 +133,34 @@ void PoundageWidget::ShowMyPoundageSlots()
 
 void PoundageWidget::SortByStuffSlots()
 {
+    std::shared_ptr<PoundageSheet> data = ui->toolButton_allPoundage->isChecked()?
+                                          _p->allPoundageSheet : _p->myPoundageSheet;
+
     switch (ui->comboBox_sortType->currentData(Qt::UserRole).value<int>()) {
     case 0:
-        _p->allPoundageSheet->sortByTime(true);
-        _p->myPoundageSheet->sortByTime(true);
+        data->sortByTime(true);
         break;
     case 1:
-        _p->allPoundageSheet->sortByTime(false);
-        _p->myPoundageSheet->sortByTime(false);
+        data->sortByTime(false);
         break;
     case 2:
-        _p->allPoundageSheet->sortByRate(true);
-        _p->myPoundageSheet->sortByRate(true);
+        data->sortByRate(true);
         break;
     case 3:
-        _p->allPoundageSheet->sortByRate(false);
-        _p->myPoundageSheet->sortByRate(false);
+        data->sortByRate(false);
         break;
     default:
         break;
     }
+    if(ui->toolButton_allPoundage->isChecked())
+    {
+        _p->allPoundageWidget->InitData(_p->allPoundageSheet);
+    }
+    else
+    {
+        _p->myPoundageWidget->InitData(_p->myPoundageSheet);
+    }
 
-    _p->allPoundageWidget->InitData(_p->allPoundageSheet);    
-    _p->myPoundageWidget->InitData(_p->myPoundageSheet);
 }
 
 void PoundageWidget::jsonDataUpdated(QString id)
@@ -180,7 +185,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
         //刷新承税单
         autoRefreshSlots();
     }
-    else if("poundage_list_guarantee_order" == id)
+    else if(id.startsWith("poundage_list_guarantee_order_"))
     {
         std::lock_guard<std::mutex> guar(_p->allMutex);
         //转化为结构体
@@ -193,12 +198,13 @@ void PoundageWidget::jsonDataUpdated(QString id)
     }
     else if("poundage_finish_all_list" == id)
     {
+        std::lock_guard<std::mutex> guar(_p->allMutex);
         SortByStuffSlots();
-        qDebug()<<_p->allPoundageSheet->size();
+        //qDebug()<<_p->allPoundageSheet->size();
         //_p->allPoundageWidget->InitData(_p->allPoundageSheet);
 
     }
-    else if("poundage_get_my_guarantee_order" == id)
+    else if(id.startsWith("poundage_get_my_guarantee_order_"))
     {
         //转化为结构体
         QString result = UBChain::getInstance()->jsonDataValue( id);

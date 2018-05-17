@@ -173,7 +173,7 @@ void DepositAutomatic::autoDeposit()
 void DepositAutomatic::PostQueryTunnelAddress(const QString &accountName, const QString &symbol)
 {
     if(accountName.isEmpty() || symbol.isEmpty()) return;
-    UBChain::getInstance()->postRPC( "automatic-get_binding_account",
+    UBChain::getInstance()->postRPC( "automatic-get_binding_account-"+accountName,
                                      toJsonFormat( "get_binding_account", QJsonArray()
                                      << accountName<<symbol ));
 
@@ -182,7 +182,7 @@ void DepositAutomatic::PostQueryTunnelAddress(const QString &accountName, const 
 void DepositAutomatic::PostQueryMultiAddress(const QString &symbol)
 {
     if(symbol.isEmpty()) return;
-    UBChain::getInstance()->postRPC( "automatic-get_current_multi_address",
+    UBChain::getInstance()->postRPC( "automatic-get_current_multi_address_"+symbol,
                                      toJsonFormat( "get_current_multi_address", QJsonArray()
                                      << symbol));
 
@@ -266,7 +266,7 @@ void DepositAutomatic::FinishSign()
 
 void DepositAutomatic::jsonDataUpdated(const QString &id)
 {
-    if("automatic-get_binding_account" == id)
+    if(id.startsWith("automatic-get_binding_account-"))
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
@@ -287,7 +287,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
         //结束查找
         FinishQueryMulti();
     }
-    else if("automatic-get_current_multi_address" == id)
+    else if(id.startsWith("automatic-get_current_multi_address_"))
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
         result.prepend("{");

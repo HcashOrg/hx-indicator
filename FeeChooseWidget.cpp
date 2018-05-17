@@ -100,6 +100,7 @@ void FeeChooseWidget::jsonDataUpdated(QString id)
         }
         //解析交易
         ParsePoundage(unit);
+        refreshUI();
     }
 
 }
@@ -135,7 +136,7 @@ void FeeChooseWidget::QueryPoundage(const QString &type)
 
 void FeeChooseWidget::updatePoundageID()
 {
-
+    qDebug()<<"poundageID---"<<_p->poundageID;
     _p->poundageID.isEmpty()?UBChain::getInstance()->postRPC( "feechoose_remove_guarantee_id",
                                                               toJsonFormat( "remove_guarantee_id",
                                                                             QJsonArray())):
@@ -171,7 +172,6 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
         _p->poundageTip = "支付:"+QString::number(_p->coinNumber,'f',pre)+" "+_p->feeType + "  汇率:"+QString::number(rate);
 
     }
-    refreshUI();
 }
 
 void FeeChooseWidget::refreshUI()

@@ -27,15 +27,12 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     assetUpdating(false),
     contactUpdating(false),
     currentTopWidget(NULL),
-    ui(new Ui::TransferPage),
-    feeWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),
-                                  UBChain::getInstance()->feeType))
+    ui(new Ui::TransferPage)
+
 {
 	
 
     ui->setupUi(this);
-    ui->stackedWidget->addWidget(feeWidget);
-    ui->stackedWidget->setCurrentWidget(feeWidget);
     InitStyle();
 
     //初始化账户comboBox
@@ -67,6 +64,11 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
         }
     }
 
+    feeWidget=new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),
+                                  UBChain::getInstance()->feeType);
+    ui->stackedWidget->addWidget(feeWidget);
+    ui->stackedWidget->setCurrentWidget(feeWidget);
+
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     connect(ui->toolButton_chooseContact,&QToolButton::clicked,this,&TransferPage::chooseContactSlots);
@@ -95,6 +97,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 	
     updateAmountSlots();
 
+    connect(this,&TransferPage::usePoundage,feeWidget,&FeeChooseWidget::updatePoundageID);
     //updatePoundage();
 }
 
@@ -154,7 +157,7 @@ void TransferPage::on_sendBtn_clicked()
 //                qDebug()<<"id-set_guarantee_id"<<toJsonFormat( "set_guarantee_id",
 //                                                               QJsonArray() << feeWidget->GetFeeID() );
 //            }
-
+            emit usePoundage();
             UBChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
                                              toJsonFormat( "transfer_to_address",
                                                            QJsonArray() << accountName << ui->sendtoLineEdit->text()
