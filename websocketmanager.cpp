@@ -89,6 +89,7 @@ void WebSocketManager::run()
     m_webSocket = new QWebSocket;
     connect(m_webSocket,SIGNAL(connected()),this,SLOT(onConnected()));
     connect(m_webSocket,SIGNAL(textFrameReceived(QString,bool)),this,SLOT(onTextFrameReceived(QString,bool)));
+    connect(m_webSocket,SIGNAL(stateChanged(QAbstractSocket::SocketState)),this,SLOT(onStateChanged(QAbstractSocket::SocketState)));
 
     connectToClient();
 
@@ -150,5 +151,15 @@ void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
         m_buff.clear();
 
         busy = false;
+    }
+}
+
+void WebSocketManager::onStateChanged(QAbstractSocket::SocketState _state)
+{
+qDebug() << "wwwwwwwwwwwwwwww " << _state << m_webSocket->errorString();
+
+    if( _state == QAbstractSocket::UnconnectedState)
+    {
+        connectToClient();
     }
 }

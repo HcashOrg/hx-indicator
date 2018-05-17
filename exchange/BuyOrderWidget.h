@@ -18,7 +18,7 @@ public:
     void init();
 
     void setAccount(QString _accountName);
-    void setPrice(QString _price, QString _assetSymbol, QString _assetSymbol2);
+    void setOrderInfo(unsigned long long _buyAmount, QString _buySymbol, unsigned long long _sellAmount, QString _sellSymbol);
     void setContractAddress(QString _contractAddress);
 
 private slots:
@@ -35,7 +35,10 @@ private slots:
 private:
     Ui::BuyOrderWidget *ui;
     QString accountName;
-    QString payAsset;
+    QString buySymbol;
+    QString sellSymbol;
+    unsigned long long buyAmount;
+    unsigned long long sellAmount;
     int stepCount = 0;      // 合约执行步数
 
     void paintEvent(QPaintEvent*);

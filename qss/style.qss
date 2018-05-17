@@ -1,4 +1,4 @@
-QComboBox{background-color:transparent;border:none;color: black;padding-left: 5px;font: 14px \"微软雅黑 Light\";}
+QComboBox{background-color:transparent;border:none;color: black;padding-left: 5px;font: 14px \"微软雅黑\";}
 #QComboBox:on{border:1px solid rgb(93,107,144);}
 QComboBox::drop-down {background:transparent;border:none;}
 QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}
@@ -26,7 +26,7 @@ QCheckBox::indicator{ image:url(:/ui/wallet_ui/checkBox_unchecked.png);}
 QCheckBox::indicator:checked{ image:url(:/ui/wallet_ui/checkBox_checked.png); }
 
 
-QLineEdit{background-color: white;color: rgb(84,116,235);font: 14px \"微软雅黑 Light\";border:1px solid white;border-bottom-color:rgb(241,241,241);padding: 0px 10px 0px 6px;}
+QLineEdit{background-color: white;color: rgb(84,116,235);font: 14px \"微软雅黑\";border:1px solid white;border-bottom-color:rgb(241,241,241);padding: 0px 10px 0px 6px;}
 QLineEdit:focus{border-bottom-color:rgb(84,116,235);}
 QLineEdit:disabled{color: rgb(151,151,151);}
 

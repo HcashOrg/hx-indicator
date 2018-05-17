@@ -1,6 +1,8 @@
 #include "BuyOrderWidget.h"
 #include "ui_BuyOrderWidget.h"
 
+#include <QtMath>
+
 #include "wallet.h"
 #include "commondialog.h"
 
@@ -37,13 +39,22 @@ void BuyOrderWidget::setAccount(QString _accountName)
     accountName = _accountName;
 }
 
-void BuyOrderWidget::setPrice(QString _price, QString _assetSymbol, QString _assetSymbol2)
-{
-    ui->priceLabel->setText(_price + " " + tr("%1/%2").arg(_assetSymbol).arg(_assetSymbol2));
-    payAsset = _assetSymbol2;
 
-    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(UBChain::getInstance()->getAccountBalance(accountName,payAsset))
-                                           .arg(payAsset) );
+
+void BuyOrderWidget::setOrderInfo(unsigned long long _buyAmount, QString _buySymbol, unsigned long long _sellAmount, QString _sellSymbol)
+{
+    buyAmount = _buyAmount;
+    sellAmount = _sellAmount;
+    buySymbol = _buySymbol;
+    sellSymbol = _sellSymbol;
+
+    AssetInfo buyAssetInfo  = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(buySymbol));
+    AssetInfo sellAssetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(sellSymbol));
+
+    double price = (double)buyAmount / qPow(10,buyAssetInfo.precision) / sellAmount * qPow(10,sellAssetInfo.precision);
+
+    ui->priceLabel->setText(QString::number(price,'g',8) + " " + tr("%1/%2").arg(buySymbol).arg(sellSymbol));
+
 }
 
 void BuyOrderWidget::setContractAddress(QString _contractAddress)
@@ -107,23 +118,43 @@ void BuyOrderWidget::paintEvent(QPaintEvent *)
 
 void BuyOrderWidget::estimateContractFee()
 {
-    if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty() || payAsset.isEmpty())   return;
+    if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty())   return;
+
+
+    // 计算实际能买到的数量
+    AssetInfo buyAssetInfo  = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(buySymbol));
+    AssetInfo sellAssetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(sellSymbol));
+    double amount = (double)buyAmount / qPow(10,buyAssetInfo.precision) / sellAmount * qPow(10,sellAssetInfo.precision)
+            * ui->amountLineEdit->text().toDouble();
+
 
     UBChain::getInstance()->postRPC( "id-transfer_to_contract_testing-BuyOrderWidget", toJsonFormat( "transfer_to_contract_testing",
                                                                            QJsonArray() << accountName << ui->contractAddressLabel->text()
-                                                                           << ui->amountLineEdit->text() << payAsset
-                                                                           << "deposit to exchange contract"
+                                                                           << ui->amountLineEdit->text() << sellSymbol
+                                                                           << QString("%1,%2").arg(buySymbol).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
                                                                            ));
+
+    qDebug() << toJsonFormat( "transfer_to_contract_testing",
+                              QJsonArray() << accountName << ui->contractAddressLabel->text()
+                              << ui->amountLineEdit->text() << sellSymbol
+                              << QString("%1,%2").arg(buySymbol).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
+                              );
 }
 
 void BuyOrderWidget::on_okBtn_clicked()
 {
-    if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty() || payAsset.isEmpty())   return;
+    if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty() )   return;
+
+    // 计算实际能买到的数量
+    AssetInfo buyAssetInfo  = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(buySymbol));
+    AssetInfo sellAssetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(sellSymbol));
+    double amount = (double)buyAmount / qPow(10,buyAssetInfo.precision) / sellAmount * qPow(10,sellAssetInfo.precision)
+            * ui->amountLineEdit->text().toDouble();
 
     UBChain::getInstance()->postRPC( "id-transfer_to_contract-BuyOrderWidget", toJsonFormat( "transfer_to_contract",
                                                                            QJsonArray() << accountName << ui->contractAddressLabel->text()
-                                                                           << ui->amountLineEdit->text() << payAsset
-                                                                           << "deposit to exchange contract"
+                                                                           << ui->amountLineEdit->text() << sellSymbol
+                                                                           << QString("%1,%2").arg(buySymbol).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
                                                                            << UBChain::getInstance()->currentContractFee() << stepCount
                                                                            << true
                                                                            ));
@@ -137,7 +168,7 @@ void BuyOrderWidget::on_cancelBtn_clicked()
 
 void BuyOrderWidget::on_allBtn_clicked()
 {
-    ui->amountLineEdit->setText(UBChain::getInstance()->getAccountBalance(accountName,payAsset));
+    ui->amountLineEdit->setText(UBChain::getInstance()->getAccountBalance(accountName,sellSymbol));
 }
 
 void BuyOrderWidget::on_amountLineEdit_textChanged(const QString &arg1)

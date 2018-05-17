@@ -22,6 +22,11 @@
      <height>580</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
@@ -67,15 +72,20 @@
        <height>321</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <widget class="QToolButton" name="okBtn">
        <property name="geometry">
         <rect>
          <x>120</x>
-         <y>280</y>
+         <y>260</y>
          <width>120</width>
          <height>36</height>
         </rect>
@@ -102,7 +112,7 @@
        <property name="geometry">
         <rect>
          <x>260</x>
-         <y>280</y>
+         <y>260</y>
          <width>120</width>
          <height>36</height>
         </rect>
@@ -128,9 +138,9 @@
       <widget class="QLabel" name="label">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>30</x>
          <y>150</y>
-         <width>81</width>
+         <width>150</width>
          <height>30</height>
         </rect>
        </property>
@@ -138,7 +148,7 @@
         <string>注册为账户名</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -162,7 +172,7 @@
         <rect>
          <x>30</x>
          <y>70</y>
-         <width>61</width>
+         <width>150</width>
          <height>30</height>
         </rect>
        </property>
@@ -170,7 +180,7 @@
         <string>待注册账户</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -187,7 +197,7 @@
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <weight>50</weight>
          <bold>false</bold>
         </font>
@@ -210,7 +220,7 @@
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <underline>false</underline>
         </font>
        </property>
@@ -249,8 +259,8 @@
       <widget class="QLabel" name="tipLabel">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>210</y>
+         <x>40</x>
+         <y>214</y>
          <width>151</width>
          <height>20</height>
         </rect>
@@ -365,19 +375,6 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-      </widget>
-      <widget class="Line" name="line_5">
-       <property name="geometry">
-        <rect>
-         <x>180</x>
-         <y>90</y>
-         <width>251</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </widget>

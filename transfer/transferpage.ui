@@ -26,7 +26,7 @@
     <rect>
      <x>80</x>
      <y>105</y>
-     <width>60</width>
+     <width>120</width>
      <height>24</height>
     </rect>
    </property>
@@ -37,7 +37,7 @@
     </font>
    </property>
    <property name="text">
-    <string>源账户</string>
+    <string>来自账户</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -207,8 +207,8 @@
     <rect>
      <x>70</x>
      <y>50</y>
-     <width>80</width>
-     <height>22</height>
+     <width>200</width>
+     <height>26</height>
     </rect>
    </property>
    <property name="font">
@@ -232,7 +232,7 @@
     <rect>
      <x>80</x>
      <y>130</y>
-     <width>111</width>
+     <width>120</width>
      <height>30</height>
     </rect>
    </property>
@@ -293,7 +293,7 @@
     <rect>
      <x>220</x>
      <y>130</y>
-     <width>111</width>
+     <width>120</width>
      <height>30</height>
     </rect>
    </property>
@@ -365,7 +365,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>230</x>
      <y>105</y>
-     <width>54</width>
+     <width>120</width>
      <height>20</height>
     </rect>
    </property>
@@ -376,71 +376,6 @@ p, li { white-space: pre-wrap; }
    </property>
    <property name="text">
     <string>币种</string>
-   </property>
-  </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>160</y>
-     <width>118</width>
-     <height>3</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_2">
-   <property name="geometry">
-    <rect>
-     <x>222</x>
-     <y>150</y>
-     <width>121</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_3">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>233</y>
-     <width>271</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_5">
-   <property name="geometry">
-    <rect>
-     <x>82</x>
-     <y>314</y>
-     <width>271</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_7">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>314</y>
-     <width>211</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
    </property>
   </widget>
   <widget class="QStackedWidget" name="stackedWidget">
@@ -470,11 +405,6 @@ p, li { white-space: pre-wrap; }
   <zorder>transferRecordBtn</zorder>
   <zorder>toolButton_chooseContact</zorder>
   <zorder>label</zorder>
-  <zorder>line</zorder>
-  <zorder>line_2</zorder>
-  <zorder>line_3</zorder>
-  <zorder>line_5</zorder>
-  <zorder>line_7</zorder>
   <zorder>stackedWidget</zorder>
  </widget>
  <tabstops>

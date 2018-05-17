@@ -55,10 +55,10 @@ MainPage::MainPage(QWidget *parent) :
 
     ui->accountTableWidget->setColumnWidth(0,185);
     ui->accountTableWidget->setColumnWidth(1,185);
-    ui->accountTableWidget->setColumnWidth(2,70);
-    ui->accountTableWidget->setColumnWidth(3,70);
-    ui->accountTableWidget->setColumnWidth(4,70);
-    ui->accountTableWidget->setColumnWidth(5,70);
+    ui->accountTableWidget->setColumnWidth(2,74);
+    ui->accountTableWidget->setColumnWidth(3,74);
+    ui->accountTableWidget->setColumnWidth(4,74);
+    ui->accountTableWidget->setColumnWidth(5,74);
     ui->accountTableWidget->horizontalHeader()->setStretchLastSection(true);
 
     QString language = UBChain::getInstance()->language;
@@ -123,7 +123,7 @@ void MainPage::updateAccountList()
             ui->accountTableWidget->setItem(i,5,new QTableWidgetItem(tr("allot")));
         }
 
-        for(int j = 0; j < 7; j++)
+        for(int j = 0; j < 6; j++)
         {
             if(ui->accountTableWidget->item(i,j))
             {
@@ -141,7 +141,7 @@ void MainPage::updateAccountList()
             //    ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(40,46,66));
             //}
         }
-        for(int j = 2;j < 7;++j)
+        for(int j = 2;j < 6;++j)
         {
             if(ui->accountTableWidget->item(i,j))
             {

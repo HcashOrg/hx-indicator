@@ -35,7 +35,7 @@ ImportDialog::ImportDialog(QWidget *parent) :
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
     ui->pathBtn->setStyleSheet(SELECTBTN_STYLE);
 
-    ui->privateKeyLineEdit->setFocus();
+    ui->accountNameLineEdit->setFocus();
 
     shadowWidget = new ShadowWidget(this);
     shadowWidget->init(this->size());
