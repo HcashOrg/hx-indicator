@@ -153,7 +153,11 @@ void MainPage::updateAccountList()
             }
         }
     }
-
+    if(ui->accountComboBox->count() == 0)
+    {
+        ui->accountTableWidget->clearContents();
+        ui->accountTableWidget->setRowCount(0);
+    }
 }
 
 void MainPage::on_addAccountBtn_clicked()
