@@ -13,7 +13,10 @@ FunctionAccountWidget::~FunctionAccountWidget()
 {
     delete ui;
 }
-
+void FunctionAccountWidget::retranslator()
+{
+    ui->retranslateUi(this);
+}
 void FunctionAccountWidget::DefaultShow()
 {
     AssetShowSlots();

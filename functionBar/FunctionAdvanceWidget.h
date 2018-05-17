@@ -14,6 +14,7 @@ class FunctionAdvanceWidget : public QWidget
 public:
     explicit FunctionAdvanceWidget(QWidget *parent = 0);
     ~FunctionAdvanceWidget();
+    void retranslator();
 public slots:
     void DefaultShow();
 signals:
