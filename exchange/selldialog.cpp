@@ -27,8 +27,6 @@ SellDialog::SellDialog(QWidget *parent) :
     feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
     ui->stackedWidget->addWidget(feeChoose);
     ui->stackedWidget->setCurrentIndex(0);
-    ui->label_5->setVisible(false);
-    ui->contractFeeLabel->setVisible(false);
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
@@ -111,8 +109,6 @@ void SellDialog::jsonDataUpdated(QString id)
             unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
 
             feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
-            ui->contractFeeLabel->setText(getBigNumberString(totalAmount, ASSET_PRECISION)
-                                          + " " + ASSET_NAME);
 
         }
 

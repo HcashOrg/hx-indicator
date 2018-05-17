@@ -119,6 +119,7 @@ void FeeChooseWidget::feeTypeChanged()
     }
     else if(ui->checkBox->checkState() == Qt::Unchecked)
     {
+        _p->poundageID = "";
         _p->coinNumber = _p->feeNumber;
         _p->feeType = "LNK";
         refreshUI();

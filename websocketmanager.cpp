@@ -156,7 +156,7 @@ void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
 
 void WebSocketManager::onStateChanged(QAbstractSocket::SocketState _state)
 {
-qDebug() << "wwwwwwwwwwwwwwww " << _state << m_webSocket->errorString();
+    qDebug() << "websocket onStateChanged: " << _state << m_webSocket->errorString();
 
     if( _state == QAbstractSocket::UnconnectedState)
     {

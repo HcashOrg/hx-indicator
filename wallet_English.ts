@@ -4456,12 +4456,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="setdialog.ui" line="56"/>
         <source>帮助</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Help</translation>
     </message>
     <message>
         <location filename="setdialog.ui" line="112"/>
         <source>通用设置</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Common</translation>
     </message>
     <message>
         <location filename="setdialog.ui" line="158"/>
@@ -4524,7 +4524,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="setdialog.ui" line="422"/>
         <source>手续费币种</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Coin type for fee</translation>
     </message>
     <message>
         <location filename="setdialog.ui" line="446"/>
@@ -4582,7 +4582,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="setdialog.ui" line="982"/>
         <source>账户管理</source>
-        <translation type="unfinished">AccountManage</translation>
+        <translation type="unfinished">Account</translation>
     </message>
     <message>
         <source>原口令：</source>
