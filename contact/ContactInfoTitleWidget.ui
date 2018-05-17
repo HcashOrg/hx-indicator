@@ -58,7 +58,7 @@
     <rect>
      <x>200</x>
      <y>48</y>
-     <width>280</width>
+     <width>311</width>
      <height>20</height>
     </rect>
    </property>
@@ -78,7 +78,7 @@
   <widget class="QToolButton" name="copyBtn">
    <property name="geometry">
     <rect>
-     <x>490</x>
+     <x>520</x>
      <y>53</y>
      <width>11</width>
      <height>11</height>
