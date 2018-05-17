@@ -40,8 +40,8 @@ void PublishPoundageWidget::ConfirmPublishSlots()
     //发送指令，创建承税单
 
     QString accountName = ui->comboBox_accounts->currentText();
-    QString sourceNumber = QString::number(ui->doubleSpinBox_sourceNumber->value(),'f',ASSET_PRECISION);
-    QString targetNumber = QString::number(ui->doubleSpinBox_targetNumber->value(),'f',ui->comboBox_targetType->currentData().toInt());
+    QString sourceNumber = ui->lineEdit_source->text();
+    QString targetNumber = ui->lineEdit_target->text();
     QString targetCoinType = ui->comboBox_targetType->currentText();
     if(accountName.isEmpty() || targetCoinType.isEmpty()) return;
     
@@ -53,18 +53,21 @@ void PublishPoundageWidget::ConfirmPublishSlots()
 
 void PublishPoundageWidget::ChangeAccountSlots()
 {
-    ui->doubleSpinBox_sourceNumber->setRange(0,0);
+    ui->lineEdit_source->clear();
     AccountInfo accountInfo = ui->comboBox_accounts->currentData(Qt::UserRole).value<AccountInfo>();
 
-    if(accountInfo.assetAmountMap.empty())return;
-
-    ui->doubleSpinBox_sourceNumber->setToolTip("maxNumber: 0");
+    if(accountInfo.assetAmountMap.empty())
+    {
+        ui->lineEdit_source->setEnabled(false);
+        ui->lineEdit_source->setPlaceholderText(tr("0 LNK"));
+        return;
+    }
     for(auto it = accountInfo.assetAmountMap.constBegin();it != accountInfo.assetAmountMap.constEnd();++it)
     {
         if(it.key() == "1.3.0")
         {
-            ui->doubleSpinBox_sourceNumber->setRange(0,it.value().amount/pow(10.,ASSET_PRECISION));
-            ui->doubleSpinBox_sourceNumber->setToolTip("maxNumber: "+QString::number(it.value().amount/pow(10.,ASSET_PRECISION)));
+            installDoubleValidator(ui->lineEdit_source,0,it.value().amount/pow(10.,ASSET_PRECISION),ASSET_PRECISION);
+            ui->lineEdit_source->setEnabled(true);
             break;
         }
     }
@@ -72,20 +75,27 @@ void PublishPoundageWidget::ChangeAccountSlots()
 
 void PublishPoundageWidget::ChangeAssetSlots()
 {
+    if(ui->comboBox_targetType->currentText().isEmpty())
+    {
+        ui->lineEdit_target->setEnabled(false);
+        ui->lineEdit_target->setPlaceholderText(tr("no chains!"));
+        return;
+    }
+    ui->lineEdit_target->setEnabled(true);
+    ui->lineEdit_target->clear();
     int pre = ui->comboBox_targetType->currentData(Qt::UserRole).value<int>();
-    ui->doubleSpinBox_targetNumber->setDecimals(pre);
+    installDoubleValidator(ui->lineEdit_target,0,1e20,pre);
+    ui->lineEdit_target->setPlaceholderText(tr("input ")+ui->comboBox_targetType->currentText()+tr(" number"));
+    //ui->doubleSpinBox_targetNumber->setDecimals(pre);
 }
 
 void PublishPoundageWidget::InitAccount()
 {
     ui->comboBox_accounts->clear();
-    ui->doubleSpinBox_sourceNumber->setRange(0,0);
-    ui->doubleSpinBox_sourceNumber->setToolTip("maxNumber: 0");
     if(UBChain::getInstance()->accountInfoMap.empty()) return;
 
     for(auto it = UBChain::getInstance()->accountInfoMap.constBegin();it != UBChain::getInstance()->accountInfoMap.constEnd();++it)
     {
-        AccountInfo dd = it.value();
         ui->comboBox_accounts->addItem(it.key(),QVariant::fromValue<AccountInfo>(it.value()));
     }
     ui->comboBox_accounts->setCurrentIndex(0);
@@ -94,7 +104,6 @@ void PublishPoundageWidget::InitAccount()
 void PublishPoundageWidget::InitTargetCoin()
 {
     ui->comboBox_targetType->clear();
-    ui->doubleSpinBox_targetNumber->setRange(0,1e10);
     if(UBChain::getInstance()->assetInfoMap.empty()) return;
     foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
         if(asset.id == "1.3.0") continue;
@@ -110,7 +119,6 @@ void PublishPoundageWidget::InitWidget()
 {
     InitStyle();
 
-    ui->doubleSpinBox_sourceNumber->setDecimals(ASSET_PRECISION);
     InitAccount();
     InitTargetCoin();
 
@@ -197,4 +205,14 @@ void PublishPoundageWidget::paintEvent(QPaintEvent *event)
     painter.drawRoundedRect(QRect(45,115,684,297),10,10);
 
     QWidget::paintEvent(event);
+}
+
+void PublishPoundageWidget::installDoubleValidator(QLineEdit *editor, double min, double max, int pre)
+{
+    if(!editor) return;
+
+    QDoubleValidator *validator = new QDoubleValidator(min,max,pre,this);
+    validator->setNotation(QDoubleValidator::StandardNotation);
+    editor->setValidator(validator);
+    editor->setPlaceholderText(tr("max:")+QString::number(validator->top(),'f',pre));
 }
