@@ -14,6 +14,11 @@ FunctionExchangeWidget::~FunctionExchangeWidget()
     delete ui;
 }
 
+void FunctionExchangeWidget::retranslator()
+{
+    ui->retranslateUi(this);
+}
+
 void FunctionExchangeWidget::DefaultShow()
 {
     on_onchainOrderBtn_clicked();

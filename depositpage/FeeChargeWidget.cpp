@@ -26,7 +26,7 @@ FeeChargeWidget::FeeChargeWidget(double feeNumber,const QString &feeType,QWidget
     ui->setupUi(this);
     _p->chooseWidget = new FeeChooseWidget(feeNumber,feeType);
     ui->label_2->setText(_p->tip.arg(feeNumber).arg("LNK"));
-
+    ui->label_char->setVisible(false);
     InitWidget();
 }
 
@@ -34,6 +34,15 @@ FeeChargeWidget::~FeeChargeWidget()
 {
     delete _p;
     delete ui;
+}
+
+void FeeChargeWidget::SetInfo(const QString &info,bool vi)
+{
+    ui->label_char->setVisible(vi);
+    if(vi)
+    {
+        ui->label_char->setText(info);
+    }
 }
 
 void FeeChargeWidget::ConfirmSlots()
@@ -93,7 +102,7 @@ void FeeChargeWidget::paintEvent(QPaintEvent *event)
 //    painter.setBrush(QColor(255,255,255,255));
 //    painter.drawRect(220,60,320,425);
 
-    painter.drawPixmap(300,140,420,350,QPixmap(":/ui/wallet_ui/whitebord.png").scaled(420,350));
+    painter.drawPixmap(300,140,420,400,QPixmap(":/ui/wallet_ui/whitebord.png").scaled(420,400));
 
     QWidget::paintEvent(event);
 }

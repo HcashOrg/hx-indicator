@@ -15,6 +15,7 @@ public:
     explicit FunctionAccountWidget(QWidget *parent = 0);
     ~FunctionAccountWidget();
 
+    void retranslator();
 public slots:
     void DefaultShow();
 private slots:

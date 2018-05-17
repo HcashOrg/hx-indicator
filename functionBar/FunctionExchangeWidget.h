@@ -14,6 +14,7 @@ class FunctionExchangeWidget : public QWidget
 public:
     explicit FunctionExchangeWidget(QWidget *parent = 0);
     ~FunctionExchangeWidget();
+    void retranslator();
 public slots:
     void DefaultShow();
 private:

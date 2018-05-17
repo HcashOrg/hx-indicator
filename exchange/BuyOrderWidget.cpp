@@ -5,6 +5,7 @@
 
 #include "wallet.h"
 #include "commondialog.h"
+#include "FeeChooseWidget.h"
 
 BuyOrderWidget::BuyOrderWidget(QWidget *parent) :
     QWidget(parent),
@@ -21,6 +22,11 @@ BuyOrderWidget::BuyOrderWidget(QWidget *parent) :
     ui->widget->setObjectName("framewidget");
     ui->widget->setStyleSheet("#framewidget{background-color:white;border:1px solid white;border-radius:15px;}");
 
+    feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
+    ui->stackedWidget->addWidget(feeChoose);
+    ui->stackedWidget->setCurrentIndex(0);
+    ui->label->setVisible(false);
+    ui->feeLabel->setVisible(false);
     init();
 }
 
@@ -101,6 +107,8 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
             UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
             stepCount = totalFee.step;
             unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
+            feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
+
             ui->feeLabel->setText(getBigNumberString(totalAmount,ASSET_PRECISION)
                                           + " " + ASSET_NAME);
         }

@@ -47,6 +47,9 @@ FunctionWidget::~FunctionWidget()
 void FunctionWidget::retranslator()
 {
     ui->retranslateUi(this);
+    _p->accountBar->retranslator();
+    _p->advanceBar->retranslator();
+    _p->exchangeBar->retranslator();
 }
 
 void FunctionWidget::contactShowTransferPageSlots()

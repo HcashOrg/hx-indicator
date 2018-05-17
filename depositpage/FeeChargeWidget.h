@@ -14,6 +14,8 @@ class FeeChargeWidget : public QWidget
 public:
     explicit FeeChargeWidget(double feeNumber = 20,const QString &feeType = "LNK",QWidget *parent = 0);
     ~FeeChargeWidget();
+public:
+    void SetInfo(const QString &info,bool vi = true);
 signals:
     void cancelSignal();
     void confirmSignal();

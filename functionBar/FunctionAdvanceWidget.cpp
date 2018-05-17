@@ -13,7 +13,10 @@ FunctionAdvanceWidget::~FunctionAdvanceWidget()
 {
     delete ui;
 }
-
+void FunctionAdvanceWidget::retranslator()
+{
+    ui->retranslateUi(this);
+}
 void FunctionAdvanceWidget::DefaultShow()
 {
     PoundageShowSlots();
