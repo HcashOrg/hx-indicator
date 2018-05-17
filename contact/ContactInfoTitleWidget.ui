@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>Microsoft JhengHei UI</family>
+    <family>微软雅黑</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -38,13 +38,14 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>52</y>
+     <y>48</y>
      <width>60</width>
-     <height>19</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <family>微软雅黑</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -56,34 +57,41 @@
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>54</y>
-     <width>331</width>
-     <height>16</height>
+     <y>48</y>
+     <width>280</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <family>微软雅黑</family>
      <pointsize>10</pointsize>
     </font>
    </property>
    <property name="text">
     <string>1111111</string>
    </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+   </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_copy">
+  <widget class="QToolButton" name="copyBtn">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>50</y>
-     <width>80</width>
-     <height>20</height>
+     <x>490</x>
+     <y>53</y>
+     <width>11</width>
+     <height>11</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="text">
-    <string>复制</string>
+    <string/>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_transfer">
+  <widget class="QToolButton" name="transferBtn">
    <property name="geometry">
     <rect>
      <x>640</x>
@@ -94,8 +102,11 @@
    </property>
    <property name="font">
     <font>
-     <family>Microsoft JhengHei UI</family>
+     <family>微软雅黑</family>
     </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
     <string>转 账</string>
@@ -105,15 +116,22 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>22</y>
+     <y>18</y>
      <width>311</width>
-     <height>27</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>20</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 20px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>名称</string>

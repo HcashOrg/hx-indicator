@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑 Light</family>
+    <family>微软雅黑</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <pointsize>12</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -57,7 +57,7 @@
    </property>
    <property name="font">
     <font>
-     <family>Microsoft JhengHei UI Light</family>
+     <family>Microsoft JhengHei UI</family>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
@@ -148,7 +148,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -161,7 +161,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -200,7 +200,7 @@
    </property>
    <property name="font">
     <font>
-     <family>Microsoft YaHei UI Light</family>
+     <family>Microsoft YaHei UI</family>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
@@ -230,7 +230,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
     </font>
    </property>
    <property name="cursor">
@@ -254,7 +254,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <weight>50</weight>
      <bold>false</bold>
     </font>
@@ -277,7 +277,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
     </font>
    </property>
    <property name="styleSheet">
@@ -301,7 +301,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <underline>false</underline>
     </font>
    </property>
@@ -329,7 +329,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
     </font>
    </property>
    <property name="styleSheet">
@@ -353,7 +353,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
     </font>
    </property>
    <property name="cursor">

@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑 Light</family>
+    <family>微软雅黑</family>
     <pointsize>-1</pointsize>
     <weight>50</weight>
     <italic>false</italic>
@@ -23,7 +23,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">font:12px &quot;微软雅黑 Light&quot;;</string>
+   <string notr="true">font:12px &quot;微软雅黑&quot;;</string>
   </property>
   <widget class="QLabel" name="label_title">
    <property name="geometry">
@@ -36,7 +36,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -84,7 +84,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -132,7 +132,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -167,7 +167,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -189,7 +189,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -237,7 +237,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -256,7 +256,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -314,7 +314,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>

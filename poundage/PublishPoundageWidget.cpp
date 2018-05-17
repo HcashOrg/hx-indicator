@@ -140,7 +140,7 @@ void PublishPoundageWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("Microsoft YaHei UI Light",12,50);
+    QFont font("\"微软雅黑\"",12,50);
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(0,0,0));
     ui->label->setPalette(pa);
@@ -171,7 +171,7 @@ void PublishPoundageWidget::InitStyle()
                   "QDoubleSpinBox{background-color: transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;color:black;font-size:12pt;}"
                   "QDoubleSpinBox:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;}"
                   "QDoubleSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:none;}"
-                  "QComboBox{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;font-size: 12pt;font-family: Microsoft YaHei UI;\
+                  "QComboBox{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;font-size: 12pt;font-family: \"微软雅黑\";\
                              background-position: center left;color: black;selection-background-color: darkgray;}"
 
                   "QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"

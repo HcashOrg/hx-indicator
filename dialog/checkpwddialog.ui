@@ -33,7 +33,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <widget class="QLabel" name="label">
@@ -76,7 +76,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑 Light</family>
+       <family>微软雅黑</family>
       </font>
      </property>
      <property name="cursor">
@@ -103,7 +103,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑 Light</family>
+       <family>微软雅黑</family>
       </font>
      </property>
      <property name="cursor">

@@ -73,9 +73,9 @@ void NewOrImportWalletWidget::InitStyle()
     ui->label_bloc->setPalette(pa);
     ui->label_version->setPalette(pa);
 
-    ui->newWalletBtn->setStyleSheet("QPushButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);font-family:Microsoft YaHei UI Light;}"
+    ui->newWalletBtn->setStyleSheet("QPushButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);font-family:\"微软雅黑\";}"
                                 "QPushButton:hover{background-color:#00D2FF;}");
-    ui->importWalletBtn->setStyleSheet("QPushButton{background-color:transparent;border:none;border-radius:15px;color: #5474EB;font-family:Microsoft YaHei UI Light;}"
+    ui->importWalletBtn->setStyleSheet("QPushButton{background-color:transparent;border:none;border-radius:15px;color: #5474EB;font-family:\"微软雅黑\";}"
                                  "QPushButton:hover{background-color:#00D2FF;color: rgb(255, 255, 255);}");
 
 

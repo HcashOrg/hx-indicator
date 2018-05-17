@@ -37,7 +37,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -50,7 +50,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -63,7 +63,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -76,7 +76,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -89,7 +89,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -102,7 +102,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <property name="textAlignment">
@@ -121,7 +121,7 @@
    </property>
    <property name="font">
     <font>
-     <family>Microsoft YaHei UI</family>
+     <family>微软雅黑</family>
     </font>
    </property>
   </widget>
@@ -157,7 +157,7 @@
    </property>
    <property name="font">
     <font>
-     <family>Microsoft JhengHei UI</family>
+     <family>微软雅黑</family>
      <pointsize>12</pointsize>
     </font>
    </property>

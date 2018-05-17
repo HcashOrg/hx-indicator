@@ -30,7 +30,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑 Light</family>
+    <family>微软雅黑</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -47,7 +47,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
     </font>
    </property>
    <property name="styleSheet">

@@ -134,7 +134,7 @@ void WithdrawConfirmWidget::InitStyle()
     //palette.setColor(QPalette::Background, QColor(10,10,10,100));
     //setPalette(palette);
 
-    QFont font("Microsoft YaHei UI Light",10,50);
+    QFont font("\"微软雅黑\"",10,50);
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(0xC6,0xCA,0xD4));
     ui->label_1->setPalette(pa);
@@ -149,7 +149,7 @@ void WithdrawConfirmWidget::InitStyle()
     ui->label_5->setFont(font);
 
 
-    QFont font1("Microsoft YaHei UI Light",14,50);
+    QFont font1("\"微软雅黑\"",14,50);
     QPalette pa1;
     pa1.setColor(QPalette::WindowText,Qt::black);
     ui->label_actualNumber->setPalette(pa1);
@@ -160,7 +160,7 @@ void WithdrawConfirmWidget::InitStyle()
 
     QPalette paw;
     paw.setColor(QPalette::WindowText,Qt::white);
-    QFont fontw("Microsoft YaHei UI Light",14,63);
+    QFont fontw("\"微软雅黑\"",14,63);
     ui->label_title->setFont(fontw);
     ui->label_title->setPalette(paw);
 
@@ -168,7 +168,7 @@ void WithdrawConfirmWidget::InitStyle()
     pa2.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
     ui->label_totalNumber->setPalette(pa2);
 
-    QFont fontad("Microsoft YaHei UI Light",10,50);
+    QFont fontad("\"微软雅黑\"",10,50);
     QPalette paad;
     paad.setColor(QPalette::WindowText,Qt::black);
 
@@ -182,7 +182,7 @@ void WithdrawConfirmWidget::InitStyle()
                   "QToolButton#toolButton_cancel::hover,QToolButton#toolButton_confirm::hover{background-color:#00D2FF;}"
                   "QToolButton#toolButton_confirm{background-color:#5474EB;}"
                   "QToolButton#toolButton_cancel{background-color:#E5E5E5;}"
-                  "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
+                  "QLabel{background:transparent;color:black:font-family:\"微软雅黑\";}");
 }
 
 void WithdrawConfirmWidget::paintEvent(QPaintEvent *event)

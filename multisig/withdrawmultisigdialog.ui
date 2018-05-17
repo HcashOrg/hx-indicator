@@ -24,11 +24,11 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel{font: 12px &quot;微软雅黑 Light&quot;;}
+    <string notr="true">QLabel{font: 12px &quot;微软雅黑&quot;;}
 </string>
    </property>
    <widget class="QWidget" name="containerWidget" native="true">
@@ -42,7 +42,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <widget class="QLabel" name="label_2">
@@ -56,7 +56,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑 Light</family>
+       <family>微软雅黑</family>
        <pointsize>-1</pointsize>
        <weight>50</weight>
        <italic>false</italic>
@@ -64,7 +64,7 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 16px &quot;微软雅黑 Light&quot;;</string>
+      <string notr="true">font: 16px &quot;微软雅黑&quot;;</string>
      </property>
      <property name="text">
       <string>从多重签名地址转出</string>
@@ -81,7 +81,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑 Light</family>
+       <family>微软雅黑</family>
       </font>
      </property>
      <property name="styleSheet">
@@ -102,7 +102,7 @@
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <pointsize>-1</pointsize>
          <weight>50</weight>
          <italic>false</italic>
@@ -127,7 +127,7 @@
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <pointsize>-1</pointsize>
          <weight>50</weight>
          <italic>false</italic>
@@ -170,7 +170,7 @@
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <pointsize>9</pointsize>
          <weight>50</weight>
          <italic>false</italic>
@@ -182,7 +182,7 @@
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">QToolButton{font: 9pt &quot;微软雅黑 Light&quot;;text-decoration: underline;background:transparent;color: rgb(192, 196, 212);}
+        <string notr="true">QToolButton{font: 9pt &quot;微软雅黑&quot;;text-decoration: underline;background:transparent;color: rgb(192, 196, 212);}
 QToolButton:hover{color:white;}</string>
        </property>
        <property name="text">
@@ -200,7 +200,7 @@ QToolButton:hover{color:white;}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <pointsize>-1</pointsize>
          <weight>50</weight>
          <italic>false</italic>
@@ -225,7 +225,7 @@ QToolButton:hover{color:white;}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
         </font>
        </property>
        <property name="cursor">
@@ -252,7 +252,7 @@ QToolButton:hover{color:white;}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <pointsize>-1</pointsize>
          <weight>50</weight>
          <italic>false</italic>
@@ -293,7 +293,7 @@ QToolButton:hover{color:white;}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <pointsize>-1</pointsize>
          <weight>50</weight>
          <italic>false</italic>
@@ -357,7 +357,7 @@ QToolButton:hover{color:white;}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
         </font>
        </property>
        <property name="cursor">
@@ -384,7 +384,7 @@ QToolButton:hover{color:white;}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <pointsize>-1</pointsize>
          <weight>50</weight>
          <italic>false</italic>
@@ -495,7 +495,7 @@ QToolButton:hover{color:white;}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>
@@ -506,7 +506,7 @@ QToolButton:hover{color:white;}</string>
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">QToolButton{font: 9pt &quot;微软雅黑 Light&quot;;text-decoration: underline;background:transparent;color: rgb(192, 196, 212);}
+        <string notr="true">QToolButton{font: 9pt &quot;微软雅黑&quot;;text-decoration: underline;background:transparent;color: rgb(192, 196, 212);}
 QToolButton:hover{color:white;}</string>
        </property>
        <property name="text">
@@ -524,7 +524,7 @@ QToolButton:hover{color:white;}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <pointsize>-1</pointsize>
          <weight>50</weight>
          <italic>false</italic>
@@ -549,7 +549,7 @@ QToolButton:hover{color:white;}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <weight>50</weight>
          <bold>false</bold>
         </font>
@@ -574,7 +574,7 @@ QToolButton:hover{color:white;}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <weight>50</weight>
          <italic>false</italic>
          <bold>false</bold>
@@ -599,7 +599,7 @@ QTextBrowser:focus{border:1px solid rgb(93,107,144);}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
         </font>
        </property>
        <property name="cursor">
@@ -648,7 +648,7 @@ QTextBrowser:focus{border:1px solid rgb(93,107,144);}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
         </font>
        </property>
        <property name="cursor">
@@ -688,7 +688,7 @@ QTextBrowser:focus{border:1px solid rgb(93,107,144);}</string>
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑 Light</family>
+         <family>微软雅黑</family>
          <pointsize>-1</pointsize>
          <weight>50</weight>
          <italic>false</italic>

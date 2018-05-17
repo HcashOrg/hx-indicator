@@ -24,7 +24,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
     </font>
    </property>
    <widget class="QWidget" name="containerWidget" native="true">
@@ -112,7 +112,7 @@
      <property name="styleSheet">
       <string notr="true">background:transparent;
 color: rgb(84, 116, 235);
-font: 11px &quot;微软雅黑 Light&quot;;</string>
+font: 11px &quot;微软雅黑&quot;;</string>
      </property>
      <property name="text">
       <string>提取全部</string>
@@ -184,7 +184,7 @@ font: 11px &quot;微软雅黑 Light&quot;;</string>
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑 Light</family>
+       <family>微软雅黑</family>
        <weight>50</weight>
        <bold>false</bold>
       </font>

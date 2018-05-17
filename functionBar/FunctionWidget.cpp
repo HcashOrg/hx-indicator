@@ -222,7 +222,7 @@ void FunctionWidget::InitStyle()
     setPalette(palette);
 
     setStyleSheet("\
-    QToolButton{min-height:24px;min-width:24px;background: rgb(72,97,220);border:none;color:white;font:Microsoft YaHei UI Light;}\
+    QToolButton{min-height:24px;min-width:24px;background: rgb(72,97,220);border:none;color:white;font:\"微软雅黑\";}\
     QToolButton:hover{background-color: rgb(0,210, 255);}\
     QToolButton:pressed{background-color: rgb(84,116, 235);}\
     QToolButton:checked{background-color: rgb(84,116, 235);}\
