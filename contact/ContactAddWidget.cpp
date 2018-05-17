@@ -56,7 +56,7 @@ void ContactAddWidget::addressChangeSlots(const QString &address)
 
     if( validateAddress(ui->lineEdit_address->text()))
     {
-        ui->label_tip->setVisible(false);
+        ui->label_tip->setVisible(true);
         ui->label_tip->setText(tr("address available"));
         QPalette pa;
         pa.setColor(QPalette::WindowText,Qt::green);
@@ -65,7 +65,7 @@ void ContactAddWidget::addressChangeSlots(const QString &address)
     }
     else
     {
-        ui->label_tip->setVisible(false);
+        ui->label_tip->setVisible(true);
         ui->label_tip->setText(tr("address illegal or conflict "));
         QPalette pa;
         pa.setColor(QPalette::WindowText,Qt::red);
@@ -93,16 +93,16 @@ bool ContactAddWidget::validateAddress(const QString &address)
     if(!_p->contactSheet) return false;
     if(!_p->contactSheet->validateAddress(address)) return false;
     //调用全局检测函数
-    return true;
-    //AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
-    //if( type == AccountAddress)
-    //{
-    //    return true;
-    //}
-    //else
-    //{
-    //    return false;
-    //}
+    //return true;
+    AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
+    if( type == AccountAddress)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 
 }
 
