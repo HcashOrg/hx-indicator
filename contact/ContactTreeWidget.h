@@ -34,6 +34,9 @@ signals:
 
     //联系人名称修改信号
     void PersonModifyFinishedSignal();
+
+    //保存联系人
+    void SaveContact();
 public slots:
     //执行查询（会选中符合查询的联系人）
     void QueryPersonSlots(const QString &queryString);
