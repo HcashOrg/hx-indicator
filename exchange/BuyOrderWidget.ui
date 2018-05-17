@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑 Light</family>
+    <family>微软雅黑</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -28,7 +28,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 19px &quot;微软雅黑 Light&quot;;</string>
+    <string notr="true">font: 19px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>买入</string>

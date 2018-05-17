@@ -174,7 +174,7 @@ void AccountManagerWidget::InitStyle()
     ui->tableWidget->setColumnWidth(0,480);
     ui->tableWidget->setColumnWidth(1,80);
     ui->tableWidget->setColumnWidth(2,80);
-    ui->tableWidget->setStyleSheet("QTableView{border:none;font:12px Microsoft YaHei UI;}");
+    ui->tableWidget->setStyleSheet("QTableView{border:none;font:12px \"微软雅黑\";}");
 
     ui->toolButton->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                                   "QToolButton:hover{background-color:#00D2FF;}");

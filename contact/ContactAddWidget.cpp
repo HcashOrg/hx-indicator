@@ -121,7 +121,7 @@ void ContactAddWidget::InitStyle()
                   "QPushButton{border:none;background-color:#5474EB;color:white;width:60px;height:20px;\
                    border-radius:10px;font-size:12pt;}"
                   "QPushButton::hover{background-color:#00D2FF;}"
-                  "QLabel{background:transparent;color:black:font-family:Microsoft YaHei UI Light;}");
+                  "QLabel{background:transparent;color:black:font-family:\"微软雅黑\";}");
     ui->line->setVisible(false);
     ui->line_2->setVisible(false);
     ui->line_3->setVisible(false);

@@ -4,6 +4,8 @@
 #include <QClipboard>
 #include <QPainter>
 #include <QMouseEvent>
+
+#include "wallet.h"
 #include "ContactDataUtil.h"
 
 class ContactInfoTitleWidget::ContactInfoTitleWidgetPrivate
@@ -66,9 +68,8 @@ void ContactInfoTitleWidget::InitWidget()
     //setStyleSheet("background-color:#FFFFFF;");
     InitStyle();
 
-    ui->pushButton_copy->setVisible(false);
-    connect(ui->pushButton_copy,&QPushButton::clicked,this,&ContactInfoTitleWidget::copyAdressSlots);
-    connect(ui->pushButton_transfer,&QPushButton::clicked,this,&ContactInfoTitleWidget::transferAccountSlots);
+    connect(ui->copyBtn,&QToolButton::clicked,this,&ContactInfoTitleWidget::copyAdressSlots);
+    connect(ui->transferBtn,&QToolButton::clicked,this,&ContactInfoTitleWidget::transferAccountSlots);
 }
 
 void ContactInfoTitleWidget::InitStyle()
@@ -78,23 +79,13 @@ void ContactInfoTitleWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("Microsoft YaHei UI Light",20,63);
-    font.setPixelSize(20);
-    ui->label_name->setFont(font);
-    QFont font1("Microsoft YaHei UI Light",10,50);
-    font1.setPixelSize(11);
-    ui->label_address->setFont(font1);
-    ui->label_addressTitle->setFont(font1);
-
     ui->label_pic->setPixmap(QPixmap(":/ui/wallet_ui/contactPic.png").scaled(ui->label_pic->size()));
-    setStyleSheet("QPushButton#pushButton_transfer{color:white;font-size:11px;\
-                  border-top-left-radius:10px;  \
-                  border-top-right-radius:10px; \
-                  border-bottom-left-radius:10px;  \
-                  border-bottom-right-radius:10px; \
-                  border:none;\
-                  background-color:#00D2FF;\}"
-                  "QPushButton#pushButton_transfer::hover{background-color:#4861DC;}");
+
+    ui->transferBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->copyBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                           "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
+    ui->copyBtn->setToolTip(tr("copy to clipboard"));
+
 }
 
 void ContactInfoTitleWidget::paintEvent(QPaintEvent *event)

@@ -33,7 +33,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑 Light</family>
+      <family>微软雅黑</family>
      </font>
     </property>
     <widget class="QLabel" name="label_2">
@@ -47,7 +47,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑 Light</family>
+       <family>微软雅黑</family>
        <pointsize>12</pointsize>
       </font>
      </property>
@@ -85,7 +85,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑 Light</family>
+       <family>微软雅黑</family>
       </font>
      </property>
      <property name="cursor">
@@ -139,7 +139,7 @@
       <string notr="true">QTableWidget{border: none;gridline-color: rgb(241,241,248);background-color: rgb(40, 46, 66);}
 QHeaderView{background-color:rgb(40,46,66);min-height:30;color:white;}
 QHeaderView::section{background-color: rgb(56,63,93);border: 1px solid rgb(40,46,66);
-font: 12px &quot;微软雅黑 Light&quot;;}
+font: 12px &quot;微软雅黑&quot;;}
 </string>
      </property>
      <property name="frameShape">
@@ -196,7 +196,7 @@ font: 12px &quot;微软雅黑 Light&quot;;}
       </property>
       <property name="font">
        <font>
-        <family>微软雅黑 Light</family>
+        <family>微软雅黑</family>
        </font>
       </property>
       <property name="textAlignment">
@@ -209,7 +209,7 @@ font: 12px &quot;微软雅黑 Light&quot;;}
       </property>
       <property name="font">
        <font>
-        <family>微软雅黑 Light</family>
+        <family>微软雅黑</family>
        </font>
       </property>
       <property name="textAlignment">

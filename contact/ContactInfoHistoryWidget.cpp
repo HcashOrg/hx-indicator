@@ -148,7 +148,7 @@ void ContactInfoHistoryWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("Microsoft YaHei UI Light",14,63);
+    QFont font("\"微软雅黑\"",14,63);
     font.setPixelSize(20);
     ui->label->setFont(font);
     QPalette pa;

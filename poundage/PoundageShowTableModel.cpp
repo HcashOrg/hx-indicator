@@ -139,7 +139,7 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
         case Qt::TextAlignmentRole:
             return Qt::AlignCenter;
         case Qt::FontRole:
-        return QFont("Microsoft YaHei UI Light",12,50);
+        return QFont("\"微软雅黑\"",12,50);
         case Qt::ForegroundRole:
             break;
         case Qt::UserRole:

@@ -38,7 +38,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>130</y>
+     <y>150</y>
      <width>670</width>
      <height>192</height>
     </rect>
@@ -80,8 +80,8 @@
     <rect>
      <x>70</x>
      <y>50</y>
-     <width>91</width>
-     <height>20</height>
+     <width>200</width>
+     <height>26</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -96,7 +96,7 @@
     <rect>
      <x>70</x>
      <y>90</y>
-     <width>80</width>
+     <width>100</width>
      <height>20</height>
     </rect>
    </property>
@@ -107,8 +107,8 @@
   <widget class="QLabel" name="contractAddressLabel">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>90</y>
+     <x>70</x>
+     <y>110</y>
      <width>300</width>
      <height>20</height>
     </rect>
@@ -123,9 +123,9 @@
   <widget class="QToolButton" name="openForUsersBtn">
    <property name="geometry">
     <rect>
-     <x>520</x>
+     <x>480</x>
      <y>50</y>
-     <width>80</width>
+     <width>120</width>
      <height>20</height>
     </rect>
    </property>

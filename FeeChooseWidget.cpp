@@ -253,7 +253,7 @@ void FeeChooseWidget::InitWidget()
 
 void FeeChooseWidget::InitStyle()
 {
-    QFont font("Microsoft YaHei UI Light",10,50);
+    QFont font("\"微软雅黑\"",10,50);
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
     ui->label_poundage->setPalette(pa);

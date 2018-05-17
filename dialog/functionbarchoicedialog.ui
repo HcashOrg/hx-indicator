@@ -24,7 +24,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
     </font>
    </property>
    <property name="cursor">
@@ -49,7 +49,7 @@ QPushButton:hover{background-color:rgb(44,48,67);color:white;}</string>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
     </font>
    </property>
    <property name="cursor">
@@ -74,7 +74,7 @@ QPushButton:hover{background-color:rgb(44,48,67);color:white;}</string>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑 Light</family>
+     <family>微软雅黑</family>
     </font>
    </property>
    <property name="cursor">

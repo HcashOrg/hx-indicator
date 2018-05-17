@@ -36,10 +36,15 @@
       <height>340</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
     <widget class="QToolButton" name="cancelBtn">
      <property name="geometry">
       <rect>
-       <x>236</x>
+       <x>264</x>
        <y>260</y>
        <width>96</width>
        <height>30</height>
@@ -58,7 +63,7 @@
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
       <rect>
-       <x>100</x>
+       <x>140</x>
        <y>260</y>
        <width>96</width>
        <height>30</height>
@@ -147,27 +152,33 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>0</x>
        <y>110</y>
-       <width>54</width>
+       <width>90</width>
        <height>30</height>
       </rect>
      </property>
      <property name="text">
       <string>卖数量</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>0</x>
        <y>147</y>
-       <width>54</width>
+       <width>90</width>
        <height>30</height>
       </rect>
      </property>
      <property name="text">
       <string>买数量</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
     <widget class="QLineEdit" name="sellAmountLineEdit">
@@ -238,44 +249,12 @@
       <string/>
      </property>
     </widget>
-    <widget class="QLabel" name="contractFeeLabel">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>320</y>
-       <width>240</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>320</y>
-       <width>100</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>预计手续费</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>-10</x>
+       <x>0</x>
        <y>184</y>
-       <width>100</width>
+       <width>90</width>
        <height>30</height>
       </rect>
      </property>

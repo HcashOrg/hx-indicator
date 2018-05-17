@@ -31,7 +31,7 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
 //    ui->containerWidget->setObjectName("containerwidget");
 //    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
-    QFont font("Microsoft YaHei UI Light",10,50);
+    QFont font("\"微软雅黑\"",10,50);
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(0xC6,0xCA,0xD4));
 

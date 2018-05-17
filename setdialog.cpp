@@ -82,30 +82,12 @@ SetDialog::SetDialog(QWidget *parent) :
                   "QSpinBox::up-arrow {width:0;height:0;}"
                   "QSpinBox::down-arrow {width:0;height:0;}"
                   "QSpinBox{background-color: transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;;color:black}"
-                  "QSpinBox:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;}"
+                  "QSpinBox:focus{border-bottom:1px solid rgb(84,116,235);}"
                   "QSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:none;}"
-
-                  "QComboBox{    \
-                  border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;\
-                  background:transparent;\
-                  font-size: 10pt;\
-                  font-family: Microsoft YaHei UI;\
-                  background-position: center left;\
-                  color: black;\
-                  selection-background-color: darkgray;}"
                   );
     ui->saveBtn->setStyleSheet(OKBTN_STYLE);
     ui->confirmBtn->setStyleSheet(OKBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
-
-    ui->line_3->setVisible(false);
-    ui->line_4->setVisible(false);
-    ui->line_5->setVisible(false);
-    ui->line_6->setVisible(false);
-    ui->line_7->setVisible(false);
-    ui->line_8->setVisible(false);
-
-    ui->languageComboBox->setView(new QListView());
 
 
     ui->containerWidget->installEventFilter(this);
