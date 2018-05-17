@@ -15,8 +15,6 @@ public:
 
     bool isConnected = false;
 
-    void init();
-
     void connectToClient();
 
     void processRPC(QString _rpcId, QString _rpcCmd);
@@ -36,7 +34,7 @@ private slots:
     void onTextFrameReceived(QString _message, bool _isLastFrame);
 
 
-
+    void onStateChanged(QAbstractSocket::SocketState _state);
 private:
     QTimer* timer;
     QWebSocket* m_webSocket;

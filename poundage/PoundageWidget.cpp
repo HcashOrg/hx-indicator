@@ -317,12 +317,8 @@ void PoundageWidget::InitStyle()
                    border-radius: 10px;\
                    background-color:rgb(0,210,255);} \
                    QPushButton#pushButton_publishPoundage:hover{\
-                   background-color:#5474EB;}\
-    ");
-//                  QComboBox::down-arrow {\
-//                   image: url(:/misc/down_arrow_2);\
-//                 }\
-
+                   background-color:#5474EB;}"
+                   TABLEWIDGET_STYLE_1);
 }
 
 void PoundageWidget::InitCoinType()

@@ -2495,7 +2495,7 @@ Cover it or not?</source>
     <message>
         <location filename="miner/foreclosedialog.ui" line="125"/>
         <source>赎回数量</source>
-        <translation type="unfinished">Amount of foreclosure</translation>
+        <translation type="unfinished">Amount to foreclose</translation>
     </message>
 </context>
 <context>
@@ -3224,7 +3224,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.ui" line="560"/>
         <source>质押信息</source>
-        <translation type="unfinished">PledgeInfo</translation>
+        <translation type="unfinished">Pledge</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="573"/>
@@ -3234,7 +3234,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.ui" line="607"/>
         <source>收益记录</source>
-        <translation type="unfinished">IncomeRecord</translation>
+        <translation type="unfinished">Record</translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="145"/>

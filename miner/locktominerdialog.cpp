@@ -27,31 +27,13 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-
-    setStyleSheet("QToolButton#okBtn,QToolButton#okBtn2{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                  "QToolButton#okBtn:hover,QToolButton#okBtn2:hover{background-color:#00D2FF;}"
-                  "QToolButton#cancelBtn,QToolButton#cancelBtn2{background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                  "QToolButton#cancelBtn:hover,QToolButton#cancelBtn2:hover{background-color:#5474EB;}"
-                  "QComboBox{    \
-                  border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;\
-                  background:transparent;\
-                  font-size: 10pt;\
-                  font-family: Microsoft YaHei UI;\
-                  background-position: center left;\
-                  color: black;\
-                  selection-background-color: darkgray;}"
-                  "QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  "QLineEdit:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;}"
-                  );
-    ui->line_2->setVisible(false);
-    ui->line_3->setVisible(false);
-    ui->line_4->setVisible(false);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
                                                      UBChain::getInstance()->feeType));
     ui->stackedWidget->setCurrentIndex(0);
     init();
+
 }
 
 LockToMinerDialog::~LockToMinerDialog()

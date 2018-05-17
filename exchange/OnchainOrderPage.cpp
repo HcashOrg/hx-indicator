@@ -97,7 +97,10 @@ qDebug() << "Rrrrrrrrrrrr " << _data;
         AssetInfo buyAssetInfo  = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(buySymbol));
 
         ui->ordersTableWidget->setItem(i,0, new QTableWidgetItem(getBigNumberString(sellAmount,sellAssetInfo.precision)));
+        ui->ordersTableWidget->item(i,0)->setData(Qt::UserRole,sellAmount);
+
         ui->ordersTableWidget->setItem(i,1, new QTableWidgetItem(getBigNumberString(buyAmount,buyAssetInfo.precision)));
+        ui->ordersTableWidget->item(i,1)->setData(Qt::UserRole,buyAmount);
 
         double price = (double)sellAmount / qPow(10,sellAssetInfo.precision) / buyAmount * qPow(10,buyAssetInfo.precision);
         QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'g',8));
@@ -212,8 +215,8 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
         buyOrderWidget->setAccount(ui->accountComboBox->currentText());
         QString contractAddress = ui->ordersTableWidget->item(_row,2)->data(Qt::UserRole).toString();
         buyOrderWidget->setContractAddress(contractAddress);
-        QString price = ui->ordersTableWidget->item(_row,2)->text();
-        buyOrderWidget->setPrice(price, ui->assetComboBox->currentText(), ui->assetComboBox2->currentText());
+        buyOrderWidget->setOrderInfo(ui->ordersTableWidget->item(_row,0)->data(Qt::UserRole).toULongLong(), ui->assetComboBox->currentText()
+                                     ,ui->ordersTableWidget->item(_row,1)->data(Qt::UserRole).toULongLong(), ui->assetComboBox2->currentText());
 
         currentWidget = buyOrderWidget;
 

@@ -23,8 +23,8 @@
     <rect>
      <x>70</x>
      <y>50</y>
-     <width>91</width>
-     <height>20</height>
+     <width>120</width>
+     <height>26</height>
     </rect>
    </property>
    <property name="styleSheet">
