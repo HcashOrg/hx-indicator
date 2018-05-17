@@ -6,7 +6,7 @@
 namespace Ui {
 class PublishPoundageWidget;
 }
-
+class QLineEdit;
 class PublishPoundageWidget : public QWidget
 {
     Q_OBJECT
@@ -32,6 +32,8 @@ public:
     PublishPoundageWidgetPrivate *_p;
 protected:
     void paintEvent(QPaintEvent *event);
+private:
+    void installDoubleValidator(QLineEdit *editor,double min,double max,int pre=5);
 };
 
 #endif // PUBLISHPOUNDAGEWIDGET_H

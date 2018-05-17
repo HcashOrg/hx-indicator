@@ -80,6 +80,11 @@ void ContactWidget::ShowContactInfoSlots(const QString &address)
     {
         disconnect(_p->contactInfoWidget,&ContactInfoWidget::gotoTransferPage,this,&ContactWidget::gotoTransferPage);
     }
+    if(address.isEmpty())
+    {
+        ui->scrollArea_rightBottom->setWidget(new QWidget);
+        return;
+    }
     _p->contactInfoWidget = new ContactInfoWidget();
     _p->contactInfoWidget->setData(_p->contactSheet->findPerson(address));
     ui->scrollArea_rightBottom->setWidget(_p->contactInfoWidget);
@@ -125,6 +130,7 @@ void ContactWidget::InitWidget()
     ui->scrollArea_rightTop->setWidget(_p->contactBriefWidget);
 
     connect(_p->contactTreeWidget,&ContactTreeWidget::ShowContactPerson,this,&ContactWidget::ShowContactInfoSlots);
+    connect(_p->contactTreeWidget,&ContactTreeWidget::SaveContact,this,&ContactWidget::SaveData);
     connect(_p->contactSearchWidget,&ContactSearchWidget::searchSignal,_p->contactTreeWidget,&ContactTreeWidget::QueryPersonSlots);
     connect(_p->contactBriefWidget,&ContactBriefWidget::addNewContactSignal,this,&ContactWidget::AddNewContactSlots);
 }

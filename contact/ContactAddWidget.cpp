@@ -84,8 +84,8 @@ void ContactAddWidget::addNewContactSlots()
     _p->person->name = ui->lineEdit_remark->text().isEmpty()? _p->person->address : ui->lineEdit_remark->text();
 
     group->groupPeople.push_back(_p->person);
-    emit addContactFinishedSignal(_p->person->address);
     ui->pushButton->setEnabled(false);
+    emit addContactFinishedSignal(_p->person->address);
 }
 
 bool ContactAddWidget::validateAddress(const QString &address)

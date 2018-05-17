@@ -39,19 +39,19 @@ public slots:
 
 private slots:
 
-    void on_accountComboBox_currentIndexChanged(const QString &arg1);
+    void accountComboBox_currentIndexChanged(const QString &arg1);
 
     void on_sendBtn_clicked();
 
-    void on_amountLineEdit_textChanged(const QString &arg1);
+    void amountLineEdit_textChanged(const QString &arg1);
 
     void jsonDataUpdated(QString id);
 
-    void on_assetComboBox_currentIndexChanged(int index);
+    void assetComboBox_currentIndexChanged(int index);
 
-    void on_sendtoLineEdit_textChanged(const QString &arg1);
+    void sendtoLineEdit_textChanged(const QString &arg1);
 
-    void on_memoTextEdit_textChanged();
+    void memoTextEdit_textChanged();
 
     void on_transferRecordBtn_clicked();
 

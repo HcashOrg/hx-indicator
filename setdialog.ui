@@ -741,8 +741,8 @@
         <widget class="QLabel" name="tipLabel3">
          <property name="geometry">
           <rect>
-           <x>245</x>
-           <y>80</y>
+           <x>330</x>
+           <y>74</y>
            <width>151</width>
            <height>16</height>
           </rect>
@@ -785,10 +785,10 @@
         <widget class="QLabel" name="tipLabel2">
          <property name="geometry">
           <rect>
-           <x>244</x>
-           <y>220</y>
+           <x>330</x>
+           <y>207</y>
            <width>151</width>
-           <height>16</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="styleSheet">
@@ -829,8 +829,8 @@
         <widget class="QLabel" name="tipLabel">
          <property name="geometry">
           <rect>
-           <x>245</x>
-           <y>150</y>
+           <x>330</x>
+           <y>140</y>
            <width>151</width>
            <height>16</height>
           </rect>
@@ -927,6 +927,20 @@
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
+        <zorder>newPwdLineEdit</zorder>
+        <zorder>confirmPwdLineEdit</zorder>
+        <zorder>confirmBtn</zorder>
+        <zorder>label_7</zorder>
+        <zorder>label_8</zorder>
+        <zorder>label_9</zorder>
+        <zorder>tipLabel</zorder>
+        <zorder>oldPwdLineEdit</zorder>
+        <zorder>label</zorder>
+        <zorder>line_6</zorder>
+        <zorder>line_7</zorder>
+        <zorder>line_8</zorder>
+        <zorder>tipLabel3</zorder>
+        <zorder>tipLabel2</zorder>
        </widget>
       </widget>
       <widget class="QToolButton" name="safeBtn">

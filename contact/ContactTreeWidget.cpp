@@ -106,7 +106,14 @@ void ContactTreeWidget::AddPersonSlots(const QString &address)
     }
     if(!groupItem) return;
     groupItem->setExpanded(true);
-    groupItem->addChild(createItemWithPerson(person));
+    QTreeWidgetItem *perItem = createItemWithPerson(person);
+    groupItem->addChild(perItem);
+
+    selectionModel()->clearSelection();
+    setSelectionMode(QAbstractItemView::SingleSelection);
+    perItem->setSelected(true);
+    emit SaveContact();
+    emit ShowContactPerson(address);
 }
 
 bool ContactTreeWidget::addGroup(const QString &groupName)
@@ -172,6 +179,7 @@ bool ContactTreeWidget::delGroup(QTreeWidgetItem *topItem)
     _p->contactSheet->removeGroup(sourceGroup);
     takeTopLevelItem(indexOfTopLevelItem(topItem));
 
+    emit SaveContact();
     return true;
 }
 
@@ -195,6 +203,7 @@ bool ContactTreeWidget::editPerson(QTreeWidgetItem *personItem)
     lineEdit->selectAll();
     lineEdit->setFocus(Qt::OtherFocusReason);
     connect(lineEdit,&QLineEdit::editingFinished,this,&ContactTreeWidget::editPersonFinishSlots);
+
     return true;
 
 }
@@ -207,7 +216,39 @@ void ContactTreeWidget::delPerson(QTreeWidgetItem *personItem)
     if(!person || !group) return;
 
     group->removePerson(person);
-    personItem->parent()->removeChild(personItem);
+    emit SaveContact();
+
+    //界面上移除本item，选择下一个item
+    QTreeWidgetItem *parentItem = personItem->parent();
+    if(!parentItem) return;
+    parentItem->removeChild(personItem);
+
+    QTreeWidgetItem * currItem = nullptr;
+    if(parentItem->childCount() >= 1)
+    {
+        currItem = parentItem->child(0);
+    }
+    else
+    {
+        for(int i = 0;i < topLevelItemCount();++i)
+        {
+            if(topLevelItem(i)->childCount() >= 1)
+            {
+                currItem = topLevelItem(i)->child(0);
+                break;
+            }
+        }
+    }
+
+    if(!currItem)
+    {
+        emit ShowContactPerson("");
+        return;
+    }
+    selectionModel()->clearSelection();
+    setSelectionMode(QAbstractItemView::SingleSelection);
+    currItem->setSelected(true);
+    emit ShowContactPerson(currItem->data(0,Qt::UserRole).value<std::shared_ptr<ContactPerson>>()->address);
 }
 
 void ContactTreeWidget::moveToGroup(QTreeWidgetItem *sourceItem, QTreeWidgetItem *targetItem)
@@ -234,6 +275,7 @@ void ContactTreeWidget::moveToGroup(QTreeWidgetItem *sourceItem, QTreeWidgetItem
         targetItem->addChild(item);
         item->setSelected(true);
     }
+    emit SaveContact();
 }
 
 void ContactTreeWidget::addGroupSlots(bool checked)
@@ -296,8 +338,9 @@ void ContactTreeWidget::editGroupFinishSlots()
 
     if(_p->contactSheet->renameGroup(newName,group))
     {
-        emit GroupModifyFinishedSignal();
         currentItem()->setText(0,newName);
+        emit GroupModifyFinishedSignal();
+        emit SaveContact();
     }
     else
     {
@@ -325,6 +368,7 @@ void ContactTreeWidget::editPersonFinishSlots()
     person->name = newName;
     currentItem()->setText(0,newName);
     emit PersonModifyFinishedSignal();
+    emit SaveContact();
     lineEdit->close();
 }
 
