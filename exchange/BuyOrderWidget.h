@@ -6,7 +6,7 @@
 namespace Ui {
 class BuyOrderWidget;
 }
-
+class FeeChooseWidget;
 class BuyOrderWidget : public QWidget
 {
     Q_OBJECT
@@ -43,6 +43,8 @@ private:
 
     void paintEvent(QPaintEvent*);
     void estimateContractFee();
+
+    FeeChooseWidget *feeChoose;
 };
 
 #endif // BUYORDERWIDGET_H
