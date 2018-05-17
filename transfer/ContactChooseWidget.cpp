@@ -76,7 +76,11 @@ void ContactChooseWidget::itemDoubleClickedSlots(QTreeWidgetItem *item)
 
 void ContactChooseWidget::confirmSlots()
 {
-    emit selectContactSignal(_p->contactName,_p->contactAddress);
+    if(!_p->contactName.isEmpty() && !_p->contactAddress.isEmpty())
+    {
+        emit selectContactSignal(_p->contactName,_p->contactAddress);
+    }
+
     emit closeSignal();
     close();
 }
@@ -110,6 +114,12 @@ void ContactChooseWidget::QueryPersonSlots()
     if(!findItems.isEmpty())
     {
         itemClickedSlots(findItems.front());
+    }
+    else
+    {
+        _p->contactName = "";
+        _p->contactAddress = "";
+        updateUI();
     }
 }
 

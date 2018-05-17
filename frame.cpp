@@ -738,7 +738,7 @@ void Frame::showContactPage()
     //connect(contactPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     //connect(contactPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(contactPage,SIGNAL(gotoTransferPage(QString,QString)),functionBar,SLOT(contactShowTransferPageSlots()));
-    connect(contactPage,SIGNAL(gotoTransferPage(QString,QString)),this,SLOT(showTransferPageWithAddress(QString,QString)));
+    connect(contactPage,SIGNAL(gotoTransferPage(QString,QString)),this,SLOT(showTransferPageWithAddress(QString,QString)));//address name
     //contactPage->setAttribute(Qt::WA_DeleteOnClose);
     contactPage->show();
     currentPageNum = 4;
@@ -788,7 +788,7 @@ void Frame::shadowWidgetHide()
     shadowWidget->hide();
 }
 
-void Frame::showTransferPageWithAddress(QString address, QString remark)
+void Frame::showTransferPageWithAddress(QString address, QString name)
 {
     closeCurrentPage();
     getAccountInfo();
@@ -843,7 +843,7 @@ void Frame::setLanguage(QString language)
             break;
         case 3:
 //            transferPage->retranslator(language);
-            showTransferPage(currentAccount,"");
+            //showTransferPage(currentAccount,"");
             break;
         case 4:
 //            contactPage->retranslator(language);

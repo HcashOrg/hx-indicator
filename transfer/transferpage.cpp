@@ -64,17 +64,8 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
         }
     }
 
-    feeWidget=new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),
-                                  UBChain::getInstance()->feeType);
-    ui->stackedWidget->addWidget(feeWidget);
-    ui->stackedWidget->setCurrentWidget(feeWidget);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    connect(ui->toolButton_chooseContact,&QToolButton::clicked,this,&TransferPage::chooseContactSlots);
-    //connect(ui->checkBox,&QCheckBox::stateChanged,this,&TransferPage::checkStateChangedSlots);
-
-    connect(this,&TransferPage::feeChangeSignal,feeWidget,&FeeChooseWidget::updateFeeNumberSlots);
     ui->amountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
     setAmountPrecision();
 
@@ -97,8 +88,26 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 	
     updateAmountSlots();
 
+    feeWidget=new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),
+                                  UBChain::getInstance()->feeType);
+    ui->stackedWidget->addWidget(feeWidget);
+    ui->stackedWidget->setCurrentWidget(feeWidget);
+
     connect(this,&TransferPage::usePoundage,feeWidget,&FeeChooseWidget::updatePoundageID);
     //updatePoundage();
+
+    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+
+    connect(ui->toolButton_chooseContact,&QToolButton::clicked,this,&TransferPage::chooseContactSlots);
+    //connect(ui->checkBox,&QCheckBox::stateChanged,this,&TransferPage::checkStateChangedSlots);
+
+    connect(this,&TransferPage::feeChangeSignal,feeWidget,&FeeChooseWidget::updateFeeNumberSlots);
+
+    connect(ui->accountComboBox,SIGNAL(currentIndexChanged(const QString &)),this,SLOT(accountComboBox_currentIndexChanged(const QString &)));
+    connect(ui->amountLineEdit,SIGNAL(textChanged(const QString &)),this,SLOT(amountLineEdit_textChanged(const QString&)));
+    connect(ui->assetComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(assetComboBox_currentIndexChanged(int)));
+    connect(ui->sendtoLineEdit,SIGNAL(textChanged(const QString &)),this,SLOT(sendtoLineEdit(const QString &)));
+    connect(ui->memoTextEdit,SIGNAL(textChanged(const QString &)),this,SLOT(memoTextEdit_textChanged()));
 }
 
 TransferPage::~TransferPage()
@@ -108,7 +117,7 @@ TransferPage::~TransferPage()
 
 
 
-void TransferPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
+void TransferPage::accountComboBox_currentIndexChanged(const QString &arg1)
 {
     if( !inited)  return;
 
@@ -172,7 +181,7 @@ qDebug() << toJsonFormat( "transfer_to_address",
     }
 }
 
-void TransferPage::on_amountLineEdit_textChanged(const QString &arg1)
+void TransferPage::amountLineEdit_textChanged(const QString &arg1)
 {
 
 }
@@ -203,13 +212,13 @@ void TransferPage::InitStyle()
     QPalette palette;
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
-    setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;margin-left:2px;}"
-                  "Qline{color:#5474EB;background:#5474EB;}"
-                  "QComboBox{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:3px;}"
-                  "QPushButton{border:none;background-color:#5474EB;color:white;width:60px;height:20px;\
-                   border-radius:10px;font-size:12pt;}"
-                  "QPushButton::hover{background-color:#00D2FF;}"
-                  );
+//    setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;margin-left:2px;}"
+//                  "Qline{color:#5474EB;background:#5474EB;}"
+//                  "QComboBox{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:3px;}"
+//                  "QPushButton{border:none;background-color:#5474EB;color:white;width:60px;height:20px;\
+//                   border-radius:10px;font-size:12pt;}"
+//                  "QPushButton::hover{background-color:#00D2FF;}"
+//                  );
     ui->sendBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
                                "QToolButton:hover{background-color:#00D2FF;}");
 //    ui->toolButton->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
@@ -351,7 +360,7 @@ qDebug() << id << result;
 }
 
 
-void TransferPage::on_assetComboBox_currentIndexChanged(int index)
+void TransferPage::assetComboBox_currentIndexChanged(int index)
 {
     if( assetUpdating)  return;
 
@@ -361,7 +370,7 @@ void TransferPage::on_assetComboBox_currentIndexChanged(int index)
     updateAmountSlots();
 }
 
-void TransferPage::on_sendtoLineEdit_textChanged(const QString &arg1)
+void TransferPage::sendtoLineEdit_textChanged(const QString &arg1)
 {
     if( ui->sendtoLineEdit->text().contains(" ") || ui->sendtoLineEdit->text().contains("\n"))   // 不判断就remove的话 右键菜单撤销看起来等于不能用
     {
@@ -415,7 +424,7 @@ void TransferPage::on_sendtoLineEdit_textChanged(const QString &arg1)
 }
 
 
-void TransferPage::on_memoTextEdit_textChanged()
+void TransferPage::memoTextEdit_textChanged()
 {
     QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
     QByteArray ba = utfCodec->fromUnicode(ui->memoTextEdit->toPlainText());
