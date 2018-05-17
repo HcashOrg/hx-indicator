@@ -329,19 +329,17 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":"))
         {
-            result.prepend("{");
-            result.append("}");
+            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            int stepCount = totalFee.step;
 
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-            QJsonObject jsonObject = parse_doucment.object();
-            double feeNumber = jsonObject.value("result").toArray().empty()?
-                                0:
-                               jsonObject.value("result").toArray()[0].toObject().value("amount").toDouble();
+            unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
 
-            FeeChargeWidget *fee = new FeeChargeWidget( feeNumber,"LNK",
+            qDebug()<<totalAmount;
+
+            FeeChargeWidget *fee = new FeeChargeWidget( getBigNumberString(totalAmount, ASSET_PRECISION).toDouble(),"LNK",
                                                          UBChain::getInstance()->mainFrame);
 
-
+            fee->SetInfo(tr("register contract!"));
             connect(fee,&FeeChargeWidget::confirmSignal,[this](){
                 QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
                 QFileInfo fileInfo(filePath);
