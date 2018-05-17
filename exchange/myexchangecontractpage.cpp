@@ -9,6 +9,7 @@
 #include "contractbalancewidget.h"
 #include "ToolButtonWidget.h"
 #include "WithdrawOrderDialog.h"
+#include "depositpage/FeeChargeWidget.h"
 
 MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     QWidget(parent),
@@ -314,6 +315,50 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
         return;
     }
+
+    if("contract-register_contract_testing" == id)
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            double feeNumber = jsonObject.value("result").toArray().empty()?
+                                0:
+                               jsonObject.value("result").toArray()[0].toObject().value("amount").toDouble();
+
+            FeeChargeWidget *fee = new FeeChargeWidget( feeNumber,"LNK",
+                                                         UBChain::getInstance()->mainFrame);
+
+
+            connect(fee,&FeeChargeWidget::confirmSignal,[this](){
+                QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
+                QFileInfo fileInfo(filePath);
+                if(fileInfo.exists())
+                {
+                    UBChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
+                                                                                           QJsonArray() << this->ui->accountComboBox->currentText() << UBChain::getInstance()->currentContractFee()
+                                                                                           << "10000"  << filePath));
+                }
+
+            });
+
+            fee->show();
+        }
+        else
+        {
+            CommonDialog dia(CommonDialog::OkOnly);
+            dia.setText(result);
+            dia.pop();
+        }
+
+
+    }
 }
 
 
@@ -329,17 +374,22 @@ void MyExchangeContractPage::paintEvent(QPaintEvent *)
 void MyExchangeContractPage::registerContract()
 {
     // 如果还没有兑换合约  先注册
-    CommonDialog commonDialog(CommonDialog::OkAndCancel);
-    commonDialog.setText(tr("You don't have an exchange contract at the moment. Will you create it?"));
-    if(commonDialog.pop())
-    {
+//    CommonDialog commonDialog(CommonDialog::OkAndCancel);
+//    commonDialog.setText(tr("You don't have an exchange contract at the moment. Will you create it?"));
+//    if(commonDialog.pop())
+//    {
         QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
         QFileInfo fileInfo(filePath);
         if(fileInfo.exists())
         {
-            UBChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
-                                                                                   QJsonArray() << ui->accountComboBox->currentText() << UBChain::getInstance()->currentContractFee()
-                                                                                   << "10000"  << filePath));
+            //查询注册合约费用
+            UBChain::getInstance()->postRPC("contract-register_contract_testing",toJsonFormat( "register_contract_testing",
+                                                                                               QJsonArray() << ui->accountComboBox->currentText() << filePath));
+
+
+//            UBChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
+//                                                                                   QJsonArray() << ui->accountComboBox->currentText() << UBChain::getInstance()->currentContractFee()
+//                                                                                   << "10000"  << filePath));
         }
         else
         {
@@ -347,7 +397,7 @@ void MyExchangeContractPage::registerContract()
             commonDialog.setText(tr("Can not find file contracts/blocklink_exchange.glua.gpc!"));
             commonDialog.pop();
         }
-    }
+//    }
 }
 
 void MyExchangeContractPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
