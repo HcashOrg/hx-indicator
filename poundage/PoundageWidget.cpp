@@ -76,7 +76,7 @@ void PoundageWidget::autoRefreshSlots()
         }
         else
         {
-            UBChain::getInstance()->postRPC("poundage_list_guarantee_order",
+            UBChain::getInstance()->postRPC("poundage_list_guarantee_order_",
                                             toJsonFormat("list_guarantee_order",
                                                          QJsonArray()<<ui->comboBox_coinType->currentText()<<false
                                                          )
