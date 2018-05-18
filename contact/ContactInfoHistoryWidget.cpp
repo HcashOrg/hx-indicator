@@ -7,7 +7,7 @@
 #include <mutex>
 
 
-static const int ROWNUMBER = 5;
+static const int ROWNUMBER = 6;
 class ContactInfoHistoryWidget::ContactInfoHistoryWidgetPrivate
 {
 public:

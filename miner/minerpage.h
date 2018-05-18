@@ -9,6 +9,7 @@ class MinerPage;
 
 class PageScrollWidget;
 class QTableWidget;
+
 class MinerPage : public QWidget
 {
     Q_OBJECT

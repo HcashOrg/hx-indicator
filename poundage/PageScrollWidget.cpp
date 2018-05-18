@@ -68,6 +68,11 @@ unsigned int PageScrollWidget::GetTotalPage() const
     return _p->totalPage;
 }
 
+unsigned int PageScrollWidget::GetCurrentPage() const
+{
+    return _p->currentPage;
+}
+
 void PageScrollWidget::buttonClickSlots()
 {
     _p->isMoreClicked = false;
