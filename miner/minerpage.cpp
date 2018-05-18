@@ -161,7 +161,9 @@ void MinerPage::jsonDataUpdated(QString id)
             connect(buttonfore,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_lockBalancesTableWidget_cellPressed,this,i,4));
 
         }
+        unsigned int curPage = pageWidget_fore->GetCurrentPage();
         pageWidget_fore->SetTotalPage(calPage(ui->lockBalancesTableWidget));
+        pageWidget_fore->SetCurrentPage(curPage);
         setTextCenter(ui->lockBalancesTableWidget);
 
         return;
@@ -227,7 +229,9 @@ void MinerPage::jsonDataUpdated(QString id)
 
 
         }
+        unsigned int curPage = pageWidget_income->GetCurrentPage();
         pageWidget_income->SetTotalPage(calPage(ui->incomeTableWidget));
+        pageWidget_income->SetCurrentPage(curPage);
         setTextCenter(ui->incomeTableWidget);
 
         return;
@@ -352,7 +356,9 @@ void MinerPage::showIncomeRecord()
         ui->incomeRecordTableWidget->setItem(i,3, new QTableWidgetItem(transactionId));
         ui->incomeRecordTableWidget->setItem(i,4, new QTableWidgetItem(tr("confirmed")));
     }
+    unsigned int curPage = pageWidget_record->GetCurrentPage();
     pageWidget_record->SetTotalPage(calPage(ui->incomeRecordTableWidget));
+    pageWidget_record->SetCurrentPage(curPage);
     setTextCenter(ui->incomeRecordTableWidget);
 }
 

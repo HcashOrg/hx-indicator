@@ -24,6 +24,7 @@ public:
     void SetCurrentPage(unsigned int number);///--totalpage
 
     unsigned int GetTotalPage()const;
+    unsigned int GetCurrentPage()const;
 signals:
     void currentPageChangeSignal(unsigned int);//0-->totalpage-1
 private slots:
