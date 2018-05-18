@@ -12,8 +12,9 @@
 #include "ToolButtonWidget.h"
 #include "depositpage/FeeChargeWidget.h"
 #include "showcontentdialog.h"
-
-static const int ROWNUMBER = 4;
+#include <mutex>
+static const int ROWNUMBER = 7;
+static std::mutex calMutex;
 MinerPage::MinerPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MinerPage)
@@ -351,7 +352,6 @@ void MinerPage::showIncomeRecord()
         ui->incomeRecordTableWidget->setItem(i,3, new QTableWidgetItem(transactionId));
         ui->incomeRecordTableWidget->setItem(i,4, new QTableWidgetItem(tr("confirmed")));
     }
-    qDebug()<<ui->incomeRecordTableWidget->rowCount();
     pageWidget_record->SetTotalPage(calPage(ui->incomeRecordTableWidget));
     setTextCenter(ui->incomeRecordTableWidget);
 }
@@ -387,11 +387,12 @@ void MinerPage::updateCheckState(int number)
 
 unsigned int MinerPage::calPage(const QTableWidget * const table) const
 {
+    std::lock_guard<std::mutex> gurd(calMutex);
     if(!table) return 0;
     int page = (table->rowCount()%ROWNUMBER==0 && table->rowCount() != 0) ?
                 table->rowCount()/ROWNUMBER : table->rowCount()/ROWNUMBER+1;
     qDebug()<<table->rowCount()<<page;
-
+    return static_cast<unsigned int>(page);
 }
 
 void MinerPage::setTextCenter(QTableWidget * const table)

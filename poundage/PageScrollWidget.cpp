@@ -53,6 +53,7 @@ void PageScrollWidget::SetTotalPage(unsigned int number)
     ResetButton();
     ui->lineEdit->setVisible(true);
     ui->lineEdit->setText("1");
+    emit currentPageChangeSignal(_p->currentPage);
 }
 
 void PageScrollWidget::SetCurrentPage(unsigned int number)
