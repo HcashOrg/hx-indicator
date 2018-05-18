@@ -351,6 +351,7 @@ void MinerPage::showIncomeRecord()
         ui->incomeRecordTableWidget->setItem(i,3, new QTableWidgetItem(transactionId));
         ui->incomeRecordTableWidget->setItem(i,4, new QTableWidgetItem(tr("confirmed")));
     }
+    qDebug()<<ui->incomeRecordTableWidget->rowCount();
     pageWidget_record->SetTotalPage(calPage(ui->incomeRecordTableWidget));
     setTextCenter(ui->incomeRecordTableWidget);
 }
@@ -389,6 +390,7 @@ unsigned int MinerPage::calPage(const QTableWidget * const table) const
     if(!table) return 0;
     int page = (table->rowCount()%ROWNUMBER==0 && table->rowCount() != 0) ?
                 table->rowCount()/ROWNUMBER : table->rowCount()/ROWNUMBER+1;
+    qDebug()<<table->rowCount()<<page;
 
 }
 
