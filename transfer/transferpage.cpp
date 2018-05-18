@@ -106,8 +106,8 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     connect(ui->accountComboBox,SIGNAL(currentIndexChanged(const QString &)),this,SLOT(accountComboBox_currentIndexChanged(const QString &)));
     connect(ui->amountLineEdit,SIGNAL(textChanged(const QString &)),this,SLOT(amountLineEdit_textChanged(const QString&)));
     connect(ui->assetComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(assetComboBox_currentIndexChanged(int)));
-    connect(ui->sendtoLineEdit,SIGNAL(textChanged(const QString &)),this,SLOT(sendtoLineEdit(const QString &)));
-    connect(ui->memoTextEdit,SIGNAL(textChanged(const QString &)),this,SLOT(memoTextEdit_textChanged()));
+    connect(ui->sendtoLineEdit,SIGNAL(textChanged(const QString &)),this,SLOT(sendtoLineEdit_textChanged(const QString &)));
+    connect(ui->memoTextEdit,SIGNAL(textChanged()),this,SLOT(memoTextEdit_textChanged()));
 }
 
 TransferPage::~TransferPage()
