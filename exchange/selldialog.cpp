@@ -4,6 +4,7 @@
 #include "wallet.h"
 #include "commondialog.h"
 #include "FeeChooseWidget.h"
+
 SellDialog::SellDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SellDialog)

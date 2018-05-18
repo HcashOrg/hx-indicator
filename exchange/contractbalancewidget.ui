@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑 Light</family>
+    <family>微软雅黑</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -75,7 +75,7 @@
     </property>
    </column>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -85,7 +85,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 19px &quot;微软雅黑 Light&quot;;</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string>合约余额</string>
@@ -96,9 +96,14 @@
     <rect>
      <x>70</x>
      <y>90</y>
-     <width>100</width>
+     <width>150</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
    </property>
    <property name="text">
     <string>合约地址</string>
@@ -112,6 +117,11 @@
      <width>300</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
    </property>
    <property name="text">
     <string/>
