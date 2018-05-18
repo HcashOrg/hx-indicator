@@ -5,7 +5,7 @@
 #include "poundage/PageScrollWidget.h"
 #include "showcontentdialog.h"
 
-static const int ROWNUMBER = 4;
+static const int ROWNUMBER = 5;
 
 DepositRecrdWideget::DepositRecrdWideget(QWidget *parent) :
     QWidget(parent),
