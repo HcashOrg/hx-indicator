@@ -13,7 +13,7 @@
 #include "depositpage/FeeChargeWidget.h"
 #include "showcontentdialog.h"
 #include <mutex>
-static const int ROWNUMBER = 7;
+static const int ROWNUMBER = 8;
 static std::mutex calMutex;
 MinerPage::MinerPage(QWidget *parent) :
     QWidget(parent),
