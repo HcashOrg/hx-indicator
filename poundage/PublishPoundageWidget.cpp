@@ -122,8 +122,8 @@ void PublishPoundageWidget::InitWidget()
     InitAccount();
     InitTargetCoin();
 
-    connect(ui->pushButton_confirm,&QPushButton::clicked,this,&PublishPoundageWidget::ConfirmPublishSlots);
-    connect(ui->pushButton_cancel,&QPushButton::clicked,this,&PublishPoundageWidget::close);
+    connect(ui->okBtn,&QToolButton::clicked,this,&PublishPoundageWidget::ConfirmPublishSlots);
+    connect(ui->cancelBtn,&QToolButton::clicked,this,&PublishPoundageWidget::close);
     connect(ui->comboBox_accounts, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),this,&PublishPoundageWidget::ChangeAccountSlots);
     connect(ui->comboBox_targetType,static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),this,&PublishPoundageWidget::ChangeAssetSlots);
 
@@ -140,49 +140,10 @@ void PublishPoundageWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    QFont font("\"微软雅黑\"",12,50);
-    QPalette pa;
-    pa.setColor(QPalette::WindowText,QColor(0,0,0));
-    ui->label->setPalette(pa);
-    ui->label->setFont(font);
-    ui->label_2->setPalette(pa);
-    ui->label_2->setFont(font);
-    ui->label_3->setPalette(pa);
-    ui->label_3->setFont(font);
-    ui->label_4->setPalette(pa);
-    ui->label_4->setFont(font);
-
-    QPalette feepa;
-    feepa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
-    ui->label_fee->setPalette(feepa);
-
     //ui->label_fee->setFrameShape(QFrame::Box);
 
-    setStyleSheet("QPushButton#pushButton_confirm{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                  "QPushButton#pushButton_confirm:hover{background-color:#00D2FF;}"
-
-                  "QPushButton#pushButton_cancel{background-color:#E5E5E5; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                  "QPushButton#pushButton_cancel:hover{background-color:#00D2FF;}"
-
-                  "QDoubleSpinBox::up-button {width:0;height:0;}"
-                  "QDoubleSpinBox::down-button {width:0;height:0;}"
-                  "QDoubleSpinBox::up-arrow {width:0;height:0;}"
-                  "QDoubleSpinBox::down-arrow {width:0;height:0;}"
-                  "QDoubleSpinBox{background-color: transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;color:black;font-size:12pt;}"
-                  "QDoubleSpinBox:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;}"
-                  "QDoubleSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:none;}"
-                  "QComboBox{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;font-size: 12pt;font-family: \"微软雅黑\";\
-                             background-position: center left;color: black;selection-background-color: darkgray;}"
-
-                  "QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  "QLineEdit:focus{border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;}"
-                  "QLable#label_fee{border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;}"
-                );
-    ui->line->setVisible(false);
-    ui->line_2->setVisible(false);
-    ui->line_3->setVisible(false);
-    ui->line_4->setVisible(false);
-    //ui->line_5->setVisible(false);
+    ui->okBtn->setStyleSheet(OKBTN_STYLE);
+    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
 }
 
 void PublishPoundageWidget::paintEvent(QPaintEvent *event)

@@ -32,15 +32,28 @@
      <height>41</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
   </widget>
   <widget class="QToolButton" name="toolButton">
    <property name="geometry">
     <rect>
      <x>560</x>
      <y>282</y>
-     <width>80</width>
+     <width>100</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
     <string>备份钱包</string>

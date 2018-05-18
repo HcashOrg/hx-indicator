@@ -144,16 +144,16 @@
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QToolButton" name="saveBtn">
          <property name="geometry">
           <rect>
-           <x>280</x>
-           <y>250</y>
-           <width>120</width>
-           <height>36</height>
+           <x>292</x>
+           <y>260</y>
+           <width>96</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="font">
@@ -662,10 +662,10 @@
         <widget class="QToolButton" name="confirmBtn">
          <property name="geometry">
           <rect>
-           <x>280</x>
-           <y>250</y>
-           <width>120</width>
-           <height>36</height>
+           <x>292</x>
+           <y>260</y>
+           <width>96</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="font">
@@ -689,8 +689,8 @@
           <rect>
            <x>195</x>
            <y>179</y>
-           <width>81</width>
-           <height>21</height>
+           <width>100</width>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -738,8 +738,8 @@
           <rect>
            <x>195</x>
            <y>46</y>
-           <width>61</width>
-           <height>16</height>
+           <width>100</width>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -787,8 +787,8 @@
           <rect>
            <x>195</x>
            <y>113</y>
-           <width>61</width>
-           <height>16</height>
+           <width>100</width>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -857,8 +857,8 @@
           <rect>
            <x>195</x>
            <y>10</y>
-           <width>131</width>
-           <height>31</height>
+           <width>200</width>
+           <height>30</height>
           </rect>
          </property>
          <property name="font">

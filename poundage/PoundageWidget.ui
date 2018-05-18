@@ -10,6 +10,11 @@
     <height>530</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -57,13 +62,13 @@
     </font>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_publishPoundage">
+  <widget class="QToolButton" name="toolButton_publishPoundage">
    <property name="geometry">
     <rect>
      <x>640</x>
      <y>149</y>
-     <width>81</width>
-     <height>24</height>
+     <width>80</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">

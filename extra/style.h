@@ -17,7 +17,7 @@
 #define TOOLBUTTON_STYLE_1      "QToolButton{font: 11px \"微软雅黑\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}" \
                                 "QToolButton:hover{background-color:#5474EB;}"
 
-#define TABLEWIDGET_STYLE_1     "QTableView{background-color:white;border:1px solid rgb(236,238,251);border-radius:15px;}" \
+#define TABLEWIDGET_STYLE_1     "QTableView{background-color:white;border:1px solid rgb(236,238,251);border-radius:15px;font: 12px \"微软雅黑\";}" \
                                 "QHeaderView{border:none;border-top-left-radius:15px;border-top-right-radius:15px;background-color:white;color:#C6CAD4;font: 12px \"微软雅黑\";}" \
                                 "QHeaderView:section{height:35px;border:none;background-color:white;}" \
                                 "QHeaderView:section:first{border-top-left-radius:15px;}" \
@@ -25,5 +25,11 @@
 
 #define SELECTBTN_STYLE "QToolButton{background:transparent;color:rgb(192,202,212);font: 11px \"微软雅黑\";}" \
                         "QToolButton:hover{color:rgb(84,116,235);}"
+
+#define COMBOBOX_STYLE_BOTTOMBORDER "QComboBox{background-color:transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;color: black;padding-left: 5px;font: 14px \"微软雅黑\";}" \
+                                    "QComboBox::drop-down {background:transparent;border:none;}" \
+                                    "QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}" \
+                                    "QComboBox::down-arrow:on {image: url(:/ui/wallet_ui/downArrow_on.png);}" \
+                                    "QComboBox QAbstractItemView {outline: 0px;}"
 
 #endif // STYLE_H

@@ -10,22 +10,14 @@
     <height>530</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>185</y>
-     <width>251</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
   <widget class="Line" name="line_2">
    <property name="geometry">
     <rect>
@@ -39,33 +31,7 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="Line" name="line_3">
-   <property name="geometry">
-    <rect>
-     <x>400</x>
-     <y>244</y>
-     <width>251</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_4">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>245</y>
-     <width>251</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_confirm">
+  <widget class="QToolButton" name="okBtn">
    <property name="geometry">
     <rect>
      <x>275</x>
@@ -79,11 +45,14 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="text">
     <string>确定</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_cancel">
+  <widget class="QToolButton" name="cancelBtn">
    <property name="geometry">
     <rect>
      <x>400</x>
@@ -97,6 +66,9 @@
      <pointsize>12</pointsize>
     </font>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="text">
     <string>取消</string>
    </property>
@@ -104,10 +76,10 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>70</x>
      <y>135</y>
-     <width>81</width>
-     <height>31</height>
+     <width>200</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -127,10 +99,10 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>70</x>
      <y>195</y>
-     <width>81</width>
-     <height>31</height>
+     <width>200</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -140,10 +112,10 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>415</x>
+     <x>400</x>
      <y>135</y>
-     <width>81</width>
-     <height>31</height>
+     <width>200</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -153,10 +125,10 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>415</x>
+     <x>400</x>
      <y>195</y>
-     <width>81</width>
-     <height>31</height>
+     <width>200</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
@@ -173,26 +145,13 @@
     </rect>
    </property>
   </widget>
-  <widget class="Line" name="line_5">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>304</y>
-     <width>251</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>85</x>
+     <x>70</x>
      <y>255</y>
-     <width>81</width>
-     <height>31</height>
+     <width>200</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">

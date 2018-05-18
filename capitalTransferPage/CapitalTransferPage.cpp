@@ -337,21 +337,24 @@ void CapitalTransferPage::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    ui->toolButton_close->setIconSize(QSize(12,12));
-    ui->toolButton_close->setIcon(QIcon(":/ui/wallet_ui/close.png"));
+//    ui->toolButton_close->setIconSize(QSize(12,12));
+//    ui->toolButton_close->setIcon(QIcon(":/ui/wallet_ui/close.png"));
 
-    setStyleSheet("QToolButton#toolButton_confirm{color:white;\
-                                      border-top-left-radius:10px;  \
-                                      border-top-right-radius:10px; \
-                                      border-bottom-left-radius:10px;  \
-                                      border-bottom-right-radius:10px; \
-                                      border:none;\
-                                      background-color:#4861DC;}"
-                  "QToolButton#toolButton_close::hover,QToolButton#toolButton_confirm::hover{background-color:#00D2FF;}"
-                  "QToolButton#toolButton_close{border:none;background:transparent;color:#4861DC;}"
-                  "QRadioButton{color:#4861DC;}"
-                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  );
+    ui->toolButton_close->setStyleSheet(CLOSEBTN_STYLE);
+    ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
+
+//    setStyleSheet("QToolButton#toolButton_confirm{color:white;\
+//                                      border-top-left-radius:10px;  \
+//                                      border-top-right-radius:10px; \
+//                                      border-bottom-left-radius:10px;  \
+//                                      border-bottom-right-radius:10px; \
+//                                      border:none;\
+//                                      background-color:#4861DC;}"
+//                  "QToolButton#toolButton_close::hover,QToolButton#toolButton_confirm::hover{background-color:#00D2FF;}"
+//                  "QToolButton#toolButton_close{border:none;background:transparent;color:#4861DC;}"
+//                  "QRadioButton{color:#4861DC;}"
+//                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
+//                  );
 }
 
 void CapitalTransferPage::paintEvent(QPaintEvent *event)

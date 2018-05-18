@@ -280,8 +280,6 @@ void SetDialog::on_saveBtn_clicked()
 
     mutexForConfigFile.unlock();
 
-//    UBChain::getInstance()->postRPC( "id_wallet_set_transaction_fee", toJsonFormat( "wallet_set_transaction_fee", QJsonArray() << ui->feeLineEdit->text() ));
-
     emit settingSaved();
 
     close();
@@ -531,38 +529,6 @@ void SetDialog::jsonDataUpdated(QString id)
         return;
     }
 
-//    if( id == "id_wallet_set_transaction_fee")
-//    {
-//        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-//        if( result.startsWith("\"result\":"))
-//        {
-//            UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QJsonArray()));
-
-//            close();
-//        }
-//        else
-//        {
-//            int pos = result.indexOf("\"message\":\"") + 11;
-//            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-//            if( errorMessage == "invalid fee")
-//            {
-//                CommonDialog commonDialog(CommonDialog::OkOnly);
-////                commonDialog.setText( QString::fromLocal8Bit("手续费不能为0!"));
-//                commonDialog.setText( tr("The fee should not be 0!"));
-//                commonDialog.pop();
-//            }
-//            else
-//            {
-//                CommonDialog commonDialog(CommonDialog::OkOnly);
-//                commonDialog.setText( "Failed: " + errorMessage);
-//                commonDialog.pop();
-//            }
-//        }
-
-//        return;
-    //    }
 }
 
 void SetDialog::on_toolButton_set_clicked()

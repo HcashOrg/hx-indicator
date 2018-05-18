@@ -98,6 +98,8 @@ private slots:
     void showNormalAndActive();
 
     void newAccount(QString name);
+
+    void onCloseWallet();
 private slots:
     //显示通知气泡
     void ShowBubbleMessage(const QString &title,const QString &context,QSystemTrayIcon::MessageIcon icon = QSystemTrayIcon::Information, int msecs = 10000);

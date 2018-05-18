@@ -93,16 +93,16 @@ bool ContactAddWidget::validateAddress(const QString &address)
     if(!_p->contactSheet) return false;
     if(!_p->contactSheet->validateAddress(address)) return false;
     //调用全局检测函数
-    return true;
-    //AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
-    //if( type == AccountAddress)
-    //{
-    //    return true;
-    //}
-    //else
-    //{
-    //    return false;
-    //}
+//    return true;
+    AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
+    if( type == AccountAddress)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 
 }
 
@@ -122,9 +122,6 @@ void ContactAddWidget::InitStyle()
                    border-radius:10px;font-size:12pt;}"
                   "QPushButton::hover{background-color:#00D2FF;}"
                   "QLabel{background:transparent;color:black:font-family:\"微软雅黑\";}");
-    ui->line->setVisible(false);
-    ui->line_2->setVisible(false);
-    ui->line_3->setVisible(false);
 }
 
 void ContactAddWidget::InitWidget()

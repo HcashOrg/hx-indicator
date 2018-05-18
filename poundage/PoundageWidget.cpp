@@ -290,9 +290,9 @@ void PoundageWidget::InitWidget()
 
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &PoundageWidget::jsonDataUpdated);
 
-    connect(ui->pushButton_publishPoundage,&QPushButton::clicked,this,&PoundageWidget::PublishPoundageSlots); 
-    connect(ui->toolButton_allPoundage,&QPushButton::clicked,this,&PoundageWidget::ShowAllPoundageSlots);
-    connect(ui->toolButton_myPoundage,&QPushButton::clicked,this,&PoundageWidget::ShowMyPoundageSlots);
+    connect(ui->toolButton_publishPoundage,&QToolButton::clicked,this,&PoundageWidget::PublishPoundageSlots);
+    connect(ui->toolButton_allPoundage,&QToolButton::clicked,this,&PoundageWidget::ShowAllPoundageSlots);
+    connect(ui->toolButton_myPoundage,&QToolButton::clicked,this,&PoundageWidget::ShowMyPoundageSlots);
 
     connect(ui->comboBox_sortType,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&PoundageWidget::SortByStuffSlots);
     connect(ui->comboBox_coinType,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&PoundageWidget::autoRefreshSlots);
@@ -310,20 +310,14 @@ void PoundageWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
+    ui->toolButton_publishPoundage->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     setStyleSheet("QToolButton#toolButton_allPoundage{background:transparent;color:rgb(144,144,144);\
                                                       font-family: \"微软雅黑\";font:14px;font-weight:600;text-align:left;}\
                    QToolButton#toolButton_allPoundage:checked{color:rgb(0,0,0);}\
                    QToolButton#toolButton_myPoundage{background:transparent;color:rgb(144,144,144);\
                                                      font-family: \"微软雅黑\";font:14px;font-weight:600;text-align:left;}\
-                   QToolButton#toolButton_myPoundage:checked{color:rgb(0,0,0);}\
-                   QPushButton#pushButton_publishPoundage{\
-                   color:white;\
-                   border: none;\
-                   border-radius: 10px;\
-                   background-color:rgb(0,210,255);} \
-                   QPushButton#pushButton_publishPoundage:hover{\
-                   background-color:#5474EB;}"
+                   QToolButton#toolButton_myPoundage:checked{color:rgb(0,0,0);}"
                    TABLEWIDGET_STYLE_1);
 }
 

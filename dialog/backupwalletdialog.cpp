@@ -25,7 +25,6 @@ BackupWalletDialog::BackupWalletDialog(QWidget *parent) :
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     ui->pathBtn->setStyleSheet(SELECTBTN_STYLE);
-    ui->pathLineEdit->setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}");
 }
 
 BackupWalletDialog::~BackupWalletDialog()

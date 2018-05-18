@@ -295,7 +295,7 @@ void Frame::alreadyLogin()
     titleBar->show();
 
     connect(titleBar,SIGNAL(minimum()),this,SLOT(showMinimized()));
-    connect(titleBar,SIGNAL(closeWallet()),qApp,SLOT(quit()));
+    connect(titleBar,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
     connect(titleBar,SIGNAL(tray()),this,SLOT(hide()));
     connect(titleBar,&TitleBar::back,this,&Frame::onBack);
     connect(this,&Frame::titleBackVisible,titleBar,&TitleBar::backBtnVis);
@@ -581,11 +581,6 @@ void Frame::syncFinished()
 {
     qDebug() << "sync finished ";
     waitingForSync->timerForWSConnected->stop();
-//    RpcThread* rpcThread = new RpcThread;
-//    connect(rpcThread,SIGNAL(finished()),rpcThread,SLOT(deleteLater()));
-//    rpcThread->setLogin("a","b");
-//    rpcThread->setWriteData( toJsonFormat( "id_open", "open", QJsonArray() << "wallet" ));
-//    rpcThread->start();
 
 //    UBChain::getInstance()->initWorkerThreadManager();
 
@@ -1148,21 +1143,14 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-
-    if( id.mid(0,37) == "id_wallet_get_account_public_address-" )
+    if( id == "id-lock-onCloseWallet")
     {
-//        QString  result = UBChain::getInstance()->jsonDataValue(id);
-//        QString name = id.mid(37);
-
-//        if( result.mid(0,9) == "\"result\":")
-//        {
-//            QString address = result.mid(10);
-//            address.remove('\"');
-//            UBChain::getInstance()->addressMapInsert(name, address);
-
-//            refreshAccountInfo();
-//        }
-
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+        if( result == "\"result\":null")
+        {
+            qApp->quit();
+        }
         return;
     }
 
@@ -1201,26 +1189,6 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-//    if( id == "id_wallet_get_transaction_fee" )
-//    {
-//        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-//        if( result.startsWith("\"result\":"))
-//        {
-//            int pos = result.indexOf("\"amount\":") + 9;
-//            QString amount = result.mid(pos, result.indexOf(",", pos) - pos);
-//            amount.remove("\"");
-
-//            UBChain::getInstance()->transactionFee = amount.toULongLong();
-
-//            if( currentPageNum == 3 && transferPage != NULL)
-//            {
-//                transferPage->updateTransactionFee();
-//            }
-//        }
-
-//        return;
-//    }
 
     if( id.startsWith("id-get_contracts_hash_entry_by_owner-"))
     {
@@ -1509,8 +1477,6 @@ void Frame::init()
     UBChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
     UBChain::getInstance()->postRPC( "id-list_miners", toJsonFormat( "list_miners", QJsonArray() << "A" << "100"));
-//    UBChain::getInstance()->postRPC( "id_wallet_get_transaction_fee", toJsonFormat( "wallet_get_transaction_fee", QJsonArray()));
-
 
     UBChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.254:9030") ));
 
@@ -1566,9 +1532,12 @@ void Frame::RestoreRightPart()
 
 void Frame::newAccount(QString name)
 {
-//    UBChain::getInstance()->postRPC( toJsonFormat( "id_wallet_get_account_public_address-" + name, "wallet_get_account_public_address", QJsonArray() << name));
-
     getAccountInfo();
+}
+
+void Frame::onCloseWallet()
+{
+    UBChain::getInstance()->postRPC( "id-lock-onCloseWallet", toJsonFormat( "lock", QJsonArray()));
 }
 
 void Frame::ShowBubbleMessage(const QString &title, const QString &context,QSystemTrayIcon::MessageIcon icon, int msecs)

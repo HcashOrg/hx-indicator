@@ -23,8 +23,8 @@
     <rect>
      <x>639</x>
      <y>90</y>
-     <width>61</width>
-     <height>24</height>
+     <width>60</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -100,10 +100,10 @@
   <widget class="QToolButton" name="lockToMinerBtn">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>560</x>
      <y>90</y>
-     <width>71</width>
-     <height>24</height>
+     <width>60</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">

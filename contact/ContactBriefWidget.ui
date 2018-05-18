@@ -10,6 +10,11 @@
     <height>80</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -57,8 +62,12 @@
    </property>
    <property name="font">
     <font>
+     <family>微软雅黑</family>
      <pointsize>16</pointsize>
     </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
     <string/>

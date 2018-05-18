@@ -28,16 +28,12 @@ ExportDialog::ExportDialog( QString name, QWidget *parent) :
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     ui->pathBtn->setStyleSheet(SELECTBTN_STYLE);
-    ui->pathLineEdit->setStyleSheet("QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;padding-right:80px;}");
-    ui->line->setVisible(false);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 
     ui->nameLabel->setText( tr("Export ") + accoutName + tr(" \'s private key to:"));
 
-
     ui->encryptCheckBox->setChecked(true);
-
 }
 
 ExportDialog::~ExportDialog()
@@ -86,16 +82,6 @@ void ExportDialog::on_cancelBtn_clicked()
 void ExportDialog::getPrivateKey()
 {
     UBChain::getInstance()->postRPC( "id-dump_private_key-" + accoutName, toJsonFormat( "dump_private_key", QJsonArray() << accoutName << "0" ));
-
-//    QStringList assets = UBChain::getInstance()->assetInfoMap.keys();
-//    foreach (QString asset, assets)
-//    {
-//        AssetInfo info = UBChain::getInstance()->assetInfoMap.value(asset);
-//        UBChain::getInstance()->postRPC( "id-get_binding_account-" + accountName + "-" + info.symbol,
-//                                         toJsonFormat( "get_binding_account", QJsonArray()
-//                                         << accountName << info.symbol ));
-//    }
-
 }
 
 void ExportDialog::jsonDataUpdated(QString id)
@@ -103,7 +89,6 @@ void ExportDialog::jsonDataUpdated(QString id)
     if( id.startsWith("id-dump_private_key-" + accoutName))
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << "eeeeeeeeeeee " << id << result;
 
         ui->exportBtn->setEnabled(true);
 
@@ -150,7 +135,7 @@ void ExportDialog::jsonDataUpdated(QString id)
 
                 QString input = "privateKey=" + privateKey;
                 QString output = QString::fromStdString( aes.EncryptString( input.toStdString()) );
-qDebug() << "iiiiiiiiiiiii  " << input;
+
                 file.resize(0);
                 QTextStream ts( &file);
                 ts << output.toUtf8();

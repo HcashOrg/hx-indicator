@@ -31,6 +31,11 @@
       <height>240</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
     <widget class="QToolButton" name="cancelBtn">
      <property name="geometry">
       <rect>

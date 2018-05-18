@@ -187,6 +187,7 @@ void UBChain::onClientExeStateChanged()
     }
     else if(clientProc->state() == QProcess::NotRunning)
     {
+        qDebug() << "client not running" + clientProc->errorString();
         CommonDialog commonDialog(CommonDialog::OkOnly);
         commonDialog.setText(tr("Fail to launch %1 !").arg("lnk_client.exe"));
         commonDialog.pop();
@@ -591,9 +592,13 @@ void UBChain::parseAssetInfo()
 
                         QJsonObject object = resultArray.at(i).toObject();
                         assetInfo.id = object.take("id").toString();
-                        assetInfo.symbol = object.take("symbol").toString();
                         assetInfo.issuer = object.take("issuer").toString();
                         assetInfo.precision = object.take("precision").toInt();
+                        assetInfo.symbol = object.take("symbol").toString();
+//                        if(assetInfo.symbol != ASSET_NAME)
+//                        {
+//                            assetInfo.symbol.prepend("link-");
+//                        }
 
                         QJsonObject object2 = object.take("options").toObject();
 
