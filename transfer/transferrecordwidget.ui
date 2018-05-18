@@ -136,8 +136,15 @@
    </property>
    <property name="font">
     <font>
-     <family>Leelawadee UI</family>
+     <family>&quot;微软雅黑&quot;</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 14px \&quot;微软雅黑\&quot;;</string>
    </property>
    <property name="text">
     <string>币种</string>

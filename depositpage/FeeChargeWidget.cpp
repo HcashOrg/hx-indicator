@@ -2,6 +2,7 @@
 #include "ui_FeeChargeWidget.h"
 
 #include "FeeChooseWidget.h"
+#include "wallet.h"
 
 #include <QPainter>
 
@@ -77,17 +78,13 @@ void FeeChargeWidget::InitStyle()
 {
     setAttribute(Qt::WA_TranslucentBackground, true);
 
-    setStyleSheet("QToolButton#toolButton_confirm{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-             "QToolButton#toolButton_cancel::hover,QToolButton#toolButton_confirm::hover{background-color:#00D2FF;}"
-    "QToolButton#toolButton_cancel{background-color:#E5E5E5; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-             );
+    ui->widget->setObjectName("widget");
+    ui->containerWidget->setObjectName("containerwidget");
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
 
-    ui->toolButton_close->setIconSize(QSize(12,12));
-    ui->toolButton_close->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-    ui->toolButton_close->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
-                                "QToolButton:hover{background-color:rgb(208,228,255);}");
-
-
+    ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
+    ui->toolButton_cancel->setStyleSheet(CANCELBTN_STYLE);
+    ui->toolButton_close->setStyleSheet(CLOSEBTN_STYLE);
 }
 
 void FeeChargeWidget::paintEvent(QPaintEvent *event)
@@ -97,12 +94,6 @@ void FeeChargeWidget::paintEvent(QPaintEvent *event)
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
     painter.drawRect(rect());
-
-
-//    painter.setBrush(QColor(255,255,255,255));
-//    painter.drawRect(220,60,320,425);
-
-    painter.drawPixmap(300,140,420,400,QPixmap(":/ui/wallet_ui/whitebord.png").scaled(420,400));
 
     QWidget::paintEvent(event);
 }

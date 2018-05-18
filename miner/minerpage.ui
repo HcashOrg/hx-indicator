@@ -137,7 +137,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="incomePage">
     <widget class="QTableWidget" name="incomeTableWidget">
@@ -400,7 +400,7 @@
       </rect>
      </property>
      <property name="cursor" stdset="0">
-      <cursorShape>PointingHandCursor</cursorShape>
+      <cursorShape>ArrowCursor</cursorShape>
      </property>
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
@@ -479,7 +479,23 @@
      </column>
      <column>
       <property name="text">
-       <string>操作</string>
+       <string>手续费</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>交易ID</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>交易状态</string>
       </property>
       <property name="textAlignment">
        <set>AlignCenter</set>

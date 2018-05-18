@@ -39,6 +39,8 @@ private slots:
     void on_incomeRecordBtn_clicked();
 
     void pageChangeSlot(unsigned int page);
+    void on_incomeRecordTableWidget_cellPressed(int row, int column);
+
 private:
     Ui::MinerPage *ui;
 

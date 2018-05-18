@@ -11,6 +11,7 @@
 #include "poundage/PageScrollWidget.h"
 #include "ToolButtonWidget.h"
 #include "depositpage/FeeChargeWidget.h"
+#include "showcontentdialog.h"
 
 static const int ROWNUMBER = 4;
 MinerPage::MinerPage(QWidget *parent) :
@@ -72,9 +73,9 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->incomeRecordTableWidget->horizontalHeader()->setVisible(true);
     ui->incomeRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    ui->incomeRecordTableWidget->setColumnWidth(0,140);
-    ui->incomeRecordTableWidget->setColumnWidth(1,140);
-
+//    ui->incomeRecordTableWidget->setColumnWidth(0,140);
+//    ui->incomeRecordTableWidget->setColumnWidth(1,140);
+//    ui->incomeRecordTableWidget->setColumnWidth(2,140);
 
 
     pageWidget_income = new PageScrollWidget();
@@ -340,10 +341,15 @@ void MinerPage::showIncomeRecord()
         unsigned long long amount = jsonValueToULL(amountObject.take("amount"));
         QString amountAssetId = amountObject.take("asset_id").toString();
         AssetInfo amountAssetInfo = UBChain::getInstance()->assetInfoMap.value(amountAssetId);
+        QJsonObject feeObject = object.take("fee").toObject();
+        unsigned long long feeAmount = jsonValueToULL(feeObject.take("amount"));
 
         ui->incomeRecordTableWidget->setItem(i,0, new QTableWidgetItem(QString::number(ts.blockNum)));
-        ui->incomeRecordTableWidget->setItem(i,1, new QTableWidgetItem(getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol));
-
+        ui->incomeRecordTableWidget->setItem(i,1, new QTableWidgetItem( "+" + getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol));
+        ui->incomeRecordTableWidget->item(i,1)->setTextColor(QColor(0,255,0));
+        ui->incomeRecordTableWidget->setItem(i,2, new QTableWidgetItem(getBigNumberString(feeAmount, ASSET_PRECISION) + " " + ASSET_NAME));
+        ui->incomeRecordTableWidget->setItem(i,3, new QTableWidgetItem(transactionId));
+        ui->incomeRecordTableWidget->setItem(i,4, new QTableWidgetItem(tr("confirmed")));
     }
     pageWidget_record->SetTotalPage(calPage(ui->incomeRecordTableWidget));
     setTextCenter(ui->incomeRecordTableWidget);
@@ -530,5 +536,22 @@ void MinerPage::pageChangeSlot(unsigned int page)
         {
             table->setRowHidden(i,true);
         }
+    }
+}
+
+void MinerPage::on_incomeRecordTableWidget_cellPressed(int row, int column)
+{
+    if( column == 3 )
+    {
+        ShowContentDialog showContentDialog( ui->incomeRecordTableWidget->item(row, column)->text(),this);
+
+        int x = ui->incomeRecordTableWidget->columnViewportPosition(column) + ui->incomeRecordTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->incomeRecordTableWidget->rowViewportPosition(row) - 10 + ui->incomeRecordTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->incomeRecordTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
     }
 }

@@ -102,7 +102,8 @@ void CapitalTransferPage::radioChangedSlots()
     }
 
     ui->lineEdit_number->clear();
-    ui->toolButton_confirm->setVisible(false);
+//    ui->toolButton_confirm->setVisible(false);
+    ui->toolButton_confirm->setEnabled(false);
 }
 
 void CapitalTransferPage::jsonDataUpdated(QString id)
@@ -170,7 +171,8 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
 
         if( result.isEmpty() || result.startsWith("\"error"))
         {
-            ui->toolButton_confirm->setVisible(false);
+//            ui->toolButton_confirm->setVisible(false);
+            ui->toolButton_confirm->setEnabled(false);
             return;
         }
         result.prepend("{");
@@ -178,7 +180,8 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         _p->trade_detail = CapitalTransferDataUtil::parseTradeDetail(result);
 
         //创建交易成功后，显示确认按钮
-        ui->toolButton_confirm->setVisible(true);
+//        ui->toolButton_confirm->setVisible(true);
+        ui->toolButton_confirm->setEnabled(true);
 
         qDebug()<<"detail"<<_p->trade_detail;
 
@@ -277,7 +280,8 @@ void CapitalTransferPage::CreateTransaction()
        _p->symbol.isEmpty() || _p->actualNumber.isEmpty() || _p->actualNumber.toDouble() < 1e-20)
     {
         _p->actualNumber = "0";
-        ui->toolButton_confirm->setVisible(false);
+//        ui->toolButton_confirm->setVisible(false);
+        ui->toolButton_confirm->setEnabled(false);
         return;
     }
 
@@ -302,7 +306,8 @@ void CapitalTransferPage::InitWidget()
 
     ui->label_fee->setText(_p->fee +_p->symbol);
 
-    ui->toolButton_confirm->setVisible(false);
+//    ui->toolButton_confirm->setVisible(false);
+    ui->toolButton_confirm->setEnabled(false);
     ui->label_addressTitle->setText(tr("%1 address").arg("Tunnel"));
     ui->radioButton_deposit->setChecked(true);
     ui->lineEdit_address->setPlaceholderText(tr("please wait"));

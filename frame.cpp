@@ -1276,7 +1276,7 @@ void Frame::jsonDataUpdated(QString id)
             {
                 QString transactionId = v.toString();
                 TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
-
+qDebug() << "ssssssssssss " << ts.transactionId <<ts.type;
                 if(ts.type == -1)
                 {
                     UBChain::getInstance()->postRPC( "id-get_transaction-" + transactionId, toJsonFormat( "get_transaction", QJsonArray() << transactionId));
@@ -1291,11 +1291,11 @@ void Frame::jsonDataUpdated(QString id)
     if( id.startsWith("id-get_transaction-"))
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result ;
 
         if(result.startsWith("\"result\":"))
         {
             QString transactionId = id.mid(QString("id-get_transaction-").size());
-            qDebug() << id << result << transactionId;
             result.prepend("{");
             result.append("}");
 
@@ -1305,7 +1305,7 @@ void Frame::jsonDataUpdated(QString id)
 
             TransactionStruct ts;
             ts.transactionId = transactionId;
-            ts.blockNum = object.take("ref_block_num").toInt();
+            ts.blockNum = object.take("block_num").toInt();
             ts.expirationTime = object.take("expiration").toString();
 
             QJsonArray array = object.take("operations").toArray().at(0).toArray();
@@ -1314,6 +1314,7 @@ void Frame::jsonDataUpdated(QString id)
             ts.operationStr = QJsonDocument(operationObject).toJson();
 
             UBChain::getInstance()->transactionDB.insertTransactionStruct(transactionId,ts);
+            qDebug() << "ttttttttttttt " << transactionId << ts.type;
 
             TransactionTypeId typeId;
             typeId.type = ts.type;
