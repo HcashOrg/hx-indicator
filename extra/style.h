@@ -26,7 +26,7 @@
 #define SELECTBTN_STYLE "QToolButton{background:transparent;color:rgb(192,202,212);font: 11px \"微软雅黑\";}" \
                         "QToolButton:hover{color:rgb(84,116,235);}"
 
-#define COMBOBOX_STYLE_BOTTOMBORDER "QComboBox{background-color:transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;color: black;padding-left: 5px;font: 14px \"微软雅黑\";}" \
+#define COMBOBOX_STYLE_BOTTOMBORDER "QComboBox{background-color:transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,192,192);color: black;padding-left: 5px;font: 14px \"微软雅黑\";}" \
                                     "QComboBox::drop-down {background:transparent;border:none;}" \
                                     "QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}" \
                                     "QComboBox::down-arrow:on {image: url(:/ui/wallet_ui/downArrow_on.png);}" \

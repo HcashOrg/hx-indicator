@@ -50,27 +50,27 @@ void ContactAddWidget::addressChangeSlots(const QString &address)
     if( ui->lineEdit_address->text().isEmpty())
     {
         ui->label_tip->setVisible(false);
-        ui->pushButton->setEnabled(false);
+        ui->toolButton->setEnabled(false);
         return;
     }
 
     if( validateAddress(ui->lineEdit_address->text()))
     {
-        ui->label_tip->setVisible(false);
+        ui->label_tip->setVisible(true);
         ui->label_tip->setText(tr("address available"));
         QPalette pa;
         pa.setColor(QPalette::WindowText,Qt::green);
         ui->label_tip->setPalette(pa);
-        ui->pushButton->setEnabled(true);
+        ui->toolButton->setEnabled(true);
     }
     else
     {
-        ui->label_tip->setVisible(false);
+        ui->label_tip->setVisible(true);
         ui->label_tip->setText(tr("address illegal or conflict "));
         QPalette pa;
         pa.setColor(QPalette::WindowText,Qt::red);
         ui->label_tip->setPalette(pa);
-        ui->pushButton->setEnabled(false);
+        ui->toolButton->setEnabled(false);
     }
 }
 
@@ -84,7 +84,7 @@ void ContactAddWidget::addNewContactSlots()
     _p->person->name = ui->lineEdit_remark->text().isEmpty()? _p->person->address : ui->lineEdit_remark->text();
 
     group->groupPeople.push_back(_p->person);
-    ui->pushButton->setEnabled(false);
+    ui->toolButton->setEnabled(false);
     emit addContactFinishedSignal(_p->person->address);
 }
 
@@ -93,7 +93,7 @@ bool ContactAddWidget::validateAddress(const QString &address)
     if(!_p->contactSheet) return false;
     if(!_p->contactSheet->validateAddress(address)) return false;
     //调用全局检测函数
-//    return true;
+
     AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
     if( type == AccountAddress)
     {
@@ -113,22 +113,14 @@ void ContactAddWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    setStyleSheet("QLineEdit{border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;\
-                   background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  "Qline{color:#5474EB;background:#5474EB;}"
-                  "QComboBox{border-top:none;border-left:none;border-right:none;border-bottom:1px solid black;\
-                   background:transparent;color:#5474EB;font-size:12pt;margin-left:3px;}"
-                  "QPushButton{border:none;background-color:#5474EB;color:white;width:60px;height:20px;\
-                   border-radius:10px;font-size:12pt;}"
-                  "QPushButton::hover{background-color:#00D2FF;}"
-                  "QLabel{background:transparent;color:black:font-family:\"微软雅黑\";}");
+    ui->toolButton->setStyleSheet(OKBTN_STYLE);
 }
 
 void ContactAddWidget::InitWidget()
 {
     InitStyle();
 
-    ui->pushButton->setEnabled(false);
+    ui->toolButton->setEnabled(false);
 
     QRegExp regx("[a-zA-Z0-9\-\.\ \n]+$");
     QValidator *validator = new QRegExpValidator(regx, this);
@@ -145,7 +137,7 @@ void ContactAddWidget::InitWidget()
     InitComboBox();
 
     connect(ui->lineEdit_address,&QLineEdit::textEdited,this,&ContactAddWidget::addressChangeSlots);
-    connect(ui->pushButton,&QPushButton::clicked,this,&ContactAddWidget::addNewContactSlots);
+    connect(ui->toolButton,&QToolButton::clicked,this,&ContactAddWidget::addNewContactSlots);
 }
 
 void ContactAddWidget::InitComboBox()

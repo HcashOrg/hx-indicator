@@ -26,7 +26,7 @@ QCheckBox::indicator{ image:url(:/ui/wallet_ui/checkBox_unchecked.png);}
 QCheckBox::indicator:checked{ image:url(:/ui/wallet_ui/checkBox_checked.png); }
 
 
-QLineEdit{background: transparent;color: rgb(84,116,235);font: 14px \"微软雅黑\";border:none;border-bottom:1px solid gray;padding: 0px 10px 0px 6px;}
+QLineEdit{background: transparent;color: rgb(84,116,235);font: 14px \"微软雅黑\";border:none;border-bottom:1px solid rgb(192,192,192);padding: 0px 10px 0px 6px;}
 QLineEdit:focus{border-bottom-color:rgb(84,116,235);}
 QLineEdit:disabled{color: rgb(151,151,151);}
 
