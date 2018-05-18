@@ -24,6 +24,8 @@ private slots:
     void on_assetComboBox_currentIndexChanged(const QString &arg1);
 
     void pageChangeSlot(unsigned int page);
+    void on_transferRecordTableWidget_cellPressed(int row, int column);
+
 private:
     Ui::TransferRecordWidget *ui;
 

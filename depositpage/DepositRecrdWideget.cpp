@@ -3,6 +3,7 @@
 
 #include "wallet.h"
 #include "poundage/PageScrollWidget.h"
+#include "showcontentdialog.h"
 
 static const int ROWNUMBER = 4;
 
@@ -131,4 +132,35 @@ void DepositRecrdWideget::pageChangeSlot(unsigned int page)
         }
     }
 
+}
+
+void DepositRecrdWideget::on_depositRecordTableWidget_cellPressed(int row, int column)
+{
+    if( column == 2 )
+    {
+        ShowContentDialog showContentDialog( ui->depositRecordTableWidget->item(row, column)->text(),this);
+
+        int x = ui->depositRecordTableWidget->columnViewportPosition(column) + ui->depositRecordTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->depositRecordTableWidget->rowViewportPosition(row) - 10 + ui->depositRecordTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->depositRecordTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
+
+    if( column == 3 )
+    {
+        ShowContentDialog showContentDialog( ui->depositRecordTableWidget->item(row, column)->text(),this);
+
+        int x = ui->depositRecordTableWidget->columnViewportPosition(column) + ui->depositRecordTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->depositRecordTableWidget->rowViewportPosition(row) - 10 + ui->depositRecordTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->depositRecordTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
 }

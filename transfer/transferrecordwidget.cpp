@@ -3,6 +3,7 @@
 
 #include "wallet.h"
 #include "poundage/PageScrollWidget.h"
+#include "showcontentdialog.h"
 
 static const int ROWNUMBER = 4;
 TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
@@ -176,4 +177,35 @@ void TransferRecordWidget::pageChangeSlot(unsigned int page)
         }
     }
 
+}
+
+void TransferRecordWidget::on_transferRecordTableWidget_cellPressed(int row, int column)
+{
+    if( column == 1 )
+    {
+        ShowContentDialog showContentDialog( ui->transferRecordTableWidget->item(row, column)->text(),this);
+
+        int x = ui->transferRecordTableWidget->columnViewportPosition(column) + ui->transferRecordTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->transferRecordTableWidget->rowViewportPosition(row) - 10 + ui->transferRecordTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->transferRecordTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
+
+    if( column == 4 )
+    {
+        ShowContentDialog showContentDialog( ui->transferRecordTableWidget->item(row, column)->text(),this);
+
+        int x = ui->transferRecordTableWidget->columnViewportPosition(column) + ui->transferRecordTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->transferRecordTableWidget->rowViewportPosition(row) - 10 + ui->transferRecordTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->transferRecordTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
 }

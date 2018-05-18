@@ -22,6 +22,8 @@ public:
 
 private slots:
     void pageChangeSlot(unsigned int page);
+    void on_depositRecordTableWidget_cellPressed(int row, int column);
+
 private:
     Ui::DepositRecrdWideget *ui;
 
