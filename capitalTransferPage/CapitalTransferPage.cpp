@@ -272,7 +272,7 @@ void CapitalTransferPage::PostQueryTunnelMoney(const QString &symbol, const QStr
 
 void CapitalTransferPage::CreateTransaction()
 {
-    _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble());
+    _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble(),'f',_p->precision);
     if(_p->tunnel_account_address.isEmpty() || _p->multisig_address.isEmpty() ||
        _p->symbol.isEmpty() || _p->actualNumber.isEmpty() || _p->actualNumber.toDouble() < 1e-20)
     {
