@@ -524,6 +524,10 @@ void MyExchangeContractPage::onItemClicked(int _row, int _column)
 
     if(_column == 4)
     {
+        SellDialog sellDialog;
+        sellDialog.setSellAsset(ui->assetComboBox->currentText());
+        sellDialog.setBuyAsset(ui->assetComboBox2->currentText());
+        sellDialog.pop();
 
         return;
     }

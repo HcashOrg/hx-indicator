@@ -60,6 +60,8 @@ void OnchainOrderPage::init()
     }
 
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
+
+    inited = true;
 }
 
 void OnchainOrderPage::onBack()
@@ -228,5 +230,9 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
 
 void OnchainOrderPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
+    if(!inited)  return;
+
+    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+
     on_assetComboBox_currentIndexChanged(ui->assetComboBox->currentText());
 }

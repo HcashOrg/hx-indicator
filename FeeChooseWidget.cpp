@@ -170,7 +170,7 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
                 break;
             }
         }
-        _p->poundageTip = "支付:"+QString::number(_p->coinNumber,'f',pre)+" "+_p->feeType + "  汇率:"+QString::number(rate);
+        _p->poundageTip = tr("pay:") + QString::number(_p->coinNumber,'f',pre) + " " + _p->feeType + tr("  rate:") + QString::number(rate);
 
     }
 }

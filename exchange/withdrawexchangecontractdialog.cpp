@@ -31,8 +31,6 @@ WithdrawExchangeContractDialog::WithdrawExchangeContractDialog(QWidget *parent) 
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    ui->label_3->setVisible(false);
-    ui->contractFeeLabel->setVisible(false);
     init();
 }
 
@@ -131,8 +129,6 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
             unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
 
             feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
-            ui->contractFeeLabel->setText(getBigNumberString(totalAmount, ASSET_PRECISION)
-                                          + " " + ASSET_NAME);
         }
 
         return;

@@ -100,14 +100,20 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>145</y>
-       <width>54</width>
-       <height>30</height>
+       <x>0</x>
+       <y>140</y>
+       <width>90</width>
+       <height>40</height>
       </rect>
      </property>
      <property name="text">
       <string>充值数量</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLineEdit" name="amountLineEdit">
@@ -123,14 +129,17 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>0</x>
        <y>30</y>
-       <width>60</width>
+       <width>90</width>
        <height>30</height>
       </rect>
      </property>
      <property name="text">
       <string>当前账户</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="accountNameLabel">
@@ -149,27 +158,33 @@
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>0</x>
        <y>70</y>
-       <width>60</width>
+       <width>90</width>
        <height>30</height>
       </rect>
      </property>
      <property name="text">
       <string>充值币种</string>
      </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
     </widget>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>0</x>
        <y>107</y>
-       <width>60</width>
+       <width>90</width>
        <height>30</height>
       </rect>
      </property>
      <property name="text">
       <string>账户余额</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="balanceLabel">
@@ -201,9 +216,9 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>-10</x>
+       <x>0</x>
        <y>190</y>
-       <width>100</width>
+       <width>90</width>
        <height>30</height>
       </rect>
      </property>

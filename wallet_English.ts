@@ -1451,12 +1451,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Contract Balance</translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.ui" line="104"/>
+        <location filename="exchange/contractbalancewidget.ui" line="109"/>
         <source>合约地址</source>
         <translation type="unfinished">Contract address</translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.ui" line="136"/>
+        <location filename="exchange/contractbalancewidget.ui" line="146"/>
         <source>开放合约</source>
         <translation type="unfinished">open for users</translation>
     </message>
@@ -1959,22 +1959,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Deposit amount</translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.ui" line="133"/>
+        <location filename="exchange/depositexchangecontractdialog.ui" line="139"/>
         <source>当前账户</source>
         <translation type="unfinished">Account</translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.ui" line="159"/>
+        <location filename="exchange/depositexchangecontractdialog.ui" line="168"/>
         <source>充值币种</source>
         <translation type="unfinished">Coin</translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.ui" line="172"/>
+        <location filename="exchange/depositexchangecontractdialog.ui" line="184"/>
         <source>账户余额</source>
         <translation type="unfinished">Balance</translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.ui" line="211"/>
+        <location filename="exchange/depositexchangecontractdialog.ui" line="226"/>
         <source>输入钱包密码</source>
         <translation type="unfinished">Password</translation>
     </message>
@@ -2322,6 +2322,16 @@ Cover it or not?</source>
         <location filename="FeeChooseWidget.cpp" line="157"/>
         <source>cannot find proper acceptance!</source>
         <oldsource>cannot find proper poundage!</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="FeeChooseWidget.cpp" line="173"/>
+        <source>pay:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="FeeChooseWidget.cpp" line="173"/>
+        <source>  rate:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4457,22 +4467,22 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Fee</translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.ui" line="262"/>
+        <location filename="exchange/selldialog.ui" line="268"/>
         <source>输入钱包密码</source>
         <translation type="unfinished">Password</translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="84"/>
+        <location filename="exchange/selldialog.cpp" line="85"/>
         <source>Transaction of sell-order has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="140"/>
+        <location filename="exchange/selldialog.cpp" line="141"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="176"/>
+        <location filename="exchange/selldialog.cpp" line="177"/>
         <source>Max: %1 %2</source>
         <oldsource>Total %1 %2</oldsource>
         <translation type="unfinished"></translation>
@@ -5624,42 +5634,41 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Amount to withdraw</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.ui" line="118"/>
+        <location filename="exchange/withdrawexchangecontractdialog.ui" line="124"/>
         <source>提取全部</source>
         <translation type="unfinished">all</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.ui" line="131"/>
+        <location filename="exchange/withdrawexchangecontractdialog.ui" line="137"/>
         <source>输入钱包密码</source>
         <translation type="unfinished">Password</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.ui" line="160"/>
+        <location filename="exchange/withdrawexchangecontractdialog.ui" line="169"/>
         <source>当前账户</source>
         <translation type="unfinished">Account</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.ui" line="173"/>
+        <location filename="exchange/withdrawexchangecontractdialog.ui" line="188"/>
         <source>提现币种</source>
         <translation type="unfinished">Coin to withdraw</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.ui" line="257"/>
         <source>预计费用</source>
-        <translation type="unfinished">Fee</translation>
+        <translation type="obsolete">Fee</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="90"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="88"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="106"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="104"/>
         <source>Transaction of withdraw from the exchange contract has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="168"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="164"/>
         <source>Max: %1 %2</source>
         <oldsource>total %1 %2</oldsource>
         <translation type="unfinished"></translation>

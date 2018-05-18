@@ -39,6 +39,7 @@ private slots:
 
 private:
     Ui::OnchainOrderPage *ui;
+    bool inited = false;
     HttpManager httpManager;
     QWidget* currentWidget;
 

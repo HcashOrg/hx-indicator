@@ -204,14 +204,17 @@
     <widget class="QLabel" name="label_4">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>0</x>
        <y>30</y>
-       <width>60</width>
+       <width>90</width>
        <height>30</height>
       </rect>
      </property>
      <property name="text">
       <string>当前账户</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="accountNameLabel">
@@ -219,9 +222,12 @@
       <rect>
        <x>100</x>
        <y>30</y>
-       <width>120</width>
+       <width>170</width>
        <height>30</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
      <property name="text">
       <string/>
