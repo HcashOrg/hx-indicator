@@ -95,7 +95,7 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
         ui->withdrawRecordTableWidget->setItem(rowCount,1, new QTableWidgetItem(crossChainAddress));
 
         // 如果是转出
-        QTableWidgetItem* item = new QTableWidgetItem( amountStr + " " + assetInfo.symbol);
+        QTableWidgetItem* item = new QTableWidgetItem( "-" + amountStr + " " + assetInfo.symbol);
         ui->withdrawRecordTableWidget->setItem(rowCount,2, item);
         item->setTextColor(QColor(255,0,0));
 
