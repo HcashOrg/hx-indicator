@@ -10,6 +10,11 @@
     <height>156</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>微软雅黑</family>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -51,7 +56,7 @@
      </property>
      <property name="font">
       <font>
-       <family>Microsoft YaHei UI</family>
+       <family>微软雅黑</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -134,7 +139,7 @@
        </property>
        <property name="font">
         <font>
-         <family>Microsoft YaHei UI</family>
+         <family>微软雅黑</family>
          <pointsize>10</pointsize>
         </font>
        </property>
@@ -158,7 +163,7 @@
          </property>
          <property name="font">
           <font>
-           <family>Microsoft YaHei UI</family>
+           <family>微软雅黑</family>
            <pointsize>10</pointsize>
           </font>
          </property>

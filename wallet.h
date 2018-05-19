@@ -94,6 +94,8 @@ struct ContractInfo
     QString contractAddress;
     QString hashValue;
     QString state;
+
+    friend bool operator == (const ContractInfo& c1, const ContractInfo& c2);
 };
 
 struct AccountInfo

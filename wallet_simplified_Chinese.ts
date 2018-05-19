@@ -1041,47 +1041,47 @@ better not transfer or upgrade</source>
 <context>
     <name>ContactChooseWidget</name>
     <message>
-        <location filename="transfer/ContactChooseWidget.ui" line="14"/>
+        <location filename="transfer/ContactChooseWidget.ui" line="19"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.ui" line="26"/>
+        <location filename="transfer/ContactChooseWidget.ui" line="31"/>
         <source>请输入账户名或地址</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.ui" line="58"/>
+        <location filename="transfer/ContactChooseWidget.ui" line="66"/>
         <source>请选择需要转账的联系人</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.ui" line="76"/>
+        <location filename="transfer/ContactChooseWidget.ui" line="84"/>
         <source>备注名</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.ui" line="95"/>
+        <location filename="transfer/ContactChooseWidget.ui" line="106"/>
         <source>确认</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.ui" line="114"/>
+        <location filename="transfer/ContactChooseWidget.ui" line="128"/>
         <source>取消</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.ui" line="147"/>
+        <location filename="transfer/ContactChooseWidget.ui" line="161"/>
         <source>备注名：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.ui" line="178"/>
+        <location filename="transfer/ContactChooseWidget.ui" line="192"/>
         <source>账户地址：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.ui" line="195"/>
+        <location filename="transfer/ContactChooseWidget.ui" line="209"/>
         <source>地址</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1091,7 +1091,7 @@ better not transfer or upgrade</source>
         <translation type="unfinished">查找</translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.cpp" line="212"/>
+        <location filename="transfer/ContactChooseWidget.cpp" line="206"/>
         <source>Contact file doesn&apos;t exist or damaged!</source>
         <translation type="unfinished">联系人文件不存在或损坏！</translation>
     </message>
@@ -2102,27 +2102,27 @@ Cover it or not?</source>
 <context>
     <name>FeeChooseWidget</name>
     <message>
-        <location filename="FeeChooseWidget.ui" line="14"/>
+        <location filename="FeeChooseWidget.ui" line="19"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.ui" line="59"/>
+        <location filename="FeeChooseWidget.ui" line="64"/>
         <source>手续费</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.ui" line="97"/>
+        <location filename="FeeChooseWidget.ui" line="102"/>
         <source>20  LNK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.ui" line="142"/>
+        <location filename="FeeChooseWidget.ui" line="147"/>
         <source>使用承兑单</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.ui" line="204"/>
+        <location filename="FeeChooseWidget.ui" line="209"/>
         <source>汇率:@  币种:#  余额:$</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3138,38 +3138,43 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="146"/>
+        <location filename="miner/minerpage.cpp" line="147"/>
         <source>add</source>
         <translation type="unfinished">追加</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="154"/>
+        <location filename="miner/minerpage.cpp" line="155"/>
         <source>foreclose</source>
         <translation type="unfinished">赎回</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="178"/>
+        <location filename="miner/minerpage.cpp" line="181"/>
         <source>Foreclose asset from miner successfully!</source>
         <oldsource>Foreclose balance from miner successfully!</oldsource>
         <translation type="unfinished">成功从miner赎回资产！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="219"/>
+        <location filename="miner/minerpage.cpp" line="222"/>
         <source>obtain</source>
         <translation type="unfinished">获取</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="244"/>
+        <location filename="miner/minerpage.cpp" line="249"/>
         <source>The transaction of obtain-income has been sent out!</source>
         <translation type="unfinished">获取收益的交易已发出！</translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="257"/>
+        <source>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</source>
+        <translation type="unfinished">该账户的挖矿收益还不到 %1 %2，还不能获取！</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="270"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished">钱包中没有未注册账户！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="352"/>
+        <location filename="miner/minerpage.cpp" line="365"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>
@@ -3781,42 +3786,42 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="110"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="112"/>
         <source>buy</source>
         <translation type="unfinished">买</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="132"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="134"/>
         <source>my own order</source>
         <translation type="unfinished">我的挂单</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="193"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="195"/>
         <source>Sell</source>
         <translation type="unfinished">卖</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="194"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="196"/>
         <source>Buy</source>
         <translation type="unfinished">买</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="195"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="197"/>
         <source>Price</source>
         <translation type="unfinished">价格</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="199"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="201"/>
         <source>Sell / %1</source>
         <translation type="unfinished">卖 / %1</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="200"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="202"/>
         <source>Buy / %1</source>
         <translation type="unfinished">买 / %1</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="201"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="203"/>
         <source>Price (%1/%2)</source>
         <translation type="unfinished">价格 (%1/%2)</translation>
     </message>

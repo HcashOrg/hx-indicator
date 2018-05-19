@@ -188,15 +188,9 @@ void ContactChooseWidget::InitStyle()
                   "QTreeView::branch::hover::adjoins-item,QTreeView::branch::hover::!adjoins-item,QTreeView::item::hover{background:#829DFF;}"
                  );
 
-    ui->toolButton_close->setIconSize(QSize(12,12));
-    ui->toolButton_close->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-    ui->toolButton_close->setStyleSheet("QToolButton{background-color:transparent;border:none;}"
-                            "QToolButton:hover{background-color:rgb(208,228,255);}");
-
-    ui->toolButton_cancel->setStyleSheet("QToolButton{background-color:#E5E5E5;border:none;border-radius:15px;color: rgb(255, 255, 255);}"
-                       "QToolButton:hover{background-color:#00D2FF;}");
-    ui->toolButton_confirm->setStyleSheet("QToolButton{background-color:#5474EB;border:none;border-radius:15px;color: rgb(255, 255, 255);}"
-                   "QToolButton:hover{background-color:#00D2FF;}");
+    ui->toolButton_close->setStyleSheet(CLOSEBTN_STYLE);
+    ui->toolButton_cancel->setStyleSheet(CANCELBTN_STYLE);
+    ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
 
     setStyleSheet("QWidget#ContactChooseWidget{border-radius:15px;}"
                   "QPushButton{ background:transparent;}"

@@ -52,7 +52,7 @@ void WaitingForSync::on_closeBtn_clicked()
 void WaitingForSync::checkConnected()
 {
     if(UBChain::getInstance()->wsManager == NULL)   return;
-    qDebug() << "ccccccccc " << UBChain::getInstance()->wsManager->isConnected;
+    qDebug() << "wsManager isConnected: " << UBChain::getInstance()->wsManager->isConnected;
     if(UBChain::getInstance()->wsManager->isConnected)      emit sync();
 }
 

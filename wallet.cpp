@@ -533,12 +533,10 @@ QStringList UBChain::getUnregisteredAccounts()
 QString UBChain::getExchangeContractAddress(QString _accountName)
 {
     QString result;
-//    qDebug() << "cccccccccccc " << _accountName;
+    qDebug() << "cccccccccccc " << _accountName << accountInfoMap.value(_accountName).contractsVector.size();
 
     foreach (ContractInfo info, accountInfoMap.value(_accountName).contractsVector)
     {
-//        qDebug() << "dddddddddd " << info.contractAddress << info.hashValue << info.state;
-
         if(info.hashValue == EXCHANGE_CONTRACT_HASH)
         {
             result = info.contractAddress;
@@ -1399,4 +1397,9 @@ unsigned long long jsonValueToULL(QJsonValue v)
     }
 
     return result;
+}
+
+bool operator ==(const ContractInfo &c1, const ContractInfo &c2)
+{
+    return c1.contractAddress == c2.contractAddress;
 }

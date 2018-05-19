@@ -1205,7 +1205,8 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.take("result").toArray();
 
-            UBChain::getInstance()->accountInfoMap[accountName].contractsVector.clear();
+//            UBChain::getInstance()->accountInfoMap[accountName].contractsVector.clear();
+
             foreach (QJsonValue v, array)
             {
                 QJsonObject object = v.toObject();
@@ -1221,7 +1222,10 @@ void Frame::jsonDataUpdated(QString id)
                                                                                            << "state"  << ""));
                 }
 
-                UBChain::getInstance()->accountInfoMap[accountName].contractsVector.append(contractInfo);
+                if(!UBChain::getInstance()->accountInfoMap[accountName].contractsVector.contains(contractInfo))
+                {
+                    UBChain::getInstance()->accountInfoMap[accountName].contractsVector.append(contractInfo);
+                }
             }
         }
 
@@ -1276,7 +1280,7 @@ void Frame::jsonDataUpdated(QString id)
             {
                 QString transactionId = v.toString();
                 TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
-qDebug() << "ssssssssssss " << ts.transactionId <<ts.type;
+//qDebug() << "list_transactions " << ts.transactionId <<ts.type;
                 if(ts.type == -1)
                 {
                     UBChain::getInstance()->postRPC( "id-get_transaction-" + transactionId, toJsonFormat( "get_transaction", QJsonArray() << transactionId));
@@ -1479,7 +1483,7 @@ void Frame::init()
 
     UBChain::getInstance()->postRPC( "id-list_miners", toJsonFormat( "list_miners", QJsonArray() << "A" << "100"));
 
-//    UBChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.254:9030") ));
+    UBChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.254:9030") ));
 
     UBChain::getInstance()->fetchTransactions();
 }

@@ -237,7 +237,7 @@ void MinerPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-obtain_pay_back_balance")
+    if( id.startsWith("id-obtain_pay_back_balance-"))
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
@@ -247,6 +247,14 @@ void MinerPage::jsonDataUpdated(QString id)
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
             commonDialog.setText(tr("The transaction of obtain-income has been sent out!"));
+            commonDialog.pop();
+        }
+        else if(result.contains("pay_back_obj.second.amount >= min_payback_balance: doesnt get enough pay back"))
+        {
+            QString assetSymbol = id.mid(QString("id-obtain_pay_back_balance-").size());
+
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("This account's mining income is less than %1 %2 ! You can not obtain it.").arg(600).arg(assetSymbol));
             commonDialog.pop();
         }
 
@@ -470,7 +478,7 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
                                                          UBChain::getInstance()->feeType,
                                                          UBChain::getInstance()->mainFrame);
         connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address,row](){
-            UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
+            UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance-" + this->ui->incomeTableWidget->item(row,0)->text(),
                                              toJsonFormat( "obtain_pay_back_balance",
                                                            QJsonArray() << address
                                                            << this->ui->incomeTableWidget->item(row,1)->text()
