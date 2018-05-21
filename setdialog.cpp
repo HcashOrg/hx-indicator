@@ -378,7 +378,7 @@ void SetDialog::on_confirmBtn_clicked()
 {
     ui->tipLabel3->clear();
 
-    UBChain::getInstance()->postRPC( "id_wallet_check_passphrase", toJsonFormat( "wallet_check_passphrase", QJsonArray() << ui->oldPwdLineEdit->text() ));
+    UBChain::getInstance()->postRPC( "id-unlock-SetDialog", toJsonFormat( "unlock", QJsonArray() << ui->oldPwdLineEdit->text() ));
 
 }
 
@@ -492,13 +492,13 @@ void SetDialog::on_oldPwdLineEdit_textChanged(const QString &arg1)
 
 void SetDialog::jsonDataUpdated(QString id)
 {
-    if( id == "id_wallet_check_passphrase")
+    if( id == "id-unlock-SetDialog")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
-        if( result == "\"result\":true")
+        if( result == "\"result\":null")
         {
-            UBChain::getInstance()->postRPC( "id_wallet_change_passphrase", toJsonFormat( "wallet_change_passphrase", QJsonArray() << ui->oldPwdLineEdit->text() <<  ui->newPwdLineEdit->text() ));
+            UBChain::getInstance()->postRPC( "id-set_password", toJsonFormat( "set_password", QJsonArray() << ui->oldPwdLineEdit->text() <<  ui->newPwdLineEdit->text() ));
         }
         else
         {
@@ -508,7 +508,7 @@ void SetDialog::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id_wallet_change_passphrase")
+    if( id == "id-set_password")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
