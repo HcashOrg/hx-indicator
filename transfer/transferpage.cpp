@@ -485,7 +485,8 @@ void TransferPage::updateAmountSlots()
               am.next();
               if(am.key() == assetID)
               {
-                  ui->amountLineEdit->setPlaceholderText(tr("Max: %1").arg(QString::number(am.value().amount/pow(10,assetPrecision))));
+                  AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(am.value().assetId);
+                  ui->amountLineEdit->setPlaceholderText(tr("Max: %1").arg(getBigNumberString(am.value().amount, assetInfo.precision)));
                   isFindAmmount = true;
                   break;
               }
