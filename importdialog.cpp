@@ -188,21 +188,16 @@ void ImportDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-import_key")
     {
-        shadowWidget->hide();
-
         QString result = UBChain::getInstance()->jsonDataValue(id);
 qDebug()  << id << result;
-        if( result.mid(0,9) == "\"result\":")
+        if( result == "\"result\":true")
         {
-            ui->importBtn->setEnabled(true);
+//            ui->importBtn->setEnabled(true);
 
-            emit accountImported();
+//            emit accountImported();
 
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( ui->accountNameLineEdit->text() + tr( " has been imported!"));
-            commonDialog.pop();
+            UBChain::getInstance()->postRPC( "id-get_account-ImportDialog-" + ui->accountNameLineEdit->text(), toJsonFormat( "get_account", QJsonArray() << ui->accountNameLineEdit->text() ));
 
-            close();
         }
         else if( result.mid(0,8) == "\"error\":")
         {
@@ -221,6 +216,38 @@ qDebug()  << id << result;
         return;
     }
 
+    if( id == "id-get_account-ImportDialog-" + ui->accountNameLineEdit->text())
+    {
+        shadowWidget->hide();
+
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug()  << id << result;
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QString accountAddress = jsonObject.take("result").toObject().take("addr").toString();
+
+        UBChain::getInstance()->addTrackAddress(accountAddress);
+
+        UBChain::getInstance()->resyncNextTime = true;
+        UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);
+
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText( ui->accountNameLineEdit->text() + tr( " has been imported!"));
+        commonDialog.pop();
+
+        CommonDialog commonDialog2(CommonDialog::OkOnly);
+        commonDialog2.setText( tr("Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time."
+                                  " After that the transactions of the account will be shown.") );
+        commonDialog2.pop();
+
+
+        close();
+        return;
+    }
 }
 
 

@@ -823,9 +823,8 @@ better not transfer or upgrade</source>
         <translation type="unfinished">错误的密码！</translation>
     </message>
     <message>
-        <location filename="dialog/checkpwddialog.cpp" line="73"/>
         <source>At least 8 letters!</source>
-        <translation type="unfinished">密码至少为8位！</translation>
+        <translation type="obsolete">密码至少为8位！</translation>
     </message>
 </context>
 <context>
@@ -1868,6 +1867,11 @@ Contract created successfully!</source>
         <source>复制地址</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="depositpage/DepositQrcodeWidget.ui" line="133"/>
+        <source>*充值金额请勿低于 0.001 BTC</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DepositRecrdWideget</name>
@@ -2306,17 +2310,17 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1448"/>
+        <location filename="frame.cpp" line="1452"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1451"/>
+        <location filename="frame.cpp" line="1455"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1454"/>
+        <location filename="frame.cpp" line="1458"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -2601,16 +2605,21 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">错误的密码！</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="214"/>
+        <location filename="importdialog.cpp" line="209"/>
         <source>Import key error: </source>
         <translation type="unfinished">导入私钥错误：</translation>
+    </message>
+    <message>
+        <location filename="importdialog.cpp" line="234"/>
+        <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
+        <translation type="unfinished">每当一个新的账户被导入，钱包会在下次启动时重新扫描区块链数据。在此之后该账户的交易将被显示。</translation>
     </message>
     <message>
         <source> already existed</source>
         <translation type="obsolete">已经存在</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="202"/>
+        <location filename="importdialog.cpp" line="227"/>
         <source> has been imported!</source>
         <translation type="unfinished">已经被导入!</translation>
     </message>
@@ -2974,22 +2983,21 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">请备份钱包！！！</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="351"/>
         <source>Everytime a new account is created or imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
-        <translation type="unfinished">每当一个新的账户被创建或导入，钱包会在下次启动时重新扫描区块链数据。在此之后该账户的交易将被显示。</translation>
+        <translation type="obsolete">每当一个新的账户被创建或导入，钱包会在下次启动时重新扫描区块链数据。在此之后该账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="368"/>
+        <location filename="mainpage.cpp" line="361"/>
         <source>Failed</source>
         <translation type="unfinished">失败</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="566"/>
+        <location filename="mainpage.cpp" line="559"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="599"/>
+        <location filename="mainpage.cpp" line="592"/>
         <source>copy to clipboard</source>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
@@ -3941,12 +3949,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="129"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="136"/>
         <source>setDefault</source>
         <translation type="unfinished">设为默认</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="130"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="137"/>
         <source>delete</source>
         <translation type="unfinished">删除</translation>
     </message>
@@ -3989,12 +3997,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="279"/>
+        <location filename="poundage/PoundageWidget.cpp" line="281"/>
         <source>汇率由低到高</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="280"/>
+        <location filename="poundage/PoundageWidget.cpp" line="282"/>
         <source>汇率由高到低</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4047,27 +4055,32 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.cpp" line="62"/>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="53"/>
+        <source>number cannot be zero!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="71"/>
         <source>0 LNK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.cpp" line="81"/>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="90"/>
         <source>no chains!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.cpp" line="88"/>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="97"/>
         <source>input </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.cpp" line="88"/>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="97"/>
         <source> number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.cpp" line="178"/>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="187"/>
         <source>max:</source>
         <translation type="unfinished">最大:</translation>
     </message>
@@ -4989,13 +5002,13 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">发送</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="137"/>
+        <location filename="transfer/transferpage.cpp" line="141"/>
         <source>Please enter the amount and address.</source>
         <oldsource>Please enter the amount and Add.</oldsource>
         <translation type="unfinished">请输入转账金额和地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="145"/>
+        <location filename="transfer/transferpage.cpp" line="149"/>
         <source>The amount can not be 0</source>
         <translation type="unfinished">金额不能为0</translation>
     </message>
@@ -5008,7 +5021,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">消息长度超过40个字节!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="394"/>
+        <location filename="transfer/transferpage.cpp" line="398"/>
         <source>You can only send %1s to multisig address currently.</source>
         <oldsource>You can only send %1s to multi-signature address currently.</oldsource>
         <translation type="unfinished"></translation>
@@ -5038,39 +5051,39 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">余额不足!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="294"/>
+        <location filename="transfer/transferpage.cpp" line="298"/>
         <source>Transaction sent failed: %1</source>
         <translation type="unfinished">交易发送失败：%1</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="379"/>
+        <location filename="transfer/transferpage.cpp" line="383"/>
         <source>Valid account address.</source>
         <translation type="unfinished">有效的账户地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="386"/>
+        <location filename="transfer/transferpage.cpp" line="390"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished">暂不支持向合约地址转账</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="400"/>
+        <location filename="transfer/transferpage.cpp" line="404"/>
         <source>Valid multisig address.</source>
         <oldsource>Valid multi-signature address.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="407"/>
+        <location filename="transfer/transferpage.cpp" line="411"/>
         <source>Invalid address.</source>
         <translation type="unfinished">无效地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="488"/>
+        <location filename="transfer/transferpage.cpp" line="493"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished">最大: %1</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="496"/>
+        <location filename="transfer/transferpage.cpp" line="501"/>
         <source>Max: 0</source>
         <translation type="unfinished">最大: 0</translation>
     </message>
@@ -5083,7 +5096,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">一个账户不能给自己转账!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="284"/>
+        <location filename="transfer/transferpage.cpp" line="288"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished">交易信息已发出，请等待确认</translation>
     </message>

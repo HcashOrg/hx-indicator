@@ -176,10 +176,10 @@ void MainPage::on_addAccountBtn_clicked()
 void MainPage::on_importAccountBtn_clicked()
 {
     ImportDialog importDialog;
-    connect(&importDialog,SIGNAL(accountImported()),this,SLOT(refresh()));
+//    connect(&importDialog,SIGNAL(accountImported()),this,SLOT(refresh()));
     importDialog.pop();
 
-    emit refreshAccountInfo();
+    init();
 }
 
 
@@ -344,13 +344,6 @@ void MainPage::jsonDataUpdated(QString id)
             QString address = jsonObject.take("result").toString();
             UBChain::getInstance()->addTrackAddress(address);
 
-            UBChain::getInstance()->resyncNextTime = true;
-            UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);
-
-            CommonDialog commonDialog2(CommonDialog::OkOnly);
-            commonDialog2.setText( tr("Everytime a new account is created or imported, the wallet will rescan the blockchain data when launched next time."
-                                     " After that the transactions of the account will be shown.") );
-            commonDialog2.pop();
             QTimer::singleShot(1000,this,&MainPage::init);
         }
         else if(result.startsWith("\"error\":"))
