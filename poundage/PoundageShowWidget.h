@@ -26,6 +26,7 @@ public:
 
     void EnableContextMenu(bool enable = false);
     void EnableDeleteAction(bool enable = false);
+    void EnalbeDefaultAction(bool enable = false);
 signals:
     void DeletePoundageSignal(const QString &orderID);
     void SetDefaultPoundageSignal(const QString &orderID);

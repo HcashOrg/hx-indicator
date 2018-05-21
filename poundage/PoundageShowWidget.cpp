@@ -23,6 +23,7 @@ public:
         ,contextMenu(nullptr)
         ,pageWidget(new PageScrollWidget())
         ,isDeleteActionEnabled(false)
+        ,isDefaultActionEnabled(false)
         ,deleteAction(nullptr)
         ,defaultAction(nullptr)
     {
@@ -36,6 +37,7 @@ public:
     QAction *defaultAction;
     QAction *deleteAction;
     bool isDeleteActionEnabled;
+    bool isDefaultActionEnabled;
 };
 
 PoundageShowWidget::PoundageShowWidget(QWidget *parent) :
@@ -76,6 +78,11 @@ void PoundageShowWidget::EnableContextMenu(bool enable)
 void PoundageShowWidget::EnableDeleteAction(bool enable)
 {
     _p->isDeleteActionEnabled = enable;
+}
+
+void PoundageShowWidget::EnalbeDefaultAction(bool enable)
+{
+    _p->isDefaultActionEnabled = enable;
 }
 
 void PoundageShowWidget::changeCurrentPageSlots(unsigned int currentPage)
@@ -136,11 +143,15 @@ void PoundageShowWidget::InitContextMenu()
 void PoundageShowWidget::RefreshMenu()
 {
     _p->contextMenu->clear();
-    _p->contextMenu->addAction(_p->defaultAction);
+    //_p->contextMenu->addAction(_p->defaultAction);
 
     if(_p->isDeleteActionEnabled)
     {
         _p->contextMenu->addAction(_p->deleteAction);
+    }
+    if(_p->isDefaultActionEnabled)
+    {
+        _p->contextMenu->addAction(_p->defaultAction);
     }
 }
 
