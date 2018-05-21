@@ -466,7 +466,8 @@ void UBChain::parseAccountInfo()
         QJsonValue resultValue = jsonObject.take("result");
         if( resultValue.isArray())
         {
-            accountInfoMap.clear();
+//            accountInfoMap.clear();
+            QStringList accountNameList;
 
             QJsonArray resultArray = resultValue.toArray();
             for( int i = 0; i < resultArray.size(); i++)
@@ -481,6 +482,16 @@ void UBChain::parseAccountInfo()
                 accountInfoMap.insert(accountInfo.name,accountInfo);
 
                 fetchAccountBalances(accountInfo.name);
+
+                accountNameList.append(accountInfo.name);
+            }
+
+            foreach (QString key, accountInfoMap.keys())
+            {
+                if(!accountNameList.contains(key))
+                {
+                    accountInfoMap.remove(key);
+                }
             }
         }
     }

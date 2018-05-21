@@ -31,6 +31,7 @@ void DepositQrcodeWidget::SetQRString(const QString &data)
 void DepositQrcodeWidget::SetSymbol(const QString &symbol)
 {
     ui->label_warning->setText(ui->label_warning->text().replace("BTC",symbol));
+    ui->tipLabel->setText(ui->tipLabel->text().replace("BTC",symbol));
 }
 
 void DepositQrcodeWidget::CopySlots()
@@ -65,6 +66,8 @@ void DepositQrcodeWidget::InitStyle()
     QPalette pe;
     pe.setColor(QPalette::WindowText,Qt::red);
     ui->label_warning->setPalette(pe);
+    ui->tipLabel->setFont(font1);
+    ui->tipLabel->setPalette(pe);
 
     ui->toolButton->setStyleSheet(TOOLBUTTON_STYLE_1);
 }
