@@ -61,6 +61,7 @@ public slots:
 
     void setCurrentAccount(QString accountName);
 
+    void ShowMainPageSlot();
 signals:
     void delegateListUpdated();
     void titleBackVisible(bool);

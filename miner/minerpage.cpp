@@ -292,8 +292,8 @@ void MinerPage::init()
     {
         ui->tipLabel->show();
         ui->stackedWidget->hide();
-        ui->incomeInfoBtn->hide();
-        ui->forecloseInfoBtn->hide();
+//        ui->incomeInfoBtn->hide();
+//        ui->forecloseInfoBtn->hide();
         ui->lockToMinerBtn->hide();
         ui->accountComboBox->hide();
         ui->accountLabel->hide();
@@ -302,8 +302,8 @@ void MinerPage::init()
     {
         ui->tipLabel->hide();
         ui->stackedWidget->show();
-        ui->incomeInfoBtn->show();
-        ui->forecloseInfoBtn->show();
+//        ui->incomeInfoBtn->show();
+//        ui->forecloseInfoBtn->show();
         ui->lockToMinerBtn->show();
         ui->accountComboBox->show();
         ui->accountLabel->show();

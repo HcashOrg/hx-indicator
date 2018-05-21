@@ -38,7 +38,13 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     //初始化账户comboBox
     // 账户下拉框按字母顺序排序
     QStringList keys = UBChain::getInstance()->accountInfoMap.keys();
-    ui->accountComboBox->addItems( keys);
+
+    //
+    if(!keys.empty())
+    {
+        ui->accountComboBox->addItems( keys);
+    }
+
     if(ui->accountComboBox->count() != 0)
     {
         if( accountName.isEmpty() )

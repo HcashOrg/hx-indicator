@@ -597,6 +597,12 @@ void Frame::setCurrentAccount(QString accountName)
     UBChain::getInstance()->currentAccount = accountName;
 }
 
+void Frame::ShowMainPageSlot()
+{
+    functionBar->contactShowTransferPageSlots();
+    //showMainPage();
+}
+
 
 void Frame::closeCurrentPage()
 {
@@ -954,6 +960,15 @@ void Frame::showOnchainOrderPage()
 
 void Frame::showMyExchangeContractPage()
 {
+    if(UBChain::getInstance()->accountInfoMap.empty())
+    {
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr("Please Import Or Create Account First!"));
+        dia.pop();
+        UBChain::getInstance()->mainFrame->ShowMainPageSlot();
+        return;
+    }
+
     closeCurrentPage();
     myExchangeContractPage = new MyExchangeContractPage(centralWidget);
     connect(myExchangeContractPage,&MyExchangeContractPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);

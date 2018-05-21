@@ -2,6 +2,7 @@
 #include "ui_OnchainOrderPage.h"
 
 #include "wallet.h"
+#include "commondialog.h"
 #include "BuyOrderWidget.h"
 #include "ToolButtonWidget.h"
 
@@ -209,6 +210,15 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
 {
     if(_column == 3)
     {
+        if(UBChain::getInstance()->accountInfoMap.empty())
+        {
+            CommonDialog dia(CommonDialog::OkOnly);
+            dia.setText(tr("Please Import Or Create Account First!"));
+            dia.pop();
+            UBChain::getInstance()->mainFrame->ShowMainPageSlot();
+            return;
+        }
+
         BuyOrderWidget* buyOrderWidget = new BuyOrderWidget(this);
         buyOrderWidget->move(0,0);
         buyOrderWidget->show();
