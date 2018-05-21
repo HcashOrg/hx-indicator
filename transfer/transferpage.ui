@@ -140,9 +140,9 @@
   <widget class="QLineEdit" name="amountLineEdit">
    <property name="geometry">
     <rect>
-     <x>86</x>
+     <x>76</x>
      <y>290</y>
-     <width>261</width>
+     <width>281</width>
      <height>30</height>
     </rect>
    </property>
@@ -394,6 +394,19 @@ p, li { white-space: pre-wrap; }
     </rect>
    </property>
   </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>383</x>
+     <y>120</y>
+     <width>20</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Vertical</enum>
+   </property>
+  </widget>
   <zorder>memoTextEdit</zorder>
   <zorder>changeAccountLabel</zorder>
   <zorder>memoLabel</zorder>
@@ -412,6 +425,7 @@ p, li { white-space: pre-wrap; }
   <zorder>toolButton_chooseContact</zorder>
   <zorder>label</zorder>
   <zorder>stackedWidget</zorder>
+  <zorder>line</zorder>
  </widget>
  <tabstops>
   <tabstop>amountLineEdit</tabstop>

@@ -22,7 +22,9 @@ public:
         ,myPoundageSheet(std::make_shared<PoundageSheet>())
     {
         myPoundageWidget->EnableDeleteAction(true);
+        myPoundageWidget->EnalbeDefaultAction(false);
         allPoundageWidget->EnableDeleteAction(false);
+        allPoundageWidget->EnalbeDefaultAction(false);
     }
 public:
     PoundageShowWidget *allPoundageWidget;

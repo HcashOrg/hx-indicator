@@ -108,6 +108,10 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     connect(ui->assetComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(assetComboBox_currentIndexChanged(int)));
     connect(ui->sendtoLineEdit,SIGNAL(textChanged(const QString &)),this,SLOT(sendtoLineEdit_textChanged(const QString &)));
     connect(ui->memoTextEdit,SIGNAL(textChanged()),this,SLOT(memoTextEdit_textChanged()));
+
+    //隐藏备注
+    ui->memoLabel->setVisible(false);
+    ui->memoTextEdit->setVisible(false);
 }
 
 TransferPage::~TransferPage()
