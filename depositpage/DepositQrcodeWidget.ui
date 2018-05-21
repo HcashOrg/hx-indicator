@@ -120,6 +120,22 @@
     <string>复制地址</string>
    </property>
   </widget>
+  <widget class="QLabel" name="tipLabel">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>310</y>
+     <width>551</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>*充值金额请勿低于 0.001 BTC</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

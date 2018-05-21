@@ -498,7 +498,7 @@ void SetDialog::jsonDataUpdated(QString id)
 
         if( result == "\"result\":null")
         {
-            UBChain::getInstance()->postRPC( "id-set_password", toJsonFormat( "set_password", QJsonArray() << ui->oldPwdLineEdit->text() <<  ui->newPwdLineEdit->text() ));
+            UBChain::getInstance()->postRPC( "id-set_password", toJsonFormat( "set_password", QJsonArray() << ui->newPwdLineEdit->text() ));
         }
         else
         {
@@ -514,6 +514,8 @@ void SetDialog::jsonDataUpdated(QString id)
 
         if( result == "\"result\":null")
         {
+            UBChain::getInstance()->postRPC( "id-unlock-pwdModified", toJsonFormat( "unlock", QJsonArray() << ui->newPwdLineEdit->text() ));
+
             close();
         }
         else

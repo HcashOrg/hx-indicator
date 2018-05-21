@@ -50,32 +50,18 @@ bool CheckPwdDialog::pop()
 
 void CheckPwdDialog::jsonDataUpdated(QString id)
 {
-    if( id.startsWith( "id_wallet_check_passphrase") )
+    if( id.startsWith( "id-unlock-CheckPwdDialog") )
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
-        if( result == "\"result\":true")
+        if( result == "\"result\":null")
         {
             yesOrNo = true;
             close();
         }
-        else if( result == "\"result\":false")
-        {
-            ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
-        }
         else
         {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            if( errorMessage == "password too short")
-            {
-                ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("At least 8 letters!") + "</font></body>" );
-            }
-            else
-            {
-                ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + errorMessage + "</font></body>" );
-            }
+            ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
         }
 
         return;
@@ -91,7 +77,7 @@ void CheckPwdDialog::on_okBtn_clicked()
 
     if(!ui->okBtn->isEnabled())     return;
 
-    UBChain::getInstance()->postRPC( "id_wallet_check_passphrase", toJsonFormat( "wallet_check_passphrase", QJsonArray() << ui->pwdLineEdit->text()
+    UBChain::getInstance()->postRPC( "id-unlock-CheckPwdDialog", toJsonFormat( "id-unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }
 
