@@ -4,6 +4,7 @@
 #include <QDateTime>
 #include "PoundageDataUtil.h"
 #include "wallet.h"
+#include "commondialog.h"
 
 Q_DECLARE_METATYPE(AccountInfo)
 Q_DECLARE_METATYPE(AssetAmount)
@@ -45,6 +46,14 @@ void PublishPoundageWidget::ConfirmPublishSlots()
     QString targetCoinType = ui->comboBox_targetType->currentText();
     if(accountName.isEmpty() || targetCoinType.isEmpty()) return;
     
+    //限定数量大于0
+    if(sourceNumber.toDouble() < 1e-20 || targetNumber.toDouble() < 1e-20)
+    {
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr("number cannot be zero!"));
+        dia.pop();
+        return;
+    }
     UBChain::getInstance()->postRPC("publish_create_guarantee_order",
                                     toJsonFormat("create_guarantee_order",
                                                  QJsonArray()<<accountName<<sourceNumber<<targetNumber<<targetCoinType<<true));
