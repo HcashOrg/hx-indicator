@@ -7,6 +7,7 @@
 
 #include "wallet.h"
 #include "ContactDataUtil.h"
+#include "commondialog.h"
 
 class ContactInfoTitleWidget::ContactInfoTitleWidgetPrivate
 {
@@ -45,6 +46,14 @@ void ContactInfoTitleWidget::copyAdressSlots()
 void ContactInfoTitleWidget::transferAccountSlots()
 {
     if(!_p->person) return;
+    if(UBChain::getInstance()->accountInfoMap.empty())
+    {
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr("Please Import Or Create Account First!"));
+        dia.pop();
+        UBChain::getInstance()->mainFrame->ShowMainPageSlot();
+        return;
+    }
     emit transferAccountSignal();
 }
 

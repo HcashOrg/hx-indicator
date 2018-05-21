@@ -108,6 +108,14 @@ void PoundageWidget::autoRefreshSlots()
 
 void PoundageWidget::PublishPoundageSlots()
 {
+    if(UBChain::getInstance()->accountInfoMap.empty())
+    {
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr("Please Import Or Create Account First!"));
+        dia.pop();
+        UBChain::getInstance()->mainFrame->ShowMainPageSlot();
+        return;
+    }
     PublishPoundageWidget *publishWidget = new PublishPoundageWidget(this);
     publishWidget->setWindowFlags(Qt::WindowStaysOnTopHint /*| Qt::Dialog*/ | Qt::FramelessWindowHint);
 //    publishWidget->setWindowModality(Qt::WindowModal);

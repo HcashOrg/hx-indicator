@@ -9,6 +9,8 @@
 #include "commondialog.h"
 #include "dialog/BackupWalletDialog.h"
 
+#include "capitalTransferPage/PasswordConfirmWidget.h"
+
 #include <ToolButtonWidget.h>
 #include <QToolButton>
 #include <QDebug>
@@ -54,29 +56,55 @@ void AccountManagerWidget::deleteButtonSlots()
     int row = ui->tableWidget->rowAt(ui->tableWidget->mapFromGlobal(QCursor::pos()).y());
     QString accountName = ui->tableWidget->item(row,0)->data(Qt::UserRole).value<AccountInfo>().name;
 
-    CommonDialog commonDialog(CommonDialog::OkAndCancel);
-    commonDialog.setText(tr("Are you sure to delete account %1 ?").arg(accountName) + accountName);
-    if(commonDialog.pop())
-    {
+
+
+    PasswordConfirmWidget *wi = new PasswordConfirmWidget(UBChain::getInstance()->mainFrame);
+    connect(wi,&PasswordConfirmWidget::confirmSignal,[this,accountName,row](){
+
         qDebug()<<"clicked          "<<row;
         UBChain::getInstance()->postRPC( "id-remove_local_account",
                                          toJsonFormat( "remove_local_account", QJsonArray()
                                          <<accountName));
+
         //刷新页码等
-        ui->tableWidget->removeRow(row);
-        int totalnumber = ui->tableWidget->rowCount();
+        this->ui->tableWidget->removeRow(row);
+        int totalnumber = this->ui->tableWidget->rowCount();
         int page = (totalnumber%3==0 && totalnumber != 0) ? totalnumber/3 : totalnumber/3+1;
-        if(static_cast<unsigned int>(page) != _p->pageWidget->GetTotalPage())
+        if(static_cast<unsigned int>(page) != this->_p->pageWidget->GetTotalPage())
         {
-            _p->pageWidget->SetTotalPage(page);
+            this->_p->pageWidget->SetTotalPage(page);
             if(page > 1)
             {
                 int curpage = std::min<unsigned int>(row,totalnumber-1)/3;
-                _p->pageWidget->SetCurrentPage(static_cast<unsigned int>(curpage));
+                this->_p->pageWidget->SetCurrentPage(static_cast<unsigned int>(curpage));
             }
 
         }
-    }
+    });
+    wi->show();
+//    CommonDialog commonDialog(CommonDialog::OkAndCancel);
+//    commonDialog.setText(tr("Are you sure to delete account %1 ?").arg(accountName) + accountName);
+//    if(commonDialog.pop())
+//    {
+//        qDebug()<<"clicked          "<<row;
+//        UBChain::getInstance()->postRPC( "id-remove_local_account",
+//                                         toJsonFormat( "remove_local_account", QJsonArray()
+//                                         <<accountName));
+//        //刷新页码等
+//        ui->tableWidget->removeRow(row);
+//        int totalnumber = ui->tableWidget->rowCount();
+//        int page = (totalnumber%3==0 && totalnumber != 0) ? totalnumber/3 : totalnumber/3+1;
+//        if(static_cast<unsigned int>(page) != _p->pageWidget->GetTotalPage())
+//        {
+//            _p->pageWidget->SetTotalPage(page);
+//            if(page > 1)
+//            {
+//                int curpage = std::min<unsigned int>(row,totalnumber-1)/3;
+//                _p->pageWidget->SetCurrentPage(static_cast<unsigned int>(curpage));
+//            }
+
+//        }
+//    }
 }
 
 void AccountManagerWidget::exportButtonSlots()
