@@ -70,15 +70,15 @@
        </property>
        <property name="font">
         <font>
-         <family>微软雅黑</family>
-         <pointsize>10</pointsize>
+         <family>Microsoft YaHei UI Light</family>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="text">
-        <string>...</string>
+        <string/>
        </property>
        <property name="toolButtonStyle">
         <enum>Qt::ToolButtonTextOnly</enum>

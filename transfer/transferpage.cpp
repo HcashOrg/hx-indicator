@@ -223,7 +223,7 @@ void TransferPage::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    ui->sendBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->sendBtn->setStyleSheet(OKBTN_STYLE);
     ui->transferRecordBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     ui->toolButton_chooseContact->setIconSize(QSize(14,14));

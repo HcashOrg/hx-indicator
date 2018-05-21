@@ -323,10 +323,10 @@ void PoundageWidget::InitStyle()
     ui->toolButton_publishPoundage->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     setStyleSheet("QToolButton#toolButton_allPoundage{background:transparent;color:rgb(144,144,144);\
-                                                      font-family: \"微软雅黑\";font:14px;font-weight:600;text-align:left;}\
+                                                      font-family: \"Microsoft YaHei UI Light\";font:14px;font-weight:600;text-align:left;}\
                    QToolButton#toolButton_allPoundage:checked{color:rgb(0,0,0);}\
                    QToolButton#toolButton_myPoundage{background:transparent;color:rgb(144,144,144);\
-                                                     font-family: \"微软雅黑\";font:14px;font-weight:600;text-align:left;}\
+                                                     font-family: \"Microsoft YaHei UI Light\";font:14px;font-weight:600;text-align:left;}\
                    QToolButton#toolButton_myPoundage:checked{color:rgb(0,0,0);}"
                    TABLEWIDGET_STYLE_1);
 }

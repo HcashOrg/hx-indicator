@@ -33,7 +33,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>Microsoft YaHei UI Light</family>
      </font>
     </property>
     <widget class="QLabel" name="label_3">
@@ -47,7 +47,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
        <pointsize>12</pointsize>
       </font>
      </property>
@@ -69,7 +69,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
       </font>
      </property>
      <property name="cursor">
@@ -104,7 +104,7 @@
       <string notr="true">QTableWidget{border: none;gridline-color: rgb(241,241,248);background-color: rgb(40, 46, 66);}
 QHeaderView{background-color:rgb(40,46,66);min-height:30;color:white;}
 QHeaderView::section{background-color: rgb(56,63,93);border: 1px solid rgb(40,46,66);
-font: 12px &quot;微软雅黑&quot;;}
+font: 12px &quot;Microsoft YaHei UI Light&quot;;}
 </string>
      </property>
      <property name="frameShape">
@@ -161,7 +161,7 @@ font: 12px &quot;微软雅黑&quot;;}
       </property>
       <property name="font">
        <font>
-        <family>微软雅黑</family>
+        <family>Microsoft YaHei UI Light</family>
        </font>
       </property>
       <property name="textAlignment">
@@ -174,7 +174,7 @@ font: 12px &quot;微软雅黑&quot;;}
       </property>
       <property name="font">
        <font>
-        <family>微软雅黑</family>
+        <family>Microsoft YaHei UI Light</family>
        </font>
       </property>
       <property name="textAlignment">
@@ -217,7 +217,7 @@ font: 12px &quot;微软雅黑&quot;;}
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
       </font>
      </property>
      <property name="cursor">
@@ -327,7 +327,7 @@ font: 12px &quot;微软雅黑&quot;;}
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
       </font>
      </property>
      <property name="styleSheet">
@@ -354,7 +354,7 @@ font: 12px &quot;微软雅黑&quot;;}
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
        <pointsize>9</pointsize>
        <weight>50</weight>
        <italic>false</italic>
@@ -369,7 +369,7 @@ font: 12px &quot;微软雅黑&quot;;}
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">QToolButton{font: 9pt &quot;微软雅黑&quot;;text-decoration: underline;background:transparent;color: rgb(192, 196, 212);}
+      <string notr="true">QToolButton{font: 9pt &quot;Microsoft YaHei UI Light&quot;;text-decoration: underline;background:transparent;color: rgb(192, 196, 212);}
 QToolButton:hover{color:white;}</string>
      </property>
      <property name="text">

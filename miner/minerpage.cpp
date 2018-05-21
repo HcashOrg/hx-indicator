@@ -376,7 +376,7 @@ void MinerPage::InitStyle()
     ui->incomeInfoBtn->setCheckable(true);
     ui->incomeRecordBtn->setCheckable(true);
 
-    setStyleSheet("QToolButton#forecloseInfoBtn,QToolButton#incomeInfoBtn,QToolButton#incomeRecordBtn{border:none;background:transparent;color:#C6CAD4;font:bold 18px \"微软雅黑\";}"
+    setStyleSheet("QToolButton#forecloseInfoBtn,QToolButton#incomeInfoBtn,QToolButton#incomeRecordBtn{border:none;background:transparent;color:#C6CAD4;font:bold 18px \"Microsoft YaHei UI Light\";}"
                   "QToolButton#forecloseInfoBtn::checked,QToolButton#incomeInfoBtn::checked,QToolButton#incomeRecordBtn::checked{color:black;}"
                   TABLEWIDGET_STYLE_1);
     ui->lockToMinerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
@@ -385,7 +385,7 @@ void MinerPage::InitStyle()
     QPalette pe;
     pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
 
-    QFont font("\"微软雅黑\"",12,50);
+    QFont font("\"Microsoft YaHei UI Light\"",12,50);
     font.setPixelSize(12);
     ui->label_op->setFont(font);
     ui->label_op->setPalette(pe);

@@ -112,10 +112,10 @@
   <widget class="QToolButton" name="sendBtn">
    <property name="geometry">
     <rect>
-     <x>355</x>
+     <x>337</x>
      <y>380</y>
-     <width>60</width>
-     <height>20</height>
+     <width>96</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="font">

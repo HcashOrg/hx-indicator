@@ -336,7 +336,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
             qDebug()<<totalAmount;
 
-            FeeChargeWidget *fee = new FeeChargeWidget( getBigNumberString(totalAmount, ASSET_PRECISION).toDouble(),"LNK",
+            FeeChargeWidget *fee = new FeeChargeWidget( getBigNumberString(totalAmount, ASSET_PRECISION).toDouble(),UBChain::getInstance()->feeType,
                                                          UBChain::getInstance()->mainFrame);
 
             fee->SetInfo(tr("register contract!"));
@@ -378,10 +378,10 @@ void MyExchangeContractPage::paintEvent(QPaintEvent *)
 void MyExchangeContractPage::registerContract()
 {
     // 如果还没有兑换合约  先注册
-//    CommonDialog commonDialog(CommonDialog::OkAndCancel);
-//    commonDialog.setText(tr("You don't have an exchange contract at the moment. Will you create it?"));
-//    if(commonDialog.pop())
-//    {
+    CommonDialog commonDialog(CommonDialog::OkAndCancel);
+    commonDialog.setText(tr("You don't have an exchange contract at the moment. Will you create it?"));
+    if(commonDialog.pop())
+    {
         QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
         QFileInfo fileInfo(filePath);
         if(fileInfo.exists())
@@ -401,7 +401,7 @@ void MyExchangeContractPage::registerContract()
             commonDialog.setText(tr("Can not find file contracts/blocklink_exchange.glua.gpc!"));
             commonDialog.pop();
         }
-//    }
+    }
 }
 
 void MyExchangeContractPage::on_accountComboBox_currentIndexChanged(const QString &arg1)

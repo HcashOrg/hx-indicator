@@ -579,7 +579,7 @@ void MainPage::InitStyle()
     QPalette pe;
     pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
     ui->label_op->setPalette(pe);
-    QFont font("\"微软雅黑\" ",20,50);
+    QFont font("\"Microsoft YaHei UI Light\" ",20,50);
     font.setPixelSize(12);
     ui->label_op->setFont(font);
 
@@ -597,7 +597,7 @@ void MainPage::InitStyle()
 
     ui->importAccountBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->addAccountBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
-//    ui->accountComboBox->setStyleSheet("QComboBox{border: none;background:transparent;font: 12pt \"微软雅黑\";\
+//    ui->accountComboBox->setStyleSheet("QComboBox{border: none;background:transparent;font: 12pt \"Microsoft YaHei UI Light\";\
 //               background-position: center left;color: black;selection-background-color: darkgray;}");
 
 

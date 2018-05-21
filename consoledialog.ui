@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑</family>
+    <family>Microsoft YaHei UI Light</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -41,7 +41,7 @@
     </property>
     <property name="font">
      <font>
-      <family>微软雅黑</family>
+      <family>Microsoft YaHei UI Light</family>
      </font>
     </property>
     <widget class="QTextBrowser" name="consoleBrowser">
@@ -55,7 +55,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
        <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
@@ -79,7 +79,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
        <pointsize>9</pointsize>
        <weight>50</weight>
        <italic>false</italic>
@@ -108,7 +108,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
        <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
@@ -129,7 +129,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
        <pointsize>12</pointsize>
        <weight>50</weight>
        <bold>false</bold>
@@ -175,7 +175,7 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
        <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>

@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑</family>
+    <family>Microsoft YaHei UI Light</family>
    </font>
   </property>
   <property name="windowTitle">
@@ -45,7 +45,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>Microsoft YaHei UI Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -64,7 +64,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>Microsoft YaHei UI Light</family>
      <pointsize>10</pointsize>
     </font>
    </property>
@@ -102,7 +102,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>Microsoft YaHei UI Light</family>
     </font>
    </property>
    <property name="cursor">
@@ -123,7 +123,7 @@
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>Microsoft YaHei UI Light</family>
      <pointsize>-1</pointsize>
      <weight>50</weight>
      <italic>false</italic>
@@ -131,7 +131,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 20px &quot;微软雅黑&quot;;</string>
+    <string notr="true">font: 20px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>名称</string>

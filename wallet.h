@@ -271,6 +271,8 @@ public:
 public:
     WalletInfo walletInfo;
 
+    bool importedWalletNeedToAddTrackAddresses = false;     // 如果是导入的钱包 需要添加到trackaddress
+
     QVector<Miner> minersVector;
     QString getMinerNameFromId(QString _minerId);
 

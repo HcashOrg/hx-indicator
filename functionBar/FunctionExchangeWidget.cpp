@@ -38,7 +38,7 @@ void FunctionExchangeWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(94,116,235));
     setPalette(palette);
 
-    setStyleSheet("QToolButton{background: rgb(94,116,235);font-size:14px;font-family:\"微软雅黑\";}\
+    setStyleSheet("QToolButton{background: rgb(94,116,235);font-size:14px;font-family:\"Microsoft YaHei UI Light\";}\
                    QToolButton:hover{background-color: rgb(0,210, 255);}\
                    QToolButton:pressed{background-color: rgb(130,157, 255);}\
                    QToolButton:checked{background-color: rgb(130,157, 255);}");

@@ -191,7 +191,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);
 
         CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(tr("Operation Done!"));
+        dia.setText(UBChain::getInstance()->jsonDataValue( id));
         dia.pop();
         close();
     }

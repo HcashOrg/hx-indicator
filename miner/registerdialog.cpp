@@ -111,6 +111,24 @@ void RegisterDialog::jsonDataUpdated(QString id)
             commonDialog.setText(tr("Register transaction has been sent out!"));
             commonDialog.pop();
         }
+        else if(result.startsWith("\"error\":"))
+        {
+            if(result.contains("Insufficient Balance:"))
+            {
+                CommonDialog commonDialog(CommonDialog::OkOnly);
+                commonDialog.setText(tr("Balance of this account is not enough!"));
+                commonDialog.pop();
+            }
+            else
+            {
+                int pos = result.indexOf("\"message\":\"") + 11;
+                QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
+
+                CommonDialog commonDialog(CommonDialog::OkOnly);
+                commonDialog.setText( "Register account failed: " + errorMessage );
+                commonDialog.pop();
+            }
+        }
 
         return;
     }

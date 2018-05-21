@@ -1068,6 +1068,20 @@ void Frame::jsonDataUpdated(QString id)
 
         UBChain::getInstance()->parseAccountInfo();
 
+        if(UBChain::getInstance()->importedWalletNeedToAddTrackAddresses)
+        {
+            UBChain::getInstance()->importedWalletNeedToAddTrackAddresses = false;
+
+            foreach (QString accountName, UBChain::getInstance()->accountInfoMap.keys())
+            {
+                qDebug() << accountName << UBChain::getInstance()->accountInfoMap.value(accountName).address;
+                UBChain::getInstance()->addTrackAddress(UBChain::getInstance()->accountInfoMap.value(accountName).address);
+            }
+
+            UBChain::getInstance()->resyncNextTime = true;
+            UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);
+        }
+
         foreach (QString accountName, UBChain::getInstance()->accountInfoMap.keys())
         {
             UBChain::getInstance()->fetchAccountBalances(accountName);

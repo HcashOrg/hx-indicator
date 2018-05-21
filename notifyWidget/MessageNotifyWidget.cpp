@@ -137,12 +137,12 @@ void MessageNotifyWidget::InitStyle()
 
     ui->label_logo->setPixmap(QPixmap(":/notifyWidget/logo.png").scaled(ui->label_logo->size()));
 
-    QFont font("\"微软雅黑\"",10,63);
+    QFont font("\"Microsoft YaHei UI Light\"",10,63);
     ui->label_lname->setFont(font);
     QPalette lpa;
     lpa.setColor(QPalette::WindowText,Qt::white);
     ui->label_lname->setPalette(lpa);
 
-    setStyleSheet("QTextBrowser{color:blue;background:transparent;border:none;padding:10px;font-size:11pt;font-family:\"微软雅黑\";}"
+    setStyleSheet("QTextBrowser{color:blue;background:transparent;border:none;padding:10px;font-size:11pt;font-family:\"Microsoft YaHei UI Light\";}"
                   );
 }

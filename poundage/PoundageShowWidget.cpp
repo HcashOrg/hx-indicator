@@ -112,7 +112,7 @@ void PoundageShowWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    ui->tableView->setPalette(palette);
+//    ui->tableView->setPalette(palette);
 
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     //ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);

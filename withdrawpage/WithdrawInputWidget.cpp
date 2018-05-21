@@ -118,7 +118,7 @@ void WithdrawInputWidget::InitStyle()
                   "QToolButton#toolButton_all{border:none;background-color:transparent;border-radius:10px;color:#5474EB;font-size:9pt;}"
                   "QToolButton#toolButton_confirm::hover,QToolButton#toolButton_all::hover{background-color:#00D2FF;}"
                   "QToolButton#toolButton_confirm{border:none;background-color:#5474EB;color:white;border-radius:10px;font-size:12pt;}"
-                  "QLabel{background:transparent;color:black:font-family:\"微软雅黑\";}");
+                  "QLabel{background:transparent;color:black:font-family:\"Microsoft YaHei UI Light\";}");
 }
 void WithdrawInputWidget::paintEvent(QPaintEvent *event)
 {
