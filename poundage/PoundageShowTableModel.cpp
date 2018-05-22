@@ -45,7 +45,7 @@ QVariant PoundageShowTableModel::headerData(int section, Qt::Orientation orienta
                 switch (section)
                 {
                 case 0:
-                    return tr("发布时间");
+                    return tr("承兑单id");
                 case 1:
                     return tr("交易对象");
                 case 2:
@@ -109,7 +109,8 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
         case Qt::ToolTipRole:
             if(index.column() == 0)
             {
-                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->publishTime.toString("yyyy/MM/dd HH:mm");
+                //return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->publishTime.toString("yyyy/MM/dd HH:mm");
+                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->poundageID;
             }
             else if(index.column() == 1)
             {

@@ -112,10 +112,10 @@
         <file>wallet_ui/tradeConfirm.png</file>
         <file>wallet_ui/addContact.png</file>
         <file>wallet_ui/contactPic.png</file>
-        <file>wallet_ui/tans.png</file>
         <file>wallet_ui/off.png</file>
         <file>wallet_ui/on.png</file>
         <file>wallet_ui/switch.png</file>
+        <file>wallet_ui/trans.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>

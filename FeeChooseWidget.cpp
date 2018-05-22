@@ -185,10 +185,11 @@ void FeeChooseWidget::refreshUI()
         ui->line_6->setVisible(true);
 
         ui->label_poundage->setText(_p->poundageTip);
-//        if(QVBoxLayout* vLay = dynamic_cast<QVBoxLayout*>(layout()))
-//        {
-//            vLay->setStretch(3,0);
-//        }
+
+        if(QVBoxLayout* vLay = dynamic_cast<QVBoxLayout*>(layout()))
+        {
+            vLay->setStretch(4,0);
+        }
     }
     else
     {
@@ -196,10 +197,10 @@ void FeeChooseWidget::refreshUI()
         ui->label_poundage->setVisible(false);
         ui->line_5->setVisible(false);
         ui->line_6->setVisible(false);
-//        if(QVBoxLayout* vLay = dynamic_cast<QVBoxLayout*>(layout()))
-//        {
-//            vLay->setStretch(3,10);
-//        }
+        if(QVBoxLayout* vLay = dynamic_cast<QVBoxLayout*>(layout()))
+        {
+            vLay->setStretch(4,1);
+        }
     }
 
     //ui->label_fee->setText(QString::number(_p->coinNumber) + " " + _p->feeType);

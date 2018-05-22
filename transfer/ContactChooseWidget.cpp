@@ -126,7 +126,8 @@ void ContactChooseWidget::QueryPersonSlots()
 void ContactChooseWidget::updateUI()
 {
     ui->name->setText(_p->contactName);
-    ui->addressLabel->setText(_p->contactAddress);
+    //ui->addressLabel->setText(_p->contactAddress);
+    ui->address->setText(_p->contactAddress);
 }
 
 void ContactChooseWidget::InitWidget()
@@ -195,6 +196,8 @@ void ContactChooseWidget::InitStyle()
     setStyleSheet("QWidget#ContactChooseWidget{border-radius:15px;}"
                   "QPushButton{ background:transparent;}"
                   "QLineEdit{background-color:transparent;border: 1px solid #999999 ;border-radius:15px;color:#5474EB;}");
+    //ui->addressLabel->setWordWrap(true);
+
 }
 
 void ContactChooseWidget::InitData()

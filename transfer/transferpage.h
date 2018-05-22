@@ -37,6 +37,8 @@ signals:
 public slots:
     void refresh();
 
+protected:
+    void paintEvent(QPaintEvent *event);
 private slots:
 
     void accountComboBox_currentIndexChanged(const QString &arg1);

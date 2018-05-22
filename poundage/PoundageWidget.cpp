@@ -189,7 +189,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
         result.append("}");
 
         CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(result);
+        dia.setText(tr("operate success!"));
         dia.pop();
         //qDebug()<<"chargecccccc"<<result;
         //刷新承税单
