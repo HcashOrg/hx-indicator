@@ -45,7 +45,7 @@
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>30</height>
+       <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
@@ -84,7 +84,7 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>36</height>
+         <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -128,7 +128,7 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>36</height>
+         <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -196,7 +196,7 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>36</height>
+         <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -223,6 +223,9 @@
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Preferred</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>

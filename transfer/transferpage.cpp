@@ -226,12 +226,17 @@ void TransferPage::InitStyle()
     ui->sendBtn->setStyleSheet(OKBTN_STYLE);
     ui->transferRecordBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
-    ui->toolButton_chooseContact->setIconSize(QSize(14,14));
-    ui->toolButton_chooseContact->setIcon(QIcon(":/ui/wallet_ui/tans.png"));
     ui->memoTextEdit->setStyleSheet("border:none;background:none;color:#5474EB;");
 
-    ui->toolButton_chooseContact->setStyleSheet("QToolButton{background-color:black; border:none;border-radius:7px;color: rgb(255, 255, 255);}"
-                                                "QToolButton:hover{background-color:#5474EB;}");
+//    ui->toolButton_chooseContact->setIconSize(QSize(12,12));
+//    ui->toolButton_chooseContact->setIcon(QIcon(":/ui/wallet_ui/tans.png"));
+
+    setStyleSheet("QToolButton#toolButton_chooseContact{background-image:url(:/ui/wallet_ui/trans.png);border:none;\
+                                                background-color:transparent;background-repeat: no-repeat;background-position: center;}"
+                                                "QToolButton#toolButton_chooseContact:hover{background-color:black;");
+
+    ui->accountComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
+    ui->assetComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
 }
 
 //void TransferPage::updatePoundage()
@@ -524,3 +529,33 @@ void TransferPage::updateAmountSlots()
 //        ui->toolButton->setEnabled(false);
 //    }
 //}
+
+void TransferPage::paintEvent(QPaintEvent *event)
+{
+    QPainter painter(this);
+    painter.setRenderHint(QPainter::Antialiasing);
+    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+    painter.save();
+    const qreal radius = 10;
+    QRectF rect = QRect(QPoint(50, 95), QSize(670,340));
+    QRectF rect1 = QRect(QPoint(45, 90), QSize(680,350));
+
+
+    QRadialGradient radial(385, 385, 770, 385,385);
+        radial.setColorAt(0, QColor(0,0,0,15));
+        radial.setColorAt(1, QColor(218,255,248,15));
+
+    painter.setBrush(radial);
+    painter.setPen(Qt::NoPen);
+    painter.drawRoundedRect(rect1,10,10);
+
+    painter.setBrush(QBrush(Qt::white));
+    painter.setPen(Qt::NoPen);
+    painter.drawRoundedRect(rect,10,10);
+
+
+    painter.restore();
+
+
+    QWidget::paintEvent(event);
+}
