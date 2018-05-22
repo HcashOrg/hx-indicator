@@ -24,7 +24,7 @@
   <widget class="QLineEdit" name="pwdLineEdit">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>285</x>
      <y>300</y>
      <width>121</width>
      <height>24</height>
@@ -76,9 +76,9 @@
   <widget class="QLabel" name="tipLabel">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>285</x>
      <y>336</y>
-     <width>121</width>
+     <width>200</width>
      <height>20</height>
     </rect>
    </property>
@@ -114,28 +114,6 @@
    </property>
    <property name="text">
     <string/>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="forgetBtn">
-   <property name="geometry">
-    <rect>
-     <x>285</x>
-     <y>390</y>
-     <width>120</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>忘记密码</string>
    </property>
   </widget>
   <widget class="Line" name="line">

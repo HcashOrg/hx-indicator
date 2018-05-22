@@ -10,6 +10,13 @@
     <height>580</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Microsoft YaHei UI Light</family>
+    <weight>75</weight>
+    <bold>true</bold>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -41,6 +48,11 @@
      <height>20</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+    </font>
+   </property>
    <property name="text">
     <string>请输入密码</string>
    </property>
@@ -66,9 +78,9 @@
   <widget class="QLabel" name="tipLabel">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>285</x>
      <y>336</y>
-     <width>111</width>
+     <width>200</width>
      <height>20</height>
     </rect>
    </property>
@@ -109,32 +121,10 @@
     <string>登录</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="forgetBtn">
-   <property name="geometry">
-    <rect>
-     <x>285</x>
-     <y>390</y>
-     <width>120</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>忘记密码</string>
-   </property>
-  </widget>
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
-     <x>282</x>
+     <x>285</x>
      <y>328</y>
      <width>120</width>
      <height>3</height>

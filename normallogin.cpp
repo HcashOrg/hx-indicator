@@ -143,7 +143,6 @@ void NormalLogin::pwdConfirmed(QString id)
 void NormalLogin::InitWidget()
 {
     InitStyle();
-    ui->forgetBtn->setVisible(false);
 }
 
 void NormalLogin::InitStyle()
@@ -170,8 +169,6 @@ void NormalLogin::InitStyle()
 
     ui->enterBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
                                 "QToolButton:hover{background-color:#00D2FF;}");
-    ui->forgetBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;border-radius:15px;color: #C6CAD4;}"
-                                 "QToolButton:hover{background-color:#00D2FF;}");
 }
 
 

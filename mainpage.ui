@@ -43,7 +43,7 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>资产管理</string>
+    <string>资产</string>
    </property>
   </widget>
   <widget class="QToolButton" name="addAccountBtn">

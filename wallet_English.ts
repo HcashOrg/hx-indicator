@@ -834,11 +834,6 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="194"/>
-        <source>Operation Done!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="211"/>
         <source>max:</source>
         <translation type="unfinished"></translation>
@@ -2514,17 +2509,17 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1467"/>
+        <location filename="frame.cpp" line="1481"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1470"/>
+        <location filename="frame.cpp" line="1484"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1473"/>
+        <location filename="frame.cpp" line="1487"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2538,17 +2533,20 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="functionBar/FunctionAccountWidget.ui" line="52"/>
-        <source>账户管理</source>
+        <source>账户</source>
+        <oldsource>账户管理</oldsource>
         <translation type="unfinished">Account</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionAccountWidget.ui" line="73"/>
-        <source>  资产管理</source>
+        <source>资产</source>
+        <oldsource>  资产</oldsource>
         <translation type="unfinished">Asset</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionAccountWidget.ui" line="91"/>
-        <source>  挖矿管理</source>
+        <source>挖矿</source>
+        <oldsource>  挖矿</oldsource>
         <translation type="unfinished">Mining</translation>
     </message>
 </context>
@@ -2659,6 +2657,11 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="functionBar/FunctionExchangeWidget.ui" line="39"/>
+        <source>市场</source>
+        <translation type="unfinished">Market</translation>
+    </message>
+    <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="60"/>
         <source>挂单中心</source>
         <translation type="unfinished">OrderCenter</translation>
@@ -2666,7 +2669,7 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="78"/>
         <source>  我的挂单</source>
-        <translation type="unfinished">MyOrder</translation>
+        <translation type="unfinished">MyOrders</translation>
     </message>
 </context>
 <context>
@@ -3021,7 +3024,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="mainpage.ui" line="46"/>
-        <source>资产管理</source>
+        <source>资产</source>
+        <oldsource>资产管理</oldsource>
         <translation type="unfinished">AssetManage</translation>
     </message>
     <message>
@@ -3038,10 +3042,6 @@ p, li { white-space: pre-wrap; }
         <location filename="mainpage.ui" line="160"/>
         <source>余额</source>
         <translation type="unfinished">Balance</translation>
-    </message>
-    <message>
-        <source>资产</source>
-        <translation type="obsolete">Balance</translation>
     </message>
     <message>
         <location filename="mainpage.ui" line="219"/>
@@ -5072,11 +5072,6 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="ToolButtonWidget.ui" line="81"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>TransferConfirmDialog</name>
@@ -5275,12 +5270,12 @@ p, li { white-space: pre-wrap; }
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Microsoft YaHei UI Light&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;微软雅黑&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <oldsource>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Microsoft YaHei UI Light Light&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Microsoft YaHei UI Light&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
