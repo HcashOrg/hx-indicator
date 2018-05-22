@@ -397,7 +397,7 @@ void ContactTreeWidget::initTreeStyle()
 
     setStyleSheet("QWidget{border:none;}"
                   "QTreeView{background-color:rgb(94,116,235);border:none;\
-                      color:white;font-size:16px;outline:0px;}"
+                      color:white;font-size:16px;outline:0px;font-family:\"Microsoft YaHei UI Light\";}"
                   "QTreeView::branch{background:rgb(94,116,235);}"
                   "QTreeView::item{height:30px;}"
                   "QTreeView::item::selected{background:#829DFF;border:none;color:white;}"
