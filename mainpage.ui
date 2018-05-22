@@ -12,7 +12,9 @@
   </property>
   <property name="font">
    <font>
-    <family>微软雅黑</family>
+    <family>Microsoft YaHei UI Light</family>
+    <weight>75</weight>
+    <bold>true</bold>
    </font>
   </property>
   <property name="windowTitle">
@@ -222,7 +224,7 @@
   <widget class="QToolButton" name="copyBtn">
    <property name="geometry">
     <rect>
-     <x>522</x>
+     <x>530</x>
      <y>110</y>
      <width>11</width>
      <height>11</height>
@@ -295,7 +297,7 @@
     <rect>
      <x>236</x>
      <y>104</y>
-     <width>280</width>
+     <width>290</width>
      <height>24</height>
     </rect>
    </property>
@@ -345,7 +347,7 @@
   <widget class="QToolButton" name="qrcodeBtn">
    <property name="geometry">
     <rect>
-     <x>540</x>
+     <x>545</x>
      <y>110</y>
      <width>11</width>
      <height>11</height>

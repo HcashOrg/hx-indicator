@@ -55,7 +55,7 @@ QVariant PoundageShowTableModel::headerData(int section, Qt::Orientation orienta
                 case 4:
                     return tr("汇率");
                 case 5:
-                    return tr("余额(LNK)");
+                    return tr("可用金额(LNK)");
                 case 6:
                     return tr("总额");
                 default:
