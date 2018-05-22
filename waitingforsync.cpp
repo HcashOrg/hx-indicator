@@ -20,11 +20,6 @@ WaitingForSync::WaitingForSync(QWidget *parent) :
 
     InitWidget();
 
-//    ui->logoLabel->setPixmap(QPixmap(":/ui/wallet_ui/logo_52x34.png"));
-
-    ui->picLabel->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
-
     rotateNum = 0;
     timerForPic = new QTimer(this);
     connect(timerForPic,SIGNAL(timeout()),this,SLOT(showPic()));
@@ -66,8 +61,6 @@ void WaitingForSync::showPic()
     QMatrix matrix;
     matrix.rotate(rotateNum);
 
-    ui->picLabel->setPixmap(QPixmap(":/ui/wallet_ui/loading.png").transformed(matrix,Qt::SmoothTransformation));
-
 }
 
 void WaitingForSync::InitWidget()
@@ -82,17 +75,9 @@ void WaitingForSync::InitStyle()
     palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
     setPalette(palette);
 
-    QFont font("黑体",14,70);
-    ui->label_wel->setFont(font);
-
-    QFont fontb("黑体",21,100);
-    ui->label_bloc->setFont(fontb);
-
     ui->loadingLabel->setFont(QFont("黑体",12,53));
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
-    ui->label_wel->setPalette(pa);
-    ui->label_bloc->setPalette(pa);
     ui->label_version->setPalette(pa);
 
     ui->loadingLabel->setPalette(pa);

@@ -33,7 +33,6 @@ ImportDialog::ImportDialog(QWidget *parent) :
     ui->importBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
-    ui->pathBtn->setStyleSheet(SELECTBTN_STYLE);
 
     ui->accountNameLineEdit->setFocus();
 

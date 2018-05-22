@@ -52,32 +52,13 @@
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_wel">
-   <property name="geometry">
-    <rect>
-     <x>295</x>
-     <y>200</y>
-     <width>81</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>黑体</family>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Welcome,</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_version">
    <property name="geometry">
     <rect>
-     <x>295</x>
-     <y>269</y>
-     <width>61</width>
-     <height>16</height>
+     <x>285</x>
+     <y>240</y>
+     <width>80</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -90,23 +71,26 @@
     <string>v1.0.1</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_bloc">
+  <widget class="QLabel" name="welcome_label">
    <property name="geometry">
     <rect>
-     <x>295</x>
-     <y>230</y>
-     <width>160</width>
-     <height>31</height>
+     <x>285</x>
+     <y>190</y>
+     <width>121</width>
+     <height>45</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>黑体</family>
-     <pointsize>22</pointsize>
+     <pointsize>16</pointsize>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <property name="text">
-    <string>BlockLink</string>
+    <string/>
    </property>
   </widget>
  </widget>

@@ -17,11 +17,11 @@ public:
     ~SelectWalletPathWidget();
 
 private slots:
-    void on_selectPathBtn_clicked();
-
     void on_okBtn_clicked();
 
     void on_closeBtn_clicked();
+
+    void on_pathBtn_clicked();
 
 signals:
     void enter();

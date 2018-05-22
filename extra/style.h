@@ -23,13 +23,16 @@
                                 "QHeaderView:section:first{border-top-left-radius:15px;}" \
                                 "QHeaderView:section:last{border-top-right-radius:15px;}"
 
-#define SELECTBTN_STYLE "QToolButton{background:transparent;color:rgb(192,202,212);font: 11px \"Microsoft YaHei UI Light\";}" \
-                        "QToolButton:hover{color:rgb(84,116,235);}"
 
 #define COMBOBOX_STYLE_BOTTOMBORDER "QComboBox{background-color:transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,192,192);color: black;padding-left: 5px;font: 14px \"Microsoft YaHei UI Light\";}" \
                                     "QComboBox::drop-down {background:transparent;border:none;}" \
                                     "QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}" \
                                     "QComboBox::down-arrow:on {image: url(:/ui/wallet_ui/downArrow_on.png);}" \
                                     "QComboBox QAbstractItemView {outline: 0px;}"
+
+#define FUNCTIONBAR_TOOLBUTTON_STYLE    "QToolButton{background:rgb(94,116,235);border:none;font-size:14px;font-family:\"Microsoft YaHei UI Light\";}" \
+                                        "QToolButton:hover{background-color: rgb(0,210, 255);}" \
+                                        "QToolButton:pressed{background-color: rgb(130,157, 255);}" \
+                                        "QToolButton:checked{border-left:2px solid rgb(0,210,255);background-color: rgb(130,157, 255);}"
 
 #endif // STYLE_H

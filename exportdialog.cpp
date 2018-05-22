@@ -27,7 +27,6 @@ ExportDialog::ExportDialog( QString name, QWidget *parent) :
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    ui->pathBtn->setStyleSheet(SELECTBTN_STYLE);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 

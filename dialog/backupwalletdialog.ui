@@ -22,6 +22,13 @@
      <height>580</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
@@ -45,6 +52,13 @@
        <height>30</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI Light</family>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
@@ -61,12 +75,14 @@
        <x>40</x>
        <y>70</y>
        <width>200</width>
-       <height>20</height>
+       <height>24</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="text">
@@ -76,19 +92,19 @@
     <widget class="QToolButton" name="pathBtn">
      <property name="geometry">
       <rect>
-       <x>285</x>
+       <x>280</x>
        <y>70</y>
-       <width>60</width>
+       <width>65</width>
        <height>24</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
        <pointsize>9</pointsize>
-       <weight>50</weight>
+       <weight>75</weight>
        <italic>false</italic>
-       <bold>false</bold>
+       <bold>true</bold>
        <underline>false</underline>
       </font>
      </property>
@@ -111,6 +127,13 @@
        <height>30</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI Light</family>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
@@ -132,8 +155,10 @@
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
+       <family>Microsoft YaHei UI Light</family>
        <pointsize>10</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="contextMenuPolicy">
