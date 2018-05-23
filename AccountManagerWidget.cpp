@@ -80,6 +80,10 @@ void AccountManagerWidget::deleteButtonSlots()
             }
 
         }
+        else
+        {
+            this->_p->pageWidget->SetCurrentPage(this->_p->pageWidget->GetCurrentPage());
+        }
     });
     wi->show();
 //    CommonDialog commonDialog(CommonDialog::OkAndCancel);

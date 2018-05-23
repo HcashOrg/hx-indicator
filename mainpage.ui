@@ -387,6 +387,30 @@
     <string>操作</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_backtip">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>80</y>
+     <width>181</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: red;</string>
+   </property>
+   <property name="text">
+    <string>钱包有变，需要保存！</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
   <zorder>addressLabel</zorder>
   <zorder>title_label</zorder>
   <zorder>addAccountBtn</zorder>
@@ -398,6 +422,7 @@
   <zorder>addressLabel2</zorder>
   <zorder>qrcodeBtn</zorder>
   <zorder>label_op</zorder>
+  <zorder>label_backtip</zorder>
  </widget>
  <resources/>
  <connections/>

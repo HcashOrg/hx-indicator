@@ -6,6 +6,8 @@
 #include "DepositRecrdWideget.h"
 #include "DepositDataUtil.h"
 #include "FeeChargeWidget.h"
+#include "commondialog.h"
+#include "dialog/backupwalletdialog.h"
 
 class DepositPage::DepositPagePrivate
 {
@@ -104,6 +106,17 @@ void DepositPage::jsonDataUpdated(QString id)
         result.append("}");
         _p->qrcodeWidget->SetQRString(_p->tunnelData->address);
         //qDebug()<<"tunnelrunnel"<<result;
+        //提示保存信息
+        UBChain::getInstance()->configFile->setValue("/settings/backupNeeded",true);
+        UBChain::getInstance()->IsBackupNeeded = true;
+        CommonDialog dia(CommonDialog::YesOrNo);
+        dia.setText(tr("You Should Back Up Your Wallet!"));
+        if(dia.pop())
+        {
+            BackupWalletDialog backupWalletDialog;
+            backupWalletDialog.pop();
+        }
+
     }
 }
 

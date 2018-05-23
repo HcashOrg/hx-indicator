@@ -158,6 +158,10 @@ Frame::Frame(): timer(NULL),
             UBChain::getInstance()->language = "English";
             UBChain::getInstance()->configFile->setValue("/settings/feeType","LNK");
             UBChain::getInstance()->feeType = "LNK";
+
+            UBChain::getInstance()->configFile->setValue("/settings/backupNeeded",false);
+            UBChain::getInstance()->IsBackupNeeded = false;
+
             UBChain::getInstance()->configFile->setValue("/settings/autoDeposit",false);
             UBChain::getInstance()->autoDeposit = false;
             UBChain::getInstance()->configFile->setValue("/settings/contractFee",1);

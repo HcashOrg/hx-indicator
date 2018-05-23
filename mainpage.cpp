@@ -36,6 +36,7 @@ MainPage::MainPage(QWidget *parent) :
 
     ui->setupUi(this);
     InitStyle();
+    ui->label_backtip->setVisible(UBChain::getInstance()->IsBackupNeeded);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 
@@ -266,6 +267,7 @@ void MainPage::refresh()
 {
 //    qDebug() << "mainpage refresh"   << refreshOrNot;
 //    if( !refreshOrNot) return;
+    ui->label_backtip->setVisible(UBChain::getInstance()->IsBackupNeeded);
 
     updateAccountList();
 
@@ -331,6 +333,9 @@ void MainPage::jsonDataUpdated(QString id)
 //            CommonDialog commonDialog(CommonDialog::OkOnly);
 //            commonDialog.setText( tr("Please backup up the wallet!!!") );
 //            commonDialog.pop();
+
+            UBChain::getInstance()->configFile->setValue("/settings/backupNeeded",true);
+            UBChain::getInstance()->IsBackupNeeded = true;
 
             BackupWalletDialog backupWalletDialog;
             backupWalletDialog.pop();
