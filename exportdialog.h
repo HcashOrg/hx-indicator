@@ -1,8 +1,9 @@
 #ifndef EXPORTDIALOG_H
 #define EXPORTDIALOG_H
 
+#include <mutex>
 #include <QDialog>
-
+#include "KeyDataUtil.h"
 namespace Ui {
 class ExportDialog;
 }
@@ -40,8 +41,17 @@ private:
     bool isEncrypt = true;
     QString pwd;
     QString path;
+    KeyDataPtr dataInfo;
+    std::mutex mutex;
+
 
     void getPrivateKey();
+
+    void ParseTunnel(const QString &jsonString);
+
+    void ParseAllKey(const QString &jsonString);
+
+    bool SaveToPath();
 };
 
 #endif // EXPORTDIALOG_H

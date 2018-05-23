@@ -50,6 +50,9 @@ void BackupWalletDialog::on_backupBtn_clicked()
         {
             qDebug() << "backup wallet.json " << file.copy(path);
 
+            UBChain::getInstance()->configFile->setValue("/settings/backupNeeded",false);
+            UBChain::getInstance()->IsBackupNeeded = false;
+
             close();
 
             CommonDialog tipDialog(CommonDialog::OkOnly);

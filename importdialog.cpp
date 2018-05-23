@@ -6,6 +6,7 @@
 #include "control/shadowwidget.h"
 #include "dialog/importenterpwddialog.h"
 #include "AES/aesencryptor.h"
+#include "KeyDataUtil.h"
 
 ImportDialog::ImportDialog(QWidget *parent) :
     QDialog(parent),
@@ -13,6 +14,7 @@ ImportDialog::ImportDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->privateKeyLineEdit->setEnabled(false);
 //    UBChain::getInstance()->appendCurrentDialogVector(this);
 
     setParent(UBChain::getInstance()->mainFrame);
@@ -68,7 +70,7 @@ void ImportDialog::on_cancelBtn_clicked()
 
 void ImportDialog::on_pathBtn_clicked()
 {
-    QString file = QFileDialog::getOpenFileName(this, tr("Choose your private key file."),"","(*.key *.upk)");
+    QString file = QFileDialog::getOpenFileName(this, tr("Choose your private key file."),"","(*.lpk *.elpk)");
 #ifdef WIN32
     file.replace("\\","/");
 #endif	
@@ -80,104 +82,163 @@ void ImportDialog::on_importBtn_clicked()
     if(ui->accountNameLineEdit->text().isEmpty())   return;
     if(ui->privateKeyLineEdit->text().isEmpty())    return;
 
+    KeyDataPtr data = std::make_shared<KeyDataInfo>();
+    if(KeyDataUtil::ReadaPrivateKeyFromPath(ui->privateKeyLineEdit->text(),data))
+    {
+        //解密
+        if(ui->privateKeyLineEdit->text().endsWith(".lpk"))
+        {
+            data->DecryptBase64();
+        }
+        else if(ui->privateKeyLineEdit->text().endsWith(".elpk"))
+        {
+            ImportEnterPwdDialog importEnterPwdDialog;
+            if(importEnterPwdDialog.pop())
+            {
+                data->DecryptAES(importEnterPwdDialog.pwd);
+            }
+        }
+        else
+        {
+            return;
+        }
+    }
+    else
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText( tr("Wrong file path."));
+        commonDialog.pop();
+        return;
+    }
+
+    //验证该地址是否已经存在
+    foreach(AccountInfo info,UBChain::getInstance()->accountInfoMap){
+        qDebug()<<info.address << " "<<data->LNKAddr;
+        if(info.address == data->LNKAddr)
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText( tr("LNK Address:%1  Already Exists!").arg(data->LNKAddr));
+            commonDialog.pop();
+            return;
+        }
+    }
+
+    //开始导入私钥
+    for(auto it = data->info_key.begin();it != data->info_key.end();++it)
+    {
+        if((*it).first == "LNK")
+        {
+            //导入lnk私钥
+            UBChain::getInstance()->postRPC( "import-import_key",
+                                             toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << (*it).second));
+        }
+        else
+        {
+            //导入跨连私钥
+            UBChain::getInstance()->postRPC( "import-import_crosschain_key",
+                                             toJsonFormat( "import_crosschain_key", QJsonArray() << (*it).second <<(*it).first));
+        }
+    }
+    UBChain::getInstance()->postRPC( "import-finish_import_key", toJsonFormat( "finish_import_key", QJsonArray()));
+
     // 如果输入框中是 私钥文件的地址
-    if( ui->privateKeyLineEdit->text().endsWith(".key") )
-    {
-        QFile file( ui->privateKeyLineEdit->text());
-        if( file.open(QIODevice::ReadOnly))
-        {
-            QByteArray rd = file.readAll();
-            QByteArray ba = QByteArray::fromBase64( rd);
-            QString str(ba);
+//    if( ui->privateKeyLineEdit->text().endsWith(".lpk") )
+//    {
+//        QFile file( ui->privateKeyLineEdit->text());
+//        if( file.open(QIODevice::ReadOnly))
+//        {
+//            QByteArray rd = file.readAll();
+//            QByteArray ba = QByteArray::fromBase64( rd);
+//            QString str(ba);
 
-            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << str));
-            ui->importBtn->setEnabled(false);
-            shadowWidget->show();
+//            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << str));
+//            ui->importBtn->setEnabled(false);
+//            shadowWidget->show();
 
-            file.close();
-            return;
-        }
-        else
-        {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Wrong file path."));
-            commonDialog.pop();
-            return;
-        }
+//            file.close();
+//            return;
+//        }
+//        else
+//        {
+//            CommonDialog commonDialog(CommonDialog::OkOnly);
+//            commonDialog.setText( tr("Wrong file path."));
+//            commonDialog.pop();
+//            return;
+//        }
 
-    }
-    else if( ui->privateKeyLineEdit->text().endsWith(".upk") )      // 如果是加密后的私钥文件
-    {
-        ImportEnterPwdDialog importEnterPwdDialog;
-        if(importEnterPwdDialog.pop())
-        {
-            QFile file( ui->privateKeyLineEdit->text());
-            if( file.open(QIODevice::ReadOnly))
-            {
-                QByteArray rd = file.readAll();
-                QString str(rd);
+//    }
+//    else if( ui->privateKeyLineEdit->text().endsWith(".elpk") )      // 如果是加密后的私钥文件
+//    {
+//        ImportEnterPwdDialog importEnterPwdDialog;
+//        if(importEnterPwdDialog.pop())
+//        {
+//            QFile file( ui->privateKeyLineEdit->text());
+//            if( file.open(QIODevice::ReadOnly))
+//            {
+//                QByteArray rd = file.readAll();
+//                QString str(rd);
 
-                QString pwd = importEnterPwdDialog.pwd;
-                unsigned char key2[16] = {0};
-                memcpy(key2,pwd.toLatin1().data(),pwd.toLatin1().size());
-                AesEncryptor aes(key2);
-                QString output = QString::fromStdString( aes.DecryptString( str.toStdString()) );
+//                QString pwd = importEnterPwdDialog.pwd;
+//                unsigned char key2[16] = {0};
+//                memcpy(key2,pwd.toLatin1().data(),pwd.toLatin1().size());
+//                AesEncryptor aes(key2);
+//                QString output = QString::fromStdString( aes.DecryptString( str.toStdString()) );
 
-                if( output.startsWith("privateKey="))
-                {
-                    file.close();
+//                if( output.startsWith("privateKey="))
+//                {
+//                    file.close();
 
-                    QString pk = output.mid( QString("privateKey=").size());
+//                    QString pk = output.mid( QString("privateKey=").size());
 
-                    UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << pk));
-                    ui->importBtn->setEnabled(false);
-                    shadowWidget->show();
-                }
-                else
-                {
-                    file.close();
+//                    UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << pk));
+//                    ui->importBtn->setEnabled(false);
+//                    shadowWidget->show();
+//                }
+//                else
+//                {
+//                    file.close();
 
-                    CommonDialog commonDialog(CommonDialog::OkOnly);
-                    commonDialog.setText( tr("Wrong password!"));
-                    commonDialog.pop();
-                    return;
-                }
+//                    CommonDialog commonDialog(CommonDialog::OkOnly);
+//                    commonDialog.setText( tr("Wrong password!"));
+//                    commonDialog.pop();
+//                    return;
+//                }
 
-            }
-            else
-            {
-                CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText( tr("Wrong file path."));
-                commonDialog.pop();
-                return;
-            }
-        }
-        else
-        {
-            return;
-        }
+//            }
+//            else
+//            {
+//                CommonDialog commonDialog(CommonDialog::OkOnly);
+//                commonDialog.setText( tr("Wrong file path."));
+//                commonDialog.pop();
+//                return;
+//            }
+//        }
+//        else
+//        {
+//            return;
+//        }
 
-    }
-    else // 如果输入框中是 私钥
-    {
-        QString privateKey = ui->privateKeyLineEdit->text();
-        privateKey = privateKey.simplified();
-        if( (privateKey.size() == 51 || privateKey.size() == 52) && (privateKey.startsWith("5") ) )
-        {
-            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << privateKey));
+//    }
+//    else // 如果输入框中是 私钥
+//    {
+//        QString privateKey = ui->privateKeyLineEdit->text();
+//        privateKey = privateKey.simplified();
+//        if( (privateKey.size() == 51 || privateKey.size() == 52) && (privateKey.startsWith("5") ) )
+//        {
+//            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << privateKey));
 
-             ui->importBtn->setEnabled(false);
-             shadowWidget->show();
-        }
-        else
-        {
-            // 如果不是未注册账户 是错误的私钥格式
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Illegal private key!"));
-            commonDialog.pop();
-        }
+//             ui->importBtn->setEnabled(false);
+//             shadowWidget->show();
+//        }
+//        else
+//        {
+//            // 如果不是未注册账户 是错误的私钥格式
+//            CommonDialog commonDialog(CommonDialog::OkOnly);
+//            commonDialog.setText( tr("Illegal private key!"));
+//            commonDialog.pop();
+//        }
 
-    }
+//    }
 
 }
 
@@ -185,7 +246,7 @@ QString toThousandFigure( int);
 
 void ImportDialog::jsonDataUpdated(QString id)
 {
-    if( id == "id-import_key")
+    if( id == "import-import_key")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 qDebug()  << id << result;

@@ -139,7 +139,8 @@ SOURCES += main.cpp\
     depositpage/FeeChargeWidget.cpp \
     exchange/WithdrawOrderDialog.cpp \
     capitalTransferPage/CapitalConfirmWidget.cpp \
-    alltransactionwidget.cpp
+    alltransactionwidget.cpp \
+    KeyDataUtil.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -250,7 +251,8 @@ HEADERS  += firstlogin.h \
     depositpage/FeeChargeWidget.h \
     exchange/WithdrawOrderDialog.h \
     capitalTransferPage/CapitalConfirmWidget.h \
-    alltransactionwidget.h
+    alltransactionwidget.h \
+    KeyDataUtil.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
