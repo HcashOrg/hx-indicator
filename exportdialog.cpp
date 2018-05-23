@@ -12,6 +12,7 @@ ExportDialog::ExportDialog( QString name, QWidget *parent) :
     ui(new Ui::ExportDialog)
 {
     ui->setupUi(this);
+    dataInfo = std::make_shared<KeyDataInfo>();
 
 //    UBChain::getInstance()->appendCurrentDialogVector(this);
     setParent(UBChain::getInstance()->mainFrame);
@@ -57,11 +58,11 @@ void ExportDialog::on_pathBtn_clicked()
 #endif
         if(ui->encryptCheckBox->isChecked())
         {
-            ui->pathLineEdit->setText( file + "/"  + accoutName + ".upk");
+            ui->pathLineEdit->setText( file + "/"  + accoutName + ".elpk");
         }
         else
         {
-            ui->pathLineEdit->setText( file + "/"  + accoutName + ".key");
+            ui->pathLineEdit->setText( file + "/"  + accoutName + ".lpk");
         }
 
     }
@@ -82,6 +83,92 @@ void ExportDialog::on_cancelBtn_clicked()
 void ExportDialog::getPrivateKey()
 {
     UBChain::getInstance()->postRPC( "id-dump_private_key-" + accoutName, toJsonFormat( "dump_private_key", QJsonArray() << accoutName << "0" ));
+
+    //开始查找私钥
+    UBChain::getInstance()->postRPC( "export-dump_crosschain_private_keys", toJsonFormat( "dump_crosschain_private_keys", QJsonArray()));
+}
+
+void ExportDialog::ParseTunnel(const QString &jsonString)
+{
+    QJsonParseError json_error;
+    QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonString.toLatin1(),&json_error);
+    if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return ;
+    QJsonObject jsonObject = parse_doucment.object();
+
+    if(!jsonObject.value("result").isArray())
+    {
+        return ;
+    }
+
+    QJsonArray object = jsonObject.value("result").toArray();
+    if(object.isEmpty()) return ;
+
+    QString accountAddress = object[0].toObject().value("owner").toString();
+    QString symbol = object[0].toObject().value("chain_type").toString();
+    QString tunnelAddress = object[0].toObject().value("bind_account").toString();
+
+    //根据总的地址公钥私钥信息，匹配该账户对应tunnel对应的私钥
+    dataInfo->MatchPrivateKey(symbol,tunnelAddress);
+}
+
+void ExportDialog::ParseAllKey(const QString &jsonString)
+{
+    QJsonParseError json_error;
+    QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonString.toLatin1(),&json_error);
+    if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return ;
+    QJsonObject jsonObject = parse_doucment.object();
+
+    if(!jsonObject.value("result").isArray())
+    {
+        return ;
+    }
+    QJsonArray arr = jsonObject.value("result").toArray();
+    foreach(QJsonValue jsonVal,arr){
+        if(!jsonVal.isArray()) continue;
+        QJsonArray arrVal = jsonVal.toArray();
+        foreach(QJsonValue val,arrVal){
+            if(!val.isObject()) continue;
+            QJsonObject valObj = val.toObject();
+            dataInfo->insertIntoAll(valObj.value("addr").toString(),valObj.value("pubkey").toString(),valObj.value("wif_key").toString());
+        }
+    }
+}
+
+bool ExportDialog::SaveToPath()
+{
+    QFile file( path);
+    QString fName = file.fileName();
+#ifdef WIN32
+    fName.replace("\\","/");
+#endif
+    fName = fName.mid( fName.lastIndexOf("\\") + 1);
+
+    if( file.exists())
+    {
+        CommonDialog tipDialog(CommonDialog::OkAndCancel);
+        tipDialog.setText( fName + tr( " already exists!\nCover it or not?") );
+        if ( !tipDialog.pop())  return false;
+    }
+
+    if( !file.open(QIODevice::WriteOnly))
+    {
+        qDebug() << "privatekey file open " + fName + " ERROR";
+
+        CommonDialog tipDialog(CommonDialog::OkOnly);
+        tipDialog.setText( tr( "Wrong path!") );
+        tipDialog.pop();
+        return false;
+    }
+
+    if(isEncrypt)
+    {
+        dataInfo->EncryptAES(pwd);
+    }
+    else
+    {
+        dataInfo->EncryptBase64();
+    }
+    return KeyDataUtil::WritePrivateKetToPath(dataInfo,path);
 }
 
 void ExportDialog::jsonDataUpdated(QString id)
@@ -94,7 +181,7 @@ void ExportDialog::jsonDataUpdated(QString id)
 
         result.prepend("{");
         result.append("}");
-
+qDebug() <<result;
         QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
         QJsonObject jsonObject = parse_doucment.object();
         QJsonArray array = jsonObject.take("result").toArray();
@@ -103,86 +190,80 @@ void ExportDialog::jsonDataUpdated(QString id)
             QJsonArray array2 = array.at(0).toArray();
 
             QString privateKey = array2.at(1).toString();
-            QFile file( path);
-            QString fName = file.fileName();
-#ifdef WIN32
-            fName.replace("\\","/");
-#endif
-            fName = fName.mid( fName.lastIndexOf("\\") + 1);
 
-            if( file.exists())
-            {
-                CommonDialog tipDialog(CommonDialog::OkAndCancel);
-                tipDialog.setText( fName + tr( " already exists!\nCover it or not?") );
-                if ( !tipDialog.pop())  return;
-            }
-
-            if( !file.open(QIODevice::WriteOnly))
-            {
-                qDebug() << "privatekey file open " + fName + " ERROR";
-
-                CommonDialog tipDialog(CommonDialog::OkOnly);
-                tipDialog.setText( tr( "Wrong path!") );
-                tipDialog.pop();
-                return;
-            }
-
-            if(isEncrypt)
-            {
-                unsigned char key2[16] = {0};
-                memcpy(key2,pwd.toLatin1().data(),pwd.toLatin1().size());
-                AesEncryptor aes(key2);
-
-                QString input = "privateKey=" + privateKey;
-                QString output = QString::fromStdString( aes.EncryptString( input.toStdString()) );
-
-                file.resize(0);
-                QTextStream ts( &file);
-                ts << output.toUtf8();
-                file.close();
-            }
-            else
-            {
-                QByteArray ba = privateKey.toUtf8();
-
-                file.resize(0);
-                QTextStream ts( &file);
-                ts << ba.toBase64();
-                file.close();
-            }
-
-
-            close();
-
-            CommonDialog tipDialog(CommonDialog::OkOnly);
-            //            tipDialog.setText( tr( "Export to ") + fName + tr(" succeeded!") + QString::fromLocal8Bit("请妥善保管您的私钥，绝对不要丢失或泄露给任何人!") );
-            tipDialog.setText( tr( "Export to ") + fName + tr(" succeeded!") + tr("Please keep your private key properly.Never lose or leak it to anyone!") );
-            tipDialog.pop();
-
-            QString dirPath = path;
-#ifdef WIN32
-            dirPath.replace( "/", "\\");
-            dirPath = dirPath.left( dirPath.lastIndexOf("\\") );
-
-            QProcess::startDetached("explorer \"" + dirPath + "\"");
-#else
-            dirPath = dirPath.left( dirPath.lastIndexOf("/") );
-            QProcess::startDetached("open \"" + dirPath + "\"");
-#endif
+            dataInfo->info_key["LNK"] = privateKey;
+            dataInfo->LNKAddr = array2.at(0).toString();
         }
         else
         {
             qDebug() << "dump_private_key " + accoutName + " ERROR: " + result;
         }
+    }
+    else if(id == "export-dump_crosschain_private_keys")
+    {
+        //解析所有私钥
+        QString result = UBChain::getInstance()->jsonDataValue( id);
+        result.prepend("{");
+        result.append("}");
+
+        qDebug()<<result;
+        ParseAllKey(result);
+
+        //获取所有的tunnel账户
+        QMap<QString,AssetInfo> assetInfoMap = UBChain::getInstance()->assetInfoMap;
+        foreach (AssetInfo info, assetInfoMap) {
+            if(info.id != "1.3.0")
+            {
+                UBChain::getInstance()->postRPC( "export-get_binding_account-"+info.symbol,
+                                                 toJsonFormat( "get_binding_account", QJsonArray()
+                                                 << accoutName<<info.symbol ));
+            }
+
+        }
+        UBChain::getInstance()->postRPC( "export-finish-tunnel",
+                                         toJsonFormat( "export-finish-tunnel", QJsonArray()));
+
+    }
+    else if(id.startsWith("export-get_binding_account-"))
+    {
+        std::lock_guard<std::mutex> loc(mutex);
+
+        QString result = UBChain::getInstance()->jsonDataValue( id);
+        result.prepend("{");
+        result.append("}");
+        //提取通道账户地址
+        ParseTunnel(result);
+    }
+    else if(id == "export-finish-tunnel")
+    {
+        if(SaveToPath())
+        {
+            close();
+
+            CommonDialog tipDialog(CommonDialog::OkOnly);
+            //            tipDialog.setText( tr( "Export to ") + fName + tr(" succeeded!") + QString::fromLocal8Bit("请妥善保管您的私钥，绝对不要丢失或泄露给任何人!") );
+            tipDialog.setText( tr( "Export succeeded!") + tr("Please keep your private key properly.Never lose or leak it to anyone!") );
+            tipDialog.pop();
+
+            QString dirPath = path;
+        #ifdef WIN32
+            dirPath.replace( "/", "\\");
+            dirPath = dirPath.left( dirPath.lastIndexOf("\\") );
+
+            QProcess::startDetached("explorer \"" + dirPath + "\"");
+        #else
+            dirPath = dirPath.left( dirPath.lastIndexOf("/") );
+            QProcess::startDetached("open \"" + dirPath + "\"");
+        #endif
+        }
 
 
-        return;
     }
 }
 
 void ExportDialog::on_exportBtn_clicked()
 {
-    if( ui->encryptCheckBox->isChecked() && ui->pathLineEdit->text().endsWith(".upk") )
+    if( ui->encryptCheckBox->isChecked() && ui->pathLineEdit->text().endsWith(".elpk") )
     {
         ExportSetPwdDialog exportSetPwdDialog;
         if( !exportSetPwdDialog.pop())  return;
@@ -195,7 +276,7 @@ void ExportDialog::on_exportBtn_clicked()
 
         ui->exportBtn->setEnabled(false);
     }
-    else if( !ui->encryptCheckBox->isChecked() && ui->pathLineEdit->text().endsWith(".key") )
+    else if( !ui->encryptCheckBox->isChecked() && ui->pathLineEdit->text().endsWith(".lpk") )
     {
         path = ui->pathLineEdit->text();
         isEncrypt = ui->encryptCheckBox->isChecked();
@@ -225,7 +306,7 @@ void ExportDialog::on_encryptCheckBox_stateChanged(int arg1)
 #else
         QString path = dir.currentPath();
 #endif
-        ui->pathLineEdit->setText( path + "/" + accoutName + ".upk");
+        ui->pathLineEdit->setText( path + "/" + accoutName + ".elpk");
     }
     else
     {
@@ -235,7 +316,7 @@ void ExportDialog::on_encryptCheckBox_stateChanged(int arg1)
 #else
         QString path = dir.currentPath();
 #endif
-        ui->pathLineEdit->setText( path + "/" + accoutName + ".key");
+        ui->pathLineEdit->setText( path + "/" + accoutName + ".lpk");
     }
 }
 
