@@ -36,7 +36,7 @@
 font: 16px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
-    <string/>
+    <string>市场</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

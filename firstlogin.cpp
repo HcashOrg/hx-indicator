@@ -263,16 +263,9 @@ void FirstLogin::InitStyle()
     palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
     setPalette(palette);
 
-    QFont font("黑体",14,70);
-    ui->label_wel->setFont(font);
-
-    QFont fontb("黑体",21,100);
-    ui->label_bloc->setFont(fontb);
 
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
-    ui->label_wel->setPalette(pa);
-    ui->label_bloc->setPalette(pa);
     ui->pwdLineEdit->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;");
     ui->pwdLineEdit2->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;");
 

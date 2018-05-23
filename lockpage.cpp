@@ -152,7 +152,6 @@ void LockPage::jsonDataUpdated(QString id)
 void LockPage::InitWidget()
 {
     InitStyle();
-    ui->forgetBtn->setVisible(false);
 }
 
 void LockPage::InitStyle()
@@ -162,24 +161,14 @@ void LockPage::InitStyle()
     palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
     setPalette(palette);
 
-    QFont font("黑体",14,70);
-    ui->label_wel->setFont(font);
-
-    QFont fontb("黑体",21,100);
-    ui->label_bloc->setFont(fontb);
-
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
-    ui->label_wel->setPalette(pa);
-    ui->label_bloc->setPalette(pa);
     ui->label_version->setPalette(pa);
 
     ui->line->setVisible(false);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
     ui->enterBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
                                 "QToolButton:hover{background-color:#00D2FF;}");
-    ui->forgetBtn->setStyleSheet("QToolButton{background-color:transparent;border:none;border-radius:15px;color: #C6CAD4;}"
-                                 "QToolButton:hover{background-color:#00D2FF;}");
 }
 
 void LockPage::keyPressEvent(QKeyEvent *e)

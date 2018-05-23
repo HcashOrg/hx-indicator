@@ -1,6 +1,8 @@
 #include "FunctionAdvanceWidget.h"
 #include "ui_FunctionAdvanceWidget.h"
 
+#include "extra/style.h"
+
 FunctionAdvanceWidget::FunctionAdvanceWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FunctionAdvanceWidget)
@@ -61,8 +63,5 @@ void FunctionAdvanceWidget::InitStyle()
     //ui->pushButton_multiSig->setFlat(true);
     //ui->pushButton_poundage->setFlat(true);
 
-    setStyleSheet("QToolButton{background: rgb(94,116,235);font-size:14px;font-family:\"Microsoft YaHei UI Light\";}\
-                   QToolButton:hover{background-color: rgb(0,210, 255);}\
-                   QToolButton:pressed{background-color: rgb(130,157, 255);}\
-                   QToolButton:checked{background-color: rgb(130,157, 255);}");
+    setStyleSheet(FUNCTIONBAR_TOOLBUTTON_STYLE);
 }

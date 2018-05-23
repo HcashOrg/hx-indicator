@@ -24,18 +24,6 @@ SelectWalletPathWidget::~SelectWalletPathWidget()
     delete ui;
 }
 
-void SelectWalletPathWidget::on_selectPathBtn_clicked()
-{
-    QString file = QFileDialog::getExistingDirectory(this, "Select the path to store the blockchain");
-    if( !file.isEmpty())
-    {
-#ifdef WIN32	
-        file.replace("/","\\");
-#endif		
-        ui->pathLineEdit->setText( file);
-    }
-}
-
 void SelectWalletPathWidget::on_okBtn_clicked()
 {
     qDebug() << "wallet path " << ui->pathLineEdit->text();
@@ -77,24 +65,15 @@ void SelectWalletPathWidget::InitStyle()
     palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
     setPalette(palette);
 
-    QFont font("黑体",14,70);
-    ui->label_wel->setFont(font);
-
-    QFont fontb("黑体",21,100);
-    ui->label_bloc->setFont(fontb);
 
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
-    ui->label_wel->setPalette(pa);
-    ui->label_bloc->setPalette(pa);
     ui->label_version->setPalette(pa);
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
     ui->okBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
                                 "QToolButton:hover{background-color:#00D2FF;}");
 
-    ui->selectPathBtn->setStyleSheet("QPushButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                                "QPushButton:hover{background-color:#00D2FF;}");
 
     ui->pathLineEdit->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;\
                                     font-size:12pt;");
@@ -106,3 +85,15 @@ void SelectWalletPathWidget::on_closeBtn_clicked()
     emit closeWallet();
 }
 
+
+void SelectWalletPathWidget::on_pathBtn_clicked()
+{
+    QString file = QFileDialog::getExistingDirectory(this, "Select the path to store the blockchain");
+    if( !file.isEmpty())
+    {
+#ifdef WIN32
+        file.replace("/","\\");
+#endif
+        ui->pathLineEdit->setText( file);
+    }
+}

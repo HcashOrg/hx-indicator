@@ -49,7 +49,7 @@
 font: 16px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
-    <string>账户管理</string>
+    <string>账户</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -70,7 +70,7 @@ font: 16px &quot;Microsoft YaHei UI Light&quot;;</string>
     </font>
    </property>
    <property name="text">
-    <string>  资产管理</string>
+    <string>资产</string>
    </property>
   </widget>
   <widget class="QToolButton" name="toolButton_miner">
@@ -88,7 +88,7 @@ font: 16px &quot;Microsoft YaHei UI Light&quot;;</string>
     </font>
    </property>
    <property name="text">
-    <string>  挖矿管理</string>
+    <string>挖矿</string>
    </property>
   </widget>
  </widget>
