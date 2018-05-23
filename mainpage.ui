@@ -51,7 +51,7 @@
   <widget class="QToolButton" name="addAccountBtn">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>650</x>
      <y>104</y>
      <width>60</width>
      <height>20</height>
@@ -194,7 +194,7 @@
   <widget class="QToolButton" name="importAccountBtn">
    <property name="geometry">
     <rect>
-     <x>570</x>
+     <x>580</x>
      <y>104</y>
      <width>60</width>
      <height>20</height>
@@ -224,8 +224,8 @@
   <widget class="QToolButton" name="copyBtn">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>110</y>
+     <x>270</x>
+     <y>86</y>
      <width>11</width>
      <height>11</height>
     </rect>
@@ -295,7 +295,7 @@
   <widget class="QLabel" name="addressLabel">
    <property name="geometry">
     <rect>
-     <x>236</x>
+     <x>200</x>
      <y>104</y>
      <width>290</width>
      <height>24</height>
@@ -323,10 +323,10 @@
   <widget class="QLabel" name="addressLabel2">
    <property name="geometry">
     <rect>
-     <x>176</x>
-     <y>104</y>
+     <x>200</x>
+     <y>80</y>
      <width>60</width>
-     <height>24</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -341,14 +341,14 @@
     <string>地址</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QToolButton" name="qrcodeBtn">
    <property name="geometry">
     <rect>
-     <x>545</x>
-     <y>110</y>
+     <x>285</x>
+     <y>86</y>
      <width>11</width>
      <height>11</height>
     </rect>
@@ -387,6 +387,36 @@
     <string>操作</string>
    </property>
   </widget>
+  <widget class="QToolButton" name="allTransactionBtn">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>104</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>交易记录</string>
+   </property>
+  </widget>
   <zorder>addressLabel</zorder>
   <zorder>title_label</zorder>
   <zorder>addAccountBtn</zorder>
@@ -398,6 +428,7 @@
   <zorder>addressLabel2</zorder>
   <zorder>qrcodeBtn</zorder>
   <zorder>label_op</zorder>
+  <zorder>allTransactionBtn</zorder>
  </widget>
  <resources/>
  <connections/>

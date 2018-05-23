@@ -153,9 +153,13 @@ TransactionTypeIds TransactionDB::getAccountTransactionTypeIdsByType(QString _ac
 {
     TransactionTypeIds transactionTypeIds = getAccountTransactionTypeIds(_accountAddress);
     TransactionTypeIds result;
+
+    qDebug() << "aaaaaaaaaaaaa  " << _accountAddress << _type;
     foreach (TransactionTypeId transactionTypeId, transactionTypeIds)
     {
-        if(transactionTypeId.type == _type)
+        qDebug() << "bbbbbbbbbbbb  " << transactionTypeId.type << transactionTypeId.transactionId;
+
+        if(transactionTypeId.type == _type || _type == -2 )
         {
             result.append(transactionTypeId);
         }

@@ -68,6 +68,8 @@ private slots:
 
     void on_qrcodeBtn_clicked();
 
+    void on_allTransactionBtn_clicked();
+
 private:
     void InitStyle();
 private:

@@ -1345,6 +1345,7 @@ void Frame::jsonDataUpdated(QString id)
             ts.type = array.at(0).toInt();
             QJsonObject operationObject = array.at(1).toObject();
             ts.operationStr = QJsonDocument(operationObject).toJson();
+            ts.feeAmount = jsonValueToULL( operationObject.take("fee").toObject().take("amount"));
 
             UBChain::getInstance()->transactionDB.insertTransactionStruct(transactionId,ts);
             qDebug() << "ttttttttttttt " << transactionId << ts.type;
@@ -1370,6 +1371,46 @@ void Frame::jsonDataUpdated(QString id)
                 {
                     UBChain::getInstance()->transactionDB.addAccountTransactionId(toAddress, typeId);
                 }
+            }
+                break;
+            case TRANSACTION_TYPE_REGISTER_ACCOUNT:
+            {
+                // 注册账户
+                QString payer = operationObject.take("payer").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(payer, typeId);
+            }
+                break;
+            case TRANSACTION_TYPE_BIND_TUNNEL:
+            {
+                // 绑定tunnel地址
+                QString addr = operationObject.take("addr").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(addr, typeId);
+            }
+                break;
+            case TRANSACTION_TYPE_UNBIND_TUNNEL:
+            {
+                // 解绑tunnel地址
+                QString addr = operationObject.take("addr").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(addr, typeId);
+            }
+                break;
+            case TRANSACTION_TYPE_LOCKBALANCE:
+            {
+                // 质押资产给miner
+                QString addr = operationObject.take("lock_balance_addr").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(addr, typeId);
+            }
+                break;
+            case TRANSACTION_TYPE_FORECLOSE:
+            {
+                // 赎回质押资产
+                QString addr = operationObject.take("foreclose_addr").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(addr, typeId);
             }
                 break;
             case TRANSACTION_TYPE_DEPOSIT:
@@ -1403,6 +1444,46 @@ void Frame::jsonDataUpdated(QString id)
                     UBChain::getInstance()->transactionDB.addAccountTransactionId(owner, typeId);
                 }
 
+            }
+                break;
+            case TRANSACTION_TYPE_CONTRACT_REGISTER:
+            {
+                // 注册合约
+                QString ownerAddr = operationObject.take("owner_addr").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(ownerAddr, typeId);
+            }
+                break;
+            case TRANSACTION_TYPE_CONTRACT_INVOKE:
+            {
+                // 调用合约
+                QString callerAddr = operationObject.take("caller_addr").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(callerAddr, typeId);
+            }
+                break;
+            case TRANSACTION_TYPE_CONTRACT_TRANSFER:
+            {
+                // 转账到合约
+                QString callerAddr = operationObject.take("caller_addr").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(callerAddr, typeId);
+            }
+                break;
+            case TRANSACTION_TYPE_CREATE_GUARANTEE:
+            {
+                // 创建承兑单
+                QString ownerAddr = operationObject.take("owner_addr").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(ownerAddr, typeId);
+            }
+                break;
+            case TRANSACTION_TYPE_CANCEL_GUARANTEE:
+            {
+                // 撤销承兑单
+                QString ownerAddr = operationObject.take("owner_addr").toString();
+
+                UBChain::getInstance()->transactionDB.addAccountTransactionId(ownerAddr, typeId);
             }
                 break;
             default:

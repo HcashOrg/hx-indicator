@@ -24,6 +24,7 @@
 #include "withdrawpage/WithdrawPage.h"
 #include "capitalTransferPage/CapitalTransferPage.h"
 #include "ToolButtonWidget.h"
+#include "alltransactionwidget.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -594,11 +595,19 @@ void MainPage::InitStyle()
     ui->qrcodeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/qrcode.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
                                  "QToolButton:hover{background-image:url(:/ui/wallet_ui/qrcode_hover.png);}");
 
-
+    ui->allTransactionBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->importAccountBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->addAccountBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 //    ui->accountComboBox->setStyleSheet("QComboBox{border: none;background:transparent;font: 12pt \"Microsoft YaHei UI Light\";\
 //               background-position: center left;color: black;selection-background-color: darkgray;}");
 
 
+}
+
+void MainPage::on_allTransactionBtn_clicked()
+{
+    AllTransactionWidget* allTransactionWidget = new AllTransactionWidget(this);
+    allTransactionWidget->setAttribute(Qt::WA_DeleteOnClose);
+    allTransactionWidget->show();
+    allTransactionWidget->raise();
 }

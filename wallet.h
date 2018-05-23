@@ -141,6 +141,7 @@ struct TransactionStruct
     int     blockNum = -1;
     QString expirationTime;
     QString operationStr;
+    unsigned long long feeAmount = 0;
 
 public:
 
