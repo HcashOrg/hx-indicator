@@ -414,7 +414,7 @@ void MultiSigTransactionPage::on_backBtn_clicked()
 
 void MultiSigTransactionPage::on_transactionsTableWidget_cellPressed(int row, int column)
 {
-    if( column == 2 )
+    if( column == 2 || column == 3 || column == 6)
     {
         ShowContentDialog showContentDialog( ui->transactionsTableWidget->item(row, column)->text(),this);
 
@@ -424,36 +424,6 @@ void MultiSigTransactionPage::on_transactionsTableWidget_cellPressed(int row, in
 
         showContentDialog.move( ui->transactionsTableWidget->mapToGlobal( QPoint(x, y)));
         showContentDialog.exec();
-
-        return;
-    }
-
-    if( column == 3 )
-    {
-        ShowContentDialog showContentDialog( ui->transactionsTableWidget->item(row, column)->text(),this);
-
-        int x = ui->transactionsTableWidget->columnViewportPosition(column) + ui->transactionsTableWidget->columnWidth(column) / 2
-                - showContentDialog.width() / 2;
-        int y = ui->transactionsTableWidget->rowViewportPosition(row) - 10 + ui->transactionsTableWidget->horizontalHeader()->height();
-
-        showContentDialog.move( ui->transactionsTableWidget->mapToGlobal( QPoint(x, y)));
-        showContentDialog.exec();
-
-        return;
-    }
-
-    if( column == 6 )
-    {
-        ShowContentDialog showContentDialog( ui->transactionsTableWidget->item(row, column)->text(),this);
-
-        int x = ui->transactionsTableWidget->columnViewportPosition(column) + ui->transactionsTableWidget->columnWidth(column) / 2
-                - showContentDialog.width() / 2;
-        int y = ui->transactionsTableWidget->rowViewportPosition(row) - 10 + ui->transactionsTableWidget->horizontalHeader()->height();
-
-        showContentDialog.move( ui->transactionsTableWidget->mapToGlobal( QPoint(x, y)));
-        showContentDialog.exec();
-
-
 
         return;
     }

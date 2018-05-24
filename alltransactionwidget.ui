@@ -75,7 +75,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <rect>
      <x>125</x>
      <y>93</y>
-     <width>46</width>
+     <width>50</width>
      <height>24</height>
     </rect>
    </property>
@@ -94,7 +94,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <rect>
      <x>190</x>
      <y>93</y>
-     <width>46</width>
+     <width>50</width>
      <height>24</height>
     </rect>
    </property>
@@ -113,7 +113,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <rect>
      <x>255</x>
      <y>93</y>
-     <width>46</width>
+     <width>50</width>
      <height>24</height>
     </rect>
    </property>
@@ -132,7 +132,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <rect>
      <x>320</x>
      <y>93</y>
-     <width>46</width>
+     <width>50</width>
      <height>24</height>
     </rect>
    </property>
@@ -151,7 +151,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <rect>
      <x>385</x>
      <y>93</y>
-     <width>60</width>
+     <width>70</width>
      <height>24</height>
     </rect>
    </property>
@@ -168,9 +168,9 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="typeOtherBtn">
    <property name="geometry">
     <rect>
-     <x>625</x>
+     <x>640</x>
      <y>93</y>
-     <width>46</width>
+     <width>50</width>
      <height>24</height>
     </rect>
    </property>
@@ -189,7 +189,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <rect>
      <x>125</x>
      <y>125</y>
-     <width>46</width>
+     <width>50</width>
      <height>24</height>
     </rect>
    </property>
@@ -208,7 +208,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <rect>
      <x>190</x>
      <y>125</y>
-     <width>46</width>
+     <width>50</width>
      <height>24</height>
     </rect>
    </property>
@@ -227,7 +227,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <rect>
      <x>255</x>
      <y>125</y>
-     <width>46</width>
+     <width>50</width>
      <height>24</height>
     </rect>
    </property>
@@ -246,7 +246,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <rect>
      <x>320</x>
      <y>125</y>
-     <width>46</width>
+     <width>50</width>
      <height>24</height>
     </rect>
    </property>
@@ -532,9 +532,9 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="typeMineBtn">
    <property name="geometry">
     <rect>
-     <x>465</x>
+     <x>470</x>
      <y>93</y>
-     <width>60</width>
+     <width>70</width>
      <height>24</height>
     </rect>
    </property>
@@ -551,9 +551,9 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="typeGuaranteeBtn">
    <property name="geometry">
     <rect>
-     <x>545</x>
+     <x>555</x>
      <y>93</y>
-     <width>60</width>
+     <width>70</width>
      <height>24</height>
     </rect>
    </property>
@@ -565,6 +565,40 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>承兑单</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="searchLineEdit">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>50</y>
+     <width>176</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border:1px solid rgb(198,202,212);border-top-left-radius:12px;border-bottom-left-radius:12px;
+color: rgb(198,202,212);padding: 0px 10px 0px 10px;
+font: 12px &quot;微软雅黑&quot;;</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="searchBtn">
+   <property name="geometry">
+    <rect>
+     <x>645</x>
+     <y>50</y>
+     <width>50</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/ui/wallet_ui/searchBtn.png);</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

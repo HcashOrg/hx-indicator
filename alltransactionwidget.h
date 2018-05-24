@@ -35,6 +35,12 @@ private slots:
 
     void on_accountComboBox_currentTextChanged(const QString &arg1);
 
+    void on_transactionsTableWidget_cellPressed(int row, int column);
+
+    void on_searchBtn_clicked();
+
+    void on_searchLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::AllTransactionWidget *ui;
     bool inited = false;
@@ -42,6 +48,8 @@ private:
     TimeChoice timeChoice = AllTime;
     void clearTypeChoice();
     void clearTimeChoice();
+
+    void hideFilteredTransactions();
 
     void showTransactions();
 

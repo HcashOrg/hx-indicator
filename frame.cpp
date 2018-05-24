@@ -223,7 +223,7 @@ Frame::Frame(): timer(NULL),
 
     trayIcon = new QSystemTrayIcon(this);
     //放在托盘提示信息、托盘图标
-    trayIcon ->setToolTip(QString("UBWallet ") + WALLET_VERSION);
+    trayIcon ->setToolTip(QString("LNKWallet ") + WALLET_VERSION);
     trayIcon ->setIcon(QIcon(":/ui/wallet_ui/LNK.ico"));
     //点击托盘执行的事件
     connect(trayIcon , SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
@@ -1352,7 +1352,7 @@ void Frame::jsonDataUpdated(QString id)
             ts.feeAmount = jsonValueToULL( operationObject.take("fee").toObject().take("amount"));
 
             UBChain::getInstance()->transactionDB.insertTransactionStruct(transactionId,ts);
-            qDebug() << "ttttttttttttt " << transactionId << ts.type;
+            qDebug() << "ttttttttttttt " << transactionId << ts.type << ts.feeAmount;
 
             TransactionTypeId typeId;
             typeId.type = ts.type;

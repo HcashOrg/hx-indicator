@@ -75,12 +75,12 @@
         <translation type="unfinished">Backup wallet</translation>
     </message>
     <message>
-        <location filename="AccountManagerWidget.cpp" line="176"/>
+        <location filename="AccountManagerWidget.cpp" line="180"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AccountManagerWidget.cpp" line="181"/>
+        <location filename="AccountManagerWidget.cpp" line="185"/>
         <source>export</source>
         <translation type="unfinished"></translation>
     </message>
@@ -418,13 +418,13 @@
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="53"/>
-        <location filename="alltransactionwidget.ui" line="517"/>
+        <location filename="alltransactionwidget.ui" line="520"/>
         <source>类型</source>
         <translation type="unfinished">Type</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="70"/>
-        <location filename="alltransactionwidget.ui" line="439"/>
+        <location filename="alltransactionwidget.ui" line="442"/>
         <source>时间</source>
         <translation type="unfinished">Time</translation>
     </message>
@@ -485,143 +485,148 @@
         <translation type="unfinished">Address</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.ui" line="426"/>
+        <location filename="alltransactionwidget.ui" line="429"/>
         <source>区块高度</source>
         <translation type="unfinished">Block</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.ui" line="452"/>
+        <location filename="alltransactionwidget.ui" line="455"/>
         <source>对方账户</source>
         <translation type="unfinished">Opposite</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.ui" line="465"/>
+        <location filename="alltransactionwidget.ui" line="468"/>
         <source>数量</source>
         <translation type="unfinished">Amount</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.ui" line="478"/>
+        <location filename="alltransactionwidget.ui" line="481"/>
         <source>手续费(LNK)</source>
         <translation type="unfinished">Fee(LNK)</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.ui" line="491"/>
+        <location filename="alltransactionwidget.ui" line="494"/>
         <source>交易ID</source>
         <translation type="unfinished">Transaction ID</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.ui" line="504"/>
+        <location filename="alltransactionwidget.ui" line="507"/>
         <source>状态</source>
         <translation type="unfinished">State</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.ui" line="545"/>
+        <location filename="alltransactionwidget.ui" line="548"/>
         <source>挖矿相关</source>
         <translation type="unfinished">Mine</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.ui" line="564"/>
+        <location filename="alltransactionwidget.ui" line="567"/>
         <source>承兑单</source>
         <translation type="unfinished">Acceptance</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="281"/>
+        <location filename="alltransactionwidget.cpp" line="46"/>
+        <source>address or transaction id</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="333"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="307"/>
+        <location filename="alltransactionwidget.cpp" line="359"/>
         <source>transfer to self</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="316"/>
+        <location filename="alltransactionwidget.cpp" line="368"/>
         <source>transfer-out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="328"/>
+        <location filename="alltransactionwidget.cpp" line="380"/>
         <source>transfer-in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="336"/>
+        <location filename="alltransactionwidget.cpp" line="388"/>
         <source>register account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="344"/>
+        <location filename="alltransactionwidget.cpp" line="396"/>
         <source>bind %1 address: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="346"/>
+        <location filename="alltransactionwidget.cpp" line="398"/>
         <source>bind tunnel address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="354"/>
+        <location filename="alltransactionwidget.cpp" line="406"/>
         <source>unbind %1 address: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="356"/>
+        <location filename="alltransactionwidget.cpp" line="408"/>
         <source>unbind tunnel address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="372"/>
+        <location filename="alltransactionwidget.cpp" line="424"/>
         <source>lock asset to miner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="388"/>
+        <location filename="alltransactionwidget.cpp" line="440"/>
         <source>foreclose asset from miner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="399"/>
-        <location filename="alltransactionwidget.cpp" line="414"/>
+        <location filename="alltransactionwidget.cpp" line="451"/>
+        <location filename="alltransactionwidget.cpp" line="466"/>
         <source>%1 account: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="405"/>
+        <location filename="alltransactionwidget.cpp" line="457"/>
         <source>deposit %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="420"/>
+        <location filename="alltransactionwidget.cpp" line="472"/>
         <source>withdraw %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="436"/>
+        <location filename="alltransactionwidget.cpp" line="488"/>
         <source>get mining income</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="449"/>
+        <location filename="alltransactionwidget.cpp" line="501"/>
         <source>register contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="462"/>
+        <location filename="alltransactionwidget.cpp" line="514"/>
         <source>call contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="479"/>
+        <location filename="alltransactionwidget.cpp" line="531"/>
         <source>transfer to contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="496"/>
+        <location filename="alltransactionwidget.cpp" line="548"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="507"/>
+        <location filename="alltransactionwidget.cpp" line="559"/>
         <source>cancel acceptance</source>
         <translation type="unfinished"></translation>
     </message>
@@ -780,27 +785,27 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Backup</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="56"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="59"/>
         <source>Your wallet has been backed up! Please keep it properly.Never lose or leak it to anyone!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="73"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="76"/>
         <source>Can not find the wallet file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="80"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="83"/>
         <source>Wrong file format!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="90"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="93"/>
         <source>You have not backup this wallet.If your wallet data is lost or corrupted, you will have no way to get your accounts back.Sure to cancel?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="99"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="102"/>
         <source>Select the path</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2231,13 +2236,18 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Record</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="81"/>
+        <location filename="depositpage/DepositPage.cpp" line="83"/>
         <source>cannot generate tunnel account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="100"/>
+        <location filename="depositpage/DepositPage.cpp" line="102"/>
         <source>cannot bind tunnel account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="depositpage/DepositPage.cpp" line="113"/>
+        <source>You Should Back Up Your Wallet!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2400,55 +2410,50 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Export</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="33"/>
+        <location filename="exportdialog.cpp" line="34"/>
         <source>Export </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="33"/>
+        <location filename="exportdialog.cpp" line="34"/>
         <source> &apos;s private key to:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="51"/>
+        <location filename="exportdialog.cpp" line="52"/>
         <source>Select the path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="73"/>
+        <location filename="exportdialog.cpp" line="74"/>
         <source>You have not backup this account.If your wallet data is lost or corrupted, you will have no way to get your account back.Sure to cancel?</source>
         <oldsource>You have not backup this wallet.If your wallet data is lost or corrupted, you will have no way to get your account back.Sure to cancel?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="115"/>
+        <location filename="exportdialog.cpp" line="148"/>
         <source> already exists!
 Cover it or not?</source>
         <oldsource> already exists! Cover it or not?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="124"/>
+        <location filename="exportdialog.cpp" line="157"/>
         <source>Wrong path!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="158"/>
-        <source>Export to </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="exportdialog.cpp" line="158"/>
-        <source> succeeded!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="exportdialog.cpp" line="158"/>
+        <location filename="exportdialog.cpp" line="244"/>
         <source>Please keep your private key properly.Never lose or leak it to anyone!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="209"/>
+        <location filename="exportdialog.cpp" line="244"/>
+        <source>Export succeeded!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exportdialog.cpp" line="290"/>
         <source>Wrong file format!</source>
         <oldsource>Wrong file format.</oldsource>
         <translation type="unfinished"></translation>
@@ -2727,22 +2732,22 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="966"/>
+        <location filename="frame.cpp" line="970"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1562"/>
+        <location filename="frame.cpp" line="1566"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1565"/>
+        <location filename="frame.cpp" line="1569"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1568"/>
+        <location filename="frame.cpp" line="1572"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3029,40 +3034,34 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Select</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="71"/>
+        <location filename="importdialog.cpp" line="73"/>
         <source>Choose your private key file.</source>
         <oldsource>Choose you private key file.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="103"/>
-        <location filename="importdialog.cpp" line="150"/>
+        <location filename="importdialog.cpp" line="109"/>
         <source>Wrong file path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="141"/>
-        <source>Wrong password!</source>
+        <location filename="importdialog.cpp" line="120"/>
+        <source>LNK Address:%1  Already Exists!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="208"/>
+        <location filename="importdialog.cpp" line="269"/>
         <source>Import key error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="238"/>
+        <location filename="importdialog.cpp" line="299"/>
         <source> has been imported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="242"/>
+        <location filename="importdialog.cpp" line="303"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="importdialog.cpp" line="176"/>
-        <source>Illegal private key!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3274,6 +3273,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Records</translation>
     </message>
     <message>
+        <location filename="mainpage.ui" line="432"/>
+        <source>钱包有变，需要保存！</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>备份钱包</source>
         <translation type="obsolete">Backup wallet</translation>
     </message>
@@ -3325,37 +3329,37 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Delegate</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="119"/>
+        <location filename="mainpage.cpp" line="120"/>
         <source>transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="122"/>
+        <location filename="mainpage.cpp" line="123"/>
         <source>deposit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="123"/>
+        <location filename="mainpage.cpp" line="124"/>
         <source>withdraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="124"/>
+        <location filename="mainpage.cpp" line="125"/>
         <source>allot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="362"/>
+        <location filename="mainpage.cpp" line="367"/>
         <source>Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="560"/>
+        <location filename="mainpage.cpp" line="565"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="593"/>
+        <location filename="mainpage.cpp" line="598"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4641,7 +4645,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="selectwalletpathwidget.ui" line="42"/>
         <source>选择路径</source>
-        <translation type="unfinished">...</translation>
+        <translation type="unfinished">Select</translation>
     </message>
 </context>
 <context>
@@ -5615,8 +5619,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UBChain</name>
     <message>
-        <location filename="wallet.cpp" line="171"/>
-        <location filename="wallet.cpp" line="195"/>
+        <location filename="wallet.cpp" line="174"/>
+        <location filename="wallet.cpp" line="198"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>

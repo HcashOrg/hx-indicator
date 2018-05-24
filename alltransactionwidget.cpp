@@ -2,6 +2,7 @@
 #include "ui_alltransactionwidget.h"
 
 #include "wallet.h"
+#include "showcontentdialog.h"
 
 AllTransactionWidget::AllTransactionWidget(QWidget *parent) :
     QWidget(parent),
@@ -39,8 +40,10 @@ void AllTransactionWidget::init()
     ui->transactionsTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
 
-    setStyleSheet("QToolButton{background:transparent;border:none;color: rgb(51,51,51);font:12px \"微软雅黑\";}"
+    setStyleSheet("QToolButton{background:transparent;border:none;color: rgb(51,51,51);font:12px \"微软雅黑\";padding:0px 0px 1px 0px;}"
                   "QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:white;}");
+
+    ui->searchLineEdit->setPlaceholderText(tr("address or transaction id"));
 
 
     ui->typeAllBtn->setCheckable(true);
@@ -190,6 +193,26 @@ void AllTransactionWidget::clearTimeChoice()
     ui->timeMonthBtn->setChecked(false);
 }
 
+void AllTransactionWidget::hideFilteredTransactions()
+{
+    QString filterStr = ui->searchLineEdit->text().simplified();
+
+    if(filterStr.isEmpty())     return;
+
+    for(int i = 0; i < ui->transactionsTableWidget->rowCount(); i++)
+    {
+        if( !ui->transactionsTableWidget->item(i,2)->text().contains(filterStr)
+                && !ui->transactionsTableWidget->item(i,5)->text().contains(filterStr))
+        {
+            ui->transactionsTableWidget->hideRow(i);
+        }
+        else
+        {
+            ui->transactionsTableWidget->showRow(i);
+        }
+    }
+}
+
 void AllTransactionWidget::showTransactions()
 {
     TransactionTypeIds typeIds;
@@ -231,29 +254,58 @@ void AllTransactionWidget::showTransactions()
         break;
     }
 
+    // 根据时间过滤
+    int earliestBlock = 0;
+    switch (timeChoice)
+    {
+    case AllTime:
+        break;
+    case DayTime:
+        earliestBlock = UBChain::getInstance()->walletInfo.blockHeight - 12 * 60 * 24;
+        break;
+    case WeekTime:
+        earliestBlock = UBChain::getInstance()->walletInfo.blockHeight - 12 * 60 * 24 * 7;
+        break;
+    case MonthTime:
+        earliestBlock = UBChain::getInstance()->walletInfo.blockHeight - 12 * 60 * 24 * 30;
+        break;
+    default:
+        break;
+    }
+    TransactionTypeIds filteredTypeIds;
+    foreach (TransactionTypeId id, typeIds)
+    {
+        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(id.transactionId);
+        if(ts.blockNum >= earliestBlock)
+        {
+            filteredTypeIds.append(id);
+        }
+    }
+
+
     // 根据区块高度排序
     TransactionTypeIds sortedTypeIds;
-    for(int i = 0; i < typeIds.size(); i++)
+    for(int i = 0; i < filteredTypeIds.size(); i++)
     {
         if(sortedTypeIds.size() == 0)
         {
-            sortedTypeIds.append(typeIds.at(i));
+            sortedTypeIds.append(filteredTypeIds.at(i));
             continue;
         }
 
-        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(typeIds.at(i).transactionId);
+        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(filteredTypeIds.at(i).transactionId);
         for(int j = 0; j < sortedTypeIds.size(); j++)
         {
             TransactionStruct ts2 = UBChain::getInstance()->transactionDB.getTransactionStruct(sortedTypeIds.at(j).transactionId);
             if(ts.blockNum >= ts2.blockNum)
             {
-                sortedTypeIds.insert(j,typeIds.at(i));
+                sortedTypeIds.insert(j,filteredTypeIds.at(i));
                 break;
             }
 
             if(j == sortedTypeIds.size() - 1)
             {
-                sortedTypeIds.append(typeIds.at(i));
+                sortedTypeIds.append(filteredTypeIds.at(i));
                 break;
             }
         }
@@ -521,6 +573,8 @@ void AllTransactionWidget::showTransactions()
         }
 
     }
+
+    hideFilteredTransactions();
 }
 
 
@@ -528,8 +582,38 @@ void AllTransactionWidget::showTransactions()
 
 void AllTransactionWidget::on_accountComboBox_currentTextChanged(const QString &arg1)
 {
+    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+
     AccountInfo info = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
     ui->addressLabel->setText(info.address);
 
     showTransactions();
+}
+
+void AllTransactionWidget::on_transactionsTableWidget_cellPressed(int row, int column)
+{
+    if( column == 1  || column == 2 || column == 5 || column == 7)
+    {
+        ShowContentDialog showContentDialog( ui->transactionsTableWidget->item(row, column)->text(),this);
+
+        int x = ui->transactionsTableWidget->columnViewportPosition(column) + ui->transactionsTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->transactionsTableWidget->rowViewportPosition(row) - 10 + ui->transactionsTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->transactionsTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
+
+}
+
+void AllTransactionWidget::on_searchBtn_clicked()
+{
+    hideFilteredTransactions();
+}
+
+void AllTransactionWidget::on_searchLineEdit_textChanged(const QString &arg1)
+{
+    hideFilteredTransactions();
 }

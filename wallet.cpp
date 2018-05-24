@@ -133,25 +133,25 @@ UBChain*   UBChain::getInstance()
 
 void UBChain:: startExe()
 {
-//    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
+    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
-//    QStringList strList;
-//    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
-//            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT);
+    QStringList strList;
+    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
+            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT);
 
-//    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
-//    {
-//        strList << "--replay";
-//    }
-//    UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
+    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+    {
+        strList << "--replay";
+    }
+    UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
-//    nodeProc->start("lnk_node.exe",strList);
-//    qDebug() << "start lnk_node.exe " << strList;
+    nodeProc->start("lnk_node.exe",strList);
+    qDebug() << "start lnk_node.exe " << strList;
 
-//    emit exeStarted();
-
-    UBChain::getInstance()->initWebSocketManager();
     emit exeStarted();
+
+//    UBChain::getInstance()->initWebSocketManager();
+//    emit exeStarted();
 }
 
 void UBChain::onNodeExeStateChanged()
@@ -1377,13 +1377,13 @@ QString toJsonFormat(QString instruction,
 
 QDataStream &operator >>(QDataStream &in, TransactionStruct &data)
 {
-    in >> data.transactionId >> data.type >> data.blockNum >> data.expirationTime >> data.operationStr;
+    in >> data.transactionId >> data.type >> data.blockNum >> data.expirationTime >> data.operationStr >> data.feeAmount;
     return in;
 }
 
 QDataStream &operator <<(QDataStream &out, const TransactionStruct &data)
 {
-    out << data.transactionId << data.type << data.blockNum << data.expirationTime << data.operationStr;
+    out << data.transactionId << data.type << data.blockNum << data.expirationTime << data.operationStr << data.feeAmount;
     return out;
 }
 

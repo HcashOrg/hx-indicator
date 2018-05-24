@@ -67,7 +67,7 @@ LPWSTR ConvertCharToLPWSTR(const char * szString)
 #include <unistd.h>
 bool checkOnly()
 {
-    const char filename[] = "/tmp/ubwalletlockfile";
+    const char filename[] = "/tmp/lnkwalletlockfile";
     int fd = open( filename, O_WRONLY | O_CREAT, 0644);
     int flock = lockf(fd, F_TLOCK, 0);
     if( fd == -1)

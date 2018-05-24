@@ -163,21 +163,7 @@ void WithdrawRecordWidget::pageChangeSlot(unsigned int page)
 
 void WithdrawRecordWidget::on_withdrawRecordTableWidget_cellPressed(int row, int column)
 {
-    if( column == 1 )
-    {
-        ShowContentDialog showContentDialog( ui->withdrawRecordTableWidget->item(row, column)->text(),this);
-
-        int x = ui->withdrawRecordTableWidget->columnViewportPosition(column) + ui->withdrawRecordTableWidget->columnWidth(column) / 2
-                - showContentDialog.width() / 2;
-        int y = ui->withdrawRecordTableWidget->rowViewportPosition(row) - 10 + ui->withdrawRecordTableWidget->horizontalHeader()->height();
-
-        showContentDialog.move( ui->withdrawRecordTableWidget->mapToGlobal( QPoint(x, y)));
-        showContentDialog.exec();
-
-        return;
-    }
-
-    if( column == 4 )
+    if( column == 1 || column == 4 )
     {
         ShowContentDialog showContentDialog( ui->withdrawRecordTableWidget->item(row, column)->text(),this);
 
