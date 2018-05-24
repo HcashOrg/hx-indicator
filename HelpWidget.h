@@ -14,6 +14,11 @@ class HelpWidget : public QWidget
 public:
     explicit HelpWidget(QWidget *parent = 0);
     ~HelpWidget();
+private slots:
+    void CheckUpdateSlot();
+    void CheckResultSlot(const QString &version);
+
+    void UpdateSlot();
 private:
     void InitWidget();
     void InitStyle();
@@ -21,6 +26,8 @@ protected:
     void paintEvent(QPaintEvent *event);
 private:
     Ui::HelpWidget *ui;
+    class DataPrivate;
+    DataPrivate *_p;
 };
 
 #endif // HELPWIDGET_H

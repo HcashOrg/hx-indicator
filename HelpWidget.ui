@@ -68,12 +68,12 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'SimSun';&quot;&gt;Blocklink是一条支持跨链交易且拥有智能合约的高性能区块链。它支持和现有数字货币（比特币，莱特币等）之间的跨链转账，支持链上的多资产转移，也支持通过智能合约支撑各种复杂业务场景。内置去中心化交易所、去中心化POS矿池等系统。兑换流程公开透明，安全可靠。帮助用户快速实现跨链资产的转移和交易，打破链与链之间的流通壁垒。Blocklink致力于更好地进行区块链资源整合，促进价值传递。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="label_updatetip">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>310</y>
-     <width>200</width>
+     <x>400</x>
+     <y>314</y>
+     <width>121</width>
      <height>21</height>
     </rect>
    </property>
@@ -90,7 +90,7 @@ p, li { white-space: pre-wrap; }
     <string notr="true">font: 14px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
-    <string>检查更新</string>
+    <string>暂无更新</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -125,7 +125,7 @@ color: rgb(198, 202, 212);</string>
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QToolButton" name="toolButton">
+  <widget class="QToolButton" name="toolButton_update">
    <property name="geometry">
     <rect>
      <x>292</x>
@@ -139,6 +139,22 @@ color: rgb(198, 202, 212);</string>
    </property>
    <property name="text">
     <string>升级</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="toolButton_checkUpdate">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>310</y>
+     <width>96</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="text">
+    <string>检查更新</string>
    </property>
   </widget>
  </widget>

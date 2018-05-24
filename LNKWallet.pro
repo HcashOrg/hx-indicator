@@ -140,7 +140,10 @@ SOURCES += main.cpp\
     exchange/WithdrawOrderDialog.cpp \
     capitalTransferPage/CapitalConfirmWidget.cpp \
     alltransactionwidget.cpp \
-    KeyDataUtil.cpp
+    KeyDataUtil.cpp \
+    update/UpdateNetWork.cpp \
+    update/UpdateProcess.cpp \
+    update/UpdateProgressUtil.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -252,7 +255,10 @@ HEADERS  += firstlogin.h \
     exchange/WithdrawOrderDialog.h \
     capitalTransferPage/CapitalConfirmWidget.h \
     alltransactionwidget.h \
-    KeyDataUtil.h
+    KeyDataUtil.h \
+    update/UpdateNetWork.h \
+    update/UpdateProcess.h \
+    update/UpdateProgressUtil.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
