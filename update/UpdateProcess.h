@@ -11,6 +11,7 @@ public:
 signals:
     void NewstVersionSignal(const QString &version);//没有更新则为空
     void updateFinish();
+    void updateWrong();
 public:
   void InitServerURL(const QString &url);
   void checkUpdate();
@@ -28,6 +29,8 @@ private slots:
     //获取下载完毕信号
     void DownloadEmptySlot();
 
+    //下载出错
+    void DownloadWrongSlot(const QString &fileName);
 private:
     void InitData();//读取本地版本文件等初始化工作
 private:

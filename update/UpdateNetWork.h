@@ -2,6 +2,7 @@
 #define UPDATENETWORK_H
 
 #include <QObject>
+#include <QNetworkReply>
 struct DownLoadData;
 class UpdateNetWork : public QObject
 {
@@ -20,11 +21,13 @@ signals:
     void TaskEmpty();
     void DownLoadFinish(const QString &filename);
     void DwonLoadWrong(const QString &filename);
-public slots:
+
 private slots:
     void DownLoadReadSlots();
     void DownLoadProgressSlots(qint64 bytesReceived, qint64 bytesTotal);
     void DownLoadFinishSlots();
+
+    void DownLoadErrorSlots(QNetworkReply::NetworkError code);
 private:
     class DataPrivate;
     DataPrivate *_p;

@@ -68,6 +68,12 @@ void HelpWidget::UpdateFinishSlot()
     ui->label_updatetip->setText(tr("update finish,restart to take effect! " ));
 }
 
+void HelpWidget::UpdateWrongSlot()
+{
+    ui->label_updatetip->setVisible(true);
+    ui->label_updatetip->setText(tr("update wrong! " ));
+}
+
 void HelpWidget::InitWidget()
 {
     InitStyle();
@@ -77,6 +83,7 @@ void HelpWidget::InitWidget()
     UBChain::getInstance()->updateProcess->InitServerURL(UBChain::getInstance()->middlewarePath);
 
     connect(UBChain::getInstance()->updateProcess,&UpdateProcess::updateFinish,this,&HelpWidget::UpdateFinishSlot);
+    connect(UBChain::getInstance()->updateProcess,&UpdateProcess::updateWrong,this,&HelpWidget::UpdateWrongSlot);
     connect(ui->toolButton_checkUpdate,&QToolButton::clicked,this,&HelpWidget::CheckUpdateSlot);
     connect(ui->toolButton_update,&QToolButton::clicked,this,&HelpWidget::UpdateSlot);
 }

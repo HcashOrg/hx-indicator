@@ -21,6 +21,7 @@ private slots:
     void UpdateSlot();
 
     void UpdateFinishSlot();
+    void UpdateWrongSlot();
 private:
     void InitWidget();
     void InitStyle();

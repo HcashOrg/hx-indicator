@@ -93,6 +93,9 @@ void UpdateNetWork::startDownLoad()
     connect(reply,&QNetworkReply::readyRead,this,&UpdateNetWork::DownLoadReadSlots);
     connect(reply,&QNetworkReply::downloadProgress,this,&UpdateNetWork::DownLoadProgressSlots);
     connect(reply,&QNetworkReply::finished,this,&UpdateNetWork::DownLoadFinishSlots);
+
+    connect(reply,static_cast<void (QNetworkReply::*)(QNetworkReply::NetworkError)>(&QNetworkReply::error),this,&UpdateNetWork::DownLoadErrorSlots);
+
 }
 
 void UpdateNetWork::DownLoadReadSlots()
@@ -126,5 +129,11 @@ void UpdateNetWork::DownLoadFinishSlots()
         emit TaskEmpty();
     }
 
+}
+
+void UpdateNetWork::DownLoadErrorSlots(QNetworkReply::NetworkError code)
+{
+
+    emit DwonLoadWrong(_p->downloadList.front().fileName);
 }
 

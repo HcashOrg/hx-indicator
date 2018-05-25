@@ -24,6 +24,7 @@ public:
         ,downloadPath(QCoreApplication::applicationDirPath() + QDir::separator() + "temp")
         ,localVersionData(std::make_shared<VersionInfo>())
         ,serverVersionData(std::make_shared<VersionInfo>())
+        ,isWrongHappened(false)
     {
         qDebug()<<downloadPath;
     }
@@ -37,11 +38,11 @@ public:
     VersionInfoPtr localVersionData;//本地文件解析结果
     VersionInfoPtr serverVersionData;//服务器下载的文件解析结果
 
-
-
     QString downloadPath;
 
     QList<DownLoadData> updateList;//需要更新的列表
+
+    bool isWrongHappened;
 };
 
 UpdateProcess::UpdateProcess(QObject *parent)
@@ -58,6 +59,8 @@ void UpdateProcess::InitServerURL(const QString &url)
 
 void UpdateProcess::checkUpdate()
 {
+    //设置当前没有错误
+    _p->isWrongHappened = false;
 
     disconnect(_p->updateNetwork,&UpdateNetWork::TaskEmpty,this,&UpdateProcess::DownloadEmptySlot);
     //先清空下载的数据
@@ -145,7 +148,16 @@ void UpdateProcess::DownloadEmptySlot()
 //    proc->start("Copy.exe",QStringList()<<_p->downloadPath<<QCoreApplication::applicationDirPath());
 //    exit(0);
     //下载完毕，发出更新完毕的信号
-    emit updateFinish();
+    if(!_p->isWrongHappened)
+    {
+        emit updateFinish();
+    }
+}
+
+void UpdateProcess::DownloadWrongSlot(const QString &fileName)
+{
+    _p->isWrongHappened = true;
+    emit updateWrong();
 }
 
 void UpdateProcess::GetLatestVersionInfo()
@@ -171,7 +183,7 @@ void UpdateProcess::GetLatestVersionInfo()
 
 void UpdateProcess::InitData()
 {
-
+    connect(_p->updateNetwork,&UpdateNetWork::DwonLoadWrong,this,&UpdateProcess::DownloadWrongSlot);
 }
 
 
