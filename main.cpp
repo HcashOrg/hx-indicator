@@ -103,6 +103,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
+    qDebug()<<QDir::currentPath()<<QCoreApplication::applicationDirPath()<<QCoreApplication::applicationFilePath();
 #ifdef TARGET_OS_MAC
     QDir::setCurrent( QCoreApplication::applicationDirPath());
 #endif

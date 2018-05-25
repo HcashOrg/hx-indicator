@@ -106,6 +106,10 @@ bool UpdateProgressUtil::ParseXmlDoc(const QDomDocument &doc, VersionInfoPtr &da
             {
                 data->serverPath = e.text();
             }
+            else if("update" == e.tagName())
+            {
+                data->updateVersion = e.text();
+            }
 
         }
         n = n.nextSibling();  //下一个兄弟节点
@@ -150,6 +154,13 @@ bool UpdateProgressUtil::ExtractUpdateData(const VersionInfoPtr &oldVersion, con
 
 bool UpdateProgressUtil::ParseXmlPath(const QString &fullPath, VersionInfoPtr &data)
 {
+    if(!data)
+    {
+        data = std::make_shared<VersionInfo>();
+    }
+
+    data->file_data.clear();
+
     QFile file(fullPath);
     if(!file.open(QIODevice::ReadOnly))
     {

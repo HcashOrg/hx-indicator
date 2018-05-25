@@ -58,12 +58,16 @@ void UpdateProcess::InitServerURL(const QString &url)
 
 void UpdateProcess::checkUpdate()
 {
+
+    disconnect(_p->updateNetwork,&UpdateNetWork::TaskEmpty,this,&UpdateProcess::DownloadEmptySlot);
+    //先清空下载的数据
+    UpdateProgressUtil::deleteDir(_p->downloadPath);
+
     //本地版本文件解析
     qDebug()<<"解析本地文件``"<<QCoreApplication::applicationDirPath() + QDir::separator() + "update.xml";
     UpdateProgressUtil::ParseXmlPath(QCoreApplication::applicationDirPath() + QDir::separator() + "update.xml",
                                      _p->localVersionData);
-    //先清空下载的数据
-    UpdateProgressUtil::deleteDir(_p->downloadPath);
+
     //获取最新的配置
     GetLatestVersionInfo();
 
@@ -112,8 +116,22 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
     //服务端下载的版本文件解析
     UpdateProgressUtil::ParseXmlPath(_p->downloadPath + QDir::separator() + "update.xml",_p->serverVersionData);
 
-    //对比分析出需要下载的版本信息及目录
+    //检查更新器是否需要更新
+    if(UpdateProgressUtil::AFTER == UpdateProgressUtil::CompareVersion(_p->localVersionData->updateVersion,_p->serverVersionData->updateVersion))
+    {
+        //更新更新器
+        DownLoadData down;
+        down.filePath = QCoreApplication::applicationDirPath() + QDir::separator()+"Copy.exe";
+        down.fileName = "Copy.exe";
+        down.version = _p->serverVersionData->updateVersion;
+        down.url = _p->serverVersionData->serverPath + "/"+"Copy.exe";
 
+        //删除文件
+        QFile::remove(down.filePath);
+        _p->updateNetwork->DownLoadFile(down);
+    }
+
+    //对比分析出需要下载的版本信息及目录
     UpdateProgressUtil::ExtractUpdateData(_p->localVersionData,_p->serverVersionData,_p->downloadPath,_p->updateList);
     //发送版本信息
     emit NewstVersionSignal(_p->updateList.empty()?"":_p->serverVersionData->version);
