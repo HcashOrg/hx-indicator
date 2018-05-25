@@ -73,6 +73,7 @@
 
 class WorkerThreadManager;
 class WebSocketManager;
+class UpdateProcess;
 
 
 static QMutex mutexForJsonData;
@@ -357,6 +358,9 @@ public:
                              // 为的是自动锁定的时候hide该dialog
 
     Frame* mainFrame = NULL; // 指向主窗口的指针
+
+    UpdateProcess *updateProcess;//更新程序
+    bool isUpdateNeeded;
 
     int currentPort;          // 当前rpc 端口
     QString localIP;   // 保存 peerinfo 获得的本机IP和端口

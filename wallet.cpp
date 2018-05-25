@@ -2,6 +2,7 @@
 
 #include "websocketmanager.h"
 #include "commondialog.h"
+#include "update/UpdateProcess.h"
 
 #ifdef WIN32
 #include <Windows.h>
@@ -97,6 +98,11 @@ UBChain::UBChain()
     //初始化手续费
     InitFeeCharge();
 
+   updateProcess = new UpdateProcess();
+   isUpdateNeeded = false;
+   connect(updateProcess,&UpdateProcess::updateFinish,[this](){
+        this->isUpdateNeeded = true;
+   });
 }
 
 UBChain::~UBChain()
@@ -975,6 +981,13 @@ void UBChain::quit()
         qDebug() << "nodeProc: close";
         delete clientProc;
         clientProc = NULL;
+    }
+
+    if(isUpdateNeeded)
+    {
+        //启动外部复制程序
+        QProcess *copproc = new QProcess();
+        copproc->start("Copy.exe");
     }
 }
 
