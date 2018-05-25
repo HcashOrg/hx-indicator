@@ -96,7 +96,7 @@ p, li { white-space: pre-wrap; }
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="label_version">
    <property name="geometry">
     <rect>
      <x>190</x>

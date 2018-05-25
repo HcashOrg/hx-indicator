@@ -66,6 +66,8 @@ void WaitingForSync::showPic()
 void WaitingForSync::InitWidget()
 {
     InitStyle();
+
+    ui->label_version->setText(QString("v") + WALLET_VERSION);
 }
 
 void WaitingForSync::InitStyle()

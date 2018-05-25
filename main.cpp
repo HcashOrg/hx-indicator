@@ -107,7 +107,6 @@ int main(int argc, char *argv[])
 #ifdef TARGET_OS_MAC
     QDir::setCurrent( QCoreApplication::applicationDirPath());
 #endif
-qDebug() << QDir::currentPath() << QCoreApplication::applicationDirPath() << QCoreApplication::applicationFilePath() ;
 //    SetUnhandledExceptionFilter(TopLevelExceptionFilter);
 
 //    QTranslator translator;

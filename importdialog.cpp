@@ -304,8 +304,14 @@ qDebug()  << id << result;
                                   " After that the transactions of the account will be shown.") );
         commonDialog2.pop();
 
-
         close();
+        return;
+    }
+
+    if( id == "import-finish_import_key")
+    {
+        UBChain::getInstance()->autoSaveWalletFile();
+
         return;
     }
 }

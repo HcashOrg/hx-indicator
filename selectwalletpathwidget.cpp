@@ -55,7 +55,10 @@ void SelectWalletPathWidget::paintEvent(QPaintEvent *e)
 void SelectWalletPathWidget::InitWidget()
 {
     InitStyle();
+
     ui->pathLineEdit->setText( UBChain::getInstance()->appDataPath);
+
+    ui->label_version->setText(QString("v") + WALLET_VERSION);
 }
 
 void SelectWalletPathWidget::InitStyle()
