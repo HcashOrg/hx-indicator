@@ -83,6 +83,9 @@ void DepositPage::jsonDataUpdated(QString id)
             _p->qrcodeWidget->SetQRString(tr("cannot generate tunnel account"));
             return;
         }
+
+        UBChain::getInstance()->autoSaveWalletFile();
+
         result.prepend("{");
         result.append("}");
         //qDebug()<<"crossAddress"<<result;

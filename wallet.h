@@ -390,6 +390,7 @@ private:
 public:
     void addTrackAddress(QString _address);     // 在chaindata/config.ini中添加 track-address
 
+    void autoSaveWalletFile();      // 自动备份钱包文件
 
 public:
     TransactionDB transactionDB;

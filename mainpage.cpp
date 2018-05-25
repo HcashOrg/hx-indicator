@@ -335,6 +335,8 @@ void MainPage::jsonDataUpdated(QString id)
 //            commonDialog.setText( tr("Please backup up the wallet!!!") );
 //            commonDialog.pop();
 
+            UBChain::getInstance()->autoSaveWalletFile();
+
             UBChain::getInstance()->configFile->setValue("/settings/backupNeeded",true);
             UBChain::getInstance()->IsBackupNeeded = true;
 

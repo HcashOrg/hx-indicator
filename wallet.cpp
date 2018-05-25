@@ -140,6 +140,7 @@ UBChain*   UBChain::getInstance()
 void UBChain:: startExe()
 {
     connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
+    qDebug() << "ddddddddd " << QDir::currentPath() << QCoreApplication::applicationDirPath() << QCoreApplication::applicationFilePath() ;
 
     QStringList strList;
     strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
@@ -826,6 +827,19 @@ void UBChain::addTrackAddress(QString _address)
     else
     {
         qDebug() << "can not find chaindata/config.ini ";
+    }
+}
+
+void UBChain::autoSaveWalletFile()
+{
+    QFileInfo fileInfo(appDataPath + "/wallet.json");
+    if(fileInfo.size() > 0)
+    {
+        QFile autoSaveFile(appDataPath + "/wallet.json.autobak");
+        qDebug() << "auto save remove " << autoSaveFile.remove();
+
+        QFile file(appDataPath + "/wallet.json");
+        qDebug() << "auto save wallet.json " << file.copy(appDataPath + "/wallet.json.autobak");
     }
 }
 

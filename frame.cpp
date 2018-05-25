@@ -174,6 +174,18 @@ Frame::Frame(): timer(NULL),
         }
         else
         {
+            if(fileInfo.size() == 0)
+            {
+                QFile autoSaveFile(path + "/wallet.json.autobak");
+                if(autoSaveFile.exists())
+                {
+                    QFile oldFile(path + "/wallet.json");
+                    qDebug() << "remove corrupted wallet.json : " << oldFile.remove();
+                    qDebug() << "recover auto backup wallet.json : " << autoSaveFile.copy(path + "/wallet.json");
+                }
+            }
+
+
             UBChain::getInstance()->startExe();
 
             waitingForSync = new WaitingForSync(this);
@@ -1181,7 +1193,9 @@ void Frame::jsonDataUpdated(QString id)
         qDebug() << id << result;
         if( result == "\"result\":null")
         {
-            qApp->quit();
+            hide();
+            QTimer::singleShot(5000,qApp,SLOT(quit()));
+//            qApp->quit();
         }
         return;
     }
