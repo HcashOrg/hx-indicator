@@ -21,7 +21,7 @@ public:
         :updateNetwork(new UpdateNetWork())
         ,networkManager(new QNetworkAccessManager())
         ,serverUrl("http://192.168.1.121:5005/api")
-        ,downloadPath(QCoreApplication::applicationDirPath() + QDir::separator() + "ttt")
+        ,downloadPath(QCoreApplication::applicationDirPath() + QDir::separator() + "temp")
         ,localVersionData(std::make_shared<VersionInfo>())
         ,serverVersionData(std::make_shared<VersionInfo>())
     {
@@ -48,18 +48,7 @@ UpdateProcess::UpdateProcess(QObject *parent)
     : QObject(parent)
     ,_p(new DataPrivate())
 {
-//    QFileInfo aa("http://192.168.1.121:5005/api\\asdf/dd.exe");
-//    qDebug() << aa.fileName() << "~~~"<<aa.path() << "~~"<<aa.filePath();
-//    VersionInfoPtr a = nullptr;
-//    VersionInfoPtr b = nullptr;
-//    UpdateProgressUtil::ParseXmlPath(QCoreApplication::applicationDirPath() + "/update.xml",a);
-//    UpdateProgressUtil::ParseXmlPath(_p->downloadPath + "/update.xml",b);
-//    UpdateProgressUtil::ExtractUpdateData(a,b,QCoreApplication::applicationDirPath(),_p->updateList);
-
-
-//    qDebug()<<_p->updateList.size();
     InitData();
-    //UpdateProgressUtil::copyDir(_p->downloadPath,QCoreApplication::applicationDirPath());
 }
 
 void UpdateProcess::InitServerURL(const QString &url)
@@ -69,11 +58,10 @@ void UpdateProcess::InitServerURL(const QString &url)
 
 void UpdateProcess::checkUpdate()
 {
+    //先清空检查数据
+    UpdateProgressUtil::deleteDir(_p->downloadPath);
+    //获取最新的配置
     GetLatestVersionInfo();
-
-//    QProcess *proc = new QProcess();
-//    qDebug()<<_p->downloadPath<<QCoreApplication::applicationDirPath();
-//    proc->start("Copy.exe",QStringList()<<_p->downloadPath<<QCoreApplication::applicationDirPath());
 
 }
 
@@ -81,6 +69,7 @@ void UpdateProcess::startDownload()
 {    //开始下载
     //链接最终下载完毕信号
     connect(_p->updateNetwork,&UpdateNetWork::TaskEmpty,this,&UpdateProcess::DownloadEmptySlot);
+    qDebug()<<_p->updateList.size();
     _p->updateNetwork->DownLoadFile(_p->updateList);
 }
 
@@ -103,7 +92,7 @@ void UpdateProcess::GetLatestVersionInfoSlots()
     //下载当前服务器版本
     DownLoadData up;
     up.fileName = "update.xml";
-    up.url = _p->serverUrl + serverVersion.url;
+    up.url = /*_p->serverUrl + serverVersion.url;*/"http://192.168.1.161/down/update.xml";//测试用，本地文件
     qDebug()<<up.url;
     up.filePath = _p->downloadPath + QDir::separator() + up.fileName;
     connect(_p->updateNetwork,&UpdateNetWork::DownLoadFinish,this,&UpdateProcess::DownLoadVersionConfigFinsihed);
@@ -129,10 +118,12 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
 void UpdateProcess::DownloadEmptySlot()
 {
     //开始更新，关闭自己，打开替换程序,关闭完自己后，删除临时文件
-    QProcess *proc = new QProcess();
-    qDebug()<<_p->downloadPath<<QCoreApplication::applicationDirPath();
-    proc->start("Copy.exe",QStringList()<<_p->downloadPath<<QCoreApplication::applicationDirPath());
-    exit(0);
+//    QProcess *proc = new QProcess();
+//    qDebug()<<_p->downloadPath<<QCoreApplication::applicationDirPath();
+//    proc->start("Copy.exe",QStringList()<<_p->downloadPath<<QCoreApplication::applicationDirPath());
+//    exit(0);
+    //下载完毕，发出更新完毕的信号
+    emit updateFinish();
 }
 
 void UpdateProcess::GetLatestVersionInfo()

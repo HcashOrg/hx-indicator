@@ -239,9 +239,9 @@ bool UpdateProgressUtil::copyDir(const QString &source, const QString &destinati
         QFileInfo fileInfo(srcFilePath);
         if (fileInfo.isFile() || fileInfo.isSymLink())
         {
-            if (override)
+            if (override && QFile::exists(dstFilePath))
             {
-                QFile::setPermissions(dstFilePath, QFile::WriteOwner);
+                QFile::remove(dstFilePath);
             }
             QFile::copy(srcFilePath, dstFilePath);
         }

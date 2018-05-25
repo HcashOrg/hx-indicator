@@ -99,6 +99,10 @@ UBChain::UBChain()
     InitFeeCharge();
 
    updateProcess = new UpdateProcess();
+   isUpdateNeeded = false;
+   connect(updateProcess,&UpdateProcess::updateFinish,[this](){
+        this->isUpdateNeeded = true;
+   });
 }
 
 UBChain::~UBChain()
@@ -976,6 +980,13 @@ void UBChain::quit()
         qDebug() << "nodeProc: close";
         delete clientProc;
         clientProc = NULL;
+    }
+
+    if(isUpdateNeeded)
+    {
+        //启动外部复制程序
+        QProcess *copproc = new QProcess();
+        copproc->start("Copy.exe");
     }
 }
 

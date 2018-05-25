@@ -71,9 +71,9 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_updatetip">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>314</y>
-     <width>121</width>
+     <x>420</x>
+     <y>310</y>
+     <width>241</width>
      <height>21</height>
     </rect>
    </property>

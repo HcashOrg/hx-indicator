@@ -19,6 +19,8 @@ private slots:
     void CheckResultSlot(const QString &version);
 
     void UpdateSlot();
+
+    void UpdateFinishSlot();
 private:
     void InitWidget();
     void InitStyle();

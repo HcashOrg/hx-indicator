@@ -44,7 +44,7 @@ void HelpWidget::CheckResultSlot(const QString &version)
     {
         //没有更新
         ui->label_updatetip->setVisible(true);
-        ui->label_updatetip->setText(tr("there's no new version!"));
+        ui->label_updatetip->setText(tr("no new version!"));
         ui->toolButton_update->setVisible(false);
     }
     else
@@ -57,7 +57,15 @@ void HelpWidget::CheckResultSlot(const QString &version)
 
 void HelpWidget::UpdateSlot()
 {
+    ui->label_updatetip->setVisible(true);
+    ui->label_updatetip->setText(tr("updating,please wait! " ));
     UBChain::getInstance()->updateProcess->startUpdate();
+}
+
+void HelpWidget::UpdateFinishSlot()
+{
+    ui->label_updatetip->setVisible(true);
+    ui->label_updatetip->setText(tr("update finish,restart to take effect! " ));
 }
 
 void HelpWidget::InitWidget()
@@ -66,6 +74,8 @@ void HelpWidget::InitWidget()
     ui->toolButton_update->setVisible(false);
 
     UBChain::getInstance()->updateProcess->InitServerURL(UBChain::getInstance()->middlewarePath);
+
+    connect(UBChain::getInstance()->updateProcess,&UpdateProcess::updateFinish,this,&HelpWidget::UpdateFinishSlot);
     connect(ui->toolButton_checkUpdate,&QToolButton::clicked,this,&HelpWidget::CheckUpdateSlot);
     connect(ui->toolButton_update,&QToolButton::clicked,this,&HelpWidget::UpdateSlot);
 }

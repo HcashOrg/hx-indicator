@@ -10,6 +10,7 @@ public:
     explicit UpdateProcess(QObject *parent = 0);
 signals:
     void NewstVersionSignal(const QString &version);//没有更新则为空
+    void updateFinish();
 public:
   void InitServerURL(const QString &url);
   void checkUpdate();
