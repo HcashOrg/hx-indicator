@@ -269,5 +269,7 @@ void ContractBalanceWidget::on_openForUsersBtn_clicked()
     UBChain::getInstance()->postRPC( "id-invoke_contract_testing-openForUsers-" + accountName, toJsonFormat( "invoke_contract_testing",
                                                                            QJsonArray() << accountName << contractAddress
                                                                            << "openForUsers"  << ""));
-
+qDebug() << "open for users: " << "id-invoke_contract_testing-openForUsers-" + accountName << toJsonFormat( "invoke_contract_testing",
+                                                                                                            QJsonArray() << accountName << contractAddress
+                                                                                                            << "openForUsers"  << "");
 }

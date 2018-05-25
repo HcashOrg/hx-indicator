@@ -340,14 +340,14 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
                                                          UBChain::getInstance()->mainFrame);
 
             fee->SetInfo(tr("register contract!"));
-            connect(fee,&FeeChargeWidget::confirmSignal,[this](){
+            connect(fee,&FeeChargeWidget::confirmSignal,[this,stepCount](){
                 QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
                 QFileInfo fileInfo(filePath);
                 if(fileInfo.exists())
                 {
                     UBChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
                                                                                            QJsonArray() << this->ui->accountComboBox->currentText() << UBChain::getInstance()->currentContractFee()
-                                                                                           << "10000"  << filePath));
+                                                                                           << stepCount  << filePath));
                 }
 
             });

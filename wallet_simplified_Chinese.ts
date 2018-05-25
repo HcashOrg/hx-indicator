@@ -501,103 +501,103 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="333"/>
+        <location filename="alltransactionwidget.cpp" line="336"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="359"/>
+        <location filename="alltransactionwidget.cpp" line="362"/>
         <source>transfer to self</source>
         <translation type="unfinished">转账给自己</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="368"/>
+        <location filename="alltransactionwidget.cpp" line="371"/>
         <source>transfer-out</source>
         <translation type="unfinished">转出</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="380"/>
+        <location filename="alltransactionwidget.cpp" line="383"/>
         <source>transfer-in</source>
         <translation type="unfinished">转入</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="388"/>
+        <location filename="alltransactionwidget.cpp" line="391"/>
         <source>register account</source>
         <translation type="unfinished">注册账户</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="396"/>
+        <location filename="alltransactionwidget.cpp" line="399"/>
         <source>bind %1 address: %2</source>
         <translation type="unfinished">绑定%1地址: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="398"/>
+        <location filename="alltransactionwidget.cpp" line="401"/>
         <source>bind tunnel address</source>
         <translation type="unfinished">绑定tunnel地址</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="406"/>
+        <location filename="alltransactionwidget.cpp" line="409"/>
         <source>unbind %1 address: %2</source>
         <translation type="unfinished">解绑%1地址: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="408"/>
+        <location filename="alltransactionwidget.cpp" line="411"/>
         <source>unbind tunnel address</source>
         <translation type="unfinished">解绑tunnel地址</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="424"/>
+        <location filename="alltransactionwidget.cpp" line="427"/>
         <source>lock asset to miner</source>
         <translation type="unfinished">质押资产给miner</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="440"/>
+        <location filename="alltransactionwidget.cpp" line="443"/>
         <source>foreclose asset from miner</source>
         <translation type="unfinished">从miner赎回资产</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="451"/>
-        <location filename="alltransactionwidget.cpp" line="466"/>
+        <location filename="alltransactionwidget.cpp" line="454"/>
+        <location filename="alltransactionwidget.cpp" line="469"/>
         <source>%1 account: %2</source>
         <translation type="unfinished">%1账户: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="457"/>
+        <location filename="alltransactionwidget.cpp" line="460"/>
         <source>deposit %1</source>
         <translation type="unfinished">%1充值</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="472"/>
+        <location filename="alltransactionwidget.cpp" line="475"/>
         <source>withdraw %1</source>
         <translation type="unfinished">%1提现</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="488"/>
+        <location filename="alltransactionwidget.cpp" line="491"/>
         <source>get mining income</source>
         <translation type="unfinished">获取挖矿收入</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="501"/>
+        <location filename="alltransactionwidget.cpp" line="504"/>
         <source>register contract</source>
         <translation type="unfinished">注册合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="514"/>
+        <location filename="alltransactionwidget.cpp" line="517"/>
         <source>call contract</source>
         <translation type="unfinished">合约调用</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="531"/>
+        <location filename="alltransactionwidget.cpp" line="534"/>
         <source>transfer to contract</source>
         <translation type="unfinished">转账到合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="548"/>
+        <location filename="alltransactionwidget.cpp" line="551"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished">创建%1承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="559"/>
+        <location filename="alltransactionwidget.cpp" line="562"/>
         <source>cancel acceptance</source>
         <translation type="unfinished">撤销承兑单</translation>
     </message>
@@ -758,15 +758,16 @@ better not transfer or upgrade</source>
         <translation type="obsolete">当前操作可能处于离线状态\n不建议转账、升级操作</translation>
     </message>
     <message>
-        <location filename="bottombar.cpp" line="22"/>
+        <location filename="bottombar.cpp" line="21"/>
         <location filename="bottombar.cpp" line="39"/>
-        <source>Local block height / Network block height(estimated)</source>
-        <translation type="unfinished">本地区块高度 / 网络区块高度（预计）</translation>
+        <source>Number of connected nodes</source>
+        <translation type="unfinished">已连接节点数</translation>
     </message>
     <message>
+        <location filename="bottombar.cpp" line="22"/>
         <location filename="bottombar.cpp" line="40"/>
-        <source>connected nodes number</source>
-        <translation type="unfinished">已连接节点数</translation>
+        <source>Local block height / Network block height(estimated)</source>
+        <translation type="unfinished">本地区块高度 / 网络区块高度（预计）</translation>
     </message>
 </context>
 <context>
@@ -1310,7 +1311,12 @@ better not transfer or upgrade</source>
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;微软雅黑&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;地址&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <oldsource>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;微软雅黑&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;地址&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2550,22 +2556,22 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="970"/>
+        <location filename="frame.cpp" line="969"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1566"/>
+        <location filename="frame.cpp" line="1565"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1569"/>
+        <location filename="frame.cpp" line="1568"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1572"/>
+        <location filename="frame.cpp" line="1571"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -2738,6 +2744,36 @@ add an account first</source>
         <location filename="functionBar/FunctionWidget.ui" line="203"/>
         <source>更多</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="177"/>
+        <source>Setting</source>
+        <translation type="unfinished">设置</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="178"/>
+        <source>Lock</source>
+        <translation type="unfinished">锁定</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="179"/>
+        <source>Console</source>
+        <translation type="unfinished">控制台</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="180"/>
+        <source>Help</source>
+        <translation type="unfinished">帮助</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="182"/>
+        <source>About Us</source>
+        <translation type="unfinished">关于我们</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="183"/>
+        <source>Update</source>
+        <translation type="unfinished">软件更新</translation>
     </message>
 </context>
 <context>
@@ -3155,8 +3191,9 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.ui" line="432"/>
-        <source>钱包有变，需要保存！</source>
+        <location filename="mainpage.ui" line="440"/>
+        <source>钱包数据更新，点击此处重新备份！</source>
+        <oldsource>钱包数据更新，点击重新备份！</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -70,6 +70,8 @@ private slots:
 
     void on_allTransactionBtn_clicked();
 
+    void on_backupBtn_clicked();
+
 private:
     void InitStyle();
 private:

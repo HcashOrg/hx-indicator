@@ -62,6 +62,9 @@ void AllTransactionWidget::init()
     ui->typeAllBtn->setChecked(true);
     ui->timeAllBtn->setChecked(true);
 
+    ui->typeWithdrawBtn->adjustSize();
+    ui->typeWithdrawBtn->setGeometry(ui->typeWithdrawBtn->x(),ui->typeWithdrawBtn->y(),ui->typeWithdrawBtn->width() < 50?50:ui->typeWithdrawBtn->width(),24);
+
     ui->accountComboBox->clear();
     QStringList accounts = UBChain::getInstance()->accountInfoMap.keys();
     ui->accountComboBox->addItems(accounts);

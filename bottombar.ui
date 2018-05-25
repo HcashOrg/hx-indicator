@@ -39,7 +39,7 @@
   <widget class="QLabel" name="syncLabel">
    <property name="geometry">
     <rect>
-     <x>75</x>
+     <x>80</x>
      <y>10</y>
      <width>80</width>
      <height>20</height>
@@ -63,14 +63,14 @@
   <widget class="QLabel" name="networkLabel">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>55</x>
      <y>10</y>
      <width>20</width>
      <height>20</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">border-image: url(:/ui/wallet_ui/net.png);</string>
    </property>
    <property name="text">
     <string/>
@@ -79,17 +79,33 @@
   <widget class="QLabel" name="nodeNumLabel">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>25</x>
      <y>10</y>
      <width>30</width>
      <height>20</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
+    <string notr="true">QLabel{color: rgb(192,196,212);}</string>
    </property>
    <property name="text">
     <string>0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nodeLabel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>10</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/ui/wallet_ui/nodes.png);</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

@@ -118,6 +118,7 @@
         <file>wallet_ui/welcomeLabel.png</file>
         <file>wallet_ui/trans.png</file>
         <file>wallet_ui/searchBtn.png</file>
+        <file>wallet_ui/nodes.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>

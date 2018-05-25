@@ -51,7 +51,6 @@ SOURCES += main.cpp\
     exportdialog.cpp \
     importdialog.cpp \
     control/myprogressbar.cpp \
-    control/showbottombarwidget.cpp \
     dialog/renamedialog.cpp \
     control/shadowwidget.cpp \
     selectwalletpathwidget.cpp \
@@ -160,7 +159,6 @@ HEADERS  += firstlogin.h \
     exportdialog.h \
     importdialog.h \
     control/myprogressbar.h \
-    control/showbottombarwidget.h \
     dialog/renamedialog.h \
     control/shadowwidget.h \
     selectwalletpathwidget.h \

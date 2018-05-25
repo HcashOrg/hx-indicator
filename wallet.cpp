@@ -148,7 +148,7 @@ void UBChain:: startExe()
     nodeProc->start("lnk_node.exe",strList);
     qDebug() << "start lnk_node.exe " << strList;
 
-    emit exeStarted();
+//    emit exeStarted();
 
 //    UBChain::getInstance()->initWebSocketManager();
 //    emit exeStarted();
@@ -156,6 +156,7 @@ void UBChain:: startExe()
 
 void UBChain::onNodeExeStateChanged()
 {
+    qDebug() << "nnnnnnnnnnnnn " << nodeProc->state();
     if(isExiting)   return;
 
     if(nodeProc->state() == QProcess::Starting)

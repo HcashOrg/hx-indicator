@@ -18,12 +18,12 @@ BottomBar::BottomBar(QWidget *parent) :
     
     ui->setupUi(this);
 
-//    ui->syncLabel->setToolTip(QString::fromLocal8Bit("本地最新区块"));
+    ui->nodeNumLabel->setToolTip(tr("Number of connected nodes"));
     ui->syncLabel->setToolTip(tr("Local block height / Network block height(estimated)"));
 
     connect(UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)),this, SLOT(jsonDataUpdated(QString)));
 
-    ui->networkLabel->setPixmap(QPixmap(":/ui/wallet_ui/net.png").scaled(20,20));
+//    ui->networkLabel->setPixmap(QPixmap(":/ui/wallet_ui/net.png").scaled(20,20));
 }
 
 BottomBar::~BottomBar()
@@ -36,8 +36,8 @@ void BottomBar::retranslator()
 {
     ui->retranslateUi(this);
 
+    ui->nodeNumLabel->setToolTip(tr("Number of connected nodes"));
     ui->syncLabel->setToolTip(tr("Local block height / Network block height(estimated)"));
-    ui->nodeNumLabel->setToolTip(tr("connected nodes number"));
 }
 
 void BottomBar::jsonDataUpdated(QString id)

@@ -115,6 +115,23 @@ void FunctionWidget::ShowExchangeWidgetSlots()
 
 void FunctionWidget::ShowMoreWidgetSlots()
 {
+    _p->contextMenu->clear();
+
+    //设置更多按钮
+    QAction* actionSet = _p->contextMenu->addAction(tr("Setting"));
+    QAction* actionLock = _p->contextMenu->addAction(tr("Lock"));
+    QAction* actionConsole = _p->contextMenu->addAction(tr("Console"));
+    QMenu *helpMenu = new QMenu(tr("Help"),_p->contextMenu);
+    _p->contextMenu->addMenu(helpMenu);
+    QAction* actionAbout = helpMenu->addAction(tr("About Us"));
+    QAction* actionUpdate = helpMenu->addAction(tr("Update"));
+
+    connect(actionLock,&QAction::triggered,this,&FunctionWidget::lock);
+    connect(actionSet,&QAction::triggered,this,&FunctionWidget::ShowSettingWidgetSlots);
+    connect(actionConsole,&QAction::triggered,this,&FunctionWidget::ShowConsoleWidgetSlots);
+    connect(actionAbout,&QAction::triggered,this,&FunctionWidget::ShowAboutWidgetSlots);
+    connect(actionUpdate,&QAction::triggered,this,&FunctionWidget::ShowUpdateWidgetSlots);
+
     _p->contextMenu->exec(mapToGlobal(QPoint(70,height()-136)));
     updateCheckState(4);
 }
@@ -173,14 +190,7 @@ void FunctionWidget::InitWidget()
     ui->stackedWidget->addWidget(_p->advanceBar);
     ui->stackedWidget->addWidget(_p->exchangeBar);
 
-    //设置更多按钮
-    QAction* actionSet = _p->contextMenu->addAction("Setting");
-    QAction* actionLock = _p->contextMenu->addAction("Lock");
-    QAction* actionConsole = _p->contextMenu->addAction("Console");
-    QMenu *helpMenu = new QMenu("Help",_p->contextMenu);
-    _p->contextMenu->addMenu(helpMenu);
-    QAction* actionAbout = helpMenu->addAction("About Us");
-    QAction* actionUpdate = helpMenu->addAction("Update");
+
 
     //ui->toolButton_more->setMenu(_p->contextMenu);
     ////ui->toolButton_more->setArrowType(Qt::RightArrow);
@@ -193,11 +203,7 @@ void FunctionWidget::InitWidget()
     connect(ui->toolButton_exchange,&QToolButton::clicked,this,&FunctionWidget::ShowExchangeWidgetSlots);
     connect(ui->toolButton_more,&QToolButton::clicked,this,&FunctionWidget::ShowMoreWidgetSlots);
 
-    connect(actionLock,&QAction::triggered,this,&FunctionWidget::lock);
-    connect(actionSet,&QAction::triggered,this,&FunctionWidget::ShowSettingWidgetSlots);
-    connect(actionConsole,&QAction::triggered,this,&FunctionWidget::ShowConsoleWidgetSlots);
-    connect(actionAbout,&QAction::triggered,this,&FunctionWidget::ShowAboutWidgetSlots);
-    connect(actionUpdate,&QAction::triggered,this,&FunctionWidget::ShowUpdateWidgetSlots);
+
 
     connect(_p->accountBar,&FunctionAccountWidget::showAccountSignal,this,&FunctionWidget::showAccountSignal);
     connect(_p->accountBar,&FunctionAccountWidget::showMinerSignal,this,&FunctionWidget::showMinerSignal);

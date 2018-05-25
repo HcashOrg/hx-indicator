@@ -25,7 +25,6 @@ class WaitingForSync;
 class UpgradePage;
 class ApplyDelegatePage;
 class SelectWalletPathWidget;
-class ShowBottomBarWidget;
 class ShadowWidget;
 class SmartContractPage;
 class MultiSigPage;

@@ -113,7 +113,6 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
                                           + " " + ASSET_NAME);
         }
 
-
         return;
     }
 }

@@ -37,7 +37,7 @@ MainPage::MainPage(QWidget *parent) :
 
     ui->setupUi(this);
     InitStyle();
-    ui->label_backtip->setVisible(UBChain::getInstance()->IsBackupNeeded);
+    ui->backupBtn->setVisible(UBChain::getInstance()->IsBackupNeeded);
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 
@@ -268,7 +268,7 @@ void MainPage::refresh()
 {
 //    qDebug() << "mainpage refresh"   << refreshOrNot;
 //    if( !refreshOrNot) return;
-    ui->label_backtip->setVisible(UBChain::getInstance()->IsBackupNeeded);
+    ui->backupBtn->setVisible(UBChain::getInstance()->IsBackupNeeded);
 
     updateAccountList();
 
@@ -607,12 +607,22 @@ void MainPage::InitStyle()
 //               background-position: center left;color: black;selection-background-color: darkgray;}");
 
 
+    ui->backupBtn->adjustSize();
+    ui->backupBtn->setGeometry(ui->backupBtn->x(),ui->backupBtn->y(),ui->backupBtn->width(),20);
 }
 
 void MainPage::on_allTransactionBtn_clicked()
 {
+    emit backBtnVisible(true);
+
     AllTransactionWidget* allTransactionWidget = new AllTransactionWidget(this);
     allTransactionWidget->setAttribute(Qt::WA_DeleteOnClose);
     allTransactionWidget->show();
     allTransactionWidget->raise();
+}
+
+void MainPage::on_backupBtn_clicked()
+{
+    BackupWalletDialog backupWalletDialog;
+    backupWalletDialog.pop();
 }
