@@ -72,6 +72,7 @@ void HelpWidget::InitWidget()
 {
     InitStyle();
     ui->toolButton_update->setVisible(false);
+    ui->label_updatetip->setVisible(false);
 
     UBChain::getInstance()->updateProcess->InitServerURL(UBChain::getInstance()->middlewarePath);
 

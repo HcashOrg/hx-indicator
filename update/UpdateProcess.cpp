@@ -58,7 +58,11 @@ void UpdateProcess::InitServerURL(const QString &url)
 
 void UpdateProcess::checkUpdate()
 {
-    //先清空检查数据
+    //本地版本文件解析
+    qDebug()<<"解析本地文件``"<<QCoreApplication::applicationDirPath() + QDir::separator() + "update.xml";
+    UpdateProgressUtil::ParseXmlPath(QCoreApplication::applicationDirPath() + QDir::separator() + "update.xml",
+                                     _p->localVersionData);
+    //先清空下载的数据
     UpdateProgressUtil::deleteDir(_p->downloadPath);
     //获取最新的配置
     GetLatestVersionInfo();
@@ -149,10 +153,6 @@ void UpdateProcess::GetLatestVersionInfo()
 
 void UpdateProcess::InitData()
 {
-    //本地版本文件解析
-    qDebug()<<"解析本地文件``"<<QCoreApplication::applicationDirPath() + QDir::separator() + "update.xml";
-    UpdateProgressUtil::ParseXmlPath(QCoreApplication::applicationDirPath() + QDir::separator() + "update.xml",
-                                     _p->localVersionData);
 
 }
 
