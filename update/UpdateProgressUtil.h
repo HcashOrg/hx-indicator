@@ -25,6 +25,7 @@ class VersionInfo
 public:
     QString version;
     QString serverPath;
+    QString updateVersion;//更新器版本
     std::vector<std::shared_ptr<VersionData>> file_data;
 };
 typedef std::shared_ptr<VersionInfo> VersionInfoPtr;
