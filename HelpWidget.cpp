@@ -74,6 +74,14 @@ void HelpWidget::InitWidget()
     ui->toolButton_update->setVisible(false);
     ui->label_updatetip->setVisible(false);
 
+#ifdef WIN64
+    ui->label_version->setText(QString("windows 64bit v") + WALLET_VERSION);
+#elif defined(TARGET_OS_MAC)
+    ui->label_version->setText(QString("mac v") + WALLET_VERSION);
+#else
+    ui->label_version->setText(QString("windows 32bit v") + WALLET_VERSION);
+#endif
+
     UBChain::getInstance()->updateProcess->InitServerURL(UBChain::getInstance()->middlewarePath);
 
     connect(UBChain::getInstance()->updateProcess,&UpdateProcess::updateFinish,this,&HelpWidget::UpdateFinishSlot);

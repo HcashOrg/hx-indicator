@@ -143,6 +143,8 @@ void NormalLogin::pwdConfirmed(QString id)
 void NormalLogin::InitWidget()
 {
     InitStyle();
+
+    ui->label_version->setText(QString("v") + WALLET_VERSION);
 }
 
 void NormalLogin::InitStyle()

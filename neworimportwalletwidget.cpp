@@ -54,6 +54,8 @@ void NewOrImportWalletWidget::on_closeBtn_clicked()
 void NewOrImportWalletWidget::InitWidget()
 {
     InitStyle();
+
+    ui->label_version->setText(QString("v") + WALLET_VERSION);
 }
 
 void NewOrImportWalletWidget::InitStyle()

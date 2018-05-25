@@ -152,6 +152,8 @@ void LockPage::jsonDataUpdated(QString id)
 void LockPage::InitWidget()
 {
     InitStyle();
+
+    ui->label_version->setText(QString("v") + WALLET_VERSION);
 }
 
 void LockPage::InitStyle()
