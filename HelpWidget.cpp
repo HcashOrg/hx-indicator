@@ -68,12 +68,14 @@ void HelpWidget::UpdateFinishSlot()
 {
     ui->label_updatetip->setVisible(true);
     ui->label_updatetip->setText(tr("update finish,restart to take effect! " ));
+    ui->toolButton_update->setVisible(false);
 }
 
 void HelpWidget::UpdateWrongSlot()
 {
     ui->label_updatetip->setVisible(true);
     ui->label_updatetip->setText(tr("update wrong! " ));
+    ui->toolButton_update->setVisible(false);
 }
 
 void HelpWidget::InitWidget()
