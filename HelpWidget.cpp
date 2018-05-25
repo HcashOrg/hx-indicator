@@ -34,6 +34,8 @@ HelpWidget::~HelpWidget()
 
 void HelpWidget::CheckUpdateSlot()
 {
+    ui->label_updatetip->setVisible(false);
+    ui->toolButton_update->setVisible(false);
     connect(UBChain::getInstance()->updateProcess,&UpdateProcess::NewstVersionSignal,this,&HelpWidget::CheckResultSlot);
     UBChain::getInstance()->updateProcess->checkUpdate();
 }
