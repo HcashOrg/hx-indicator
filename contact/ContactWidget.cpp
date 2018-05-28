@@ -67,6 +67,8 @@ void ContactWidget::AddNewContactSlots()
     {
         disconnect(_p->contactAddWidget,&ContactAddWidget::addContactFinishedSignal,_p->contactTreeWidget,&ContactTreeWidget::AddPersonSlots);
         disconnect(_p->contactTreeWidget,&ContactTreeWidget::GroupModifyFinishedSignal,_p->contactAddWidget,&ContactAddWidget::groupModifySlots);
+        delete _p->contactAddWidget;
+        _p->contactAddWidget = nullptr;
     }
     _p->contactAddWidget = new ContactAddWidget(_p->contactSheet);
     ui->scrollArea_rightBottom->setWidget(_p->contactAddWidget);
