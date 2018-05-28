@@ -11,8 +11,6 @@ class MainPage;
 
 #define MODULE_MAIN_PAGE "MAIN_PAGE"
 
-class AccountDetailWidget;
-
 class MainPage : public QWidget
 {
     Q_OBJECT
@@ -80,7 +78,6 @@ private:
     int previousColorRow;
     bool hasDelegateOrNot;
     bool refreshOrNot;
-    AccountDetailWidget* detailWidget;
     int currentAccountIndex;
 
 

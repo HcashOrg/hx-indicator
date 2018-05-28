@@ -177,7 +177,7 @@ void TransferConfirmDialog::paintEvent(QPaintEvent *event)
     painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
     painter.drawRect(rect());
 
-    painter.drawPixmap(320,35,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
+    painter.drawPixmap(320,55,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
 
     QWidget::paintEvent(event);
 

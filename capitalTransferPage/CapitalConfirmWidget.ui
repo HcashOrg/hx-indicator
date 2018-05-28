@@ -16,10 +16,10 @@
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>438</x>
-     <y>440</y>
+     <x>346</x>
+     <y>399</y>
      <width>261</width>
-     <height>20</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="echoMode">
@@ -29,11 +29,15 @@
   <widget class="QLabel" name="label_feeNumber">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>316</y>
+     <x>518</x>
+     <y>275</y>
      <width>141</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(51, 51, 51);
+font: 13px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>address</string>
@@ -42,8 +46,8 @@
   <widget class="QToolButton" name="toolButton_cancel">
    <property name="geometry">
     <rect>
-     <x>590</x>
-     <y>480</y>
+     <x>498</x>
+     <y>439</y>
      <width>100</width>
      <height>30</height>
     </rect>
@@ -55,11 +59,15 @@
   <widget class="QLabel" name="label_actualNumber">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>316</y>
+     <x>348</x>
+     <y>275</y>
      <width>151</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(51, 51, 51);
+font: 13px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>address</string>
@@ -68,11 +76,15 @@
   <widget class="QLabel" name="label_totalNumber">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>376</y>
+     <x>348</x>
+     <y>335</y>
      <width>131</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(84,116,235);
+font: 13px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>address</string>
@@ -81,24 +93,35 @@
   <widget class="QLabel" name="label_address">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>246</y>
-     <width>361</width>
-     <height>21</height>
+     <x>340</x>
+     <y>205</y>
+     <width>300</width>
+     <height>30</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(51, 51, 51);
+font: 14px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </property>
    <property name="text">
     <string>address</string>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>350</y>
-     <width>71</width>
-     <height>16</height>
+     <x>348</x>
+     <y>309</y>
+     <width>80</width>
+     <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(198, 202, 212);
+font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>共需支付</string>
@@ -107,8 +130,8 @@
   <widget class="QToolButton" name="toolButton_confirm">
    <property name="geometry">
     <rect>
-     <x>464</x>
-     <y>480</y>
+     <x>372</x>
+     <y>439</y>
      <width>100</width>
      <height>30</height>
     </rect>
@@ -120,11 +143,15 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>410</y>
-     <width>71</width>
-     <height>16</height>
+     <x>348</x>
+     <y>369</y>
+     <width>80</width>
+     <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(198, 202, 212);
+font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>交易密码</string>
@@ -133,11 +160,15 @@
   <widget class="QLabel" name="label_1">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>290</y>
-     <width>71</width>
-     <height>16</height>
+     <x>348</x>
+     <y>249</y>
+     <width>80</width>
+     <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(198, 202, 212);
+font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>到账数额</string>
@@ -146,56 +177,61 @@
   <widget class="QLabel" name="label_title">
    <property name="geometry">
     <rect>
-     <x>542</x>
-     <y>151</y>
-     <width>141</width>
-     <height>31</height>
+     <x>380</x>
+     <y>120</y>
+     <width>200</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Microsoft YaHei UI Light</family>
-     <pointsize>14</pointsize>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 14px &quot;微软雅黑&quot;;
+color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>交易确认</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>290</y>
-     <width>71</width>
-     <height>16</height>
+     <x>518</x>
+     <y>249</y>
+     <width>80</width>
+     <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(198, 202, 212);
+font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>手续费</string>
    </property>
   </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>440</x>
-     <y>456</y>
-     <width>260</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>220</y>
-     <width>71</width>
-     <height>16</height>
+     <x>348</x>
+     <y>179</y>
+     <width>80</width>
+     <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(198, 202, 212);
+font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>到账地址</string>

@@ -78,6 +78,8 @@ void AllTransactionWidget::init()
     ui->addressLabel->setText(info.address);
 
     inited = true;
+
+    on_accountComboBox_currentTextChanged(ui->accountComboBox->currentText());
 }
 
 void AllTransactionWidget::on_typeAllBtn_clicked()
@@ -585,6 +587,8 @@ void AllTransactionWidget::showTransactions()
 
 void AllTransactionWidget::on_accountComboBox_currentTextChanged(const QString &arg1)
 {
+    if(!inited)     return;
+
     UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
 
     AccountInfo info = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());

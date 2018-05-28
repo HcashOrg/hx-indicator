@@ -112,13 +112,9 @@ void WithdrawInputWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    setStyleSheet("QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  "Qline{color:#5474EB;background:#5474EB;}"
-                  "QComboBox{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:3px;}"
-                  "QToolButton#toolButton_all{border:none;background-color:transparent;border-radius:10px;color:#5474EB;font-size:9pt;}"
-                  "QToolButton#toolButton_confirm::hover,QToolButton#toolButton_all::hover{background-color:#00D2FF;}"
-                  "QToolButton#toolButton_confirm{border:none;background-color:#5474EB;color:white;border-radius:10px;font-size:12pt;}"
-                  "QLabel{background:transparent;color:black:font-family:\"Microsoft YaHei UI Light\";}");
+    ui->toolButton_all->setStyleSheet("QToolButton{background:transparent;color:rgb(192,202,212);font: 12px \"Microsoft YaHei UI Light\";}"
+                                      "QToolButton:hover{color:rgb(84,116,235);}");
+    ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
 }
 void WithdrawInputWidget::paintEvent(QPaintEvent *event)
 {
