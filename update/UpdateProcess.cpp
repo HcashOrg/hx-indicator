@@ -119,6 +119,11 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
     //服务端下载的版本文件解析
     UpdateProgressUtil::ParseXmlPath(_p->downloadPath + QDir::separator() + "update.xml",_p->serverVersionData);
 
+    if(_p->serverVersionData->version.isEmpty())
+    {
+        return;//说明出错，没必要进行了
+    }
+
     //检查更新器是否需要更新
     if(UpdateProgressUtil::AFTER == UpdateProgressUtil::CompareVersion(_p->localVersionData->updateVersion,_p->serverVersionData->updateVersion))
     {
@@ -142,11 +147,6 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
 
 void UpdateProcess::DownloadEmptySlot()
 {
-    //开始更新，关闭自己，打开替换程序,关闭完自己后，删除临时文件
-//    QProcess *proc = new QProcess();
-//    qDebug()<<_p->downloadPath<<QCoreApplication::applicationDirPath();
-//    proc->start("Copy.exe",QStringList()<<_p->downloadPath<<QCoreApplication::applicationDirPath());
-//    exit(0);
     //下载完毕，发出更新完毕的信号
     if(!_p->isWrongHappened)
     {

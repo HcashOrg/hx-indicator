@@ -4,6 +4,7 @@
 #include <QDir>
 #include <QTimer>
 #include <QString>
+#include <QProcess>
 
 #include "DataUtil.h"
 
@@ -37,17 +38,29 @@ void UpdateWidget::startMove()
 void UpdateWidget::copyFinish()
 {
     ui->update->setText(tr("update finish!"));
-    ui->update->setEnabled(true);
+
+    restartWallet();
+}
+
+void UpdateWidget::restartWallet()
+{
+    //启动外部复制程序
+    QProcess *copproc = new QProcess();
+    copproc->start("LNKWallet.exe");
+    close();
 }
 
 void UpdateWidget::InitWidget()
 {
     InitStyle();
+    ui->toolButton_close->setVisible(false);
+    ui->toolButton_restart->setVisible(false);
 
-    ui->update->setEnabled(false);
     ui->update->setText(tr("updating,please wait!"));
-    QTimer::singleShot(1000,this,&UpdateWidget::startMove);
-    connect(ui->update,&QToolButton::clicked,this,&UpdateWidget::close);
+    QTimer::singleShot(500,this,&UpdateWidget::startMove);
+
+    connect(ui->toolButton_close,&QToolButton::clicked,this,&UpdateWidget::close);
+    connect(ui->toolButton_restart,&QToolButton::clicked,this,&UpdateWidget::restartWallet);
 }
 
 void UpdateWidget::InitStyle()
@@ -71,5 +84,6 @@ void UpdateWidget::InitStyle()
                                                                      Qt::IgnoreAspectRatio,
                                                                      Qt::SmoothTransformation));
 
-    ui->update->setStyleSheet(OKBTN_STYLE);
+    ui->toolButton_close->setStyleSheet(OKBTN_STYLE);
+    ui->toolButton_restart->setStyleSheet(OKBTN_STYLE);
 }

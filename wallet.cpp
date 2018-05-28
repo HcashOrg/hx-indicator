@@ -2,7 +2,6 @@
 
 #include "websocketmanager.h"
 #include "commondialog.h"
-#include "update/UpdateProcess.h"
 
 #ifdef WIN32
 #include <Windows.h>
@@ -98,11 +97,14 @@ UBChain::UBChain()
     //初始化手续费
     InitFeeCharge();
 
-   updateProcess = new UpdateProcess();
-   isUpdateNeeded = false;
-   connect(updateProcess,&UpdateProcess::updateFinish,[this](){
-        this->isUpdateNeeded = true;
-   });
+    isUpdateNeeded = false;
+//   updateProcess = new UpdateProcess();
+//   connect(updateProcess,&UpdateProcess::updateFinish,[this](){
+//        this->isUpdateNeeded = true;
+//   });
+//   connect(updateProcess,&UpdateProcess::updateWrong,[this](){
+//       this->isUpdateNeeded = false;
+//  });
 }
 
 UBChain::~UBChain()

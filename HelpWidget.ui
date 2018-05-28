@@ -157,6 +157,22 @@ color: rgb(198, 202, 212);</string>
     <string>检查更新</string>
    </property>
   </widget>
+  <widget class="QToolButton" name="toolButton_restart">
+   <property name="geometry">
+    <rect>
+     <x>290</x>
+     <y>370</y>
+     <width>96</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="text">
+    <string>立即重启</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
