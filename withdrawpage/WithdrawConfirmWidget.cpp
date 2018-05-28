@@ -134,55 +134,8 @@ void WithdrawConfirmWidget::InitStyle()
     //palette.setColor(QPalette::Background, QColor(10,10,10,100));
     //setPalette(palette);
 
-    QFont font("\"Microsoft YaHei UI Light\"",10,50);
-    QPalette pa;
-    pa.setColor(QPalette::WindowText,QColor(0xC6,0xCA,0xD4));
-    ui->label_1->setPalette(pa);
-    ui->label_1->setFont(font);
-    ui->label_2->setPalette(pa);
-    ui->label_2->setFont(font);
-    ui->label_3->setPalette(pa);
-    ui->label_3->setFont(font);
-    ui->label_4->setPalette(pa);
-    ui->label_4->setFont(font);
-    ui->label_5->setPalette(pa);
-    ui->label_5->setFont(font);
-
-
-    QFont font1("\"Microsoft YaHei UI Light\"",14,50);
-    QPalette pa1;
-    pa1.setColor(QPalette::WindowText,Qt::black);
-    ui->label_actualNumber->setPalette(pa1);
-    ui->label_actualNumber->setFont(font1);
-    ui->label_feeNumber->setPalette(pa1);
-    ui->label_feeNumber->setFont(font1);
-    ui->label_totalNumber->setFont(font1);
-
-    QPalette paw;
-    paw.setColor(QPalette::WindowText,Qt::white);
-    QFont fontw("\"Microsoft YaHei UI Light\"",14,63);
-    ui->label_title->setFont(fontw);
-    ui->label_title->setPalette(paw);
-
-    QPalette pa2;
-    pa2.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
-    ui->label_totalNumber->setPalette(pa2);
-
-    QFont fontad("\"Microsoft YaHei UI Light\"",10,50);
-    QPalette paad;
-    paad.setColor(QPalette::WindowText,Qt::black);
-
-    ui->label_address->setPalette(paad);
-    ui->label_address->setFont(fontad);
-
-
-    setStyleSheet("QLineEdit{border:none;background:transparent;color:red;font-size:10pt;margin-left:2px;}"
-                  "Qline{color:#5474EB;background:#5474EB;}"
-                  "QToolButton{border:none;color:white;border-radius:10px;font-size:12pt;}"
-                  "QToolButton#toolButton_cancel::hover,QToolButton#toolButton_confirm::hover{background-color:#00D2FF;}"
-                  "QToolButton#toolButton_confirm{background-color:#5474EB;}"
-                  "QToolButton#toolButton_cancel{background-color:#E5E5E5;}"
-                  "QLabel{background:transparent;color:black:font-family:\"Microsoft YaHei UI Light\";}");
+    ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
+    ui->toolButton_cancel->setStyleSheet(CANCELBTN_STYLE);
 }
 
 void WithdrawConfirmWidget::paintEvent(QPaintEvent *event)
@@ -197,7 +150,7 @@ void WithdrawConfirmWidget::paintEvent(QPaintEvent *event)
 //    painter.setBrush(QColor(255,255,255,255));
 //    painter.drawRect(220,60,320,425);
 
-    painter.drawPixmap(410,90,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
+    painter.drawPixmap(320,60,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
 
     QWidget::paintEvent(event);
 }
