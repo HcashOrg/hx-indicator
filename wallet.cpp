@@ -103,6 +103,9 @@ UBChain::UBChain()
    connect(updateProcess,&UpdateProcess::updateFinish,[this](){
         this->isUpdateNeeded = true;
    });
+   connect(updateProcess,&UpdateProcess::updateWrong,[this](){
+       this->isUpdateNeeded = false;
+  });
 }
 
 UBChain::~UBChain()
