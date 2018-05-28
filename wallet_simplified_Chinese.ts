@@ -2075,14 +2075,15 @@ Contract created successfully!</source>
         <translation type="unfinished">未能生成tunnel账户</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="102"/>
+        <location filename="depositpage/DepositPage.cpp" line="105"/>
         <source>cannot bind tunnel account</source>
         <translation type="unfinished">未能绑定tunnel账户</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="113"/>
-        <source>You Should Back Up Your Wallet!</source>
-        <translation type="unfinished"></translation>
+        <location filename="depositpage/DepositPage.cpp" line="116"/>
+        <source>Wallet data updated! Please backup your wallet!</source>
+        <oldsource>You Should Back Up Your Wallet!</oldsource>
+        <translation type="unfinished">钱包数据已更新！请重新备份您的钱包！</translation>
     </message>
 </context>
 <context>
@@ -2556,22 +2557,22 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="969"/>
+        <location filename="frame.cpp" line="981"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1565"/>
+        <location filename="frame.cpp" line="1579"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1568"/>
+        <location filename="frame.cpp" line="1582"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1571"/>
+        <location filename="frame.cpp" line="1585"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -2746,32 +2747,32 @@ add an account first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="177"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="121"/>
         <source>Setting</source>
         <translation type="unfinished">设置</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="178"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="122"/>
         <source>Lock</source>
         <translation type="unfinished">锁定</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="179"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="123"/>
         <source>Console</source>
         <translation type="unfinished">控制台</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="180"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="124"/>
         <source>Help</source>
         <translation type="unfinished">帮助</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="182"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="126"/>
         <source>About Us</source>
         <translation type="unfinished">关于我们</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="183"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="127"/>
         <source>Update</source>
         <translation type="unfinished">软件更新</translation>
     </message>
@@ -2799,6 +2800,11 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="HelpWidget.ui" line="93"/>
+        <source>暂无更新</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="HelpWidget.ui" line="157"/>
         <source>检查更新</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2810,6 +2816,31 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="HelpWidget.ui" line="141"/>
         <source>升级</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="HelpWidget.cpp" line="49"/>
+        <source>no new version!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="HelpWidget.cpp" line="55"/>
+        <source>new version found! </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="HelpWidget.cpp" line="63"/>
+        <source>updating,please wait! </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="HelpWidget.cpp" line="70"/>
+        <source>update finish,restart to take effect! </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="HelpWidget.cpp" line="76"/>
+        <source>update wrong! </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3020,7 +3051,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="lockpage.cpp" line="36"/>
-        <location filename="lockpage.cpp" line="181"/>
+        <location filename="lockpage.cpp" line="183"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -3082,7 +3113,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">锁定剩余</translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="186"/>
+        <location filename="lockpage.cpp" line="188"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -3278,17 +3309,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">每当一个新的账户被创建或导入，钱包会在下次启动时重新扫描区块链数据。在此之后该账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="367"/>
+        <location filename="mainpage.cpp" line="369"/>
         <source>Failed</source>
         <translation type="unfinished">失败</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="565"/>
+        <location filename="mainpage.cpp" line="567"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="598"/>
+        <location filename="mainpage.cpp" line="600"/>
         <source>copy to clipboard</source>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
@@ -3969,7 +4000,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="normallogin.cpp" line="34"/>
-        <location filename="normallogin.cpp" line="174"/>
+        <location filename="normallogin.cpp" line="176"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -4025,7 +4056,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">锁定剩余</translation>
     </message>
     <message>
-        <location filename="normallogin.cpp" line="179"/>
+        <location filename="normallogin.cpp" line="181"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -5482,8 +5513,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UBChain</name>
     <message>
-        <location filename="wallet.cpp" line="174"/>
-        <location filename="wallet.cpp" line="198"/>
+        <location filename="wallet.cpp" line="182"/>
+        <location filename="wallet.cpp" line="206"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>

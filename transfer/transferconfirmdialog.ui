@@ -30,8 +30,8 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>80</y>
+      <x>300</x>
+      <y>45</y>
       <width>360</width>
       <height>490</height>
      </rect>
@@ -47,7 +47,7 @@
       <rect>
        <x>50</x>
        <y>330</y>
-       <width>180</width>
+       <width>260</width>
        <height>30</height>
       </rect>
      </property>
@@ -103,13 +103,16 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <family>Microsoft YaHei UI Light</family>
+       <pointsize>-1</pointsize>
        <weight>50</weight>
+       <italic>false</italic>
        <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgb(198, 202, 212);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>发往地址:</string>
@@ -123,18 +126,19 @@
       <rect>
        <x>50</x>
        <y>302</y>
-       <width>51</width>
+       <width>80</width>
        <height>30</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgb(198, 202, 212);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>交易密码</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
     <widget class="QLabel" name="label_5">
@@ -142,19 +146,22 @@
       <rect>
        <x>50</x>
        <y>250</y>
-       <width>40</width>
+       <width>80</width>
        <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <family>Microsoft YaHei UI Light</family>
+       <pointsize>-1</pointsize>
        <weight>50</weight>
+       <italic>false</italic>
        <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgb(198, 202, 212);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>备注:</string>
@@ -173,7 +180,8 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgb(51, 51, 51);
+font: 13px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string/>
@@ -184,19 +192,22 @@
       <rect>
        <x>50</x>
        <y>205</y>
-       <width>60</width>
+       <width>80</width>
        <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <family>Microsoft YaHei UI Light</family>
+       <pointsize>-1</pointsize>
        <weight>50</weight>
+       <italic>false</italic>
        <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgb(198, 202, 212);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>转账金额:</string>
@@ -215,7 +226,8 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgb(84,116,235);
+font: 13px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>无</string>
@@ -274,19 +286,22 @@
       <rect>
        <x>215</x>
        <y>205</y>
-       <width>60</width>
+       <width>80</width>
        <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <family>Microsoft YaHei UI Light</family>
+       <pointsize>-1</pointsize>
        <weight>50</weight>
+       <italic>false</italic>
        <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgb(198, 202, 212);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>手续费:</string>
@@ -305,7 +320,8 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">QLabel{color: rgb(51, 51, 51);
+font: 14px &quot;Microsoft YaHei UI Light&quot;;}</string>
      </property>
      <property name="text">
       <string/>
@@ -324,7 +340,8 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgb(51, 51, 51);
+font: 13px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string/>
@@ -347,19 +364,6 @@
      </property>
      <property name="text">
       <string/>
-     </property>
-    </widget>
-    <widget class="Line" name="line">
-     <property name="geometry">
-      <rect>
-       <x>50</x>
-       <y>350</y>
-       <width>201</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </widget>

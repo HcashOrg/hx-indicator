@@ -113,7 +113,7 @@ void DepositPage::jsonDataUpdated(QString id)
         UBChain::getInstance()->configFile->setValue("/settings/backupNeeded",true);
         UBChain::getInstance()->IsBackupNeeded = true;
         CommonDialog dia(CommonDialog::YesOrNo);
-        dia.setText(tr("You Should Back Up Your Wallet!"));
+        dia.setText(tr("Wallet data updated! Please backup your wallet!"));
         if(dia.pop())
         {
             BackupWalletDialog backupWalletDialog;
