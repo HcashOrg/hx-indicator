@@ -35,8 +35,10 @@ HelpWidget::~HelpWidget()
 
 void HelpWidget::CheckUpdateSlot()
 {
+    UBChain::getInstance()->SetUpdateNeeded(false);
     ui->label_updatetip->setText(tr("start check!"));
     showState(true,false,false,true);
+    ui->toolButton_checkUpdate->setEnabled(false);
     _p->updateProcess->checkUpdate();
 }
 
@@ -53,10 +55,12 @@ void HelpWidget::CheckResultSlot(const QString &version)
         ui->label_updatetip->setText(tr("new version found! " )+ version);
         showState(true,true,false,true);
     }
+    ui->toolButton_checkUpdate->setEnabled(true);
 }
 
 void HelpWidget::UpdateSlot()
 {
+    ui->toolButton_checkUpdate->setEnabled(false);
     ui->label_updatetip->setText(tr("updating,please wait! " ));
     showState(true,false,false,true);
     _p->updateProcess->startUpdate();
@@ -64,6 +68,7 @@ void HelpWidget::UpdateSlot()
 
 void HelpWidget::UpdateFinishSlot()
 {
+    ui->toolButton_checkUpdate->setEnabled(true);
     ui->label_updatetip->setText(tr("update finish,restart to take effect! " ));
     showState(true,false,true,true);
     UBChain::getInstance()->SetUpdateNeeded(true);
@@ -71,6 +76,7 @@ void HelpWidget::UpdateFinishSlot()
 
 void HelpWidget::UpdateWrongSlot()
 {
+    ui->toolButton_checkUpdate->setEnabled(true);
     ui->label_updatetip->setText(tr("update wrong! " ));
 
     showState(true,false,false,true);
