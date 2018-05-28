@@ -19,6 +19,7 @@ private slots:
 
     void copyFinish();
 
+    void restartWallet();
 private:
     void InitWidget();
     void InitStyle();

@@ -22,9 +22,13 @@ private slots:
 
     void UpdateFinishSlot();
     void UpdateWrongSlot();
+
+    void RestartSlot();
 private:
     void InitWidget();
     void InitStyle();
+
+    void showState(bool check,bool update,bool restart,bool label_tip);
 protected:
     void paintEvent(QPaintEvent *event);
 private:
