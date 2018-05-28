@@ -54,6 +54,7 @@ void PublishPoundageWidget::ConfirmPublishSlots()
         dia.pop();
         return;
     }
+    qDebug()<<"publish_create_create----";
     UBChain::getInstance()->postRPC("publish_create_guarantee_order",
                                     toJsonFormat("create_guarantee_order",
                                                  QJsonArray()<<accountName<<sourceNumber<<targetNumber<<targetCoinType<<true));
