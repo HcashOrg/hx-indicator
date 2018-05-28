@@ -55,6 +55,7 @@ Frame::Frame(): timer(NULL),
     multiSigPage(NULL),
     multiSigTransactionPage(NULL),
     minerPage(NULL),
+    poundage(nullptr),
     needToRefresh(false)
 {
 
@@ -635,8 +636,11 @@ void Frame::closeCurrentPage()
         transferPage = NULL;
         break;
     case 4:
-        contactPage->close();
-        contactPage = NULL;
+        if(contactPage)
+        {
+            contactPage->close();
+            contactPage = NULL;
+        }
         break;
     case 5:
         myExchangeContractPage->close();
@@ -659,6 +663,13 @@ void Frame::closeCurrentPage()
     case 10:
         multiSigTransactionPage->close();
         multiSigTransactionPage = NULL;
+        break;
+    case 11:
+        if(poundage)
+        {
+            poundage->close();
+            poundage = nullptr;
+        }
         break;
     default:
         break;
@@ -958,9 +969,12 @@ void Frame::showMultiSigPage()
 
 void Frame::showPoundagePage()
 {
-    PoundageWidget *poundage = new PoundageWidget(centralWidget);
+    closeCurrentPage();
+    poundage = new PoundageWidget(centralWidget);
     poundage->resize(centralWidget->size());
+    poundage->setAttribute(Qt::WA_DeleteOnClose);
     poundage->show();
+    currentPageNum = 11;
 }
 
 void Frame::showOnchainOrderPage()

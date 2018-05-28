@@ -37,6 +37,7 @@ class FunctionWidget;
 class MinerPage;
 class OnchainOrderPage;
 class MyExchangeContractPage;
+class PoundageWidget;
 
 class Frame:public QFrame
 {
@@ -119,7 +120,7 @@ private:
     MinerPage* minerPage;
     OnchainOrderPage* onchainOrderPage;
     MyExchangeContractPage* myExchangeContractPage;
-
+    PoundageWidget *poundage;
 
     BottomBar* bottomBar;
     QWidget* centralWidget;
