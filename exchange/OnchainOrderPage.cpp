@@ -220,6 +220,7 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
         }
 
         BuyOrderWidget* buyOrderWidget = new BuyOrderWidget(this);
+        buyOrderWidget->setAttribute(Qt::WA_DeleteOnClose);
         buyOrderWidget->move(0,0);
         buyOrderWidget->show();
         buyOrderWidget->raise();

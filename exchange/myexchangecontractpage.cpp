@@ -470,6 +470,7 @@ void MyExchangeContractPage::on_balanceBtn_clicked()
     else
     {
         ContractBalanceWidget* contractBalanceWidget = new ContractBalanceWidget(this);
+        contractBalanceWidget->setAttribute(Qt::WA_DeleteOnClose);
         contractBalanceWidget->setAccount(ui->accountComboBox->currentText());
         contractBalanceWidget->move(0,0);
         contractBalanceWidget->show();
