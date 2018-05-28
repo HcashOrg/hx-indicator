@@ -34,7 +34,8 @@ HelpWidget::~HelpWidget()
 
 void HelpWidget::CheckUpdateSlot()
 {
-    ui->label_updatetip->setVisible(false);
+    ui->label_updatetip->setText(tr("start check!"));
+    ui->label_updatetip->setVisible(true);
     ui->toolButton_update->setVisible(false);
     connect(UBChain::getInstance()->updateProcess,&UpdateProcess::NewstVersionSignal,this,&HelpWidget::CheckResultSlot);
     UBChain::getInstance()->updateProcess->checkUpdate();
@@ -59,6 +60,7 @@ void HelpWidget::CheckResultSlot(const QString &version)
 
 void HelpWidget::UpdateSlot()
 {
+    ui->toolButton_update->setVisible(false);
     ui->label_updatetip->setVisible(true);
     ui->label_updatetip->setText(tr("updating,please wait! " ));
     UBChain::getInstance()->updateProcess->startUpdate();
