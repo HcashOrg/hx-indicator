@@ -160,7 +160,7 @@ void BuyOrderWidget::on_okBtn_clicked()
     AssetInfo sellAssetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(sellSymbol));
     double amount = (double)buyAmount / qPow(10,buyAssetInfo.precision) / sellAmount * qPow(10,sellAssetInfo.precision)
             * ui->amountLineEdit->text().toDouble();
-
+    feeChoose->updatePoundageID();
     UBChain::getInstance()->postRPC( "id-transfer_to_contract-BuyOrderWidget", toJsonFormat( "transfer_to_contract",
                                                                            QJsonArray() << accountName << ui->contractAddressLabel->text()
                                                                            << ui->amountLineEdit->text() << sellSymbol

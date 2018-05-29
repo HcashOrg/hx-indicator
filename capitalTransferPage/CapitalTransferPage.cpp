@@ -11,6 +11,8 @@
 
 #include "extra/HttpManager.h"
 #include "commondialog.h"
+
+static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001}};
 class CapitalTransferPage::CapitalTransferPagePrivate
 {
 public:
@@ -276,6 +278,11 @@ void CapitalTransferPage::PostQueryTunnelMoney(const QString &symbol, const QStr
 void CapitalTransferPage::CreateTransaction()
 {
     _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble(),'f',_p->precision);
+    if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
+    {
+        return;
+    }
+
     if(_p->tunnel_account_address.isEmpty() || _p->multisig_address.isEmpty() ||
        _p->symbol.isEmpty() || _p->actualNumber.isEmpty() || _p->actualNumber.toDouble() < 1e-20)
     {
@@ -291,7 +298,7 @@ void CapitalTransferPage::CreateTransaction()
                                          toJsonFormat( "createrawtransaction", QJsonArray()
                                          << _p->tunnel_account_address<<_p->multisig_address<<_p->actualNumber<<_p->symbol ));
     }
-    else if(ui->radioButton_withdraw->isChecked())
+    else if(ui->radioButton_withdraw->isChecked() && _p->tunnel_account_address != ui->lineEdit_address->text())
     {
         UBChain::getInstance()->postRPC( "captial-createrawtransaction",
                                          toJsonFormat( "createrawtransaction", QJsonArray()

@@ -509,8 +509,11 @@ void TransferPage::updateAmountSlots()
       }
      if(!isFindAmmount)
      {
-         ui->amountLineEdit->setPlaceholderText(tr("Max: 0"));
+         ui->amountLineEdit->setEnabled(false);
+         ui->amountLineEdit->setPlaceholderText(tr("cannot find asset!"));
+         return;
      }
+     ui->amountLineEdit->setEnabled(true);
 }
 
 //void TransferPage::checkStateChangedSlots(int state)
