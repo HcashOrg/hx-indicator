@@ -25,6 +25,7 @@ public:
         :updateNetwork(new UpdateNetWork())
         ,networkManager(new QNetworkAccessManager())
         ,serverUrl("http://192.168.1.121:5005/api")
+        ,serverAddr("http://192.168.1.121:5005")
         ,downloadPath(QCoreApplication::applicationDirPath() + QDir::separator() + UPDATE_DIR_NAME)
         ,localVersionData(std::make_shared<VersionInfo>())
         ,serverVersionData(std::make_shared<VersionInfo>())
@@ -37,6 +38,7 @@ public:
     QNetworkAccessManager   *networkManager;
 
     QString serverUrl;
+    QString serverAddr;
     QString clientID;
 
     VersionInfoPtr localVersionData;//本地文件解析结果
@@ -59,6 +61,7 @@ UpdateProcess::UpdateProcess(QObject *parent)
 void UpdateProcess::InitServerURL(const QString &url)
 {
     _p->serverUrl = url;
+    _p->serverAddr = _p->serverUrl.mid(0,_p->serverUrl.indexOf("/api"));
 }
 
 void UpdateProcess::checkUpdate()
@@ -107,7 +110,7 @@ void UpdateProcess::GetLatestVersionInfoSlots()
     //下载当前服务器版本
     DownLoadData up;
     up.fileName = UPDATE_DOC_NAME;
-    up.url = /*_p->serverUrl + serverVersion.url;*/"http://192.168.1.161/down/blocklink_wallet_upgrade.xml";//测试用，本地文件
+    up.url = _p->serverAddr + serverVersion.url;//"http://192.168.1.161/down/blocklink_wallet_upgrade.xml";//测试用，本地文件
     qDebug()<<up.url;
     up.filePath = _p->downloadPath + QDir::separator() + up.fileName;
     connect(_p->updateNetwork,&UpdateNetWork::DownLoadFinish,this,&UpdateProcess::DownLoadVersionConfigFinsihed);

@@ -34,7 +34,7 @@ bool PoundageDataUtil::ParseJsonObjToUnit(QJsonObject jsonObj,std::shared_ptr<Po
 
     poundageUnit->poundageFinished = jsonObj.value("finished").toBool();
 
-    qDebug()<<poundageUnit->sourceCoinNumber << poundageUnit->targetCoinNumber;
+    qDebug()<<poundageUnit->sourceCoinNumber << poundageUnit->targetCoinNumber <<tarObj.value("amount");
     return true;
 }
 
