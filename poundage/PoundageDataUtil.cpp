@@ -26,7 +26,7 @@ bool PoundageDataUtil::ParseJsonObjToUnit(QJsonObject jsonObj,std::shared_ptr<Po
 
     QJsonObject tarObj = jsonObj.value("asset_target").toObject();
     int tarPre = UBChain::getInstance()->assetInfoMap[tarObj.value("asset_id").toString()].precision;
-    poundageUnit->targetCoinNumber =  tarObj.value("amount").toDouble()/pow(10,tarPre);
+    poundageUnit->targetCoinNumber = (double)jsonValueToULL(tarObj.value("amount"))/pow(10,tarPre);
     poundageUnit->targetCoinID = tarObj.value("asset_id").toString();
 
     QJsonObject finishObj = jsonObj.value("asset_finished").toObject();

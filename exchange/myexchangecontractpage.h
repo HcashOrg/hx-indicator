@@ -38,6 +38,8 @@ private:
     void showOrders();
     void updateTableHeaders();
 
+    void fetchAccountExchangeContractBalances();
+
 private slots:
     void jsonDataUpdated(QString id);
 

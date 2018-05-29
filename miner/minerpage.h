@@ -48,6 +48,8 @@ private:
 
     void paintEvent(QPaintEvent*);
     void init();
+    void updateAccounts();
+    bool accountsUpdating = false;
 
     void fetchLockBalance();
     void fetchAccountIncome();

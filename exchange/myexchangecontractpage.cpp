@@ -78,6 +78,11 @@ void MyExchangeContractPage::init()
 void MyExchangeContractPage::refresh()
 {
     on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
+
+    if( currentWidget != NULL && currentWidget->objectName() == "contractBalanceWidget")
+    {
+        static_cast<ContractBalanceWidget*>(currentWidget)->refresh();
+    }
 }
 
 void MyExchangeContractPage::onBack()
@@ -154,9 +159,61 @@ void MyExchangeContractPage::updateTableHeaders()
     }
 }
 
+void MyExchangeContractPage::fetchAccountExchangeContractBalances()
+{
+    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+
+    if(!contractAddress.isEmpty())
+    {
+        UBChain::getInstance()->postRPC( "id-invoke_contract_offline-owner_assets-" + ui->accountComboBox->currentText(), toJsonFormat( "invoke_contract_offline",
+                                                                               QJsonArray() << ui->accountComboBox->currentText() << contractAddress
+                                                                               << "owner_assets"  << ""));
+    }
+}
+
 
 void MyExchangeContractPage::jsonDataUpdated(QString id)
 {
+    if( id.startsWith("id-invoke_contract_offline-owner_assets-") )
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        QString accountName = id.mid(QString("id-invoke_contract_offline-owner_assets-").size());
+
+        if(result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonObject object = QJsonDocument::fromJson(jsonObject.take("result").toString().toLatin1()).object();
+
+            ExchangeContractBalances balances;
+            foreach (QString key, object.keys())
+            {
+                QJsonValue amountValue = object.take(key);
+                unsigned long long amount = 0;
+
+                if(amountValue.isString())
+                {
+                    amount = amountValue.toString().toULongLong();
+                }
+                else
+                {
+                    amount = QString::number(amountValue.toDouble(),'g',12).toULongLong();
+                }
+
+                balances.insert(key,amount);
+            }
+
+            UBChain::getInstance()->accountExchangeContractBalancesMap.insert(accountName,balances);
+        }
+
+        return;
+    }
+
     if( id == "id-register_contract")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
@@ -360,8 +417,6 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             dia.setText(result);
             dia.pop();
         }
-
-
     }
 }
 
@@ -420,6 +475,8 @@ void MyExchangeContractPage::on_accountComboBox_currentIndexChanged(const QStrin
         UBChain::getInstance()->postRPC( "id-invoke_contract_offline-sell_orders-" + ui->accountComboBox->currentText(), toJsonFormat( "invoke_contract_offline",
                                                                                QJsonArray() << ui->accountComboBox->currentText() << contractAddress
                                                                                << "sell_orders"  << ""));
+
+        fetchAccountExchangeContractBalances();
     }
 
 }
@@ -471,6 +528,7 @@ void MyExchangeContractPage::on_balanceBtn_clicked()
     {
         ContractBalanceWidget* contractBalanceWidget = new ContractBalanceWidget(this);
         contractBalanceWidget->setAttribute(Qt::WA_DeleteOnClose);
+        contractBalanceWidget->setObjectName("contractBalanceWidget");
         contractBalanceWidget->setAccount(ui->accountComboBox->currentText());
         contractBalanceWidget->move(0,0);
         contractBalanceWidget->show();

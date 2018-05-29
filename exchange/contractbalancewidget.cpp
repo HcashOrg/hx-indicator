@@ -57,67 +57,29 @@ void ContractBalanceWidget::setAccount(QString _accountName)
 {
     accountName = _accountName;
 
+    refresh();
+}
+
+void ContractBalanceWidget::refresh()
+{
     QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(accountName);
 
     ui->contractAddressLabel->setText(contractAddress);
 
-    if(contractAddress.isEmpty())
-    {
-    }
-    else
-    {
-        UBChain::getInstance()->postRPC( "id-invoke_contract_offline-owner_assets-" + accountName, toJsonFormat( "invoke_contract_offline",
-                                                                               QJsonArray() << accountName << contractAddress
-                                                                               << "owner_assets"  << ""));
-    }
+    showContractBalances();
 
     if(UBChain::getInstance()->getExchangeContractState(accountName) == "NOT_INITED")
     {
         ui->openForUsersBtn->show();
     }
+    else
+    {
+        ui->openForUsersBtn->hide();
+    }
 }
 
 void ContractBalanceWidget::jsonDataUpdated(QString id)
 {
-    if( id == "id-invoke_contract_offline-owner_assets-" + accountName )
-    {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
-
-        if(result.startsWith("\"result\":"))
-        {
-            result.prepend("{");
-            result.append("}");
-
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-            QJsonObject jsonObject = parse_doucment.object();
-            QJsonObject object = QJsonDocument::fromJson(jsonObject.take("result").toString().toLatin1()).object();
-
-            ExchangeContractBalances balances;
-            foreach (QString key, object.keys())
-            {
-                QJsonValue amountValue = object.take(key);
-                unsigned long long amount = 0;
-
-                if(amountValue.isString())
-                {
-                    amount = amountValue.toString().toULongLong();
-                }
-                else
-                {
-                    amount = QString::number(amountValue.toDouble(),'g',12).toULongLong();
-                }
-
-                balances.insert(key,amount);
-            }
-
-            UBChain::getInstance()->accountExchangeContractBalancesMap.insert(accountName,balances);
-        }
-
-        showContractBalances();
-
-        return;
-    }
 
     if( id == "id-invoke_contract_testing-openForUsers-" + accountName )
     {
@@ -269,7 +231,4 @@ void ContractBalanceWidget::on_openForUsersBtn_clicked()
     UBChain::getInstance()->postRPC( "id-invoke_contract_testing-openForUsers-" + accountName, toJsonFormat( "invoke_contract_testing",
                                                                            QJsonArray() << accountName << contractAddress
                                                                            << "openForUsers"  << ""));
-qDebug() << "open for users: " << "id-invoke_contract_testing-openForUsers-" + accountName << toJsonFormat( "invoke_contract_testing",
-                                                                                                            QJsonArray() << accountName << contractAddress
-                                                                                                            << "openForUsers"  << "");
 }
