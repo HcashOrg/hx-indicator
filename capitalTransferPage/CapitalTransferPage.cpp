@@ -278,7 +278,7 @@ void CapitalTransferPage::PostQueryTunnelMoney(const QString &symbol, const QStr
 void CapitalTransferPage::CreateTransaction()
 {
     _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble(),'f',_p->precision);
-    if(_p->actualNumber < dust_number[_p->symbol])
+    if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
     {
         return;
     }
