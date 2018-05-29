@@ -14,6 +14,8 @@ class ContactChooseWidget : public QWidget
 public:
     explicit ContactChooseWidget(QWidget *parent = 0);
     ~ContactChooseWidget();
+public:
+    bool isInitSuccess()const;
 signals:
     void selectContactSignal(const QString &name,const QString &address);
     void closeSignal();

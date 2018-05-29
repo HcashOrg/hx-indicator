@@ -74,6 +74,7 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
         {
             QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
+            feeChoose->updatePoundageID();
             UBChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
                                                                                    QJsonArray() << ui->accountNameLabel->text() << contractAddress
                                                                                    << ui->amountLineEdit->text() << ui->assetComboBox->currentText()

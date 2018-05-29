@@ -16,6 +16,7 @@ public:
     ContactChooseWidgetPrivate()
         :contactSheet(nullptr)
         ,contactFilePath("")
+        ,initSuccess(true)
     {
         if( UBChain::getInstance()->configFile->contains("/settings/chainPath"))
         {
@@ -32,6 +33,8 @@ public:
 
     QString contactName;
     QString contactAddress;
+
+    bool initSuccess;
 };
 
 ContactChooseWidget::ContactChooseWidget(QWidget *parent) :
@@ -47,6 +50,11 @@ ContactChooseWidget::~ContactChooseWidget()
 {
     delete _p;
     delete ui;
+}
+
+bool ContactChooseWidget::isInitSuccess() const
+{
+    return _p->initSuccess;
 }
 
 void ContactChooseWidget::itemClickedSlots(QTreeWidgetItem *item)
@@ -208,6 +216,7 @@ void ContactChooseWidget::InitData()
         CommonDialog dia(CommonDialog::OkOnly);
         dia.setText(tr("Contact file doesn't exist or damaged!"));
         dia.pop();
+        _p->initSuccess = false;
         return;
     }
     if(!_p->contactSheet) return;

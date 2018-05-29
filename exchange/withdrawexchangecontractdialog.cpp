@@ -77,6 +77,7 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
             QString params = QString("%1,%2").arg(ui->assetComboBox->currentText())
                     .arg(decimalToIntegerStr(ui->amountLineEdit->text(), assetInfo.precision));
 
+            feeChoose->updatePoundageID();
             UBChain::getInstance()->postRPC( "id-invoke_contract-withdrawAsset", toJsonFormat( "invoke_contract",
                                                                                    QJsonArray() << ui->accountNameLabel->text()
                                                                                    << UBChain::getInstance()->currentContractFee() << stepCount

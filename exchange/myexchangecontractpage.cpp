@@ -303,7 +303,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
                 QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
 
                 QString params = id.mid(QString("id-invoke_contract_testing-cancelSellOrder-").size());
-
+                withdrawOrderDialog.updatePoundageID();
                 UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrder", toJsonFormat( "invoke_contract",
                                                                                        QJsonArray() << ui->accountComboBox->currentText()
                                                                                        << UBChain::getInstance()->currentContractFee() << stepCount
@@ -328,6 +328,16 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             commonDialog.setText( "Transaction of withdraw-order has been sent out!");
             commonDialog.pop();
         }
+        else if(result.startsWith("\"error\":"))
+        {
+            int pos = result.indexOf("\"message\":\"") + 11;
+            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
+
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText( "Create exchange contract failed: " + errorMessage );
+            commonDialog.pop();
+        }
+
 
         return;
     }
@@ -345,12 +355,15 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             WithdrawOrderDialog withdrawOrderDialog;
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION)
                                                + " " + ASSET_NAME);
+            withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
             withdrawOrderDialog.setText(tr("You need to pay the fee for contract execution."));
+            qDebug()<<totalAmount;
             if(withdrawOrderDialog.pop())
             {
                 QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
                 QString params = id.mid(QString("id-invoke_contract_testing-cancelSellOrderPair-").size());
 
+                withdrawOrderDialog.updatePoundageID();
                 UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrderPair", toJsonFormat( "invoke_contract",
                                                                                                          QJsonArray() << ui->accountComboBox->currentText()
                                                                                                          << UBChain::getInstance()->currentContractFee() << stepCount
@@ -373,6 +386,15 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
             commonDialog.setText( "Transaction of withdraw-order-pair has been sent out!");
+            commonDialog.pop();
+        }
+        else if(result.startsWith("\"error\":"))
+        {
+            int pos = result.indexOf("\"message\":\"") + 11;
+            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
+
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText( "Create exchange contract failed: " + errorMessage );
             commonDialog.pop();
         }
 

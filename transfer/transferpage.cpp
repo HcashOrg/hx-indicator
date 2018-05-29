@@ -457,14 +457,17 @@ void TransferPage::on_transferRecordBtn_clicked()
 void TransferPage::chooseContactSlots()
 {
     ContactChooseWidget *wi = new ContactChooseWidget(this);
-    BlurWidget *blur = new BlurWidget(this);
-    connect(wi,&ContactChooseWidget::closeSignal,blur,&BlurWidget::close);
-    connect(wi,&ContactChooseWidget::selectContactSignal,this,&TransferPage::selectContactSlots);
+    if(wi->isInitSuccess())
+    {
+        BlurWidget *blur = new BlurWidget(this);
+        connect(wi,&ContactChooseWidget::closeSignal,blur,&BlurWidget::close);
+        connect(wi,&ContactChooseWidget::selectContactSignal,this,&TransferPage::selectContactSlots);
 
-    blur->show();
-    wi->move(QPoint(160,140));
-    wi->show();
-    wi->raise();
+        blur->show();
+        wi->move(QPoint(160,140));
+        wi->show();
+        wi->raise();
+    }
 }
 
 void TransferPage::selectContactSlots(const QString &name, const QString &address)

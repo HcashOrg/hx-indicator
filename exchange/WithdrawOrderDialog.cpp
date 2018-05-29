@@ -61,6 +61,11 @@ void WithdrawOrderDialog::setContractFee(double _fee)
     feeChoose->updateFeeNumberSlots(_fee);
 }
 
+void WithdrawOrderDialog::updatePoundageID()
+{
+    feeChoose->updatePoundageID();
+}
+
 void WithdrawOrderDialog::jsonDataUpdated(QString id)
 {
     if( id.startsWith( "id-unlock-WithdrawOrderDialog") )
@@ -88,6 +93,7 @@ void WithdrawOrderDialog::on_okBtn_clicked()
 
     UBChain::getInstance()->postRPC( "id-unlock-WithdrawOrderDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
+    feeChoose->updatePoundageID();
 
 }
 

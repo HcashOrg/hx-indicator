@@ -20,6 +20,7 @@ public:
     void setText(QString _text);
     void setContractFee(QString _feeStr);
     void setContractFee(double _fee);
+    void updatePoundageID();
 private slots:
     void jsonDataUpdated(QString id);
 
