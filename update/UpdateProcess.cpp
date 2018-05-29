@@ -14,6 +14,10 @@
 #include "UpdateProgressUtil.h"
 #include "UpdateNetWork.h"
 
+static const QString UPDATE_DOC_NAME = "blocklink_wallet_upgrade.xml";
+static const QString UPDATE_EXE_NAME = "Copy.exe";
+static const QString UPDATE_DIR_NAME = "temp";
+
 class UpdateProcess::DataPrivate
 {
 public:
@@ -21,7 +25,7 @@ public:
         :updateNetwork(new UpdateNetWork())
         ,networkManager(new QNetworkAccessManager())
         ,serverUrl("http://192.168.1.121:5005/api")
-        ,downloadPath(QCoreApplication::applicationDirPath() + QDir::separator() + "temp")
+        ,downloadPath(QCoreApplication::applicationDirPath() + QDir::separator() + UPDATE_DIR_NAME)
         ,localVersionData(std::make_shared<VersionInfo>())
         ,serverVersionData(std::make_shared<VersionInfo>())
         ,isWrongHappened(false)
@@ -67,8 +71,8 @@ void UpdateProcess::checkUpdate()
     UpdateProgressUtil::deleteDir(_p->downloadPath);
 
     //本地版本文件解析
-    qDebug()<<"解析本地文件``"<<QCoreApplication::applicationDirPath() + QDir::separator() + "update.xml";
-    UpdateProgressUtil::ParseXmlPath(QCoreApplication::applicationDirPath() + QDir::separator() + "update.xml",
+    qDebug()<<"解析本地文件``"<<QCoreApplication::applicationDirPath() + QDir::separator() + UPDATE_DOC_NAME;
+    UpdateProgressUtil::ParseXmlPath(QCoreApplication::applicationDirPath() + QDir::separator() + UPDATE_DOC_NAME,
                                      _p->localVersionData);
 
     //获取最新的配置
@@ -102,8 +106,8 @@ void UpdateProcess::GetLatestVersionInfoSlots()
     //下载config配置
     //下载当前服务器版本
     DownLoadData up;
-    up.fileName = "update.xml";
-    up.url = /*_p->serverUrl + serverVersion.url;*/"http://192.168.1.161/down/update.xml";//测试用，本地文件
+    up.fileName = UPDATE_DOC_NAME;
+    up.url = /*_p->serverUrl + serverVersion.url;*/"http://192.168.1.161/down/blocklink_wallet_upgrade.xml";//测试用，本地文件
     qDebug()<<up.url;
     up.filePath = _p->downloadPath + QDir::separator() + up.fileName;
     connect(_p->updateNetwork,&UpdateNetWork::DownLoadFinish,this,&UpdateProcess::DownLoadVersionConfigFinsihed);
@@ -117,7 +121,7 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
 
     //下载完配置文件后，对比本地、服务器配置，列出需要更新的配置项
     //服务端下载的版本文件解析
-    UpdateProgressUtil::ParseXmlPath(_p->downloadPath + QDir::separator() + "update.xml",_p->serverVersionData);
+    UpdateProgressUtil::ParseXmlPath(_p->downloadPath + QDir::separator() + UPDATE_DOC_NAME,_p->serverVersionData);
 
     if(_p->serverVersionData->version.isEmpty())
     {
@@ -129,10 +133,10 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
     {
         //更新更新器
         DownLoadData down;
-        down.filePath = QCoreApplication::applicationDirPath() + QDir::separator()+"Copy.exe";
-        down.fileName = "Copy.exe";
+        down.filePath = QCoreApplication::applicationDirPath() + QDir::separator()+UPDATE_EXE_NAME;
+        down.fileName = UPDATE_EXE_NAME;
         down.version = _p->serverVersionData->updateVersion;
-        down.url = _p->serverVersionData->serverPath + "/"+"Copy.exe";
+        down.url = _p->serverVersionData->serverPath + "/"+UPDATE_EXE_NAME;
 
         //删除文件
         QFile::remove(down.filePath);
