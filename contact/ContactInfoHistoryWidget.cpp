@@ -43,13 +43,43 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
     accountAddress = _accountAddress;
     QVector<TransactionStruct> tsVector = UBChain::getInstance()->transactionDB.lookupTransactionStruct(_accountAddress,TRANSACTION_TYPE_NORMAL);
 
-    int size = tsVector.size();
+
+    // 根据区块高度排序
+//    TransactionTypeIds sortedTypeIds;
+    QVector<TransactionStruct> sortedTsVector;
+    for(int i = 0; i < tsVector.size(); i++)
+    {
+        if(sortedTsVector.size() == 0)
+        {
+            sortedTsVector.append(tsVector.at(i));
+            continue;
+        }
+
+        TransactionStruct ts = tsVector.at(i);
+        for(int j = 0; j < sortedTsVector.size(); j++)
+        {
+            TransactionStruct ts2 = sortedTsVector.at(j);
+            if(ts.blockNum >= ts2.blockNum)
+            {
+                sortedTsVector.insert(j,ts);
+                break;
+            }
+
+            if(j == sortedTsVector.size() - 1)
+            {
+                sortedTsVector.append(ts);
+                break;
+            }
+        }
+    }
+
+    int size = sortedTsVector.size();
     ui->transferRecordTableWidget->setRowCount(0);
     int rowCount = 0;
 
     for(int i = 0; i < size; i++)
     {
-        TransactionStruct ts = tsVector.at(size - i - 1);
+        TransactionStruct ts = sortedTsVector.at(i);
         QString transactionId = ts.transactionId;
         if(ts.type == -1)
         {
