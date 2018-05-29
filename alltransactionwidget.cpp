@@ -202,8 +202,6 @@ void AllTransactionWidget::hideFilteredTransactions()
 {
     QString filterStr = ui->searchLineEdit->text().simplified();
 
-    if(filterStr.isEmpty())     return;
-
     for(int i = 0; i < ui->transactionsTableWidget->rowCount(); i++)
     {
         if( !ui->transactionsTableWidget->item(i,2)->text().contains(filterStr)
@@ -599,7 +597,7 @@ void AllTransactionWidget::on_accountComboBox_currentTextChanged(const QString &
 
 void AllTransactionWidget::on_transactionsTableWidget_cellPressed(int row, int column)
 {
-    if( column == 1  || column == 2 || column == 5 || column == 7)
+    if( column == 1  || column == 2 || column == 3 || column == 5 || column == 7)
     {
         ShowContentDialog showContentDialog( ui->transactionsTableWidget->item(row, column)->text(),this);
 

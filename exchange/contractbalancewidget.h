@@ -19,6 +19,8 @@ public:
 
     void setAccount(QString _accountName);
 
+    void refresh();
+
 private slots:
     void jsonDataUpdated(QString id);
 

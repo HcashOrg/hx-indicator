@@ -126,6 +126,7 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
             }
             else if(index.column() == 4)
             {
+
                 return "1 : "+ QString::number(_p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->sourceCoinNumber/
                         _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->targetCoinNumber,'f',5);
             }

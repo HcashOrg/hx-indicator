@@ -100,6 +100,8 @@ MinerPage::~MinerPage()
 
 void MinerPage::refresh()
 {
+    updateAccounts();
+
     fetchLockBalance();
     fetchAccountIncome();
     showIncomeRecord();
@@ -288,12 +290,20 @@ void MinerPage::paintEvent(QPaintEvent *)
 
 void MinerPage::init()
 {
+    updateAccounts();
+
+    ui->stackedWidget->setCurrentIndex(0);
+    updateCheckState(0);
+}
+
+void MinerPage::updateAccounts()
+{
+    accountsUpdating = true;
+
     if( UBChain::getInstance()->getRegisteredAccounts().isEmpty())
     {
         ui->tipLabel->show();
         ui->stackedWidget->hide();
-//        ui->incomeInfoBtn->hide();
-//        ui->forecloseInfoBtn->hide();
         ui->lockToMinerBtn->hide();
         ui->accountComboBox->hide();
         ui->accountLabel->hide();
@@ -302,18 +312,20 @@ void MinerPage::init()
     {
         ui->tipLabel->hide();
         ui->stackedWidget->show();
-//        ui->incomeInfoBtn->show();
-//        ui->forecloseInfoBtn->show();
         ui->lockToMinerBtn->show();
         ui->accountComboBox->show();
         ui->accountLabel->show();
 
         QStringList keys = UBChain::getInstance()->getRegisteredAccounts();
         ui->accountComboBox->addItems(keys);
+
+        if(keys.contains(UBChain::getInstance()->currentAccount))
+        {
+            ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+        }
     }
 
-    ui->stackedWidget->setCurrentIndex(0);
-    updateCheckState(0);
+    accountsUpdating = false;
 }
 
 void MinerPage::fetchLockBalance()
@@ -399,6 +411,7 @@ void MinerPage::updateCheckState(int number)
     ui->incomeRecordBtn->setChecked(2 == number);
 }
 
+
 unsigned int MinerPage::calPage(const QTableWidget * const table) const
 {
     std::lock_guard<std::mutex> gurd(calMutex);
@@ -428,6 +441,8 @@ void MinerPage::setTextCenter(QTableWidget * const table)
 
 void MinerPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
+    if(accountsUpdating)        return;
+
     fetchLockBalance();
     fetchAccountIncome();
     showIncomeRecord();

@@ -841,50 +841,50 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="39"/>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="65"/>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="78"/>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="91"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="43"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="73"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="90"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="107"/>
         <source>address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="52"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="56"/>
         <source>取消</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="104"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="127"/>
         <source>共需支付</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="117"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="140"/>
         <source>确认</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="130"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="157"/>
         <source>交易密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="143"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="174"/>
         <source>到账数额</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="162"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="200"/>
         <source>交易确认</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="175"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="220"/>
         <source>手续费</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="201"/>
+        <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="237"/>
         <source>到账地址</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1204,27 +1204,27 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactAddWidget.ui" line="36"/>
+        <location filename="contact/ContactAddWidget.ui" line="44"/>
         <source>账户地址</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactAddWidget.ui" line="54"/>
+        <location filename="contact/ContactAddWidget.ui" line="70"/>
         <source>备注名</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactAddWidget.ui" line="82"/>
+        <location filename="contact/ContactAddWidget.ui" line="106"/>
         <source>分组</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactAddWidget.ui" line="105"/>
+        <location filename="contact/ContactAddWidget.ui" line="132"/>
         <source>提示</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactAddWidget.ui" line="139"/>
+        <location filename="contact/ContactAddWidget.ui" line="166"/>
         <source>确定</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1565,12 +1565,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactWidget.cpp" line="143"/>
+        <location filename="contact/ContactWidget.cpp" line="145"/>
         <source>New Sheet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactWidget.cpp" line="145"/>
+        <location filename="contact/ContactWidget.cpp" line="147"/>
         <source>Default Group</source>
         <translation type="unfinished">默认分组</translation>
     </message>
@@ -2557,22 +2557,22 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="981"/>
+        <location filename="frame.cpp" line="995"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1579"/>
+        <location filename="frame.cpp" line="1593"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1582"/>
+        <location filename="frame.cpp" line="1596"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1585"/>
+        <location filename="frame.cpp" line="1599"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -2809,6 +2809,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="HelpWidget.ui" line="173"/>
+        <source>立即重启</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="HelpWidget.ui" line="122"/>
         <source>Windows桌面版 v1.0.1</source>
         <translation type="unfinished"></translation>
@@ -2819,7 +2824,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="49"/>
+        <location filename="HelpWidget.cpp" line="39"/>
+        <source>start check!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="HelpWidget.cpp" line="50"/>
         <source>no new version!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2829,17 +2839,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="63"/>
+        <location filename="HelpWidget.cpp" line="64"/>
         <source>updating,please wait! </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="70"/>
+        <location filename="HelpWidget.cpp" line="72"/>
         <source>update finish,restart to take effect! </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="76"/>
+        <location filename="HelpWidget.cpp" line="80"/>
         <source>update wrong! </source>
         <translation type="unfinished"></translation>
     </message>
@@ -3468,43 +3478,43 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="147"/>
+        <location filename="miner/minerpage.cpp" line="149"/>
         <source>add</source>
         <translation type="unfinished">追加</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="155"/>
+        <location filename="miner/minerpage.cpp" line="157"/>
         <source>foreclose</source>
         <translation type="unfinished">赎回</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="181"/>
+        <location filename="miner/minerpage.cpp" line="183"/>
         <source>Foreclose asset from miner successfully!</source>
         <oldsource>Foreclose balance from miner successfully!</oldsource>
         <translation type="unfinished">成功从miner赎回资产！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="222"/>
+        <location filename="miner/minerpage.cpp" line="224"/>
         <source>obtain</source>
         <translation type="unfinished">获取</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="249"/>
+        <location filename="miner/minerpage.cpp" line="251"/>
         <source>The transaction of obtain-income has been sent out!</source>
         <translation type="unfinished">获取收益的交易已发出！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="257"/>
+        <location filename="miner/minerpage.cpp" line="259"/>
         <source>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</source>
         <translation type="unfinished">该账户的挖矿收益还不到 %1 %2，还不能获取！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="270"/>
+        <location filename="miner/minerpage.cpp" line="272"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished">钱包中没有未注册账户！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="365"/>
+        <location filename="miner/minerpage.cpp" line="377"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>
@@ -3858,7 +3868,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">未能找到文件 contracts/blocklink_exchange.glua.gpc！</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="490"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="491"/>
         <source>Sure to cancel all orders of %1-to-%2 ?</source>
         <oldsource>Sure to withdraw all orders of %1-to-%2 ?</oldsource>
         <translation type="unfinished">确定撤销所有 %1-to-%2 的挂单吗?</translation>
@@ -4383,27 +4393,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.cpp" line="71"/>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="72"/>
         <source>0 LNK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.cpp" line="90"/>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="91"/>
         <source>no chains!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.cpp" line="97"/>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="98"/>
         <source>input </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.cpp" line="97"/>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="98"/>
         <source> number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.cpp" line="187"/>
+        <location filename="poundage/PublishPoundageWidget.cpp" line="188"/>
         <source>max:</source>
         <translation type="unfinished">最大:</translation>
     </message>
@@ -4673,7 +4683,12 @@ update or not?</source>
         <translation type="unfinished">错误的密码！</translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="177"/>
+        <location filename="exchange/selldialog.cpp" line="153"/>
+        <source>Assets can not be the same!</source>
+        <translation type="unfinished">资产不能相同！</translation>
+    </message>
+    <message>
+        <location filename="exchange/selldialog.cpp" line="186"/>
         <source>Max: %1 %2</source>
         <oldsource>Total %1 %2</oldsource>
         <translation type="unfinished">最大: %1 %2</translation>
@@ -5151,42 +5166,42 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferconfirmdialog.ui" line="115"/>
+        <location filename="transfer/transferconfirmdialog.ui" line="118"/>
         <source>发往地址:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferconfirmdialog.ui" line="134"/>
+        <location filename="transfer/transferconfirmdialog.ui" line="138"/>
         <source>交易密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferconfirmdialog.ui" line="160"/>
+        <location filename="transfer/transferconfirmdialog.ui" line="167"/>
         <source>备注:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferconfirmdialog.ui" line="202"/>
+        <location filename="transfer/transferconfirmdialog.ui" line="213"/>
         <source>转账金额:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferconfirmdialog.ui" line="221"/>
+        <location filename="transfer/transferconfirmdialog.ui" line="233"/>
         <source>无</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferconfirmdialog.ui" line="242"/>
+        <location filename="transfer/transferconfirmdialog.ui" line="259"/>
         <source>账单确认</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferconfirmdialog.ui" line="269"/>
+        <location filename="transfer/transferconfirmdialog.ui" line="286"/>
         <source>取消</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="transfer/transferconfirmdialog.ui" line="292"/>
+        <location filename="transfer/transferconfirmdialog.ui" line="312"/>
         <source>手续费:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5513,8 +5528,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UBChain</name>
     <message>
-        <location filename="wallet.cpp" line="182"/>
-        <location filename="wallet.cpp" line="206"/>
+        <location filename="wallet.cpp" line="184"/>
+        <location filename="wallet.cpp" line="208"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5662,50 +5677,50 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="26"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="30"/>
         <source>提至地址</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="45"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="56"/>
         <source>交易确认</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="58"/>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="136"/>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="149"/>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="162"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="76"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="177"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="194"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="211"/>
         <source>address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="71"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="96"/>
         <source>提现数额</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="84"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="113"/>
         <source>提现手续费</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="97"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="130"/>
         <source>共需支付</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="110"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="147"/>
         <source>交易密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="188"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="227"/>
         <source>确认</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="201"/>
+        <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="243"/>
         <source>取消</source>
         <translation type="unfinished">取消</translation>
     </message>
@@ -5800,37 +5815,37 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="31"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="39"/>
         <source>提至地址</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="49"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="65"/>
         <source>LNK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="67"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="94"/>
         <source>数量</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="85"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="112"/>
         <source>请输入提现地址</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="103"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="130"/>
         <source>可提现数量:0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="116"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="146"/>
         <source>全部提现</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="155"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="162"/>
         <source>确定</source>
         <translation type="unfinished"></translation>
     </message>

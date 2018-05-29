@@ -147,6 +147,15 @@ void SellDialog::jsonDataUpdated(QString id)
 
 void SellDialog::on_okBtn_clicked()
 {
+    if(ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText( tr("Assets can not be the same!") );
+        commonDialog.pop();
+
+        return;
+    }
+
     if(ui->sellAmountLineEdit->text().toDouble() <= 0)  return;
     if(ui->buyAmountLineEdit->text().toDouble() <= 0)  return;
 

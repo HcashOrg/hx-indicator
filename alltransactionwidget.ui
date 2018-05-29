@@ -346,7 +346,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
+    <string notr="true">QLabel{color: rgb(192, 196, 212);}</string>
    </property>
    <property name="text">
     <string/>
