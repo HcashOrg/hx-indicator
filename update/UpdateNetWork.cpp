@@ -92,7 +92,7 @@ void UpdateNetWork::startDownLoad()
         qDebug()<<"wrong open file!"<<_p->downloadList.front().filePath;
         return;
     }
-
+    qDebug()<<_p->downloadList.front().filePath <<"url --"<< _p->downloadList.front().url;
     QNetworkReply *reply = _p->networkManager->get(QNetworkRequest(_p->downloadList.front().url));
     connect(reply,&QNetworkReply::readyRead,this,&UpdateNetWork::DownLoadReadSlots);
     connect(reply,&QNetworkReply::downloadProgress,this,&UpdateNetWork::DownLoadProgressSlots);

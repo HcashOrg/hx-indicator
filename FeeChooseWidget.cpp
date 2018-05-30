@@ -204,7 +204,7 @@ void FeeChooseWidget::refreshUI()
     }
 
     //ui->label_fee->setText(QString::number(_p->coinNumber) + " " + _p->feeType);
-    ui->label_fee->setText(QString::number(_p->feeNumber)+" LNK");
+    ui->label_fee->setText(QString::number(_p->feeNumber,'f',5)+" LNK");
 
     updatePoundageID();
 }
