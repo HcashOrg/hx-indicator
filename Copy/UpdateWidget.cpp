@@ -15,6 +15,7 @@ static const QString OKBTN_STYLE =  "QToolButton{font: 14px \"Microsoft YaHei UI
 static const QString TEMP_FOLDER_NAME = "temp";
 static const QString PACKAGE_UN = "blocklink";
 static const QString PACKAGE_NAME = "blocklink.zip";
+static const QString MAINEXE_NAME = "LNKWallet.exe";
 
 UpdateWidget::UpdateWidget(QWidget *parent) :
     QWidget(parent),
@@ -44,9 +45,9 @@ void UpdateWidget::startMove()
     DataUtil::deleteDir(tempdir + QDir::separator() + PACKAGE_UN);
 
     //复制临时文件到主目录
-    DataUtil::copyDir(QCoreApplication::applicationDirPath()+QDir::separator()+"temp",QCoreApplication::applicationDirPath());
+    DataUtil::copyDir(QCoreApplication::applicationDirPath()+QDir::separator()+TEMP_FOLDER_NAME,QCoreApplication::applicationDirPath());
     //删除临时文件
-    DataUtil::deleteDir(QCoreApplication::applicationDirPath()+QDir::separator()+"temp");
+    DataUtil::deleteDir(QCoreApplication::applicationDirPath()+QDir::separator()+TEMP_FOLDER_NAME);
     //更新结束
     copyFinish();
 }
@@ -62,7 +63,7 @@ void UpdateWidget::restartWallet()
 {
     //启动外部复制程序
     QProcess *copproc = new QProcess();
-    copproc->start("LNKWallet.exe");
+    copproc->start(MAINEXE_NAME);
     close();
 }
 

@@ -78,7 +78,7 @@ bool UpdateProgressUtil::ParseXmlDoc(const QDomDocument &doc, VersionInfoPtr &da
         if (n.isElement())  //如果节点是元素
         {
             QDomElement e = n.toElement();  //将其转换为元素
-            if( e.tagName() == "Files")
+            if( e.tagName() == "MainFiles")
             {
                 QDomNodeList list = e.childNodes(); //获得元素e的所有子节点的列表
 
@@ -96,6 +96,26 @@ bool UpdateProgressUtil::ParseXmlDoc(const QDomDocument &doc, VersionInfoPtr &da
                     ver->checksum = MD5Node.toElement().text();
                     ver->signature = signatureNode.toElement().text();
                     data->file_data.push_back(ver);
+                }
+            }
+            else if(e.tagName() == "UpdateFiles")
+            {
+                QDomNodeList list = e.childNodes(); //获得元素e的所有子节点的列表
+
+                for(int i=0; i<list.count(); i++) //遍历该列表
+                {
+                    QDomNode node = list.at(i);
+                    QDomNode nameNode = node.childNodes().at(0);
+                    QDomNode latestVerNode = node.childNodes().at(1);
+                    QDomNode MD5Node = node.childNodes().at(2);
+                    QDomNode signatureNode = node.childNodes().at(3);
+
+                    std::shared_ptr<VersionData>  ver = std::make_shared<VersionData>();
+                    ver->url = nameNode.toElement().text();
+                    ver->version = latestVerNode.toElement().text();
+                    ver->checksum = MD5Node.toElement().text();
+                    ver->signature = signatureNode.toElement().text();
+                    data->update_data.push_back(ver);
                 }
             }
             else if(e.tagName() == "Version")
@@ -128,10 +148,30 @@ bool UpdateProgressUtil::MakeUpVersionData(VersionInfoPtr &data,const QString &h
 }
 
 bool UpdateProgressUtil::ExtractUpdateData(const VersionInfoPtr &oldVersion, const VersionInfoPtr &newVersion,
-                                           const QString &dirPath,QList<DownLoadData> &data)
+                                           const QString &updateDir,const QString &mainDir,QList<DownLoadData> &data)
 {
-    data.clear();
+    data.clear();    
+
     if(!oldVersion || !newVersion) return false;
+    //更新器文件
+    for(auto newit = newVersion->update_data.begin();newit != newVersion->update_data.end();++newit)
+    {
+        auto oldit = std::find_if(oldVersion->update_data.begin(),oldVersion->update_data.end(),[newit](const std::shared_ptr<VersionData> &ve){
+            return (*newit)->url == ve->url;
+        });
+        if(oldit == oldVersion->update_data.end() || (*oldit)->version != (*newit)->version)
+        {
+            DownLoadData down;
+            down.filePath = updateDir + QDir::separator()+(*newit)->url;
+            down.fileName = (*newit)->url;
+            down.version = (*newit)->version;
+            down.url = newVersion->serverPath + "/"+(*newit)->url;
+            down.checksum = (*newit)->checksum;
+            down.signature = (*newit)->signature;
+            data.append(down);
+        }
+    }
+    //主程序文件
     for(auto newit = newVersion->file_data.begin();newit != newVersion->file_data.end();++newit)
     {
         auto oldit = std::find_if(oldVersion->file_data.begin(),oldVersion->file_data.end(),[newit](const std::shared_ptr<VersionData> &ve){
@@ -140,7 +180,7 @@ bool UpdateProgressUtil::ExtractUpdateData(const VersionInfoPtr &oldVersion, con
         if(oldit == oldVersion->file_data.end() || (*oldit)->version != (*newit)->version)
         {
             DownLoadData down;
-            down.filePath = dirPath + QDir::separator()+(*newit)->url;
+            down.filePath = mainDir + QDir::separator()+(*newit)->url;
             down.fileName = (*newit)->url;
             down.version = (*newit)->version;
             down.url = newVersion->serverPath + "/"+(*newit)->url;

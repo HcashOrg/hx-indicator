@@ -15,7 +15,6 @@
 #include "UpdateNetWork.h"
 
 static const QString UPDATE_DOC_NAME = "blocklink_wallet_upgrade.xml";
-static const QString UPDATE_EXE_NAME = "Copy.exe";
 static const QString UPDATE_DIR_NAME = "temp";
 
 class UpdateProcess::DataPrivate
@@ -131,24 +130,11 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
         return;//说明出错，没必要进行了
     }
 
-    //检查更新器是否需要更新
-    if(UpdateProgressUtil::AFTER == UpdateProgressUtil::CompareVersion(_p->localVersionData->updateVersion,_p->serverVersionData->updateVersion))
-    {
-        //更新更新器
-        DownLoadData down;
-        down.filePath = QCoreApplication::applicationDirPath() + QDir::separator()+UPDATE_EXE_NAME;
-        down.fileName = UPDATE_EXE_NAME;
-        down.version = _p->serverVersionData->updateVersion;
-        down.url = _p->serverVersionData->serverPath + "/"+UPDATE_EXE_NAME;
-
-        //删除文件
-        QFile::remove(down.filePath);
-        qDebug()<<"down copy exe";
-        _p->updateNetwork->DownLoadFile(down);
-    }
-
     //对比分析出需要下载的版本信息及目录
-    UpdateProgressUtil::ExtractUpdateData(_p->localVersionData,_p->serverVersionData,_p->downloadPath,_p->updateList);
+    UpdateProgressUtil::ExtractUpdateData(_p->localVersionData,_p->serverVersionData,
+                                          QCoreApplication::applicationDirPath(),_p->downloadPath,
+                                          _p->updateList);
+    qDebug()<<"download size---"<<_p->updateList.size();
     //发送版本信息
     emit NewstVersionSignal(_p->updateList.empty()?"":_p->serverVersionData->version);
 }
