@@ -77,11 +77,15 @@ void UpdateNetWork::startDownLoad()
         _p->currentFile = nullptr;
     }
 
+    //创建目录
     QDir dir(QFileInfo(_p->downloadList.front().filePath).path());
     if(!dir.exists())
     {
         dir.mkpath(QFileInfo(_p->downloadList.front().filePath).path());
     }
+    //删除原文件
+    QFile::remove(_p->downloadList.front().filePath);
+
     _p->currentFile = new QFile(_p->downloadList.front().filePath);
     if(!_p->currentFile->open(QIODevice::WriteOnly|QIODevice::Append))
     {

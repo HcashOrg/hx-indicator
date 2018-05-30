@@ -3,6 +3,8 @@
 #include <QDir>
 #include <QFile>
 #include <QDebug>
+#include "quazip/quazip/quazip.h"
+#include "quazip/quazip/quazipfile.h"
 
 DataUtil::DataUtil()
 {
@@ -11,6 +13,7 @@ DataUtil::DataUtil()
 
 bool DataUtil::deleteDir(const QString &dirName)
 {
+    qDebug()<<dirName;
     QDir directory(dirName);
     if (!directory.exists())
     {
@@ -99,4 +102,43 @@ bool DataUtil::copyDir(const QString &source, const QString &destination, bool o
     }
 
     return !error;
+}
+
+bool DataUtil::unCompress(const QString &in_file_path, const QString &out_file_path)
+{
+    QuaZip archive(in_file_path);
+        if (!archive.open(QuaZip::mdUnzip))
+            return false;
+
+        QString path = out_file_path;
+        if (!path.endsWith("/") && !out_file_path.endsWith("\\"))
+            path += "/";
+
+        QDir dir(out_file_path);
+        if (!dir.exists())
+            dir.mkpath(out_file_path);
+
+        for( bool f = archive.goToFirstFile(); f; f = archive.goToNextFile() )
+        {
+            QString filePath = archive.getCurrentFileName();
+            QuaZipFile zFile(archive.getZipName(), filePath);
+            zFile.open(QIODevice::ReadOnly );
+            QByteArray ba = zFile.readAll();
+            zFile.close();
+
+            if (filePath.endsWith("/"))
+            {
+                dir.mkpath(filePath);
+            }
+            else
+            {
+                QFile dstFile(path + filePath);
+                if (!dstFile.open(QIODevice::WriteOnly))
+                    return false;
+                dstFile.write(ba);
+                dstFile.close();
+            }
+        }
+
+        return true;
 }
