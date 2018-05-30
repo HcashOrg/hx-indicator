@@ -365,20 +365,6 @@ TwoAddresses UBChain::getAddress(QString name)
 
 
 
-QString UBChain::addressToName(QString address)
-{
-    foreach (QString key, addressMap.keys())
-    {
-        if( addressMap.value(key).ownerAddress == address)
-        {
-            return key;
-        }
-    }
-
-    return address;
-}
-
-
 void UBChain::getSystemEnvironmentPath()
 {
     QStringList environment = QProcess::systemEnvironment();
@@ -868,6 +854,21 @@ bool UBChain::isMyAddress(QString _address)
     }
 
     return result;
+}
+
+QString UBChain::addressToName(QString _address)
+{
+    QStringList keys = accountInfoMap.keys();
+
+    foreach (QString key, keys)
+    {
+        if( accountInfoMap.value(key).address == _address)
+        {
+            return key;
+        }
+    }
+
+    return _address;
 }
 
 void UBChain::parseMultiSigTransactions(QString result, QString multiSigAddress)

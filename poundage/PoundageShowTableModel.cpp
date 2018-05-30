@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QFont>
 #include "PoundageDataUtil.h"
+#include "wallet.h"
 
 Q_DECLARE_METATYPE(std::shared_ptr<PoundageUnit>)
 
@@ -49,7 +50,7 @@ QVariant PoundageShowTableModel::headerData(int section, Qt::Orientation orienta
                 case 1:
                     return tr("交易对象");
                 case 2:
-                    return tr("发布者地址");
+                    return tr("Owner");
                 case 3:
                     return tr("发布者\ ");
                 case 4:
@@ -118,7 +119,7 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
             }
             else if(index.column() == 2)
             {
-                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->ownerAdress;
+                return UBChain::getInstance()->addressToName(_p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->ownerAdress);
             }
             else if(index.column() == 3)
             {

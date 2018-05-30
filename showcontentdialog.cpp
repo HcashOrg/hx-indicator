@@ -12,7 +12,7 @@ ShowContentDialog::ShowContentDialog(QString text, QWidget *parent) :
 
 
     setStyleSheet("#ShowContentDialog{background-color:rgb(50,60,70);border:1px groove rgb(70,80,90);}");
-    ui->textLabel->setStyleSheet("background-color:rgb(50,60,70);color:rgb(192,196,212);");
+    ui->textLabel->setStyleSheet("QLabel{background-color:rgb(50,60,70);color:rgb(192,196,212);}");
     ui->textLabel->setText(text);
     ui->textLabel->adjustSize();
 

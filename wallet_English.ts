@@ -1029,40 +1029,40 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="88"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="98"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="311"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="90"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="100"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="318"/>
         <source>%1 address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="89"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="313"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="315"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="91"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="320"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="322"/>
         <source>please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="99"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="101"/>
         <source>please input withdraw address...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="119"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="131"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="121"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="133"/>
         <source>Can not find tunnel address!</source>
         <oldsource>Cannot find tunnelAddress!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="149"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="161"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="151"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="163"/>
         <source>Can not find multi-address!</source>
         <oldsource>Cannot find multiAddress!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="211"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="213"/>
         <source>max:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1414,12 +1414,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">address</translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.cpp" line="142"/>
+        <location filename="transfer/ContactChooseWidget.cpp" line="150"/>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/ContactChooseWidget.cpp" line="209"/>
+        <location filename="transfer/ContactChooseWidget.cpp" line="217"/>
         <source>Contact file doesn&apos;t exist or damaged!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1478,12 +1478,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">state</translation>
     </message>
     <message>
-        <location filename="contact/ContactInfoHistoryWidget.cpp" line="111"/>
+        <location filename="contact/ContactInfoHistoryWidget.cpp" line="141"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactInfoHistoryWidget.cpp" line="134"/>
+        <location filename="contact/ContactInfoHistoryWidget.cpp" line="164"/>
         <source>ALL</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1701,22 +1701,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="136"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="98"/>
         <source>You need to pay the fee for contract execution.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="153"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="115"/>
         <source>Please put on at least 1 sell-order!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="168"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="130"/>
         <source>Execute the function of the contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="211"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="173"/>
         <source>withdraw</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2214,12 +2214,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Password</translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.cpp" line="88"/>
+        <location filename="exchange/depositexchangecontractdialog.cpp" line="89"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.cpp" line="105"/>
+        <location filename="exchange/depositexchangecontractdialog.cpp" line="106"/>
         <source>Transaction of deposit has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3896,78 +3896,78 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">OrderPair</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="113"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="118"/>
         <source>cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="114"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="119"/>
         <source>add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="145"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="150"/>
         <source>Sell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="146"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="151"/>
         <source>Buy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="147"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="152"/>
         <source>Price</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="151"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="156"/>
         <source>Sell / %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="152"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="157"/>
         <source>Buy / %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="153"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="158"/>
         <source>Price (%1/%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="168"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="225"/>
         <source>Create exchange contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="243"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="300"/>
         <source>Sure to cancel this order? You need to pay the fee for contract execution.</source>
         <oldsource>Sure to withdraw this order? You need to pay the fee for contract execution.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="291"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="359"/>
         <source>You need to pay the fee for contract execution.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="342"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="421"/>
         <source>register contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="382"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="461"/>
         <source>You don&apos;t have an exchange contract at the moment. Will you create it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="401"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="477"/>
         <source>Can not find file contracts/blocklink_exchange.glua.gpc!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="491"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="570"/>
         <source>Sure to cancel all orders of %1-to-%2 ?</source>
         <oldsource>Sure to withdraw all orders of %1-to-%2 ?</oldsource>
         <translation type="unfinished"></translation>
@@ -4315,39 +4315,43 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>PoundageShowTableModel</name>
     <message>
-        <location filename="poundage/PoundageShowTableModel.cpp" line="48"/>
+        <location filename="poundage/PoundageShowTableModel.cpp" line="49"/>
         <source>承兑单id</source>
         <oldsource>发布时间</oldsource>
         <translation type="unfinished">Time</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowTableModel.cpp" line="50"/>
+        <location filename="poundage/PoundageShowTableModel.cpp" line="51"/>
         <source>交易对象</source>
         <translation type="unfinished">AcceptCoin</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowTableModel.cpp" line="52"/>
         <source>发布者地址</source>
-        <translation type="unfinished">OwnerAddress</translation>
+        <translation type="obsolete">OwnerAddress</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowTableModel.cpp" line="54"/>
+        <location filename="poundage/PoundageShowTableModel.cpp" line="53"/>
+        <source>Owner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="poundage/PoundageShowTableModel.cpp" line="55"/>
         <source>发布者 </source>
         <translation type="unfinished">Owner</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowTableModel.cpp" line="56"/>
+        <location filename="poundage/PoundageShowTableModel.cpp" line="57"/>
         <source>汇率</source>
         <translation type="unfinished">Rate</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowTableModel.cpp" line="58"/>
+        <location filename="poundage/PoundageShowTableModel.cpp" line="59"/>
         <source>可用金额(LNK)</source>
         <oldsource>余额(LNK)</oldsource>
         <translation type="unfinished">Balance(LNK)</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowTableModel.cpp" line="60"/>
+        <location filename="poundage/PoundageShowTableModel.cpp" line="61"/>
         <source>总额</source>
         <translation type="unfinished">Total</translation>
     </message>
@@ -4779,17 +4783,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="141"/>
+        <location filename="exchange/selldialog.cpp" line="142"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="153"/>
+        <location filename="exchange/selldialog.cpp" line="154"/>
         <source>Assets can not be the same!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="186"/>
+        <location filename="exchange/selldialog.cpp" line="187"/>
         <source>Max: %1 %2</source>
         <oldsource>Total %1 %2</oldsource>
         <translation type="unfinished"></translation>
@@ -5630,14 +5634,14 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="504"/>
+        <location filename="transfer/transferpage.cpp" line="507"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="512"/>
-        <source>Max: 0</source>
+        <location filename="transfer/transferpage.cpp" line="516"/>
+        <source>cannot find asset!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5948,17 +5952,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="obsolete">Fee</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="88"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="89"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="104"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="105"/>
         <source>Transaction of withdraw from the exchange contract has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="164"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="165"/>
         <source>Max: %1 %2</source>
         <oldsource>total %1 %2</oldsource>
         <translation type="unfinished"></translation>
@@ -6174,7 +6178,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="obsolete">Fee:</translation>
     </message>
     <message>
-        <location filename="exchange/WithdrawOrderDialog.cpp" line="78"/>
+        <location filename="exchange/WithdrawOrderDialog.cpp" line="83"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>

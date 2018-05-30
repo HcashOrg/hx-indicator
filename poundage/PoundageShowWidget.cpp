@@ -11,6 +11,7 @@
 #include "GeneralComboBoxDelegate.h"
 #include "PageScrollWidget.h"
 #include "wallet.h"
+#include "showcontentdialog.h"
 
 Q_DECLARE_METATYPE(std::shared_ptr<PoundageUnit>)
 
@@ -97,7 +98,7 @@ void PoundageShowWidget::InitWidget()
 
     ui->tableView->setModel(_p->tableModel);
     ui->tableView->hideColumn(3);
-    ui->tableView->hideColumn(2);
+//    ui->tableView->hideColumn(2);
     ui->tableView->hideColumn(6);
 
     ui->stackedWidget_pageBar->addWidget(_p->pageWidget);
@@ -187,4 +188,21 @@ void PoundageShowWidget::paintEvent(QPaintEvent *event)
 
     painter.restore();
     QWidget::paintEvent(event);
+}
+
+void PoundageShowWidget::on_tableView_pressed(const QModelIndex &index)
+{
+    if( index.column() == 2)
+    {
+        ShowContentDialog showContentDialog( index.data(Qt::DisplayRole).toString(),this);
+
+        int x = ui->tableView->columnViewportPosition(index.column()) + ui->tableView->columnWidth(index.column()) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->tableView->rowViewportPosition(index.row()) - 10 + ui->tableView->horizontalHeader()->height();
+
+        showContentDialog.move( ui->tableView->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
 }

@@ -309,7 +309,6 @@ public:
     QMap<QString,double> delegateSalaryMap;
 
     TwoAddresses getAddress(QString);
-    QString addressToName(QString address);
 
     void deleteAccountInConfigFile(QString);
     void updateJsonDataMap(QString id, QString data);
@@ -372,6 +371,7 @@ public:
     void fetchAccountBalances(QString _accountName);
     void fetchMyContracts();
     bool    isMyAddress(QString _address);
+    QString addressToName(QString _address);
     QString getAccountBalance(QString _accountName, QString _assetSymbol);
     QStringList getRegisteredAccounts();
     QStringList getUnregisteredAccounts();
