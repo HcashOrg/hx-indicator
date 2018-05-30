@@ -71,7 +71,7 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_updatetip">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>220</x>
      <y>310</y>
      <width>241</width>
      <height>21</height>
@@ -100,7 +100,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>340</y>
+     <y>370</y>
      <width>300</width>
      <height>20</height>
     </rect>
@@ -128,8 +128,8 @@ color: rgb(198, 202, 212);</string>
   <widget class="QToolButton" name="toolButton_update">
    <property name="geometry">
     <rect>
-     <x>292</x>
-     <y>370</y>
+     <x>290</x>
+     <y>340</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -145,7 +145,7 @@ color: rgb(198, 202, 212);</string>
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>310</y>
+     <y>340</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -161,7 +161,7 @@ color: rgb(198, 202, 212);</string>
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>370</y>
+     <y>340</y>
      <width>96</width>
      <height>30</height>
     </rect>

@@ -28,7 +28,7 @@ private:
     void InitWidget();
     void InitStyle();
 
-    void showState(bool check,bool update,bool restart,bool label_tip);
+    void showButtonState(int type);//0--检查升级  1--升级 2--重启
 protected:
     void paintEvent(QPaintEvent *event);
 private:

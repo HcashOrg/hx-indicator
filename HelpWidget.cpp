@@ -36,9 +36,10 @@ HelpWidget::~HelpWidget()
 void HelpWidget::CheckUpdateSlot()
 {
     UBChain::getInstance()->SetUpdateNeeded(false);
+
     ui->label_updatetip->setText(tr("start check!"));
-    showState(true,false,false,true);
-    ui->toolButton_checkUpdate->setEnabled(false);
+    ui->label_updatetip->setVisible(true);
+    showButtonState(-1);
     _p->updateProcess->checkUpdate();
 }
 
@@ -48,38 +49,36 @@ void HelpWidget::CheckResultSlot(const QString &version)
     {
         //没有更新
         ui->label_updatetip->setText(tr("no new version!"));
-        showState(true,false,false,true);
+
+        showButtonState(0);
     }
     else
     {
         ui->label_updatetip->setText(tr("new version found! " )+ version);
-        showState(true,true,false,true);
+
+        showButtonState(1);
     }
-    ui->toolButton_checkUpdate->setEnabled(true);
 }
 
 void HelpWidget::UpdateSlot()
 {
-    ui->toolButton_checkUpdate->setEnabled(false);
     ui->label_updatetip->setText(tr("updating,please wait! " ));
-    showState(true,false,false,true);
+
+    showButtonState(-1);
     _p->updateProcess->startUpdate();
 }
 
 void HelpWidget::UpdateFinishSlot()
 {
-    ui->toolButton_checkUpdate->setEnabled(true);
     ui->label_updatetip->setText(tr("update finish,restart to take effect! " ));
-    showState(true,false,true,true);
+    showButtonState(2);
     UBChain::getInstance()->SetUpdateNeeded(true);
 }
 
 void HelpWidget::UpdateWrongSlot()
 {
-    ui->toolButton_checkUpdate->setEnabled(true);
     ui->label_updatetip->setText(tr("update wrong! " ));
-
-    showState(true,false,false,true);
+    showButtonState(0);
 
     UBChain::getInstance()->SetUpdateNeeded(false);
 }
@@ -92,7 +91,8 @@ void HelpWidget::RestartSlot()
 void HelpWidget::InitWidget()
 {
     InitStyle();
-    showState(true,false,false,false);
+    showButtonState(0);
+    ui->label_updatetip->setVisible(false);
 
 #ifdef WIN64
     ui->label_version->setText(QString("windows 64bit v") + WALLET_VERSION);
@@ -122,12 +122,11 @@ void HelpWidget::InitStyle()
 
 }
 
-void HelpWidget::showState(bool check, bool update, bool restart, bool label_tip)
+void HelpWidget::showButtonState(int type)
 {
-    ui->toolButton_checkUpdate->setVisible(check);
-    ui->toolButton_update->setVisible(update);
-    ui->toolButton_restart->setVisible(restart);
-    ui->label_updatetip->setVisible(label_tip);
+    ui->toolButton_checkUpdate->setVisible(0 == type);
+    ui->toolButton_update->setVisible(1 == type);
+    ui->toolButton_restart->setVisible(2 == type);
 }
 
 void HelpWidget::paintEvent(QPaintEvent *event)
