@@ -143,6 +143,7 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
 
         //删除文件
         QFile::remove(down.filePath);
+        qDebug()<<"down copy exe";
         _p->updateNetwork->DownLoadFile(down);
     }
 
