@@ -26,3 +26,11 @@ QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
 
 RESOURCES += \
     resource.qrc
+
+INCLUDEPATH += $$PWD/quazip/quazip
+
+
+win32{
+
+    LIBS += $$PWD/lib/quazip.lib
+}

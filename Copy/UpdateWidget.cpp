@@ -5,11 +5,16 @@
 #include <QTimer>
 #include <QString>
 #include <QProcess>
+#include <QDebug>
 
 #include "DataUtil.h"
 
 static const QString OKBTN_STYLE =  "QToolButton{font: 14px \"Microsoft YaHei UI Light\";background-color: rgb(84,116,235);border:0px solid white;border-radius:15px;color: white;}"  \
                         "QToolButton:hover{background-color:rgb(0,210,255);}" ;
+
+static const QString TEMP_FOLDER_NAME = "temp";
+static const QString PACKAGE_UN = "blocklink";
+static const QString PACKAGE_NAME = "blocklink.zip";
 
 UpdateWidget::UpdateWidget(QWidget *parent) :
     QWidget(parent),
@@ -26,11 +31,22 @@ UpdateWidget::~UpdateWidget()
 
 void UpdateWidget::startMove()
 {
+    //解压文件
+    QString tempdir = QCoreApplication::applicationDirPath()+QDir::separator()+TEMP_FOLDER_NAME;
+    QString appdir = QCoreApplication::applicationDirPath();
+    QString compressPath = tempdir +QDir::separator()+ PACKAGE_NAME;
+    DataUtil::unCompress( compressPath,tempdir);
+    //复制文件到temp目录
+    DataUtil::copyDir(tempdir+QDir::separator()+PACKAGE_UN,QCoreApplication::applicationDirPath());
+    //删除压缩文件、解压目录
+    qDebug()<<compressPath;
+    QFile::remove(compressPath);
+    DataUtil::deleteDir(tempdir + QDir::separator() + PACKAGE_UN);
+
     //复制临时文件到主目录
     DataUtil::copyDir(QCoreApplication::applicationDirPath()+QDir::separator()+"temp",QCoreApplication::applicationDirPath());
     //删除临时文件
     DataUtil::deleteDir(QCoreApplication::applicationDirPath()+QDir::separator()+"temp");
-
     //更新结束
     copyFinish();
 }
