@@ -89,7 +89,7 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
         {
             UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
 
             WithdrawOrderDialog withdrawOrderDialog;
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
@@ -137,7 +137,7 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
             QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
 
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Create exchange contract failed: " + errorMessage );
+            commonDialog.setText( "openForUsers failed: " + errorMessage );
             commonDialog.pop();
         }
 

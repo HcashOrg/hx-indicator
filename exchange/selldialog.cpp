@@ -107,7 +107,7 @@ void SellDialog::jsonDataUpdated(QString id)
         {
             UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
             stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
 
             feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
 
