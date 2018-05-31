@@ -352,7 +352,7 @@ void MainPage::jsonDataUpdated(QString id)
             QString address = jsonObject.take("result").toString();
             UBChain::getInstance()->addTrackAddress(address);
 
-            QTimer::singleShot(1000,this,&MainPage::init);
+            QTimer::singleShot(5000,this,&MainPage::init);
         }
         else if(result.startsWith("\"error\":"))
         {
@@ -371,6 +371,11 @@ void MainPage::jsonDataUpdated(QString id)
         }
 
         return;
+    }
+
+    if("id-refresh-account" == id)
+    {
+        QTimer::singleShot(5000,this,&MainPage::init);
     }
 
 }

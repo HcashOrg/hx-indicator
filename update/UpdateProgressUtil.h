@@ -58,7 +58,7 @@ public:
 
     //版本对比，提取需要更新的版本
     static bool ExtractUpdateData(const VersionInfoPtr &oldVersion,const VersionInfoPtr &newVersion,
-                                  const QString &updateDir,const QString &mainDir,QList<DownLoadData> &data);
+                                  const QString &updateDir,const QString &dirPath,QList<DownLoadData> &data);
 public:
     static bool deleteDir(const QString &dirName);
     static bool copyDir(const QString &source, const QString &destination, bool override = true);

@@ -16,6 +16,7 @@
 
 static const QString UPDATE_DOC_NAME = "blocklink_wallet_upgrade.xml";
 static const QString UPDATE_DIR_NAME = "temp";
+static const QString COPY_DIR_NAME = "copy";
 
 class UpdateProcess::DataPrivate
 {
@@ -132,7 +133,7 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
 
     //对比分析出需要下载的版本信息及目录
     UpdateProgressUtil::ExtractUpdateData(_p->localVersionData,_p->serverVersionData,
-                                          QCoreApplication::applicationDirPath(),_p->downloadPath,
+                                          _p->downloadPath+QDir::separator()+COPY_DIR_NAME,_p->downloadPath,
                                           _p->updateList);
     qDebug()<<"download size---"<<_p->updateList.size();
     //发送版本信息
@@ -142,10 +143,13 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
 void UpdateProcess::DownloadEmptySlot()
 {
     //下载完毕，发出更新完毕的信号
-    if(!_p->isWrongHappened)
-    {
-        emit updateFinish();
-    }
+    if(_p->isWrongHappened) return;
+    UpdateProgressUtil::copyDir(_p->downloadPath+QDir::separator()+COPY_DIR_NAME,
+                                QCoreApplication::applicationDirPath());
+    UpdateProgressUtil::deleteDir(_p->downloadPath+QDir::separator()+COPY_DIR_NAME);
+
+    emit updateFinish();
+
 }
 
 void UpdateProcess::DownloadWrongSlot(const QString &fileName)

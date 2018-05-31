@@ -94,8 +94,8 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 	
     updateAmountSlots();
 
-    feeWidget=new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),
-                                  UBChain::getInstance()->feeType);
+    feeWidget=new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),UBChain::getInstance()->feeType,
+                                  ui->accountComboBox->currentText());
     ui->stackedWidget->addWidget(feeWidget);
     ui->stackedWidget->setCurrentWidget(feeWidget);
 
@@ -114,7 +114,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     connect(ui->assetComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(assetComboBox_currentIndexChanged(int)));
     connect(ui->sendtoLineEdit,SIGNAL(textChanged(const QString &)),this,SLOT(sendtoLineEdit_textChanged(const QString &)));
     connect(ui->memoTextEdit,SIGNAL(textChanged()),this,SLOT(memoTextEdit_textChanged()));
-
+    connect(ui->accountComboBox,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),std::bind(&FeeChooseWidget::updateAccountNameSlots,feeWidget,std::placeholders::_1,true));
     //隐藏备注
     ui->memoLabel->setVisible(false);
     ui->memoTextEdit->setVisible(false);

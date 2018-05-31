@@ -232,7 +232,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
 
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Register exchange contract failed: " + result );
+            commonDialog.setText( "Register exchange contract failed: " + errorMessage );
             commonDialog.pop();
         }
 
@@ -297,6 +297,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION)
                                                + " " + ASSET_NAME);
+            withdrawOrderDialog.setAccountName(ui->accountComboBox->currentText());
             withdrawOrderDialog.setText(tr("Sure to cancel this order? You need to pay the fee for contract execution."));
             if(withdrawOrderDialog.pop())
             {
@@ -356,6 +357,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION)
                                                + " " + ASSET_NAME);
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
+            withdrawOrderDialog.setAccountName(ui->accountComboBox->currentText());
             withdrawOrderDialog.setText(tr("You need to pay the fee for contract execution."));
             qDebug()<<totalAmount;
             if(withdrawOrderDialog.pop())
@@ -416,7 +418,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             qDebug()<<totalAmount;
 
             FeeChargeWidget *fee = new FeeChargeWidget( getBigNumberString(totalAmount, ASSET_PRECISION).toDouble(),UBChain::getInstance()->feeType,
-                                                         UBChain::getInstance()->mainFrame);
+                                                         ui->accountComboBox->currentText(),UBChain::getInstance()->mainFrame);
 
             fee->SetInfo(tr("register contract!"));
             connect(fee,&FeeChargeWidget::confirmSignal,[this,stepCount,fee](){

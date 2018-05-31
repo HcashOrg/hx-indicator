@@ -470,7 +470,7 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
 
     if(column == 4)
     {
-        ForecloseDialog forecloseDialog;
+        ForecloseDialog forecloseDialog(ui->accountComboBox->currentText());
         QString amountStr = forecloseDialog.pop();
 
         UBChain::getInstance()->postRPC( "id-foreclose_balance_from_miner",
@@ -491,7 +491,7 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
         QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
         FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
-                                                         UBChain::getInstance()->feeType,
+                                                         UBChain::getInstance()->feeType,ui->accountComboBox->currentText(),
                                                          UBChain::getInstance()->mainFrame);
         connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address,row](){
             UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance-" + this->ui->incomeTableWidget->item(row,0)->text(),

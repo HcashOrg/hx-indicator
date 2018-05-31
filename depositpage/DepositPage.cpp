@@ -168,7 +168,7 @@ void DepositPage::InitWidget()
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &DepositPage::jsonDataUpdated);
 
 
-    _p->fee = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.tunnelBindFee.toDouble(),"LNK",
+    _p->fee = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.tunnelBindFee.toDouble(),"LNK",_p->name,
                                                     UBChain::getInstance()->mainFrame);
     _p->fee->raise();
     connect(_p->fee,&FeeChargeWidget::cancelSignal,this,&DepositPage::close);

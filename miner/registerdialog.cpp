@@ -185,6 +185,10 @@ void RegisterDialog::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     ui->addressLabel->setText(UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address);
     ui->registerNameLineEdit->setText(ui->accountComboBox->currentText());
+    if(FeeChooseWidget *feeWidget = qobject_cast<FeeChooseWidget*>(ui->stackedWidget_fee->currentWidget()))
+    {
+        feeWidget->updateAccountNameSlots(ui->accountComboBox->currentText(),true);
+    }
 }
 
 void RegisterDialog::on_okBtn2_clicked()

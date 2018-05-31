@@ -28,7 +28,7 @@ public:
     void EnableDeleteAction(bool enable = false);
     void EnalbeDefaultAction(bool enable = false);
 signals:
-    void DeletePoundageSignal(const QString &orderID);
+    void DeletePoundageSignal(const QString &orderID,const QString &accountName);
     void SetDefaultPoundageSignal(const QString &orderID);
 private slots:
     void DeletePoundageSlots();

@@ -95,6 +95,7 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION)
                                                + " " + ASSET_NAME);
+            withdrawOrderDialog.setAccountName(accountName);
             withdrawOrderDialog.setText(tr("You need to pay the fee for contract execution."));
             if(withdrawOrderDialog.pop())
             {

@@ -5,7 +5,7 @@
 #include "commondialog.h"
 #include "FeeChooseWidget.h"
 
-ForecloseDialog::ForecloseDialog(QWidget *parent) :
+ForecloseDialog::ForecloseDialog(const QString &accountName,QWidget *parent) :
     QDialog(parent),
     yesOrNo(false),
     ui(new Ui::ForecloseDialog)
@@ -27,7 +27,7 @@ ForecloseDialog::ForecloseDialog(QWidget *parent) :
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
-                                                     UBChain::getInstance()->feeType));
+                                                     accountName,UBChain::getInstance()->feeType));
     ui->stackedWidget->setCurrentIndex(0);
 }
 

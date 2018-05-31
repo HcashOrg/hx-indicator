@@ -43,6 +43,7 @@ void BuyOrderWidget::init()
 void BuyOrderWidget::setAccount(QString _accountName)
 {
     accountName = _accountName;
+    feeChoose->updateAccountNameSlots(_accountName);
 }
 
 

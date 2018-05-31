@@ -131,6 +131,8 @@ void AccountManagerWidget::jsonDataUpdated(QString id)
     {
         QString  result = UBChain::getInstance()->jsonDataValue(id);
 
+        UBChain::getInstance()->postRPC( "id-refresh-account",
+                                         toJsonFormat( "id-refresh-account", QJsonArray()));
         qDebug()<<result;
     }
 }

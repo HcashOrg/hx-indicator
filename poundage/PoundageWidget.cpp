@@ -251,10 +251,10 @@ void PoundageWidget::jsonDataUpdated(QString id)
     }
 }
 
-void PoundageWidget::DeletePoundageSlots(const QString &orderID)
+void PoundageWidget::DeletePoundageSlots(const QString &orderID,const QString &accountName)
 {
     FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.poundageCancelFee.toDouble(),"LNK",
-                                                     UBChain::getInstance()->mainFrame);
+                                                     accountName,UBChain::getInstance()->mainFrame);
     feeCharge->setAttribute(Qt::WA_DeleteOnClose);
     feeCharge->show();
     connect(feeCharge,&FeeChargeWidget::confirmSignal,[orderID](){

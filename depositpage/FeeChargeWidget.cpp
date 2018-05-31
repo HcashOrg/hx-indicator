@@ -19,13 +19,13 @@ public:
     QString tip;
 };
 
-FeeChargeWidget::FeeChargeWidget(double feeNumber,const QString &feeType,QWidget *parent) :
+FeeChargeWidget::FeeChargeWidget(double feeNumber,const QString &feeType,const QString &accountName,QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FeeChargeWidget),
     _p(new FeeChargeWidgetPrivate())
 {
     ui->setupUi(this);
-    _p->chooseWidget = new FeeChooseWidget(feeNumber,feeType);
+    _p->chooseWidget = new FeeChooseWidget(feeNumber,feeType,accountName,this);
     ui->label_2->setText(_p->tip.arg(feeNumber).arg("LNK"));
     ui->label_char->setVisible(false);
     InitWidget();
