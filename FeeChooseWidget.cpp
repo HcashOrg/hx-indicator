@@ -9,8 +9,8 @@
 class FeeChooseWidget::DataPrivate
 {
 public:
-    DataPrivate(double number,const QString &type)
-        :feeNumber(number),feeType(type)
+    DataPrivate(double number,const QString &type,const QString &account)
+        :feeNumber(number),feeType(type),accountName(account)
     {
 
     }
@@ -25,12 +25,15 @@ public:
     QString poundageTip;
 
     std::mutex mutex;
+
+    QString accountName;
+    std::map<QString,double> accountAssets;
 };
 
-FeeChooseWidget::FeeChooseWidget(double feeNumber,const QString &coinType,QWidget *parent) :
+FeeChooseWidget::FeeChooseWidget(double feeNumber,const QString &coinType,const QString &accountName,QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FeeChooseWidget),
-    _p(new DataPrivate(feeNumber,coinType))
+    _p(new DataPrivate(feeNumber,coinType,accountName))
 {
     ui->setupUi(this);
     InitWidget();
@@ -147,6 +150,16 @@ void FeeChooseWidget::updatePoundageID()
 
 }
 
+void FeeChooseWidget::updateAccountNameSlots(const QString &accountName,bool refreshTip)
+{
+    _p->accountName = accountName;
+    ResetAccountBalance();
+    if(refreshTip)
+    {
+        checkAccountBalance();
+    }
+}
+
 void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundage)
 {
     if(poundage == nullptr)
@@ -205,8 +218,54 @@ void FeeChooseWidget::refreshUI()
 
     //ui->label_fee->setText(QString::number(_p->coinNumber) + " " + _p->feeType);
     ui->label_fee->setText(QString::number(_p->feeNumber,'f',5)+" LNK");
+    //检查账户余额
+    if(!checkAccountBalance())
+    {
+        //提示余额不足
+
+    }
 
     updatePoundageID();
+}
+
+bool FeeChooseWidget::checkAccountBalance() const
+{
+    if(_p->accountName.isEmpty())
+    {
+        return true;
+    }
+    //当前承兑单币种+金额  与 账户中对应资产比较
+    if(_p->coinNumber > _p->accountAssets[_p->feeType])
+    {
+        ui->tipLabel->setText(_p->feeType+tr(" less than ")+_p->coinNumber);
+        ui->tipLabel->setVisible(true);
+        return false;
+    }
+    else
+    {
+        ui->tipLabel->setVisible(false);
+        return true;
+    }
+
+}
+
+void FeeChooseWidget::ResetAccountBalance()
+{
+    _p->accountAssets.clear();
+
+    AccountInfo info = UBChain::getInstance()->accountInfoMap.value(_p->accountName);
+
+    AssetAmountMap map = info.assetAmountMap;
+    QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
+
+    for(int i = 0;i < keys.size();++i)
+    {
+        QString assetId = keys.at(i);
+        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
+
+        _p->accountAssets[assetInfo.symbol] = map.value(assetId).amount/pow(10.,assetInfo.precision);
+    }
+
 }
 
 void FeeChooseWidget::InitCoinType()
@@ -227,6 +286,7 @@ void FeeChooseWidget::InitWidget()
 {
     InitStyle();
     InitCoinType();
+    ResetAccountBalance();
 
     if(_p->feeType == "LNK")
     {

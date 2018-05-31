@@ -30,7 +30,7 @@ private slots:
     void jsonDataUpdated(QString id);
 
     //删除自己的承税单
-    void DeletePoundageSlots(const QString &orderID);
+    void DeletePoundageSlots(const QString &orderID,const QString &accountName);
 
     //设置默认承税单
     void SetDefaultPoundageSlots(const QString &orderID);

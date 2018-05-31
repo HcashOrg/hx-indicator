@@ -61,6 +61,11 @@ void WithdrawOrderDialog::setContractFee(double _fee)
     feeChoose->updateFeeNumberSlots(_fee);
 }
 
+void WithdrawOrderDialog::setAccountName(const QString &accountName)
+{
+    feeChoose->updateAccountNameSlots(accountName,true);
+}
+
 void WithdrawOrderDialog::updatePoundageID()
 {
     feeChoose->updatePoundageID();
