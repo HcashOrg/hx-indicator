@@ -3002,21 +3002,22 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="HelpWidget.ui" line="93"/>
         <source>暂无更新</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No updates</translation>
     </message>
     <message>
         <location filename="HelpWidget.ui" line="157"/>
         <source>检查更新</source>
-        <translation type="unfinished">Check for updates</translation>
+        <translation type="unfinished">Check updates</translation>
     </message>
     <message>
         <location filename="HelpWidget.ui" line="173"/>
         <source>立即重启</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Restart</translation>
     </message>
     <message>
         <location filename="HelpWidget.ui" line="122"/>
-        <source>Windows桌面版 v1.0.1</source>
+        <source>Windows桌面版 v</source>
+        <oldsource>Windows桌面版 v1.0.1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3025,34 +3026,39 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Update</translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="39"/>
-        <source>start check!</source>
-        <translation type="unfinished"></translation>
+        <location filename="HelpWidget.cpp" line="40"/>
+        <source>Checking updates...</source>
+        <translation type="unfinished">正在检查更新...</translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="50"/>
-        <source>no new version!</source>
-        <translation type="unfinished"></translation>
+        <location filename="HelpWidget.cpp" line="51"/>
+        <source>No new version!</source>
+        <oldsource>no new version!</oldsource>
+        <translation type="unfinished">已经是最新版本！</translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="55"/>
-        <source>new version found! </source>
-        <translation type="unfinished"></translation>
+        <location filename="HelpWidget.cpp" line="57"/>
+        <source>New version found! </source>
+        <oldsource>new version found! </oldsource>
+        <translation type="unfinished">发现新版本！</translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="64"/>
-        <source>updating,please wait! </source>
-        <translation type="unfinished"></translation>
+        <location filename="HelpWidget.cpp" line="65"/>
+        <source>Downloading... Please wait a moment! </source>
+        <oldsource>updating,please wait! </oldsource>
+        <translation type="unfinished">下载更新中... 稍等一会儿。</translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="72"/>
-        <source>update finish,restart to take effect! </source>
-        <translation type="unfinished"></translation>
+        <location filename="HelpWidget.cpp" line="73"/>
+        <source>Update finished. Restart and it will take effect! </source>
+        <oldsource>update finish,restart to take effect! </oldsource>
+        <translation type="unfinished">更新完成，重启生效！</translation>
     </message>
     <message>
         <location filename="HelpWidget.cpp" line="80"/>
-        <source>update wrong! </source>
-        <translation type="unfinished"></translation>
+        <source>Update error! </source>
+        <oldsource>update wrong! </oldsource>
+        <translation type="unfinished">更新出错！</translation>
     </message>
 </context>
 <context>
@@ -4364,12 +4370,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="136"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="137"/>
         <source>setDefault</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="137"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="138"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>

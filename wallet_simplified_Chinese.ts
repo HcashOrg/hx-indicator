@@ -2815,7 +2815,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="HelpWidget.ui" line="122"/>
-        <source>Windows桌面版 v1.0.1</source>
+        <source>Windows桌面版 v</source>
+        <oldsource>Windows桌面版 v1.0.1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2824,33 +2825,38 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="39"/>
-        <source>start check!</source>
+        <location filename="HelpWidget.cpp" line="40"/>
+        <source>Checking updates...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="50"/>
-        <source>no new version!</source>
+        <location filename="HelpWidget.cpp" line="51"/>
+        <source>No new version!</source>
+        <oldsource>no new version!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="55"/>
-        <source>new version found! </source>
+        <location filename="HelpWidget.cpp" line="57"/>
+        <source>New version found! </source>
+        <oldsource>new version found! </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="64"/>
-        <source>updating,please wait! </source>
+        <location filename="HelpWidget.cpp" line="65"/>
+        <source>Downloading... Please wait a moment! </source>
+        <oldsource>updating,please wait! </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HelpWidget.cpp" line="72"/>
-        <source>update finish,restart to take effect! </source>
+        <location filename="HelpWidget.cpp" line="73"/>
+        <source>Update finished. Restart and it will take effect! </source>
+        <oldsource>update finish,restart to take effect! </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="HelpWidget.cpp" line="80"/>
-        <source>update wrong! </source>
+        <source>Update error! </source>
+        <oldsource>update wrong! </oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4272,12 +4278,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="136"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="137"/>
         <source>setDefault</source>
         <translation type="unfinished">设为默认</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="137"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="138"/>
         <source>delete</source>
         <translation type="unfinished">删除</translation>
     </message>
