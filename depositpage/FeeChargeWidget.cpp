@@ -46,6 +46,11 @@ void FeeChargeWidget::SetInfo(const QString &info,bool vi)
     }
 }
 
+void FeeChargeWidget::updatePoundageID()
+{
+    _p->chooseWidget->updatePoundageID();
+}
+
 void FeeChargeWidget::ConfirmSlots()
 {
     emit confirmSignal();

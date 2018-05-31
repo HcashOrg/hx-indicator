@@ -37,7 +37,7 @@ void HelpWidget::CheckUpdateSlot()
 {
     UBChain::getInstance()->SetUpdateNeeded(false);
 
-    ui->label_updatetip->setText(tr("start check!"));
+    ui->label_updatetip->setText(tr("Checking updates..."));
     ui->label_updatetip->setVisible(true);
     showButtonState(-1);
     _p->updateProcess->checkUpdate();
@@ -48,13 +48,13 @@ void HelpWidget::CheckResultSlot(const QString &version)
     if(version.isEmpty())
     {
         //没有更新
-        ui->label_updatetip->setText(tr("no new version!"));
+        ui->label_updatetip->setText(tr("No new version!"));
 
         showButtonState(0);
     }
     else
     {
-        ui->label_updatetip->setText(tr("new version found! " )+ version);
+        ui->label_updatetip->setText(tr("New version found! " )+ version);
 
         showButtonState(1);
     }
@@ -62,7 +62,7 @@ void HelpWidget::CheckResultSlot(const QString &version)
 
 void HelpWidget::UpdateSlot()
 {
-    ui->label_updatetip->setText(tr("updating,please wait! " ));
+    ui->label_updatetip->setText(tr("Downloading... Please wait a moment! " ));
 
     showButtonState(-1);
     _p->updateProcess->startUpdate();
@@ -70,14 +70,14 @@ void HelpWidget::UpdateSlot()
 
 void HelpWidget::UpdateFinishSlot()
 {
-    ui->label_updatetip->setText(tr("update finish,restart to take effect! " ));
+    ui->label_updatetip->setText(tr("Update finished. Restart and it will take effect! " ));
     showButtonState(2);
     UBChain::getInstance()->SetUpdateNeeded(true);
 }
 
 void HelpWidget::UpdateWrongSlot()
 {
-    ui->label_updatetip->setText(tr("update wrong! " ));
+    ui->label_updatetip->setText(tr("Update error! " ));
     showButtonState(0);
 
     UBChain::getInstance()->SetUpdateNeeded(false);

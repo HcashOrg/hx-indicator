@@ -31,6 +31,6 @@ INCLUDEPATH += $$PWD/quazip/quazip
 
 
 win32{
-
+LIBS += -L$$PWD/leveldb -lleveldb
     LIBS += $$PWD/lib/quazip.lib
 }

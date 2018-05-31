@@ -232,7 +232,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
 
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Create exchange contract failed: " + errorMessage );
+            commonDialog.setText( "Register exchange contract failed: " + result );
             commonDialog.pop();
         }
 
@@ -291,7 +291,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         {
             UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
 
             WithdrawOrderDialog withdrawOrderDialog;
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
@@ -335,7 +335,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
 
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Create exchange contract failed: " + errorMessage );
+            commonDialog.setText( "Cancel sell-order failed: " + errorMessage );
             commonDialog.pop();
         }
 
@@ -351,7 +351,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         {
             UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
 
             WithdrawOrderDialog withdrawOrderDialog;
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION)
@@ -396,7 +396,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
 
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Create exchange contract failed: " + errorMessage );
+            commonDialog.setText( "Cancel sell-order pair failed: " + errorMessage );
             commonDialog.pop();
         }
 
@@ -413,7 +413,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
 
-            unsigned long long totalAmount = totalFee.baseAmount + totalFee.step * UBChain::getInstance()->contractFee;
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
 
             qDebug()<<totalAmount;
 
@@ -421,11 +421,13 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
                                                          ui->accountComboBox->currentText(),UBChain::getInstance()->mainFrame);
 
             fee->SetInfo(tr("register contract!"));
-            connect(fee,&FeeChargeWidget::confirmSignal,[this,stepCount](){
+            connect(fee,&FeeChargeWidget::confirmSignal,[this,stepCount,fee](){
                 QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
                 QFileInfo fileInfo(filePath);
                 if(fileInfo.exists())
                 {
+                    fee->updatePoundageID();
+                    qDebug()<<"set poundage";
                     UBChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
                                                                                            QJsonArray() << this->ui->accountComboBox->currentText() << UBChain::getInstance()->currentContractFee()
                                                                                            << stepCount  << filePath));
@@ -470,9 +472,6 @@ void MyExchangeContractPage::registerContract()
                                                                                                QJsonArray() << ui->accountComboBox->currentText() << filePath));
 
 
-//            UBChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
-//                                                                                   QJsonArray() << ui->accountComboBox->currentText() << UBChain::getInstance()->currentContractFee()
-//                                                                                   << "10000"  << filePath));
         }
         else
         {

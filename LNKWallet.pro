@@ -20,7 +20,7 @@ win32{
     LIBS += -lDbgHelp
     LIBS += User32.Lib
     LIBS += -limm32
-    LIBS += -L$$PWD/leveldb  -lShLwApi
+    LIBS += -lShLwApi
 }
 macx{
 #    ICON = ub.icns

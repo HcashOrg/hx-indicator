@@ -16,6 +16,7 @@ public:
     ~FeeChargeWidget();
 public:
     void SetInfo(const QString &info,bool vi = true);
+    void updatePoundageID();
 signals:
     void cancelSignal();
     void confirmSignal();
