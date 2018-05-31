@@ -232,7 +232,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
 
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Register exchange contract failed: " + result );
+            commonDialog.setText( "Register exchange contract failed: " + errorMessage );
             commonDialog.pop();
         }
 

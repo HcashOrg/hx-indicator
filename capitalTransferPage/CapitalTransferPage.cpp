@@ -277,21 +277,34 @@ void CapitalTransferPage::PostQueryTunnelMoney(const QString &symbol, const QStr
 
 void CapitalTransferPage::CreateTransaction()
 {
-    _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble(),'f',_p->precision);
-    if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
-    {
-        return;
-    }
-
     if(_p->tunnel_account_address.isEmpty() || _p->multisig_address.isEmpty() ||
-       _p->symbol.isEmpty() || _p->actualNumber.isEmpty() || _p->actualNumber.toDouble() < 1e-20)
+       _p->symbol.isEmpty() || _p->actualNumber.isEmpty())
     {
         _p->actualNumber = "0";
-//        ui->toolButton_confirm->setVisible(false);
+        ui->label_tip->setVisible(false);
         ui->toolButton_confirm->setEnabled(false);
         return;
     }
 
+    _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble(),'f',_p->precision);
+    double extraNumber = _p->asset_max_ammount.toDouble() - ui->lineEdit_number->text().toDouble();
+    if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
+    {
+        ui->label_tip->setText(tr("less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
+        ui->label_tip->setVisible(true);
+        ui->toolButton_confirm->setEnabled(false);
+        return;
+    }
+    else if(extraNumber < dust_number[_p->symbol])
+    {
+        ui->label_tip->setText(tr("balance less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
+        ui->label_tip->setVisible(true);
+        ui->toolButton_confirm->setEnabled(false);
+        return;
+    }
+
+
+    ui->label_tip->setVisible(false);
     if(ui->radioButton_deposit->isChecked())
     {//充值修改，发送充值指令问题
         UBChain::getInstance()->postRPC( "captial-createrawtransaction",
@@ -311,6 +324,7 @@ void CapitalTransferPage::InitWidget()
 {
     InitStyle();
 
+    ui->label_tip->setVisible(false);
     ui->label_fee->setText(_p->fee +_p->symbol);
 
 //    ui->toolButton_confirm->setVisible(false);
