@@ -94,8 +94,8 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 	
     updateAmountSlots();
 
-    feeWidget=new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),
-                                  name,UBChain::getInstance()->feeType);
+    feeWidget=new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),UBChain::getInstance()->feeType,
+                                  ui->accountComboBox->currentText());
     ui->stackedWidget->addWidget(feeWidget);
     ui->stackedWidget->setCurrentWidget(feeWidget);
 

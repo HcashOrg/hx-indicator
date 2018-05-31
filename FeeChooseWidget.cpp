@@ -36,6 +36,7 @@ FeeChooseWidget::FeeChooseWidget(double feeNumber,const QString &coinType,const 
     _p(new DataPrivate(feeNumber,coinType,accountName))
 {
     ui->setupUi(this);
+    qDebug()<<accountName;
     InitWidget();
 }
 
@@ -235,6 +236,7 @@ bool FeeChooseWidget::checkAccountBalance() const
         return true;
     }
     //当前承兑单币种+金额  与 账户中对应资产比较
+    qDebug() <<_p->coinNumber <<_p->feeType<< _p->accountAssets[_p->feeType] <<_p->accountAssets.size();
     if(_p->coinNumber > _p->accountAssets[_p->feeType])
     {
         int pre = 5;
@@ -248,13 +250,11 @@ bool FeeChooseWidget::checkAccountBalance() const
 
         ui->tipLabel->setText(_p->feeType+tr(" less than ")+QString::number(_p->coinNumber,'f',pre));
         ui->tipLabel->setVisible(true);
-        ui->line_7->setVisible(true);
         return false;
     }
     else
     {
         ui->tipLabel->setVisible(false);
-        ui->line_7->setVisible(false);
         return true;
     }
 
@@ -275,6 +275,7 @@ void FeeChooseWidget::ResetAccountBalance()
         AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
 
         _p->accountAssets[assetInfo.symbol] = map.value(assetId).amount/pow(10.,assetInfo.precision);
+        qDebug()<<assetInfo.symbol<<_p->accountAssets[assetInfo.symbol];
     }
 
 }
