@@ -317,6 +317,7 @@ void MinerPage::updateAccounts()
         ui->accountLabel->show();
 
         QStringList keys = UBChain::getInstance()->getRegisteredAccounts();
+        ui->accountComboBox->clear();
         ui->accountComboBox->addItems(keys);
 
         if(keys.contains(UBChain::getInstance()->currentAccount))

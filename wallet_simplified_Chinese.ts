@@ -2795,7 +2795,12 @@ add an account first</source>
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Microsoft YaHei UI Light&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;SimSun&apos;;&quot;&gt;Blocklink是一条支持跨链交易且拥有智能合约的高性能区块链。它支持和现有数字货币（比特币，莱特币等）之间的跨链转账，支持链上的多资产转移，也支持通过智能合约支撑各种复杂业务场景。内置去中心化交易所、去中心化POS矿池等系统。兑换流程公开透明，安全可靠。帮助用户快速实现跨链资产的转移和交易，打破链与链之间的流通壁垒。Blocklink致力于更好地进行区块链资源整合，促进价值传递。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Blocklink是一条支持跨链交易且拥有智能合约的高性能区块链。它支持和现有数字货币（比特币，莱特币等）之间的跨链转账，支持链上的多资产转移，也支持通过智能合约支撑各种复杂业务场景。内置去中心化交易所、去中心化POS矿池等系统。兑换流程公开透明，安全可靠。帮助用户快速实现跨链资产的转移和交易，打破链与链之间的流通壁垒。Blocklink致力于更好地进行区块链资源整合，促进价值传递。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <oldsource>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Microsoft YaHei UI Light&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:&apos;SimSun&apos;;&quot;&gt;Blocklink是一条支持跨链交易且拥有智能合约的高性能区块链。它支持和现有数字货币（比特币，莱特币等）之间的跨链转账，支持链上的多资产转移，也支持通过智能合约支撑各种复杂业务场景。内置去中心化交易所、去中心化POS矿池等系统。兑换流程公开透明，安全可靠。帮助用户快速实现跨链资产的转移和交易，打破链与链之间的流通壁垒。Blocklink致力于更好地进行区块链资源整合，促进价值传递。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2827,37 +2832,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="HelpWidget.cpp" line="40"/>
         <source>Checking updates...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">正在检查更新...</translation>
     </message>
     <message>
         <location filename="HelpWidget.cpp" line="51"/>
         <source>No new version!</source>
         <oldsource>no new version!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">已经是最新版本！</translation>
     </message>
     <message>
         <location filename="HelpWidget.cpp" line="57"/>
         <source>New version found! </source>
         <oldsource>new version found! </oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">发现新版本！</translation>
     </message>
     <message>
         <location filename="HelpWidget.cpp" line="65"/>
         <source>Downloading... Please wait a moment! </source>
         <oldsource>updating,please wait! </oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">下载更新中... 稍等一会儿。</translation>
     </message>
     <message>
         <location filename="HelpWidget.cpp" line="73"/>
         <source>Update finished. Restart and it will take effect! </source>
         <oldsource>update finish,restart to take effect! </oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">更新完成，重启生效！</translation>
     </message>
     <message>
         <location filename="HelpWidget.cpp" line="80"/>
         <source>Update error! </source>
         <oldsource>update wrong! </oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">更新出错！</translation>
     </message>
 </context>
 <context>
@@ -5538,8 +5543,8 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>UBChain</name>
     <message>
-        <location filename="wallet.cpp" line="184"/>
-        <location filename="wallet.cpp" line="208"/>
+        <location filename="wallet.cpp" line="183"/>
+        <location filename="wallet.cpp" line="207"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>
