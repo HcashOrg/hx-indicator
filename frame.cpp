@@ -758,8 +758,10 @@ void Frame::showTransferPage()
 
 void Frame::showContactPage()
 {
+    //EnlargeRightPart();
     emit titleBackVisible(false);
     closeCurrentPage();
+
     contactPage = new ContactWidget(centralWidget);
 
     //getAccountInfo();
@@ -771,6 +773,7 @@ void Frame::showContactPage()
     //contactPage->setAttribute(Qt::WA_DeleteOnClose);
     contactPage->show();
     currentPageNum = 4;
+    EnlargeRightPart();
 }
 
 bool Frame::eventFilter(QObject* watched, QEvent* e)
