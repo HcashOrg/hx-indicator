@@ -469,7 +469,7 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
 
     if(column == 4)
     {
-        ForecloseDialog forecloseDialog;
+        ForecloseDialog forecloseDialog(ui->accountComboBox->currentText());
         QString amountStr = forecloseDialog.pop();
 
         UBChain::getInstance()->postRPC( "id-foreclose_balance_from_miner",

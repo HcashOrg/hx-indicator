@@ -110,7 +110,7 @@ void SellDialog::jsonDataUpdated(QString id)
             unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
 
             feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
-
+            feeChoose->updateAccountNameSlots(ui->accountNameLabel->text());
         }
 
         return;

@@ -190,6 +190,12 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
 
 void FeeChooseWidget::refreshUI()
 {
+    //检查账户余额
+    if(!checkAccountBalance())
+    {
+        //提示余额不足
+    }
+
     if(ui->checkBox->checkState() == Qt::Checked)
     {
         ui->comboBox_coinType->setVisible(true);
@@ -201,7 +207,7 @@ void FeeChooseWidget::refreshUI()
 
         if(QVBoxLayout* vLay = dynamic_cast<QVBoxLayout*>(layout()))
         {
-            vLay->setStretch(4,0);
+            vLay->setStretch(5,0);
         }
     }
     else
@@ -212,18 +218,12 @@ void FeeChooseWidget::refreshUI()
         ui->line_6->setVisible(false);
         if(QVBoxLayout* vLay = dynamic_cast<QVBoxLayout*>(layout()))
         {
-            vLay->setStretch(4,1);
+            vLay->setStretch(5,1);
         }
     }
 
     //ui->label_fee->setText(QString::number(_p->coinNumber) + " " + _p->feeType);
     ui->label_fee->setText(QString::number(_p->feeNumber,'f',5)+" LNK");
-    //检查账户余额
-    if(!checkAccountBalance())
-    {
-        //提示余额不足
-
-    }
 
     updatePoundageID();
 }
@@ -237,13 +237,24 @@ bool FeeChooseWidget::checkAccountBalance() const
     //当前承兑单币种+金额  与 账户中对应资产比较
     if(_p->coinNumber > _p->accountAssets[_p->feeType])
     {
-        ui->tipLabel->setText(_p->feeType+tr(" less than ")+_p->coinNumber);
+        int pre = 5;
+        foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+            if(asset.symbol == _p->feeType)
+            {
+                pre = asset.precision;
+                break;
+            }
+        }
+
+        ui->tipLabel->setText(_p->feeType+tr(" less than ")+QString::number(_p->coinNumber,'f',pre));
         ui->tipLabel->setVisible(true);
+        ui->line_7->setVisible(true);
         return false;
     }
     else
     {
         ui->tipLabel->setVisible(false);
+        ui->line_7->setVisible(false);
         return true;
     }
 

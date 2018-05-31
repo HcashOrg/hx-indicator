@@ -29,8 +29,9 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
+    qDebug()<<_accountName;
     ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
-                                                     UBChain::getInstance()->feeType));
+                                                     _accountName,UBChain::getInstance()->feeType));
     ui->stackedWidget->setCurrentIndex(0);
     init();
 

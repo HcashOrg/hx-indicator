@@ -12,7 +12,7 @@ class ForecloseDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ForecloseDialog(QWidget *parent = 0);
+    explicit ForecloseDialog(const QString &accountName,QWidget *parent = 0);
     ~ForecloseDialog();
 
     QString  pop();
