@@ -75,12 +75,12 @@
         <translation type="unfinished">Backup wallet</translation>
     </message>
     <message>
-        <location filename="AccountManagerWidget.cpp" line="180"/>
+        <location filename="AccountManagerWidget.cpp" line="182"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AccountManagerWidget.cpp" line="185"/>
+        <location filename="AccountManagerWidget.cpp" line="187"/>
         <source>export</source>
         <translation type="unfinished"></translation>
     </message>
@@ -899,17 +899,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Contract address</translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="62"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="63"/>
         <source>%1/%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="64"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="65"/>
         <source>Max: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="84"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="85"/>
         <source>Transaction of buy-order has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -946,7 +946,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="157"/>
-        <source>交易密码</source>
+        <source>钱包密码</source>
+        <oldsource>交易密码</oldsource>
         <translation type="unfinished">Password</translation>
     </message>
     <message>
@@ -990,6 +991,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.ui" line="76"/>
         <location filename="capitalTransferPage/CapitalTransferPage.ui" line="124"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="299"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1031,14 +1033,14 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="90"/>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="100"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="318"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="332"/>
         <source>%1 address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="91"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="320"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="322"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="334"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="336"/>
         <source>please wait</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1064,6 +1066,16 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="213"/>
         <source>max:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="293"/>
+        <source>less than </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="300"/>
+        <source>balance less than </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1701,22 +1713,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="98"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="99"/>
         <source>You need to pay the fee for contract execution.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="115"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="116"/>
         <source>Please put on at least 1 sell-order!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="130"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="131"/>
         <source>Execute the function of the contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="173"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="174"/>
         <source>withdraw</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2560,19 +2572,29 @@ Cover it or not?</source>
         <translation type="unfinished">rate:@ coin:# balance:$</translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="157"/>
+        <location filename="FeeChooseWidget.ui" line="233"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="FeeChooseWidget.cpp" line="171"/>
         <source>cannot find proper acceptance!</source>
         <oldsource>cannot find proper poundage!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="173"/>
+        <location filename="FeeChooseWidget.cpp" line="187"/>
         <source>pay:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="173"/>
+        <location filename="FeeChooseWidget.cpp" line="187"/>
         <source>  rate:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="FeeChooseWidget.cpp" line="251"/>
+        <source> less than </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2739,22 +2761,22 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="995"/>
+        <location filename="frame.cpp" line="998"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1593"/>
+        <location filename="frame.cpp" line="1599"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1596"/>
+        <location filename="frame.cpp" line="1602"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1599"/>
+        <location filename="frame.cpp" line="1605"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3129,33 +3151,33 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="obsolete">Select</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="73"/>
+        <location filename="importdialog.cpp" line="77"/>
         <source>Choose your private key file.</source>
         <oldsource>Choose you private key file.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="109"/>
+        <location filename="importdialog.cpp" line="113"/>
         <source>Wrong file path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="120"/>
+        <location filename="importdialog.cpp" line="124"/>
         <source>LNK Address:%1  Already Exists!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="269"/>
+        <location filename="importdialog.cpp" line="273"/>
         <source>Import key error: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="299"/>
+        <location filename="importdialog.cpp" line="303"/>
         <source> has been imported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="303"/>
+        <location filename="importdialog.cpp" line="307"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3291,13 +3313,13 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Asset to pledge</translation>
     </message>
     <message>
-        <location filename="miner/locktominerdialog.cpp" line="91"/>
+        <location filename="miner/locktominerdialog.cpp" line="92"/>
         <source>Pledge asset to miner successfully!</source>
         <oldsource>Pledge coins to miner successfully!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/locktominerdialog.cpp" line="128"/>
+        <location filename="miner/locktominerdialog.cpp" line="129"/>
         <source>Max: %1 %2</source>
         <oldsource>total %1 %2</oldsource>
         <translation type="unfinished"></translation>
@@ -3450,12 +3472,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="567"/>
+        <location filename="mainpage.cpp" line="572"/>
         <source>Copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="600"/>
+        <location filename="mainpage.cpp" line="605"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3615,7 +3637,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="377"/>
+        <location filename="miner/minerpage.cpp" line="378"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3959,33 +3981,33 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="300"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="301"/>
         <source>Sure to cancel this order? You need to pay the fee for contract execution.</source>
         <oldsource>Sure to withdraw this order? You need to pay the fee for contract execution.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="359"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="361"/>
         <source>You need to pay the fee for contract execution.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="421"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="423"/>
         <source>register contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="461"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="463"/>
         <source>You don&apos;t have an exchange contract at the moment. Will you create it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="477"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="479"/>
         <source>Can not find file contracts/blocklink_exchange.glua.gpc!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="570"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="572"/>
         <source>Sure to cancel all orders of %1-to-%2 ?</source>
         <oldsource>Sure to withdraw all orders of %1-to-%2 ?</oldsource>
         <translation type="unfinished"></translation>
@@ -4382,12 +4404,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="137"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="138"/>
         <source>setDefault</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="138"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="139"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5386,7 +5408,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="transfer/transferconfirmdialog.ui" line="138"/>
-        <source>交易密码</source>
+        <source>钱包密码</source>
+        <oldsource>交易密码</oldsource>
         <translation type="unfinished">Password</translation>
     </message>
     <message>
@@ -5422,10 +5445,6 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <source>转账地址</source>
         <translation type="obsolete">Send to</translation>
-    </message>
-    <message>
-        <source>钱包密码</source>
-        <translation type="obsolete">Password</translation>
     </message>
     <message>
         <source>转账金额</source>
@@ -5878,7 +5897,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="147"/>
-        <source>交易密码</source>
+        <source>钱包密码</source>
+        <oldsource>交易密码</oldsource>
         <translation type="unfinished">Password</translation>
     </message>
     <message>
@@ -5980,7 +6000,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="165"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="166"/>
         <source>Max: %1 %2</source>
         <oldsource>total %1 %2</oldsource>
         <translation type="unfinished"></translation>
@@ -6196,7 +6216,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="obsolete">Fee:</translation>
     </message>
     <message>
-        <location filename="exchange/WithdrawOrderDialog.cpp" line="83"/>
+        <location filename="exchange/WithdrawOrderDialog.cpp" line="88"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
