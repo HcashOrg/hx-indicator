@@ -144,7 +144,7 @@
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QToolButton" name="saveBtn">
@@ -575,7 +575,7 @@
           <rect>
            <x>370</x>
            <y>90</y>
-           <width>200</width>
+           <width>300</width>
            <height>20</height>
           </rect>
          </property>
