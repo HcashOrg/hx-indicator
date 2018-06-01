@@ -73,7 +73,7 @@ void AccountManagerWidget::deleteButtonSlots()
         if(static_cast<unsigned int>(page) != this->_p->pageWidget->GetTotalPage())
         {
             this->_p->pageWidget->SetTotalPage(page);
-            if(page > 1)
+            if(page >= 1)
             {
                 int curpage = std::min<unsigned int>(row,totalnumber-1)/3;
                 this->_p->pageWidget->SetCurrentPage(static_cast<unsigned int>(curpage));

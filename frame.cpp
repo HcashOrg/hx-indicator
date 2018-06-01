@@ -1026,8 +1026,11 @@ void Frame::jsonDataUpdated(QString id)
 {
     if( id == "id-is_new")
     {
-        waitingForSync->close();
-        waitingForSync = NULL;
+        if(waitingForSync)
+        {
+            waitingForSync->close();
+            waitingForSync = NULL;
+        }
 
         activateWindow();
         QString result = UBChain::getInstance()->jsonDataValue(id);

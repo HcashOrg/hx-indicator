@@ -104,6 +104,7 @@ void WebSocketManager::onTimer()
     {
         if(!busy)
         {
+            qDebug()<<pendingRpcs.size();
             QStringList rpc = pendingRpcs.at(0).split("***");
             processRPC(rpc.at(0),rpc.at(1));
         }
