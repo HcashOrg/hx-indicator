@@ -69,7 +69,8 @@ void CapitalTransferPage::ConfirmSlots()
     QString actualShow = _p->actualNumber + " "+_p->symbol;
     QString feeShow = ui->label_fee->text();
     QString totalShow = ui->lineEdit_number->text() + " "+_p->symbol;
-    CapitalConfirmWidget *confirmWidget = new CapitalConfirmWidget(CapitalConfirmWidget::CapitalConfirmInput(_p->account_address,
+    CapitalConfirmWidget *confirmWidget = new CapitalConfirmWidget(CapitalConfirmWidget::CapitalConfirmInput(
+                                                                   ui->radioButton_deposit->isChecked()?_p->account_address:ui->lineEdit_address->text(),
                                                                    actualShow,feeShow,totalShow),UBChain::getInstance()->mainFrame);
     connect(confirmWidget,&CapitalConfirmWidget::ConfirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
     connect(confirmWidget,&CapitalConfirmWidget::CancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
