@@ -415,7 +415,7 @@ void ContactTreeWidget::initTreeStyle()
 void ContactTreeWidget::initContextMenu()
 {
     _p->contextMenu = new QMenu(this);
-    _p->movePersonMenu = new QMenu("MoveToGroup",this);
+    _p->movePersonMenu = new QMenu(tr("MoveToGroup"),this);
 
     _p->addGroupAction = new QAction(tr("AddGroup"),this);
 
