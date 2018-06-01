@@ -37,7 +37,7 @@ private:
     void RefreshNumber();
 private slots:
     void changeCurrentPageSlots(unsigned int currentPage);
-    void on_tableView_pressed(const QModelIndex &index);
+    void on_tableView_clicked(const QModelIndex &index);
 
 private:
     void InitWidget();
