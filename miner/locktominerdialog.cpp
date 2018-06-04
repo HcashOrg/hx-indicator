@@ -31,7 +31,7 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
 
     qDebug()<<_accountName;
     ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
-                                                     _accountName,UBChain::getInstance()->feeType));
+                                                     UBChain::getInstance()->feeType,_accountName));
     ui->stackedWidget->setCurrentIndex(0);
     init();
 
