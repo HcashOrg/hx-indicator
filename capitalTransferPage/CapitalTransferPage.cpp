@@ -312,11 +312,19 @@ void CapitalTransferPage::CreateTransaction()
                                          toJsonFormat( "createrawtransaction", QJsonArray()
                                          << _p->tunnel_account_address<<_p->multisig_address<<_p->actualNumber<<_p->symbol ));
     }
-    else if(ui->radioButton_withdraw->isChecked() && _p->tunnel_account_address != ui->lineEdit_address->text())
-    {
-        UBChain::getInstance()->postRPC( "captial-createrawtransaction",
-                                         toJsonFormat( "createrawtransaction", QJsonArray()
-                                         << _p->tunnel_account_address<<ui->lineEdit_address->text()<<_p->actualNumber<<_p->symbol ));
+    else if(ui->radioButton_withdraw->isChecked())
+    {//划转，账户不能时自己的账户
+        if(_p->tunnel_account_address == ui->lineEdit_address->text())
+        {
+            //提示不能给自己划转
+
+        }
+        else
+        {
+            UBChain::getInstance()->postRPC( "captial-createrawtransaction",
+                                             toJsonFormat( "createrawtransaction", QJsonArray()
+                                             << _p->tunnel_account_address<<ui->lineEdit_address->text()<<_p->actualNumber<<_p->symbol ));
+        }
     }
 
 }
