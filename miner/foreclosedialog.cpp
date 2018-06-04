@@ -27,7 +27,7 @@ ForecloseDialog::ForecloseDialog(const QString &accountName,QWidget *parent) :
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
-                                                     accountName,UBChain::getInstance()->feeType));
+                                                     UBChain::getInstance()->feeType,accountName));
     ui->stackedWidget->setCurrentIndex(0);
 }
 
