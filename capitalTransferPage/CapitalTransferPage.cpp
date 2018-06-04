@@ -293,7 +293,7 @@ void CapitalTransferPage::CreateTransaction()
     double extraNumber = _p->asset_max_ammount.toDouble() - ui->lineEdit_number->text().toDouble();
     if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
     {
-        ui->label_tip->setText(tr("less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
+        ui->label_tip->setText(tr("number cannot less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
         ui->label_tip->setVisible(true);
         ui->toolButton_confirm->setEnabled(false);
         return;
