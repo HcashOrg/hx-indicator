@@ -35,6 +35,7 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
     validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_ammount->setValidator( validator );
     ui->label_symbol->setText(symbol);
+    ui->label_tipNumber->setText(tr("number limits: 0.001 to %1").arg(number));
 }
 
 void WithdrawInputWidget::addressChangeSlots(const QString &address)
@@ -49,6 +50,25 @@ void WithdrawInputWidget::addressChangeSlots(const QString &address)
     }
 }
 
+void WithdrawInputWidget::numberChangeSlots(const QString &number)
+{
+    QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()));
+    if(!via)
+    {
+        return;
+    }
+    if(ui->lineEdit_ammount->text().toDouble() > via->top())
+    {
+        ui->lineEdit_ammount->setText(ui->lineEdit_ammount->text().remove(ui->lineEdit_ammount->text().length()-1,1));
+        ui->label_tipNumber->setVisible(true);
+    }
+    else
+    {
+        ui->label_tipNumber->setVisible(false);
+    }
+
+}
+
 void WithdrawInputWidget::maxButtonSlots()
 {
     QDoubleValidator* vali = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()));
@@ -60,6 +80,8 @@ void WithdrawInputWidget::maxButtonSlots()
 
 void WithdrawInputWidget::confirmButtonSlots()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()));
     if(!via)
     {
@@ -93,6 +115,11 @@ bool WithdrawInputWidget::validateAddress(const QString &address)
 void WithdrawInputWidget::InitWidget()
 {
     InitStyle();
+    ui->label_tipNumber->setVisible(false);
+
+    QRegExp regx("[a-zA-Z0-9]+$");
+    QValidator *validator1 = new QRegExpValidator(regx, this);
+    ui->lineEdit_address->setValidator( validator1 );
 
     QDoubleValidator *validator = new QDoubleValidator(0,0,0,ui->lineEdit_ammount);
     ui->lineEdit_ammount->setValidator( validator );
@@ -102,6 +129,7 @@ void WithdrawInputWidget::InitWidget()
     connect(ui->toolButton_all,&QToolButton::clicked,this,&WithdrawInputWidget::maxButtonSlots);
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&WithdrawInputWidget::confirmButtonSlots);
 
+    connect(ui->lineEdit_ammount,&QLineEdit::textChanged,this,&WithdrawInputWidget::numberChangeSlots);
     ui->lineEdit_address->setFocus();
 }
 

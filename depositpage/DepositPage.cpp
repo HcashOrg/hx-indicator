@@ -142,17 +142,18 @@ void DepositPage::GetBindTunnelAccount()
 
 void DepositPage::GenerateAddress()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     UBChain::getInstance()->postRPC("deposit_create_crosschain_symbol",
                                     toJsonFormat("create_crosschain_symbol",
                                                  QJsonArray()<<_p->assetSymbol)
                                     );
-//    qDebug()<<toJsonFormat("create_crosschain_symbol",
-//                           QJsonArray()<<_p->assetSymbol);
 }
 
 void DepositPage::BindTunnelAccount()
 {
     //绑定账户
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
     UBChain::getInstance()->postRPC("deposit_bind_tunnel_account",
                                     toJsonFormat("bind_tunnel_account",
                                                  QJsonArray()<<_p->name<<_p->tunnelData->address<<_p->assetSymbol<<true));

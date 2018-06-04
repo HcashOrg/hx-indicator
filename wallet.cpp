@@ -30,7 +30,7 @@ UBChain::UBChain()
     nodeProc = new QProcess;
     clientProc = new QProcess;
     isExiting = false;
-
+    isBlockSyncFinish = false;
     wsManager = NULL;
 
     getSystemEnvironmentPath();
@@ -754,6 +754,19 @@ void UBChain::parseTransactions(QString result, QString accountName)
             }
         }
     }
+}
+
+bool UBChain::ValidateOnChainOperation()
+{
+    if(GetBlockSyncFinish()) return true;
+    //当前状态不允许链上操作时，弹出警告框
+    if(mainFrame)
+    {
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr("Cannot operate online transaction,please wait for block sync finished!"));
+        dia.pop();
+    }
+    return false;
 }
 
 void UBChain::InitFeeCharge()

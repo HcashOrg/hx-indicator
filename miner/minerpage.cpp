@@ -266,6 +266,8 @@ void MinerPage::jsonDataUpdated(QString id)
 
 void MinerPage::on_registerBtn_clicked()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     if(UBChain::getInstance()->getUnregisteredAccounts().isEmpty())
     {
         CommonDialog commonDialog(CommonDialog::OkOnly);
@@ -473,6 +475,8 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
         ForecloseDialog forecloseDialog(ui->accountComboBox->currentText());
         QString amountStr = forecloseDialog.pop();
 
+        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
         UBChain::getInstance()->postRPC( "id-foreclose_balance_from_miner",
                                          toJsonFormat( "foreclose_balance_from_miner",
                                                        QJsonArray() << ui->lockBalancesTableWidget->item(row,0)->text()
@@ -488,6 +492,8 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
 {
     if(column == 2)
     {
+        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
         QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
         FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),

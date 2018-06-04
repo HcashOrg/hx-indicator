@@ -38,6 +38,8 @@ PublishPoundageWidget::~PublishPoundageWidget()
 
 void PublishPoundageWidget::ConfirmPublishSlots()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     //发送指令，创建承税单
 
     QString accountName = ui->comboBox_accounts->currentText();

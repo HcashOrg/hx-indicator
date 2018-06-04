@@ -278,6 +278,8 @@ void CapitalTransferPage::PostQueryTunnelMoney(const QString &symbol, const QStr
 
 void CapitalTransferPage::CreateTransaction()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     if(_p->tunnel_account_address.isEmpty() || _p->multisig_address.isEmpty() ||
        _p->symbol.isEmpty() || _p->actualNumber.isEmpty())
     {

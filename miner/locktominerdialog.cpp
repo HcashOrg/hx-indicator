@@ -106,6 +106,8 @@ void LockToMinerDialog::jsonDataUpdated(QString id)
 
 void LockToMinerDialog::on_okBtn_clicked()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     UBChain::getInstance()->postRPC( "id-lock_balance_to_miner",
                                      toJsonFormat( "lock_balance_to_miner",
                                                    QJsonArray() << ui->minerComboBox->currentText() << m_accountName

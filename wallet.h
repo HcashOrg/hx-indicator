@@ -82,6 +82,9 @@ static QMutex mutexForRegisterMap;
 static QMutex mutexForBalanceMap;
 static QMutex mutexForAddressMap;
 
+#include <mutex>
+static std::mutex infoMutex;
+
 struct AssetAmount
 {
     QString assetId;
@@ -384,6 +387,14 @@ public:
 
     QMap<QString,TransactionsInfoVector> transactionsMap;   // key是 "账户名_资产符号" 形式
     void parseTransactions(QString result, QString accountName = "ALL");
+private:
+    bool isBlockSyncFinish;
+public:
+    //在bottombar中使用，外部勿用
+    void SetBlockSyncFinish(bool fi){std::lock_guard<std::mutex> infoLock(infoMutex); isBlockSyncFinish = fi;}
+    bool GetBlockSyncFinish()const{return isBlockSyncFinish;}
+    //外部使用
+    bool ValidateOnChainOperation();
 private:
     void InitFeeCharge();//设置手续费
 public:

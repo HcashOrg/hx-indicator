@@ -289,6 +289,9 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
+
+            if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
             UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
             unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
@@ -349,6 +352,9 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
+
+            if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
             UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
             unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
@@ -522,6 +528,8 @@ void MyExchangeContractPage::on_assetComboBox2_currentIndexChanged(const QString
 
 void MyExchangeContractPage::on_sellBtn_clicked()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
 
     if(contractAddress.isEmpty())
@@ -545,6 +553,7 @@ void MyExchangeContractPage::on_balanceBtn_clicked()
 
     if(contractAddress.isEmpty())
     {
+        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
         registerContract();
     }
     else
@@ -568,6 +577,8 @@ void MyExchangeContractPage::on_withdrawAllBtn_clicked()
 {
     if(ui->ordersTableWidget->rowCount() < 1)   return;
 
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     CommonDialog commonDialog(CommonDialog::OkAndCancel);
     commonDialog.setText( tr("Sure to cancel all orders of %1-to-%2 ?").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()) );
     if(commonDialog.pop())
@@ -586,6 +597,7 @@ void MyExchangeContractPage::onItemClicked(int _row, int _column)
 {
     if(_column == 3)
     {
+        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
         // 撤销挂单
         QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
         AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
@@ -606,6 +618,7 @@ void MyExchangeContractPage::onItemClicked(int _row, int _column)
 
     if(_column == 4)
     {
+        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
         SellDialog sellDialog;
         sellDialog.setSellAsset(ui->assetComboBox->currentText());
         sellDialog.setBuyAsset(ui->assetComboBox2->currentText());

@@ -87,6 +87,9 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
+
+            if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
             UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
             unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
@@ -217,6 +220,8 @@ void ContractBalanceWidget::onItemClicked(int _row, int _column)
 {
     if(_column == 2)
     {
+
+        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
         // 合约提现
         WithdrawExchangeContractDialog withdrawExchangeContractDialog;
         withdrawExchangeContractDialog.setCurrentAsset(ui->balancesTableWidget->item(_row,0)->text());
