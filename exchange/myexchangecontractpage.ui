@@ -34,7 +34,7 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>挂卖单</string>
+    <string>挂交易单</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">

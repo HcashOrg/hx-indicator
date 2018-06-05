@@ -24,6 +24,7 @@
 #include "capitalTransferPage/CapitalTransferPage.h"
 #include "ToolButtonWidget.h"
 #include "alltransactionwidget.h"
+#include "dialog/ErrorResultDialog.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -355,18 +356,10 @@ void MainPage::jsonDataUpdated(QString id)
         }
         else if(result.startsWith("\"error\":"))
         {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Create account failed: " + errorMessage );
-            commonDialog.pop();
-        }
-        else
-        {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Failed"));
-            commonDialog.pop();
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to create account!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
         return;

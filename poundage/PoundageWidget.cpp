@@ -11,6 +11,8 @@
 #include "wallet.h"
 #include "commondialog.h"
 #include "depositpage/FeeChargeWidget.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 class PoundageWidget::PoundageWidgetPrivate
 {
@@ -178,20 +180,23 @@ void PoundageWidget::jsonDataUpdated(QString id)
     if("publish_create_guarantee_order" == id)
     {
         QString result = UBChain::getInstance()->jsonDataValue( id);
-        if( result.isEmpty() || result.startsWith("\"error"))
-        {
-            CommonDialog dia(CommonDialog::OkOnly);
-            dia.setText(result);
-            dia.pop();
-            return;
-        }
-        result.prepend("{");
-        result.append("}");
+        qDebug() << id << result;
 
-        CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(tr("operate success!"));
-        dia.pop();
-        //qDebug()<<"chargecccccc"<<result;
+        if( result.startsWith("\"result\":{"))             // 成功
+        {
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of create-guarantee-order has been sent!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
+        }
+        else
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to create guarantee order!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
+        }
+
         //刷新承税单
         autoRefreshSlots();
     }
@@ -237,16 +242,23 @@ void PoundageWidget::jsonDataUpdated(QString id)
     {
         //转化为结构体
         QString result = UBChain::getInstance()->jsonDataValue( id);
-        if( result.isEmpty() || result.startsWith("\"error"))
+        qDebug() << id << result;
+
+        if( result.startsWith("\"result\":{"))             // 成功
         {
-            CommonDialog dia(CommonDialog::OkOnly);
-            dia.setText(result);
-            dia.pop();
-            return;
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of cancel-guarantee-order has been sent!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
-        result.prepend("{");
-        result.append("}");
-        qDebug()<<result;
+        else
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to cancel guarantee order!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
+        }
+
         autoRefreshSlots();
     }
 }

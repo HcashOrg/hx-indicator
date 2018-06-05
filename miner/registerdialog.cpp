@@ -5,6 +5,9 @@
 #include "wallet.h"
 #include "commondialog.h"
 #include "FeeChooseWidget.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
+
 RegisterDialog::RegisterDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RegisterDialog)
@@ -107,27 +110,26 @@ void RegisterDialog::jsonDataUpdated(QString id)
         {
             close();
 
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Register transaction has been sent out!"));
-            commonDialog.pop();
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of register-account has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
         {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setDetailText(result);
+
             if(result.contains("Insufficient Balance:"))
             {
-                CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText(tr("Balance of this account is not enough!"));
-                commonDialog.pop();
+                errorResultDialog.setInfoText(tr("Balance of this account is not enough!"));
             }
             else
-            {
-                int pos = result.indexOf("\"message\":\"") + 11;
-                QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-                CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText( "Register account failed: " + errorMessage );
-                commonDialog.pop();
+            {                
+                errorResultDialog.setInfoText(tr("Fail to register account!"));
             }
+
+            errorResultDialog.pop();
         }
 
         return;

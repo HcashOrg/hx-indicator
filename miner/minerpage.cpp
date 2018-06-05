@@ -7,12 +7,15 @@
 #include "locktominerdialog.h"
 #include "foreclosedialog.h"
 #include "commondialog.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 #include "poundage/PageScrollWidget.h"
 #include "ToolButtonWidget.h"
 #include "depositpage/FeeChargeWidget.h"
 #include "showcontentdialog.h"
 #include <mutex>
+
 static const int ROWNUMBER = 8;
 static std::mutex calMutex;
 MinerPage::MinerPage(QWidget *parent) :
@@ -178,10 +181,18 @@ void MinerPage::jsonDataUpdated(QString id)
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":{"))
+        {            
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of foreclose-asset has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
+        }
+        else
         {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Foreclose asset from miner successfully!"));
-            commonDialog.pop();
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to foreclose asset from miner!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
         return;
@@ -247,17 +258,28 @@ void MinerPage::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":{"))
         {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("The transaction of obtain-income has been sent out!"));
-            commonDialog.pop();
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of obtain-income has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
-        else if(result.contains("pay_back_obj.second.amount >= min_payback_balance: doesnt get enough pay back"))
+        else
         {
-            QString assetSymbol = id.mid(QString("id-obtain_pay_back_balance-").size());
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setDetailText(result);
 
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("This account's mining income is less than %1 %2 ! You can not obtain it.").arg(600).arg(assetSymbol));
-            commonDialog.pop();
+            if(result.contains("pay_back_obj.second.amount >= min_payback_balance: doesnt get enough pay back"))
+            {
+                QString assetSymbol = id.mid(QString("id-obtain_pay_back_balance-").size());
+                errorResultDialog.setInfoText(tr("This account's mining income is less than %1 %2 ! You can not obtain it.")
+                                              .arg(600).arg(assetSymbol));
+            }
+            else
+            {
+                errorResultDialog.setInfoText(tr("Fail to obtain mining income!"));
+            }
+
+            errorResultDialog.pop();
         }
 
         return;

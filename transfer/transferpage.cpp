@@ -18,6 +18,8 @@
 
 #include "poundage/PoundageDataUtil.h"
 #include "FeeChooseWidget.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     QWidget(parent),
@@ -293,24 +295,20 @@ void TransferPage::jsonDataUpdated(QString id)
     if( id == "id-transfer_to_address-" + accountName)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-qDebug() << id << result;
+        qDebug() << id << result;
         if( result.startsWith("\"result\":{"))             // 成功
         {
-
-            CommonDialog tipDialog(CommonDialog::OkOnly);
-            tipDialog.setText( tr("Transaction has been sent,please wait for confirmation"));
-            tipDialog.pop();
-
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction has been sent,please wait for confirmation"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
         else
         {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog tipDialog(CommonDialog::OkOnly);
-            tipDialog.setText( tr("Transaction sent failed: %1").arg(errorMessage));
-            tipDialog.pop();
-
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to transfer!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
         return;
     }

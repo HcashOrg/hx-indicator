@@ -4,6 +4,8 @@
 #include "wallet.h"
 #include "commondialog.h"
 #include "FeeChooseWidget.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 WithdrawExchangeContractDialog::WithdrawExchangeContractDialog(QWidget *parent) :
     QDialog(parent),
@@ -101,18 +103,17 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
         {
             close();
 
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Transaction of withdraw from the exchange contract has been sent out!"));
-            commonDialog.pop();
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of withdraw-balance from the exchange contract has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
-        {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Withdraw from the exchange contract failed: " + errorMessage );
-            commonDialog.pop();
+        {   
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to withdraw balance from the exchange contract!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
         return;

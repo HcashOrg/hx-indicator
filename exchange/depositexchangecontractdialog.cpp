@@ -4,6 +4,8 @@
 #include "wallet.h"
 #include "commondialog.h"
 #include "FeeChooseWidget.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 DepositExchangeContractDialog::DepositExchangeContractDialog(QWidget *parent) :
     QDialog(parent),
@@ -102,18 +104,17 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
         {
             close();
 
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Transaction of deposit has been sent out!"));
-            commonDialog.pop();
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of deposit has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
-        {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Deposit to exchange contract failed: " + errorMessage );
-            commonDialog.pop();
+        {            
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to deposit to the contract!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
         return;
@@ -141,6 +142,8 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
 
 void DepositExchangeContractDialog::on_okBtn_clicked()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation())     return;
+
     if(ui->amountLineEdit->text().toDouble() <= 0)  return;
     if(ui->pwdLineEdit->text().isEmpty())           return;
 

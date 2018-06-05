@@ -7,6 +7,8 @@
 #include "withdrawexchangecontractdialog.h"
 #include "ToolButtonWidget.h"
 #include "WithdrawOrderDialog.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
     QWidget(parent),
@@ -130,19 +132,17 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":"))
         {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Execute the function of the contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.") );
-            commonDialog.pop();
-
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Open the contract for users successfully! Please wait for the confirmation of the block chain. Please do not repeat the operation."));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
         {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "openForUsers failed: " + errorMessage );
-            commonDialog.pop();
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to call the function of the contract!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
         return;

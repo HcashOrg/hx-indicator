@@ -5,6 +5,8 @@
 
 #include "wallet.h"
 #include "commondialog.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 class WithdrawConfirmWidget::WithdrawConfirmWidgetPrivate
 {
@@ -63,11 +65,22 @@ void WithdrawConfirmWidget::jsonDataUpdated(QString id)
     else if("withdraw-withdraw_cross_chain_transaction" == id)
     {
         QString  result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id <<"asdfsdfsdfasdf"<< result;
+        qDebug() << id << result;
+        if( result.startsWith("\"result\":{"))             // 成功
+        {
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of withdraw-crosschain-balance has been sent,please wait for confirmation"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
+        }
+        else
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to withdraw crosschain balance!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
+        }
 
-        CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(result);
-        dia.pop();
         emit closeSelf();
         close();
     }

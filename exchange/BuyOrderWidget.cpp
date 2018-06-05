@@ -88,20 +88,9 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
             transactionResultDialog.setInfoText(tr("Transaction of buy-order has been sent out!"));
             transactionResultDialog.setDetailText(result);
             transactionResultDialog.pop();
-
-//            CommonDialog commonDialog(CommonDialog::OkOnly);
-//            commonDialog.setText(tr("Transaction of buy-order has been sent out!"));
-//            commonDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
         {
-            int pos = result.indexOf("\"message\":\"") + 11;
-//            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-//            CommonDialog commonDialog(CommonDialog::OkOnly);
-//            commonDialog.setText( "Transfer to exchange contract failed: " + errorMessage );
-//            commonDialog.pop();
-
             ErrorResultDialog errorResultDialog;
             errorResultDialog.setInfoText(tr("Transfer to exchange contract failed!"));
             errorResultDialog.setDetailText(result);

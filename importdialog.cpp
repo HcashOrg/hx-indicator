@@ -7,6 +7,7 @@
 #include "dialog/importenterpwddialog.h"
 #include "AES/aesencryptor.h"
 #include "KeyDataUtil.h"
+#include "dialog/ErrorResultDialog.h"
 
 ImportDialog::ImportDialog(QWidget *parent) :
     QDialog(parent),
@@ -265,13 +266,10 @@ qDebug()  << id << result;
         }
         else if( result.mid(0,8) == "\"error\":")
         {
-            qDebug() << "import error: " << result;
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Import key error: ") + errorMessage);
-            commonDialog.pop();
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to import key!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
 
             ui->importBtn->setEnabled(true);
             return;

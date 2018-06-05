@@ -10,6 +10,8 @@
 #include "ToolButtonWidget.h"
 #include "WithdrawOrderDialog.h"
 #include "depositpage/FeeChargeWidget.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     QWidget(parent),
@@ -221,19 +223,17 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":"))
         {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("Create exchange contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.") );
-            commonDialog.pop();
-
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Create exchange contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract."));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
-        {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Register exchange contract failed: " + errorMessage );
-            commonDialog.pop();
+        {            
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to register exchange contract!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
         return;
@@ -328,18 +328,17 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Transaction of withdraw-order has been sent out!");
-            commonDialog.pop();
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of cancel-order has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
         {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Cancel sell-order failed: " + errorMessage );
-            commonDialog.pop();
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to cancel sell-order!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
 
@@ -392,18 +391,17 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Transaction of withdraw-order-pair has been sent out!");
-            commonDialog.pop();
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of cancel-order-pair has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
         {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Cancel sell-order pair failed: " + errorMessage );
-            commonDialog.pop();
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to cancel sell-order pair!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
         return;
@@ -445,9 +443,9 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         }
         else
         {
-            CommonDialog dia(CommonDialog::OkOnly);
-            dia.setText(result);
-            dia.pop();
+//            CommonDialog dia(CommonDialog::OkOnly);
+//            dia.setText(result);
+//            dia.pop();
         }
     }
 }

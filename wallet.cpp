@@ -763,7 +763,7 @@ bool UBChain::ValidateOnChainOperation()
     if(mainFrame)
     {
         CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(tr("Cannot operate online transaction,please wait for block sync finished!"));
+        dia.setText(tr("You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!"));
         dia.pop();
     }
     return false;

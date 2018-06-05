@@ -10,7 +10,7 @@
 #include "wallet.h"
 #include "AccountManagerWidget.h"
 #include "HelpWidget.h"
-
+#include "dialog/ErrorResultDialog.h"
 #include "commondialog.h"
 
 #define MIN_CONTRACT_FEE    1
@@ -520,12 +520,10 @@ void SetDialog::jsonDataUpdated(QString id)
         }
         else
         {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Failed: " + errorMessage);
-            commonDialog.pop();
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to modify the password!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
         return;

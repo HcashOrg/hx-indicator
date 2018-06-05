@@ -914,7 +914,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="106"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="95"/>
         <source>Transfer to exchange contract failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1718,23 +1718,28 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">open for users</translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="40"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="42"/>
         <source>Before you open your contract for all users, other users can not buy your sell-orders.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="102"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="104"/>
         <source>You need to pay the fee for contract execution.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="119"/>
+        <location filename="exchange/contractbalancewidget.cpp" line="121"/>
         <source>Please put on at least 1 sell-order!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/contractbalancewidget.cpp" line="134"/>
-        <source>Execute the function of the contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.</source>
+        <location filename="exchange/contractbalancewidget.cpp" line="136"/>
+        <source>Open the contract for users successfully! Please wait for the confirmation of the block chain. Please do not repeat the operation.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/contractbalancewidget.cpp" line="143"/>
+        <source>Fail to call the function of the contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2085,65 +2090,18 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>DeleteAccountDialog</name>
     <message>
-        <location filename="deleteaccountdialog.ui" line="19"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="deleteaccountdialog.ui" line="76"/>
         <source>*删除后即不能再使用，除非将私钥重新导入</source>
         <oldsource>*删除后地址将无法使用</oldsource>
-        <translation type="unfinished">*Deleted account can not be used</translation>
+        <translation type="obsolete">*Deleted account can not be used</translation>
     </message>
     <message>
         <source>删除账户</source>
         <translation type="obsolete">Delete Account</translation>
     </message>
     <message>
-        <location filename="deleteaccountdialog.ui" line="132"/>
         <source>密码：</source>
         <oldsource>登录口令</oldsource>
-        <translation type="unfinished">Password:</translation>
-    </message>
-    <message>
-        <location filename="deleteaccountdialog.cpp" line="33"/>
-        <source>Login password</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="deleteaccountdialog.cpp" line="41"/>
-        <source>Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="deleteaccountdialog.cpp" line="43"/>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="deleteaccountdialog.cpp" line="60"/>
-        <source>Please enter the password!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="deleteaccountdialog.cpp" line="121"/>
-        <source>Wrong password!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="deleteaccountdialog.cpp" line="155"/>
-        <source>Account deleted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="deleteaccountdialog.cpp" line="164"/>
-        <source>Delete account failed: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="deleteaccountdialog.cpp" line="130"/>
-        <source>At least 8 letters!</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Password:</translation>
     </message>
 </context>
 <context>
@@ -2236,13 +2194,18 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Password</translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.cpp" line="89"/>
+        <location filename="exchange/depositexchangecontractdialog.cpp" line="91"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.cpp" line="106"/>
+        <location filename="exchange/depositexchangecontractdialog.cpp" line="108"/>
         <source>Transaction of deposit has been sent out!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/depositexchangecontractdialog.cpp" line="115"/>
+        <source>Fail to deposit to the contract!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2426,7 +2389,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="dialog/ErrorResultDialog.ui" line="120"/>
         <source>错误全文</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error message</translation>
     </message>
     <message>
         <location filename="dialog/ErrorResultDialog.cpp" line="28"/>
@@ -3184,33 +3147,33 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="obsolete">Select</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="77"/>
+        <location filename="importdialog.cpp" line="78"/>
         <source>Choose your private key file.</source>
         <oldsource>Choose you private key file.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="113"/>
+        <location filename="importdialog.cpp" line="114"/>
         <source>Wrong file path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="124"/>
+        <location filename="importdialog.cpp" line="125"/>
         <source>LNK Address:%1  Already Exists!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="273"/>
-        <source>Import key error: </source>
+        <location filename="importdialog.cpp" line="270"/>
+        <source>Fail to import key!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="303"/>
+        <location filename="importdialog.cpp" line="301"/>
         <source> has been imported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="307"/>
+        <location filename="importdialog.cpp" line="305"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3346,9 +3309,13 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Asset to pledge</translation>
     </message>
     <message>
-        <location filename="miner/locktominerdialog.cpp" line="92"/>
-        <source>Pledge asset to miner successfully!</source>
-        <oldsource>Pledge coins to miner successfully!</oldsource>
+        <location filename="miner/locktominerdialog.cpp" line="93"/>
+        <source>Transaction of lock-to-miner has been sent out!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/locktominerdialog.cpp" line="100"/>
+        <source>Fail to lock balance to miner!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3480,32 +3447,32 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="obsolete">Delegate</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="119"/>
+        <location filename="mainpage.cpp" line="120"/>
         <source>transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="122"/>
+        <location filename="mainpage.cpp" line="123"/>
         <source>deposit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="123"/>
+        <location filename="mainpage.cpp" line="124"/>
         <source>withdraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="124"/>
+        <location filename="mainpage.cpp" line="125"/>
         <source>allot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="368"/>
-        <source>Failed</source>
+        <location filename="mainpage.cpp" line="360"/>
+        <source>Fail to create account!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="558"/>
+        <location filename="mainpage.cpp" line="551"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3629,43 +3596,52 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Record</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="149"/>
+        <location filename="miner/minerpage.cpp" line="152"/>
         <source>add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="157"/>
+        <location filename="miner/minerpage.cpp" line="160"/>
         <source>foreclose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="183"/>
-        <source>Foreclose asset from miner successfully!</source>
-        <oldsource>Foreclose balance from miner successfully!</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="miner/minerpage.cpp" line="224"/>
+        <location filename="miner/minerpage.cpp" line="235"/>
         <source>obtain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="251"/>
-        <source>The transaction of obtain-income has been sent out!</source>
+        <location filename="miner/minerpage.cpp" line="186"/>
+        <source>Transaction of foreclose-asset has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="259"/>
-        <source>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</source>
+        <location filename="miner/minerpage.cpp" line="193"/>
+        <source>Fail to foreclose asset from miner!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="262"/>
+        <source>Transaction of obtain-income has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="274"/>
+        <source>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="279"/>
+        <source>Fail to obtain mining income!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="296"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="380"/>
+        <location filename="miner/minerpage.cpp" line="402"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3920,7 +3896,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.ui" line="37"/>
-        <source>挂卖单</source>
+        <source>挂交易单</source>
+        <oldsource>挂卖单</oldsource>
         <translation type="unfinished">Sell</translation>
     </message>
     <message>
@@ -3964,48 +3941,53 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">OrderPair</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="118"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="120"/>
         <source>cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="119"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="121"/>
         <source>add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="150"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="152"/>
         <source>Sell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="151"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="153"/>
         <source>Buy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="152"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="154"/>
         <source>Price</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="156"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="158"/>
         <source>Sell / %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="157"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="159"/>
         <source>Buy / %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="158"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="160"/>
         <source>Price (%1/%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="225"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="227"/>
         <source>Create exchange contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/myexchangecontractpage.cpp" line="234"/>
+        <source>Fail to register exchange contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4015,27 +3997,49 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="367"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="332"/>
+        <source>Transaction of cancel-order has been sent out!</source>
+        <oldsource>Transaction of withdraw-order has been sent out!</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/myexchangecontractpage.cpp" line="339"/>
+        <source>Fail to cancel sell-order!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/myexchangecontractpage.cpp" line="366"/>
         <source>You need to pay the fee for contract execution.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="429"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="395"/>
+        <source>Transaction of cancel-order-pair has been sent out!</source>
+        <oldsource>Transaction of withdraw-order-pair has been sent out!</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/myexchangecontractpage.cpp" line="402"/>
+        <source>Fail to cancel sell-order pair!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/myexchangecontractpage.cpp" line="427"/>
         <source>register contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="469"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="467"/>
         <source>You don&apos;t have an exchange contract at the moment. Will you create it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="485"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="483"/>
         <source>Can not find file contracts/blocklink_exchange.glua.gpc!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="583"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="581"/>
         <source>Sure to cancel all orders of %1-to-%2 ?</source>
         <oldsource>Sure to withdraw all orders of %1-to-%2 ?</oldsource>
         <translation type="unfinished"></translation>
@@ -4480,22 +4484,37 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">MyAcceptance</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="114"/>
+        <location filename="poundage/PoundageWidget.cpp" line="116"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="192"/>
-        <source>operate success!</source>
+        <location filename="poundage/PoundageWidget.cpp" line="188"/>
+        <source>Transaction of create-guarantee-order has been sent!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="289"/>
+        <location filename="poundage/PoundageWidget.cpp" line="195"/>
+        <source>Fail to create guarantee order!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="poundage/PoundageWidget.cpp" line="250"/>
+        <source>Transaction of cancel-guarantee-order has been sent!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="poundage/PoundageWidget.cpp" line="257"/>
+        <source>Fail to cancel guarantee order!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="poundage/PoundageWidget.cpp" line="301"/>
         <source>汇率由低到高</source>
         <translation type="unfinished">Rate low-high</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="290"/>
+        <location filename="poundage/PoundageWidget.cpp" line="302"/>
         <source>汇率由高到低</source>
         <translation type="unfinished">Rate high-low</translation>
     </message>
@@ -4626,32 +4645,37 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Password:</translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="83"/>
+        <location filename="miner/registerdialog.cpp" line="86"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="111"/>
-        <source>Register transaction has been sent out!</source>
+        <location filename="miner/registerdialog.cpp" line="114"/>
+        <source>Transaction of register-account has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="119"/>
+        <location filename="miner/registerdialog.cpp" line="125"/>
         <source>Balance of this account is not enough!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="147"/>
+        <location filename="miner/registerdialog.cpp" line="129"/>
+        <source>Fail to register account!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/registerdialog.cpp" line="149"/>
         <source>The name is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="152"/>
+        <location filename="miner/registerdialog.cpp" line="154"/>
         <source>This name has been used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="171"/>
+        <location filename="miner/registerdialog.cpp" line="173"/>
         <source>The name that will be registered is not the same as current name. Sure to change the name of this account?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4808,22 +4832,27 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Password</translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="85"/>
+        <location filename="exchange/selldialog.cpp" line="87"/>
         <source>Transaction of sell-order has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="142"/>
+        <location filename="exchange/selldialog.cpp" line="94"/>
+        <source>Fail to create sell-order!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/selldialog.cpp" line="143"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="154"/>
+        <location filename="exchange/selldialog.cpp" line="155"/>
         <source>Assets can not be the same!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/selldialog.cpp" line="187"/>
+        <location filename="exchange/selldialog.cpp" line="188"/>
         <source>Max: %1 %2</source>
         <oldsource>Total %1 %2</oldsource>
         <translation type="unfinished"></translation>
@@ -5050,6 +5079,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="setdialog.cpp" line="505"/>
         <source>wrong password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setdialog.cpp" line="524"/>
+        <source>Fail to modify the password!</source>
+        <oldsource>Fail to set password!</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5394,7 +5429,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="dialog/TransactionResultDialog.ui" line="120"/>
         <source>交易结构体</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Transaction struct</translation>
     </message>
     <message>
         <location filename="dialog/TransactionResultDialog.cpp" line="28"/>
@@ -5636,61 +5671,61 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">More than 40 bytes</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="149"/>
+        <location filename="transfer/transferpage.cpp" line="151"/>
         <source>Please enter the amount and address.</source>
         <oldsource>Please enter the amount and Add.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="157"/>
+        <location filename="transfer/transferpage.cpp" line="159"/>
         <source>The amount can not be 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="411"/>
+        <location filename="transfer/transferpage.cpp" line="309"/>
+        <source>Fail to transfer!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="transfer/transferpage.cpp" line="409"/>
         <source>You can only send %1s to multisig address currently.</source>
         <oldsource>You can only send %1s to multi-signature address currently.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="301"/>
+        <location filename="transfer/transferpage.cpp" line="302"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="311"/>
-        <source>Transaction sent failed: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="transfer/transferpage.cpp" line="396"/>
+        <location filename="transfer/transferpage.cpp" line="394"/>
         <source>Valid account address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="403"/>
+        <location filename="transfer/transferpage.cpp" line="401"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="417"/>
+        <location filename="transfer/transferpage.cpp" line="415"/>
         <source>Valid multisig address.</source>
         <oldsource>Valid multi-signature address.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="424"/>
+        <location filename="transfer/transferpage.cpp" line="422"/>
         <source>Invalid address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="509"/>
+        <location filename="transfer/transferpage.cpp" line="507"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="518"/>
+        <location filename="transfer/transferpage.cpp" line="516"/>
         <source>cannot find asset!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5763,7 +5798,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="wallet.cpp" line="766"/>
-        <source>Cannot operate online transaction,please wait for block sync finished!</source>
+        <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
+        <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5929,6 +5965,16 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <source>取消</source>
         <translation type="unfinished">Cancel</translation>
     </message>
+    <message>
+        <location filename="withdrawpage/WithdrawConfirmWidget.cpp" line="72"/>
+        <source>Transaction of withdraw-crosschain-balance has been sent,please wait for confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/WithdrawConfirmWidget.cpp" line="79"/>
+        <source>Fail to withdraw crosschain balance!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>WithdrawContractBalanceDialog</name>
@@ -6008,17 +6054,22 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="obsolete">Fee</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="89"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="91"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="105"/>
-        <source>Transaction of withdraw from the exchange contract has been sent out!</source>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="107"/>
+        <source>Transaction of withdraw-balance from the exchange contract has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="166"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="114"/>
+        <source>Fail to withdraw balance from the exchange contract!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="167"/>
         <source>Max: %1 %2</source>
         <oldsource>total %1 %2</oldsource>
         <translation type="unfinished"></translation>

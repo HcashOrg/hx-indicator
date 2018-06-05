@@ -3,8 +3,9 @@
 
 #include "wallet.h"
 #include "commondialog.h"
-
 #include "FeeChooseWidget.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
     QDialog(parent),
@@ -88,18 +89,17 @@ void LockToMinerDialog::jsonDataUpdated(QString id)
         {
             close();
 
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Pledge asset to miner successfully!"));
-            commonDialog.pop();
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of lock-to-miner has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
         {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Lock balance to miner failed: " + errorMessage );
-            commonDialog.pop();
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to lock balance to miner!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
     }
 }

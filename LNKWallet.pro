@@ -47,7 +47,6 @@ SOURCES += main.cpp\
     commondialog.cpp \
     showcontentdialog.cpp \
     namedialog.cpp \
-    deleteaccountdialog.cpp \
     exportdialog.cpp \
     importdialog.cpp \
     control/myprogressbar.cpp \
@@ -159,7 +158,6 @@ HEADERS  += firstlogin.h \
     commondialog.h \
     showcontentdialog.h \
     namedialog.h \
-    deleteaccountdialog.h \
     exportdialog.h \
     importdialog.h \
     control/myprogressbar.h \
@@ -272,7 +270,6 @@ FORMS    += firstlogin.ui \
     commondialog.ui \
     showcontentdialog.ui \
     namedialog.ui \
-    deleteaccountdialog.ui \
     exportdialog.ui \
     importdialog.ui \
     control/shadowwidget.ui \

@@ -4,6 +4,8 @@
 #include "wallet.h"
 #include "commondialog.h"
 #include "FeeChooseWidget.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 SellDialog::SellDialog(QWidget *parent) :
     QDialog(parent),
@@ -81,18 +83,17 @@ void SellDialog::jsonDataUpdated(QString id)
         {
             close();
 
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Transaction of sell-order has been sent out!"));
-            commonDialog.pop();
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of sell-order has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
-        {
-            int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
-
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Put on sell-order failed: " + errorMessage );
-            commonDialog.pop();
+        {            
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to create sell-order!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
         return;
