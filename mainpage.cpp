@@ -16,7 +16,6 @@
 #include "importdialog.h"
 #include "commondialog.h"
 #include "showcontentdialog.h"
-#include "dialog/renamedialog.h"
 #include "dialog/backupwalletdialog.h"
 #include "control/qrcodedialog.h"
 
@@ -509,52 +508,6 @@ void MainPage::showExportDialog(QString name)
 }
 
 
-
-void MainPage::renameAccount(QString name)
-{
-    RenameDialog renameDialog;
-    QString newName = renameDialog.pop();
-
-    if( !newName.isEmpty() && newName != name)
-    {
-        UBChain::getInstance()->write("wallet_account_rename " + name + " " + newName + '\n');
-        QString result = UBChain::getInstance()->read();
-        qDebug() << result;
-        if( result.mid(0,2) == "OK")
-        {
-            mutexForConfigFile.lock();
-            UBChain::getInstance()->configFile->beginGroup("/accountInfo");
-            QStringList keys = UBChain::getInstance()->configFile->childKeys();
-            foreach (QString key, keys)
-            {
-                if( UBChain::getInstance()->configFile->value(key) == name)
-                {
-                    UBChain::getInstance()->configFile->setValue(key, newName);
-                    break;
-                }
-            }
-            UBChain::getInstance()->configFile->endGroup();
-            mutexForConfigFile.unlock();
-            UBChain::getInstance()->balanceMapInsert( newName, UBChain::getInstance()->balanceMapValue(name));
-            UBChain::getInstance()->balanceMapRemove(name);
-            UBChain::getInstance()->registerMapInsert( newName, UBChain::getInstance()->registerMapValue(name));
-            UBChain::getInstance()->registerMapRemove(name);
-            UBChain::getInstance()->addressMapInsert( newName, UBChain::getInstance()->addressMapValue(name));
-            UBChain::getInstance()->addressMapRemove(name);
-
-//            detailWidget->accountName = newName;
-            emit newAccount(newName);
-
-        }
-        else
-        {
-            return;
-        }
-
-
-    }
-}
-
 void MainPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     if(!inited)     return;
@@ -568,9 +521,9 @@ void MainPage::on_copyBtn_clicked()
     QClipboard* clipBoard = QApplication::clipboard();
     clipBoard->setText(ui->addressLabel->text());
 
-    CommonDialog commonDialog(CommonDialog::OkOnly);
-    commonDialog.setText(tr("Copy to clipboard"));
-    commonDialog.pop();
+//    CommonDialog commonDialog(CommonDialog::OkOnly);
+//    commonDialog.setText(tr("Copy to clipboard"));
+//    commonDialog.pop();
 }
 
 void MainPage::on_qrcodeBtn_clicked()

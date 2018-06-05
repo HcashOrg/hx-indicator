@@ -22,6 +22,7 @@ public:
     void setInitNone(bool non = false);
     void setInitColor(const QColor color);
     void setEnabled(bool enabled);
+    void setButtonFixSize(int width, int height);
 private:
     void InitWidget();
     void InitStyle();

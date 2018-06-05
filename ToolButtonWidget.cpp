@@ -55,6 +55,12 @@ void ToolButtonWidget::setEnabled(bool enabled)
     ui->toolButton->setEnabled(enabled);
 }
 
+void ToolButtonWidget::setButtonFixSize(int width, int height)
+{
+    ui->toolButton->setFixedWidth(width);
+    ui->toolButton->setFixedHeight(height);
+}
+
 void ToolButtonWidget::InitWidget()
 {
     InitStyle();

@@ -40,6 +40,7 @@
 #include <QDateTime>
 #include <QVector>
 #include <QTimer>
+#include <QGraphicsEffect>
 
 #include "frame.h"
 #include "extra/style.h"

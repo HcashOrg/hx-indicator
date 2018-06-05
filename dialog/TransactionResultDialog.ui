@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CheckPwdDialog</class>
- <widget class="QDialog" name="CheckPwdDialog">
+ <class>TransactionResultDialog</class>
+ <widget class="QDialog" name="TransactionResultDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -25,10 +25,10 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>180</y>
-      <width>420</width>
-      <height>220</height>
+      <x>260</x>
+      <y>60</y>
+      <width>440</width>
+      <height>460</height>
      </rect>
     </property>
     <property name="font">
@@ -36,69 +36,13 @@
       <family>Microsoft YaHei UI Light</family>
      </font>
     </property>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>70</y>
-       <width>120</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>输入钱包密码：</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="pwdLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>70</y>
-       <width>240</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="echoMode">
-      <enum>QLineEdit::Password</enum>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="cancelBtn">
-     <property name="geometry">
-      <rect>
-       <x>220</x>
-       <y>140</y>
-       <width>120</width>
-       <height>36</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Microsoft YaHei UI Light</family>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>取消</string>
-     </property>
-    </widget>
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
       <rect>
-       <x>80</x>
-       <y>140</y>
-       <width>120</width>
-       <height>36</height>
+       <x>172</x>
+       <y>410</y>
+       <width>96</width>
+       <height>30</height>
       </rect>
      </property>
      <property name="font">
@@ -119,23 +63,10 @@
       <string>确定</string>
      </property>
     </widget>
-    <widget class="QLabel" name="tipLabel2">
-     <property name="geometry">
-      <rect>
-       <x>140</x>
-       <y>110</y>
-       <width>200</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>395</x>
+       <x>415</x>
        <y>12</y>
        <width>13</width>
        <height>13</height>
@@ -149,6 +80,75 @@
      </property>
      <property name="styleSheet">
       <string notr="true"/>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="infoLabel">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>40</y>
+       <width>240</width>
+       <height>60</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>120</y>
+       <width>200</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>交易结构体</string>
+     </property>
+    </widget>
+    <widget class="QTextBrowser" name="textBrowser">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>150</y>
+       <width>360</width>
+       <height>240</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="copyBtn">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>130</y>
+       <width>11</width>
+       <height>11</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string/>

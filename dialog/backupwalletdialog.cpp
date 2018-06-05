@@ -4,7 +4,6 @@
 #include "wallet.h"
 #include "commondialog.h"
 
-
 BackupWalletDialog::BackupWalletDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::BackupWalletDialog)
@@ -18,7 +17,7 @@ BackupWalletDialog::BackupWalletDialog(QWidget *parent) :
 
     ui->widget->setObjectName("widget");
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
+    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
     ui->backupBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);

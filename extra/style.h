@@ -11,6 +11,8 @@
 #define CLOSEBTN_STYLE  "QToolButton{background-image:url(:/ui/wallet_ui/close.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}"   \
                         "QToolButton:hover{background-color:rgb(208,228,255);"
 
+#define BACKGROUNDWIDGET_STYLE  "#widget {background-color:rgba(10, 10, 10,100);}"
+
 #define CONTAINERWIDGET_STYLE   "#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}"  \
                                 "QLabel{color:rgb(51,51,51);}"
 

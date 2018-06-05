@@ -52,8 +52,6 @@ private slots:
 
     void showExportDialog(QString name);
 
-    void renameAccount(QString name);
-
 
 //    void showDetailWidget(QString name);
 

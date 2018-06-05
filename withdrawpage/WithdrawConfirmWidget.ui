@@ -144,7 +144,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
 font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
-    <string>交易密码</string>
+    <string>钱包密码</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit">

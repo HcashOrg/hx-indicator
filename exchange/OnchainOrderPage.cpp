@@ -28,10 +28,10 @@ OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
     ui->ordersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->ordersTableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->ordersTableWidget->verticalHeader()->setVisible(false);
-    ui->ordersTableWidget->setColumnWidth(0,160);
-    ui->ordersTableWidget->setColumnWidth(1,160);
-    ui->ordersTableWidget->setColumnWidth(2,160);
-    ui->ordersTableWidget->setColumnWidth(3,180);
+    ui->ordersTableWidget->setColumnWidth(0,190);
+    ui->ordersTableWidget->setColumnWidth(1,180);
+    ui->ordersTableWidget->setColumnWidth(2,130);
+    ui->ordersTableWidget->setColumnWidth(3,90);
 
     ui->ordersTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
@@ -128,11 +128,12 @@ qDebug() << "Rrrrrrrrrrrr " << _data;
         for(int j = 3;j < 4;++j)
         {
             ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
+            toolButtonItem->setButtonFixSize(80,20);
 
             if(UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText()) == contractAddress)
             {
                 toolButtonItem->setBtnEnabled(false);
-                toolButtonItem->setText(tr("my own order"));
+                toolButtonItem->setText(tr("my order"));
             }
             else
             {

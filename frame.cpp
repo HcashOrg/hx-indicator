@@ -1214,7 +1214,7 @@ void Frame::jsonDataUpdated(QString id)
         if( result == "\"result\":null")
         {
             hide();
-            QTimer::singleShot(1000,qApp,SLOT(quit()));
+            QTimer::singleShot(2000,qApp,SLOT(quit()));
 //            qApp->quit();
         }
         return;
