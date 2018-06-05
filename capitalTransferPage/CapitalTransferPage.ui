@@ -305,9 +305,9 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QLabel" name="label_marktip">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>340</y>
-     <width>281</width>
+     <x>380</x>
+     <y>146</y>
+     <width>181</width>
      <height>20</height>
     </rect>
    </property>

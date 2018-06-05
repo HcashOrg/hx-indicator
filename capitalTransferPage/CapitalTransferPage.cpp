@@ -352,7 +352,7 @@ void CapitalTransferPage::CreateTransaction()
 
 void CapitalTransferPage::getMarkNumber()
 {
-    QString tip = tr("already withdraw %1 ,wait for confirm!");
+    QString tip = tr(" %1 is pending!");
     double number = UBChain::getInstance()->mainFrame->crossMark->CalTransaction(_p->account_name,_p->symbol);
     qDebug()<<"get---get---"<<number;
     if(number > dust_number[_p->symbol])

@@ -242,7 +242,7 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
     QString hash = object.value("data").toObject().value("hash").toString();
     unsigned long long confirm = object.value("data").toObject().value("confirmations").toInt();
-    if(confirm > 2)
+    if(confirm > 3)
     {
         RemoveTransaction(hash);
     }
