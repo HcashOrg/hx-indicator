@@ -45,6 +45,8 @@ private:
     void PostQueryTunnelMoney(const QString &symbol,const QString &tunnelAddress);
 
     void CreateTransaction();
+
+    void getMarkNumber();
 protected:
     void paintEvent(QPaintEvent *event);
 private:

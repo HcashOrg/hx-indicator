@@ -138,6 +138,10 @@ void FunctionWidget::ShowMoreWidgetSlots()
     connect(actionUpdate,&QAction::triggered,this,&FunctionWidget::ShowUpdateWidgetSlots);
     _p->contextMenu->show();
     _p->contextMenu->hide();
+
+    bool a = _p->contextMenu->testAttribute(Qt::WA_NoSystemBackground);
+    _p->contextMenu->setAttribute(Qt::WA_TranslucentBackground );
+    _p->contextMenu->setAttribute(Qt::WA_NoSystemBackground,a);
     _p->contextMenu->exec(mapToGlobal(QPoint(70,height()-_p->contextMenu->height())));
     updateCheckState(4);
 }

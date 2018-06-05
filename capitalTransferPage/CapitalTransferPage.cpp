@@ -11,6 +11,7 @@
 
 #include "extra/HttpManager.h"
 #include "commondialog.h"
+#include "crossmark/crosscapitalmark.h"
 
 static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001}};
 class CapitalTransferPage::CapitalTransferPagePrivate
@@ -166,6 +167,8 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         }
 
         qDebug()<<"多签地址"<<_p->multisig_address;
+
+        UBChain::getInstance()->mainFrame->crossMark->checkUpData(_p->account_name,_p->symbol);
     }
     else if("captial-createrawtransaction" == id)
     {//获取到创建交易信息
@@ -191,8 +194,12 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
     }
     else if("captial-signrawtransaction" == id)
     {
-        qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);
+        QString result = UBChain::getInstance()->jsonDataValue( id);
+        result.prepend("{");
+        result.append("}");
+        UBChain::getInstance()->mainFrame->crossMark->TransactionInput(result,_p->symbol,_p->account_name,ui->lineEdit_number->text().toDouble());
 
+        qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);        
         CommonDialog dia(CommonDialog::OkOnly);
         dia.setText(UBChain::getInstance()->jsonDataValue( id));
         dia.pop();
@@ -343,6 +350,22 @@ void CapitalTransferPage::CreateTransaction()
 
 }
 
+void CapitalTransferPage::getMarkNumber()
+{
+    QString tip = tr("already withdraw %1 ,wait for confirm!");
+    double number = UBChain::getInstance()->mainFrame->crossMark->CalTransaction(_p->account_name,_p->symbol);
+    qDebug()<<"get---get---"<<number;
+    if(number > dust_number[_p->symbol])
+    {//说明有划出去钱，显示提示
+        ui->label_marktip->setText(tip.arg(QString::number(number,'g',_p->precision)));
+        ui->label_marktip->setVisible(true);
+    }
+    else
+    {
+        ui->label_marktip->setVisible(false);
+    }
+}
+
 void CapitalTransferPage::InitWidget()
 {
     InitStyle();
@@ -368,6 +391,10 @@ void CapitalTransferPage::InitWidget()
 
     connect(ui->lineEdit_number,&QLineEdit::textEdited,this,&CapitalTransferPage::numberChangeSlots);
     connect(ui->lineEdit_address,&QLineEdit::textEdited,this,&CapitalTransferPage::addressChangeSlots);
+
+    //记录标志
+    ui->label_marktip->setVisible(false);
+    connect(UBChain::getInstance()->mainFrame->crossMark,&CrossCapitalMark::updateMark,this,&CapitalTransferPage::getMarkNumber);
 
     //获取通道账户，获取多签地址，用于充值使用
     UBChain::getInstance()->postRPC( "captial-get_binding_account",
