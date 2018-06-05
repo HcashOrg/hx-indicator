@@ -51,7 +51,6 @@ SOURCES += main.cpp\
     exportdialog.cpp \
     importdialog.cpp \
     control/myprogressbar.cpp \
-    dialog/renamedialog.cpp \
     control/shadowwidget.cpp \
     selectwalletpathwidget.cpp \
     control/mycheckbtn.cpp \
@@ -143,7 +142,8 @@ SOURCES += main.cpp\
     update/UpdateNetWork.cpp \
     update/UpdateProcess.cpp \
     update/UpdateProgressUtil.cpp \
-    dialog/ErrorResultDialog.cpp
+    dialog/ErrorResultDialog.cpp \
+    dialog/TransactionResultDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -163,7 +163,6 @@ HEADERS  += firstlogin.h \
     exportdialog.h \
     importdialog.h \
     control/myprogressbar.h \
-    dialog/renamedialog.h \
     control/shadowwidget.h \
     selectwalletpathwidget.h \
     control/mycheckbtn.h \
@@ -258,7 +257,8 @@ HEADERS  += firstlogin.h \
     update/UpdateNetWork.h \
     update/UpdateProcess.h \
     update/UpdateProgressUtil.h \
-    dialog/ErrorResultDialog.h
+    dialog/ErrorResultDialog.h \
+    dialog/TransactionResultDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -275,7 +275,6 @@ FORMS    += firstlogin.ui \
     deleteaccountdialog.ui \
     exportdialog.ui \
     importdialog.ui \
-    dialog/renamedialog.ui \
     control/shadowwidget.ui \
     selectwalletpathwidget.ui \
     control/qrcodedialog.ui \
@@ -346,7 +345,8 @@ FORMS    += firstlogin.ui \
     exchange/WithdrawOrderDialog.ui \
     capitalTransferPage/CapitalConfirmWidget.ui \
     alltransactionwidget.ui \
-    dialog/ErrorResultDialog.ui
+    dialog/ErrorResultDialog.ui \
+    dialog/TransactionResultDialog.ui
 
 win32{
     DISTFILES += logo.rc

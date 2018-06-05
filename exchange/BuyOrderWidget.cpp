@@ -7,6 +7,9 @@
 #include "commondialog.h"
 #include "FeeChooseWidget.h"
 
+#include "dialog/TransactionResultDialog.h"
+#include "dialog/ErrorResultDialog.h"
+
 BuyOrderWidget::BuyOrderWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BuyOrderWidget)
@@ -81,18 +84,28 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
         {
             close();
 
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Transaction of buy-order has been sent out!"));
-            commonDialog.pop();
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of buy-order has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
+
+//            CommonDialog commonDialog(CommonDialog::OkOnly);
+//            commonDialog.setText(tr("Transaction of buy-order has been sent out!"));
+//            commonDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
         {
             int pos = result.indexOf("\"message\":\"") + 11;
-            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
+//            QString errorMessage = result.mid(pos, result.indexOf("\"", pos) - pos);
 
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( "Transfer to exchange contract failed: " + errorMessage );
-            commonDialog.pop();
+//            CommonDialog commonDialog(CommonDialog::OkOnly);
+//            commonDialog.setText( "Transfer to exchange contract failed: " + errorMessage );
+//            commonDialog.pop();
+
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Transfer to exchange contract failed!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
         return;

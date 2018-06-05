@@ -1,12 +1,12 @@
-#include "ErrorResultDialog.h"
-#include "ui_ErrorResultDialog.h"
+#include "TransactionResultDialog.h"
+#include "ui_TransactionResultDialog.h"
 
 #include "wallet.h"
 #include <QClipboard>
 
-ErrorResultDialog::ErrorResultDialog(QWidget *parent) :
+TransactionResultDialog::TransactionResultDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ErrorResultDialog)
+    ui(new Ui::TransactionResultDialog)
 {
     ui->setupUi(this);
 
@@ -28,38 +28,38 @@ ErrorResultDialog::ErrorResultDialog(QWidget *parent) :
     ui->copyBtn->setToolTip(tr("copy to clipboard"));
 }
 
-ErrorResultDialog::~ErrorResultDialog()
+TransactionResultDialog::~TransactionResultDialog()
 {
     delete ui;
 }
 
-void ErrorResultDialog::setInfoText(QString _text)
+void TransactionResultDialog::setInfoText(QString _text)
 {
     ui->infoLabel->setText(_text);
 }
 
-void ErrorResultDialog::setDetailText(QString _text)
+void TransactionResultDialog::setDetailText(QString _text)
 {
     ui->textBrowser->setPlainText(_text);
 }
 
-void ErrorResultDialog::pop()
+void TransactionResultDialog::pop()
 {
     move(0,0);
     exec();
 }
 
-void ErrorResultDialog::on_okBtn_clicked()
+void TransactionResultDialog::on_okBtn_clicked()
 {
     close();
 }
 
-void ErrorResultDialog::on_closeBtn_clicked()
+void TransactionResultDialog::on_closeBtn_clicked()
 {
     close();
 }
 
-void ErrorResultDialog::on_copyBtn_clicked()
+void TransactionResultDialog::on_copyBtn_clicked()
 {
     QClipboard* clipBoard = QApplication::clipboard();
     clipBoard->setText(ui->textBrowser->toPlainText());

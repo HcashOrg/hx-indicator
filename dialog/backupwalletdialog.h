@@ -15,7 +15,7 @@ public:
     explicit BackupWalletDialog(QWidget *parent = 0);
     ~BackupWalletDialog();
 
-    void  pop();
+    void pop();
 
 protected:
     void paintEvent(QPaintEvent *event);

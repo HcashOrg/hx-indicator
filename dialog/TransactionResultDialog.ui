@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ErrorResultDialog</class>
- <widget class="QDialog" name="ErrorResultDialog">
+ <class>TransactionResultDialog</class>
+ <widget class="QDialog" name="TransactionResultDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -117,7 +117,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>错误全文</string>
+      <string>交易结构体</string>
      </property>
     </widget>
     <widget class="QTextBrowser" name="textBrowser">
