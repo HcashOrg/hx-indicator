@@ -285,9 +285,9 @@
   <widget class="QLabel" name="label_tip">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>360</x>
      <y>254</y>
-     <width>171</width>
+     <width>201</width>
      <height>20</height>
     </rect>
    </property>
