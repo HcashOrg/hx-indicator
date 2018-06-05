@@ -35,6 +35,7 @@
 #include "exchange/OnchainOrderPage.h"
 #include "exchange/myexchangecontractpage.h"
 #include "extra/transactiondb.h"
+#include "crossmark/crosscapitalmark.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -246,11 +247,15 @@ Frame::Frame(): timer(NULL),
 
     //朱正天--自动转账
     autoDeposit = new DepositAutomatic(this);
+    //自动记录链外资金划转
+    crossMark = new CrossCapitalMark(this);
 }
 
 Frame::~Frame()
 {
 
+    delete crossMark;
+    crossMark = nullptr;
     qDebug() << "~Frame begin;";
 
     if(centralWidget)

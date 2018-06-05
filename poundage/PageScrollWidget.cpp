@@ -51,8 +51,16 @@ void PageScrollWidget::SetTotalPage(unsigned int number)
     ui->lineEdit->setValidator( validator );
 
     ResetButton();
-    ui->lineEdit->setVisible(true);
-    ui->lineEdit->setText("1");
+    if(_p->totalPage > _p->buttonNumber)
+    {
+        ui->lineEdit->setVisible(true);
+        ui->lineEdit->setText("1");
+    }
+    else
+    {
+        ui->lineEdit->setVisible(false);
+        ui->lineEdit->setText("1");
+    }
 }
 
 void PageScrollWidget::SetCurrentPage(unsigned int number)
@@ -238,22 +246,17 @@ void PageScrollWidget::InitWidget()
 
 void PageScrollWidget::InitStyle()
 {
-    setStyleSheet("QToolButton{\
-                  max-height:20 px;\
-                  max-width:20 px;\
-                  min-height:20 px;\
-                  min-width:20 px;\
-                  font:\"Microsoft YaHei UI Light\";\
-                  font-size:12px;\
-                  font-weight:580;\
-                  border-top-left-radius:10px;  \
-                  border-top-right-radius:10px; \
-                  border-bottom-left-radius:10px;  \
-                  border-bottom-right-radius:10px; \
-                  border:1px solid;\
-                  border-color:#CACACA;\
+    setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/circle1.png);background-repeat: no-repeat;background-position: center;border: none;\
+                  max-height:18 px;\
+                  max-width:18 px;\
+                  min-height:18 px;\
+                  min-width:18 px;\
+                  text-align :center;\
+                  font:\"Microsoft YaHei UI\";\
+                  font-size:10px;\
+                  font-weight:bold;\
                   color:#CACACA;}"
-                  "QToolButton:checked{border-color:#4861DC;\
+                  "QToolButton:checked{background-image:url(:/ui/wallet_ui/circle.png);background-repeat: no-repeat;background-position: center;border: none;\
                    color:#4861DC;}"
                   "QToolButton#toolButton_next{border:none;}QToolButton#toolButton_pre{border:none;}"
                   "QLineEdit{max-height:20 px;\
@@ -314,6 +317,7 @@ void PageScrollWidget::ResetButton()
     for(unsigned int i = 0; i < _p->buttonNumber;++i)
     {
         QToolButton *toolButton = new QToolButton(this);
+        toolButton->setToolButtonStyle(Qt::ToolButtonTextOnly);
         toolButton->setCheckable(true);
         connect(toolButton,&QToolButton::clicked,this,&PageScrollWidget::buttonClickSlots);
         ui->button_layout->addWidget(toolButton);

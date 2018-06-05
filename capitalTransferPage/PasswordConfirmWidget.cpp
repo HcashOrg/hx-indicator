@@ -90,16 +90,9 @@ void PasswordConfirmWidget::InitStyle()
 //    palette.setColor(QPalette::Window, QColor(10,10,10,100));
 //    setPalette(palette);
 
-    setStyleSheet("QToolButton#toolButton_confirm{color:white;\
-                                      border-top-left-radius:10px;  \
-                                      border-top-right-radius:10px; \
-                                      border-bottom-left-radius:10px;  \
-                                      border-bottom-right-radius:10px; \
-                                      border:none;\
-                                      background-color:#4861DC;}"
-                  "QToolButton#toolButton_confirm::hover{background-color:#00D2FF;}"
-                  "QToolButton#toolButton_cancel{border:none;background:transparent;color:#4861DC;}"
-                  "QRadioButton{color:#4861DC;}"
+    ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
+    ui->toolButton_cancel->setStyleSheet(CLOSEBTN_STYLE);
+    setStyleSheet(
                   "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
                   );
 

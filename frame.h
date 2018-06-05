@@ -39,6 +39,7 @@ class OnchainOrderPage;
 class MyExchangeContractPage;
 class PoundageWidget;
 
+class CrossCapitalMark;
 class Frame:public QFrame
 {
     Q_OBJECT
@@ -177,6 +178,8 @@ private slots:
 
 private:
     DepositAutomatic *autoDeposit;
+public:
+    CrossCapitalMark *crossMark;
 };
 
 
