@@ -101,7 +101,6 @@ bool CrossCapitalMark::ReadFromDoc()
             }
         }
     }
-    qDebug()<<"aaaaaaaaa"<<(*(*_p->crossData.front()->transaction.begin()).second.begin()).first;
     return true;
 }
 
