@@ -33,7 +33,7 @@ void ContactBriefWidget::InitWidget()
 {
     InitStyle();
 
-    connect(ui->pushButton,&QPushButton::clicked,this,&ContactBriefWidget::addNewContactSignal);
+    connect(ui->toolButton,&QToolButton::clicked,this,&ContactBriefWidget::addNewContactSignal);
 }
 
 void ContactBriefWidget::InitStyle()
@@ -44,13 +44,11 @@ void ContactBriefWidget::InitStyle()
     setPalette(palette);
 
 
-    ui->pushButton->setIconSize(QSize(18,18));
-    ui->pushButton->setIcon(QIcon(":/ui/wallet_ui/addContact.png"));
-    ui->pushButton->setStyleSheet("QPushButton{border-top-left-radius:10px;  \
-                                  border-top-right-radius:10px; \
-                                  border-bottom-left-radius:10px;  \
-                                  border-bottom-right-radius:10px; \
-                                  border:none;\
-                                  background-color:#00D2FF;\}"
-                                  "QPushButton::hover{background-color:#4861DC;}");
+//    ui->pushButton->setIconSize(QSize(18,18));
+//    ui->pushButton->setIcon(QIcon(":/ui/wallet_ui/addContact.png"));
+
+//    setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/addContact_1.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}"   \
+//                                  "QToolButton:hover{background-image:url(:/ui/wallet_ui/addContact.png);");
+
+
 }

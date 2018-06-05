@@ -119,20 +119,26 @@ void FunctionWidget::ShowMoreWidgetSlots()
 
     //设置更多按钮
     QAction* actionSet = _p->contextMenu->addAction(tr("Setting"));
+    _p->contextMenu->addSeparator();
     QAction* actionLock = _p->contextMenu->addAction(tr("Lock"));
+    _p->contextMenu->addSeparator();
     QAction* actionConsole = _p->contextMenu->addAction(tr("Console"));
+    _p->contextMenu->addSeparator();
     QMenu *helpMenu = new QMenu(tr("Help"),_p->contextMenu);
     _p->contextMenu->addMenu(helpMenu);
     QAction* actionAbout = helpMenu->addAction(tr("About Us"));
+    helpMenu->addSeparator();
     QAction* actionUpdate = helpMenu->addAction(tr("Update"));
+    helpMenu->setStyleSheet("QMenu {border-bottom-left-radius:10px;}");
 
     connect(actionLock,&QAction::triggered,this,&FunctionWidget::lock);
     connect(actionSet,&QAction::triggered,this,&FunctionWidget::ShowSettingWidgetSlots);
     connect(actionConsole,&QAction::triggered,this,&FunctionWidget::ShowConsoleWidgetSlots);
     connect(actionAbout,&QAction::triggered,this,&FunctionWidget::ShowAboutWidgetSlots);
     connect(actionUpdate,&QAction::triggered,this,&FunctionWidget::ShowUpdateWidgetSlots);
-
-    _p->contextMenu->exec(mapToGlobal(QPoint(70,height()-136)));
+    _p->contextMenu->show();
+    _p->contextMenu->hide();
+    _p->contextMenu->exec(mapToGlobal(QPoint(70,height()-_p->contextMenu->height())));
     updateCheckState(4);
 }
 
@@ -231,14 +237,14 @@ void FunctionWidget::InitStyle()
     QToolButton{min-height:24px;min-width:24px;background: rgb(72,97,220);border:none;color:white;font:\"Microsoft YaHei UI Light\";}\
     QToolButton:hover{background-color: rgb(0,210, 255);}\
     QToolButton:pressed{background-color: rgb(84,116, 235);}\
-    QToolButton:checked{background-color: rgb(84,116, 235);}\
+    QToolButton:checked{border-left:2px solid rgb(0,210,255);background-color: rgb(84,116, 235);}\
                   "
 
                   );
-    _p->contextMenu->setStyleSheet("QMenu{background-color:rgb(238,241,253);border: none;border-radius:10px;}"
-                                   "QMenu::item {border:none;background-color:rgb(238,241,253);color:black;border-bottom:1px solid #DBDBDB;}"
-                                   "QMenu::item::selected{border:none;background-color: #829DFF;}"
-                                   "QMenu::indicator{margin:0px 4px;}");
+//    _p->contextMenu->setStyleSheet("QMenu {background-color:rgb(89,87,87);border: 1px solid rgb(192, 196, 212);}"
+//                "QMenu::item {border: 0px solid rgb(192, 196, 212);background-color:rgb(238,240,252);padding:8px 8px;}"
+//                "QMenu::item:selected {background-color:rgb(130,157,255);}"
+//                "QMenu::separator {height: 1px;background-color: rgb(192, 196, 212);}");
 
     ui->toolButton_account->setIconSize(QSize(24,24));
     ui->toolButton_advanced->setIconSize(QSize(24,24));

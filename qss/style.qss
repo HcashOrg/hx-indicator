@@ -7,10 +7,10 @@ QComboBox QAbstractItemView {outline: 0px;}
 /*QComboBox QAbstractItemView::item { min-height: 30px;color:rgb(192,196,212);selection-color: white;background-color: rgb(58,62,82);selection-background-color: rgb(44,48,67);}*/
 /*QComboBox QAbstractItemView::item:hover {color: white;background-color: rgb(44,48,67);}*/
 
-QMenu {background-color:rgb(89,87,87);border: 1px solid rgb(192, 196, 212);}
-QMenu::item {border: 0px solid rgb(192, 196, 212);background-color:rgb(238,240,252);padding:8px 8px;}
+QMenu {border-top-left-radius:10px;border-bottom-right-radius:10px;border-top-right-radius:10px;background-color:rgba(238,241,253,190);border: 0px solid red;}
+QMenu::item {border-radius:10px;border: 0px solid green;background-color:transparent;padding:5px 10px;}
 QMenu::item:selected {background-color:rgb(130,157,255);}
-QMenu::separator {height: 1px;background-color: rgb(192, 196, 212);}
+QMenu::separator {height: 2px;background-color: #FCFCFC;}
 
 
 QScrollBar:vertical{border:none; width:20px;background:white;padding:20px 4px 20px 8px;}

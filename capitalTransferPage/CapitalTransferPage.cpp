@@ -238,6 +238,18 @@ void CapitalTransferPage::passwordCancelSlots()
 
 void CapitalTransferPage::numberChangeSlots(const QString &number)
 {
+    //修正数值
+    QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_number->validator()));
+    if(!via)
+    {
+        return;
+    }
+    if(ui->lineEdit_number->text().toDouble() > via->top())
+    {
+        ui->lineEdit_number->setText(ui->lineEdit_number->text().remove(ui->lineEdit_number->text().length()-1,1));
+        return;
+    }
+
     CreateTransaction();
 }
 
@@ -281,7 +293,7 @@ void CapitalTransferPage::CreateTransaction()
     if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
 
     if(_p->tunnel_account_address.isEmpty() || _p->multisig_address.isEmpty() ||
-       _p->symbol.isEmpty() || _p->actualNumber.isEmpty())
+       _p->symbol.isEmpty() || _p->actualNumber.isEmpty() || ui->lineEdit_number->text().isEmpty())
     {
         _p->actualNumber = "0";
         ui->label_tip->setVisible(false);

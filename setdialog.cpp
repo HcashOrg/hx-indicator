@@ -54,13 +54,13 @@ SetDialog::SetDialog(QWidget *parent) :
 
     ui->generalBtn->setChecked(false);
 
-    ui->generalBtn->setIconSize(QSize(20,20));
+    ui->generalBtn->setIconSize(QSize(10,10));
     ui->generalBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
 
-    ui->safeBtn->setIconSize(QSize(20,20));
+    ui->safeBtn->setIconSize(QSize(10,10));
     ui->safeBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
 
-    ui->accountBtn->setIconSize(QSize(20,20));
+    ui->accountBtn->setIconSize(QSize(10,10));
     ui->accountBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
 
 

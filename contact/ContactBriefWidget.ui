@@ -21,16 +21,24 @@
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>50</y>
+     <x>74</x>
+     <y>41</y>
      <width>200</width>
      <height>26</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <family>Microsoft YaHei UI</family>
+     <pointsize>-1</pointsize>
+     <weight>9</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 75 20px &quot;Microsoft YaHei UI&quot;;
+</string>
    </property>
    <property name="text">
     <string>联系人</string>
@@ -39,7 +47,7 @@
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QToolButton" name="toolButton">
    <property name="geometry">
     <rect>
      <x>680</x>
@@ -48,26 +56,10 @@
      <height>20</height>
     </rect>
    </property>
-   <property name="minimumSize">
-    <size>
-     <width>18</width>
-     <height>18</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>180</width>
-     <height>180</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei UI Light</family>
-     <pointsize>16</pointsize>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
+   <property name="styleSheet">
+    <string notr="true">    QToolButton{background-image: url(:/ui/wallet_ui/addContact.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}
+    QToolButton:hover{background-image: url(:/ui/wallet_ui/addContact_1.png);}
+</string>
    </property>
    <property name="text">
     <string/>
