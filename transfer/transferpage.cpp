@@ -141,6 +141,8 @@ void TransferPage::accountComboBox_currentIndexChanged(const QString &arg1)
 
 void TransferPage::on_sendBtn_clicked()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     if(ui->amountLineEdit->text().size() == 0 || ui->sendtoLineEdit->text().size() == 0)
     {
         CommonDialog tipDialog(CommonDialog::OkOnly);

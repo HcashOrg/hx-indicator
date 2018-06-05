@@ -219,6 +219,9 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
             return;
         }
 
+
+        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
         BuyOrderWidget* buyOrderWidget = new BuyOrderWidget(this);
         buyOrderWidget->setAttribute(Qt::WA_DeleteOnClose);
         buyOrderWidget->move(0,0);

@@ -69,7 +69,8 @@ void CapitalTransferPage::ConfirmSlots()
     QString actualShow = _p->actualNumber + " "+_p->symbol;
     QString feeShow = ui->label_fee->text();
     QString totalShow = ui->lineEdit_number->text() + " "+_p->symbol;
-    CapitalConfirmWidget *confirmWidget = new CapitalConfirmWidget(CapitalConfirmWidget::CapitalConfirmInput(_p->account_address,
+    CapitalConfirmWidget *confirmWidget = new CapitalConfirmWidget(CapitalConfirmWidget::CapitalConfirmInput(
+                                                                   ui->radioButton_deposit->isChecked()?_p->account_address:ui->lineEdit_address->text(),
                                                                    actualShow,feeShow,totalShow),UBChain::getInstance()->mainFrame);
     connect(confirmWidget,&CapitalConfirmWidget::ConfirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
     connect(confirmWidget,&CapitalConfirmWidget::CancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
@@ -277,6 +278,8 @@ void CapitalTransferPage::PostQueryTunnelMoney(const QString &symbol, const QStr
 
 void CapitalTransferPage::CreateTransaction()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     if(_p->tunnel_account_address.isEmpty() || _p->multisig_address.isEmpty() ||
        _p->symbol.isEmpty() || _p->actualNumber.isEmpty())
     {
@@ -290,12 +293,12 @@ void CapitalTransferPage::CreateTransaction()
     double extraNumber = _p->asset_max_ammount.toDouble() - ui->lineEdit_number->text().toDouble();
     if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
     {
-        ui->label_tip->setText(tr("less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
+        ui->label_tip->setText(tr("number cannot less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
         ui->label_tip->setVisible(true);
         ui->toolButton_confirm->setEnabled(false);
         return;
     }
-    else if(extraNumber < dust_number[_p->symbol])
+    else if(extraNumber > 1e-10 && extraNumber < dust_number[_p->symbol])
     {
         ui->label_tip->setText(tr("balance less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
         ui->label_tip->setVisible(true);
@@ -311,11 +314,19 @@ void CapitalTransferPage::CreateTransaction()
                                          toJsonFormat( "createrawtransaction", QJsonArray()
                                          << _p->tunnel_account_address<<_p->multisig_address<<_p->actualNumber<<_p->symbol ));
     }
-    else if(ui->radioButton_withdraw->isChecked() && _p->tunnel_account_address != ui->lineEdit_address->text())
-    {
-        UBChain::getInstance()->postRPC( "captial-createrawtransaction",
-                                         toJsonFormat( "createrawtransaction", QJsonArray()
-                                         << _p->tunnel_account_address<<ui->lineEdit_address->text()<<_p->actualNumber<<_p->symbol ));
+    else if(ui->radioButton_withdraw->isChecked())
+    {//划转，账户不能时自己的账户
+        if(_p->tunnel_account_address == ui->lineEdit_address->text())
+        {
+            //提示不能给自己划转
+
+        }
+        else
+        {
+            UBChain::getInstance()->postRPC( "captial-createrawtransaction",
+                                             toJsonFormat( "createrawtransaction", QJsonArray()
+                                             << _p->tunnel_account_address<<ui->lineEdit_address->text()<<_p->actualNumber<<_p->symbol ));
+        }
     }
 
 }

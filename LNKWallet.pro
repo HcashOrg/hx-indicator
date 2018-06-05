@@ -142,7 +142,8 @@ SOURCES += main.cpp\
     KeyDataUtil.cpp \
     update/UpdateNetWork.cpp \
     update/UpdateProcess.cpp \
-    update/UpdateProgressUtil.cpp
+    update/UpdateProgressUtil.cpp \
+    dialog/ErrorResultDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -256,7 +257,8 @@ HEADERS  += firstlogin.h \
     KeyDataUtil.h \
     update/UpdateNetWork.h \
     update/UpdateProcess.h \
-    update/UpdateProgressUtil.h
+    update/UpdateProgressUtil.h \
+    dialog/ErrorResultDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -343,7 +345,8 @@ FORMS    += firstlogin.ui \
     depositpage/FeeChargeWidget.ui \
     exchange/WithdrawOrderDialog.ui \
     capitalTransferPage/CapitalConfirmWidget.ui \
-    alltransactionwidget.ui
+    alltransactionwidget.ui \
+    dialog/ErrorResultDialog.ui
 
 win32{
     DISTFILES += logo.rc

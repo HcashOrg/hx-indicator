@@ -23,6 +23,8 @@ protected:
 private slots:
     void addressChangeSlots(const QString &address);
 
+    void numberChangeSlots(const QString &number);
+
     void maxButtonSlots();
 
     void confirmButtonSlots();

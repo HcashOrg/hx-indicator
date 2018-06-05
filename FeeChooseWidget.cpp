@@ -231,6 +231,7 @@ void FeeChooseWidget::refreshUI()
 
 bool FeeChooseWidget::checkAccountBalance() const
 {
+    ui->tipLabel->setVisible(false);
     if(_p->accountName.isEmpty())
     {
         return true;

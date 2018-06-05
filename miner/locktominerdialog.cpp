@@ -31,7 +31,7 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
 
     qDebug()<<_accountName;
     ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
-                                                     _accountName,UBChain::getInstance()->feeType));
+                                                     UBChain::getInstance()->feeType,_accountName));
     ui->stackedWidget->setCurrentIndex(0);
     init();
 
@@ -106,6 +106,8 @@ void LockToMinerDialog::jsonDataUpdated(QString id)
 
 void LockToMinerDialog::on_okBtn_clicked()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     UBChain::getInstance()->postRPC( "id-lock_balance_to_miner",
                                      toJsonFormat( "lock_balance_to_miner",
                                                    QJsonArray() << ui->minerComboBox->currentText() << m_accountName

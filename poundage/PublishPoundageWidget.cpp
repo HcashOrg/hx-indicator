@@ -38,6 +38,8 @@ PublishPoundageWidget::~PublishPoundageWidget()
 
 void PublishPoundageWidget::ConfirmPublishSlots()
 {
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
     //发送指令，创建承税单
 
     QString accountName = ui->comboBox_accounts->currentText();
@@ -87,6 +89,7 @@ void PublishPoundageWidget::ChangeAssetSlots()
 {
     if(ui->comboBox_targetType->currentText().isEmpty())
     {
+        ui->lineEdit_target->clear();
         ui->lineEdit_target->setEnabled(false);
         ui->lineEdit_target->setPlaceholderText(tr("no chains!"));
         return;

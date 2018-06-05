@@ -191,7 +191,7 @@ void PoundageShowWidget::paintEvent(QPaintEvent *event)
     QWidget::paintEvent(event);
 }
 
-void PoundageShowWidget::on_tableView_pressed(const QModelIndex &index)
+void PoundageShowWidget::on_tableView_clicked(const QModelIndex &index)
 {
     if( index.column() == 2)
     {

@@ -47,6 +47,8 @@ void BottomBar::jsonDataUpdated(QString id)
 //        UBChain::getInstance()->parseBalance();
 
         QString result = UBChain::getInstance()->jsonDataValue( id);
+        qDebug()<<result;
+        CheckBlockSync(result);
         if( result.isEmpty() )  return;
 
 
@@ -89,6 +91,38 @@ void BottomBar::jsonDataUpdated(QString id)
 
     }
 
+
+}
+
+void BottomBar::CheckBlockSync(const QString &res)
+{
+    if(res.isEmpty())
+    {
+        UBChain::getInstance()->SetBlockSyncFinish(false);
+        return;
+    }
+    QString data = res;
+    data.prepend("{");
+    data.append("}");
+    QJsonParseError json_error;
+    QJsonDocument parse_doucment = QJsonDocument::fromJson(data.toLatin1(),&json_error);
+    if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject())
+    {
+        UBChain::getInstance()->SetBlockSyncFinish(false);
+        return;
+    }
+
+    QJsonObject jsonObject = parse_doucment.object();
+    QJsonObject object = jsonObject.value("result").toObject();
+    QString blockAge = object.take("head_block_age").toString();
+    if(blockAge.contains("second"))
+    {
+        UBChain::getInstance()->SetBlockSyncFinish(true);
+    }
+    else
+    {
+        UBChain::getInstance()->SetBlockSyncFinish(false);
+    }
 
 }
 

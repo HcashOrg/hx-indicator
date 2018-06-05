@@ -163,7 +163,7 @@ DepositAutomatic::~DepositAutomatic()
 void DepositAutomatic::autoDeposit()
 {
     _p->autoDeposit = UBChain::getInstance()->autoDeposit;
-    if(_p->autoDeposit && !_p->isInUpdate)
+    if(_p->autoDeposit && !_p->isInUpdate && UBChain::getInstance()->GetBlockSyncFinish())
     {
         //_p->timer->stop();
         updateData();
