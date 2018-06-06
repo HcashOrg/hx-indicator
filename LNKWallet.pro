@@ -143,7 +143,8 @@ SOURCES += main.cpp\
     update/UpdateProgressUtil.cpp \
     dialog/ErrorResultDialog.cpp \
     dialog/TransactionResultDialog.cpp \
-    crossmark/crosscapitalmark.cpp
+    crossmark/crosscapitalmark.cpp \
+    crossmark/AddressValidate.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -258,7 +259,8 @@ HEADERS  += firstlogin.h \
     update/UpdateProgressUtil.h \
     dialog/ErrorResultDialog.h \
     dialog/TransactionResultDialog.h \
-    crossmark/crosscapitalmark.h
+    crossmark/crosscapitalmark.h \
+    crossmark/AddressValidate.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \

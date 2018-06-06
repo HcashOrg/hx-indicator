@@ -124,12 +124,14 @@ void FunctionWidget::ShowMoreWidgetSlots()
     _p->contextMenu->addSeparator();
     QAction* actionConsole = _p->contextMenu->addAction(tr("Console"));
     _p->contextMenu->addSeparator();
-    QMenu *helpMenu = new QMenu(tr("Help"),_p->contextMenu);
+    QMenu *helpMenu = new QMenu(tr("Help"));
+    helpMenu->setAttribute(Qt::WA_TranslucentBackground, true);
+    helpMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | helpMenu->windowFlags());
+
     _p->contextMenu->addMenu(helpMenu);
     QAction* actionAbout = helpMenu->addAction(tr("About Us"));
     helpMenu->addSeparator();
     QAction* actionUpdate = helpMenu->addAction(tr("Update"));
-    helpMenu->setStyleSheet("QMenu {border-bottom-left-radius:10px;}");
 
     connect(actionLock,&QAction::triggered,this,&FunctionWidget::lock);
     connect(actionSet,&QAction::triggered,this,&FunctionWidget::ShowSettingWidgetSlots);
@@ -137,12 +139,13 @@ void FunctionWidget::ShowMoreWidgetSlots()
     connect(actionAbout,&QAction::triggered,this,&FunctionWidget::ShowAboutWidgetSlots);
     connect(actionUpdate,&QAction::triggered,this,&FunctionWidget::ShowUpdateWidgetSlots);
     _p->contextMenu->show();
-    _p->contextMenu->hide();
+    _p->contextMenu->close();
 
-    bool a = _p->contextMenu->testAttribute(Qt::WA_NoSystemBackground);
-    _p->contextMenu->setAttribute(Qt::WA_TranslucentBackground );
-    _p->contextMenu->setAttribute(Qt::WA_NoSystemBackground,a);
+
+
     _p->contextMenu->exec(mapToGlobal(QPoint(70,height()-_p->contextMenu->height())));
+
+
     updateCheckState(4);
 }
 
@@ -184,6 +187,13 @@ void FunctionWidget::updateCheckState(int buttonNumber)
     ui->toolButton_advanced->setChecked(2 == buttonNumber);
     ui->toolButton_exchange->setChecked(3 == buttonNumber);
     ui->toolButton_more->setChecked(4 == buttonNumber);
+
+    ui->toolButton_account->setToolButtonStyle( Qt::ToolButtonIconOnly );
+    ui->toolButton_contact->setToolButtonStyle(Qt::ToolButtonIconOnly );
+    ui->toolButton_advanced->setToolButtonStyle( Qt::ToolButtonIconOnly );
+    ui->toolButton_exchange->setToolButtonStyle( Qt::ToolButtonIconOnly );
+    ui->toolButton_more->setToolButtonStyle(Qt::ToolButtonIconOnly );
+
 }
 
 void FunctionWidget::InitWidget()
@@ -199,12 +209,6 @@ void FunctionWidget::InitWidget()
     ui->stackedWidget->addWidget(_p->accountBar);
     ui->stackedWidget->addWidget(_p->advanceBar);
     ui->stackedWidget->addWidget(_p->exchangeBar);
-
-
-
-    //ui->toolButton_more->setMenu(_p->contextMenu);
-    ////ui->toolButton_more->setArrowType(Qt::RightArrow);
-    //ui->toolButton_more->setPopupMode(QToolButton::InstantPopup );
 
     //链接信号槽
     connect(ui->toolButton_contact,&QToolButton::clicked,this,&FunctionWidget::ShowContactWidgetSlots);
@@ -228,6 +232,11 @@ void FunctionWidget::InitWidget()
     connect(this,&FunctionWidget::AccountDefaultSignal,_p->accountBar,&FunctionAccountWidget::DefaultShow);
     connect(this,&FunctionWidget::AdvanceDefaultSignal,_p->advanceBar,&FunctionAdvanceWidget::DefaultShow);
     connect(this,&FunctionWidget::ExchangeDefaultSignal,_p->exchangeBar,&FunctionExchangeWidget::DefaultShow);
+    ui->toolButton_account->installEventFilter(this);
+    ui->toolButton_advanced->installEventFilter(this);
+    ui->toolButton_contact->installEventFilter(this);
+    ui->toolButton_exchange->installEventFilter(this);
+    ui->toolButton_more->installEventFilter(this);
 }
 
 void FunctionWidget::InitStyle()
@@ -238,28 +247,53 @@ void FunctionWidget::InitStyle()
     setPalette(palette);
 
     setStyleSheet("\
-    QToolButton{min-height:24px;min-width:24px;background: rgb(72,97,220);border:none;color:white;font:\"Microsoft YaHei UI Light\";}\
+    QToolButton{padding:4px 0px;background: rgb(72,97,220);border:none;color:white;font:65 12px \"Microsoft YaHei UI \";}\
     QToolButton:hover{background-color: rgb(0,210, 255);}\
     QToolButton:pressed{background-color: rgb(84,116, 235);}\
     QToolButton:checked{border-left:2px solid rgb(0,210,255);background-color: rgb(84,116, 235);}\
                   "
 
                   );
-//    _p->contextMenu->setStyleSheet("QMenu {background-color:rgb(89,87,87);border: 1px solid rgb(192, 196, 212);}"
-//                "QMenu::item {border: 0px solid rgb(192, 196, 212);background-color:rgb(238,240,252);padding:8px 8px;}"
-//                "QMenu::item:selected {background-color:rgb(130,157,255);}"
-//                "QMenu::separator {height: 1px;background-color: rgb(192, 196, 212);}");
+    _p->contextMenu->setAttribute(Qt::WA_TranslucentBackground);
+    _p->contextMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | _p->contextMenu->windowFlags() );
+    _p->contextMenu->setMinimumWidth(88);
+    _p->contextMenu->setStyleSheet("QMenu {border-bottom-left-radius:0px;}");
 
-    ui->toolButton_account->setIconSize(QSize(24,24));
-    ui->toolButton_advanced->setIconSize(QSize(24,24));
-    ui->toolButton_contact->setIconSize(QSize(24,24));
-    ui->toolButton_exchange->setIconSize(QSize(24,24));
-    ui->toolButton_more->setIconSize(QSize(24,24));
+
+    ui->toolButton_account->setIconSize(QSize(26,26));
+    ui->toolButton_advanced->setIconSize(QSize(26,26));
+    ui->toolButton_contact->setIconSize(QSize(26,26));
+    ui->toolButton_exchange->setIconSize(QSize(26,26));
+    ui->toolButton_more->setIconSize(QSize(26,26));
 
     ui->toolButton_account->setIcon(QIcon(":/functionBar/account.png"));
     ui->toolButton_advanced->setIcon(QIcon(":/functionBar/advance.png"));
     ui->toolButton_contact->setIcon(QIcon(":/functionBar/contact.png"));
     ui->toolButton_exchange->setIcon(QIcon(":/functionBar/exchange.png"));
     ui->toolButton_more->setIcon(QIcon(":/functionBar/more.png"));
+}
 
+bool FunctionWidget::eventFilter(QObject *watched,QEvent *e)
+{
+
+    if((watched == ui->toolButton_contact ||watched == ui->toolButton_account
+        ||watched == ui->toolButton_advanced ||watched == ui->toolButton_exchange
+        ||watched == ui->toolButton_more)&& e->type() == QEvent::Enter)
+    {
+        if(QToolButton *button = qobject_cast<QToolButton*>(watched))
+        {
+            if(!button->isChecked())
+            {
+                button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+            }
+        }
+    }
+    else if((watched == ui->toolButton_contact ||watched == ui->toolButton_account
+             ||watched == ui->toolButton_advanced ||watched == ui->toolButton_exchange
+             ||watched == ui->toolButton_more) && e->type() == QEvent::Leave)
+    {
+        qobject_cast<QToolButton*>(watched)->setToolButtonStyle(Qt::ToolButtonIconOnly);
+    }
+
+    return QWidget::eventFilter(watched,e);
 }

@@ -28,6 +28,8 @@ private slots:
     void maxButtonSlots();
 
     void confirmButtonSlots();
+
+    void addressValidateSlot(bool va);
 private:
     bool validateAddress(const QString &address);
 private:
@@ -35,6 +37,9 @@ private:
     void InitStyle();
 private:
     Ui::WithdrawInputWidget *ui;
+private:
+    class DataPrivate;
+    DataPrivate *_p;
 };
 
 #endif // WITHDRAWINPUTWIDGET_H

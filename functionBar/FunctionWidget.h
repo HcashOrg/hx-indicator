@@ -2,6 +2,7 @@
 #define FUNCTIONWIDGET_H
 
 #include <QWidget>
+#include <QEvent>
 //////////////////////////////////////////////////////////////////////////
 ///<summary>左侧工具栏 </summary>
 ///
@@ -77,6 +78,10 @@ private:
 private:
     class FunctionWidgetPrivate;
     FunctionWidgetPrivate *_p;
+protected:
+
+    virtual bool eventFilter(QObject *watched,QEvent *e);
+
 };
 
 #endif // FUNCTIONWIDGET_H

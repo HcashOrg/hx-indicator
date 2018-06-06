@@ -37,6 +37,8 @@ public:
 
     std::mutex dataMutex;
 
+    std::mutex httpMutex;
+
     HttpManager httpManager;
 };
 
@@ -238,6 +240,8 @@ void CrossCapitalMark::jsonDataUpdated(const QString &id)
 
 void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
 {
+    std::lock_guard<std::mutex> mu(_p->httpMutex);
+
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
     QString hash = object.value("data").toObject().value("hash").toString();
     unsigned long long confirm = object.value("data").toObject().value("confirmations").toInt();

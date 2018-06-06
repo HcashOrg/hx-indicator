@@ -37,7 +37,7 @@ void FunctionExchangeWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(94,116,235));
+    palette.setColor(QPalette::Window, QColor(84,116,235));
     setPalette(palette);
 
     setStyleSheet(FUNCTIONBAR_TOOLBUTTON_STYLE);

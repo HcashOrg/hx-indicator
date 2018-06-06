@@ -134,9 +134,12 @@ void PoundageShowWidget::InitStyle()
 
 void PoundageShowWidget::InitContextMenu()
 {
-   _p->contextMenu = new QMenu(this);
+   _p->contextMenu = new QMenu();
    _p->defaultAction = new QAction(tr("setDefault"),this);
    _p->deleteAction = new QAction(tr("delete"),this);
+
+   _p->contextMenu->setAttribute(Qt::WA_TranslucentBackground, true);
+   _p->contextMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | _p->contextMenu->windowFlags());
 
    connect(_p->defaultAction,&QAction::triggered,this,&PoundageShowWidget::SetDefaultPoundageSlots);
    connect(_p->deleteAction,&QAction::triggered,this,&PoundageShowWidget::DeletePoundageSlots);
