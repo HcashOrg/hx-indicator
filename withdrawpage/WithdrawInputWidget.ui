@@ -179,6 +179,22 @@ color: rgb(255, 11, 35);</string>
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="label_tipAddr">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>130</y>
+     <width>271</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: red;</string>
+   </property>
+   <property name="text">
+    <string>invalid address!</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

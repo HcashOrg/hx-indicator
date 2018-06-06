@@ -128,14 +128,16 @@ void WithdrawInputWidget::confirmButtonSlots()
 void WithdrawInputWidget::addressValidateSlot(bool va)
 {
     qDebug()<<va;
-    if(!ui->lineEdit_ammount->text().isEmpty() && va)
+    if(va)
     {
-        ui->toolButton_confirm->setEnabled(true);
+        ui->label_tipAddr->setVisible(false);
+
     }
     else
     {
-        ui->toolButton_confirm->setEnabled(false);
+        ui->label_tipAddr->setVisible(true);
     }
+
 
 }
 
@@ -148,6 +150,7 @@ void WithdrawInputWidget::InitWidget()
 {
     InitStyle();
     ui->label_tipNumber->setVisible(false);
+    ui->label_tipAddr->setVisible(false);
 
     QRegExp regx("[a-zA-Z0-9]+$");
     QValidator *validator1 = new QRegExpValidator(regx, this);
@@ -156,7 +159,7 @@ void WithdrawInputWidget::InitWidget()
     QDoubleValidator *validator = new QDoubleValidator(0,0,0,ui->lineEdit_ammount);
     ui->lineEdit_ammount->setValidator( validator );
 
-    ui->toolButton_confirm->setEnabled(false);
+    //ui->toolButton_confirm->setEnabled(false);
     connect(ui->lineEdit_address,&QLineEdit::textEdited,this,&WithdrawInputWidget::addressChangeSlots);
     connect(ui->toolButton_all,&QToolButton::clicked,this,&WithdrawInputWidget::maxButtonSlots);
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&WithdrawInputWidget::confirmButtonSlots);
