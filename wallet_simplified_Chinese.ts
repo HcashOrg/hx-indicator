@@ -1553,7 +1553,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="contact/ContactTreeWidget.cpp" line="430"/>
         <source>MoveToGroup</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">移动分组</translation>
     </message>
     <message>
         <location filename="contact/ContactTreeWidget.cpp" line="432"/>

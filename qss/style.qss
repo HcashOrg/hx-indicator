@@ -7,10 +7,11 @@ QComboBox QAbstractItemView {outline: 0px;}
 /*QComboBox QAbstractItemView::item { min-height: 30px;color:rgb(192,196,212);selection-color: white;background-color: rgb(58,62,82);selection-background-color: rgb(44,48,67);}*/
 /*QComboBox QAbstractItemView::item:hover {color: white;background-color: rgb(44,48,67);}*/
 
-QMenu {border-top-left-radius:10px;border-bottom-right-radius:10px;border-top-right-radius:10px;background-color:rgba(238,241,253,190);border: 0px solid red;}
+QMenu {border-radius:10px;background-color:rgba(238,241,253,255);border: 0px solid red;}
 QMenu::item {border-radius:10px;border: 0px solid green;background-color:transparent;padding:5px 10px;}
 QMenu::item:selected {background-color:rgb(130,157,255);}
 QMenu::separator {height: 2px;background-color: #FCFCFC;}
+QMenu::right-arrow {padding:0px 10px;image:url(:/wallet_ui/right.png);}
 
 
 QScrollBar:vertical{border:none; width:20px;background:white;padding:20px 4px 20px 8px;}

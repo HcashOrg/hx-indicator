@@ -89,6 +89,9 @@
       <property name="text">
        <string>账户</string>
       </property>
+      <property name="toolButtonStyle">
+       <enum>Qt::ToolButtonIconOnly</enum>
+      </property>
      </widget>
     </item>
     <item>
@@ -112,7 +115,10 @@
        </size>
       </property>
       <property name="text">
-       <string>挂单</string>
+       <string>市场</string>
+      </property>
+      <property name="toolButtonStyle">
+       <enum>Qt::ToolButtonIconOnly</enum>
       </property>
      </widget>
     </item>
@@ -139,6 +145,9 @@
       <property name="text">
        <string>高级</string>
       </property>
+      <property name="toolButtonStyle">
+       <enum>Qt::ToolButtonIconOnly</enum>
+      </property>
      </widget>
     </item>
     <item>
@@ -163,6 +172,9 @@
       </property>
       <property name="text">
        <string>联系人</string>
+      </property>
+      <property name="toolButtonStyle">
+       <enum>Qt::ToolButtonIconOnly</enum>
       </property>
      </widget>
     </item>

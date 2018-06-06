@@ -397,8 +397,8 @@ void ContactTreeWidget::initTreeStyle()
     setSelectionMode(QAbstractItemView::SingleSelection);
 
     setStyleSheet("QWidget{border:none;}"
-                  "QTreeView{background-color:rgb(94,116,235);border:none;\
-                      color:white;font:65 16px \"Microsoft YaHei UI Light\";outline:0px;}"
+                  "QTreeView{background-color:rgb(84,116,235);border:none;\
+                      color:white;font:65 16px \"Microsoft YaHei UI\";outline:0px;}"
                   "QTreeView::branch{background:rgb(94,116,235);}"
                   "QTreeView::item{margin:5px 0px;height:30px;}"
                   "QTreeView::branch{margin:5px 0px;}"
@@ -414,11 +414,6 @@ void ContactTreeWidget::initTreeStyle()
         "QTreeView::branch:open:has-children:!has-siblings,QTreeView::branch:open:has-children:has-siblings  {\
             border-image: none;image: url(:/open.png);}"
             "QTreeView::item:has-children{color:#A6B9FF;}"
-
-                  "QMenu{border: none;border-radius:15px;}"
-                  "QMenu::item {border:none;background-color:#FFFFFF;color:black;border-bottom:1px solid #DBDBDB;}"
-                  "QMenu::item::selected{border:none;background-color: #829DFF;}"
-                  "QMenu::indicator{margin:0px 4px;}"
 
                  );
 
@@ -436,6 +431,12 @@ void ContactTreeWidget::initContextMenu()
 
     _p->editPersonAction = new QAction(tr("EditContact"),this);
     _p->delPersonAction = new QAction(tr("DeleteContact"),this);
+
+    _p->contextMenu->setAttribute(Qt::WA_TranslucentBackground, true);
+    _p->contextMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | _p->contextMenu->windowFlags());
+
+    _p->movePersonMenu->setAttribute(Qt::WA_TranslucentBackground, true);
+    _p->movePersonMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | _p->movePersonMenu->windowFlags());
 
     connect(_p->addGroupAction,&QAction::triggered,this,&ContactTreeWidget::addGroupSlots);
     connect(_p->editGroupAction,&QAction::triggered,this,&ContactTreeWidget::editGroupSlots);
