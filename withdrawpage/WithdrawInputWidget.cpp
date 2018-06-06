@@ -6,9 +6,24 @@
 #include "wallet.h"
 #include "commondialog.h"
 
+#include "crossmark/AddressValidate.h"
+
+class WithdrawInputWidget::DataPrivate
+{
+public:
+    DataPrivate()
+    {
+
+    }
+public:
+    QString chainType;
+    AddressValidate addrValid;
+};
+
 WithdrawInputWidget::WithdrawInputWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::WithdrawInputWidget)
+    ui(new Ui::WithdrawInputWidget),
+    _p(new DataPrivate())
 {
     ui->setupUi(this);
     InitWidget();
@@ -16,11 +31,13 @@ WithdrawInputWidget::WithdrawInputWidget(QWidget *parent) :
 
 WithdrawInputWidget::~WithdrawInputWidget()
 {
+    delete _p;
     delete ui;
 }
 
 void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
 {
+    _p->chainType = symbol;
     ui->lineEdit_ammount->setPlaceholderText(tr("Max: %1").arg(number));
     int pre = 5;
     foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
@@ -40,14 +57,15 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
 
 void WithdrawInputWidget::addressChangeSlots(const QString &address)
 {
-    if(validateAddress(address))
-    {
-        ui->toolButton_confirm->setEnabled(true);
-    }
-    else
-    {
-        ui->toolButton_confirm->setEnabled(false);
-    }
+    _p->addrValid.startValidateAddress(_p->chainType,address);
+//    if(validateAddress(address))
+//    {
+//        ui->toolButton_confirm->setEnabled(true);
+//    }
+//    else
+//    {
+//        ui->toolButton_confirm->setEnabled(false);
+//    }
 }
 
 void WithdrawInputWidget::numberChangeSlots(const QString &number)
@@ -107,6 +125,20 @@ void WithdrawInputWidget::confirmButtonSlots()
 
 }
 
+void WithdrawInputWidget::addressValidateSlot(bool va)
+{
+    qDebug()<<va;
+    if(!ui->lineEdit_ammount->text().isEmpty() && va)
+    {
+        ui->toolButton_confirm->setEnabled(true);
+    }
+    else
+    {
+        ui->toolButton_confirm->setEnabled(false);
+    }
+
+}
+
 bool WithdrawInputWidget::validateAddress(const QString &address)
 {
     return !address.isEmpty();
@@ -131,6 +163,8 @@ void WithdrawInputWidget::InitWidget()
 
     connect(ui->lineEdit_ammount,&QLineEdit::textChanged,this,&WithdrawInputWidget::numberChangeSlots);
     ui->lineEdit_address->setFocus();
+
+    connect(&_p->addrValid,&AddressValidate::AddressValidateSignal,this,&WithdrawInputWidget::addressValidateSlot);
 }
 
 void WithdrawInputWidget::InitStyle()
