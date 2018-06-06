@@ -155,7 +155,7 @@ public:
 
 struct TransactionTypeId
 {
-    int type;
+    int type = -2;
     QString transactionId;
 
 public:
@@ -386,8 +386,6 @@ public:
     void parseAssetInfo();
     QString getAssetId(QString symbol);
 
-    QMap<QString,TransactionsInfoVector> transactionsMap;   // key是 "账户名_资产符号" 形式
-    void parseTransactions(QString result, QString accountName = "ALL");
 private:
     bool isBlockSyncFinish;
 public:
@@ -406,6 +404,8 @@ public:
 public:
     TransactionDB transactionDB;
     void fetchTransactions();
+    void parseTransaction(QString result);
+    void checkPendingTransactions();    // 查看pending的交易有没有被确认， 如果过期了就从DB删掉
 
 public:
     QMap<QString,MultiSigInfo>  multiSigInfoMap;

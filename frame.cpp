@@ -1358,7 +1358,7 @@ void Frame::jsonDataUpdated(QString id)
                 QString transactionId = v.toString();
                 TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
 //qDebug() << "list_transactions " << ts.transactionId <<ts.type;
-                if(ts.type == -1)
+                if(ts.type == -1 || ts.blockNum == 0)
                 {
                     UBChain::getInstance()->postRPC( "id-get_transaction-" + transactionId, toJsonFormat( "get_transaction", QJsonArray() << transactionId));
                 }
@@ -1376,169 +1376,21 @@ void Frame::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":"))
         {
-            QString transactionId = id.mid(QString("id-get_transaction-").size());
-            result.prepend("{");
-            result.append("}");
-
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-            QJsonObject jsonObject = parse_doucment.object();
-            QJsonObject object = jsonObject.take("result").toObject();
-
-            TransactionStruct ts;
-            ts.transactionId = transactionId;
-            ts.blockNum = object.take("block_num").toInt();
-            ts.expirationTime = object.take("expiration").toString();
-
-            QJsonArray array = object.take("operations").toArray().at(0).toArray();
-            ts.type = array.at(0).toInt();
-            QJsonObject operationObject = array.at(1).toObject();
-            ts.operationStr = QJsonDocument(operationObject).toJson();
-            ts.feeAmount = jsonValueToULL( operationObject.take("fee").toObject().take("amount"));
-
-            UBChain::getInstance()->transactionDB.insertTransactionStruct(transactionId,ts);
-            qDebug() << "ttttttttttttt " << transactionId << ts.type << ts.feeAmount;
-
-            TransactionTypeId typeId;
-            typeId.type = ts.type;
-            typeId.transactionId = transactionId;
-            switch (typeId.type)
+            UBChain::getInstance()->parseTransaction(result);
+        }
+        else
+        {
+            QString trxId = id.mid(QString("id-get_transaction-").size());
+            TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(trxId);
+            QDateTime dateTime = QDateTime::fromString(ts.expirationTime,"yyyy-MM-ddThh:mm:ss");
+            dateTime.setTimeSpec(Qt::UTC);
+            QDateTime currentTime = QDateTime::currentDateTimeUtc();
+            qDebug() << "yyyyyyyyyyyyyy " << dateTime << currentTime << (dateTime < currentTime);
+            if(dateTime < currentTime)      // 如果交易失效了 则从DB中删掉
             {
-            case TRANSACTION_TYPE_NORMAL:
-            {
-                // 普通交易
-                QString fromAddress = operationObject.take("from_addr").toString();
-                QString toAddress   = operationObject.take("to_addr").toString();
-
-
-                if(UBChain::getInstance()->isMyAddress(fromAddress))
-                {
-                    UBChain::getInstance()->transactionDB.addAccountTransactionId(fromAddress, typeId);
-                }
-
-                if(UBChain::getInstance()->isMyAddress(toAddress))
-                {
-                    UBChain::getInstance()->transactionDB.addAccountTransactionId(toAddress, typeId);
-                }
-            }
-                break;
-            case TRANSACTION_TYPE_REGISTER_ACCOUNT:
-            {
-                // 注册账户
-                QString payer = operationObject.take("payer").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(payer, typeId);
-            }
-                break;
-            case TRANSACTION_TYPE_BIND_TUNNEL:
-            {
-                // 绑定tunnel地址
-                QString addr = operationObject.take("addr").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(addr, typeId);
-            }
-                break;
-            case TRANSACTION_TYPE_UNBIND_TUNNEL:
-            {
-                // 解绑tunnel地址
-                QString addr = operationObject.take("addr").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(addr, typeId);
-            }
-                break;
-            case TRANSACTION_TYPE_LOCKBALANCE:
-            {
-                // 质押资产给miner
-                QString addr = operationObject.take("lock_balance_addr").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(addr, typeId);
-            }
-                break;
-            case TRANSACTION_TYPE_FORECLOSE:
-            {
-                // 赎回质押资产
-                QString addr = operationObject.take("foreclose_addr").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(addr, typeId);
-            }
-                break;
-            case TRANSACTION_TYPE_DEPOSIT:
-            {
-                // 充值交易
-                QJsonObject crossChainTrxObject = operationObject.take("cross_chain_trx").toObject();
-                QString fromTunnelAddress = crossChainTrxObject.take("from_account").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(fromTunnelAddress, typeId);
-            }
-                break;
-            case TRANSACTION_TYPE_WITHDRAW:
-            {
-                // 提现交易
-                QString withdrawAddress = operationObject.take("withdraw_account").toString();
-
-                if(UBChain::getInstance()->isMyAddress(withdrawAddress))
-                {
-                    UBChain::getInstance()->transactionDB.addAccountTransactionId(withdrawAddress, typeId);
-                }
-
-            }
-                break;
-            case TRANSACTION_TYPE_MINE_INCOME:
-            {
-                // 质押挖矿收入
-                QString owner = operationObject.take("pay_back_owner").toString();
-
-                if(UBChain::getInstance()->isMyAddress(owner))
-                {
-                    UBChain::getInstance()->transactionDB.addAccountTransactionId(owner, typeId);
-                }
-
-            }
-                break;
-            case TRANSACTION_TYPE_CONTRACT_REGISTER:
-            {
-                // 注册合约
-                QString ownerAddr = operationObject.take("owner_addr").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(ownerAddr, typeId);
-            }
-                break;
-            case TRANSACTION_TYPE_CONTRACT_INVOKE:
-            {
-                // 调用合约
-                QString callerAddr = operationObject.take("caller_addr").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(callerAddr, typeId);
-            }
-                break;
-            case TRANSACTION_TYPE_CONTRACT_TRANSFER:
-            {
-                // 转账到合约
-                QString callerAddr = operationObject.take("caller_addr").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(callerAddr, typeId);
-            }
-                break;
-            case TRANSACTION_TYPE_CREATE_GUARANTEE:
-            {
-                // 创建承兑单
-                QString ownerAddr = operationObject.take("owner_addr").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(ownerAddr, typeId);
-            }
-                break;
-            case TRANSACTION_TYPE_CANCEL_GUARANTEE:
-            {
-                // 撤销承兑单
-                QString ownerAddr = operationObject.take("owner_addr").toString();
-
-                UBChain::getInstance()->transactionDB.addAccountTransactionId(ownerAddr, typeId);
-            }
-                break;
-            default:
-                break;
+                UBChain::getInstance()->transactionDB.removeTransactionStruct(trxId);
             }
         }
-
 
         return;
     }

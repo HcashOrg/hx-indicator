@@ -62,7 +62,36 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
     accountAddress = _accountAddress;
     TransactionTypeIds typeIds = UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(_accountAddress,TRANSACTION_TYPE_WITHDRAW);
 
-    int size = typeIds.size();
+    // 根据区块高度排序
+    TransactionTypeIds sortedTypeIds;
+    for(int i = 0; i < typeIds.size(); i++)
+    {
+        if(sortedTypeIds.size() == 0)
+        {
+            sortedTypeIds.append(typeIds.at(i));
+            continue;
+        }
+
+        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(typeIds.at(i).transactionId);
+        for(int j = 0; j < sortedTypeIds.size(); j++)
+        {
+            TransactionStruct ts2 = UBChain::getInstance()->transactionDB.getTransactionStruct(sortedTypeIds.at(j).transactionId);
+            if(ts2.blockNum == 0)   continue;   // 未确认的交易放前面
+            if(ts.blockNum >= ts2.blockNum || ts.blockNum == 0)
+            {
+                sortedTypeIds.insert(j,typeIds.at(i));
+                break;
+            }
+
+            if(j == sortedTypeIds.size() - 1)
+            {
+                sortedTypeIds.append(typeIds.at(i));
+                break;
+            }
+        }
+    }
+
+    int size = sortedTypeIds.size();
     ui->withdrawRecordTableWidget->setRowCount(0);
     int rowCount = 0;
 

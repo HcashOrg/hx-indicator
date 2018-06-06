@@ -649,113 +649,6 @@ QString UBChain::getAssetId(QString symbol)
     return id;
 }
 
-void UBChain::parseTransactions(QString result, QString accountName)
-{
-    transactionsMap.remove(accountName);
-
-    result.prepend("{");
-    result.append("}");
-
-    QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
-    QByteArray ba = utfCodec->fromUnicode(result);
-
-    QJsonParseError json_error;
-    QJsonDocument parse_doucment = QJsonDocument::fromJson(ba, &json_error);
-    if(json_error.error == QJsonParseError::NoError)
-    {
-        if( parse_doucment.isObject())
-        {
-            QJsonObject jsonObject = parse_doucment.object();
-            if( jsonObject.contains("result"))
-            {
-                QJsonValue resultValue = jsonObject.take("result");
-                if( resultValue.isArray())
-                {
-                    TransactionsInfoVector transactionsInfoVector;
-                    QJsonArray resultArray = resultValue.toArray();
-                    for( int i = 0; i < resultArray.size(); i++)
-                    {
-                        TransactionInfo transactionInfo;
-
-                        QJsonObject object          = resultArray.at(i).toObject();
-                        transactionInfo.isConfirmed = object.take("is_confirmed").toBool();
-                        if ( !transactionInfo.isConfirmed)
-                        {
-                            // 包含error  则为失效交易
-                            if( object.contains("error"))   continue;
-                        }
-
-                        transactionInfo.trxId       = object.take("trx_id").toString();
-                        transactionInfo.isMarket    = object.take("is_market").toBool();
-                        transactionInfo.isMarketCancel = object.take("is_market_cancel").toBool();
-                        transactionInfo.blockNum    = object.take("block_num").toInt();
-                        transactionInfo.timeStamp   = object.take("timestamp").toString();
-
-                        QJsonArray entriesArray       = object.take("ledger_entries").toArray();
-                        for( int j = 0; j < entriesArray.size(); j++)
-                        {
-                            QJsonObject entryObject = entriesArray.at(j).toObject();
-                            Entry   entry;
-                            entry.fromAccount       = entryObject.take("from_account").toString();
-                            entry.toAccount         = entryObject.take("to_account").toString();
-                            QJsonValue v = entryObject.take("memo");
-                            entry.memo              = v.toString();
-
-                            QJsonObject amountObject = entryObject.take("amount").toObject();
-                            entry.amount.assetId     = amountObject.take("asset_id").toInt();
-                            QJsonValue amountValue   = amountObject.take("amount");
-                            if( amountValue.isString())
-                            {
-                                entry.amount.amount  = amountValue.toString().toULongLong();
-                            }
-                            else
-                            {
-                                entry.amount.amount  = QString::number(amountValue.toDouble(),'g',10).toULongLong();
-                            }
-
-                            QJsonArray runningBalanceArray  = entryObject.take("running_balances").toArray().at(0).toArray().at(1).toArray();
-                            for( int k = 0; k < runningBalanceArray.size(); k++)
-                            {
-                                QJsonObject amountObject2    = runningBalanceArray.at(k).toArray().at(1).toObject();
-                                AssetAmount assetAmount;
-                                assetAmount.assetId = amountObject2.take("asset_id").toInt();
-                                QJsonValue amountValue2   = amountObject2.take("amount");
-                                if( amountValue2.isString())
-                                {
-                                    assetAmount.amount  = amountValue2.toString().toULongLong();
-                                }
-                                else
-                                {
-                                    assetAmount.amount  = QString::number(amountValue2.toDouble(),'g',10).toULongLong();
-                                }
-                                entry.runningBalances.append(assetAmount);
-                            }
-
-                            transactionInfo.entries.append(entry);
-                        }
-
-                        QJsonObject object5         = object.take("fee").toObject();
-                        QJsonValue amountValue3     = object5.take("amount");
-                        if( amountValue3.isString())
-                        {
-                            transactionInfo.fee     = amountValue3.toString().toULongLong();
-                        }
-                        else
-                        {
-                            transactionInfo.fee     = QString::number(amountValue3.toDouble(),'g',10).toULongLong();
-                        }
-                        transactionInfo.feeId       = object5.take("asset_id").toInt();
-
-                        transactionsInfoVector.append(transactionInfo);
-                    }
-
-                    transactionsMap.insert(accountName,transactionsInfoVector);
-                }
-            }
-        }
-    }
-}
-
 bool UBChain::ValidateOnChainOperation()
 {
     if(GetBlockSyncFinish()) return true;
@@ -846,6 +739,181 @@ void UBChain::autoSaveWalletFile()
 void UBChain::fetchTransactions()
 {
     postRPC( "id-list_transactions", toJsonFormat( "list_transactions", QJsonArray() << 0 << -1));
+
+    checkPendingTransactions();
+}
+
+void UBChain::parseTransaction(QString result)
+{
+    result.prepend("{");
+    result.append("}");
+
+    QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+    QJsonObject jsonObject = parse_doucment.object();
+    QJsonObject object = jsonObject.take("result").toObject();
+
+    TransactionStruct ts;
+    ts.transactionId = object.take("trxid").toString();
+    ts.blockNum = object.take("block_num").toInt();
+    ts.expirationTime = object.take("expiration").toString();
+
+    QJsonArray array = object.take("operations").toArray().at(0).toArray();
+    ts.type = array.at(0).toInt();
+    QJsonObject operationObject = array.at(1).toObject();
+    ts.operationStr = QJsonDocument(operationObject).toJson();
+    ts.feeAmount = jsonValueToULL( operationObject.take("fee").toObject().take("amount"));
+
+    transactionDB.insertTransactionStruct(ts.transactionId,ts);
+    qDebug() << "ttttttttttttt " << ts.transactionId << ts.type << ts.feeAmount;
+
+    TransactionTypeId typeId;
+    typeId.type = ts.type;
+    typeId.transactionId = ts.transactionId;
+    switch (typeId.type)
+    {
+    case TRANSACTION_TYPE_NORMAL:
+    {
+        // 普通交易
+        QString fromAddress = operationObject.take("from_addr").toString();
+        QString toAddress   = operationObject.take("to_addr").toString();
+
+
+        if(isMyAddress(fromAddress))
+        {
+            transactionDB.addAccountTransactionId(fromAddress, typeId);
+        }
+
+        if(isMyAddress(toAddress))
+        {
+            transactionDB.addAccountTransactionId(toAddress, typeId);
+        }
+    }
+        break;
+    case TRANSACTION_TYPE_REGISTER_ACCOUNT:
+    {
+        // 注册账户
+        QString payer = operationObject.take("payer").toString();
+
+        transactionDB.addAccountTransactionId(payer, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_BIND_TUNNEL:
+    {
+        // 绑定tunnel地址
+        QString addr = operationObject.take("addr").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_UNBIND_TUNNEL:
+    {
+        // 解绑tunnel地址
+        QString addr = operationObject.take("addr").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_LOCKBALANCE:
+    {
+        // 质押资产给miner
+        QString addr = operationObject.take("lock_balance_addr").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_FORECLOSE:
+    {
+        // 赎回质押资产
+        QString addr = operationObject.take("foreclose_addr").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_DEPOSIT:
+    {
+        // 充值交易
+        QJsonObject crossChainTrxObject = operationObject.take("cross_chain_trx").toObject();
+        QString fromTunnelAddress = crossChainTrxObject.take("from_account").toString();
+
+        transactionDB.addAccountTransactionId(fromTunnelAddress, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_WITHDRAW:
+    {
+        // 提现交易
+        QString withdrawAddress = operationObject.take("withdraw_account").toString();
+
+        if(isMyAddress(withdrawAddress))
+        {
+            transactionDB.addAccountTransactionId(withdrawAddress, typeId);
+        }
+
+    }
+        break;
+    case TRANSACTION_TYPE_MINE_INCOME:
+    {
+        // 质押挖矿收入
+        QString owner = operationObject.take("pay_back_owner").toString();
+
+        if(isMyAddress(owner))
+        {
+            transactionDB.addAccountTransactionId(owner, typeId);
+        }
+
+    }
+        break;
+    case TRANSACTION_TYPE_CONTRACT_REGISTER:
+    {
+        // 注册合约
+        QString ownerAddr = operationObject.take("owner_addr").toString();
+
+        transactionDB.addAccountTransactionId(ownerAddr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_CONTRACT_INVOKE:
+    {
+        // 调用合约
+        QString callerAddr = operationObject.take("caller_addr").toString();
+
+        transactionDB.addAccountTransactionId(callerAddr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_CONTRACT_TRANSFER:
+    {
+        // 转账到合约
+        QString callerAddr = operationObject.take("caller_addr").toString();
+
+        transactionDB.addAccountTransactionId(callerAddr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_CREATE_GUARANTEE:
+    {
+        // 创建承兑单
+        QString ownerAddr = operationObject.take("owner_addr").toString();
+
+        transactionDB.addAccountTransactionId(ownerAddr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_CANCEL_GUARANTEE:
+    {
+        // 撤销承兑单
+        QString ownerAddr = operationObject.take("owner_addr").toString();
+
+        transactionDB.addAccountTransactionId(ownerAddr, typeId);
+    }
+        break;
+    default:
+        break;
+    }
+}
+
+void UBChain::checkPendingTransactions()
+{
+    QStringList trxIds = transactionDB.getPendingTransactions();
+    foreach (QString trxId, trxIds)
+    {
+        postRPC( "id-get_transaction-" + trxId, toJsonFormat( "get_transaction", QJsonArray() << trxId));
+    }
 }
 
 void UBChain::fetchMyContracts()

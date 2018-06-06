@@ -300,7 +300,8 @@ void AllTransactionWidget::showTransactions()
         for(int j = 0; j < sortedTypeIds.size(); j++)
         {
             TransactionStruct ts2 = UBChain::getInstance()->transactionDB.getTransactionStruct(sortedTypeIds.at(j).transactionId);
-            if(ts.blockNum >= ts2.blockNum)
+            if(ts2.blockNum == 0)   continue;   // 未确认的交易放前面
+            if(ts.blockNum >= ts2.blockNum || ts.blockNum == 0)
             {
                 sortedTypeIds.insert(j,filteredTypeIds.at(i));
                 break;

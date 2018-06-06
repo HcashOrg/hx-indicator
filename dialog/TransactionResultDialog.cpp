@@ -41,6 +41,11 @@ void TransactionResultDialog::setInfoText(QString _text)
 void TransactionResultDialog::setDetailText(QString _text)
 {
     ui->textBrowser->setPlainText(_text);
+
+    if(_text.startsWith("\"result\":"))
+    {
+        UBChain::getInstance()->parseTransaction(_text);
+    }
 }
 
 void TransactionResultDialog::pop()

@@ -174,7 +174,7 @@ void SellDialog::on_cancelBtn_clicked()
 void SellDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
     ExchangeContractBalances balances = UBChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text());
-    qDebug() << "bbbbbbbbbbb " << balances.keys();
+
     unsigned long long balanceAmount = 0;
     if(balances.contains(ui->assetComboBox->currentText()))
     {

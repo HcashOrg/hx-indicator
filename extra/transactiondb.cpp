@@ -68,6 +68,17 @@ TransactionStruct TransactionDB::getTransactionStruct(QString _transactionId)
     return transactionStruct;
 }
 
+void TransactionDB::removeTransactionStruct(QString _transactionId)
+{
+    removeFromDB(m_transactionStructDB, _transactionId);
+
+    QStringList keys = getKeys(m_accountTransactionIdsDB);
+    foreach (QString key, keys)
+    {
+        removeAccountTransactionId(key, _transactionId);
+    }
+}
+
 QVector<TransactionStruct> TransactionDB::lookupTransactionStruct(QString _address, int _type)
 {
     QVector<TransactionStruct> result;
@@ -100,6 +111,23 @@ QVector<TransactionStruct> TransactionDB::lookupTransactionStruct(QString _addre
     return result;
 }
 
+QStringList TransactionDB::getPendingTransactions()
+{
+    QStringList result;
+
+    QStringList keys = getKeys(m_transactionStructDB);
+    foreach (QString key, keys)
+    {
+        TransactionStruct ts = getTransactionStruct(key);
+        if(ts.blockNum == 0)
+        {
+            result << ts.transactionId;
+        }
+    }
+
+    return result;
+}
+
 void TransactionDB::insertAccountTransactionTypeIds(QString _accountAddress, TransactionTypeIds _transactionTypeIds)
 {
     QByteArray ba;
@@ -121,6 +149,19 @@ void TransactionDB::addAccountTransactionId(QString _accountAddress, Transaction
     if(!typeIds.contains(_transactionTypeId))
     {
         typeIds.append(_transactionTypeId);
+    }
+
+    insertAccountTransactionTypeIds(_accountAddress, typeIds);
+}
+
+void TransactionDB::removeAccountTransactionId(QString _accountAddress, QString _transactionId)
+{
+    TransactionTypeIds typeIds = getAccountTransactionTypeIds(_accountAddress);
+    TransactionTypeId  typeId;
+    typeId.transactionId = _transactionId;
+    if(typeIds.contains(typeId))
+    {
+        typeIds.removeAll(typeId);
     }
 
     insertAccountTransactionTypeIds(_accountAddress, typeIds);
@@ -186,6 +227,13 @@ QByteArray TransactionDB::readFromDB(leveldb::DB* _db, QString _key)
     leveldb::Slice key = stdStr;
     _db->Get(leveldb::ReadOptions(), key, &strValue);
     return QByteArray::fromStdString(strValue);
+}
+
+bool TransactionDB::removeFromDB(leveldb::DB *_db, QString _key)
+{
+    std::string stdStr = _key.toStdString();
+    leveldb::Slice key = stdStr;
+    return _db->Delete(leveldb::WriteOptions(), key).ok();
 }
 
 QStringList TransactionDB::getKeys(leveldb::DB *_db)

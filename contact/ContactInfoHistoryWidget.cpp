@@ -59,7 +59,8 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
         for(int j = 0; j < sortedTsVector.size(); j++)
         {
             TransactionStruct ts2 = sortedTsVector.at(j);
-            if(ts.blockNum >= ts2.blockNum)
+            if(ts2.blockNum == 0)   continue;   // 未确认的交易放前面
+            if(ts.blockNum >= ts2.blockNum || ts.blockNum == 0)
             {
                 sortedTsVector.insert(j,ts);
                 break;

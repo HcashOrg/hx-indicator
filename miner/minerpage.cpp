@@ -371,7 +371,36 @@ void MinerPage::showIncomeRecord()
     QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
     TransactionTypeIds typeIds = UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(address,TRANSACTION_TYPE_MINE_INCOME);
 
-    int size = typeIds.size();
+    // 根据区块高度排序
+    TransactionTypeIds sortedTypeIds;
+    for(int i = 0; i < typeIds.size(); i++)
+    {
+        if(sortedTypeIds.size() == 0)
+        {
+            sortedTypeIds.append(typeIds.at(i));
+            continue;
+        }
+
+        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(typeIds.at(i).transactionId);
+        for(int j = 0; j < sortedTypeIds.size(); j++)
+        {
+            TransactionStruct ts2 = UBChain::getInstance()->transactionDB.getTransactionStruct(sortedTypeIds.at(j).transactionId);
+            if(ts2.blockNum == 0)   continue;   // 未确认的交易放前面
+            if(ts.blockNum >= ts2.blockNum || ts.blockNum == 0)
+            {
+                sortedTypeIds.insert(j,typeIds.at(i));
+                break;
+            }
+
+            if(j == sortedTypeIds.size() - 1)
+            {
+                sortedTypeIds.append(typeIds.at(i));
+                break;
+            }
+        }
+    }
+
+    int size = sortedTypeIds.size();
     ui->incomeRecordTableWidget->setRowCount(0);
     ui->incomeRecordTableWidget->setRowCount(size);
 
