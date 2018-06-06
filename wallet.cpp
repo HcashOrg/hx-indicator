@@ -996,21 +996,34 @@ void UBChain::quit()
 {
     isExiting = true;
 
+    if (clientProc)
+    {
+//        clientProc->close();
+        qDebug() << "clientProc: close";
+
+        AttachConsole((uint)clientProc->processId());
+        SetConsoleCtrlHandler(NULL, true);
+        GenerateConsoleCtrlEvent( CTRL_C_EVENT ,0);
+
+        delete clientProc;
+        clientProc = NULL;
+    }
+
+
     if (nodeProc)
     {
-        nodeProc->close();
+//        nodeProc->close();
         qDebug() << "nodeProc: close";
+
+        AttachConsole((uint)nodeProc->processId());
+        SetConsoleCtrlHandler(NULL, true);
+        GenerateConsoleCtrlEvent( CTRL_C_EVENT ,0);
+
         delete nodeProc;
         nodeProc = NULL;
     }
 
-    if (clientProc)
-    {
-        clientProc->close();
-        qDebug() << "nodeProc: close";
-        delete clientProc;
-        clientProc = NULL;
-    }
+
 
     if(isUpdateNeeded)
     {
