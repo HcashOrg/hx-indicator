@@ -965,6 +965,7 @@ void Frame::showNewOrImportWalletWidget()
 
 void Frame::showMultiSigPage()
 {
+    emit titleBackVisible(false);
     closeCurrentPage();
     multiSigPage = new MultiSigPage(centralWidget);
     connect(multiSigPage,SIGNAL(goToTransferPage(QString,QString)),this,SLOT(showTransferPageWithAddress(QString,QString)));
@@ -987,6 +988,7 @@ void Frame::showPoundagePage()
 
 void Frame::showOnchainOrderPage()
 {
+    emit titleBackVisible(false);
     closeCurrentPage();
     onchainOrderPage = new OnchainOrderPage(centralWidget);
     connect(onchainOrderPage,&OnchainOrderPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
@@ -997,6 +999,7 @@ void Frame::showOnchainOrderPage()
 
 void Frame::showMyExchangeContractPage()
 {
+    emit titleBackVisible(false);
     if(UBChain::getInstance()->accountInfoMap.empty())
     {
         CommonDialog dia(CommonDialog::OkOnly);
@@ -1219,8 +1222,9 @@ void Frame::jsonDataUpdated(QString id)
         if( result == "\"result\":null")
         {
             hide();
-            QTimer::singleShot(2000,qApp,SLOT(quit()));
+            QTimer::singleShot(1000,qApp,SLOT(quit()));
 //            qApp->quit();
+
         }
         return;
     }
@@ -1554,12 +1558,14 @@ void Frame::onBack()
     case 4:
         break;
     case 5:
-        myExchangeContractPage->onBack();
-        emit titleBackVisible(false);
+//        myExchangeContractPage->onBack();
+//        emit titleBackVisible(false);
+        showMyExchangeContractPage();
         break;
     case 6:
-        onchainOrderPage->onBack();
-        emit titleBackVisible(false);
+//        onchainOrderPage->onBack();
+//        emit titleBackVisible(false);
+        showOnchainOrderPage();
         break;
     case 7:
         break;

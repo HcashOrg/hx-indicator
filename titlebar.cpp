@@ -63,10 +63,6 @@ void TitleBar::on_closeBtn_clicked()
 
         if( choice)
         {
-
-//            AttachConsole((uint)UBChain::getInstance()->nodeProc->processId());
-//            SetConsoleCtrlHandler(NULL, true);
-//            GenerateConsoleCtrlEvent( CTRL_C_EVENT ,0);
             emit closeWallet();
         }
         else

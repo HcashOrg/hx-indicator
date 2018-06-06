@@ -468,6 +468,8 @@ void MinerPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     if(accountsUpdating)        return;
 
+    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+
     fetchLockBalance();
     fetchAccountIncome();
     showIncomeRecord();
