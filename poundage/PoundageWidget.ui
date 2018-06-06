@@ -32,7 +32,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>50</y>
+     <y>46</y>
      <width>200</width>
      <height>26</height>
     </rect>
@@ -51,8 +51,8 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>150</y>
-     <width>111</width>
+     <y>147</y>
+     <width>81</width>
      <height>24</height>
     </rect>
    </property>
@@ -66,18 +66,25 @@
    <property name="geometry">
     <rect>
      <x>640</x>
-     <y>149</y>
-     <width>80</width>
+     <y>146</y>
+     <width>60</width>
      <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>6</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 50 10px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>发行承兑单</string>
@@ -86,9 +93,9 @@
   <widget class="QComboBox" name="comboBox_sortType">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>150</y>
-     <width>171</width>
+     <x>180</x>
+     <y>147</y>
+     <width>141</width>
      <height>24</height>
     </rect>
    </property>
@@ -111,7 +118,7 @@
   <widget class="QToolButton" name="toolButton_allPoundage">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>89</y>
      <width>91</width>
      <height>31</height>
@@ -141,7 +148,7 @@
   <widget class="QToolButton" name="toolButton_myPoundage">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>160</x>
      <y>89</y>
      <width>111</width>
      <height>31</height>

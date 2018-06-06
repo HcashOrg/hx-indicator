@@ -88,7 +88,7 @@ void ContactInfoTitleWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
-    ui->label_pic->setPixmap(QPixmap(":/ui/wallet_ui/contactPic.png").scaled(ui->label_pic->size()));
+    ui->label_pic->setPixmap(QPixmap(":/contactPic.png").scaled(ui->label_pic->size()));
 
     ui->transferBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->copyBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"

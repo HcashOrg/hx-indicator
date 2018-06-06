@@ -127,6 +127,7 @@ bool ContactTreeWidget::addGroup(const QString &groupName)
     QTreeWidgetItem *topItem = createItemWithGroup(group);
     addTopLevelItem(topItem);
 
+    emit SaveContact();
     return editGroup(topItem);
 }
 
@@ -397,14 +398,23 @@ void ContactTreeWidget::initTreeStyle()
 
     setStyleSheet("QWidget{border:none;}"
                   "QTreeView{background-color:rgb(94,116,235);border:none;\
-                      color:white;font-size:16px;outline:0px;font-family:\"Microsoft YaHei UI Light\";}"
+                      color:white;font:65 16px \"Microsoft YaHei UI Light\";outline:0px;}"
                   "QTreeView::branch{background:rgb(94,116,235);}"
-                  "QTreeView::item{height:30px;}"
+                  "QTreeView::item{margin:5px 0px;height:30px;}"
+                  "QTreeView::branch{margin:5px 0px;}"
                   "QTreeView::item::selected{background:#829DFF;border:none;color:white;}"
-        "QTreeView::branch:selected:has-children:adjoins-item {border-left:2px solid rgb(0,210,255);}"
+                  "QTreeView::branch:selected:has-children:adjoins-item {border-left:2px solid rgb(0,210,255);}"
                   "QTreeView::branch::selected::adjoins-item{background:#829DFF;}"
                   "QTreeView::branch::selected::!adjoins-item{border-left:2px solid rgb(0,210,255);background:#829DFF;}"
                   "QTreeView::branch::hover::adjoins-item,QTreeView::branch::hover::!adjoins-item,QTreeView::item::hover{background:#829DFF;}"
+
+        "QTreeView::branch:has-children:!has-siblings:closed,QTreeView::branch:closed:has-children:has-siblings { border-image: none;\
+            image: url(:/close.png);}"
+
+        "QTreeView::branch:open:has-children:!has-siblings,QTreeView::branch:open:has-children:has-siblings  {\
+            border-image: none;image: url(:/open.png);}"
+            "QTreeView::item:has-children{color:#A6B9FF;}"
+
                   "QMenu{border: none;border-radius:15px;}"
                   "QMenu::item {border:none;background-color:#FFFFFF;color:black;border-bottom:1px solid #DBDBDB;}"
                   "QMenu::item::selected{border:none;background-color: #829DFF;}"
