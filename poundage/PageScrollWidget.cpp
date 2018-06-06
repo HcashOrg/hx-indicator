@@ -247,13 +247,13 @@ void PageScrollWidget::InitWidget()
 void PageScrollWidget::InitStyle()
 {
     setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/circle1.png);background-repeat: no-repeat;background-position: center;border: none;\
-                  max-height:18 px;\
-                  max-width:18 px;\
-                  min-height:18 px;\
-                  min-width:18 px;\
+                  max-height:20 px;\
+                  max-width:20 px;\
+                  min-height:20 px;\
+                  min-width:20 px;\
                   text-align :center;\
                   font:\"Microsoft YaHei UI\";\
-                  font-size:10px;\
+                  font-size:10 px;\
                   font-weight:bold;\
                   color:#CACACA;}"
                   "QToolButton:checked{background-image:url(:/ui/wallet_ui/circle.png);background-repeat: no-repeat;background-position: center;border: none;\

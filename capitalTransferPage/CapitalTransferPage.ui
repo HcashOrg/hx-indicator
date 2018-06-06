@@ -285,10 +285,10 @@
   <widget class="QLabel" name="label_tip">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>410</x>
      <y>254</y>
-     <width>201</width>
-     <height>20</height>
+     <width>151</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -305,9 +305,9 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QLabel" name="label_marktip">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>146</y>
-     <width>181</width>
+     <x>410</x>
+     <y>148</y>
+     <width>151</width>
      <height>20</height>
     </rect>
    </property>

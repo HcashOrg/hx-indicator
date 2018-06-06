@@ -31,20 +31,20 @@
     <font>
      <family>Microsoft YaHei UI Light</family>
      <pointsize>-1</pointsize>
-     <weight>50</weight>
+     <weight>6</weight>
      <italic>false</italic>
      <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(248, 249, 253);
-font: 16px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 50 16px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
-    <string>高级</string>
+    <string>    高级</string>
    </property>
    <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
   <widget class="QToolButton" name="toolButton_multiSig">

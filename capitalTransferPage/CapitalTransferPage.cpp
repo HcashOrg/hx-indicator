@@ -370,6 +370,7 @@ void CapitalTransferPage::InitWidget()
 {
     InitStyle();
 
+    ui->label_tip->setWordWrap(true);
     ui->label_tip->setVisible(false);
     ui->label_fee->setText(_p->fee +_p->symbol);
 
