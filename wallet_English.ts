@@ -1038,14 +1038,14 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="92"/>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="102"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="378"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="379"/>
         <source>%1 address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="93"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="380"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="382"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="381"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="383"/>
         <source>please wait</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1624,44 +1624,44 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="347"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="348"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="347"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="348"/>
         <source>Cannot Rename Group!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="420"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="430"/>
         <source>MoveToGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="422"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="432"/>
         <source>AddGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="424"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="434"/>
         <source>EditGroup</source>
         <oldsource>EidtGroup</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="425"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="435"/>
         <source>DeleteGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="427"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="437"/>
         <source>EditContact</source>
         <oldsource>EditPerson</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="428"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="438"/>
         <source>DeleteContact</source>
         <oldsource>DeletePerson</oldsource>
         <translation type="unfinished"></translation>
@@ -2762,22 +2762,22 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1003"/>
+        <location filename="frame.cpp" line="1005"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1604"/>
+        <location filename="frame.cpp" line="1606"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1607"/>
+        <location filename="frame.cpp" line="1609"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1610"/>
+        <location filename="frame.cpp" line="1612"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2816,13 +2816,17 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionAdvanceWidget.ui" line="44"/>
-        <source>    高级</source>
-        <oldsource>高级</oldsource>
-        <translation type="unfinished">   Advance</translation>
+        <location filename="functionBar/FunctionAdvanceWidget.ui" line="45"/>
+        <source>高级</source>
+        <translation type="unfinished">Advance</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionAdvanceWidget.ui" line="72"/>
+        <source>    高级</source>
+        <oldsource>高级</oldsource>
+        <translation type="obsolete">    Advance</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionAdvanceWidget.ui" line="73"/>
         <source>多重签名</source>
         <translation type="unfinished">Multi-signature</translation>
     </message>
@@ -2835,7 +2839,7 @@ Cover it or not?</source>
         <translation type="obsolete">MultiSig</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionAdvanceWidget.ui" line="97"/>
+        <location filename="functionBar/FunctionAdvanceWidget.ui" line="98"/>
         <source>手续费承兑单</source>
         <translation type="unfinished">FeeAcceptance</translation>
     </message>

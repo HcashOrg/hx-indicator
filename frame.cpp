@@ -907,6 +907,8 @@ void Frame::setLanguage(QString language)
                 showMultiSigTransactionPage(multiSigTransactionPage->multiSigAddress);
             }
             break;
+        case 11:
+            showPoundagePage();
         default:
             break;
         }

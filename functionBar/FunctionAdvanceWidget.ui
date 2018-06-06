@@ -31,17 +31,18 @@
     <font>
      <family>Microsoft YaHei UI Light</family>
      <pointsize>-1</pointsize>
-     <weight>6</weight>
+     <weight>8</weight>
      <italic>false</italic>
      <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(248, 249, 253);
-font: 50 16px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 65 16px &quot;Microsoft YaHei UI Light&quot;;
+padding-left:15px;</string>
    </property>
    <property name="text">
-    <string>    高级</string>
+    <string>高级</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
