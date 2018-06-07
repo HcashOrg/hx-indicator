@@ -59,6 +59,10 @@ void PoundageShowWidget::InitData(const std::shared_ptr<PoundageSheet> &data)
 {
     _p->tableModel->InitData(data);
     _p->pageWidget->SetTotalPage(_p->tableModel->GetMaxPage()+1);
+    if(data)
+    {
+        _p->pageWidget->setShowTip(data->poundages.size(),static_cast<unsigned int>(_p->tableModel->GetSinglePageRow()));
+    }
 }
 
 void PoundageShowWidget::DeletePoundageSlots()

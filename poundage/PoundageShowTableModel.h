@@ -27,6 +27,7 @@ public:
     int GetCurrentPage()const;
     void SetCurrentPage(int currPage);
     void SetSinglePageRow(int rowNumber);
+    int GetSinglePageRow()const;
     int GetMaxPage()const;
 private:
     void RefreshModel();

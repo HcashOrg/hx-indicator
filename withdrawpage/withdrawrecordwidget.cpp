@@ -151,6 +151,7 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
     int page = (ui->withdrawRecordTableWidget->rowCount()%ROWNUMBER==0 && ui->withdrawRecordTableWidget->rowCount() != 0) ?
                 ui->withdrawRecordTableWidget->rowCount()/ROWNUMBER : ui->withdrawRecordTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->withdrawRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
 
 }

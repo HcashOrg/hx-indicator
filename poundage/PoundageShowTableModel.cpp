@@ -199,6 +199,11 @@ void PoundageShowTableModel::SetSinglePageRow(int rowNumber)
     }
 }
 
+int PoundageShowTableModel::GetSinglePageRow() const
+{
+    return _p->pageMaxRow;
+}
+
 int PoundageShowTableModel::GetMaxPage() const
 {
     return _p->maxPage;
