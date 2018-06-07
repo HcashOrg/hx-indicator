@@ -83,6 +83,7 @@ UBChain::UBChain()
         resyncNextTime  = configFile->value("/settings/resyncNextTime",false).toBool();
         contractFee     = configFile->value("/settings/contractFee",1).toULongLong();
         middlewarePath  = configFile->value("/settings/middlewarePath","http://117.78.44.37:5005/api").toString();
+        importedWalletNeedToAddTrackAddresses = configFile->value("/settings/importedWalletNeedToAddTrackAddresses",false).toBool();
     }
 
     QFile file( walletConfigPath + "/log.txt");       // 每次启动清空 log.txt文件

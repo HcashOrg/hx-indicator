@@ -41,6 +41,8 @@ void NewOrImportWalletWidget::on_importWalletBtn_clicked()
     qDebug() << "copy wallet.json to chaindata path : " << QFile::copy(file, UBChain::getInstance()->appDataPath + "/wallet.json");
 
     UBChain::getInstance()->importedWalletNeedToAddTrackAddresses = true;
+    UBChain::getInstance()->configFile->setValue("/settings/importedWalletNeedToAddTrackAddresses",true);
+
 
     UBChain::getInstance()->startExe();
     emit enter();

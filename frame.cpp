@@ -1115,16 +1115,22 @@ void Frame::jsonDataUpdated(QString id)
 
         if(UBChain::getInstance()->importedWalletNeedToAddTrackAddresses)
         {
-            UBChain::getInstance()->importedWalletNeedToAddTrackAddresses = false;
-
             foreach (QString accountName, UBChain::getInstance()->accountInfoMap.keys())
             {
                 qDebug() << accountName << UBChain::getInstance()->accountInfoMap.value(accountName).address;
                 UBChain::getInstance()->addTrackAddress(UBChain::getInstance()->accountInfoMap.value(accountName).address);
             }
 
+            UBChain::getInstance()->importedWalletNeedToAddTrackAddresses = false;
+            UBChain::getInstance()->configFile->setValue("/settings/importedWalletNeedToAddTrackAddresses",false);
+
             UBChain::getInstance()->resyncNextTime = true;
             UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);
+
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("This wallet is newly imported. It will rescan the blockchain data when launched next time."
+                                    " After that the transactions of the accounts in this wallet will be shown.") );
+            commonDialog.pop();
         }
 
         foreach (QString accountName, UBChain::getInstance()->accountInfoMap.keys())
@@ -1221,13 +1227,15 @@ void Frame::jsonDataUpdated(QString id)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
-        if( result == "\"result\":null")
-        {
-            hide();
-            QTimer::singleShot(1000,qApp,SLOT(quit()));
-//            qApp->quit();
+//        if( result == "\"result\":null")
+//        {
+//            hide();
+//            QTimer::singleShot(1000,qApp,SLOT(quit()));
+////            qApp->quit();
 
-        }
+//        }
+        hide();
+        QTimer::singleShot(1000,qApp,SLOT(quit()));
         return;
     }
 
