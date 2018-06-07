@@ -51,6 +51,8 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->depositBtn->setIconSize(QSize(26,12));
     ui->depositBtn->setIcon(ui->depositBtn->isChecked()?QIcon(":/ui/wallet_ui/off.png"):QIcon(":/ui/wallet_ui/on.png"));
     ui->depositBtn->setText(ui->depositBtn->isChecked()?tr("on"):tr("off"));
+    ui->label_autotip->setWordWrap(true);
+    ui->label_autotip->setVisible(ui->depositBtn->isChecked());
 
     ui->generalBtn->setChecked(false);
 
@@ -71,19 +73,21 @@ SetDialog::SetDialog(QWidget *parent) :
                   "QToolButton#toolButton_help,QToolButton#toolButton_set{border:none;background:#F8F9FD;color:#C6CAD4;border-top-left-radius:10px;border-top-right-radius:10px;}"
                   "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{color:black;background:#FFFFFF;}"
 
-
                   "QToolButton#depositBtn{color:black;}"
 
-                  "QCheckBox{color:rgb(192,196,212);}"
-                  "QCheckBox::checked{ color:black;}"
+                  "QCheckBox{color:black;font:65 14px \"Microsoft YaHei UI Light\";}"
+                  "QCheckBox#nolockCheckBox{font:65 10px \"Microsoft YaHei UI Light\";}"
 
                   "QSpinBox::up-button {width:0;height:0;}"
                   "QSpinBox::down-button {width:0;height:0;}"
                   "QSpinBox::up-arrow {width:0;height:0;}"
                   "QSpinBox::down-arrow {width:0;height:0;}"
-                  "QSpinBox{background-color: transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid gray;;color:black}"
+                  "QSpinBox{background-color: transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid #5474EB;color:black}"
                   "QSpinBox:focus{border-bottom:1px solid rgb(84,116,235);}"
-                  "QSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:none;}"
+                  "QSpinBox:disabled{background:transparent;color: rgb(83,90,109);border-bottom:1px solid gray;}"
+
+                  "QComboBox#languageComboBox{border-bottom:1px solid gray;color:#5474EB;}"
+                  "QComboBox#comboBox_fee{color:#5474EB;}"
                   );
     ui->saveBtn->setStyleSheet(OKBTN_STYLE);
     ui->confirmBtn->setStyleSheet(OKBTN_STYLE);
@@ -259,8 +263,10 @@ void SetDialog::on_saveBtn_clicked()
         UBChain::getInstance()->language = "English";
     }
 
-    UBChain::getInstance()->configFile->setValue("/settings/feeType", ui->comboBox_fee->currentText());
-    UBChain::getInstance()->feeType = ui->comboBox_fee->currentText();
+
+    UBChain::getInstance()->configFile->setValue("/settings/feeType", ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"LNK");
+    UBChain::getInstance()->feeType = ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"LNK";
+
 
     UBChain::getInstance()->configFile->setValue("/settings/autoDeposit", ui->depositBtn->isChecked());
     UBChain::getInstance()->autoDeposit = ui->depositBtn->isChecked();
@@ -357,6 +363,7 @@ void SetDialog::on_depositBtn_clicked()
         ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/on.png"));
         ui->depositBtn->setText(tr("off"));
     }
+    ui->label_autotip->setVisible(ui->depositBtn->isChecked());
 }
 
 void SetDialog::on_safeBtn_clicked()

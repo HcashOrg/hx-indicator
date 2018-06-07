@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>420</height>
+    <width>380</width>
+    <height>414</height>
    </rect>
   </property>
   <property name="font">
@@ -26,8 +26,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
-     <height>420</height>
+     <width>380</width>
+     <height>414</height>
     </rect>
    </property>
    <widget class="QWidget" name="containerWidget" native="true">
@@ -35,8 +35,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>600</width>
-      <height>420</height>
+      <width>380</width>
+      <height>414</height>
      </rect>
     </property>
     <property name="font">
@@ -48,9 +48,9 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>68</y>
-       <width>520</width>
-       <height>240</height>
+       <y>65</y>
+       <width>310</width>
+       <height>222</height>
       </rect>
      </property>
      <property name="font">
@@ -65,16 +65,16 @@
       <enum>Qt::DefaultContextMenu</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgb(0, 0, 0);</string>
      </property>
     </widget>
     <widget class="QToolButton" name="clearBtn">
      <property name="geometry">
       <rect>
-       <x>510</x>
-       <y>320</y>
-       <width>50</width>
-       <height>20</height>
+       <x>148</x>
+       <y>364</y>
+       <width>96</width>
+       <height>30</height>
       </rect>
      </property>
      <property name="font">
@@ -84,7 +84,7 @@
        <weight>50</weight>
        <italic>false</italic>
        <bold>false</bold>
-       <underline>true</underline>
+       <underline>false</underline>
       </font>
      </property>
      <property name="cursor">
@@ -101,8 +101,8 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>350</y>
-       <width>520</width>
+       <y>320</y>
+       <width>310</width>
        <height>30</height>
       </rect>
      </property>
@@ -121,7 +121,7 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>40</x>
        <y>8</y>
        <width>80</width>
        <height>21</height>
@@ -136,7 +136,7 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color: rgb(0, 0, 0);</string>
      </property>
      <property name="text">
       <string>控制台</string>
@@ -148,10 +148,10 @@
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>560</x>
-       <y>12</y>
-       <width>18</width>
-       <height>18</height>
+       <x>335</x>
+       <y>20</y>
+       <width>12</width>
+       <height>12</height>
       </rect>
      </property>
      <property name="cursor">
@@ -168,7 +168,7 @@
      <property name="geometry">
       <rect>
        <x>45</x>
-       <y>320</y>
+       <y>300</y>
        <width>311</width>
        <height>20</height>
       </rect>
@@ -181,6 +181,9 @@
        <bold>false</bold>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(0, 0, 0);</string>
+     </property>
      <property name="text">
       <string>在此输入命令并回车</string>
      </property>
@@ -188,8 +191,8 @@
     <widget class="QCheckBox" name="checkBox">
      <property name="geometry">
       <rect>
-       <x>410</x>
-       <y>320</y>
+       <x>254</x>
+       <y>296</y>
        <width>91</width>
        <height>20</height>
       </rect>
@@ -199,19 +202,6 @@
      </property>
      <property name="text">
       <string>RPC方式</string>
-     </property>
-    </widget>
-    <widget class="Line" name="line">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>370</y>
-       <width>521</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </widget>

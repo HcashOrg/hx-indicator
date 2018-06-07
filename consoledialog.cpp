@@ -26,17 +26,14 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
      this->setAutoFillBackground(true);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(251, 251, 254,100);border-radius:10px;}");
+    ui->widget->setStyleSheet("#widget {background-color:white;border-radius:10px;}");
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(0,210,255);border-radius:10px;}");
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:white;border-radius:10px;}");
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->clearBtn->setStyleSheet(OKBTN_STYLE);
+    ui->consoleLineEdit->setStyleSheet("QLineEdit{color:#5474EB;}QLineEdit:focus{border-bottom-color:rgb(192,192,192);}");
 
-    setStyleSheet("QToolButton#clearBtn{background-color:#5474EB; border:none;border-radius:5px;color: rgb(255, 255, 255);}"
-                  "QToolButton#clearBtn:hover{background-color:#00D2FF;}"
-                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  "QLineEdit:focus{border:none;}"
-                  );
 
     ui->containerWidget->installEventFilter(this);
 
