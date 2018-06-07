@@ -122,6 +122,10 @@
         <file>wallet_ui/addContact_1.png</file>
         <file>wallet_ui/circle.png</file>
         <file>wallet_ui/circle1.png</file>
+        <file>wallet_ui/coin_BTC.png</file>
+        <file>wallet_ui/coin_LTC.png</file>
+        <file>wallet_ui/coin_UB.png</file>
+        <file>wallet_ui/coin_LNK.png</file>
         <file>wallet_ui/redtip.png</file>
     </qresource>
     <qresource prefix="/">
