@@ -122,6 +122,7 @@
         <file>wallet_ui/addContact_1.png</file>
         <file>wallet_ui/circle.png</file>
         <file>wallet_ui/circle1.png</file>
+        <file>wallet_ui/redtip.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>
