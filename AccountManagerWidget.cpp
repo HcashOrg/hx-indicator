@@ -172,18 +172,20 @@ void AccountManagerWidget::InitWidget()
     foreach (AccountInfo info, UBChain::getInstance()->accountInfoMap) {
         QTableWidgetItem *item = new QTableWidgetItem("\n"+info.name+"\n"+info.address);
         item->setData(Qt::UserRole,QVariant::fromValue<AccountInfo>(info));
-        item->setTextAlignment(Qt::AlignHCenter);
+        item->setTextAlignment(Qt::AlignLeft);
         item->setFlags(Qt::ItemIsEnabled);
         ui->tableWidget->insertRow(ui->tableWidget->rowCount());
-        ui->tableWidget->setRowHeight(ui->tableWidget->rowCount()-1,90);
+        ui->tableWidget->setRowHeight(ui->tableWidget->rowCount()-1,84);
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,0,item);
 
         ToolButtonWidget *button1 = new ToolButtonWidget();
+        button1->setButtonFixSize(60,20);
         button1->setText(tr("delete"));
         button1->setInitGray(true);
         ui->tableWidget->setIndexWidget(ui->tableWidget->model()->index(ui->tableWidget->rowCount()-1,1),button1);
 
         ToolButtonWidget *button2 = new ToolButtonWidget();
+        button2->setButtonFixSize(60,20);
         button2->setText(tr("export"));
         ui->tableWidget->setIndexWidget(ui->tableWidget->model()->index(ui->tableWidget->rowCount()-1,2),button2);
 
@@ -205,7 +207,7 @@ void AccountManagerWidget::InitStyle()
     ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->setShowGrid(false);
     ui->tableWidget->setColumnCount(3);
-    ui->tableWidget->setColumnWidth(0,480);
+    ui->tableWidget->setColumnWidth(0,465);
     ui->tableWidget->setColumnWidth(1,80);
     ui->tableWidget->setColumnWidth(2,80);
     ui->tableWidget->setStyleSheet("QTableView{border:none;font:12px \"Microsoft YaHei UI Light\";}");

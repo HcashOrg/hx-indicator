@@ -146,7 +146,7 @@ void FunctionWidget::ShowMoreWidgetSlots()
     _p->contextMenu->exec(mapToGlobal(QPoint(70,height()-_p->contextMenu->height())));
 
 
-    updateCheckState(4);
+    //updateCheckState(4);
 }
 
 void FunctionWidget::ShowSettingWidgetSlots()
@@ -204,7 +204,7 @@ void FunctionWidget::InitWidget()
     ui->toolButton_account->setCheckable(true);
     ui->toolButton_advanced->setCheckable(true);
     ui->toolButton_exchange->setCheckable(true);
-    ui->toolButton_more->setCheckable(true);
+    ui->toolButton_more->setCheckable(false);
 
     ui->stackedWidget->addWidget(_p->accountBar);
     ui->stackedWidget->addWidget(_p->advanceBar);
@@ -256,8 +256,8 @@ void FunctionWidget::InitStyle()
                   );
     _p->contextMenu->setAttribute(Qt::WA_TranslucentBackground);
     _p->contextMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | _p->contextMenu->windowFlags() );
-    _p->contextMenu->setMinimumWidth(88);
-    _p->contextMenu->setStyleSheet("QMenu {border-bottom-left-radius:0px;}");
+    //_p->contextMenu->setMinimumWidth(88);
+    _p->contextMenu->setStyleSheet("QMenu {width:88px;border-bottom-left-radius:0px;}QMenu::item{padding:5px 21px;}");
 
 
     ui->toolButton_account->setIconSize(QSize(26,26));

@@ -31,15 +31,15 @@
     <font>
      <family>Microsoft YaHei UI Light</family>
      <pointsize>-1</pointsize>
-     <weight>8</weight>
+     <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(248, 249, 253);
-font: 65 16px &quot;Microsoft YaHei UI Light&quot;;
-padding-left:15px;</string>
+    <string notr="true">color: #A6B9FF;
+font: 16px &quot;Microsoft YaHei UI Light&quot;;
+padding-left: 18px;</string>
    </property>
    <property name="text">
     <string>高级</string>

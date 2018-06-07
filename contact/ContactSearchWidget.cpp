@@ -64,6 +64,7 @@ void ContactSearchWidget::InitWidget()
 
     connect(ui->lineEdit,&QLineEdit::textEdited,this, &ContactSearchWidget::StartSearchSlots);
 
+    ui->label->setVisible(false);
     //ui->lineEdit->setStyleSheet();
 }
 

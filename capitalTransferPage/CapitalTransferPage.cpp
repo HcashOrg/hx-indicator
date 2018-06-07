@@ -12,6 +12,8 @@
 #include "extra/HttpManager.h"
 #include "commondialog.h"
 #include "crossmark/crosscapitalmark.h"
+#include "dialog/ErrorResultDialog.h"
+#include "dialog/TransactionResultDialog.h"
 
 static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001}};
 class CapitalTransferPage::CapitalTransferPagePrivate
@@ -168,7 +170,6 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
 
         qDebug()<<"多签地址"<<_p->multisig_address;
 
-        UBChain::getInstance()->mainFrame->crossMark->checkUpData(_p->account_name,_p->symbol);
     }
     else if("captial-createrawtransaction" == id)
     {//获取到创建交易信息
@@ -199,10 +200,25 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         result.append("}");
         UBChain::getInstance()->mainFrame->crossMark->TransactionInput(result,_p->symbol,_p->account_name,ui->lineEdit_number->text().toDouble());
 
-        qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);        
-        CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(UBChain::getInstance()->jsonDataValue( id));
-        dia.pop();
+        qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);
+        if( result.startsWith("\"result\":{"))             // 成功
+        {
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction has been sent,please wait for confirmation"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
+        }
+        else
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to transfer!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
+        }
+
+//        CommonDialog dia(CommonDialog::OkOnly);
+//        dia.setText(UBChain::getInstance()->jsonDataValue( id));
+//        dia.pop();
         close();
     }
 }
@@ -404,6 +420,9 @@ void CapitalTransferPage::InitWidget()
     UBChain::getInstance()->postRPC( "captial-get_current_multi_address",
                                      toJsonFormat( "get_current_multi_address", QJsonArray()
                                      << _p->symbol));
+    //查询缓存提现
+    UBChain::getInstance()->mainFrame->crossMark->checkUpData(_p->account_name,_p->symbol);
+
 
 }
 

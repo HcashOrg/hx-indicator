@@ -136,6 +136,7 @@ void HelpWidget::paintEvent(QPaintEvent *event)
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);//最后一位是设置透明属性（在0-255取值）
     painter.drawRoundedRect(rect(),10,10);
+    painter.drawRect(0,0,10,10);
 
     QWidget::paintEvent(event);
 }

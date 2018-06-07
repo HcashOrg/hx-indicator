@@ -7,6 +7,9 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QStringList>
+#include <thread>
+#include <chrono>
+#include <QTimer>
 #include "wallet.h"
 #include "extra/HttpManager.h"
 
@@ -234,7 +237,7 @@ void CrossCapitalMark::jsonDataUpdated(const QString &id)
         QueryTransaction(symbol,trid);
 
         //需要更新信息
-        QueryTransaction(symbol,"finish");
+         QTimer::singleShot(200,[this,symbol](){this->QueryTransaction(symbol,"finish");});
     }
 }
 
@@ -323,7 +326,8 @@ void CrossCapitalMark::checkUpData(const QString &accountName, const QString &ch
             }
         }
     }
-    QueryTransaction(chainType,"finish");
+    QTimer::singleShot(200,[this,chainType](){this->QueryTransaction(chainType,"finish");});
+
 }
 
 void CrossCapitalMark::TransactionInput(const QString &jsonString,const QString &symbol,const QString &accountName,double number)

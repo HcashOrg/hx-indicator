@@ -40,7 +40,7 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->widget->setStyleSheet("#widget {background-color:transparent;}");
     ui->containerWidget->setObjectName("containerwidget");
     //ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-top-right-radius:10px;border-bottom-right-radius:10px;border-bottom-left-radius:10px;}");
 
     ui->generalBtn->setCheckable(true);
     ui->safeBtn->setCheckable(true);
@@ -54,13 +54,13 @@ SetDialog::SetDialog(QWidget *parent) :
 
     ui->generalBtn->setChecked(false);
 
-    ui->generalBtn->setIconSize(QSize(10,10));
+    ui->generalBtn->setIconSize(QSize(12,12));
     ui->generalBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
 
-    ui->safeBtn->setIconSize(QSize(10,10));
+    ui->safeBtn->setIconSize(QSize(12,12));
     ui->safeBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
 
-    ui->accountBtn->setIconSize(QSize(10,10));
+    ui->accountBtn->setIconSize(QSize(12,12));
     ui->accountBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
 
 
@@ -68,8 +68,8 @@ SetDialog::SetDialog(QWidget *parent) :
                   "QToolButton::hover{color:black;}"
                   "QToolButton::checked{color:black;}"
 
-                  "QToolButton#toolButton_help,QToolButton#toolButton_set{border:none;background:transparent;color:#C6CAD4;}"
-                  "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{color:black;}"
+                  "QToolButton#toolButton_help,QToolButton#toolButton_set{border:none;background:#F8F9FD;color:#C6CAD4;border-top-left-radius:10px;border-top-right-radius:10px;}"
+                  "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{color:black;background:#FFFFFF;}"
 
 
                   "QToolButton#depositBtn{color:black;}"

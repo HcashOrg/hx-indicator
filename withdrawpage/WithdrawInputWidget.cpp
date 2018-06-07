@@ -75,9 +75,17 @@ void WithdrawInputWidget::numberChangeSlots(const QString &number)
     {
         return;
     }
-    if(ui->lineEdit_ammount->text().toDouble() > via->top())
+    if(number.isEmpty())
+    {
+        ui->label_tipNumber->setVisible(false);
+    }
+    else if(ui->lineEdit_ammount->text().toDouble() > via->top())
     {
         ui->lineEdit_ammount->setText(ui->lineEdit_ammount->text().remove(ui->lineEdit_ammount->text().length()-1,1));
+        ui->label_tipNumber->setVisible(true);
+    }
+    else if(ui->lineEdit_ammount->text().toDouble() < via->bottom())
+    {
         ui->label_tipNumber->setVisible(true);
     }
     else

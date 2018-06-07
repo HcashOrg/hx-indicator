@@ -400,8 +400,7 @@ void ContactTreeWidget::initTreeStyle()
                   "QTreeView{background-color:rgb(84,116,235);border:none;\
                       color:white;font:65 16px \"Microsoft YaHei UI\";outline:0px;}"
                   "QTreeView::branch{background:rgb(94,116,235);}"
-                  "QTreeView::item{margin:5px 0px;height:30px;}"
-                  "QTreeView::branch{margin:5px 0px;}"
+                  "QTreeView::item{height:32px;}"
                   "QTreeView::item::selected{background:#829DFF;border:none;color:white;}"
                   "QTreeView::branch:selected:has-children:adjoins-item {border-left:2px solid rgb(0,210,255);}"
                   "QTreeView::branch::selected::adjoins-item{background:#829DFF;}"
@@ -468,7 +467,9 @@ void ContactTreeWidget::contextMenuEvent(QContextMenuEvent *event)
     else if (std::shared_ptr<ContactPerson> person = currentItem->data(0,Qt::UserRole).value<std::shared_ptr<ContactPerson>>())
     {
         _p->contextMenu->addAction(_p->editPersonAction);
+        _p->contextMenu->addSeparator();
         _p->contextMenu->addAction(_p->delPersonAction);
+        _p->contextMenu->addSeparator();
         _p->contextMenu->addMenu(_p->movePersonMenu);
         //刷新分组菜单
         _p->movePersonMenu->clear();
