@@ -1,6 +1,7 @@
 #include "PageScrollWidget.h"
 #include "ui_PageScrollWidget.h"
 
+
 class PageScrollWidget::PageScrollWidgetPrivate
 {
 public:
@@ -11,6 +12,9 @@ public:
         ,isShowNext(false)
         ,currentPage(0)
         ,isMoreClicked(false)
+        ,showTip(false)
+        ,totalItem(0)
+        ,pageItem(0)
     {
         dataShow.resize(buttonNumber,-1);//-1表示不显示，-2表示。。。
     }
@@ -24,6 +28,11 @@ public:
 
     int currentPage;
     bool isMoreClicked;
+
+    bool showTip;//是否显示条目提示
+    unsigned int totalItem;//总共条目
+    unsigned int pageItem;//每页条目
+
 };
 
 PageScrollWidget::PageScrollWidget(unsigned int buttonNumber,QWidget *parent) :
@@ -61,6 +70,7 @@ void PageScrollWidget::SetTotalPage(unsigned int number)
         ui->lineEdit->setVisible(false);
         ui->lineEdit->setText("1");
     }
+
 }
 
 void PageScrollWidget::SetCurrentPage(unsigned int number)
@@ -69,6 +79,8 @@ void PageScrollWidget::SetCurrentPage(unsigned int number)
     RefreshData();
     ui->lineEdit->setText(QString::number(_p->currentPage+1));
     emit currentPageChangeSignal(_p->currentPage);
+
+    updateShowTip();
 }
 
 unsigned int PageScrollWidget::GetTotalPage() const
@@ -79,6 +91,15 @@ unsigned int PageScrollWidget::GetTotalPage() const
 unsigned int PageScrollWidget::GetCurrentPage() const
 {
     return _p->currentPage;
+}
+
+void PageScrollWidget::setShowTip(unsigned int totalItem,unsigned int pageItem)
+{
+    _p->showTip = true;
+    _p->totalItem = totalItem;
+    _p->pageItem = pageItem;
+
+    updateShowTip();
 }
 
 void PageScrollWidget::buttonClickSlots()
@@ -147,6 +168,7 @@ void PageScrollWidget::RefreshData()
 
     RefreshButton();
     emit currentPageChangeSignal(static_cast<unsigned int>(_p->currentPage));
+    updateShowTip();
 }
 
 void PageScrollWidget::RefreshButton()
@@ -239,6 +261,7 @@ void PageScrollWidget::InitWidget()
     ui->toolButton_next->setVisible(false);
     ui->toolButton_pre->setVisible(false);
     ui->lineEdit->setVisible(false);
+    ui->label->setVisible(false);
     connect(ui->toolButton_next,&QToolButton::clicked,this,&PageScrollWidget::buttonClickSlots);
     connect(ui->toolButton_pre,&QToolButton::clicked,this,&PageScrollWidget::buttonClickSlots);
     connect(ui->lineEdit,&QLineEdit::editingFinished,this,&PageScrollWidget::LineEditFinishSlots);
@@ -325,4 +348,27 @@ void PageScrollWidget::ResetButton()
     }
 
     RefreshButton();
+}
+
+void PageScrollWidget::updateShowTip()
+{
+    if(_p->showTip)
+    {
+        if(_p->totalItem >= 1)
+        {
+            unsigned int minNumber = _p->currentPage*_p->pageItem + 1;
+            unsigned int maxNumber = std::min<unsigned int>((_p->currentPage+1)*_p->pageItem,_p->totalItem);
+            ui->label->setText(tr("currently show %1-%2 items,total %3 items").arg(QString::number(minNumber)).arg(QString::number(maxNumber)).arg(_p->totalItem));
+            ui->label->setVisible(true);
+
+        }
+        else
+        {
+            ui->label->setVisible(false);
+        }
+    }
+    else
+    {
+       ui->label->setVisible(false);
+    }
 }

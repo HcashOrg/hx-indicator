@@ -102,6 +102,7 @@ void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
     int page = (ui->depositRecordTableWidget->rowCount()%ROWNUMBER==0 && ui->depositRecordTableWidget->rowCount() != 0) ?
                 ui->depositRecordTableWidget->rowCount()/ROWNUMBER : ui->depositRecordTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->depositRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
 
 }

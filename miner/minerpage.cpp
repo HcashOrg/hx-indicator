@@ -169,6 +169,8 @@ void MinerPage::jsonDataUpdated(QString id)
         unsigned int curPage = pageWidget_fore->GetCurrentPage();
         pageWidget_fore->SetTotalPage(calPage(ui->lockBalancesTableWidget));
         pageWidget_fore->SetCurrentPage(curPage);
+
+        pageWidget_fore->setShowTip(ui->lockBalancesTableWidget->rowCount(),ROWNUMBER);
         setTextCenter(ui->lockBalancesTableWidget);
 
         return;
@@ -245,6 +247,8 @@ void MinerPage::jsonDataUpdated(QString id)
         unsigned int curPage = pageWidget_income->GetCurrentPage();
         pageWidget_income->SetTotalPage(calPage(ui->incomeTableWidget));
         pageWidget_income->SetCurrentPage(curPage);
+
+        pageWidget_income->setShowTip(ui->incomeTableWidget->rowCount(),ROWNUMBER);
         setTextCenter(ui->incomeTableWidget);
 
         return;
@@ -433,6 +437,7 @@ void MinerPage::showIncomeRecord()
     unsigned int curPage = pageWidget_record->GetCurrentPage();
     pageWidget_record->SetTotalPage(calPage(ui->incomeRecordTableWidget));
     pageWidget_record->SetCurrentPage(curPage);
+    pageWidget_record->setShowTip(ui->incomeRecordTableWidget->rowCount(),ROWNUMBER);
     setTextCenter(ui->incomeRecordTableWidget);
 }
 

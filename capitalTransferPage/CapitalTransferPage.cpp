@@ -201,7 +201,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         UBChain::getInstance()->mainFrame->crossMark->TransactionInput(result,_p->symbol,_p->account_name,ui->lineEdit_number->text().toDouble());
 
         qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);
-        if( result.startsWith("\"result\":{"))             // 成功
+        if( result.startsWith("{\"result\":"))             // 成功
         {
             TransactionResultDialog transactionResultDialog;
             transactionResultDialog.setInfoText(tr("Transaction has been sent,please wait for confirmation"));

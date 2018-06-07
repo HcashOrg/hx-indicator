@@ -84,6 +84,7 @@ void AccountManagerWidget::deleteButtonSlots()
         {
             this->_p->pageWidget->SetCurrentPage(this->_p->pageWidget->GetCurrentPage());
         }
+        this->_p->pageWidget->setShowTip(totalnumber,3);
     });
     wi->show();
 //    CommonDialog commonDialog(CommonDialog::OkAndCancel);
@@ -193,6 +194,8 @@ void AccountManagerWidget::InitWidget()
         connect(button2,&ToolButtonWidget::clicked,this,&AccountManagerWidget::exportButtonSlots);
     }
     RefreshTableShow(0);
+    _p->pageWidget->setShowTip(UBChain::getInstance()->accountInfoMap.size(),3);
+
     connect(_p->pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&AccountManagerWidget::pageChangeSlot);
     connect(ui->toolButton,&QToolButton::clicked,this,&AccountManagerWidget::backupButtonSlots);
 

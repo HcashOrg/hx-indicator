@@ -25,6 +25,9 @@ public:
 
     unsigned int GetTotalPage()const;
     unsigned int GetCurrentPage()const;
+
+public:
+    void setShowTip(unsigned int totalItem,unsigned int pageItem);//设置显示条目提示
 signals:
     void currentPageChangeSignal(unsigned int);//0-->totalpage-1
 private slots:
@@ -40,6 +43,8 @@ private:
     void InitWidget();
     void InitStyle();
     void ResetButton();
+
+    void updateShowTip();
 private:
     Ui::PageScrollWidget *ui;
 private:

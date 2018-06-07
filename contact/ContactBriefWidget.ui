@@ -31,13 +31,13 @@
     <font>
      <family>Microsoft YaHei UI</family>
      <pointsize>-1</pointsize>
-     <weight>12</weight>
+     <weight>13</weight>
      <italic>false</italic>
      <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 100 20px &quot;Microsoft YaHei UI&quot;;
+    <string notr="true">font: 105 20px &quot;Microsoft YaHei UI&quot;;
 </string>
    </property>
    <property name="text">

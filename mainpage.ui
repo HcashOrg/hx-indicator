@@ -420,11 +420,21 @@
   <widget class="QPushButton" name="backupBtn">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>57</y>
+     <x>130</x>
+     <y>53</y>
      <width>200</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+     <underline>false</underline>
+    </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
@@ -433,11 +443,20 @@
     <string notr="true">color: red;
 font: 12px &quot;微软雅黑&quot;;
 border:none;
-background:transparent;
-text-decoration: underline;</string>
+background:transparent;</string>
    </property>
    <property name="text">
     <string>钱包数据更新，点击此处重新备份！</string>
+   </property>
+   <property name="icon">
+    <iconset resource="wallet.qrc">
+     <normaloff>:/ui/wallet_ui/redtip.png</normaloff>:/ui/wallet_ui/redtip.png</iconset>
+   </property>
+   <property name="autoDefault">
+    <bool>false</bool>
+   </property>
+   <property name="default">
+    <bool>false</bool>
    </property>
   </widget>
   <zorder>addressLabel</zorder>
@@ -454,6 +473,8 @@ text-decoration: underline;</string>
   <zorder>allTransactionBtn</zorder>
   <zorder>backupBtn</zorder>
  </widget>
- <resources/>
+ <resources>
+  <include location="wallet.qrc"/>
+ </resources>
  <connections/>
 </ui>
