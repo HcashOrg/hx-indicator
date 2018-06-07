@@ -410,7 +410,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <enum>Qt::SolidLine</enum>
    </property>
    <attribute name="horizontalHeaderVisible">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>
@@ -579,7 +579,8 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    <property name="styleSheet">
     <string notr="true">border:1px solid rgb(198,202,212);border-top-left-radius:12px;border-bottom-left-radius:12px;
 color: rgb(198,202,212);padding: 0px 10px 0px 10px;
-font: 12px &quot;微软雅黑&quot;;</string>
+font: 12px &quot;微软雅黑&quot;;
+</string>
    </property>
   </widget>
   <widget class="QPushButton" name="searchBtn">

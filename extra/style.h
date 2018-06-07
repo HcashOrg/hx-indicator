@@ -16,11 +16,11 @@
 #define CONTAINERWIDGET_STYLE   "#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}"  \
                                 "QLabel{color:rgb(51,51,51);}"
 
-#define TOOLBUTTON_STYLE_1      "QToolButton{font: 11px \"Microsoft YaHei UI Light\";background-color:#00D2FF; border:none;border-radius:10px;color: rgb(255, 255, 255);}" \
-                                "QToolButton:hover{background-color:#5474EB;}"
+#define TOOLBUTTON_STYLE_1      "QToolButton{font: 11px \"Microsoft YaHei UI Light\";background-color:rgb(84,116,235); border:none;border-radius:10px;color: rgb(255, 255, 255);}" \
+                                "QToolButton:pressed{background-color:rgb(70,95,191);}"
 
 #define TABLEWIDGET_STYLE_1     "QTableView{background-color:white;border:1px solid rgb(236,238,251);border-radius:15px;font: 12px \"Microsoft YaHei UI Light\";}" \
-                                "QHeaderView{border:none;border-top-left-radius:15px;border-top-right-radius:15px;background-color:white;color:#C6CAD4;font: 12px \"Microsoft YaHei UI Light\";}" \
+                                "QHeaderView{border:none;border-bottom:1px solid rgb(240,240,240);border-top-left-radius:15px;border-top-right-radius:15px;background-color:white;color:#C6CAD4;font: 12px \"Microsoft YaHei UI Light\";}" \
                                 "QHeaderView:section{height:35px;border:none;background-color:white;}" \
                                 "QHeaderView:section:first{border-top-left-radius:15px;}" \
                                 "QHeaderView:section:last{border-top-right-radius:15px;}"

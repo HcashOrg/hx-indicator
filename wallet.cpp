@@ -142,7 +142,6 @@ UBChain*   UBChain::getInstance()
 void UBChain:: startExe()
 {
     connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
-    qDebug() << "ddddddddd " << QDir::currentPath() << QCoreApplication::applicationDirPath() << QCoreApplication::applicationFilePath() ;
 
     QStringList strList;
     strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
@@ -164,7 +163,7 @@ void UBChain:: startExe()
 
 void UBChain::onNodeExeStateChanged()
 {
-    qDebug() << "nnnnnnnnnnnnn " << nodeProc->state();
+    qDebug() << "node exe state " << nodeProc->state();
     if(isExiting)   return;
 
     if(nodeProc->state() == QProcess::Starting)
