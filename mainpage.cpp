@@ -25,6 +25,7 @@
 #include "ToolButtonWidget.h"
 #include "alltransactionwidget.h"
 #include "dialog/ErrorResultDialog.h"
+#include "control/AssetIconItem.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -82,11 +83,7 @@ MainPage::MainPage(QWidget *parent) :
 
 MainPage::~MainPage()
 {
-	
-
     delete ui;
-
-	
 }
 
 QString toThousandFigure( int);
@@ -105,7 +102,7 @@ void MainPage::updateAccountList()
 
     for(int i = 0; i < size; i++)
     {
-        ui->accountTableWidget->setRowHeight(i,37);
+        ui->accountTableWidget->setRowHeight(i,40);
 
         QString assetId = keys.at(i);
         AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
@@ -154,6 +151,14 @@ void MainPage::updateAccountList()
                 connect(toolButton,&ToolButtonWidget::clicked,std::bind(&MainPage::on_accountTableWidget_cellClicked,this,i,j));
             }
         }
+
+        AssetIconItem* assetIconItem = new AssetIconItem();
+        assetIconItem->setAsset(ui->accountTableWidget->item(i,0)->text());
+        QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
+        qDebug() << "cccccccc " << itemColor;
+        assetIconItem->setBackgroundColor(itemColor);
+        ui->accountTableWidget->setCellWidget(i, 0, assetIconItem);
+
     }
     if(ui->accountComboBox->count() == 0)
     {

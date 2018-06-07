@@ -70,7 +70,7 @@ void ToolButtonWidget::InitWidget()
 void ToolButtonWidget::InitStyle()
 {
     setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-             "QToolButton:hover{background-color:#00D2FF;color:white;}");
+                  "QToolButton:hover{background-color:#00D2FF;color:white;}");
 }
 
 ToolButtonWidgetItem::ToolButtonWidgetItem(int _row, int _column, QWidget *parent)
