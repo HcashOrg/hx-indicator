@@ -128,17 +128,17 @@ qDebug() << "Rrrrrrrrrrrr " << _data;
         for(int j = 3;j < 4;++j)
         {
             ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
-            toolButtonItem->setButtonFixSize(80,20);
 
             if(UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText()) == contractAddress)
             {
-                toolButtonItem->setBtnEnabled(false);
+                toolButtonItem->setEnabled(false);
                 toolButtonItem->setText(tr("my order"));
+                toolButtonItem->setButtonFixSize(80,20);
             }
             else
             {
-                toolButtonItem->setBtnEnabled(true);
-                toolButtonItem->setText(ui->ordersTableWidget->item(i,j)->text());
+                toolButtonItem->setInitGray(false);
+                toolButtonItem->setText(ui->ordersTableWidget->item(i,j)->text());          
             }
 
             ui->ordersTableWidget->setCellWidget(i,j,toolButtonItem);

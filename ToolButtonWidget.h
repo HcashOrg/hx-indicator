@@ -19,10 +19,9 @@ signals:
 public:
     void setText(const QString &text);
     void setInitGray(bool gray = false);
-    void setInitNone(bool non = false);
-    void setInitColor(const QColor color);
     void setEnabled(bool enabled);
     void setButtonFixSize(int width, int height);
+    void setBackgroundColor(QString color);
 private:
     void InitWidget();
     void InitStyle();
@@ -36,8 +35,6 @@ class ToolButtonWidgetItem : public ToolButtonWidget
 
 public:
     explicit ToolButtonWidgetItem(int _row, int _column, QWidget *parent = 0);
-
-    void setBtnEnabled(bool enabled = true);
 
 signals:
     void itemClicked(int,int);

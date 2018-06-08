@@ -184,14 +184,13 @@ void AccountManagerWidget::InitWidget()
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,0,item);
 
         ToolButtonWidget *button1 = new ToolButtonWidget();
-        button1->setButtonFixSize(60,20);
         button1->setText(tr("delete"));
         button1->setInitGray(true);
         ui->tableWidget->setIndexWidget(ui->tableWidget->model()->index(ui->tableWidget->rowCount()-1,1),button1);
 
         ToolButtonWidget *button2 = new ToolButtonWidget();
-        button2->setButtonFixSize(60,20);
         button2->setText(tr("export"));
+        button2->setInitGray(false);
         ui->tableWidget->setIndexWidget(ui->tableWidget->model()->index(ui->tableWidget->rowCount()-1,2),button2);
 
         connect(button1,&ToolButtonWidget::clicked,this,&AccountManagerWidget::deleteButtonSlots);
