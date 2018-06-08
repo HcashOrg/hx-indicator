@@ -125,6 +125,7 @@ void FunctionWidget::ShowMoreWidgetSlots()
     QAction* actionConsole = _p->contextMenu->addAction(tr("Console"));
     _p->contextMenu->addSeparator();
     QMenu *helpMenu = new QMenu(tr("Help"));
+    helpMenu->setStyleSheet(MENU_STYLE);
     helpMenu->setAttribute(Qt::WA_TranslucentBackground, true);
     helpMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | helpMenu->windowFlags());
 
@@ -257,7 +258,11 @@ void FunctionWidget::InitStyle()
     _p->contextMenu->setAttribute(Qt::WA_TranslucentBackground);
     _p->contextMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | _p->contextMenu->windowFlags() );
     //_p->contextMenu->setMinimumWidth(88);
-    _p->contextMenu->setStyleSheet("QMenu {width:88px;border-bottom-left-radius:0px;}QMenu::item{padding:5px 21px;}");
+    _p->contextMenu->setStyleSheet("QMenu {border-radius:10px;width:88px;border-bottom-left-radius:0px;background-color:rgba(238,241,253,235);border: 0px solid red;}"\
+                "QMenu::item {border-radius:10px;border: 0px solid green;background-color:transparent;padding:5px 21px;}"\
+                "QMenu::item:selected {background-color:rgb(130,157,255);}"\
+                "QMenu::separator {height: 2px;background-color: #FCFCFC;}"\
+                "QMenu::right-arrow {padding:0px 10px;image:url(:/wallet_ui/right.png);}");
 
 
     ui->toolButton_account->setIconSize(QSize(26,26));

@@ -116,8 +116,7 @@ void HelpWidget::InitWidget()
 void HelpWidget::InitStyle()
 {
     setStyleSheet(
-                  "QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
-                  "QToolButton:hover{background-color:#00D2FF;}"
+                  OKBTN_STYLE
                   "QTextBrowser{background-color:transparent;color:#333333;border:none;font-size:12px;font-family:\"Microsoft YaHei UI Light\";}");
 
 }

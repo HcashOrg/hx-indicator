@@ -46,4 +46,13 @@
 
 #define CANCELBTN_STYLE_HOVER "QToolButton{background:rgb(229,229,229);color: white;border:0px solid white;border-radius:15px;}"  \
                         "QToolButton:hover{background-color:rgb(0,210,255);}"
+
+
+#define MENU_STYLE      "QMenu {border-radius:10px;background-color:rgba(238,241,253,235);border: 0px solid red;}"\
+                        "QMenu::item {border-radius:10px;border: 0px solid green;background-color:transparent;padding:5px 10px;}"\
+                        "QMenu::item:selected {background-color:rgb(130,157,255);}"\
+                        "QMenu::separator {height: 2px;background-color: #FCFCFC;}"\
+                        "QMenu::right-arrow {padding:0px 10px;image:url(:/wallet_ui/right.png);}"
+
+
 #endif // STYLE_H

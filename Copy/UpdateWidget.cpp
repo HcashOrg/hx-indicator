@@ -10,7 +10,7 @@
 #include "DataUtil.h"
 
 static const QString OKBTN_STYLE =  "QToolButton{font: 14px \"Microsoft YaHei UI Light\";background-color: rgb(84,116,235);border:0px solid white;border-radius:15px;color: white;}"  \
-                        "QToolButton:hover{background-color:rgb(0,210,255);}" ;
+                        "QToolButton:hover{background-color:rgb(235,235,235);}" ;
 
 static const QString TEMP_FOLDER_NAME = "temp";
 static const QString PACKAGE_UN = "blocklink";
