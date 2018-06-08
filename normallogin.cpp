@@ -161,8 +161,7 @@ void NormalLogin::InitStyle()
     ui->line->setVisible(false);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    ui->enterBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
-                                "QToolButton:hover{background-color:#00D2FF;}");
+    ui->enterBtn->setStyleSheet(BIG_BUTTON);
 }
 
 

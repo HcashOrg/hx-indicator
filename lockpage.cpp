@@ -169,8 +169,7 @@ void LockPage::InitStyle()
 
     ui->line->setVisible(false);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
-    ui->enterBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
-                                "QToolButton:hover{background-color:#00D2FF;}");
+    ui->enterBtn->setStyleSheet(BIG_BUTTON);
 }
 
 void LockPage::keyPressEvent(QKeyEvent *e)
@@ -196,7 +195,7 @@ void LockPage::keyPressEvent(QKeyEvent *e)
 void LockPage::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
-    painter.drawPixmap(238,130,490,320,QPixmap(":/ui/wallet_ui/login.png").scaled(490,320));
+    painter.drawPixmap(238,130,470,320,QPixmap(":/ui/wallet_ui/login.png").scaled(470,320));
 
     QWidget::paintEvent(e);
 }

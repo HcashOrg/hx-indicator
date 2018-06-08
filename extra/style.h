@@ -2,11 +2,11 @@
 #define STYLE_H
 
 #define OKBTN_STYLE     "QToolButton{font: 14px \"Microsoft YaHei UI Light\";background-color: rgb(84,116,235);border:0px solid white;border-radius:15px;color: white;}"  \
-                        "QToolButton:hover{background-color:rgb(0,210,255);}"   \
+                        "QToolButton:pressed{background-color:rgb(70,95,191);}"\
                         "QToolButton:disabled{background-color:rgb(235,235,235);}"
 
 #define CANCELBTN_STYLE "QToolButton{background:rgb(229,229,229);color: white;border:0px solid white;border-radius:15px;}"  \
-                        "QToolButton:hover{background-color:rgb(0,210,255);}"
+                        "QToolButton:pressed{background-color:rgb(70,95,191);}"
 
 #define CLOSEBTN_STYLE  "QToolButton{background-image:url(:/ui/wallet_ui/close.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}"   \
                         "QToolButton:hover{background-color:rgb(208,228,255);"
@@ -37,4 +37,13 @@
                                         "QToolButton:pressed{background-color: rgb(130,157, 255);}" \
                                         "QToolButton:checked{border-left:2px solid rgb(0,210,255);background-color: rgb(130,157, 255);}"
 
+#define BIG_BUTTON      "QToolButton{font: 11px \"Microsoft YaHei UI Light\";background-color:rgb(84,116,235); border:none;border-radius:15px;color: rgb(255, 255, 255);}" \
+                                "QToolButton:pressed{background-color:rgb(70,95,191);}"
+
+#define OKBTN_STYLE_HOVER     "QToolButton{font: 14px \"Microsoft YaHei UI Light\";background-color: rgb(84,116,235);border:0px solid white;border-radius:15px;color: white;}"  \
+                        "QToolButton:hover{background-color:rgb(0,210,255);}"   \
+                        "QToolButton:disabled{background-color:rgb(235,235,235);}"
+
+#define CANCELBTN_STYLE_HOVER "QToolButton{background:rgb(229,229,229);color: white;border:0px solid white;border-radius:15px;}"  \
+                        "QToolButton:hover{background-color:rgb(0,210,255);}"
 #endif // STYLE_H

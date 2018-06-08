@@ -47,7 +47,7 @@ void SelectWalletPathWidget::on_okBtn_clicked()
 void SelectWalletPathWidget::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
-    painter.drawPixmap(238,130,490,320,QPixmap(":/ui/wallet_ui/login.png").scaled(490,320));
+    painter.drawPixmap(238,130,470,320,QPixmap(":/ui/wallet_ui/login.png").scaled(470,320));
 
     QWidget::paintEvent(e);
 }
@@ -74,8 +74,7 @@ void SelectWalletPathWidget::InitStyle()
     ui->label_version->setPalette(pa);
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
-    ui->okBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
-                                "QToolButton:hover{background-color:#00D2FF;}");
+    ui->okBtn->setStyleSheet(BIG_BUTTON);
 
 
     ui->pathLineEdit->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;\

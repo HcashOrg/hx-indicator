@@ -140,6 +140,7 @@ void AccountManagerWidget::jsonDataUpdated(QString id)
 
 void AccountManagerWidget::RefreshTableShow(unsigned int page)
 {
+    int showNumber = 0;
     for(int i = 0;i < ui->tableWidget->rowCount();++i)
     {
         if(i < page*3)
@@ -149,12 +150,15 @@ void AccountManagerWidget::RefreshTableShow(unsigned int page)
         else if(page * 3 <= i && i < page*3 + 3)
         {
             ui->tableWidget->setRowHidden(i,false);
+            ++showNumber;
         }
         else
         {
             ui->tableWidget->setRowHidden(i,true);
         }
     }
+    ui->line->setVisible(1 < showNumber);
+    ui->line_2->setVisible(2 < showNumber);
 }
 
 void AccountManagerWidget::InitWidget()

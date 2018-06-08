@@ -105,7 +105,7 @@ void FirstLogin::paintEvent(QPaintEvent *e)
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 
     QPainter painter(this);
-    painter.drawPixmap(238,130,490,320,QPixmap(":/ui/wallet_ui/whitebord.png").scaled(490,320));
+    painter.drawPixmap(238,130,470,320,QPixmap(":/ui/wallet_ui/whitebord.png").scaled(470,320));
 
 
     QWidget::paintEvent(e);
@@ -271,8 +271,7 @@ void FirstLogin::InitStyle()
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    ui->createBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
-                                "QToolButton:hover{background-color:#00D2FF;}");
+    ui->createBtn->setStyleSheet(BIG_BUTTON);
 
 }
 
