@@ -130,8 +130,10 @@ void PoundageWidget::ShowAllPoundageSlots()
 {
     ui->toolButton_allPoundage->setChecked(true);
     ui->toolButton_myPoundage->setChecked(false);
+
     autoRefreshSlots();
     ui->stackedWidget->setCurrentWidget(_p->allPoundageWidget);
+    updateButtonStyle();
 }
 
 void PoundageWidget::ShowMyPoundageSlots()
@@ -141,6 +143,7 @@ void PoundageWidget::ShowMyPoundageSlots()
 
     autoRefreshSlots();
     ui->stackedWidget->setCurrentWidget(_p->myPoundageWidget);
+    updateButtonStyle();
 }
 
 void PoundageWidget::SortByStuffSlots()
@@ -323,6 +326,7 @@ void PoundageWidget::InitWidget()
     connect(_p->allPoundageWidget,&PoundageShowWidget::SetDefaultPoundageSignal,this,&PoundageWidget::SetDefaultPoundageSlots);
     connect(_p->myPoundageWidget,&PoundageShowWidget::SetDefaultPoundageSignal,this,&PoundageWidget::SetDefaultPoundageSlots);
     autoRefreshSlots();
+    updateButtonStyle();
 }
 
 void PoundageWidget::InitStyle()
@@ -331,6 +335,11 @@ void PoundageWidget::InitStyle()
     QPalette palette;
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
+
+    QFont font("\"Microsoft YaHei UI Light\"",14,50);
+    font.setPixelSize(14);
+    ui->label->setFont(font);
+    ui->label_2->setFont(font);
 
     ui->toolButton_publishPoundage->setStyleSheet(TOOLBUTTON_STYLE_1);
 
@@ -356,4 +365,18 @@ void PoundageWidget::InitCoinType()
     {
         ui->comboBox_coinType->setCurrentIndex(0);
     }
+}
+
+void PoundageWidget::updateButtonStyle()
+{
+    QPalette pa;
+    pa.setColor(QPalette::WindowText,Qt::black);
+
+    QPalette pa1;
+    pa1.setColor(QPalette::WindowText,QColor(192,202,212));
+
+    ui->label->setPalette(ui->toolButton_allPoundage->isChecked()?pa:pa1);
+    ui->frame->setVisible(ui->toolButton_allPoundage->isChecked());
+    ui->label_2->setPalette(ui->toolButton_myPoundage->isChecked()?pa:pa1);
+    ui->frame_2->setVisible(ui->toolButton_myPoundage->isChecked());
 }
