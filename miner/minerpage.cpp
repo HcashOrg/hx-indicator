@@ -152,15 +152,12 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->lockBalancesTableWidget->setItem(i,3,new QTableWidgetItem(tr("add")));
 
             ToolButtonWidget *buttonAdd = new ToolButtonWidget();
-            buttonAdd->setInitNone(true);
             buttonAdd->setText(ui->lockBalancesTableWidget->item(i,3)->text());
             ui->lockBalancesTableWidget->setCellWidget(i,3,buttonAdd);
             connect(buttonAdd,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_lockBalancesTableWidget_cellPressed,this,i,3));
 
             ui->lockBalancesTableWidget->setItem(i,4,new QTableWidgetItem(tr("foreclose")));
             ToolButtonWidget *buttonfore = new ToolButtonWidget();
-            buttonfore->setInitNone(true);
-            //buttonfore->setInitGray(true);
             buttonfore->setText(ui->lockBalancesTableWidget->item(i,4)->text());
             ui->lockBalancesTableWidget->setCellWidget(i,4,buttonfore);
             connect(buttonfore,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_lockBalancesTableWidget_cellPressed,this,i,4));
@@ -237,7 +234,6 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->incomeTableWidget->setItem(i,2,new QTableWidgetItem(tr("obtain")));
 
             ToolButtonWidget *buttonInc = new ToolButtonWidget();
-            buttonInc->setInitNone(true);
             buttonInc->setText(ui->incomeTableWidget->item(i,2)->text());
             ui->incomeTableWidget->setCellWidget(i,2,buttonInc);
             connect(buttonInc,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_incomeTableWidget_cellPressed,this,i,2));

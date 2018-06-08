@@ -140,13 +140,15 @@ void MainPage::updateAccountList()
             //    ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(40,46,66));
             //}
         }
+
+        QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
         for(int j = 2;j < 6;++j)
         {
             if(ui->accountTableWidget->item(i,j))
             {
                 ToolButtonWidget *toolButton = new ToolButtonWidget();
-                toolButton->setInitNone(true);
                 toolButton->setText(ui->accountTableWidget->item(i,j)->text());
+                toolButton->setBackgroundColor(itemColor);
                 ui->accountTableWidget->setCellWidget(i,j,toolButton);
                 connect(toolButton,&ToolButtonWidget::clicked,std::bind(&MainPage::on_accountTableWidget_cellClicked,this,i,j));
             }
@@ -154,11 +156,17 @@ void MainPage::updateAccountList()
 
         AssetIconItem* assetIconItem = new AssetIconItem();
         assetIconItem->setAsset(ui->accountTableWidget->item(i,0)->text());
-        QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
-        qDebug() << "cccccccc " << itemColor;
         assetIconItem->setBackgroundColor(itemColor);
         ui->accountTableWidget->setCellWidget(i, 0, assetIconItem);
 
+        if(i%2)
+        {
+            ui->accountTableWidget->item(i,1)->setBackgroundColor(QColor(252,253,255));
+        }
+        else
+        {
+            ui->accountTableWidget->item(i,1)->setBackgroundColor(QColor("white"));
+        }
     }
     if(ui->accountComboBox->count() == 0)
     {

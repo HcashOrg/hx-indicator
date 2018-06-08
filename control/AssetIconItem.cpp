@@ -11,6 +11,8 @@ AssetIconItem::AssetIconItem(QWidget *parent) :
     ui(new Ui::AssetIconItem)
 {
     ui->setupUi(this);
+
+    setBackgroundColor("white");
 }
 
 AssetIconItem::~AssetIconItem()

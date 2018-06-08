@@ -1,8 +1,6 @@
 #include "ToolButtonWidget.h"
 #include "ui_ToolButtonWidget.h"
 
-static const QString BUTTONSTYLESHEET="QToolButton{background-color:rgb(%1,%2,%3); border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                                      "QToolButton:hover{background-color:#00D2FF;}";
 ToolButtonWidget::ToolButtonWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ToolButtonWidget)
@@ -25,30 +23,17 @@ void ToolButtonWidget::setInitGray(bool gray)
 {
     if(gray)
     {
-        setStyleSheet("QToolButton{background-color:#E5E5E5; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                 "QToolButton:hover{background-color:#00D2FF;color:white;}");
+        ui->toolButton->setStyleSheet("QToolButton{background-color:#E5E5E5; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                                      "QToolButton:pressed{background-color:#465FBF;color:white;}");
 
     }
     else
     {
-        setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                 "QToolButton:hover{background-color:#00D2FF;color:white;}");
+        ui->toolButton->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
+                                      "QToolButton:pressed{background-color:#465FBF;color:white;}");
     }
 }
 
-void ToolButtonWidget::setInitNone(bool non)
-{
-    if(non)
-    {
-        setStyleSheet("QToolButton{background-color:transparent; border:none;border-radius:10px;color: transparent;}"
-                 "QToolButton:hover{background-color:#00D2FF;color:white;}");
-    }
-}
-
-void ToolButtonWidget::setInitColor(const QColor color)
-{
-    setStyleSheet(BUTTONSTYLESHEET.arg(color.red()).arg(color.green()).arg(color.blue()));
-}
 
 void ToolButtonWidget::setEnabled(bool enabled)
 {
@@ -61,6 +46,11 @@ void ToolButtonWidget::setButtonFixSize(int width, int height)
     ui->toolButton->setFixedHeight(height);
 }
 
+void ToolButtonWidget::setBackgroundColor(QString color)
+{
+    setStyleSheet(QString("#widget{background-color:%1;}").arg(color));
+}
+
 void ToolButtonWidget::InitWidget()
 {
     InitStyle();
@@ -69,8 +59,12 @@ void ToolButtonWidget::InitWidget()
 
 void ToolButtonWidget::InitStyle()
 {
-    setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                  "QToolButton:hover{background-color:#00D2FF;color:white;}");
+    ui->toolButton->setStyleSheet("QToolButton{background:transparent; border:none;color: rgb(51, 51, 51);}"
+                                  "QToolButton:hover{color:rgb(84,116,235);}"
+                                  "QToolButton:disabled{color:rgb(200,200,200);}"
+                                  );
+    setButtonFixSize(60,20);
+    setBackgroundColor("white");
 }
 
 ToolButtonWidgetItem::ToolButtonWidgetItem(int _row, int _column, QWidget *parent)
@@ -79,15 +73,6 @@ ToolButtonWidgetItem::ToolButtonWidgetItem(int _row, int _column, QWidget *paren
     column = _column;
 
     connect(this,SIGNAL(clicked(bool)),this,SLOT(onButtonClicked()));
-}
-
-void ToolButtonWidgetItem::setBtnEnabled(bool enabled)
-{
-    setEnabled(enabled);
-    setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                  "QToolButton:hover{background-color:#00D2FF;color:white;}"
-                  "QToolButton:disabled{background-color:rgb(229,229,229);color:white;}"
-                  );
 }
 
 void ToolButtonWidgetItem::onButtonClicked()
