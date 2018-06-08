@@ -271,8 +271,7 @@ void FirstLogin::InitStyle()
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    ui->createBtn->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:15px;color: rgb(255, 255, 255);}"
-                                "QToolButton:hover{background-color:#00D2FF;}");
+    ui->createBtn->setStyleSheet(BIG_BUTTON);
 
 }
 
