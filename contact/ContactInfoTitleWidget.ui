@@ -68,6 +68,9 @@
      <pointsize>10</pointsize>
     </font>
    </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::DefaultContextMenu</enum>
+   </property>
    <property name="text">
     <string>1111111</string>
    </property>

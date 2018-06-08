@@ -10,6 +10,7 @@
 #include <QDebug>
 
 #include "ContactDataUtil.h"
+#include "extra/style.h"
 
 Q_DECLARE_METATYPE(std::shared_ptr<ContactGroup>);
 Q_DECLARE_METATYPE(std::shared_ptr<ContactPerson>);
@@ -421,6 +422,7 @@ void ContactTreeWidget::initTreeStyle()
 void ContactTreeWidget::initContextMenu()
 {
     _p->contextMenu = new QMenu(this);
+    _p->contextMenu->setStyleSheet(MENU_STYLE);
     _p->movePersonMenu = new QMenu(tr("MoveToGroup"),this);
 
     _p->addGroupAction = new QAction(tr("AddGroup"),this);

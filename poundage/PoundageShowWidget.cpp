@@ -129,16 +129,12 @@ void PoundageShowWidget::InitStyle()
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 
     ui->tableView->setStyleSheet(TABLEWIDGET_STYLE_1);
-    setStyleSheet("QMenu{border: none;border-radius:15px;}"
-                  "QMenu::item {border:none;background-color:#FFFFFF;color:black;border-bottom:1px solid #DBDBDB;}"
-                  "QMenu::item::selected{border:none;background-color: #829DFF;}"
-                  "QMenu::indicator{margin:0px 4px;}"
-                  );
 }
 
 void PoundageShowWidget::InitContextMenu()
 {
    _p->contextMenu = new QMenu();
+   _p->contextMenu->setStyleSheet(MENU_STYLE);
    _p->defaultAction = new QAction(tr("setDefault"),this);
    _p->deleteAction = new QAction(tr("delete"),this);
 
