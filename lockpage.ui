@@ -23,7 +23,7 @@
   <widget class="QLabel" name="label_pass">
    <property name="geometry">
     <rect>
-     <x>285</x>
+     <x>305</x>
      <y>270</y>
      <width>91</width>
      <height>20</height>
@@ -41,7 +41,7 @@
   <widget class="QLabel" name="label_version">
    <property name="geometry">
     <rect>
-     <x>285</x>
+     <x>305</x>
      <y>240</y>
      <width>80</width>
      <height>20</height>
@@ -83,9 +83,9 @@
   <widget class="QToolButton" name="enterBtn">
    <property name="geometry">
     <rect>
-     <x>285</x>
+     <x>300</x>
      <y>355</y>
-     <width>120</width>
+     <width>116</width>
      <height>30</height>
     </rect>
    </property>
@@ -105,7 +105,7 @@
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
-     <x>285</x>
+     <x>305</x>
      <y>328</y>
      <width>120</width>
      <height>3</height>
@@ -118,10 +118,10 @@
   <widget class="QToolButton" name="closeBtn">
    <property name="geometry">
     <rect>
-     <x>648</x>
-     <y>188</y>
-     <width>18</width>
-     <height>18</height>
+     <x>645</x>
+     <y>190</y>
+     <width>12</width>
+     <height>12</height>
     </rect>
    </property>
    <property name="cursor">
@@ -137,7 +137,7 @@
   <widget class="QLineEdit" name="pwdLineEdit">
    <property name="geometry">
     <rect>
-     <x>285</x>
+     <x>305</x>
      <y>300</y>
      <width>121</width>
      <height>24</height>
@@ -167,9 +167,9 @@
   <widget class="QLabel" name="welcome_label">
    <property name="geometry">
     <rect>
-     <x>285</x>
+     <x>305</x>
      <y>190</y>
-     <width>121</width>
+     <width>100</width>
      <height>45</height>
     </rect>
    </property>

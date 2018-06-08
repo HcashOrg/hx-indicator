@@ -47,4 +47,5 @@ QSpinBox::down-arrow:hover {image: url(:/ui/wallet_ui/spinDownArrow_hover.png);}
 #accountNameLabel,#priceLabel{font: bold 14px \"Microsoft YaHei UI Light\";}
 #pathBtn{background:transparent;color:rgb(192,202,212);font: 12px \"Microsoft YaHei UI Light\";}
 #pathBtn:hover{color:rgb(84,116,235);}
-#welcome_label{background-image: url(:/ui/wallet_ui/welcomeLabel.png);}
+#welcome_label{background-image: url(:/ui/wallet_ui/Welcome_normal.png);}
+#welcome_label_big{background-image: url(:/ui/wallet_ui/Welcome_big.png);}

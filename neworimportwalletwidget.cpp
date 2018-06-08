@@ -76,14 +76,13 @@ void NewOrImportWalletWidget::InitStyle()
     ui->importWalletBtn->setStyleSheet("QPushButton{background-color:transparent;border:none;border-radius:15px;color: #5474EB;font-family:\"Microsoft YaHei UI Light\";}"
                                  "QPushButton:hover{background-color:#00D2FF;color: rgb(255, 255, 255);}");
 
-
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 }
 
 void NewOrImportWalletWidget::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
-    painter.drawPixmap(235,130,490,320,QPixmap(":/ui/wallet_ui/login.png").scaled(490,320));
+    painter.drawPixmap(235,130,470,320,QPixmap(":/ui/wallet_ui/login.png").scaled(470,320));
 
     QWidget::paintEvent(e);
 }

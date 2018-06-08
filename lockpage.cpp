@@ -196,7 +196,7 @@ void LockPage::keyPressEvent(QKeyEvent *e)
 void LockPage::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
-    painter.drawPixmap(238,130,490,320,QPixmap(":/ui/wallet_ui/login.png").scaled(490,320));
+    painter.drawPixmap(238,130,470,320,QPixmap(":/ui/wallet_ui/login.png").scaled(470,320));
 
     QWidget::paintEvent(e);
 }

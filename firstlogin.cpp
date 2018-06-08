@@ -105,7 +105,7 @@ void FirstLogin::paintEvent(QPaintEvent *e)
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 
     QPainter painter(this);
-    painter.drawPixmap(238,130,490,320,QPixmap(":/ui/wallet_ui/whitebord.png").scaled(490,320));
+    painter.drawPixmap(238,130,470,320,QPixmap(":/ui/wallet_ui/whitebord.png").scaled(470,320));
 
 
     QWidget::paintEvent(e);

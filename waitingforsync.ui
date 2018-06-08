@@ -50,10 +50,10 @@
   <widget class="QToolButton" name="closeBtn">
    <property name="geometry">
     <rect>
-     <x>648</x>
-     <y>188</y>
-     <width>18</width>
-     <height>18</height>
+     <x>645</x>
+     <y>190</y>
+     <width>12</width>
+     <height>12</height>
     </rect>
    </property>
    <property name="cursor">
@@ -84,13 +84,13 @@
     <string>v1.0.1</string>
    </property>
   </widget>
-  <widget class="QLabel" name="welcome_label">
+  <widget class="QLabel" name="welcome_label_big">
    <property name="geometry">
     <rect>
      <x>305</x>
      <y>190</y>
-     <width>181</width>
-     <height>66</height>
+     <width>100</width>
+     <height>65</height>
     </rect>
    </property>
    <property name="font">
