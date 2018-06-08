@@ -65,8 +65,11 @@
      <x>30</x>
      <y>76</y>
      <width>624</width>
-     <height>3</height>
+     <height>2</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F0F0;</string>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -78,8 +81,11 @@
      <x>30</x>
      <y>164</y>
      <width>624</width>
-     <height>3</height>
+     <height>2</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F0F0;</string>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
