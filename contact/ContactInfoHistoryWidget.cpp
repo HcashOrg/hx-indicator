@@ -9,7 +9,7 @@
 #include "control/BlankDefaultWidget.h"
 
 
-static const int ROWNUMBER = 6;
+static const int ROWNUMBER = 5;
 class ContactInfoHistoryWidget::ContactInfoHistoryWidgetPrivate
 {
 public:

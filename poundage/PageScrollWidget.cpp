@@ -358,7 +358,7 @@ void PageScrollWidget::updateShowTip()
         {
             unsigned int minNumber = _p->currentPage*_p->pageItem + 1;
             unsigned int maxNumber = std::min<unsigned int>((_p->currentPage+1)*_p->pageItem,_p->totalItem);
-            ui->label->setText(tr("currently show %1-%2 items,total %3 items").arg(QString::number(minNumber)).arg(QString::number(maxNumber)).arg(_p->totalItem));
+            ui->label->setText(tr("currently show %1-%2,total %3").arg(QString::number(minNumber)).arg(QString::number(maxNumber)).arg(_p->totalItem));
             ui->label->setVisible(true);
 
         }

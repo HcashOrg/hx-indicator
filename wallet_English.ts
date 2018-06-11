@@ -2284,17 +2284,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Record</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="83"/>
+        <location filename="depositpage/DepositPage.cpp" line="84"/>
         <source>cannot generate tunnel account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="105"/>
+        <location filename="depositpage/DepositPage.cpp" line="106"/>
         <source>cannot bind tunnel account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="116"/>
+        <location filename="depositpage/DepositPage.cpp" line="117"/>
         <source>Wallet data updated! Please backup your wallet!</source>
         <oldsource>You Should Back Up Your Wallet!</oldsource>
         <translation type="unfinished"></translation>
@@ -4432,7 +4432,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="poundage/PageScrollWidget.cpp" line="361"/>
-        <source>currently show %1-%2 items,total %3 items</source>
+        <source>currently show %1-%2,total %3</source>
+        <oldsource>currently show %1-%2 items,total %3 items</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
