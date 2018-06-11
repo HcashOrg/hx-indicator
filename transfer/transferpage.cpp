@@ -230,7 +230,10 @@ void TransferPage::InitStyle()
     ui->sendBtn->setStyleSheet(OKBTN_STYLE);
     ui->transferRecordBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
-    ui->memoTextEdit->setStyleSheet("border:none;background:none;color:#5474EB;");
+
+    ui->memoTextEdit->setStyleSheet("QTextEdit{background: transparent;color: rgb(84,116,235);font: 14px \"Microsoft YaHei UI Light\";border:none;border-bottom:1px solid rgb(192,192,192);padding: 0px 10px 0px 6px;}\
+                                    QTextEdit:focus{border-bottom-color:rgb(84,116,235);}\
+                                    QTextEdit:disabled{color: rgb(151,151,151);}");
 
 //    ui->toolButton_chooseContact->setIconSize(QSize(12,12));
 //    ui->toolButton_chooseContact->setIcon(QIcon(":/ui/wallet_ui/tans.png"));
