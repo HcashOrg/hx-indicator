@@ -75,12 +75,12 @@
         <translation type="unfinished">Backup wallet</translation>
     </message>
     <message>
-        <location filename="AccountManagerWidget.cpp" line="184"/>
+        <location filename="AccountManagerWidget.cpp" line="187"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AccountManagerWidget.cpp" line="190"/>
+        <location filename="AccountManagerWidget.cpp" line="192"/>
         <source>export</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1551,7 +1551,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Address:</translation>
     </message>
     <message>
-        <location filename="contact/ContactInfoTitleWidget.ui" line="72"/>
+        <location filename="contact/ContactInfoTitleWidget.ui" line="75"/>
         <source>1111111</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1571,12 +1571,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactInfoTitleWidget.ui" line="112"/>
+        <location filename="contact/ContactInfoTitleWidget.ui" line="115"/>
         <source>转 账</source>
         <translation type="unfinished">transfer</translation>
     </message>
     <message>
-        <location filename="contact/ContactInfoTitleWidget.ui" line="137"/>
+        <location filename="contact/ContactInfoTitleWidget.ui" line="140"/>
         <source>名称</source>
         <translation type="unfinished">Remark</translation>
     </message>
@@ -1647,44 +1647,44 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="348"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="349"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="348"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="349"/>
         <source>Cannot Rename Group!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="424"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="426"/>
         <source>MoveToGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="426"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="428"/>
         <source>AddGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="428"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="430"/>
         <source>EditGroup</source>
         <oldsource>EidtGroup</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="429"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="431"/>
         <source>DeleteGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="431"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="433"/>
         <source>EditContact</source>
         <oldsource>EditPerson</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="432"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="434"/>
         <source>DeleteContact</source>
         <oldsource>DeletePerson</oldsource>
         <translation type="unfinished"></translation>
@@ -2734,7 +2734,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="firstlogin.cpp" line="49"/>
-        <location filename="firstlogin.cpp" line="286"/>
+        <location filename="firstlogin.cpp" line="285"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2754,7 +2754,7 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="firstlogin.cpp" line="291"/>
+        <location filename="firstlogin.cpp" line="290"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3028,12 +3028,12 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="132"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="133"/>
         <source>About Us</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="134"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="135"/>
         <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3282,7 +3282,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="lockpage.cpp" line="36"/>
-        <location filename="lockpage.cpp" line="183"/>
+        <location filename="lockpage.cpp" line="182"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3308,7 +3308,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="188"/>
+        <location filename="lockpage.cpp" line="187"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3509,12 +3509,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="365"/>
+        <location filename="mainpage.cpp" line="373"/>
         <source>Fail to create account!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="556"/>
+        <location filename="mainpage.cpp" line="564"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3643,47 +3643,47 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="160"/>
+        <location filename="miner/minerpage.cpp" line="159"/>
         <source>foreclose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="237"/>
+        <location filename="miner/minerpage.cpp" line="234"/>
         <source>obtain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="188"/>
+        <location filename="miner/minerpage.cpp" line="185"/>
         <source>Transaction of foreclose-asset has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="195"/>
+        <location filename="miner/minerpage.cpp" line="192"/>
         <source>Fail to foreclose asset from miner!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="266"/>
+        <location filename="miner/minerpage.cpp" line="262"/>
         <source>Transaction of obtain-income has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="278"/>
+        <location filename="miner/minerpage.cpp" line="274"/>
         <source>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="283"/>
+        <location filename="miner/minerpage.cpp" line="279"/>
         <source>Fail to obtain mining income!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="300"/>
+        <location filename="miner/minerpage.cpp" line="296"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="435"/>
+        <location filename="miner/minerpage.cpp" line="431"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4236,7 +4236,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="normallogin.cpp" line="34"/>
-        <location filename="normallogin.cpp" line="176"/>
+        <location filename="normallogin.cpp" line="175"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4256,7 +4256,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="normallogin.cpp" line="181"/>
+        <location filename="normallogin.cpp" line="180"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4304,7 +4304,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="136"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="135"/>
         <source>my order</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4483,12 +4483,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="142"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="138"/>
         <source>setDefault</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="143"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="139"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4521,12 +4521,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.ui" line="142"/>
+        <location filename="poundage/PoundageWidget.ui" line="191"/>
         <source>最新</source>
         <translation type="unfinished">Newest</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.ui" line="172"/>
+        <location filename="poundage/PoundageWidget.ui" line="204"/>
         <source>我发起的</source>
         <translation type="unfinished">MyAcceptance</translation>
     </message>
@@ -4536,32 +4536,32 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="188"/>
+        <location filename="poundage/PoundageWidget.cpp" line="191"/>
         <source>Transaction of create-guarantee-order has been sent!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="195"/>
+        <location filename="poundage/PoundageWidget.cpp" line="198"/>
         <source>Fail to create guarantee order!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="250"/>
+        <location filename="poundage/PoundageWidget.cpp" line="253"/>
         <source>Transaction of cancel-guarantee-order has been sent!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="257"/>
+        <location filename="poundage/PoundageWidget.cpp" line="260"/>
         <source>Fail to cancel guarantee order!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="301"/>
+        <location filename="poundage/PoundageWidget.cpp" line="304"/>
         <source>汇率由低到高</source>
         <translation type="unfinished">Rate low-high</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="302"/>
+        <location filename="poundage/PoundageWidget.cpp" line="305"/>
         <source>汇率由高到低</source>
         <translation type="unfinished">Rate high-low</translation>
     </message>
@@ -5031,7 +5031,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="setdialog.ui" line="625"/>
         <source>优先选择支付币种</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Preferential asset</translation>
     </message>
     <message>
         <location filename="setdialog.ui" line="642"/>

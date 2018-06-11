@@ -5,8 +5,8 @@
                         "QToolButton:pressed{background-color:rgb(70,95,191);}"\
                         "QToolButton:disabled{background-color:rgb(235,235,235);}"
 
-#define CANCELBTN_STYLE "QToolButton{background:rgb(229,229,229);color: white;border:0px solid white;border-radius:15px;}"  \
-                        "QToolButton:pressed{background-color:rgb(70,95,191);}"
+#define CANCELBTN_STYLE "QToolButton{font: 14px \"Microsoft YaHei UI Light\";background:white;color: rgb(84,116,235);border:1px solid rgb(84,116,235);border-radius:15px;}"  \
+                        "QToolButton:pressed{background-color:rgb(84,116,235);color: white}"
 
 #define CLOSEBTN_STYLE  "QToolButton{background-image:url(:/ui/wallet_ui/close.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}"   \
                         "QToolButton:hover{background-color:rgb(208,228,255);"

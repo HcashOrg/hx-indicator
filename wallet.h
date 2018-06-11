@@ -294,6 +294,8 @@ public:
     QString currentAccount; // 保存当前账户  切换页面的时候默认选择当前账户
     FeeChargeInfo feeChargeInfo;//手续费情况
     unsigned long long transactionFee;
+    QString currentSellAssetId;
+    QString currentBuyAssetId;
 
     unsigned long long contractFee;     // 合约单步执行费用
     QString currentContractFee();

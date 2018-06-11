@@ -75,8 +75,8 @@ SetDialog::SetDialog(QWidget *parent) :
 
                   "QToolButton#depositBtn{color:black;}"
 
-                  "QCheckBox{color:black;font:65 14px \"Microsoft YaHei UI Light\";}"
-                  "QCheckBox#nolockCheckBox{font:65 10px \"Microsoft YaHei UI Light\";}"
+                  "QCheckBox{color:black;font:14px \"Microsoft YaHei UI Light\";padding: 5px 0px 0px 0px;}"
+                  "QCheckBox#nolockCheckBox{font:10px \"Microsoft YaHei UI Light\";}"
 
                   "QSpinBox::up-button {width:0;height:0;}"
                   "QSpinBox::down-button {width:0;height:0;}"
