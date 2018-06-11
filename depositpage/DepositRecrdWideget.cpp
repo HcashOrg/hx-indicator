@@ -113,12 +113,13 @@ void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
 
 }
 
-void DepositRecrdWideget::paintEvent(QPaintEvent *)
+void DepositRecrdWideget::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
     painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
     painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
     painter.drawRect(0,0,770,530);
+    QWidget::paintEvent(e);
 }
 
 void DepositRecrdWideget::pageChangeSlot(unsigned int page)

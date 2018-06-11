@@ -2142,17 +2142,17 @@ Contract created successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="83"/>
+        <location filename="depositpage/DepositPage.cpp" line="84"/>
         <source>cannot generate tunnel account</source>
         <translation type="unfinished">未能生成tunnel账户</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="105"/>
+        <location filename="depositpage/DepositPage.cpp" line="106"/>
         <source>cannot bind tunnel account</source>
         <translation type="unfinished">未能绑定tunnel账户</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="116"/>
+        <location filename="depositpage/DepositPage.cpp" line="117"/>
         <source>Wallet data updated! Please backup your wallet!</source>
         <oldsource>You Should Back Up Your Wallet!</oldsource>
         <translation type="unfinished">钱包数据已更新！请重新备份您的钱包！</translation>
@@ -4400,8 +4400,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="poundage/PageScrollWidget.cpp" line="361"/>
-        <source>currently show %1-%2 items,total %3 items</source>
-        <translation type="unfinished">当前显示%1-%2条，共%3条记录</translation>
+        <source>currently show %1-%2,total %3</source>
+        <oldsource>currently show %1-%2 items,total %3 items</oldsource>
+        <translation type="unfinished">当前显示%1-%2，共%3条</translation>
     </message>
 </context>
 <context>

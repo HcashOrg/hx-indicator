@@ -16,7 +16,7 @@ public:
         :address(data.accountAddress),name(data.accountName),assetSymbol(data.assetType)
         ,assetID(data.assetID)
         ,qrcodeWidget(new DepositQrcodeWidget())
-        ,recordWidget(new DepositRecrdWideget())
+        ,recordWidget(nullptr)
         ,tunnelData(std::make_shared<TunnelData>())
     {
     }
@@ -41,6 +41,7 @@ DepositPage::DepositPage(const DepositDataInput & data,QWidget *parent) :
     _p(new DepositPagePrivate(data))
 {
     ui->setupUi(this);
+    _p->recordWidget = new DepositRecrdWideget(this);
     InitWidget();
 
     //UBChain::getInstance()->ShowBubbleMessage("fdfd","fdsfds",5);
