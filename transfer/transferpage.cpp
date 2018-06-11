@@ -118,8 +118,8 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     connect(ui->memoTextEdit,SIGNAL(textChanged()),this,SLOT(memoTextEdit_textChanged()));
     connect(ui->accountComboBox,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),std::bind(&FeeChooseWidget::updateAccountNameSlots,feeWidget,std::placeholders::_1,true));
     //隐藏备注
-    ui->memoLabel->setVisible(false);
-    ui->memoTextEdit->setVisible(false);
+    ui->memoLabel->setVisible(true);
+    ui->memoTextEdit->setVisible(true);
 }
 
 TransferPage::~TransferPage()
