@@ -19,7 +19,7 @@
      <x>50</x>
      <y>130</y>
      <width>670</width>
-     <height>211</height>
+     <height>322</height>
     </rect>
    </property>
    <property name="showGrid">
@@ -176,7 +176,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>350</y>
+     <y>477</y>
      <width>770</width>
      <height>41</height>
     </rect>

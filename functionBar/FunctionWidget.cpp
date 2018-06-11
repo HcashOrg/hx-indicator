@@ -249,7 +249,7 @@ void FunctionWidget::InitStyle()
 
     setStyleSheet("\
     QToolButton{padding:4px 0px;background: rgb(72,97,220);border:none;color:white;font:65 12px \"Microsoft YaHei UI \";}\
-    QToolButton:hover{background-color: rgb(0,210, 255);}\
+    QToolButton:hover{background-color: rgb(84,116, 235);}\
     QToolButton:pressed{background-color: rgb(84,116, 235);}\
     QToolButton:checked{border-left:2px solid rgb(0,210,255);background-color: rgb(84,116, 235);}\
                   "

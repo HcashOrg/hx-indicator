@@ -21,7 +21,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>75</x>
      <y>14</y>
      <width>300</width>
      <height>40</height>
@@ -39,8 +39,8 @@
   <widget class="QComboBox" name="assetComboBox">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>56</y>
+     <x>600</x>
+     <y>20</y>
      <width>120</width>
      <height>30</height>
     </rect>
@@ -50,7 +50,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>90</y>
+     <y>67</y>
      <width>670</width>
      <height>240</height>
     </rect>
@@ -144,7 +144,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>330</y>
+     <y>324</y>
      <width>770</width>
      <height>41</height>
     </rect>

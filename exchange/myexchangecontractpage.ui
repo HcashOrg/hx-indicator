@@ -170,7 +170,7 @@ background-image: url(:/ui/wallet_ui/switch.png);</string>
      <x>50</x>
      <y>160</y>
      <width>670</width>
-     <height>281</height>
+     <height>282</height>
     </rect>
    </property>
    <column>
@@ -293,7 +293,7 @@ background-image: url(:/ui/wallet_ui/switch.png);</string>
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>445</y>
+     <y>480</y>
      <width>770</width>
      <height>41</height>
     </rect>

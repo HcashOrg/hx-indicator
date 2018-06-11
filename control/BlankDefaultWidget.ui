@@ -6,25 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>770</width>
-    <height>225</height>
+    <width>672</width>
+    <height>240</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
     <number>0</number>
    </property>
    <property name="topMargin">
-    <number>20</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
     <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>20</number>
+    <number>0</number>
    </property>
    <item>
     <spacer name="verticalSpacer_2">
@@ -45,10 +48,13 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <property name="spacing">
-      <number>30</number>
+      <number>6</number>
      </property>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1">
+       <property name="spacing">
+        <number>0</number>
+       </property>
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -66,8 +72,8 @@
         <widget class="QLabel" name="label_pic">
          <property name="minimumSize">
           <size>
-           <width>109</width>
-           <height>105</height>
+           <width>218</width>
+           <height>210</height>
           </size>
          </property>
          <property name="maximumSize">
@@ -100,13 +106,13 @@
       <widget class="QLabel" name="label_tip">
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>670</width>
          <height>14</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
+         <width>670</width>
          <height>14</height>
         </size>
        </property>
