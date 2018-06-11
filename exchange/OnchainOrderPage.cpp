@@ -69,9 +69,22 @@ void OnchainOrderPage::init()
         ui->assetComboBox2->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
+    if(assetIds.contains(UBChain::getInstance()->currentSellAssetId))
+    {
+        ui->assetComboBox->setCurrentText(UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->currentSellAssetId).symbol);
+    }
+
+    if(assetIds.contains(UBChain::getInstance()->currentBuyAssetId))
+    {
+        ui->assetComboBox2->setCurrentText(UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->currentBuyAssetId).symbol);
+    }
+
+
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
     inited = true;
+
+    on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
 }
 
 void OnchainOrderPage::onBack()
@@ -174,6 +187,10 @@ void OnchainOrderPage::paintEvent(QPaintEvent *)
 
 void OnchainOrderPage::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
+    if(!inited)     return;
+
+    UBChain::getInstance()->currentSellAssetId = ui->assetComboBox->currentData().toString();
+
     ui->ordersTableWidget->setRowCount(0);
     updateTableHeaders();
 //    if(ui->assetComboBox->currentText().isEmpty() || ui->assetComboBox2->currentText().isEmpty()
@@ -184,6 +201,10 @@ void OnchainOrderPage::on_assetComboBox_currentIndexChanged(const QString &arg1)
 
 void OnchainOrderPage::on_assetComboBox2_currentIndexChanged(const QString &arg1)
 {
+    if(!inited)     return;
+
+    UBChain::getInstance()->currentBuyAssetId = ui->assetComboBox2->currentData().toString();
+
     ui->ordersTableWidget->setRowCount(0);
     updateTableHeaders();
 //    if(ui->assetComboBox->currentText().isEmpty() || ui->assetComboBox2->currentText().isEmpty()

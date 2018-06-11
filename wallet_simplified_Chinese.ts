@@ -54,12 +54,12 @@
         <translation type="obsolete">确定删除账户 %1 吗?</translation>
     </message>
     <message>
-        <location filename="AccountManagerWidget.cpp" line="184"/>
+        <location filename="AccountManagerWidget.cpp" line="187"/>
         <source>delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="AccountManagerWidget.cpp" line="190"/>
+        <location filename="AccountManagerWidget.cpp" line="192"/>
         <source>export</source>
         <translation type="unfinished">导出</translation>
     </message>
@@ -1460,7 +1460,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactInfoTitleWidget.ui" line="72"/>
+        <location filename="contact/ContactInfoTitleWidget.ui" line="75"/>
         <source>1111111</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1480,12 +1480,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
     <message>
-        <location filename="contact/ContactInfoTitleWidget.ui" line="112"/>
+        <location filename="contact/ContactInfoTitleWidget.ui" line="115"/>
         <source>转 账</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactInfoTitleWidget.ui" line="137"/>
+        <location filename="contact/ContactInfoTitleWidget.ui" line="140"/>
         <source>名称</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1564,44 +1564,44 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="348"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="349"/>
         <source>Warning</source>
         <translation type="unfinished">警告</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="348"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="349"/>
         <source>Cannot Rename Group!</source>
         <translation type="unfinished">不能重命名分组</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="424"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="426"/>
         <source>MoveToGroup</source>
         <translation type="unfinished">移动分组</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="426"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="428"/>
         <source>AddGroup</source>
         <translation type="unfinished">添加分组</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="428"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="430"/>
         <source>EditGroup</source>
         <oldsource>EidtGroup</oldsource>
         <translation type="unfinished">编辑分组</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="429"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="431"/>
         <source>DeleteGroup</source>
         <translation type="unfinished">删除分组</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="431"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="433"/>
         <source>EditContact</source>
         <oldsource>EditPerson</oldsource>
         <translation type="unfinished">编辑联系人</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="432"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="434"/>
         <source>DeleteContact</source>
         <oldsource>DeletePerson</oldsource>
         <translation type="unfinished">删除联系人</translation>
@@ -2561,7 +2561,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="firstlogin.cpp" line="49"/>
-        <location filename="firstlogin.cpp" line="286"/>
+        <location filename="firstlogin.cpp" line="285"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -2602,7 +2602,7 @@ Cover it or not?</source>
         <translation type="obsolete">确定关闭 Goopal 钱包</translation>
     </message>
     <message>
-        <location filename="firstlogin.cpp" line="291"/>
+        <location filename="firstlogin.cpp" line="290"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -2848,12 +2848,12 @@ add an account first</source>
         <translation type="unfinished">帮助</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="132"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="133"/>
         <source>About Us</source>
         <translation type="unfinished">关于我们</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="134"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="135"/>
         <source>Update</source>
         <translation type="unfinished">软件更新</translation>
     </message>
@@ -3157,7 +3157,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="lockpage.cpp" line="36"/>
-        <location filename="lockpage.cpp" line="183"/>
+        <location filename="lockpage.cpp" line="182"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -3219,7 +3219,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">锁定剩余</translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="188"/>
+        <location filename="lockpage.cpp" line="187"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -3412,7 +3412,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">划转</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="365"/>
+        <location filename="mainpage.cpp" line="373"/>
         <source>Fail to create account!</source>
         <translation type="unfinished">创建账户失败！</translation>
     </message>
@@ -3437,7 +3437,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">复制到剪贴板</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="556"/>
+        <location filename="mainpage.cpp" line="564"/>
         <source>copy to clipboard</source>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
@@ -3591,7 +3591,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">追加</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="160"/>
+        <location filename="miner/minerpage.cpp" line="159"/>
         <source>foreclose</source>
         <translation type="unfinished">赎回</translation>
     </message>
@@ -3601,7 +3601,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">成功从miner赎回资产！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="237"/>
+        <location filename="miner/minerpage.cpp" line="234"/>
         <source>obtain</source>
         <translation type="unfinished">领取</translation>
     </message>
@@ -3610,37 +3610,37 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">获取收益的交易已发出！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="188"/>
+        <location filename="miner/minerpage.cpp" line="185"/>
         <source>Transaction of foreclose-asset has been sent out!</source>
         <translation type="unfinished">赎回资产交易已发出！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="195"/>
+        <location filename="miner/minerpage.cpp" line="192"/>
         <source>Fail to foreclose asset from miner!</source>
         <translation type="unfinished">从miner赎回资产失败！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="266"/>
+        <location filename="miner/minerpage.cpp" line="262"/>
         <source>Transaction of obtain-income has been sent out!</source>
         <translation type="unfinished">领取挖矿收入交易已发出！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="278"/>
+        <location filename="miner/minerpage.cpp" line="274"/>
         <source>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</source>
         <translation type="unfinished">该账户的挖矿收益还不到 %1 %2，还不能领取！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="283"/>
+        <location filename="miner/minerpage.cpp" line="279"/>
         <source>Fail to obtain mining income!</source>
         <translation type="unfinished">领取挖矿收益失败！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="300"/>
+        <location filename="miner/minerpage.cpp" line="296"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished">钱包中没有未注册账户！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="435"/>
+        <location filename="miner/minerpage.cpp" line="431"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>
@@ -4164,7 +4164,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="normallogin.cpp" line="34"/>
-        <location filename="normallogin.cpp" line="176"/>
+        <location filename="normallogin.cpp" line="175"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -4220,7 +4220,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">锁定剩余</translation>
     </message>
     <message>
-        <location filename="normallogin.cpp" line="181"/>
+        <location filename="normallogin.cpp" line="180"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -4272,7 +4272,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">我的挂单</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="136"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="135"/>
         <source>my order</source>
         <translation type="unfinished">我的挂单</translation>
     </message>
@@ -4435,12 +4435,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="142"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="138"/>
         <source>setDefault</source>
         <translation type="unfinished">设为默认</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="143"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="139"/>
         <source>delete</source>
         <translation type="unfinished">删除</translation>
     </message>
@@ -4473,12 +4473,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.ui" line="142"/>
+        <location filename="poundage/PoundageWidget.ui" line="191"/>
         <source>最新</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.ui" line="172"/>
+        <location filename="poundage/PoundageWidget.ui" line="204"/>
         <source>我发起的</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4488,32 +4488,32 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="188"/>
+        <location filename="poundage/PoundageWidget.cpp" line="191"/>
         <source>Transaction of create-guarantee-order has been sent!</source>
         <translation type="unfinished">创建承兑单交易已发出！</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="195"/>
+        <location filename="poundage/PoundageWidget.cpp" line="198"/>
         <source>Fail to create guarantee order!</source>
         <translation type="unfinished">创建承兑单失败！</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="250"/>
+        <location filename="poundage/PoundageWidget.cpp" line="253"/>
         <source>Transaction of cancel-guarantee-order has been sent!</source>
         <translation type="unfinished">撤销承兑单交易已发出！</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="257"/>
+        <location filename="poundage/PoundageWidget.cpp" line="260"/>
         <source>Fail to cancel guarantee order!</source>
         <translation type="unfinished">撤销承兑单失败！</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="301"/>
+        <location filename="poundage/PoundageWidget.cpp" line="304"/>
         <source>汇率由低到高</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageWidget.cpp" line="302"/>
+        <location filename="poundage/PoundageWidget.cpp" line="305"/>
         <source>汇率由高到低</source>
         <translation type="unfinished"></translation>
     </message>

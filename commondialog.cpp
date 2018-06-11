@@ -4,7 +4,7 @@
 
 #include "wallet.h"
 
-CommonDialog::CommonDialog(commonDialogType type, QWidget *parent) :
+CommonDialog::CommonDialog(commonDialogType _type, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::CommonDialog)
 {
@@ -31,20 +31,19 @@ CommonDialog::CommonDialog(commonDialogType type, QWidget *parent) :
 
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
-    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
 
     yesOrNO = false;
 
-    if( type == OkAndCancel)
+    if( _type == OkAndCancel)
     {
     }
-    else if( type == OkOnly)
+    else if( _type == OkOnly)
     {
         ui->cancelBtn->hide();
-        ui->okBtn->move(130,160);
+        ui->okBtn->move((this->width() - ui->okBtn->width()) / 2,150);
     }
-    else if( type == YesOrNo)
+    else if( _type == YesOrNo)
     {
         ui->okBtn->setText(tr("Yes"));
         ui->cancelBtn->setText(tr("No"));
@@ -74,6 +73,19 @@ void CommonDialog::on_cancelBtn_clicked()
     close();
 }
 
+void CommonDialog::adaptSize()
+{
+    ui->textLabel->setFixedWidth(220);
+    ui->textLabel->setMinimumHeight(60);
+    ui->textLabel->adjustSize();
+
+    int height = ui->textLabel->height();
+    ui->okBtn->move(ui->okBtn->x(), 30 + height + 30);
+    ui->cancelBtn->move(ui->cancelBtn->x(), 30 + height + 30);
+    ui->containerWidget->setGeometry( (960 - ui->containerWidget->width()) / 2, (580 - height - 120) / 2,
+                                      ui->containerWidget->width(), 30 + height + 30 + 60);
+}
+
 bool CommonDialog::pop()
 {
     
@@ -84,10 +96,6 @@ bool CommonDialog::pop()
 void CommonDialog::setText(QString text)
 {
     ui->textLabel->setText(text);
-}
 
-void CommonDialog::on_closeBtn_clicked()
-{
-    yesOrNO = false;
-    close();
+    adaptSize();
 }

@@ -80,6 +80,16 @@ void MyExchangeContractPage::init()
         ui->assetComboBox2->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
+    if(assetIds.contains(UBChain::getInstance()->currentSellAssetId))
+    {
+        ui->assetComboBox->setCurrentText(UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->currentSellAssetId).symbol);
+    }
+
+    if(assetIds.contains(UBChain::getInstance()->currentBuyAssetId))
+    {
+        ui->assetComboBox2->setCurrentText(UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->currentBuyAssetId).symbol);
+    }
+
     inited = true;
 
     on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
@@ -524,6 +534,9 @@ void MyExchangeContractPage::on_accountComboBox_currentIndexChanged(const QStrin
 
 void MyExchangeContractPage::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
+    if(!inited)     return;
+
+    UBChain::getInstance()->currentSellAssetId = ui->assetComboBox->currentData().toString();
     updateTableHeaders();
     if(ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())   return;
 
@@ -532,6 +545,9 @@ void MyExchangeContractPage::on_assetComboBox_currentIndexChanged(const QString 
 
 void MyExchangeContractPage::on_assetComboBox2_currentIndexChanged(const QString &arg1)
 {
+    if(!inited)     return;
+
+    UBChain::getInstance()->currentBuyAssetId = ui->assetComboBox2->currentData().toString();
     updateTableHeaders();
     if(ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())   return;
 

@@ -13,7 +13,7 @@ class CommonDialog : public QDialog
 
 public:
     enum commonDialogType{OkAndCancel, OkOnly, YesOrNo};
-    explicit CommonDialog( commonDialogType type,QWidget *parent = 0);
+    explicit CommonDialog( commonDialogType _type,QWidget *parent = 0);
     ~CommonDialog();
 
     bool pop();
@@ -24,11 +24,12 @@ private slots:
 
     void on_cancelBtn_clicked();
 
-    void on_closeBtn_clicked();
-
 private:
     Ui::CommonDialog *ui;
     bool yesOrNO;
+    commonDialogType type;
+
+    void adaptSize();
 };
 
 #endif // COMMONDIALOG_H

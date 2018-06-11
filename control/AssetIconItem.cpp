@@ -4,7 +4,7 @@
 #include "wallet.h"
 
 //QMap<QString,QString> AssetIconItem::assetColorMap.insert("BTC","#F5A623");
-QMap<QString,QString> AssetIconItem::assetColorMap = {{"BTC","#F5A623"}, {"LTC","#4A4A4A"}, {"UB","#38BDE9"}};
+QMap<QString,QString> AssetIconItem::assetColorMap = {{"LNK","#4F3B8D"}, {"BTC","#F5A623"}, {"LTC","#4A4A4A"}, {"UB","#38BDE9"}};
 
 AssetIconItem::AssetIconItem(QWidget *parent) :
     QWidget(parent),

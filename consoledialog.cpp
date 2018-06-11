@@ -28,7 +28,7 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
     ui->widget->setObjectName("widget");
     ui->widget->setStyleSheet("#widget {background-color:white;border-radius:10px;}");
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:white;border-radius:10px;}");
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:white;border:2px solid rgb(229,229,229);border-radius:10px;}");
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
     ui->clearBtn->setStyleSheet(OKBTN_STYLE);
