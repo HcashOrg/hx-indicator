@@ -73,7 +73,9 @@ void ContactWidget::AddNewContactSlots()
     _p->contactAddWidget = new ContactAddWidget(_p->contactSheet);
     ui->scrollArea_rightBottom->setWidget(_p->contactAddWidget);
     connect(_p->contactAddWidget,&ContactAddWidget::addContactFinishedSignal,_p->contactTreeWidget,&ContactTreeWidget::AddPersonSlots);
+    connect(_p->contactAddWidget,&ContactAddWidget::addContactFinishedSignal,std::bind(&ContactWidget::backBtnVisible,this,false));
     connect(_p->contactTreeWidget,&ContactTreeWidget::GroupModifyFinishedSignal,_p->contactAddWidget,&ContactAddWidget::groupModifySlots);
+    emit backBtnVisible(true);
 }
 
 void ContactWidget::ShowContactInfoSlots(const QString &address)

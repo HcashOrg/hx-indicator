@@ -9,7 +9,11 @@
 #include "WithdrawOrderDialog.h"
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
+#include "control/BlankDefaultWidget.h"
+#include "poundage/PageScrollWidget.h"
 
+
+static const int ROWNUMBER = 8;
 ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ContractBalanceWidget)
@@ -42,6 +46,12 @@ ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
     ui->openForUsersBtn->setToolTip(tr("Before you open your contract for all users, other users can not buy your sell-orders."));
     ui->openForUsersBtn->hide();
 
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ContractBalanceWidget::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->balancesTableWidget);
+    blankWidget->setTextTip(tr("There is no contract!"));
     init();
 }
 
@@ -199,7 +209,12 @@ void ContractBalanceWidget::showContractBalances()
         connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
 
     }
-
+    int page = (ui->balancesTableWidget->rowCount()%ROWNUMBER==0 && ui->balancesTableWidget->rowCount() != 0) ?
+                ui->balancesTableWidget->rowCount()/ROWNUMBER : ui->balancesTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->balancesTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
+    blankWidget->setVisible(0 == size);
 }
 
 void ContractBalanceWidget::on_depositBtn_clicked()
@@ -238,5 +253,25 @@ void ContractBalanceWidget::on_openForUsersBtn_clicked()
 
     UBChain::getInstance()->postRPC( "id-invoke_contract_testing-openForUsers-" + accountName, toJsonFormat( "invoke_contract_testing",
                                                                            QJsonArray() << accountName << contractAddress
-                                                                           << "openForUsers"  << ""));
+                                                                                                             << "openForUsers"  << ""));
+}
+
+void ContractBalanceWidget::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->balancesTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->balancesTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->balancesTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->balancesTableWidget->setRowHidden(i,true);
+        }
+    }
+
 }

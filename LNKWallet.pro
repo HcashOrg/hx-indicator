@@ -145,7 +145,8 @@ SOURCES += main.cpp\
     dialog/TransactionResultDialog.cpp \
     crossmark/crosscapitalmark.cpp \
     crossmark/AddressValidate.cpp \
-    control/AssetIconItem.cpp
+    control/AssetIconItem.cpp \
+    control/BlankDefaultWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -262,7 +263,8 @@ HEADERS  += firstlogin.h \
     dialog/TransactionResultDialog.h \
     crossmark/crosscapitalmark.h \
     crossmark/AddressValidate.h \
-    control/AssetIconItem.h
+    control/AssetIconItem.h \
+    control/BlankDefaultWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -350,7 +352,8 @@ FORMS    += firstlogin.ui \
     alltransactionwidget.ui \
     dialog/ErrorResultDialog.ui \
     dialog/TransactionResultDialog.ui \
-    control/AssetIconItem.ui
+    control/AssetIconItem.ui \
+    control/BlankDefaultWidget.ui
 
 win32{
     DISTFILES += logo.rc

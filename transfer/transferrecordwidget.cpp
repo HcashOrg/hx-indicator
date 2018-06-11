@@ -4,6 +4,7 @@
 #include "wallet.h"
 #include "poundage/PageScrollWidget.h"
 #include "showcontentdialog.h"
+#include "control/BlankDefaultWidget.h"
 
 static const int ROWNUMBER = 5;
 TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
@@ -35,6 +36,8 @@ TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
 //    ui->transferRecordTableWidget->setColumnWidth(5,70);
 
     pageWidget = new PageScrollWidget();
+    blankWidget = new BlankDefaultWidget(ui->transferRecordTableWidget);
+    blankWidget->setTextTip(tr("当前账户没有转账记录!"));
     init();
 }
 
@@ -185,6 +188,7 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->transferRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
+    blankWidget->setVisible(size == 0);
 }
 
 void TransferRecordWidget::paintEvent(QPaintEvent *)

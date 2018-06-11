@@ -6,6 +6,8 @@
 #include "showcontentdialog.h"
 #include <mutex>
 
+#include "control/BlankDefaultWidget.h"
+
 
 static const int ROWNUMBER = 6;
 class ContactInfoHistoryWidget::ContactInfoHistoryWidgetPrivate
@@ -13,12 +15,15 @@ class ContactInfoHistoryWidget::ContactInfoHistoryWidgetPrivate
 public:
     ContactInfoHistoryWidgetPrivate()
         :pageWidget(new PageScrollWidget())
+        ,blankWidget(nullptr)
     {
 
     }
 public:
     PageScrollWidget *pageWidget;
     std::mutex mutexLock;
+
+    BlankDefaultWidget *blankWidget;
 };
 
 ContactInfoHistoryWidget::ContactInfoHistoryWidget(QWidget *parent) :
@@ -28,7 +33,8 @@ ContactInfoHistoryWidget::ContactInfoHistoryWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
+    _p->blankWidget = new BlankDefaultWidget(ui->transferRecordTableWidget);
+    _p->blankWidget->setTextTip(tr("当前账户没有历史交易纪录!"));
     InitWidget();
 }
 
@@ -158,6 +164,9 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
     _p->pageWidget->SetTotalPage(page);
     _p->pageWidget->setShowTip(ui->transferRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
+
+    qDebug()<<size;
+    _p->blankWidget->setVisible(ui->transferRecordTableWidget->rowCount() == 0);
 }
 
 void ContactInfoHistoryWidget::InitWidget()

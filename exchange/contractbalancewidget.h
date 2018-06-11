@@ -6,7 +6,8 @@
 namespace Ui {
 class ContractBalanceWidget;
 }
-
+class PageScrollWidget;
+class BlankDefaultWidget;
 class ContractBalanceWidget : public QWidget
 {
     Q_OBJECT
@@ -30,12 +31,16 @@ private slots:
 
     void on_openForUsersBtn_clicked();
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::ContractBalanceWidget *ui;
     QString accountName;
 
     void paintEvent(QPaintEvent*);
     void showContractBalances();
+
+    BlankDefaultWidget *blankWidget;
+    PageScrollWidget *pageWidget;
 };
 
 #endif // CONTRACTBALANCEWIDGET_H

@@ -7,6 +7,8 @@ namespace Ui {
 class AllTransactionWidget;
 }
 
+class PageScrollWidget;
+class BlankDefaultWidget;
 class AllTransactionWidget : public QWidget
 {
     Q_OBJECT
@@ -41,6 +43,7 @@ private slots:
 
     void on_searchLineEdit_textChanged(const QString &arg1);
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::AllTransactionWidget *ui;
     bool inited = false;
@@ -54,6 +57,11 @@ private:
     void showTransactions();
 
     void init();
+
+
+    PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
+    std::vector<int> showRows;
 };
 
 #endif // ALLTRANSACTIONWIDGET_H

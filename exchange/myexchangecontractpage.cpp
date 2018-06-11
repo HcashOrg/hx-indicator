@@ -12,7 +12,10 @@
 #include "depositpage/FeeChargeWidget.h"
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
+#include "control/BlankDefaultWidget.h"
+#include "poundage/PageScrollWidget.h"
 
+static const int ROWNUMBER = 8;
 MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     QWidget(parent),
     currentWidget(NULL),
@@ -46,7 +49,12 @@ MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     ui->sellBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->withdrawAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&MyExchangeContractPage::pageChangeSlot);
 
+    blankWidget = new BlankDefaultWidget(ui->ordersTableWidget);
+    blankWidget->setTextTip(tr("There's no contract!"));
     init();
 }
 
@@ -154,7 +162,13 @@ void MyExchangeContractPage::showOrders()
             connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
         }
     }
+    int page = (ui->ordersTableWidget->rowCount()%ROWNUMBER==0 && ui->ordersTableWidget->rowCount() != 0) ?
+                ui->ordersTableWidget->rowCount()/ROWNUMBER : ui->ordersTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->ordersTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
 
+    blankWidget->setVisible(0 == size);
 }
 
 void MyExchangeContractPage::updateTableHeaders()
@@ -642,4 +656,24 @@ void MyExchangeContractPage::onItemClicked(int _row, int _column)
 
         return;
     }
+}
+
+void MyExchangeContractPage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->ordersTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->ordersTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->ordersTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->ordersTableWidget->setRowHidden(i,true);
+        }
+    }
+
 }

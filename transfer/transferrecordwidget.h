@@ -8,6 +8,7 @@ class TransferRecordWidget;
 }
 
 class PageScrollWidget;
+class BlankDefaultWidget;
 class TransferRecordWidget : public QWidget
 {
     Q_OBJECT
@@ -34,6 +35,7 @@ private:
     void paintEvent(QPaintEvent*);
 
     PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
 };
 
 #endif // TRANSFERRECORDWIDGET_H

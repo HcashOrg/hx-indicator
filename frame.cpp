@@ -769,10 +769,7 @@ void Frame::showContactPage()
 
     contactPage = new ContactWidget(centralWidget);
 
-    //getAccountInfo();
-    //contactPage = new ContactPage(centralWidget);
-    //connect(contactPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
-    //connect(contactPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
+    connect(contactPage,&ContactWidget::backBtnVisible,titleBar,&TitleBar::backBtnVis);
     connect(contactPage,SIGNAL(gotoTransferPage(QString,QString)),functionBar,SLOT(contactShowTransferPageSlots()));
     connect(contactPage,SIGNAL(gotoTransferPage(QString,QString)),this,SLOT(showTransferPageWithAddress(QString,QString)));//address name
     //contactPage->setAttribute(Qt::WA_DeleteOnClose);
@@ -980,8 +977,10 @@ void Frame::showMultiSigPage()
 
 void Frame::showPoundagePage()
 {
+    emit titleBackVisible(false);
     closeCurrentPage();
     poundage = new PoundageWidget(centralWidget);
+    connect(poundage,&PoundageWidget::backBtnVisible,titleBar,&TitleBar::backBtnVis);
     poundage->resize(centralWidget->size());
     poundage->setAttribute(Qt::WA_DeleteOnClose);
     poundage->show();
@@ -1418,6 +1417,7 @@ void Frame::onBack()
         showMainPage();
         break;
     case 4:
+        showContactPage();
         break;
     case 5:
 //        myExchangeContractPage->onBack();
@@ -1436,6 +1436,9 @@ void Frame::onBack()
     case 9:
         break;
     case 10:
+        break;
+    case 11:
+        showPoundagePage();
         break;
     default:
         break;

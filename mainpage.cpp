@@ -26,6 +26,7 @@
 #include "alltransactionwidget.h"
 #include "dialog/ErrorResultDialog.h"
 #include "control/AssetIconItem.h"
+#include "control/BlankDefaultWidget.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -75,8 +76,10 @@ MainPage::MainPage(QWidget *parent) :
     }
 
 
+    blankWidget = new BlankDefaultWidget(ui->accountTableWidget);
+    blankWidget->setTextTip(tr("there's no account or assest!"));
     // 由于首页是第一个页面，第一次打开先等待x秒钟 再 updateAccountList
-    QTimer::singleShot(500, this, SLOT(init()));
+    QTimer::singleShot(10, this, SLOT(init()));
 
 
 }
@@ -172,6 +175,11 @@ void MainPage::updateAccountList()
     {
         ui->accountTableWidget->clearContents();
         ui->accountTableWidget->setRowCount(0);
+        //blankWidget->setVisible(true);
+    }
+    else
+    {
+        //blankWidget->setVisible(false);
     }
 }
 
@@ -284,6 +292,15 @@ void MainPage::refresh()
     ui->backupBtn->setVisible(UBChain::getInstance()->IsBackupNeeded);
 
     updateAccountList();
+
+    if(ui->accountComboBox->count() == 0)
+    {
+        blankWidget->setVisible(true);
+    }
+    else
+    {
+        blankWidget->setVisible(false);
+    }
 
 }
 

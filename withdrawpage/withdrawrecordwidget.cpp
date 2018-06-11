@@ -4,6 +4,7 @@
 #include "wallet.h"
 #include "poundage/PageScrollWidget.h"
 #include "showcontentdialog.h"
+#include "control/BlankDefaultWidget.h"
 
 static const int ROWNUMBER = 5;
 
@@ -36,6 +37,9 @@ WithdrawRecordWidget::WithdrawRecordWidget(QWidget *parent) :
 //    ui->withdrawRecordTableWidget->setColumnWidth(5,70);
 
     pageWidget = new PageScrollWidget();
+
+    blankWidget = new BlankDefaultWidget(ui->withdrawRecordTableWidget);
+    blankWidget->setTextTip(tr("There's no withdraw record!"));
     init();
 }
 
@@ -154,6 +158,8 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->withdrawRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
+
+    blankWidget->setVisible(ui->withdrawRecordTableWidget->rowCount() == 0);
 
 }
 
