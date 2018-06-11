@@ -229,7 +229,7 @@ background-image: url(:/ui/wallet_ui/switch.png);</string>
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>476</y>
+     <y>480</y>
      <width>770</width>
      <height>41</height>
     </rect>
