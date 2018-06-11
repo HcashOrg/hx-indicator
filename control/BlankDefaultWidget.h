@@ -18,6 +18,9 @@ public:
     void setTextTip(const QString &tip);
 private:
     void InitWidget();
+
+protected:
+    void paintEvent(QPaintEvent *event);
 private:
     Ui::BlankDefaultWidget *ui;
 };
