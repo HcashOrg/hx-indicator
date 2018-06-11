@@ -10,7 +10,7 @@
 
 #include <QtMath>
 
-static const int ROWNUMBER = 8;
+static const int ROWNUMBER = 6;
 OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::OnchainOrderPage)

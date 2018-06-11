@@ -6,7 +6,7 @@
 #include "showcontentdialog.h"
 #include "control/BlankDefaultWidget.h"
 
-static const int ROWNUMBER = 5;
+static const int ROWNUMBER = 7;
 
 WithdrawRecordWidget::WithdrawRecordWidget(QWidget *parent) :
     QWidget(parent),

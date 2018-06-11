@@ -15,7 +15,7 @@
 #include "control/BlankDefaultWidget.h"
 #include "poundage/PageScrollWidget.h"
 
-static const int ROWNUMBER = 8;
+static const int ROWNUMBER = 6;
 MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     QWidget(parent),
     currentWidget(NULL),

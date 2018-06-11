@@ -19,7 +19,7 @@
      <x>50</x>
      <y>120</y>
      <width>670</width>
-     <height>220</height>
+     <height>322</height>
     </rect>
    </property>
    <attribute name="horizontalHeaderVisible">
@@ -117,7 +117,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>360</y>
+     <y>480</y>
      <width>770</width>
      <height>41</height>
     </rect>
