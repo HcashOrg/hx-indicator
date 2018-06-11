@@ -137,16 +137,16 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="incomePage">
     <widget class="QTableWidget" name="incomeTableWidget">
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>30</y>
+       <y>10</y>
        <width>670</width>
-       <height>300</height>
+       <height>322</height>
       </rect>
      </property>
      <property name="cursor" stdset="0">
@@ -252,9 +252,9 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>30</y>
+       <y>10</y>
        <width>670</width>
-       <height>300</height>
+       <height>322</height>
       </rect>
      </property>
      <property name="cursor" stdset="0">
@@ -373,9 +373,9 @@
      <property name="geometry">
       <rect>
        <x>575</x>
-       <y>33</y>
+       <y>10</y>
        <width>71</width>
-       <height>21</height>
+       <height>40</height>
       </rect>
      </property>
      <property name="font">
@@ -394,9 +394,9 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>30</y>
+       <y>10</y>
        <width>670</width>
-       <height>300</height>
+       <height>322</height>
       </rect>
      </property>
      <property name="cursor" stdset="0">

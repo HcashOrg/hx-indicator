@@ -41,7 +41,7 @@ CommonDialog::CommonDialog(commonDialogType _type, QWidget *parent) :
     else if( _type == OkOnly)
     {
         ui->cancelBtn->hide();
-        ui->okBtn->move((this->width() - ui->okBtn->width()) / 2,150);
+        ui->okBtn->move((this->width() - ui->okBtn->width()) / 2, 150);
     }
     else if( _type == YesOrNo)
     {
@@ -84,6 +84,7 @@ void CommonDialog::adaptSize()
     ui->cancelBtn->move(ui->cancelBtn->x(), 30 + height + 30);
     ui->containerWidget->setGeometry( (960 - ui->containerWidget->width()) / 2, (580 - height - 120) / 2,
                                       ui->containerWidget->width(), 30 + height + 30 + 60);
+
 }
 
 bool CommonDialog::pop()
