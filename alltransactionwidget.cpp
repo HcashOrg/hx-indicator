@@ -3,7 +3,10 @@
 
 #include "wallet.h"
 #include "showcontentdialog.h"
+#include "control/BlankDefaultWidget.h"
+#include "poundage/PageScrollWidget.h"
 
+static const int ROWNUMBER = 5;
 AllTransactionWidget::AllTransactionWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AllTransactionWidget)
@@ -25,6 +28,8 @@ void AllTransactionWidget::init()
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
 
+
+
     ui->transactionsTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->transactionsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->transactionsTableWidget->setFocusPolicy(Qt::NoFocus);
@@ -44,6 +49,13 @@ void AllTransactionWidget::init()
                   "QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:white;}");
 
     ui->searchLineEdit->setPlaceholderText(tr("address or transaction id"));
+
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&AllTransactionWidget::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->transactionsTableWidget);
+    blankWidget->setTextTip(tr("There's no record!"));
 
 
     ui->typeAllBtn->setCheckable(true);
@@ -80,6 +92,7 @@ void AllTransactionWidget::init()
     inited = true;
 
     on_accountComboBox_currentTextChanged(ui->accountComboBox->currentText());
+
 }
 
 void AllTransactionWidget::on_typeAllBtn_clicked()
@@ -200,6 +213,7 @@ void AllTransactionWidget::clearTimeChoice()
 
 void AllTransactionWidget::hideFilteredTransactions()
 {
+    showRows.clear();
     QString filterStr = ui->searchLineEdit->text().simplified();
 
     for(int i = 0; i < ui->transactionsTableWidget->rowCount(); i++)
@@ -212,8 +226,18 @@ void AllTransactionWidget::hideFilteredTransactions()
         else
         {
             ui->transactionsTableWidget->showRow(i);
+            showRows.push_back(i);
         }
     }
+
+    int page = (showRows.size()%ROWNUMBER==0 && showRows.size() != 0) ?
+                showRows.size()/ROWNUMBER : showRows.size()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(showRows.size(),ROWNUMBER);
+    pageChangeSlot(0);
+
+    blankWidget->setVisible(showRows.size() == 0);
+
 }
 
 void AllTransactionWidget::showTransactions()
@@ -622,4 +646,24 @@ void AllTransactionWidget::on_searchBtn_clicked()
 void AllTransactionWidget::on_searchLineEdit_textChanged(const QString &arg1)
 {
     hideFilteredTransactions();
+}
+
+void AllTransactionWidget::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < showRows.size();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->transactionsTableWidget->setRowHidden(showRows[i],true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->transactionsTableWidget->setRowHidden(showRows[i],false);
+        }
+        else
+        {
+            ui->transactionsTableWidget->setRowHidden(showRows[i],true);
+        }
+    }
+
 }

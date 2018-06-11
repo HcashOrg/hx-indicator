@@ -60,6 +60,7 @@ void PublishPoundageWidget::ConfirmPublishSlots()
     UBChain::getInstance()->postRPC("publish_create_guarantee_order",
                                     toJsonFormat("create_guarantee_order",
                                                  QJsonArray()<<accountName<<sourceNumber<<targetNumber<<targetCoinType<<true));
+    emit backBtnVisible(false);
     close();
 }
 
@@ -137,6 +138,7 @@ void PublishPoundageWidget::InitWidget()
 
     connect(ui->okBtn,&QToolButton::clicked,this,&PublishPoundageWidget::ConfirmPublishSlots);
     connect(ui->cancelBtn,&QToolButton::clicked,this,&PublishPoundageWidget::close);
+    connect(ui->cancelBtn,&QToolButton::clicked,std::bind(&PublishPoundageWidget::backBtnVisible,this,false));
     connect(ui->comboBox_accounts, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),this,&PublishPoundageWidget::ChangeAccountSlots);
     connect(ui->comboBox_targetType,static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),this,&PublishPoundageWidget::ChangeAssetSlots);
 

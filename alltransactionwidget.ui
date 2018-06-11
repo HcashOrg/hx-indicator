@@ -602,6 +602,16 @@ font: 12px &quot;微软雅黑&quot;;
     <string/>
    </property>
   </widget>
+  <widget class="QStackedWidget" name="stackedWidget">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>422</y>
+     <width>770</width>
+     <height>41</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

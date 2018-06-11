@@ -14,6 +14,7 @@
 #include "ToolButtonWidget.h"
 #include "depositpage/FeeChargeWidget.h"
 #include "showcontentdialog.h"
+#include "control/BlankDefaultWidget.h"
 #include <mutex>
 
 static const int ROWNUMBER = 8;
@@ -92,6 +93,13 @@ MinerPage::MinerPage(QWidget *parent) :
     connect(pageWidget_fore,&PageScrollWidget::currentPageChangeSignal,this,&MinerPage::pageChangeSlot);
     connect(pageWidget_record,&PageScrollWidget::currentPageChangeSignal,this,&MinerPage::pageChangeSlot);
 
+    blankWidget_income = new BlankDefaultWidget(ui->incomeTableWidget);
+    blankWidget_income->setTextTip(tr("There's no income!"));
+    blankWidget_fore = new BlankDefaultWidget(ui->lockBalancesTableWidget);
+    blankWidget_fore->setTextTip(tr("There's no foreclose information!"));
+    blankWidget_record = new BlankDefaultWidget(ui->incomeRecordTableWidget);
+    blankWidget_record->setTextTip(tr("There's no income record!"));
+
     InitStyle();
     init();
 }
@@ -169,7 +177,7 @@ void MinerPage::jsonDataUpdated(QString id)
 
         pageWidget_fore->setShowTip(ui->lockBalancesTableWidget->rowCount(),ROWNUMBER);
         setTextCenter(ui->lockBalancesTableWidget);
-
+        blankWidget_fore->setVisible(0 == size);
         return;
     }
 
@@ -246,7 +254,7 @@ void MinerPage::jsonDataUpdated(QString id)
 
         pageWidget_income->setShowTip(ui->incomeTableWidget->rowCount(),ROWNUMBER);
         setTextCenter(ui->incomeTableWidget);
-
+        blankWidget_income->setVisible( 0 == size);
         return;
     }
 
@@ -435,6 +443,7 @@ void MinerPage::showIncomeRecord()
     pageWidget_record->SetCurrentPage(curPage);
     pageWidget_record->setShowTip(ui->incomeRecordTableWidget->rowCount(),ROWNUMBER);
     setTextCenter(ui->incomeRecordTableWidget);
+    blankWidget_record->setVisible(0 == size);
 }
 
 void MinerPage::InitStyle()

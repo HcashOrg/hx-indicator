@@ -4,6 +4,7 @@
 #include "wallet.h"
 #include "poundage/PageScrollWidget.h"
 #include "showcontentdialog.h"
+#include "control/BlankDefaultWidget.h"
 
 static const int ROWNUMBER = 5;
 
@@ -35,6 +36,8 @@ DepositRecrdWideget::DepositRecrdWideget(QWidget *parent) :
 //    ui->depositRecordTableWidget->setColumnWidth(5,70);
 
     pageWidget = new PageScrollWidget();
+    blankWidget = new BlankDefaultWidget(ui->depositRecordTableWidget);
+    blankWidget->setTextTip(tr("There's no deposit record!"));
     init();
 }
 
@@ -104,6 +107,7 @@ void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->depositRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
+    blankWidget->setVisible(0 == size);
 
 }
 

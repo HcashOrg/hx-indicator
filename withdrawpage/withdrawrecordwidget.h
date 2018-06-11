@@ -8,6 +8,7 @@ class WithdrawRecordWidget;
 }
 
 class PageScrollWidget;
+class BlankDefaultWidget;
 class WithdrawRecordWidget : public QWidget
 {
     Q_OBJECT
@@ -33,6 +34,7 @@ private:
 
     void paintEvent(QPaintEvent*);
     PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
 };
 
 #endif // WITHDRAWRECORDWIDGET_H

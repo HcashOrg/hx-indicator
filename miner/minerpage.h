@@ -9,7 +9,7 @@ class MinerPage;
 
 class PageScrollWidget;
 class QTableWidget;
-
+class BlankDefaultWidget;
 class MinerPage : public QWidget
 {
     Q_OBJECT
@@ -62,6 +62,9 @@ private:
     void setTextCenter(QTableWidget *const table);
 
     PageScrollWidget *pageWidget_income;
+    BlankDefaultWidget *blankWidget_income;
+    BlankDefaultWidget *blankWidget_fore;
+    BlankDefaultWidget *blankWidget_record;
     PageScrollWidget *pageWidget_fore;
     PageScrollWidget *pageWidget_record;
 };

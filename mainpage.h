@@ -10,7 +10,7 @@ class MainPage;
 }
 
 #define MODULE_MAIN_PAGE "MAIN_PAGE"
-
+class BlankDefaultWidget;
 class MainPage : public QWidget
 {
     Q_OBJECT
@@ -84,6 +84,7 @@ private:
     void updatePending();
     bool eventFilter(QObject *watched, QEvent *e);
 
+    BlankDefaultWidget *blankWidget;
 };
 
 #endif // MAINPAGE_H

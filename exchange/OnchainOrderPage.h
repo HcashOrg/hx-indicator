@@ -8,7 +8,8 @@
 namespace Ui {
 class OnchainOrderPage;
 }
-
+class PageScrollWidget;
+class BlankDefaultWidget;
 class OnchainOrderPage : public QWidget
 {
     Q_OBJECT
@@ -37,6 +38,7 @@ private slots:
 
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::OnchainOrderPage *ui;
     bool inited = false;
@@ -46,6 +48,9 @@ private:
     void paintEvent(QPaintEvent*);
     void queryContractOrders();
     void updateTableHeaders();
+
+    BlankDefaultWidget *blankWidget;
+    PageScrollWidget *pageWidget;
 };
 
 #endif // ONCHAINORDERPAGE_H

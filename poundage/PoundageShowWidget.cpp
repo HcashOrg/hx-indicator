@@ -12,6 +12,7 @@
 #include "PageScrollWidget.h"
 #include "wallet.h"
 #include "showcontentdialog.h"
+#include "control/BlankDefaultWidget.h"
 
 Q_DECLARE_METATYPE(std::shared_ptr<PoundageUnit>)
 
@@ -27,6 +28,7 @@ public:
         ,isDefaultActionEnabled(false)
         ,deleteAction(nullptr)
         ,defaultAction(nullptr)
+        ,blankWidget(nullptr)
     {
 
     }
@@ -39,6 +41,8 @@ public:
     QAction *deleteAction;
     bool isDeleteActionEnabled;
     bool isDefaultActionEnabled;
+
+    BlankDefaultWidget *blankWidget;
 };
 
 PoundageShowWidget::PoundageShowWidget(QWidget *parent) :
@@ -47,6 +51,9 @@ PoundageShowWidget::PoundageShowWidget(QWidget *parent) :
     _p(new PoundageShowWidgetPrivate())
 {
     ui->setupUi(this);
+
+    _p->blankWidget = new BlankDefaultWidget(ui->tableView);
+    _p->blankWidget->setTextTip(tr("当前无承兑单!"));
     InitWidget();
 }
 
@@ -63,6 +70,7 @@ void PoundageShowWidget::InitData(const std::shared_ptr<PoundageSheet> &data)
     {
         _p->pageWidget->setShowTip(data->poundages.size(),static_cast<unsigned int>(_p->tableModel->GetSinglePageRow()));
     }
+    _p->blankWidget->setVisible(data->size() == 0);
 }
 
 void PoundageShowWidget::DeletePoundageSlots()

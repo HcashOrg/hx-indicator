@@ -15,7 +15,8 @@ struct OrderAmount
     unsigned long long buyAmount;
 };
 typedef QMap<QString,QVector<OrderAmount>>   SellOrders;        // key 是 "资产1,资产2" 格式的字符串
-
+class BlankDefaultWidget;
+class PageScrollWidget;
 class MyExchangeContractPage : public QWidget
 {
     Q_OBJECT
@@ -57,6 +58,7 @@ private slots:
 
     void onItemClicked(int _row, int _column);
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::MyExchangeContractPage *ui;
     bool inited = false;
@@ -64,6 +66,9 @@ private:
 
     void paintEvent(QPaintEvent*);
     void registerContract();
+
+    BlankDefaultWidget *blankWidget;
+    PageScrollWidget *pageWidget;
 };
 
 #endif // MYEXCHANGECONTRACTPAGE_H

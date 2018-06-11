@@ -280,7 +280,7 @@ void PageScrollWidget::InitStyle()
                   font-weight:bold;\
                   color:#CACACA;}"
                   "QToolButton:checked{background-image:url(:/ui/wallet_ui/circle.png);background-repeat: no-repeat;background-position: center;border: none;\
-                   color:#4861DC;}"
+                   background-color:transparent;color:#4861DC;}"
                   "QToolButton#toolButton_next{border:none;}QToolButton#toolButton_pre{border:none;}"
                   "QLineEdit{max-height:20 px;\
                    max-width:30 px;\

@@ -119,11 +119,13 @@ void PoundageWidget::PublishPoundageSlots()
         return;
     }
     PublishPoundageWidget *publishWidget = new PublishPoundageWidget(this);
+    connect(publishWidget,&PublishPoundageWidget::backBtnVisible,this,&PoundageWidget::backBtnVisible);
     publishWidget->setWindowFlags(Qt::WindowStaysOnTopHint /*| Qt::Dialog*/ | Qt::FramelessWindowHint);
     publishWidget->setWindowModality(Qt::WindowModal);
     publishWidget->setAttribute(Qt::WA_DeleteOnClose);
     publishWidget->move(QPoint(0,0));
     publishWidget->show();
+    emit backBtnVisible(true);
 }
 
 void PoundageWidget::ShowAllPoundageSlots()

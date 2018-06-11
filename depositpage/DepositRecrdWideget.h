@@ -8,6 +8,7 @@ class DepositRecrdWideget;
 }
 
 class PageScrollWidget;
+class BlankDefaultWidget;
 class DepositRecrdWideget : public QWidget
 {
     Q_OBJECT
@@ -31,6 +32,7 @@ private:
 
     void paintEvent(QPaintEvent*);
     PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
 };
 
 #endif // DEPOSITRECRDWIDEGET_H

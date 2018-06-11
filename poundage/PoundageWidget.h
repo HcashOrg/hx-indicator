@@ -18,6 +18,8 @@ class PoundageWidget : public QWidget
 public:
     explicit PoundageWidget(QWidget *parent = 0);
     ~PoundageWidget();
+signals:
+    void backBtnVisible(bool isShow);
 public slots:
     void autoRefreshSlots();
 private slots:

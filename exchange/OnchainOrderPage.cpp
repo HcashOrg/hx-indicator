@@ -5,9 +5,12 @@
 #include "commondialog.h"
 #include "BuyOrderWidget.h"
 #include "ToolButtonWidget.h"
+#include "control/BlankDefaultWidget.h"
+#include "poundage/PageScrollWidget.h"
 
 #include <QtMath>
 
+static const int ROWNUMBER = 8;
 OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::OnchainOrderPage)
@@ -35,6 +38,12 @@ OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
 
     ui->ordersTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&OnchainOrderPage::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->ordersTableWidget);
+    blankWidget->setTextTip(tr("There's no contract!"));
     init();
 }
 
@@ -145,6 +154,13 @@ qDebug() << "Rrrrrrrrrrrr " << _data;
             connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
         }
     }
+    int page = (ui->ordersTableWidget->rowCount()%ROWNUMBER==0 && ui->ordersTableWidget->rowCount() != 0) ?
+                ui->ordersTableWidget->rowCount()/ROWNUMBER : ui->ordersTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->ordersTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
+
+    blankWidget->setVisible(0 == size);
 }
 
 void OnchainOrderPage::paintEvent(QPaintEvent *)
@@ -160,8 +176,8 @@ void OnchainOrderPage::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
     ui->ordersTableWidget->setRowCount(0);
     updateTableHeaders();
-    if(ui->assetComboBox->currentText().isEmpty() || ui->assetComboBox2->currentText().isEmpty()
-            || ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())       return;
+//    if(ui->assetComboBox->currentText().isEmpty() || ui->assetComboBox2->currentText().isEmpty()
+//            || ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())       return;
 
     queryContractOrders();
 }
@@ -170,8 +186,8 @@ void OnchainOrderPage::on_assetComboBox2_currentIndexChanged(const QString &arg1
 {
     ui->ordersTableWidget->setRowCount(0);
     updateTableHeaders();
-    if(ui->assetComboBox->currentText().isEmpty() || ui->assetComboBox2->currentText().isEmpty()
-            || ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())       return;
+//    if(ui->assetComboBox->currentText().isEmpty() || ui->assetComboBox2->currentText().isEmpty()
+//            || ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())       return;
 
     queryContractOrders();
 }
@@ -250,4 +266,24 @@ void OnchainOrderPage::on_accountComboBox_currentIndexChanged(const QString &arg
     UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
 
     on_assetComboBox_currentIndexChanged(ui->assetComboBox->currentText());
+}
+
+void OnchainOrderPage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->ordersTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->ordersTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->ordersTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->ordersTableWidget->setRowHidden(i,true);
+        }
+    }
+
 }

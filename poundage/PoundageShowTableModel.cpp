@@ -89,7 +89,7 @@ Qt::ItemFlags PoundageShowTableModel::flags(const QModelIndex &index) const
 
 int PoundageShowTableModel::rowCount(const QModelIndex &parent) const
 {
-
+    qDebug()<<std::max<int>(0,std::min<int>(_p->pageMaxRow,_p->data->poundages.size() - _p->currentPage * _p->pageMaxRow));
     return std::max<int>(0,std::min<int>(_p->pageMaxRow,_p->data->poundages.size() - _p->currentPage * _p->pageMaxRow));
 }
 
