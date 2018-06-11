@@ -6,7 +6,7 @@
 #include "showcontentdialog.h"
 #include "control/BlankDefaultWidget.h"
 
-static const int ROWNUMBER = 5;
+static const int ROWNUMBER = 7;
 TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TransferRecordWidget)
