@@ -225,6 +225,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         emit backBtnVisible(true);
         DepositPage *deposit = new DepositPage(DepositPage::DepositDataInput(ui->accountComboBox->currentText(),
                                                ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text()),this);
+        connect(deposit,&DepositPage::backBtnVisible,this,&MainPage::backBtnVisible);
         deposit->setAttribute(Qt::WA_DeleteOnClose);
         deposit->show();
         deposit->raise();

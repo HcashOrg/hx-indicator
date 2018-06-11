@@ -26,6 +26,8 @@ public:
 public:
     explicit DepositPage(const DepositDataInput &data,QWidget *parent = 0);
     ~DepositPage();
+signals:
+    void backBtnVisible(bool);
 private slots:
     void jsonDataUpdated(QString id);
 
