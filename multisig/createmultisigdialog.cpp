@@ -46,7 +46,7 @@ CreateMultiSigDialog::CreateMultiSigDialog(QWidget *parent) :
     ui->ownersTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->ownersTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->ownersTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->ownersTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->ownersTableWidget->horizontalHeader()->setVisible(true);
     ui->ownersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
@@ -78,9 +78,10 @@ void CreateMultiSigDialog::updateOwnersList()
 
     for(int i = 0; i < size; i++)
     {
+        ui->ownersTableWidget->setRowHeight(i,40);
+
         QString address = owners.at(i);
 
-        ui->ownersTableWidget->setRowHeight(i,35);
 
         ui->ownersTableWidget->setItem(i,0,new QTableWidgetItem(address));
         ui->ownersTableWidget->item(i,0)->setTextColor(QColor(192,196,212));

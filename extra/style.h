@@ -21,7 +21,7 @@
 
 #define TABLEWIDGET_STYLE_1     "QTableView{background-color:white;border:1px solid rgb(236,238,251);border-radius:15px;font: 12px \"Microsoft YaHei UI Light\";}" \
                                 "QHeaderView{border:none;border-bottom:1px solid rgb(240,240,240);border-top-left-radius:15px;border-top-right-radius:15px;background-color:white;color:#C6CAD4;font: 12px \"Microsoft YaHei UI Light\";}" \
-                                "QHeaderView:section{height:35px;border:none;background-color:white;}" \
+                                "QHeaderView:section{height:40px;border:none;background-color:white;}" \
                                 "QHeaderView:section:first{border-top-left-radius:15px;}" \
                                 "QHeaderView:section:last{border-top-right-radius:15px;}"
 

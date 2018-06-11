@@ -98,6 +98,7 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
 
 
         ui->transferRecordTableWidget->setRowCount(rowCount + 1);
+        ui->transferRecordTableWidget->setRowHeight(rowCount,40);
 
         ui->transferRecordTableWidget->setItem(rowCount,0, new QTableWidgetItem(QString::number(ts.blockNum)));
         ui->transferRecordTableWidget->setItem(rowCount,4, new QTableWidgetItem(transactionId));
@@ -199,7 +200,7 @@ void ContactInfoHistoryWidget::InitStyle()
     ui->transferRecordTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->transferRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->transferRecordTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->transferRecordTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->transferRecordTableWidget->horizontalHeader()->setVisible(true);
     ui->transferRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 

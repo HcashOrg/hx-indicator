@@ -28,7 +28,7 @@ MultiSigPage::MultiSigPage(QWidget *parent) :
     ui->multiSigTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->multiSigTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->multiSigTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->multiSigTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->multiSigTableWidget->horizontalHeader()->setVisible(true);
     ui->multiSigTableWidget->verticalHeader()->setVisible(false);
     ui->multiSigTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);

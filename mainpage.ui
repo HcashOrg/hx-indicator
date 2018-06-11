@@ -372,9 +372,9 @@
    <property name="geometry">
     <rect>
      <x>525</x>
-     <y>143</y>
+     <y>140</y>
      <width>71</width>
-     <height>21</height>
+     <height>40</height>
     </rect>
    </property>
    <property name="font">
@@ -433,7 +433,6 @@
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
-     <underline>false</underline>
     </font>
    </property>
    <property name="cursor">

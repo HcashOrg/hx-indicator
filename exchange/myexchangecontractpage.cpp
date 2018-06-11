@@ -29,7 +29,7 @@ MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     ui->ordersTableWidget->setMouseTracking(true);
     ui->ordersTableWidget->setShowGrid(false);//隐藏表格线
     ui->ordersTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->ordersTableWidget->horizontalHeader()->setFixedHeight(35);
+//    ui->ordersTableWidget->horizontalHeader()->setFixedHeight(35);
     ui->ordersTableWidget->horizontalHeader()->setVisible(true);
     ui->ordersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->ordersTableWidget->horizontalHeader()->setStretchLastSection(true);
@@ -120,6 +120,8 @@ void MyExchangeContractPage::showOrders()
 
     for(int i = 0; i < size; i++)
     {
+        ui->ordersTableWidget->setRowHeight(i,40);
+
         OrderAmount amount = vector.at(i);
 
         ui->ordersTableWidget->setItem(i,0, new QTableWidgetItem(getBigNumberString(amount.sellAmount, assetInfo.precision)));

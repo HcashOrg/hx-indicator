@@ -47,7 +47,7 @@ SignMultiSigDialog::SignMultiSigDialog(QWidget *parent) :
     ui->signInfoTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->signInfoTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->signInfoTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->signInfoTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->signInfoTableWidget->horizontalHeader()->setVisible(true);
     ui->signInfoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 

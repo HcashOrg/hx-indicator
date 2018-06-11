@@ -23,7 +23,7 @@ OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
     ui->ordersTableWidget->setMouseTracking(true);
     ui->ordersTableWidget->setShowGrid(false);//隐藏表格线
     ui->ordersTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->ordersTableWidget->horizontalHeader()->setFixedHeight(35);
+//    ui->ordersTableWidget->horizontalHeader()->setFixedHeight(35);
     ui->ordersTableWidget->horizontalHeader()->setVisible(true);
     ui->ordersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->ordersTableWidget->horizontalHeader()->setStretchLastSection(true);
@@ -101,6 +101,8 @@ qDebug() << "Rrrrrrrrrrrr " << _data;
     ui->ordersTableWidget->setRowCount(size);
     for(int i = 0; i < size; i++)
     {
+        ui->ordersTableWidget->setRowHeight(i,40);
+
         QJsonObject dataObject = array.at(i).toObject();
         QString contractAddress = dataObject.take("contract_address").toString();
         unsigned long long sellAmount = jsonValueToULL(dataObject.take("from_supply"));

@@ -35,7 +35,7 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->lockBalancesTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->lockBalancesTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->lockBalancesTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->lockBalancesTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->lockBalancesTableWidget->horizontalHeader()->setVisible(true);
     ui->lockBalancesTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     //ui->lockBalancesTableWidget->setColumnCount(5);
@@ -56,7 +56,7 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->incomeTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->incomeTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->incomeTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->incomeTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->incomeTableWidget->horizontalHeader()->setVisible(true);
     ui->incomeTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -73,7 +73,7 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->incomeRecordTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->incomeRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->incomeRecordTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->incomeRecordTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->incomeRecordTableWidget->horizontalHeader()->setVisible(true);
     ui->incomeRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -128,6 +128,8 @@ void MinerPage::jsonDataUpdated(QString id)
 
         for(int i = 0; i < size; i++)
         {
+            ui->lockBalancesTableWidget->setRowHeight(i,40);
+
             QJsonObject object = array.at(i).toObject();
             QString minerId = object.take("lockto_miner_account").toString();
             QString assetId = object.take("lock_asset_id").toString();
@@ -213,6 +215,8 @@ void MinerPage::jsonDataUpdated(QString id)
 
         for(int i = 0; i < size; i++)
         {
+            ui->incomeTableWidget->setRowHeight(i,40);
+
             QJsonObject object = array.at(i).toObject();
             QString assetId = object.take("asset_id").toString();
             unsigned long long amount = 0;
@@ -406,6 +410,8 @@ void MinerPage::showIncomeRecord()
 
     for(int i = 0; i < size; i++)
     {
+        ui->incomeRecordTableWidget->setRowHeight(i,40);
+
         QString transactionId = typeIds.at(size - i - 1).transactionId;
         TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
         if(ts.type == -1)

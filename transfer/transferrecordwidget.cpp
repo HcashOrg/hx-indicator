@@ -20,7 +20,7 @@ TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
     ui->transferRecordTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->transferRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->transferRecordTableWidget->horizontalHeader()->setFixedHeight(40);
+//    ui->transferRecordTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->transferRecordTableWidget->horizontalHeader()->setVisible(true);
     ui->transferRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -117,6 +117,7 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
 
 
         ui->transferRecordTableWidget->setRowCount(rowCount + 1);
+        ui->transferRecordTableWidget->setRowHeight(rowCount,40);
 
         if(ts.blockNum == 0)
         {

@@ -53,7 +53,7 @@ MultiSigTransactionPage::MultiSigTransactionPage(QString _multiSigAddress, QWidg
     ui->transactionsTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->transactionsTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->transactionsTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->transactionsTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->transactionsTableWidget->horizontalHeader()->setVisible(true);
     ui->transactionsTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 

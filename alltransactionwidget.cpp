@@ -33,7 +33,7 @@ void AllTransactionWidget::init()
     ui->transactionsTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->transactionsTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->transactionsTableWidget->horizontalHeader()->setFixedHeight(40);
+//    ui->transactionsTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->transactionsTableWidget->horizontalHeader()->setVisible(true);
     ui->transactionsTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -322,6 +322,8 @@ void AllTransactionWidget::showTransactions()
 
     for(int i = 0; i < size; i++)
     {
+        ui->transactionsTableWidget->setRowHeight(i,40);
+
         QString transactionId = sortedTypeIds.at(i).transactionId;
         TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
         if(ts.type == -1)

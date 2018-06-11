@@ -37,7 +37,7 @@ MultiSigInfoDialog::MultiSigInfoDialog(QString _multiSigAddress, QWidget *parent
     ui->infoTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->infoTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->infoTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->infoTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->infoTableWidget->horizontalHeader()->setVisible(true);
     ui->infoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 

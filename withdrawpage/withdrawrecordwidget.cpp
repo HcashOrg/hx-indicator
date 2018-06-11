@@ -21,7 +21,7 @@ WithdrawRecordWidget::WithdrawRecordWidget(QWidget *parent) :
     ui->withdrawRecordTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->withdrawRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->withdrawRecordTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->withdrawRecordTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->withdrawRecordTableWidget->horizontalHeader()->setVisible(true);
     ui->withdrawRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -115,6 +115,7 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
 
 
         ui->withdrawRecordTableWidget->setRowCount(rowCount + 1);
+        ui->withdrawRecordTableWidget->setRowHeight(rowCount,40);
 
         ui->withdrawRecordTableWidget->setItem(rowCount,0, new QTableWidgetItem(QString::number(ts.blockNum)));
         ui->withdrawRecordTableWidget->setItem(rowCount,4, new QTableWidgetItem(transactionId));

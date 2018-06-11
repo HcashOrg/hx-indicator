@@ -52,12 +52,12 @@ MainPage::MainPage(QWidget *parent) :
 
     previousColorRow = 0;
     ui->accountTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->accountTableWidget->horizontalHeader()->setFixedHeight(30);
+//    ui->accountTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->accountTableWidget->horizontalHeader()->setVisible(true);
     ui->accountTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->accountTableWidget->setColumnWidth(0,185);
-    ui->accountTableWidget->setColumnWidth(1,185);
+    ui->accountTableWidget->setColumnWidth(0,140);
+    ui->accountTableWidget->setColumnWidth(1,230);
     ui->accountTableWidget->setColumnWidth(2,74);
     ui->accountTableWidget->setColumnWidth(3,74);
     ui->accountTableWidget->setColumnWidth(4,74);

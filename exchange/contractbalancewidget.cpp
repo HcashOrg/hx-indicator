@@ -25,7 +25,7 @@ ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
     ui->balancesTableWidget->setMouseTracking(true);
     ui->balancesTableWidget->setShowGrid(false);//隐藏表格线
     ui->balancesTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->balancesTableWidget->horizontalHeader()->setFixedHeight(35);
+//    ui->balancesTableWidget->horizontalHeader()->setFixedHeight(35);
     ui->balancesTableWidget->horizontalHeader()->setVisible(true);
     ui->balancesTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->balancesTableWidget->horizontalHeader()->setStretchLastSection(true);
@@ -169,6 +169,8 @@ void ContractBalanceWidget::showContractBalances()
 
     for(int i = 0; i < size; i++)
     {
+        ui->balancesTableWidget->setRowHeight(i,40);
+
         QString key = keys.at(i);
         AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(key));
 

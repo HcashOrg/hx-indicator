@@ -21,7 +21,7 @@ DepositRecrdWideget::DepositRecrdWideget(QWidget *parent) :
     ui->depositRecordTableWidget->setShowGrid(false);//隐藏表格线
 
     ui->depositRecordTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->depositRecordTableWidget->horizontalHeader()->setFixedHeight(40);
+//    ui->depositRecordTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->depositRecordTableWidget->horizontalHeader()->setVisible(true);
     ui->depositRecordTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
@@ -62,6 +62,8 @@ void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
 
     for(int i = 0; i < size; i++)
     {
+        ui->depositRecordTableWidget->setRowHeight(i,40);
+
         QString transactionId = typeIds.at(size - i - 1).transactionId;
         TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
         if(ts.type == -1)
