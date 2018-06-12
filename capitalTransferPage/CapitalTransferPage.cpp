@@ -85,6 +85,7 @@ void CapitalTransferPage::ConfirmSlots()
     //confirmWidget->setAttribute(Qt::WA_DeleteOnClose);
     //confirmWidget->move(mapToGlobal(QPoint(-190,-50)));
     confirmWidget->show();
+    emit backBtnVisible(false);
 }
 
 void CapitalTransferPage::radioChangedSlots()
@@ -257,6 +258,7 @@ void CapitalTransferPage::passwordConfirmSlots()
 void CapitalTransferPage::passwordCancelSlots()
 {
     show();
+    emit backBtnVisible(true);
 }
 
 void CapitalTransferPage::numberChangeSlots(const QString &number)
@@ -326,9 +328,10 @@ void CapitalTransferPage::CreateTransaction()
 
     _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble(),'f',_p->precision);
     double extraNumber = _p->asset_max_ammount.toDouble() - ui->lineEdit_number->text().toDouble();
+    //qDebug()<<_p->actualNumber<<extraNumber<<dust_number[_p->symbol];
     if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
     {
-        ui->label_tip->setText(tr("number cannot less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
+        ui->label_tip->setText(tr("number cannot less than ")+QString::number(dust_number[_p->symbol]+_p->fee.toDouble(),'f',_p->precision));
         ui->label_tip->setVisible(true);
         ui->toolButton_confirm->setEnabled(false);
         return;
@@ -401,6 +404,7 @@ void CapitalTransferPage::InitWidget()
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &CapitalTransferPage::jsonDataUpdated);
     connect(&_p->httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
+    connect(ui->toolButton_close,&QToolButton::clicked,std::bind(&CapitalTransferPage::backBtnVisible,this,false));
     connect(ui->toolButton_close,&QToolButton::clicked,this,&CapitalTransferPage::close);
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&CapitalTransferPage::ConfirmSlots);
     connect(ui->radioButton_deposit,&QRadioButton::toggled,this,&CapitalTransferPage::radioChangedSlots);

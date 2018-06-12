@@ -825,6 +825,7 @@ void Frame::shadowWidgetHide()
 
 void Frame::showTransferPageWithAddress(QString address, QString name)
 {
+    emit titleBackVisible(true);
     closeCurrentPage();
     getAccountInfo();
     transferPage = new TransferPage(UBChain::getInstance()->currentAccount,centralWidget);
