@@ -100,6 +100,9 @@ MinerPage::MinerPage(QWidget *parent) :
     blankWidget_record = new BlankDefaultWidget(ui->incomeRecordTableWidget);
     blankWidget_record->setTextTip(tr("There's no income record!"));
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->incomeRecordTableWidget);
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->incomeTableWidget);
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->lockBalancesTableWidget);
     InitStyle();
     init();
 }

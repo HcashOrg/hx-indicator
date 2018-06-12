@@ -44,6 +44,8 @@ OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
 
     blankWidget = new BlankDefaultWidget(ui->ordersTableWidget);
     blankWidget->setTextTip(tr("There's no contract!"));
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->ordersTableWidget);
     init();
 }
 

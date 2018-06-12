@@ -121,6 +121,8 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     //隐藏备注
     ui->memoLabel->setVisible(true);
     ui->memoTextEdit->setVisible(true);
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
 
 TransferPage::~TransferPage()
@@ -542,29 +544,29 @@ void TransferPage::updateAmountSlots()
 
 void TransferPage::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform);
-    painter.save();
-    const qreal radius = 10;
-    QRectF rect = QRect(QPoint(50, 95), QSize(670,340));
-    QRectF rect1 = QRect(QPoint(45, 90), QSize(680,350));
+//    QPainter painter(this);
+//    painter.setRenderHint(QPainter::Antialiasing);
+//    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+//    painter.save();
+//    const qreal radius = 10;
+//    QRectF rect = QRect(QPoint(50, 95), QSize(670,340));
+//    QRectF rect1 = QRect(QPoint(45, 90), QSize(680,350));
 
 
-    QRadialGradient radial(385, 385, 770, 385,385);
-        radial.setColorAt(0, QColor(0,0,0,15));
-        radial.setColorAt(1, QColor(218,255,248,15));
+//    QRadialGradient radial(385, 385, 770, 385,385);
+//        radial.setColorAt(0, QColor(0,0,0,15));
+//        radial.setColorAt(1, QColor(218,255,248,15));
 
-    painter.setBrush(radial);
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect1,10,10);
+//    painter.setBrush(radial);
+//    painter.setPen(Qt::NoPen);
+//    painter.drawRoundedRect(rect1,10,10);
 
-    painter.setBrush(QBrush(Qt::white));
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect,10,10);
+//    painter.setBrush(QBrush(Qt::white));
+//    painter.setPen(Qt::NoPen);
+//    painter.drawRoundedRect(rect,10,10);
 
 
-    painter.restore();
+//    painter.restore();
 
 
     QWidget::paintEvent(event);

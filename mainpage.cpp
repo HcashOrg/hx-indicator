@@ -81,6 +81,7 @@ MainPage::MainPage(QWidget *parent) :
     // 由于首页是第一个页面，第一次打开先等待x秒钟 再 updateAccountList
     QTimer::singleShot(10, this, SLOT(init()));
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->accountTableWidget);
 
 }
 

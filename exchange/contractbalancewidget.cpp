@@ -52,6 +52,8 @@ ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
 
     blankWidget = new BlankDefaultWidget(ui->balancesTableWidget);
     blankWidget->setTextTip(tr("There is no contract!"));
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->balancesTableWidget);
     init();
 }
 

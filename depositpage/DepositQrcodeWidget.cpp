@@ -70,33 +70,34 @@ void DepositQrcodeWidget::InitStyle()
     ui->tipLabel->setPalette(pe);
 
     ui->toolButton->setStyleSheet(TOOLBUTTON_STYLE_1);
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
 
 void DepositQrcodeWidget::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform);
-    painter.save();
-    const qreal radius = 10;
-    QRectF rect = QRect(QPoint(50, 10), QSize(670,380));
-    QRectF rect1 = QRect(QPoint(45, 5), QSize(680,390));
+//    QPainter painter(this);
+//    painter.setRenderHint(QPainter::Antialiasing);
+//    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+//    painter.save();
+//    const qreal radius = 10;
+//    QRectF rect = QRect(QPoint(50, 10), QSize(670,380));
+//    QRectF rect1 = QRect(QPoint(45, 5), QSize(680,390));
 
 
-    QRadialGradient radial(385, 385, 770, 385,385);
-    radial.setColorAt(0, QColor(0,0,0,15));
-    radial.setColorAt(1, QColor(218,255,248,15));
+//    QRadialGradient radial(385, 385, 770, 385,385);
+//    radial.setColorAt(0, QColor(0,0,0,15));
+//    radial.setColorAt(1, QColor(218,255,248,15));
 
-    painter.setBrush(radial);
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect1,10,10);
+//    painter.setBrush(radial);
+//    painter.setPen(Qt::NoPen);
+//    painter.drawRoundedRect(rect1,10,10);
 
-    painter.setBrush(QBrush(Qt::white));
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect,10,10);
+//    painter.setBrush(QBrush(Qt::white));
+//    painter.setPen(Qt::NoPen);
+//    painter.drawRoundedRect(rect,10,10);
 
 
-    painter.restore();
+//    painter.restore();
 
 
     QWidget::paintEvent(event);

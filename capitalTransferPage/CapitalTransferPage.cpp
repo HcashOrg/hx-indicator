@@ -438,7 +438,7 @@ void CapitalTransferPage::InitStyle()
 
     ui->toolButton_close->setStyleSheet(CLOSEBTN_STYLE);
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
-
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 //    setStyleSheet("QToolButton#toolButton_confirm{color:white;\
 //                                      border-top-left-radius:10px;  \
 //                                      border-top-right-radius:10px; \
@@ -455,22 +455,22 @@ void CapitalTransferPage::InitStyle()
 
 void CapitalTransferPage::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(this);
+//    QPainter painter(this);
+
+////    painter.setPen(Qt::NoPen);
+////    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
+////    painter.drawRect(rect());
 
 //    painter.setPen(Qt::NoPen);
-//    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
-//    painter.drawRect(rect());
+//    painter.setBrush(QColor(255,255,255,255));
+//    painter.drawRoundedRect(QRect(195,80,380,370),10,10);
 
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(255,255,255,255));
-    painter.drawRoundedRect(QRect(195,80,380,370),10,10);
-
-    QRadialGradient radial(385, 385, 390, 385,385);
-    radial.setColorAt(0, QColor(0,0,0,15));
-    radial.setColorAt(1, QColor(218,255,248,15));
-    painter.setBrush(radial);
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(QRect(190,75,390,380),10,10);
+//    QRadialGradient radial(385, 385, 390, 385,385);
+//    radial.setColorAt(0, QColor(0,0,0,15));
+//    radial.setColorAt(1, QColor(218,255,248,15));
+//    painter.setBrush(radial);
+//    painter.setPen(Qt::NoPen);
+//    painter.drawRoundedRect(QRect(190,75,390,380),10,10);
 
     QWidget::paintEvent(event);
 }

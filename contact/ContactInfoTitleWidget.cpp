@@ -95,33 +95,35 @@ void ContactInfoTitleWidget::InitStyle()
                            "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
     ui->copyBtn->setToolTip(tr("copy to clipboard"));
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+
 }
 
 void ContactInfoTitleWidget::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform);
-    painter.save();
-    const qreal radius = 10;
-    QRectF rect = QRect(QPoint(50, 5), QSize(670,70));
-    QRectF rect1 = QRect(QPoint(45, 0), QSize(680,80));
-
-
-    QRadialGradient radial(385, 385, 770, 385,385);
-        radial.setColorAt(0, QColor(0,0,0,15));
-        radial.setColorAt(1, QColor(218,255,248,15));
-
-    painter.setBrush(radial);
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect1,10,10);
-
-    painter.setBrush(QBrush(Qt::white));
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect,10,10);
-
-
-    painter.restore();
+    //QPainter painter(this);
+    //painter.setRenderHint(QPainter::Antialiasing);
+    //painter.setRenderHint(QPainter::SmoothPixmapTransform);
+    //painter.save();
+    //const qreal radius = 10;
+    //QRectF rect = QRect(QPoint(50, 5), QSize(670,70));
+    //QRectF rect1 = QRect(QPoint(45, 0), QSize(680,80));
+    //
+    //
+    //QRadialGradient radial(385, 385, 770, 385,385);
+    //    radial.setColorAt(0, QColor(0,0,0,15));
+    //    radial.setColorAt(1, QColor(218,255,248,15));
+    //
+    //painter.setBrush(radial);
+    //painter.setPen(Qt::NoPen);
+    //painter.drawRoundedRect(rect1,10,10);
+    //
+    //painter.setBrush(QBrush(Qt::white));
+    //painter.setPen(Qt::NoPen);
+    //painter.drawRoundedRect(rect,10,10);
+    //
+    //
+    //painter.restore();
 
 
     QWidget::paintEvent(event);

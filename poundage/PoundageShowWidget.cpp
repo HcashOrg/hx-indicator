@@ -124,6 +124,8 @@ void PoundageShowWidget::InitWidget()
     ui->stackedWidget_pageBar->addWidget(_p->pageWidget);
     ui->stackedWidget_pageBar->setCurrentWidget(_p->pageWidget);
     connect(_p->pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&PoundageShowWidget::changeCurrentPageSlots);
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->tableView);
 }
 
 void PoundageShowWidget::InitStyle()
@@ -188,24 +190,24 @@ void PoundageShowWidget::contextMenuEvent(QContextMenuEvent *event)
 
 void PoundageShowWidget::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform);
-    painter.save();
-    const qreal radius = 10;
-    //QPainterPath path;
-    //QRectF rect = QRect(50, 5, 670, 270);
-    QRectF rect1 = QRect(40,0,696,310);
+//    QPainter painter(this);
+//    painter.setRenderHint(QPainter::Antialiasing);
+//    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+//    painter.save();
+//    const qreal radius = 10;
+//    //QPainterPath path;
+//    //QRectF rect = QRect(50, 5, 670, 270);
+//    QRectF rect1 = QRect(40,0,696,310);
 
-    QRadialGradient radial(385, 385, 770, 385,385);
-    radial.setColorAt(0, QColor(198,202,212,10));
-    radial.setColorAt(1, QColor(218,255,248,10));
+//    QRadialGradient radial(385, 385, 770, 385,385);
+//    radial.setColorAt(0, QColor(198,202,212,10));
+//    radial.setColorAt(1, QColor(218,255,248,10));
 
-    painter.setBrush(radial);
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect1,radius,radius);
+//    painter.setBrush(radial);
+//    painter.setPen(Qt::NoPen);
+//    painter.drawRoundedRect(rect1,radius,radius);
 
-    painter.restore();
+//    painter.restore();
     QWidget::paintEvent(event);
 }
 

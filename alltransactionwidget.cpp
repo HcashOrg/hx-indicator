@@ -93,6 +93,7 @@ void AllTransactionWidget::init()
 
     on_accountComboBox_currentTextChanged(ui->accountComboBox->currentText());
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->transactionsTableWidget);
 }
 
 void AllTransactionWidget::on_typeAllBtn_clicked()

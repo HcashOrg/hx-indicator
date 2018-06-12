@@ -188,30 +188,31 @@ void WithdrawInputWidget::InitStyle()
     ui->toolButton_all->setStyleSheet("QToolButton{background:transparent;color:rgb(192,202,212);font: 12px \"Microsoft YaHei UI Light\";}"
                                       "QToolButton:hover{color:rgb(84,116,235);}");
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
 void WithdrawInputWidget::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform);
-    painter.save();
-    const qreal radius = 10;
-    QPainterPath path;
-    QRectF rect = QRect(50, 10, 680, 220);
-    QRectF rect1 = QRect(45,5,690,230);
+//    QPainter painter(this);
+//    painter.setRenderHint(QPainter::Antialiasing);
+//    painter.setRenderHint(QPainter::SmoothPixmapTransform);
+//    painter.save();
+//    const qreal radius = 10;
+//    QPainterPath path;
+//    QRectF rect = QRect(50, 10, 680, 220);
+//    QRectF rect1 = QRect(45,5,690,230);
 
-    QRadialGradient radial(375, 200, 375, 375,200);
-    radial.setColorAt(0, QColor(0,0,0,15));
-    radial.setColorAt(1, QColor(218,255,248,15));
+//    QRadialGradient radial(375, 200, 375, 375,200);
+//    radial.setColorAt(0, QColor(0,0,0,15));
+//    radial.setColorAt(1, QColor(218,255,248,15));
 
-    painter.setBrush(radial);
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect1,radius,radius);
+//    painter.setBrush(radial);
+//    painter.setPen(Qt::NoPen);
+//    painter.drawRoundedRect(rect1,radius,radius);
 
-    painter.setBrush(QBrush(Qt::white));
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect,radius,radius);
+//    painter.setBrush(QBrush(Qt::white));
+//    painter.setPen(Qt::NoPen);
+//    painter.drawRoundedRect(rect,radius,radius);
 
-    painter.restore();
+//    painter.restore();
     QWidget::paintEvent(event);
 }

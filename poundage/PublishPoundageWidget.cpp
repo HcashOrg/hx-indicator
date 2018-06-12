@@ -146,6 +146,8 @@ void PublishPoundageWidget::InitWidget()
     ChangeAssetSlots();
 
     ui->label_fee->setText("  "+UBChain::getInstance()->feeChargeInfo.poundagePublishFee+" LNK");
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
 
 void PublishPoundageWidget::InitStyle()
@@ -163,22 +165,18 @@ void PublishPoundageWidget::InitStyle()
 
 void PublishPoundageWidget::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(this);
+//    QPainter painter(this);
 
 //    painter.setPen(Qt::NoPen);
-//    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
-//    painter.drawRect(rect());
+//    painter.setBrush(QColor(255,255,255,255));
+//    painter.drawRoundedRect(QRect(50,120,674,287),10,10);
 
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(255,255,255,255));
-    painter.drawRoundedRect(QRect(50,120,674,287),10,10);
-
-    QRadialGradient radial(385, 265, 380, 385,265);
-    radial.setColorAt(0, QColor(0,0,0,15));
-    radial.setColorAt(1, QColor(218,255,248,15));
-    painter.setBrush(radial);
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(QRect(45,115,684,297),10,10);
+//    QRadialGradient radial(385, 265, 380, 385,265);
+//    radial.setColorAt(0, QColor(0,0,0,15));
+//    radial.setColorAt(1, QColor(218,255,248,15));
+//    painter.setBrush(radial);
+//    painter.setPen(Qt::NoPen);
+//    painter.drawRoundedRect(QRect(45,115,684,297),10,10);
 
     QWidget::paintEvent(event);
 }

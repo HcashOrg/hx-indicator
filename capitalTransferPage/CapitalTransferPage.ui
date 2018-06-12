@@ -319,6 +319,40 @@ color: rgb(255, 0, 0);</string>
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="label_back">
+   <property name="geometry">
+    <rect>
+     <x>195</x>
+     <y>80</y>
+     <width>380</width>
+     <height>370</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:15px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>label_back</zorder>
+  <zorder>label_title</zorder>
+  <zorder>label_1</zorder>
+  <zorder>label_number</zorder>
+  <zorder>label_addressTitle</zorder>
+  <zorder>label_2</zorder>
+  <zorder>label_fee</zorder>
+  <zorder>toolButton_close</zorder>
+  <zorder>radioButton_deposit</zorder>
+  <zorder>radioButton_withdraw</zorder>
+  <zorder>label_3</zorder>
+  <zorder>lineEdit_number</zorder>
+  <zorder>lineEdit_address</zorder>
+  <zorder>label_5</zorder>
+  <zorder>toolButton_confirm</zorder>
+  <zorder>label_tip</zorder>
+  <zorder>label_marktip</zorder>
  </widget>
  <resources/>
  <connections/>

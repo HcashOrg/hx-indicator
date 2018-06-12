@@ -40,6 +40,8 @@ WithdrawRecordWidget::WithdrawRecordWidget(QWidget *parent) :
 
     blankWidget = new BlankDefaultWidget(ui->withdrawRecordTableWidget);
     blankWidget->setTextTip(tr("There's no withdraw record!"));
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->withdrawRecordTableWidget);
     init();
 }
 

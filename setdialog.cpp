@@ -175,6 +175,9 @@ SetDialog::SetDialog(QWidget *parent) :
     //帮助页面
     HelpWidget *helpWidget = new HelpWidget();
     ui->stackedWidget_2->insertWidget(1,helpWidget);
+
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->stackedWidget_2);
 }
 
 SetDialog::~SetDialog()

@@ -165,7 +165,7 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
     _p->pageWidget->setShowTip(ui->transferRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
 
-    _p->pageWidget->setVisible(ui->transferRecordTableWidget->rowCount() == 0);
+    _p->pageWidget->setVisible(0 != ui->transferRecordTableWidget->rowCount());
     _p->blankWidget->setVisible(ui->transferRecordTableWidget->rowCount() == 0);
 }
 
@@ -184,6 +184,8 @@ void ContactInfoHistoryWidget::InitWidget()
     connect(_p->pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ContactInfoHistoryWidget::pageChangeSlot);
 
     connect(ui->assetComboBox,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),this,&ContactInfoHistoryWidget::assetComboBox_currentIndexChanged);
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->transferRecordTableWidget);
 }
 
 void ContactInfoHistoryWidget::InitStyle()

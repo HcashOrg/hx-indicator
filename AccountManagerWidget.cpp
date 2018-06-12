@@ -206,6 +206,7 @@ void AccountManagerWidget::InitWidget()
 
     connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &AccountManagerWidget::jsonDataUpdated);
 
+
 }
 
 void AccountManagerWidget::InitStyle()

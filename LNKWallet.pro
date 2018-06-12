@@ -146,7 +146,8 @@ SOURCES += main.cpp\
     crossmark/crosscapitalmark.cpp \
     crossmark/AddressValidate.cpp \
     control/AssetIconItem.cpp \
-    control/BlankDefaultWidget.cpp
+    control/BlankDefaultWidget.cpp \
+    control/CustomShadowEffect.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -264,7 +265,8 @@ HEADERS  += firstlogin.h \
     crossmark/crosscapitalmark.h \
     crossmark/AddressValidate.h \
     control/AssetIconItem.h \
-    control/BlankDefaultWidget.h
+    control/BlankDefaultWidget.h \
+    control/CustomShadowEffect.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
