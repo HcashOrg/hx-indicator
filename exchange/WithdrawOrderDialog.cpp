@@ -26,6 +26,7 @@ WithdrawOrderDialog::WithdrawOrderDialog(QWidget *parent) :
 
     feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
     ui->stackedWidget->addWidget(feeChoose);
+    feeChoose->resize(ui->stackedWidget->size());
     ui->stackedWidget->setCurrentIndex(0);
 
     connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));

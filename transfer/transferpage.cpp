@@ -100,6 +100,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
                                   ui->accountComboBox->currentText());
     ui->stackedWidget->addWidget(feeWidget);
     ui->stackedWidget->setCurrentWidget(feeWidget);
+    ui->stackedWidget->currentWidget()->resize(ui->stackedWidget->size());
 
     connect(this,&TransferPage::usePoundage,feeWidget,&FeeChooseWidget::updatePoundageID);
     //updatePoundage();

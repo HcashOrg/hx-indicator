@@ -69,6 +69,7 @@ void FeeChargeWidget::InitWidget()
 {
     InitStyle();
     ui->stackedWidget->addWidget(_p->chooseWidget);
+    _p->chooseWidget->resize(ui->stackedWidget->size());
 
     connect(ui->toolButton_cancel,&QToolButton::clicked,this,&FeeChargeWidget::CancelSlots);
     connect(ui->toolButton_close,&QToolButton::clicked,this,&FeeChargeWidget::CancelSlots);

@@ -201,7 +201,6 @@ void FeeChooseWidget::refreshUI()
     {
         ui->comboBox_coinType->setVisible(true);
         ui->label_poundage->setVisible(true);
-        ui->line_5->setVisible(true);
         ui->line_6->setVisible(true);
 
         ui->label_poundage->setText(_p->poundageTip);
@@ -215,7 +214,6 @@ void FeeChooseWidget::refreshUI()
     {
         ui->comboBox_coinType->setVisible(false);
         ui->label_poundage->setVisible(false);
-        ui->line_5->setVisible(false);
         ui->line_6->setVisible(false);
         if(QVBoxLayout* vLay = dynamic_cast<QVBoxLayout*>(layout()))
         {
@@ -333,5 +331,5 @@ void FeeChooseWidget::InitStyle()
     ui->label_poundage->setPalette(pa);
     ui->label_poundage->setFont(font);
 
-    setStyleSheet("QCheckBox::checked{color:black;}");
+    setStyleSheet("QCheckBox::checked{color:black;}QComboBox{border-bottom:1px solid gray;color:#5474EB;}");
 }
