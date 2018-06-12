@@ -84,13 +84,13 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>0</height>
+         <height>30</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>36</height>
+         <height>30</height>
         </size>
        </property>
        <property name="font">
@@ -128,13 +128,13 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>0</height>
+         <height>30</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>36</height>
+         <height>30</height>
         </size>
        </property>
        <property name="font">
@@ -161,18 +161,23 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>30</height>
+          </size>
+         </property>
          <property name="font">
           <font>
            <family>微软雅黑</family>
            <pointsize>10</pointsize>
           </font>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="Line" name="line_5">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -196,13 +201,13 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>0</height>
+         <height>30</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>36</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text">
@@ -226,6 +231,18 @@
      </property>
      <item>
       <widget class="QLabel" name="tipLabel">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(170, 0, 0);</string>
        </property>

@@ -29,6 +29,7 @@ ForecloseDialog::ForecloseDialog(const QString &accountName,QWidget *parent) :
     ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
                                                      UBChain::getInstance()->feeType,accountName));
     ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->currentWidget()->resize(ui->stackedWidget->size());
 }
 
 ForecloseDialog::~ForecloseDialog()

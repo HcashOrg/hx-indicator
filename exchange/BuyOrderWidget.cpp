@@ -27,6 +27,7 @@ BuyOrderWidget::BuyOrderWidget(QWidget *parent) :
 
     feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
     ui->stackedWidget->addWidget(feeChoose);
+    feeChoose->resize(ui->stackedWidget->size());
     ui->stackedWidget->setCurrentIndex(0);
     ui->label->setVisible(false);
     ui->feeLabel->setVisible(false);
