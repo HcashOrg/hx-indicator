@@ -21,7 +21,7 @@
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>74</x>
+     <x>73</x>
      <y>41</y>
      <width>200</width>
      <height>26</height>
@@ -30,14 +30,13 @@
    <property name="font">
     <font>
      <family>Microsoft YaHei UI</family>
-     <pointsize>-1</pointsize>
-     <weight>13</weight>
+     <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 105 20px &quot;Microsoft YaHei UI&quot;;
+    <string notr="true">
 </string>
    </property>
    <property name="text">

@@ -25,6 +25,8 @@ public:
 public:
     explicit CapitalTransferPage(const CapitalTransferInput &data,QWidget *parent = 0);
     ~CapitalTransferPage();
+signals:
+    void backBtnVisible(bool isShow);
 private slots:
     void ConfirmSlots();
 

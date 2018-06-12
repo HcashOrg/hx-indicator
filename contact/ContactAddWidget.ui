@@ -166,6 +166,32 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <string>确定</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_back">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>10</y>
+     <width>670</width>
+     <height>270</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:15px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>label_back</zorder>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>lineEdit_remark</zorder>
+  <zorder>label_3</zorder>
+  <zorder>comboBox_group</zorder>
+  <zorder>label_tip</zorder>
+  <zorder>lineEdit_address</zorder>
+  <zorder>toolButton</zorder>
  </widget>
  <resources/>
  <connections/>

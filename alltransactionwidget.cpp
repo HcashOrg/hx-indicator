@@ -93,6 +93,7 @@ void AllTransactionWidget::init()
 
     on_accountComboBox_currentTextChanged(ui->accountComboBox->currentText());
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->transactionsTableWidget);
 }
 
 void AllTransactionWidget::on_typeAllBtn_clicked()
@@ -235,6 +236,7 @@ void AllTransactionWidget::hideFilteredTransactions()
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(showRows.size(),ROWNUMBER);
     pageChangeSlot(0);
+    pageWidget->setVisible(showRows.size() == 0);
 
     blankWidget->setVisible(showRows.size() == 0);
 

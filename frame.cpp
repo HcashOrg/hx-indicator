@@ -36,6 +36,7 @@
 #include "exchange/myexchangecontractpage.h"
 #include "extra/transactiondb.h"
 #include "crossmark/crosscapitalmark.h"
+#include "control/CustomShadowEffect.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -824,6 +825,7 @@ void Frame::shadowWidgetHide()
 
 void Frame::showTransferPageWithAddress(QString address, QString name)
 {
+    emit titleBackVisible(true);
     closeCurrentPage();
     getAccountInfo();
     transferPage = new TransferPage(UBChain::getInstance()->currentAccount,centralWidget);
@@ -1556,6 +1558,16 @@ void Frame::RestoreRightPart()
 
     //bottomBar->resize(680,40);
     //bottomBar->move(220,516);
+}
+
+void Frame::installBlurEffect(QWidget *widget)
+{
+    if(!widget) return;
+    CustomShadowEffect *bodyShadow = new CustomShadowEffect(this);
+    bodyShadow->setBlurRadius(20.0);
+    bodyShadow->setDistance(5.0);
+    bodyShadow->setColor(QColor(150, 150, 150, 35));
+    widget->setGraphicsEffect(bodyShadow);
 }
 
 void Frame::newAccount(QString name)

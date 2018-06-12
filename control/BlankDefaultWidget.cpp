@@ -32,6 +32,7 @@ void BlankDefaultWidget::InitWidget()
     setPalette(palette);
 
     ui->label_pic->setPixmap(QPixmap(":/ui/wallet_ui/blank.png").scaled(ui->label_pic->size(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+    this->setStyleSheet("QWidget{border-radius:15px;}");
 }
 
 void BlankDefaultWidget::paintEvent(QPaintEvent *event)
@@ -39,7 +40,7 @@ void BlankDefaultWidget::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);
-    painter.drawRect(rect());
+    painter.drawRoundedRect(rect(),15,15);
     QWidget::paintEvent(event);
 
 }

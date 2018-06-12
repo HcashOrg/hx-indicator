@@ -38,6 +38,8 @@ TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
     pageWidget = new PageScrollWidget();
     blankWidget = new BlankDefaultWidget(ui->transferRecordTableWidget);
     blankWidget->setTextTip(tr("当前账户没有转账记录!"));
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->transferRecordTableWidget);
     init();
 }
 
@@ -188,6 +190,10 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->transferRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
+    if(0 == ui->transferRecordTableWidget->rowCount())
+    {
+        pageWidget->setVisible(false);
+    }
     blankWidget->setVisible(size == 0);
 }
 

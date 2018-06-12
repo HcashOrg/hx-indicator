@@ -33,7 +33,7 @@
       <x>230</x>
       <y>130</y>
       <width>500</width>
-      <height>350</height>
+      <height>320</height>
      </rect>
     </property>
     <widget class="QToolButton" name="cancelBtn">

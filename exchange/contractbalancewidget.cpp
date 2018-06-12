@@ -51,7 +51,13 @@ ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ContractBalanceWidget::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->balancesTableWidget);
+<<<<<<< HEAD
     blankWidget->setTextTip(tr("There is no asset in the contract!"));
+=======
+    blankWidget->setTextTip(tr("There is no contract!"));
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->balancesTableWidget);
+>>>>>>> cbd912949f57aadbe5be4373529811a56d0819d3
     init();
 }
 
@@ -212,6 +218,8 @@ void ContractBalanceWidget::showContractBalances()
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->balancesTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
+    pageWidget->setVisible(0 != size);
+
     blankWidget->setVisible(0 == size);
 }
 

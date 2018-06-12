@@ -100,6 +100,9 @@ MinerPage::MinerPage(QWidget *parent) :
     blankWidget_record = new BlankDefaultWidget(ui->incomeRecordTableWidget);
     blankWidget_record->setTextTip(tr("There's no income record!"));
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->incomeRecordTableWidget);
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->incomeTableWidget);
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->lockBalancesTableWidget);
     InitStyle();
     init();
 }
@@ -180,6 +183,7 @@ void MinerPage::jsonDataUpdated(QString id)
         pageWidget_fore->setShowTip(ui->lockBalancesTableWidget->rowCount(),ROWNUMBER);
         setTextCenter(ui->lockBalancesTableWidget);
         blankWidget_fore->setVisible(0 == size);
+        pageWidget_fore->setVisible(0 != size);
         return;
     }
 
@@ -258,6 +262,7 @@ void MinerPage::jsonDataUpdated(QString id)
 
         pageWidget_income->setShowTip(ui->incomeTableWidget->rowCount(),ROWNUMBER);
         setTextCenter(ui->incomeTableWidget);
+        pageWidget_income->setVisible(0 != size);
         blankWidget_income->setVisible( 0 == size);
         return;
     }
@@ -450,6 +455,7 @@ void MinerPage::showIncomeRecord()
     pageWidget_record->setShowTip(ui->incomeRecordTableWidget->rowCount(),ROWNUMBER);
     setTextCenter(ui->incomeRecordTableWidget);
     blankWidget_record->setVisible(0 == size);
+    pageWidget_record->setVisible(0 != size);
 }
 
 void MinerPage::InitStyle()

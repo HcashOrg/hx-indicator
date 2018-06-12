@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>450</height>
+    <height>456</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,13 +34,13 @@
      <property name="minimumSize">
       <size>
        <width>770</width>
-       <height>80</height>
+       <height>100</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>770</width>
-       <height>80</height>
+       <height>100</height>
       </size>
      </property>
      <property name="widgetResizable">
@@ -52,7 +52,7 @@
         <x>0</x>
         <y>0</y>
         <width>768</width>
-        <height>78</height>
+        <height>98</height>
        </rect>
       </property>
      </widget>
@@ -60,6 +60,18 @@
    </item>
    <item>
     <widget class="QScrollArea" name="scrollArea_bottom">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -69,7 +81,7 @@
         <x>0</x>
         <y>0</y>
         <width>768</width>
-        <height>368</height>
+        <height>354</height>
        </rect>
       </property>
      </widget>

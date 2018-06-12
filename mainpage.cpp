@@ -81,6 +81,7 @@ MainPage::MainPage(QWidget *parent) :
     // 由于首页是第一个页面，第一次打开先等待x秒钟 再 updateAccountList
     QTimer::singleShot(10, this, SLOT(init()));
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->accountTableWidget);
 
 }
 
@@ -238,6 +239,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         WithdrawPage *withdraw = new WithdrawPage(WithdrawPage::WithdrawDataInput(ui->accountComboBox->currentText(),
                                                   ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text(),
                                                   ui->accountTableWidget->item(row,1)->text()),this);
+
         withdraw->setAttribute(Qt::WA_DeleteOnClose);
         withdraw->show();
         withdraw->raise();
@@ -249,6 +251,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         emit backBtnVisible(true);
         CapitalTransferPage *capital = new CapitalTransferPage(CapitalTransferPage::CapitalTransferInput(
                                            ui->accountComboBox->currentText(),ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text()),this);
+        connect(capital,&CapitalTransferPage::backBtnVisible,this,&MainPage::backBtnVisible);
         capital->setAttribute(Qt::WA_DeleteOnClose);
         capital->show();
         capital->raise();

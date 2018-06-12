@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>80</height>
+    <height>100</height>
    </rect>
   </property>
   <property name="font">
@@ -22,7 +22,7 @@
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>15</y>
+     <y>25</y>
      <width>50</width>
      <height>50</height>
     </rect>
@@ -38,7 +38,7 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>48</y>
+     <y>58</y>
      <width>60</width>
      <height>20</height>
     </rect>
@@ -57,7 +57,7 @@
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>48</y>
+     <y>58</y>
      <width>311</width>
      <height>20</height>
     </rect>
@@ -82,7 +82,7 @@
    <property name="geometry">
     <rect>
      <x>520</x>
-     <y>53</y>
+     <y>63</y>
      <width>11</width>
      <height>11</height>
     </rect>
@@ -98,7 +98,7 @@
    <property name="geometry">
     <rect>
      <x>640</x>
-     <y>30</y>
+     <y>40</y>
      <width>60</width>
      <height>20</height>
     </rect>
@@ -119,7 +119,7 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>18</y>
+     <y>28</y>
      <width>491</width>
      <height>26</height>
     </rect>
@@ -140,6 +140,30 @@
     <string>名称</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_back">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>10</y>
+     <width>670</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:15px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>label_back</zorder>
+  <zorder>label_pic</zorder>
+  <zorder>label_addressTitle</zorder>
+  <zorder>label_address</zorder>
+  <zorder>copyBtn</zorder>
+  <zorder>transferBtn</zorder>
+  <zorder>label_name</zorder>
  </widget>
  <resources/>
  <connections/>

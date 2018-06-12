@@ -195,6 +195,33 @@ color: rgb(255, 11, 35);</string>
     <string>invalid address!</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_back">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>15</y>
+     <width>680</width>
+     <height>220</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:15px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>label_back</zorder>
+  <zorder>label</zorder>
+  <zorder>label_symbol</zorder>
+  <zorder>label_3</zorder>
+  <zorder>lineEdit_address</zorder>
+  <zorder>lineEdit_ammount</zorder>
+  <zorder>toolButton_all</zorder>
+  <zorder>toolButton_confirm</zorder>
+  <zorder>label_tipNumber</zorder>
+  <zorder>label_tipAddr</zorder>
  </widget>
  <resources/>
  <connections/>

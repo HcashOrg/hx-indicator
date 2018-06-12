@@ -138,6 +138,8 @@ void ContactAddWidget::InitWidget()
 
     connect(ui->lineEdit_address,&QLineEdit::textEdited,this,&ContactAddWidget::addressChangeSlots);
     connect(ui->toolButton,&QToolButton::clicked,this,&ContactAddWidget::addNewContactSlots);
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
 
 void ContactAddWidget::InitComboBox()
@@ -151,27 +153,27 @@ void ContactAddWidget::InitComboBox()
 
 void ContactAddWidget::paintEvent(QPaintEvent *event)
 {
-    QPainter painter(this);
-    painter.setRenderHint(QPainter::Antialiasing);
-    painter.setRenderHint(QPainter::SmoothPixmapTransform);
-    painter.save();
-    const qreal radius = 10;
-    QPainterPath path;
-    QRectF rect = QRect(50, 5, 670, 270);
-    QRectF rect1 = QRect(45,0,680,280);
-
-    QRadialGradient radial(385, 385, 770, 385,385);
-    radial.setColorAt(0, QColor(0,0,0,15));
-    radial.setColorAt(1, QColor(218,255,248,15));
-
-    painter.setBrush(radial);
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect1,radius,radius);
-
-    painter.setBrush(QBrush(Qt::white));
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(rect,radius,radius);
-
-    painter.restore();
+    //QPainter painter(this);
+    //painter.setRenderHint(QPainter::Antialiasing);
+    //painter.setRenderHint(QPainter::SmoothPixmapTransform);
+    //painter.save();
+    //const qreal radius = 10;
+    //QPainterPath path;
+    //QRectF rect = QRect(50, 5, 670, 270);
+    //QRectF rect1 = QRect(45,0,680,280);
+    //
+    //QRadialGradient radial(385, 385, 770, 385,385);
+    //radial.setColorAt(0, QColor(0,0,0,15));
+    //radial.setColorAt(1, QColor(218,255,248,15));
+    //
+    //painter.setBrush(radial);
+    //painter.setPen(Qt::NoPen);
+    //painter.drawRoundedRect(rect1,radius,radius);
+    //
+    //painter.setBrush(QBrush(Qt::white));
+    //painter.setPen(Qt::NoPen);
+    //painter.drawRoundedRect(rect,radius,radius);
+    //
+    //painter.restore();
     QWidget::paintEvent(event);
 }

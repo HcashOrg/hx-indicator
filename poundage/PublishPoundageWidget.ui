@@ -197,6 +197,37 @@
     <enum>Qt::Vertical</enum>
    </property>
   </widget>
+  <widget class="QLabel" name="label_back">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>120</y>
+     <width>674</width>
+     <height>287</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:15px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>label_back</zorder>
+  <zorder>okBtn</zorder>
+  <zorder>cancelBtn</zorder>
+  <zorder>label</zorder>
+  <zorder>comboBox_accounts</zorder>
+  <zorder>label_3</zorder>
+  <zorder>label_2</zorder>
+  <zorder>label_4</zorder>
+  <zorder>comboBox_targetType</zorder>
+  <zorder>label_5</zorder>
+  <zorder>label_fee</zorder>
+  <zorder>lineEdit_source</zorder>
+  <zorder>lineEdit_target</zorder>
+  <zorder>line_6</zorder>
  </widget>
  <resources/>
  <connections/>

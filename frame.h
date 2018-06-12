@@ -40,6 +40,7 @@ class MyExchangeContractPage;
 class PoundageWidget;
 
 class CrossCapitalMark;
+class CustomShadowEffect;
 class Frame:public QFrame
 {
     Q_OBJECT
@@ -180,6 +181,8 @@ private:
     DepositAutomatic *autoDeposit;
 public:
     CrossCapitalMark *crossMark;
+public:
+    void installBlurEffect(QWidget *widget);
 };
 
 

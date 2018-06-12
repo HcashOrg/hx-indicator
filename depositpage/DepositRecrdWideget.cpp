@@ -38,6 +38,8 @@ DepositRecrdWideget::DepositRecrdWideget(QWidget *parent) :
     pageWidget = new PageScrollWidget();
     blankWidget = new BlankDefaultWidget(ui->depositRecordTableWidget);
     blankWidget->setTextTip(tr("There's no deposit record!"));
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->depositRecordTableWidget);
     init();
 }
 
@@ -109,6 +111,7 @@ void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->depositRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
+    pageWidget->setVisible(0 != size);
     blankWidget->setVisible(0 == size);
 
 }
