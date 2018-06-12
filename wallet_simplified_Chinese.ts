@@ -1042,7 +1042,7 @@ better not transfer or upgrade</source>
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="371"/>
         <source> %1 is pending!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 已划出，尚未到账！</translation>
     </message>
     <message>
         <source>Operation Done!</source>
