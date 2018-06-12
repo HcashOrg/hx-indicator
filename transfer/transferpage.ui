@@ -47,7 +47,7 @@
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>236</y>
+     <y>233</y>
      <width>80</width>
      <height>30</height>
     </rect>
@@ -276,7 +276,7 @@
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>299</y>
+     <y>296</y>
      <width>221</width>
      <height>16</height>
     </rect>
@@ -315,8 +315,8 @@
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>259</y>
-     <width>221</width>
+     <y>256</y>
+     <width>241</width>
      <height>30</height>
     </rect>
    </property>
@@ -388,7 +388,7 @@ p, li { white-space: pre-wrap; }
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>125</y>
+     <y>122</y>
      <width>240</width>
      <height>121</height>
     </rect>
