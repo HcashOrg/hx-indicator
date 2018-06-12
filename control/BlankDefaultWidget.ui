@@ -55,6 +55,9 @@
        <property name="spacing">
         <number>0</number>
        </property>
+       <property name="topMargin">
+        <number>10</number>
+       </property>
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -107,14 +110,19 @@
        <property name="minimumSize">
         <size>
          <width>670</width>
-         <height>14</height>
+         <height>20</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>670</width>
-         <height>14</height>
+         <height>20</height>
         </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{color: rgb(51, 51, 51);font: 14px &quot;微软雅黑 Light&quot;;}
+
+</string>
        </property>
        <property name="text">
         <string>TextLabel</string>

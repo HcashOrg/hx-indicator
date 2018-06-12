@@ -31,8 +31,16 @@
    </property>
    <property name="font">
     <font>
-     <family>Microsoft YaHei UI Light</family>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color:rgb(51,51,51);font: 12px &quot;微软雅黑&quot;;}
+</string>
    </property>
    <property name="text">
     <string>请输入密码</string>
