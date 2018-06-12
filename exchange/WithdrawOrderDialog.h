@@ -18,7 +18,6 @@ public:
     bool pop();
 
     void setText(QString _text);
-    void setContractFee(QString _feeStr);
     void setContractFee(double _fee);
     void setAccountName(const QString &accountName);
     void updatePoundageID();

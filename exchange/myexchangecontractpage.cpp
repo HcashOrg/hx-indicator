@@ -324,8 +324,6 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
             WithdrawOrderDialog withdrawOrderDialog;
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
-            withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION)
-                                               + " " + ASSET_NAME);
             withdrawOrderDialog.setAccountName(ui->accountComboBox->currentText());
             withdrawOrderDialog.setText(tr("Sure to cancel this order? You need to pay the fee for contract execution."));
             if(withdrawOrderDialog.pop())
@@ -385,8 +383,6 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
 
             WithdrawOrderDialog withdrawOrderDialog;
-            withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION)
-                                               + " " + ASSET_NAME);
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
             withdrawOrderDialog.setAccountName(ui->accountComboBox->currentText());
             withdrawOrderDialog.setText(tr("You need to pay the fee for contract execution."));

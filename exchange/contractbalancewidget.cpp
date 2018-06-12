@@ -51,7 +51,7 @@ ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ContractBalanceWidget::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->balancesTableWidget);
-    blankWidget->setTextTip(tr("There is no contract!"));
+    blankWidget->setTextTip(tr("There is no asset in the contract!"));
     init();
 }
 
@@ -108,8 +108,6 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
 
             WithdrawOrderDialog withdrawOrderDialog;
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
-            withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION)
-                                               + " " + ASSET_NAME);
             withdrawOrderDialog.setAccountName(accountName);
             withdrawOrderDialog.setText(tr("You need to pay the fee for contract execution."));
             if(withdrawOrderDialog.pop())

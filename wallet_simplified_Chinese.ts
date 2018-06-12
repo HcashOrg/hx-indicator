@@ -745,8 +745,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="control/BlankDefaultWidget.ui" line="86"/>
-        <location filename="control/BlankDefaultWidget.ui" line="120"/>
+        <location filename="control/BlankDefaultWidget.ui" line="89"/>
+        <location filename="control/BlankDefaultWidget.ui" line="128"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1693,8 +1693,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="exchange/contractbalancewidget.cpp" line="54"/>
-        <source>There is no contract!</source>
-        <translation type="unfinished"></translation>
+        <source>There is no asset in the contract!</source>
+        <oldsource>There is no contract!</oldsource>
+        <translation type="unfinished">合约里还没有资产！</translation>
     </message>
     <message>
         <location filename="exchange/contractbalancewidget.cpp" line="114"/>
@@ -3175,17 +3176,17 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">欢迎，</translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="38"/>
+        <location filename="lockpage.ui" line="46"/>
         <source>请输入密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="56"/>
+        <location filename="lockpage.ui" line="64"/>
         <source>v1.0.1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="102"/>
+        <location filename="lockpage.ui" line="110"/>
         <source>登录</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3451,7 +3452,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">划转</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="390"/>
+        <location filename="mainpage.cpp" line="391"/>
         <source>Fail to create account!</source>
         <translation type="unfinished">创建账户失败！</translation>
     </message>
@@ -3476,7 +3477,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">复制到剪贴板</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="581"/>
+        <location filename="mainpage.cpp" line="582"/>
         <source>copy to clipboard</source>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
@@ -5641,7 +5642,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">消息长度超过40个字节!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="409"/>
+        <location filename="transfer/transferpage.cpp" line="412"/>
         <source>You can only send %1s to multisig address currently.</source>
         <oldsource>You can only send %1s to multi-signature address currently.</oldsource>
         <translation type="unfinished"></translation>
@@ -5675,39 +5676,39 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">交易发送失败：%1</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="309"/>
+        <location filename="transfer/transferpage.cpp" line="312"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished">转账失败！</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="394"/>
+        <location filename="transfer/transferpage.cpp" line="397"/>
         <source>Valid account address.</source>
         <translation type="unfinished">有效的账户地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="401"/>
+        <location filename="transfer/transferpage.cpp" line="404"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished">暂不支持向合约地址转账</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="415"/>
+        <location filename="transfer/transferpage.cpp" line="418"/>
         <source>Valid multisig address.</source>
         <oldsource>Valid multi-signature address.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="422"/>
+        <location filename="transfer/transferpage.cpp" line="425"/>
         <source>Invalid address.</source>
         <translation type="unfinished">无效地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="507"/>
+        <location filename="transfer/transferpage.cpp" line="510"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished">最大: %1</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="516"/>
+        <location filename="transfer/transferpage.cpp" line="519"/>
         <source>cannot find asset!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5724,7 +5725,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">一个账户不能给自己转账!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="302"/>
+        <location filename="transfer/transferpage.cpp" line="305"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished">交易信息已发出，请等待确认</translation>
     </message>

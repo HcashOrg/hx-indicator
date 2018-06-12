@@ -836,8 +836,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="control/BlankDefaultWidget.ui" line="86"/>
-        <location filename="control/BlankDefaultWidget.ui" line="120"/>
+        <location filename="control/BlankDefaultWidget.ui" line="89"/>
+        <location filename="control/BlankDefaultWidget.ui" line="128"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1776,7 +1776,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="exchange/contractbalancewidget.cpp" line="54"/>
-        <source>There is no contract!</source>
+        <source>There is no asset in the contract!</source>
+        <oldsource>There is no contract!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3296,17 +3297,17 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="38"/>
+        <location filename="lockpage.ui" line="46"/>
         <source>请输入密码</source>
         <translation type="unfinished">Password</translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="56"/>
+        <location filename="lockpage.ui" line="64"/>
         <source>v1.0.1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="102"/>
+        <location filename="lockpage.ui" line="110"/>
         <source>登录</source>
         <translation type="unfinished">Enter</translation>
     </message>
@@ -3548,12 +3549,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="390"/>
+        <location filename="mainpage.cpp" line="391"/>
         <source>Fail to create account!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="581"/>
+        <location filename="mainpage.cpp" line="582"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5809,50 +5810,50 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="309"/>
+        <location filename="transfer/transferpage.cpp" line="312"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="409"/>
+        <location filename="transfer/transferpage.cpp" line="412"/>
         <source>You can only send %1s to multisig address currently.</source>
         <oldsource>You can only send %1s to multi-signature address currently.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="302"/>
+        <location filename="transfer/transferpage.cpp" line="305"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="394"/>
+        <location filename="transfer/transferpage.cpp" line="397"/>
         <source>Valid account address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="401"/>
+        <location filename="transfer/transferpage.cpp" line="404"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="415"/>
+        <location filename="transfer/transferpage.cpp" line="418"/>
         <source>Valid multisig address.</source>
         <oldsource>Valid multi-signature address.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="422"/>
+        <location filename="transfer/transferpage.cpp" line="425"/>
         <source>Invalid address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="507"/>
+        <location filename="transfer/transferpage.cpp" line="510"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="516"/>
+        <location filename="transfer/transferpage.cpp" line="519"/>
         <source>cannot find asset!</source>
         <translation type="unfinished"></translation>
     </message>
