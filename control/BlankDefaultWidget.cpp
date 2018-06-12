@@ -7,6 +7,10 @@ BlankDefaultWidget::BlankDefaultWidget(QWidget *parent) :
     ui(new Ui::BlankDefaultWidget)
 {
     ui->setupUi(this);
+    if(parent)
+    {
+        this->resize(parent->size());
+    }
     QTimer::singleShot(100,this,&BlankDefaultWidget::InitWidget);
 }
 

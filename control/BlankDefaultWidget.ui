@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>672</width>
-    <height>240</height>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,10,1">
+  <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,6,1">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -48,7 +48,7 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <property name="spacing">
-      <number>6</number>
+      <number>0</number>
      </property>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1">
@@ -56,7 +56,7 @@
         <number>0</number>
        </property>
        <property name="topMargin">
-        <number>10</number>
+        <number>0</number>
        </property>
        <item>
         <spacer name="horizontalSpacer">
