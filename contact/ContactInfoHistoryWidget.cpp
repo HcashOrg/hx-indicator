@@ -165,7 +165,7 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
     _p->pageWidget->setShowTip(ui->transferRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
 
-    qDebug()<<size;
+    _p->pageWidget->setVisible(ui->transferRecordTableWidget->rowCount() == 0);
     _p->blankWidget->setVisible(ui->transferRecordTableWidget->rowCount() == 0);
 }
 

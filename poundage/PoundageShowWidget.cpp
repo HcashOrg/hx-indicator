@@ -69,7 +69,14 @@ void PoundageShowWidget::InitData(const std::shared_ptr<PoundageSheet> &data)
     if(data)
     {
         _p->pageWidget->setShowTip(data->poundages.size(),static_cast<unsigned int>(_p->tableModel->GetSinglePageRow()));
+
+        if(0 == data->size())
+        {
+             _p->pageWidget->setVisible(false);
+        }
     }
+
+
     _p->blankWidget->setVisible(data->size() == 0);
 }
 

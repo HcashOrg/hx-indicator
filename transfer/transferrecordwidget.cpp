@@ -188,6 +188,10 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->transferRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
+    if(0 == ui->transferRecordTableWidget->rowCount())
+    {
+        pageWidget->setVisible(false);
+    }
     blankWidget->setVisible(size == 0);
 }
 
