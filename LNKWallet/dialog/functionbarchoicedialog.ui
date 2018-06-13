@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FunctionBarChoiceDialog</class>
+ <widget class="QDialog" name="FunctionBarChoiceDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>85</width>
+    <height>88</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QPushButton" name="lockBtn">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>85</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{background-color:rgb(48,52,72);color:rgb(192,196,212);border:0px solid rgb(239,239,239);}
+QPushButton:hover{background-color:rgb(44,48,67);color:white;}</string>
+   </property>
+   <property name="text">
+    <string>Lock</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="consoleBtn">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>29</y>
+     <width>85</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{background-color:rgb(48,52,72);color:rgb(192,196,212);border:0px solid rgb(239,239,239);}
+QPushButton:hover{background-color:rgb(44,48,67);color:white;}</string>
+   </property>
+   <property name="text">
+    <string>Console</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="setBtn">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>58</y>
+     <width>85</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{background-color:rgb(48,52,72);color:rgb(192,196,212);border:0px solid rgb(239,239,239);}
+QPushButton:hover{background-color:rgb(44,48,67);color:white;}</string>
+   </property>
+   <property name="text">
+    <string>Setting</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

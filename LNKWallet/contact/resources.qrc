@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>search.png</file>
+        <file>close.png</file>
+        <file>open.png</file>
+        <file>contactPic.png</file>
+    </qresource>
+</RCC>
