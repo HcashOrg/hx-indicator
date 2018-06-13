@@ -27,6 +27,8 @@ public:
 public:
     explicit WithdrawPage(const WithdrawDataInput &data,QWidget *parent = 0);
     ~WithdrawPage();
+signals:
+    void backBtnVisible(bool);
 private slots:
     void ShowRecordSlots();
 
