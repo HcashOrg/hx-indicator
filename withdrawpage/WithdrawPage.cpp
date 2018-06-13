@@ -52,6 +52,7 @@ void WithdrawPage::ShowConfirmWidget(const QString &address, const QString & amm
                                                                _p->name,ammount,_p->assetSymbol,address),
                                                                UBChain::getInstance()->mainFrame);
     connect(confirm,&WithdrawConfirmWidget::closeSelf,this,&WithdrawPage::close);
+    connect(confirm,&WithdrawConfirmWidget::closeSelf,std::bind(&WithdrawPage::backBtnVisible,this,false));
     //confirm->setWindowFlags( Qt::Dialog | Qt::FramelessWindowHint);
     //confirm->setWindowModality(Qt::WindowModal);
     confirm->setAttribute(Qt::WA_DeleteOnClose);

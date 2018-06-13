@@ -44,7 +44,17 @@ void BackupWalletDialog::on_backupBtn_clicked()
     {
         QString path = ui->pathLineEdit->text();
 
-        QFile file(UBChain::getInstance()->appDataPath + "/wallet.json");
+        QString walletFilePath;
+        if( UBChain::getInstance()->configFile->contains("/settings/chainPath"))
+        {
+            walletFilePath = UBChain::getInstance()->configFile->value("/settings/chainPath").toString() + "/wallet.json";
+        }
+        else
+        {
+            walletFilePath = UBChain::getInstance()->appDataPath + "/wallet.json";
+        }
+
+        QFile file(walletFilePath);
         if(file.exists())
         {
             qDebug() << "backup wallet.json " << file.copy(path);

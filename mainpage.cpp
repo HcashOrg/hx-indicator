@@ -239,7 +239,7 @@ void MainPage::on_accountTableWidget_cellClicked(int row, int column)
         WithdrawPage *withdraw = new WithdrawPage(WithdrawPage::WithdrawDataInput(ui->accountComboBox->currentText(),
                                                   ui->addressLabel->text(),ui->accountTableWidget->item(row,0)->text(),
                                                   ui->accountTableWidget->item(row,1)->text()),this);
-
+        connect(withdraw,&WithdrawPage::backBtnVisible,this,&MainPage::backBtnVisible);
         withdraw->setAttribute(Qt::WA_DeleteOnClose);
         withdraw->show();
         withdraw->raise();

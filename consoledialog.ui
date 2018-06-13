@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>380</width>
-    <height>414</height>
+    <width>400</width>
+    <height>434</height>
    </rect>
   </property>
   <property name="font">
@@ -24,8 +24,8 @@
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
+     <x>10</x>
+     <y>10</y>
      <width>380</width>
      <height>414</height>
     </rect>
