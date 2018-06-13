@@ -73,7 +73,7 @@ void NewOrImportWalletWidget::InitStyle()
 
     ui->newWalletBtn->setStyleSheet(BIG_BUTTON);
     ui->importWalletBtn->setStyleSheet("QToolButton{font: 11px \"Microsoft YaHei UI Light\";background-color:transparent; border:none;border-radius:16px;color: #5474EB;}" \
-                                       "QToolButton:pressed{background-color:rgb(70,95,191);color:white;}");
+                                       "QToolButton:pressed{background-color:rgb(70,95,191);color:white;border-radius:16px;}");
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 }

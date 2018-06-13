@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="newWalletBtn">
+  <widget class="QToolButton" name="newWalletBtn">
    <property name="geometry">
     <rect>
      <x>295</x>
@@ -26,7 +26,7 @@
     <string>创建钱包</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="importWalletBtn">
+  <widget class="QToolButton" name="importWalletBtn">
    <property name="geometry">
     <rect>
      <x>295</x>

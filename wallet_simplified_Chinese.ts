@@ -2864,12 +2864,12 @@ add an account first</source>
     <message>
         <location filename="functionBar/FunctionWidget.cpp" line="121"/>
         <source>Setting</source>
-        <translation type="unfinished">设置</translation>
+        <translation type="unfinished">设   置</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionWidget.cpp" line="123"/>
         <source>Lock</source>
-        <translation type="unfinished">锁定</translation>
+        <translation type="unfinished">锁   定</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionWidget.cpp" line="125"/>
@@ -2879,7 +2879,7 @@ add an account first</source>
     <message>
         <location filename="functionBar/FunctionWidget.cpp" line="127"/>
         <source>Help</source>
-        <translation type="unfinished">帮助</translation>
+        <translation type="unfinished">帮   助</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionWidget.cpp" line="133"/>
