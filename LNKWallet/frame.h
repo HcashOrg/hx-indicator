@@ -9,9 +9,9 @@
 #include "windows.h"
 #endif
 
-namespace Ui {
-   class Frame;
-}
+//namespace Ui {
+//   class Frame;
+//}
 
 class FirstLogin;
 class NormalLogin;
@@ -129,7 +129,6 @@ private:
     LockPage*  lockPage;
     QTimer* timer;
     TitleBar* titleBar;
-    QString lastPage;
     QString currentAccount;
     WaitingForSync* waitingForSync;
     NewOrImportWalletWidget* newOrImportWalletWidget;
@@ -154,7 +153,6 @@ private:
     void  getAccountInfo();
     void startTimerForAutoRefresh();      // 自动刷新
     QTimer* timerForAutoRefresh;
-    //FunctionBar* functionBar;
     FunctionWidget *functionBar;
     void closeCurrentPage();
     bool eventFilter(QObject *watched, QEvent *e);
@@ -162,7 +160,6 @@ private:
     void init();
 
     ContactWidget *contactPage;
-    UpgradePage* upgradePage;
 
     QTranslator translator;         //  选择语言
     QTranslator menuTranslator;     //  右键菜单语言
@@ -172,7 +169,6 @@ private:
 
 private:
     void paintEvent(QPaintEvent* e);
-    QPixmap _pixmap;
 private slots:
     void EnlargeRightPart();
     void RestoreRightPart();

@@ -89,7 +89,6 @@ Frame::Frame(): timer(NULL),
 
     mouse_press = false;
     currentPageNum = 0;
-    lastPage = "";
     currentAccount = "";
 
 
