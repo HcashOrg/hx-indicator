@@ -147,7 +147,9 @@ SOURCES += main.cpp\
     crossmark/AddressValidate.cpp \
     control/AssetIconItem.cpp \
     control/BlankDefaultWidget.cpp \
-    control/CustomShadowEffect.cpp
+    control/CustomShadowEffect.cpp \
+    guard/AssetPage.cpp \
+    functionBar/FunctionGuardWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -266,7 +268,9 @@ HEADERS  += firstlogin.h \
     crossmark/AddressValidate.h \
     control/AssetIconItem.h \
     control/BlankDefaultWidget.h \
-    control/CustomShadowEffect.h
+    control/CustomShadowEffect.h \
+    guard/AssetPage.h \
+    functionBar/FunctionGuardWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -355,7 +359,9 @@ FORMS    += firstlogin.ui \
     dialog/ErrorResultDialog.ui \
     dialog/TransactionResultDialog.ui \
     control/AssetIconItem.ui \
-    control/BlankDefaultWidget.ui
+    control/BlankDefaultWidget.ui \
+    guard/AssetPage.ui \
+    functionBar/FunctionGuardWidget.ui
 
 win32{
     DISTFILES += logo.rc

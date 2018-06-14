@@ -148,8 +148,5 @@ void BottomBar::refresh()
 
     UBChain::getInstance()->postRPC( "id-network_get_connected_peers", toJsonFormat( "network_get_connected_peers", QJsonArray()));
 
-//    UBChain::getInstance()->postRPC( "id_blockchain_list_assets", toJsonFormat( "blockchain_list_assets", QJsonArray()));
-
-//    UBChain::getInstance()->postRPC( toJsonFormat( "id_balance", "balance", QJsonArray()));
 
 }

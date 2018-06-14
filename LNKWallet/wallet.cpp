@@ -480,6 +480,16 @@ void UBChain::parseAccountInfo()
                 accountInfo.name = object.take("name").toString();
                 accountInfo.address = object.take("addr").toString();
 
+                if(formalGuardMap.contains(accountInfo.name))
+                {
+                    accountInfo.guardId = formalGuardMap.value(accountInfo.name);
+                    accountInfo.isFormalGuard = true;
+                }
+                else if(allGuardMap.contains(accountInfo.name))
+                {
+                    accountInfo.guardId = allGuardMap.value(accountInfo.name);
+                }
+
                 accountInfoMap.insert(accountInfo.name,accountInfo);
 
                 fetchAccountBalances(accountInfo.name);
@@ -574,64 +584,6 @@ QString UBChain::getExchangeContractState(QString _accountName)
     return result;
 }
 
-
-void UBChain::parseAssetInfo()
-{
-    assetInfoMap.clear();
-
-    QString jsonResult = jsonDataValue("id-list_assets");
-    jsonResult.prepend("{");
-    jsonResult.append("}");
-
-    QJsonParseError json_error;
-    QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonResult.toLatin1(), &json_error);
-    if(json_error.error == QJsonParseError::NoError)
-    {
-        if( parse_doucment.isObject())
-        {
-            QJsonObject jsonObject = parse_doucment.object();
-            if( jsonObject.contains("result"))
-            {
-                QJsonValue resultValue = jsonObject.take("result");
-                if( resultValue.isArray())
-                {
-                    QJsonArray resultArray = resultValue.toArray();
-                    for( int i = 0; i < resultArray.size(); i++)
-                    {
-                        AssetInfo assetInfo;
-
-                        QJsonObject object = resultArray.at(i).toObject();
-                        assetInfo.id = object.take("id").toString();
-                        assetInfo.issuer = object.take("issuer").toString();
-                        assetInfo.precision = object.take("precision").toInt();
-                        assetInfo.symbol = object.take("symbol").toString();
-//                        if(assetInfo.symbol != ASSET_NAME)
-//                        {
-//                            assetInfo.symbol.prepend("link-");
-//                        }
-
-                        QJsonObject object2 = object.take("options").toObject();
-
-                        QJsonValue value2 = object2.take("max_supply");
-                        if( value2.isString())
-                        {
-                            assetInfo.maxSupply = value2.toString().toULongLong();
-                        }
-                        else
-                        {
-                            assetInfo.maxSupply = QString::number(value2.toDouble(),'g',10).toULongLong();
-                        }
-
-                        qDebug() << assetInfo.id << assetInfo.symbol << assetInfo.issuer << assetInfo.precision << assetInfo.maxSupply;
-
-                        assetInfoMap.insert(assetInfo.id,assetInfo);
-                    }
-                }
-            }
-        }
-    }
-
-}
 
 QString UBChain::getAssetId(QString symbol)
 {
@@ -914,6 +866,16 @@ void UBChain::checkPendingTransactions()
     {
         postRPC( "id-get_transaction-" + trxId, toJsonFormat( "get_transaction", QJsonArray() << trxId));
     }
+}
+
+void UBChain::fetchFormalGuards()
+{
+    postRPC( "id-list_guard_members", toJsonFormat( "list_guard_members", QJsonArray() << "A" << 100));
+}
+
+void UBChain::fetchAllGuards()
+{
+    postRPC( "id-list_all_guards", toJsonFormat( "list_all_guards", QJsonArray() << "A" << 100));
 }
 
 void UBChain::fetchMyContracts()

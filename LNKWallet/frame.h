@@ -38,6 +38,7 @@ class MinerPage;
 class OnchainOrderPage;
 class MyExchangeContractPage;
 class PoundageWidget;
+class AssetPage;
 
 class CrossCapitalMark;
 class CustomShadowEffect;
@@ -95,9 +96,11 @@ private slots:
     void showPoundagePage();//显示手续费承税单--朱正天
     void showOnchainOrderPage();
     void showMyExchangeContractPage();
+    void showAssetPage();
     void showMultiSigTransactionPage(QString _multiSigAddress);
     void showWaittingForSyncWidget();
     void showNewOrImportWalletWidget();
+
 
     void iconIsActived(QSystemTrayIcon::ActivationReason reason);
     void showNormalAndActive();
@@ -123,6 +126,7 @@ private:
     OnchainOrderPage* onchainOrderPage;
     MyExchangeContractPage* myExchangeContractPage;
     PoundageWidget *poundage;
+    AssetPage*  assetPage;
 
     BottomBar* bottomBar;
     QWidget* centralWidget;
@@ -134,7 +138,7 @@ private:
     NewOrImportWalletWidget* newOrImportWalletWidget;
 
     int currentPageNum;  //  0:mainPage   1:  2:delegatePgae  3:transferPage    4:contactPage    5:myExchangeContractPage
-                         //   6: onchainOrderPage   7:minerPage   8: SmartContract     9: multiSigPage   10: multiSigTransactionPage
+                         //   6: onchainOrderPage   7:minerPage   8: assetPage     9: multiSigPage   10: multiSigTransactionPage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;
     void createTrayIconActions();

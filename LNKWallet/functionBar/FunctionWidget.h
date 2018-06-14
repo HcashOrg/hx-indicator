@@ -41,6 +41,7 @@ signals:
     void showContactSignal();
     void showAdvanceSignal();
     void showExchangeSignal();
+    void showGuardSignal();
     //点击二级按钮的信号
     void showPoundageSignal();
     void showMultiSigSignal();
@@ -48,6 +49,7 @@ signals:
     void showMinerSignal();
     void showOnchainOrderSignal();
     void showMyOrderSignal();
+    void showAssetSignal();
 
 signals:
     void ShrinkSignal();
@@ -57,11 +59,13 @@ signals:
     void AccountDefaultSignal();
     void AdvanceDefaultSignal();
     void ExchangeDefaultSignal();
+    void GuardDefaultSignal();
 private slots:
     void ShowContactWidgetSlots();
     void ShowAccountWidgetSlots();
     void ShowAdvanceWidgetSlots();
     void ShowExchangeWidgetSlots();
+    void ShowGuardWidgetSlots();
     void ShowMoreWidgetSlots();
 
     void ShowSettingWidgetSlots();

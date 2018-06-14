@@ -37,6 +37,7 @@
 #include "extra/transactiondb.h"
 #include "crossmark/crosscapitalmark.h"
 #include "control/CustomShadowEffect.h"
+#include "guard/AssetPage.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -57,6 +58,7 @@ Frame::Frame(): timer(NULL),
     multiSigPage(NULL),
     multiSigTransactionPage(NULL),
     minerPage(NULL),
+    assetPage(NULL),
     poundage(nullptr),
     needToRefresh(false)
 {
@@ -354,6 +356,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::RestoreSignal,this,&Frame::RestoreRightPart);
     connect(functionBar,&FunctionWidget::showOnchainOrderSignal,this,&Frame::showOnchainOrderPage);
     connect(functionBar,&FunctionWidget::showMyOrderSignal,this,&Frame::showMyExchangeContractPage);
+    connect(functionBar,&FunctionWidget::showAssetSignal,this,&Frame::showAssetPage);
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
@@ -660,6 +663,8 @@ void Frame::closeCurrentPage()
         minerPage = NULL;
         break;
     case 8:
+        assetPage->close();
+        assetPage = NULL;
         break;
     case 9:
         multiSigPage->close();
@@ -962,7 +967,6 @@ void Frame::showNewOrImportWalletWidget()
     moveWidgetToScreenCenter(this);
 }
 
-
 void Frame::showMultiSigPage()
 {
     emit titleBackVisible(false);
@@ -1019,6 +1023,17 @@ void Frame::showMyExchangeContractPage()
     currentPageNum = 5;
 
     //RestoreRightPart();不用自己调用，functionbar已连接该槽
+}
+
+void Frame::showAssetPage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    assetPage = new AssetPage(centralWidget);
+    assetPage->setAttribute(Qt::WA_DeleteOnClose);
+    assetPage->show();
+    currentPageNum = 8;
 }
 
 void Frame::showMultiSigTransactionPage(QString _multiSigAddress)
@@ -1243,7 +1258,85 @@ void Frame::jsonDataUpdated(QString id)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
-        UBChain::getInstance()->parseAssetInfo();
+        UBChain::getInstance()->assetInfoMap.clear();
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonParseError json_error;
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1(), &json_error);
+        if(json_error.error == QJsonParseError::NoError)
+        {
+            if( parse_doucment.isObject())
+            {
+                QJsonObject jsonObject = parse_doucment.object();
+                if( jsonObject.contains("result"))
+                {
+                    QJsonValue resultValue = jsonObject.take("result");
+                    if( resultValue.isArray())
+                    {
+                        QJsonArray resultArray = resultValue.toArray();
+                        for( int i = 0; i < resultArray.size(); i++)
+                        {
+                            AssetInfo assetInfo;
+
+                            QJsonObject object = resultArray.at(i).toObject();
+                            assetInfo.id = object.take("id").toString();
+                            assetInfo.issuer = object.take("issuer").toString();
+                            assetInfo.precision = object.take("precision").toInt();
+                            assetInfo.symbol = object.take("symbol").toString();
+    //                        if(assetInfo.symbol != ASSET_NAME)
+    //                        {
+    //                            assetInfo.symbol.prepend("link-");
+    //                        }
+
+                            QJsonObject object2 = object.take("options").toObject();
+
+                            QJsonValue value2 = object2.take("max_supply");
+                            if( value2.isString())
+                            {
+                                assetInfo.maxSupply = value2.toString().toULongLong();
+                            }
+                            else
+                            {
+                                assetInfo.maxSupply = QString::number(value2.toDouble(),'g',10).toULongLong();
+                            }
+
+                            if(assetInfo.symbol != ASSET_NAME)
+                            {
+                                UBChain::getInstance()->postRPC( "id-get_current_multi_address-" + assetInfo.symbol, toJsonFormat( "get_current_multi_address", QJsonArray() << assetInfo.symbol));
+                            }
+
+                            qDebug() << assetInfo.id << assetInfo.symbol << assetInfo.issuer << assetInfo.precision << assetInfo.maxSupply;
+
+                            UBChain::getInstance()->assetInfoMap.insert(assetInfo.id,assetInfo);
+                        }
+                    }
+                }
+            }
+        }
+
+        return;
+    }
+
+    if( id.startsWith("id-get_current_multi_address-"))
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        QString assetSymbol = id.mid(QString("id-get_current_multi_address-").size());
+        QString assetId = UBChain::getInstance()->getAssetId(assetSymbol);
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonObject object = jsonObject.take("result").toObject();
+
+        UBChain::getInstance()->assetInfoMap[assetId].multisigAddressId = object.take("id").toString();
+        UBChain::getInstance()->assetInfoMap[assetId].hotAddress = object.take("bind_account_hot").toString();
+        UBChain::getInstance()->assetInfoMap[assetId].coldAddress = object.take("bind_account_cold").toString();
 
         return;
     }
@@ -1274,6 +1367,49 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
+    if( id == "id-list_guard_members")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonArray array = jsonObject.take("result").toArray();
+
+        UBChain::getInstance()->formalGuardMap.clear();
+        foreach (QJsonValue v, array)
+        {
+            QJsonArray array2 = v.toArray();
+            UBChain::getInstance()->formalGuardMap.insert(array2.at(0).toString(),array2.at(1).toString());
+        }
+
+        return;
+    }
+
+    if( id == "id-list_all_guards")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonArray array = jsonObject.take("result").toArray();
+
+        UBChain::getInstance()->allGuardMap.clear();
+        foreach (QJsonValue v, array)
+        {
+            QJsonArray array2 = v.toArray();
+            UBChain::getInstance()->allGuardMap.insert(array2.at(0).toString(),array2.at(1).toString());
+        }
+
+        return;
+    }
 
     if( id.startsWith("id-get_contracts_hash_entry_by_owner-"))
     {
@@ -1402,6 +1538,7 @@ void Frame::jsonDataUpdated(QString id)
 
         return;
     }
+
 }
 
 void Frame::onBack()
@@ -1510,6 +1647,9 @@ void Frame::init()
     //UBChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.195:5444") ));
 
     UBChain::getInstance()->fetchTransactions();
+
+    UBChain::getInstance()->fetchFormalGuards();
+    UBChain::getInstance()->fetchAllGuards();
 }
 
 

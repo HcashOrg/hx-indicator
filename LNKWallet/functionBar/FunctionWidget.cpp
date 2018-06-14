@@ -6,6 +6,7 @@
 #include "functionBar/FunctionAccountWidget.h"
 #include "functionBar/FunctionAdvanceWidget.h"
 #include "functionBar/FunctionExchangeWidget.h"
+#include "functionBar/FunctionGuardWidget.h"
 
 #include "setdialog.h"
 #include "consoledialog.h"
@@ -18,6 +19,7 @@ public:
         :accountBar(new FunctionAccountWidget())
         ,advanceBar(new FunctionAdvanceWidget())
         ,exchangeBar(new FunctionExchangeWidget())
+        ,guardBar(new FunctionGuardWidget())
         ,contextMenu(new QMenu())
     {
 
@@ -26,6 +28,7 @@ public:
     FunctionAccountWidget *accountBar;
     FunctionAdvanceWidget *advanceBar;
     FunctionExchangeWidget *exchangeBar;
+    FunctionGuardWidget   *guardBar;
     QMenu *contextMenu;
 };
 
@@ -50,6 +53,7 @@ void FunctionWidget::retranslator()
     _p->accountBar->retranslator();
     _p->advanceBar->retranslator();
     _p->exchangeBar->retranslator();
+    _p->guardBar->retranslator();
 }
 
 void FunctionWidget::contactShowTransferPageSlots()
@@ -111,6 +115,19 @@ void FunctionWidget::ShowExchangeWidgetSlots()
 
     updateCheckState(3);
     emit ExchangeDefaultSignal();
+}
+
+void FunctionWidget::ShowGuardWidgetSlots()
+{
+    ui->stackedWidget->setCurrentWidget(_p->guardBar);
+
+    emit showGuardSignal();
+
+    ui->stackedWidget->setVisible(true);
+    emit RestoreSignal();
+
+    updateCheckState(4);
+    emit GuardDefaultSignal();
 }
 
 void FunctionWidget::ShowMoreWidgetSlots()
@@ -187,12 +204,14 @@ void FunctionWidget::updateCheckState(int buttonNumber)
     ui->toolButton_contact->setChecked(1 == buttonNumber);
     ui->toolButton_advanced->setChecked(2 == buttonNumber);
     ui->toolButton_exchange->setChecked(3 == buttonNumber);
-    ui->toolButton_more->setChecked(4 == buttonNumber);
+    ui->toolButton_guard->setChecked(4 == buttonNumber);
+    ui->toolButton_more->setChecked(5 == buttonNumber);
 
     ui->toolButton_account->setToolButtonStyle( Qt::ToolButtonIconOnly );
     ui->toolButton_contact->setToolButtonStyle(Qt::ToolButtonIconOnly );
     ui->toolButton_advanced->setToolButtonStyle( Qt::ToolButtonIconOnly );
     ui->toolButton_exchange->setToolButtonStyle( Qt::ToolButtonIconOnly );
+    ui->toolButton_guard->setToolButtonStyle( Qt::ToolButtonIconOnly );
     ui->toolButton_more->setToolButtonStyle(Qt::ToolButtonIconOnly );
 
 }
@@ -205,17 +224,20 @@ void FunctionWidget::InitWidget()
     ui->toolButton_account->setCheckable(true);
     ui->toolButton_advanced->setCheckable(true);
     ui->toolButton_exchange->setCheckable(true);
+    ui->toolButton_guard->setCheckable(true);
     ui->toolButton_more->setCheckable(false);
 
     ui->stackedWidget->addWidget(_p->accountBar);
     ui->stackedWidget->addWidget(_p->advanceBar);
     ui->stackedWidget->addWidget(_p->exchangeBar);
+    ui->stackedWidget->addWidget(_p->guardBar);
 
     //链接信号槽
     connect(ui->toolButton_contact,&QToolButton::clicked,this,&FunctionWidget::ShowContactWidgetSlots);
     connect(ui->toolButton_account,&QToolButton::clicked,this,&FunctionWidget::ShowAccountWidgetSlots);
     connect(ui->toolButton_advanced,&QToolButton::clicked,this,&FunctionWidget::ShowAdvanceWidgetSlots);
     connect(ui->toolButton_exchange,&QToolButton::clicked,this,&FunctionWidget::ShowExchangeWidgetSlots);
+    connect(ui->toolButton_guard,&QToolButton::clicked,this,&FunctionWidget::ShowGuardWidgetSlots);
     connect(ui->toolButton_more,&QToolButton::clicked,this,&FunctionWidget::ShowMoreWidgetSlots);
 
 
@@ -229,14 +251,18 @@ void FunctionWidget::InitWidget()
     connect(_p->exchangeBar,&FunctionExchangeWidget::showOnchainOrderSignal,this,&FunctionWidget::showOnchainOrderSignal);
     connect(_p->exchangeBar,&FunctionExchangeWidget::showMyOrderSignal,this,&FunctionWidget::showMyOrderSignal);
 
-    //链接二级菜单默认单机情况
+    connect(_p->guardBar,&FunctionGuardWidget::showAssetSignal,this,&FunctionWidget::showAssetSignal);
+
+    //链接二级菜单默认单击情况
     connect(this,&FunctionWidget::AccountDefaultSignal,_p->accountBar,&FunctionAccountWidget::DefaultShow);
     connect(this,&FunctionWidget::AdvanceDefaultSignal,_p->advanceBar,&FunctionAdvanceWidget::DefaultShow);
     connect(this,&FunctionWidget::ExchangeDefaultSignal,_p->exchangeBar,&FunctionExchangeWidget::DefaultShow);
+    connect(this,&FunctionWidget::GuardDefaultSignal,_p->guardBar,&FunctionGuardWidget::DefaultShow);
     ui->toolButton_account->installEventFilter(this);
     ui->toolButton_advanced->installEventFilter(this);
     ui->toolButton_contact->installEventFilter(this);
     ui->toolButton_exchange->installEventFilter(this);
+    ui->toolButton_guard->installEventFilter(this);
     ui->toolButton_more->installEventFilter(this);
 }
 
@@ -269,12 +295,14 @@ void FunctionWidget::InitStyle()
     ui->toolButton_advanced->setIconSize(QSize(26,26));
     ui->toolButton_contact->setIconSize(QSize(26,26));
     ui->toolButton_exchange->setIconSize(QSize(26,26));
+    ui->toolButton_guard->setIconSize(QSize(26,26));
     ui->toolButton_more->setIconSize(QSize(26,26));
 
     ui->toolButton_account->setIcon(QIcon(":/functionBar/account.png"));
     ui->toolButton_advanced->setIcon(QIcon(":/functionBar/advance.png"));
     ui->toolButton_contact->setIcon(QIcon(":/functionBar/contact.png"));
     ui->toolButton_exchange->setIcon(QIcon(":/functionBar/exchange.png"));
+    ui->toolButton_guard->setIcon(QIcon(":/functionBar/guard.png"));
     ui->toolButton_more->setIcon(QIcon(":/functionBar/more.png"));
 }
 
@@ -283,6 +311,7 @@ bool FunctionWidget::eventFilter(QObject *watched,QEvent *e)
 
     if((watched == ui->toolButton_contact ||watched == ui->toolButton_account
         ||watched == ui->toolButton_advanced ||watched == ui->toolButton_exchange
+        ||watched == ui->toolButton_guard
         ||watched == ui->toolButton_more)&& e->type() == QEvent::Enter)
     {
         if(QToolButton *button = qobject_cast<QToolButton*>(watched))
@@ -295,6 +324,7 @@ bool FunctionWidget::eventFilter(QObject *watched,QEvent *e)
     }
     else if((watched == ui->toolButton_contact ||watched == ui->toolButton_account
              ||watched == ui->toolButton_advanced ||watched == ui->toolButton_exchange
+             ||watched == ui->toolButton_guard
              ||watched == ui->toolButton_more) && e->type() == QEvent::Leave)
     {
         qobject_cast<QToolButton*>(watched)->setToolButtonStyle(Qt::ToolButtonIconOnly);

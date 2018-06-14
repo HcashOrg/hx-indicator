@@ -107,6 +107,8 @@ struct AccountInfo
     QString name;
     QString address;
     QString id;
+    QString guardId;        // "1.5.X" 为空则不是guard
+    bool    isFormalGuard = false;
 
     AssetAmountMap   assetAmountMap;
     QVector<ContractInfo> contractsVector;
@@ -136,6 +138,10 @@ struct AssetInfo
     QString issuer;
     int precision;
     unsigned long long maxSupply;
+
+    QString multisigAddressId;
+    QString hotAddress;     // 热钱包地址
+    QString coldAddress;    // 冷钱包地址
 };
 
 struct TransactionStruct
@@ -385,7 +391,6 @@ public:
     QString getExchangeContractState(QString _accountName);   // 没有兑换合约则返回空  有多个返回第一个
 
     QMap<QString,AssetInfo>   assetInfoMap;
-    void parseAssetInfo();
     QString getAssetId(QString symbol);
 
 private:
@@ -408,6 +413,11 @@ public:
     void fetchTransactions();
     void parseTransaction(QString result);
     void checkPendingTransactions();    // 查看pending的交易有没有被确认， 如果过期了就从DB删掉
+
+    QMap<QString,QString>   formalGuardMap;
+    QMap<QString,QString>   allGuardMap;
+    void fetchFormalGuards();
+    void fetchAllGuards();
 
 public:
     QMap<QString,MultiSigInfo>  multiSigInfoMap;
