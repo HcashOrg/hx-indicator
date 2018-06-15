@@ -30,9 +30,6 @@
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
-    hasDelegateOrNot(false),
-    refreshOrNot(false),
-    currentAccountIndex(-1),
     ui(new Ui::MainPage)
 {
 	
@@ -51,7 +48,6 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->setMouseTracking(true);
     ui->accountTableWidget->setShowGrid(false);//隐藏表格线
 
-    previousColorRow = 0;
     ui->accountTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->accountTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->accountTableWidget->horizontalHeader()->setVisible(true);
@@ -313,7 +309,6 @@ void MainPage::init()
 //    refreshOrNot = false;
 
     updateAccountList();
-//    updateTotalBalance();
 
 //    refreshOrNot = true;
 

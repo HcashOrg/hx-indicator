@@ -59,8 +59,7 @@ Frame::Frame(): timer(NULL),
     multiSigTransactionPage(NULL),
     minerPage(NULL),
     assetPage(NULL),
-    poundage(nullptr),
-    needToRefresh(false)
+    poundage(nullptr)
 {
 
 #ifdef TARGET_OS_MAC
@@ -582,12 +581,6 @@ void Frame::mouseReleaseEvent(QMouseEvent *)
 #endif
 }
 
-void Frame::refreshAccountInfo()
-{
-    needToRefresh = true;
-    getAccountInfo();
-}
-
 void Frame::startTimerForAutoRefresh()
 {
     if( timerForAutoRefresh != NULL)
@@ -744,7 +737,6 @@ void Frame::showMainPage()
     currentPageNum = 0;
     connect(mainPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
     connect(mainPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
-//    connect(mainPage,SIGNAL(refreshAccountInfo()),this,SLOT(refreshAccountInfo()));
     connect(mainPage,SIGNAL(showTransferPage(QString,QString)),this,SLOT(showTransferPage(QString,QString)));
     connect(mainPage,SIGNAL(newAccount(QString)),this,SLOT(newAccount(QString)));
     connect(mainPage,&MainPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
@@ -1155,12 +1147,6 @@ void Frame::jsonDataUpdated(QString id)
 
         UBChain::getInstance()->fetchMyContracts();
 
-//        if( needToRefresh)
-//        {
-//            refresh();
-//            needToRefresh = false;
-//        }
-
         return;
     }
 
@@ -1322,7 +1308,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id.startsWith("id-get_current_multi_address-"))
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         QString assetSymbol = id.mid(QString("id-get_current_multi_address-").size());
         QString assetId = UBChain::getInstance()->getAssetId(assetSymbol);

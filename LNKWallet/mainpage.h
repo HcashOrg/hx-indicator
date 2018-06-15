@@ -33,8 +33,6 @@ public slots:
 signals:
     void showShadowWidget();
     void hideShadowWidget();
-    void showApplyDelegatePage(QString);
-    void refreshAccountInfo();
     void showTransferPage(QString,QString);//账户名，资产类型
     void newAccount(QString);
 
@@ -73,14 +71,9 @@ private:
 private:
     Ui::MainPage *ui;
     bool inited = false;
-    int previousColorRow;
-    bool hasDelegateOrNot;
-    bool refreshOrNot;
-    int currentAccountIndex;
 
 
     void paintEvent(QPaintEvent*);
-    void updateTotalBalance();
     void updatePending();
     bool eventFilter(QObject *watched, QEvent *e);
 

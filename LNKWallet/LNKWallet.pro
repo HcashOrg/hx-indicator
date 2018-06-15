@@ -149,7 +149,8 @@ SOURCES += main.cpp\
     control/BlankDefaultWidget.cpp \
     control/CustomShadowEffect.cpp \
     guard/AssetPage.cpp \
-    functionBar/FunctionGuardWidget.cpp
+    functionBar/FunctionGuardWidget.cpp \
+    guard/AssetChangeHistoryWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -270,7 +271,8 @@ HEADERS  += firstlogin.h \
     control/BlankDefaultWidget.h \
     control/CustomShadowEffect.h \
     guard/AssetPage.h \
-    functionBar/FunctionGuardWidget.h
+    functionBar/FunctionGuardWidget.h \
+    guard/AssetChangeHistoryWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -361,7 +363,8 @@ FORMS    += firstlogin.ui \
     control/AssetIconItem.ui \
     control/BlankDefaultWidget.ui \
     guard/AssetPage.ui \
-    functionBar/FunctionGuardWidget.ui
+    functionBar/FunctionGuardWidget.ui \
+    guard/AssetChangeHistoryWidget.ui
 
 win32{
     DISTFILES += logo.rc

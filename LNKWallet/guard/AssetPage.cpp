@@ -2,6 +2,10 @@
 #include "ui_AssetPage.h"
 
 #include "wallet.h"
+#include "control/AssetIconItem.h"
+#include "showcontentdialog.h"
+#include "ToolButtonWidget.h"
+#include "AssetChangeHistoryWidget.h"
 
 AssetPage::AssetPage(QWidget *parent) :
     QWidget(parent),
@@ -9,12 +13,86 @@ AssetPage::AssetPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    qDebug() << "asssssssssssssssssss ";
+    ui->assetTableWidget->installEventFilter(this);
+    ui->assetTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->assetTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->assetTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->assetTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->assetTableWidget->setMouseTracking(true);
+    ui->assetTableWidget->setShowGrid(false);//隐藏表格线
+
+    ui->assetTableWidget->horizontalHeader()->setSectionsClickable(true);
+//    ui->assetTableWidget->horizontalHeader()->setFixedHeight(40);
+    ui->assetTableWidget->horizontalHeader()->setVisible(true);
+    ui->assetTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+
+    ui->assetTableWidget->setColumnWidth(0,140);
+    ui->assetTableWidget->setColumnWidth(1,100);
+    ui->assetTableWidget->setColumnWidth(2,100);
+    ui->assetTableWidget->setColumnWidth(3,100);
+    ui->assetTableWidget->setColumnWidth(4,100);
+    ui->assetTableWidget->setColumnWidth(5,100);
+    ui->assetTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+
+    showAssetsInfo();
 }
 
 AssetPage::~AssetPage()
 {
     delete ui;
+}
+
+void AssetPage::showAssetsInfo()
+{
+    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    assetIds.removeAll("1.3.0");    // 不显示LNK
+
+    int size = assetIds.size();
+    ui->assetTableWidget->setRowCount(size);
+
+    for(int i = 0; i < size; i++)
+    {
+        ui->assetTableWidget->setRowHeight(i,40);
+
+        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetIds.at(i));
+
+        //资产名
+        QString symbol = assetInfo.symbol;
+        ui->assetTableWidget->setItem(i,0,new QTableWidgetItem(symbol));
+        ui->assetTableWidget->setItem(i,1,new QTableWidgetItem(QString::number(assetInfo.precision)));
+        ui->assetTableWidget->setItem(i,2,new QTableWidgetItem(assetInfo.hotAddress));
+        ui->assetTableWidget->setItem(i,3,new QTableWidgetItem(assetInfo.coldAddress));
+        ui->assetTableWidget->setItem(i,4,new QTableWidgetItem(assetInfo.issuer));
+        ui->assetTableWidget->setItem(i,5,new QTableWidgetItem(tr("history")));
+
+        QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
+
+        AssetIconItem* assetIconItem = new AssetIconItem();
+        assetIconItem->setAsset(ui->assetTableWidget->item(i,0)->text());
+        assetIconItem->setBackgroundColor(itemColor);
+        ui->assetTableWidget->setCellWidget(i, 0, assetIconItem);
+
+        ToolButtonWidget *toolButton = new ToolButtonWidget();
+        toolButton->setText(ui->assetTableWidget->item(i,5)->text());
+        toolButton->setBackgroundColor(itemColor);
+        ui->assetTableWidget->setCellWidget(i,5,toolButton);
+        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&AssetPage::on_assetTableWidget_cellClicked,this,i,5));
+
+
+        for(int j = 1; j < 5; j++)
+        {
+            if(i%2)
+            {
+                ui->assetTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                ui->assetTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
+            }
+            else
+            {
+                ui->assetTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                ui->assetTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
+            }
+        }
+    }
 }
 
 void AssetPage::paintEvent(QPaintEvent *)
@@ -24,4 +102,35 @@ void AssetPage::paintEvent(QPaintEvent *)
     painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
 
     painter.drawRect(rect());
+}
+
+void AssetPage::on_assetTableWidget_cellPressed(int row, int column)
+{
+    if( column == 2 || column == 3 )
+    {
+        ShowContentDialog showContentDialog( ui->assetTableWidget->item(row, column)->text(),this);
+
+        int x = ui->assetTableWidget->columnViewportPosition(column) + ui->assetTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->assetTableWidget->rowViewportPosition(row) - 10 + ui->assetTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->assetTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
+}
+
+void AssetPage::on_assetTableWidget_cellClicked(int row, int column)
+{
+    AssetChangeHistoryWidget* assetChangeHistoryWidget = new AssetChangeHistoryWidget(this);
+    assetChangeHistoryWidget->setAttribute(Qt::WA_DeleteOnClose);
+    assetChangeHistoryWidget->setObjectName("assetChangeHistoryWidget");
+    assetChangeHistoryWidget->move(0,0);
+    assetChangeHistoryWidget->show();
+    assetChangeHistoryWidget->setAsset(ui->assetTableWidget->item(row,0)->text());
+
+    currentWidget = assetChangeHistoryWidget;
+
+    emit backBtnVisible(true);
 }
