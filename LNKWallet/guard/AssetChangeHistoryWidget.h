@@ -20,6 +20,10 @@ public:
 private slots:
     void jsonDataUpdated(QString id);
 
+    void on_changeHistoryTableWidget_cellPressed(int row, int column);
+
+    void on_changeHistoryTableWidget_cellClicked(int row, int column);
+
 private:
     Ui::AssetChangeHistoryWidget *ui;
     QString assetSymbol;

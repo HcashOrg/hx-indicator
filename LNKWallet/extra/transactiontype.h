@@ -6,6 +6,7 @@
 #define TRANSACTION_TYPE_REGISTER_ACCOUNT       5       // 注册账户
 #define TRANSACTION_TYPE_BIND_TUNNEL            10      // 绑定tunnel地址
 #define TRANSACTION_TYPE_UNBIND_TUNNEL          11      // 解绑tunnel地址
+#define TRANSACTION_TYPE_PROPOSAL_APPROVE       29      // 提案投票
 #define TRANSACTION_TYPE_LOCKBALANCE            55      // 质押资产给miner
 #define TRANSACTION_TYPE_FORECLOSE              56      // 赎回质押资产
 #define TRANSACTION_TYPE_DEPOSIT                60      // 充值交易（多签转link-BTC）

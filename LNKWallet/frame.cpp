@@ -38,6 +38,9 @@
 #include "crossmark/crosscapitalmark.h"
 #include "control/CustomShadowEffect.h"
 #include "guard/AssetPage.h"
+#include "guard/GuardKeyManagePage.h"
+#include "guard/ProposalPage.h"
+#include "guard/WithdrawConfirmPage.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -59,6 +62,9 @@ Frame::Frame(): timer(NULL),
     multiSigTransactionPage(NULL),
     minerPage(NULL),
     assetPage(NULL),
+    guardKeyManagePage(NULL),
+    proposalPage(NULL),
+    withdrawConfirmPage(NULL),
     poundage(nullptr)
 {
 
@@ -356,6 +362,9 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showOnchainOrderSignal,this,&Frame::showOnchainOrderPage);
     connect(functionBar,&FunctionWidget::showMyOrderSignal,this,&Frame::showMyExchangeContractPage);
     connect(functionBar,&FunctionWidget::showAssetSignal,this,&Frame::showAssetPage);
+    connect(functionBar,&FunctionWidget::showKeyManageSignal,this,&Frame::showKeyManagePage);
+    connect(functionBar,&FunctionWidget::showProposalSignal,this,&Frame::showProposalPage);
+    connect(functionBar,&FunctionWidget::showWithdrawConfirmSignal,this,&Frame::showWithdrawConfirmPage);
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
@@ -415,6 +424,8 @@ void Frame::getAccountInfo()
     UBChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
     UBChain::getInstance()->fetchTransactions();
+
+    UBChain::getInstance()->fetchFormalGuards();
 }
 
 
@@ -671,7 +682,28 @@ void Frame::closeCurrentPage()
         if(poundage)
         {
             poundage->close();
-            poundage = nullptr;
+            poundage = NULL;
+        }
+        break;
+    case 12:
+        if(guardKeyManagePage)
+        {
+            guardKeyManagePage->close();
+            guardKeyManagePage = NULL;
+        }
+        break;
+    case 13:
+        if(proposalPage)
+        {
+            proposalPage->close();
+            proposalPage = NULL;
+        }
+        break;
+    case 14:
+        if(withdrawConfirmPage)
+        {
+            withdrawConfirmPage->close();
+            withdrawConfirmPage = NULL;
         }
         break;
     default:
@@ -718,6 +750,8 @@ void Frame::autoRefresh()
         break;
     case 10:
         multiSigTransactionPage->refresh();
+    case 13:
+        proposalPage->refresh();
         break;
     default:
         break;
@@ -1028,6 +1062,39 @@ void Frame::showAssetPage()
     currentPageNum = 8;
 }
 
+void Frame::showKeyManagePage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    guardKeyManagePage = new GuardKeyManagePage(centralWidget);
+    guardKeyManagePage->setAttribute(Qt::WA_DeleteOnClose);
+    guardKeyManagePage->show();
+    currentPageNum = 12;
+}
+
+void Frame::showProposalPage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    proposalPage = new ProposalPage(centralWidget);
+    proposalPage->setAttribute(Qt::WA_DeleteOnClose);
+    proposalPage->show();
+    currentPageNum = 13;
+}
+
+void Frame::showWithdrawConfirmPage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    withdrawConfirmPage = new WithdrawConfirmPage(centralWidget);
+    withdrawConfirmPage->setAttribute(Qt::WA_DeleteOnClose);
+    withdrawConfirmPage->show();
+    currentPageNum = 14;
+}
+
 void Frame::showMultiSigTransactionPage(QString _multiSigAddress)
 {
     closeCurrentPage();
@@ -1228,17 +1295,16 @@ void Frame::jsonDataUpdated(QString id)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
-//        if( result == "\"result\":null")
-//        {
-//            hide();
-//            QTimer::singleShot(1000,qApp,SLOT(quit()));
-////            qApp->quit();
 
-//        }
         hide();
-        QTimer::singleShot(1000,qApp,SLOT(quit()));
+        UBChain::getInstance()->isExiting = true;
+        UBChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()));
+
+        QTimer::singleShot(5000,qApp,SLOT(quit()));
+
         return;
     }
+
 
     if( id == "id-list_assets")
     {
@@ -1323,6 +1389,7 @@ void Frame::jsonDataUpdated(QString id)
         UBChain::getInstance()->assetInfoMap[assetId].multisigAddressId = object.take("id").toString();
         UBChain::getInstance()->assetInfoMap[assetId].hotAddress = object.take("bind_account_hot").toString();
         UBChain::getInstance()->assetInfoMap[assetId].coldAddress = object.take("bind_account_cold").toString();
+        UBChain::getInstance()->assetInfoMap[assetId].effectiveBlock = object.take("effective_block_num").toInt();
 
         return;
     }
@@ -1365,11 +1432,65 @@ void Frame::jsonDataUpdated(QString id)
         QJsonObject jsonObject = parse_doucment.object();
         QJsonArray array = jsonObject.take("result").toArray();
 
-        UBChain::getInstance()->formalGuardMap.clear();
+//        UBChain::getInstance()->formalGuardMap.clear();
         foreach (QJsonValue v, array)
         {
             QJsonArray array2 = v.toArray();
-            UBChain::getInstance()->formalGuardMap.insert(array2.at(0).toString(),array2.at(1).toString());
+            QString account = array2.at(0).toString();
+            GuardInfo info;
+            info.guardId = array2.at(1).toString();
+            info.accountId = UBChain::getInstance()->accountInfoMap.value(account).id;
+            UBChain::getInstance()->formalGuardMap.insert(account, info);
+
+            UBChain::getInstance()->fetchProposals();
+
+            UBChain::getInstance()->postRPC( "id-get_guard_member-" + account, toJsonFormat( "get_guard_member", QJsonArray() << account));
+//            UBChain::getInstance()->fetchGuardAllMultisigAddresses(accountId);
+
+            UBChain::getInstance()->postRPC( "guard-get_account-" + account, toJsonFormat( "get_account", QJsonArray() << account));
+
+        }
+
+        return;
+    }
+
+    if( id.startsWith("id-get_guard_member-"))
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result;
+        QString account = id.mid(QString("id-get_guard_member-").size());
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonObject object = jsonObject.take("result").toObject();
+
+        UBChain::getInstance()->formalGuardMap[account].accountId   = object.take("guard_member_account").toString();
+        UBChain::getInstance()->formalGuardMap[account].voteId      = object.take("vote_id").toString();
+        UBChain::getInstance()->formalGuardMap[account].isFormal    = object.take("formal").toBool();
+
+        UBChain::getInstance()->fetchGuardAllMultisigAddresses(UBChain::getInstance()->formalGuardMap[account].accountId);
+        return;
+    }
+
+    if( id.startsWith("guard-get_account-"))
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result;
+        QString account = id.mid(QString("guard-get_account-").size());
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonObject object = jsonObject.take("result").toObject();
+
+        if(UBChain::getInstance()->formalGuardMap.contains(account))
+        {
+            UBChain::getInstance()->formalGuardMap[account].address = object.take("addr").toString();
         }
 
         return;
@@ -1393,6 +1514,91 @@ void Frame::jsonDataUpdated(QString id)
             QJsonArray array2 = v.toArray();
             UBChain::getInstance()->allGuardMap.insert(array2.at(0).toString(),array2.at(1).toString());
         }
+
+        return;
+    }
+
+    if(id == "id-get_proposal_for_voter")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result;
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonArray array = jsonObject.take("result").toArray();
+
+        UBChain::getInstance()->proposalInfoMap.clear();
+        foreach (QJsonValue v, array)
+        {
+            QJsonObject object = v.toObject();
+            ProposalInfo info;
+            info.proposalId = object.take("id").toString();
+            info.proposer   = object.take("proposer").toString();
+            info.expirationTime = object.take("expiration_time").toString();
+            QJsonValue proposedTransactionValue = object.take("proposed_transaction");
+            info.transactionStr = QJsonDocument(proposedTransactionValue.toObject()).toJson();
+            info.type       = object.take("type").toString();
+
+            QJsonArray array2 = object.take("approved_key_approvals").toArray();
+            foreach (QJsonValue v2, array2)
+            {
+                info.approvedKeys += v2.toString();
+            }
+
+            QJsonArray array3 = object.take("disapproved_key_approvals").toArray();
+            foreach (QJsonValue v3, array3)
+            {
+                info.disapprovedKeys += v3.toString();
+            }
+
+            QJsonArray array4 = object.take("required_account_approvals").toArray();
+            foreach (QJsonValue v4, array4)
+            {
+                info.requiredAccounts += v4.toString();
+            }
+
+            info.proposalOperationType = proposedTransactionValue.toObject().take("operations").toArray()
+                                         .at(0).toArray().at(0).toInt();
+
+            UBChain::getInstance()->proposalInfoMap.insert(info.proposalId, info);
+        }
+
+        return;
+    }
+
+    if( id.startsWith("id-get_multi_address_obj-"))
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        QString str = id.mid(QString("id-get_multi_address_obj-").size());
+        QString assetSymbol = str.split("-").at(0);
+        QString accountId = str.split("-").at(1);
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonArray array = jsonObject.take("result").toArray();
+
+        QVector<GuardMultisigAddress> vector;
+        foreach (QJsonValue v, array)
+        {
+            GuardMultisigAddress gma;
+            QJsonObject object = v.toObject();
+            gma.multisigAddressObjectId = object.take("id").toString();
+            gma.hotAddress  = object.take("new_address_hot").toString();
+            gma.hotPubKey   = object.take("new_pubkey_hot").toString();
+            gma.coldAddress = object.take("new_address_cold").toString();
+            gma.coldPubKey  = object.take("new_pubkey_cold").toString();
+            gma.pairId      = object.take("multisig_account_pair_object_id").toString();
+            vector.append(gma);
+        }
+        UBChain::getInstance()->guardMultisigAddressesMap.insert(str,vector);
 
         return;
     }

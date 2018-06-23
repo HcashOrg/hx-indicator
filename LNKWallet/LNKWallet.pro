@@ -150,7 +150,12 @@ SOURCES += main.cpp\
     control/CustomShadowEffect.cpp \
     guard/AssetPage.cpp \
     functionBar/FunctionGuardWidget.cpp \
-    guard/AssetChangeHistoryWidget.cpp
+    guard/AssetChangeHistoryWidget.cpp \
+    guard/GuardKeyManagePage.cpp \
+    guard/GuardKeyUpdatingInfoDialog.cpp \
+    guard/ProposalPage.cpp \
+    guard/ProposalDetailDialog.cpp \
+    guard/WithdrawConfirmPage.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -272,7 +277,12 @@ HEADERS  += firstlogin.h \
     control/CustomShadowEffect.h \
     guard/AssetPage.h \
     functionBar/FunctionGuardWidget.h \
-    guard/AssetChangeHistoryWidget.h
+    guard/AssetChangeHistoryWidget.h \
+    guard/GuardKeyManagePage.h \
+    guard/GuardKeyUpdatingInfoDialog.h \
+    guard/ProposalPage.h \
+    guard/ProposalDetailDialog.h \
+    guard/WithdrawConfirmPage.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -364,7 +374,12 @@ FORMS    += firstlogin.ui \
     control/BlankDefaultWidget.ui \
     guard/AssetPage.ui \
     functionBar/FunctionGuardWidget.ui \
-    guard/AssetChangeHistoryWidget.ui
+    guard/AssetChangeHistoryWidget.ui \
+    guard/GuardKeyManagePage.ui \
+    guard/GuardKeyUpdatingInfoDialog.ui \
+    guard/ProposalPage.ui \
+    guard/ProposalDetailDialog.ui \
+    guard/WithdrawConfirmPage.ui
 
 win32{
     DISTFILES += logo.rc

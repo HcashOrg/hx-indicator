@@ -50,7 +50,7 @@ bool CheckPwdDialog::pop()
 
 void CheckPwdDialog::jsonDataUpdated(QString id)
 {
-    if( id.startsWith( "id-unlock-CheckPwdDialog") )
+    if( id == "id-unlock-CheckPwdDialog")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
@@ -77,7 +77,7 @@ void CheckPwdDialog::on_okBtn_clicked()
 
     if(!ui->okBtn->isEnabled())     return;
 
-    UBChain::getInstance()->postRPC( "id-unlock-CheckPwdDialog", toJsonFormat( "id-unlock", QJsonArray() << ui->pwdLineEdit->text()
+    UBChain::getInstance()->postRPC( "id-unlock-CheckPwdDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }
 

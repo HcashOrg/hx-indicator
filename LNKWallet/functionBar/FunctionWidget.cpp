@@ -252,6 +252,9 @@ void FunctionWidget::InitWidget()
     connect(_p->exchangeBar,&FunctionExchangeWidget::showMyOrderSignal,this,&FunctionWidget::showMyOrderSignal);
 
     connect(_p->guardBar,&FunctionGuardWidget::showAssetSignal,this,&FunctionWidget::showAssetSignal);
+    connect(_p->guardBar,&FunctionGuardWidget::showKeyManageSignal,this,&FunctionWidget::showKeyManageSignal);
+    connect(_p->guardBar,&FunctionGuardWidget::showProposalSignal,this,&FunctionWidget::showProposalSignal);
+    connect(_p->guardBar,&FunctionGuardWidget::showWithdrawConfirmSignal,this,&FunctionWidget::showWithdrawConfirmSignal);
 
     //链接二级菜单默认单击情况
     connect(this,&FunctionWidget::AccountDefaultSignal,_p->accountBar,&FunctionAccountWidget::DefaultShow);

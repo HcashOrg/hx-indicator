@@ -84,7 +84,6 @@ void CommonDialog::adaptSize()
     ui->cancelBtn->move(ui->cancelBtn->x(), 30 + height + 30);
     ui->containerWidget->setGeometry( (960 - ui->containerWidget->width()) / 2, (580 - height - 120) / 2,
                                       ui->containerWidget->width(), 30 + height + 30 + 60);
-qDebug() << "hhhhhhhhhh " << height << ui->okBtn->pos() << ui->okBtn->size();
 }
 
 bool CommonDialog::pop()

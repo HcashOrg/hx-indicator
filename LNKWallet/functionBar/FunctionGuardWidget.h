@@ -23,9 +23,18 @@ private:
 
 signals:
     void showAssetSignal();
+    void showKeyManageSignal();
+    void showProposalSignal();
+    void showWithdrawConfirmSignal();
 
 private slots:
     void on_assetInfoBtn_clicked();
+
+    void on_keyManageBtn_clicked();
+
+    void on_proposalBtn_clicked();
+
+    void on_withdrawConfirmBtn_clicked();
 
 private:
     Ui::FunctionGuardWidget *ui;

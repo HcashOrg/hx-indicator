@@ -50,6 +50,9 @@ signals:
     void showOnchainOrderSignal();
     void showMyOrderSignal();
     void showAssetSignal();
+    void showKeyManageSignal();
+    void showProposalSignal();
+    void showWithdrawConfirmSignal();
 
 signals:
     void ShrinkSignal();

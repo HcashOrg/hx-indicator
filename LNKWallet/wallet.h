@@ -142,6 +142,39 @@ struct AssetInfo
     QString multisigAddressId;
     QString hotAddress;     // 热钱包地址
     QString coldAddress;    // 冷钱包地址
+    int     effectiveBlock; // 生效区块
+};
+
+struct GuardInfo
+{
+    QString guardId;
+    QString accountId;
+    QString voteId;
+    bool    isFormal = true;
+    QString address;
+};
+
+struct GuardMultisigAddress
+{
+    QString multisigAddressObjectId;
+    QString hotAddress;     // 热钱包地址
+    QString hotPubKey;      // 热钱包公钥
+    QString coldAddress;    // 冷钱包地址
+    QString coldPubKey;     // 冷钱包公钥
+    QString pairId;         // 对应的多签地址id  如果是"2.7.0" 就是正在更新中
+};
+
+struct ProposalInfo
+{
+    QString proposalId;     // 提案id
+    QString proposer;       // 发起提案的人
+    QString expirationTime; // 失效时间
+    QString transactionStr; // 提案的交易
+    QStringList    approvedKeys;       // 已投支持票的人
+    QStringList    disapprovedKeys;    // 已投反对票的人
+    QStringList    requiredAccounts;   // 需要的投票人
+    QString type;
+    int proposalOperationType = -1;
 };
 
 struct TransactionStruct
@@ -414,10 +447,19 @@ public:
     void parseTransaction(QString result);
     void checkPendingTransactions();    // 查看pending的交易有没有被确认， 如果过期了就从DB删掉
 
-    QMap<QString,QString>   formalGuardMap;
+    QMap<QString,GuardInfo>   formalGuardMap;
     QMap<QString,QString>   allGuardMap;
     void fetchFormalGuards();
     void fetchAllGuards();
+    QStringList getMyFormalGuards();
+    QMap<QString,QVector<GuardMultisigAddress>> guardMultisigAddressesMap;  // key是 资产名-guard账户Id 的形式 比如 BTC-1.2.23
+    void fetchGuardAllMultisigAddresses(QString accountId);
+    QStringList getAssetMultisigUpdatedGuards(QString assetSymbol);         // 获取多签地址正在更新的guardId
+    QString guardAccountIdToName(QString guardAccountId);
+    QString guardAddressToName(QString guardAddress);
+
+    QMap<QString,ProposalInfo>   proposalInfoMap;        // key是proposal id
+    void fetchProposals();
 
 public:
     QMap<QString,MultiSigInfo>  multiSigInfoMap;

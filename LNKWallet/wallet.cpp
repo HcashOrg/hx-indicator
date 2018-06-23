@@ -482,7 +482,7 @@ void UBChain::parseAccountInfo()
 
                 if(formalGuardMap.contains(accountInfo.name))
                 {
-                    accountInfo.guardId = formalGuardMap.value(accountInfo.name);
+                    accountInfo.guardId = formalGuardMap.value(accountInfo.name).guardId;
                     accountInfo.isFormalGuard = true;
                 }
                 else if(allGuardMap.contains(accountInfo.name))
@@ -555,7 +555,6 @@ QStringList UBChain::getUnregisteredAccounts()
 QString UBChain::getExchangeContractAddress(QString _accountName)
 {
     QString result;
-    qDebug() << "cccccccccccc " << _accountName << accountInfoMap.value(_accountName).contractsVector.size();
 
     foreach (ContractInfo info, accountInfoMap.value(_accountName).contractsVector)
     {
@@ -786,8 +785,10 @@ void UBChain::parseTransaction(QString result)
         // 充值交易
         QJsonObject crossChainTrxObject = operationObject.take("cross_chain_trx").toObject();
         QString fromTunnelAddress = crossChainTrxObject.take("from_account").toString();
+        QString depositAddress = operationObject.take("deposit_address").toString();
 
         transactionDB.addAccountTransactionId(fromTunnelAddress, typeId);
+        transactionDB.addAccountTransactionId(depositAddress, typeId);
     }
         break;
     case TRANSACTION_TYPE_WITHDRAW:
@@ -876,6 +877,91 @@ void UBChain::fetchFormalGuards()
 void UBChain::fetchAllGuards()
 {
     postRPC( "id-list_all_guards", toJsonFormat( "list_all_guards", QJsonArray() << "A" << 100));
+}
+
+QStringList UBChain::getMyFormalGuards()
+{
+    QStringList result;
+    QStringList guards = formalGuardMap.keys();
+    foreach (QString key, accountInfoMap.keys())
+    {
+        if(guards.contains(key))
+        {
+            result += key;
+        }
+    }
+
+    return result;
+}
+
+void UBChain::fetchGuardAllMultisigAddresses(QString accountId)
+{
+    QStringList keys = assetInfoMap.keys();
+    foreach (QString key, keys)
+    {
+        if(assetInfoMap.value(key).symbol == ASSET_NAME)   continue;
+
+        QString assetSymbol = assetInfoMap.value(key).symbol;
+        postRPC( "id-get_multi_address_obj-" + assetSymbol + "-" + accountId,
+                 toJsonFormat( "get_multi_address_obj", QJsonArray() << assetSymbol << accountId));
+    }
+}
+
+QStringList UBChain::getAssetMultisigUpdatedGuards(QString assetSymbol)
+{
+    QStringList result;
+    QStringList keys = formalGuardMap.keys();
+    foreach (QString key, keys)
+    {
+        QString accountId = formalGuardMap.value(key).accountId;
+        QVector<GuardMultisigAddress> vector = guardMultisigAddressesMap.value(assetSymbol + "-" + accountId);
+        foreach (GuardMultisigAddress gma, vector)
+        {
+            if(gma.pairId == "2.7.0")
+            {
+                result += accountId;
+                break;
+            }
+        }
+    }
+
+    return result;
+}
+
+QString UBChain::guardAccountIdToName(QString guardAccountId)
+{
+    QString result;
+    foreach (QString account, formalGuardMap.keys())
+    {
+        if( formalGuardMap.value(account).accountId == guardAccountId)
+        {
+            result = account;
+            break;
+        }
+    }
+
+    return result;
+}
+
+QString UBChain::guardAddressToName(QString guardAddress)
+{
+    QString result;
+    foreach (QString account, formalGuardMap.keys())
+    {
+        if( formalGuardMap.value(account).address == guardAddress)
+        {
+            result = account;
+            break;
+        }
+    }
+
+    return result;
+}
+
+void UBChain::fetchProposals()
+{
+    if(formalGuardMap.size() < 1)   return;
+    postRPC( "id-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << formalGuardMap.keys().at(0)));
 }
 
 void UBChain::fetchMyContracts()
@@ -1025,17 +1111,16 @@ void UBChain::parseMultiSigTransactions(QString result, QString multiSigAddress)
 void UBChain::quit()
 {
     isExiting = true;
-
     if (clientProc)
     {
 //        clientProc->close();
-        qDebug() << "clientProc: close";
+        qDebug() << "clientProc: delete";
 
-        AttachConsole((uint)clientProc->processId());
-        SetConsoleCtrlHandler(NULL, true);
-        GenerateConsoleCtrlEvent( CTRL_C_EVENT ,0);
-
-        delete clientProc;
+//        AttachConsole((uint)clientProc->processId());
+//        SetConsoleCtrlHandler(NULL, true);
+//        GenerateConsoleCtrlEvent( CTRL_C_EVENT ,0);
+        clientProc->close();
+//        delete clientProc;
         clientProc = NULL;
     }
 
@@ -1043,13 +1128,14 @@ void UBChain::quit()
     if (nodeProc)
     {
 //        nodeProc->close();
-        qDebug() << "nodeProc: close";
+        qDebug() << "nodeProc: delete";
 
-        AttachConsole((uint)nodeProc->processId());
-        SetConsoleCtrlHandler(NULL, true);
-        GenerateConsoleCtrlEvent( CTRL_C_EVENT ,0);
+//        AttachConsole((uint)nodeProc->processId());
+//        SetConsoleCtrlHandler(NULL, true);
+//        GenerateConsoleCtrlEvent( CTRL_C_EVENT ,0);
 
-        delete nodeProc;
+        nodeProc->close();
+//        delete nodeProc;
         nodeProc = NULL;
     }
 
