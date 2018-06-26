@@ -53,6 +53,8 @@ signals:
     void showKeyManageSignal();
     void showProposalSignal();
     void showWithdrawConfirmSignal();
+    void showFeedPriceSignal();
+    void showColdHotTransferSignal();
 
 signals:
     void ShrinkSignal();

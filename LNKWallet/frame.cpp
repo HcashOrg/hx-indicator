@@ -41,6 +41,8 @@
 #include "guard/GuardKeyManagePage.h"
 #include "guard/ProposalPage.h"
 #include "guard/WithdrawConfirmPage.h"
+#include "guard/FeedPricePage.h"
+#include "guard/ColdHotTransferPage.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -65,6 +67,8 @@ Frame::Frame(): timer(NULL),
     guardKeyManagePage(NULL),
     proposalPage(NULL),
     withdrawConfirmPage(NULL),
+    feedPricePage(NULL),
+    coldHotTransferPage(NULL),
     poundage(nullptr)
 {
 
@@ -365,6 +369,8 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showKeyManageSignal,this,&Frame::showKeyManagePage);
     connect(functionBar,&FunctionWidget::showProposalSignal,this,&Frame::showProposalPage);
     connect(functionBar,&FunctionWidget::showWithdrawConfirmSignal,this,&Frame::showWithdrawConfirmPage);
+    connect(functionBar,&FunctionWidget::showFeedPriceSignal,this,&Frame::showFeedPricePage);
+    connect(functionBar,&FunctionWidget::showColdHotTransferSignal,this,&Frame::showColdHotTransferPage);
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
@@ -704,6 +710,20 @@ void Frame::closeCurrentPage()
         {
             withdrawConfirmPage->close();
             withdrawConfirmPage = NULL;
+        }
+        break;
+    case 15:
+        if(feedPricePage)
+        {
+            feedPricePage->close();
+            feedPricePage = NULL;
+        }
+        break;
+    case 16:
+        if(coldHotTransferPage)
+        {
+            coldHotTransferPage->close();
+            coldHotTransferPage = NULL;
         }
         break;
     default:
@@ -1095,6 +1115,26 @@ void Frame::showWithdrawConfirmPage()
     currentPageNum = 14;
 }
 
+void Frame::showFeedPricePage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    feedPricePage = new FeedPricePage(centralWidget);
+    feedPricePage->setAttribute(Qt::WA_DeleteOnClose);
+    feedPricePage->show();
+    currentPageNum = 15;
+}
+
+void Frame::showColdHotTransferPage()
+{
+    closeCurrentPage();
+    coldHotTransferPage = new ColdHotTransferPage(centralWidget);
+    coldHotTransferPage->setAttribute(Qt::WA_DeleteOnClose);
+    coldHotTransferPage->show();
+    currentPageNum = 16;
+}
+
 void Frame::showMultiSigTransactionPage(QString _multiSigAddress)
 {
     closeCurrentPage();
@@ -1359,7 +1399,19 @@ void Frame::jsonDataUpdated(QString id)
                                 UBChain::getInstance()->postRPC( "id-get_current_multi_address-" + assetInfo.symbol, toJsonFormat( "get_current_multi_address", QJsonArray() << assetInfo.symbol));
                             }
 
-                            qDebug() << assetInfo.id << assetInfo.symbol << assetInfo.issuer << assetInfo.precision << assetInfo.maxSupply;
+
+                            // 喂价相关
+                            assetInfo.currentFeedTime = object.take("current_feed_publication_time").toString();
+                            QJsonObject currentFeedObject = object.take("current_feed").toObject();
+                            QJsonObject settlementPriceObject = currentFeedObject.take("settlement_price").toObject();
+
+                            QJsonObject baseObject = settlementPriceObject.take("base").toObject();
+                            assetInfo.baseAmount.assetId = baseObject.take("asset_id").toString();
+                            assetInfo.baseAmount.amount = jsonValueToULL(baseObject.take("amount"));
+
+                            QJsonObject quoteObject = settlementPriceObject.take("quote").toObject();
+                            assetInfo.quoteAmount.assetId = quoteObject.take("asset_id").toString();
+                            assetInfo.quoteAmount.amount = jsonValueToULL(quoteObject.take("amount"));
 
                             UBChain::getInstance()->assetInfoMap.insert(assetInfo.id,assetInfo);
                         }
@@ -1423,7 +1475,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id == "id-list_guard_members")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         result.prepend("{");
         result.append("}");
@@ -1499,7 +1551,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id == "id-list_all_guards")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         result.prepend("{");
         result.append("}");
@@ -1572,7 +1624,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id.startsWith("id-get_multi_address_obj-"))
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         QString str = id.mid(QString("id-get_multi_address_obj-").size());
         QString assetSymbol = str.split("-").at(0);
@@ -1708,7 +1760,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id.startsWith("id-get_transaction-"))
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result ;
+//        qDebug() << id << result ;
 
         if(result.startsWith("\"result\":"))
         {
@@ -1721,7 +1773,7 @@ void Frame::jsonDataUpdated(QString id)
             QDateTime dateTime = QDateTime::fromString(ts.expirationTime,"yyyy-MM-ddThh:mm:ss");
             dateTime.setTimeSpec(Qt::UTC);
             QDateTime currentTime = QDateTime::currentDateTimeUtc();
-            qDebug() << "yyyyyyyyyyyyyy " << dateTime << currentTime << (dateTime < currentTime);
+
             if(dateTime < currentTime)      // 如果交易失效了 则从DB中删掉
             {
                 UBChain::getInstance()->transactionDB.removeTransactionStruct(trxId);

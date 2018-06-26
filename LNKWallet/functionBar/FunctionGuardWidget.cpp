@@ -34,6 +34,8 @@ void FunctionGuardWidget::InitWidget()
     ui->keyManageBtn->setCheckable(true);
     ui->proposalBtn->setCheckable(true);
     ui->withdrawConfirmBtn->setCheckable(true);
+    ui->feedPriceBtn->setCheckable(true);
+    ui->coldHotTransferBtn->setCheckable(true);
 }
 
 void FunctionGuardWidget::InitStyle()
@@ -52,6 +54,8 @@ void FunctionGuardWidget::on_assetInfoBtn_clicked()
     ui->keyManageBtn->setChecked(false);
     ui->proposalBtn->setChecked(false);
     ui->withdrawConfirmBtn->setChecked(false);
+    ui->feedPriceBtn->setChecked(false);
+    ui->coldHotTransferBtn->setChecked(false);
     showAssetSignal();
 }
 
@@ -61,6 +65,8 @@ void FunctionGuardWidget::on_keyManageBtn_clicked()
     ui->keyManageBtn->setChecked(true);
     ui->proposalBtn->setChecked(false);
     ui->withdrawConfirmBtn->setChecked(false);
+    ui->feedPriceBtn->setChecked(false);
+    ui->coldHotTransferBtn->setChecked(false);
     showKeyManageSignal();
 }
 
@@ -70,6 +76,8 @@ void FunctionGuardWidget::on_proposalBtn_clicked()
     ui->keyManageBtn->setChecked(false);
     ui->proposalBtn->setChecked(true);
     ui->withdrawConfirmBtn->setChecked(false);
+    ui->feedPriceBtn->setChecked(false);
+    ui->coldHotTransferBtn->setChecked(false);
     showProposalSignal();
 }
 
@@ -79,5 +87,29 @@ void FunctionGuardWidget::on_withdrawConfirmBtn_clicked()
     ui->keyManageBtn->setChecked(false);
     ui->proposalBtn->setChecked(false);
     ui->withdrawConfirmBtn->setChecked(true);
+    ui->feedPriceBtn->setChecked(false);
+    ui->coldHotTransferBtn->setChecked(false);
     showWithdrawConfirmSignal();
+}
+
+void FunctionGuardWidget::on_feedPriceBtn_clicked()
+{
+    ui->assetInfoBtn->setChecked(false);
+    ui->keyManageBtn->setChecked(false);
+    ui->proposalBtn->setChecked(false);
+    ui->withdrawConfirmBtn->setChecked(false);
+    ui->feedPriceBtn->setChecked(true);
+    ui->coldHotTransferBtn->setChecked(false);
+    showFeedPriceSignal();
+}
+
+void FunctionGuardWidget::on_coldHotTransferBtn_clicked()
+{
+    ui->assetInfoBtn->setChecked(false);
+    ui->keyManageBtn->setChecked(false);
+    ui->proposalBtn->setChecked(false);
+    ui->withdrawConfirmBtn->setChecked(false);
+    ui->feedPriceBtn->setChecked(false);
+    ui->coldHotTransferBtn->setChecked(true);
+    showColdHotTransferSignal();
 }

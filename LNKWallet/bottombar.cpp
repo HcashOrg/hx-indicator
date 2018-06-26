@@ -47,7 +47,7 @@ void BottomBar::jsonDataUpdated(QString id)
 //        UBChain::getInstance()->parseBalance();
 
         QString result = UBChain::getInstance()->jsonDataValue( id);
-        qDebug()<<result;
+
         CheckBlockSync(result);
         if( result.isEmpty() )  return;
 

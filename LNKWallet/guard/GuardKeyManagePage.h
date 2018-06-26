@@ -28,6 +28,7 @@ private slots:
 
 private:
     Ui::GuardKeyManagePage *ui;
+    bool inited = false;
 
     void paintEvent(QPaintEvent*);
 };

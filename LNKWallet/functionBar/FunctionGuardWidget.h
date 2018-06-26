@@ -26,6 +26,8 @@ signals:
     void showKeyManageSignal();
     void showProposalSignal();
     void showWithdrawConfirmSignal();
+    void showFeedPriceSignal();
+    void showColdHotTransferSignal();
 
 private slots:
     void on_assetInfoBtn_clicked();
@@ -35,6 +37,10 @@ private slots:
     void on_proposalBtn_clicked();
 
     void on_withdrawConfirmBtn_clicked();
+
+    void on_feedPriceBtn_clicked();
+
+    void on_coldHotTransferBtn_clicked();
 
 private:
     Ui::FunctionGuardWidget *ui;

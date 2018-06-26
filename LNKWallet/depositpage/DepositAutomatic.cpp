@@ -346,7 +346,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
 
 void DepositAutomatic::httpReplied(QByteArray _data, int _status)
 {//解析查询余额的返回，补全账户信息
-    qDebug() << "auto--http-- " << _data << _status;
+//    qDebug() << "auto--http-- " << _data << _status;
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
     QString tunnel   = object.value("address").toString();
@@ -414,7 +414,7 @@ void DepositAutomatic::updateData()
 
 void DepositAutomatic::ParseTunnel(const QString &jsonString)
 {
-    qDebug()<< "auto--"<<jsonString;
+//    qDebug()<< "auto--"<<jsonString;
     QJsonParseError json_error;
     QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonString.toLatin1(),&json_error);
     if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return ;

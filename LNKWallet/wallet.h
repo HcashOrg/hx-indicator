@@ -138,6 +138,10 @@ struct AssetInfo
     QString issuer;
     int precision;
     unsigned long long maxSupply;
+    QStringList feeders;
+    AssetAmount baseAmount;
+    AssetAmount quoteAmount;
+    QString currentFeedTime;
 
     QString multisigAddressId;
     QString hotAddress;     // 热钱包地址
@@ -453,6 +457,7 @@ public:
     void fetchAllGuards();
     QStringList getMyFormalGuards();
     QMap<QString,QVector<GuardMultisigAddress>> guardMultisigAddressesMap;  // key是 资产名-guard账户Id 的形式 比如 BTC-1.2.23
+    GuardMultisigAddress getGuardMultisigByPairId(QString assetSymbol, QString guardName, QString pairId);      // 从guardMultisigAddressesMap，找到对应的
     void fetchGuardAllMultisigAddresses(QString accountId);
     QStringList getAssetMultisigUpdatedGuards(QString assetSymbol);         // 获取多签地址正在更新的guardId
     QString guardAccountIdToName(QString guardAccountId);

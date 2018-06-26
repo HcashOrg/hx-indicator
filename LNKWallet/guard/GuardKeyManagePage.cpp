@@ -51,6 +51,8 @@ GuardKeyManagePage::~GuardKeyManagePage()
 
 void GuardKeyManagePage::init()
 {
+    inited = false;
+
     ui->accountComboBox->clear();
     QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
     ui->accountComboBox->addItems(accounts);
@@ -61,6 +63,8 @@ void GuardKeyManagePage::init()
     }
 
     showMultisigInfo();
+
+    inited = true;
 }
 
 void GuardKeyManagePage::showMultisigInfo()
@@ -223,5 +227,8 @@ void GuardKeyManagePage::on_multisigTableWidget_cellClicked(int row, int column)
 
 void GuardKeyManagePage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
+    if(!inited)     return;
+
+    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
     showMultisigInfo();
 }

@@ -129,6 +129,8 @@
         <file>wallet_ui/Welcome_big.png</file>
         <file>wallet_ui/Welcome_normal.png</file>
         <file>wallet_ui/blank.png</file>
+        <file>wallet_ui/guard_formal.png</file>
+        <file>wallet_ui/guard_normal.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>

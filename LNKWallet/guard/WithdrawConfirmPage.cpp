@@ -4,6 +4,8 @@
 #include "wallet.h"
 #include "ToolButtonWidget.h"
 #include "commondialog.h"
+#include "dialog/TransactionResultDialog.h"
+#include "dialog/ErrorResultDialog.h"
 
 WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     QWidget(parent),
@@ -84,7 +86,7 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
             int operationType = array3.at(0).toInt();
             QJsonObject operationObject = array3.at(1).toObject();
 
-            if(operationType == 62)
+            if(operationType == TRANSACTION_TYPE_WITHDRAW_CROSSCHAIN)
             {
                 GeneratedTransaction gt;
                 gt.trxId = array2.at(0).toString();
@@ -96,7 +98,7 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
 
                 generatedTransactionMap.insert(gt.trxId, gt);
             }
-            else if(operationType == 61)
+            else if(operationType == TRANSACTION_TYPE_WITHDRAW)
             {
                 ApplyTransaction at;
                 at.trxId            = array2.at(0).toString();
@@ -128,6 +130,7 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
             time = time.addSecs(-600);       // 时间减10分钟
             QString currentDateTime = time.toString("yyyy-MM-dd hh:mm:ss");
             ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
+            ui->crosschainTransactionTableWidget->item(i,0)->setData(Qt::UserRole, at.trxId);
 
             ui->crosschainTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(at.amount + " " + at.assetSymbol));
 
@@ -160,6 +163,31 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
 
         return;
     }
+
+    if(id == "id-guard_sign_crosschain_transaction")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            close();
+
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of guard-sign-crosschain has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
+        }
+        else if(result.startsWith("\"error\":"))
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Failed!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
+        }
+
+        return;
+    }
 }
 
 void WithdrawConfirmPage::paintEvent(QPaintEvent *)
@@ -173,5 +201,31 @@ void WithdrawConfirmPage::paintEvent(QPaintEvent *)
 
 void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked(int row, int column)
 {
+    if(column == 6)
+    {
+        if(ui->crosschainTransactionTableWidget->item(row,0))
+        {
+            QString trxId = ui->crosschainTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
 
+            QString generatedTrxId;
+            QStringList keys = generatedTransactionMap.keys();
+            foreach (QString key, keys)
+            {
+                GeneratedTransaction gt = generatedTransactionMap.value(key);
+                if(gt.ccwTrxIds.contains(trxId))
+                {
+                    generatedTrxId = gt.trxId;
+                }
+            }
+
+            if(!generatedTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
+            {
+                UBChain::getInstance()->postRPC( "id-guard_sign_crosschain_transaction", toJsonFormat( "guard_sign_crosschain_transaction",
+                                                 QJsonArray() << generatedTrxId << ui->accountComboBox->currentText()));
+
+            }
+        }
+
+        return;
+    }
 }

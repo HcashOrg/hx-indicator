@@ -1,0 +1,132 @@
+#include "FeedPricePage.h"
+#include "ui_FeedPricePage.h"
+
+#include "wallet.h"
+#include "control/AssetIconItem.h"
+#include "ToolButtonWidget.h"
+#include "FeedPriceDialog.h"
+
+FeedPricePage::FeedPricePage(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::FeedPricePage)
+{
+    ui->setupUi(this);
+
+    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+
+    ui->assetPriceTableWidget->installEventFilter(this);
+    ui->assetPriceTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->assetPriceTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->assetPriceTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->assetPriceTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->assetPriceTableWidget->setMouseTracking(true);
+    ui->assetPriceTableWidget->setShowGrid(false);//隐藏表格线
+
+    ui->assetPriceTableWidget->horizontalHeader()->setSectionsClickable(true);
+//    ui->assetPriceTableWidget->horizontalHeader()->setFixedHeight(40);
+    ui->assetPriceTableWidget->horizontalHeader()->setVisible(true);
+    ui->assetPriceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+
+    ui->assetPriceTableWidget->setColumnWidth(0,140);
+    ui->assetPriceTableWidget->setColumnWidth(1,140);
+    ui->assetPriceTableWidget->setColumnWidth(2,140);
+    ui->assetPriceTableWidget->setColumnWidth(3,100);
+    ui->assetPriceTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+
+    init();
+}
+
+FeedPricePage::~FeedPricePage()
+{
+    delete ui;
+}
+
+void FeedPricePage::init()
+{
+    ui->accountComboBox->clear();
+    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    ui->accountComboBox->addItems(accounts);
+
+    if(accounts.contains(UBChain::getInstance()->currentAccount))
+    {
+        ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+    }
+
+    showAssetsPrice();
+}
+
+void FeedPricePage::showAssetsPrice()
+{
+    QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
+    keys.removeAll("1.3.0");
+    int size = keys.size();
+    ui->assetPriceTableWidget->setRowCount(0);
+    ui->assetPriceTableWidget->setRowCount(size);
+
+    for(int i = 0; i < size; i++)
+    {
+        ui->assetPriceTableWidget->setRowHeight(i,40);
+
+        AssetInfo info = UBChain::getInstance()->assetInfoMap.value(keys.at(i));
+
+        ui->assetPriceTableWidget->setItem(i, 0, new QTableWidgetItem(info.symbol));
+        ui->assetPriceTableWidget->setItem(i, 1, new QTableWidgetItem(info.currentFeedTime));
+        ui->assetPriceTableWidget->setItem(i, 3, new QTableWidgetItem(tr("feed")));
+
+        QString str = QString("%1:%2").arg(info.quoteAmount.amount).arg(info.baseAmount.amount);
+        ui->assetPriceTableWidget->setItem(i, 2, new QTableWidgetItem(str));
+
+
+        QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
+
+        AssetIconItem* assetIconItem = new AssetIconItem();
+        assetIconItem->setAsset(ui->assetPriceTableWidget->item(i,0)->text());
+        assetIconItem->setBackgroundColor(itemColor);
+        ui->assetPriceTableWidget->setCellWidget(i, 0, assetIconItem);
+
+        ToolButtonWidget *toolButton = new ToolButtonWidget();
+        toolButton->setText(ui->assetPriceTableWidget->item(i,3)->text());
+        toolButton->setBackgroundColor(itemColor);
+        ui->assetPriceTableWidget->setCellWidget(i,3,toolButton);
+        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&FeedPricePage::on_assetPriceTableWidget_cellClicked,this,i,3));
+
+
+        for (int j : {1,2})
+        {
+            if(i%2)
+            {
+                ui->assetPriceTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                ui->assetPriceTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
+            }
+            else
+            {
+                ui->assetPriceTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                ui->assetPriceTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
+            }
+        }
+    }
+}
+
+void FeedPricePage::jsonDataUpdated(QString id)
+{
+
+}
+
+void FeedPricePage::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+
+    painter.drawRect(rect());
+}
+
+void FeedPricePage::on_assetPriceTableWidget_cellClicked(int row, int column)
+{
+    if(column == 3)
+    {
+        FeedPriceDialog feedPriceDialog;
+        feedPriceDialog.setAsset(ui->assetPriceTableWidget->item(row,0)->text());
+        feedPriceDialog.pop();
+    }
+}

@@ -8,8 +8,8 @@
 #include "ExportDialog.h"
 #include "commondialog.h"
 #include "dialog/BackupWalletDialog.h"
-
 #include "capitalTransferPage/PasswordConfirmWidget.h"
+#include "control/AccountInfoWidget.h"
 
 #include <ToolButtonWidget.h>
 #include <QToolButton>
@@ -176,13 +176,17 @@ void AccountManagerWidget::InitWidget()
     ui->stackedWidget->setCurrentWidget(_p->pageWidget);
 
     foreach (AccountInfo info, UBChain::getInstance()->accountInfoMap) {
-        QTableWidgetItem *item = new QTableWidgetItem("\n"+info.name+"\n"+info.address);
+        QTableWidgetItem *item = new QTableWidgetItem();
         item->setData(Qt::UserRole,QVariant::fromValue<AccountInfo>(info));
         item->setTextAlignment(Qt::AlignLeft);
         item->setFlags(Qt::ItemIsEnabled);
         ui->tableWidget->insertRow(ui->tableWidget->rowCount());
         ui->tableWidget->setRowHeight(ui->tableWidget->rowCount()-1,84);
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,0,item);
+
+        AccountInfoWidget* w = new AccountInfoWidget;
+        w->setAccount(info.name);
+        ui->tableWidget->setCellWidget(ui->tableWidget->rowCount()-1,0,w);
 
         ToolButtonWidget *button1 = new ToolButtonWidget();
         button1->setText(tr("delete"));
@@ -226,3 +230,4 @@ void AccountManagerWidget::InitStyle()
 
     ui->tableWidget->setFocusPolicy(Qt::NoFocus);
 }
+

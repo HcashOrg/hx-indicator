@@ -155,7 +155,12 @@ SOURCES += main.cpp\
     guard/GuardKeyUpdatingInfoDialog.cpp \
     guard/ProposalPage.cpp \
     guard/ProposalDetailDialog.cpp \
-    guard/WithdrawConfirmPage.cpp
+    guard/WithdrawConfirmPage.cpp \
+    guard/FeedPricePage.cpp \
+    control/AccountInfoWidget.cpp \
+    guard/FeedPriceDialog.cpp \
+    guard/ColdHotTransferPage.cpp \
+    guard/ColdHotTransferDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -282,7 +287,12 @@ HEADERS  += firstlogin.h \
     guard/GuardKeyUpdatingInfoDialog.h \
     guard/ProposalPage.h \
     guard/ProposalDetailDialog.h \
-    guard/WithdrawConfirmPage.h
+    guard/WithdrawConfirmPage.h \
+    guard/FeedPricePage.h \
+    control/AccountInfoWidget.h \
+    guard/FeedPriceDialog.h \
+    guard/ColdHotTransferPage.h \
+    guard/ColdHotTransferDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -379,7 +389,12 @@ FORMS    += firstlogin.ui \
     guard/GuardKeyUpdatingInfoDialog.ui \
     guard/ProposalPage.ui \
     guard/ProposalDetailDialog.ui \
-    guard/WithdrawConfirmPage.ui
+    guard/WithdrawConfirmPage.ui \
+    guard/FeedPricePage.ui \
+    control/AccountInfoWidget.ui \
+    guard/FeedPriceDialog.ui \
+    guard/ColdHotTransferPage.ui \
+    guard/ColdHotTransferDialog.ui
 
 win32{
     DISTFILES += logo.rc

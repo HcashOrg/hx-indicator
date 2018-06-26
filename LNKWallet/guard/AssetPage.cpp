@@ -63,7 +63,7 @@ void AssetPage::showAssetsInfo()
         ui->assetTableWidget->setItem(i,2,new QTableWidgetItem(assetInfo.hotAddress));
         ui->assetTableWidget->setItem(i,3,new QTableWidgetItem(assetInfo.coldAddress));
         ui->assetTableWidget->setItem(i,4,new QTableWidgetItem(assetInfo.issuer));
-        ui->assetTableWidget->setItem(i,5,new QTableWidgetItem(tr("change history")));
+        ui->assetTableWidget->setItem(i,5,new QTableWidgetItem(tr("history")));
 
         QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
 
