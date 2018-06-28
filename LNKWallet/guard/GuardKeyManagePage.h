@@ -19,12 +19,22 @@ public:
 
     void showMultisigInfo();
 
+
+signals:
+    void backBtnVisible(bool isShow);
+
 private slots:
     void jsonDataUpdated(QString id);
 
     void on_multisigTableWidget_cellClicked(int row, int column);
 
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_multisigTableWidget_cellPressed(int row, int column);
+
+    void on_historyBtn_clicked();
+
+    void on_importBtn_clicked();
 
 private:
     Ui::GuardKeyManagePage *ui;

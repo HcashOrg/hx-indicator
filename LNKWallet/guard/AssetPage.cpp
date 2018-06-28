@@ -5,7 +5,6 @@
 #include "control/AssetIconItem.h"
 #include "showcontentdialog.h"
 #include "ToolButtonWidget.h"
-#include "AssetChangeHistoryWidget.h"
 
 AssetPage::AssetPage(QWidget *parent) :
     QWidget(parent),
@@ -27,12 +26,14 @@ AssetPage::AssetPage(QWidget *parent) :
     ui->assetTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->assetTableWidget->setColumnWidth(0,140);
-    ui->assetTableWidget->setColumnWidth(1,100);
-    ui->assetTableWidget->setColumnWidth(2,100);
-    ui->assetTableWidget->setColumnWidth(3,100);
-    ui->assetTableWidget->setColumnWidth(4,100);
-    ui->assetTableWidget->setColumnWidth(5,100);
+    ui->assetTableWidget->setColumnWidth(1,60);
+    ui->assetTableWidget->setColumnWidth(2,140);
+    ui->assetTableWidget->setColumnWidth(3,140);
+    ui->assetTableWidget->setColumnWidth(4,90);
+    ui->assetTableWidget->setColumnWidth(5,90);
     ui->assetTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->assetTableWidget);
 
     showAssetsInfo();
 }
@@ -62,8 +63,8 @@ void AssetPage::showAssetsInfo()
         ui->assetTableWidget->setItem(i,1,new QTableWidgetItem(QString::number(assetInfo.precision)));
         ui->assetTableWidget->setItem(i,2,new QTableWidgetItem(assetInfo.hotAddress));
         ui->assetTableWidget->setItem(i,3,new QTableWidgetItem(assetInfo.coldAddress));
-        ui->assetTableWidget->setItem(i,4,new QTableWidgetItem(assetInfo.issuer));
-        ui->assetTableWidget->setItem(i,5,new QTableWidgetItem(tr("history")));
+        ui->assetTableWidget->setItem(i,4,new QTableWidgetItem(UBChain::getInstance()->guardAccountIdToName(assetInfo.issuer)));
+        ui->assetTableWidget->setItem(i,5,new QTableWidgetItem("0.001 " + symbol));
 
         QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
 
@@ -72,14 +73,8 @@ void AssetPage::showAssetsInfo()
         assetIconItem->setBackgroundColor(itemColor);
         ui->assetTableWidget->setCellWidget(i, 0, assetIconItem);
 
-        ToolButtonWidget *toolButton = new ToolButtonWidget();
-        toolButton->setText(ui->assetTableWidget->item(i,5)->text());
-        toolButton->setBackgroundColor(itemColor);
-        ui->assetTableWidget->setCellWidget(i,5,toolButton);
-        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&AssetPage::on_assetTableWidget_cellClicked,this,i,5));
 
-
-        for(int j = 1; j < 5; j++)
+        for (int j : {1,2,3,4,5})
         {
             if(i%2)
             {
@@ -119,18 +114,4 @@ void AssetPage::on_assetTableWidget_cellPressed(int row, int column)
 
         return;
     }
-}
-
-void AssetPage::on_assetTableWidget_cellClicked(int row, int column)
-{
-    AssetChangeHistoryWidget* assetChangeHistoryWidget = new AssetChangeHistoryWidget(this);
-    assetChangeHistoryWidget->setAttribute(Qt::WA_DeleteOnClose);
-    assetChangeHistoryWidget->setObjectName("assetChangeHistoryWidget");
-    assetChangeHistoryWidget->move(0,0);
-    assetChangeHistoryWidget->show();
-    assetChangeHistoryWidget->setAsset(ui->assetTableWidget->item(row,0)->text());
-
-    currentWidget = assetChangeHistoryWidget;
-
-    emit backBtnVisible(true);
 }

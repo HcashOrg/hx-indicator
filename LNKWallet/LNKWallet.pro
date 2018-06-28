@@ -160,7 +160,9 @@ SOURCES += main.cpp\
     control/AccountInfoWidget.cpp \
     guard/FeedPriceDialog.cpp \
     guard/ColdHotTransferPage.cpp \
-    guard/ColdHotTransferDialog.cpp
+    guard/ColdHotTransferDialog.cpp \
+    guard/GuardAccountPage.cpp \
+    guard/GuardIncomePage.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -292,7 +294,9 @@ HEADERS  += firstlogin.h \
     control/AccountInfoWidget.h \
     guard/FeedPriceDialog.h \
     guard/ColdHotTransferPage.h \
-    guard/ColdHotTransferDialog.h
+    guard/ColdHotTransferDialog.h \
+    guard/GuardAccountPage.h \
+    guard/GuardIncomePage.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -394,7 +398,9 @@ FORMS    += firstlogin.ui \
     control/AccountInfoWidget.ui \
     guard/FeedPriceDialog.ui \
     guard/ColdHotTransferPage.ui \
-    guard/ColdHotTransferDialog.ui
+    guard/ColdHotTransferDialog.ui \
+    guard/GuardAccountPage.ui \
+    guard/GuardIncomePage.ui
 
 win32{
     DISTFILES += logo.rc

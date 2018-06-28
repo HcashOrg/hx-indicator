@@ -26,6 +26,10 @@ ColdHotTransferDialog::ColdHotTransferDialog(QWidget *parent) :
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->closeBtn->setStyleSheet(CANCELBTN_STYLE);
 
+    ui->assetComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
+    ui->accountComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
+    ui->typeComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
+
     init();
 }
 
@@ -121,7 +125,7 @@ void ColdHotTransferDialog::on_okBtn_clicked()
     UBChain::getInstance()->postRPC( "id-transfer_from_cold_to_hot", toJsonFormat( "transfer_from_cold_to_hot",
                                      QJsonArray() << ui->accountComboBox->currentText() << ui->fromLabel->text()
                                      << ui->toLabel->text() << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
-                                     << ui->memoLineEdit->text() << ui->timeLineEdit->text().toInt() << true));
+                                     << "" << ui->timeLineEdit->text().toInt() << true));
 }
 
 void ColdHotTransferDialog::on_closeBtn_clicked()

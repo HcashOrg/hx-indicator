@@ -17,19 +17,14 @@ public:
 
     void showAssetsInfo();
 
-signals:
-    void backBtnVisible(bool isShow);
 
 private slots:
     void on_assetTableWidget_cellPressed(int row, int column);
 
-    void on_assetTableWidget_cellClicked(int row, int column);
-
 private:
     Ui::AssetPage *ui;
-    QWidget* currentWidget;
+void paintEvent(QPaintEvent*);
 
-    void paintEvent(QPaintEvent*);
 };
 
 #endif // ASSETPAGE_H

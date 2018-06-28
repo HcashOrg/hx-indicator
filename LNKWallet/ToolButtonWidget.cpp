@@ -1,6 +1,8 @@
 #include "ToolButtonWidget.h"
 #include "ui_ToolButtonWidget.h"
 
+#include <QDebug>
+
 ToolButtonWidget::ToolButtonWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ToolButtonWidget)
@@ -65,6 +67,12 @@ void ToolButtonWidget::InitStyle()
                                   );
     setButtonFixSize(60,20);
     setBackgroundColor("white");
+}
+
+void ToolButtonWidget::resizeEvent(QResizeEvent *event)
+{
+    ui->toolButton->setGeometry((this->width() - ui->toolButton->width()) / 2, (this->height() - ui->toolButton->height()) / 2,
+                                ui->toolButton->width(), ui->toolButton->height());
 }
 
 ToolButtonWidgetItem::ToolButtonWidgetItem(int _row, int _column, QWidget *parent)

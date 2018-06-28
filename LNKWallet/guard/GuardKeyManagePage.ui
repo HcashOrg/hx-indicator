@@ -16,10 +16,10 @@
   <widget class="QTableWidget" name="multisigTableWidget">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>100</y>
-     <width>674</width>
-     <height>322</height>
+     <x>50</x>
+     <y>160</y>
+     <width>670</width>
+     <height>280</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -146,15 +146,23 @@
    </column>
    <column>
     <property name="text">
-     <string/>
+     <string>操作</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
     </property>
    </column>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>40</y>
+     <x>70</x>
+     <y>90</y>
      <width>100</width>
      <height>20</height>
     </rect>
@@ -177,8 +185,8 @@
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>60</y>
+     <x>70</x>
+     <y>110</y>
      <width>111</width>
      <height>30</height>
     </rect>
@@ -195,6 +203,91 @@
    </property>
    <property name="styleSheet">
     <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="title_label">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>50</y>
+     <width>200</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>Guard账户信息</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="historyBtn">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>120</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>变更记录</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="importBtn">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>120</y>
+     <width>90</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>导入跨链私钥</string>
    </property>
   </widget>
  </widget>

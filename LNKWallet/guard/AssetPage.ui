@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>120</y>
-     <width>674</width>
-     <height>322</height>
+     <y>110</y>
+     <width>670</width>
+     <height>320</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -65,7 +65,7 @@
     <enum>Qt::SolidLine</enum>
    </property>
    <attribute name="horizontalHeaderVisible">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>
@@ -146,9 +146,42 @@
    </column>
    <column>
     <property name="text">
-     <string/>
+     <string>手续费</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
     </property>
    </column>
+  </widget>
+  <widget class="QLabel" name="title_label">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>40</y>
+     <width>200</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>资产信息</string>
+   </property>
   </widget>
  </widget>
  <resources/>

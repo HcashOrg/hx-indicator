@@ -35,11 +35,16 @@ ProposalDetailDialog::ProposalDetailDialog(QWidget *parent) :
     ui->voteStateTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->voteStateTableWidget->setColumnWidth(0,300);
-    ui->voteStateTableWidget->setColumnWidth(1,100);
+    ui->voteStateTableWidget->setColumnWidth(1,90);
     ui->voteStateTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->stackedWidget->setCurrentIndex(0);
     ui->typeStackedWidget->setCurrentIndex(0);
+
+    ui->infoBtn->setCheckable(true);
+    ui->voteStateBtn->setCheckable(true);
+    ui->infoBtn->setChecked(true);
+    ui->voteStateBtn->setChecked(false);
 }
 
 ProposalDetailDialog::~ProposalDetailDialog()
@@ -147,12 +152,16 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
 
 void ProposalDetailDialog::on_infoBtn_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(0);   
+    ui->infoBtn->setChecked(true);
+    ui->voteStateBtn->setChecked(false);
 }
 
 void ProposalDetailDialog::on_voteStateBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+    ui->infoBtn->setChecked(false);
+    ui->voteStateBtn->setChecked(true);
 }
 
 void ProposalDetailDialog::on_closeBtn_clicked()

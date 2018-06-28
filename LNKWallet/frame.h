@@ -38,6 +38,8 @@ class MinerPage;
 class OnchainOrderPage;
 class MyExchangeContractPage;
 class PoundageWidget;
+class GuardAccountPage;
+class GuardIncomePage;
 class AssetPage;
 class GuardKeyManagePage;
 class ProposalPage;
@@ -100,6 +102,8 @@ private slots:
     void showPoundagePage();//显示手续费承税单--朱正天
     void showOnchainOrderPage();
     void showMyExchangeContractPage();
+    void showGuardAccountPage();
+    void showGuardIncomePage();
     void showAssetPage();
     void showKeyManagePage();
     void showProposalPage();
@@ -135,6 +139,8 @@ private:
     OnchainOrderPage* onchainOrderPage;
     MyExchangeContractPage* myExchangeContractPage;
     PoundageWidget *poundage;
+    GuardAccountPage*   guardAccountPage;
+    GuardIncomePage*    guardIncomePage;
     AssetPage*          assetPage;
     GuardKeyManagePage* guardKeyManagePage;
     ProposalPage*       proposalPage;
@@ -154,7 +160,7 @@ private:
     int currentPageNum;  //  0:mainPage   1:  2:delegatePgae  3:transferPage    4:contactPage    5:myExchangeContractPage
                          //   6: onchainOrderPage   7:minerPage   8: assetPage     9: multiSigPage   10: multiSigTransactionPage
                          //  11: poundage   12: guardKeyManagePage  13: proposalPage    14: withdrawConfirmPage  15: feedPricePage
-                        //   16: coldHotTransferPage
+                        //   16: coldHotTransferPage    17: guardAccountPage    18: guardIncomePage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;
     void createTrayIconActions();

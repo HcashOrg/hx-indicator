@@ -25,6 +25,13 @@ struct GeneratedTransaction
     QStringList ccwTrxIds;      // 交易里包含的apply交易
 };
 
+struct SignTransaction
+{
+    QString trxId;
+    QString generatedTrxId;
+    QString guardAddress;
+};
+
 class WithdrawConfirmPage : public QWidget
 {
     Q_OBJECT
@@ -35,19 +42,30 @@ public:
 
     void init();
 
-    void fetchCrosschainTransactions(int type = 1);
+    void fetchCrosschainTransactions();
 
 
     QMap<QString,ApplyTransaction> applyTransactionMap;
     QMap<QString,GeneratedTransaction> generatedTransactionMap;
+    QMap<QString,SignTransaction>   signTransactionMap;
 
 private slots:
     void jsonDataUpdated(QString id);
 
     void on_crosschainTransactionTableWidget_cellClicked(int row, int column);
 
+    void on_crosschainTransactionTableWidget_cellPressed(int row, int column);
+
+    void on_accountComboBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::WithdrawConfirmPage *ui;
+
+    void showCrosschainTransactions();
+    void refreshCrosschainTransactionsState();
+
+    QString lookupGeneratedTrxByApplyTrxId(QString applyTrxId);
+    QStringList lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId);
 
     void paintEvent(QPaintEvent*);
 };

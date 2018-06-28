@@ -52,6 +52,9 @@ void FeedPricePage::init()
         ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
     }
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->assetPriceTableWidget);
+
+
     showAssetsPrice();
 }
 

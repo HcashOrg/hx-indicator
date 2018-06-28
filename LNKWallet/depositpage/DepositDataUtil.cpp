@@ -35,7 +35,6 @@ QImage DepositDataUtil::CreateQRcodeImage(const QString &data)
 #include <QDebug>
 bool DepositDataUtil::ParseTunnelData(const QString &jsonString, std::shared_ptr<TunnelData> &resultData)
 {
-    qDebug()<<"zzzzzzzzzz"<<jsonString;
     if(!resultData) resultData = std::make_shared<TunnelData>();
     QJsonParseError json_error;
     QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonString.toLatin1(),&json_error);

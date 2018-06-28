@@ -37,6 +37,8 @@
 #include "extra/transactiondb.h"
 #include "crossmark/crosscapitalmark.h"
 #include "control/CustomShadowEffect.h"
+#include "guard/GuardAccountPage.h"
+#include "guard/GuardIncomePage.h"
 #include "guard/AssetPage.h"
 #include "guard/GuardKeyManagePage.h"
 #include "guard/ProposalPage.h"
@@ -63,6 +65,8 @@ Frame::Frame(): timer(NULL),
     multiSigPage(NULL),
     multiSigTransactionPage(NULL),
     minerPage(NULL),
+    guardAccountPage(NULL),
+    guardIncomePage(NULL),
     assetPage(NULL),
     guardKeyManagePage(NULL),
     proposalPage(NULL),
@@ -365,6 +369,8 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::RestoreSignal,this,&Frame::RestoreRightPart);
     connect(functionBar,&FunctionWidget::showOnchainOrderSignal,this,&Frame::showOnchainOrderPage);
     connect(functionBar,&FunctionWidget::showMyOrderSignal,this,&Frame::showMyExchangeContractPage);
+    connect(functionBar,&FunctionWidget::showGuardAccountSignal,this,&Frame::showGuardAccountPage);
+    connect(functionBar,&FunctionWidget::showGuardIncomeSignal,this,&Frame::showGuardIncomePage);
     connect(functionBar,&FunctionWidget::showAssetSignal,this,&Frame::showAssetPage);
     connect(functionBar,&FunctionWidget::showKeyManageSignal,this,&Frame::showKeyManagePage);
     connect(functionBar,&FunctionWidget::showProposalSignal,this,&Frame::showProposalPage);
@@ -726,6 +732,20 @@ void Frame::closeCurrentPage()
             coldHotTransferPage = NULL;
         }
         break;
+    case 17:
+        if(guardAccountPage)
+        {
+            guardAccountPage->close();
+            guardAccountPage = NULL;
+        }
+        break;
+    case 18:
+        if(guardIncomePage)
+        {
+            guardIncomePage->close();
+            guardIncomePage = NULL;
+        }
+        break;
     default:
         break;
     }
@@ -1071,6 +1091,28 @@ void Frame::showMyExchangeContractPage()
     //RestoreRightPart();不用自己调用，functionbar已连接该槽
 }
 
+void Frame::showGuardAccountPage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    guardAccountPage = new GuardAccountPage(centralWidget);
+    guardAccountPage->setAttribute(Qt::WA_DeleteOnClose);
+    guardAccountPage->show();
+    currentPageNum = 17;
+}
+
+void Frame::showGuardIncomePage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    guardIncomePage = new GuardIncomePage(centralWidget);
+    guardIncomePage->setAttribute(Qt::WA_DeleteOnClose);
+    guardIncomePage->show();
+    currentPageNum = 18;
+}
+
 void Frame::showAssetPage()
 {
     emit titleBackVisible(false);
@@ -1088,6 +1130,7 @@ void Frame::showKeyManagePage()
 
     closeCurrentPage();
     guardKeyManagePage = new GuardKeyManagePage(centralWidget);
+    connect(guardKeyManagePage,&GuardKeyManagePage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
     guardKeyManagePage->setAttribute(Qt::WA_DeleteOnClose);
     guardKeyManagePage->show();
     currentPageNum = 12;
@@ -1821,6 +1864,9 @@ void Frame::onBack()
         break;
     case 11:
         showPoundagePage();
+        break;
+    case 12:
+        showKeyManagePage();
         break;
     default:
         break;

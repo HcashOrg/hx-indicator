@@ -19,6 +19,8 @@ public:
 
     void setAsset(QString _assetSymbol);
 
+    void init();
+
 private slots:
     void jsonDataUpdated(QString id);
 

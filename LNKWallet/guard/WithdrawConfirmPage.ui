@@ -18,8 +18,8 @@
     <rect>
      <x>50</x>
      <y>120</y>
-     <width>674</width>
-     <height>322</height>
+     <width>670</width>
+     <height>320</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -142,11 +142,6 @@
     </property>
     <property name="textAlignment">
      <set>AlignCenter</set>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string/>
     </property>
    </column>
    <column>

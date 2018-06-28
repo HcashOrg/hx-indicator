@@ -49,6 +49,8 @@ signals:
     void showMinerSignal();
     void showOnchainOrderSignal();
     void showMyOrderSignal();
+    void showGuardAccountSignal();
+    void showGuardIncomeSignal();
     void showAssetSignal();
     void showKeyManageSignal();
     void showProposalSignal();

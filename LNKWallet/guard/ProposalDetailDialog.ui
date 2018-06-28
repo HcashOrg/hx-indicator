@@ -32,10 +32,10 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>90</y>
-      <width>500</width>
-      <height>400</height>
+      <x>250</x>
+      <y>100</y>
+      <width>460</width>
+      <height>380</height>
      </rect>
     </property>
     <property name="font">
@@ -45,11 +45,14 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>202</x>
-       <y>340</y>
+       <x>182</x>
+       <y>330</y>
        <width>96</width>
        <height>30</height>
       </rect>
@@ -74,7 +77,7 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>150</x>
+       <x>130</x>
        <y>20</y>
        <width>200</width>
        <height>20</height>
@@ -96,11 +99,18 @@
     <widget class="QToolButton" name="infoBtn">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>30</x>
        <y>50</y>
-       <width>60</width>
-       <height>20</height>
+       <width>80</width>
+       <height>24</height>
       </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QToolButton{background:transparent;border:none;color: rgb(51,51,51);font:12px &quot;微软雅黑&quot;;padding:0px 0px 1px 0px;}
+QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:white;}</string>
      </property>
      <property name="text">
       <string>提案信息</string>
@@ -109,11 +119,18 @@
     <widget class="QToolButton" name="voteStateBtn">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>120</x>
        <y>50</y>
-       <width>60</width>
-       <height>20</height>
+       <width>80</width>
+       <height>24</height>
       </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QToolButton{background:transparent;border:none;color: rgb(51,51,51);font:12px &quot;微软雅黑&quot;;padding:0px 0px 1px 0px;}
+QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:white;}</string>
      </property>
      <property name="text">
       <string>投票状态</string>
@@ -124,14 +141,22 @@
       <rect>
        <x>0</x>
        <y>90</y>
-       <width>500</width>
+       <width>460</width>
        <height>220</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
      <property name="currentIndex">
       <number>1</number>
      </property>
      <widget class="QWidget" name="page">
+      <property name="styleSheet">
+       <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+      </property>
       <widget class="QLabel" name="label_2">
        <property name="geometry">
         <rect>
@@ -177,7 +202,7 @@
       <widget class="QLabel" name="expirationTimeLabel">
        <property name="geometry">
         <rect>
-         <x>330</x>
+         <x>320</x>
          <y>10</y>
          <width>120</width>
          <height>20</height>
@@ -193,7 +218,7 @@
       <widget class="QLabel" name="label_8">
        <property name="geometry">
         <rect>
-         <x>250</x>
+         <x>240</x>
          <y>10</y>
          <width>80</width>
          <height>20</height>
@@ -222,7 +247,7 @@
       <widget class="QLabel" name="label_9">
        <property name="geometry">
         <rect>
-         <x>250</x>
+         <x>240</x>
          <y>40</y>
          <width>80</width>
          <height>20</height>
@@ -235,11 +260,14 @@
       <widget class="QLabel" name="typeLabel">
        <property name="geometry">
         <rect>
-         <x>330</x>
+         <x>320</x>
          <y>40</y>
          <width>120</width>
          <height>20</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
        </property>
        <property name="text">
         <string/>
@@ -253,7 +281,7 @@
         <rect>
          <x>0</x>
          <y>70</y>
-         <width>500</width>
+         <width>460</width>
          <height>150</height>
         </rect>
        </property>
@@ -303,7 +331,7 @@
         <widget class="QLabel" name="assetLabel_hotCold">
          <property name="geometry">
           <rect>
-           <x>120</x>
+           <x>110</x>
            <y>20</y>
            <width>120</width>
            <height>20</height>
@@ -319,7 +347,7 @@
         <widget class="QLabel" name="sendLabel_hotCold">
          <property name="geometry">
           <rect>
-           <x>120</x>
+           <x>110</x>
            <y>50</y>
            <width>300</width>
            <height>20</height>
@@ -335,7 +363,7 @@
         <widget class="QLabel" name="receiveLabel_hotCold">
          <property name="geometry">
           <rect>
-           <x>120</x>
+           <x>110</x>
            <y>80</y>
            <width>300</width>
            <height>20</height>
@@ -351,7 +379,7 @@
         <widget class="QLabel" name="amountLabel_hotCold">
          <property name="geometry">
           <rect>
-           <x>330</x>
+           <x>320</x>
            <y>20</y>
            <width>120</width>
            <height>20</height>
@@ -367,7 +395,7 @@
         <widget class="QLabel" name="label_10">
          <property name="geometry">
           <rect>
-           <x>250</x>
+           <x>240</x>
            <y>20</y>
            <width>80</width>
            <height>20</height>
@@ -393,7 +421,7 @@
         <widget class="QLabel" name="memoLabel_hotCold">
          <property name="geometry">
           <rect>
-           <x>120</x>
+           <x>110</x>
            <y>110</y>
            <width>300</width>
            <height>20</height>
@@ -562,9 +590,9 @@
       <widget class="QTableWidget" name="voteStateTableWidget">
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>30</x>
          <y>10</y>
-         <width>420</width>
+         <width>400</width>
          <height>200</height>
         </rect>
        </property>

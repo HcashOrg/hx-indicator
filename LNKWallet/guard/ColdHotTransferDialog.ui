@@ -45,11 +45,14 @@
       <bold>false</bold>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
        <x>250</x>
-       <y>350</y>
+       <y>360</y>
        <width>100</width>
        <height>30</height>
       </rect>
@@ -82,9 +85,17 @@
      </property>
      <property name="font">
       <font>
-       <weight>75</weight>
-       <bold>true</bold>
+       <family>微软雅黑</family>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  14px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
      </property>
      <property name="text">
       <string>发起资产变更</string>
@@ -101,6 +112,11 @@
        <width>80</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
      </property>
      <property name="text">
       <string>币种</string>
@@ -141,10 +157,16 @@
      <property name="font">
       <font>
        <family>微软雅黑</family>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
      </property>
      <property name="text">
       <string>发起账户</string>
@@ -157,7 +179,7 @@
      <property name="geometry">
       <rect>
        <x>130</x>
-       <y>350</y>
+       <y>360</y>
        <width>100</width>
        <height>30</height>
       </rect>
@@ -177,29 +199,6 @@
      </property>
      <property name="text">
       <string>确定</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_4">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>300</y>
-       <width>80</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>备注</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="memoLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>320</y>
-       <width>200</width>
-       <height>20</height>
-      </rect>
      </property>
     </widget>
     <widget class="QComboBox" name="assetComboBox">
@@ -234,6 +233,11 @@
        <height>20</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+     </property>
      <property name="text">
       <string>转出地址</string>
      </property>
@@ -241,11 +245,14 @@
     <widget class="QLabel" name="fromLabel">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>170</y>
-       <width>280</width>
+       <x>30</x>
+       <y>190</y>
+       <width>300</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
      </property>
      <property name="text">
       <string/>
@@ -257,11 +264,14 @@
     <widget class="QLabel" name="toLabel">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>200</y>
-       <width>280</width>
+       <x>30</x>
+       <y>240</y>
+       <width>300</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
      </property>
      <property name="text">
       <string/>
@@ -274,10 +284,15 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>200</y>
+       <y>220</y>
        <width>60</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
      </property>
      <property name="text">
       <string>转入地址</string>
@@ -320,7 +335,7 @@
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>260</y>
+       <y>300</y>
        <width>120</width>
        <height>20</height>
       </rect>
@@ -333,10 +348,15 @@
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>240</y>
+       <y>280</y>
        <width>120</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
      </property>
      <property name="text">
       <string>终止确认时间（秒）</string>
@@ -346,7 +366,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>260</y>
+       <y>300</y>
        <width>140</width>
        <height>20</height>
       </rect>
@@ -356,10 +376,15 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>240</y>
+       <y>280</y>
        <width>80</width>
        <height>20</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
      </property>
      <property name="text">
       <string>数量</string>

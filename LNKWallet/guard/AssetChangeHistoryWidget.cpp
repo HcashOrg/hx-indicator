@@ -61,6 +61,8 @@ void AssetChangeHistoryWidget::init()
         ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->changeHistoryTableWidget);
+
     inited = true;
 }
 
@@ -203,6 +205,7 @@ void AssetChangeHistoryWidget::on_changeHistoryTableWidget_cellClicked(int row, 
 {
     if(column == 5)
     {
+        QString assetSymbol = ui->changeHistoryTableWidget->item(row,0)->text();
         QString hotAddress = ui->changeHistoryTableWidget->item(row,1)->data(Qt::UserRole).toString();
         QString coldAddress = ui->changeHistoryTableWidget->item(row,2)->data(Qt::UserRole).toString();
 
@@ -218,7 +221,9 @@ void AssetChangeHistoryWidget::on_changeHistoryTableWidget_cellClicked(int row, 
             QJsonArray array;
             array.append(crosschainKeyObjectMap.value(hotAddress));
             array.append(crosschainKeyObjectMap.value(coldAddress));
-            QString str = QJsonDocument(array).toJson();
+            QJsonObject object;
+            object.insert(assetSymbol, array);
+            QString str = QJsonDocument(object).toJson();
 
             QString path = QFileDialog::getSaveFileName(this, tr("Select the export path"), "", "(*.gcck)");
             if(!path.isEmpty())
@@ -270,6 +275,15 @@ void AssetChangeHistoryWidget::refreshKeyState()
             ui->changeHistoryTableWidget->item(i,4)->setText(tr("unavailable"));
         }
     }
+}
+
+void AssetChangeHistoryWidget::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+
+    painter.drawRect(rect());
 }
 
 void AssetChangeHistoryWidget::on_accountComboBox_currentIndexChanged(const QString &arg1)

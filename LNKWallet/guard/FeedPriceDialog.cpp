@@ -41,6 +41,18 @@ void FeedPriceDialog::setAsset(QString _assetSymbol)
     ui->assetLabel->setText(_assetSymbol);
 }
 
+void FeedPriceDialog::init()
+{
+    ui->accountComboBox->clear();
+    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    ui->accountComboBox->addItems(accounts);
+
+    if(accounts.contains(UBChain::getInstance()->currentAccount))
+    {
+        ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+    }
+}
+
 void FeedPriceDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-publish_normal_asset_feed")

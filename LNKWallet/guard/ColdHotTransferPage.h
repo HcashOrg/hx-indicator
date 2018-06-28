@@ -28,6 +28,13 @@ struct ColdHotCrosschainTransaction
     QString coldHotTrxId;
 };
 
+struct ColdHotSignTransaction
+{
+    QString trxId;
+    QString coldHotCrosschainTrxId;
+    QString guardAddress;
+};
+
 class ColdHotTransferPage : public QWidget
 {
     Q_OBJECT
@@ -38,6 +45,8 @@ public:
 
     void init();
 
+    void refresh();
+
 private slots:
     void jsonDataUpdated(QString id);
 
@@ -45,12 +54,23 @@ private slots:
 
     void on_coldHotTransactionTableWidget_cellClicked(int row, int column);
 
+    void on_accountComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_coldHotTransactionTableWidget_cellPressed(int row, int column);
+
 private:
     Ui::ColdHotTransferPage *ui;
+    bool inited = false;
 
     QMap<QString,ColdHotTransaction> coldHotTransactionMap;
     QMap<QString,ColdHotCrosschainTransaction> coldHotCrosschainTransactionMap;
-    void fetchColdHotTransaction(int type = 1);
+    QMap<QString,ColdHotSignTransaction> coldHotSignTransactionMap;
+    void fetchColdHotTransaction();
+
+    void showColdHotTransactions();
+    void refreshColdHotTtransactionsState();
+    QString lookupCrosschainTrxByColdHotTrxId(QString coldHotTrxId);
+    QStringList lookupSignedGuardByCrosschainTrx(QString crosschainTrxId);
 
     void paintEvent(QPaintEvent*);
 };

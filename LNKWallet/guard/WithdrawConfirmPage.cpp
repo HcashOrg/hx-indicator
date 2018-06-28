@@ -6,6 +6,7 @@
 #include "commondialog.h"
 #include "dialog/TransactionResultDialog.h"
 #include "dialog/ErrorResultDialog.h"
+#include "showcontentdialog.h"
 
 WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     QWidget(parent),
@@ -28,11 +29,10 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
 
     ui->crosschainTransactionTableWidget->setColumnWidth(0,120);
     ui->crosschainTransactionTableWidget->setColumnWidth(1,120);
-    ui->crosschainTransactionTableWidget->setColumnWidth(2,100);
-    ui->crosschainTransactionTableWidget->setColumnWidth(3,100);
+    ui->crosschainTransactionTableWidget->setColumnWidth(2,130);
+    ui->crosschainTransactionTableWidget->setColumnWidth(3,130);
     ui->crosschainTransactionTableWidget->setColumnWidth(4,80);
     ui->crosschainTransactionTableWidget->setColumnWidth(5,80);
-    ui->crosschainTransactionTableWidget->setColumnWidth(6,80);
     ui->crosschainTransactionTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     init();
@@ -54,13 +54,18 @@ void WithdrawConfirmPage::init()
         ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
     }
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->crosschainTransactionTableWidget);
+
     fetchCrosschainTransactions();
 }
 
-void WithdrawConfirmPage::fetchCrosschainTransactions(int type)
+void WithdrawConfirmPage::fetchCrosschainTransactions()
 {
-    UBChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(type), toJsonFormat( "get_crosschain_transaction",
-                                                                                    QJsonArray() << type));
+    UBChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(1), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 1));
+
+    UBChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(2), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 2));
 }
 
 void WithdrawConfirmPage::jsonDataUpdated(QString id)
@@ -69,6 +74,17 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
+
+        int type = id.mid(QString("id-get_crosschain_transaction-").size()).toInt();
+        if(type == 1)
+        {
+            applyTransactionMap.clear();
+            generatedTransactionMap.clear();
+        }
+        else if(type == 2)
+        {
+            signTransactionMap.clear();
+        }
 
         result.prepend("{");
         result.append("}");
@@ -112,53 +128,24 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
 
                 applyTransactionMap.insert(at.trxId, at);
             }
+            else if(operationType == TRANSACTION_TYPE_WITHDRAW_SIGN)
+            {
+                SignTransaction st;
+                st.trxId            = array2.at(0).toString();
+                st.generatedTrxId   = operationObject.take("ccw_trx_id").toString();
+                st.guardAddress     = operationObject.take("guard_address").toString();
+
+                signTransactionMap.insert(st.trxId, st);
+            }
         }
 
-
-        QStringList keys = applyTransactionMap.keys();
-        int size = keys.size();
-        ui->crosschainTransactionTableWidget->setRowCount(0);
-        ui->crosschainTransactionTableWidget->setRowCount(size);
-
-        for(int i = 0; i < size; i++)
+        if(type != 2)
         {
-            ui->crosschainTransactionTableWidget->setRowHeight(i,40);
-
-            ApplyTransaction at = applyTransactionMap.value(keys.at(i));
-
-            QDateTime time = QDateTime::fromString(at.expirationTime, "yyyy-MM-ddThh:mm:ss");
-            time = time.addSecs(-600);       // 时间减10分钟
-            QString currentDateTime = time.toString("yyyy-MM-dd hh:mm:ss");
-            ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
-            ui->crosschainTransactionTableWidget->item(i,0)->setData(Qt::UserRole, at.trxId);
-
-            ui->crosschainTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(at.amount + " " + at.assetSymbol));
-
-            ui->crosschainTransactionTableWidget->setItem(i, 2, new QTableWidgetItem(at.withdrawAddress));
-
-            ui->crosschainTransactionTableWidget->setItem(i, 3, new QTableWidgetItem(at.crosschainAddress));
-
-            ui->crosschainTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
-            ToolButtonWidget *toolButton = new ToolButtonWidget();
-            toolButton->setText(ui->crosschainTransactionTableWidget->item(i,6)->text());
-//            toolButton->setBackgroundColor(itemColor);
-            ui->crosschainTransactionTableWidget->setCellWidget(i,6,toolButton);
-            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,6));
-
-
-            for (int j : {0,1,2,3})
-            {
-                if(i%2)
-                {
-                    ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                    ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-                }
-                else
-                {
-                    ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                    ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-                }
-            }
+            showCrosschainTransactions();
+        }
+        else
+        {
+            refreshCrosschainTransactionsState();
         }
 
         return;
@@ -171,8 +158,6 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":"))
         {
-            close();
-
             TransactionResultDialog transactionResultDialog;
             transactionResultDialog.setInfoText(tr("Transaction of guard-sign-crosschain has been sent out!"));
             transactionResultDialog.setDetailText(result);
@@ -207,16 +192,7 @@ void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked(int ro
         {
             QString trxId = ui->crosschainTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
 
-            QString generatedTrxId;
-            QStringList keys = generatedTransactionMap.keys();
-            foreach (QString key, keys)
-            {
-                GeneratedTransaction gt = generatedTransactionMap.value(key);
-                if(gt.ccwTrxIds.contains(trxId))
-                {
-                    generatedTrxId = gt.trxId;
-                }
-            }
+            QString generatedTrxId = lookupGeneratedTrxByApplyTrxId(trxId);
 
             if(!generatedTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
             {
@@ -228,4 +204,132 @@ void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked(int ro
 
         return;
     }
+}
+
+void WithdrawConfirmPage::showCrosschainTransactions()
+{
+    QStringList keys = applyTransactionMap.keys();
+    int size = keys.size();
+    ui->crosschainTransactionTableWidget->setRowCount(0);
+    ui->crosschainTransactionTableWidget->setRowCount(size);
+
+    for(int i = 0; i < size; i++)
+    {
+        ui->crosschainTransactionTableWidget->setRowHeight(i,40);
+
+        ApplyTransaction at = applyTransactionMap.value(keys.at(i));
+
+        QDateTime time = QDateTime::fromString(at.expirationTime, "yyyy-MM-ddThh:mm:ss");
+        time = time.addSecs(-600);       // 时间减10分钟
+        QString currentDateTime = time.toString("yyyy-MM-dd hh:mm:ss");
+        ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
+        ui->crosschainTransactionTableWidget->item(i,0)->setData(Qt::UserRole, at.trxId);
+
+        ui->crosschainTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(at.amount + " " + at.assetSymbol));
+
+        ui->crosschainTransactionTableWidget->setItem(i, 2, new QTableWidgetItem(at.withdrawAddress));
+
+        ui->crosschainTransactionTableWidget->setItem(i, 3, new QTableWidgetItem(at.crosschainAddress));
+
+        ui->crosschainTransactionTableWidget->setItem(i, 4, new QTableWidgetItem(tr("checking")));
+
+        ui->crosschainTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("sign")));
+        ToolButtonWidget *toolButton = new ToolButtonWidget();
+        toolButton->setText(ui->crosschainTransactionTableWidget->item(i,5)->text());
+//            toolButton->setBackgroundColor(itemColor);
+        ui->crosschainTransactionTableWidget->setCellWidget(i,5,toolButton);
+        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,6));
+
+
+        for (int j : {0,1,2,3,4})
+        {
+            if(i%2)
+            {
+                ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
+            }
+            else
+            {
+                ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
+            }
+        }
+    }
+}
+
+void WithdrawConfirmPage::refreshCrosschainTransactionsState()
+{
+    int rowCount = ui->crosschainTransactionTableWidget->rowCount();
+    for(int i = 0; i < rowCount; i++)
+    {
+        QString trxId = ui->crosschainTransactionTableWidget->item(i,0)->data(Qt::UserRole).toString();
+        QString generatedTrxId = lookupGeneratedTrxByApplyTrxId(trxId);
+        QStringList guardAddresses = lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
+
+        QString currentAddress = UBChain::getInstance()->formalGuardMap.value(ui->accountComboBox->currentText()).address;
+        if(guardAddresses.contains(currentAddress))
+        {
+            ui->crosschainTransactionTableWidget->item(i,4)->setText(tr("signed"));
+        }
+        else
+        {
+            ui->crosschainTransactionTableWidget->item(i,4)->setText(tr("unsigned"));
+        }
+    }
+}
+
+QString WithdrawConfirmPage::lookupGeneratedTrxByApplyTrxId(QString applyTrxId)
+{
+    QString generatedTrxId;
+    QStringList keys = generatedTransactionMap.keys();
+    foreach (QString key, keys)
+    {
+        GeneratedTransaction gt = generatedTransactionMap.value(key);
+        if(gt.ccwTrxIds.contains(applyTrxId))
+        {
+            generatedTrxId = gt.trxId;
+            break;
+        }
+    }
+
+    return generatedTrxId;
+}
+
+QStringList WithdrawConfirmPage::lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId)
+{
+    QStringList result;
+    QStringList keys = signTransactionMap.keys();
+
+    foreach (QString key, keys)
+    {
+        SignTransaction st = signTransactionMap.value(key);
+        if(st.generatedTrxId == generatedTrxId)
+        {
+            result += st.guardAddress;
+        }
+    }
+
+    return result;
+}
+
+void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellPressed(int row, int column)
+{
+    if( column == 2 || column == 3)
+    {
+        ShowContentDialog showContentDialog( ui->crosschainTransactionTableWidget->item(row, column)->text(),this);
+
+        int x = ui->crosschainTransactionTableWidget->columnViewportPosition(column) + ui->crosschainTransactionTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->crosschainTransactionTableWidget->rowViewportPosition(row) - 10 + ui->crosschainTransactionTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->crosschainTransactionTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
+}
+
+void WithdrawConfirmPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
+{
+    fetchCrosschainTransactions();
 }

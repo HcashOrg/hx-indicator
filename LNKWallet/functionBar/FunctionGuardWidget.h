@@ -22,6 +22,8 @@ private:
     void InitStyle();
 
 signals:
+    void showGuardAccountSignal();
+    void showGuardIncomeSignal();
     void showAssetSignal();
     void showKeyManageSignal();
     void showProposalSignal();
@@ -30,6 +32,10 @@ signals:
     void showColdHotTransferSignal();
 
 private slots:
+    void on_accountInfoBtn_clicked();
+
+    void on_myIncomeBtn_clicked();
+
     void on_assetInfoBtn_clicked();
 
     void on_keyManageBtn_clicked();

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GuardAccountPage</class>
+ <widget class="QWidget" name="GuardAccountPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>770</width>
+    <height>530</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="title_label">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>50</y>
+     <width>200</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>Guard账户信息</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>95</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(192, 196, 212);</string>
+   </property>
+   <property name="text">
+    <string>当前账号</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="accountComboBox">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>115</y>
+     <width>111</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_back">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>160</y>
+     <width>670</width>
+     <height>175</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:15px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>187</y>
+     <width>120</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{font: 12px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);}</string>
+   </property>
+   <property name="text">
+    <string>Guard类型</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="guardTypeLabel">
+   <property name="geometry">
+    <rect>
+     <x>65</x>
+     <y>217</y>
+     <width>300</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(229,229,229);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);padding:0px 0px 0px 5px;}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>187</y>
+     <width>120</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{font: 12px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);}</string>
+   </property>
+   <property name="text">
+    <string>Guard ID</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="guardIdLabel">
+   <property name="geometry">
+    <rect>
+     <x>395</x>
+     <y>217</y>
+     <width>300</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(229,229,229);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);padding:0px 0px 0px 5px;}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>249</y>
+     <width>120</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{font: 12px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);}</string>
+   </property>
+   <property name="text">
+    <string>账户地址</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="addressLabel">
+   <property name="geometry">
+    <rect>
+     <x>65</x>
+     <y>279</y>
+     <width>300</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(229,229,229);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);padding:0px 0px 0px 5px;}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="guardLabel">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>124</y>
+     <width>12</width>
+     <height>12</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

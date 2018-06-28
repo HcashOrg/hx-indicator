@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GuardIncomePage</class>
+ <widget class="QWidget" name="GuardIncomePage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>770</width>
+    <height>530</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>770</width>
+     <height>530</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(248,249,253);</string>
+   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>190</y>
+      <width>270</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Microsoft YaHei UI Light</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>暂无代理收益</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

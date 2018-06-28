@@ -13,26 +13,13 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QToolButton" name="transferBtn">
-   <property name="geometry">
-    <rect>
-     <x>570</x>
-     <y>70</y>
-     <width>81</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>发起资产变更</string>
-   </property>
-  </widget>
   <widget class="QTableWidget" name="coldHotTransactionTableWidget">
    <property name="geometry">
     <rect>
      <x>50</x>
      <y>130</y>
-     <width>674</width>
-     <height>322</height>
+     <width>670</width>
+     <height>320</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -78,7 +65,7 @@
     <enum>Qt::SolidLine</enum>
    </property>
    <attribute name="horizontalHeaderVisible">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>
@@ -208,6 +195,36 @@
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="transferBtn">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>90</y>
+     <width>90</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>发起资产变更</string>
    </property>
   </widget>
  </widget>

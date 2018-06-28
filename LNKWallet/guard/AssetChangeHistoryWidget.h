@@ -41,6 +41,8 @@ private:
     QMap<QString,QJsonObject>   crosschainKeyObjectMap;
     void fetchCrosschainPrivateKey(QString address);
     void refreshKeyState();
+
+    void paintEvent(QPaintEvent*);
 };
 
 #endif // ASSETCHANGEHISTORYWIDGET_H

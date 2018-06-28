@@ -29,13 +29,13 @@ ProposalPage::ProposalPage(QWidget *parent) :
     ui->proposalTableWidget->horizontalHeader()->setVisible(true);
     ui->proposalTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->proposalTableWidget->setColumnWidth(0,100);
-    ui->proposalTableWidget->setColumnWidth(1,80);
+    ui->proposalTableWidget->setColumnWidth(0,120);
+    ui->proposalTableWidget->setColumnWidth(1,100);
     ui->proposalTableWidget->setColumnWidth(2,100);
     ui->proposalTableWidget->setColumnWidth(3,100);
-    ui->proposalTableWidget->setColumnWidth(4,100);
-    ui->proposalTableWidget->setColumnWidth(5,100);
-    ui->proposalTableWidget->setColumnWidth(6,100);
+    ui->proposalTableWidget->setColumnWidth(4,80);
+    ui->proposalTableWidget->setColumnWidth(5,80);
+    ui->proposalTableWidget->setColumnWidth(6,80);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     init();
@@ -57,6 +57,8 @@ void ProposalPage::init()
         ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
     }
 
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->proposalTableWidget);
+
     showProposals();
 }
 
@@ -77,7 +79,7 @@ void ProposalPage::showProposals()
         ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(info.expirationTime.replace("T"," ")));
         ui->proposalTableWidget->item(i,0)->setData(Qt::UserRole,info.proposalId);
 
-        ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(info.proposer));
+        ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(UBChain::getInstance()->guardAccountIdToName(info.proposer)));
 
         QString typeStr;
         if(info.proposalOperationType == 66)
@@ -202,54 +204,6 @@ void ProposalPage::jsonDataUpdated(QString id)
     }
 }
 
-void ProposalPage::paintEvent(QPaintEvent *)
-{
-    QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
-
-    painter.drawRect(rect());
-}
-
-VoteStateLabel::VoteStateLabel(QWidget *parent)
-{
-    setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-}
-
-VoteStateLabel::~VoteStateLabel()
-{
-
-}
-
-void VoteStateLabel::setVoteNum(int approve, int disapprove, int total)
-{
-    QString str;
-    if( 3 * disapprove >= total )
-    {
-        str = QString("<body><font style=\"font-size:12px\" color=#ff0000>%1("
-                      "<font style=\"font-size:12px\" color=#00ff00>%2</font>"
-                      "/"
-                      "<font style=\"font-size:12px\" color=#ff0000>%3</font>"
-                      "/"
-                      "%4"
-                      ")</font></body>")
-                .arg(tr("not passed")).arg(approve).arg(disapprove).arg(total);
-    }
-    else
-    {
-        str = QString("<body><font style=\"font-size:12px\" color=#ff8400>%1</font>("
-                      "<font style=\"font-size:12px\" color=#00ff00>%2</font>"
-                      "/"
-                      "<font style=\"font-size:12px\" color=#ff0000>%3</font>"
-                      "/"
-                      "%4"
-                      ")</body>")
-                .arg(tr("voting")).arg(approve).arg(disapprove).arg(total);
-    }
-
-    setText(str);
-}
-
 void ProposalPage::on_proposalTableWidget_cellClicked(int row, int column)
 {
     if(column == 5)
@@ -308,3 +262,53 @@ void ProposalPage::on_proposalTableWidget_cellPressed(int row, int column)
         return;
     }
 }
+
+void ProposalPage::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+
+    painter.drawRect(rect());
+}
+
+VoteStateLabel::VoteStateLabel(QWidget *parent)
+{
+    setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+}
+
+VoteStateLabel::~VoteStateLabel()
+{
+
+}
+
+void VoteStateLabel::setVoteNum(int approve, int disapprove, int total)
+{
+    QString str;
+    if( 3 * disapprove >= total )
+    {
+        str = QString("<body><font style=\"font-size:12px\" color=#ff0000>%1("
+                      "<font style=\"font-size:12px\" color=#00ff00>%2</font>"
+                      "/"
+                      "<font style=\"font-size:12px\" color=#ff0000>%3</font>"
+                      "/"
+                      "%4"
+                      ")</font></body>")
+                .arg(tr("not passed")).arg(approve).arg(disapprove).arg(total);
+    }
+    else
+    {
+        str = QString("<body><font style=\"font-size:12px\" color=#ff8400>%1</font>("
+                      "<font style=\"font-size:12px\" color=#00ff00>%2</font>"
+                      "/"
+                      "<font style=\"font-size:12px\" color=#ff0000>%3</font>"
+                      "/"
+                      "%4"
+                      ")</body>")
+                .arg(tr("voting")).arg(approve).arg(disapprove).arg(total);
+    }
+
+    setText(str);
+}
+
+

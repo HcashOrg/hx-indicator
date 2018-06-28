@@ -10,6 +10,7 @@
 #include "commondialog.h"
 #include "dialog/TransactionResultDialog.h"
 #include "dialog/ErrorResultDialog.h"
+#include "AssetChangeHistoryWidget.h"
 
 
 GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
@@ -34,12 +35,15 @@ GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
     ui->multisigTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->multisigTableWidget->setColumnWidth(0,140);
-    ui->multisigTableWidget->setColumnWidth(1,100);
-    ui->multisigTableWidget->setColumnWidth(2,100);
+    ui->multisigTableWidget->setColumnWidth(1,120);
+    ui->multisigTableWidget->setColumnWidth(2,120);
     ui->multisigTableWidget->setColumnWidth(3,100);
-    ui->multisigTableWidget->setColumnWidth(4,100);
-    ui->multisigTableWidget->setColumnWidth(5,100);
+    ui->multisigTableWidget->setColumnWidth(4,90);
+    ui->multisigTableWidget->setColumnWidth(5,90);
     ui->multisigTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+
+    ui->historyBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->importBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     init();
 }
@@ -61,6 +65,8 @@ void GuardKeyManagePage::init()
     {
         ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
     }
+
+    UBChain::getInstance()->mainFrame->installBlurEffect(ui->multisigTableWidget);
 
     showMultisigInfo();
 
@@ -118,6 +124,13 @@ void GuardKeyManagePage::showMultisigInfo()
             if(guardAccountIds.contains(accountId))
             {
                 ui->multisigTableWidget->setItem(i,5,new QTableWidgetItem(tr("updated")));
+
+                ToolButtonWidget *toolButton = new ToolButtonWidget();
+                toolButton->setText(ui->multisigTableWidget->item(i,5)->text());
+                toolButton->setBackgroundColor(itemColor);
+                toolButton->setEnabled(false);
+                ui->multisigTableWidget->setCellWidget(i,5,toolButton);
+                connect(toolButton,&ToolButtonWidget::clicked,std::bind(&GuardKeyManagePage::on_multisigTableWidget_cellClicked,this,i,5));
             }
             else
             {
@@ -128,7 +141,6 @@ void GuardKeyManagePage::showMultisigInfo()
                 toolButton->setBackgroundColor(itemColor);
                 ui->multisigTableWidget->setCellWidget(i,5,toolButton);
                 connect(toolButton,&ToolButtonWidget::clicked,std::bind(&GuardKeyManagePage::on_multisigTableWidget_cellClicked,this,i,5));
-
             }
         }
 
@@ -140,7 +152,7 @@ void GuardKeyManagePage::showMultisigInfo()
 
 
 
-        for(int j = 1; j < 4; j++)
+        for (int j : {1,2,3,4})
         {
             if(i%2)
             {
@@ -178,6 +190,19 @@ void GuardKeyManagePage::jsonDataUpdated(QString id)
             errorResultDialog.pop();
         }
         return;
+    }
+
+    if( id == "finish-import_crosschain_key")
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText(tr("The cross-chain keys has already imported."));
+        commonDialog.pop();
+    }
+
+    if( id == "id-import_crosschain_key")
+    {
+        QString result = UBChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result;
     }
 }
 
@@ -231,4 +256,64 @@ void GuardKeyManagePage::on_accountComboBox_currentIndexChanged(const QString &a
 
     UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
     showMultisigInfo();
+}
+
+void GuardKeyManagePage::on_multisigTableWidget_cellPressed(int row, int column)
+{
+    if( column == 1 || column == 2)
+    {
+        ShowContentDialog showContentDialog( ui->multisigTableWidget->item(row, column)->text(),this);
+
+        int x = ui->multisigTableWidget->columnViewportPosition(column) + ui->multisigTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->multisigTableWidget->rowViewportPosition(row) - 10 + ui->multisigTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->multisigTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
+}
+
+void GuardKeyManagePage::on_historyBtn_clicked()
+{
+    AssetChangeHistoryWidget* assetChangeHistoryWidget = new AssetChangeHistoryWidget(this);
+    assetChangeHistoryWidget->setAttribute(Qt::WA_DeleteOnClose);
+    assetChangeHistoryWidget->setObjectName("assetChangeHistoryWidget");
+    assetChangeHistoryWidget->move(0,0);
+    assetChangeHistoryWidget->show();
+    assetChangeHistoryWidget->raise();
+
+    emit backBtnVisible(true);
+}
+
+void GuardKeyManagePage::on_importBtn_clicked()
+{
+    QString filePath = QFileDialog::getOpenFileName(this, tr("Select the file of cross-chain key"), "", "*.gcck");
+    qDebug() << "Fffffffffff " << filePath;
+
+    QFile file(filePath);
+    if(!file.open(QIODevice::ReadOnly))     return;
+    QByteArray ba = file.readAll();
+    file.close();
+
+    QJsonParseError json_error;
+    QJsonDocument parse_doucment = QJsonDocument::fromJson(ba,&json_error);
+    if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return ;
+    QJsonObject object = parse_doucment.object();
+    QStringList keys = object.keys();
+    foreach (QString key, keys)
+    {
+        QJsonArray array = object.take(key).toArray();
+        foreach (QJsonValue v, array)
+        {
+            QJsonObject object2 = v.toObject();
+            QString wifKey = object2.take("wif_key").toString();
+            UBChain::getInstance()->postRPC( "id-import_crosschain_key", toJsonFormat( "import_crosschain_key",
+                                    QJsonArray()  << wifKey << key));
+        }
+    }
+
+    UBChain::getInstance()->postRPC( "finish-import_crosschain_key", toJsonFormat( "import_crosschain_key",
+                            QJsonArray() ));
 }

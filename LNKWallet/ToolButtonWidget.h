@@ -27,6 +27,8 @@ private:
     void InitStyle();
 private:
     Ui::ToolButtonWidget *ui;
+
+    virtual void resizeEvent(QResizeEvent *event);
 };
 
 class ToolButtonWidgetItem : public ToolButtonWidget
