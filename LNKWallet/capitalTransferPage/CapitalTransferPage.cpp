@@ -92,17 +92,16 @@ void CapitalTransferPage::radioChangedSlots()
 {
     if(ui->radioButton_deposit->isChecked())
     {
-        ui->label_addressTitle->setText(tr("%1 address").arg("Tunnel"));
-        ui->lineEdit_address->setPlaceholderText(tr("please wait"));
+        ui->lineEdit_address->setPlaceholderText(tr("select withdraw to input address"));
+        ui->lineEdit_address->clear();
         if(!_p->tunnel_account_address.isEmpty())
         {
-            ui->lineEdit_address->setText(_p->tunnel_account_address);
+            //ui->lineEdit_address->setText(_p->tunnel_account_address);
         }
         ui->lineEdit_address->setEnabled(false);
     }
     else if(ui->radioButton_withdraw->isChecked())
     {
-        ui->label_addressTitle->setText(tr("%1 address").arg(_p->symbol));
         ui->lineEdit_address->setPlaceholderText(tr("please input withdraw address..."));
         ui->lineEdit_address->setEnabled(true);
         ui->lineEdit_address->clear();
@@ -123,7 +122,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             ui->radioButton_deposit->setEnabled(false);
             ui->radioButton_withdraw->setEnabled(false);
             ui->lineEdit_number->setEnabled(false);
-            ui->lineEdit_address->setText(tr("Can not find tunnel address!"));
+            ui->label_tunnelAddress->setText(tr("Can not find tunnel address!"));
             return;
         }
         result.prepend("{");
@@ -135,12 +134,12 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             ui->radioButton_deposit->setEnabled(false);
             ui->radioButton_withdraw->setEnabled(false);
             ui->lineEdit_number->setEnabled(false);
-            ui->lineEdit_address->setText(tr("Can not find tunnel address!"));
+            ui->label_tunnelAddress->setText(tr("Can not find tunnel address!"));
             return;
         }
         if(ui->radioButton_deposit->isChecked())
         {
-            ui->lineEdit_address->setText(_p->tunnel_account_address);
+            ui->label_tunnelAddress->setText(_p->tunnel_account_address);
         }
         //查询tunnel地址的余额
         PostQueryTunnelMoney(_p->symbol,_p->tunnel_account_address);
@@ -153,7 +152,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             ui->radioButton_deposit->setEnabled(false);
             ui->radioButton_withdraw->setEnabled(false);
             ui->lineEdit_number->setEnabled(false);
-            ui->lineEdit_address->setText(tr("Can not find multi-address!"));
+            ui->label_tunnelAddress->setText(tr("Can not find multi-address!"));
             return;
         }
         result.prepend("{");
@@ -165,7 +164,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             ui->radioButton_deposit->setEnabled(false);
             ui->radioButton_withdraw->setEnabled(false);
             ui->lineEdit_number->setEnabled(false);
-            ui->lineEdit_address->setText(tr("Can not find multi-address!"));
+            ui->label_tunnelAddress->setText(tr("Can not find multi-address!"));
             return;
         }
 
@@ -199,11 +198,11 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         QString result = UBChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
         result.append("}");
-        UBChain::getInstance()->mainFrame->crossMark->TransactionInput(result,_p->symbol,_p->account_name,ui->lineEdit_number->text().toDouble());
-
         qDebug()<<"签名"<<UBChain::getInstance()->jsonDataValue( id);
         if( result.startsWith("{\"result\":"))             // 成功
         {
+            UBChain::getInstance()->mainFrame->crossMark->TransactionInput(result,_p->symbol,_p->account_name,ui->lineEdit_number->text().toDouble());
+
             TransactionResultDialog transactionResultDialog;
             transactionResultDialog.setInfoText(tr("Transaction has been sent,please wait for confirmation"));
             transactionResultDialog.setDetailText(result);
@@ -395,9 +394,8 @@ void CapitalTransferPage::InitWidget()
 
 //    ui->toolButton_confirm->setVisible(false);
     ui->toolButton_confirm->setEnabled(false);
-    ui->label_addressTitle->setText(tr("%1 address").arg("Tunnel"));
     ui->radioButton_deposit->setChecked(true);
-    ui->lineEdit_address->setPlaceholderText(tr("please wait"));
+    ui->lineEdit_address->setPlaceholderText(tr("select withdraw to input address"));
     ui->lineEdit_address->setEnabled(false);
     ui->lineEdit_number->setPlaceholderText(tr("please wait"));
 
