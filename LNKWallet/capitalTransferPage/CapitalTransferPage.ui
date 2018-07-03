@@ -28,7 +28,7 @@
   <widget class="QLabel" name="label_title">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>222</x>
      <y>110</y>
      <width>121</width>
      <height>26</height>
@@ -53,9 +53,9 @@
   <widget class="QLabel" name="label_1">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>222</x>
      <y>150</y>
-     <width>300</width>
+     <width>131</width>
      <height>16</height>
     </rect>
    </property>
@@ -66,43 +66,21 @@
   <widget class="QLabel" name="label_number">
    <property name="geometry">
     <rect>
-     <x>245</x>
-     <y>176</y>
-     <width>251</width>
-     <height>16</height>
+     <x>352</x>
+     <y>150</y>
+     <width>171</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_addressTitle">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>270</y>
-     <width>200</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <pointsize>-1</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>X地址</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>208</y>
+     <x>222</x>
+     <y>273</y>
      <width>150</width>
      <height>16</height>
     </rect>
@@ -114,10 +92,10 @@
   <widget class="QLabel" name="label_fee">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>370</y>
-     <width>100</width>
-     <height>16</height>
+     <x>301</x>
+     <y>363</y>
+     <width>171</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="text">
@@ -152,8 +130,8 @@
   <widget class="QRadioButton" name="radioButton_deposit">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>230</y>
+     <x>222</x>
+     <y>298</y>
      <width>80</width>
      <height>18</height>
     </rect>
@@ -174,8 +152,8 @@
   <widget class="QRadioButton" name="radioButton_withdraw">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>230</y>
+     <x>222</x>
+     <y>326</y>
      <width>80</width>
      <height>18</height>
     </rect>
@@ -196,9 +174,9 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>208</y>
-     <width>120</width>
+     <x>222</x>
+     <y>230</y>
+     <width>101</width>
      <height>16</height>
     </rect>
    </property>
@@ -209,9 +187,9 @@
   <widget class="QLineEdit" name="lineEdit_number">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>230</y>
-     <width>141</width>
+     <x>302</x>
+     <y>228</y>
+     <width>251</width>
      <height>21</height>
     </rect>
    </property>
@@ -228,9 +206,9 @@
   <widget class="QLineEdit" name="lineEdit_address">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>292</y>
-     <width>331</width>
+     <x>302</x>
+     <y>316</y>
+     <width>251</width>
      <height>31</height>
     </rect>
    </property>
@@ -247,8 +225,8 @@
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>340</y>
+     <x>222</x>
+     <y>363</y>
      <width>100</width>
      <height>16</height>
     </rect>
@@ -261,7 +239,7 @@
    <property name="geometry">
     <rect>
      <x>337</x>
-     <y>400</y>
+     <y>399</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -285,9 +263,9 @@
   <widget class="QLabel" name="label_tip">
    <property name="geometry">
     <rect>
-     <x>410</x>
-     <y>254</y>
-     <width>151</width>
+     <x>306</x>
+     <y>250</y>
+     <width>241</width>
      <height>41</height>
     </rect>
    </property>
@@ -305,9 +283,9 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QLabel" name="label_marktip">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>148</y>
-     <width>161</width>
+     <x>330</x>
+     <y>110</y>
+     <width>171</width>
      <height>20</height>
     </rect>
    </property>
@@ -336,11 +314,54 @@ border-radius:15px;</string>
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="label_addressTitle_2">
+   <property name="geometry">
+    <rect>
+     <x>222</x>
+     <y>190</y>
+     <width>81</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Tunnel地址:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_tunnelAddress">
+   <property name="geometry">
+    <rect>
+     <x>293</x>
+     <y>189</y>
+     <width>271</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>1111</string>
+   </property>
+  </widget>
   <zorder>label_back</zorder>
   <zorder>label_title</zorder>
   <zorder>label_1</zorder>
   <zorder>label_number</zorder>
-  <zorder>label_addressTitle</zorder>
   <zorder>label_2</zorder>
   <zorder>label_fee</zorder>
   <zorder>toolButton_close</zorder>
@@ -353,6 +374,8 @@ border-radius:15px;</string>
   <zorder>toolButton_confirm</zorder>
   <zorder>label_tip</zorder>
   <zorder>label_marktip</zorder>
+  <zorder>label_addressTitle_2</zorder>
+  <zorder>label_tunnelAddress</zorder>
  </widget>
  <resources/>
  <connections/>
