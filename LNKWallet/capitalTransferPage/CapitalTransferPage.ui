@@ -28,7 +28,7 @@
   <widget class="QLabel" name="label_title">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>222</x>
      <y>110</y>
      <width>121</width>
      <height>26</height>
@@ -53,7 +53,7 @@
   <widget class="QLabel" name="label_1">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>222</x>
      <y>150</y>
      <width>131</width>
      <height>16</height>
@@ -66,7 +66,7 @@
   <widget class="QLabel" name="label_number">
    <property name="geometry">
     <rect>
-     <x>360</x>
+     <x>352</x>
      <y>150</y>
      <width>171</width>
      <height>20</height>
@@ -79,7 +79,7 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>222</x>
      <y>273</y>
      <width>150</width>
      <height>16</height>
@@ -92,7 +92,7 @@
   <widget class="QLabel" name="label_fee">
    <property name="geometry">
     <rect>
-     <x>309</x>
+     <x>301</x>
      <y>363</y>
      <width>171</width>
      <height>20</height>
@@ -130,7 +130,7 @@
   <widget class="QRadioButton" name="radioButton_deposit">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>222</x>
      <y>298</y>
      <width>80</width>
      <height>18</height>
@@ -152,7 +152,7 @@
   <widget class="QRadioButton" name="radioButton_withdraw">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>222</x>
      <y>326</y>
      <width>80</width>
      <height>18</height>
@@ -174,7 +174,7 @@
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>222</x>
      <y>230</y>
      <width>101</width>
      <height>16</height>
@@ -187,7 +187,7 @@
   <widget class="QLineEdit" name="lineEdit_number">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>302</x>
      <y>228</y>
      <width>251</width>
      <height>21</height>
@@ -206,7 +206,7 @@
   <widget class="QLineEdit" name="lineEdit_address">
    <property name="geometry">
     <rect>
-     <x>310</x>
+     <x>302</x>
      <y>316</y>
      <width>251</width>
      <height>31</height>
@@ -225,7 +225,7 @@
   <widget class="QLabel" name="label_5">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>222</x>
      <y>363</y>
      <width>100</width>
      <height>16</height>
@@ -263,7 +263,7 @@
   <widget class="QLabel" name="label_tip">
    <property name="geometry">
     <rect>
-     <x>314</x>
+     <x>306</x>
      <y>250</y>
      <width>241</width>
      <height>41</height>
@@ -283,9 +283,9 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QLabel" name="label_marktip">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>114</y>
-     <width>161</width>
+     <x>330</x>
+     <y>110</y>
+     <width>171</width>
      <height>20</height>
     </rect>
    </property>
@@ -317,7 +317,7 @@ border-radius:15px;</string>
   <widget class="QLabel" name="label_addressTitle_2">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>222</x>
      <y>190</y>
      <width>81</width>
      <height>16</height>
@@ -339,9 +339,9 @@ border-radius:15px;</string>
   <widget class="QLabel" name="label_tunnelAddress">
    <property name="geometry">
     <rect>
-     <x>301</x>
+     <x>293</x>
      <y>189</y>
-     <width>261</width>
+     <width>271</width>
      <height>20</height>
     </rect>
    </property>
