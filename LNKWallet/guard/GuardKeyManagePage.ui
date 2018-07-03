@@ -162,7 +162,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>90</y>
+     <y>95</y>
      <width>100</width>
      <height>20</height>
     </rect>
@@ -186,7 +186,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>110</y>
+     <y>115</y>
      <width>111</width>
      <height>30</height>
     </rect>
@@ -210,7 +210,7 @@
     <rect>
      <x>70</x>
      <y>50</y>
-     <width>200</width>
+     <width>300</width>
      <height>26</height>
     </rect>
    </property>
@@ -227,7 +227,7 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>Guard账户信息</string>
+    <string>Guard私钥管理</string>
    </property>
   </widget>
   <widget class="QToolButton" name="historyBtn">
@@ -288,6 +288,36 @@
    </property>
    <property name="text">
     <string>导入跨链私钥</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="changeAddressBtn">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>120</y>
+     <width>90</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>变更多签地址</string>
    </property>
   </widget>
  </widget>

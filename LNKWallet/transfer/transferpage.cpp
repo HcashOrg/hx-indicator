@@ -519,7 +519,7 @@ void TransferPage::updateAmountSlots()
      if(!isFindAmmount)
      {
          ui->amountLineEdit->setEnabled(false);
-         ui->amountLineEdit->setPlaceholderText(tr("cannot find asset!"));
+         ui->amountLineEdit->setPlaceholderText(tr("Max: %1").arg(0));
          return;
      }
      ui->amountLineEdit->setEnabled(true);
@@ -570,4 +570,16 @@ void TransferPage::paintEvent(QPaintEvent *event)
 
 
     QWidget::paintEvent(event);
+}
+
+void TransferPage::on_amountLineEdit_textEdited(const QString &arg1)
+{
+    QString assetId = UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText());
+    AssetAmount assetAmount = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).assetAmountMap.value(assetId);
+    QString amountStr = getBigNumberString(assetAmount.amount, UBChain::getInstance()->assetInfoMap.value(assetId).precision);
+
+    if(ui->amountLineEdit->text().toDouble() > amountStr.toDouble())
+    {
+        ui->amountLineEdit->setText(amountStr);
+    }
 }

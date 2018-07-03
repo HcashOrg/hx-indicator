@@ -34,9 +34,12 @@ private slots:
 
     void on_typeComboBox_currentIndexChanged(const QString &arg1);
 
+    void on_amountLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::ColdHotTransferDialog *ui;
     HttpManager httpManager;
+    double queriedBalance = 0;
 
     void showAddresses();
     void queryMultisigBalance();

@@ -173,7 +173,7 @@
         </size>
        </property>
        <property name="text">
-        <string>guard</string>
+        <string>Guard</string>
        </property>
        <property name="toolButtonStyle">
         <enum>Qt::ToolButtonIconOnly</enum>

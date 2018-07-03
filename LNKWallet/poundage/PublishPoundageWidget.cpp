@@ -67,7 +67,8 @@ void PublishPoundageWidget::ConfirmPublishSlots()
 void PublishPoundageWidget::ChangeAccountSlots()
 {
     ui->lineEdit_source->clear();
-    AccountInfo accountInfo = ui->comboBox_accounts->currentData(Qt::UserRole).value<AccountInfo>();
+//    AccountInfo accountInfo = ui->comboBox_accounts->currentData(Qt::UserRole).value<AccountInfo>();
+    AccountInfo accountInfo = UBChain::getInstance()->accountInfoMap.value(ui->comboBox_accounts->currentText());
 
     if(accountInfo.assetAmountMap.empty())
     {
@@ -79,7 +80,16 @@ void PublishPoundageWidget::ChangeAccountSlots()
     {
         if(it.key() == "1.3.0")
         {
-            installDoubleValidator(ui->lineEdit_source,0,it.value().amount/pow(10.,ASSET_PRECISION),ASSET_PRECISION);
+//            installDoubleValidator(ui->lineEdit_source,0,it.value().amount/pow(10.,ASSET_PRECISION),ASSET_PRECISION);
+
+            QString amountStr = getBigNumberString(it.value().amount, ASSET_PRECISION);
+            ui->lineEdit_source->setPlaceholderText(tr("Max: %1 %2").arg(amountStr).arg(ASSET_NAME) );
+
+            QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(ASSET_PRECISION));
+            QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
+            ui->lineEdit_source->setValidator(pReg1);
+            ui->lineEdit_source->clear();
+
             ui->lineEdit_source->setEnabled(true);
             break;
         }
@@ -189,4 +199,17 @@ void PublishPoundageWidget::installDoubleValidator(QLineEdit *editor, double min
     validator->setNotation(QDoubleValidator::StandardNotation);
     editor->setValidator(validator);
     editor->setPlaceholderText(tr("max:")+QString::number(validator->top(),'f',pre));
+}
+
+void PublishPoundageWidget::on_lineEdit_source_textEdited(const QString &arg1)
+{
+
+    QString assetId = UBChain::getInstance()->getAssetId(ASSET_NAME);
+    AssetAmount assetAmount = UBChain::getInstance()->accountInfoMap.value(ui->comboBox_accounts->currentText()).assetAmountMap.value(assetId);
+    QString amountStr = getBigNumberString(assetAmount.amount, ASSET_PRECISION);
+
+    if(ui->lineEdit_source->text().toDouble() > amountStr.toDouble())
+    {
+        ui->lineEdit_source->setText(amountStr);
+    }
 }

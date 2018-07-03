@@ -63,6 +63,8 @@ private slots:
     void updateAmountSlots();
 
     //void checkStateChangedSlots(int state);
+    void on_amountLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::TransferPage *ui;
     QString accountName;

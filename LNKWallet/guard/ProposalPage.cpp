@@ -76,7 +76,7 @@ void ProposalPage::showProposals()
 
         ProposalInfo info = UBChain::getInstance()->proposalInfoMap.value(keys.at(i));
 
-        ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(info.expirationTime.replace("T"," ")));
+        ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(info.expirationTime.replace("T","\n")));
         ui->proposalTableWidget->item(i,0)->setData(Qt::UserRole,info.proposalId);
 
         ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(UBChain::getInstance()->guardAccountIdToName(info.proposer)));
@@ -84,7 +84,7 @@ void ProposalPage::showProposals()
         QString typeStr;
         if(info.proposalOperationType == 66)
         {
-            typeStr = tr("hot-cold trx");
+            typeStr = tr("cold-hot trx");
         }
         else if(info.proposalOperationType == 74)
         {

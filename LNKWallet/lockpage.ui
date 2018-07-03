@@ -67,7 +67,7 @@
   <widget class="QLabel" name="tipLabel">
    <property name="geometry">
     <rect>
-     <x>285</x>
+     <x>310</x>
      <y>330</y>
      <width>200</width>
      <height>20</height>

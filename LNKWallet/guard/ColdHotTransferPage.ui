@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>130</y>
+     <y>160</y>
      <width>670</width>
-     <height>320</height>
+     <height>280</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -65,7 +65,7 @@
     <enum>Qt::SolidLine</enum>
    </property>
    <attribute name="horizontalHeaderVisible">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>
@@ -153,8 +153,8 @@
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>80</y>
+     <x>70</x>
+     <y>115</y>
      <width>111</width>
      <height>30</height>
     </rect>
@@ -176,8 +176,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>60</y>
+     <x>70</x>
+     <y>95</y>
      <width>100</width>
      <height>20</height>
     </rect>
@@ -201,7 +201,7 @@
    <property name="geometry">
     <rect>
      <x>620</x>
-     <y>90</y>
+     <y>120</y>
      <width>90</width>
      <height>20</height>
     </rect>
@@ -225,6 +225,31 @@
    </property>
    <property name="text">
     <string>发起资产变更</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="title_label">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>50</y>
+     <width>200</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>资产变更</string>
    </property>
   </widget>
  </widget>

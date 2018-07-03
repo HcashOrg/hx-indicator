@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FeedPriceDialog</class>
- <widget class="QDialog" name="FeedPriceDialog">
+ <class>ChangeCrosschainAddressDialog</class>
+ <widget class="QDialog" name="ChangeCrosschainAddressDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -33,9 +33,9 @@
     <property name="geometry">
      <rect>
       <x>280</x>
-      <y>120</y>
+      <y>100</y>
       <width>400</width>
-      <height>340</height>
+      <height>380</height>
      </rect>
     </property>
     <property name="font">
@@ -52,7 +52,7 @@
      <property name="geometry">
       <rect>
        <x>250</x>
-       <y>280</y>
+       <y>320</y>
        <width>100</width>
        <height>30</height>
       </rect>
@@ -74,179 +74,7 @@
       <string>关闭</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>70</y>
-       <width>120</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
-
-</string>
-     </property>
-     <property name="text">
-      <string>喂价币种</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="assetLabel">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>90</y>
-       <width>120</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="accountComboBox">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>150</y>
-       <width>120</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>微软雅黑</family>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>130</y>
-       <width>120</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>微软雅黑</family>
-       <pointsize>-1</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
-
-</string>
-     </property>
-     <property name="text">
-      <string>喂价账户</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="okBtn">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>280</y>
-       <width>100</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>Microsoft YaHei UI Light</family>
-       <weight>50</weight>
-       <bold>false</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>喂价</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_4">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>200</y>
-       <width>120</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
-
-</string>
-     </property>
-     <property name="text">
-      <string>喂价比例</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="quoteLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>220</y>
-       <width>120</width>
-       <height>30</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="assetLabel_2">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>220</y>
-       <width>100</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>: 1</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="noAcountLabel">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>150</y>
-       <width>150</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(255,0,0);}
-
-</string>
-     </property>
-     <property name="text">
-      <string>钱包内没有喂价账户</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_12">
+    <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
        <x>30</x>
@@ -270,32 +98,16 @@
 </string>
      </property>
      <property name="text">
-      <string>喂价</string>
+      <string>变更多签地址</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="currentRateLabel">
+    <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>220</x>
-       <y>90</y>
-       <width>120</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>220</x>
+       <x>30</x>
        <y>70</y>
        <width>120</width>
        <height>20</height>
@@ -307,22 +119,216 @@
 </string>
      </property>
      <property name="text">
-      <string>当前比例</string>
+      <string>币种</string>
      </property>
     </widget>
-    <zorder>noAcountLabel</zorder>
-    <zorder>closeBtn</zorder>
-    <zorder>label_2</zorder>
-    <zorder>assetLabel</zorder>
-    <zorder>accountComboBox</zorder>
-    <zorder>label_3</zorder>
-    <zorder>okBtn</zorder>
-    <zorder>label_4</zorder>
-    <zorder>quoteLineEdit</zorder>
-    <zorder>assetLabel_2</zorder>
-    <zorder>label_12</zorder>
-    <zorder>currentRateLabel</zorder>
-    <zorder>label_5</zorder>
+    <widget class="QComboBox" name="accountComboBox">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>90</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>70</y>
+       <width>120</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+     </property>
+     <property name="text">
+      <string>发起账户</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="okBtn">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>320</y>
+       <width>100</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Microsoft YaHei UI Light</family>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>确定</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="assetComboBox">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>90</y>
+       <width>120</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>130</y>
+       <width>200</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+     </property>
+     <property name="text">
+      <string>最新热钱包地址</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="hotAddressLabel">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>150</y>
+       <width>300</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="coldAddressLabel">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>200</y>
+       <width>300</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>180</y>
+       <width>200</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+     </property>
+     <property name="text">
+      <string>最新冷钱包地址</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="timeLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>260</y>
+       <width>120</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>86400</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>240</y>
+       <width>120</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+     </property>
+     <property name="text">
+      <string>终止确认时间（秒）</string>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

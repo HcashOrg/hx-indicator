@@ -18,6 +18,8 @@ public:
     void init();
 
     void showAssetsPrice();
+
+    void refresh();
 private slots:
     void jsonDataUpdated(QString id);
 

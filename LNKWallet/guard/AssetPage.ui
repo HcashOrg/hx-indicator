@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>110</y>
+     <y>120</y>
      <width>670</width>
      <height>320</height>
     </rect>
@@ -65,7 +65,7 @@
     <enum>Qt::SolidLine</enum>
    </property>
    <attribute name="horizontalHeaderVisible">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>
@@ -162,7 +162,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>40</y>
+     <y>50</y>
      <width>200</width>
      <height>26</height>
     </rect>

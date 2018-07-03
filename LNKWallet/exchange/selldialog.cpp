@@ -159,8 +159,13 @@ void SellDialog::on_okBtn_clicked()
         return;
     }
 
-    if(ui->sellAmountLineEdit->text().toDouble() <= 0)  return;
-    if(ui->buyAmountLineEdit->text().toDouble() <= 0)  return;
+    if(ui->sellAmountLineEdit->text().toDouble() <= 0 || ui->buyAmountLineEdit->text().toDouble() <= 0)
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText(tr("The amount can not be 0!"));
+        commonDialog.pop();
+        return;
+    }
 
     UBChain::getInstance()->postRPC( "id-unlock-SellDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
@@ -212,6 +217,7 @@ void SellDialog::on_closeBtn_clicked()
 
 void SellDialog::estimateContractFee()
 {
+    feeChoose->updateFeeNumberSlots(0);
     if(ui->sellAmountLineEdit->text().toDouble() <= 0)  return;
     if(ui->buyAmountLineEdit->text().toDouble() <= 0)  return;
 
@@ -230,6 +236,21 @@ void SellDialog::estimateContractFee()
 
 void SellDialog::on_sellAmountLineEdit_textChanged(const QString &arg1)
 {
+    ExchangeContractBalances balances = UBChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text());
+    unsigned long long balanceAmount = 0;
+    if(balances.contains(ui->assetComboBox->currentText()))
+    {
+        balanceAmount = balances.value(ui->assetComboBox->currentText());
+    }
+
+    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    QString balanceStr = getBigNumberString(balanceAmount,assetInfo.precision);
+    if(ui->sellAmountLineEdit->text().toDouble() > balanceStr.toDouble())
+    {
+        ui->sellAmountLineEdit->setText(balanceStr);
+        return;
+    }
+
     estimateContractFee();
 }
 

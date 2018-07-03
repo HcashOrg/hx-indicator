@@ -28,8 +28,8 @@ FeedPricePage::FeedPricePage(QWidget *parent) :
     ui->assetPriceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->assetPriceTableWidget->setColumnWidth(0,140);
-    ui->assetPriceTableWidget->setColumnWidth(1,140);
-    ui->assetPriceTableWidget->setColumnWidth(2,140);
+    ui->assetPriceTableWidget->setColumnWidth(1,210);
+    ui->assetPriceTableWidget->setColumnWidth(2,210);
     ui->assetPriceTableWidget->setColumnWidth(3,100);
     ui->assetPriceTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
@@ -73,7 +73,7 @@ void FeedPricePage::showAssetsPrice()
         AssetInfo info = UBChain::getInstance()->assetInfoMap.value(keys.at(i));
 
         ui->assetPriceTableWidget->setItem(i, 0, new QTableWidgetItem(info.symbol));
-        ui->assetPriceTableWidget->setItem(i, 1, new QTableWidgetItem(info.currentFeedTime));
+        ui->assetPriceTableWidget->setItem(i, 1, new QTableWidgetItem(info.currentFeedTime.replace("T"," ")));
         ui->assetPriceTableWidget->setItem(i, 3, new QTableWidgetItem(tr("feed")));
 
         QString str = QString("%1:%2").arg(info.quoteAmount.amount).arg(info.baseAmount.amount);
@@ -110,6 +110,11 @@ void FeedPricePage::showAssetsPrice()
     }
 }
 
+void FeedPricePage::refresh()
+{
+    showAssetsPrice();
+}
+
 void FeedPricePage::jsonDataUpdated(QString id)
 {
 
@@ -128,8 +133,9 @@ void FeedPricePage::on_assetPriceTableWidget_cellClicked(int row, int column)
 {
     if(column == 3)
     {
-        FeedPriceDialog feedPriceDialog;
-        feedPriceDialog.setAsset(ui->assetPriceTableWidget->item(row,0)->text());
+        FeedPriceDialog feedPriceDialog(ui->assetPriceTableWidget->item(row,0)->text());
         feedPriceDialog.pop();
+
+        refresh();
     }
 }

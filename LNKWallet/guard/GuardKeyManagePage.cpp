@@ -11,6 +11,7 @@
 #include "dialog/TransactionResultDialog.h"
 #include "dialog/ErrorResultDialog.h"
 #include "AssetChangeHistoryWidget.h"
+#include "ChangeCrosschainAddressDialog.h"
 
 
 GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
@@ -34,16 +35,17 @@ GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
     ui->multisigTableWidget->horizontalHeader()->setVisible(true);
     ui->multisigTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->multisigTableWidget->setColumnWidth(0,140);
-    ui->multisigTableWidget->setColumnWidth(1,120);
-    ui->multisigTableWidget->setColumnWidth(2,120);
+    ui->multisigTableWidget->setColumnWidth(0,120);
+    ui->multisigTableWidget->setColumnWidth(1,140);
+    ui->multisigTableWidget->setColumnWidth(2,140);
     ui->multisigTableWidget->setColumnWidth(3,100);
-    ui->multisigTableWidget->setColumnWidth(4,90);
-    ui->multisigTableWidget->setColumnWidth(5,90);
+    ui->multisigTableWidget->setColumnWidth(4,80);
+    ui->multisigTableWidget->setColumnWidth(5,80);
     ui->multisigTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->historyBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->importBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->changeAddressBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     init();
 }
@@ -316,4 +318,10 @@ void GuardKeyManagePage::on_importBtn_clicked()
 
     UBChain::getInstance()->postRPC( "finish-import_crosschain_key", toJsonFormat( "import_crosschain_key",
                             QJsonArray() ));
+}
+
+void GuardKeyManagePage::on_changeAddressBtn_clicked()
+{
+    ChangeCrosschainAddressDialog changeCrosschainAddressDialog;
+    changeCrosschainAddressDialog.pop();
 }

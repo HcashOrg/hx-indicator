@@ -50,7 +50,7 @@
 #define ASSET_NAME "LNK"
 #define ACCOUNT_ADDRESS_PREFIX  "LNK"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.0.2"           // 版本号
+#define WALLET_VERSION "1.0.3"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "f138267ad4c454097a06fb2d80518ea7e8ef7370"
 
@@ -61,9 +61,9 @@
 #endif
 
 #ifdef  WIN32
-#define WALLET_EXE_FILE     "UB"WALLET_EXE_SUFFIX".exe"
+#define WALLET_EXE_FILE     "LNK"WALLET_EXE_SUFFIX".exe"
 #else
-#define WALLET_EXE_FILE     "./UB"WALLET_EXE_SUFFIX
+#define WALLET_EXE_FILE     "./LNK"WALLET_EXE_SUFFIX
 #endif
 
 
@@ -138,7 +138,7 @@ struct AssetInfo
     QString issuer;
     int precision;
     unsigned long long maxSupply;
-    QStringList feeders;
+    QStringList publishers;
     AssetAmount baseAmount;
     AssetAmount quoteAmount;
     QString currentFeedTime;
@@ -146,7 +146,7 @@ struct AssetInfo
     QString multisigAddressId;
     QString hotAddress;     // 热钱包地址
     QString coldAddress;    // 冷钱包地址
-    int     effectiveBlock; // 生效区块
+    int     effectiveBlock = -1; // 生效区块
 };
 
 struct GuardInfo

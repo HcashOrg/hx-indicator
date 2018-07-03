@@ -308,7 +308,7 @@ void MainPage::init()
 {
 //    refreshOrNot = false;
 
-    updateAccountList();
+//    updateAccountList();
 
 //    refreshOrNot = true;
 
@@ -535,7 +535,7 @@ void MainPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
     if(!inited)     return;
     UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
 
-    updateAccountList();
+    refresh();
 }
 
 void MainPage::on_copyBtn_clicked()

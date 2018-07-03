@@ -473,11 +473,17 @@ void UBChain::parseAccountInfo()
             QJsonArray resultArray = resultValue.toArray();
             for( int i = 0; i < resultArray.size(); i++)
             {
-                AccountInfo accountInfo;
-
                 QJsonObject object = resultArray.at(i).toObject();
+                QString name = object.take("name").toString();
+
+                AccountInfo accountInfo;
+                if(accountInfoMap.contains(name))
+                {
+                    accountInfo = accountInfoMap.value(name);
+                }
+
                 accountInfo.id = object.take("id").toString();
-                accountInfo.name = object.take("name").toString();
+                accountInfo.name = name;
                 accountInfo.address = object.take("addr").toString();
 
                 if(formalGuardMap.contains(accountInfo.name))

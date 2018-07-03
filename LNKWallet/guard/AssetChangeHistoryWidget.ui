@@ -37,7 +37,7 @@
    </column>
    <column>
     <property name="text">
-     <string>多签地址（热钱包）</string>
+     <string>热钱包多签地址</string>
     </property>
     <property name="font">
      <font>
@@ -50,7 +50,7 @@
    </column>
    <column>
     <property name="text">
-     <string>多签地址（冷钱包）</string>
+     <string>冷钱包多签地址</string>
     </property>
     <property name="font">
      <font>
@@ -181,7 +181,7 @@
     <string notr="true">color: rgb(192, 196, 212);</string>
    </property>
    <property name="text">
-    <string>当前资产</string>
+    <string>币种</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -192,7 +192,7 @@
     <rect>
      <x>70</x>
      <y>40</y>
-     <width>200</width>
+     <width>300</width>
      <height>26</height>
     </rect>
    </property>

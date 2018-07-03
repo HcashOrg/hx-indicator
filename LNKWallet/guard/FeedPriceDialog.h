@@ -12,12 +12,10 @@ class FeedPriceDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit FeedPriceDialog(QWidget *parent = 0);
+    explicit FeedPriceDialog( QString _assetSymbol, QWidget *parent = 0);
     ~FeedPriceDialog();
 
     void pop();
-
-    void setAsset(QString _assetSymbol);
 
     void init();
 

@@ -35,7 +35,7 @@ ProposalDetailDialog::ProposalDetailDialog(QWidget *parent) :
     ui->voteStateTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->voteStateTableWidget->setColumnWidth(0,300);
-    ui->voteStateTableWidget->setColumnWidth(1,90);
+    ui->voteStateTableWidget->setColumnWidth(1,80);
     ui->voteStateTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->stackedWidget->setCurrentIndex(0);
@@ -113,7 +113,7 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
     {
     case 66:
     {
-        ui->typeLabel->setText(tr("hot-cold transfer"));
+        ui->typeLabel->setText(tr("cold-hot trx"));
         ui->typeStackedWidget->setCurrentIndex(0);
 
         QJsonObject operationObject = object.take("operations").toArray().at(0).toArray().at(1).toObject();

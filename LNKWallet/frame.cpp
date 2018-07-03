@@ -793,6 +793,9 @@ void Frame::autoRefresh()
     case 13:
         proposalPage->refresh();
         break;
+    case 15:
+        feedPricePage->refresh();
+        break;
     default:
         break;
     }
@@ -1444,6 +1447,13 @@ void Frame::jsonDataUpdated(QString id)
 
 
                             // 喂价相关
+                            QJsonArray publisherArray = object.take("publishers").toArray();
+                            assetInfo.publishers.clear();
+                            foreach (QJsonValue v, publisherArray)
+                            {
+                                assetInfo.publishers += v.toString();
+                            }
+
                             assetInfo.currentFeedTime = object.take("current_feed_publication_time").toString();
                             QJsonObject currentFeedObject = object.take("current_feed").toObject();
                             QJsonObject settlementPriceObject = currentFeedObject.take("settlement_price").toObject();

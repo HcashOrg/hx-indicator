@@ -130,9 +130,27 @@ void LockToMinerDialog::on_assetComboBox_currentIndexChanged(const QString &arg1
     QString amountStr = getBigNumberString(assetAmount.amount, UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString()).precision);
 
     ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(amountStr).arg(ui->assetComboBox->currentText()) );
+
+    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(assetInfo.precision));
+    QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
+    ui->amountLineEdit->setValidator(pReg1);
+    ui->amountLineEdit->clear();
 }
 
 void LockToMinerDialog::on_closeBtn_clicked()
 {
     close();
+}
+
+void LockToMinerDialog::on_amountLineEdit_textEdited(const QString &arg1)
+{
+    QString assetId = UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText());
+    AssetAmount assetAmount = UBChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap.value(assetId);
+    QString amountStr = getBigNumberString(assetAmount.amount, UBChain::getInstance()->assetInfoMap.value(assetId).precision);
+
+    if(ui->amountLineEdit->text().toDouble() > amountStr.toDouble())
+    {
+        ui->amountLineEdit->setText(amountStr);
+    }
 }

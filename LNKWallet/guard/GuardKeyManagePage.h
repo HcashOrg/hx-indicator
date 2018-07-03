@@ -36,6 +36,8 @@ private slots:
 
     void on_importBtn_clicked();
 
+    void on_changeAddressBtn_clicked();
+
 private:
     Ui::GuardKeyManagePage *ui;
     bool inited = false;

@@ -162,7 +162,8 @@ SOURCES += main.cpp\
     guard/ColdHotTransferPage.cpp \
     guard/ColdHotTransferDialog.cpp \
     guard/GuardAccountPage.cpp \
-    guard/GuardIncomePage.cpp
+    guard/GuardIncomePage.cpp \
+    guard/ChangeCrosschainAddressDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -296,7 +297,8 @@ HEADERS  += firstlogin.h \
     guard/ColdHotTransferPage.h \
     guard/ColdHotTransferDialog.h \
     guard/GuardAccountPage.h \
-    guard/GuardIncomePage.h
+    guard/GuardIncomePage.h \
+    guard/ChangeCrosschainAddressDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -400,7 +402,8 @@ FORMS    += firstlogin.ui \
     guard/ColdHotTransferPage.ui \
     guard/ColdHotTransferDialog.ui \
     guard/GuardAccountPage.ui \
-    guard/GuardIncomePage.ui
+    guard/GuardIncomePage.ui \
+    guard/ChangeCrosschainAddressDialog.ui
 
 win32{
     DISTFILES += logo.rc

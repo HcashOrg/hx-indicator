@@ -34,6 +34,8 @@ private slots:
 
     void on_closeBtn_clicked();
 
+    void on_amountLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::LockToMinerDialog *ui;
 };

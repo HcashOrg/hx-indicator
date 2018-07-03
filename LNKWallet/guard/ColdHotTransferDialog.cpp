@@ -78,6 +78,8 @@ void ColdHotTransferDialog::jsonDataUpdated(QString id)
 
         if( result.startsWith("\"result\":{"))             // 成功
         {
+            close();
+
             TransactionResultDialog transactionResultDialog;
             transactionResultDialog.setInfoText(tr("Transaction of cold-hot-trx proposal has been sent out. You can check the voting state in the proposal page."));
             transactionResultDialog.setDetailText(result);
@@ -97,22 +99,20 @@ void ColdHotTransferDialog::jsonDataUpdated(QString id)
 
 void ColdHotTransferDialog::httpReplied(QByteArray _data, int _status)
 {
-    qDebug() << "hhhhhhhh " << _data << _status;
-
-
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
     QString assetSymbol = object.take("chainId").toString().toUpper();
     if(assetSymbol != ui->assetComboBox->currentText())     return;
 
     AssetInfo info = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(assetSymbol));
-    double balance = object.take("balance").toDouble();
-    qDebug() << assetSymbol << info.symbol << balance << info.precision << QString::number(balance, 'g', info.precision);
+    queriedBalance = object.take("balance").toDouble();
+    qDebug() << assetSymbol << info.symbol << queriedBalance << info.precision << QString::number(queriedBalance, 'g', info.precision);
 
-    QDoubleValidator *validator = new QDoubleValidator(0, balance, info.precision);
-    validator->setNotation(QDoubleValidator::StandardNotation);
-    ui->amountLineEdit->setValidator(validator);
+    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(info.precision));
+    QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
+    ui->amountLineEdit->setValidator(pReg1);
+    ui->amountLineEdit->clear();
 
-    ui->amountLineEdit->setPlaceholderText(tr("max:") + QString::number(balance, 'f', info.precision));
+    ui->amountLineEdit->setPlaceholderText(tr("max:") + QString::number(queriedBalance, 'f', info.precision));
 //    ui->amountLineEdit->setPlaceholderText("ssss");
 }
 
@@ -173,4 +173,13 @@ void ColdHotTransferDialog::queryMultisigBalance()
     paramObject.insert("addr",ui->fromLabel->text());
     object.insert("params",paramObject);
     httpManager.post(UBChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+}
+
+void ColdHotTransferDialog::on_amountLineEdit_textEdited(const QString &arg1)
+{
+    AssetInfo info = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    if(ui->amountLineEdit->text().toDouble() > queriedBalance)
+    {
+        ui->amountLineEdit->setText(QString::number(queriedBalance, 'f', info.precision));
+    }
 }
