@@ -5,6 +5,8 @@
 #include "dialog/TransactionResultDialog.h"
 #include "dialog/ErrorResultDialog.h"
 
+#include "QtMath"
+
 FeedPriceDialog::FeedPriceDialog( QString _assetSymbol, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FeedPriceDialog)
@@ -79,9 +81,14 @@ void FeedPriceDialog::init()
         ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
     }
 
-    QString str = QString("%1:%2").arg(assetInfo.quoteAmount.amount).arg(assetInfo.baseAmount.amount);
+    QString str = QString("%1 : %2").arg( getBigNumberString(assetInfo.quoteAmount.amount, ASSET_PRECISION))
+            .arg( getBigNumberString(assetInfo.baseAmount.amount, assetInfo.precision));
     ui->currentRateLabel->setText(str);
 
+
+    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,5})?$|(^\\t?$)"));
+    QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
+    ui->quoteLineEdit->setValidator(pReg1);
 }
 
 void FeedPriceDialog::jsonDataUpdated(QString id)
@@ -119,11 +126,13 @@ void FeedPriceDialog::on_okBtn_clicked()
         return;
     }
 
+
+    AssetInfo baseAssetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetLabel->text()));
     QJsonObject baseObject;
-    baseObject.insert("amount", 1);
-    baseObject.insert("asset_id", UBChain::getInstance()->getAssetId(ui->assetLabel->text()));
+    baseObject.insert("amount", QString::number( qPow(10, baseAssetInfo.precision), 'f', 0));
+    baseObject.insert("asset_id", baseAssetInfo.id);
     QJsonObject quoteObject;
-    quoteObject.insert("amount", ui->quoteLineEdit->text().toInt());
+    quoteObject.insert("amount", QString::number(ui->quoteLineEdit->text().toDouble() * qPow(10,ASSET_PRECISION), 'f', 0));
     quoteObject.insert("asset_id", "1.3.0");
     QJsonObject settlementPriceObject;
     settlementPriceObject.insert("base", baseObject);
@@ -135,9 +144,17 @@ void FeedPriceDialog::on_okBtn_clicked()
 
     UBChain::getInstance()->postRPC( "id-publish_normal_asset_feed", toJsonFormat( "publish_normal_asset_feed",
                             QJsonArray() << ui->accountComboBox->currentText() << ui->assetLabel->text() << object << true));
+
+    qDebug() << toJsonFormat( "publish_normal_asset_feed",
+                              QJsonArray() << ui->accountComboBox->currentText() << ui->assetLabel->text() << object << true);
 }
 
 void FeedPriceDialog::on_closeBtn_clicked()
 {
     close();
+}
+
+void FeedPriceDialog::on_quoteLineEdit_textEdited(const QString &arg1)
+{
+
 }

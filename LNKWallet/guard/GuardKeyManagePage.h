@@ -19,6 +19,7 @@ public:
 
     void showMultisigInfo();
 
+    void refresh();
 
 signals:
     void backBtnVisible(bool isShow);

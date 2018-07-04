@@ -790,11 +790,20 @@ void Frame::autoRefresh()
         break;
     case 10:
         multiSigTransactionPage->refresh();
+    case 12:
+        guardKeyManagePage->refresh();
+        break;
     case 13:
         proposalPage->refresh();
         break;
+    case 14:
+        withdrawConfirmPage->refresh();
+        break;
     case 15:
         feedPricePage->refresh();
+        break;
+    case 16:
+        coldHotTransferPage->refresh();
         break;
     default:
         break;

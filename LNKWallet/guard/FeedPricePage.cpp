@@ -76,7 +76,8 @@ void FeedPricePage::showAssetsPrice()
         ui->assetPriceTableWidget->setItem(i, 1, new QTableWidgetItem(info.currentFeedTime.replace("T"," ")));
         ui->assetPriceTableWidget->setItem(i, 3, new QTableWidgetItem(tr("feed")));
 
-        QString str = QString("%1:%2").arg(info.quoteAmount.amount).arg(info.baseAmount.amount);
+        QString str = QString("%1 : %2").arg( getBigNumberString(info.quoteAmount.amount, ASSET_PRECISION))
+                .arg( getBigNumberString(info.baseAmount.amount, info.precision));
         ui->assetPriceTableWidget->setItem(i, 2, new QTableWidgetItem(str));
 
 

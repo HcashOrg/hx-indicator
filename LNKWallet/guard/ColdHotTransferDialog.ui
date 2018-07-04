@@ -242,44 +242,6 @@
       <string>转出地址</string>
      </property>
     </widget>
-    <widget class="QLabel" name="fromLabel">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>190</y>
-       <width>300</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="textInteractionFlags">
-      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="toLabel">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>240</y>
-       <width>300</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="textInteractionFlags">
-      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
@@ -303,7 +265,7 @@
       <rect>
        <x>30</x>
        <y>130</y>
-       <width>120</width>
+       <width>150</width>
        <height>30</height>
       </rect>
      </property>
@@ -322,12 +284,17 @@
      </property>
      <item>
       <property name="text">
-       <string>冷钱包转热钱包</string>
+       <string>当前冷钱包转热钱包</string>
       </property>
      </item>
      <item>
       <property name="text">
-       <string>热钱包转冷钱包</string>
+       <string>当前热钱包转冷钱包</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>其他转账</string>
       </property>
      </item>
     </widget>
@@ -337,7 +304,7 @@
        <x>210</x>
        <y>300</y>
        <width>120</width>
-       <height>20</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="text">
@@ -368,7 +335,7 @@
        <x>30</x>
        <y>300</y>
        <width>140</width>
-       <height>20</height>
+       <height>30</height>
       </rect>
      </property>
     </widget>
@@ -388,6 +355,26 @@
      </property>
      <property name="text">
       <string>数量</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="fromLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>190</y>
+       <width>300</width>
+       <height>30</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="toLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>240</y>
+       <width>300</width>
+       <height>30</height>
+      </rect>
      </property>
     </widget>
    </widget>

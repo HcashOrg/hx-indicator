@@ -26,6 +26,8 @@ private slots:
 
     void on_closeBtn_clicked();
 
+    void on_quoteLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::FeedPriceDialog *ui;
 };

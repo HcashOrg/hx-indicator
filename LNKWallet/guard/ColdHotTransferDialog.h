@@ -36,6 +36,8 @@ private slots:
 
     void on_amountLineEdit_textEdited(const QString &arg1);
 
+    void on_fromLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::ColdHotTransferDialog *ui;
     HttpManager httpManager;
@@ -43,6 +45,7 @@ private:
 
     void showAddresses();
     void queryMultisigBalance();
+    void checkOkBtnEnable();
 };
 
 #endif // COLDHOTTRANSFERDIALOG_H

@@ -170,6 +170,11 @@ void GuardKeyManagePage::showMultisigInfo()
     }
 }
 
+void GuardKeyManagePage::refresh()
+{
+    showMultisigInfo();
+}
+
 void GuardKeyManagePage::jsonDataUpdated(QString id)
 {
     if( id.startsWith("id-update_asset_private_keys"))

@@ -118,13 +118,13 @@ void ColdHotTransferDialog::httpReplied(QByteArray _data, int _status)
 
 void ColdHotTransferDialog::on_okBtn_clicked()
 {
-    if(ui->accountComboBox->currentText().isEmpty() || ui->fromLabel->text().isEmpty() || ui->toLabel->text().isEmpty()
+    if(ui->accountComboBox->currentText().isEmpty() || ui->fromLineEdit->text().isEmpty() || ui->toLineEdit->text().isEmpty()
             || ui->amountLineEdit->text().toDouble() <= 0 || ui->timeLineEdit->text().toInt() <= 0)
         return;
 
     UBChain::getInstance()->postRPC( "id-transfer_from_cold_to_hot", toJsonFormat( "transfer_from_cold_to_hot",
-                                     QJsonArray() << ui->accountComboBox->currentText() << ui->fromLabel->text()
-                                     << ui->toLabel->text() << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                                     QJsonArray() << ui->accountComboBox->currentText() << ui->fromLineEdit->text()
+                                     << ui->toLineEdit->text() << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
                                      << "" << ui->timeLineEdit->text().toInt() << true));
 }
 
@@ -149,13 +149,24 @@ void ColdHotTransferDialog::showAddresses()
 
     if(ui->typeComboBox->currentIndex() == 0)
     {
-        ui->fromLabel->setText(info.coldAddress);
-        ui->toLabel->setText(info.hotAddress);
+        ui->fromLineEdit->setText(info.coldAddress);
+        ui->toLineEdit->setText(info.hotAddress);
+        ui->fromLineEdit->setReadOnly(true);
+        ui->toLineEdit->setReadOnly(true);
+    }
+    else if(ui->typeComboBox->currentIndex() == 1)
+    {
+        ui->fromLineEdit->setText(info.hotAddress);
+        ui->toLineEdit->setText(info.coldAddress);
+        ui->fromLineEdit->setReadOnly(true);
+        ui->toLineEdit->setReadOnly(true);
     }
     else
     {
-        ui->fromLabel->setText(info.hotAddress);
-        ui->toLabel->setText(info.coldAddress);
+        ui->fromLineEdit->clear();
+        ui->toLineEdit->clear();
+        ui->fromLineEdit->setReadOnly(false);
+        ui->toLineEdit->setReadOnly(false);
     }
 
     queryMultisigBalance();
@@ -163,16 +174,29 @@ void ColdHotTransferDialog::showAddresses()
 
 void ColdHotTransferDialog::queryMultisigBalance()
 {
-    if(ui->assetComboBox->currentText().isEmpty() || ui->fromLabel->text().isEmpty()) return;
+    if(ui->assetComboBox->currentText().isEmpty() || ui->fromLineEdit->text().isEmpty()) return;
     QJsonObject object;
     object.insert("jsonrpc","2.0");
     object.insert("id",45);
     object.insert("method","Zchain.Address.GetBalance");
     QJsonObject paramObject;
     paramObject.insert("chainId",ui->assetComboBox->currentText());
-    paramObject.insert("addr",ui->fromLabel->text());
+    paramObject.insert("addr",ui->fromLineEdit->text());
     object.insert("params",paramObject);
     httpManager.post(UBChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+}
+
+void ColdHotTransferDialog::checkOkBtnEnable()
+{
+    if(ui->accountComboBox->currentText().isEmpty() || ui->fromLineEdit->text().isEmpty() || ui->toLineEdit->text().isEmpty()
+            || ui->amountLineEdit->text().toDouble() <= 0 || ui->timeLineEdit->text().toInt() <= 0)
+    {
+        ui->okBtn->setEnabled(false);
+    }
+    else
+    {
+        ui->okBtn->setEnabled(true);
+    }
 }
 
 void ColdHotTransferDialog::on_amountLineEdit_textEdited(const QString &arg1)
@@ -182,4 +206,9 @@ void ColdHotTransferDialog::on_amountLineEdit_textEdited(const QString &arg1)
     {
         ui->amountLineEdit->setText(QString::number(queriedBalance, 'f', info.precision));
     }
+}
+
+void ColdHotTransferDialog::on_fromLineEdit_textEdited(const QString &arg1)
+{
+    queryMultisigBalance();
 }

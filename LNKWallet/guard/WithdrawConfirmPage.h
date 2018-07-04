@@ -42,6 +42,8 @@ public:
 
     void init();
 
+    void refresh();
+
     void fetchCrosschainTransactions();
 
 

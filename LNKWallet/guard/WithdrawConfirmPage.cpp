@@ -59,6 +59,11 @@ void WithdrawConfirmPage::init()
     fetchCrosschainTransactions();
 }
 
+void WithdrawConfirmPage::refresh()
+{
+    fetchCrosschainTransactions();
+}
+
 void WithdrawConfirmPage::fetchCrosschainTransactions()
 {
     UBChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(1), toJsonFormat( "get_crosschain_transaction",
