@@ -990,6 +990,28 @@ void Frame::setLanguage(QString language)
             break;
         case 11:
             showPoundagePage();
+            break;
+        case 12:
+            showKeyManagePage();
+            break;
+        case 13:
+            showProposalPage();
+            break;
+        case 14:
+            showWithdrawConfirmPage();
+            break;
+        case 15:
+            showFeedPricePage();
+            break;
+        case 16:
+            showColdHotTransferPage();
+            break;
+        case 17:
+            showGuardAccountPage();
+            break;
+        case 18:
+            showGuardIncomePage();
+            break;
         default:
             break;
         }

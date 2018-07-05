@@ -339,7 +339,7 @@ void CapitalTransferPage::CreateTransaction()
     }
     else if(extraNumber > 1e-10 && extraNumber < dust_number[_p->symbol])
     {
-        ui->label_tip->setText(tr("balance less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
+        ui->label_tip->setText(tr("balance left should not less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
         ui->label_tip->setVisible(true);
         ui->toolButton_confirm->setEnabled(false);
         return;

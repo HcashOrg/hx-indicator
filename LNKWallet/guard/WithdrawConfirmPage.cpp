@@ -7,6 +7,7 @@
 #include "dialog/TransactionResultDialog.h"
 #include "dialog/ErrorResultDialog.h"
 #include "showcontentdialog.h"
+#include "WithdrawInfoDialog.h"
 
 WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     QWidget(parent),
@@ -28,11 +29,12 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     ui->crosschainTransactionTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->crosschainTransactionTableWidget->setColumnWidth(0,120);
-    ui->crosschainTransactionTableWidget->setColumnWidth(1,120);
-    ui->crosschainTransactionTableWidget->setColumnWidth(2,130);
-    ui->crosschainTransactionTableWidget->setColumnWidth(3,130);
+    ui->crosschainTransactionTableWidget->setColumnWidth(1,100);
+    ui->crosschainTransactionTableWidget->setColumnWidth(2,100);
+    ui->crosschainTransactionTableWidget->setColumnWidth(3,100);
     ui->crosschainTransactionTableWidget->setColumnWidth(4,80);
     ui->crosschainTransactionTableWidget->setColumnWidth(5,80);
+    ui->crosschainTransactionTableWidget->setColumnWidth(6,80);
     ui->crosschainTransactionTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     init();
@@ -191,10 +193,35 @@ void WithdrawConfirmPage::paintEvent(QPaintEvent *)
 
 void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked(int row, int column)
 {
-    if(column == 6)
+    if(column == 5)
     {
         if(ui->crosschainTransactionTableWidget->item(row,0))
         {
+            QString trxId = ui->crosschainTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
+
+            qDebug() << trxId;
+
+            WithdrawInfoDialog withdrawInfoDialog(this);
+            withdrawInfoDialog.setTrxId(trxId);
+            withdrawInfoDialog.pop();
+        }
+
+        return;
+    }
+
+    if(column == 6)
+    {
+        if(ui->crosschainTransactionTableWidget->item(row,0) && ui->crosschainTransactionTableWidget->item(row,4))
+        {
+            if(ui->crosschainTransactionTableWidget->item(row,4)->text() == tr("signed"))
+            {
+                CommonDialog commonDialog(CommonDialog::OkOnly);
+                commonDialog.setText(tr("%1 has already signed!").arg(ui->accountComboBox->currentText()));
+                commonDialog.pop();
+
+                return;
+            }
+
             QString trxId = ui->crosschainTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
 
             QString generatedTrxId = lookupGeneratedTrxByApplyTrxId(trxId);
@@ -238,12 +265,19 @@ void WithdrawConfirmPage::showCrosschainTransactions()
 
         ui->crosschainTransactionTableWidget->setItem(i, 4, new QTableWidgetItem(tr("checking")));
 
-        ui->crosschainTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("sign")));
+        ui->crosschainTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
         ToolButtonWidget *toolButton = new ToolButtonWidget();
         toolButton->setText(ui->crosschainTransactionTableWidget->item(i,5)->text());
 //            toolButton->setBackgroundColor(itemColor);
         ui->crosschainTransactionTableWidget->setCellWidget(i,5,toolButton);
-        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,6));
+        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,5));
+
+        ui->crosschainTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
+        ToolButtonWidget *toolButton2 = new ToolButtonWidget();
+        toolButton2->setText(ui->crosschainTransactionTableWidget->item(i,6)->text());
+//            toolButton->setBackgroundColor(itemColor);
+        ui->crosschainTransactionTableWidget->setCellWidget(i,6,toolButton2);
+        connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,6));
 
 
         for (int j : {0,1,2,3,4})
@@ -271,7 +305,7 @@ void WithdrawConfirmPage::refreshCrosschainTransactionsState()
         QString generatedTrxId = lookupGeneratedTrxByApplyTrxId(trxId);
         QStringList guardAddresses = lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
 
-        QString currentAddress = UBChain::getInstance()->formalGuardMap.value(ui->accountComboBox->currentText()).address;
+        QString currentAddress = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
         if(guardAddresses.contains(currentAddress))
         {
             ui->crosschainTransactionTableWidget->item(i,4)->setText(tr("signed"));

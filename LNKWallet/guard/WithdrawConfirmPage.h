@@ -50,6 +50,8 @@ public:
     QMap<QString,ApplyTransaction> applyTransactionMap;
     QMap<QString,GeneratedTransaction> generatedTransactionMap;
     QMap<QString,SignTransaction>   signTransactionMap;
+    QString lookupGeneratedTrxByApplyTrxId(QString applyTrxId);
+    QStringList lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId);
 
 private slots:
     void jsonDataUpdated(QString id);
@@ -65,9 +67,6 @@ private:
 
     void showCrosschainTransactions();
     void refreshCrosschainTransactionsState();
-
-    QString lookupGeneratedTrxByApplyTrxId(QString applyTrxId);
-    QStringList lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId);
 
     void paintEvent(QPaintEvent*);
 };

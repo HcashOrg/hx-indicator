@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GuardKeyUpdatingInfoDialog</class>
- <widget class="QDialog" name="GuardKeyUpdatingInfoDialog">
+ <class>WithdrawInfoDialog</class>
+ <widget class="QDialog" name="WithdrawInfoDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -33,9 +33,9 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>110</y>
+      <y>80</y>
       <width>380</width>
-      <height>360</height>
+      <height>420</height>
      </rect>
     </property>
     <property name="font">
@@ -52,7 +52,7 @@
      <property name="geometry">
       <rect>
        <x>140</x>
-       <y>310</y>
+       <y>370</y>
        <width>100</width>
        <height>30</height>
       </rect>
@@ -98,7 +98,7 @@
 </string>
      </property>
      <property name="text">
-      <string>更新详情</string>
+      <string>提现详情</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -119,15 +119,15 @@
 </string>
      </property>
      <property name="text">
-      <string>币种</string>
+      <string>提现金额</string>
      </property>
     </widget>
-    <widget class="QLabel" name="assetLabel">
+    <widget class="QLabel" name="amountLabel">
      <property name="geometry">
       <rect>
        <x>40</x>
        <y>70</y>
-       <width>200</width>
+       <width>300</width>
        <height>20</height>
       </rect>
      </property>
@@ -144,7 +144,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>110</y>
+       <y>210</y>
        <width>80</width>
        <height>20</height>
       </rect>
@@ -155,14 +155,14 @@
 </string>
      </property>
      <property name="text">
-      <string>更新状态</string>
+      <string>签名状态</string>
      </property>
     </widget>
     <widget class="QLabel" name="stateLabel">
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>130</y>
+       <y>230</y>
        <width>300</width>
        <height>40</height>
       </rect>
@@ -186,7 +186,7 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>190</y>
+       <y>290</y>
        <width>80</width>
        <height>20</height>
       </rect>
@@ -197,16 +197,16 @@
 </string>
      </property>
      <property name="text">
-      <string>已更新guard</string>
+      <string>已签名guard</string>
      </property>
     </widget>
-    <widget class="QLabel" name="updatedGuardsLabel">
+    <widget class="QLabel" name="signedGuardsLabel">
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>210</y>
+       <y>310</y>
        <width>300</width>
-       <height>60</height>
+       <height>40</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -222,6 +222,84 @@
      </property>
      <property name="wordWrap">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>100</y>
+       <width>80</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(198,202,212);}
+
+</string>
+     </property>
+     <property name="text">
+      <string>申请人</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="withdrawAddressLabel">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>120</y>
+       <width>300</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  14px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="crosschainAddressLabel">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>170</y>
+       <width>300</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  14px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>150</y>
+       <width>80</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(198,202,212);}
+
+</string>
+     </property>
+     <property name="text">
+      <string>提现到地址</string>
      </property>
     </widget>
    </widget>

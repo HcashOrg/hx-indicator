@@ -47,6 +47,12 @@ public:
 
     void refresh();
 
+    QMap<QString,ColdHotTransaction> coldHotTransactionMap;
+    QMap<QString,ColdHotCrosschainTransaction> coldHotCrosschainTransactionMap;
+    QMap<QString,ColdHotSignTransaction> coldHotSignTransactionMap;
+    QString lookupCrosschainTrxByColdHotTrxId(QString coldHotTrxId);
+    QStringList lookupSignedGuardByCrosschainTrx(QString crosschainTrxId);
+
 private slots:
     void jsonDataUpdated(QString id);
 
@@ -62,15 +68,9 @@ private:
     Ui::ColdHotTransferPage *ui;
     bool inited = false;
 
-    QMap<QString,ColdHotTransaction> coldHotTransactionMap;
-    QMap<QString,ColdHotCrosschainTransaction> coldHotCrosschainTransactionMap;
-    QMap<QString,ColdHotSignTransaction> coldHotSignTransactionMap;
     void fetchColdHotTransaction();
-
     void showColdHotTransactions();
     void refreshColdHotTtransactionsState();
-    QString lookupCrosschainTrxByColdHotTrxId(QString coldHotTrxId);
-    QStringList lookupSignedGuardByCrosschainTrx(QString crosschainTrxId);
 
     void paintEvent(QPaintEvent*);
 };

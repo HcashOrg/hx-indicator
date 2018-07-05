@@ -9,6 +9,7 @@
 #include "dialog/checkpwddialog.h"
 #include "commondialog.h"
 #include "showcontentdialog.h"
+#include "ColdHotInfoDialog.h"
 
 ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
     QWidget(parent),
@@ -30,11 +31,12 @@ ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
     ui->coldHotTransactionTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->coldHotTransactionTableWidget->setColumnWidth(0,120);
-    ui->coldHotTransactionTableWidget->setColumnWidth(1,120);
-    ui->coldHotTransactionTableWidget->setColumnWidth(2,130);
-    ui->coldHotTransactionTableWidget->setColumnWidth(3,130);
+    ui->coldHotTransactionTableWidget->setColumnWidth(1,100);
+    ui->coldHotTransactionTableWidget->setColumnWidth(2,100);
+    ui->coldHotTransactionTableWidget->setColumnWidth(3,100);
     ui->coldHotTransactionTableWidget->setColumnWidth(4,80);
     ui->coldHotTransactionTableWidget->setColumnWidth(5,80);
+    ui->coldHotTransactionTableWidget->setColumnWidth(6,80);
     ui->coldHotTransactionTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->transferBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
@@ -233,13 +235,20 @@ void ColdHotTransferPage::showColdHotTransactions()
 
         ui->coldHotTransactionTableWidget->setItem(i, 4, new QTableWidgetItem(tr("checking")));
 
-        ui->coldHotTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("sign")));
+        ui->coldHotTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
         ToolButtonWidget *toolButton = new ToolButtonWidget();
         toolButton->setText(ui->coldHotTransactionTableWidget->item(i,5)->text());
 //            toolButton->setBackgroundColor(itemColor);
         ui->coldHotTransactionTableWidget->setCellWidget(i,5,toolButton);
         connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,5));
 
+
+        ui->coldHotTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
+        ToolButtonWidget *toolButton2 = new ToolButtonWidget();
+        toolButton2->setText(ui->coldHotTransactionTableWidget->item(i,6)->text());
+//            toolButton->setBackgroundColor(itemColor);
+        ui->coldHotTransactionTableWidget->setCellWidget(i,6,toolButton2);
+        connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,6));
 
         for (int j : {0,1,2,3,4})
         {
@@ -313,6 +322,22 @@ QStringList ColdHotTransferPage::lookupSignedGuardByCrosschainTrx(QString crossc
 void ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked(int row, int column)
 {
     if(column == 5)
+    {
+        if(ui->coldHotTransactionTableWidget->item(row,0))
+        {
+            QString trxId = ui->coldHotTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
+
+            qDebug() << trxId;
+
+            ColdHotInfoDialog coldHotInfoDialog(this);
+            coldHotInfoDialog.setTrxId(trxId);
+            coldHotInfoDialog.pop();
+        }
+
+        return;
+    }
+
+    if(column == 6)
     {
         if(ui->coldHotTransactionTableWidget->item(row,4))
         {

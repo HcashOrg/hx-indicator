@@ -147,6 +147,8 @@ void ColdHotTransferDialog::showAddresses()
 {
     AssetInfo info = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
 
+    ui->amountLineEdit->clear();
+    ui->amountLineEdit->setPlaceholderText("");
     if(ui->typeComboBox->currentIndex() == 0)
     {
         ui->fromLineEdit->setText(info.coldAddress);
