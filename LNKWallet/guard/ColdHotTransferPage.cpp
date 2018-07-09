@@ -41,6 +41,12 @@ ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
 
     ui->transferBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
+    ui->typeCurrentBtn->setCheckable(true);
+    ui->typeWaitingBtn->setCheckable(true);
+
+    setStyleSheet("QToolButton{background:transparent;border:none;color: rgb(51,51,51);font:12px \"微软雅黑\";padding:0px 0px 1px 0px;}"
+                  "QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:white;}");
+
     init();
 }
 
@@ -63,6 +69,8 @@ void ColdHotTransferPage::init()
     }
 
     UBChain::getInstance()->mainFrame->installBlurEffect(ui->coldHotTransactionTableWidget);
+
+    ui->typeCurrentBtn->setChecked(true);
 
     fetchColdHotTransaction();
 
@@ -101,6 +109,10 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
             {
                 coldHotSignTransactionMap.clear();
             }
+            else if(type == 0)
+            {
+                pendingColdHotTransactionMap.clear();
+            }
 
             foreach (QJsonValue v, array)
             {
@@ -133,7 +145,14 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
                     cht.guardId         = operationObject.take("guard_id").toString();
                     cht.memo            = operationObject.take("memo").toString();
 
-                    coldHotTransactionMap.insert(cht.trxId, cht);
+                    if(type == 0)
+                    {
+                        pendingColdHotTransactionMap.insert(cht.trxId, cht);
+                    }
+                    else
+                    {
+                        coldHotTransactionMap.insert(cht.trxId, cht);
+                    }
                 }
                 else if(operationType == TRANSACTION_TYPE_COLDHOT_SIGN)
                 {
@@ -200,6 +219,9 @@ void ColdHotTransferPage::on_transferBtn_clicked()
 
 void ColdHotTransferPage::fetchColdHotTransaction()
 {
+    UBChain::getInstance()->postRPC( "id-get_coldhot_transaction-" + QString::number(0), toJsonFormat( "get_coldhot_transaction",
+                                                                                     QJsonArray() << 0));
+
     UBChain::getInstance()->postRPC( "id-get_coldhot_transaction-" + QString::number(1), toJsonFormat( "get_coldhot_transaction",
                                                                                      QJsonArray() << 1));
 
@@ -210,64 +232,120 @@ void ColdHotTransferPage::fetchColdHotTransaction()
 
 void ColdHotTransferPage::showColdHotTransactions()
 {
-    QStringList keys = coldHotTransactionMap.keys();
-    int size = keys.size();
-    ui->coldHotTransactionTableWidget->setRowCount(0);
-    ui->coldHotTransactionTableWidget->setRowCount(size);
-
-    for(int i = 0; i < size; i++)
+    if(currentType == 1)
     {
-        ui->coldHotTransactionTableWidget->setRowHeight(i,40);
+        QStringList keys = coldHotTransactionMap.keys();
+        int size = keys.size();
+        ui->coldHotTransactionTableWidget->setRowCount(0);
+        ui->coldHotTransactionTableWidget->setRowCount(size);
 
-        ColdHotTransaction cht = coldHotTransactionMap.value(keys.at(i));
-
-        QDateTime time = QDateTime::fromString(cht.expirationTime, "yyyy-MM-ddThh:mm:ss");
-//                time = time.addSecs(-600);       // 时间减10分钟
-        QString currentDateTime = time.toString("yyyy-MM-dd\nhh:mm:ss");
-        ui->coldHotTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
-        ui->coldHotTransactionTableWidget->item(i,0)->setData(Qt::UserRole, cht.trxId);
-
-        ui->coldHotTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(cht.amount + " " + cht.assetSymbol));
-
-        ui->coldHotTransactionTableWidget->setItem(i, 2, new QTableWidgetItem(cht.withdrawAddress));
-
-        ui->coldHotTransactionTableWidget->setItem(i, 3, new QTableWidgetItem(cht.depositAddress));
-
-        ui->coldHotTransactionTableWidget->setItem(i, 4, new QTableWidgetItem(tr("checking")));
-
-        ui->coldHotTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
-        ToolButtonWidget *toolButton = new ToolButtonWidget();
-        toolButton->setText(ui->coldHotTransactionTableWidget->item(i,5)->text());
-//            toolButton->setBackgroundColor(itemColor);
-        ui->coldHotTransactionTableWidget->setCellWidget(i,5,toolButton);
-        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,5));
-
-
-        ui->coldHotTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
-        ToolButtonWidget *toolButton2 = new ToolButtonWidget();
-        toolButton2->setText(ui->coldHotTransactionTableWidget->item(i,6)->text());
-//            toolButton->setBackgroundColor(itemColor);
-        ui->coldHotTransactionTableWidget->setCellWidget(i,6,toolButton2);
-        connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,6));
-
-        for (int j : {0,1,2,3,4})
+        for(int i = 0; i < size; i++)
         {
-            if(i%2)
+            ui->coldHotTransactionTableWidget->setRowHeight(i,40);
+
+            ColdHotTransaction cht = coldHotTransactionMap.value(keys.at(i));
+
+            QDateTime time = QDateTime::fromString(cht.expirationTime, "yyyy-MM-ddThh:mm:ss");
+    //                time = time.addSecs(-600);       // 时间减10分钟
+            QString currentDateTime = time.toString("yyyy-MM-dd\nhh:mm:ss");
+            ui->coldHotTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
+            ui->coldHotTransactionTableWidget->item(i,0)->setData(Qt::UserRole, cht.trxId);
+
+            ui->coldHotTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(cht.amount + " " + cht.assetSymbol));
+
+            ui->coldHotTransactionTableWidget->setItem(i, 2, new QTableWidgetItem(cht.withdrawAddress));
+
+            ui->coldHotTransactionTableWidget->setItem(i, 3, new QTableWidgetItem(cht.depositAddress));
+
+            ui->coldHotTransactionTableWidget->setItem(i, 4, new QTableWidgetItem(tr("checking")));
+
+            ui->coldHotTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
+            ToolButtonWidget *toolButton = new ToolButtonWidget();
+            toolButton->setText(ui->coldHotTransactionTableWidget->item(i,5)->text());
+    //            toolButton->setBackgroundColor(itemColor);
+            ui->coldHotTransactionTableWidget->setCellWidget(i,5,toolButton);
+            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,5));
+
+
+            ui->coldHotTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
+            ToolButtonWidget *toolButton2 = new ToolButtonWidget();
+            toolButton2->setText(ui->coldHotTransactionTableWidget->item(i,6)->text());
+    //            toolButton->setBackgroundColor(itemColor);
+            ui->coldHotTransactionTableWidget->setCellWidget(i,6,toolButton2);
+            connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,6));
+
+            for (int j : {0,1,2,3,4})
             {
-                ui->coldHotTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->coldHotTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-            else
-            {
-                ui->coldHotTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->coldHotTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
+                if(i%2)
+                {
+                    ui->coldHotTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                    ui->coldHotTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
+                }
+                else
+                {
+                    ui->coldHotTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                    ui->coldHotTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
+                }
             }
         }
     }
+    else if(currentType == 0)
+    {
+        QStringList keys = pendingColdHotTransactionMap.keys();
+        int size = keys.size();
+        ui->coldHotTransactionTableWidget->setRowCount(0);
+        ui->coldHotTransactionTableWidget->setRowCount(size);
+
+        for(int i = 0; i < size; i++)
+        {
+            ui->coldHotTransactionTableWidget->setRowHeight(i,40);
+
+            ColdHotTransaction cht = pendingColdHotTransactionMap.value(keys.at(i));
+
+            QDateTime time = QDateTime::fromString(cht.expirationTime, "yyyy-MM-ddThh:mm:ss");
+    //                time = time.addSecs(-600);       // 时间减10分钟
+            QString currentDateTime = time.toString("yyyy-MM-dd\nhh:mm:ss");
+            ui->coldHotTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
+            ui->coldHotTransactionTableWidget->item(i,0)->setData(Qt::UserRole, cht.trxId);
+
+            ui->coldHotTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(cht.amount + " " + cht.assetSymbol));
+
+            ui->coldHotTransactionTableWidget->setItem(i, 2, new QTableWidgetItem(cht.withdrawAddress));
+
+            ui->coldHotTransactionTableWidget->setItem(i, 3, new QTableWidgetItem(cht.depositAddress));
+
+            ui->coldHotTransactionTableWidget->setItem(i, 4, new QTableWidgetItem(tr("waiting")));
+
+            ui->coldHotTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
+            ToolButtonWidget *toolButton = new ToolButtonWidget();
+            toolButton->setText(ui->coldHotTransactionTableWidget->item(i,5)->text());
+    //            toolButton->setBackgroundColor(itemColor);
+            ui->coldHotTransactionTableWidget->setCellWidget(i,5,toolButton);
+            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,5));
+
+
+            for (int j : {0,1,2,3,4})
+            {
+                if(i%2)
+                {
+                    ui->coldHotTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                    ui->coldHotTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
+                }
+                else
+                {
+                    ui->coldHotTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                    ui->coldHotTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
+                }
+            }
+        }
+    }
+
 }
 
 void ColdHotTransferPage::refreshColdHotTtransactionsState()
 {
+    if(currentType != 1)    return;
+
     int rowCount = ui->coldHotTransactionTableWidget->rowCount();
     for(int i = 0; i < rowCount; i++)
     {
@@ -339,6 +417,8 @@ void ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked(int row, 
 
     if(column == 6)
     {
+        if(currentType != 1)    return;
+
         if(ui->coldHotTransactionTableWidget->item(row,4))
         {
             if(ui->coldHotTransactionTableWidget->item(row,4)->text() == tr("signed"))
@@ -355,22 +435,22 @@ void ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked(int row, 
                 commonDialog.pop();
                 return;
             }
-        }
 
-        CheckPwdDialog checkPwdDialog;
-        if(!checkPwdDialog.pop())   return;
+            CheckPwdDialog checkPwdDialog;
+            if(!checkPwdDialog.pop())   return;
 
-        if(ui->coldHotTransactionTableWidget->item(row,0))
-        {
-            QString trxId = ui->coldHotTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
-
-            QString chcTrxId = lookupCrosschainTrxByColdHotTrxId(trxId);
-
-            if(!chcTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
+            if(ui->coldHotTransactionTableWidget->item(row,0))
             {
-                UBChain::getInstance()->postRPC( "id-guard_sign_coldhot_transaction", toJsonFormat( "guard_sign_coldhot_transaction",
-                                                 QJsonArray() << chcTrxId << ui->accountComboBox->currentText()));
+                QString trxId = ui->coldHotTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
 
+                QString chcTrxId = lookupCrosschainTrxByColdHotTrxId(trxId);
+
+                if(!chcTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
+                {
+                    UBChain::getInstance()->postRPC( "id-guard_sign_coldhot_transaction", toJsonFormat( "guard_sign_coldhot_transaction",
+                                                                                                        QJsonArray() << chcTrxId << ui->accountComboBox->currentText()));
+
+                }
             }
         }
 
@@ -398,4 +478,20 @@ void ColdHotTransferPage::on_coldHotTransactionTableWidget_cellPressed(int row, 
 
         return;
     }
+}
+
+void ColdHotTransferPage::on_typeCurrentBtn_clicked()
+{
+    currentType = 1;
+    ui->typeCurrentBtn->setChecked(true);
+    ui->typeWaitingBtn->setChecked(false);
+    showColdHotTransactions();
+}
+
+void ColdHotTransferPage::on_typeWaitingBtn_clicked()
+{
+    currentType = 0;
+    ui->typeCurrentBtn->setChecked(false);
+    ui->typeWaitingBtn->setChecked(true);
+    showColdHotTransactions();
 }

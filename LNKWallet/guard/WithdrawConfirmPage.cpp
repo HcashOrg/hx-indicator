@@ -233,6 +233,7 @@ void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked(int ro
 
     if(column == 6)
     {
+        if(currentType != 1)    return;
         if(ui->crosschainTransactionTableWidget->item(row,0) && ui->crosschainTransactionTableWidget->item(row,4))
         {
             if(ui->crosschainTransactionTableWidget->item(row,4)->text() == tr("signed"))

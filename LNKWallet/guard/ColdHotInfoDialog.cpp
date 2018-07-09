@@ -39,7 +39,16 @@ void ColdHotInfoDialog::setTrxId(QString _trxId)
 {
     if(page == NULL)    return;
 
-    ColdHotTransaction cht = page->coldHotTransactionMap.value(_trxId);
+    ColdHotTransaction cht;
+    if(page->currentType == 1)
+    {
+        cht = page->coldHotTransactionMap.value(_trxId);
+    }
+    else
+    {
+        cht = page->pendingColdHotTransactionMap.value(_trxId);
+    }
+
     ui->amountLabel->setText(QString("%1 %2").arg(cht.amount).arg(cht.assetSymbol));
     ui->fromLabel->setText(cht.withdrawAddress);
     ui->toLabel->setText(cht.depositAddress);

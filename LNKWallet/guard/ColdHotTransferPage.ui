@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>160</y>
+     <y>200</y>
      <width>670</width>
-     <height>280</height>
+     <height>240</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -159,7 +159,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>115</y>
+     <y>155</y>
      <width>111</width>
      <height>30</height>
     </rect>
@@ -182,7 +182,7 @@
    <property name="geometry">
     <rect>
      <x>70</x>
-     <y>95</y>
+     <y>135</y>
      <width>100</width>
      <height>20</height>
     </rect>
@@ -206,7 +206,7 @@
    <property name="geometry">
     <rect>
      <x>620</x>
-     <y>120</y>
+     <y>160</y>
      <width>90</width>
      <height>20</height>
     </rect>
@@ -255,6 +255,44 @@
    </property>
    <property name="text">
     <string>资产变更</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="typeCurrentBtn">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>95</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>正在授权</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="typeWaitingBtn">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>95</y>
+     <width>70</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>等待授权</string>
    </property>
   </widget>
  </widget>

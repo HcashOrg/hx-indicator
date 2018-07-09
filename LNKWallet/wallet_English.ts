@@ -1535,7 +1535,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">To</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotInfoDialog.cpp" line="51"/>
+        <location filename="guard/ColdHotInfoDialog.cpp" line="60"/>
         <source>%1 guards have signed. %2 guards have not yet.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1684,49 +1684,65 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Cold-Hot Trx</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="171"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="276"/>
+        <source>正在授权</source>
+        <translation type="unfinished">Confirming</translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.ui" line="295"/>
+        <source>等待授权</source>
+        <translation type="unfinished">Waiting</translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="190"/>
         <source>Transaction of guard-sign-coldhot has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="177"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="196"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="236"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="351"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="260"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="431"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="238"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="262"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="319"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="246"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="270"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="281"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="344"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="317"/>
+        <source>waiting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="359"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="424"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="285"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="363"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="347"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="427"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="354"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="434"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7183,39 +7199,39 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="241"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="242"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="290"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="291"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="292"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="349"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="293"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="350"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="299"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="300"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="238"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="391"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="239"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="392"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="347"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="348"/>
         <source>waiting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="395"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="396"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>

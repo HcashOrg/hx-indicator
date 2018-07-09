@@ -47,7 +47,9 @@ public:
 
     void refresh();
 
+    int currentType = 1;
     QMap<QString,ColdHotTransaction> coldHotTransactionMap;
+    QMap<QString,ColdHotTransaction> pendingColdHotTransactionMap;
     QMap<QString,ColdHotCrosschainTransaction> coldHotCrosschainTransactionMap;
     QMap<QString,ColdHotSignTransaction> coldHotSignTransactionMap;
     QString lookupCrosschainTrxByColdHotTrxId(QString coldHotTrxId);
@@ -63,6 +65,10 @@ private slots:
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
     void on_coldHotTransactionTableWidget_cellPressed(int row, int column);
+
+    void on_typeCurrentBtn_clicked();
+
+    void on_typeWaitingBtn_clicked();
 
 private:
     Ui::ColdHotTransferPage *ui;
