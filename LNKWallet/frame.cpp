@@ -978,6 +978,7 @@ void Frame::setLanguage(QString language)
 //            showUpgradePage(currentAccount);
             break;
         case 8:
+            showAssetPage();
             break;
         case 9:
             showMultiSigPage();
@@ -1427,7 +1428,7 @@ void Frame::jsonDataUpdated(QString id)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
-        UBChain::getInstance()->assetInfoMap.clear();
+//        UBChain::getInstance()->assetInfoMap.clear();
 
         result.prepend("{");
         result.append("}");
@@ -1447,10 +1448,11 @@ void Frame::jsonDataUpdated(QString id)
                         QJsonArray resultArray = resultValue.toArray();
                         for( int i = 0; i < resultArray.size(); i++)
                         {
-                            AssetInfo assetInfo;
-
                             QJsonObject object = resultArray.at(i).toObject();
-                            assetInfo.id = object.take("id").toString();
+                            QString assetId = object.take("id").toString();
+                            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
+
+                            assetInfo.id = assetId;
                             assetInfo.issuer = object.take("issuer").toString();
                             assetInfo.precision = object.take("precision").toInt();
                             assetInfo.symbol = object.take("symbol").toString();

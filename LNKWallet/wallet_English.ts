@@ -775,8 +775,9 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="79"/>
-        <source>状态</source>
-        <translation type="unfinished">State</translation>
+        <source>私钥状态</source>
+        <oldsource>状态</oldsource>
+        <translation type="unfinished">Key State</translation>
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="137"/>
@@ -790,35 +791,40 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="212"/>
         <source>变更历史</source>
-        <translation type="unfinished">M-A Change History</translation>
+        <translation type="unfinished">Multisig-Address Change History</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="108"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="110"/>
+        <source>updating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="117"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="109"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="118"/>
         <source>export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="216"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="225"/>
         <source>There is no corresponding private key in the wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="228"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="237"/>
         <source>Select the export path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="271"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="280"/>
         <source>available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="275"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="284"/>
         <source>unavailable</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3357,27 +3363,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1112"/>
+        <location filename="frame.cpp" line="1113"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1322"/>
+        <location filename="frame.cpp" line="1323"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1944"/>
+        <location filename="frame.cpp" line="1946"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1947"/>
+        <location filename="frame.cpp" line="1949"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1950"/>
+        <location filename="frame.cpp" line="1952"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3689,8 +3695,9 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="59"/>
-        <source>当前账号</source>
-        <translation type="unfinished">Account</translation>
+        <source>当前guard账号</source>
+        <oldsource>当前账号</oldsource>
+        <translation type="unfinished">Current Guard</translation>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="118"/>
@@ -7156,43 +7163,59 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Confirm Withdraw</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="169"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="246"/>
+        <source>正在授权</source>
+        <translation type="unfinished">Confirming</translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.ui" line="265"/>
+        <source>等待授权</source>
+        <translation type="unfinished">Waiting</translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="191"/>
         <source>Transaction of guard-sign-crosschain has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="176"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="198"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="219"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="241"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="266"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="290"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="268"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="292"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="349"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="275"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="299"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="216"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="311"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="238"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="391"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="315"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="347"/>
+        <source>waiting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="395"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7406,7 +7429,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">To Address</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawInfoDialog.cpp" line="51"/>
+        <location filename="guard/WithdrawInfoDialog.cpp" line="59"/>
         <source>%1 guards have signed. %2 guards have not yet.</source>
         <translation type="unfinished"></translation>
     </message>

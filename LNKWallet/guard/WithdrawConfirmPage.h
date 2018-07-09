@@ -46,8 +46,9 @@ public:
 
     void fetchCrosschainTransactions();
 
-
+    int currentType = 1;
     QMap<QString,ApplyTransaction> applyTransactionMap;
+    QMap<QString,ApplyTransaction> pendingApplyTransactionMap;
     QMap<QString,GeneratedTransaction> generatedTransactionMap;
     QMap<QString,SignTransaction>   signTransactionMap;
     QString lookupGeneratedTrxByApplyTrxId(QString applyTrxId);
@@ -61,6 +62,10 @@ private slots:
     void on_crosschainTransactionTableWidget_cellPressed(int row, int column);
 
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_typeCurrentBtn_clicked();
+
+    void on_typeWaitingBtn_clicked();
 
 private:
     Ui::WithdrawConfirmPage *ui;

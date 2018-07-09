@@ -704,7 +704,8 @@
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="79"/>
-        <source>状态</source>
+        <source>私钥状态</source>
+        <oldsource>状态</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -718,32 +719,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="108"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="110"/>
+        <source>updating</source>
+        <translation type="unfinished">更新中</translation>
+    </message>
+    <message>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="117"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="109"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="118"/>
         <source>export</source>
         <translation type="unfinished">导出</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="216"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="225"/>
         <source>There is no corresponding private key in the wallet</source>
         <translation type="unfinished">钱包内没有对应的私钥</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="228"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="237"/>
         <source>Select the export path</source>
         <translation type="unfinished">选择导出地址</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="271"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="280"/>
         <source>available</source>
         <translation type="unfinished">有私钥</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="275"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="284"/>
         <source>unavailable</source>
         <translation type="unfinished">无私钥</translation>
     </message>
@@ -3200,27 +3206,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1112"/>
+        <location filename="frame.cpp" line="1113"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1322"/>
+        <location filename="frame.cpp" line="1323"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1944"/>
+        <location filename="frame.cpp" line="1946"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1947"/>
+        <location filename="frame.cpp" line="1949"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1950"/>
+        <location filename="frame.cpp" line="1952"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -3504,7 +3510,8 @@ add an account first</source>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="59"/>
-        <source>当前账号</source>
+        <source>当前guard账号</source>
+        <oldsource>当前账号</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7087,43 +7094,59 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="169"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="246"/>
+        <source>正在授权</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.ui" line="265"/>
+        <source>等待授权</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="191"/>
         <source>Transaction of guard-sign-crosschain has been sent out!</source>
         <translation type="unfinished">guard签名交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="176"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="198"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="219"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="241"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="266"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="290"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="268"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="292"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="349"/>
         <source>check</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="275"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="299"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="216"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="311"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="238"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="391"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="315"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="347"/>
+        <source>waiting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="395"/>
         <source>unsigned</source>
         <translation type="unfinished">未签名</translation>
     </message>
@@ -7329,7 +7352,7 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawInfoDialog.cpp" line="51"/>
+        <location filename="guard/WithdrawInfoDialog.cpp" line="59"/>
         <source>%1 guards have signed. %2 guards have not yet.</source>
         <translation type="unfinished">%1 个guard已签名，%2 个guard还未签名。</translation>
     </message>

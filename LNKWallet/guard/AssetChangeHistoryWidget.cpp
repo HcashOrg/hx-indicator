@@ -25,10 +25,10 @@ AssetChangeHistoryWidget::AssetChangeHistoryWidget(QWidget *parent) :
     ui->changeHistoryTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->changeHistoryTableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->changeHistoryTableWidget->verticalHeader()->setVisible(false);
-    ui->changeHistoryTableWidget->setColumnWidth(0,140);
+    ui->changeHistoryTableWidget->setColumnWidth(0,120);
     ui->changeHistoryTableWidget->setColumnWidth(1,140);
     ui->changeHistoryTableWidget->setColumnWidth(2,140);
-    ui->changeHistoryTableWidget->setColumnWidth(3,80);
+    ui->changeHistoryTableWidget->setColumnWidth(3,100);
     ui->changeHistoryTableWidget->setColumnWidth(4,80);
     ui->changeHistoryTableWidget->setColumnWidth(5,80);
     ui->changeHistoryTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
@@ -104,7 +104,16 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
                 ui->changeHistoryTableWidget->setItem(row,0,new QTableWidgetItem(ui->assetComboBox->currentText()));
                 ui->changeHistoryTableWidget->setItem(row,1,new QTableWidgetItem(hotAddress));
                 ui->changeHistoryTableWidget->setItem(row,2,new QTableWidgetItem(coldAddress));
-                ui->changeHistoryTableWidget->setItem(row,3,new QTableWidgetItem(QString::number(effectiveBlock)));
+                
+                if(effectiveBlock == 0)
+                {
+                    ui->changeHistoryTableWidget->setItem(row,3,new QTableWidgetItem(tr("updating")));
+                }
+                else
+                {
+                    ui->changeHistoryTableWidget->setItem(row,3,new QTableWidgetItem(QString::number(effectiveBlock)));
+                }
+
                 ui->changeHistoryTableWidget->setItem(row,4,new QTableWidgetItem(tr("checking")));
                 ui->changeHistoryTableWidget->setItem(row,5,new QTableWidgetItem(tr("export")));
 

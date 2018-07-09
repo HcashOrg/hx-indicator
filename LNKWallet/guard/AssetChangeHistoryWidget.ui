@@ -76,7 +76,7 @@
    </column>
    <column>
     <property name="text">
-     <string>状态</string>
+     <string>私钥状态</string>
     </property>
     <property name="font">
      <font>

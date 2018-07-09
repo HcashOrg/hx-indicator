@@ -223,7 +223,7 @@ void ColdHotTransferPage::showColdHotTransactions()
 
         QDateTime time = QDateTime::fromString(cht.expirationTime, "yyyy-MM-ddThh:mm:ss");
 //                time = time.addSecs(-600);       // 时间减10分钟
-        QString currentDateTime = time.toString("yyyy-MM-dd hh:mm:ss");
+        QString currentDateTime = time.toString("yyyy-MM-dd\nhh:mm:ss");
         ui->coldHotTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
         ui->coldHotTransactionTableWidget->item(i,0)->setData(Qt::UserRole, cht.trxId);
 

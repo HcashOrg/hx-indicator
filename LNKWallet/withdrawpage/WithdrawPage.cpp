@@ -79,14 +79,7 @@ void WithdrawPage::InitStyle()
     setPalette(palette);
 
 
-    ui->withdrawRecordBtn->setStyleSheet("QToolButton{color:white;\
-                                  border-top-left-radius:10px;  \
-                                  border-top-right-radius:10px; \
-                                  border-bottom-left-radius:10px;  \
-                                  border-bottom-right-radius:10px; \
-                                  border:none;\
-                                  background-color:#00D2FF;\}"
-                                  "QToolButton::hover{background-color:#4861DC;}");
+    ui->withdrawRecordBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 }
 
 

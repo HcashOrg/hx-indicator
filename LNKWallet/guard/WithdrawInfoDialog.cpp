@@ -38,8 +38,16 @@ void WithdrawInfoDialog::pop()
 void WithdrawInfoDialog::setTrxId(QString _trxId)
 {
     if(page == NULL)    return;
+    ApplyTransaction at;
+    if(page->currentType == 1)
+    {
+        at = page->applyTransactionMap.value(_trxId);
+    }
+    else if(page->currentType == 0)
+    {
+        at = page->pendingApplyTransactionMap.value(_trxId);
+    }
 
-    ApplyTransaction at = page->applyTransactionMap.value(_trxId);
     ui->amountLabel->setText(QString("%1 %2").arg(at.amount).arg(at.assetSymbol));
     ui->withdrawAddressLabel->setText(at.withdrawAddress);
     ui->crosschainAddressLabel->setText(at.crosschainAddress);

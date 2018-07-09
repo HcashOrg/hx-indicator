@@ -56,7 +56,7 @@
     <string notr="true">color: rgb(192, 196, 212);</string>
    </property>
    <property name="text">
-    <string>当前账号</string>
+    <string>当前guard账号</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

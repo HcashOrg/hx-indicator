@@ -37,6 +37,12 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     ui->crosschainTransactionTableWidget->setColumnWidth(6,80);
     ui->crosschainTransactionTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
+    ui->typeCurrentBtn->setCheckable(true);
+    ui->typeWaitingBtn->setCheckable(true);
+
+    setStyleSheet("QToolButton{background:transparent;border:none;color: rgb(51,51,51);font:12px \"微软雅黑\";padding:0px 0px 1px 0px;}"
+                  "QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:white;}");
+
     init();
 }
 
@@ -58,6 +64,8 @@ void WithdrawConfirmPage::init()
 
     UBChain::getInstance()->mainFrame->installBlurEffect(ui->crosschainTransactionTableWidget);
 
+    ui->typeCurrentBtn->setChecked(true);
+
     fetchCrosschainTransactions();
 }
 
@@ -68,6 +76,9 @@ void WithdrawConfirmPage::refresh()
 
 void WithdrawConfirmPage::fetchCrosschainTransactions()
 {
+    UBChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(0), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 0));
+
     UBChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(1), toJsonFormat( "get_crosschain_transaction",
                                                                                     QJsonArray() << 1));
 
@@ -91,6 +102,10 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
         else if(type == 2)
         {
             signTransactionMap.clear();
+        }
+        else if(type == 0)
+        {
+            pendingApplyTransactionMap.clear();
         }
 
         result.prepend("{");
@@ -133,7 +148,14 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
                 at.crosschainAddress  = operationObject.take("crosschain_account").toString();
                 at.memo             = operationObject.take("memo").toString();
 
-                applyTransactionMap.insert(at.trxId, at);
+                if(type == 0)
+                {
+                    pendingApplyTransactionMap.insert(at.trxId, at);
+                }
+                else
+                {
+                    applyTransactionMap.insert(at.trxId, at);
+                }
             }
             else if(operationType == TRANSACTION_TYPE_WITHDRAW_SIGN)
             {
@@ -240,64 +262,122 @@ void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked(int ro
 
 void WithdrawConfirmPage::showCrosschainTransactions()
 {
-    QStringList keys = applyTransactionMap.keys();
-    int size = keys.size();
-    ui->crosschainTransactionTableWidget->setRowCount(0);
-    ui->crosschainTransactionTableWidget->setRowCount(size);
-
-    for(int i = 0; i < size; i++)
+    if(currentType == 1)
     {
-        ui->crosschainTransactionTableWidget->setRowHeight(i,40);
+        QStringList keys = applyTransactionMap.keys();
+        int size = keys.size();
+        ui->crosschainTransactionTableWidget->setRowCount(0);
+        ui->crosschainTransactionTableWidget->setRowCount(size);
 
-        ApplyTransaction at = applyTransactionMap.value(keys.at(i));
-
-        QDateTime time = QDateTime::fromString(at.expirationTime, "yyyy-MM-ddThh:mm:ss");
-        time = time.addSecs(-600);       // 时间减10分钟
-        QString currentDateTime = time.toString("yyyy-MM-dd hh:mm:ss");
-        ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
-        ui->crosschainTransactionTableWidget->item(i,0)->setData(Qt::UserRole, at.trxId);
-
-        ui->crosschainTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(at.amount + " " + at.assetSymbol));
-
-        ui->crosschainTransactionTableWidget->setItem(i, 2, new QTableWidgetItem(at.withdrawAddress));
-
-        ui->crosschainTransactionTableWidget->setItem(i, 3, new QTableWidgetItem(at.crosschainAddress));
-
-        ui->crosschainTransactionTableWidget->setItem(i, 4, new QTableWidgetItem(tr("checking")));
-
-        ui->crosschainTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
-        ToolButtonWidget *toolButton = new ToolButtonWidget();
-        toolButton->setText(ui->crosschainTransactionTableWidget->item(i,5)->text());
-//            toolButton->setBackgroundColor(itemColor);
-        ui->crosschainTransactionTableWidget->setCellWidget(i,5,toolButton);
-        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,5));
-
-        ui->crosschainTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
-        ToolButtonWidget *toolButton2 = new ToolButtonWidget();
-        toolButton2->setText(ui->crosschainTransactionTableWidget->item(i,6)->text());
-//            toolButton->setBackgroundColor(itemColor);
-        ui->crosschainTransactionTableWidget->setCellWidget(i,6,toolButton2);
-        connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,6));
-
-
-        for (int j : {0,1,2,3,4})
+        for(int i = 0; i < size; i++)
         {
-            if(i%2)
+            ui->crosschainTransactionTableWidget->setRowHeight(i,40);
+
+            ApplyTransaction at = applyTransactionMap.value(keys.at(i));
+
+            QDateTime time = QDateTime::fromString(at.expirationTime, "yyyy-MM-ddThh:mm:ss");
+            time = time.addSecs(-600);       // 时间减10分钟
+            QString currentDateTime = time.toString("yyyy-MM-dd\nhh:mm:ss");
+            ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
+            ui->crosschainTransactionTableWidget->item(i,0)->setData(Qt::UserRole, at.trxId);
+
+            ui->crosschainTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(at.amount + " " + at.assetSymbol));
+
+            ui->crosschainTransactionTableWidget->setItem(i, 2, new QTableWidgetItem(at.withdrawAddress));
+
+            ui->crosschainTransactionTableWidget->setItem(i, 3, new QTableWidgetItem(at.crosschainAddress));
+
+            ui->crosschainTransactionTableWidget->setItem(i, 4, new QTableWidgetItem(tr("checking")));
+
+            ui->crosschainTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
+            ToolButtonWidget *toolButton = new ToolButtonWidget();
+            toolButton->setText(ui->crosschainTransactionTableWidget->item(i,5)->text());
+    //            toolButton->setBackgroundColor(itemColor);
+            ui->crosschainTransactionTableWidget->setCellWidget(i,5,toolButton);
+            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,5));
+
+            ui->crosschainTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
+            ToolButtonWidget *toolButton2 = new ToolButtonWidget();
+            toolButton2->setText(ui->crosschainTransactionTableWidget->item(i,6)->text());
+    //            toolButton->setBackgroundColor(itemColor);
+            ui->crosschainTransactionTableWidget->setCellWidget(i,6,toolButton2);
+            connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,6));
+
+
+            for (int j : {0,1,2,3,4})
             {
-                ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-            else
-            {
-                ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
+                if(i%2)
+                {
+                    ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                    ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
+                }
+                else
+                {
+                    ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                    ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
+                }
             }
         }
     }
+    else if( currentType == 0)
+    {
+        QStringList keys = pendingApplyTransactionMap.keys();
+        int size = keys.size();
+        ui->crosschainTransactionTableWidget->setRowCount(0);
+        ui->crosschainTransactionTableWidget->setRowCount(size);
+
+        for(int i = 0; i < size; i++)
+        {
+            ui->crosschainTransactionTableWidget->setRowHeight(i,40);
+
+            ApplyTransaction at = pendingApplyTransactionMap.value(keys.at(i));
+
+            QDateTime time = QDateTime::fromString(at.expirationTime, "yyyy-MM-ddThh:mm:ss");
+            time = time.addSecs(-600);       // 时间减10分钟
+            QString currentDateTime = time.toString("yyyy-MM-dd\nhh:mm:ss");
+            ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
+            ui->crosschainTransactionTableWidget->item(i,0)->setData(Qt::UserRole, at.trxId);
+
+            ui->crosschainTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(at.amount + " " + at.assetSymbol));
+
+            ui->crosschainTransactionTableWidget->setItem(i, 2, new QTableWidgetItem(at.withdrawAddress));
+
+            ui->crosschainTransactionTableWidget->setItem(i, 3, new QTableWidgetItem(at.crosschainAddress));
+
+            ui->crosschainTransactionTableWidget->setItem(i, 4, new QTableWidgetItem(tr("waiting")));
+
+            ui->crosschainTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
+            ToolButtonWidget *toolButton = new ToolButtonWidget();
+            toolButton->setText(ui->crosschainTransactionTableWidget->item(i,5)->text());
+    //            toolButton->setBackgroundColor(itemColor);
+            ui->crosschainTransactionTableWidget->setCellWidget(i,5,toolButton);
+            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,5));
+
+
+
+            for (int j : {0,1,2,3,4})
+            {
+                if(i%2)
+                {
+                    ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                    ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
+                }
+                else
+                {
+                    ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                    ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
+                }
+            }
+        }
+    }
+
+
 }
 
 void WithdrawConfirmPage::refreshCrosschainTransactionsState()
 {
+    if(currentType != 1)    return;
+
     int rowCount = ui->crosschainTransactionTableWidget->rowCount();
     for(int i = 0; i < rowCount; i++)
     {
@@ -371,4 +451,20 @@ void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellPressed(int ro
 void WithdrawConfirmPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     fetchCrosschainTransactions();
+}
+
+void WithdrawConfirmPage::on_typeCurrentBtn_clicked()
+{
+    currentType = 1;
+    ui->typeCurrentBtn->setChecked(true);
+    ui->typeWaitingBtn->setChecked(false);
+    showCrosschainTransactions();
+}
+
+void WithdrawConfirmPage::on_typeWaitingBtn_clicked()
+{
+    currentType = 0;
+    ui->typeCurrentBtn->setChecked(false);
+    ui->typeWaitingBtn->setChecked(true);
+    showCrosschainTransactions();
 }
