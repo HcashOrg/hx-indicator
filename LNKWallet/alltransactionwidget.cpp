@@ -66,6 +66,9 @@ void AllTransactionWidget::init()
     ui->typeMineBtn->setCheckable(true);
     ui->typeGuaranteeBtn->setCheckable(true);
     ui->typeOtherBtn->setCheckable(true);
+    ui->typeFeedPriceBtn->setCheckable(true);
+    ui->typeProposalBtn->setCheckable(true);
+
     ui->timeAllBtn->setCheckable(true);
     ui->timeDayBtn->setCheckable(true);
     ui->timeMonthBtn->setCheckable(true);
@@ -160,6 +163,24 @@ void AllTransactionWidget::on_typeOtherBtn_clicked()
     showTransactions();
 }
 
+void AllTransactionWidget::on_typeFeedPriceBtn_clicked()
+{
+    clearTypeChoice();
+    ui->typeFeedPriceBtn->setChecked(true);
+    typeChoice = FeedPriceType;
+    showTransactions();
+}
+
+
+void AllTransactionWidget::on_typeProposalBtn_clicked()
+{
+    clearTypeChoice();
+    ui->typeProposalBtn->setChecked(true);
+    typeChoice = ProposalType;
+    showTransactions();
+}
+
+
 void AllTransactionWidget::on_timeAllBtn_clicked()
 {
     clearTimeChoice();
@@ -202,6 +223,8 @@ void AllTransactionWidget::clearTypeChoice()
     ui->typeMineBtn->setChecked(false);
     ui->typeGuaranteeBtn->setChecked(false);
     ui->typeOtherBtn->setChecked(false);
+    ui->typeFeedPriceBtn->setChecked(false);
+    ui->typeProposalBtn->setChecked(false);
 }
 
 void AllTransactionWidget::clearTimeChoice()
@@ -219,6 +242,11 @@ void AllTransactionWidget::hideFilteredTransactions()
 
     for(int i = 0; i < ui->transactionsTableWidget->rowCount(); i++)
     {
+        if(ui->transactionsTableWidget->item(i,2) == NULL || ui->transactionsTableWidget->item(i,5) == NULL)
+        {
+            continue;
+        }
+
         if( !ui->transactionsTableWidget->item(i,2)->text().contains(filterStr)
                 && !ui->transactionsTableWidget->item(i,5)->text().contains(filterStr))
         {
@@ -236,7 +264,7 @@ void AllTransactionWidget::hideFilteredTransactions()
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(showRows.size(),ROWNUMBER);
     pageChangeSlot(0);
-    pageWidget->setVisible(showRows.size() == 0);
+    pageWidget->setVisible(showRows.size() != 0);
 
     blankWidget->setVisible(showRows.size() == 0);
 
@@ -278,6 +306,14 @@ void AllTransactionWidget::showTransactions()
         typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_REGISTER_ACCOUNT);
         typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_BIND_TUNNEL);
         typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_UNBIND_TUNNEL);
+        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_ISSUE_ASSET);
+        break;
+    case FeedPriceType:
+        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_FEED_PRICE);
+        break;
+    case ProposalType:
+        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SPONSOR_PROPOSAL);
+        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_PROPOSAL_APPROVE);
         break;
     default:
         break;
@@ -440,6 +476,60 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("unbind tunnel address")));
         }
             break;
+        case TRANSACTION_TYPE_FEED_PRICE:
+        {
+            QJsonObject feedObject = operationObject.value("feed").toObject();
+            QJsonObject settlementObject = feedObject.value("settlement_price").toObject();
+            QJsonObject baseObject = settlementObject.value("base").toObject();
+            QString     baseAssetid = baseObject.value("asset_id").toString();
+            unsigned long long baseAmount = jsonValueToULL(baseObject.value("amount"));
+            QJsonObject quoteObject = settlementObject.value("quote").toObject();
+            unsigned long long quoteAmount = jsonValueToULL(quoteObject.value("amount"));
+
+            AssetInfo info = UBChain::getInstance()->assetInfoMap.value(baseAssetid);
+            QString str = QString("feed price: %1:%2  %3:%4").arg(info.symbol).arg(ASSET_NAME).arg( getBigNumberString(quoteAmount, ASSET_PRECISION))
+                    .arg( getBigNumberString(baseAmount, info.precision));
+
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(str));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("feed price")));
+        }
+            break;
+        case TRANSACTION_TYPE_SPONSOR_PROPOSAL:
+        {
+            QJsonObject proposedOpObject = operationObject.value("proposed_ops").toArray().at(0).toObject();
+            int opType = proposedOpObject.value("op").toArray().at(0).toInt();
+            QString str = tr("type: ");
+            switch (opType)
+            {
+            case TRANSACTION_TYPE_COLDHOT:
+                str += tr("cold-hot wallet trx");
+                break;
+            case TRANSACTION_TYPE_CHANGE_ASSET_ACCOUNT:
+                str += tr("change cold-hot wallet multisig-address");
+                break;
+            case TRANSACTION_TYPE_SET_PUBLISHER:
+                str += tr("set publisher");
+                break;
+            default:
+                str += tr("%1 (unkown)").arg(opType);
+                break;
+            }
+
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(str));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("sponsor a proposal")));
+        }
+            break;
+        case TRANSACTION_TYPE_PROPOSAL_APPROVE:
+        {
+            QString proposalId = operationObject.value("proposal").toString();
+
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(tr("proposal ID: %1").arg(proposalId)));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("vote for a proposal")));
+        }
+            break;
         case TRANSACTION_TYPE_LOCKBALANCE:
         {
             unsigned long long lockAmount = jsonValueToULL(operationObject.take("lock_asset_amount"));
@@ -518,6 +608,15 @@ void AllTransactionWidget::showTransactions()
             item->setTextColor(QColor(0,255,0));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("get mining income")));
+        }
+            break;
+        case TRANSACTION_TYPE_ISSUE_ASSET:
+        {
+            QString assetSymbol = operationObject.take("symbol").toString();
+
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(tr("issue \"%1\"").arg(assetSymbol)));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("issue asset")));
         }
             break;
         case TRANSACTION_TYPE_CONTRACT_REGISTER:
@@ -601,7 +700,10 @@ void AllTransactionWidget::showTransactions()
     {
         for(int j = 0;j < ui->transactionsTableWidget->columnCount();++j)
         {
-            ui->transactionsTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+            if(ui->transactionsTableWidget->item(i,j))
+            {
+                ui->transactionsTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+            }
         }
 
     }
@@ -671,3 +773,5 @@ void AllTransactionWidget::pageChangeSlot(unsigned int page)
     }
 
 }
+
+

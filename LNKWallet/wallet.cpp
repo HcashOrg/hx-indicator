@@ -770,6 +770,30 @@ void UBChain::parseTransaction(QString result)
         transactionDB.addAccountTransactionId(addr, typeId);
     }
         break;
+    case TRANSACTION_TYPE_FEED_PRICE:
+    {
+        // 喂价
+        QString addr = operationObject.take("publisher_addr").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_SPONSOR_PROPOSAL:
+    {
+        // 发起提案
+        QString addr = operationObject.take("fee_paying_account").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_PROPOSAL_APPROVE:
+    {
+        // 提案投票
+        QString addr = operationObject.take("fee_paying_account").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
     case TRANSACTION_TYPE_LOCKBALANCE:
     {
         // 质押资产给miner
@@ -819,6 +843,14 @@ void UBChain::parseTransaction(QString result)
             transactionDB.addAccountTransactionId(owner, typeId);
         }
 
+    }
+        break;
+    case TRANSACTION_TYPE_ISSUE_ASSET:
+    {
+        // 发行资产
+        QString issuer = operationObject.take("issuer_addr").toString();
+
+        transactionDB.addAccountTransactionId(issuer, typeId);
     }
         break;
     case TRANSACTION_TYPE_CONTRACT_REGISTER:

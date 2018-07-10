@@ -87,35 +87,6 @@ void TitleBar::backBtnVis(bool isVisible)
 void TitleBar::jsonDataUpdated(QString id)
 {
 
-
-    if( id.startsWith("id_blockchain_get_transaction"))
-    {
-
-        QString result = UBChain::getInstance()->jsonDataValue(id);
-
-        if( result.mid(0,22).contains("exception") || result.mid(0,22).contains("error"))
-        {
-            // 若不在pending区也不在链上  则为失效交易  recordId置为2
-            mutexForConfigFile.lock();
-
-            UBChain::getInstance()->configFile->setValue("/recordId/" + id.right(40), 2);
-
-            mutexForConfigFile.unlock();
-
-            return;
-        }
-        else   //  如果已经被打包进区块，则将config中记录置为1
-        {
-            mutexForConfigFile.lock();
-
-            UBChain::getInstance()->configFile->setValue("/recordId/" + id.right(40), 1);
-
-            mutexForConfigFile.unlock();
-        }
-
-        return;
-    }
-
 }
 
 

@@ -82,15 +82,15 @@ void ProposalPage::showProposals()
         ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(UBChain::getInstance()->guardAccountIdToName(info.proposer)));
 
         QString typeStr;
-        if(info.proposalOperationType == 66)
+        if(info.proposalOperationType == TRANSACTION_TYPE_COLDHOT)
         {
             typeStr = tr("cold-hot trx");
         }
-        else if(info.proposalOperationType == 74)
+        else if(info.proposalOperationType == TRANSACTION_TYPE_CHANGE_ASSET_ACCOUNT)
         {
             typeStr = tr("update multisig");
         }
-        else if(info.proposalOperationType == 85)
+        else if(info.proposalOperationType == TRANSACTION_TYPE_SET_PUBLISHER)
         {
             typeStr = tr("set publisher");
         }
