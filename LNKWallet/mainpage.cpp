@@ -98,6 +98,7 @@ void MainPage::updateAccountList()
     QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
 
     int size = keys.size();
+    ui->accountTableWidget->setRowCount(0);
     ui->accountTableWidget->setRowCount(size);
 
     for(int i = 0; i < size; i++)

@@ -721,7 +721,7 @@ void UBChain::parseTransaction(QString result)
     ts.feeAmount = jsonValueToULL( operationObject.take("fee").toObject().take("amount"));
 
     transactionDB.insertTransactionStruct(ts.transactionId,ts);
-    qDebug() << "ttttttttttttt " << ts.transactionId << ts.type << ts.feeAmount;
+    qDebug() << "ttttttttttttt " << ts.type << ts.transactionId  << ts.feeAmount;
 
     TransactionTypeId typeId;
     typeId.type = ts.type;

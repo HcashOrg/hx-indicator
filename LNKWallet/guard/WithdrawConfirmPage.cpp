@@ -186,11 +186,10 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
-        {
-            TransactionResultDialog transactionResultDialog;
-            transactionResultDialog.setInfoText(tr("Transaction of guard-sign-crosschain has been sent out!"));
-            transactionResultDialog.setDetailText(result);
-            transactionResultDialog.pop();
+        {            
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Transaction of guard-sign-crosschain has been sent out!"));
+            commonDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
         {

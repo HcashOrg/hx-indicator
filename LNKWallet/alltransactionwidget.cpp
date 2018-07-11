@@ -511,6 +511,12 @@ void AllTransactionWidget::showTransactions()
             case TRANSACTION_TYPE_SET_PUBLISHER:
                 str += tr("set publisher");
                 break;
+            case TRANSACTION_TYPE_COLDHOT_CANCEL:
+                str += tr("cancel cold-hot trx");
+                break;
+            case TRANSACTION_TYPE_WITHDRAW_CANCEL:
+                str += tr("cancel withdraw trx");
+                break;
             default:
                 str += tr("%1 (unkown)").arg(opType);
                 break;

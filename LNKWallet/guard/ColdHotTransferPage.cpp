@@ -352,8 +352,8 @@ void ColdHotTransferPage::refreshColdHotTtransactionsState()
         QString trxId = ui->coldHotTransactionTableWidget->item(i,0)->data(Qt::UserRole).toString();
         QString crosschainTrxId = lookupCrosschainTrxByColdHotTrxId(trxId);
         QStringList guardAddresses = lookupSignedGuardByCrosschainTrx(crosschainTrxId);
+        QString currentAddress = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
-        QString currentAddress = UBChain::getInstance()->formalGuardMap.value(ui->accountComboBox->currentText()).address;
         if(guardAddresses.contains(currentAddress))
         {
             ui->coldHotTransactionTableWidget->item(i,4)->setText(tr("signed"));

@@ -111,38 +111,56 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
     QJsonObject object = QJsonDocument::fromJson(info.transactionStr.toLatin1()).object();
     switch (info.proposalOperationType)
     {
-    case 66:
+    case TRANSACTION_TYPE_COLDHOT:
     {
         ui->typeLabel->setText(tr("cold-hot trx"));
         ui->typeStackedWidget->setCurrentIndex(0);
 
-        QJsonObject operationObject = object.take("operations").toArray().at(0).toArray().at(1).toObject();
-        ui->assetLabel_hotCold->setText(operationObject.take("asset_symbol").toString());
-        ui->amountLabel_hotCold->setText(operationObject.take("amount").toString());
-        ui->sendLabel_hotCold->setText(operationObject.take("multi_account_withdraw").toString());
-        ui->receiveLabel_hotCold->setText(operationObject.take("multi_account_deposit").toString());
-        ui->memoLabel_hotCold->setText(operationObject.take("memo").toString());
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        ui->assetLabel_hotCold->setText(operationObject.value("asset_symbol").toString());
+        ui->amountLabel_hotCold->setText(operationObject.value("amount").toString());
+        ui->sendLabel_hotCold->setText(operationObject.value("multi_account_withdraw").toString());
+        ui->receiveLabel_hotCold->setText(operationObject.value("multi_account_deposit").toString());
+        ui->memoLabel_hotCold->setText(operationObject.value("memo").toString());
     }
         break;
-    case 74:
+    case TRANSACTION_TYPE_CHANGE_ASSET_ACCOUNT:
     {
         ui->typeLabel->setText(tr("update multisig-address"));
         ui->typeStackedWidget->setCurrentIndex(1);
 
-        QJsonObject operationObject = object.take("operations").toArray().at(0).toArray().at(1).toObject();
-        ui->assetLabel_updateMS->setText(operationObject.take("chain_type").toString());
-        ui->coldAddressLabel_updateMS->setText(operationObject.take("cold").toString());
-        ui->hotAddressLabel_updateMS->setText(operationObject.take("hot").toString());
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        ui->assetLabel_updateMS->setText(operationObject.value("chain_type").toString());
+        ui->coldAddressLabel_updateMS->setText(operationObject.value("cold").toString());
+        ui->hotAddressLabel_updateMS->setText(operationObject.value("hot").toString());
     }
         break;
-    case 85:
+    case TRANSACTION_TYPE_SET_PUBLISHER:
     {
         ui->typeLabel->setText(tr("set publisher"));
         ui->typeStackedWidget->setCurrentIndex(2);
 
-        QJsonObject operationObject = object.take("operations").toArray().at(0).toArray().at(1).toObject();
-        ui->assetLabel_publisher->setText(operationObject.take("asset_symbol").toString());
-        ui->publisherLabel_publisher->setText(operationObject.take("publisher").toString());
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        ui->assetLabel_publisher->setText(operationObject.value("asset_symbol").toString());
+        ui->publisherLabel_publisher->setText(operationObject.value("publisher").toString());
+    }
+        break;
+    case TRANSACTION_TYPE_COLDHOT_CANCEL:
+    {
+        ui->typeLabel->setText(tr("cancel cold-hot trx"));
+        ui->typeStackedWidget->setCurrentIndex(3);
+
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        ui->coldHotTrxIdLabel->setText(operationObject.value("trx_id").toString());
+    }
+        break;
+    case TRANSACTION_TYPE_WITHDRAW_CANCEL:
+    {
+        ui->typeLabel->setText(tr("cancel withdraw trx"));
+        ui->typeStackedWidget->setCurrentIndex(4);
+
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        ui->withdrawTrxIdLabel->setText(operationObject.value("not_enough_sign_trx_id").toString());
     }
         break;
     default:

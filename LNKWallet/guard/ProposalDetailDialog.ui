@@ -149,7 +149,7 @@ QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:w
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page">
       <property name="styleSheet">
@@ -286,7 +286,7 @@ QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:w
         </rect>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="hotColdTransferPage">
         <widget class="QLabel" name="label_3">
@@ -581,6 +581,68 @@ QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:w
          </property>
          <property name="text">
           <string>资产类型</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="cancelColdHotPage">
+        <widget class="QLabel" name="coldHotTrxIdLabel">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>40</y>
+           <width>300</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_16">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>20</y>
+           <width>200</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>冷热钱包转账交易ID</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="cancelWithdrawPage">
+        <widget class="QLabel" name="withdrawTrxIdLabel">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>40</y>
+           <width>300</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_17">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>20</y>
+           <width>200</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>提现交易ID</string>
          </property>
         </widget>
        </widget>

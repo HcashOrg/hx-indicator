@@ -94,6 +94,14 @@ void ProposalPage::showProposals()
         {
             typeStr = tr("set publisher");
         }
+        else if(info.proposalOperationType == TRANSACTION_TYPE_COLDHOT_CANCEL)
+        {
+            typeStr = tr("cancel cold-hot trx");
+        }
+        else if(info.proposalOperationType == TRANSACTION_TYPE_WITHDRAW_CANCEL)
+        {
+            typeStr = tr("cancel withdraw trx");
+        }
         else
         {
             typeStr = tr("unknown");

@@ -183,10 +183,6 @@ TransactionTypeIds TransactionDB::getAccountTransactionTypeIds(QString _accountA
     in >> transactionTypeIds;
     buffer.close();
 
-    foreach (TransactionTypeId id, transactionTypeIds) {
-        qDebug() << "00000000000  " << id.type << id.transactionId;
-    }
-
     return transactionTypeIds;
 }
 
@@ -195,11 +191,8 @@ TransactionTypeIds TransactionDB::getAccountTransactionTypeIdsByType(QString _ac
     TransactionTypeIds transactionTypeIds = getAccountTransactionTypeIds(_accountAddress);
     TransactionTypeIds result;
 
-    qDebug() << "aaaaaaaaaaaaa  " << _accountAddress << _type;
     foreach (TransactionTypeId transactionTypeId, transactionTypeIds)
     {
-        qDebug() << "bbbbbbbbbbbb  " << transactionTypeId.type << transactionTypeId.transactionId;
-
         if(transactionTypeId.type == _type || _type == -2 )
         {
             result.append(transactionTypeId);
