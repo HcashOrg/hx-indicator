@@ -96,7 +96,7 @@ void MainPage::updateAccountList()
 
     AssetAmountMap map = info.assetAmountMap;
     QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
-
+qDebug() << "ssssssssssssssss " << keys;
     int size = keys.size();
     ui->accountTableWidget->setRowCount(0);
     ui->accountTableWidget->setRowCount(size);
@@ -326,7 +326,6 @@ void MainPage::init()
 
      refresh();
 }
-
 
 void MainPage::paintEvent(QPaintEvent *)
 {

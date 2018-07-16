@@ -794,37 +794,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="110"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="66"/>
+        <source>There are no guard accounts in the wallet.</source>
+        <translation type="unfinished">钱包内没有代理账户</translation>
+    </message>
+    <message>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="122"/>
         <source>updating</source>
         <translation type="unfinished">更新中</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="117"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="129"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="118"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="130"/>
         <source>export</source>
         <translation type="unfinished">导出</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="225"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="237"/>
         <source>There is no corresponding private key in the wallet</source>
         <translation type="unfinished">钱包内没有对应的私钥</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="237"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="249"/>
         <source>Select the export path</source>
         <translation type="unfinished">选择导出地址</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="280"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="292"/>
         <source>available</source>
         <translation type="unfinished">有私钥</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="284"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="296"/>
         <source>unavailable</source>
         <translation type="unfinished">无私钥</translation>
     </message>
@@ -1679,55 +1684,60 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="190"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="80"/>
+        <source>There are no guard accounts in the wallet.</source>
+        <translation type="unfinished">钱包内没有代理账户</translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="202"/>
         <source>Transaction of guard-sign-coldhot has been sent out!</source>
         <translation type="unfinished">包含guard签名冷热钱包转账的交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="196"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="208"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="260"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="431"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="272"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="443"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="262"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="319"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="274"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="331"/>
         <source>check</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="270"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="282"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="317"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="329"/>
         <source>waiting</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">等待中</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="359"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="424"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="371"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="436"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="363"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="375"/>
         <source>unsigned</source>
         <translation type="unfinished">未签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="427"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="439"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished">%1已经签名了该冷热钱包转账交易！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="434"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="446"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished">正在检查%1的签名！</translation>
     </message>
@@ -3191,7 +3201,12 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/FeedPricePage.cpp" line="77"/>
+        <location filename="guard/FeedPricePage.cpp" line="64"/>
+        <source>There are no guard accounts in the wallet.</source>
+        <translation type="unfinished">钱包内没有代理账户</translation>
+    </message>
+    <message>
+        <location filename="guard/FeedPricePage.cpp" line="89"/>
         <source>feed</source>
         <translation type="unfinished">喂价</translation>
     </message>
@@ -3621,12 +3636,17 @@ add an account first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.cpp" line="45"/>
+        <location filename="guard/GuardAccountPage.cpp" line="41"/>
+        <source>There are no guard accounts in the wallet.</source>
+        <translation type="unfinished">钱包内没有代理账户</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardAccountPage.cpp" line="58"/>
         <source>formal guard</source>
         <translation type="unfinished">正式guard</translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.cpp" line="50"/>
+        <location filename="guard/GuardAccountPage.cpp" line="63"/>
         <source>informal guard</source>
         <translation type="unfinished">非正式guard</translation>
     </message>
@@ -3707,54 +3727,59 @@ add an account first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="105"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="80"/>
+        <source>There are no guard accounts in the wallet.</source>
+        <translation type="unfinished">钱包内没有代理账户</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardKeyManagePage.cpp" line="117"/>
         <source>no update</source>
         <translation type="unfinished">无更新</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="109"/>
-        <location filename="guard/GuardKeyManagePage.cpp" line="229"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="121"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="241"/>
         <source>updating</source>
         <translation type="unfinished">更新中</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="120"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="132"/>
         <source>no guard</source>
         <translation type="unfinished">无guard</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="128"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="140"/>
         <source>updated</source>
         <translation type="unfinished">已更新</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="139"/>
-        <location filename="guard/GuardKeyManagePage.cpp" line="241"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="151"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="253"/>
         <source>update</source>
         <translation type="unfinished">更新</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="188"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="200"/>
         <source>Transaction of updating multisig-address has been sent,please wait for confirmation</source>
         <translation type="unfinished">更新多签地址的交易已发出，请等待确认。</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="195"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="207"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="205"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="217"/>
         <source>The cross-chain keys has already imported.</source>
         <translation type="unfinished">跨链私钥已被导入！</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="245"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="257"/>
         <source>You are changing the key of %1 multisig-address on the chain. Sure to change it?</source>
         <translation type="unfinished">您正在变更%1多签地址的私钥。确定变更吗？</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="299"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="311"/>
         <source>Select the file of cross-chain key</source>
         <translation type="unfinished">选择跨链私钥文件</translation>
     </message>
@@ -5684,83 +5709,88 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="87"/>
+        <location filename="guard/ProposalPage.cpp" line="99"/>
         <source>cold-hot trx</source>
         <oldsource>hot-cold trx</oldsource>
         <translation type="unfinished">冷热钱包转账</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="99"/>
+        <location filename="guard/ProposalPage.cpp" line="111"/>
         <source>cancel cold-hot trx</source>
         <translation type="unfinished">取消冷热钱包转账</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="91"/>
+        <location filename="guard/ProposalPage.cpp" line="103"/>
         <source>update multisig</source>
         <translation type="unfinished">更新多签地址</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="95"/>
+        <location filename="guard/ProposalPage.cpp" line="69"/>
+        <source>There are no guard accounts in the wallet.</source>
+        <translation type="unfinished">钱包内没有代理账户</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalPage.cpp" line="107"/>
         <source>set publisher</source>
         <translation type="unfinished">设置喂价人</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="103"/>
+        <location filename="guard/ProposalPage.cpp" line="115"/>
         <source>cancel withdraw trx</source>
         <translation type="unfinished">取消提现交易</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="107"/>
+        <location filename="guard/ProposalPage.cpp" line="119"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="120"/>
+        <location filename="guard/ProposalPage.cpp" line="132"/>
         <source>no guard</source>
         <translation type="unfinished">无guard</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="124"/>
+        <location filename="guard/ProposalPage.cpp" line="136"/>
         <source>approved</source>
         <translation type="unfinished">已赞成</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="129"/>
+        <location filename="guard/ProposalPage.cpp" line="141"/>
         <source>disapproved</source>
         <translation type="unfinished">已反对</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="134"/>
+        <location filename="guard/ProposalPage.cpp" line="146"/>
         <source>not voted</source>
         <translation type="unfinished">未投票</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="140"/>
+        <location filename="guard/ProposalPage.cpp" line="152"/>
         <source>approve</source>
         <translation type="unfinished">赞成</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="141"/>
+        <location filename="guard/ProposalPage.cpp" line="153"/>
         <source>disapprove</source>
         <translation type="unfinished">反对</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="200"/>
+        <location filename="guard/ProposalPage.cpp" line="212"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished">包含提案投票的交易已发出，请等待确认</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="207"/>
+        <location filename="guard/ProposalPage.cpp" line="219"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="220"/>
+        <location filename="guard/ProposalPage.cpp" line="232"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished">确定赞成这个提案吗？</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="240"/>
+        <location filename="guard/ProposalPage.cpp" line="252"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished">确定反对这个提案吗？</translation>
     </message>
@@ -7121,12 +7151,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VoteStateLabel</name>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="305"/>
+        <location filename="guard/ProposalPage.cpp" line="317"/>
         <source>not passed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="316"/>
+        <location filename="guard/ProposalPage.cpp" line="328"/>
         <source>voting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7226,49 +7256,54 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="191"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="203"/>
         <source>Transaction of guard-sign-crosschain has been sent out!</source>
         <translation type="unfinished">guard签名交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="197"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="209"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="241"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="253"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished">%1 已经签名过了！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="290"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="302"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="292"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="349"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="304"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="361"/>
         <source>check</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="299"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="311"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="238"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="391"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="250"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="403"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="347"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="74"/>
+        <source>There are no guard accounts in the wallet.</source>
+        <translation type="unfinished">钱包内没有代理账户</translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="359"/>
         <source>waiting</source>
         <translation type="unfinished">等待中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="395"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="407"/>
         <source>unsigned</source>
         <translation type="unfinished">未签名</translation>
     </message>

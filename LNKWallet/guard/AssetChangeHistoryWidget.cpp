@@ -47,11 +47,23 @@ void AssetChangeHistoryWidget::init()
 
     ui->accountComboBox->clear();
     QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
-    ui->accountComboBox->addItems(accounts);
-
-    if(accounts.contains(UBChain::getInstance()->currentAccount))
+    if(accounts.size() > 0)
     {
-        ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+        ui->accountComboBox->addItems(accounts);
+
+        if(accounts.contains(UBChain::getInstance()->currentAccount))
+        {
+            ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+        }
+    }
+    else
+    {
+        ui->label->hide();
+        ui->accountComboBox->hide();
+
+        QLabel* label = new QLabel(this);
+        label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
+        label->setText(tr("There are no guard accounts in the wallet."));
     }
 
     QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();

@@ -107,7 +107,7 @@ void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
 {
     QJsonObject object  = QJsonDocument::fromJson(_data).object();
     QJsonArray  array   = object.take("result").toObject().take("data").toArray();
-qDebug() << "Rrrrrrrrrrrr " << _data;
+
     int size = array.size();
     ui->ordersTableWidget->setRowCount(size);
     for(int i = 0; i < size; i++)

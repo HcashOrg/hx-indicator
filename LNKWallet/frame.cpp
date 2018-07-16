@@ -1429,7 +1429,6 @@ void Frame::jsonDataUpdated(QString id)
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
-//        UBChain::getInstance()->assetInfoMap.clear();
 
         if(result.startsWith("\"result\":"))
         {
@@ -1448,6 +1447,8 @@ void Frame::jsonDataUpdated(QString id)
                         QJsonValue resultValue = jsonObject.take("result");
                         if( resultValue.isArray())
                         {
+//                            UBChain::getInstance()->assetInfoMap.clear();
+
                             QJsonArray resultArray = resultValue.toArray();
                             for( int i = 0; i < resultArray.size(); i++)
                             {
@@ -1529,10 +1530,13 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonObject object = jsonObject.take("result").toObject();
 
-            UBChain::getInstance()->assetInfoMap[assetId].multisigAddressId = object.take("id").toString();
-            UBChain::getInstance()->assetInfoMap[assetId].hotAddress = object.take("bind_account_hot").toString();
-            UBChain::getInstance()->assetInfoMap[assetId].coldAddress = object.take("bind_account_cold").toString();
-            UBChain::getInstance()->assetInfoMap[assetId].effectiveBlock = object.take("effective_block_num").toInt();
+            if(UBChain::getInstance()->assetInfoMap.contains(assetId))
+            {
+                UBChain::getInstance()->assetInfoMap[assetId].multisigAddressId = object.take("id").toString();
+                UBChain::getInstance()->assetInfoMap[assetId].hotAddress = object.take("bind_account_hot").toString();
+                UBChain::getInstance()->assetInfoMap[assetId].coldAddress = object.take("bind_account_cold").toString();
+                UBChain::getInstance()->assetInfoMap[assetId].effectiveBlock = object.take("effective_block_num").toInt();
+            }
         }
 
         return;
@@ -1621,11 +1625,14 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonObject object = jsonObject.take("result").toObject();
 
-            UBChain::getInstance()->formalGuardMap[account].accountId   = object.take("guard_member_account").toString();
-            UBChain::getInstance()->formalGuardMap[account].voteId      = object.take("vote_id").toString();
-            UBChain::getInstance()->formalGuardMap[account].isFormal    = object.take("formal").toBool();
+            if(UBChain::getInstance()->formalGuardMap.contains(account))
+            {
+                UBChain::getInstance()->formalGuardMap[account].accountId   = object.take("guard_member_account").toString();
+                UBChain::getInstance()->formalGuardMap[account].voteId      = object.take("vote_id").toString();
+                UBChain::getInstance()->formalGuardMap[account].isFormal    = object.take("formal").toBool();
 
-            UBChain::getInstance()->fetchGuardAllMultisigAddresses(UBChain::getInstance()->formalGuardMap[account].accountId);
+                UBChain::getInstance()->fetchGuardAllMultisigAddresses(UBChain::getInstance()->formalGuardMap[account].accountId);
+            }
         }
 
         return;
