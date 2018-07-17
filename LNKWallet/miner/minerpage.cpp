@@ -222,6 +222,16 @@ void MinerPage::jsonDataUpdated(QString id)
         QJsonObject jsonObject = parse_doucment.object();
         QJsonArray array = jsonObject.take("result").toArray();
         int size = array.size();
+
+        if(size == 0)
+        {
+            ui->obtainAllBtn->hide();
+        }
+        else
+        {
+            ui->obtainAllBtn->setVisible(ui->stackedWidget->currentIndex() == 0);
+        }
+
         ui->incomeTableWidget->setRowCount(0);
         ui->incomeTableWidget->setRowCount(size);
 
@@ -229,23 +239,18 @@ void MinerPage::jsonDataUpdated(QString id)
         {
             ui->incomeTableWidget->setRowHeight(i,40);
 
-            QJsonObject object = array.at(i).toObject();
-            QString assetId = object.take("asset_id").toString();
-            unsigned long long amount = 0;
-            QJsonValue value = object.take("amount");
-            if(value.isString())
-            {
-                amount = value.toString().toULongLong();
-            }
-            else
-            {
-                amount = QString::number(value.toDouble(),'g',10).toULongLong();
-            }
+            QJsonArray minerArray = array.at(i).toArray();
+            QString miner = minerArray.at(0).toString();
+
+            QJsonObject amountObject = minerArray.at(1).toObject();
+            QString assetId = amountObject.value("asset_id").toString();
+            unsigned long long amount = jsonValueToULL( amountObject.value("amount"));
 
             AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
-            ui->incomeTableWidget->setItem(i,0,new QTableWidgetItem(assetInfo.symbol));
+            ui->incomeTableWidget->setItem(i,0,new QTableWidgetItem(miner));
 
-            ui->incomeTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(amount,assetInfo.precision)));
+            ui->incomeTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(amount,assetInfo.precision) + " " + assetInfo.symbol));
+            ui->incomeTableWidget->item(i,1)->setData(Qt::UserRole, QString::number(amount));
 
             ui->incomeTableWidget->setItem(i,2,new QTableWidgetItem(tr("obtain")));
 
@@ -267,7 +272,7 @@ void MinerPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id.startsWith("id-obtain_pay_back_balance-"))
+    if( id == "id-obtain_pay_back_balance")
     {
         QString result = UBChain::getInstance()->jsonDataValue(id);
 
@@ -287,9 +292,8 @@ void MinerPage::jsonDataUpdated(QString id)
 
             if(result.contains("pay_back_obj.second.amount >= min_payback_balance: doesnt get enough pay back"))
             {
-                QString assetSymbol = id.mid(QString("id-obtain_pay_back_balance-").size());
                 errorResultDialog.setInfoText(tr("This account's mining income is less than %1 %2 ! You can not obtain it.")
-                                              .arg(600).arg(assetSymbol));
+                                              .arg(0.6).arg(ASSET_NAME));
             }
             else
             {
@@ -333,6 +337,7 @@ void MinerPage::init()
 {
     updateAccounts();
 
+    ui->obtainAllBtn->hide();
     ui->stackedWidget->setCurrentIndex(0);
     updateCheckState(0);
 }
@@ -467,6 +472,7 @@ void MinerPage::InitStyle()
     setStyleSheet("QToolButton#forecloseInfoBtn,QToolButton#incomeInfoBtn,QToolButton#incomeRecordBtn{border:none;background:transparent;color:#C6CAD4;font:bold 18px \"Microsoft YaHei UI Light\";}"
                   "QToolButton#forecloseInfoBtn::checked,QToolButton#incomeInfoBtn::checked,QToolButton#incomeRecordBtn::checked{color:black;}"
                   TABLEWIDGET_STYLE_1);
+    ui->obtainAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->lockToMinerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->registerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
@@ -523,6 +529,7 @@ void MinerPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 
     fetchLockBalance();
     fetchAccountIncome();
+    qDebug() << "fetchAccountIncome ";
     showIncomeRecord();
 }
 
@@ -575,27 +582,22 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
                                                          UBChain::getInstance()->feeType,ui->accountComboBox->currentText(),
                                                          UBChain::getInstance()->mainFrame);
         connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address,row](){
-            UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance-" + this->ui->incomeTableWidget->item(row,0)->text(),
+            QJsonArray array;
+            QJsonArray array2;
+            array2 << ui->incomeTableWidget->item(row,0)->text();
+            QJsonObject object;
+            QStringList amountStringList = this->ui->incomeTableWidget->item(row,1)->text().split(" ");
+            object.insert("amount", ui->incomeTableWidget->item(row,1)->data(Qt::UserRole).toString());
+            object.insert("asset_id", UBChain::getInstance()->getAssetId(amountStringList.at(1)));
+            array2 << object;
+            array << array2;
+            UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
                                              toJsonFormat( "obtain_pay_back_balance",
                                                            QJsonArray() << address
-                                                           << this->ui->incomeTableWidget->item(row,1)->text()
-                                                           << this->ui->incomeTableWidget->item(row,0)->text()
+                                                           << array
                                                            << true ));
         });
         feeCharge->show();
-
-//        CommonDialog commonDialog(CommonDialog::OkAndCancel);
-//        commonDialog.setText(tr("Sure to obtain all the current income?"));
-//        if(commonDialog.pop())
-//        {
-//            QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
-//            UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
-//                                             toJsonFormat( "obtain_pay_back_balance",
-//                                                           QJsonArray() << address
-//                                                           << ui->incomeTableWidget->item(row,1)->text()
-//                                                           << ui->incomeTableWidget->item(row,0)->text()
-//                                                           << true ));
-//        }
 
         return;
     }
@@ -605,18 +607,24 @@ void MinerPage::on_incomeInfoBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
     updateCheckState(0);
+
+    ui->obtainAllBtn->setVisible(ui->incomeTableWidget->rowCount() > 0);
 }
 
 void MinerPage::on_forecloseInfoBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
     updateCheckState(1);
+
+    ui->obtainAllBtn->hide();
 }
 
 void MinerPage::on_incomeRecordBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
     updateCheckState(2);
+
+    ui->obtainAllBtn->hide();
 }
 
 void MinerPage::pageChangeSlot(unsigned int page)
@@ -668,4 +676,37 @@ void MinerPage::on_incomeRecordTableWidget_cellPressed(int row, int column)
 
         return;
     }
+}
+
+void MinerPage::on_obtainAllBtn_clicked()
+{
+    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+
+    QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+
+    FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
+                                                     UBChain::getInstance()->feeType,ui->accountComboBox->currentText(),
+                                                     UBChain::getInstance()->mainFrame);
+    connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address](){
+        QJsonArray array;
+
+        for(int i = 0; i < ui->incomeTableWidget->rowCount(); i++)
+        {
+            QJsonArray array2;
+            array2 << ui->incomeTableWidget->item(i,0)->text();
+            QJsonObject object;
+            QStringList amountStringList = this->ui->incomeTableWidget->item(i,1)->text().split(" ");
+            object.insert("amount", ui->incomeTableWidget->item(i,1)->data(Qt::UserRole).toString());
+            object.insert("asset_id", UBChain::getInstance()->getAssetId(amountStringList.at(1)));
+            array2 << object;
+            array << array2;
+        }
+
+        UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
+                                         toJsonFormat( "obtain_pay_back_balance",
+                                                       QJsonArray() << address
+                                                       << array
+                                                       << true ));
+    });
+    feeCharge->show();
 }

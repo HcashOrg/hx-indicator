@@ -14,16 +14,6 @@
 
 
 UBChain* UBChain::goo = 0;
-//QMutex mutexForJsonData;
-//QMutex mutexForPending;
-//QMutex mutexForConfigFile;
-//QMutex mutexForMainpage;
-//QMutex mutexForPendingFile;
-//QMutex mutexForDelegateList;
-//QMutex mutexForRegisterMap;
-//QMutex mutexForBalanceMap;
-//QMutex mutexForAddressMap;
-//QMutex mutexForRpcReceiveOrNot;
 
 UBChain::UBChain()
 {
