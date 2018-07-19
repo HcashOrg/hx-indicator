@@ -439,7 +439,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    </column>
    <column>
     <property name="text">
-     <string>时间</string>
+     <string>时间（GMT）</string>
     </property>
     <property name="font">
      <font>
@@ -648,6 +648,25 @@ font: 12px &quot;微软雅黑&quot;;
    </property>
    <property name="text">
     <string>提案</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="typeBonusBtn">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>120</y>
+     <width>50</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>分红</string>
    </property>
   </widget>
  </widget>

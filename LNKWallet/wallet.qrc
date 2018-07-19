@@ -100,7 +100,6 @@
         <file>wallet_ui/peers.png</file>
         <file>wallet_ui/LNK.ico</file>
         <file>wallet_ui/back.png</file>
-        <file>wallet_ui/Linklogo.png</file>
         <file>wallet_ui/net.png</file>
         <file>wallet_ui/background.png</file>
         <file>wallet_ui/login.png</file>
@@ -131,6 +130,7 @@
         <file>wallet_ui/blank.png</file>
         <file>wallet_ui/guard_formal.png</file>
         <file>wallet_ui/guard_normal.png</file>
+        <file>wallet_ui/HX_logo.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>

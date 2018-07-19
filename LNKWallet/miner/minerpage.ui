@@ -655,9 +655,9 @@
   <widget class="QToolButton" name="obtainAllBtn">
    <property name="geometry">
     <rect>
-     <x>480</x>
+     <x>460</x>
      <y>90</y>
-     <width>60</width>
+     <width>80</width>
      <height>20</height>
     </rect>
    </property>

@@ -20,7 +20,7 @@ TitleBar::TitleBar(QWidget *parent) :
 
 //    ui->divLineLabel->setPixmap(QPixmap("pic2/divLine.png"));
 //    ui->divLineLabel->setScaledContents(true);
-    ui->label->setPixmap(QPixmap(":/ui/wallet_ui/Linklogo.png").scaled(112,26,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    ui->label->setPixmap(QPixmap(":/ui/wallet_ui/HX_logo.png").scaled(62,30,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->backBtn->setVisible(false);
     ui->backBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/back.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}");
 

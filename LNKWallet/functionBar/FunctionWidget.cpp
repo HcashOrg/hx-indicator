@@ -244,6 +244,7 @@ void FunctionWidget::InitWidget()
 
     connect(_p->accountBar,&FunctionAccountWidget::showAccountSignal,this,&FunctionWidget::showAccountSignal);
     connect(_p->accountBar,&FunctionAccountWidget::showMinerSignal,this,&FunctionWidget::showMinerSignal);
+    connect(_p->accountBar,&FunctionAccountWidget::showBonusSignal,this,&FunctionWidget::showBonusSignal);
 
     connect(_p->advanceBar,&FunctionAdvanceWidget::showPoundageSignal,this,&FunctionWidget::showPoundageSignal);
     connect(_p->advanceBar,&FunctionAdvanceWidget::showMultiSigSignal,this,&FunctionWidget::showMultiSigSignal);

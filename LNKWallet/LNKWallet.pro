@@ -165,7 +165,8 @@ SOURCES += main.cpp\
     guard/GuardIncomePage.cpp \
     guard/ChangeCrosschainAddressDialog.cpp \
     guard/WithdrawInfoDialog.cpp \
-    guard/ColdHotInfoDialog.cpp
+    guard/ColdHotInfoDialog.cpp \
+    bonus/BonusPage.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -302,7 +303,8 @@ HEADERS  += firstlogin.h \
     guard/GuardIncomePage.h \
     guard/ChangeCrosschainAddressDialog.h \
     guard/WithdrawInfoDialog.h \
-    guard/ColdHotInfoDialog.h
+    guard/ColdHotInfoDialog.h \
+    bonus/BonusPage.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -409,7 +411,8 @@ FORMS    += firstlogin.ui \
     guard/GuardIncomePage.ui \
     guard/ChangeCrosschainAddressDialog.ui \
     guard/WithdrawInfoDialog.ui \
-    guard/ColdHotInfoDialog.ui
+    guard/ColdHotInfoDialog.ui \
+    bonus/BonusPage.ui
 
 win32{
     DISTFILES += logo.rc

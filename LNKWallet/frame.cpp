@@ -45,6 +45,7 @@
 #include "guard/WithdrawConfirmPage.h"
 #include "guard/FeedPricePage.h"
 #include "guard/ColdHotTransferPage.h"
+#include "bonus/BonusPage.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -65,6 +66,7 @@ Frame::Frame(): timer(NULL),
     multiSigPage(NULL),
     multiSigTransactionPage(NULL),
     minerPage(NULL),
+    bonusPage(NULL),
     guardAccountPage(NULL),
     guardIncomePage(NULL),
     assetPage(NULL),
@@ -357,8 +359,9 @@ void Frame::alreadyLogin()
     functionBar->move(0,50);
     functionBar->show();
     connect(functionBar,SIGNAL(lock()),this,SLOT(showLockPage()));
-    connect(functionBar,SIGNAL(showMinerSignal()),this,SLOT(showMinerPage()));
 
+    connect(functionBar,&FunctionWidget::showMinerSignal,this,&Frame::showMinerPage);
+    connect(functionBar,&FunctionWidget::showBonusSignal,this,&Frame::showBonusPage);
     connect(functionBar,&FunctionWidget::showAccountSignal,this,&Frame::showMainPage);
     connect(functionBar,&FunctionWidget::showContactSignal,this,&Frame::showContactPage);
     connect(functionBar,&FunctionWidget::showAdvanceSignal,this,&Frame::showMainPage);
@@ -451,6 +454,18 @@ void Frame::showMinerPage()
     minerPage->show();
 
     currentPageNum = 7;
+}
+
+void Frame::showBonusPage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    bonusPage = new BonusPage(centralWidget);
+    bonusPage->setAttribute(Qt::WA_DeleteOnClose);
+    bonusPage->show();
+
+    currentPageNum = 19;
 }
 
 void Frame::showTransferPage(QString accountName,QString assetType)
@@ -747,6 +762,13 @@ void Frame::closeCurrentPage()
             guardIncomePage = NULL;
         }
         break;
+    case 19:
+        if(bonusPage)
+        {
+            bonusPage->close();
+            bonusPage = NULL;
+        }
+        break;
     default:
         break;
     }
@@ -975,8 +997,7 @@ void Frame::setLanguage(QString language)
             showOnchainOrderPage();
             break;
         case 7:
-//            upgradePage->retranslator();
-//            showUpgradePage(currentAccount);
+            showMinerPage();
             break;
         case 8:
             showAssetPage();
@@ -1013,6 +1034,9 @@ void Frame::setLanguage(QString language)
             break;
         case 18:
             showGuardIncomePage();
+            break;
+        case 19:
+            showBonusPage();
             break;
         default:
             break;

@@ -883,6 +883,14 @@ void UBChain::parseTransaction(QString result)
         transactionDB.addAccountTransactionId(ownerAddr, typeId);
     }
         break;
+    case TRANSACTION_TYPE_OBTAIN_BONUS:
+    {
+        // 领取分红
+        QString ownerAddr = operationObject.take("bonus_owner").toString();
+
+        transactionDB.addAccountTransactionId(ownerAddr, typeId);
+    }
+        break;
     default:
         break;
     }
@@ -1638,4 +1646,19 @@ unsigned long long jsonValueToULL(QJsonValue v)
 bool operator ==(const ContractInfo &c1, const ContractInfo &c2)
 {
     return c1.contractAddress == c2.contractAddress;
+}
+
+void setTextCenter(QTableWidget * const table)
+{
+    if(!table) return;
+    for(int i = 0;i < table->rowCount();++i)
+    {
+        for(int j = 0;j < table->columnCount();++j)
+        {
+            if(table->item(i,j))
+            {
+                table->item(i,j)->setTextAlignment(Qt::AlignCenter);
+            }
+        }
+    }
 }

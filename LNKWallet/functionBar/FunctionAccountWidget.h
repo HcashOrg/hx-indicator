@@ -21,10 +21,12 @@ public slots:
 private slots:
     void AssetShowSlots();
     void MinerShowSlots();
+    void BonusShowSlots();
 
 signals:
     void showAccountSignal();
     void showMinerSignal();
+    void showBonusSignal();
 
 private:
     void InitWidget();

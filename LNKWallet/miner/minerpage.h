@@ -60,8 +60,9 @@ private:
     void InitStyle();
     void updateCheckState(int number);//0 1 2
 
+    void checkObtainAllBtnVisible();
+
     unsigned int calPage(const QTableWidget *const table)const;
-    void setTextCenter(QTableWidget *const table);
 
     PageScrollWidget *pageWidget_income;
     BlankDefaultWidget *blankWidget_income;

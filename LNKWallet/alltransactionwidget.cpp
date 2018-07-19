@@ -68,6 +68,7 @@ void AllTransactionWidget::init()
     ui->typeOtherBtn->setCheckable(true);
     ui->typeFeedPriceBtn->setCheckable(true);
     ui->typeProposalBtn->setCheckable(true);
+    ui->typeBonusBtn->setCheckable(true);
 
     ui->timeAllBtn->setCheckable(true);
     ui->timeDayBtn->setCheckable(true);
@@ -181,6 +182,14 @@ void AllTransactionWidget::on_typeProposalBtn_clicked()
 }
 
 
+void AllTransactionWidget::on_typeBonusBtn_clicked()
+{
+    clearTypeChoice();
+    ui->typeBonusBtn->setChecked(true);
+    typeChoice = BonusType;
+    showTransactions();
+}
+
 void AllTransactionWidget::on_timeAllBtn_clicked()
 {
     clearTimeChoice();
@@ -225,6 +234,7 @@ void AllTransactionWidget::clearTypeChoice()
     ui->typeOtherBtn->setChecked(false);
     ui->typeFeedPriceBtn->setChecked(false);
     ui->typeProposalBtn->setChecked(false);
+    ui->typeBonusBtn->setChecked(false);
 }
 
 void AllTransactionWidget::clearTimeChoice()
@@ -315,6 +325,9 @@ void AllTransactionWidget::showTransactions()
         typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SPONSOR_PROPOSAL);
         typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_PROPOSAL_APPROVE);
         break;
+    case BonusType:
+        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_OBTAIN_BONUS);
+        break;
     default:
         break;
     }
@@ -395,7 +408,7 @@ void AllTransactionWidget::showTransactions()
         }
 
         ui->transactionsTableWidget->setItem(i,0, new QTableWidgetItem(QString::number(ts.blockNum)));
-        ui->transactionsTableWidget->setItem(i,1, new QTableWidgetItem(ts.expirationTime));
+        ui->transactionsTableWidget->setItem(i,1, new QTableWidgetItem(ts.expirationTime.replace("T", " ")));
         ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(getBigNumberString(ts.feeAmount, ASSET_PRECISION)));
         ui->transactionsTableWidget->setItem(i,5, new QTableWidgetItem(transactionId));
         ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("confirmed")));
@@ -487,12 +500,12 @@ void AllTransactionWidget::showTransactions()
             unsigned long long quoteAmount = jsonValueToULL(quoteObject.value("amount"));
 
             AssetInfo info = UBChain::getInstance()->assetInfoMap.value(baseAssetid);
-            QString str = QString("feed price: %1:%2  %3:%4").arg(info.symbol).arg(ASSET_NAME).arg( getBigNumberString(quoteAmount, ASSET_PRECISION))
+            QString str = tr("asset quote: %1:%2  %3:%4").arg(info.symbol).arg(ASSET_NAME).arg( getBigNumberString(quoteAmount, ASSET_PRECISION))
                     .arg( getBigNumberString(baseAmount, info.precision));
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(str));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
-            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("feed price")));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("asset quote")));
         }
             break;
         case TRANSACTION_TYPE_SPONSOR_PROPOSAL:
@@ -602,17 +615,29 @@ void AllTransactionWidget::showTransactions()
             break;
         case TRANSACTION_TYPE_MINE_INCOME:
         {
-            QJsonObject amountObject = operationObject.take("pay_back_balance").toArray().at(0).toArray().at(1).toObject();
-            unsigned long long amount = jsonValueToULL(amountObject.take("amount"));
-            QString amountAssetId = amountObject.take("asset_id").toString();
-            AssetInfo amountAssetInfo = UBChain::getInstance()->assetInfoMap.value(amountAssetId);
+            QJsonArray balanceArray = operationObject.value("pay_back_balance").toArray();
+            if(balanceArray.size() > 0)
+            {
+                unsigned long long amount = 0;
+                for(int i = 0; i < balanceArray.size(); i++)
+                {
+                    QJsonArray minerAmountArray = balanceArray.at(i).toArray();
+                    QJsonObject amountObject = minerAmountArray.at(1).toObject();
+                    amount += jsonValueToULL( amountObject.value("amount"));
+                }
+
+                QString str = "+" + getBigNumberString(amount, ASSET_PRECISION) + " " + ASSET_NAME;
+                if(balanceArray.size() > 1)
+                {
+                    str.prepend(tr("total "));
+                }
+
+                QTableWidgetItem* item = new QTableWidgetItem( str);
+                ui->transactionsTableWidget->setItem(i,3, item);
+                item->setTextColor(QColor(0,255,0));
+            }
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
-
-            QTableWidgetItem* item = new QTableWidgetItem( "+" + getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
-            ui->transactionsTableWidget->setItem(i,3, item);
-            item->setTextColor(QColor(0,255,0));
-
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("get mining income")));
         }
             break;
@@ -696,6 +721,32 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("cancel acceptance")));
         }
             break;
+        case TRANSACTION_TYPE_OBTAIN_BONUS:
+        {
+            QJsonArray bonusBalanceArray = operationObject.value("bonus_balance").toArray();
+            if(bonusBalanceArray.size() > 0)
+            {
+                QJsonArray assetAmountArray = bonusBalanceArray.at(0).toArray();
+                QString assetSymbol = assetAmountArray.at(0).toString();
+                unsigned long long amount = jsonValueToULL( assetAmountArray.at(1));
+                AssetInfo amountAssetInfo = UBChain::getInstance()->assetInfoMap.value( UBChain::getInstance()->getAssetId( assetSymbol));
+
+                QString str = "+" + getBigNumberString(amount, amountAssetInfo.precision) + " " + assetSymbol;
+                if(bonusBalanceArray.size() > 1)
+                {
+                    str += tr(" etc.");
+                }
+
+                QTableWidgetItem* item = new QTableWidgetItem( str);
+                ui->transactionsTableWidget->setItem(i,3, item);
+                item->setTextColor(QColor(0,255,0));
+            }
+
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
+
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("get bonus")));
+        }
+            break;
         default:
             break;
         }
@@ -736,6 +787,8 @@ void AllTransactionWidget::on_transactionsTableWidget_cellPressed(int row, int c
 {
     if( column == 1  || column == 2 || column == 3 || column == 5 || column == 7)
     {
+        if( !ui->transactionsTableWidget->item(row, column))    return;
+
         ShowContentDialog showContentDialog( ui->transactionsTableWidget->item(row, column)->text(),this);
 
         int x = ui->transactionsTableWidget->columnViewportPosition(column) + ui->transactionsTableWidget->columnWidth(column) / 2
@@ -779,5 +832,6 @@ void AllTransactionWidget::pageChangeSlot(unsigned int page)
     }
 
 }
+
 
 

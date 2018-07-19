@@ -63,7 +63,7 @@ MinerPage::MinerPage(QWidget *parent) :
 
     ui->incomeTableWidget->setColumnWidth(0,140);
     ui->incomeTableWidget->setColumnWidth(1,140);
-    ui->incomeTableWidget->setColumnWidth(2,80);
+    ui->incomeTableWidget->setColumnWidth(2,120);
 
     ui->incomeRecordTableWidget->installEventFilter(this);
     ui->incomeRecordTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -223,15 +223,6 @@ void MinerPage::jsonDataUpdated(QString id)
         QJsonArray array = jsonObject.take("result").toArray();
         int size = array.size();
 
-        if(size == 0)
-        {
-            ui->obtainAllBtn->hide();
-        }
-        else
-        {
-            ui->obtainAllBtn->setVisible(ui->stackedWidget->currentIndex() == 0);
-        }
-
         ui->incomeTableWidget->setRowCount(0);
         ui->incomeTableWidget->setRowCount(size);
 
@@ -252,12 +243,20 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->incomeTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(amount,assetInfo.precision) + " " + assetInfo.symbol));
             ui->incomeTableWidget->item(i,1)->setData(Qt::UserRole, QString::number(amount));
 
-            ui->incomeTableWidget->setItem(i,2,new QTableWidgetItem(tr("obtain")));
+            if( amount > 0)
+            {
+                ui->incomeTableWidget->setItem(i,2,new QTableWidgetItem(tr("get income")));
 
-            ToolButtonWidget *buttonInc = new ToolButtonWidget();
-            buttonInc->setText(ui->incomeTableWidget->item(i,2)->text());
-            ui->incomeTableWidget->setCellWidget(i,2,buttonInc);
-            connect(buttonInc,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_incomeTableWidget_cellPressed,this,i,2));
+                ToolButtonWidget *buttonInc = new ToolButtonWidget();
+                buttonInc->setText(ui->incomeTableWidget->item(i,2)->text());
+                buttonInc->setButtonFixSize(120,40);
+                ui->incomeTableWidget->setCellWidget(i,2,buttonInc);
+                connect(buttonInc,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_incomeTableWidget_cellPressed,this,i,2));
+            }
+            else
+            {
+                ui->incomeTableWidget->setItem(i,2,new QTableWidgetItem(""));
+            }
 
 
         }
@@ -269,6 +268,9 @@ void MinerPage::jsonDataUpdated(QString id)
         setTextCenter(ui->incomeTableWidget);
         pageWidget_income->setVisible(0 != size);
         blankWidget_income->setVisible( 0 == size);
+
+        checkObtainAllBtnVisible();
+
         return;
     }
 
@@ -337,9 +339,11 @@ void MinerPage::init()
 {
     updateAccounts();
 
-    ui->obtainAllBtn->hide();
     ui->stackedWidget->setCurrentIndex(0);
     updateCheckState(0);
+
+    refresh();
+    checkObtainAllBtnVisible();
 }
 
 void MinerPage::updateAccounts()
@@ -493,6 +497,29 @@ void MinerPage::updateCheckState(int number)
     ui->incomeRecordBtn->setChecked(2 == number);
 }
 
+void MinerPage::checkObtainAllBtnVisible()
+{
+    if(ui->stackedWidget->currentIndex() != 0 || ui->incomeTableWidget->rowCount() == 0)
+    {
+        ui->obtainAllBtn->hide();
+        return;
+    }
+
+    bool visible = false;
+    for(int i = 0; i < ui->incomeTableWidget->rowCount(); i++)
+    {
+        QTableWidgetItem* item = ui->incomeTableWidget->item(i, 2);
+        if(item)
+        {
+            if(!item->text().isEmpty())
+            {
+                visible = true;
+            }
+        }
+    }
+    ui->obtainAllBtn->setVisible(visible);
+}
+
 
 unsigned int MinerPage::calPage(const QTableWidget * const table) const
 {
@@ -504,22 +531,6 @@ unsigned int MinerPage::calPage(const QTableWidget * const table) const
     return static_cast<unsigned int>(page);
 }
 
-void MinerPage::setTextCenter(QTableWidget * const table)
-{
-    if(!table) return;
-    for(int i = 0;i < table->rowCount();++i)
-    {
-        for(int j = 0;j < table->columnCount();++j)
-        {
-            if(table->item(i,j))
-            {
-                //qDebug()<<i<<"-----------"<<j;
-                table->item(i,j)->setTextAlignment(Qt::AlignCenter);
-
-            }
-        }
-    }
-}
 
 void MinerPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
@@ -574,6 +585,7 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
 {
     if(column == 2)
     {
+        if(ui->incomeTableWidget->item(row,column)->text().isEmpty())       return;
         if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
 
         QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
@@ -608,7 +620,7 @@ void MinerPage::on_incomeInfoBtn_clicked()
     ui->stackedWidget->setCurrentIndex(0);
     updateCheckState(0);
 
-    ui->obtainAllBtn->setVisible(ui->incomeTableWidget->rowCount() > 0);
+    checkObtainAllBtnVisible();
 }
 
 void MinerPage::on_forecloseInfoBtn_clicked()
@@ -616,7 +628,7 @@ void MinerPage::on_forecloseInfoBtn_clicked()
     ui->stackedWidget->setCurrentIndex(1);
     updateCheckState(1);
 
-    ui->obtainAllBtn->hide();
+    checkObtainAllBtnVisible();
 }
 
 void MinerPage::on_incomeRecordBtn_clicked()
@@ -624,7 +636,7 @@ void MinerPage::on_incomeRecordBtn_clicked()
     ui->stackedWidget->setCurrentIndex(2);
     updateCheckState(2);
 
-    ui->obtainAllBtn->hide();
+    checkObtainAllBtnVisible();
 }
 
 void MinerPage::pageChangeSlot(unsigned int page)

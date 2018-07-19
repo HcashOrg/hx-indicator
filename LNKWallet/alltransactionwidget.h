@@ -17,7 +17,8 @@ public:
     explicit AllTransactionWidget(QWidget *parent = 0);
     ~AllTransactionWidget();
 
-    enum TypeChoice{AllType, TransferType, DepositType, WithdrawType, ContractType, MineType, GuaranteeType, OtherType, FeedPriceType, ProposalType};
+    enum TypeChoice{AllType, TransferType, DepositType, WithdrawType, ContractType, MineType, GuaranteeType,
+                    OtherType, FeedPriceType, ProposalType, BonusType};
     enum TimeChoice{AllTime, DayTime, WeekTime, MonthTime};
 private slots:
     void on_typeAllBtn_clicked();
@@ -30,6 +31,7 @@ private slots:
     void on_typeOtherBtn_clicked();
     void on_typeFeedPriceBtn_clicked();
     void on_typeProposalBtn_clicked();
+    void on_typeBonusBtn_clicked();
 
     void on_timeAllBtn_clicked();
     void on_timeDayBtn_clicked();
@@ -46,6 +48,7 @@ private slots:
     void on_searchLineEdit_textChanged(const QString &arg1);
 
     void pageChangeSlot(unsigned int page);
+
 
 
 private:

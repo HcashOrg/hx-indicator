@@ -25,7 +25,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout"/>
   <widget class="QLabel" name="label_normal">
    <property name="geometry">
     <rect>
@@ -80,7 +79,7 @@ padding-left: 18px;</string>
      <x>0</x>
      <y>90</y>
      <width>120</width>
-     <height>32</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="font">
@@ -90,6 +89,24 @@ padding-left: 18px;</string>
    </property>
    <property name="text">
     <string>挖矿</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="toolButton_bonus">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>120</y>
+     <width>120</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>分红</string>
    </property>
   </widget>
  </widget>

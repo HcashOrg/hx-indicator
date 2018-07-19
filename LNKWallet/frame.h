@@ -35,6 +35,7 @@ class DepositAutomatic;
 class ContactWidget;
 class FunctionWidget;
 class MinerPage;
+class BonusPage;
 class OnchainOrderPage;
 class MyExchangeContractPage;
 class PoundageWidget;
@@ -80,6 +81,7 @@ private slots:
     void alreadyLogin();
 
     void showMinerPage();
+    void showBonusPage();
 
     void showLockPage();
     void autoLock();
@@ -136,6 +138,7 @@ private:
     MultiSigPage* multiSigPage;
     MultiSigTransactionPage* multiSigTransactionPage;
     MinerPage* minerPage;
+    BonusPage* bonusPage;
     OnchainOrderPage* onchainOrderPage;
     MyExchangeContractPage* myExchangeContractPage;
     PoundageWidget *poundage;
@@ -160,7 +163,7 @@ private:
     int currentPageNum;  //  0:mainPage   1:  2:delegatePgae  3:transferPage    4:contactPage    5:myExchangeContractPage
                          //   6: onchainOrderPage   7:minerPage   8: assetPage     9: multiSigPage   10: multiSigTransactionPage
                          //  11: poundage   12: guardKeyManagePage  13: proposalPage    14: withdrawConfirmPage  15: feedPricePage
-                        //   16: coldHotTransferPage    17: guardAccountPage    18: guardIncomePage
+                        //   16: coldHotTransferPage    17: guardAccountPage    18: guardIncomePage     19: bonusPage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;
     void createTrayIconActions();
