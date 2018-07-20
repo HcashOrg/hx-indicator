@@ -934,12 +934,10 @@ GuardMultisigAddress UBChain::getGuardMultisigByPairId(QString assetSymbol, QStr
 {
     QString guardAccountId = formalGuardMap.value(guardName).accountId;
     QVector<GuardMultisigAddress> v = guardMultisigAddressesMap.value(assetSymbol + "-" + guardAccountId);
-qDebug() << "11111111111 " << assetSymbol + "-" + guardAccountId << v.size();
+
     GuardMultisigAddress result;
     foreach (GuardMultisigAddress gma, v)
     {
-        qDebug() << "222222222 " << gma.pairId ;
-
         if(gma.pairId == pairId)
         {
             result = gma;

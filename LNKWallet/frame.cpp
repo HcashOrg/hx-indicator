@@ -1132,7 +1132,7 @@ void Frame::showOnchainOrderPage()
 void Frame::showMyExchangeContractPage()
 {
     emit titleBackVisible(false);
-    if(UBChain::getInstance()->accountInfoMap.empty())
+    if(UBChain::getInstance()->accountInfoMap.isEmpty())
     {
         CommonDialog dia(CommonDialog::OkOnly);
         dia.setText(tr("Please Import Or Create Account First!"));
@@ -1472,6 +1472,7 @@ void Frame::jsonDataUpdated(QString id)
                         if( resultValue.isArray())
                         {
 //                            UBChain::getInstance()->assetInfoMap.clear();
+                            QMap<QString,AssetInfo> map;
 
                             QJsonArray resultArray = resultValue.toArray();
                             for( int i = 0; i < resultArray.size(); i++)
@@ -1527,8 +1528,11 @@ void Frame::jsonDataUpdated(QString id)
                                 assetInfo.quoteAmount.assetId = quoteObject.take("asset_id").toString();
                                 assetInfo.quoteAmount.amount = jsonValueToULL(quoteObject.take("amount"));
 
-                                UBChain::getInstance()->assetInfoMap.insert(assetInfo.id,assetInfo);
+//                                UBChain::getInstance()->assetInfoMap.insert(assetInfo.id,assetInfo);
+                                map.insert(assetInfo.id, assetInfo);
                             }
+
+                            UBChain::getInstance()->assetInfoMap = map;
                         }
                     }
                 }

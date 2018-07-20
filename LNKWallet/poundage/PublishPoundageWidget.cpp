@@ -70,7 +70,7 @@ void PublishPoundageWidget::ChangeAccountSlots()
 //    AccountInfo accountInfo = ui->comboBox_accounts->currentData(Qt::UserRole).value<AccountInfo>();
     AccountInfo accountInfo = UBChain::getInstance()->accountInfoMap.value(ui->comboBox_accounts->currentText());
 
-    if(accountInfo.assetAmountMap.empty())
+    if(accountInfo.assetAmountMap.isEmpty())
     {
         ui->lineEdit_source->setEnabled(false);
         ui->lineEdit_source->setPlaceholderText(tr("0 LNK"));
@@ -116,7 +116,7 @@ void PublishPoundageWidget::ChangeAssetSlots()
 void PublishPoundageWidget::InitAccount()
 {
     ui->comboBox_accounts->clear();
-    if(UBChain::getInstance()->accountInfoMap.empty()) return;
+    if(UBChain::getInstance()->accountInfoMap.isEmpty()) return;
 
     for(auto it = UBChain::getInstance()->accountInfoMap.constBegin();it != UBChain::getInstance()->accountInfoMap.constEnd();++it)
     {
@@ -128,7 +128,7 @@ void PublishPoundageWidget::InitAccount()
 void PublishPoundageWidget::InitTargetCoin()
 {
     ui->comboBox_targetType->clear();
-    if(UBChain::getInstance()->assetInfoMap.empty()) return;
+    if(UBChain::getInstance()->assetInfoMap.isEmpty()) return;
     foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
         if(asset.id == "1.3.0") continue;
 

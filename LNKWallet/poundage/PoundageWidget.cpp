@@ -110,7 +110,7 @@ void PoundageWidget::autoRefreshSlots()
 
 void PoundageWidget::PublishPoundageSlots()
 {
-    if(UBChain::getInstance()->accountInfoMap.empty())
+    if(UBChain::getInstance()->accountInfoMap.isEmpty())
     {
         CommonDialog dia(CommonDialog::OkOnly);
         dia.setText(tr("Please Import Or Create Account First!"));

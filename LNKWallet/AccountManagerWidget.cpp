@@ -168,7 +168,7 @@ void AccountManagerWidget::InitWidget()
 
     //初始化账户信息
     int totalPage = (UBChain::getInstance()->accountInfoMap.size()%3 == 0 &&
-                     !UBChain::getInstance()->accountInfoMap.empty())?
+                     !UBChain::getInstance()->accountInfoMap.isEmpty())?
                     UBChain::getInstance()->accountInfoMap.size()/3 :
                     UBChain::getInstance()->accountInfoMap.size()/3 + 1;
     _p->pageWidget->SetTotalPage(totalPage);

@@ -20,12 +20,12 @@ bool PoundageDataUtil::ParseJsonObjToUnit(QJsonObject jsonObj,std::shared_ptr<Po
     poundageUnit->publishTime = QDateTime::fromString(jsonObj.value("time").toString(),"yyyy-MM-ddTHH:mm:ss");
 
     QJsonObject oriObj = jsonObj.value("asset_orign").toObject();
-    int oriPre = UBChain::getInstance()->assetInfoMap[oriObj.value("asset_id").toString()].precision;
+    int oriPre = UBChain::getInstance()->assetInfoMap.value(oriObj.value("asset_id").toString()).precision;
     poundageUnit->sourceCoinNumber =  (double)jsonValueToULL(oriObj.value("amount"))/pow(10,oriPre);
     poundageUnit->sourceCoinID = oriObj.value("asset_id").toString();
 
     QJsonObject tarObj = jsonObj.value("asset_target").toObject();
-    int tarPre = UBChain::getInstance()->assetInfoMap[tarObj.value("asset_id").toString()].precision;
+    int tarPre = UBChain::getInstance()->assetInfoMap.value(tarObj.value("asset_id").toString()).precision;
     poundageUnit->targetCoinNumber = (double)jsonValueToULL(tarObj.value("amount"))/pow(10,tarPre);
     poundageUnit->targetCoinID = tarObj.value("asset_id").toString();
 

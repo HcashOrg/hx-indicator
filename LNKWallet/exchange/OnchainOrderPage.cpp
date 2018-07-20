@@ -253,7 +253,7 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
 {
     if(_column == 3)
     {
-        if(UBChain::getInstance()->accountInfoMap.empty())
+        if(UBChain::getInstance()->accountInfoMap.isEmpty())
         {
             CommonDialog dia(CommonDialog::OkOnly);
             dia.setText(tr("Please Import Or Create Account First!"));
