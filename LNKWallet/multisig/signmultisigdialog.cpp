@@ -17,7 +17,7 @@ SignMultiSigDialog::SignMultiSigDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -27,7 +27,7 @@ SignMultiSigDialog::SignMultiSigDialog(QWidget *parent) :
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->nextBtn->setStyleSheet(OKBTN_STYLE);
     ui->signBtn->setStyleSheet(OKBTN_STYLE);
@@ -73,7 +73,7 @@ void SignMultiSigDialog::jsonDataUpdated(QString id)
 {
     if( id.startsWith("id_wallet_builder_get_multisig_detail") || id.startsWith("id_wallet_builder_file_get_multisig_detail")  )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 qDebug() << id << result;
         if( result.startsWith("\"result\":") )             // 成功
         {
@@ -143,9 +143,9 @@ qDebug() << id << result;
                                 ui->signInfoTableWidget->setItem(i,0,new QTableWidgetItem(address));
                                 ui->signInfoTableWidget->item(i,0)->setTextColor(QColor(192,196,212));
 
-                                if(UBChain::getInstance()->isMyAddress(address))
+                                if(HXChain::getInstance()->isMyAddress(address))
                                 {
-                                    ui->signInfoTableWidget->setItem(i,1,new QTableWidgetItem(UBChain::getInstance()->addressToName(address)));
+                                    ui->signInfoTableWidget->setItem(i,1,new QTableWidgetItem(HXChain::getInstance()->addressToName(address)));
                                     ui->signInfoTableWidget->item(i,1)->setTextColor(QColor(43,230,131));
                                 }
                                 else
@@ -165,7 +165,7 @@ qDebug() << id << result;
                                     ui->signInfoTableWidget->item(i,2)->setTextColor(QColor(255,34,76));
                                 }
 
-                                if(UBChain::getInstance()->isMyAddress(address) && !signedAddresses.contains(address))
+                                if(HXChain::getInstance()->isMyAddress(address) && !signedAddresses.contains(address))
                                 {
                                     localUnsignedCount++;
                                 }        
@@ -196,7 +196,7 @@ qDebug() << id << result;
 
     if( id.startsWith("id_wallet_builder_add_signature") || id.startsWith("id_wallet_builder_file_add_signature")  )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 qDebug() << id << result;
         if( result.startsWith("\"result\":") )             // 成功
         {
@@ -228,14 +228,14 @@ void SignMultiSigDialog::on_nextBtn_clicked()
 {
     if(useFile)
     {
-        UBChain::getInstance()->postRPC( "id_wallet_builder_file_get_multisig_detail",
+        HXChain::getInstance()->postRPC( "id_wallet_builder_file_get_multisig_detail",
                                          toJsonFormat( "wallet_builder_file_get_multisig_detail",
                                                        QJsonArray() << ui->pathLineEdit->text()));
 
     }
     else
     {
-        UBChain::getInstance()->postRPC( "id_wallet_builder_get_multisig_detail",
+        HXChain::getInstance()->postRPC( "id_wallet_builder_get_multisig_detail",
                                          toJsonFormat( "wallet_builder_get_multisig_detail",
                                                        QJsonArray() << ui->transactionBrowser->toPlainText()));
 
@@ -282,7 +282,7 @@ void SignMultiSigDialog::init()
 
 void SignMultiSigDialog::on_selectPathBtn_clicked()
 {
-    QString file = QFileDialog::getOpenFileName(this, tr("Choose your multisig transaction file."),UBChain::getInstance()->walletConfigPath,"(*.json)");
+    QString file = QFileDialog::getOpenFileName(this, tr("Choose your multisig transaction file."),HXChain::getInstance()->walletConfigPath,"(*.json)");
 #ifdef WIN32
     file.replace("\\","/");
 #endif
@@ -313,14 +313,14 @@ void SignMultiSigDialog::on_signBtn_clicked()
 
     if(useFile)
     {
-        UBChain::getInstance()->postRPC( "id_wallet_builder_file_add_signature",
+        HXChain::getInstance()->postRPC( "id_wallet_builder_file_add_signature",
                                          toJsonFormat( "wallet_builder_file_add_signature",
                                                        QJsonArray() << ui->pathLineEdit->text() << "true"));
 
     }
     else
     {        
-        UBChain::getInstance()->postRPC( "id_wallet_builder_add_signature",
+        HXChain::getInstance()->postRPC( "id_wallet_builder_add_signature",
                                          toJsonFormat( "wallet_builder_add_signature",
                                                        QJsonArray() << ui->transactionBrowser->toPlainText() << "true"));
     }

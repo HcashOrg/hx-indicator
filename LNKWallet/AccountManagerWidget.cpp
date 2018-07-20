@@ -58,11 +58,11 @@ void AccountManagerWidget::deleteButtonSlots()
 
 
 
-    PasswordConfirmWidget *wi = new PasswordConfirmWidget(UBChain::getInstance()->mainFrame);
+    PasswordConfirmWidget *wi = new PasswordConfirmWidget(HXChain::getInstance()->mainFrame);
     connect(wi,&PasswordConfirmWidget::confirmSignal,[this,accountName,row](){
 
         qDebug()<<"clicked          "<<row;
-        UBChain::getInstance()->postRPC( "id-remove_local_account",
+        HXChain::getInstance()->postRPC( "id-remove_local_account",
                                          toJsonFormat( "remove_local_account", QJsonArray()
                                          <<accountName));
 
@@ -93,7 +93,7 @@ void AccountManagerWidget::deleteButtonSlots()
 //    if(commonDialog.pop())
 //    {
 //        qDebug()<<"clicked          "<<row;
-//        UBChain::getInstance()->postRPC( "id-remove_local_account",
+//        HXChain::getInstance()->postRPC( "id-remove_local_account",
 //                                         toJsonFormat( "remove_local_account", QJsonArray()
 //                                         <<accountName));
 //        //刷新页码等
@@ -131,9 +131,9 @@ void AccountManagerWidget::jsonDataUpdated(QString id)
 {
     if("id-remove_local_account" == id)
     {
-        QString  result = UBChain::getInstance()->jsonDataValue(id);
+        QString  result = HXChain::getInstance()->jsonDataValue(id);
 
-        UBChain::getInstance()->postRPC( "id-refresh-account",
+        HXChain::getInstance()->postRPC( "id-refresh-account",
                                          toJsonFormat( "id-refresh-account", QJsonArray()));
         qDebug()<<result;
     }
@@ -167,15 +167,15 @@ void AccountManagerWidget::InitWidget()
     InitStyle();
 
     //初始化账户信息
-    int totalPage = (UBChain::getInstance()->accountInfoMap.size()%3 == 0 &&
-                     !UBChain::getInstance()->accountInfoMap.isEmpty())?
-                    UBChain::getInstance()->accountInfoMap.size()/3 :
-                    UBChain::getInstance()->accountInfoMap.size()/3 + 1;
+    int totalPage = (HXChain::getInstance()->accountInfoMap.size()%3 == 0 &&
+                     !HXChain::getInstance()->accountInfoMap.isEmpty())?
+                    HXChain::getInstance()->accountInfoMap.size()/3 :
+                    HXChain::getInstance()->accountInfoMap.size()/3 + 1;
     _p->pageWidget->SetTotalPage(totalPage);
     ui->stackedWidget->addWidget(_p->pageWidget);
     ui->stackedWidget->setCurrentWidget(_p->pageWidget);
 
-    foreach (AccountInfo info, UBChain::getInstance()->accountInfoMap) {
+    foreach (AccountInfo info, HXChain::getInstance()->accountInfoMap) {
         QTableWidgetItem *item = new QTableWidgetItem();
         item->setData(Qt::UserRole,QVariant::fromValue<AccountInfo>(info));
         item->setTextAlignment(Qt::AlignLeft);
@@ -202,13 +202,13 @@ void AccountManagerWidget::InitWidget()
         connect(button2,&ToolButtonWidget::clicked,this,&AccountManagerWidget::exportButtonSlots);
     }
     RefreshTableShow(0);
-    _p->pageWidget->setShowTip(UBChain::getInstance()->accountInfoMap.size(),3);
-    _p->pageWidget->setVisible(0 != UBChain::getInstance()->accountInfoMap.size());
+    _p->pageWidget->setShowTip(HXChain::getInstance()->accountInfoMap.size(),3);
+    _p->pageWidget->setVisible(0 != HXChain::getInstance()->accountInfoMap.size());
 
     connect(_p->pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&AccountManagerWidget::pageChangeSlot);
     connect(ui->toolButton,&QToolButton::clicked,this,&AccountManagerWidget::backupButtonSlots);
 
-    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &AccountManagerWidget::jsonDataUpdated);
+    connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &AccountManagerWidget::jsonDataUpdated);
 
 
 }

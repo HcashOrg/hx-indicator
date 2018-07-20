@@ -60,7 +60,7 @@ const QString &FeeChooseWidget::GetFeeType() const
 QString FeeChooseWidget::GetFeeNumber() const
 {
     int pre = 5;
-    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
         if(asset.symbol == _p->feeType)
         {
             pre = asset.precision;
@@ -82,7 +82,7 @@ void FeeChooseWidget::jsonDataUpdated(QString id)
     {
         std::lock_guard<std::mutex> lock(_p->mutex);
         //转化为结构体
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
         result.append("}");
 
@@ -132,7 +132,7 @@ void FeeChooseWidget::feeTypeChanged()
 
 void FeeChooseWidget::QueryPoundage(const QString &type)
 {
-    UBChain::getInstance()->postRPC("feechoose_list_guarantee_order",
+    HXChain::getInstance()->postRPC("feechoose_list_guarantee_order",
                                     toJsonFormat("list_guarantee_order",
                                                  QJsonArray()<<type<<false
                                                  )
@@ -142,10 +142,10 @@ void FeeChooseWidget::QueryPoundage(const QString &type)
 void FeeChooseWidget::updatePoundageID()
 {
     qDebug()<<"poundageID---"<<_p->poundageID;
-    _p->poundageID.isEmpty()?UBChain::getInstance()->postRPC( "feechoose_remove_guarantee_id",
+    _p->poundageID.isEmpty()?HXChain::getInstance()->postRPC( "feechoose_remove_guarantee_id",
                                                               toJsonFormat( "remove_guarantee_id",
                                                                             QJsonArray())):
-                             UBChain::getInstance()->postRPC( "feechoose_set_guarantee_id",
+                             HXChain::getInstance()->postRPC( "feechoose_set_guarantee_id",
                                                               toJsonFormat( "set_guarantee_id",
                                                        QJsonArray() << _p->poundageID ));
 
@@ -177,7 +177,7 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
         _p->poundageID = poundage->poundageID;
         double rate = poundage->sourceCoinNumber/poundage->targetCoinNumber;
         int pre = 5;
-        foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+        foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
             if(asset.symbol == _p->feeType)
             {
                 pre = asset.precision;
@@ -239,7 +239,7 @@ bool FeeChooseWidget::checkAccountBalance() const
     if(_p->coinNumber > _p->accountAssets[_p->feeType])
     {
         int pre = 5;
-        foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+        foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
             if(asset.symbol == _p->feeType)
             {
                 pre = asset.precision;
@@ -263,15 +263,15 @@ void FeeChooseWidget::ResetAccountBalance()
 {
     _p->accountAssets.clear();
 
-    AccountInfo info = UBChain::getInstance()->accountInfoMap.value(_p->accountName);
+    AccountInfo info = HXChain::getInstance()->accountInfoMap.value(_p->accountName);
 
     AssetAmountMap map = info.assetAmountMap;
-    QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->assetInfoMap.keys();
 
     for(int i = 0;i < keys.size();++i)
     {
         QString assetId = keys.at(i);
-        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
+        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
 
         _p->accountAssets[assetInfo.symbol] = map.value(assetId).amount/pow(10.,assetInfo.precision);
         qDebug()<<assetInfo.symbol<<_p->accountAssets[assetInfo.symbol];
@@ -283,7 +283,7 @@ void FeeChooseWidget::InitCoinType()
 {
     //初始化币种(币symbol，币id)
     ui->comboBox_coinType->clear();
-    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
         if(asset.id == "1.3.0") continue;
         ui->comboBox_coinType->addItem(asset.symbol,asset.id);
     }
@@ -316,7 +316,7 @@ void FeeChooseWidget::InitWidget()
         ui->checkBox->setChecked(true);
     }
 
-    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &FeeChooseWidget::jsonDataUpdated);
+    connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &FeeChooseWidget::jsonDataUpdated);
     connect(ui->comboBox_coinType,static_cast<void (QComboBox::*)(int)>(&QComboBox::activated),this,&FeeChooseWidget::coinTypeChanged);
     connect(ui->checkBox,&QCheckBox::stateChanged,this,&FeeChooseWidget::feeTypeChanged);
 

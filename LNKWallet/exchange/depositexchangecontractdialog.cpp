@@ -13,7 +13,7 @@ DepositExchangeContractDialog::DepositExchangeContractDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -27,13 +27,13 @@ DepositExchangeContractDialog::DepositExchangeContractDialog(QWidget *parent) :
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
+    feeChoose = new FeeChooseWidget(0,HXChain::getInstance()->feeType);
     ui->stackedWidget->addWidget(feeChoose);
     feeChoose->resize(ui->stackedWidget->size());
     ui->stackedWidget->setCurrentIndex(0);
 
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     init();
 }
@@ -51,12 +51,12 @@ void DepositExchangeContractDialog::pop()
 
 void DepositExchangeContractDialog::init()
 {
-    ui->accountNameLabel->setText(UBChain::getInstance()->currentAccount);
+    ui->accountNameLabel->setText(HXChain::getInstance()->currentAccount);
 
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
 }
@@ -70,19 +70,19 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
 {
     if( id.startsWith( "id-unlock-DepositExchangeContractDialog") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result == "\"result\":null")
         {
-            QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+            QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
             feeChoose->updatePoundageID();
-            UBChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
+            HXChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
                                                                                    QJsonArray() << ui->accountNameLabel->text() << contractAddress
                                                                                    << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
                                                                                    << "deposit to exchange contract"
-                                                                                   << UBChain::getInstance()->currentContractFee() << stepCount
+                                                                                   << HXChain::getInstance()->currentContractFee() << stepCount
                                                                                    << true
                                                                                    ));
 
@@ -98,7 +98,7 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
 
     if( id == "id-transfer_to_contract")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -123,14 +123,14 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
 
     if( id == "id-transfer_to_contract_testing-DepositExchangeContractDialog")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
-            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
             stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
 
             feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
             feeChoose->updateAccountNameSlots(ui->accountNameLabel->text(),true);
@@ -143,12 +143,12 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
 
 void DepositExchangeContractDialog::on_okBtn_clicked()
 {
-    if(!UBChain::getInstance()->ValidateOnChainOperation())     return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation())     return;
 
     if(ui->amountLineEdit->text().toDouble() <= 0)  return;
     if(ui->pwdLineEdit->text().isEmpty())           return;
 
-    UBChain::getInstance()->postRPC( "id-unlock-DepositExchangeContractDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+    HXChain::getInstance()->postRPC( "id-unlock-DepositExchangeContractDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 
 }
@@ -160,8 +160,8 @@ void DepositExchangeContractDialog::on_cancelBtn_clicked()
 
 void DepositExchangeContractDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
-    AssetAmountMap map = UBChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap;
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetAmountMap map = HXChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap;
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
 
     ui->balanceLabel->setText(getBigNumberString(map.value(assetInfo.id).amount, assetInfo.precision) + " " + assetInfo.symbol );
 
@@ -178,9 +178,9 @@ void DepositExchangeContractDialog::on_closeBtn_clicked()
 
 void DepositExchangeContractDialog::estimateContractFee()
 {
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
-    UBChain::getInstance()->postRPC( "id-transfer_to_contract_testing-DepositExchangeContractDialog", toJsonFormat( "transfer_to_contract_testing",
+    HXChain::getInstance()->postRPC( "id-transfer_to_contract_testing-DepositExchangeContractDialog", toJsonFormat( "transfer_to_contract_testing",
                                                                            QJsonArray() << ui->accountNameLabel->text() << contractAddress
                                                                            << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
                                                                            << "deposit to exchange contract"

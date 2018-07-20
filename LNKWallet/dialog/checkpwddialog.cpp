@@ -12,7 +12,7 @@ CheckPwdDialog::CheckPwdDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -23,7 +23,7 @@ CheckPwdDialog::CheckPwdDialog(QWidget *parent) :
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->pwdLineEdit->setFocus();
 
@@ -52,7 +52,7 @@ void CheckPwdDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-unlock-CheckPwdDialog")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if( result == "\"result\":null")
         {
@@ -77,7 +77,7 @@ void CheckPwdDialog::on_okBtn_clicked()
 
     if(!ui->okBtn->isEnabled())     return;
 
-    UBChain::getInstance()->postRPC( "id-unlock-CheckPwdDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+    HXChain::getInstance()->postRPC( "id-unlock-CheckPwdDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }
 

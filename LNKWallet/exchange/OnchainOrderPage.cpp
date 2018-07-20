@@ -17,7 +17,7 @@ OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->ordersTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->ordersTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -45,7 +45,7 @@ OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
     blankWidget = new BlankDefaultWidget(ui->ordersTableWidget);
     blankWidget->setTextTip(tr("There's no contract!"));
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->ordersTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->ordersTableWidget);
     init();
 }
 
@@ -56,29 +56,29 @@ OnchainOrderPage::~OnchainOrderPage()
 
 void OnchainOrderPage::init()
 {
-    QStringList accounts = UBChain::getInstance()->accountInfoMap.keys();
+    QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
     ui->accountComboBox->addItems(accounts);
 
-    if(accounts.contains(UBChain::getInstance()->currentAccount))
+    if(accounts.contains(HXChain::getInstance()->currentAccount))
     {
-        ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+        ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
 
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
-        ui->assetComboBox2->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox2->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
-    if(assetIds.contains(UBChain::getInstance()->currentSellAssetId))
+    if(assetIds.contains(HXChain::getInstance()->currentSellAssetId))
     {
-        ui->assetComboBox->setCurrentText(UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->currentSellAssetId).symbol);
+        ui->assetComboBox->setCurrentText(HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentSellAssetId).symbol);
     }
 
-    if(assetIds.contains(UBChain::getInstance()->currentBuyAssetId))
+    if(assetIds.contains(HXChain::getInstance()->currentBuyAssetId))
     {
-        ui->assetComboBox2->setCurrentText(UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->currentBuyAssetId).symbol);
+        ui->assetComboBox2->setCurrentText(HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentBuyAssetId).symbol);
     }
 
 
@@ -122,8 +122,8 @@ void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
         QString buySymbol = dataObject.take("to_asset").toString();
         int state = dataObject.take("state").toInt();
 
-        AssetInfo sellAssetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(sellSymbol));
-        AssetInfo buyAssetInfo  = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(buySymbol));
+        AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(sellSymbol));
+        AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(buySymbol));
 
         ui->ordersTableWidget->setItem(i,0, new QTableWidgetItem(getBigNumberString(sellAmount,sellAssetInfo.precision)));
         ui->ordersTableWidget->item(i,0)->setData(Qt::UserRole,sellAmount);
@@ -155,7 +155,7 @@ void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
         {
             ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
 
-            if(UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText()) == contractAddress)
+            if(HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText()) == contractAddress)
             {
                 toolButtonItem->setEnabled(false);
                 toolButtonItem->setText(tr("my order"));
@@ -194,7 +194,7 @@ void OnchainOrderPage::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
     if(!inited)     return;
 
-    UBChain::getInstance()->currentSellAssetId = ui->assetComboBox->currentData().toString();
+    HXChain::getInstance()->currentSellAssetId = ui->assetComboBox->currentData().toString();
 
     ui->ordersTableWidget->setRowCount(0);
     updateTableHeaders();
@@ -208,7 +208,7 @@ void OnchainOrderPage::on_assetComboBox2_currentIndexChanged(const QString &arg1
 {
     if(!inited)     return;
 
-    UBChain::getInstance()->currentBuyAssetId = ui->assetComboBox2->currentData().toString();
+    HXChain::getInstance()->currentBuyAssetId = ui->assetComboBox2->currentData().toString();
 
     ui->ordersTableWidget->setRowCount(0);
     updateTableHeaders();
@@ -229,7 +229,7 @@ void OnchainOrderPage::queryContractOrders()
     paramObject.insert("to_asset",ui->assetComboBox2->currentText());
     paramObject.insert("limit",10);
     object.insert("params",paramObject);
-    httpManager.post(UBChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+    httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
 void OnchainOrderPage::updateTableHeaders()
@@ -253,17 +253,17 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
 {
     if(_column == 3)
     {
-        if(UBChain::getInstance()->accountInfoMap.isEmpty())
+        if(HXChain::getInstance()->accountInfoMap.isEmpty())
         {
             CommonDialog dia(CommonDialog::OkOnly);
             dia.setText(tr("Please Import Or Create Account First!"));
             dia.pop();
-            UBChain::getInstance()->mainFrame->ShowMainPageSlot();
+            HXChain::getInstance()->mainFrame->ShowMainPageSlot();
             return;
         }
 
 
-        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+        if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
         BuyOrderWidget* buyOrderWidget = new BuyOrderWidget(this);
         buyOrderWidget->setAttribute(Qt::WA_DeleteOnClose);
@@ -289,7 +289,7 @@ void OnchainOrderPage::on_accountComboBox_currentIndexChanged(const QString &arg
 {
     if(!inited)  return;
 
-    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
 
     on_assetComboBox_currentIndexChanged(ui->assetComboBox->currentText());
 }

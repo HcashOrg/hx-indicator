@@ -25,7 +25,7 @@ MinerPage::MinerPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->lockBalancesTableWidget->installEventFilter(this);
     ui->lockBalancesTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -100,9 +100,9 @@ MinerPage::MinerPage(QWidget *parent) :
     blankWidget_record = new BlankDefaultWidget(ui->incomeRecordTableWidget);
     blankWidget_record->setTextTip(tr("There's no income record!"));
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->incomeRecordTableWidget);
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->incomeTableWidget);
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->lockBalancesTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->incomeRecordTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->incomeTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->lockBalancesTableWidget);
     InitStyle();
     init();
 }
@@ -125,7 +125,7 @@ void MinerPage::jsonDataUpdated(QString id)
 {
     if( id == "id-get_account_lock_balance-" + ui->accountComboBox->currentText())
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         result.prepend("{");
         result.append("}");
@@ -155,9 +155,9 @@ void MinerPage::jsonDataUpdated(QString id)
                 lockAmount = QString::number(value.toDouble(),'g',10).toULongLong();
             }
 
-            ui->lockBalancesTableWidget->setItem(i,0,new QTableWidgetItem(UBChain::getInstance()->getMinerNameFromId(minerId)));
+            ui->lockBalancesTableWidget->setItem(i,0,new QTableWidgetItem(HXChain::getInstance()->getMinerNameFromId(minerId)));
 
-            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
+            AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
             ui->lockBalancesTableWidget->setItem(i,1,new QTableWidgetItem(assetInfo.symbol));
 
             ui->lockBalancesTableWidget->setItem(i,2,new QTableWidgetItem(getBigNumberString(lockAmount,assetInfo.precision)));
@@ -189,7 +189,7 @@ void MinerPage::jsonDataUpdated(QString id)
 
     if( id == "id-foreclose_balance_from_miner")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         qDebug() << id << result;
 
@@ -213,7 +213,7 @@ void MinerPage::jsonDataUpdated(QString id)
 
     if( id == "id-get_address_pay_back_balance-" + ui->accountComboBox->currentText())
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         result.prepend("{");
         result.append("}");
@@ -237,7 +237,7 @@ void MinerPage::jsonDataUpdated(QString id)
             QString assetId = amountObject.value("asset_id").toString();
             unsigned long long amount = jsonValueToULL( amountObject.value("amount"));
 
-            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
+            AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
             ui->incomeTableWidget->setItem(i,0,new QTableWidgetItem(miner));
 
             ui->incomeTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(amount,assetInfo.precision) + " " + assetInfo.symbol));
@@ -276,7 +276,7 @@ void MinerPage::jsonDataUpdated(QString id)
 
     if( id == "id-obtain_pay_back_balance")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         qDebug() << id << result;
 
@@ -311,9 +311,9 @@ void MinerPage::jsonDataUpdated(QString id)
 
 void MinerPage::on_registerBtn_clicked()
 {
-    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-    if(UBChain::getInstance()->getUnregisteredAccounts().isEmpty())
+    if(HXChain::getInstance()->getUnregisteredAccounts().isEmpty())
     {
         CommonDialog commonDialog(CommonDialog::OkOnly);
         commonDialog.setText(tr("There are no unregistered accounts in the wallet!"));
@@ -350,7 +350,7 @@ void MinerPage::updateAccounts()
 {
     accountsUpdating = true;
 
-    if( UBChain::getInstance()->getRegisteredAccounts().isEmpty())
+    if( HXChain::getInstance()->getRegisteredAccounts().isEmpty())
     {
         ui->tipLabel->show();
         ui->stackedWidget->hide();
@@ -366,13 +366,13 @@ void MinerPage::updateAccounts()
         ui->accountComboBox->show();
         ui->accountLabel->show();
 
-        QStringList keys = UBChain::getInstance()->getRegisteredAccounts();
+        QStringList keys = HXChain::getInstance()->getRegisteredAccounts();
         ui->accountComboBox->clear();
         ui->accountComboBox->addItems(keys);
 
-        if(keys.contains(UBChain::getInstance()->currentAccount))
+        if(keys.contains(HXChain::getInstance()->currentAccount))
         {
-            ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+            ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
         }
     }
 
@@ -381,21 +381,21 @@ void MinerPage::updateAccounts()
 
 void MinerPage::fetchLockBalance()
 {
-    UBChain::getInstance()->postRPC( "id-get_account_lock_balance-" + ui->accountComboBox->currentText(),
+    HXChain::getInstance()->postRPC( "id-get_account_lock_balance-" + ui->accountComboBox->currentText(),
                                      toJsonFormat( "get_account_lock_balance",QJsonArray() << ui->accountComboBox->currentText()));
 }
 
 void MinerPage::fetchAccountIncome()
 {
-    QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
-    UBChain::getInstance()->postRPC( "id-get_address_pay_back_balance-" + ui->accountComboBox->currentText(),
+    QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+    HXChain::getInstance()->postRPC( "id-get_address_pay_back_balance-" + ui->accountComboBox->currentText(),
                                      toJsonFormat( "get_address_pay_back_balance",QJsonArray() << address << ""));
 }
 
 void MinerPage::showIncomeRecord()
 {
-    QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
-    TransactionTypeIds typeIds = UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(address,TRANSACTION_TYPE_MINE_INCOME);
+    QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+    TransactionTypeIds typeIds = HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(address,TRANSACTION_TYPE_MINE_INCOME);
 
     // 根据区块高度排序
     TransactionTypeIds sortedTypeIds;
@@ -407,10 +407,10 @@ void MinerPage::showIncomeRecord()
             continue;
         }
 
-        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(typeIds.at(i).transactionId);
+        TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(typeIds.at(i).transactionId);
         for(int j = 0; j < sortedTypeIds.size(); j++)
         {
-            TransactionStruct ts2 = UBChain::getInstance()->transactionDB.getTransactionStruct(sortedTypeIds.at(j).transactionId);
+            TransactionStruct ts2 = HXChain::getInstance()->transactionDB.getTransactionStruct(sortedTypeIds.at(j).transactionId);
             if(ts2.blockNum == 0)   continue;   // 未确认的交易放前面
             if(ts.blockNum >= ts2.blockNum || ts.blockNum == 0)
             {
@@ -435,7 +435,7 @@ void MinerPage::showIncomeRecord()
         ui->incomeRecordTableWidget->setRowHeight(i,40);
 
         QString transactionId = typeIds.at(size - i - 1).transactionId;
-        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
+        TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
         if(ts.type == -1)
         {
             qDebug() << "can not find transaction in transactionstruct db: " << transactionId;
@@ -447,7 +447,7 @@ void MinerPage::showIncomeRecord()
         QJsonObject amountObject = object.take("pay_back_balance").toArray().at(0).toArray().at(1).toObject();
         unsigned long long amount = jsonValueToULL(amountObject.take("amount"));
         QString amountAssetId = amountObject.take("asset_id").toString();
-        AssetInfo amountAssetInfo = UBChain::getInstance()->assetInfoMap.value(amountAssetId);
+        AssetInfo amountAssetInfo = HXChain::getInstance()->assetInfoMap.value(amountAssetId);
         QJsonObject feeObject = object.take("fee").toObject();
         unsigned long long feeAmount = jsonValueToULL(feeObject.take("amount"));
 
@@ -536,7 +536,7 @@ void MinerPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     if(accountsUpdating)        return;
 
-    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
 
     fetchLockBalance();
     fetchAccountIncome();
@@ -568,9 +568,9 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
         ForecloseDialog forecloseDialog(ui->accountComboBox->currentText());
         QString amountStr = forecloseDialog.pop();
 
-        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+        if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-        UBChain::getInstance()->postRPC( "id-foreclose_balance_from_miner",
+        HXChain::getInstance()->postRPC( "id-foreclose_balance_from_miner",
                                          toJsonFormat( "foreclose_balance_from_miner",
                                                        QJsonArray() << ui->lockBalancesTableWidget->item(row,0)->text()
                                                        << ui->accountComboBox->currentText()
@@ -586,13 +586,13 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
     if(column == 2)
     {
         if(ui->incomeTableWidget->item(row,column)->text().isEmpty())       return;
-        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+        if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-        QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+        QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
-        FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
-                                                         UBChain::getInstance()->feeType,ui->accountComboBox->currentText(),
-                                                         UBChain::getInstance()->mainFrame);
+        FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
+                                                         HXChain::getInstance()->feeType,ui->accountComboBox->currentText(),
+                                                         HXChain::getInstance()->mainFrame);
         connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address,row](){
             QJsonArray array;
             QJsonArray array2;
@@ -600,10 +600,10 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
             QJsonObject object;
             QStringList amountStringList = this->ui->incomeTableWidget->item(row,1)->text().split(" ");
             object.insert("amount", ui->incomeTableWidget->item(row,1)->data(Qt::UserRole).toString());
-            object.insert("asset_id", UBChain::getInstance()->getAssetId(amountStringList.at(1)));
+            object.insert("asset_id", HXChain::getInstance()->getAssetId(amountStringList.at(1)));
             array2 << object;
             array << array2;
-            UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
+            HXChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
                                              toJsonFormat( "obtain_pay_back_balance",
                                                            QJsonArray() << address
                                                            << array
@@ -692,13 +692,13 @@ void MinerPage::on_incomeRecordTableWidget_cellPressed(int row, int column)
 
 void MinerPage::on_obtainAllBtn_clicked()
 {
-    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-    QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+    QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
-    FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
-                                                     UBChain::getInstance()->feeType,ui->accountComboBox->currentText(),
-                                                     UBChain::getInstance()->mainFrame);
+    FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
+                                                     HXChain::getInstance()->feeType,ui->accountComboBox->currentText(),
+                                                     HXChain::getInstance()->mainFrame);
     connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address](){
         QJsonArray array;
 
@@ -709,12 +709,12 @@ void MinerPage::on_obtainAllBtn_clicked()
             QJsonObject object;
             QStringList amountStringList = this->ui->incomeTableWidget->item(i,1)->text().split(" ");
             object.insert("amount", ui->incomeTableWidget->item(i,1)->data(Qt::UserRole).toString());
-            object.insert("asset_id", UBChain::getInstance()->getAssetId(amountStringList.at(1)));
+            object.insert("asset_id", HXChain::getInstance()->getAssetId(amountStringList.at(1)));
             array2 << object;
             array << array2;
         }
 
-        UBChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
+        HXChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
                                          toJsonFormat( "obtain_pay_back_balance",
                                                        QJsonArray() << address
                                                        << array

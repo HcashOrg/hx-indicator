@@ -9,7 +9,7 @@ ProposalDetailDialog::ProposalDetailDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -60,7 +60,7 @@ void ProposalDetailDialog::pop()
 
 void ProposalDetailDialog::setProposal(QString _proposalId)
 {
-    ProposalInfo info = UBChain::getInstance()->proposalInfoMap.value(_proposalId);
+    ProposalInfo info = HXChain::getInstance()->proposalInfoMap.value(_proposalId);
 
     ui->proposalIdLabel->setText(info.proposalId);
     ui->proposerIdLabel->setText(info.proposer);
@@ -75,7 +75,7 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
 
         QString address = info.requiredAccounts.at(i);
         ui->voteStateTableWidget->setItem(i, 0, new QTableWidgetItem(QString("%1\n%2").
-                                  arg(UBChain::getInstance()->guardAddressToName(address)).arg(address)));
+                                  arg(HXChain::getInstance()->guardAddressToName(address)).arg(address)));
 
         if(info.approvedKeys.contains(address))
         {

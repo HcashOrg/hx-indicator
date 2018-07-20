@@ -112,9 +112,9 @@ int main(int argc, char *argv[])
 //    QTranslator translator;
 //    translator.load(QString(":/qm/qt_zh_cn"));
 //    a.installTranslator(&translator);
-    UBChain::getInstance();  // 在frame创建前先创建实例，读取language
-    qDebug() <<  "db init: " << UBChain::getInstance()->transactionDB.init();
-//    QStringList keys = UBChain::getInstance()->transactionDB.keys();
+    HXChain::getInstance();  // 在frame创建前先创建实例，读取language
+    qDebug() <<  "db init: " << HXChain::getInstance()->transactionDB.init();
+//    QStringList keys = HXChain::getInstance()->transactionDB.keys();
 
 //    qInstallMessageHandler(outputMessage);  // 重定向qebug 到log.txt
 //    removeUpdateDeleteFile();
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
     if(checkOnly()==false)  return 0;    // 防止程序多次启动
 
     Frame frame;
-    UBChain::getInstance()->mainFrame = &frame;   // 一个全局的指向主窗口的指针
+    HXChain::getInstance()->mainFrame = &frame;   // 一个全局的指向主窗口的指针
     frame.show();
 
     a.installEventFilter(&frame);
@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
     CommonHelper::setStyle(":/ui/qss/style.qss");
 
     int result = a.exec();
-    UBChain::getInstance()->quit();
+    HXChain::getInstance()->quit();
 
     return result;
 }

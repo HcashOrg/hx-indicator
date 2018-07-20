@@ -38,7 +38,7 @@ PublishPoundageWidget::~PublishPoundageWidget()
 
 void PublishPoundageWidget::ConfirmPublishSlots()
 {
-    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
     //发送指令，创建承税单
 
@@ -57,7 +57,7 @@ void PublishPoundageWidget::ConfirmPublishSlots()
         return;
     }
     qDebug()<<"publish_create_create----";
-    UBChain::getInstance()->postRPC("publish_create_guarantee_order",
+    HXChain::getInstance()->postRPC("publish_create_guarantee_order",
                                     toJsonFormat("create_guarantee_order",
                                                  QJsonArray()<<accountName<<sourceNumber<<targetNumber<<targetCoinType<<true));
     emit backBtnVisible(false);
@@ -68,7 +68,7 @@ void PublishPoundageWidget::ChangeAccountSlots()
 {
     ui->lineEdit_source->clear();
 //    AccountInfo accountInfo = ui->comboBox_accounts->currentData(Qt::UserRole).value<AccountInfo>();
-    AccountInfo accountInfo = UBChain::getInstance()->accountInfoMap.value(ui->comboBox_accounts->currentText());
+    AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(ui->comboBox_accounts->currentText());
 
     if(accountInfo.assetAmountMap.isEmpty())
     {
@@ -116,9 +116,9 @@ void PublishPoundageWidget::ChangeAssetSlots()
 void PublishPoundageWidget::InitAccount()
 {
     ui->comboBox_accounts->clear();
-    if(UBChain::getInstance()->accountInfoMap.isEmpty()) return;
+    if(HXChain::getInstance()->accountInfoMap.isEmpty()) return;
 
-    for(auto it = UBChain::getInstance()->accountInfoMap.constBegin();it != UBChain::getInstance()->accountInfoMap.constEnd();++it)
+    for(auto it = HXChain::getInstance()->accountInfoMap.constBegin();it != HXChain::getInstance()->accountInfoMap.constEnd();++it)
     {
         ui->comboBox_accounts->addItem(it.key(),QVariant::fromValue<AccountInfo>(it.value()));
     }
@@ -128,8 +128,8 @@ void PublishPoundageWidget::InitAccount()
 void PublishPoundageWidget::InitTargetCoin()
 {
     ui->comboBox_targetType->clear();
-    if(UBChain::getInstance()->assetInfoMap.isEmpty()) return;
-    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+    if(HXChain::getInstance()->assetInfoMap.isEmpty()) return;
+    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
         if(asset.id == "1.3.0") continue;
 
         ui->comboBox_targetType->addItem(asset.symbol,asset.precision);
@@ -155,9 +155,9 @@ void PublishPoundageWidget::InitWidget()
     ChangeAccountSlots();
     ChangeAssetSlots();
 
-    ui->label_fee->setText("  "+UBChain::getInstance()->feeChargeInfo.poundagePublishFee+" LNK");
+    ui->label_fee->setText("  "+HXChain::getInstance()->feeChargeInfo.poundagePublishFee+" LNK");
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
 
 void PublishPoundageWidget::InitStyle()
@@ -204,8 +204,8 @@ void PublishPoundageWidget::installDoubleValidator(QLineEdit *editor, double min
 void PublishPoundageWidget::on_lineEdit_source_textEdited(const QString &arg1)
 {
 
-    QString assetId = UBChain::getInstance()->getAssetId(ASSET_NAME);
-    AssetAmount assetAmount = UBChain::getInstance()->accountInfoMap.value(ui->comboBox_accounts->currentText()).assetAmountMap.value(assetId);
+    QString assetId = HXChain::getInstance()->getAssetId(ASSET_NAME);
+    AssetAmount assetAmount = HXChain::getInstance()->accountInfoMap.value(ui->comboBox_accounts->currentText()).assetAmountMap.value(assetId);
     QString amountStr = getBigNumberString(assetAmount.amount, ASSET_PRECISION);
 
     if(ui->lineEdit_source->text().toDouble() > amountStr.toDouble())

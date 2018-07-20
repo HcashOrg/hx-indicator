@@ -17,7 +17,7 @@ WithdrawMultiSigDialog::WithdrawMultiSigDialog(QString _multiSigAddress, QWidget
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -27,7 +27,7 @@ WithdrawMultiSigDialog::WithdrawMultiSigDialog(QString _multiSigAddress, QWidget
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->copyBtn->setStyleSheet(OKBTN_STYLE);
@@ -71,12 +71,12 @@ void WithdrawMultiSigDialog::getContactsList()
 {
     contactUpdating = true;
 
-    if( !UBChain::getInstance()->contactsFile->open(QIODevice::ReadOnly))
+    if( !HXChain::getInstance()->contactsFile->open(QIODevice::ReadOnly))
     {
         qDebug() << "contact.dat not exist";
     }
-    QString str = QByteArray::fromBase64( UBChain::getInstance()->contactsFile->readAll());
-    UBChain::getInstance()->contactsFile->close();
+    QString str = QByteArray::fromBase64( HXChain::getInstance()->contactsFile->readAll());
+    HXChain::getInstance()->contactsFile->close();
 
     QStringList strList = str.split(";");
     strList.removeLast();
@@ -105,7 +105,7 @@ void WithdrawMultiSigDialog::jsonDataUpdated(QString id)
 {
     if( id.startsWith("id_wallet_multisig_withdraw_start+") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 qDebug() << id << result;
         if( result.startsWith("\"result\":") )             // 成功
         {
@@ -192,7 +192,7 @@ void WithdrawMultiSigDialog::on_okBtn_clicked()
         QString fileName = "M_to_U_" + current_date + ".json";
         QString filePath = ui->pathLineEdit->text() + "/" + fileName;
 
-        UBChain::getInstance()->postRPC( "id_wallet_multisig_withdraw_start+" + filePath,
+        HXChain::getInstance()->postRPC( "id_wallet_multisig_withdraw_start+" + filePath,
                                          toJsonFormat( "wallet_multisig_withdraw_start",
                                                        QJsonArray() << ui->amountLineEdit->text() << ASSET_NAME << ui->multiSigAddressComboBox->currentText()
                                                        << ui->sendtoLineEdit->text() << remark << filePath));
@@ -213,12 +213,12 @@ void WithdrawMultiSigDialog::on_cancelBtn_clicked()
 
 void WithdrawMultiSigDialog::init()
 {
-    QStringList keys = UBChain::getInstance()->multiSigInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->multiSigInfoMap.keys();
     ui->multiSigAddressComboBox->addItems(keys);
 
-    ui->feeLabel->setText( getBigNumberString(UBChain::getInstance()->transactionFee,ASSET_PRECISION));
+    ui->feeLabel->setText( getBigNumberString(HXChain::getInstance()->transactionFee,ASSET_PRECISION));
 
-    QString path = UBChain::getInstance()->walletConfigPath;
+    QString path = HXChain::getInstance()->walletConfigPath;
     path.replace("\\","/");
     ui->pathLineEdit->setText( path);
 
@@ -232,7 +232,7 @@ void WithdrawMultiSigDialog::init()
 void WithdrawMultiSigDialog::on_multiSigAddressComboBox_currentIndexChanged(const QString &arg1)
 {
     if(ui->multiSigAddressComboBox->currentText().isEmpty())    return;
-    unsigned long long balance = UBChain::getInstance()->multiSigInfoMap.value(ui->multiSigAddressComboBox->currentText()).balanceMap.value(0);
+    unsigned long long balance = HXChain::getInstance()->multiSigInfoMap.value(ui->multiSigAddressComboBox->currentText()).balanceMap.value(0);
     ui->balanceLabel->setText(getBigNumberString(balance,ASSET_PRECISION));
 }
 

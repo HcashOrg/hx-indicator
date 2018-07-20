@@ -10,7 +10,7 @@ TransactionResultDialog::TransactionResultDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -44,7 +44,7 @@ void TransactionResultDialog::setDetailText(QString _text)
 
     if(_text.startsWith("\"result\":"))
     {
-        UBChain::getInstance()->parseTransaction(_text);
+        HXChain::getInstance()->parseTransaction(_text);
     }
 }
 

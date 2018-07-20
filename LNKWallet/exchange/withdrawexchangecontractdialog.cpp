@@ -13,7 +13,7 @@ WithdrawExchangeContractDialog::WithdrawExchangeContractDialog(QWidget *parent) 
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -27,12 +27,12 @@ WithdrawExchangeContractDialog::WithdrawExchangeContractDialog(QWidget *parent) 
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
+    feeChoose = new FeeChooseWidget(0,HXChain::getInstance()->feeType);
     ui->stackedWidget->addWidget(feeChoose);
     feeChoose->resize(ui->stackedWidget->size());
     ui->stackedWidget->setCurrentIndex(0);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     init();
 }
@@ -50,12 +50,12 @@ void WithdrawExchangeContractDialog::pop()
 
 void WithdrawExchangeContractDialog::init()
 {
-    ui->accountNameLabel->setText(UBChain::getInstance()->currentAccount);
+    ui->accountNameLabel->setText(HXChain::getInstance()->currentAccount);
 
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 }
 
@@ -69,21 +69,21 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
 
     if( id.startsWith( "id-unlock-WithdrawExchangeContractDialog") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result == "\"result\":null")
         {
-            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
-            QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+            AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+            QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
             QString params = QString("%1,%2").arg(ui->assetComboBox->currentText())
                     .arg(decimalToIntegerStr(ui->amountLineEdit->text(), assetInfo.precision));
 
             feeChoose->updatePoundageID();
-            UBChain::getInstance()->postRPC( "id-invoke_contract-withdrawAsset", toJsonFormat( "invoke_contract",
+            HXChain::getInstance()->postRPC( "id-invoke_contract-withdrawAsset", toJsonFormat( "invoke_contract",
                                                                                    QJsonArray() << ui->accountNameLabel->text()
-                                                                                   << UBChain::getInstance()->currentContractFee() << stepCount
+                                                                                   << HXChain::getInstance()->currentContractFee() << stepCount
                                                                                    << contractAddress
                                                                                    << "withdrawAsset"  << params));
         }
@@ -97,7 +97,7 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
 
     if( id == "id-invoke_contract-withdrawAsset")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -122,14 +122,14 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
 
     if( id == "id-invoke_contract_testing-withdrawAsset")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
-            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
             stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
 
             feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
             feeChoose->updateAccountNameSlots(ui->accountNameLabel->text(),true);
@@ -144,7 +144,7 @@ void WithdrawExchangeContractDialog::on_okBtn_clicked()
     if(ui->amountLineEdit->text().toDouble() <= 0)  return;
     if(ui->pwdLineEdit->text().isEmpty())          return;
 
-    UBChain::getInstance()->postRPC( "id-unlock-WithdrawExchangeContractDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+    HXChain::getInstance()->postRPC( "id-unlock-WithdrawExchangeContractDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }
 
@@ -155,8 +155,8 @@ void WithdrawExchangeContractDialog::on_cancelBtn_clicked()
 
 void WithdrawExchangeContractDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
-    AssetAmountMap map = UBChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap;
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetAmountMap map = HXChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap;
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
 
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(assetInfo.precision));
@@ -164,14 +164,14 @@ void WithdrawExchangeContractDialog::on_assetComboBox_currentIndexChanged(const 
     ui->amountLineEdit->setValidator(pReg1);
     ui->amountLineEdit->clear();
 
-    unsigned long long maxAmount = UBChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value(ui->assetComboBox->currentText());
+    unsigned long long maxAmount = HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value(ui->assetComboBox->currentText());
     ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(getBigNumberString(maxAmount, assetInfo.precision)).arg(assetInfo.symbol));
 }
 
 void WithdrawExchangeContractDialog::on_withdrawAllBtn_clicked()
 {
-    unsigned long long maxAmount = UBChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value(ui->assetComboBox->currentText());
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    unsigned long long maxAmount = HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value(ui->assetComboBox->currentText());
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
 
     ui->amountLineEdit->setText(getBigNumberString(maxAmount, assetInfo.precision));
 }
@@ -183,13 +183,13 @@ void WithdrawExchangeContractDialog::on_closeBtn_clicked()
 
 void WithdrawExchangeContractDialog::estimateContractFee()
 {
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
     QString params = QString("%1,%2").arg(ui->assetComboBox->currentText())
             .arg(decimalToIntegerStr(ui->amountLineEdit->text(), assetInfo.precision));
 
-    UBChain::getInstance()->postRPC( "id-invoke_contract_testing-withdrawAsset", toJsonFormat( "invoke_contract_testing",
+    HXChain::getInstance()->postRPC( "id-invoke_contract_testing-withdrawAsset", toJsonFormat( "invoke_contract_testing",
                                                                            QJsonArray() << ui->accountNameLabel->text()
                                                                            << contractAddress
                                                                            << "withdrawAsset"  << params));

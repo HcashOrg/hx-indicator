@@ -13,7 +13,7 @@ AssetChangeHistoryWidget::AssetChangeHistoryWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->changeHistoryTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->changeHistoryTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -46,14 +46,14 @@ void AssetChangeHistoryWidget::init()
     inited = false;
 
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
 
-        if(accounts.contains(UBChain::getInstance()->currentAccount))
+        if(accounts.contains(HXChain::getInstance()->currentAccount))
         {
-            ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+            ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
         }
     }
     else
@@ -66,14 +66,14 @@ void AssetChangeHistoryWidget::init()
         label->setText(tr("There are no guard accounts in the wallet."));
     }
 
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
         if(assetId == "1.3.0")  continue;
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->changeHistoryTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->changeHistoryTableWidget);
 
     inited = true;
 }
@@ -87,7 +87,7 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
 {
     if( id == "id-get_multisig_account_pair-" + ui->assetComboBox->currentText())
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -129,7 +129,7 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
                 ui->changeHistoryTableWidget->setItem(row,4,new QTableWidgetItem(tr("checking")));
                 ui->changeHistoryTableWidget->setItem(row,5,new QTableWidgetItem(tr("export")));
 
-                GuardMultisigAddress gma = UBChain::getInstance()->getGuardMultisigByPairId(ui->assetComboBox->currentText(),
+                GuardMultisigAddress gma = HXChain::getInstance()->getGuardMultisigByPairId(ui->assetComboBox->currentText(),
                                                                    ui->accountComboBox->currentText(), pairId);
                 ui->changeHistoryTableWidget->item(row,1)->setData(Qt::UserRole, gma.hotAddress);
                 ui->changeHistoryTableWidget->item(row,2)->setData(Qt::UserRole, gma.coldAddress);
@@ -137,7 +137,7 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
                 fetchCrosschainPrivateKey(gma.coldAddress);
                 if(i == size - 1)
                 {
-                    UBChain::getInstance()->postRPC( "finish-dump_crosschain_private_key", toJsonFormat( "finish-dump_crosschain_private_key",
+                    HXChain::getInstance()->postRPC( "finish-dump_crosschain_private_key", toJsonFormat( "finish-dump_crosschain_private_key",
                                                                                                      QJsonArray() ));
                 }
 
@@ -175,7 +175,7 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
 
     if( id == "id-dump_crosschain_private_key")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -269,13 +269,13 @@ void AssetChangeHistoryWidget::on_assetComboBox_currentIndexChanged(const QStrin
 
 void AssetChangeHistoryWidget::fetchMultisigAccountPair()
 {
-    UBChain::getInstance()->postRPC( "id-get_multisig_account_pair-" + ui->assetComboBox->currentText(), toJsonFormat( "get_multisig_account_pair",
+    HXChain::getInstance()->postRPC( "id-get_multisig_account_pair-" + ui->assetComboBox->currentText(), toJsonFormat( "get_multisig_account_pair",
                                                                            QJsonArray() << ui->assetComboBox->currentText()));
 }
 
 void AssetChangeHistoryWidget::fetchCrosschainPrivateKey(QString address)
 {
-    UBChain::getInstance()->postRPC( "id-dump_crosschain_private_key", toJsonFormat( "dump_crosschain_private_key",
+    HXChain::getInstance()->postRPC( "id-dump_crosschain_private_key", toJsonFormat( "dump_crosschain_private_key",
                                                                                      QJsonArray() << address));
 }
 
@@ -311,6 +311,6 @@ void AssetChangeHistoryWidget::on_accountComboBox_currentIndexChanged(const QStr
 {
     if(!inited)     return;
 
-    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
     fetchMultisigAccountPair();
 }

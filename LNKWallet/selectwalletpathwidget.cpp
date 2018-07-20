@@ -27,14 +27,14 @@ SelectWalletPathWidget::~SelectWalletPathWidget()
 void SelectWalletPathWidget::on_okBtn_clicked()
 {
     qDebug() << "wallet path " << ui->pathLineEdit->text();
-    UBChain::getInstance()->configFile->setValue("/settings/chainPath", ui->pathLineEdit->text());
-    UBChain::getInstance()->appDataPath = ui->pathLineEdit->text();
+    HXChain::getInstance()->configFile->setValue("/settings/chainPath", ui->pathLineEdit->text());
+    HXChain::getInstance()->appDataPath = ui->pathLineEdit->text();
 
     QString path = ui->pathLineEdit->text() + "/wallet.json";
     QFileInfo info(path);
     if(info.exists())
     {
-        UBChain::getInstance()->startExe();
+        HXChain::getInstance()->startExe();
         emit enter();
     }
     else
@@ -56,7 +56,7 @@ void SelectWalletPathWidget::InitWidget()
 {
     InitStyle();
 
-    ui->pathLineEdit->setText( UBChain::getInstance()->appDataPath);
+    ui->pathLineEdit->setText( HXChain::getInstance()->appDataPath);
 
     ui->label_version->setText(QString("v") + WALLET_VERSION);
 }

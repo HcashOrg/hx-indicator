@@ -39,7 +39,7 @@ TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
     blankWidget = new BlankDefaultWidget(ui->transferRecordTableWidget);
     blankWidget->setTextTip(tr("当前账户没有转账记录!"));
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->transferRecordTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->transferRecordTableWidget);
     init();
 }
 
@@ -51,10 +51,10 @@ TransferRecordWidget::~TransferRecordWidget()
 void TransferRecordWidget::init()
 {
     ui->assetComboBox->addItem(tr("ALL"), "ALL");
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
     ui->stackedWidget->addWidget(pageWidget);
@@ -65,7 +65,7 @@ void TransferRecordWidget::init()
 void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _assetId)
 {
     accountAddress = _accountAddress;
-    TransactionTypeIds typeIds = UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(_accountAddress,TRANSACTION_TYPE_NORMAL);
+    TransactionTypeIds typeIds = HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(_accountAddress,TRANSACTION_TYPE_NORMAL);
 
 
     // 根据区块高度排序
@@ -78,10 +78,10 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
             continue;
         }
 
-        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(typeIds.at(i).transactionId);
+        TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(typeIds.at(i).transactionId);
         for(int j = 0; j < sortedTypeIds.size(); j++)
         {
-            TransactionStruct ts2 = UBChain::getInstance()->transactionDB.getTransactionStruct(sortedTypeIds.at(j).transactionId);
+            TransactionStruct ts2 = HXChain::getInstance()->transactionDB.getTransactionStruct(sortedTypeIds.at(j).transactionId);
             if(ts2.blockNum == 0)   continue;   // 未确认的交易放前面
             if(ts.blockNum >= ts2.blockNum || ts.blockNum == 0)
             {
@@ -105,7 +105,7 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
     for(int i = 0; i < size; i++)
     {
         QString transactionId = typeIds.at(size - i - 1).transactionId;
-        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
+        TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
         if(ts.type == -1)
         {
             qDebug() << "can not find transaction in transactionstruct db: " << transactionId;
@@ -116,7 +116,7 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
         QJsonObject amountObject = object.take("amount").toObject();
         unsigned long long amount = jsonValueToULL(amountObject.take("amount"));
         QString amountAssetId = amountObject.take("asset_id").toString();
-        AssetInfo amountAssetInfo = UBChain::getInstance()->assetInfoMap.value(amountAssetId);
+        AssetInfo amountAssetInfo = HXChain::getInstance()->assetInfoMap.value(amountAssetId);
 
         if(_assetId != "ALL"  &&  amountAssetId != _assetId)    continue;
 
@@ -171,7 +171,7 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
         QJsonObject feeObject = object.take("fee").toObject();
         unsigned long long feeAmount = jsonValueToULL(feeObject.take("amount"));
         QString feeAssetId = feeObject.take("asset_id").toString();
-        AssetInfo feeAssetInfo = UBChain::getInstance()->assetInfoMap.value(feeAssetId);
+        AssetInfo feeAssetInfo = HXChain::getInstance()->assetInfoMap.value(feeAssetId);
         ui->transferRecordTableWidget->setItem(rowCount,3, new QTableWidgetItem(getBigNumberString(feeAmount, feeAssetInfo.precision)));
 
         rowCount++;

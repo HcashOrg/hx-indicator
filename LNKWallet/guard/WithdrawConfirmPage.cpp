@@ -15,7 +15,7 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->crosschainTransactionTableWidget->installEventFilter(this);
     ui->crosschainTransactionTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -54,14 +54,14 @@ WithdrawConfirmPage::~WithdrawConfirmPage()
 void WithdrawConfirmPage::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
 
-        if(accounts.contains(UBChain::getInstance()->currentAccount))
+        if(accounts.contains(HXChain::getInstance()->currentAccount))
         {
-            ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+            ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
         }
     }
     else
@@ -74,7 +74,7 @@ void WithdrawConfirmPage::init()
         label->setText(tr("There are no guard accounts in the wallet."));
     }
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->crosschainTransactionTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->crosschainTransactionTableWidget);
 
     ui->typeCurrentBtn->setChecked(true);
 
@@ -88,13 +88,13 @@ void WithdrawConfirmPage::refresh()
 
 void WithdrawConfirmPage::fetchCrosschainTransactions()
 {
-    UBChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(0), toJsonFormat( "get_crosschain_transaction",
+    HXChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(0), toJsonFormat( "get_crosschain_transaction",
                                                                                     QJsonArray() << 0));
 
-    UBChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(1), toJsonFormat( "get_crosschain_transaction",
+    HXChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(1), toJsonFormat( "get_crosschain_transaction",
                                                                                     QJsonArray() << 1));
 
-    UBChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(2), toJsonFormat( "get_crosschain_transaction",
+    HXChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(2), toJsonFormat( "get_crosschain_transaction",
                                                                                     QJsonArray() << 2));
 }
 
@@ -102,7 +102,7 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
 {
     if(id.startsWith("id-get_crosschain_transaction-"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         int type = id.mid(QString("id-get_crosschain_transaction-").size()).toInt();
@@ -194,7 +194,7 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
 
     if(id == "id-guard_sign_crosschain_transaction")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -262,7 +262,7 @@ void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked(int ro
 
             if(!generatedTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
             {
-                UBChain::getInstance()->postRPC( "id-guard_sign_crosschain_transaction", toJsonFormat( "guard_sign_crosschain_transaction",
+                HXChain::getInstance()->postRPC( "id-guard_sign_crosschain_transaction", toJsonFormat( "guard_sign_crosschain_transaction",
                                                  QJsonArray() << generatedTrxId << ui->accountComboBox->currentText()));
 
             }
@@ -397,7 +397,7 @@ void WithdrawConfirmPage::refreshCrosschainTransactionsState()
         QString generatedTrxId = lookupGeneratedTrxByApplyTrxId(trxId);
         QStringList guardAddresses = lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
 
-        QString currentAddress = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+        QString currentAddress = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
         if(guardAddresses.contains(currentAddress))
         {
             ui->crosschainTransactionTableWidget->item(i,4)->setText(tr("signed"));

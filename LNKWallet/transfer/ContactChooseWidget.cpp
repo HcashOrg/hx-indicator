@@ -18,13 +18,13 @@ public:
         ,contactFilePath("")
         ,initSuccess(true)
     {
-        if( UBChain::getInstance()->configFile->contains("/settings/chainPath"))
+        if( HXChain::getInstance()->configFile->contains("/settings/chainPath"))
         {
-            contactFilePath = UBChain::getInstance()->configFile->value("/settings/chainPath").toString() + "/contacts.dat";
+            contactFilePath = HXChain::getInstance()->configFile->value("/settings/chainPath").toString() + "/contacts.dat";
         }
         else
         {
-            contactFilePath = UBChain::getInstance()->appDataPath + "/contacts.dat";
+            contactFilePath = HXChain::getInstance()->appDataPath + "/contacts.dat";
         }
     }
 public:

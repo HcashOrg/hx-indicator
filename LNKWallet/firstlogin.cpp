@@ -17,7 +17,7 @@ FirstLogin::FirstLogin(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(UBChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(jsonDataUpdated(QString)));
+    connect(HXChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(jsonDataUpdated(QString)));
 
     InitWidget();
     //setStyleSheet("FirstLogin{background-image:url(:/ui/wallet_ui/loginBg.png);}");
@@ -85,7 +85,7 @@ void FirstLogin::on_createBtn_clicked()
 //        rpcThread->setWriteData( toJsonFormat( "id_create", "create", QJsonArray() << "wallet" << ui->pwdLineEdit->text() ));
 //        rpcThread->start();
 
-        UBChain::getInstance()->postRPC( "id-set_password", toJsonFormat( "set_password", QJsonArray() <<  ui->pwdLineEdit->text() ));
+        HXChain::getInstance()->postRPC( "id-set_password", toJsonFormat( "set_password", QJsonArray() <<  ui->pwdLineEdit->text() ));
     }
     else
     {
@@ -122,7 +122,7 @@ void FirstLogin::on_pwdLineEdit2_returnPressed()
 
 void FirstLogin::on_closeBtn_clicked()
 {
-//    if( UBChain::getInstance()->closeToMinimize)
+//    if( HXChain::getInstance()->closeToMinimize)
 //    {
 //        emit tray();
 //    }
@@ -218,11 +218,11 @@ void FirstLogin::jsonDataUpdated(QString id)
 {
     if( id == "id-set_password")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << "id-set_password" << result;
         if( result == "\"result\":null" )
         {
-            UBChain::getInstance()->postRPC( "id-unlock-firstlogin", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text() ));
+            HXChain::getInstance()->postRPC( "id-unlock-firstlogin", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text() ));
             return;
         }
         else
@@ -239,7 +239,7 @@ void FirstLogin::jsonDataUpdated(QString id)
         ui->pwdLineEdit->setEnabled(true);
         ui->pwdLineEdit2->setEnabled(true);
 
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if( result == "\"result\":null")
         {

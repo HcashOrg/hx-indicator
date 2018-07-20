@@ -36,7 +36,7 @@ public:
     };
 public:
     DataPrivate()
-        :autoDeposit(UBChain::getInstance()->autoDeposit)
+        :autoDeposit(HXChain::getInstance()->autoDeposit)
         ,isInUpdate(false)
     {
 
@@ -97,14 +97,14 @@ public:
         for(auto it = accounts.begin();it != accounts.end();++it){
             if(tunnelAddress == (*it)->tunnelAddress){
                 int pre = 5;
-                foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+                foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
                     if(asset.symbol == (*it)->assetSymbol)
                     {
                         pre = asset.precision;
                         break;
                     }
                 }
-                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-UBChain::getInstance()->feeChargeInfo.capitalFee.toDouble())
+                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-HXChain::getInstance()->feeChargeInfo.capitalFee.toDouble())
                                                      ,'f',pre);
                 //qDebug()<<"update-money---"<<tunnelAddress<<(*it)->assetMultiAddress<<(*it)->assetNumber;
                 if((*it)->assetNumber.toDouble() < 1e-11)
@@ -147,7 +147,7 @@ DepositAutomatic::DepositAutomatic(QObject *parent)
     connect(_p->timer,&QTimer::timeout,this,&DepositAutomatic::autoDeposit);
     _p->timer->start(30000);
 
-    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &DepositAutomatic::jsonDataUpdated);
+    connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &DepositAutomatic::jsonDataUpdated);
 
     connect(&_p->httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
     //test
@@ -162,8 +162,8 @@ DepositAutomatic::~DepositAutomatic()
 
 void DepositAutomatic::autoDeposit()
 {
-    _p->autoDeposit = UBChain::getInstance()->autoDeposit;
-    if(_p->autoDeposit && !_p->isInUpdate && UBChain::getInstance()->GetBlockSyncFinish())
+    _p->autoDeposit = HXChain::getInstance()->autoDeposit;
+    if(_p->autoDeposit && !_p->isInUpdate && HXChain::getInstance()->GetBlockSyncFinish())
     {
         //_p->timer->stop();
         updateData();
@@ -173,7 +173,7 @@ void DepositAutomatic::autoDeposit()
 void DepositAutomatic::PostQueryTunnelAddress(const QString &accountName, const QString &symbol)
 {
     if(accountName.isEmpty() || symbol.isEmpty()) return;
-    UBChain::getInstance()->postRPC( "automatic-get_binding_account-"+accountName,
+    HXChain::getInstance()->postRPC( "automatic-get_binding_account-"+accountName,
                                      toJsonFormat( "get_binding_account", QJsonArray()
                                      << accountName<<symbol ));
 
@@ -182,7 +182,7 @@ void DepositAutomatic::PostQueryTunnelAddress(const QString &accountName, const 
 void DepositAutomatic::PostQueryMultiAddress(const QString &symbol)
 {
     if(symbol.isEmpty()) return;
-    UBChain::getInstance()->postRPC( "automatic-get_current_multi_address_"+symbol,
+    HXChain::getInstance()->postRPC( "automatic-get_current_multi_address_"+symbol,
                                      toJsonFormat( "get_current_multi_address", QJsonArray()
                                      << symbol));
 
@@ -199,7 +199,7 @@ void DepositAutomatic::PostQueryTunnelMoney(const QString &symbol,const QString 
     paramObject.insert("chainId",symbol);
     paramObject.insert("addr",tunnelAddress);
     object.insert("params",paramObject);
-    _p->httpManager.post(UBChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+    _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
 void DepositAutomatic::PostCreateTransaction(const QString &fromAddress, const QString &toAddress,
@@ -210,7 +210,7 @@ void DepositAutomatic::PostCreateTransaction(const QString &fromAddress, const Q
 //        qDebug()<<"justbeforetransaction"<<(*it)->tunnelAddress<<(*it)->assetSymbol<<(*it)->assetMultiAddress<<(*it)->assetNumber;
 //    }
     if(fromAddress.isEmpty() || toAddress.isEmpty() || number.isEmpty() || symbol.isEmpty() || number.toDouble()<1e-10) return;
-    UBChain::getInstance()->postRPC( "automatic-createrawtransaction_"+fromAddress,
+    HXChain::getInstance()->postRPC( "automatic-createrawtransaction_"+fromAddress,
                                      toJsonFormat( "createrawtransaction", QJsonArray()
                                      << fromAddress<<toAddress<<number<<symbol ));
 
@@ -223,7 +223,7 @@ void DepositAutomatic::PostSignTrasaction(const QString &fromAddress, const QStr
                                           const QJsonObject &detail)
 {
     if(fromAddress.isEmpty() || symbol.isEmpty() || detail.isEmpty()) return;
-    UBChain::getInstance()->postRPC( "automatic-signrawtransaction",
+    HXChain::getInstance()->postRPC( "automatic-signrawtransaction",
                                      toJsonFormat( "signrawtransaction", QJsonArray()
                                      <<fromAddress<<symbol<<detail<<true ));
 
@@ -231,35 +231,35 @@ void DepositAutomatic::PostSignTrasaction(const QString &fromAddress, const QStr
 
 void DepositAutomatic::FinishQueryTunnel()
 {
-    UBChain::getInstance()->postRPC( "automatic-finish-tunnel",
+    HXChain::getInstance()->postRPC( "automatic-finish-tunnel",
                                      toJsonFormat( "automatic-finish-tunnel", QJsonArray()));
 
 }
 
 void DepositAutomatic::FinishQueryMoney()
 {
-    UBChain::getInstance()->postRPC( "automatic-finish-money",
+    HXChain::getInstance()->postRPC( "automatic-finish-money",
                                      toJsonFormat( "automatic-finish-money", QJsonArray()));
 
 }
 
 void DepositAutomatic::FinishQueryMulti()
 {
-    UBChain::getInstance()->postRPC( "automatic-finish-multi",
+    HXChain::getInstance()->postRPC( "automatic-finish-multi",
                                      toJsonFormat( "automatic-finish-multi", QJsonArray()));
 
 }
 
 void DepositAutomatic::FinishCreateTransaction()
 {
-    UBChain::getInstance()->postRPC( "automatic-finish-transaction",
+    HXChain::getInstance()->postRPC( "automatic-finish-transaction",
                                      toJsonFormat( "automatic-finish-transaction", QJsonArray()));
 
 }
 
 void DepositAutomatic::FinishSign()
 {
-    UBChain::getInstance()->postRPC( "automatic-finish-sign",
+    HXChain::getInstance()->postRPC( "automatic-finish-sign",
                                      toJsonFormat( "automatic-finish-sign", QJsonArray()));
 
 }
@@ -268,7 +268,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
 {
     if(id.startsWith("automatic-get_binding_account-"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
         result.append("}");
     //提取通道账户地址
@@ -289,7 +289,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
     }
     else if(id.startsWith("automatic-get_current_multi_address_"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
         result.append("}");
         ParseMutli(result);
@@ -320,11 +320,11 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
     {
         QString address = id.mid(QString("automatic-createrawtransaction_").size());
 
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
         result.append("}");
         ParseTransaction(address,result);
-        qDebug()<<id<<"-----"<<UBChain::getInstance()->jsonDataValue( id);
+        qDebug()<<id<<"-----"<<HXChain::getInstance()->jsonDataValue( id);
     }
     else if("automatic-finish-transaction" == id)
     {//进行签名
@@ -336,7 +336,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
     }
     else if("automatic-signrawtransaction" == id)
     {
-        qDebug()<<id<<"-----"<<UBChain::getInstance()->jsonDataValue( id);
+        qDebug()<<id<<"-----"<<HXChain::getInstance()->jsonDataValue( id);
     }
     else if("automatic-finish-sign" == id)
     {//结束签名,可以进行刷新
@@ -375,10 +375,10 @@ void DepositAutomatic::updateData()
     _p->SetInUpdateTrue();
     _p->accounts.clear();
     _p->assetSymbols.clear();
-    _p->autoDeposit = UBChain::getInstance()->autoDeposit;
+    _p->autoDeposit = HXChain::getInstance()->autoDeposit;
 
-    QMap<QString,AccountInfo> accountInfoMap = UBChain::getInstance()->accountInfoMap;
-    QMap<QString,AssetInfo> assetInfoMap = UBChain::getInstance()->assetInfoMap;
+    QMap<QString,AccountInfo> accountInfoMap = HXChain::getInstance()->accountInfoMap;
+    QMap<QString,AssetInfo> assetInfoMap = HXChain::getInstance()->assetInfoMap;
     qDebug()<<accountInfoMap.size() << assetInfoMap.size();
     foreach (AccountInfo info, accountInfoMap) {
         foreach(AssetInfo assetInfo,assetInfoMap){

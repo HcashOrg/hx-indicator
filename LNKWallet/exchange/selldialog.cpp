@@ -13,7 +13,7 @@ SellDialog::SellDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -27,12 +27,12 @@ SellDialog::SellDialog(QWidget *parent) :
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
+    feeChoose = new FeeChooseWidget(0,HXChain::getInstance()->feeType);
     ui->stackedWidget->addWidget(feeChoose);
     feeChoose->resize(ui->stackedWidget->size());
     ui->stackedWidget->setCurrentIndex(0);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->sellAmountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
     ui->buyAmountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
@@ -53,13 +53,13 @@ void SellDialog::pop()
 
 void SellDialog::init()
 {
-    ui->accountNameLabel->setText(UBChain::getInstance()->currentAccount);
+    ui->accountNameLabel->setText(HXChain::getInstance()->currentAccount);
 
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
-        ui->assetComboBox2->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox2->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 }
 
@@ -77,7 +77,7 @@ void SellDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-invoke_contract-putOnSellOrder")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -102,14 +102,14 @@ void SellDialog::jsonDataUpdated(QString id)
 
     if( id == "id-invoke_contract_testing-putOnSellOrder")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
-            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
             stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
 
             feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
             feeChoose->updateAccountNameSlots(ui->accountNameLabel->text());
@@ -120,22 +120,22 @@ void SellDialog::jsonDataUpdated(QString id)
 
     if( id.startsWith( "id-unlock-SellDialog") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result == "\"result\":null")
         {
-            QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+            QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
-            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
-            AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
+            AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
+            AssetInfo assetInfo2 = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
 
             QString params = QString("%1,%2,%3,%4").arg(ui->assetComboBox->currentText()).arg(decimalToIntegerStr(ui->sellAmountLineEdit->text(), assetInfo.precision))
                    .arg(ui->assetComboBox2->currentText()).arg(decimalToIntegerStr(ui->buyAmountLineEdit->text(), assetInfo2.precision));
             feeChoose->updatePoundageID();
-            UBChain::getInstance()->postRPC( "id-invoke_contract-putOnSellOrder", toJsonFormat( "invoke_contract",
+            HXChain::getInstance()->postRPC( "id-invoke_contract-putOnSellOrder", toJsonFormat( "invoke_contract",
                                                                                    QJsonArray() << ui->accountNameLabel->text()
-                                                                                   << UBChain::getInstance()->currentContractFee() << stepCount
+                                                                                   << HXChain::getInstance()->currentContractFee() << stepCount
                                                                                    << contractAddress
                                                                                    << "putOnSellOrder"  << params));
         }
@@ -167,7 +167,7 @@ void SellDialog::on_okBtn_clicked()
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id-unlock-SellDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+    HXChain::getInstance()->postRPC( "id-unlock-SellDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }
 
@@ -179,7 +179,7 @@ void SellDialog::on_cancelBtn_clicked()
 
 void SellDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
-    ExchangeContractBalances balances = UBChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text());
+    ExchangeContractBalances balances = HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text());
 
     unsigned long long balanceAmount = 0;
     if(balances.contains(ui->assetComboBox->currentText()))
@@ -187,7 +187,7 @@ void SellDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
         balanceAmount = balances.value(ui->assetComboBox->currentText());
     }
 
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
 
     QString balanceStr = getBigNumberString(balanceAmount,assetInfo.precision);
 
@@ -202,7 +202,7 @@ void SellDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 
 void SellDialog::on_assetComboBox2_currentIndexChanged(const QString &arg1)
 {
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox2->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox2->currentText()));
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(assetInfo.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
@@ -221,14 +221,14 @@ void SellDialog::estimateContractFee()
     if(ui->sellAmountLineEdit->text().toDouble() <= 0)  return;
     if(ui->buyAmountLineEdit->text().toDouble() <= 0)  return;
 
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
-    AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
+    AssetInfo assetInfo2 = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
 
     QString params = QString("%1,%2,%3,%4").arg(ui->assetComboBox->currentText()).arg(decimalToIntegerStr(ui->sellAmountLineEdit->text(), assetInfo.precision))
             .arg(ui->assetComboBox2->currentText()).arg(decimalToIntegerStr(ui->buyAmountLineEdit->text(), assetInfo2.precision));
-    UBChain::getInstance()->postRPC( "id-invoke_contract_testing-putOnSellOrder", toJsonFormat( "invoke_contract_testing",
+    HXChain::getInstance()->postRPC( "id-invoke_contract_testing-putOnSellOrder", toJsonFormat( "invoke_contract_testing",
                                                                            QJsonArray() << ui->accountNameLabel->text()
                                                                            << contractAddress
                                                                            << "putOnSellOrder"  << params));
@@ -236,14 +236,14 @@ void SellDialog::estimateContractFee()
 
 void SellDialog::on_sellAmountLineEdit_textChanged(const QString &arg1)
 {
-    ExchangeContractBalances balances = UBChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text());
+    ExchangeContractBalances balances = HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text());
     unsigned long long balanceAmount = 0;
     if(balances.contains(ui->assetComboBox->currentText()))
     {
         balanceAmount = balances.value(ui->assetComboBox->currentText());
     }
 
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
     QString balanceStr = getBigNumberString(balanceAmount,assetInfo.precision);
     if(ui->sellAmountLineEdit->text().toDouble() > balanceStr.toDouble())
     {

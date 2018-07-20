@@ -11,9 +11,9 @@ ColdHotTransferDialog::ColdHotTransferDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -47,19 +47,19 @@ void ColdHotTransferDialog::pop()
 void ColdHotTransferDialog::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     ui->accountComboBox->addItems(accounts);
 
-    if(accounts.contains(UBChain::getInstance()->currentAccount))
+    if(accounts.contains(HXChain::getInstance()->currentAccount))
     {
-        ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+        ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
 
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
         if(assetId == "1.3.0")  continue;
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
     QIntValidator *validator = new QIntValidator(1, 60 * 60 * 24 * 365,this);
@@ -73,7 +73,7 @@ void ColdHotTransferDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-transfer_from_cold_to_hot")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result.startsWith("\"result\":{"))             // 成功
@@ -103,7 +103,7 @@ void ColdHotTransferDialog::httpReplied(QByteArray _data, int _status)
     QString assetSymbol = object.take("chainId").toString().toUpper();
     if(assetSymbol != ui->assetComboBox->currentText())     return;
 
-    AssetInfo info = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(assetSymbol));
+    AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(assetSymbol));
     queriedBalance = object.take("balance").toDouble();
     qDebug() << assetSymbol << info.symbol << queriedBalance << info.precision << QString::number(queriedBalance, 'g', info.precision);
 
@@ -122,7 +122,7 @@ void ColdHotTransferDialog::on_okBtn_clicked()
             || ui->amountLineEdit->text().toDouble() <= 0 || ui->timeLineEdit->text().toInt() <= 0)
         return;
 
-    UBChain::getInstance()->postRPC( "id-transfer_from_cold_to_hot", toJsonFormat( "transfer_from_cold_to_hot",
+    HXChain::getInstance()->postRPC( "id-transfer_from_cold_to_hot", toJsonFormat( "transfer_from_cold_to_hot",
                                      QJsonArray() << ui->accountComboBox->currentText() << ui->fromLineEdit->text()
                                      << ui->toLineEdit->text() << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
                                      << "" << ui->timeLineEdit->text().toInt() << true));
@@ -145,7 +145,7 @@ void ColdHotTransferDialog::on_typeComboBox_currentIndexChanged(const QString &a
 
 void ColdHotTransferDialog::showAddresses()
 {
-    AssetInfo info = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
 
     ui->amountLineEdit->clear();
     ui->amountLineEdit->setPlaceholderText("");
@@ -185,7 +185,7 @@ void ColdHotTransferDialog::queryMultisigBalance()
     paramObject.insert("chainId",ui->assetComboBox->currentText());
     paramObject.insert("addr",ui->fromLineEdit->text());
     object.insert("params",paramObject);
-    httpManager.post(UBChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+    httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
 void ColdHotTransferDialog::checkOkBtnEnable()
@@ -203,7 +203,7 @@ void ColdHotTransferDialog::checkOkBtnEnable()
 
 void ColdHotTransferDialog::on_amountLineEdit_textEdited(const QString &arg1)
 {
-    AssetInfo info = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
     if(ui->amountLineEdit->text().toDouble() > queriedBalance)
     {
         ui->amountLineEdit->setText(QString::number(queriedBalance, 'f', info.precision));

@@ -14,7 +14,7 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -28,11 +28,11 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     qDebug()<<_accountName;
-    ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
-                                                     UBChain::getInstance()->feeType,_accountName));
+    ui->stackedWidget->addWidget(new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
+                                                     HXChain::getInstance()->feeType,_accountName));
     ui->stackedWidget->setCurrentIndex(0);
     ui->stackedWidget->currentWidget()->resize(ui->stackedWidget->size());
     init();
@@ -55,17 +55,17 @@ void LockToMinerDialog::init()
     ui->accountNameLabel->setText(m_accountName);
 
     QStringList miners;
-    foreach (Miner m, UBChain::getInstance()->minersVector)
+    foreach (Miner m, HXChain::getInstance()->minersVector)
     {
         miners += m.name;
     }
 
     ui->minerComboBox->addItems(miners);
 
-    QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString key, keys)
     {
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(key).symbol, key);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(key).symbol, key);
     }
 }
 
@@ -83,7 +83,7 @@ void LockToMinerDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-lock_balance_to_miner")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         qDebug() << id << result;
         if(result.startsWith("\"result\":{"))
@@ -107,9 +107,9 @@ void LockToMinerDialog::jsonDataUpdated(QString id)
 
 void LockToMinerDialog::on_okBtn_clicked()
 {
-    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-    UBChain::getInstance()->postRPC( "id-lock_balance_to_miner",
+    HXChain::getInstance()->postRPC( "id-lock_balance_to_miner",
                                      toJsonFormat( "lock_balance_to_miner",
                                                    QJsonArray() << ui->minerComboBox->currentText() << m_accountName
                                                    << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
@@ -126,12 +126,12 @@ void LockToMinerDialog::on_assetComboBox_currentIndexChanged(const QString &arg1
 {
     ui->amountLineEdit->clear();
 
-    AssetAmount assetAmount = UBChain::getInstance()->accountInfoMap.value(m_accountName).assetAmountMap.value(ui->assetComboBox->currentData().toString());
-    QString amountStr = getBigNumberString(assetAmount.amount, UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString()).precision);
+    AssetAmount assetAmount = HXChain::getInstance()->accountInfoMap.value(m_accountName).assetAmountMap.value(ui->assetComboBox->currentData().toString());
+    QString amountStr = getBigNumberString(assetAmount.amount, HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString()).precision);
 
     ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(amountStr).arg(ui->assetComboBox->currentText()) );
 
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(assetInfo.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
@@ -145,9 +145,9 @@ void LockToMinerDialog::on_closeBtn_clicked()
 
 void LockToMinerDialog::on_amountLineEdit_textEdited(const QString &arg1)
 {
-    QString assetId = UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText());
-    AssetAmount assetAmount = UBChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap.value(assetId);
-    QString amountStr = getBigNumberString(assetAmount.amount, UBChain::getInstance()->assetInfoMap.value(assetId).precision);
+    QString assetId = HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText());
+    AssetAmount assetAmount = HXChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap.value(assetId);
+    QString amountStr = getBigNumberString(assetAmount.amount, HXChain::getInstance()->assetInfoMap.value(assetId).precision);
 
     if(ui->amountLineEdit->text().toDouble() > amountStr.toDouble())
     {

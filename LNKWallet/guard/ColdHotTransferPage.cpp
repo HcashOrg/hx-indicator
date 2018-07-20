@@ -17,7 +17,7 @@ ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->coldHotTransactionTableWidget->installEventFilter(this);
     ui->coldHotTransactionTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -60,14 +60,14 @@ void ColdHotTransferPage::init()
     inited = false;
 
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
 
-        if(accounts.contains(UBChain::getInstance()->currentAccount))
+        if(accounts.contains(HXChain::getInstance()->currentAccount))
         {
-            ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+            ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
         }
     }
     else
@@ -80,7 +80,7 @@ void ColdHotTransferPage::init()
         label->setText(tr("There are no guard accounts in the wallet."));
     }
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->coldHotTransactionTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->coldHotTransactionTableWidget);
 
     ui->typeCurrentBtn->setChecked(true);
 
@@ -98,7 +98,7 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
 {
     if( id.startsWith("id-get_coldhot_transaction-") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         int type = id.mid(QString("id-get_coldhot_transaction-").size()).toInt();
@@ -193,7 +193,7 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
 
     if(id == "id-guard_sign_coldhot_transaction")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":null"))
@@ -231,13 +231,13 @@ void ColdHotTransferPage::on_transferBtn_clicked()
 
 void ColdHotTransferPage::fetchColdHotTransaction()
 {
-    UBChain::getInstance()->postRPC( "id-get_coldhot_transaction-" + QString::number(0), toJsonFormat( "get_coldhot_transaction",
+    HXChain::getInstance()->postRPC( "id-get_coldhot_transaction-" + QString::number(0), toJsonFormat( "get_coldhot_transaction",
                                                                                      QJsonArray() << 0));
 
-    UBChain::getInstance()->postRPC( "id-get_coldhot_transaction-" + QString::number(1), toJsonFormat( "get_coldhot_transaction",
+    HXChain::getInstance()->postRPC( "id-get_coldhot_transaction-" + QString::number(1), toJsonFormat( "get_coldhot_transaction",
                                                                                      QJsonArray() << 1));
 
-    UBChain::getInstance()->postRPC( "id-get_coldhot_transaction-" + QString::number(2), toJsonFormat( "get_coldhot_transaction",
+    HXChain::getInstance()->postRPC( "id-get_coldhot_transaction-" + QString::number(2), toJsonFormat( "get_coldhot_transaction",
                                                                                      QJsonArray() << 2));
 
 }
@@ -364,7 +364,7 @@ void ColdHotTransferPage::refreshColdHotTtransactionsState()
         QString trxId = ui->coldHotTransactionTableWidget->item(i,0)->data(Qt::UserRole).toString();
         QString crosschainTrxId = lookupCrosschainTrxByColdHotTrxId(trxId);
         QStringList guardAddresses = lookupSignedGuardByCrosschainTrx(crosschainTrxId);
-        QString currentAddress = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+        QString currentAddress = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
         if(guardAddresses.contains(currentAddress))
         {
@@ -459,7 +459,7 @@ void ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked(int row, 
 
                 if(!chcTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
                 {
-                    UBChain::getInstance()->postRPC( "id-guard_sign_coldhot_transaction", toJsonFormat( "guard_sign_coldhot_transaction",
+                    HXChain::getInstance()->postRPC( "id-guard_sign_coldhot_transaction", toJsonFormat( "guard_sign_coldhot_transaction",
                                                                                                         QJsonArray() << chcTrxId << ui->accountComboBox->currentText()));
 
                 }

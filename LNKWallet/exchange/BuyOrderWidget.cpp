@@ -16,7 +16,7 @@ BuyOrderWidget::BuyOrderWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->allBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
@@ -25,7 +25,7 @@ BuyOrderWidget::BuyOrderWidget(QWidget *parent) :
     ui->widget->setObjectName("framewidget");
     ui->widget->setStyleSheet("#framewidget{background-color:white;border:1px solid white;border-radius:15px;}");
 
-    feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
+    feeChoose = new FeeChooseWidget(0,HXChain::getInstance()->feeType);
     ui->stackedWidget->addWidget(feeChoose);
     feeChoose->resize(ui->stackedWidget->size());
     ui->stackedWidget->setCurrentIndex(0);
@@ -59,14 +59,14 @@ void BuyOrderWidget::setOrderInfo(unsigned long long _buyAmount, QString _buySym
     buySymbol = _buySymbol;
     sellSymbol = _sellSymbol;
 
-    AssetInfo buyAssetInfo  = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(buySymbol));
-    AssetInfo sellAssetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(sellSymbol));
+    AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(buySymbol));
+    AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(sellSymbol));
 
     double price = (double)buyAmount / qPow(10,buyAssetInfo.precision) / sellAmount * qPow(10,sellAssetInfo.precision);
 
     ui->priceLabel->setText(QString::number(price,'g',8) + " " + tr("%1/%2").arg(buySymbol).arg(sellSymbol));
 
-    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(UBChain::getInstance()->getAccountBalance(accountName,sellSymbol)).arg(sellSymbol));
+    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(HXChain::getInstance()->getAccountBalance(accountName,sellSymbol)).arg(sellSymbol));
 }
 
 void BuyOrderWidget::setContractAddress(QString _contractAddress)
@@ -78,7 +78,7 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
 {
     if( id == "id-transfer_to_contract-BuyOrderWidget")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -103,14 +103,14 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
 
     if( id == "id-transfer_to_contract_testing-BuyOrderWidget")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
-            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
             stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
             feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
 
             ui->feeLabel->setText(getBigNumberString(totalAmount,ASSET_PRECISION)
@@ -136,13 +136,13 @@ void BuyOrderWidget::estimateContractFee()
 
 
     // 计算实际能买到的数量
-    AssetInfo buyAssetInfo  = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(buySymbol));
-    AssetInfo sellAssetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(sellSymbol));
+    AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(buySymbol));
+    AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(sellSymbol));
     double amount = (double)buyAmount / qPow(10,buyAssetInfo.precision) / sellAmount * qPow(10,sellAssetInfo.precision)
             * ui->amountLineEdit->text().toDouble();
 
 
-    UBChain::getInstance()->postRPC( "id-transfer_to_contract_testing-BuyOrderWidget", toJsonFormat( "transfer_to_contract_testing",
+    HXChain::getInstance()->postRPC( "id-transfer_to_contract_testing-BuyOrderWidget", toJsonFormat( "transfer_to_contract_testing",
                                                                            QJsonArray() << accountName << ui->contractAddressLabel->text()
                                                                            << ui->amountLineEdit->text() << sellSymbol
                                                                            << QString("%1,%2").arg(buySymbol).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
@@ -160,16 +160,16 @@ void BuyOrderWidget::on_okBtn_clicked()
     if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty() )   return;
 
     // 计算实际能买到的数量
-    AssetInfo buyAssetInfo  = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(buySymbol));
-    AssetInfo sellAssetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(sellSymbol));
+    AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(buySymbol));
+    AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(sellSymbol));
     double amount = (double)buyAmount / qPow(10,buyAssetInfo.precision) / sellAmount * qPow(10,sellAssetInfo.precision)
             * ui->amountLineEdit->text().toDouble();
     feeChoose->updatePoundageID();
-    UBChain::getInstance()->postRPC( "id-transfer_to_contract-BuyOrderWidget", toJsonFormat( "transfer_to_contract",
+    HXChain::getInstance()->postRPC( "id-transfer_to_contract-BuyOrderWidget", toJsonFormat( "transfer_to_contract",
                                                                            QJsonArray() << accountName << ui->contractAddressLabel->text()
                                                                            << ui->amountLineEdit->text() << sellSymbol
                                                                            << QString("%1,%2").arg(buySymbol).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
-                                                                           << UBChain::getInstance()->currentContractFee() << stepCount
+                                                                           << HXChain::getInstance()->currentContractFee() << stepCount
                                                                            << true
                                                                            ));
 
@@ -182,7 +182,7 @@ void BuyOrderWidget::on_cancelBtn_clicked()
 
 void BuyOrderWidget::on_allBtn_clicked()
 {
-    ui->amountLineEdit->setText(UBChain::getInstance()->getAccountBalance(accountName,sellSymbol));
+    ui->amountLineEdit->setText(HXChain::getInstance()->getAccountBalance(accountName,sellSymbol));
 }
 
 void BuyOrderWidget::on_amountLineEdit_textChanged(const QString &arg1)

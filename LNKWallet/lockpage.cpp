@@ -18,7 +18,7 @@ LockPage::LockPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     InitWidget();
 
@@ -66,7 +66,7 @@ void LockPage::on_enterBtn_clicked()
     }
 
 
-    UBChain::getInstance()->postRPC( "id-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text() ));
+    HXChain::getInstance()->postRPC( "id-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text() ));
  qDebug() << "id_unlock_lockpage" ;
     emit showShadowWidget();
     ui->pwdLineEdit->setEnabled(false);
@@ -87,7 +87,7 @@ void LockPage::on_pwdLineEdit_returnPressed()
 
 void LockPage::on_closeBtn_clicked()
 {
-    if( UBChain::getInstance()->closeToMinimize)
+    if( HXChain::getInstance()->closeToMinimize)
     {
         emit tray();
     }
@@ -131,7 +131,7 @@ void LockPage::jsonDataUpdated(QString id)
         ui->pwdLineEdit->setEnabled(true);
         ui->pwdLineEdit->setFocus();
 
-        QString  result = UBChain::getInstance()->jsonDataValue(id);
+        QString  result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result == "\"result\":null")

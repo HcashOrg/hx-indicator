@@ -15,7 +15,7 @@ public:
         :account(data.account),ammount(data.ammount),symbol(data.symbol),crosschain_account(data.crosschain_account)
         ,pre(5)
     {
-        foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+        foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
             if(asset.symbol == symbol)
             {
                 pre = asset.precision;
@@ -50,7 +50,7 @@ void WithdrawConfirmWidget::jsonDataUpdated(QString id)
 {
     if( id == "withdraw-unlock-lockpage")
     {
-        QString  result = UBChain::getInstance()->jsonDataValue(id);
+        QString  result = HXChain::getInstance()->jsonDataValue(id);
         if( result == "\"result\":null")
         {
             ui->lineEdit->setStyleSheet("color:green");
@@ -64,7 +64,7 @@ void WithdrawConfirmWidget::jsonDataUpdated(QString id)
     }
     else if("withdraw-withdraw_cross_chain_transaction" == id)
     {
-        QString  result = UBChain::getInstance()->jsonDataValue(id);
+        QString  result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         if( result.startsWith("\"result\":{"))             // 成功
         {
@@ -89,7 +89,7 @@ void WithdrawConfirmWidget::jsonDataUpdated(QString id)
 
 void WithdrawConfirmWidget::ConfirmSlots()
 {
-    UBChain::getInstance()->postRPC( "withdraw-withdraw_cross_chain_transaction", toJsonFormat( "withdraw_cross_chain_transaction",
+    HXChain::getInstance()->postRPC( "withdraw-withdraw_cross_chain_transaction", toJsonFormat( "withdraw_cross_chain_transaction",
                                      QJsonArray() << _p->account<<_p->ammount<<_p->symbol<<_p->crosschain_account<<""<<true ));
     qDebug()<<_p->account << _p->ammount << _p->symbol << _p->crosschain_account;
     //close();
@@ -109,23 +109,23 @@ void WithdrawConfirmWidget::passwordChangeSlots(const QString &address)
         return;
     }
 
-    UBChain::getInstance()->postRPC( "withdraw-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->lineEdit->text() ));
+    HXChain::getInstance()->postRPC( "withdraw-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->lineEdit->text() ));
 }
 
 void WithdrawConfirmWidget::InitData()
 {
     ui->label_address->setText(_p->crosschain_account);
     ui->label_totalNumber->setText(_p->ammount + "  " + _p->symbol);
-    ui->label_feeNumber->setText(UBChain::getInstance()->feeChargeInfo.withDrawFee + " " + _p->symbol);
+    ui->label_feeNumber->setText(HXChain::getInstance()->feeChargeInfo.withDrawFee + " " + _p->symbol);
     int pre = 5;
-    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
         if(asset.symbol == _p->symbol)
         {
             pre = asset.precision;
             break;
         }
     }
-    ui->label_actualNumber->setText(QString::number(_p->ammount.toDouble()-UBChain::getInstance()->feeChargeInfo.withDrawFee.toDouble(),'f',pre)+" "+_p->symbol);
+    ui->label_actualNumber->setText(QString::number(_p->ammount.toDouble()-HXChain::getInstance()->feeChargeInfo.withDrawFee.toDouble(),'f',pre)+" "+_p->symbol);
 }
 
 void WithdrawConfirmWidget::InitWidget()
@@ -133,7 +133,7 @@ void WithdrawConfirmWidget::InitWidget()
     InitStyle();
 
     ui->toolButton_confirm->setEnabled(false);
-    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &WithdrawConfirmWidget::jsonDataUpdated);
+    connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &WithdrawConfirmWidget::jsonDataUpdated);
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&WithdrawConfirmWidget::ConfirmSlots);
     connect(ui->toolButton_cancel,&QToolButton::clicked,this,&WithdrawConfirmWidget::CancelSlots);
     connect(ui->lineEdit,&QLineEdit::textEdited,this,&WithdrawConfirmWidget::passwordChangeSlots);

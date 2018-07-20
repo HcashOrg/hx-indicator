@@ -16,7 +16,7 @@ MultiSigTransactionPage::MultiSigTransactionPage(QString _multiSigAddress, QWidg
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->pageLineEdit->setText("1");
     QIntValidator *validator = new QIntValidator(1,9999,this);
@@ -65,7 +65,7 @@ MultiSigTransactionPage::MultiSigTransactionPage(QString _multiSigAddress, QWidg
     ui->transactionsTableWidget->setColumnWidth(5,70);
     ui->transactionsTableWidget->setColumnWidth(6,90);
 
-    QStringList keys = UBChain::getInstance()->multiSigInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->multiSigInfoMap.keys();
     ui->multiSigAddressComboBox->addItems( keys);
     ui->multiSigAddressComboBox->setCurrentText(multiSigAddress);
 
@@ -81,10 +81,10 @@ MultiSigTransactionPage::~MultiSigTransactionPage()
 
 void MultiSigTransactionPage::updateTransactionsList()
 {
-    QStringList keys = UBChain::getInstance()->multiSigInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->multiSigInfoMap.keys();
     foreach (QString key, keys)
     {
-        UBChain::getInstance()->postRPC( "id_wallet_multisig_account_history+" + key, toJsonFormat( "wallet_multisig_account_history",
+        HXChain::getInstance()->postRPC( "id_wallet_multisig_account_history+" + key, toJsonFormat( "wallet_multisig_account_history",
                                                        QJsonArray() << key
                                                    ));
     }
@@ -92,7 +92,7 @@ void MultiSigTransactionPage::updateTransactionsList()
 
 void MultiSigTransactionPage::updateBalance()
 {
-    MultiSigInfo info = UBChain::getInstance()->multiSigInfoMap.value(ui->multiSigAddressComboBox->currentText());
+    MultiSigInfo info = HXChain::getInstance()->multiSigInfoMap.value(ui->multiSigAddressComboBox->currentText());
     unsigned long long amount = info.balanceMap.value(0);
 
     ui->balanceLabel->setText( "<body><font style=\"font-size:18px\" color=#18faef>" + getBigNumberString(amount,ASSET_PRECISION) + "</font><font style=\"font-size:12px\" color=#18faef> " + ASSET_NAME + "</font></body>" );
@@ -110,9 +110,9 @@ void MultiSigTransactionPage::jsonDataUpdated(QString id)
 {
     if( id.startsWith("id_wallet_multisig_account_history+"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         QString multiSigAddress = id.mid(QString("id_wallet_multisig_account_history+").size());
-        UBChain::getInstance()->parseMultiSigTransactions(result, multiSigAddress);
+        HXChain::getInstance()->parseMultiSigTransactions(result, multiSigAddress);
 
         showTransactions();
         return;
@@ -222,7 +222,7 @@ void MultiSigTransactionPage::showTransactions()
 //    ui->transactionsTableWidget->setColumnWidth(5,90);
 //    ui->transactionsTableWidget->setColumnWidth(6,120);
 
-    TransactionsInfoVector vector = UBChain::getInstance()->multiSigTransactionsMap.value(ui->multiSigAddressComboBox->currentText());
+    TransactionsInfoVector vector = HXChain::getInstance()->multiSigTransactionsMap.value(ui->multiSigAddressComboBox->currentText());
 
     ui->transactionsTableWidget->setRowCount(0);
     if( vector.size() < 1)
@@ -275,11 +275,11 @@ void MultiSigTransactionPage::showTransactions()
 
         TransactionDetail detail = getDetail(transactionInfo);
         // 对方账户
-        ui->transactionsTableWidget->setItem(i,3,new QTableWidgetItem( UBChain::getInstance()->addressToName(detail.opposite)));
+        ui->transactionsTableWidget->setItem(i,3,new QTableWidgetItem( HXChain::getInstance()->addressToName(detail.opposite)));
         ui->transactionsTableWidget->item(i,3)->setTextColor(QColor(192,196,212));
 
 //        // 金额
-//        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(detail.assetAmount.assetId);
+//        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(detail.assetAmount.assetId);
 //        unsigned long long amount = 0;
 //        if( !detail.includeFee || transactionInfo.isConfirmed == false)
 //        {

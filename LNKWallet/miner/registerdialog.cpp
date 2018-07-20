@@ -14,7 +14,7 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -30,10 +30,10 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
     ui->okBtn2->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn2->setStyleSheet(CANCELBTN_STYLE);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    ui->stackedWidget_fee->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerRegisterFee.toDouble(),
-                                                         UBChain::getInstance()->feeType));
+    ui->stackedWidget_fee->addWidget(new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.minerRegisterFee.toDouble(),
+                                                         HXChain::getInstance()->feeType));
     ui->stackedWidget_fee->setCurrentIndex(0);
     ui->stackedWidget_fee->currentWidget()->resize(ui->stackedWidget_fee->size());
     init();
@@ -55,7 +55,7 @@ void RegisterDialog::init()
 {
     ui->okBtn->setEnabled(false);
 
-    QStringList keys = UBChain::getInstance()->getUnregisteredAccounts();
+    QStringList keys = HXChain::getInstance()->getUnregisteredAccounts();
     ui->accountComboBox->addItems(keys);
 
     ui->stackedWidget->setCurrentIndex(0);
@@ -65,19 +65,19 @@ void RegisterDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-unlock-RegisterDialog")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if(result == "\"result\":null")
         {
             if(ui->accountComboBox->currentText() != ui->registerNameLineEdit->text())
             {
                 // 如果注册的名字和当前名字不一样 先改为注册的名字
-                UBChain::getInstance()->postRPC(  "id-change_account_name", toJsonFormat("change_account_name",
+                HXChain::getInstance()->postRPC(  "id-change_account_name", toJsonFormat("change_account_name",
                                                QJsonArray() << ui->accountComboBox->currentText() << ui->registerNameLineEdit->text() ));
             }
             else
             {
-                UBChain::getInstance()->postRPC(  "id-register_account", toJsonFormat("register_account",
+                HXChain::getInstance()->postRPC(  "id-register_account", toJsonFormat("register_account",
                                                                                       QJsonArray() << ui->accountComboBox->currentText() << true ));
             }
 
@@ -92,11 +92,11 @@ void RegisterDialog::jsonDataUpdated(QString id)
 
     if( id == "id-change_account_name")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if(result.startsWith("\"result\":{\"id\":\"0.0.0\""))
         {
-            UBChain::getInstance()->postRPC(  "id-register_account", toJsonFormat("register_account",
+            HXChain::getInstance()->postRPC(  "id-register_account", toJsonFormat("register_account",
                                                                                   QJsonArray() << ui->registerNameLineEdit->text() << true ));
         }
 
@@ -105,7 +105,7 @@ void RegisterDialog::jsonDataUpdated(QString id)
 
     if( id == "id-register_account")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         if(result.startsWith("\"result\":{"))
         {
@@ -138,7 +138,7 @@ void RegisterDialog::jsonDataUpdated(QString id)
 
     if( id.startsWith("id-get_account-") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         // 如果跟当前输入框中的内容不一样，则是过时的rpc返回，不用处理
         if( id.mid(QString("id-get_account-").size()) != ui->registerNameLineEdit->text())  return;
@@ -186,7 +186,7 @@ void RegisterDialog::on_okBtn_clicked()
 
 void RegisterDialog::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
-    ui->addressLabel->setText(UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address);
+    ui->addressLabel->setText(HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address);
     ui->registerNameLineEdit->setText(ui->accountComboBox->currentText());
     if(FeeChooseWidget *feeWidget = qobject_cast<FeeChooseWidget*>(ui->stackedWidget_fee->currentWidget()))
     {
@@ -198,7 +198,7 @@ void RegisterDialog::on_okBtn2_clicked()
 {
     if( ui->pwdLineEdit->text().isEmpty())  return;
 
-    UBChain::getInstance()->postRPC( "id-unlock-RegisterDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+    HXChain::getInstance()->postRPC( "id-unlock-RegisterDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }
 
@@ -209,7 +209,7 @@ void RegisterDialog::on_cancelBtn_clicked()
 
 void RegisterDialog::on_registerNameLineEdit_textChanged(const QString &arg1)
 {
-    UBChain::getInstance()->postRPC( "id-get_account-" + ui->registerNameLineEdit->text(),
+    HXChain::getInstance()->postRPC( "id-get_account-" + ui->registerNameLineEdit->text(),
                                      toJsonFormat( "get_account", QJsonArray() << ui->registerNameLineEdit->text() ));
 }
 

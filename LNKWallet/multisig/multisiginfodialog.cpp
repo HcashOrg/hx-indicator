@@ -15,7 +15,7 @@ MultiSigInfoDialog::MultiSigInfoDialog(QString _multiSigAddress, QWidget *parent
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -62,7 +62,7 @@ void MultiSigInfoDialog::pop()
 
 void MultiSigInfoDialog::showMultiSigInfo()
 {
-    MultiSigInfo info = UBChain::getInstance()->multiSigInfoMap.value(multiSigAddress);
+    MultiSigInfo info = HXChain::getInstance()->multiSigInfoMap.value(multiSigAddress);
 
     int size = info.owners.size();
     ui->infoTableWidget->setRowCount(size);
@@ -79,9 +79,9 @@ void MultiSigInfoDialog::showMultiSigInfo()
         ui->infoTableWidget->setItem(i,0,new QTableWidgetItem(address));
         ui->infoTableWidget->item(i,0)->setTextColor(QColor(192,196,212));
 
-        if(UBChain::getInstance()->isMyAddress(address))
+        if(HXChain::getInstance()->isMyAddress(address))
         {
-            QString accountName = UBChain::getInstance()->addressToName(address);
+            QString accountName = HXChain::getInstance()->addressToName(address);
             ui->infoTableWidget->setItem(i,1,new QTableWidgetItem(accountName));
             ui->infoTableWidget->item(i,1)->setTextColor(QColor(192,196,212));
         }

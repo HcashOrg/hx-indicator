@@ -20,7 +20,7 @@ ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->balancesTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->balancesTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -54,7 +54,7 @@ ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
     blankWidget->setTextTip(tr("There is no asset in the contract!"));
 
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->balancesTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->balancesTableWidget);
     init();
 }
 
@@ -77,13 +77,13 @@ void ContractBalanceWidget::setAccount(QString _accountName)
 
 void ContractBalanceWidget::refresh()
 {
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(accountName);
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(accountName);
 
     ui->contractAddressLabel->setText(contractAddress);
 
     showContractBalances();
 
-    if(UBChain::getInstance()->getExchangeContractState(accountName) == "NOT_INITED")
+    if(HXChain::getInstance()->getExchangeContractState(accountName) == "NOT_INITED")
     {
         ui->openForUsersBtn->show();
     }
@@ -98,16 +98,16 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
 
     if( id == "id-invoke_contract_testing-openForUsers-" + accountName )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
 
-            if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+            if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
 
             WithdrawOrderDialog withdrawOrderDialog;
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
@@ -115,11 +115,11 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
             withdrawOrderDialog.setText(tr("You need to pay the fee for contract execution."));
             if(withdrawOrderDialog.pop())
             {
-                QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(accountName);
+                QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(accountName);
 
-                UBChain::getInstance()->postRPC( "id-invoke_contract-openForUsers", toJsonFormat( "invoke_contract",
+                HXChain::getInstance()->postRPC( "id-invoke_contract-openForUsers", toJsonFormat( "invoke_contract",
                                                                                     QJsonArray() << accountName
-                                                                                    << UBChain::getInstance()->currentContractFee() << stepCount
+                                                                                    << HXChain::getInstance()->currentContractFee() << stepCount
                                                                                     << contractAddress
                                                                                     << "openForUsers"  << ""));
 
@@ -138,7 +138,7 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
 
     if( id == "id-invoke_contract-openForUsers")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -171,7 +171,7 @@ void ContractBalanceWidget::paintEvent(QPaintEvent *)
 
 void ContractBalanceWidget::showContractBalances()
 {
-    ExchangeContractBalances balances = UBChain::getInstance()->accountExchangeContractBalancesMap.value(accountName);
+    ExchangeContractBalances balances = HXChain::getInstance()->accountExchangeContractBalancesMap.value(accountName);
 
     QStringList keys = balances.keys();
     int size = keys.size();
@@ -183,7 +183,7 @@ void ContractBalanceWidget::showContractBalances()
         ui->balancesTableWidget->setRowHeight(i,40);
 
         QString key = keys.at(i);
-        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(key));
+        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(key));
 
         ui->balancesTableWidget->setItem(i,0, new QTableWidgetItem(key));
         ui->balancesTableWidget->setItem(i,1, new QTableWidgetItem(getBigNumberString(balances.value(key), assetInfo.precision)));
@@ -222,7 +222,7 @@ void ContractBalanceWidget::showContractBalances()
 
 void ContractBalanceWidget::on_depositBtn_clicked()
 {
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(accountName);
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(accountName);
 
     if(contractAddress.isEmpty())
     {
@@ -241,7 +241,7 @@ void ContractBalanceWidget::onItemClicked(int _row, int _column)
     if(_column == 2)
     {
 
-        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+        if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
         // 合约提现
         WithdrawExchangeContractDialog withdrawExchangeContractDialog;
         withdrawExchangeContractDialog.setCurrentAsset(ui->balancesTableWidget->item(_row,0)->text());
@@ -252,9 +252,9 @@ void ContractBalanceWidget::onItemClicked(int _row, int _column)
 
 void ContractBalanceWidget::on_openForUsersBtn_clicked()
 {
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(accountName);
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(accountName);
 
-    UBChain::getInstance()->postRPC( "id-invoke_contract_testing-openForUsers-" + accountName, toJsonFormat( "invoke_contract_testing",
+    HXChain::getInstance()->postRPC( "id-invoke_contract_testing-openForUsers-" + accountName, toJsonFormat( "invoke_contract_testing",
                                                                            QJsonArray() << accountName << contractAddress
                                                                                                              << "openForUsers"  << ""));
 }

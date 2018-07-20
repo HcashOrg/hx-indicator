@@ -7230,7 +7230,7 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>UBChain</name>
+    <name>HXChain</name>
     <message>
         <location filename="wallet.cpp" line="173"/>
         <location filename="wallet.cpp" line="197"/>

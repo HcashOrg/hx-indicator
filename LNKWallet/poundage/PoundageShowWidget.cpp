@@ -83,7 +83,7 @@ void PoundageShowWidget::InitData(const std::shared_ptr<PoundageSheet> &data)
 void PoundageShowWidget::DeletePoundageSlots()
 {
     emit DeletePoundageSignal(ui->tableView->currentIndex().data(Qt::UserRole).value<std::shared_ptr<PoundageUnit>>()->poundageID
-                              ,UBChain::getInstance()->addressToName(ui->tableView->currentIndex().data(Qt::UserRole).value<std::shared_ptr<PoundageUnit>>()->ownerAdress));
+                              ,HXChain::getInstance()->addressToName(ui->tableView->currentIndex().data(Qt::UserRole).value<std::shared_ptr<PoundageUnit>>()->ownerAdress));
 }
 
 void PoundageShowWidget::SetDefaultPoundageSlots()
@@ -125,7 +125,7 @@ void PoundageShowWidget::InitWidget()
     ui->stackedWidget_pageBar->setCurrentWidget(_p->pageWidget);
     connect(_p->pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&PoundageShowWidget::changeCurrentPageSlots);
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->tableView);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->tableView);
 }
 
 void PoundageShowWidget::InitStyle()

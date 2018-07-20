@@ -9,7 +9,7 @@ GuardKeyUpdatingInfoDialog::GuardKeyUpdatingInfoDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -37,14 +37,14 @@ void GuardKeyUpdatingInfoDialog::pop()
 void GuardKeyUpdatingInfoDialog::setAsset(QString _assetSymbol)
 {
     ui->assetLabel->setText(_assetSymbol);
-    QStringList guardAccountIds = UBChain::getInstance()->getInstance()->getAssetMultisigUpdatedGuards(_assetSymbol);
-    int totalNum = UBChain::getInstance()->formalGuardMap.size();
+    QStringList guardAccountIds = HXChain::getInstance()->getInstance()->getAssetMultisigUpdatedGuards(_assetSymbol);
+    int totalNum = HXChain::getInstance()->formalGuardMap.size();
     ui->stateLabel->setText(tr("%1 guards have updated. %2 guards have not yet.").arg(guardAccountIds.size()).arg(totalNum - guardAccountIds.size()));
 
     QString str;
     foreach (QString accountId, guardAccountIds)
     {
-        str += UBChain::getInstance()->guardAccountIdToName(accountId) + "  ";
+        str += HXChain::getInstance()->guardAccountIdToName(accountId) + "  ";
     }
     ui->updatedGuardsLabel->setText(str);
 }

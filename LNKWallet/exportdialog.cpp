@@ -14,8 +14,8 @@ ExportDialog::ExportDialog( QString name, QWidget *parent) :
     ui->setupUi(this);
     dataInfo = std::make_shared<KeyDataInfo>();
 
-//    UBChain::getInstance()->appendCurrentDialogVector(this);
-    setParent(UBChain::getInstance()->mainFrame);
+//    HXChain::getInstance()->appendCurrentDialogVector(this);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -28,7 +28,7 @@ ExportDialog::ExportDialog( QString name, QWidget *parent) :
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 
     ui->nameLabel->setText( tr("Export ") + accoutName + tr(" \'s private key to:"));
@@ -81,10 +81,10 @@ void ExportDialog::on_cancelBtn_clicked()
 
 void ExportDialog::getPrivateKey()
 {
-    UBChain::getInstance()->postRPC( "id-dump_private_key-" + accoutName, toJsonFormat( "dump_private_key", QJsonArray() << accoutName << "0" ));
+    HXChain::getInstance()->postRPC( "id-dump_private_key-" + accoutName, toJsonFormat( "dump_private_key", QJsonArray() << accoutName << "0" ));
 
     //开始查找私钥
-    UBChain::getInstance()->postRPC( "export-dump_crosschain_private_keys", toJsonFormat( "dump_crosschain_private_keys", QJsonArray()));
+    HXChain::getInstance()->postRPC( "export-dump_crosschain_private_keys", toJsonFormat( "dump_crosschain_private_keys", QJsonArray()));
 }
 
 void ExportDialog::ParseTunnel(const QString &jsonString)
@@ -174,7 +174,7 @@ void ExportDialog::jsonDataUpdated(QString id)
 {
     if( id.startsWith("id-dump_private_key-" + accoutName))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         ui->exportBtn->setEnabled(true);
 
@@ -201,7 +201,7 @@ qDebug() <<result;
     else if(id == "export-dump_crosschain_private_keys")
     {
         //解析所有私钥
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
         result.append("}");
 
@@ -209,17 +209,17 @@ qDebug() <<result;
         ParseAllKey(result);
 
         //获取所有的tunnel账户
-        QMap<QString,AssetInfo> assetInfoMap = UBChain::getInstance()->assetInfoMap;
+        QMap<QString,AssetInfo> assetInfoMap = HXChain::getInstance()->assetInfoMap;
         foreach (AssetInfo info, assetInfoMap) {
             if(info.id != "1.3.0")
             {
-                UBChain::getInstance()->postRPC( "export-get_binding_account-"+info.symbol,
+                HXChain::getInstance()->postRPC( "export-get_binding_account-"+info.symbol,
                                                  toJsonFormat( "get_binding_account", QJsonArray()
                                                  << accoutName<<info.symbol ));
             }
 
         }
-        UBChain::getInstance()->postRPC( "export-finish-tunnel",
+        HXChain::getInstance()->postRPC( "export-finish-tunnel",
                                          toJsonFormat( "export-finish-tunnel", QJsonArray()));
 
     }
@@ -227,7 +227,7 @@ qDebug() <<result;
     {
         std::lock_guard<std::mutex> loc(mutex);
 
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
         result.append("}");
         //提取通道账户地址

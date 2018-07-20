@@ -21,7 +21,7 @@ BottomBar::BottomBar(QWidget *parent) :
     ui->nodeNumLabel->setToolTip(tr("Number of connected nodes"));
     ui->syncLabel->setToolTip(tr("Local block height / Network block height(estimated)"));
 
-    connect(UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)),this, SLOT(jsonDataUpdated(QString)));
+    connect(HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)),this, SLOT(jsonDataUpdated(QString)));
 
 //    ui->networkLabel->setPixmap(QPixmap(":/ui/wallet_ui/net.png").scaled(20,20));
 }
@@ -44,9 +44,9 @@ void BottomBar::jsonDataUpdated(QString id)
 {
     if( id == "id-info")
     {
-//        UBChain::getInstance()->parseBalance();
+//        HXChain::getInstance()->parseBalance();
 
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
 
         CheckBlockSync(result);
         if( result.isEmpty() )  return;
@@ -58,25 +58,25 @@ void BottomBar::jsonDataUpdated(QString id)
         QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
         QJsonObject jsonObject = parse_doucment.object();
         QJsonObject object = jsonObject.take("result").toObject();
-        UBChain::getInstance()->walletInfo.blockHeight = object.take("head_block_num").toInt();
-        UBChain::getInstance()->walletInfo.blockId = object.take("head_block_id").toString();
-        UBChain::getInstance()->walletInfo.blockAge = object.take("head_block_age").toString();
-        UBChain::getInstance()->walletInfo.chainId = object.take("chain_id").toString();
+        HXChain::getInstance()->walletInfo.blockHeight = object.take("head_block_num").toInt();
+        HXChain::getInstance()->walletInfo.blockId = object.take("head_block_id").toString();
+        HXChain::getInstance()->walletInfo.blockAge = object.take("head_block_age").toString();
+        HXChain::getInstance()->walletInfo.chainId = object.take("chain_id").toString();
 
-//        UBChain::getInstance()->walletInfo.activeMiners.clear();
+//        HXChain::getInstance()->walletInfo.activeMiners.clear();
 //        QJsonArray array = object.take("active_miners").toArray();
 //        foreach (QJsonValue v, array)
 //        {
-//            UBChain::getInstance()->walletInfo.activeMiners += v.toString();
+//            HXChain::getInstance()->walletInfo.activeMiners += v.toString();
 //        }
 
-        ui->syncLabel->setText(QString::number(UBChain::getInstance()->walletInfo.blockHeight));
+        ui->syncLabel->setText(QString::number(HXChain::getInstance()->walletInfo.blockHeight));
 
         return;
     }
     else if("id-network_get_connected_peers" == id)
     {
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() )
         {
             ui->nodeNumLabel->setText("0");
@@ -98,7 +98,7 @@ void BottomBar::CheckBlockSync(const QString &res)
 {
     if(res.isEmpty())
     {
-        UBChain::getInstance()->SetBlockSyncFinish(false);
+        HXChain::getInstance()->SetBlockSyncFinish(false);
         return;
     }
     QString data = res;
@@ -108,7 +108,7 @@ void BottomBar::CheckBlockSync(const QString &res)
     QJsonDocument parse_doucment = QJsonDocument::fromJson(data.toLatin1(),&json_error);
     if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject())
     {
-        UBChain::getInstance()->SetBlockSyncFinish(false);
+        HXChain::getInstance()->SetBlockSyncFinish(false);
         return;
     }
 
@@ -117,11 +117,11 @@ void BottomBar::CheckBlockSync(const QString &res)
     QString blockAge = object.take("head_block_age").toString();
     if(blockAge.contains("second"))
     {
-        UBChain::getInstance()->SetBlockSyncFinish(true);
+        HXChain::getInstance()->SetBlockSyncFinish(true);
     }
     else
     {
-        UBChain::getInstance()->SetBlockSyncFinish(false);
+        HXChain::getInstance()->SetBlockSyncFinish(false);
     }
 
 }
@@ -144,9 +144,9 @@ void BottomBar::paintEvent(QPaintEvent *)
 
 void BottomBar::refresh()
 {
-    UBChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QJsonArray()));
+    HXChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QJsonArray()));
 
-    UBChain::getInstance()->postRPC( "id-network_get_connected_peers", toJsonFormat( "network_get_connected_peers", QJsonArray()));
+    HXChain::getInstance()->postRPC( "id-network_get_connected_peers", toJsonFormat( "network_get_connected_peers", QJsonArray()));
 
 
 }

@@ -30,8 +30,8 @@ SetDialog::SetDialog(QWidget *parent) :
 
     ui->setupUi(this);
 
-//    UBChain::getInstance()->appendCurrentDialogVector(this);
-    setParent(UBChain::getInstance()->mainFrame);
+//    HXChain::getInstance()->appendCurrentDialogVector(this);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -47,7 +47,7 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->accountBtn->setCheckable(true);
     ui->depositBtn->setCheckable(true);
 
-    ui->depositBtn->setChecked(UBChain::getInstance()->autoDeposit);
+    ui->depositBtn->setChecked(HXChain::getInstance()->autoDeposit);
     ui->depositBtn->setIconSize(QSize(26,12));
     ui->depositBtn->setIcon(ui->depositBtn->isChecked()?QIcon(":/ui/wallet_ui/off.png"):QIcon(":/ui/wallet_ui/on.png"));
     ui->depositBtn->setText(ui->depositBtn->isChecked()?tr("on"):tr("off"));
@@ -96,13 +96,13 @@ SetDialog::SetDialog(QWidget *parent) :
 
     ui->containerWidget->installEventFilter(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     on_generalBtn_clicked();
 
-    ui->lockTimeSpinBox->setValue(QString::number(UBChain::getInstance()->lockMinutes).toInt());
+    ui->lockTimeSpinBox->setValue(QString::number(HXChain::getInstance()->lockMinutes).toInt());
 
-    if(!UBChain::getInstance()->notProduce)
+    if(!HXChain::getInstance()->notProduce)
     {
         ui->nolockCheckBox->setChecked(true);
         ui->lockTimeSpinBox->setEnabled(false);
@@ -114,7 +114,7 @@ SetDialog::SetDialog(QWidget *parent) :
     }
 
 
-    QString language = UBChain::getInstance()->language;
+    QString language = HXChain::getInstance()->language;
     if( language == "Simplified Chinese")
     {
         ui->languageComboBox->setCurrentIndex(0);
@@ -128,7 +128,7 @@ SetDialog::SetDialog(QWidget *parent) :
         ui->languageComboBox->setCurrentIndex(0);
     }
 
-    QString fee = UBChain::getInstance()->feeType;
+    QString fee = HXChain::getInstance()->feeType;
     if("LNK" == fee){
         ui->comboBox_fee->setCurrentIndex(0);
     }
@@ -141,12 +141,12 @@ SetDialog::SetDialog(QWidget *parent) :
         ui->comboBox_fee->setCurrentIndex(2);
     }
 
-    ui->minimizeCheckBox->setChecked( UBChain::getInstance()->minimizeToTray);
-    ui->closeCheckBox->setChecked( UBChain::getInstance()->closeToMinimize);
-    ui->resyncCheckBox->setChecked( UBChain::getInstance()->resyncNextTime);
+    ui->minimizeCheckBox->setChecked( HXChain::getInstance()->minimizeToTray);
+    ui->closeCheckBox->setChecked( HXChain::getInstance()->closeToMinimize);
+    ui->resyncCheckBox->setChecked( HXChain::getInstance()->resyncNextTime);
 
     ui->contractFeeLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
-    ui->contractFeeLineEdit->setText( getBigNumberString(UBChain::getInstance()->contractFee,ASSET_PRECISION));
+    ui->contractFeeLineEdit->setText( getBigNumberString(HXChain::getInstance()->contractFee,ASSET_PRECISION));
 
     QRegExp rx(QString("^([0]|[1-9][0-9]{0,2})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(ASSET_PRECISION));
     QRegExpValidator *pReg = new QRegExpValidator(rx, this);
@@ -177,15 +177,15 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->stackedWidget_2->insertWidget(1,helpWidget);
 
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->stackedWidget_2);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->stackedWidget_2);
 }
 
 SetDialog::~SetDialog()
 {
     qDebug() << "setdialog delete";
-//    UBChain::getInstance()->currentDialog = NULL;
+//    HXChain::getInstance()->currentDialog = NULL;
     delete ui;
-//    UBChain::getInstance()->removeCurrentDialogVector(this);
+//    HXChain::getInstance()->removeCurrentDialogVector(this);
 }
 
 void SetDialog::pop()
@@ -243,49 +243,49 @@ void SetDialog::on_saveBtn_clicked()
     on_contractFeeLineEdit_editingFinished();
 
     mutexForConfigFile.lock();
-    UBChain::getInstance()->lockMinutes = ui->lockTimeSpinBox->value();
-    UBChain::getInstance()->configFile->setValue("/settings/lockMinutes", UBChain::getInstance()->lockMinutes);
+    HXChain::getInstance()->lockMinutes = ui->lockTimeSpinBox->value();
+    HXChain::getInstance()->configFile->setValue("/settings/lockMinutes", HXChain::getInstance()->lockMinutes);
     if( ui->nolockCheckBox->isChecked())
     {
-        UBChain::getInstance()->notProduce = false;
+        HXChain::getInstance()->notProduce = false;
     }
     else
     {
-        UBChain::getInstance()->notProduce = true;
+        HXChain::getInstance()->notProduce = true;
     }
-    UBChain::getInstance()->configFile->setValue("/settings/notAutoLock", !UBChain::getInstance()->notProduce);
+    HXChain::getInstance()->configFile->setValue("/settings/notAutoLock", !HXChain::getInstance()->notProduce);
 
     if( ui->languageComboBox->currentIndex() == 0)      // config 中保存语言设置
     {
-        UBChain::getInstance()->configFile->setValue("/settings/language", "Simplified Chinese");
-        UBChain::getInstance()->language = "Simplified Chinese";
+        HXChain::getInstance()->configFile->setValue("/settings/language", "Simplified Chinese");
+        HXChain::getInstance()->language = "Simplified Chinese";
     }
     else if( ui->languageComboBox->currentIndex() == 1)
     {
-        UBChain::getInstance()->configFile->setValue("/settings/language", "English");
-        UBChain::getInstance()->language = "English";
+        HXChain::getInstance()->configFile->setValue("/settings/language", "English");
+        HXChain::getInstance()->language = "English";
     }
 
 
-    UBChain::getInstance()->configFile->setValue("/settings/feeType", ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"LNK");
-    UBChain::getInstance()->feeType = ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"LNK";
+    HXChain::getInstance()->configFile->setValue("/settings/feeType", ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"LNK");
+    HXChain::getInstance()->feeType = ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"LNK";
 
 
-    UBChain::getInstance()->configFile->setValue("/settings/autoDeposit", ui->depositBtn->isChecked());
-    UBChain::getInstance()->autoDeposit = ui->depositBtn->isChecked();
+    HXChain::getInstance()->configFile->setValue("/settings/autoDeposit", ui->depositBtn->isChecked());
+    HXChain::getInstance()->autoDeposit = ui->depositBtn->isChecked();
 
 
-    UBChain::getInstance()->minimizeToTray = ui->minimizeCheckBox->isChecked();
-    UBChain::getInstance()->configFile->setValue("/settings/minimizeToTray", UBChain::getInstance()->minimizeToTray);
+    HXChain::getInstance()->minimizeToTray = ui->minimizeCheckBox->isChecked();
+    HXChain::getInstance()->configFile->setValue("/settings/minimizeToTray", HXChain::getInstance()->minimizeToTray);
 
-    UBChain::getInstance()->closeToMinimize = ui->closeCheckBox->isChecked();
-    UBChain::getInstance()->configFile->setValue("/settings/closeToMinimize", UBChain::getInstance()->closeToMinimize);
+    HXChain::getInstance()->closeToMinimize = ui->closeCheckBox->isChecked();
+    HXChain::getInstance()->configFile->setValue("/settings/closeToMinimize", HXChain::getInstance()->closeToMinimize);
 
-    UBChain::getInstance()->resyncNextTime = ui->resyncCheckBox->isChecked();
-    UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime", UBChain::getInstance()->resyncNextTime);
+    HXChain::getInstance()->resyncNextTime = ui->resyncCheckBox->isChecked();
+    HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime", HXChain::getInstance()->resyncNextTime);
 
-    UBChain::getInstance()->contractFee = ui->contractFeeLineEdit->text().toDouble() * qPow(10,ASSET_PRECISION);
-    UBChain::getInstance()->configFile->setValue("/settings/contractFee", UBChain::getInstance()->contractFee);
+    HXChain::getInstance()->contractFee = ui->contractFeeLineEdit->text().toDouble() * qPow(10,ASSET_PRECISION);
+    HXChain::getInstance()->configFile->setValue("/settings/contractFee", HXChain::getInstance()->contractFee);
 
     mutexForConfigFile.unlock();
 
@@ -388,7 +388,7 @@ void SetDialog::on_confirmBtn_clicked()
 {
     ui->tipLabel3->clear();
 
-    UBChain::getInstance()->postRPC( "id-unlock-SetDialog", toJsonFormat( "unlock", QJsonArray() << ui->oldPwdLineEdit->text() ));
+    HXChain::getInstance()->postRPC( "id-unlock-SetDialog", toJsonFormat( "unlock", QJsonArray() << ui->oldPwdLineEdit->text() ));
 
 }
 
@@ -504,11 +504,11 @@ void SetDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-unlock-SetDialog")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if( result == "\"result\":null")
         {
-            UBChain::getInstance()->postRPC( "id-set_password", toJsonFormat( "set_password", QJsonArray() << ui->newPwdLineEdit->text() ));
+            HXChain::getInstance()->postRPC( "id-set_password", toJsonFormat( "set_password", QJsonArray() << ui->newPwdLineEdit->text() ));
         }
         else
         {
@@ -520,11 +520,11 @@ void SetDialog::jsonDataUpdated(QString id)
 
     if( id == "id-set_password")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if( result == "\"result\":null")
         {
-            UBChain::getInstance()->postRPC( "id-unlock-pwdModified", toJsonFormat( "unlock", QJsonArray() << ui->newPwdLineEdit->text() ));
+            HXChain::getInstance()->postRPC( "id-unlock-pwdModified", toJsonFormat( "unlock", QJsonArray() << ui->newPwdLineEdit->text() ));
 
             close();
         }

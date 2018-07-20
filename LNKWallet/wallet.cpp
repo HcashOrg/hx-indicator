@@ -13,9 +13,9 @@
 #include <QDesktopWidget>
 
 
-UBChain* UBChain::goo = 0;
+HXChain* HXChain::goo = 0;
 
-UBChain::UBChain()
+HXChain::HXChain()
 {
     nodeProc = new QProcess;
     clientProc = new QProcess;
@@ -98,7 +98,7 @@ UBChain::UBChain()
 //  });
 }
 
-UBChain::~UBChain()
+HXChain::~HXChain()
 {
 
 
@@ -121,38 +121,38 @@ UBChain::~UBChain()
     }
 }
 
-UBChain*   UBChain::getInstance()
+HXChain*   HXChain::getInstance()
 {
     if( goo == NULL)
     {
-        goo = new UBChain;
+        goo = new HXChain;
     }
     return goo;
 }
 
-void UBChain:: startExe()
+void HXChain:: startExe()
 {
     connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
     QStringList strList;
-    strList << "--data-dir=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
+    strList << "--data-dir=" + HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT);
 
-    if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
     {
         strList << "--replay";
     }
-    UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
+    HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
     nodeProc->start("lnk_node.exe",strList);
     qDebug() << "start lnk_node.exe " << strList;
 
 
-//    UBChain::getInstance()->initWebSocketManager();
+//    HXChain::getInstance()->initWebSocketManager();
 //    emit exeStarted();
 }
 
-void UBChain::onNodeExeStateChanged()
+void HXChain::onNodeExeStateChanged()
 {
     qDebug() << "node exe state " << nodeProc->state();
     if(isExiting)   return;
@@ -175,7 +175,7 @@ void UBChain::onNodeExeStateChanged()
     }
 }
 
-void UBChain::onClientExeStateChanged()
+void HXChain::onClientExeStateChanged()
 {
     if(isExiting)   return;
 
@@ -187,7 +187,7 @@ void UBChain::onClientExeStateChanged()
     {
         qDebug() << QString("%1 is running").arg("lnk_client.exe");
 
-        UBChain::getInstance()->initWebSocketManager();
+        HXChain::getInstance()->initWebSocketManager();
         emit exeStarted();
     }
     else if(clientProc->state() == QProcess::NotRunning)
@@ -199,19 +199,19 @@ void UBChain::onClientExeStateChanged()
     }
 }
 
-void UBChain::delayedLaunchClient()
+void HXChain::delayedLaunchClient()
 {
     connect(clientProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onClientExeStateChanged()));
 
     QStringList strList;
-    strList << "--wallet-file=" + UBChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/") + "/wallet.json"
+    strList << "--wallet-file=" + HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/") + "/wallet.json"
             << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
 
     clientProc->start("lnk_client.exe",strList);
 }
 
-void UBChain::checkNodeExeIsReady()
+void HXChain::checkNodeExeIsReady()
 {
     QString str = nodeProc->readAllStandardError();
     qDebug() << "node exe standardError: " << str ;
@@ -222,12 +222,12 @@ void UBChain::checkNodeExeIsReady()
     }
 }
 
-void UBChain::ShowBubbleMessage(const QString &title, const QString &context, int msecs, QSystemTrayIcon::MessageIcon icon)
+void HXChain::ShowBubbleMessage(const QString &title, const QString &context, int msecs, QSystemTrayIcon::MessageIcon icon)
 {
     emit showBubbleSignal(title,context,icon,msecs);
 }
 
-QString UBChain::getMinerNameFromId(QString _minerId)
+QString HXChain::getMinerNameFromId(QString _minerId)
 {
     QString name;
     foreach (Miner m, minersVector)
@@ -241,12 +241,12 @@ QString UBChain::getMinerNameFromId(QString _minerId)
     return name;
 }
 
-QString UBChain::currentContractFee()
+QString HXChain::currentContractFee()
 {
     return getBigNumberString(contractFee,ASSET_PRECISION);
 }
 
-UBChain::TotalContractFee UBChain::parseTotalContractFee(QString result)
+HXChain::TotalContractFee HXChain::parseTotalContractFee(QString result)
 {
     result.prepend("{");
     result.append("}");
@@ -258,14 +258,14 @@ UBChain::TotalContractFee UBChain::parseTotalContractFee(QString result)
     QJsonObject object = parse_doucment.object();
     QJsonArray array = object.take("result").toArray();
 
-    UBChain::TotalContractFee totalFee;
+    HXChain::TotalContractFee totalFee;
     totalFee.baseAmount = jsonValueToULL(array.at(0).toObject().take("amount"));
     totalFee.step = array.at(1).toInt();
 
     return totalFee;
 }
 
-qint64 UBChain::write(QString cmd)
+qint64 HXChain::write(QString cmd)
 {
     QTextCodec* gbkCodec = QTextCodec::codecForName("GBK");
     QByteArray cmdBa = gbkCodec->fromUnicode(cmd);  // 转为gbk的bytearray
@@ -273,7 +273,7 @@ qint64 UBChain::write(QString cmd)
     return clientProc->write(cmdBa.data());
 }
 
-QString UBChain::read()
+QString HXChain::read()
 {
     QTextCodec* gbkCodec = QTextCodec::codecForName("GBK");
     QString result;
@@ -297,7 +297,7 @@ QString UBChain::read()
 
 
 
-void UBChain::deleteAccountInConfigFile(QString accountName)
+void HXChain::deleteAccountInConfigFile(QString accountName)
 {
 
     mutexForConfigFile.lock();
@@ -327,7 +327,7 @@ void UBChain::deleteAccountInConfigFile(QString accountName)
 }
 
 
-TwoAddresses UBChain::getAddress(QString name)
+TwoAddresses HXChain::getAddress(QString name)
 {
     TwoAddresses twoAddresses;
 
@@ -354,7 +354,7 @@ TwoAddresses UBChain::getAddress(QString name)
 
 
 
-void UBChain::getSystemEnvironmentPath()
+void HXChain::getSystemEnvironmentPath()
 {
     QStringList environment = QProcess::systemEnvironment();
     QString str;
@@ -408,7 +408,7 @@ void UBChain::getSystemEnvironmentPath()
 }
 
 
-void UBChain::getContactsFile()
+void HXChain::getContactsFile()
 {
     QString path;
     if( configFile->contains("/settings/chainPath"))
@@ -443,7 +443,7 @@ void UBChain::getContactsFile()
     //    }
 }
 
-void UBChain::parseAccountInfo()
+void HXChain::parseAccountInfo()
 {
     QString jsonResult = jsonDataValue("id-list_my_accounts");
     jsonResult.prepend("{");
@@ -504,21 +504,21 @@ void UBChain::parseAccountInfo()
     }
 }
 
-void UBChain::fetchAccountBalances(QString _accountName)
+void HXChain::fetchAccountBalances(QString _accountName)
 {
     postRPC( "id-get_account_balances-" + _accountName, toJsonFormat( "get_account_balances", QJsonArray() << _accountName));
 }
 
-QString UBChain::getAccountBalance(QString _accountName, QString _assetSymbol)
+QString HXChain::getAccountBalance(QString _accountName, QString _assetSymbol)
 {
     AssetAmountMap map = accountInfoMap.value(_accountName).assetAmountMap;
     QString assetId = getAssetId(_assetSymbol);
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
 
     return getBigNumberString(map.value(assetId).amount, assetInfo.precision);
 }
 
-QStringList UBChain::getRegisteredAccounts()
+QStringList HXChain::getRegisteredAccounts()
 {
     QStringList keys = accountInfoMap.keys();
     QStringList accounts;
@@ -533,7 +533,7 @@ QStringList UBChain::getRegisteredAccounts()
     return accounts;
 }
 
-QStringList UBChain::getUnregisteredAccounts()
+QStringList HXChain::getUnregisteredAccounts()
 {
     QStringList keys = accountInfoMap.keys();
     QStringList accounts;
@@ -548,7 +548,7 @@ QStringList UBChain::getUnregisteredAccounts()
     return accounts;
 }
 
-QString UBChain::getExchangeContractAddress(QString _accountName)
+QString HXChain::getExchangeContractAddress(QString _accountName)
 {
     QString result;
 
@@ -564,7 +564,7 @@ QString UBChain::getExchangeContractAddress(QString _accountName)
     return result;
 }
 
-QString UBChain::getExchangeContractState(QString _accountName)
+QString HXChain::getExchangeContractState(QString _accountName)
 {
     QString result;
     foreach (ContractInfo info, accountInfoMap.value(_accountName).contractsVector)
@@ -580,12 +580,12 @@ QString UBChain::getExchangeContractState(QString _accountName)
 }
 
 
-QString UBChain::getAssetId(QString symbol)
+QString HXChain::getAssetId(QString symbol)
 {
     QString id;
-    foreach (QString key, UBChain::getInstance()->assetInfoMap.keys())
+    foreach (QString key, HXChain::getInstance()->assetInfoMap.keys())
     {
-        AssetInfo info = UBChain::getInstance()->assetInfoMap.value(key);
+        AssetInfo info = HXChain::getInstance()->assetInfoMap.value(key);
         if( info.symbol == symbol)
         {
             id = key;
@@ -596,7 +596,7 @@ QString UBChain::getAssetId(QString symbol)
     return id;
 }
 
-bool UBChain::ValidateOnChainOperation()
+bool HXChain::ValidateOnChainOperation()
 {
     if(GetBlockSyncFinish()) return true;
     //当前状态不允许链上操作时，弹出警告框
@@ -609,7 +609,7 @@ bool UBChain::ValidateOnChainOperation()
     return false;
 }
 
-void UBChain::InitFeeCharge()
+void HXChain::InitFeeCharge()
 {//读取手续费文件
     QFile fileExit(":/config/feeCharge.config");
     if(!fileExit.open(QIODevice::ReadOnly)) return ;
@@ -643,9 +643,9 @@ void UBChain::InitFeeCharge()
     feeChargeInfo.capitalFee = crossfeeObj.value("Capital").toString();
 }
 
-void UBChain::addTrackAddress(QString _address)
+void HXChain::addTrackAddress(QString _address)
 {
-    QFile file(UBChain::getInstance()->appDataPath + "/config.ini");
+    QFile file(HXChain::getInstance()->appDataPath + "/config.ini");
     if(file.exists())
     {
         if(file.open(QIODevice::ReadWrite))
@@ -670,7 +670,7 @@ void UBChain::addTrackAddress(QString _address)
     }
 }
 
-void UBChain::autoSaveWalletFile()
+void HXChain::autoSaveWalletFile()
 {
     QFileInfo fileInfo(appDataPath + "/wallet.json");
     if(fileInfo.size() > 0)
@@ -683,14 +683,14 @@ void UBChain::autoSaveWalletFile()
     }
 }
 
-void UBChain::fetchTransactions()
+void HXChain::fetchTransactions()
 {
     postRPC( "id-list_transactions", toJsonFormat( "list_transactions", QJsonArray() << 0 << -1));
 
     checkPendingTransactions();
 }
 
-void UBChain::parseTransaction(QString result)
+void HXChain::parseTransaction(QString result)
 {
     result.prepend("{");
     result.append("}");
@@ -896,7 +896,7 @@ void UBChain::parseTransaction(QString result)
     }
 }
 
-void UBChain::checkPendingTransactions()
+void HXChain::checkPendingTransactions()
 {
     QStringList trxIds = transactionDB.getPendingTransactions();
     foreach (QString trxId, trxIds)
@@ -905,17 +905,17 @@ void UBChain::checkPendingTransactions()
     }
 }
 
-void UBChain::fetchFormalGuards()
+void HXChain::fetchFormalGuards()
 {
     postRPC( "id-list_guard_members", toJsonFormat( "list_guard_members", QJsonArray() << "A" << 100));
 }
 
-void UBChain::fetchAllGuards()
+void HXChain::fetchAllGuards()
 {
     postRPC( "id-list_all_guards", toJsonFormat( "list_all_guards", QJsonArray() << "A" << 100));
 }
 
-QStringList UBChain::getMyFormalGuards()
+QStringList HXChain::getMyFormalGuards()
 {
     QStringList result;
     QStringList guards = formalGuardMap.keys();
@@ -930,7 +930,7 @@ QStringList UBChain::getMyFormalGuards()
     return result;
 }
 
-GuardMultisigAddress UBChain::getGuardMultisigByPairId(QString assetSymbol, QString guardName, QString pairId)
+GuardMultisigAddress HXChain::getGuardMultisigByPairId(QString assetSymbol, QString guardName, QString pairId)
 {
     QString guardAccountId = formalGuardMap.value(guardName).accountId;
     QVector<GuardMultisigAddress> v = guardMultisigAddressesMap.value(assetSymbol + "-" + guardAccountId);
@@ -947,7 +947,7 @@ GuardMultisigAddress UBChain::getGuardMultisigByPairId(QString assetSymbol, QStr
     return result;
 }
 
-void UBChain::fetchGuardAllMultisigAddresses(QString accountId)
+void HXChain::fetchGuardAllMultisigAddresses(QString accountId)
 {
     QStringList keys = assetInfoMap.keys();
     foreach (QString key, keys)
@@ -960,7 +960,7 @@ void UBChain::fetchGuardAllMultisigAddresses(QString accountId)
     }
 }
 
-QStringList UBChain::getAssetMultisigUpdatedGuards(QString assetSymbol)
+QStringList HXChain::getAssetMultisigUpdatedGuards(QString assetSymbol)
 {
     QStringList result;
     QStringList keys = formalGuardMap.keys();
@@ -981,7 +981,7 @@ QStringList UBChain::getAssetMultisigUpdatedGuards(QString assetSymbol)
     return result;
 }
 
-QString UBChain::guardAccountIdToName(QString guardAccountId)
+QString HXChain::guardAccountIdToName(QString guardAccountId)
 {
     QString result;
     foreach (QString account, formalGuardMap.keys())
@@ -996,7 +996,7 @@ QString UBChain::guardAccountIdToName(QString guardAccountId)
     return result;
 }
 
-QString UBChain::guardAddressToName(QString guardAddress)
+QString HXChain::guardAddressToName(QString guardAddress)
 {
     QString result;
     foreach (QString account, formalGuardMap.keys())
@@ -1011,13 +1011,13 @@ QString UBChain::guardAddressToName(QString guardAddress)
     return result;
 }
 
-void UBChain::fetchProposals()
+void HXChain::fetchProposals()
 {
     if(formalGuardMap.size() < 1)   return;
     postRPC( "id-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << formalGuardMap.keys().at(0)));
 }
 
-void UBChain::fetchMyContracts()
+void HXChain::fetchMyContracts()
 {
     foreach (QString accountName, accountInfoMap.keys())
     {
@@ -1025,7 +1025,7 @@ void UBChain::fetchMyContracts()
     }
 }
 
-bool UBChain::isMyAddress(QString _address)
+bool HXChain::isMyAddress(QString _address)
 {
     QStringList keys = accountInfoMap.keys();
     bool result = false;
@@ -1037,7 +1037,7 @@ bool UBChain::isMyAddress(QString _address)
     return result;
 }
 
-QString UBChain::addressToName(QString _address)
+QString HXChain::addressToName(QString _address)
 {
     QStringList keys = accountInfoMap.keys();
 
@@ -1052,7 +1052,7 @@ QString UBChain::addressToName(QString _address)
     return _address;
 }
 
-void UBChain::parseMultiSigTransactions(QString result, QString multiSigAddress)
+void HXChain::parseMultiSigTransactions(QString result, QString multiSigAddress)
 {
     multiSigTransactionsMap.remove(multiSigAddress);
 
@@ -1161,7 +1161,7 @@ void UBChain::parseMultiSigTransactions(QString result, QString multiSigAddress)
     }
 }
 
-void UBChain::quit()
+void HXChain::quit()
 {
     isExiting = true;
     if (clientProc)
@@ -1202,7 +1202,7 @@ void UBChain::quit()
     }
 }
 
-void UBChain::updateJsonDataMap(QString id, QString data)
+void HXChain::updateJsonDataMap(QString id, QString data)
 {
     mutexForJsonData.lock();
 
@@ -1213,7 +1213,7 @@ void UBChain::updateJsonDataMap(QString id, QString data)
 
 }
 
-QString UBChain::jsonDataValue(QString id)
+QString HXChain::jsonDataValue(QString id)
 {
 
     mutexForJsonData.lock();
@@ -1225,7 +1225,7 @@ QString UBChain::jsonDataValue(QString id)
     return value;
 }
 
-double UBChain::getPendingAmount(QString name)
+double HXChain::getPendingAmount(QString name)
 {
     mutexForConfigFile.lock();
     if( !pendingFile->open(QIODevice::ReadOnly))
@@ -1253,7 +1253,7 @@ double UBChain::getPendingAmount(QString name)
     return amount;
 }
 
-QString UBChain::getPendingInfo(QString id)
+QString HXChain::getPendingInfo(QString id)
 {
     mutexForConfigFile.lock();
     if( !pendingFile->open(QIODevice::ReadOnly))
@@ -1289,7 +1289,7 @@ QString doubleTo5Decimals(double number)
         return num.mid(0,pos);
 }
 
-QString UBChain::registerMapValue(QString key)
+QString HXChain::registerMapValue(QString key)
 {
     mutexForRegisterMap.lock();
     QString value = registerMap.value(key);
@@ -1298,14 +1298,14 @@ QString UBChain::registerMapValue(QString key)
     return value;
 }
 
-void UBChain::registerMapInsert(QString key, QString value)
+void HXChain::registerMapInsert(QString key, QString value)
 {
     mutexForRegisterMap.lock();
     registerMap.insert(key,value);
     mutexForRegisterMap.unlock();
 }
 
-int UBChain::registerMapRemove(QString key)
+int HXChain::registerMapRemove(QString key)
 {
     mutexForRegisterMap.lock();
     int number = registerMap.remove(key);
@@ -1313,7 +1313,7 @@ int UBChain::registerMapRemove(QString key)
     return number;
 }
 
-QString UBChain::balanceMapValue(QString key)
+QString HXChain::balanceMapValue(QString key)
 {
     mutexForBalanceMap.lock();
     QString value = balanceMap.value(key);
@@ -1322,14 +1322,14 @@ QString UBChain::balanceMapValue(QString key)
     return value;
 }
 
-void UBChain::balanceMapInsert(QString key, QString value)
+void HXChain::balanceMapInsert(QString key, QString value)
 {
     mutexForBalanceMap.lock();
     balanceMap.insert(key,value);
     mutexForBalanceMap.unlock();
 }
 
-int UBChain::balanceMapRemove(QString key)
+int HXChain::balanceMapRemove(QString key)
 {
     mutexForBalanceMap.lock();
     int number = balanceMap.remove(key);
@@ -1337,7 +1337,7 @@ int UBChain::balanceMapRemove(QString key)
     return number;
 }
 
-TwoAddresses UBChain::addressMapValue(QString key)
+TwoAddresses HXChain::addressMapValue(QString key)
 {
     mutexForAddressMap.lock();
     TwoAddresses value = addressMap.value(key);
@@ -1346,14 +1346,14 @@ TwoAddresses UBChain::addressMapValue(QString key)
     return value;
 }
 
-void UBChain::addressMapInsert(QString key, TwoAddresses value)
+void HXChain::addressMapInsert(QString key, TwoAddresses value)
 {
     mutexForAddressMap.lock();
     addressMap.insert(key,value);
     mutexForAddressMap.unlock();
 }
 
-int UBChain::addressMapRemove(QString key)
+int HXChain::addressMapRemove(QString key)
 {
     mutexForAddressMap.lock();
     int number = addressMap.remove(key);
@@ -1361,7 +1361,7 @@ int UBChain::addressMapRemove(QString key)
     return number;
 }
 
-//bool UBChain::rpcReceivedOrNotMapValue(QString key)
+//bool HXChain::rpcReceivedOrNotMapValue(QString key)
 //{
 //    mutexForRpcReceiveOrNot.lock();
 //    bool received = rpcReceivedOrNotMap.value(key);
@@ -1369,7 +1369,7 @@ int UBChain::addressMapRemove(QString key)
 //    return received;
 //}
 
-//void UBChain::rpcReceivedOrNotMapSetValue(QString key, bool received)
+//void HXChain::rpcReceivedOrNotMapSetValue(QString key, bool received)
 //{
 //    mutexForRpcReceiveOrNot.lock();
 //    rpcReceivedOrNotMap.insert(key, received);
@@ -1377,17 +1377,17 @@ int UBChain::addressMapRemove(QString key)
 //}
 
 
-void UBChain::appendCurrentDialogVector( QWidget * w)
+void HXChain::appendCurrentDialogVector( QWidget * w)
 {
     currentDialogVector.append(w);
 }
 
-void UBChain::removeCurrentDialogVector( QWidget * w)
+void HXChain::removeCurrentDialogVector( QWidget * w)
 {
     currentDialogVector.removeAll(w);
 }
 
-void UBChain::hideCurrentDialog()
+void HXChain::hideCurrentDialog()
 {
     foreach (QWidget* w, currentDialogVector)
     {
@@ -1395,7 +1395,7 @@ void UBChain::hideCurrentDialog()
     }
 }
 
-void UBChain::showCurrentDialog()
+void HXChain::showCurrentDialog()
 {
     foreach (QWidget* w, currentDialogVector)
     {
@@ -1405,7 +1405,7 @@ void UBChain::showCurrentDialog()
     }
 }
 
-void UBChain::resetPosOfCurrentDialog()
+void HXChain::resetPosOfCurrentDialog()
 {
     foreach (QWidget* w, currentDialogVector)
     {
@@ -1413,7 +1413,7 @@ void UBChain::resetPosOfCurrentDialog()
     }
 }
 
-void UBChain::initWebSocketManager()
+void HXChain::initWebSocketManager()
 {
     wsManager = new WebSocketManager;
     wsManager->start();
@@ -1423,7 +1423,7 @@ void UBChain::initWebSocketManager()
 
 }
 
-void UBChain::postRPC(QString _rpcId, QString _rpcCmd)
+void HXChain::postRPC(QString _rpcId, QString _rpcCmd)
 {
 //    if( rpcReceivedOrNotMap.contains( _rpcId))
 //    {
@@ -1465,7 +1465,7 @@ double roundDown(double decimal, int precision)
 bool isExistInWallet(QString strName)
 {
     mutexForAddressMap.lock();
-    for (QMap<QString,TwoAddresses>::const_iterator i = UBChain::getInstance()->addressMap.constBegin(); i != UBChain::getInstance()->addressMap.constEnd(); ++i)
+    for (QMap<QString,TwoAddresses>::const_iterator i = HXChain::getInstance()->addressMap.constBegin(); i != HXChain::getInstance()->addressMap.constEnd(); ++i)
     {
         if(i.key() == strName)
         {

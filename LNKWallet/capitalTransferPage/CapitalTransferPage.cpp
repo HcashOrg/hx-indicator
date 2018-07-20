@@ -21,11 +21,11 @@ class CapitalTransferPage::CapitalTransferPagePrivate
 public:
     CapitalTransferPagePrivate(const CapitalTransferInput &data)
         :account_name(data.account_name),account_address(data.account_address),symbol(data.symbol)
-        ,fee(UBChain::getInstance()->feeChargeInfo.capitalFee)
+        ,fee(HXChain::getInstance()->feeChargeInfo.capitalFee)
         ,actualNumber("0")
         ,precision(5)
     {
-        foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+        foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
             if(asset.symbol == symbol)
             {
                 precision = asset.precision;
@@ -74,10 +74,10 @@ void CapitalTransferPage::ConfirmSlots()
     QString totalShow = ui->lineEdit_number->text() + " "+_p->symbol;
     CapitalConfirmWidget *confirmWidget = new CapitalConfirmWidget(CapitalConfirmWidget::CapitalConfirmInput(
                                                                    ui->radioButton_deposit->isChecked()?_p->account_address:ui->lineEdit_address->text(),
-                                                                   actualShow,feeShow,totalShow),UBChain::getInstance()->mainFrame);
+                                                                   actualShow,feeShow,totalShow),HXChain::getInstance()->mainFrame);
     connect(confirmWidget,&CapitalConfirmWidget::ConfirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
     connect(confirmWidget,&CapitalConfirmWidget::CancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
-    //PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget(UBChain::getInstance()->mainFrame);
+    //PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget(HXChain::getInstance()->mainFrame);
     //connect(confirmWidget,&PasswordConfirmWidget::confirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
     //connect(confirmWidget,&PasswordConfirmWidget::cancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
     //confirmWidget->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
@@ -116,7 +116,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
 {
     if("captial-get_binding_account" == id)
     {//获取到当前账户绑定的通道账户
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() || result.startsWith("\"error"))
         {
             ui->radioButton_deposit->setEnabled(false);
@@ -146,7 +146,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
     }
     else if("captial-get_current_multi_address" == id)
     {//获取到多签地址
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() || result.startsWith("\"error"))
         {
             ui->radioButton_deposit->setEnabled(false);
@@ -173,7 +173,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
     }
     else if("captial-createrawtransaction" == id)
     {//获取到创建交易信息
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         qDebug()<<"transaction"<<result;
 
         if( result.isEmpty() || result.startsWith("\"error"))
@@ -195,15 +195,15 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
     }
     else if("captial-signrawtransaction" == id)
     {
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
         result.append("}");
 
-        qDebug()<<"signature"<<UBChain::getInstance()->jsonDataValue( id);
+        qDebug()<<"signature"<<HXChain::getInstance()->jsonDataValue( id);
 
         if( result.startsWith("{\"result\":"))             // 成功
         {
-            UBChain::getInstance()->mainFrame->crossMark->TransactionInput(result,_p->symbol,_p->account_name,ui->lineEdit_number->text().toDouble());
+            HXChain::getInstance()->mainFrame->crossMark->TransactionInput(result,_p->symbol,_p->account_name,ui->lineEdit_number->text().toDouble());
 
             TransactionResultDialog transactionResultDialog;
             transactionResultDialog.setInfoText(tr("Transaction has been sent,please wait for confirmation"));
@@ -219,7 +219,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         }
 
 //        CommonDialog dia(CommonDialog::OkOnly);
-//        dia.setText(UBChain::getInstance()->jsonDataValue( id));
+//        dia.setText(HXChain::getInstance()->jsonDataValue( id));
 //        dia.pop();
         close();
     }
@@ -244,13 +244,13 @@ void CapitalTransferPage::passwordConfirmSlots()
 {//提交充值或提现指令
     if(ui->radioButton_deposit->isChecked())
     {//充值，对已有交易进行签名
-        UBChain::getInstance()->postRPC( "captial-signrawtransaction",
+        HXChain::getInstance()->postRPC( "captial-signrawtransaction",
                                          toJsonFormat( "signrawtransaction", QJsonArray()
                                          <<_p->tunnel_account_address<<_p->symbol<<_p->trade_detail<<true ));
     }
     else if(ui->radioButton_withdraw->isChecked())
     {//提现
-        UBChain::getInstance()->postRPC( "captial-signrawtransaction",
+        HXChain::getInstance()->postRPC( "captial-signrawtransaction",
                                          toJsonFormat( "signrawtransaction", QJsonArray()
                                          <<_p->tunnel_account_address<<_p->symbol<<_p->trade_detail<<true ));
     }
@@ -311,12 +311,12 @@ void CapitalTransferPage::PostQueryTunnelMoney(const QString &symbol, const QStr
     paramObject.insert("chainId",symbol);
     paramObject.insert("addr",tunnelAddress);
     object.insert("params",paramObject);
-    _p->httpManager.post(UBChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+    _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
 void CapitalTransferPage::CreateTransaction()
 {
-    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
     if(_p->tunnel_account_address.isEmpty() || _p->multisig_address.isEmpty() ||
        _p->symbol.isEmpty() || _p->actualNumber.isEmpty() || ui->lineEdit_number->text().isEmpty())
@@ -349,7 +349,7 @@ void CapitalTransferPage::CreateTransaction()
     ui->label_tip->setVisible(false);
     if(ui->radioButton_deposit->isChecked())
     {//充值修改，发送充值指令问题
-        UBChain::getInstance()->postRPC( "captial-createrawtransaction",
+        HXChain::getInstance()->postRPC( "captial-createrawtransaction",
                                          toJsonFormat( "createrawtransaction", QJsonArray()
                                          << _p->tunnel_account_address<<_p->multisig_address<<_p->actualNumber<<_p->symbol ));
     }
@@ -362,7 +362,7 @@ void CapitalTransferPage::CreateTransaction()
         }
         else
         {
-            UBChain::getInstance()->postRPC( "captial-createrawtransaction",
+            HXChain::getInstance()->postRPC( "captial-createrawtransaction",
                                              toJsonFormat( "createrawtransaction", QJsonArray()
                                              << _p->tunnel_account_address<<ui->lineEdit_address->text()<<_p->actualNumber<<_p->symbol ));
         }
@@ -373,7 +373,7 @@ void CapitalTransferPage::CreateTransaction()
 void CapitalTransferPage::getMarkNumber()
 {
     QString tip = tr(" %1 is pending!");
-    double number = UBChain::getInstance()->mainFrame->crossMark->CalTransaction(_p->account_name,_p->symbol);
+    double number = HXChain::getInstance()->mainFrame->crossMark->CalTransaction(_p->account_name,_p->symbol);
     qDebug()<<"get---get---"<<number;
     if(number > dust_number[_p->symbol])
     {//说明有划出去钱，显示提示
@@ -401,7 +401,7 @@ void CapitalTransferPage::InitWidget()
     ui->lineEdit_address->setEnabled(false);
     ui->lineEdit_number->setPlaceholderText(tr("please wait"));
 
-    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &CapitalTransferPage::jsonDataUpdated);
+    connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &CapitalTransferPage::jsonDataUpdated);
     connect(&_p->httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
     connect(ui->toolButton_close,&QToolButton::clicked,std::bind(&CapitalTransferPage::backBtnVisible,this,false));
@@ -415,17 +415,17 @@ void CapitalTransferPage::InitWidget()
 
     //记录标志
     ui->label_marktip->setVisible(false);
-    connect(UBChain::getInstance()->mainFrame->crossMark,&CrossCapitalMark::updateMark,this,&CapitalTransferPage::getMarkNumber);
+    connect(HXChain::getInstance()->mainFrame->crossMark,&CrossCapitalMark::updateMark,this,&CapitalTransferPage::getMarkNumber);
 
     //获取通道账户，获取多签地址，用于充值使用
-    UBChain::getInstance()->postRPC( "captial-get_binding_account",
+    HXChain::getInstance()->postRPC( "captial-get_binding_account",
                                      toJsonFormat( "get_binding_account", QJsonArray()
                                      << _p->account_name<<_p->symbol ));
-    UBChain::getInstance()->postRPC( "captial-get_current_multi_address",
+    HXChain::getInstance()->postRPC( "captial-get_current_multi_address",
                                      toJsonFormat( "get_current_multi_address", QJsonArray()
                                      << _p->symbol));
     //查询缓存提现
-    UBChain::getInstance()->mainFrame->crossMark->checkUpData(_p->account_name,_p->symbol);
+    HXChain::getInstance()->mainFrame->crossMark->checkUpData(_p->account_name,_p->symbol);
 
 
 }
@@ -442,7 +442,7 @@ void CapitalTransferPage::InitStyle()
 
     ui->toolButton_close->setStyleSheet(CLOSEBTN_STYLE);
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 //    setStyleSheet("QToolButton#toolButton_confirm{color:white;\
 //                                      border-top-left-radius:10px;  \
 //                                      border-top-right-radius:10px; \

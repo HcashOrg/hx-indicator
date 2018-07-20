@@ -10,7 +10,7 @@ AddMultiSigDialog::AddMultiSigDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -25,7 +25,7 @@ AddMultiSigDialog::AddMultiSigDialog(QWidget *parent) :
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->okBtn->setEnabled(false);
 
@@ -48,7 +48,7 @@ void AddMultiSigDialog::jsonDataUpdated(QString id)
 {
     if( id.startsWith( "id_wallet_import_multisig_account-AddMultiSigDialog+") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if( result.startsWith("\"result\":"))
         {
@@ -87,9 +87,9 @@ void AddMultiSigDialog::jsonDataUpdated(QString id)
                                     owners << array.at(i).toString();
                                 }
 
-                                UBChain::getInstance()->multiSigInfoMap[address].multiSigAddress = address;
-                                UBChain::getInstance()->multiSigInfoMap[address].requires = resultObject.take("requires").toInt();
-                                UBChain::getInstance()->multiSigInfoMap[address].owners = owners;
+                                HXChain::getInstance()->multiSigInfoMap[address].multiSigAddress = address;
+                                HXChain::getInstance()->multiSigInfoMap[address].requires = resultObject.take("requires").toInt();
+                                HXChain::getInstance()->multiSigInfoMap[address].owners = owners;
 
                                 CommonDialog commonDialog(CommonDialog::OkOnly);
                                 commonDialog.setText(tr("This multisig address has been imported!"));
@@ -141,7 +141,7 @@ void AddMultiSigDialog::on_okBtn_clicked()
     if(address.isEmpty())   return;
 
 
-    UBChain::getInstance()->postRPC( "id_wallet_import_multisig_account-AddMultiSigDialog+" + address,
+    HXChain::getInstance()->postRPC( "id_wallet_import_multisig_account-AddMultiSigDialog+" + address,
                                      toJsonFormat( "wallet_import_multisig_account", QJsonArray() << address
                                                ));
 }

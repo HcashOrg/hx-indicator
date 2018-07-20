@@ -288,12 +288,12 @@ struct MultiSigInfo
     AssetBalanceMap balanceMap;
 };
 
-class UBChain : public QObject
+class HXChain : public QObject
 {
     Q_OBJECT
 public:
-    ~UBChain();
-    static UBChain*   getInstance();
+    ~HXChain();
+    static HXChain*   getInstance();
 
 
 public:
@@ -480,8 +480,8 @@ signals:
 
 private:
 
-    UBChain();
-    static UBChain* goo;
+    HXChain();
+    static HXChain* goo;
     QMap<QString,QString> jsonDataMap;   //  各指令的id,各指令的返回
 
     void getSystemEnvironmentPath();
@@ -491,8 +491,8 @@ private:
     public:
         ~CGarbo()
         {
-            if (UBChain::goo)
-                delete UBChain::goo;
+            if (HXChain::goo)
+                delete HXChain::goo;
         }
     };
     static CGarbo Garbo; // 定义一个静态成员，在程序结束时，系统会调用它的析构函数

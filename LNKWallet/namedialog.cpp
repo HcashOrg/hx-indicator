@@ -12,8 +12,8 @@ NameDialog::NameDialog(QWidget *parent) :
     
     ui->setupUi(this);
 
-//    UBChain::getInstance()->appendCurrentDialogVector(this);
-    setParent(UBChain::getInstance()->mainFrame);
+//    HXChain::getInstance()->appendCurrentDialogVector(this);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -27,7 +27,7 @@ NameDialog::NameDialog(QWidget *parent) :
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
     yesOrNO = true;
 
     ui->nameLineEdit->setPlaceholderText( tr("Beginning with letter,letters or numbers"));
@@ -124,7 +124,7 @@ void NameDialog::on_nameLineEdit_textChanged(const QString &arg1)
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id-get_account-" + addrName, toJsonFormat( "get_account", QJsonArray() << addrName ));
+    HXChain::getInstance()->postRPC( "id-get_account-" + addrName, toJsonFormat( "get_account", QJsonArray() << addrName ));
     ui->gifLabel->show();
 }
 
@@ -139,7 +139,7 @@ void NameDialog::jsonDataUpdated(QString id)
 {
     if( id.startsWith("id-get_account-") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         // 如果跟当前输入框中的内容不一样，则是过时的rpc返回，不用处理
         if( id.mid(QString("id-get_account-").size()) != ui->nameLineEdit->text())  return;

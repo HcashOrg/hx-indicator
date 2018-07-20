@@ -17,7 +17,7 @@ NormalLogin::NormalLogin(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(pwdConfirmed(QString)));
+    connect( HXChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(pwdConfirmed(QString)));
 
     InitWidget();
 
@@ -63,7 +63,7 @@ void NormalLogin::on_enterBtn_clicked()
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id-unlock-normallogin", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text() ));
+    HXChain::getInstance()->postRPC( "id-unlock-normallogin", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text() ));
 
     emit showShadowWidget();
     ui->pwdLineEdit->setEnabled(false);
@@ -80,7 +80,7 @@ void NormalLogin::on_pwdLineEdit_returnPressed()
 
 void NormalLogin::on_closeBtn_clicked()
 {
-//    if( UBChain::getInstance()->closeToMinimize)
+//    if( HXChain::getInstance()->closeToMinimize)
 //    {
 //        emit tray();
 //    }
@@ -123,7 +123,7 @@ void NormalLogin::pwdConfirmed(QString id)
         emit hideShadowWidget();
         ui->pwdLineEdit->setEnabled(true);
         ui->pwdLineEdit->setFocus();
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
 
         if( result == "\"result\":null")
         {

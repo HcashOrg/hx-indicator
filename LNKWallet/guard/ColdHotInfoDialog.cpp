@@ -11,7 +11,7 @@ ColdHotInfoDialog::ColdHotInfoDialog(ColdHotTransferPage *_page, QWidget *parent
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -56,13 +56,13 @@ void ColdHotInfoDialog::setTrxId(QString _trxId)
     QString crosschainTrxId = page->lookupCrosschainTrxByColdHotTrxId(_trxId);
     QStringList guardAddresses = page->lookupSignedGuardByCrosschainTrx(crosschainTrxId);
 
-    int totalNum = UBChain::getInstance()->formalGuardMap.size();
+    int totalNum = HXChain::getInstance()->formalGuardMap.size();
     ui->stateLabel->setText(tr("%1 guards have signed. %2 guards have not yet.").arg(guardAddresses.size()).arg(totalNum - guardAddresses.size()));
 
     QString str;
     foreach (QString address, guardAddresses)
     {
-        str += UBChain::getInstance()->guardAddressToName(address) + "  ";
+        str += HXChain::getInstance()->guardAddressToName(address) + "  ";
     }
     ui->signedGuardsLabel->setText(str);
 

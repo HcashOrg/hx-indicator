@@ -16,9 +16,9 @@ ImportDialog::ImportDialog(QWidget *parent) :
     ui->setupUi(this);
 
     ui->privateKeyLineEdit->setEnabled(false);
-//    UBChain::getInstance()->appendCurrentDialogVector(this);
+//    HXChain::getInstance()->appendCurrentDialogVector(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -29,7 +29,7 @@ ImportDialog::ImportDialog(QWidget *parent) :
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->importBtn->setEnabled(false);
 
@@ -51,7 +51,7 @@ ImportDialog::ImportDialog(QWidget *parent) :
 ImportDialog::~ImportDialog()
 {
     delete ui;
-//    UBChain::getInstance()->removeCurrentDialogVector(this);
+//    HXChain::getInstance()->removeCurrentDialogVector(this);
 }
 
 void ImportDialog::pop()
@@ -117,7 +117,7 @@ void ImportDialog::on_importBtn_clicked()
     }
 
     //验证该地址是否已经存在
-    foreach(AccountInfo info,UBChain::getInstance()->accountInfoMap){
+    foreach(AccountInfo info,HXChain::getInstance()->accountInfoMap){
         qDebug()<<info.address << " "<<data->LNKAddr;
         if(info.address == data->LNKAddr)
         {
@@ -134,17 +134,17 @@ void ImportDialog::on_importBtn_clicked()
         if((*it).first == "LNK")
         {
             //导入lnk私钥
-            UBChain::getInstance()->postRPC( "import-import_key",
+            HXChain::getInstance()->postRPC( "import-import_key",
                                              toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << (*it).second));
         }
         else
         {
             //导入跨连私钥
-            UBChain::getInstance()->postRPC( "import-import_crosschain_key",
+            HXChain::getInstance()->postRPC( "import-import_crosschain_key",
                                              toJsonFormat( "import_crosschain_key", QJsonArray() << (*it).second <<(*it).first));
         }
     }
-    UBChain::getInstance()->postRPC( "import-finish_import_key", toJsonFormat( "finish_import_key", QJsonArray()));
+    HXChain::getInstance()->postRPC( "import-finish_import_key", toJsonFormat( "finish_import_key", QJsonArray()));
 
     // 如果输入框中是 私钥文件的地址
 //    if( ui->privateKeyLineEdit->text().endsWith(".lpk") )
@@ -156,7 +156,7 @@ void ImportDialog::on_importBtn_clicked()
 //            QByteArray ba = QByteArray::fromBase64( rd);
 //            QString str(ba);
 
-//            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << str));
+//            HXChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << str));
 //            ui->importBtn->setEnabled(false);
 //            shadowWidget->show();
 
@@ -195,7 +195,7 @@ void ImportDialog::on_importBtn_clicked()
 
 //                    QString pk = output.mid( QString("privateKey=").size());
 
-//                    UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << pk));
+//                    HXChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << pk));
 //                    ui->importBtn->setEnabled(false);
 //                    shadowWidget->show();
 //                }
@@ -230,7 +230,7 @@ void ImportDialog::on_importBtn_clicked()
 //        privateKey = privateKey.simplified();
 //        if( (privateKey.size() == 51 || privateKey.size() == 52) && (privateKey.startsWith("5") ) )
 //        {
-//            UBChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << privateKey));
+//            HXChain::getInstance()->postRPC( "id-import_key", toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << privateKey));
 
 //             ui->importBtn->setEnabled(false);
 //             shadowWidget->show();
@@ -253,7 +253,7 @@ void ImportDialog::jsonDataUpdated(QString id)
 {
     if( id == "import-import_key")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 qDebug()  << id << result;
         if( result == "\"result\":true")
         {
@@ -261,7 +261,7 @@ qDebug()  << id << result;
 
 //            emit accountImported();
 
-            UBChain::getInstance()->postRPC( "id-get_account-ImportDialog-" + ui->accountNameLineEdit->text(), toJsonFormat( "get_account", QJsonArray() << ui->accountNameLineEdit->text() ));
+            HXChain::getInstance()->postRPC( "id-get_account-ImportDialog-" + ui->accountNameLineEdit->text(), toJsonFormat( "get_account", QJsonArray() << ui->accountNameLineEdit->text() ));
 
         }
         else if( result.mid(0,8) == "\"error\":")
@@ -282,7 +282,7 @@ qDebug()  << id << result;
     {
         shadowWidget->hide();
 
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug()  << id << result;
 
         result.prepend("{");
@@ -292,10 +292,10 @@ qDebug()  << id << result;
         QJsonObject jsonObject = parse_doucment.object();
         QString accountAddress = jsonObject.take("result").toObject().take("addr").toString();
 
-        UBChain::getInstance()->addTrackAddress(accountAddress);
+        HXChain::getInstance()->addTrackAddress(accountAddress);
 
-        UBChain::getInstance()->resyncNextTime = true;
-        UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);
+        HXChain::getInstance()->resyncNextTime = true;
+        HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);
 
         CommonDialog commonDialog(CommonDialog::OkOnly);
         commonDialog.setText( ui->accountNameLineEdit->text() + tr( " has been imported!"));
@@ -312,7 +312,7 @@ qDebug()  << id << result;
 
     if( id == "import-finish_import_key")
     {
-        UBChain::getInstance()->autoSaveWalletFile();
+        HXChain::getInstance()->autoSaveWalletFile();
 
         return;
     }

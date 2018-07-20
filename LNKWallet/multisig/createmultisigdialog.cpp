@@ -14,7 +14,7 @@ CreateMultiSigDialog::CreateMultiSigDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -24,7 +24,7 @@ CreateMultiSigDialog::CreateMultiSigDialog(QWidget *parent) :
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 
     ui->createBtn->setStyleSheet(OKBTN_STYLE);
@@ -55,7 +55,7 @@ CreateMultiSigDialog::CreateMultiSigDialog(QWidget *parent) :
     ui->ownersTableWidget->setColumnWidth(1,100);
     ui->ownersTableWidget->setColumnWidth(2,80);
 
-    QStringList keys = UBChain::getInstance()->addressMap.keys();
+    QStringList keys = HXChain::getInstance()->addressMap.keys();
     ui->accountComboBox->addItems( keys);
 }
 
@@ -86,9 +86,9 @@ void CreateMultiSigDialog::updateOwnersList()
         ui->ownersTableWidget->setItem(i,0,new QTableWidgetItem(address));
         ui->ownersTableWidget->item(i,0)->setTextColor(QColor(192,196,212));
 
-        if(UBChain::getInstance()->isMyAddress(address))
+        if(HXChain::getInstance()->isMyAddress(address))
         {
-            QString accountName = UBChain::getInstance()->addressToName(address);
+            QString accountName = HXChain::getInstance()->addressToName(address);
             ui->ownersTableWidget->setItem(i,1,new QTableWidgetItem(accountName));
             ui->ownersTableWidget->item(i,1)->setTextColor(QColor(43,230,131));
         }
@@ -127,7 +127,7 @@ void CreateMultiSigDialog::jsonDataUpdated(QString id)
 {
     if( id.startsWith( "id_wallet_create_multisig_account") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 qDebug()  << id << result;
         if( result.startsWith("\"result\":"))
         {
@@ -216,7 +216,7 @@ void CreateMultiSigDialog::on_createBtn_clicked()
     str += "]";
     str.replace(",]","]");
 
-    UBChain::getInstance()->postRPC( "id_wallet_create_multisig_account",
+    HXChain::getInstance()->postRPC( "id_wallet_create_multisig_account",
                                      toJsonFormat( "wallet_create_multisig_account",
                                                    QJsonArray() << getBigNumberString(1,ASSET_PRECISION) << ASSET_NAME
                                                    << ui->accountComboBox->currentText() << QString::number(requires)
@@ -253,7 +253,7 @@ void CreateMultiSigDialog::on_addBtn_clicked()
 
 void CreateMultiSigDialog::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
-    ui->balanceLabel->setText( getBigNumberString(UBChain::getInstance()->accountInfoMap.value(arg1).assetAmountMap.value("1.3.0").amount,ASSET_PRECISION) + " UB");
+    ui->balanceLabel->setText( getBigNumberString(HXChain::getInstance()->accountInfoMap.value(arg1).assetAmountMap.value("1.3.0").amount,ASSET_PRECISION) + " UB");
 }
 
 void CreateMultiSigDialog::on_ownersTableWidget_cellPressed(int row, int column)

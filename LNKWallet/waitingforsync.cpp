@@ -29,8 +29,8 @@ WaitingForSync::WaitingForSync(QWidget *parent) :
     timerForWSConnected = new QTimer(this);
     connect(timerForWSConnected,SIGNAL(timeout()),this,SLOT(checkConnected()));
     timerForWSConnected->start(1000);
-//    UBChain::getInstance()->initWorkerThreadManager();
-//    connect(UBChain::getInstance()->workerManager,SIGNAL(allConnected()),this,SIGNAL(sync()));
+//    HXChain::getInstance()->initWorkerThreadManager();
+//    connect(HXChain::getInstance()->workerManager,SIGNAL(allConnected()),this,SIGNAL(sync()));
 }
 
 WaitingForSync::~WaitingForSync()
@@ -46,9 +46,9 @@ void WaitingForSync::on_closeBtn_clicked()
 
 void WaitingForSync::checkConnected()
 {
-    if(UBChain::getInstance()->wsManager == NULL)   return;
-    qDebug() << "wsManager isConnected: " << UBChain::getInstance()->wsManager->isConnected;
-    if(UBChain::getInstance()->wsManager->isConnected)      emit sync();
+    if(HXChain::getInstance()->wsManager == NULL)   return;
+    qDebug() << "wsManager isConnected: " << HXChain::getInstance()->wsManager->isConnected;
+    if(HXChain::getInstance()->wsManager->isConnected)      emit sync();
 }
 
 

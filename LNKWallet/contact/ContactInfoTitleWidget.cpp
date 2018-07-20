@@ -46,12 +46,12 @@ void ContactInfoTitleWidget::copyAdressSlots()
 void ContactInfoTitleWidget::transferAccountSlots()
 {
     if(!_p->person) return;
-    if(UBChain::getInstance()->accountInfoMap.isEmpty())
+    if(HXChain::getInstance()->accountInfoMap.isEmpty())
     {
         CommonDialog dia(CommonDialog::OkOnly);
         dia.setText(tr("Please Import Or Create Account First!"));
         dia.pop();
-        UBChain::getInstance()->mainFrame->ShowMainPageSlot();
+        HXChain::getInstance()->mainFrame->ShowMainPageSlot();
         return;
     }
     emit transferAccountSignal();
@@ -95,7 +95,7 @@ void ContactInfoTitleWidget::InitStyle()
                            "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
     ui->copyBtn->setToolTip(tr("copy to clipboard"));
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 
 }
 

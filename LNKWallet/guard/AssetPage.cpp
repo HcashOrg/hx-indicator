@@ -33,7 +33,7 @@ AssetPage::AssetPage(QWidget *parent) :
     ui->assetTableWidget->setColumnWidth(5,90);
     ui->assetTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->assetTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->assetTableWidget);
 
     showAssetsInfo();
 }
@@ -45,7 +45,7 @@ AssetPage::~AssetPage()
 
 void AssetPage::showAssetsInfo()
 {
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     assetIds.removeAll("1.3.0");    // 不显示LNK
 
     int size = assetIds.size();
@@ -55,7 +55,7 @@ void AssetPage::showAssetsInfo()
     {
         ui->assetTableWidget->setRowHeight(i,40);
 
-        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetIds.at(i));
+        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetIds.at(i));
 
         //资产名
         QString symbol = assetInfo.symbol;
@@ -63,7 +63,7 @@ void AssetPage::showAssetsInfo()
         ui->assetTableWidget->setItem(i,1,new QTableWidgetItem(QString::number(assetInfo.precision)));
         ui->assetTableWidget->setItem(i,2,new QTableWidgetItem(assetInfo.hotAddress));
         ui->assetTableWidget->setItem(i,3,new QTableWidgetItem(assetInfo.coldAddress));
-        ui->assetTableWidget->setItem(i,4,new QTableWidgetItem(UBChain::getInstance()->guardAccountIdToName(assetInfo.issuer)));
+        ui->assetTableWidget->setItem(i,4,new QTableWidgetItem(HXChain::getInstance()->guardAccountIdToName(assetInfo.issuer)));
         ui->assetTableWidget->setItem(i,5,new QTableWidgetItem("0.001 " + symbol));
 
         QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";

@@ -10,7 +10,7 @@ BackupWalletDialog::BackupWalletDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -45,13 +45,13 @@ void BackupWalletDialog::on_backupBtn_clicked()
         QString path = ui->pathLineEdit->text();
 
         QString walletFilePath;
-        if( UBChain::getInstance()->configFile->contains("/settings/chainPath"))
+        if( HXChain::getInstance()->configFile->contains("/settings/chainPath"))
         {
-            walletFilePath = UBChain::getInstance()->configFile->value("/settings/chainPath").toString() + "/wallet.json";
+            walletFilePath = HXChain::getInstance()->configFile->value("/settings/chainPath").toString() + "/wallet.json";
         }
         else
         {
-            walletFilePath = UBChain::getInstance()->appDataPath + "/wallet.json";
+            walletFilePath = HXChain::getInstance()->appDataPath + "/wallet.json";
         }
 
         QFile file(walletFilePath);
@@ -59,8 +59,8 @@ void BackupWalletDialog::on_backupBtn_clicked()
         {
             qDebug() << "backup wallet.json " << file.copy(path);
 
-            UBChain::getInstance()->configFile->setValue("/settings/backupNeeded",false);
-            UBChain::getInstance()->IsBackupNeeded = false;
+            HXChain::getInstance()->configFile->setValue("/settings/backupNeeded",false);
+            HXChain::getInstance()->IsBackupNeeded = false;
 
             close();
 

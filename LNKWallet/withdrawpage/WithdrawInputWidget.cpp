@@ -40,7 +40,7 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
     _p->chainType = symbol;
     ui->lineEdit_ammount->setPlaceholderText(tr("Max: %1").arg(number));
     int pre = 5;
-    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
         if(asset.symbol == symbol)
         {
             pre = asset.precision;
@@ -106,7 +106,7 @@ void WithdrawInputWidget::maxButtonSlots()
 
 void WithdrawInputWidget::confirmButtonSlots()
 {
-    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
     QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()));
     if(!via)
@@ -188,7 +188,7 @@ void WithdrawInputWidget::InitStyle()
     ui->toolButton_all->setStyleSheet("QToolButton{background:transparent;color:rgb(192,202,212);font: 12px \"Microsoft YaHei UI Light\";}"
                                       "QToolButton:hover{color:rgb(84,116,235);}");
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
 void WithdrawInputWidget::paintEvent(QPaintEvent *event)
 {

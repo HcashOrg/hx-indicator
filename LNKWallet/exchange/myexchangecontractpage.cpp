@@ -23,7 +23,7 @@ MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->ordersTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->ordersTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -57,7 +57,7 @@ MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     blankWidget->setTextTip(tr("There's no contract!"));
 
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->ordersTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->ordersTableWidget);
     init();
 }
 
@@ -68,29 +68,29 @@ MyExchangeContractPage::~MyExchangeContractPage()
 
 void MyExchangeContractPage::init()
 {
-    QStringList accounts = UBChain::getInstance()->accountInfoMap.keys();
+    QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
     ui->accountComboBox->addItems(accounts);
 
-    if(accounts.contains(UBChain::getInstance()->currentAccount))
+    if(accounts.contains(HXChain::getInstance()->currentAccount))
     {
-        ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+        ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
 
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
-        ui->assetComboBox2->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox2->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
-    if(assetIds.contains(UBChain::getInstance()->currentSellAssetId))
+    if(assetIds.contains(HXChain::getInstance()->currentSellAssetId))
     {
-        ui->assetComboBox->setCurrentText(UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->currentSellAssetId).symbol);
+        ui->assetComboBox->setCurrentText(HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentSellAssetId).symbol);
     }
 
-    if(assetIds.contains(UBChain::getInstance()->currentBuyAssetId))
+    if(assetIds.contains(HXChain::getInstance()->currentBuyAssetId))
     {
-        ui->assetComboBox2->setCurrentText(UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->currentBuyAssetId).symbol);
+        ui->assetComboBox2->setCurrentText(HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentBuyAssetId).symbol);
     }
 
     inited = true;
@@ -122,8 +122,8 @@ void MyExchangeContractPage::showOrders()
     SellOrders orders = accountSellOrdersMap.value(ui->accountComboBox->currentText());
     QVector<OrderAmount> vector = orders.value(ui->assetComboBox->currentText() + "," + ui->assetComboBox2->currentText());
 
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
-    AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
+    AssetInfo assetInfo2 = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
 
     int size = vector.size();
     ui->ordersTableWidget->setRowCount(0);
@@ -193,11 +193,11 @@ void MyExchangeContractPage::updateTableHeaders()
 
 void MyExchangeContractPage::fetchAccountExchangeContractBalances()
 {
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
 
     if(!contractAddress.isEmpty())
     {
-        UBChain::getInstance()->postRPC( "id-invoke_contract_offline-owner_assets-" + ui->accountComboBox->currentText(), toJsonFormat( "invoke_contract_offline",
+        HXChain::getInstance()->postRPC( "id-invoke_contract_offline-owner_assets-" + ui->accountComboBox->currentText(), toJsonFormat( "invoke_contract_offline",
                                                                                QJsonArray() << ui->accountComboBox->currentText() << contractAddress
                                                                                << "owner_assets"  << ""));
     }
@@ -208,7 +208,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 {
     if( id.startsWith("id-invoke_contract_offline-owner_assets-") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         QString accountName = id.mid(QString("id-invoke_contract_offline-owner_assets-").size());
@@ -240,7 +240,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
                 balances.insert(key,amount);
             }
 
-            UBChain::getInstance()->accountExchangeContractBalancesMap.insert(accountName,balances);
+            HXChain::getInstance()->accountExchangeContractBalancesMap.insert(accountName,balances);
         }
 
         return;
@@ -248,7 +248,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
     if( id == "id-register_contract")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -272,7 +272,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
     if( id.startsWith("id-invoke_contract_offline-sell_orders-"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
 
         QString accountName = id.mid(QString("id-invoke_contract_offline-sell_orders-").size());
@@ -315,16 +315,16 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
     if( id.startsWith("id-invoke_contract_testing-cancelSellOrder-") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
 
-            if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+            if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
 
             WithdrawOrderDialog withdrawOrderDialog;
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
@@ -332,13 +332,13 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             withdrawOrderDialog.setText(tr("Sure to cancel this order? You need to pay the fee for contract execution."));
             if(withdrawOrderDialog.pop())
             {
-                QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+                QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
 
                 QString params = id.mid(QString("id-invoke_contract_testing-cancelSellOrder-").size());
                 withdrawOrderDialog.updatePoundageID();
-                UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrder", toJsonFormat( "invoke_contract",
+                HXChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrder", toJsonFormat( "invoke_contract",
                                                                                        QJsonArray() << ui->accountComboBox->currentText()
-                                                                                       << UBChain::getInstance()->currentContractFee() << stepCount
+                                                                                       << HXChain::getInstance()->currentContractFee() << stepCount
                                                                                        << contractAddress
                                                                                        << "cancelSellOrder"  << params));
             }
@@ -352,7 +352,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
     if( id == "id-invoke_contract-cancelSellOrder" )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
@@ -375,16 +375,16 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
     if( id.startsWith("id-invoke_contract_testing-cancelSellOrderPair-") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
 
-            if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+            if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
-            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
 
             WithdrawOrderDialog withdrawOrderDialog;
             withdrawOrderDialog.setContractFee(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
@@ -393,13 +393,13 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             qDebug()<<totalAmount;
             if(withdrawOrderDialog.pop())
             {
-                QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+                QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
                 QString params = id.mid(QString("id-invoke_contract_testing-cancelSellOrderPair-").size());
 
                 withdrawOrderDialog.updatePoundageID();
-                UBChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrderPair", toJsonFormat( "invoke_contract",
+                HXChain::getInstance()->postRPC( "id-invoke_contract-cancelSellOrderPair", toJsonFormat( "invoke_contract",
                                                                                                          QJsonArray() << ui->accountComboBox->currentText()
-                                                                                                         << UBChain::getInstance()->currentContractFee() << stepCount
+                                                                                                         << HXChain::getInstance()->currentContractFee() << stepCount
                                                                                                          << contractAddress
                                                                                                          << "cancelSellOrderPair"  << params));
 
@@ -413,7 +413,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
     if( id == "id-invoke_contract-cancelSellOrderPair" )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
@@ -435,20 +435,20 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
     if("contract-register_contract_testing" == id)
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
-            UBChain::TotalContractFee totalFee = UBChain::getInstance()->parseTotalContractFee(result);
+            HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
             int stepCount = totalFee.step;
 
-            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * UBChain::getInstance()->contractFee / 100.0);
+            unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
 
             qDebug()<<totalAmount;
 
-            FeeChargeWidget *fee = new FeeChargeWidget( getBigNumberString(totalAmount, ASSET_PRECISION).toDouble(),UBChain::getInstance()->feeType,
-                                                         ui->accountComboBox->currentText(),UBChain::getInstance()->mainFrame);
+            FeeChargeWidget *fee = new FeeChargeWidget( getBigNumberString(totalAmount, ASSET_PRECISION).toDouble(),HXChain::getInstance()->feeType,
+                                                         ui->accountComboBox->currentText(),HXChain::getInstance()->mainFrame);
 
             fee->SetInfo(tr("register contract!"));
             connect(fee,&FeeChargeWidget::confirmSignal,[this,stepCount,fee](){
@@ -458,8 +458,8 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
                 {
                     fee->updatePoundageID();
                     qDebug()<<"set poundage";
-                    UBChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
-                                                                                           QJsonArray() << this->ui->accountComboBox->currentText() << UBChain::getInstance()->currentContractFee()
+                    HXChain::getInstance()->postRPC( "id-register_contract", toJsonFormat( "register_contract",
+                                                                                           QJsonArray() << this->ui->accountComboBox->currentText() << HXChain::getInstance()->currentContractFee()
                                                                                            << stepCount  << filePath));
                 }
 
@@ -498,7 +498,7 @@ void MyExchangeContractPage::registerContract()
         if(fileInfo.exists())
         {
             //查询注册合约费用
-            UBChain::getInstance()->postRPC("contract-register_contract_testing",toJsonFormat( "register_contract_testing",
+            HXChain::getInstance()->postRPC("contract-register_contract_testing",toJsonFormat( "register_contract_testing",
                                                                                                QJsonArray() << ui->accountComboBox->currentText() << filePath));
 
 
@@ -516,8 +516,8 @@ void MyExchangeContractPage::on_accountComboBox_currentIndexChanged(const QStrin
 {
     if(!inited)     return;
 
-    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
 
     if(contractAddress.isEmpty())
     {
@@ -525,7 +525,7 @@ void MyExchangeContractPage::on_accountComboBox_currentIndexChanged(const QStrin
     }
     else
     {
-        UBChain::getInstance()->postRPC( "id-invoke_contract_offline-sell_orders-" + ui->accountComboBox->currentText(), toJsonFormat( "invoke_contract_offline",
+        HXChain::getInstance()->postRPC( "id-invoke_contract_offline-sell_orders-" + ui->accountComboBox->currentText(), toJsonFormat( "invoke_contract_offline",
                                                                                QJsonArray() << ui->accountComboBox->currentText() << contractAddress
                                                                                << "sell_orders"  << ""));
 
@@ -538,7 +538,7 @@ void MyExchangeContractPage::on_assetComboBox_currentIndexChanged(const QString 
 {
     if(!inited)     return;
 
-    UBChain::getInstance()->currentSellAssetId = ui->assetComboBox->currentData().toString();
+    HXChain::getInstance()->currentSellAssetId = ui->assetComboBox->currentData().toString();
     updateTableHeaders();
     if(ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())   return;
 
@@ -549,7 +549,7 @@ void MyExchangeContractPage::on_assetComboBox2_currentIndexChanged(const QString
 {
     if(!inited)     return;
 
-    UBChain::getInstance()->currentBuyAssetId = ui->assetComboBox2->currentData().toString();
+    HXChain::getInstance()->currentBuyAssetId = ui->assetComboBox2->currentData().toString();
     updateTableHeaders();
     if(ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())   return;
 
@@ -558,9 +558,9 @@ void MyExchangeContractPage::on_assetComboBox2_currentIndexChanged(const QString
 
 void MyExchangeContractPage::on_sellBtn_clicked()
 {
-    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
 
     if(contractAddress.isEmpty())
     {
@@ -579,11 +579,11 @@ void MyExchangeContractPage::on_sellBtn_clicked()
 
 void MyExchangeContractPage::on_balanceBtn_clicked()
 {
-    QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
 
     if(contractAddress.isEmpty())
     {
-        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+        if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
         registerContract();
     }
     else
@@ -607,16 +607,16 @@ void MyExchangeContractPage::on_withdrawAllBtn_clicked()
 {
     if(ui->ordersTableWidget->rowCount() < 1)   return;
 
-    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
     CommonDialog commonDialog(CommonDialog::OkAndCancel);
     commonDialog.setText( tr("Sure to cancel all orders of %1-to-%2 ?").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()) );
     if(commonDialog.pop())
     {
-        QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+        QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
         QString params = QString("%1,%2").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText());
 
-        UBChain::getInstance()->postRPC( "id-invoke_contract_testing-cancelSellOrderPair-" + params, toJsonFormat( "invoke_contract_testing",
+        HXChain::getInstance()->postRPC( "id-invoke_contract_testing-cancelSellOrderPair-" + params, toJsonFormat( "invoke_contract_testing",
                                                                                                  QJsonArray() << ui->accountComboBox->currentText()
                                                                                                  << contractAddress
                                                                                                  << "cancelSellOrderPair"  << params));
@@ -627,17 +627,17 @@ void MyExchangeContractPage::onItemClicked(int _row, int _column)
 {
     if(_column == 3)
     {
-        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+        if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
         // 撤销挂单
-        QString contractAddress = UBChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
-        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
-        AssetInfo assetInfo2 = UBChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
+        QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
+        AssetInfo assetInfo2 = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
 
         QString params = QString("%1,%2,%3,%4").arg(assetInfo.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(_row,0)->text(), assetInfo.precision))
                 .arg(assetInfo2.symbol).arg(decimalToIntegerStr(ui->ordersTableWidget->item(_row,1)->text(), assetInfo2.precision));
 
 
-        UBChain::getInstance()->postRPC( "id-invoke_contract_testing-cancelSellOrder-" + params, toJsonFormat( "invoke_contract_testing",
+        HXChain::getInstance()->postRPC( "id-invoke_contract_testing-cancelSellOrder-" + params, toJsonFormat( "invoke_contract_testing",
                                                                                                                QJsonArray() << ui->accountComboBox->currentText()
                                                                                                                << contractAddress
                                                                                                                << "cancelSellOrder"  << params));
@@ -648,7 +648,7 @@ void MyExchangeContractPage::onItemClicked(int _row, int _column)
 
     if(_column == 4)
     {
-        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+        if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
         SellDialog sellDialog;
         sellDialog.setSellAsset(ui->assetComboBox->currentText());
         sellDialog.setBuyAsset(ui->assetComboBox2->currentText());

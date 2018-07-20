@@ -82,22 +82,22 @@ void AllTransactionWidget::init()
     ui->typeWithdrawBtn->setGeometry(ui->typeWithdrawBtn->x(),ui->typeWithdrawBtn->y(),ui->typeWithdrawBtn->width() < 50?50:ui->typeWithdrawBtn->width(),24);
 
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->accountInfoMap.keys();
+    QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
     ui->accountComboBox->addItems(accounts);
 
-    if(accounts.contains(UBChain::getInstance()->currentAccount))
+    if(accounts.contains(HXChain::getInstance()->currentAccount))
     {
-        ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+        ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
 
-    AccountInfo info = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+    AccountInfo info = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
     ui->addressLabel->setText(info.address);
 
     inited = true;
 
     on_accountComboBox_currentTextChanged(ui->accountComboBox->currentText());
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->transactionsTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->transactionsTableWidget);
 }
 
 void AllTransactionWidget::on_typeAllBtn_clicked()
@@ -287,46 +287,46 @@ void AllTransactionWidget::showTransactions()
     switch (typeChoice)
     {
     case AllType:
-        typeIds = UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text());
+        typeIds = HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text());
         break;
     case TransferType:
-        typeIds = UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_NORMAL);
+        typeIds = HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_NORMAL);
         break;
     case DepositType:
-        typeIds = UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_DEPOSIT);
+        typeIds = HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_DEPOSIT);
         break;
     case WithdrawType:
-        typeIds = UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_WITHDRAW);
+        typeIds = HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_WITHDRAW);
         break;
     case ContractType:
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CONTRACT_REGISTER);
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CONTRACT_INVOKE);
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CONTRACT_TRANSFER);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CONTRACT_REGISTER);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CONTRACT_INVOKE);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CONTRACT_TRANSFER);
         break;
     case MineType:
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_LOCKBALANCE);
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_FORECLOSE);
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_MINE_INCOME);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_LOCKBALANCE);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_FORECLOSE);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_MINE_INCOME);
         break;
     case GuaranteeType:
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CREATE_GUARANTEE);
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CANCEL_GUARANTEE);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CREATE_GUARANTEE);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CANCEL_GUARANTEE);
         break;
     case OtherType:
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_REGISTER_ACCOUNT);
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_BIND_TUNNEL);
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_UNBIND_TUNNEL);
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_ISSUE_ASSET);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_REGISTER_ACCOUNT);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_BIND_TUNNEL);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_UNBIND_TUNNEL);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_ISSUE_ASSET);
         break;
     case FeedPriceType:
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_FEED_PRICE);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_FEED_PRICE);
         break;
     case ProposalType:
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SPONSOR_PROPOSAL);
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_PROPOSAL_APPROVE);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SPONSOR_PROPOSAL);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_PROPOSAL_APPROVE);
         break;
     case BonusType:
-        typeIds += UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_OBTAIN_BONUS);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_OBTAIN_BONUS);
         break;
     default:
         break;
@@ -339,13 +339,13 @@ void AllTransactionWidget::showTransactions()
     case AllTime:
         break;
     case DayTime:
-        earliestBlock = UBChain::getInstance()->walletInfo.blockHeight - 12 * 60 * 24;
+        earliestBlock = HXChain::getInstance()->walletInfo.blockHeight - 12 * 60 * 24;
         break;
     case WeekTime:
-        earliestBlock = UBChain::getInstance()->walletInfo.blockHeight - 12 * 60 * 24 * 7;
+        earliestBlock = HXChain::getInstance()->walletInfo.blockHeight - 12 * 60 * 24 * 7;
         break;
     case MonthTime:
-        earliestBlock = UBChain::getInstance()->walletInfo.blockHeight - 12 * 60 * 24 * 30;
+        earliestBlock = HXChain::getInstance()->walletInfo.blockHeight - 12 * 60 * 24 * 30;
         break;
     default:
         break;
@@ -353,7 +353,7 @@ void AllTransactionWidget::showTransactions()
     TransactionTypeIds filteredTypeIds;
     foreach (TransactionTypeId id, typeIds)
     {
-        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(id.transactionId);
+        TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(id.transactionId);
         if(ts.blockNum >= earliestBlock)
         {
             filteredTypeIds.append(id);
@@ -371,10 +371,10 @@ void AllTransactionWidget::showTransactions()
             continue;
         }
 
-        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(filteredTypeIds.at(i).transactionId);
+        TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(filteredTypeIds.at(i).transactionId);
         for(int j = 0; j < sortedTypeIds.size(); j++)
         {
-            TransactionStruct ts2 = UBChain::getInstance()->transactionDB.getTransactionStruct(sortedTypeIds.at(j).transactionId);
+            TransactionStruct ts2 = HXChain::getInstance()->transactionDB.getTransactionStruct(sortedTypeIds.at(j).transactionId);
             if(ts2.blockNum == 0)   continue;   // 未确认的交易放前面
             if(ts.blockNum >= ts2.blockNum || ts.blockNum == 0)
             {
@@ -400,7 +400,7 @@ void AllTransactionWidget::showTransactions()
         ui->transactionsTableWidget->setRowHeight(i,40);
 
         QString transactionId = sortedTypeIds.at(i).transactionId;
-        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
+        TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
         if(ts.type == -1)
         {
             qDebug() << "can not find transaction in transactionstruct db: " << transactionId;
@@ -423,7 +423,7 @@ void AllTransactionWidget::showTransactions()
             QJsonObject amountObject = operationObject.take("amount").toObject();
             unsigned long long amount = jsonValueToULL(amountObject.take("amount"));
             QString amountAssetId = amountObject.take("asset_id").toString();
-            AssetInfo amountAssetInfo = UBChain::getInstance()->assetInfoMap.value(amountAssetId);
+            AssetInfo amountAssetInfo = HXChain::getInstance()->assetInfoMap.value(amountAssetId);
 
             QString fromAddress = operationObject.take("from_addr").toString();
             QString toAddress   = operationObject.take("to_addr").toString();
@@ -499,7 +499,7 @@ void AllTransactionWidget::showTransactions()
             QJsonObject quoteObject = settlementObject.value("quote").toObject();
             unsigned long long quoteAmount = jsonValueToULL(quoteObject.value("amount"));
 
-            AssetInfo info = UBChain::getInstance()->assetInfoMap.value(baseAssetid);
+            AssetInfo info = HXChain::getInstance()->assetInfoMap.value(baseAssetid);
             QString str = tr("asset quote: %1:%2  %3:%4").arg(info.symbol).arg(ASSET_NAME).arg( getBigNumberString(quoteAmount, ASSET_PRECISION))
                     .arg( getBigNumberString(baseAmount, info.precision));
 
@@ -553,10 +553,10 @@ void AllTransactionWidget::showTransactions()
         {
             unsigned long long lockAmount = jsonValueToULL(operationObject.take("lock_asset_amount"));
             QString lockAssetId = operationObject.take("lock_asset_id").toString();
-            AssetInfo lockAssetInfo = UBChain::getInstance()->assetInfoMap.value(lockAssetId);
+            AssetInfo lockAssetInfo = HXChain::getInstance()->assetInfoMap.value(lockAssetId);
             QString minerId = operationObject.take("lockto_miner_account").toString();
 
-            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(UBChain::getInstance()->getMinerNameFromId(minerId)));
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(HXChain::getInstance()->getMinerNameFromId(minerId)));
 
             QTableWidgetItem* item = new QTableWidgetItem( "- " + getBigNumberString(lockAmount, lockAssetInfo.precision) + " " + lockAssetInfo.symbol);
             ui->transactionsTableWidget->setItem(i,3, item);
@@ -569,10 +569,10 @@ void AllTransactionWidget::showTransactions()
         {
             unsigned long long forecloseAmount = jsonValueToULL(operationObject.take("foreclose_asset_amount"));
             QString forecloseAssetId = operationObject.take("foreclose_asset_id").toString();
-            AssetInfo forecloseAssetInfo = UBChain::getInstance()->assetInfoMap.value(forecloseAssetId);
+            AssetInfo forecloseAssetInfo = HXChain::getInstance()->assetInfoMap.value(forecloseAssetId);
             QString minerId = operationObject.take("foreclose_miner_account").toString();
 
-            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(UBChain::getInstance()->getMinerNameFromId(minerId)));
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(HXChain::getInstance()->getMinerNameFromId(minerId)));
 
             QTableWidgetItem* item = new QTableWidgetItem( "+ " + getBigNumberString(forecloseAmount, forecloseAssetInfo.precision) + " " + forecloseAssetInfo.symbol);
             ui->transactionsTableWidget->setItem(i,3, item);
@@ -682,7 +682,7 @@ void AllTransactionWidget::showTransactions()
             QJsonObject amountObject    = operationObject.take("amount").toObject();
             unsigned long long amount   = jsonValueToULL( amountObject.take("amount"));
             QString assetId             = amountObject.take("asset_id").toString();
-            AssetInfo assetInfo         = UBChain::getInstance()->assetInfoMap.value(assetId);
+            AssetInfo assetInfo         = HXChain::getInstance()->assetInfoMap.value(assetId);
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(contractId));
 
@@ -698,7 +698,7 @@ void AllTransactionWidget::showTransactions()
             QJsonObject amountObject    = operationObject.take("asset_origin").toObject();
             unsigned long long amount   = jsonValueToULL( amountObject.take("amount"));
             QString assetId             = amountObject.take("asset_id").toString();
-            AssetInfo assetInfo         = UBChain::getInstance()->assetInfoMap.value(assetId);
+            AssetInfo assetInfo         = HXChain::getInstance()->assetInfoMap.value(assetId);
             QString acceptSymbol        = operationObject.take("symbol").toString();
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
@@ -729,7 +729,7 @@ void AllTransactionWidget::showTransactions()
                 QJsonArray assetAmountArray = bonusBalanceArray.at(0).toArray();
                 QString assetSymbol = assetAmountArray.at(0).toString();
                 unsigned long long amount = jsonValueToULL( assetAmountArray.at(1));
-                AssetInfo amountAssetInfo = UBChain::getInstance()->assetInfoMap.value( UBChain::getInstance()->getAssetId( assetSymbol));
+                AssetInfo amountAssetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId( assetSymbol));
 
                 QString str = "+" + getBigNumberString(amount, amountAssetInfo.precision) + " " + assetSymbol;
                 if(bonusBalanceArray.size() > 1)
@@ -775,9 +775,9 @@ void AllTransactionWidget::on_accountComboBox_currentTextChanged(const QString &
 {
     if(!inited)     return;
 
-    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
 
-    AccountInfo info = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+    AccountInfo info = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
     ui->addressLabel->setText(info.address);
 
     showTransactions();

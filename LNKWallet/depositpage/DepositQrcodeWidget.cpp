@@ -70,7 +70,7 @@ void DepositQrcodeWidget::InitStyle()
     ui->tipLabel->setPalette(pe);
 
     ui->toolButton->setStyleSheet(TOOLBUTTON_STYLE_1);
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
 
 void DepositQrcodeWidget::paintEvent(QPaintEvent *event)

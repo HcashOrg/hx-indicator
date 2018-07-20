@@ -39,7 +39,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 
     //初始化账户comboBox
     // 账户下拉框按字母顺序排序
-    QStringList keys = UBChain::getInstance()->accountInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->accountInfoMap.keys();
 
     //
     if(!keys.empty())
@@ -61,9 +61,9 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 
     if( accountName.isEmpty())  // 如果是点击账单跳转
     {
-        if( UBChain::getInstance()->addressMap.size() > 0)
+        if( HXChain::getInstance()->addressMap.size() > 0)
         {
-            accountName = UBChain::getInstance()->addressMap.keys().at(0);
+            accountName = HXChain::getInstance()->addressMap.keys().at(0);
         }
         else  // 如果还没有账户
         {
@@ -96,7 +96,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 	
     updateAmountSlots();
 
-    feeWidget=new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.transferFee.toDouble(),UBChain::getInstance()->feeType,
+    feeWidget=new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.transferFee.toDouble(),HXChain::getInstance()->feeType,
                                   ui->accountComboBox->currentText());
     ui->stackedWidget->addWidget(feeWidget);
     ui->stackedWidget->setCurrentWidget(feeWidget);
@@ -105,7 +105,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     connect(this,&TransferPage::usePoundage,feeWidget,&FeeChooseWidget::updatePoundageID);
     //updatePoundage();
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     connect(ui->toolButton_chooseContact,&QToolButton::clicked,this,&TransferPage::chooseContactSlots);
     //connect(ui->checkBox,&QCheckBox::stateChanged,this,&TransferPage::checkStateChangedSlots);
@@ -122,7 +122,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     ui->memoLabel->setVisible(true);
     ui->memoTextEdit->setVisible(true);
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
 
 TransferPage::~TransferPage()
@@ -137,7 +137,7 @@ void TransferPage::accountComboBox_currentIndexChanged(const QString &arg1)
     if( !inited)  return;
 
     accountName = arg1;
-    UBChain::getInstance()->mainFrame->setCurrentAccount(accountName);
+    HXChain::getInstance()->mainFrame->setCurrentAccount(accountName);
 
     ui->amountLineEdit->clear();
     updateAmountSlots();
@@ -146,7 +146,7 @@ void TransferPage::accountComboBox_currentIndexChanged(const QString &arg1)
 
 void TransferPage::on_sendBtn_clicked()
 {
-    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
     if(ui->amountLineEdit->text().size() == 0 || ui->sendtoLineEdit->text().size() == 0)
     {
@@ -177,14 +177,14 @@ void TransferPage::on_sendBtn_clicked()
         {
 //            if(feeWidget && !feeWidget->GetFeeID().isEmpty())
 //            {
-//                UBChain::getInstance()->postRPC( "id-set_guarantee_id",
+//                HXChain::getInstance()->postRPC( "id-set_guarantee_id",
 //                                                 toJsonFormat( "set_guarantee_id",
 //                                                               QJsonArray() << feeWidget->GetFeeID() ));
 //                qDebug()<<"id-set_guarantee_id"<<toJsonFormat( "set_guarantee_id",
 //                                                               QJsonArray() << feeWidget->GetFeeID() );
 //            }
             emit usePoundage();
-            UBChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
+            HXChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
                                              toJsonFormat( "transfer_to_address",
                                                            QJsonArray() << accountName << ui->sendtoLineEdit->text()
                                                            << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
@@ -211,7 +211,7 @@ void TransferPage::refresh()
 void TransferPage::setAmountPrecision()
 {
     int pre = ASSET_PRECISION;
-    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
         if(asset.symbol == ui->assetComboBox->currentText())
         {
             pre = asset.precision;
@@ -255,7 +255,7 @@ void TransferPage::InitStyle()
 //    ui->checkBox->setEnabled(true);
 //    ui->toolButton->setEnabled(false);
 
-//    feeID = UBChain::getInstance()->configFile->value("/settings/feeOrderID").toString();
+//    feeID = HXChain::getInstance()->configFile->value("/settings/feeOrderID").toString();
 //    if(feeID.isEmpty())
 //    {
 //        ui->toolButton->setText(tr("poundage doesn't exist!"));
@@ -263,7 +263,7 @@ void TransferPage::InitStyle()
 //    else
 //    {
 //        //查询承兑单
-//        UBChain::getInstance()->postRPC( "id-get_guarantee_order",
+//        HXChain::getInstance()->postRPC( "id-get_guarantee_order",
 //                                         toJsonFormat( "get_guarantee_order",
 //                                                       QJsonArray() << feeID));
 
@@ -285,10 +285,10 @@ void TransferPage::getAssets()
 {
     assetUpdating = true;
 
-    QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString key, keys)
     {
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(key).symbol);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(key).symbol);
     }
 
 
@@ -300,7 +300,7 @@ void TransferPage::jsonDataUpdated(QString id)
 {
     if( id == "id-transfer_to_address-" + accountName)
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         if( result.startsWith("\"result\":{"))             // 成功
         {
@@ -320,7 +320,7 @@ void TransferPage::jsonDataUpdated(QString id)
     }
 //    else if("id-get_guarantee_order" == id)
 //    {//查询承兑单id是否还有余额
-//        QString result = UBChain::getInstance()->jsonDataValue(id);
+//        QString result = HXChain::getInstance()->jsonDataValue(id);
 
 //        if(result.isEmpty() || result.startsWith("\"error"))
 //        {
@@ -362,7 +362,7 @@ void TransferPage::jsonDataUpdated(QString id)
 //    }
 //    else if("id-set_guarantee_id" == id)
 //    {
-//        QString result = UBChain::getInstance()->jsonDataValue(id);
+//        QString result = HXChain::getInstance()->jsonDataValue(id);
 
 //        qDebug()<<"设置承兑单id---"<<result;
 //    }
@@ -447,7 +447,7 @@ void TransferPage::memoTextEdit_textChanged()
 //    {
 //        ui->tipLabel6->hide();
 //    }
-    double fee = static_cast<double>(ba.size())*10/1024 + UBChain::getInstance()->feeChargeInfo.transferFee.toDouble();
+    double fee = static_cast<double>(ba.size())*10/1024 + HXChain::getInstance()->feeChargeInfo.transferFee.toDouble();
     emit feeChangeSignal(fee);
 }
 
@@ -457,7 +457,7 @@ void TransferPage::on_transferRecordBtn_clicked()
     currentTopWidget->setParent(this);
     currentTopWidget->move(0,0);
     currentTopWidget->show();
-    static_cast<TransferRecordWidget*>(currentTopWidget)->showTransferRecord(UBChain::getInstance()->accountInfoMap.value(accountName).address);
+    static_cast<TransferRecordWidget*>(currentTopWidget)->showTransferRecord(HXChain::getInstance()->accountInfoMap.value(accountName).address);
 }
 
 void TransferPage::chooseContactSlots()
@@ -488,7 +488,7 @@ void TransferPage::updateAmountSlots()
 
     QString assetID ;
     int assetPrecision ;
-    foreach (AssetInfo in, UBChain::getInstance()->assetInfoMap) {
+    foreach (AssetInfo in, HXChain::getInstance()->assetInfoMap) {
         if(in.symbol == assetType){
             assetID = in.id;
             assetPrecision = in.precision;
@@ -498,7 +498,7 @@ void TransferPage::updateAmountSlots()
 
     //获取数量
     bool isFindAmmount = false;
-    QMapIterator<QString, AccountInfo> i(UBChain::getInstance()->accountInfoMap);
+    QMapIterator<QString, AccountInfo> i(HXChain::getInstance()->accountInfoMap);
       while (i.hasNext()) {
           i.next();
           if(isFindAmmount) break;
@@ -509,7 +509,7 @@ void TransferPage::updateAmountSlots()
               am.next();
               if(am.key() == assetID)
               {
-                  AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(am.value().assetId);
+                  AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(am.value().assetId);
                   ui->amountLineEdit->setPlaceholderText(tr("Max: %1").arg(getBigNumberString(am.value().amount, assetInfo.precision)));
                   isFindAmmount = true;
                   break;
@@ -531,7 +531,7 @@ void TransferPage::updateAmountSlots()
 //    {
 //        ui->toolButton->setEnabled(true);
 
-////        UBChain::getInstance()->postRPC( "id-set_guarantee_id",
+////        HXChain::getInstance()->postRPC( "id-set_guarantee_id",
 ////                                         toJsonFormat( "set_guarantee_id",
 ////                                                       QJsonArray() << "0" ));
 
@@ -574,9 +574,9 @@ void TransferPage::paintEvent(QPaintEvent *event)
 
 void TransferPage::on_amountLineEdit_textEdited(const QString &arg1)
 {
-    QString assetId = UBChain::getInstance()->getAssetId(ui->assetComboBox->currentText());
-    AssetAmount assetAmount = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).assetAmountMap.value(assetId);
-    QString amountStr = getBigNumberString(assetAmount.amount, UBChain::getInstance()->assetInfoMap.value(assetId).precision);
+    QString assetId = HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText());
+    AssetAmount assetAmount = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).assetAmountMap.value(assetId);
+    QString amountStr = getBigNumberString(assetAmount.amount, HXChain::getInstance()->assetInfoMap.value(assetId).precision);
 
     if(ui->amountLineEdit->text().toDouble() > amountStr.toDouble())
     {

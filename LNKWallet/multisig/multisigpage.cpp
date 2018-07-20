@@ -38,7 +38,7 @@ MultiSigPage::MultiSigPage(QWidget *parent) :
     ui->multiSigTableWidget->setColumnWidth(1,160);
     ui->multiSigTableWidget->setColumnWidth(2,160);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     refresh();
 }
@@ -50,14 +50,14 @@ MultiSigPage::~MultiSigPage()
 
 void MultiSigPage::refresh()
 {
-    UBChain::getInstance()->postRPC( "id_wallet_multisig_account_balance", toJsonFormat( "wallet_multisig_account_balance", QJsonArray()
+    HXChain::getInstance()->postRPC( "id_wallet_multisig_account_balance", toJsonFormat( "wallet_multisig_account_balance", QJsonArray()
                                                    ));
 
 }
 
 void MultiSigPage::updateMultiSigList()
 {
-    QStringList keys = UBChain::getInstance()->multiSigInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->multiSigInfoMap.keys();
     int size = keys.size();
 
     ui->multiSigTableWidget->setRowCount(0);
@@ -66,7 +66,7 @@ void MultiSigPage::updateMultiSigList()
     for(int i = 0; i < size; i++)
     {
         QString key = keys.at(i);
-        MultiSigInfo info = UBChain::getInstance()->multiSigInfoMap.value(key);
+        MultiSigInfo info = HXChain::getInstance()->multiSigInfoMap.value(key);
 
         ui->multiSigTableWidget->setRowHeight(i,37);
 
@@ -104,7 +104,7 @@ void MultiSigPage::jsonDataUpdated(QString id)
 {
     if( id.startsWith( "id_wallet_multisig_account_balance") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if( result.startsWith("\"result\":"))
         {
@@ -159,13 +159,13 @@ void MultiSigPage::jsonDataUpdated(QString id)
                                     info.balanceMap.insert(assetId,balance);
                                 }
 
-                                UBChain::getInstance()->postRPC( "id_wallet_import_multisig_account+" + info.multiSigAddress,
+                                HXChain::getInstance()->postRPC( "id_wallet_import_multisig_account+" + info.multiSigAddress,
                                                                  toJsonFormat( "wallet_import_multisig_account",
                                                                                QJsonArray() << info.multiSigAddress
                                                                            ));
 
 
-                                UBChain::getInstance()->multiSigInfoMap.insert(info.multiSigAddress,info);
+                                HXChain::getInstance()->multiSigInfoMap.insert(info.multiSigAddress,info);
                             }
 
                         }
@@ -181,7 +181,7 @@ void MultiSigPage::jsonDataUpdated(QString id)
 
     if( id.startsWith( "id_wallet_import_multisig_account+") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if( result.startsWith("\"result\":"))
         {
@@ -219,9 +219,9 @@ void MultiSigPage::jsonDataUpdated(QString id)
                                     owners << array.at(i).toString();
                                 }
 
-                                UBChain::getInstance()->multiSigInfoMap[address].multiSigAddress = address;
-                                UBChain::getInstance()->multiSigInfoMap[address].requires = resultObject.take("requires").toInt();
-                                UBChain::getInstance()->multiSigInfoMap[address].owners = owners;
+                                HXChain::getInstance()->multiSigInfoMap[address].multiSigAddress = address;
+                                HXChain::getInstance()->multiSigInfoMap[address].requires = resultObject.take("requires").toInt();
+                                HXChain::getInstance()->multiSigInfoMap[address].owners = owners;
 
                             }
                         }
@@ -236,9 +236,9 @@ void MultiSigPage::jsonDataUpdated(QString id)
 
     if( id.startsWith("id_wallet_multisig_account_history+"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         QString multiSigAddress = id.mid(QString("id_wallet_multisig_account_history+").size());
-        UBChain::getInstance()->parseMultiSigTransactions(result, multiSigAddress);
+        HXChain::getInstance()->parseMultiSigTransactions(result, multiSigAddress);
 
 
         return;
@@ -318,7 +318,7 @@ void MultiSigPage::on_createMultiSigBtn_clicked()
 
     if(checkAddress(createMultiSigDialog.multiSigAddress,MultiSigAddress))
     {
-        if(UBChain::getInstance()->multiSigInfoMap.contains(createMultiSigDialog.multiSigAddress))
+        if(HXChain::getInstance()->multiSigInfoMap.contains(createMultiSigDialog.multiSigAddress))
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
             commonDialog.setText( tr("This multisig address already exists!"));

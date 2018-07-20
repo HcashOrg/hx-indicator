@@ -24,7 +24,7 @@ TitleBar::TitleBar(QWidget *parent) :
     ui->backBtn->setVisible(false);
     ui->backBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/back.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}");
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
     connect(ui->backBtn,&QToolButton::clicked,this,&TitleBar::back);
 
 
@@ -37,7 +37,7 @@ TitleBar::~TitleBar()
 
 void TitleBar::on_minBtn_clicked()
 {
-    if( UBChain::getInstance()->minimizeToTray)
+    if( HXChain::getInstance()->minimizeToTray)
     {
 
         emit tray();
@@ -50,7 +50,7 @@ void TitleBar::on_minBtn_clicked()
 
 void TitleBar::on_closeBtn_clicked()
 {
-    if( UBChain::getInstance()->closeToMinimize)
+    if( HXChain::getInstance()->closeToMinimize)
     {
 
         emit tray();

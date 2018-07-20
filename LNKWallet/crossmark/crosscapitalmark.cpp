@@ -24,13 +24,13 @@ class CrossCapitalMark::DataPrivate
 public:
     DataPrivate()
     {
-        if( UBChain::getInstance()->configFile->contains("/settings/chainPath"))
+        if( HXChain::getInstance()->configFile->contains("/settings/chainPath"))
         {
-            crossFilePath = UBChain::getInstance()->configFile->value("/settings/chainPath").toString() + "/crossmark.dat";
+            crossFilePath = HXChain::getInstance()->configFile->value("/settings/chainPath").toString() + "/crossmark.dat";
         }
         else
         {
-            crossFilePath = UBChain::getInstance()->appDataPath + "/crossmark.dat";
+            crossFilePath = HXChain::getInstance()->appDataPath + "/crossmark.dat";
         }
     }
 public:
@@ -50,7 +50,7 @@ CrossCapitalMark::CrossCapitalMark(QObject *parent)
 {
     ReadFromDoc();
 
-    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &CrossCapitalMark::jsonDataUpdated);
+    connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &CrossCapitalMark::jsonDataUpdated);
 
     connect(&_p->httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
@@ -226,7 +226,7 @@ void CrossCapitalMark::jsonDataUpdated(const QString &id)
         QString symbol ;
         double number = 0;
         ParsePostID(id,accountName,symbol,number);
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
         result.append("}");
         QString trid = ParseTransactionID(result);
@@ -280,7 +280,7 @@ void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id
     paramObject.insert("chainId",symbol);
     paramObject.insert("trxid",id);
     object.insert("params",paramObject);
-    _p->httpManager.post(UBChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+    _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
 void CrossCapitalMark::ParsePostID(const QString &postID, QString &name, QString &symbol, double &number)
@@ -339,7 +339,7 @@ void CrossCapitalMark::TransactionInput(const QString &jsonString,const QString 
     QJsonObject jsonObject = parse_doucment.object();
     QString transHex = jsonObject.value("result").toString();
     //解锁交易id
-    UBChain::getInstance()->postRPC( "mark_decoderawtransaction-"+accountName+"-"+symbol+"-"+QString::number(number),
+    HXChain::getInstance()->postRPC( "mark_decoderawtransaction-"+accountName+"-"+symbol+"-"+QString::number(number),
                                      toJsonFormat( "decoderawtransaction", QJsonArray()
                                      << transHex<<symbol ));
 }

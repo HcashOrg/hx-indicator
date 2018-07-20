@@ -145,7 +145,7 @@ void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
         QString result = m_buff.mid( QString("{\"id\":32800,\"jsonrpc\":\"2.0\",").size());
         result = result.left( result.size() - 1);
 
-        UBChain::getInstance()->updateJsonDataMap(pendingRpcs.at(0).split("***").at(0), result);
+        HXChain::getInstance()->updateJsonDataMap(pendingRpcs.at(0).split("***").at(0), result);
 
         pendingRpcs.removeFirst();
 

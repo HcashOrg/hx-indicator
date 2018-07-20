@@ -13,9 +13,9 @@ ChangeCrosschainAddressDialog::ChangeCrosschainAddressDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -48,19 +48,19 @@ void ChangeCrosschainAddressDialog::pop()
 void ChangeCrosschainAddressDialog::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     ui->accountComboBox->addItems(accounts);
 
-    if(accounts.contains(UBChain::getInstance()->currentAccount))
+    if(accounts.contains(HXChain::getInstance()->currentAccount))
     {
-        ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+        ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
 
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
         if(assetId == "1.3.0")  continue;
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
     QIntValidator *validator = new QIntValidator(1, 60 * 60 * 24 * 365,this);
@@ -71,7 +71,7 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
 {
     if( id == "ChangeCrosschainAddressDialog-get_multisig_account_pair-" + ui->assetComboBox->currentText())
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result.startsWith("\"result\":"))             // 成功
@@ -121,7 +121,7 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
 
     if( id == "id-account_change_for_crosschain")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         close();
@@ -160,7 +160,7 @@ void ChangeCrosschainAddressDialog::on_okBtn_clicked()
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id-account_change_for_crosschain", toJsonFormat( "account_change_for_crosschain",
+    HXChain::getInstance()->postRPC( "id-account_change_for_crosschain", toJsonFormat( "account_change_for_crosschain",
                                      QJsonArray() << ui->accountComboBox->currentText() << ui->assetComboBox->currentText()
                                      << ui->hotAddressLabel->text() << ui->coldAddressLabel->text()
                                      << ui->timeLineEdit->text().toInt() << true ));
@@ -177,7 +177,7 @@ void ChangeCrosschainAddressDialog::on_assetComboBox_currentIndexChanged(const Q
     ui->hotAddressLabel->clear();
     ui->coldAddressLabel->clear();
 
-    UBChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_multisig_account_pair-" + ui->assetComboBox->currentText(),
+    HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_multisig_account_pair-" + ui->assetComboBox->currentText(),
                                      toJsonFormat( "get_multisig_account_pair", QJsonArray() << ui->assetComboBox->currentText()));
 
 }

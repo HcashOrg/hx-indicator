@@ -14,7 +14,7 @@ ProposalPage::ProposalPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->proposalTableWidget->installEventFilter(this);
     ui->proposalTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -49,14 +49,14 @@ ProposalPage::~ProposalPage()
 void ProposalPage::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
 
-        if(accounts.contains(UBChain::getInstance()->currentAccount))
+        if(accounts.contains(HXChain::getInstance()->currentAccount))
         {
-            ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+            ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
         }
     }
     else
@@ -69,14 +69,14 @@ void ProposalPage::init()
         label->setText(tr("There are no guard accounts in the wallet."));
     }
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->proposalTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->proposalTableWidget);
 
     showProposals();
 }
 
 void ProposalPage::showProposals()
 {
-    QStringList keys = UBChain::getInstance()->proposalInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->proposalInfoMap.keys();
 
     int size = keys.size();
     ui->proposalTableWidget->setRowCount(0);
@@ -86,12 +86,12 @@ void ProposalPage::showProposals()
     {
         ui->proposalTableWidget->setRowHeight(i,40);
 
-        ProposalInfo info = UBChain::getInstance()->proposalInfoMap.value(keys.at(i));
+        ProposalInfo info = HXChain::getInstance()->proposalInfoMap.value(keys.at(i));
 
         ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(info.expirationTime.replace("T","\n")));
         ui->proposalTableWidget->item(i,0)->setData(Qt::UserRole,info.proposalId);
 
-        ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(UBChain::getInstance()->guardAccountIdToName(info.proposer)));
+        ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(HXChain::getInstance()->guardAccountIdToName(info.proposer)));
 
         QString typeStr;
         if(info.proposalOperationType == TRANSACTION_TYPE_COLDHOT)
@@ -126,7 +126,7 @@ void ProposalPage::showProposals()
         ui->proposalTableWidget->setCellWidget(i,3,voteStateLabel);
 
 
-        QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+        QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
         if(address.isEmpty())
         {
             ui->proposalTableWidget->setItem(i,4,new QTableWidgetItem(tr("no guard")));
@@ -203,7 +203,7 @@ void ProposalPage::jsonDataUpdated(QString id)
 {
     if( id == "id-approve_proposal")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result.startsWith("\"result\":{"))             // 成功
@@ -232,13 +232,13 @@ void ProposalPage::on_proposalTableWidget_cellClicked(int row, int column)
         commonDialog.setText(tr("Sure to approve this proposal?"));
         if(commonDialog.pop())
         {
-            QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+            QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
             QJsonArray array;
             array << address;
             QJsonObject object;
             object.insert("key_approvals_to_add", array);
 
-            UBChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_proposal",
+            HXChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_proposal",
                                     QJsonArray() << ui->accountComboBox->currentText()
                                     << ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString()
                                     << object << true));
@@ -252,13 +252,13 @@ void ProposalPage::on_proposalTableWidget_cellClicked(int row, int column)
         commonDialog.setText(tr("Sure to disapprove this proposal?"));
         if(commonDialog.pop())
         {
-            QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+            QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
             QJsonArray array;
             array << address;
             QJsonObject object;
             object.insert("key_approvals_to_remove", array);
 
-            UBChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_proposal",
+            HXChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_proposal",
                                     QJsonArray() << ui->accountComboBox->currentText()
                                     << ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString()
                                     << object << true));

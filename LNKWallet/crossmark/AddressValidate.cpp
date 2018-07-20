@@ -30,7 +30,7 @@ void AddressValidate::startValidateAddress(const QString &chainId, const QString
     paramObject.insert("chainId",chainId);
     paramObject.insert("addr",address);
     object.insert("params",paramObject);
-    _p->httpManager.post(UBChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+    _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 
 }
 

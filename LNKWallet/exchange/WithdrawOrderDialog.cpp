@@ -10,7 +10,7 @@ WithdrawOrderDialog::WithdrawOrderDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -24,12 +24,12 @@ WithdrawOrderDialog::WithdrawOrderDialog(QWidget *parent) :
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    feeChoose = new FeeChooseWidget(0,UBChain::getInstance()->feeType);
+    feeChoose = new FeeChooseWidget(0,HXChain::getInstance()->feeType);
     ui->stackedWidget->addWidget(feeChoose);
     feeChoose->resize(ui->stackedWidget->size());
     ui->stackedWidget->setCurrentIndex(0);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 }
 
@@ -70,7 +70,7 @@ void WithdrawOrderDialog::jsonDataUpdated(QString id)
 {
     if( id.startsWith( "id-unlock-WithdrawOrderDialog") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result == "\"result\":null")
@@ -91,7 +91,7 @@ void WithdrawOrderDialog::on_okBtn_clicked()
 {
     if(ui->pwdLineEdit->text().isEmpty())           return;
 
-    UBChain::getInstance()->postRPC( "id-unlock-WithdrawOrderDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+    HXChain::getInstance()->postRPC( "id-unlock-WithdrawOrderDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
     feeChoose->updatePoundageID();
 

@@ -21,7 +21,7 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
     
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -55,7 +55,7 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
 
     ui->containerWidget->installEventFilter(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 
     ui->addressLabel->setText( address);
@@ -98,7 +98,7 @@ void TransferConfirmDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-unlock-TransferConfirmDialog")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if( result == "\"result\":null")
         {
@@ -122,7 +122,7 @@ void TransferConfirmDialog::on_okBtn_clicked()
         return;
     }
 
-    UBChain::getInstance()->postRPC( "id-unlock-TransferConfirmDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+    HXChain::getInstance()->postRPC( "id-unlock-TransferConfirmDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 
 }

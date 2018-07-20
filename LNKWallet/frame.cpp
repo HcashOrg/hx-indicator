@@ -109,10 +109,10 @@ Frame::Frame(): timer(NULL),
     currentAccount = "";
 
 
-    connect(UBChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(jsonDataUpdated(QString)));
+    connect(HXChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(jsonDataUpdated(QString)));
 
-    connect(UBChain::getInstance(),&UBChain::showBubbleSignal,this,&Frame::ShowBubbleMessage);
-    QString language = UBChain::getInstance()->language;
+    connect(HXChain::getInstance(),&HXChain::showBubbleSignal,this,&Frame::ShowBubbleMessage);
+    QString language = HXChain::getInstance()->language;
     if( language.isEmpty())
     {
 //        setLanguage("Simplified Chinese");
@@ -133,7 +133,7 @@ Frame::Frame(): timer(NULL),
     //  如果是第一次使用(未设置 blockchain 路径)
     mutexForConfigFile.lock();
 
-    if( !UBChain::getInstance()->configFile->contains("/settings/chainPath") )
+    if( !HXChain::getInstance()->configFile->contains("/settings/chainPath") )
     {
         selectWalletPathWidget = new SelectWalletPathWidget(this);
         selectWalletPathWidget->setAttribute(Qt::WA_DeleteOnClose);
@@ -149,7 +149,7 @@ Frame::Frame(): timer(NULL),
     }
     else
     {
-        QString path = UBChain::getInstance()->configFile->value("/settings/chainPath").toString();
+        QString path = HXChain::getInstance()->configFile->value("/settings/chainPath").toString();
         QDir dir(path);
         QFileInfo fileInfo(path + "/wallet.json");
 
@@ -167,28 +167,28 @@ Frame::Frame(): timer(NULL),
             setGeometry(0,0, selectWalletPathWidget->width(), selectWalletPathWidget->height());
             moveWidgetToScreenCenter(this);
 
-            UBChain::getInstance()->configFile->clear();
-            UBChain::getInstance()->configFile->setValue("/settings/lockMinutes",5);
-            UBChain::getInstance()->lockMinutes     = 5;
-            UBChain::getInstance()->configFile->setValue("/settings/notAutoLock",false);
-            UBChain::getInstance()->notProduce      =  true;
-            UBChain::getInstance()->configFile->setValue("/settings/language","English");
-            UBChain::getInstance()->language = "English";
-            UBChain::getInstance()->configFile->setValue("/settings/feeType","LNK");
-            UBChain::getInstance()->feeType = "LNK";
+            HXChain::getInstance()->configFile->clear();
+            HXChain::getInstance()->configFile->setValue("/settings/lockMinutes",5);
+            HXChain::getInstance()->lockMinutes     = 5;
+            HXChain::getInstance()->configFile->setValue("/settings/notAutoLock",false);
+            HXChain::getInstance()->notProduce      =  true;
+            HXChain::getInstance()->configFile->setValue("/settings/language","English");
+            HXChain::getInstance()->language = "English";
+            HXChain::getInstance()->configFile->setValue("/settings/feeType","LNK");
+            HXChain::getInstance()->feeType = "LNK";
 
-            UBChain::getInstance()->configFile->setValue("/settings/backupNeeded",false);
-            UBChain::getInstance()->IsBackupNeeded = false;
+            HXChain::getInstance()->configFile->setValue("/settings/backupNeeded",false);
+            HXChain::getInstance()->IsBackupNeeded = false;
 
-            UBChain::getInstance()->configFile->setValue("/settings/autoDeposit",false);
-            UBChain::getInstance()->autoDeposit = false;
-            UBChain::getInstance()->configFile->setValue("/settings/contractFee",1);
-            UBChain::getInstance()->contractFee = 1;
+            HXChain::getInstance()->configFile->setValue("/settings/autoDeposit",false);
+            HXChain::getInstance()->autoDeposit = false;
+            HXChain::getInstance()->configFile->setValue("/settings/contractFee",1);
+            HXChain::getInstance()->contractFee = 1;
 
-            UBChain::getInstance()->minimizeToTray  = false;
-            UBChain::getInstance()->configFile->setValue("/settings/minimizeToTray",false);
-            UBChain::getInstance()->closeToMinimize = false;
-            UBChain::getInstance()->configFile->setValue("/settings/closeToMinimize",false);
+            HXChain::getInstance()->minimizeToTray  = false;
+            HXChain::getInstance()->configFile->setValue("/settings/minimizeToTray",false);
+            HXChain::getInstance()->closeToMinimize = false;
+            HXChain::getInstance()->configFile->setValue("/settings/closeToMinimize",false);
 
         }
         else
@@ -205,7 +205,7 @@ Frame::Frame(): timer(NULL),
             }
 
 
-            UBChain::getInstance()->startExe();
+            HXChain::getInstance()->startExe();
 
             waitingForSync = new WaitingForSync(this);
             waitingForSync->setAttribute(Qt::WA_DeleteOnClose);
@@ -219,23 +219,23 @@ Frame::Frame(): timer(NULL),
             setGeometry(0,0, waitingForSync->width(), waitingForSync->height());
             moveWidgetToScreenCenter(this);
 
-//            UBChain::getInstance()->appDataPath = UBChain::getInstance()->configFile->value("/settings/chainPath").toString();
+//            HXChain::getInstance()->appDataPath = HXChain::getInstance()->configFile->value("/settings/chainPath").toString();
 
 //            QStringList strList;
-//            strList << "--data-dir" << UBChain::getInstance()->configFile->value("/settings/chainPath").toString()
+//            strList << "--data-dir" << HXChain::getInstance()->configFile->value("/settings/chainPath").toString()
 //                    << "--rpcuser" << "a" << "--rpcpassword" << "b" << "--rpcport" << QString::number( RPC_PORT) << "--server";
-//            if( UBChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+//            if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
 //            {
 //                strList << "--resync-blockchain";
 
-//                QFile file(UBChain::getInstance()->configFile->value("/settings/chainPath").toString() + "\\config.json");
+//                QFile file(HXChain::getInstance()->configFile->value("/settings/chainPath").toString() + "\\config.json");
 //                if(file.exists())   file.remove();
 //            }
-//            UBChain::getInstance()->configFile->setValue("settings/resyncNextTime",false);
+//            HXChain::getInstance()->configFile->setValue("settings/resyncNextTime",false);
 
-//            UBChain::getInstance()->proc->start( WALLET_EXE_FILE,strList );
+//            HXChain::getInstance()->proc->start( WALLET_EXE_FILE,strList );
 
-//            if( UBChain::getInstance()->proc->waitForStarted())
+//            if( HXChain::getInstance()->proc->waitForStarted())
 //            {
 //                qDebug() << QString("launch %1 successfully").arg(WALLET_EXE_FILE);
 //            }
@@ -396,9 +396,9 @@ void Frame::alreadyLogin()
 
     timer = new QTimer(this);               //  自动锁定
     connect(timer,SIGNAL(timeout()),this,SLOT(autoLock()));
-    if(UBChain::getInstance()->notProduce)
+    if(HXChain::getInstance()->notProduce)
     {
-        timer->start(UBChain::getInstance()->lockMinutes * 60000);
+        timer->start(HXChain::getInstance()->lockMinutes * 60000);
     }
 
     startTimerForAutoRefresh();              // 自动刷新
@@ -434,13 +434,13 @@ QString toThousandFigure( int number)     // 转换为0001,0015  这种数字格
 
 void Frame::getAccountInfo()
 {
-    UBChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QJsonArray()));
+    HXChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QJsonArray()));
 
-    UBChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
+    HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
-    UBChain::getInstance()->fetchTransactions();
+    HXChain::getInstance()->fetchTransactions();
 
-    UBChain::getInstance()->fetchFormalGuards();
+    HXChain::getInstance()->fetchFormalGuards();
 }
 
 
@@ -472,7 +472,7 @@ void Frame::showTransferPage(QString accountName,QString assetType)
 {
     closeCurrentPage();
     getAccountInfo();
-    UBChain::getInstance()->mainFrame->setCurrentAccount(accountName);
+    HXChain::getInstance()->mainFrame->setCurrentAccount(accountName);
     transferPage = new TransferPage(accountName,centralWidget,assetType);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
@@ -494,7 +494,7 @@ void Frame::showLockPage()
     shadowWidgetShow();
 
 
-    UBChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray()));
+    HXChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray()));
 qDebug() << "lock ";
 
 }
@@ -504,7 +504,7 @@ void Frame::autoLock()
 
     timer->stop();
 
-    UBChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray() ));
+    HXChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray() ));
 qDebug() << "autolock ";
 
 }
@@ -514,9 +514,9 @@ void Frame::unlock()
     setGeometry(0,0, 960, 580);
     moveWidgetToScreenCenter(this);
 
-    if( UBChain::getInstance()->notProduce)
+    if( HXChain::getInstance()->notProduce)
     {
-        timer->start(UBChain::getInstance()->lockMinutes * 60000);
+        timer->start(HXChain::getInstance()->lockMinutes * 60000);
     }
     centralWidget->show();
     bottomBar->show();
@@ -529,7 +529,7 @@ void Frame::unlock()
     }
 
 qDebug() << "unlock showCurrentDialog";
-    UBChain::getInstance()->showCurrentDialog();
+    HXChain::getInstance()->showCurrentDialog();
 
 
 }
@@ -538,10 +538,10 @@ void Frame::updateTimer()
 {
     if( timer != NULL && lockPage == NULL)
     {
-        if( UBChain::getInstance()->notProduce)
+        if( HXChain::getInstance()->notProduce)
         {
             timer->stop();
-            timer->start(UBChain::getInstance()->lockMinutes * 60000);
+            timer->start(HXChain::getInstance()->lockMinutes * 60000);
         }
     }
 }
@@ -549,16 +549,16 @@ void Frame::updateTimer()
 void Frame::settingSaved()
 {
 
-    if( !UBChain::getInstance()->notProduce)
+    if( !HXChain::getInstance()->notProduce)
     {
         timer->stop();
     }
     else
     {
-        timer->start( UBChain::getInstance()->lockMinutes * 60000);
+        timer->start( HXChain::getInstance()->lockMinutes * 60000);
     }
 
-    QString language = UBChain::getInstance()->language;
+    QString language = HXChain::getInstance()->language;
     if( language.isEmpty())
     {
         setLanguage("English");
@@ -581,7 +581,7 @@ void Frame::privateKeyImported()
 
 void Frame::mousePressEvent(QMouseEvent *event)
 {
-//    if( UBChain::getInstance()->notProduce)
+//    if( HXChain::getInstance()->notProduce)
 //    {
 //        updateTimer();
 //    }
@@ -638,19 +638,19 @@ void Frame::syncFinished()
     qDebug() << "sync finished ";
     waitingForSync->timerForWSConnected->stop();
 
-//    UBChain::getInstance()->initWorkerThreadManager();
+//    HXChain::getInstance()->initWorkerThreadManager();
 
-    if( UBChain::getInstance()->contactsFile == NULL)
+    if( HXChain::getInstance()->contactsFile == NULL)
     {
-        UBChain::getInstance()->getContactsFile();
+        HXChain::getInstance()->getContactsFile();
     }
 
-    UBChain::getInstance()->postRPC("id-is_new", toJsonFormat( "is_new", QJsonArray()));
+    HXChain::getInstance()->postRPC("id-is_new", toJsonFormat( "is_new", QJsonArray()));
 }
 
 void Frame::setCurrentAccount(QString accountName)
 {
-    UBChain::getInstance()->currentAccount = accountName;
+    HXChain::getInstance()->currentAccount = accountName;
 }
 
 void Frame::ShowMainPageSlot()
@@ -856,7 +856,7 @@ void Frame::showTransferPage()
 {
     closeCurrentPage();
     getAccountInfo();
-    transferPage = new TransferPage(UBChain::getInstance()->currentAccount,centralWidget);
+    transferPage = new TransferPage(HXChain::getInstance()->currentAccount,centralWidget);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
     connect(transferPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
@@ -892,7 +892,7 @@ bool Frame::eventFilter(QObject* watched, QEvent* e)
     }
 
     // currentDialog 上的鼠标事件也会移动 frame 和 本身
-    if( UBChain::getInstance()->currentDialogVector.contains(  (QWidget*)watched) )
+    if( HXChain::getInstance()->currentDialogVector.contains(  (QWidget*)watched) )
     {
         if( e->type() == QEvent::MouseMove)
         {
@@ -907,7 +907,7 @@ bool Frame::eventFilter(QObject* watched, QEvent* e)
             mouseReleaseEvent( (QMouseEvent*)e);
         }
 
-        UBChain::getInstance()->resetPosOfCurrentDialog();  // currentDialog 一起移动
+        HXChain::getInstance()->resetPosOfCurrentDialog();  // currentDialog 一起移动
 
         return false;
     }
@@ -933,7 +933,7 @@ void Frame::showTransferPageWithAddress(QString address, QString name)
     emit titleBackVisible(true);
     closeCurrentPage();
     getAccountInfo();
-    transferPage = new TransferPage(UBChain::getInstance()->currentAccount,centralWidget);
+    transferPage = new TransferPage(HXChain::getInstance()->currentAccount,centralWidget);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
     transferPage->setAddress(address);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
@@ -1132,12 +1132,12 @@ void Frame::showOnchainOrderPage()
 void Frame::showMyExchangeContractPage()
 {
     emit titleBackVisible(false);
-    if(UBChain::getInstance()->accountInfoMap.isEmpty())
+    if(HXChain::getInstance()->accountInfoMap.isEmpty())
     {
         CommonDialog dia(CommonDialog::OkOnly);
         dia.setText(tr("Please Import Or Create Account First!"));
         dia.pop();
-        UBChain::getInstance()->mainFrame->ShowMainPageSlot();
+        HXChain::getInstance()->mainFrame->ShowMainPageSlot();
         return;
     }
 
@@ -1260,7 +1260,7 @@ void Frame::jsonDataUpdated(QString id)
         }
 
         activateWindow();
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result != "\"result\":true")
@@ -1299,7 +1299,7 @@ void Frame::jsonDataUpdated(QString id)
 //        else
 //        {
 //            // 其他情况视为钱包数据损坏
-//            QDir dir(UBChain::getInstance()->appDataPath + "/wallets/wallet");
+//            QDir dir(HXChain::getInstance()->appDataPath + "/wallets/wallet");
 //            if(!dir.exists())   return;
 //            QFileInfoList fileInfos = dir.entryInfoList( QJsonArray() << "*.log");
 //            for(int i= 0; i < fileInfos.size(); i++)
@@ -1326,23 +1326,23 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "id-list_my_accounts")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
-        UBChain::getInstance()->parseAccountInfo();
+        HXChain::getInstance()->parseAccountInfo();
 
-        if(UBChain::getInstance()->importedWalletNeedToAddTrackAddresses)
+        if(HXChain::getInstance()->importedWalletNeedToAddTrackAddresses)
         {
-            foreach (QString accountName, UBChain::getInstance()->accountInfoMap.keys())
+            foreach (QString accountName, HXChain::getInstance()->accountInfoMap.keys())
             {
-                qDebug() << accountName << UBChain::getInstance()->accountInfoMap.value(accountName).address;
-                UBChain::getInstance()->addTrackAddress(UBChain::getInstance()->accountInfoMap.value(accountName).address);
+                qDebug() << accountName << HXChain::getInstance()->accountInfoMap.value(accountName).address;
+                HXChain::getInstance()->addTrackAddress(HXChain::getInstance()->accountInfoMap.value(accountName).address);
             }
 
-            UBChain::getInstance()->importedWalletNeedToAddTrackAddresses = false;
-            UBChain::getInstance()->configFile->setValue("/settings/importedWalletNeedToAddTrackAddresses",false);
+            HXChain::getInstance()->importedWalletNeedToAddTrackAddresses = false;
+            HXChain::getInstance()->configFile->setValue("/settings/importedWalletNeedToAddTrackAddresses",false);
 
-            UBChain::getInstance()->resyncNextTime = true;
-            UBChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);
+            HXChain::getInstance()->resyncNextTime = true;
+            HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);
 
             CommonDialog commonDialog(CommonDialog::OkOnly);
             commonDialog.setText(tr("This wallet is newly imported. It will rescan the blockchain data when launched next time."
@@ -1350,19 +1350,19 @@ void Frame::jsonDataUpdated(QString id)
             commonDialog.pop();
         }
 
-        foreach (QString accountName, UBChain::getInstance()->accountInfoMap.keys())
+        foreach (QString accountName, HXChain::getInstance()->accountInfoMap.keys())
         {
-            UBChain::getInstance()->fetchAccountBalances(accountName);
+            HXChain::getInstance()->fetchAccountBalances(accountName);
         }
 
-        UBChain::getInstance()->fetchMyContracts();
+        HXChain::getInstance()->fetchMyContracts();
 
         return;
     }
 
     if( id.startsWith("id-get_account_balances-") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if(result.startsWith("\"result\":["))
         {
@@ -1390,7 +1390,7 @@ void Frame::jsonDataUpdated(QString id)
                     assetAmount.amount = QString::number(value.toDouble(),'g',12).toULongLong();
                 }
 
-                UBChain::getInstance()->accountInfoMap[accountName].assetAmountMap.insert(assetAmount.assetId,assetAmount);
+                HXChain::getInstance()->accountInfoMap[accountName].assetAmountMap.insert(assetAmount.assetId,assetAmount);
             }
         }
 
@@ -1409,7 +1409,7 @@ void Frame::jsonDataUpdated(QString id)
             return;
         }
 
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if( result == "\"result\":null")
         {
@@ -1426,7 +1426,7 @@ void Frame::jsonDataUpdated(QString id)
             connect( lockPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
             lockPage->show();
 
-            UBChain::getInstance()->hideCurrentDialog();
+            HXChain::getInstance()->hideCurrentDialog();
 
             setGeometry(0,0, lockPage->width(), lockPage->height());
             moveWidgetToScreenCenter(this);
@@ -1436,12 +1436,12 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "id-lock-onCloseWallet")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         hide();
-        UBChain::getInstance()->isExiting = true;
-        UBChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()));
+        HXChain::getInstance()->isExiting = true;
+        HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()));
 
         QTimer::singleShot(5000,qApp,SLOT(quit()));
 
@@ -1451,7 +1451,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "id-list_assets")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -1471,7 +1471,7 @@ void Frame::jsonDataUpdated(QString id)
                         QJsonValue resultValue = jsonObject.take("result");
                         if( resultValue.isArray())
                         {
-//                            UBChain::getInstance()->assetInfoMap.clear();
+//                            HXChain::getInstance()->assetInfoMap.clear();
                             QMap<QString,AssetInfo> map;
 
                             QJsonArray resultArray = resultValue.toArray();
@@ -1479,7 +1479,7 @@ void Frame::jsonDataUpdated(QString id)
                             {
                                 QJsonObject object = resultArray.at(i).toObject();
                                 QString assetId = object.take("id").toString();
-                                AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
+                                AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
 
                                 assetInfo.id = assetId;
                                 assetInfo.issuer = object.take("issuer").toString();
@@ -1504,7 +1504,7 @@ void Frame::jsonDataUpdated(QString id)
 
                                 if(assetInfo.symbol != ASSET_NAME)
                                 {
-                                    UBChain::getInstance()->postRPC( "id-get_current_multi_address-" + assetInfo.symbol, toJsonFormat( "get_current_multi_address", QJsonArray() << assetInfo.symbol));
+                                    HXChain::getInstance()->postRPC( "id-get_current_multi_address-" + assetInfo.symbol, toJsonFormat( "get_current_multi_address", QJsonArray() << assetInfo.symbol));
                                 }
 
 
@@ -1528,11 +1528,11 @@ void Frame::jsonDataUpdated(QString id)
                                 assetInfo.quoteAmount.assetId = quoteObject.take("asset_id").toString();
                                 assetInfo.quoteAmount.amount = jsonValueToULL(quoteObject.take("amount"));
 
-//                                UBChain::getInstance()->assetInfoMap.insert(assetInfo.id,assetInfo);
+//                                HXChain::getInstance()->assetInfoMap.insert(assetInfo.id,assetInfo);
                                 map.insert(assetInfo.id, assetInfo);
                             }
 
-                            UBChain::getInstance()->assetInfoMap = map;
+                            HXChain::getInstance()->assetInfoMap = map;
                         }
                     }
                 }
@@ -1544,12 +1544,12 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id.startsWith("id-get_current_multi_address-"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
             QString assetSymbol = id.mid(QString("id-get_current_multi_address-").size());
-            QString assetId = UBChain::getInstance()->getAssetId(assetSymbol);
+            QString assetId = HXChain::getInstance()->getAssetId(assetSymbol);
 
             result.prepend("{");
             result.append("}");
@@ -1558,12 +1558,12 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonObject object = jsonObject.take("result").toObject();
 
-            if(UBChain::getInstance()->assetInfoMap.contains(assetId))
+            if(HXChain::getInstance()->assetInfoMap.contains(assetId))
             {
-                UBChain::getInstance()->assetInfoMap[assetId].multisigAddressId = object.take("id").toString();
-                UBChain::getInstance()->assetInfoMap[assetId].hotAddress = object.take("bind_account_hot").toString();
-                UBChain::getInstance()->assetInfoMap[assetId].coldAddress = object.take("bind_account_cold").toString();
-                UBChain::getInstance()->assetInfoMap[assetId].effectiveBlock = object.take("effective_block_num").toInt();
+                HXChain::getInstance()->assetInfoMap[assetId].multisigAddressId = object.take("id").toString();
+                HXChain::getInstance()->assetInfoMap[assetId].hotAddress = object.take("bind_account_hot").toString();
+                HXChain::getInstance()->assetInfoMap[assetId].coldAddress = object.take("bind_account_cold").toString();
+                HXChain::getInstance()->assetInfoMap[assetId].effectiveBlock = object.take("effective_block_num").toInt();
             }
         }
 
@@ -1572,7 +1572,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "id-list_miners")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -1585,7 +1585,7 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.take("result").toArray();
 
-            UBChain::getInstance()->minersVector.clear();
+            HXChain::getInstance()->minersVector.clear();
             foreach (QJsonValue v, array)
             {
                 QJsonArray array2 = v.toArray();
@@ -1593,7 +1593,7 @@ void Frame::jsonDataUpdated(QString id)
                 Miner miner;
                 miner.name = array2.at(0).toString();
                 miner.minerId = array2.at(1).toString();
-                UBChain::getInstance()->minersVector.append(miner);
+                HXChain::getInstance()->minersVector.append(miner);
             }
         }
 
@@ -1602,7 +1602,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "id-list_guard_members")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -1614,22 +1614,22 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.take("result").toArray();
 
-            //        UBChain::getInstance()->formalGuardMap.clear();
+            //        HXChain::getInstance()->formalGuardMap.clear();
             foreach (QJsonValue v, array)
             {
                 QJsonArray array2 = v.toArray();
                 QString account = array2.at(0).toString();
                 GuardInfo info;
                 info.guardId = array2.at(1).toString();
-                info.accountId = UBChain::getInstance()->accountInfoMap.value(account).id;
-                UBChain::getInstance()->formalGuardMap.insert(account, info);
+                info.accountId = HXChain::getInstance()->accountInfoMap.value(account).id;
+                HXChain::getInstance()->formalGuardMap.insert(account, info);
 
-                UBChain::getInstance()->fetchProposals();
+                HXChain::getInstance()->fetchProposals();
 
-                UBChain::getInstance()->postRPC( "id-get_guard_member-" + account, toJsonFormat( "get_guard_member", QJsonArray() << account));
-                //            UBChain::getInstance()->fetchGuardAllMultisigAddresses(accountId);
+                HXChain::getInstance()->postRPC( "id-get_guard_member-" + account, toJsonFormat( "get_guard_member", QJsonArray() << account));
+                //            HXChain::getInstance()->fetchGuardAllMultisigAddresses(accountId);
 
-                UBChain::getInstance()->postRPC( "guard-get_account-" + account, toJsonFormat( "get_account", QJsonArray() << account));
+                HXChain::getInstance()->postRPC( "guard-get_account-" + account, toJsonFormat( "get_account", QJsonArray() << account));
 
             }
         }
@@ -1639,7 +1639,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id.startsWith("id-get_guard_member-"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -1653,13 +1653,13 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonObject object = jsonObject.take("result").toObject();
 
-            if(UBChain::getInstance()->formalGuardMap.contains(account))
+            if(HXChain::getInstance()->formalGuardMap.contains(account))
             {
-                UBChain::getInstance()->formalGuardMap[account].accountId   = object.take("guard_member_account").toString();
-                UBChain::getInstance()->formalGuardMap[account].voteId      = object.take("vote_id").toString();
-                UBChain::getInstance()->formalGuardMap[account].isFormal    = object.take("formal").toBool();
+                HXChain::getInstance()->formalGuardMap[account].accountId   = object.take("guard_member_account").toString();
+                HXChain::getInstance()->formalGuardMap[account].voteId      = object.take("vote_id").toString();
+                HXChain::getInstance()->formalGuardMap[account].isFormal    = object.take("formal").toBool();
 
-                UBChain::getInstance()->fetchGuardAllMultisigAddresses(UBChain::getInstance()->formalGuardMap[account].accountId);
+                HXChain::getInstance()->fetchGuardAllMultisigAddresses(HXChain::getInstance()->formalGuardMap[account].accountId);
             }
         }
 
@@ -1668,7 +1668,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id.startsWith("guard-get_account-"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         //        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -1682,9 +1682,9 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonObject object = jsonObject.take("result").toObject();
 
-            if(UBChain::getInstance()->formalGuardMap.contains(account))
+            if(HXChain::getInstance()->formalGuardMap.contains(account))
             {
-                UBChain::getInstance()->formalGuardMap[account].address = object.take("addr").toString();
+                HXChain::getInstance()->formalGuardMap[account].address = object.take("addr").toString();
             }
         }
 
@@ -1693,7 +1693,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "id-list_all_guards")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -1705,11 +1705,11 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.take("result").toArray();
 
-            UBChain::getInstance()->allGuardMap.clear();
+            HXChain::getInstance()->allGuardMap.clear();
             foreach (QJsonValue v, array)
             {
                 QJsonArray array2 = v.toArray();
-                UBChain::getInstance()->allGuardMap.insert(array2.at(0).toString(),array2.at(1).toString());
+                HXChain::getInstance()->allGuardMap.insert(array2.at(0).toString(),array2.at(1).toString());
             }
         }
 
@@ -1718,7 +1718,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if(id == "id-get_proposal_for_voter")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -1730,7 +1730,7 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.take("result").toArray();
 
-            UBChain::getInstance()->proposalInfoMap.clear();
+            HXChain::getInstance()->proposalInfoMap.clear();
             foreach (QJsonValue v, array)
             {
                 QJsonObject object = v.toObject();
@@ -1763,7 +1763,7 @@ void Frame::jsonDataUpdated(QString id)
                 info.proposalOperationType = proposedTransactionValue.toObject().take("operations").toArray()
                         .at(0).toArray().at(0).toInt();
 
-                UBChain::getInstance()->proposalInfoMap.insert(info.proposalId, info);
+                HXChain::getInstance()->proposalInfoMap.insert(info.proposalId, info);
             }
         }
 
@@ -1772,7 +1772,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id.startsWith("id-get_multi_address_obj-"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
@@ -1801,7 +1801,7 @@ void Frame::jsonDataUpdated(QString id)
                 gma.pairId      = object.take("multisig_account_pair_object_id").toString();
                 vector.append(gma);
             }
-            UBChain::getInstance()->guardMultisigAddressesMap.insert(str,vector);
+            HXChain::getInstance()->guardMultisigAddressesMap.insert(str,vector);
         }
 
         return;
@@ -1809,7 +1809,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id.startsWith("id-get_contracts_hash_entry_by_owner-"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if(result.startsWith("\"result\":"))
         {
@@ -1822,7 +1822,7 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.take("result").toArray();
 
-//            UBChain::getInstance()->accountInfoMap[accountName].contractsVector.clear();
+//            HXChain::getInstance()->accountInfoMap[accountName].contractsVector.clear();
 
             foreach (QJsonValue v, array)
             {
@@ -1834,14 +1834,14 @@ void Frame::jsonDataUpdated(QString id)
 
                 if(contractInfo.hashValue == EXCHANGE_CONTRACT_HASH)
                 {
-                    UBChain::getInstance()->postRPC( "id-invoke_contract_offline-state-" + accountName + "-" + contractInfo.contractAddress, toJsonFormat( "invoke_contract_offline",
+                    HXChain::getInstance()->postRPC( "id-invoke_contract_offline-state-" + accountName + "-" + contractInfo.contractAddress, toJsonFormat( "invoke_contract_offline",
                                                                                            QJsonArray() << accountName << contractInfo.contractAddress
                                                                                            << "state"  << ""));
                 }
 
-                if(!UBChain::getInstance()->accountInfoMap[accountName].contractsVector.contains(contractInfo))
+                if(!HXChain::getInstance()->accountInfoMap[accountName].contractsVector.contains(contractInfo))
                 {
-                    UBChain::getInstance()->accountInfoMap[accountName].contractsVector.append(contractInfo);
+                    HXChain::getInstance()->accountInfoMap[accountName].contractsVector.append(contractInfo);
                 }
             }
         }
@@ -1852,7 +1852,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id.startsWith("id-invoke_contract_offline-state-"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if(result.startsWith("\"result\":"))
         {
@@ -1868,11 +1868,11 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QString state = jsonObject.take("result").toString();
 
-            for(int i = 0; i < UBChain::getInstance()->accountInfoMap[accountName].contractsVector.size(); i++)
+            for(int i = 0; i < HXChain::getInstance()->accountInfoMap[accountName].contractsVector.size(); i++)
             {
-                if(UBChain::getInstance()->accountInfoMap[accountName].contractsVector[i].contractAddress == contractAddress)
+                if(HXChain::getInstance()->accountInfoMap[accountName].contractsVector[i].contractAddress == contractAddress)
                 {
-                    UBChain::getInstance()->accountInfoMap[accountName].contractsVector[i].state = state;
+                    HXChain::getInstance()->accountInfoMap[accountName].contractsVector[i].state = state;
                 }
             }
         }
@@ -1882,7 +1882,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "id-list_transactions")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if(result.startsWith("\"result\":"))
         {
@@ -1896,11 +1896,11 @@ void Frame::jsonDataUpdated(QString id)
             foreach (QJsonValue v, array)
             {
                 QString transactionId = v.toString();
-                TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
+                TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
 //qDebug() << "list_transactions " << ts.transactionId <<ts.type;
                 if(ts.type == -1 || ts.blockNum == 0)
                 {
-                    UBChain::getInstance()->postRPC( "id-get_transaction-" + transactionId, toJsonFormat( "get_transaction", QJsonArray() << transactionId));
+                    HXChain::getInstance()->postRPC( "id-get_transaction-" + transactionId, toJsonFormat( "get_transaction", QJsonArray() << transactionId));
                 }
             }
         }
@@ -1911,24 +1911,24 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id.startsWith("id-get_transaction-"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result ;
 
         if(result.startsWith("\"result\":"))
         {
-            UBChain::getInstance()->parseTransaction(result);
+            HXChain::getInstance()->parseTransaction(result);
         }
         else
         {
             QString trxId = id.mid(QString("id-get_transaction-").size());
-            TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(trxId);
+            TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(trxId);
             QDateTime dateTime = QDateTime::fromString(ts.expirationTime,"yyyy-MM-ddThh:mm:ss");
             dateTime.setTimeSpec(Qt::UTC);
             QDateTime currentTime = QDateTime::currentDateTimeUtc();
 
             if(dateTime < currentTime)      // 如果交易失效了 则从DB中删掉
             {
-                UBChain::getInstance()->transactionDB.removeTransactionStruct(trxId);
+                HXChain::getInstance()->transactionDB.removeTransactionStruct(trxId);
             }
         }
 
@@ -2039,16 +2039,16 @@ void Frame::showNormalAndActive()
 // 提前载入，防止切换到别的界面显示不出来
 void Frame::init()
 {
-    UBChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
+    HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
-    UBChain::getInstance()->postRPC( "id-list_miners", toJsonFormat( "list_miners", QJsonArray() << "A" << "100"));
+    HXChain::getInstance()->postRPC( "id-list_miners", toJsonFormat( "list_miners", QJsonArray() << "A" << "100"));
 
-    //UBChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.195:5444") ));
+    //HXChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.195:5444") ));
 
-    UBChain::getInstance()->fetchTransactions();
+    HXChain::getInstance()->fetchTransactions();
 
-    UBChain::getInstance()->fetchFormalGuards();
-    UBChain::getInstance()->fetchAllGuards();
+    HXChain::getInstance()->fetchFormalGuards();
+    HXChain::getInstance()->fetchAllGuards();
 }
 
 
@@ -2115,7 +2115,7 @@ void Frame::newAccount(QString name)
 
 void Frame::onCloseWallet()
 {
-    UBChain::getInstance()->postRPC( "id-lock-onCloseWallet", toJsonFormat( "lock", QJsonArray()));
+    HXChain::getInstance()->postRPC( "id-lock-onCloseWallet", toJsonFormat( "lock", QJsonArray()));
 }
 
 void Frame::ShowBubbleMessage(const QString &title, const QString &context,QSystemTrayIcon::MessageIcon icon, int msecs)

@@ -12,7 +12,7 @@ ForecloseDialog::ForecloseDialog(const QString &accountName,QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -26,8 +26,8 @@ ForecloseDialog::ForecloseDialog(const QString &accountName,QWidget *parent) :
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    ui->stackedWidget->addWidget(new FeeChooseWidget(UBChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
-                                                     UBChain::getInstance()->feeType,accountName));
+    ui->stackedWidget->addWidget(new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
+                                                     HXChain::getInstance()->feeType,accountName));
     ui->stackedWidget->setCurrentIndex(0);
     ui->stackedWidget->currentWidget()->resize(ui->stackedWidget->size());
 }

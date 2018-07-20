@@ -14,8 +14,8 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
     
     ui->setupUi(this);
 
-//    UBChain::getInstance()->appendCurrentDialogVector(this);
-//    setParent(UBChain::getInstance()->mainFrame);
+//    HXChain::getInstance()->appendCurrentDialogVector(this);
+//    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -27,7 +27,7 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
 
     ui->widget->setObjectName("widget");
     ui->widget->setStyleSheet("#widget {background-color:white;border-radius:10px;}");
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->widget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->widget);
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet("#containerwidget{background-color:white;border:none;border-radius:10px;}");
 
@@ -41,7 +41,7 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
     ui->consoleLineEdit->installEventFilter(this);
 
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 
 //    ui->consoleLineEdit->setStyleSheet("color:black;border:1px solid #CCCCCC;border-radius:3px;");
@@ -63,8 +63,8 @@ ConsoleDialog::~ConsoleDialog()
 {
     
     qDebug() << "ConsoleDialog delete";
-//    UBChain::getInstance()->currentDialog = NULL;
-//    UBChain::getInstance()->removeCurrentDialogVector(this);
+//    HXChain::getInstance()->currentDialog = NULL;
+//    HXChain::getInstance()->removeCurrentDialogVector(this);
     delete ui;
     
 }
@@ -210,7 +210,7 @@ void ConsoleDialog::on_consoleLineEdit_returnPressed()
         }
     }
 
-    UBChain::getInstance()->postRPC( "console-" + str, toJsonFormat( command, array ));
+    HXChain::getInstance()->postRPC( "console-" + str, toJsonFormat( command, array ));
 
     ui->consoleLineEdit->clear();
 
@@ -228,7 +228,7 @@ void ConsoleDialog::jsonDataUpdated(QString id)
     if( id.startsWith("console-"))
     {
         ui->consoleBrowser->append(">>>" + id.mid(8));
-        ui->consoleBrowser->append( UBChain::getInstance()->jsonDataValue(id));
+        ui->consoleBrowser->append( HXChain::getInstance()->jsonDataValue(id));
         ui->consoleBrowser->append("\n");
         return;
     }

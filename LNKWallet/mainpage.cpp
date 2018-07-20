@@ -36,8 +36,8 @@ MainPage::MainPage(QWidget *parent) :
 
     ui->setupUi(this);
     InitStyle();
-    ui->backupBtn->setVisible(UBChain::getInstance()->IsBackupNeeded);
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    ui->backupBtn->setVisible(HXChain::getInstance()->IsBackupNeeded);
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
 
     ui->accountTableWidget->installEventFilter(this);
@@ -61,7 +61,7 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->setColumnWidth(5,74);
     ui->accountTableWidget->horizontalHeader()->setStretchLastSection(true);
 
-    QString language = UBChain::getInstance()->language;
+    QString language = HXChain::getInstance()->language;
     if( language.isEmpty())
     {
         retranslator("English");
@@ -77,7 +77,7 @@ MainPage::MainPage(QWidget *parent) :
     // 由于首页是第一个页面，第一次打开先等待x秒钟 再 updateAccountList
     QTimer::singleShot(10, this, SLOT(init()));
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->accountTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->accountTableWidget);
 
 }
 
@@ -90,12 +90,12 @@ QString toThousandFigure( int);
 
 void MainPage::updateAccountList()
 {
-    AccountInfo info = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+    AccountInfo info = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
     ui->addressLabel->setText(info.address);
 
 
     AssetAmountMap map = info.assetAmountMap;
-    QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->assetInfoMap.keys();
 qDebug() << "ssssssssssssssss " << keys;
     int size = keys.size();
     ui->accountTableWidget->setRowCount(0);
@@ -106,7 +106,7 @@ qDebug() << "ssssssssssssssss " << keys;
         ui->accountTableWidget->setRowHeight(i,40);
 
         QString assetId = keys.at(i);
-        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetId);
+        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
 
         //资产名
         QString symbol = assetInfo.symbol;
@@ -188,7 +188,7 @@ void MainPage::on_addAccountBtn_clicked()
 
     if( !name.isEmpty())
     {
-        UBChain::getInstance()->postRPC( "id-wallet_create_account-" + name, toJsonFormat( "wallet_create_account", QJsonArray() << name ));
+        HXChain::getInstance()->postRPC( "id-wallet_create_account-" + name, toJsonFormat( "wallet_create_account", QJsonArray() << name ));
 
     }
 
@@ -290,7 +290,7 @@ void MainPage::refresh()
 {
 //    qDebug() << "mainpage refresh"   << refreshOrNot;
 //    if( !refreshOrNot) return;
-    ui->backupBtn->setVisible(UBChain::getInstance()->IsBackupNeeded);
+    ui->backupBtn->setVisible(HXChain::getInstance()->IsBackupNeeded);
 
     updateAccountList();
 
@@ -314,12 +314,12 @@ void MainPage::init()
 //    refreshOrNot = true;
 
      ui->accountComboBox->clear();
-     QStringList accounts = UBChain::getInstance()->accountInfoMap.keys();
+     QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
      ui->accountComboBox->addItems(accounts);
 
-     if(accounts.contains(UBChain::getInstance()->currentAccount))
+     if(accounts.contains(HXChain::getInstance()->currentAccount))
      {
-         ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+         ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
      }
 
      inited = true;
@@ -356,7 +356,7 @@ void MainPage::jsonDataUpdated(QString id)
 {
     if( id.startsWith("id-wallet_create_account-") )
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if(result.startsWith(QString("\"result\":\"%1").arg(ACCOUNT_ADDRESS_PREFIX)))
         {
@@ -364,10 +364,10 @@ void MainPage::jsonDataUpdated(QString id)
 //            commonDialog.setText( tr("Please backup up the wallet!!!") );
 //            commonDialog.pop();
 
-            UBChain::getInstance()->autoSaveWalletFile();
+            HXChain::getInstance()->autoSaveWalletFile();
 
-            UBChain::getInstance()->configFile->setValue("/settings/backupNeeded",true);
-            UBChain::getInstance()->IsBackupNeeded = true;
+            HXChain::getInstance()->configFile->setValue("/settings/backupNeeded",true);
+            HXChain::getInstance()->IsBackupNeeded = true;
 
             BackupWalletDialog backupWalletDialog;
             backupWalletDialog.pop();
@@ -379,7 +379,7 @@ void MainPage::jsonDataUpdated(QString id)
             QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
             QJsonObject jsonObject = parse_doucment.object();
             QString address = jsonObject.take("result").toString();
-            UBChain::getInstance()->addTrackAddress(address);
+            HXChain::getInstance()->addTrackAddress(address);
 
             QTimer::singleShot(5000,this,&MainPage::init);
         }
@@ -407,25 +407,25 @@ void MainPage::updatePending()
     
     mutexForPending.lock();
 
-    if( !UBChain::getInstance()->pendingFile->open(QIODevice::ReadWrite))
+    if( !HXChain::getInstance()->pendingFile->open(QIODevice::ReadWrite))
     {
         qDebug() << "pending.dat not exist";
         return;
     }
 
-    QByteArray ba = QByteArray::fromBase64( UBChain::getInstance()->pendingFile->readAll());
+    QByteArray ba = QByteArray::fromBase64( HXChain::getInstance()->pendingFile->readAll());
     QString str(ba);
     QStringList strList = str.split(";");
     strList.removeLast();
 
     mutexForAddressMap.lock();
-    QStringList keys = UBChain::getInstance()->addressMap.keys();
+    QStringList keys = HXChain::getInstance()->addressMap.keys();
     mutexForAddressMap.unlock();
 
     mutexForConfigFile.lock();
-    UBChain::getInstance()->configFile->beginGroup("recordId");
-    QStringList recordKeys = UBChain::getInstance()->configFile->childKeys();
-    UBChain::getInstance()->configFile->endGroup();
+    HXChain::getInstance()->configFile->beginGroup("recordId");
+    QStringList recordKeys = HXChain::getInstance()->configFile->childKeys();
+    HXChain::getInstance()->configFile->endGroup();
 
 
     foreach (QString ss, strList)
@@ -438,14 +438,14 @@ void MainPage::updatePending()
             continue;
         }
         // 如果config中recordId会被置为1， 则删除该记录
-        if( UBChain::getInstance()->configFile->value("recordId/" + sList.at(0)).toInt() != 0 )
+        if( HXChain::getInstance()->configFile->value("recordId/" + sList.at(0)).toInt() != 0 )
         {
             strList.removeAll( ss);
             continue;
         }
 
         // 如果config中recordId被删除了， 则删除该记录
-        if( !UBChain::getInstance()->configFile->contains("recordId/" + sList.at(0)))
+        if( !HXChain::getInstance()->configFile->contains("recordId/" + sList.at(0)))
         {
             strList.removeAll( ss);
             continue;
@@ -461,10 +461,10 @@ void MainPage::updatePending()
         ba += QString( ss + ";").toUtf8();
     }
     ba = ba.toBase64();
-    UBChain::getInstance()->pendingFile->resize(0);
-    QTextStream ts(UBChain::getInstance()->pendingFile);
+    HXChain::getInstance()->pendingFile->resize(0);
+    QTextStream ts(HXChain::getInstance()->pendingFile);
     ts << ba;
-    UBChain::getInstance()->pendingFile->close();
+    HXChain::getInstance()->pendingFile->close();
 
     mutexForPending.unlock();
     
@@ -533,7 +533,7 @@ void MainPage::showExportDialog(QString name)
 void MainPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     if(!inited)     return;
-    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
 
     refresh();
 }
@@ -550,7 +550,7 @@ void MainPage::on_copyBtn_clicked()
 
 void MainPage::on_qrcodeBtn_clicked()
 {
-    AccountInfo info = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+    AccountInfo info = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
     QRCodeDialog qrcodeDialog(info.address);
     qrcodeDialog.move(ui->qrcodeBtn->mapToGlobal( QPoint(20,0)));
     qrcodeDialog.exec();

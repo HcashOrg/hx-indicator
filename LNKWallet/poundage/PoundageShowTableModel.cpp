@@ -119,7 +119,7 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
             }
             else if(index.column() == 2)
             {
-                return UBChain::getInstance()->addressToName(_p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->ownerAdress);
+                return HXChain::getInstance()->addressToName(_p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->ownerAdress);
             }
             else if(index.column() == 3)
             {

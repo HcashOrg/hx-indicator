@@ -35,7 +35,7 @@ HelpWidget::~HelpWidget()
 
 void HelpWidget::CheckUpdateSlot()
 {
-    UBChain::getInstance()->SetUpdateNeeded(false);
+    HXChain::getInstance()->SetUpdateNeeded(false);
 
     ui->label_updatetip->setText(tr("Checking updates..."));
     ui->label_updatetip->setVisible(true);
@@ -72,7 +72,7 @@ void HelpWidget::UpdateFinishSlot()
 {
     ui->label_updatetip->setText(tr("Update finished. Restart and it will take effect! " ));
     showButtonState(2);
-    UBChain::getInstance()->SetUpdateNeeded(true);
+    HXChain::getInstance()->SetUpdateNeeded(true);
 }
 
 void HelpWidget::UpdateWrongSlot()
@@ -80,12 +80,12 @@ void HelpWidget::UpdateWrongSlot()
     ui->label_updatetip->setText(tr("Update error! " ));
     showButtonState(0);
 
-    UBChain::getInstance()->SetUpdateNeeded(false);
+    HXChain::getInstance()->SetUpdateNeeded(false);
 }
 
 void HelpWidget::RestartSlot()
 {
-    UBChain::getInstance()->mainFrame->onCloseWallet();
+    HXChain::getInstance()->mainFrame->onCloseWallet();
 }
 
 void HelpWidget::InitWidget()
@@ -102,7 +102,7 @@ void HelpWidget::InitWidget()
     ui->label_version->setText(QString("windows 32bit v") + WALLET_VERSION);
 #endif
 
-    _p->updateProcess->InitServerURL(UBChain::getInstance()->middlewarePath);
+    _p->updateProcess->InitServerURL(HXChain::getInstance()->middlewarePath);
 
     connect(_p->updateProcess,&UpdateProcess::updateFinish,this,&HelpWidget::UpdateFinishSlot);
     connect(_p->updateProcess,&UpdateProcess::updateWrong,this,&HelpWidget::UpdateWrongSlot);

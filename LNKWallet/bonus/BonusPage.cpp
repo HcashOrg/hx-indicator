@@ -15,7 +15,7 @@ BonusPage::BonusPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->bonusTableWidget->installEventFilter(this);
     ui->bonusTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -37,7 +37,7 @@ BonusPage::BonusPage(QWidget *parent) :
 
     ui->bonusTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->bonusTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->bonusTableWidget);
 
     ui->obtainAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
@@ -53,12 +53,12 @@ BonusPage::~BonusPage()
 void BonusPage::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->accountInfoMap.keys();
+    QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
     ui->accountComboBox->addItems(accounts);
 
-    if(accounts.contains(UBChain::getInstance()->currentAccount))
+    if(accounts.contains(HXChain::getInstance()->currentAccount))
     {
-        ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+        ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
 
     checkObtainAllBtnVisible();
@@ -73,7 +73,7 @@ void BonusPage::jsonDataUpdated(QString id)
 {
     if( id == "id-get_bonus_balance-" + ui->accountComboBox->currentText())
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
         result.prepend("{");
         result.append("}");
@@ -99,7 +99,7 @@ void BonusPage::jsonDataUpdated(QString id)
             assetIconItem->setAsset(ui->bonusTableWidget->item(i,0)->text());
             ui->bonusTableWidget->setCellWidget(i, 0, assetIconItem);
 
-            AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(assetSymbol));
+            AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(assetSymbol));
             ui->bonusTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(bonusAmount,assetInfo.precision)));
             ui->bonusTableWidget->item(i,1)->setData(Qt::UserRole, QString::number(bonusAmount));
 
@@ -128,7 +128,7 @@ void BonusPage::jsonDataUpdated(QString id)
 
     if( id == "id-obtain_bonus_balance")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if(result.startsWith("\"result\":{"))
@@ -167,8 +167,8 @@ void BonusPage::paintEvent(QPaintEvent *)
 
 void BonusPage::fetchBonusBalance()
 {
-    QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
-    UBChain::getInstance()->postRPC( "id-get_bonus_balance-" + ui->accountComboBox->currentText(),
+    QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+    HXChain::getInstance()->postRPC( "id-get_bonus_balance-" + ui->accountComboBox->currentText(),
                                      toJsonFormat( "get_bonus_balance",QJsonArray() << address));
 
 }
@@ -195,13 +195,13 @@ void BonusPage::on_bonusTableWidget_cellPressed(int row, int column)
     if(column == 2)
     {
         if(ui->bonusTableWidget->item(row,2)->text().isEmpty()) return;
-        if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+        if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-        QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+        QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
-        FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
-                                                         UBChain::getInstance()->feeType,ui->accountComboBox->currentText(),
-                                                         UBChain::getInstance()->mainFrame);
+        FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
+                                                         HXChain::getInstance()->feeType,ui->accountComboBox->currentText(),
+                                                         HXChain::getInstance()->mainFrame);
         connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address,row](){
             QJsonArray array;
             QJsonArray array2;
@@ -209,7 +209,7 @@ void BonusPage::on_bonusTableWidget_cellPressed(int row, int column)
             QString amountStr = ui->bonusTableWidget->item(row,1)->data(Qt::UserRole).toString();
             array2 << amountStr;
             array << array2;
-            UBChain::getInstance()->postRPC( "id-obtain_bonus_balance",
+            HXChain::getInstance()->postRPC( "id-obtain_bonus_balance",
                                              toJsonFormat( "obtain_bonus_balance",
                                                            QJsonArray() << address
                                                            << array
@@ -223,13 +223,13 @@ void BonusPage::on_bonusTableWidget_cellPressed(int row, int column)
 
 void BonusPage::on_obtainAllBtn_clicked()
 {
-    if(!UBChain::getInstance()->ValidateOnChainOperation()) return;
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-    QString address = UBChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+    QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
-    FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
-                                                     UBChain::getInstance()->feeType,ui->accountComboBox->currentText(),
-                                                     UBChain::getInstance()->mainFrame);
+    FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
+                                                     HXChain::getInstance()->feeType,ui->accountComboBox->currentText(),
+                                                     HXChain::getInstance()->mainFrame);
     connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address](){
         QJsonArray array;
 
@@ -242,7 +242,7 @@ void BonusPage::on_obtainAllBtn_clicked()
             array << array2;
         }
 
-        UBChain::getInstance()->postRPC( "id-obtain_bonus_balance",
+        HXChain::getInstance()->postRPC( "id-obtain_bonus_balance",
                                          toJsonFormat( "obtain_bonus_balance",
                                                        QJsonArray() << address
                                                        << array

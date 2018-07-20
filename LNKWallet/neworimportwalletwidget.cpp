@@ -19,7 +19,7 @@ NewOrImportWalletWidget::~NewOrImportWalletWidget()
 
 void NewOrImportWalletWidget::on_newWalletBtn_clicked()
 {
-    UBChain::getInstance()->startExe();
+    HXChain::getInstance()->startExe();
     emit enter();
 }
 
@@ -32,19 +32,19 @@ void NewOrImportWalletWidget::on_importWalletBtn_clicked()
 
     if(file.isEmpty())      return;
 
-    QDir dir(UBChain::getInstance()->appDataPath);
+    QDir dir(HXChain::getInstance()->appDataPath);
     if(!dir.exists())
     {
-        qDebug() << dir.mkdir(UBChain::getInstance()->appDataPath);
+        qDebug() << dir.mkdir(HXChain::getInstance()->appDataPath);
     }
 
-    qDebug() << "copy wallet.json to chaindata path : " << QFile::copy(file, UBChain::getInstance()->appDataPath + "/wallet.json");
+    qDebug() << "copy wallet.json to chaindata path : " << QFile::copy(file, HXChain::getInstance()->appDataPath + "/wallet.json");
 
-    UBChain::getInstance()->importedWalletNeedToAddTrackAddresses = true;
-    UBChain::getInstance()->configFile->setValue("/settings/importedWalletNeedToAddTrackAddresses",true);
+    HXChain::getInstance()->importedWalletNeedToAddTrackAddresses = true;
+    HXChain::getInstance()->configFile->setValue("/settings/importedWalletNeedToAddTrackAddresses",true);
 
 
-    UBChain::getInstance()->startExe();
+    HXChain::getInstance()->startExe();
     emit enter();
 }
 

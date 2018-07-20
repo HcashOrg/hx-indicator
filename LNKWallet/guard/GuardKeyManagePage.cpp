@@ -20,7 +20,7 @@ GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->multisigTableWidget->installEventFilter(this);
     ui->multisigTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -60,14 +60,14 @@ void GuardKeyManagePage::init()
     inited = false;
 
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
 
-        if(accounts.contains(UBChain::getInstance()->currentAccount))
+        if(accounts.contains(HXChain::getInstance()->currentAccount))
         {
-            ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+            ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
         }
     }
     else
@@ -80,7 +80,7 @@ void GuardKeyManagePage::init()
         label->setText(tr("There are no guard accounts in the wallet."));
     }
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->multisigTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->multisigTableWidget);
 
     showMultisigInfo();
 
@@ -89,7 +89,7 @@ void GuardKeyManagePage::init()
 
 void GuardKeyManagePage::showMultisigInfo()
 {
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     assetIds.removeAll("1.3.0");    // 不显示LNK
 
     int size = assetIds.size();
@@ -100,7 +100,7 @@ void GuardKeyManagePage::showMultisigInfo()
     {
         ui->multisigTableWidget->setRowHeight(i,40);
 
-        AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(assetIds.at(i));
+        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetIds.at(i));
 
         QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
 
@@ -111,7 +111,7 @@ void GuardKeyManagePage::showMultisigInfo()
         ui->multisigTableWidget->setItem(i,2,new QTableWidgetItem(assetInfo.coldAddress));
         ui->multisigTableWidget->setItem(i,3,new QTableWidgetItem(QString::number(assetInfo.effectiveBlock)));
 
-        QStringList guardAccountIds = UBChain::getInstance()->getInstance()->getAssetMultisigUpdatedGuards(symbol);
+        QStringList guardAccountIds = HXChain::getInstance()->getInstance()->getAssetMultisigUpdatedGuards(symbol);
         if(guardAccountIds.isEmpty())
         {
             ui->multisigTableWidget->setItem(i,4,new QTableWidgetItem(tr("no update")));
@@ -133,7 +133,7 @@ void GuardKeyManagePage::showMultisigInfo()
         }
         else
         {
-            QString accountId = UBChain::getInstance()->formalGuardMap.value(ui->accountComboBox->currentText()).accountId;
+            QString accountId = HXChain::getInstance()->formalGuardMap.value(ui->accountComboBox->currentText()).accountId;
 
             if(guardAccountIds.contains(accountId))
             {
@@ -191,7 +191,7 @@ void GuardKeyManagePage::jsonDataUpdated(QString id)
 {
     if( id.startsWith("id-update_asset_private_keys"))
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result.startsWith("\"result\":{"))             // 成功
@@ -220,7 +220,7 @@ void GuardKeyManagePage::jsonDataUpdated(QString id)
 
     if( id == "id-import_crosschain_key")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
     }
 }
@@ -260,7 +260,7 @@ void GuardKeyManagePage::on_multisigTableWidget_cellClicked(int row, int column)
             CheckPwdDialog checkPwdDialog;
             if(!checkPwdDialog.pop())   return;
 
-            UBChain::getInstance()->postRPC( "id-update_asset_private_keys", toJsonFormat( "update_asset_private_keys",
+            HXChain::getInstance()->postRPC( "id-update_asset_private_keys", toJsonFormat( "update_asset_private_keys",
                                     QJsonArray() << ui->accountComboBox->currentText() << assetSymbol << true));
 
         }
@@ -273,7 +273,7 @@ void GuardKeyManagePage::on_accountComboBox_currentIndexChanged(const QString &a
 {
     if(!inited)     return;
 
-    UBChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
     showMultisigInfo();
 }
 
@@ -328,12 +328,12 @@ void GuardKeyManagePage::on_importBtn_clicked()
         {
             QJsonObject object2 = v.toObject();
             QString wifKey = object2.take("wif_key").toString();
-            UBChain::getInstance()->postRPC( "id-import_crosschain_key", toJsonFormat( "import_crosschain_key",
+            HXChain::getInstance()->postRPC( "id-import_crosschain_key", toJsonFormat( "import_crosschain_key",
                                     QJsonArray()  << wifKey << key));
         }
     }
 
-    UBChain::getInstance()->postRPC( "finish-import_crosschain_key", toJsonFormat( "import_crosschain_key",
+    HXChain::getInstance()->postRPC( "finish-import_crosschain_key", toJsonFormat( "import_crosschain_key",
                             QJsonArray() ));
 }
 

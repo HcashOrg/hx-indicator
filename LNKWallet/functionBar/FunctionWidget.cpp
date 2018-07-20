@@ -170,7 +170,7 @@ void FunctionWidget::ShowMoreWidgetSlots()
 void FunctionWidget::ShowSettingWidgetSlots()
 {
     SetDialog setDialog;
-    connect(&setDialog,SIGNAL(settingSaved()),UBChain::getInstance()->mainFrame,SLOT(settingSaved()));
+    connect(&setDialog,SIGNAL(settingSaved()),HXChain::getInstance()->mainFrame,SLOT(settingSaved()));
     setDialog.pop();
 }
 
@@ -184,7 +184,7 @@ void FunctionWidget::ShowAboutWidgetSlots()
 {
     SetDialog setDialog;
     setDialog.setHelpFirst(true);
-    connect(&setDialog,SIGNAL(settingSaved()),UBChain::getInstance()->mainFrame,SLOT(settingSaved()));
+    connect(&setDialog,SIGNAL(settingSaved()),HXChain::getInstance()->mainFrame,SLOT(settingSaved()));
     setDialog.pop();
 
 }
@@ -193,7 +193,7 @@ void FunctionWidget::ShowUpdateWidgetSlots()
 {
     SetDialog setDialog;
     setDialog.setHelpFirst(true);
-    connect(&setDialog,SIGNAL(settingSaved()),UBChain::getInstance()->mainFrame,SLOT(settingSaved()));
+    connect(&setDialog,SIGNAL(settingSaved()),HXChain::getInstance()->mainFrame,SLOT(settingSaved()));
     setDialog.pop();
 
 }

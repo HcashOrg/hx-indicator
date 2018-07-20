@@ -64,9 +64,9 @@ void PoundageWidget::autoRefreshSlots()
         if(ui->comboBox_coinType->currentData().toString() == "0")
         {
             //查询所有承兑单
-            foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+            foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
                 if(asset.id == "1.3.0") continue;
-                UBChain::getInstance()->postRPC("poundage_list_guarantee_order_"+asset.symbol,
+                HXChain::getInstance()->postRPC("poundage_list_guarantee_order_"+asset.symbol,
                                                 toJsonFormat("list_guarantee_order",
                                                              QJsonArray()<<asset.symbol<<false
                                                              )
@@ -80,13 +80,13 @@ void PoundageWidget::autoRefreshSlots()
         }
         else
         {
-            UBChain::getInstance()->postRPC("poundage_list_guarantee_order_",
+            HXChain::getInstance()->postRPC("poundage_list_guarantee_order_",
                                             toJsonFormat("list_guarantee_order",
                                                          QJsonArray()<<ui->comboBox_coinType->currentText()<<false
                                                          )
                                             );
         }
-        UBChain::getInstance()->postRPC("poundage_finish_all_list",toJsonFormat("finish_all_list",QJsonArray()));
+        HXChain::getInstance()->postRPC("poundage_finish_all_list",toJsonFormat("finish_all_list",QJsonArray()));
 
     }
     else if(ui->toolButton_myPoundage->isChecked())
@@ -94,15 +94,15 @@ void PoundageWidget::autoRefreshSlots()
         _p->myPoundageSheet->clear();
 
         //获取自己账户的所有信息
-        foreach(QString key,UBChain::getInstance()->accountInfoMap.keys())
+        foreach(QString key,HXChain::getInstance()->accountInfoMap.keys())
         {
-            UBChain::getInstance()->postRPC("poundage_get_my_guarantee_order_"+key,
+            HXChain::getInstance()->postRPC("poundage_get_my_guarantee_order_"+key,
                                             toJsonFormat("get_my_guarantee_order",
                                                          QJsonArray()<<key<<false
                                                          )
                                             );
         }
-        UBChain::getInstance()->postRPC("poundage_finish_my_list",toJsonFormat("finish_all_list",QJsonArray()));
+        HXChain::getInstance()->postRPC("poundage_finish_my_list",toJsonFormat("finish_all_list",QJsonArray()));
 
     }
 
@@ -110,12 +110,12 @@ void PoundageWidget::autoRefreshSlots()
 
 void PoundageWidget::PublishPoundageSlots()
 {
-    if(UBChain::getInstance()->accountInfoMap.isEmpty())
+    if(HXChain::getInstance()->accountInfoMap.isEmpty())
     {
         CommonDialog dia(CommonDialog::OkOnly);
         dia.setText(tr("Please Import Or Create Account First!"));
         dia.pop();
-        UBChain::getInstance()->mainFrame->ShowMainPageSlot();
+        HXChain::getInstance()->mainFrame->ShowMainPageSlot();
         return;
     }
     PublishPoundageWidget *publishWidget = new PublishPoundageWidget(this);
@@ -184,7 +184,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
 {
     if("publish_create_guarantee_order" == id)
     {
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         qDebug() << id << result;
 
         if( result.startsWith("\"result\":{"))             // 成功
@@ -209,7 +209,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
     {
         std::lock_guard<std::mutex> guar(_p->allMutex);
         //转化为结构体
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() )  return;
         result.prepend("{");
         result.append("}");
@@ -227,7 +227,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
     else if(id.startsWith("poundage_get_my_guarantee_order_"))
     {
         //转化为结构体
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() )  return;
         result.prepend("{");
         result.append("}");
@@ -246,7 +246,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
     else if("poundage_cancel_guarantee_order" == id)
     {
         //转化为结构体
-        QString result = UBChain::getInstance()->jsonDataValue( id);
+        QString result = HXChain::getInstance()->jsonDataValue( id);
         qDebug() << id << result;
 
         if( result.startsWith("\"result\":{"))             // 成功
@@ -270,12 +270,12 @@ void PoundageWidget::jsonDataUpdated(QString id)
 
 void PoundageWidget::DeletePoundageSlots(const QString &orderID,const QString &accountName)
 {
-    FeeChargeWidget *feeCharge = new FeeChargeWidget(UBChain::getInstance()->feeChargeInfo.poundageCancelFee.toDouble(),"LNK",
-                                                     accountName,UBChain::getInstance()->mainFrame);
+    FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.poundageCancelFee.toDouble(),"LNK",
+                                                     accountName,HXChain::getInstance()->mainFrame);
     feeCharge->setAttribute(Qt::WA_DeleteOnClose);
     feeCharge->show();
     connect(feeCharge,&FeeChargeWidget::confirmSignal,[orderID](){
-        UBChain::getInstance()->postRPC("poundage_cancel_guarantee_order",
+        HXChain::getInstance()->postRPC("poundage_cancel_guarantee_order",
                                         toJsonFormat("cancel_guarantee_order",
                                                      QJsonArray()<<orderID<<true)
                                         );
@@ -286,8 +286,8 @@ void PoundageWidget::DeletePoundageSlots(const QString &orderID,const QString &a
 void PoundageWidget::SetDefaultPoundageSlots(const QString &orderID)
 {
     //往配置文件里写入
-    UBChain::getInstance()->configFile->setValue("/settings/feeOrderID", orderID);
-    UBChain::getInstance()->feeOrderID = orderID;
+    HXChain::getInstance()->configFile->setValue("/settings/feeOrderID", orderID);
+    HXChain::getInstance()->feeOrderID = orderID;
 }
 
 void PoundageWidget::InitWidget()
@@ -315,7 +315,7 @@ void PoundageWidget::InitWidget()
     ui->stackedWidget->setCurrentWidget(_p->allPoundageWidget);
 
 
-    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &PoundageWidget::jsonDataUpdated);
+    connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &PoundageWidget::jsonDataUpdated);
 
     connect(ui->toolButton_publishPoundage,&QToolButton::clicked,this,&PoundageWidget::PublishPoundageSlots);
     connect(ui->toolButton_allPoundage,&QToolButton::clicked,this,&PoundageWidget::ShowAllPoundageSlots);
@@ -358,7 +358,7 @@ void PoundageWidget::InitCoinType()
 {
     //初始化币种(币symbol，币id)
     ui->comboBox_coinType->clear();
-    foreach(AssetInfo asset,UBChain::getInstance()->assetInfoMap){
+    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
         if(asset.id == "1.3.0") continue;
         ui->comboBox_coinType->addItem(asset.symbol,asset.id);
     }

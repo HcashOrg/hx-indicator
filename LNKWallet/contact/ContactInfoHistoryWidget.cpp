@@ -47,7 +47,7 @@ ContactInfoHistoryWidget::~ContactInfoHistoryWidget()
 void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QString _assetId)
 {
     accountAddress = _accountAddress;
-    QVector<TransactionStruct> tsVector = UBChain::getInstance()->transactionDB.lookupTransactionStruct(_accountAddress,TRANSACTION_TYPE_NORMAL);
+    QVector<TransactionStruct> tsVector = HXChain::getInstance()->transactionDB.lookupTransactionStruct(_accountAddress,TRANSACTION_TYPE_NORMAL);
 
 
     // 根据区块高度排序
@@ -98,7 +98,7 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
         QJsonObject amountObject = object.take("amount").toObject();
         unsigned long long amount = jsonValueToULL(amountObject.take("amount"));
         QString amountAssetId = amountObject.take("asset_id").toString();
-        AssetInfo amountAssetInfo = UBChain::getInstance()->assetInfoMap.value(amountAssetId);
+        AssetInfo amountAssetInfo = HXChain::getInstance()->assetInfoMap.value(amountAssetId);
 
         if(_assetId != "ALL"  &&  amountAssetId != _assetId)    continue;
 
@@ -143,7 +143,7 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
         QJsonObject feeObject = object.take("fee").toObject();
         unsigned long long feeAmount = jsonValueToULL(feeObject.take("amount"));
         QString feeAssetId = feeObject.take("asset_id").toString();
-        AssetInfo feeAssetInfo = UBChain::getInstance()->assetInfoMap.value(feeAssetId);
+        AssetInfo feeAssetInfo = HXChain::getInstance()->assetInfoMap.value(feeAssetId);
         ui->transferRecordTableWidget->setItem(rowCount,3, new QTableWidgetItem(getBigNumberString(feeAmount, feeAssetInfo.precision)));
 
         ui->transferRecordTableWidget->setItem(rowCount,5, new QTableWidgetItem(tr("confirmed")));
@@ -174,10 +174,10 @@ void ContactInfoHistoryWidget::InitWidget()
     InitStyle();
 
     ui->assetComboBox->addItem(tr("ALL"), "ALL");
-    QStringList assetIds = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(UBChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
     }
 
     ui->stackedWidget->addWidget(_p->pageWidget);
@@ -185,7 +185,7 @@ void ContactInfoHistoryWidget::InitWidget()
 
     connect(ui->assetComboBox,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),this,&ContactInfoHistoryWidget::assetComboBox_currentIndexChanged);
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->transferRecordTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->transferRecordTableWidget);
 }
 
 void ContactInfoHistoryWidget::InitStyle()

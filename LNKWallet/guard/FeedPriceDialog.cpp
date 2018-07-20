@@ -13,9 +13,9 @@ FeedPriceDialog::FeedPriceDialog( QString _assetSymbol, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    setParent(UBChain::getInstance()->mainFrame);
+    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
@@ -51,12 +51,12 @@ void FeedPriceDialog::init()
 {
     ui->accountComboBox->clear();
 
-    QStringList keys = UBChain::getInstance()->accountInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->accountInfoMap.keys();
     QStringList publishers;
-    AssetInfo assetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetLabel->text()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetLabel->text()));
     foreach (QString key, keys)
     {
-        AccountInfo accountInfo = UBChain::getInstance()->accountInfoMap.value(key);
+        AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(key);
         if(assetInfo.publishers.contains(accountInfo.address))
         {
             publishers += key;
@@ -76,9 +76,9 @@ void FeedPriceDialog::init()
         ui->okBtn->setEnabled(true);
     }
 
-    if(publishers.contains(UBChain::getInstance()->currentAccount))
+    if(publishers.contains(HXChain::getInstance()->currentAccount))
     {
-        ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+        ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
 
     QString str = QString("%1 : %2").arg( getBigNumberString(assetInfo.quoteAmount.amount, ASSET_PRECISION))
@@ -95,7 +95,7 @@ void FeedPriceDialog::jsonDataUpdated(QString id)
 {
     if( id == "id-publish_normal_asset_feed")
     {
-        QString result = UBChain::getInstance()->jsonDataValue(id);
+        QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
         if( result.startsWith("\"result\":{"))             // 成功
@@ -127,7 +127,7 @@ void FeedPriceDialog::on_okBtn_clicked()
     }
 
 
-    AssetInfo baseAssetInfo = UBChain::getInstance()->assetInfoMap.value(UBChain::getInstance()->getAssetId(ui->assetLabel->text()));
+    AssetInfo baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetLabel->text()));
     QJsonObject baseObject;
     baseObject.insert("amount", QString::number( qPow(10, baseAssetInfo.precision), 'f', 0));
     baseObject.insert("asset_id", baseAssetInfo.id);
@@ -142,7 +142,7 @@ void FeedPriceDialog::on_okBtn_clicked()
 
 //    object.insert("core_exchange_rate", settlementPriceObject);
 
-    UBChain::getInstance()->postRPC( "id-publish_normal_asset_feed", toJsonFormat( "publish_normal_asset_feed",
+    HXChain::getInstance()->postRPC( "id-publish_normal_asset_feed", toJsonFormat( "publish_normal_asset_feed",
                             QJsonArray() << ui->accountComboBox->currentText() << ui->assetLabel->text() << object << true));
 
     qDebug() << toJsonFormat( "publish_normal_asset_feed",

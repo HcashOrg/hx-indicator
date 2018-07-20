@@ -20,8 +20,8 @@ bool TransactionDB::init()
 {
     leveldb::Options options;
     options.create_if_missing = true;
-    leveldb::Status status = leveldb::DB::Open(options,QString(UBChain::getInstance()->walletConfigPath + "/transactionDB/transactionStruct").toStdString(), &m_transactionStructDB);
-    leveldb::Status status2 = leveldb::DB::Open(options,QString(UBChain::getInstance()->walletConfigPath + "/transactionDB/accountTransactionIds").toStdString(), &m_accountTransactionIdsDB);
+    leveldb::Status status = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/transactionStruct").toStdString(), &m_transactionStructDB);
+    leveldb::Status status2 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/accountTransactionIds").toStdString(), &m_accountTransactionIdsDB);
 
     if(status.ok() && status2.ok())
     {

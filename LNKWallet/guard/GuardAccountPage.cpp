@@ -20,14 +20,14 @@ GuardAccountPage::~GuardAccountPage()
 void GuardAccountPage::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
 
-        if(accounts.contains(UBChain::getInstance()->currentAccount))
+        if(accounts.contains(HXChain::getInstance()->currentAccount))
         {
-            ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+            ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
         }
     }
     else
@@ -41,18 +41,18 @@ void GuardAccountPage::init()
         label->setText(tr("There are no guard accounts in the wallet."));
     }
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
 
 void GuardAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
-    GuardInfo info = UBChain::getInstance()->formalGuardMap.value(ui->accountComboBox->currentText());
+    GuardInfo info = HXChain::getInstance()->formalGuardMap.value(ui->accountComboBox->currentText());
 
     ui->guardIdLabel->setText(info.guardId);
     ui->addressLabel->setText(info.address);
 
-    QStringList formalGuards = UBChain::getInstance()->formalGuardMap.keys();
-    QStringList normalGuards = UBChain::getInstance()->allGuardMap.keys();
+    QStringList formalGuards = HXChain::getInstance()->formalGuardMap.keys();
+    QStringList normalGuards = HXChain::getInstance()->allGuardMap.keys();
     if(formalGuards.contains(ui->accountComboBox->currentText()))
     {
         ui->guardTypeLabel->setText(tr("formal guard"));

@@ -12,7 +12,7 @@ FeedPricePage::FeedPricePage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( UBChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->assetPriceTableWidget->installEventFilter(this);
     ui->assetPriceTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -44,14 +44,14 @@ FeedPricePage::~FeedPricePage()
 void FeedPricePage::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = UBChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
 
-        if(accounts.contains(UBChain::getInstance()->currentAccount))
+        if(accounts.contains(HXChain::getInstance()->currentAccount))
         {
-            ui->accountComboBox->setCurrentText(UBChain::getInstance()->currentAccount);
+            ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
         }
     }
     else
@@ -64,7 +64,7 @@ void FeedPricePage::init()
         label->setText(tr("There are no guard accounts in the wallet."));
     }
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->assetPriceTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->assetPriceTableWidget);
 
 
     showAssetsPrice();
@@ -72,7 +72,7 @@ void FeedPricePage::init()
 
 void FeedPricePage::showAssetsPrice()
 {
-    QStringList keys = UBChain::getInstance()->assetInfoMap.keys();
+    QStringList keys = HXChain::getInstance()->assetInfoMap.keys();
     keys.removeAll("1.3.0");
     int size = keys.size();
     ui->assetPriceTableWidget->setRowCount(0);
@@ -82,7 +82,7 @@ void FeedPricePage::showAssetsPrice()
     {
         ui->assetPriceTableWidget->setRowHeight(i,40);
 
-        AssetInfo info = UBChain::getInstance()->assetInfoMap.value(keys.at(i));
+        AssetInfo info = HXChain::getInstance()->assetInfoMap.value(keys.at(i));
 
         ui->assetPriceTableWidget->setItem(i, 0, new QTableWidgetItem(info.symbol));
         ui->assetPriceTableWidget->setItem(i, 1, new QTableWidgetItem(info.currentFeedTime.replace("T"," ")));

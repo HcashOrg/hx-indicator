@@ -37,7 +37,7 @@ void CapitalConfirmWidget::jsonDataUpdated(QString id)
 {
     if( id == "capital-unlock-lockpage")
     {
-        QString  result = UBChain::getInstance()->jsonDataValue(id);
+        QString  result = HXChain::getInstance()->jsonDataValue(id);
         if( result == "\"result\":null")
         {
             ui->lineEdit->setStyleSheet("color:green");
@@ -73,7 +73,7 @@ void CapitalConfirmWidget::passwordChangeSlots(const QString &address)
         return;
     }
 
-    UBChain::getInstance()->postRPC( "capital-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->lineEdit->text() ));
+    HXChain::getInstance()->postRPC( "capital-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->lineEdit->text() ));
 }
 
 void CapitalConfirmWidget::InitData()
@@ -90,7 +90,7 @@ void CapitalConfirmWidget::InitWidget()
 
     InitData();
     ui->toolButton_confirm->setEnabled(false);
-    connect( UBChain::getInstance(), &UBChain::jsonDataUpdated, this, &CapitalConfirmWidget::jsonDataUpdated);
+    connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &CapitalConfirmWidget::jsonDataUpdated);
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&CapitalConfirmWidget::ConfirmSlots);
     connect(ui->toolButton_cancel,&QToolButton::clicked,this,&CapitalConfirmWidget::CancelSlots);
     connect(ui->lineEdit,&QLineEdit::textEdited,this,&CapitalConfirmWidget::passwordChangeSlots);

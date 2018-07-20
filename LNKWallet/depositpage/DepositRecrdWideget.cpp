@@ -39,7 +39,7 @@ DepositRecrdWideget::DepositRecrdWideget(QWidget *parent) :
     blankWidget = new BlankDefaultWidget(ui->depositRecordTableWidget);
     blankWidget->setTextTip(tr("There's no deposit record!"));
 
-    UBChain::getInstance()->mainFrame->installBlurEffect(ui->depositRecordTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->depositRecordTableWidget);
     init();
 }
 
@@ -59,7 +59,7 @@ void DepositRecrdWideget::init()
 void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
 {
     tunnelAddress = _tunnelAddress;
-    TransactionTypeIds typeIds = UBChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(_tunnelAddress,TRANSACTION_TYPE_DEPOSIT);
+    TransactionTypeIds typeIds = HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(_tunnelAddress,TRANSACTION_TYPE_DEPOSIT);
 
     int size = typeIds.size();
     ui->depositRecordTableWidget->setRowCount(0);
@@ -70,7 +70,7 @@ void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
         ui->depositRecordTableWidget->setRowHeight(i,40);
 
         QString transactionId = typeIds.at(size - i - 1).transactionId;
-        TransactionStruct ts = UBChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
+        TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(transactionId);
         if(ts.type == -1)
         {
             qDebug() << "can not find transaction in transactionstruct db: " << transactionId;
