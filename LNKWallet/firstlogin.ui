@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>960</width>
-    <height>580</height>
+    <width>228</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="font">
@@ -23,10 +23,10 @@
   <widget class="QLineEdit" name="pwdLineEdit2">
    <property name="geometry">
     <rect>
-     <x>305</x>
-     <y>340</y>
-     <width>180</width>
-     <height>24</height>
+     <x>20</x>
+     <y>145</y>
+     <width>187</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="font">
@@ -46,14 +46,20 @@
    <property name="echoMode">
     <enum>QLineEdit::Password</enum>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>确认密码</string>
+   </property>
   </widget>
   <widget class="QToolButton" name="createBtn">
    <property name="geometry">
     <rect>
-     <x>540</x>
-     <y>386</y>
-     <width>116</width>
-     <height>30</height>
+     <x>45</x>
+     <y>193</y>
+     <width>135</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="font">
@@ -77,10 +83,10 @@
   <widget class="QToolButton" name="closeBtn">
    <property name="geometry">
     <rect>
-     <x>645</x>
-     <y>190</y>
-     <width>18</width>
-     <height>18</height>
+     <x>210</x>
+     <y>10</y>
+     <width>7</width>
+     <height>7</height>
     </rect>
    </property>
    <property name="cursor">
@@ -96,10 +102,10 @@
   <widget class="QLineEdit" name="pwdLineEdit">
    <property name="geometry">
     <rect>
-     <x>305</x>
-     <y>280</y>
-     <width>180</width>
-     <height>24</height>
+     <x>20</x>
+     <y>115</y>
+     <width>187</width>
+     <height>25</height>
     </rect>
    </property>
    <property name="font">
@@ -117,49 +123,20 @@
     <enum>QLineEdit::Password</enum>
    </property>
    <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="placeholderText">
+    <string>输入密码</string>
    </property>
    <property name="clearButtonEnabled">
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>305</x>
-     <y>250</y>
-     <width>200</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>输入密码</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label2">
-   <property name="geometry">
-    <rect>
-     <x>305</x>
-     <y>320</y>
-     <width>200</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>确认密码</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="tipLabel">
    <property name="geometry">
     <rect>
-     <x>305</x>
-     <y>370</y>
+     <x>25</x>
+     <y>172</y>
      <width>180</width>
      <height>20</height>
     </rect>
@@ -179,39 +156,34 @@
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="Line" name="line">
+  <widget class="QLabel" name="label_version">
    <property name="geometry">
     <rect>
-     <x>305</x>
-     <y>298</y>
-     <width>181</width>
-     <height>16</height>
+     <x>97</x>
+     <y>94</y>
+     <width>80</width>
+     <height>20</height>
     </rect>
    </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
+   <property name="font">
+    <font>
+     <pointsize>-1</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size: 8px;</string>
+   </property>
+   <property name="text">
+    <string>v1.0.1</string>
    </property>
   </widget>
-  <widget class="Line" name="line_2">
+  <widget class="QLabel" name="welcome">
    <property name="geometry">
     <rect>
-     <x>305</x>
-     <y>358</y>
-     <width>181</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-  </widget>
-  <widget class="QLabel" name="welcome_label">
-   <property name="geometry">
-    <rect>
-     <x>305</x>
-     <y>190</y>
-     <width>100</width>
-     <height>45</height>
+     <x>72</x>
+     <y>82</y>
+     <width>78</width>
+     <height>15</height>
     </rect>
    </property>
    <property name="font">
@@ -227,16 +199,6 @@
     <string/>
    </property>
   </widget>
-  <zorder>label2</zorder>
-  <zorder>label</zorder>
-  <zorder>pwdLineEdit2</zorder>
-  <zorder>createBtn</zorder>
-  <zorder>closeBtn</zorder>
-  <zorder>pwdLineEdit</zorder>
-  <zorder>tipLabel</zorder>
-  <zorder>line</zorder>
-  <zorder>line_2</zorder>
-  <zorder>welcome_label</zorder>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

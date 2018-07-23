@@ -28,25 +28,25 @@
      <x>0</x>
      <y>0</y>
      <width>960</width>
-     <height>580</height>
+     <height>543</height>
     </rect>
    </property>
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>180</y>
-      <width>380</width>
-      <height>220</height>
+      <x>330</x>
+      <y>200</y>
+      <width>300</width>
+      <height>136</height>
      </rect>
     </property>
     <widget class="QToolButton" name="cancelBtn">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>170</y>
-       <width>100</width>
-       <height>30</height>
+       <x>160</x>
+       <y>94</y>
+       <width>92</width>
+       <height>28</height>
       </rect>
      </property>
      <property name="cursor">
@@ -62,10 +62,10 @@
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>170</y>
-       <width>100</width>
-       <height>30</height>
+       <x>51</x>
+       <y>94</y>
+       <width>92</width>
+       <height>28</height>
       </rect>
      </property>
      <property name="cursor">
@@ -81,10 +81,10 @@
     <widget class="QLabel" name="addressNameTipLabel2">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>130</y>
-       <width>200</width>
-       <height>20</height>
+       <x>20</x>
+       <y>70</y>
+       <width>261</width>
+       <height>16</height>
       </rect>
      </property>
      <property name="text">
@@ -94,10 +94,10 @@
     <widget class="QLineEdit" name="nameLineEdit">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>100</y>
-       <width>311</width>
-       <height>30</height>
+       <x>20</x>
+       <y>40</y>
+       <width>266</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="font">
@@ -128,10 +128,10 @@
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>335</x>
-       <y>20</y>
-       <width>18</width>
-       <height>18</height>
+       <x>280</x>
+       <y>10</y>
+       <width>7</width>
+       <height>7</height>
       </rect>
      </property>
      <property name="cursor">
@@ -150,17 +150,23 @@
     <widget class="QLabel" name="label_9">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>70</y>
+       <x>12</x>
+       <y>16</y>
        <width>121</width>
-       <height>30</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <family>Microsoft YaHei UI Light</family>
-       <stylestrategy>PreferDefault</stylestrategy>
+       <pointsize>-1</pointsize>
+       <weight>9</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 75 9px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>账户名</string>

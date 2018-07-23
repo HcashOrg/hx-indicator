@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>434</height>
+    <width>960</width>
+    <height>543</height>
    </rect>
   </property>
   <property name="font">
@@ -24,19 +24,19 @@
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>380</width>
-     <height>414</height>
+     <x>0</x>
+     <y>0</y>
+     <width>960</width>
+     <height>543</height>
     </rect>
    </property>
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>380</width>
-      <height>414</height>
+      <x>330</x>
+      <y>130</y>
+      <width>300</width>
+      <height>296</height>
      </rect>
     </property>
     <property name="font">
@@ -47,10 +47,10 @@
     <widget class="QTextBrowser" name="consoleBrowser">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>65</y>
-       <width>310</width>
-       <height>222</height>
+       <x>18</x>
+       <y>48</y>
+       <width>266</width>
+       <height>125</height>
       </rect>
      </property>
      <property name="font">
@@ -65,14 +65,19 @@
       <enum>Qt::DefaultContextMenu</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(0, 0, 0);</string>
+      <string notr="true">color: rgb(0, 0, 0);
+border:1px solid rgb(196,191,214);
+</string>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Sunken</enum>
      </property>
     </widget>
     <widget class="QToolButton" name="clearBtn">
      <property name="geometry">
       <rect>
-       <x>148</x>
-       <y>364</y>
+       <x>100</x>
+       <y>249</y>
        <width>96</width>
        <height>30</height>
       </rect>
@@ -100,10 +105,10 @@
     <widget class="QLineEdit" name="consoleLineEdit">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>320</y>
-       <width>310</width>
-       <height>30</height>
+       <x>18</x>
+       <y>205</y>
+       <width>266</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="font">
@@ -121,22 +126,24 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>8</y>
-       <width>80</width>
+       <x>15</x>
+       <y>15</y>
+       <width>91</width>
        <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Microsoft YaHei UI Light</family>
-       <pointsize>12</pointsize>
-       <weight>50</weight>
+       <family>黑体</family>
+       <pointsize>-1</pointsize>
+       <weight>9</weight>
+       <italic>false</italic>
        <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(0, 0, 0);</string>
+      <string notr="true">font: 75 18px &quot;黑体&quot;;
+color: rgb(52, 37, 90);</string>
      </property>
      <property name="text">
       <string>控制台</string>
@@ -148,10 +155,10 @@
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>335</x>
-       <y>20</y>
-       <width>12</width>
-       <height>12</height>
+       <x>280</x>
+       <y>10</y>
+       <width>7</width>
+       <height>7</height>
       </rect>
      </property>
      <property name="cursor">
@@ -167,22 +174,20 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>45</x>
-       <y>300</y>
+       <x>19</x>
+       <y>184</y>
        <width>311</width>
        <height>20</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Microsoft YaHei UI Light</family>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
+       <pointsize>-1</pointsize>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(0, 0, 0);</string>
+      <string notr="true">color: rgb(137,129,161);
+font-size:10px;</string>
      </property>
      <property name="text">
       <string>在此输入命令并回车</string>
@@ -191,8 +196,8 @@
     <widget class="QCheckBox" name="checkBox">
      <property name="geometry">
       <rect>
-       <x>254</x>
-       <y>296</y>
+       <x>197</x>
+       <y>178</y>
        <width>91</width>
        <height>20</height>
       </rect>

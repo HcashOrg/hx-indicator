@@ -64,24 +64,29 @@ void NewOrImportWalletWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/login_back.png").scaled(this->size())));
     setPalette(palette);
 
     QPalette pa;
-    pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
+    pa.setColor(QPalette::WindowText,QColor(243,241,250));
     ui->label_version->setPalette(pa);
 
-    ui->newWalletBtn->setStyleSheet(BIG_BUTTON);
-    ui->importWalletBtn->setStyleSheet("QToolButton{font: 11px \"Microsoft YaHei UI Light\";background-color:transparent; border:none;border-radius:15px;color: #5474EB;}" \
-                                       "QToolButton:pressed{background-color:rgb(70,95,191);color:white;border-radius:15px;}");
+    ui->newWalletBtn->setStyleSheet(OKBTN_STYLE);
+    ui->importWalletBtn->setStyleSheet(CANCELBTN_STYLE);
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    //welcome
+    ui->welcome->setPixmap(QPixmap(":/ui/wallet_ui/Welcome.png").scaled(ui->welcome->width(), ui->welcome->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
 }
 
 void NewOrImportWalletWidget::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
-    painter.drawPixmap(235,130,470,320,QPixmap(":/ui/wallet_ui/login.png").scaled(470,320));
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QBrush(QColor(243,241,250)));
+    painter.drawRect(0,0,228,24);
+    painter.drawPixmap(7,5,32,12,QPixmap(":/ui/wallet_ui/hx_label_logo.png").scaled(32,12,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    painter.drawPixmap(94,38,36,36,QPixmap(":/ui/wallet_ui/logo_center.png").scaled(36,36,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
     QWidget::paintEvent(e);
 }

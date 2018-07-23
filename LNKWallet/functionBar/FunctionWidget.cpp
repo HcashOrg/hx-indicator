@@ -176,8 +176,8 @@ void FunctionWidget::ShowSettingWidgetSlots()
 
 void FunctionWidget::ShowConsoleWidgetSlots()
 {
-    ConsoleDialog *consoleDialog = new ConsoleDialog();
-    consoleDialog->show();
+    ConsoleDialog consoleDialog /*= new ConsoleDialog()*/;
+    consoleDialog.pop();
 }
 
 void FunctionWidget::ShowAboutWidgetSlots()

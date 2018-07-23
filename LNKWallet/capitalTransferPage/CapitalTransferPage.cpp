@@ -15,13 +15,14 @@
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
 
-static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001}};
+static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001},{"HC",0.001}};
+static const QMap<QString,QString> fee_charge = {{"BTC","0.001"},{"LTC","0.001"},{"HC","0.01"}};
 class CapitalTransferPage::CapitalTransferPagePrivate
 {
 public:
     CapitalTransferPagePrivate(const CapitalTransferInput &data)
         :account_name(data.account_name),account_address(data.account_address),symbol(data.symbol)
-        ,fee(HXChain::getInstance()->feeChargeInfo.capitalFee)
+        ,fee(fee_charge.value(data.symbol))
         ,actualNumber("0")
         ,precision(5)
     {

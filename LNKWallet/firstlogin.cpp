@@ -27,7 +27,7 @@ FirstLogin::FirstLogin(QWidget *parent) :
     ui->pwdLineEdit->setAttribute(Qt::WA_MacShowFocusRect,false);
     ui->pwdLineEdit2->setAttribute(Qt::WA_MacShowFocusRect,false);
 #endif
-    ui->pwdLineEdit->setFocus();
+    //ui->pwdLineEdit->setFocus();
     ui->pwdLineEdit->installEventFilter(this);
     ui->pwdLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
     ui->pwdLineEdit2->setContextMenuPolicy(Qt::NoContextMenu);
@@ -98,14 +98,12 @@ void FirstLogin::on_createBtn_clicked()
 
 void FirstLogin::paintEvent(QPaintEvent *e)
 {
-    QStyleOption opt;
-
-    opt.init(this);
-    QPainter p(this);
-    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-
     QPainter painter(this);
-    painter.drawPixmap(238,130,470,320,QPixmap(":/ui/wallet_ui/whitebord.png").scaled(470,320));
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QBrush(QColor(243,241,250)));
+    painter.drawRect(0,0,228,24);
+    painter.drawPixmap(7,5,32,12,QPixmap(":/ui/wallet_ui/hx_label_logo.png").scaled(32,12,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    painter.drawPixmap(94,38,36,36,QPixmap(":/ui/wallet_ui/logo_center.png").scaled(36,36,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
 
     QWidget::paintEvent(e);
@@ -254,24 +252,27 @@ void FirstLogin::jsonDataUpdated(QString id)
 void FirstLogin::InitWidget()
 {
     InitStyle();
+
+    ui->label_version->setText(QString("v") + WALLET_VERSION);
 }
 
 void FirstLogin::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/login_back.png").scaled(this->size())));
     setPalette(palette);
 
 
     QPalette pa;
-    pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
-    ui->pwdLineEdit->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;");
-    ui->pwdLineEdit2->setStyleSheet("color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;");
+    pa.setColor(QPalette::WindowText,QColor(243,241,250));
+    ui->label_version->setPalette(pa);
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
-    ui->createBtn->setStyleSheet(BIG_BUTTON);
+    ui->createBtn->setStyleSheet(CANCELBTN_STYLE);
+    //welcome
+    ui->welcome->setPixmap(QPixmap(":/ui/wallet_ui/Welcome.png").scaled(ui->welcome->width(), ui->welcome->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
 
 }
 

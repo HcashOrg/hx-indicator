@@ -131,6 +131,14 @@
         <file>wallet_ui/guard_formal.png</file>
         <file>wallet_ui/guard_normal.png</file>
         <file>wallet_ui/HX_logo.png</file>
+        <file>wallet_ui/close_button.png</file>
+        <file>wallet_ui/hx_label_logo.png</file>
+        <file>wallet_ui/login_back.png</file>
+        <file>wallet_ui/logo_center.png</file>
+        <file>wallet_ui/max_button.png</file>
+        <file>wallet_ui/mini_button.png</file>
+        <file>wallet_ui/Welcome.png</file>
+        <file>wallet_ui/back_dialog.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>

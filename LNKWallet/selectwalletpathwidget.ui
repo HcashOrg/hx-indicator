@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>960</width>
-    <height>580</height>
+    <width>228</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="font">
@@ -21,34 +21,34 @@
   <widget class="QToolButton" name="pathBtn">
    <property name="geometry">
     <rect>
-     <x>560</x>
-     <y>313</y>
-     <width>65</width>
+     <x>200</x>
+     <y>136</y>
+     <width>21</width>
      <height>24</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
     </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">font-size:15px;</string>
    </property>
    <property name="text">
-    <string>选择路径</string>
+    <string>...</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="pathLineEdit">
    <property name="geometry">
     <rect>
-     <x>305</x>
-     <y>310</y>
-     <width>261</width>
-     <height>30</height>
+     <x>8</x>
+     <y>136</y>
+     <width>191</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -62,43 +62,17 @@
    <property name="readOnly">
     <bool>true</bool>
    </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>305</x>
-     <y>290</y>
-     <width>220</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei UI Light</family>
-     <pointsize>-1</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
-   </property>
-   <property name="text">
-    <string>Select the path of the wallet data</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   <property name="placeholderText">
+    <string/>
    </property>
   </widget>
   <widget class="QToolButton" name="closeBtn">
    <property name="geometry">
     <rect>
-     <x>645</x>
-     <y>190</y>
-     <width>12</width>
-     <height>12</height>
+     <x>210</x>
+     <y>8</y>
+     <width>7</width>
+     <height>7</height>
     </rect>
    </property>
    <property name="cursor">
@@ -114,10 +88,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="okBtn">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>360</y>
-     <width>116</width>
-     <height>30</height>
+     <x>45</x>
+     <y>181</y>
+     <width>135</width>
+     <height>34</height>
     </rect>
    </property>
    <property name="cursor">
@@ -133,13 +107,34 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <string>Next</string>
    </property>
   </widget>
-  <widget class="QLabel" name="welcome_label">
+  <widget class="QLabel" name="label_version">
    <property name="geometry">
     <rect>
-     <x>305</x>
-     <y>190</y>
-     <width>100</width>
-     <height>45</height>
+     <x>97</x>
+     <y>94</y>
+     <width>80</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>-1</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size: 8px;</string>
+   </property>
+   <property name="text">
+    <string>v1.0.1</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="welcome">
+   <property name="geometry">
+    <rect>
+     <x>72</x>
+     <y>82</y>
+     <width>78</width>
+     <height>15</height>
     </rect>
    </property>
    <property name="font">
@@ -155,37 +150,30 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <string/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_version">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>305</x>
-     <y>240</y>
-     <width>80</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>v1.0.1</string>
-   </property>
-  </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>305</x>
-     <y>332</y>
-     <width>331</width>
+     <x>10</x>
+     <y>116</y>
+     <width>201</width>
      <height>16</height>
     </rect>
    </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(243, 241, 250);
+font: 75 10px &quot;Microsoft JhengHei UI Light&quot;;</string>
+   </property>
+   <property name="text">
+    <string>Select the path of the wallet data</string>
    </property>
   </widget>
+  <zorder>pathLineEdit</zorder>
+  <zorder>pathBtn</zorder>
+  <zorder>closeBtn</zorder>
+  <zorder>okBtn</zorder>
+  <zorder>label_version</zorder>
+  <zorder>welcome</zorder>
+  <zorder>label</zorder>
  </widget>
  <resources/>
  <connections/>
