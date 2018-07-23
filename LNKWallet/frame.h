@@ -183,6 +183,7 @@ private:
     void startTimerForAutoRefresh();      // 自动刷新
     QTimer* timerForAutoRefresh;
     FunctionWidget *functionBar;
+    QWidget* topLeftWidget = NULL;
     void closeCurrentPage();
     bool eventFilter(QObject *watched, QEvent *e);
     void closeEvent(QCloseEvent* e);

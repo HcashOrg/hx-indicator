@@ -33,6 +33,8 @@ private:
     void InitStyle();
 private:
     Ui::FunctionAccountWidget *ui;
+
+    void paintEvent(QPaintEvent*);
 };
 
 #endif // FUNCTIONACCOUNTWIDGET_H

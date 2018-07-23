@@ -28,6 +28,8 @@ private:
     void InitStyle();
 private:
     Ui::FunctionAdvanceWidget *ui;
+
+    void paintEvent(QPaintEvent*);
 };
 
 #endif // FUNCTIONADVANCEWIDGET_H

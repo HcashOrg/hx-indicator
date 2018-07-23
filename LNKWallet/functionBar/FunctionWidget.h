@@ -93,7 +93,7 @@ private:
 protected:
 
     virtual bool eventFilter(QObject *watched,QEvent *e);
-
+    void paintEvent(QPaintEvent*);
 };
 
 #endif // FUNCTIONWIDGET_H

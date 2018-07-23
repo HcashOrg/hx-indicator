@@ -75,14 +75,14 @@
         <widget class="QLabel" name="label_pic">
          <property name="minimumSize">
           <size>
-           <width>218</width>
-           <height>210</height>
+           <width>73</width>
+           <height>81</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>218</width>
-           <height>210</height>
+           <width>73</width>
+           <height>81</height>
           </size>
          </property>
          <property name="text">

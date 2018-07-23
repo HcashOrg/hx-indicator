@@ -20,7 +20,6 @@ TitleBar::TitleBar(QWidget *parent) :
 
 //    ui->divLineLabel->setPixmap(QPixmap("pic2/divLine.png"));
 //    ui->divLineLabel->setScaledContents(true);
-    ui->label->setPixmap(QPixmap(":/ui/wallet_ui/HX_logo.png").scaled(62,30,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
     ui->backBtn->setVisible(false);
     ui->backBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/back.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}");
 
@@ -93,11 +92,8 @@ void TitleBar::jsonDataUpdated(QString id)
 void TitleBar::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setBrush(QColor(255,255,255));
-    painter.setPen(QColor(255,255,255));
-    painter.drawRect(rect());
+    painter.setBrush(QColor(243,241,250));
+    painter.setPen(QColor(215,211,229));
+    painter.drawRect( -1, -1, this->width() + 2, this->height());
 
-    painter.setBrush(QColor(38,62,181));
-    painter.setPen(QColor(38,62,181));
-    painter.drawRect(QRect(0,0,189,49));
 }

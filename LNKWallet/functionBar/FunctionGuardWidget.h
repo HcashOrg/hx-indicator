@@ -50,6 +50,8 @@ private slots:
 
 private:
     Ui::FunctionGuardWidget *ui;
+
+    void paintEvent(QPaintEvent*);
 };
 
 #endif // FUNCTIONGUARDWIDGET_H

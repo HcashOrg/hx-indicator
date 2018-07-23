@@ -328,8 +328,8 @@ void Frame::alreadyLogin()
     moveWidgetToScreenCenter(this);
 
     titleBar = new TitleBar(this);
-    titleBar->resize(960,50);
-    titleBar->move(0,0);
+    titleBar->resize(770,33);
+    titleBar->move(190,0);
     titleBar->show();
 
     connect(titleBar,SIGNAL(minimum()),this,SLOT(showMinimized()));
@@ -339,13 +339,13 @@ void Frame::alreadyLogin()
     connect(this,&Frame::titleBackVisible,titleBar,&TitleBar::backBtnVis);
 
     centralWidget = new QWidget(this);
-    centralWidget->resize(770,530);
-    centralWidget->move(190,50);
+    centralWidget->resize(770,510);
+    centralWidget->move(190, titleBar->height());
     centralWidget->show();
 
     bottomBar = new BottomBar(this);
     bottomBar->resize(160,40);
-    bottomBar->move(800,540);
+    bottomBar->move(800,503);
     bottomBar->raise();
     bottomBar->show();
 
@@ -355,10 +355,19 @@ void Frame::alreadyLogin()
 //    showBottomBarWidget->show();
 
     functionBar = new FunctionWidget(this);
-    functionBar->resize(190,530);
-    functionBar->move(0,50);
+    functionBar->resize(190,480);
+    functionBar->move(0,63);
     functionBar->show();
     connect(functionBar,SIGNAL(lock()),this,SLOT(showLockPage()));
+
+    topLeftWidget = new QWidget(this);
+    topLeftWidget->setGeometry(0,0,190,63);
+    topLeftWidget->setStyleSheet("background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(14,2,8), stop:1 rgba(19,9,20));");
+    QLabel* logoLabel = new QLabel(topLeftWidget);
+    logoLabel->setGeometry(50,15,92,35);
+    logoLabel->setPixmap(QPixmap(":/ui/wallet_ui/HX_logo.png"));
+    topLeftWidget->show();
+    topLeftWidget->raise();
 
     connect(functionBar,&FunctionWidget::showMinerSignal,this,&Frame::showMinerPage);
     connect(functionBar,&FunctionWidget::showBonusSignal,this,&Frame::showBonusPage);
@@ -383,7 +392,7 @@ void Frame::alreadyLogin()
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
-    mainPage->resize(770,530);
+    mainPage->resize(770,510);
     mainPage->setAttribute(Qt::WA_DeleteOnClose);
 //    QTimer::singleShot(1000,mainPage,SLOT(show()));
     mainPage->show();
@@ -1716,6 +1725,67 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
+    if( id == "id-list_miners")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonArray array = jsonObject.value("result").toArray();
+
+            //        HXChain::getInstance()->formalGuardMap.clear();
+            foreach (QJsonValue v, array)
+            {
+                QJsonArray array2 = v.toArray();
+                QString account = array2.at(0).toString();
+                MinerInfo info;
+                info.minerId = array2.at(1).toString();
+                HXChain::getInstance()->minerMap.insert(account, info);
+
+                HXChain::getInstance()->postRPC( "id-get_miner-" + account, toJsonFormat( "get_miner", QJsonArray() << account));
+            }
+        }
+
+        return;
+    }
+
+    if( id.startsWith("id-get_miner-"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            QString account = id.mid(QString("id-get_miner-").size());
+
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonObject object = jsonObject.value("result").toObject();
+
+            if(HXChain::getInstance()->minerMap.contains(account))
+            {
+                HXChain::getInstance()->minerMap[account].accountId     = object.value("miner_account").toString();
+                HXChain::getInstance()->minerMap[account].signingKey    = object.value("signing_key").toString();
+                HXChain::getInstance()->minerMap[account].totalMissed   = object.value("total_missed").toInt();
+                HXChain::getInstance()->minerMap[account].totalProduced = object.value("total_produced").toInt();
+                HXChain::getInstance()->minerMap[account].lastBlock     = object.value("last_confirmed_block_num").toInt();
+                HXChain::getInstance()->minerMap[account].participationRate = object.value("participation_rate").toDouble();
+
+            }
+        }
+
+        return;
+    }
+
     if(id == "id-get_proposal_for_voter")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
@@ -2070,7 +2140,7 @@ void Frame::EnlargeRightPart()
 
     centralWidget->resize(890,centralWidget->height());
 
-    centralWidget->move(70,50);
+    centralWidget->move(70, titleBar->height());
 //    if(QWidget *widget = centralWidget->childAt(10,10))
 //    {
 //        widget->resize(805,centralWidget->height());
@@ -2087,7 +2157,7 @@ void Frame::RestoreRightPart()
 {
     functionBar->resize(190,functionBar->height());
 
-    centralWidget->move(190,50);
+    centralWidget->move(190, titleBar->height());
     if(QWidget *widget = centralWidget->childAt(10,10))
     {
         widget->resize(770,centralWidget->height());

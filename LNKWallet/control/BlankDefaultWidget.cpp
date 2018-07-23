@@ -31,7 +31,7 @@ void BlankDefaultWidget::InitWidget()
     palette.setColor(QPalette::Window, Qt::white);
     setPalette(palette);
 
-    ui->label_pic->setPixmap(QPixmap(":/ui/wallet_ui/blank.png").scaled(ui->label_pic->size(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+    ui->label_pic->setPixmap(QPixmap(":/ui/wallet_ui/blank.png"));
     this->setStyleSheet("QWidget{border-radius:15px;}");
 }
 

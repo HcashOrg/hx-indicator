@@ -1126,17 +1126,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">get all</translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="103"/>
+        <location filename="bonus/BonusPage.cpp" line="108"/>
         <source>get bonus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="132"/>
+        <location filename="bonus/BonusPage.cpp" line="137"/>
         <source>Transaction of obtain-bonus has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="140"/>
+        <location filename="bonus/BonusPage.cpp" line="145"/>
         <source>Fail to obtain bonus!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3546,27 +3546,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1136"/>
+        <location filename="frame.cpp" line="1147"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1346"/>
+        <location filename="frame.cpp" line="1357"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2006"/>
+        <location filename="frame.cpp" line="2082"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2009"/>
+        <location filename="frame.cpp" line="2085"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2012"/>
+        <location filename="frame.cpp" line="2088"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3804,39 +3804,28 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.ui" line="64"/>
         <source>账户</source>
-        <translation type="unfinished">Account</translation>
+        <translation type="obsolete">Account</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.ui" line="92"/>
         <source>市场</source>
-        <translation type="unfinished">Market</translation>
+        <translation type="obsolete">Market</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.ui" line="148"/>
         <source>联系人</source>
-        <translation type="unfinished">Contact</translation>
+        <translation type="obsolete">Contact</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.ui" line="176"/>
-        <source>Guard</source>
-        <oldsource>guard</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="functionBar/FunctionWidget.ui" line="120"/>
         <source>高级</source>
-        <translation type="unfinished">Advance</translation>
+        <translation type="obsolete">Advance</translation>
     </message>
     <message>
         <source>挂单</source>
         <translation type="obsolete">Order</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.ui" line="217"/>
         <source>更多</source>
-        <translation type="unfinished">More</translation>
+        <translation type="obsolete">More</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionWidget.cpp" line="138"/>
@@ -4086,6 +4075,21 @@ Cover it or not?</source>
     <message>
         <location filename="guard/GuardKeyUpdatingInfoDialog.cpp" line="42"/>
         <source>%1 guards have updated. %2 guards have not yet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HXChain</name>
+    <message>
+        <location filename="wallet.cpp" line="173"/>
+        <location filename="wallet.cpp" line="197"/>
+        <source>Fail to launch %1 !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="wallet.cpp" line="606"/>
+        <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
+        <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5064,7 +5068,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="57"/>
-        <source>There&apos;s no contract!</source>
+        <source>There are no orders!</source>
+        <oldsource>There&apos;s no contract!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5385,7 +5390,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.cpp" line="46"/>
-        <source>There&apos;s no contract!</source>
+        <source>There are no orders!</source>
+        <oldsource>There&apos;s no contract!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6841,7 +6847,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="obsolete">Console</translation>
     </message>
     <message>
-        <location filename="titlebar.cpp" line="61"/>
+        <location filename="titlebar.cpp" line="60"/>
         <source>Sure to close the Wallet?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7226,21 +7232,6 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="transfer/transferrecordwidget.cpp" line="135"/>
         <source>confirmed</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>HXChain</name>
-    <message>
-        <location filename="wallet.cpp" line="173"/>
-        <location filename="wallet.cpp" line="197"/>
-        <source>Fail to launch %1 !</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="wallet.cpp" line="606"/>
-        <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
-        <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>

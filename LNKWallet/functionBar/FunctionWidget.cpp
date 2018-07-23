@@ -160,8 +160,9 @@ void FunctionWidget::ShowMoreWidgetSlots()
     _p->contextMenu->close();
 
 
-
+    ui->toolButton_more->setChecked(true);
     _p->contextMenu->exec(mapToGlobal(QPoint(70,height()-_p->contextMenu->height())));
+    ui->toolButton_more->setChecked(false);
 
 
     //updateCheckState(4);
@@ -207,12 +208,12 @@ void FunctionWidget::updateCheckState(int buttonNumber)
     ui->toolButton_guard->setChecked(4 == buttonNumber);
     ui->toolButton_more->setChecked(5 == buttonNumber);
 
-    ui->toolButton_account->setToolButtonStyle( Qt::ToolButtonIconOnly );
-    ui->toolButton_contact->setToolButtonStyle(Qt::ToolButtonIconOnly );
-    ui->toolButton_advanced->setToolButtonStyle( Qt::ToolButtonIconOnly );
-    ui->toolButton_exchange->setToolButtonStyle( Qt::ToolButtonIconOnly );
-    ui->toolButton_guard->setToolButtonStyle( Qt::ToolButtonIconOnly );
-    ui->toolButton_more->setToolButtonStyle(Qt::ToolButtonIconOnly );
+//    ui->toolButton_account->setToolButtonStyle( Qt::ToolButtonIconOnly );
+//    ui->toolButton_contact->setToolButtonStyle(Qt::ToolButtonIconOnly );
+//    ui->toolButton_advanced->setToolButtonStyle( Qt::ToolButtonIconOnly );
+//    ui->toolButton_exchange->setToolButtonStyle( Qt::ToolButtonIconOnly );
+//    ui->toolButton_guard->setToolButtonStyle( Qt::ToolButtonIconOnly );
+//    ui->toolButton_more->setToolButtonStyle(Qt::ToolButtonIconOnly );
 
 }
 
@@ -225,7 +226,7 @@ void FunctionWidget::InitWidget()
     ui->toolButton_advanced->setCheckable(true);
     ui->toolButton_exchange->setCheckable(true);
     ui->toolButton_guard->setCheckable(true);
-    ui->toolButton_more->setCheckable(false);
+    ui->toolButton_more->setCheckable(true);
 
     ui->stackedWidget->addWidget(_p->accountBar);
     ui->stackedWidget->addWidget(_p->advanceBar);
@@ -266,12 +267,12 @@ void FunctionWidget::InitWidget()
     connect(this,&FunctionWidget::AdvanceDefaultSignal,_p->advanceBar,&FunctionAdvanceWidget::DefaultShow);
     connect(this,&FunctionWidget::ExchangeDefaultSignal,_p->exchangeBar,&FunctionExchangeWidget::DefaultShow);
     connect(this,&FunctionWidget::GuardDefaultSignal,_p->guardBar,&FunctionGuardWidget::DefaultShow);
-    ui->toolButton_account->installEventFilter(this);
-    ui->toolButton_advanced->installEventFilter(this);
-    ui->toolButton_contact->installEventFilter(this);
-    ui->toolButton_exchange->installEventFilter(this);
-    ui->toolButton_guard->installEventFilter(this);
-    ui->toolButton_more->installEventFilter(this);
+//    ui->toolButton_account->installEventFilter(this);
+//    ui->toolButton_advanced->installEventFilter(this);
+//    ui->toolButton_contact->installEventFilter(this);
+//    ui->toolButton_exchange->installEventFilter(this);
+//    ui->toolButton_guard->installEventFilter(this);
+//    ui->toolButton_more->installEventFilter(this);
 }
 
 void FunctionWidget::InitStyle()
@@ -281,62 +282,87 @@ void FunctionWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(72,97,220));
     setPalette(palette);
 
-    setStyleSheet("\
-    QToolButton{padding:4px 0px;background: rgb(72,97,220);border:none;color:white;font:65 12px \"Microsoft YaHei UI \";}\
-    QToolButton:hover{background-color: rgb(84,116, 235);}\
-    QToolButton:pressed{background-color: rgb(84,116, 235);}\
-    QToolButton:checked{border-left:2px solid rgb(0,210,255);background-color: rgb(84,116, 235);}\
-                  "
-
-                  );
+//    setStyleSheet(
+//                "QToolButton{padding:4px 0px;background: rgb(72,97,220);border:none;color:white;font:65 12px \"Microsoft YaHei UI \";}"
+//                "QToolButton:hover{background-color: rgb(84,116, 235);}"
+//                "QToolButton:pressed{background-color: rgb(84,116, 235);}"
+//                "QToolButton:checked{border-left:2px solid rgb(0,210,255);background-color: rgb(84,116, 235);}"
+//                );
     _p->contextMenu->setAttribute(Qt::WA_TranslucentBackground);
     _p->contextMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | _p->contextMenu->windowFlags() );
     //_p->contextMenu->setMinimumWidth(88);
-    _p->contextMenu->setStyleSheet("QMenu {border-radius:10px;width:88px;border-bottom-left-radius:0px;background-color:rgba(238,241,253,235);border: 0px solid red;}"\
-                "QMenu::item {border-radius:10px;border: 0px solid green;background-color:transparent;padding:5px 21px;}"\
-                "QMenu::item:selected {background-color:rgb(130,157,255);}"\
-                "QMenu::separator {height: 2px;background-color: #FCFCFC;}"\
+    _p->contextMenu->setStyleSheet(
+                "QMenu {border-radius:10px;width:88px;border-bottom-left-radius:0px;background-color:rgba(238,241,253,235);border: 0px solid red;}"
+                "QMenu::item {border-radius:10px;border: 0px solid green;background-color:transparent;padding:5px 21px;}"
+                "QMenu::item:selected {background-color:rgb(130,157,255);}"
+                "QMenu::separator {height: 2px;background-color: #FCFCFC;}"
                 "QMenu::right-arrow {padding:0px 10px;image:url(:/wallet_ui/right.png);}");
 
 
-    ui->toolButton_account->setIconSize(QSize(26,26));
-    ui->toolButton_advanced->setIconSize(QSize(26,26));
-    ui->toolButton_contact->setIconSize(QSize(26,26));
-    ui->toolButton_exchange->setIconSize(QSize(26,26));
-    ui->toolButton_guard->setIconSize(QSize(26,26));
-    ui->toolButton_more->setIconSize(QSize(26,26));
+//    ui->toolButton_account->setIconSize(QSize(26,26));
+//    ui->toolButton_advanced->setIconSize(QSize(26,26));
+//    ui->toolButton_contact->setIconSize(QSize(26,26));
+//    ui->toolButton_exchange->setIconSize(QSize(26,26));
+//    ui->toolButton_guard->setIconSize(QSize(26,26));
+//    ui->toolButton_more->setIconSize(QSize(26,26));
 
-    ui->toolButton_account->setIcon(QIcon(":/functionBar/account.png"));
-    ui->toolButton_advanced->setIcon(QIcon(":/functionBar/advance.png"));
-    ui->toolButton_contact->setIcon(QIcon(":/functionBar/contact.png"));
-    ui->toolButton_exchange->setIcon(QIcon(":/functionBar/exchange.png"));
-    ui->toolButton_guard->setIcon(QIcon(":/functionBar/guard.png"));
-    ui->toolButton_more->setIcon(QIcon(":/functionBar/more.png"));
+//    ui->toolButton_account->setIcon(QIcon(":/functionBar/account.png"));
+//    ui->toolButton_advanced->setIcon(QIcon(":/functionBar/advance.png"));
+//    ui->toolButton_contact->setIcon(QIcon(":/functionBar/contact.png"));
+//    ui->toolButton_exchange->setIcon(QIcon(":/functionBar/exchange.png"));
+//    ui->toolButton_guard->setIcon(QIcon(":/functionBar/guard.png"));
+//    ui->toolButton_more->setIcon(QIcon(":/functionBar/more.png"));
+
+    ui->toolButton_account->setStyleSheet("QToolButton{background-image:url(:/functionBar/account.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                                          "QToolButton:checked{background-image:url(:/functionBar/account_checked.png);}");
+    ui->toolButton_exchange->setStyleSheet("QToolButton{background-image:url(:/functionBar/exchange.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                                          "QToolButton:checked{background-image:url(:/functionBar/exchange_checked.png);}");
+    ui->toolButton_advanced->setStyleSheet("QToolButton{background-image:url(:/functionBar/advance.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                                          "QToolButton:checked{background-image:url(:/functionBar/advance_checked.png);}");
+    ui->toolButton_contact->setStyleSheet("QToolButton{background-image:url(:/functionBar/contact.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                                          "QToolButton:checked{background-image:url(:/functionBar/contact_checked.png);}");
+    ui->toolButton_guard->setStyleSheet("QToolButton{background-image:url(:/functionBar/guard.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                                          "QToolButton:checked{background-image:url(:/functionBar/guard_checked.png);}");
+    ui->toolButton_more->setStyleSheet("QToolButton{background-image:url(:/functionBar/more.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                                          "QToolButton:checked{background-color:rgb(199,19,106);background-image:url(:/functionBar/more_checked.png);}");
 }
 
 bool FunctionWidget::eventFilter(QObject *watched,QEvent *e)
 {
 
-    if((watched == ui->toolButton_contact ||watched == ui->toolButton_account
-        ||watched == ui->toolButton_advanced ||watched == ui->toolButton_exchange
-        ||watched == ui->toolButton_guard
-        ||watched == ui->toolButton_more)&& e->type() == QEvent::Enter)
-    {
-        if(QToolButton *button = qobject_cast<QToolButton*>(watched))
-        {
-            if(!button->isChecked())
-            {
-                button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-            }
-        }
-    }
-    else if((watched == ui->toolButton_contact ||watched == ui->toolButton_account
-             ||watched == ui->toolButton_advanced ||watched == ui->toolButton_exchange
-             ||watched == ui->toolButton_guard
-             ||watched == ui->toolButton_more) && e->type() == QEvent::Leave)
-    {
-        qobject_cast<QToolButton*>(watched)->setToolButtonStyle(Qt::ToolButtonIconOnly);
-    }
+//    if((watched == ui->toolButton_contact ||watched == ui->toolButton_account
+//        ||watched == ui->toolButton_advanced ||watched == ui->toolButton_exchange
+//        ||watched == ui->toolButton_guard
+//        ||watched == ui->toolButton_more)&& e->type() == QEvent::Enter)
+//    {
+//        if(QToolButton *button = qobject_cast<QToolButton*>(watched))
+//        {
+//            if(!button->isChecked())
+//            {
+//                button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+//            }
+//        }
+//    }
+//    else if((watched == ui->toolButton_contact ||watched == ui->toolButton_account
+//             ||watched == ui->toolButton_advanced ||watched == ui->toolButton_exchange
+//             ||watched == ui->toolButton_guard
+//             ||watched == ui->toolButton_more) && e->type() == QEvent::Leave)
+//    {
+//        qobject_cast<QToolButton*>(watched)->setToolButtonStyle(Qt::ToolButtonIconOnly);
+//    }
 
     return QWidget::eventFilter(watched,e);
+}
+
+void FunctionWidget::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+
+    QLinearGradient linear(QPointF(0, 480), QPointF(62, 0));
+    linear.setColorAt(0, QColor(119,20,64));
+    linear.setColorAt(1, QColor(20,4,12));
+    linear.setSpread(QGradient::PadSpread);
+    painter.setBrush(linear);
+    painter.drawRect(QRect(-1,-1,63,481));
+
 }
