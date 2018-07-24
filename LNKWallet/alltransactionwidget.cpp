@@ -25,7 +25,7 @@ void AllTransactionWidget::init()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
 
 
@@ -42,11 +42,16 @@ void AllTransactionWidget::init()
     ui->transactionsTableWidget->horizontalHeader()->setVisible(true);
     ui->transactionsTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    ui->transactionsTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+    ui->transactionsTableWidget->setStyleSheet("QTableView{background-color:rgb(243,241,250);border:none;border-radius:5px;font: 11px \"Microsoft YaHei UI Light\";}"
+                                               "QHeaderView{border:none;border-bottom:1px solid rgb(222,218,236);border-top-left-radius:5px;border-top-right-radius:5px;background-color:rgb(243,241,250);color:rgb(137,129,161);font: 11px \"Microsoft YaHei UI Light\";}"
+                                               "QHeaderView:section{height:30px;border:none;background-color:rgb(243,241,250);}"
+                                               "QHeaderView:section:first{border-top-left-radius:5px;}"
+                                               "QHeaderView:section:last{border-top-right-radius:5px;}");
 
 
-    setStyleSheet("QToolButton{background:transparent;border:none;color: rgb(51,51,51);font:12px \"微软雅黑\";padding:0px 0px 1px 0px;}"
-                  "QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:white;}");
+
+    setStyleSheet("QToolButton{font:10px \"微软雅黑\";background:transparent;border:1px solid rgb(137,129,161);border-radius:9px;color: rgb(137,129,161);}"
+                  "QToolButton::checked{background-color:rgb(83,61,138);color:white;}");
 
     ui->searchLineEdit->setPlaceholderText(tr("address or transaction id"));
 
@@ -78,8 +83,8 @@ void AllTransactionWidget::init()
     ui->typeAllBtn->setChecked(true);
     ui->timeAllBtn->setChecked(true);
 
-    ui->typeWithdrawBtn->adjustSize();
-    ui->typeWithdrawBtn->setGeometry(ui->typeWithdrawBtn->x(),ui->typeWithdrawBtn->y(),ui->typeWithdrawBtn->width() < 50?50:ui->typeWithdrawBtn->width(),24);
+//    ui->typeWithdrawBtn->adjustSize();
+//    ui->typeWithdrawBtn->setGeometry(ui->typeWithdrawBtn->x(),ui->typeWithdrawBtn->y(),ui->typeWithdrawBtn->width() < 50?50:ui->typeWithdrawBtn->width(),24);
 
     ui->accountComboBox->clear();
     QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
@@ -831,6 +836,15 @@ void AllTransactionWidget::pageChangeSlot(unsigned int page)
         }
     }
 
+}
+
+void AllTransactionWidget::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    painter.setPen(QPen(QColor(222,218,236),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(243,241,250),Qt::SolidPattern));
+
+    painter.drawRect(0,90,this->width(),98);
 }
 
 

@@ -101,7 +101,7 @@
        <property name="geometry">
         <rect>
          <x>160</x>
-         <y>7</y>
+         <y>14</y>
          <width>43</width>
          <height>28</height>
         </rect>
@@ -195,7 +195,8 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>钱包自动锁定时间</string>
@@ -266,7 +267,7 @@
            <x>25</x>
            <y>47</y>
            <width>216</width>
-           <height>21</height>
+           <height>24</height>
           </rect>
          </property>
          <property name="font">
@@ -312,7 +313,8 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>界面语言</string>
@@ -325,7 +327,7 @@
          <property name="geometry">
           <rect>
            <x>83</x>
-           <y>47</y>
+           <y>50</y>
            <width>31</width>
            <height>16</height>
           </rect>
@@ -333,8 +335,15 @@
          <property name="font">
           <font>
            <family>微软雅黑</family>
-           <pointsize>10</pointsize>
+           <pointsize>-1</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>min</string>
@@ -343,7 +352,7 @@
         <widget class="QCheckBox" name="minimizeCheckBox">
          <property name="geometry">
           <rect>
-           <x>309</x>
+           <x>310</x>
            <y>129</y>
            <width>240</width>
            <height>21</height>
@@ -368,7 +377,7 @@
         <widget class="QCheckBox" name="closeCheckBox">
          <property name="geometry">
           <rect>
-           <x>309</x>
+           <x>310</x>
            <y>150</y>
            <width>240</width>
            <height>21</height>
@@ -393,7 +402,7 @@
         <widget class="QCheckBox" name="resyncCheckBox">
          <property name="geometry">
           <rect>
-           <x>309</x>
+           <x>310</x>
            <y>172</y>
            <width>240</width>
            <height>21</height>
@@ -418,7 +427,7 @@
         <widget class="QLabel" name="label_4">
          <property name="geometry">
           <rect>
-           <x>309</x>
+           <x>310</x>
            <y>16</y>
            <width>200</width>
            <height>31</height>
@@ -434,7 +443,8 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>手续费币种</string>
@@ -455,10 +465,15 @@
          <property name="font">
           <font>
            <family>微软雅黑</family>
+           <pointsize>-1</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true"/>
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>LNK</string>
@@ -467,7 +482,7 @@
         <widget class="QLineEdit" name="contractFeeLineEdit">
          <property name="geometry">
           <rect>
-           <x>309</x>
+           <x>310</x>
            <y>96</y>
            <width>221</width>
            <height>25</height>
@@ -492,9 +507,9 @@
         <widget class="QComboBox" name="comboBox_fee">
          <property name="geometry">
           <rect>
-           <x>460</x>
+           <x>440</x>
            <y>46</y>
-           <width>71</width>
+           <width>91</width>
            <height>22</height>
           </rect>
          </property>
@@ -533,7 +548,8 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>充值自动划转</string>
@@ -575,9 +591,9 @@
         <widget class="QLabel" name="label_5">
          <property name="geometry">
           <rect>
-           <x>309</x>
+           <x>310</x>
            <y>76</y>
-           <width>111</width>
+           <width>151</width>
            <height>20</height>
           </rect>
          </property>
@@ -591,7 +607,8 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;</string>
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>单步合约执行费用</string>
@@ -603,7 +620,7 @@
         <widget class="QCheckBox" name="feeCheckBox">
          <property name="geometry">
           <rect>
-           <x>309</x>
+           <x>310</x>
            <y>46</y>
            <width>151</width>
            <height>21</height>
@@ -667,9 +684,9 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>115</y>
+           <y>111</y>
            <width>291</width>
-           <height>30</height>
+           <height>24</height>
           </rect>
          </property>
          <property name="font">
@@ -688,9 +705,9 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>178</y>
+           <y>168</y>
            <width>291</width>
-           <height>30</height>
+           <height>24</height>
           </rect>
          </property>
          <property name="font">
@@ -734,22 +751,23 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>157</y>
+           <y>147</y>
            <width>100</width>
            <height>20</height>
           </rect>
          </property>
          <property name="font">
           <font>
-           <family>Microsoft YaHei UI Light</family>
+           <family>微软雅黑</family>
            <pointsize>-1</pointsize>
-           <weight>9</weight>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 75 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>再次输入：</string>
@@ -762,7 +780,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>172</x>
-           <y>65</y>
+           <y>63</y>
            <width>151</width>
            <height>16</height>
           </rect>
@@ -790,15 +808,16 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          </property>
          <property name="font">
           <font>
-           <family>Microsoft YaHei UI Light</family>
+           <family>微软雅黑</family>
            <pointsize>-1</pointsize>
-           <weight>9</weight>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 75 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>旧密码：</string>
@@ -811,7 +830,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>172</x>
-           <y>184</y>
+           <y>174</y>
            <width>151</width>
            <height>20</height>
           </rect>
@@ -832,22 +851,23 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>95</y>
+           <y>91</y>
            <width>100</width>
            <height>20</height>
           </rect>
          </property>
          <property name="font">
           <font>
-           <family>Microsoft YaHei UI Light</family>
+           <family>微软雅黑</family>
            <pointsize>-1</pointsize>
-           <weight>9</weight>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 75 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>新密码：</string>
@@ -860,7 +880,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>172</x>
-           <y>121</y>
+           <y>115</y>
            <width>151</width>
            <height>16</height>
           </rect>
@@ -883,7 +903,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
            <x>37</x>
            <y>58</y>
            <width>291</width>
-           <height>30</height>
+           <height>24</height>
           </rect>
          </property>
          <property name="font">
@@ -909,31 +929,32 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          </property>
          <property name="font">
           <font>
-           <family>Microsoft YaHei UI Light</family>
+           <family>微软雅黑</family>
            <pointsize>-1</pointsize>
-           <weight>9</weight>
+           <weight>50</weight>
            <italic>false</italic>
            <bold>false</bold>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 75 14px &quot;Microsoft YaHei UI Light&quot;;</string>
+          <string notr="true">font: 12px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>修改钱包密码</string>
          </property>
         </widget>
+        <zorder>tipLabel3</zorder>
+        <zorder>tipLabel</zorder>
+        <zorder>tipLabel2</zorder>
         <zorder>newPwdLineEdit</zorder>
         <zorder>confirmPwdLineEdit</zorder>
         <zorder>confirmBtn</zorder>
         <zorder>label_7</zorder>
         <zorder>label_8</zorder>
         <zorder>label_9</zorder>
-        <zorder>tipLabel</zorder>
         <zorder>oldPwdLineEdit</zorder>
         <zorder>label</zorder>
-        <zorder>tipLabel3</zorder>
-        <zorder>tipLabel2</zorder>
        </widget>
        <widget class="AccountManagerWidget" name="accountmanager"/>
       </widget>
@@ -941,7 +962,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
        <property name="geometry">
         <rect>
          <x>254</x>
-         <y>6</y>
+         <y>14</y>
          <width>40</width>
          <height>28</height>
         </rect>
@@ -972,7 +993,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
        <property name="geometry">
         <rect>
          <x>355</x>
-         <y>6</y>
+         <y>14</y>
          <width>40</width>
          <height>28</height>
         </rect>
@@ -1015,11 +1036,54 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
         <string/>
        </property>
       </widget>
+      <widget class="QLabel" name="label_general">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>11</y>
+         <width>12</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_safe">
+       <property name="geometry">
+        <rect>
+         <x>268</x>
+         <y>11</y>
+         <width>12</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_account">
+       <property name="geometry">
+        <rect>
+         <x>369</x>
+         <y>11</y>
+         <width>12</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
       <zorder>label_11</zorder>
       <zorder>generalBtn</zorder>
       <zorder>stackedWidget</zorder>
       <zorder>safeBtn</zorder>
       <zorder>accountBtn</zorder>
+      <zorder>label_safe</zorder>
+      <zorder>closeBtn</zorder>
+      <zorder>label_account</zorder>
+      <zorder>label_general</zorder>
      </widget>
     </widget>
     <widget class="HelpWidget" name="page_help"/>

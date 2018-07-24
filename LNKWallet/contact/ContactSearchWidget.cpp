@@ -52,6 +52,7 @@ void ContactSearchWidget::InitWidget()
     ui->lineEdit->setTextMargins(margins.left(), margins.top(),pSearchButton->width()+5, margins.bottom());
     ui->lineEdit->setPlaceholderText(tr("name or addr"));
 
+
     QHBoxLayout *pSearchLayout = new QHBoxLayout();
     pSearchLayout->addStretch();
     pSearchLayout->addWidget(pSearchButton);

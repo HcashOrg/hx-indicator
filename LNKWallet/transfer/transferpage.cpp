@@ -245,8 +245,6 @@ void TransferPage::InitStyle()
                                                 background-color:transparent;background-repeat: no-repeat;background-position: center;}"
                                                 "QToolButton#toolButton_chooseContact:hover{background-color:black;");
 
-    ui->accountComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
-    ui->assetComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
 }
 
 //void TransferPage::updatePoundage()

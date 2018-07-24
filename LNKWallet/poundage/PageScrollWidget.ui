@@ -16,7 +16,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>20</x>
      <y>0</y>
      <width>231</width>
      <height>41</height>
@@ -24,7 +24,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">font: 75 12px &quot;Microsoft YaHei UI Light&quot;;
-color: rgb(198, 202, 212);</string>
+color: rgb(96,66,169);</string>
    </property>
    <property name="text">
     <string>TextLabel</string>
@@ -39,7 +39,7 @@ color: rgb(198, 202, 212);</string>
      <height>41</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1">
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="7,6,6">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -71,7 +71,7 @@ color: rgb(198, 202, 212);</string>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <property name="spacing">
-       <number>12</number>
+       <number>3</number>
       </property>
       <item>
        <widget class="QToolButton" name="toolButton_pre">
@@ -99,14 +99,14 @@ color: rgb(198, 202, 212);</string>
          </font>
         </property>
         <property name="text">
-         <string>&lt;</string>
+         <string/>
         </property>
        </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="button_layout">
         <property name="spacing">
-         <number>10</number>
+         <number>1</number>
         </property>
        </layout>
       </item>
@@ -136,7 +136,7 @@ color: rgb(198, 202, 212);</string>
          </font>
         </property>
         <property name="text">
-         <string>&gt;</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -182,8 +182,6 @@ color: rgb(198, 202, 212);</string>
     </item>
    </layout>
   </widget>
-  <zorder>widget</zorder>
-  <zorder>label</zorder>
  </widget>
  <resources/>
  <connections/>

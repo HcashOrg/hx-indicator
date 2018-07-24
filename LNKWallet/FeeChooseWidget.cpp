@@ -331,5 +331,4 @@ void FeeChooseWidget::InitStyle()
     ui->label_poundage->setPalette(pa);
     ui->label_poundage->setFont(font);
 
-    setStyleSheet("QCheckBox::checked{color:black;}QComboBox{border-bottom:1px solid gray;color:#5474EB;}");
 }

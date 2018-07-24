@@ -80,8 +80,6 @@
         <file>wallet_ui/choice_hover.png</file>
         <file>wallet_ui/choice.png</file>
         <file>qss/style.qss</file>
-        <file>wallet_ui/checkBox_checked.png</file>
-        <file>wallet_ui/checkBox_unchecked.png</file>
         <file>wallet_ui/spinDownArrow_hover.png</file>
         <file>wallet_ui/spinDownArrow.png</file>
         <file>wallet_ui/spinUpArrow.png</file>
@@ -136,6 +134,10 @@
         <file>wallet_ui/addContact.png</file>
         <file>wallet_ui/off.png</file>
         <file>wallet_ui/on.png</file>
+        <file>wallet_ui/next.png</file>
+        <file>wallet_ui/pre.png</file>
+        <file>wallet_ui/checkBox_checked.png</file>
+        <file>wallet_ui/checkBox_unchecked.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>
