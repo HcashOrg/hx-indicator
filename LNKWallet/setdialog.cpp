@@ -37,10 +37,10 @@ SetDialog::SetDialog(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:transparent;}");
+    ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
     ui->containerWidget->setObjectName("containerwidget");
     //ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-top-right-radius:10px;border-bottom-right-radius:10px;border-bottom-left-radius:10px;}");
+    //ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-top-right-radius:4px;border-bottom-right-radius:4px;border-bottom-left-radius:4px;}");
 
     ui->generalBtn->setCheckable(true);
     ui->safeBtn->setCheckable(true);
@@ -57,34 +57,33 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->generalBtn->setChecked(false);
 
     ui->generalBtn->setIconSize(QSize(12,12));
-    ui->generalBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
+    ui->generalBtn->setIcon(QIcon(":/ui/wallet_ui/gray_circle.png"));
 
     ui->safeBtn->setIconSize(QSize(12,12));
-    ui->safeBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
+    ui->safeBtn->setIcon(QIcon(":/ui/wallet_ui/gray_circle.png"));
 
     ui->accountBtn->setIconSize(QSize(12,12));
-    ui->accountBtn->setIcon(QIcon(":/ui/wallet_ui/gray-circle.png"));
+    ui->accountBtn->setIcon(QIcon(":/ui/wallet_ui/gray_circle.png"));
 
 
-    setStyleSheet("QToolButton{background-color:transparent;border:none;color:#C6CAD4;}"
-                  "QToolButton::hover{color:black;}"
-                  "QToolButton::checked{color:black;}"
+    setStyleSheet("QToolButton{background-color:transparent;border:none;color:rgb(137,129,161);}"
+                  "QToolButton::checked{color:rgb(83,61,138);}"
 
-                  "QToolButton#toolButton_help,QToolButton#toolButton_set{border:none;background:#F8F9FD;color:#C6CAD4;border-top-left-radius:10px;border-top-right-radius:10px;}"
-                  "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{color:black;background:#FFFFFF;}"
+                  "QToolButton#toolButton_help,QToolButton#toolButton_set{font-size:10px;border:none;background:transparent;color:white;border-top-left-radius:4px;border-top-right-radius:4px;}"
+                  "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{color:rgb(52,37,90);background:#FFFFFF;}"
 
                   "QToolButton#depositBtn{color:black;}"
 
-                  "QCheckBox{color:black;font:14px \"Microsoft YaHei UI Light\";padding: 5px 0px 0px 0px;}"
+                  "QCheckBox{color:black;font:10px \"Microsoft YaHei UI Light\";padding: 5px 0px 0px 0px;}"
                   "QCheckBox#nolockCheckBox{font:10px \"Microsoft YaHei UI Light\";}"
 
                   "QSpinBox::up-button {width:0;height:0;}"
                   "QSpinBox::down-button {width:0;height:0;}"
                   "QSpinBox::up-arrow {width:0;height:0;}"
                   "QSpinBox::down-arrow {width:0;height:0;}"
-                  "QSpinBox{background-color: transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid #5474EB;color:black}"
-                  "QSpinBox:focus{border-bottom:1px solid rgb(84,116,235);}"
-                  "QSpinBox:disabled{background:transparent;color: rgb(83,90,109);border-bottom:1px solid gray;}"
+                  "QSpinBox{background-color: white;border:1px solid rgb(84,61,137);border-radius:4px;color:rgb(56,36,88)}"
+                  "QSpinBox:focus{border:1px solid rgb(84,61,137);border-radius:4px;}"
+                  "QSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:1px solid gray;}"
 
                   "QComboBox#languageComboBox{border-bottom:1px solid gray;color:#5474EB;}"
                   "QComboBox#comboBox_fee{color:#5474EB;}"
@@ -169,7 +168,7 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->toolButton_help->setChecked(false);
 
     //新建账户管理页面
-    AccountManagerWidget *accountManage = new AccountManagerWidget(this);
+    AccountManagerWidget *accountManage = new AccountManagerWidget();
     ui->stackedWidget->addWidget(accountManage);
 
     //帮助页面
@@ -558,8 +557,8 @@ void SetDialog::on_toolButton_help_clicked()
 
 void SetDialog::updateButtonIcon(int buttonNumber)
 {
-    QIcon gray(":/ui/wallet_ui/gray-circle.png");
-    QIcon blue(":/ui/wallet_ui/blue-circle.png");
+    QIcon gray(":/ui/wallet_ui/gray_circle.png");
+    QIcon blue(":/ui/wallet_ui/blue_circle.png");
     ui->generalBtn->setChecked(0 == buttonNumber);
     ui->safeBtn->setChecked(1 == buttonNumber);
     ui->accountBtn->setChecked(2 == buttonNumber);
@@ -574,8 +573,8 @@ void SetDialog::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(rect());
+
+    painter.setBrush(QColor(229,226,240));
 
     QWidget::paintEvent(event);
 

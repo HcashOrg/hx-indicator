@@ -181,7 +181,7 @@ void AccountManagerWidget::InitWidget()
         item->setTextAlignment(Qt::AlignLeft);
         item->setFlags(Qt::ItemIsEnabled);
         ui->tableWidget->insertRow(ui->tableWidget->rowCount());
-        ui->tableWidget->setRowHeight(ui->tableWidget->rowCount()-1,84);
+        ui->tableWidget->setRowHeight(ui->tableWidget->rowCount()-1,66);
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,0,item);
 
         AccountInfoWidget* w = new AccountInfoWidget;
@@ -220,9 +220,9 @@ void AccountManagerWidget::InitStyle()
     ui->tableWidget->verticalHeader()->setVisible(false);
     ui->tableWidget->setShowGrid(false);
     ui->tableWidget->setColumnCount(3);
-    ui->tableWidget->setColumnWidth(0,465);
-    ui->tableWidget->setColumnWidth(1,80);
-    ui->tableWidget->setColumnWidth(2,80);
+    ui->tableWidget->setColumnWidth(0,435);
+    ui->tableWidget->setColumnWidth(1,60);
+    ui->tableWidget->setColumnWidth(2,60);
     ui->tableWidget->setStyleSheet("QTableView{border:none;font:12px \"Microsoft YaHei UI Light\";}");
 
     ui->toolButton->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"

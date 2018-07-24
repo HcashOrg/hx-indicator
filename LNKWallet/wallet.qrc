@@ -105,8 +105,6 @@
         <file>wallet_ui/login.png</file>
         <file>wallet_ui/close.png</file>
         <file>wallet_ui/whitebord.png</file>
-        <file>wallet_ui/blue-circle.png</file>
-        <file>wallet_ui/gray-circle.png</file>
         <file>wallet_ui/trade.png</file>
         <file>wallet_ui/tradeConfirm.png</file>
         <file>wallet_ui/addContact.png</file>
@@ -139,6 +137,8 @@
         <file>wallet_ui/mini_button.png</file>
         <file>wallet_ui/Welcome.png</file>
         <file>wallet_ui/back_dialog.png</file>
+        <file>wallet_ui/blue_circle.png</file>
+        <file>wallet_ui/gray_circle.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>
