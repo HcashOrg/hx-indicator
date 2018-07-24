@@ -24,8 +24,7 @@ ImportDialog::ImportDialog(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
-
+    ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
