@@ -42,9 +42,9 @@ void ContactSearchWidget::InitWidget()
     QPushButton *pSearchButton = new QPushButton(this);
 
     pSearchButton->setCursor(Qt::PointingHandCursor);
-    pSearchButton->setFixedSize(14, 14);
+    pSearchButton->setFixedSize(10, 10);
     pSearchButton->setToolTip(tr("Search"));
-    pSearchButton->setIconSize(QSize(14,14));
+    pSearchButton->setIconSize(QSize(10,10));
     pSearchButton->setIcon(QIcon(":/search.png"));
 
     //防止文本框输入内容位于按钮之下
@@ -76,7 +76,7 @@ void ContactSearchWidget::InitStyle()
 
 
     setStyleSheet("QPushButton{ background:transparent;}"
-                  "QLineEdit{background-color:transparent;font-size:10px;border:none;color:white;border-bottom:1px solid rgb(81,59,134);}"
+                  "QLineEdit{background-color:transparent;font-size:10px;border:none;border-radius:0px;color:white;border-bottom:1px solid rgb(81,59,134);}"
                   );
 
 }

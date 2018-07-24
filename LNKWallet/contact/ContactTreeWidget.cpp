@@ -400,7 +400,7 @@ void ContactTreeWidget::initTreeStyle()
 
     setStyleSheet("QWidget{border:none;}"
                   "QTreeView{background-color:rgb(55,36,88);border:none;padding-left:0px;\
-                      color:rgb(104,86,144);font:65 14px \"Microsoft YaHei UI\";outline:0px;}"
+                      color:rgb(104,86,144);font:65 14px \"Microsoft YaHei UI\";outline:0px;margin-left:5px;}"
                   "QTreeView::item{height:32px;}"
                   "QTreeView::item::selected{border-bottom:1px solid rgb(255,255,255);color:white;}"
                   "QTreeView::branch:selected:has-children:adjoins-item {border-bottom:1px solid rgb(255,255,255);}"
