@@ -103,8 +103,6 @@
         <file>wallet_ui/trade.png</file>
         <file>wallet_ui/tradeConfirm.png</file>
         <file>wallet_ui/contactPic.png</file>
-        <file>wallet_ui/off.png</file>
-        <file>wallet_ui/on.png</file>
         <file>wallet_ui/switch.png</file>
         <file>wallet_ui/trans.png</file>
         <file>wallet_ui/searchBtn.png</file>
@@ -136,6 +134,8 @@
         <file>wallet_ui/white_close.png</file>
         <file>wallet_ui/help_pic.png</file>
         <file>wallet_ui/addContact.png</file>
+        <file>wallet_ui/off.png</file>
+        <file>wallet_ui/on.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>

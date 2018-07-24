@@ -49,7 +49,7 @@ SetDialog::SetDialog(QWidget *parent) :
 
     ui->depositBtn->setChecked(HXChain::getInstance()->autoDeposit);
     ui->depositBtn->setIconSize(QSize(26,12));
-    ui->depositBtn->setIcon(ui->depositBtn->isChecked()?QIcon(":/ui/wallet_ui/off.png"):QIcon(":/ui/wallet_ui/on.png"));
+    ui->depositBtn->setIcon(ui->depositBtn->isChecked()?QIcon(":/ui/wallet_ui/on.png"):QIcon(":/ui/wallet_ui/off.png"));
     ui->depositBtn->setText(ui->depositBtn->isChecked()?tr("on"):tr("off"));
     ui->label_autotip->setWordWrap(true);
     ui->label_autotip->setVisible(ui->depositBtn->isChecked());
@@ -365,12 +365,12 @@ void SetDialog::on_depositBtn_clicked()
 {
     if(ui->depositBtn->isChecked())
     {
-        ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/off.png"));
+        ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/on.png"));
         ui->depositBtn->setText(tr("on"));
     }
     else
     {
-        ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/on.png"));
+        ui->depositBtn->setIcon(QIcon(":/ui/wallet_ui/off.png"));
         ui->depositBtn->setText(tr("off"));
     }
     ui->label_autotip->setVisible(ui->depositBtn->isChecked());

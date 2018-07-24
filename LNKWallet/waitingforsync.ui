@@ -81,7 +81,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size: 8px;</string>
+    <string notr="true">font-size: 10px;</string>
    </property>
    <property name="text">
     <string>v1.0.1</string>
