@@ -37,10 +37,10 @@ SetDialog::SetDialog(QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
+    ui->widget->setStyleSheet("#widget {background-color:transparent;}");
     ui->containerWidget->setObjectName("containerwidget");
     //ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
-    //ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-top-right-radius:4px;border-bottom-right-radius:4px;border-bottom-left-radius:4px;}");
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-top-right-radius:4px;border-bottom-right-radius:4px;border-bottom-left-radius:4px;}");
 
     ui->generalBtn->setCheckable(true);
     ui->safeBtn->setCheckable(true);
@@ -90,7 +90,12 @@ SetDialog::SetDialog(QWidget *parent) :
                   );
     ui->saveBtn->setStyleSheet(OKBTN_STYLE);
     ui->confirmBtn->setStyleSheet(OKBTN_STYLE);
-    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+
+    ui->closeBtn->setIconSize(QSize(8,8));
+    ui->closeBtn->setIcon(QIcon(":/ui/wallet_ui/white_close.png"));
+
+    //ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->closeBtn->setStyleSheet("QToolButton{background-color:rgb(83,61,138);}");
 
 
     ui->containerWidget->installEventFilter(this);
@@ -168,14 +173,17 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->toolButton_help->setChecked(false);
 
     //新建账户管理页面
-    AccountManagerWidget *accountManage = new AccountManagerWidget();
-    ui->stackedWidget->addWidget(accountManage);
+//    AccountManagerWidget *accountManage = new AccountManagerWidget(ui->containerWidget);
+//    ui->stackedWidget->addWidget(accountManage);
 
     //帮助页面
-    HelpWidget *helpWidget = new HelpWidget();
-    ui->stackedWidget_2->insertWidget(1,helpWidget);
-
-
+//    HelpWidget *helpWidget = new HelpWidget();
+//    ui->stackedWidget_2->insertWidget(1,helpWidget);
+    ui->label_helppic->setPixmap(QPixmap(":/ui/wallet_ui/help_pic.png").scaled(ui->label_helppic->size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    ui->label_helppic->setVisible(false);
+    connect(ui->stackedWidget_2,&QStackedWidget::currentChanged,[this](){
+        this->ui->label_helppic->setVisible(this->ui->stackedWidget_2->currentIndex() == 1);
+    });
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->stackedWidget_2);
 }
 
@@ -574,7 +582,7 @@ void SetDialog::paintEvent(QPaintEvent *event)
 
     painter.setPen(Qt::NoPen);
 
-    painter.setBrush(QColor(229,226,240));
+    painter.drawPixmap(rect(),QPixmap(":/ui/wallet_ui/back_dialog.png").scaled(rect().size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
     QWidget::paintEvent(event);
 

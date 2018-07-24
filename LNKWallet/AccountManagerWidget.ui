@@ -19,7 +19,7 @@
      <x>0</x>
      <y>0</y>
      <width>556</width>
-     <height>221</height>
+     <height>231</height>
     </rect>
    </property>
   </widget>
@@ -27,9 +27,9 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>220</y>
+     <y>236</y>
      <width>556</width>
-     <height>41</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="font">
@@ -41,10 +41,10 @@
   <widget class="QToolButton" name="toolButton">
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>231</y>
-     <width>71</width>
-     <height>20</height>
+     <x>464</x>
+     <y>239</y>
+     <width>86</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
@@ -63,7 +63,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>60</y>
+     <y>72</y>
      <width>556</width>
      <height>2</height>
     </rect>
@@ -79,7 +79,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>130</y>
+     <y>146</y>
      <width>556</width>
      <height>2</height>
     </rect>
@@ -91,6 +91,11 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+  <zorder>tableWidget</zorder>
+  <zorder>stackedWidget</zorder>
+  <zorder>line</zorder>
+  <zorder>line_2</zorder>
+  <zorder>toolButton</zorder>
  </widget>
  <resources/>
  <connections/>

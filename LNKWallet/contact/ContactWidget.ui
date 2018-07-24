@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>679</width>
-    <height>530</height>
+    <width>900</width>
+    <height>510</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,14 +38,14 @@
       <widget class="QScrollArea" name="scrollArea_leftTop">
        <property name="minimumSize">
         <size>
-         <width>120</width>
-         <height>72</height>
+         <width>130</width>
+         <height>100</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>120</width>
-         <height>72</height>
+         <height>100</height>
         </size>
        </property>
        <property name="widgetResizable">
@@ -56,8 +56,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>118</width>
-          <height>70</height>
+          <width>128</width>
+          <height>98</height>
          </rect>
         </property>
        </widget>
@@ -67,7 +67,7 @@
       <widget class="QScrollArea" name="scrollArea_leftBottom">
        <property name="minimumSize">
         <size>
-         <width>120</width>
+         <width>130</width>
          <height>0</height>
         </size>
        </property>
@@ -85,8 +85,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>118</width>
-          <height>454</height>
+          <width>128</width>
+          <height>406</height>
          </rect>
         </property>
        </widget>
@@ -121,7 +121,7 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>553</width>
+          <width>764</width>
           <height>70</height>
          </rect>
         </property>
@@ -138,8 +138,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>553</width>
-          <height>454</height>
+          <width>764</width>
+          <height>434</height>
          </rect>
         </property>
        </widget>

@@ -1011,6 +1011,11 @@ QString HXChain::guardAddressToName(QString guardAddress)
     return result;
 }
 
+void HXChain::fetchMiners()
+{
+    postRPC( "id-list_miners", toJsonFormat( "list_miners", QJsonArray() << "A" << 100));
+}
+
 void HXChain::fetchProposals()
 {
     if(formalGuardMap.size() < 1)   return;

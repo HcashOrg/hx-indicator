@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>120</width>
-    <height>530</height>
+    <width>130</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>120</width>
-    <height>530</height>
+    <width>130</width>
+    <height>480</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>120</width>
+    <width>130</width>
     <height>530</height>
    </size>
   </property>
@@ -36,17 +36,17 @@
    </property>
    <property name="font">
     <font>
-     <family>Microsoft YaHei UI Light</family>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
-     <weight>50</weight>
+     <weight>75</weight>
      <italic>false</italic>
-     <bold>false</bold>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: #A6B9FF;
-font: 16px &quot;Microsoft YaHei UI Light&quot;;
-padding-left: 18px;</string>
+    <string notr="true">color: white;
+font: bold 14px &quot;微软雅黑&quot;;
+padding-left: 15px;</string>
    </property>
    <property name="text">
     <string>账户</string>
@@ -55,13 +55,13 @@ padding-left: 18px;</string>
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QToolButton" name="toolButton_asset">
+  <widget class="QPushButton" name="pushButton_asset">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>60</y>
-     <width>120</width>
-     <height>30</height>
+     <x>18</x>
+     <y>70</y>
+     <width>112</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -73,13 +73,13 @@ padding-left: 18px;</string>
     <string>资产</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="toolButton_miner">
+  <widget class="QPushButton" name="pushButton_miner">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>90</y>
-     <width>120</width>
-     <height>30</height>
+     <x>18</x>
+     <y>110</y>
+     <width>112</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -91,13 +91,13 @@ padding-left: 18px;</string>
     <string>挖矿</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="toolButton_bonus">
+  <widget class="QPushButton" name="pushButton_bonus">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>120</y>
-     <width>120</width>
-     <height>30</height>
+     <x>18</x>
+     <y>150</y>
+     <width>112</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">

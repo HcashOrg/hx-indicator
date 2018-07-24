@@ -23,6 +23,7 @@ BottomBar::BottomBar(QWidget *parent) :
 
     connect(HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)),this, SLOT(jsonDataUpdated(QString)));
 
+    this->setAttribute(Qt::WA_TranslucentBackground);
 //    ui->networkLabel->setPixmap(QPixmap(":/ui/wallet_ui/net.png").scaled(20,20));
 }
 
@@ -128,18 +129,18 @@ void BottomBar::CheckBlockSync(const QString &res)
 
 void BottomBar::paintEvent(QPaintEvent *)
 {
-    QPainter painter(this);
-    painter.setBrush(QColor(248,249,253));
-    painter.setPen(QColor(248,249,253));
-    painter.drawRect(rect());
-    //painter.drawRect(QRect(0,0,900,40));
+//    QPainter painter(this);
+//    painter.setBrush(QColor(248,249,253));
+//    painter.setPen(QColor(248,249,253));
+//    painter.drawRect(rect());
+//    //painter.drawRect(QRect(0,0,900,40));
 
-    if(rect().width() > 680)
-    {
-        painter.setBrush(QColor(24,28,45));
-        painter.setPen(QColor(24,28,45));
-        painter.drawRect(0,0,124,40);
-    }
+//    if(rect().width() > 680)
+//    {
+//        painter.setBrush(QColor(24,28,45));
+//        painter.setPen(QColor(24,28,45));
+//        painter.drawRect(0,0,124,40);
+//    }
 }
 
 void BottomBar::refresh()

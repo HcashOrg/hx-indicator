@@ -169,6 +169,18 @@ struct GuardMultisigAddress
     QString pairId;         // 对应的多签地址id  如果是"2.7.0" 就是正在更新中
 };
 
+struct MinerInfo
+{
+    QString minerId;
+    QString accountId;
+    QString signingKey;
+    int totalMissed = 0;
+    int totalProduced = 0;
+    int lastBlock = -1;
+    double participationRate = 0;
+    QVector<AssetAmount>    lockBalances;
+};
+
 struct ProposalInfo
 {
     QString proposalId;     // 提案id
@@ -463,6 +475,10 @@ public:
     QStringList getAssetMultisigUpdatedGuards(QString assetSymbol);         // 获取多签地址正在更新的guardId
     QString guardAccountIdToName(QString guardAccountId);
     QString guardAddressToName(QString guardAddress);
+
+    QMap<QString,MinerInfo>     minerMap;
+    void fetchMiners();
+
 
     QMap<QString,ProposalInfo>   proposalInfoMap;        // key是proposal id
     void fetchProposals();

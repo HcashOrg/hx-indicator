@@ -92,9 +92,6 @@ void PasswordConfirmWidget::InitStyle()
 
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
     ui->toolButton_cancel->setStyleSheet(CLOSEBTN_STYLE);
-    setStyleSheet(
-                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-                  );
 
 }
 
@@ -102,20 +99,23 @@ void PasswordConfirmWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
 
+    painter.drawPixmap(rect(),QPixmap(":/ui/wallet_ui/back_dialog.png").scaled(rect().size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
     painter.drawRect(rect());
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(255,255,255,255));
-    painter.drawRoundedRect(QRect(385,220,380,185),10,10);
+    painter.drawRoundedRect(QRect(355,200,380,185),10,10);
 
     QRadialGradient radial(385, 385, 390, 385,385);
     radial.setColorAt(0, QColor(0,0,0,15));
-    radial.setColorAt(1, QColor(218,255,248,15));
+    radial.setColorAt(1, QColor(188,235,248,15));
     painter.setBrush(radial);
     painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(QRect(380,215,390,195),10,10);
+    painter.drawRoundedRect(QRect(350,195,390,195),10,10);
+
 
     QWidget::paintEvent(event);
 }

@@ -45,6 +45,8 @@ private:
     void ResetButton();
 
     void updateShowTip();
+protected:
+    void resizeEvent(QResizeEvent *event);
 private:
     Ui::PageScrollWidget *ui;
 private:

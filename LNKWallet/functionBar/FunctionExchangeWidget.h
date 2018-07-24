@@ -32,6 +32,8 @@ private slots:
 
 private:
     Ui::FunctionExchangeWidget *ui;
+
+    void paintEvent(QPaintEvent*);
 };
 
 #endif // FUNCTIONEXCHANGEWIDGET_H

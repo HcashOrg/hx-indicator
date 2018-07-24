@@ -146,14 +146,14 @@
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QToolButton" name="saveBtn">
          <property name="geometry">
           <rect>
            <x>240</x>
-           <y>216</y>
+           <y>222</y>
            <width>92</width>
            <height>28</height>
           </rect>
@@ -667,7 +667,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>127</y>
+           <y>115</y>
            <width>291</width>
            <height>30</height>
           </rect>
@@ -688,7 +688,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>190</y>
+           <y>178</y>
            <width>291</width>
            <height>30</height>
           </rect>
@@ -708,10 +708,10 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
         <widget class="QToolButton" name="confirmBtn">
          <property name="geometry">
           <rect>
-           <x>230</x>
-           <y>230</y>
-           <width>96</width>
-           <height>30</height>
+           <x>240</x>
+           <y>222</y>
+           <width>92</width>
+           <height>28</height>
           </rect>
          </property>
          <property name="font">
@@ -734,7 +734,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>169</y>
+           <y>157</y>
            <width>100</width>
            <height>20</height>
           </rect>
@@ -762,7 +762,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>172</x>
-           <y>74</y>
+           <y>65</y>
            <width>151</width>
            <height>16</height>
           </rect>
@@ -783,7 +783,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>44</y>
+           <y>40</y>
            <width>100</width>
            <height>20</height>
           </rect>
@@ -811,7 +811,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>172</x>
-           <y>201</y>
+           <y>184</y>
            <width>151</width>
            <height>20</height>
           </rect>
@@ -832,7 +832,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>107</y>
+           <y>95</y>
            <width>100</width>
            <height>20</height>
           </rect>
@@ -860,7 +860,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>172</x>
-           <y>138</y>
+           <y>121</y>
            <width>151</width>
            <height>16</height>
           </rect>
@@ -881,7 +881,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>62</y>
+           <y>58</y>
            <width>291</width>
            <height>30</height>
           </rect>
@@ -902,7 +902,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>15</y>
+           <y>11</y>
            <width>200</width>
            <height>30</height>
           </rect>
@@ -935,6 +935,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
         <zorder>tipLabel3</zorder>
         <zorder>tipLabel2</zorder>
        </widget>
+       <widget class="AccountManagerWidget" name="accountmanager"/>
       </widget>
       <widget class="QToolButton" name="safeBtn">
        <property name="geometry">
@@ -1020,33 +1021,62 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
       <zorder>safeBtn</zorder>
       <zorder>accountBtn</zorder>
      </widget>
-     <widget class="QToolButton" name="closeBtn">
-      <property name="geometry">
-       <rect>
-        <x>530</x>
-        <y>0</y>
-        <width>18</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
     </widget>
-    <widget class="QWidget" name="page_help"/>
+    <widget class="HelpWidget" name="page_help"/>
+   </widget>
+   <widget class="QToolButton" name="closeBtn">
+    <property name="geometry">
+     <rect>
+      <x>741</x>
+      <y>138</y>
+      <width>17</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_helppic">
+    <property name="geometry">
+     <rect>
+      <x>545</x>
+      <y>177</y>
+      <width>238</width>
+      <height>248</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
    <zorder>stackedWidget_2</zorder>
    <zorder>toolButton_help</zorder>
    <zorder>toolButton_set</zorder>
+   <zorder>closeBtn</zorder>
+   <zorder>label_helppic</zorder>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AccountManagerWidget</class>
+   <extends>QWidget</extends>
+   <header>accountmanagerwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HelpWidget</class>
+   <extends>QWidget</extends>
+   <header>helpwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <tabstops>
   <tabstop>oldPwdLineEdit</tabstop>
   <tabstop>newPwdLineEdit</tabstop>

@@ -2,6 +2,7 @@
 #include "ui_FunctionAdvanceWidget.h"
 
 #include "extra/style.h"
+#include <QPainter>
 
 FunctionAdvanceWidget::FunctionAdvanceWidget(QWidget *parent) :
     QWidget(parent),
@@ -26,42 +27,43 @@ void FunctionAdvanceWidget::DefaultShow()
 
 void FunctionAdvanceWidget::PoundageShowSlots()
 {
-    ui->toolButton_poundage->setChecked(true);
-    ui->toolButton_multiSig->setChecked(false);
+    ui->pushButton_poundage->setChecked(true);
+    ui->pushButton_multiSig->setChecked(false);
     emit showPoundageSignal();
 }
 
 void FunctionAdvanceWidget::MultiSigShowSlots()
 {
-    ui->toolButton_poundage->setChecked(false);
-    ui->toolButton_multiSig->setChecked(true);
+    ui->pushButton_poundage->setChecked(false);
+    ui->pushButton_multiSig->setChecked(true);
     emit showMultiSigSignal();
 }
 
 void FunctionAdvanceWidget::InitWidget()
 {
     InitStyle();
-    ui->toolButton_poundage->setCheckable(true);
-    ui->toolButton_multiSig->setCheckable(true);
-    connect(ui->toolButton_poundage,&QToolButton::clicked,this,&FunctionAdvanceWidget::PoundageShowSlots);
-    connect(ui->toolButton_multiSig,&QToolButton::clicked,this,&FunctionAdvanceWidget::MultiSigShowSlots);
+    ui->pushButton_poundage->setCheckable(true);
+    ui->pushButton_multiSig->setCheckable(true);
+    connect(ui->pushButton_poundage,&QPushButton::clicked,this,&FunctionAdvanceWidget::PoundageShowSlots);
+    connect(ui->pushButton_multiSig,&QPushButton::clicked,this,&FunctionAdvanceWidget::MultiSigShowSlots);
 }
 
 void FunctionAdvanceWidget::InitStyle()
 {
-    setAutoFillBackground(true);
-    QPalette palette;
-    palette.setColor(QPalette::Window, QColor(84,116,235));
-    setPalette(palette);
+    setStyleSheet(FUNCTIONBAR_PUSHBUTTON_STYLE);
+}
 
-    QFont font("\"Microsoft YaHei UI Light\"",14,63);
-    ui->label->setFont(font);
-    QPalette pa;
-    pa.setColor(QPalette::WindowText,QColor(248,249,254));
-    ui->label->setPalette(pa);
+void FunctionAdvanceWidget::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
 
-    //ui->pushButton_multiSig->setFlat(true);
-    //ui->pushButton_poundage->setFlat(true);
+    QLinearGradient linear(QPointF(0, 480), QPointF(130, 0));
+    linear.setColorAt(0, QColor(56,19,56));
+    linear.setColorAt(1, QColor(27,17,44));
+    linear.setSpread(QGradient::PadSpread);
+    painter.setBrush(linear);
+    painter.drawRect(QRect(-1,-1,131,481));
 
-    setStyleSheet(FUNCTIONBAR_TOOLBUTTON_STYLE);
+    painter.setPen(QColor(45,29,71));
+    painter.drawLine(20,62,110,62);
 }

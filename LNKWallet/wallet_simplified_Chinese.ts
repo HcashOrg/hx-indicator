@@ -1042,17 +1042,17 @@
         <translation type="obsolete">领取</translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="103"/>
+        <location filename="bonus/BonusPage.cpp" line="108"/>
         <source>get bonus</source>
         <translation type="unfinished">领取分红</translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="132"/>
+        <location filename="bonus/BonusPage.cpp" line="137"/>
         <source>Transaction of obtain-bonus has been sent out!</source>
         <translation type="unfinished">领取分红交易已发出！</translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="140"/>
+        <location filename="bonus/BonusPage.cpp" line="145"/>
         <source>Fail to obtain bonus!</source>
         <translation type="unfinished">领取分红失败！</translation>
     </message>
@@ -3401,27 +3401,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1136"/>
+        <location filename="frame.cpp" line="1147"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1346"/>
+        <location filename="frame.cpp" line="1357"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2006"/>
+        <location filename="frame.cpp" line="2082"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2009"/>
+        <location filename="frame.cpp" line="2085"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2012"/>
+        <location filename="frame.cpp" line="2088"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -3632,37 +3632,6 @@ add an account first</source>
     <message>
         <location filename="functionBar/FunctionWidget.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="functionBar/FunctionWidget.ui" line="64"/>
-        <source>账户</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="functionBar/FunctionWidget.ui" line="92"/>
-        <source>市场</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="functionBar/FunctionWidget.ui" line="148"/>
-        <source>联系人</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="functionBar/FunctionWidget.ui" line="120"/>
-        <source>高级</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="functionBar/FunctionWidget.ui" line="176"/>
-        <source>Guard</source>
-        <oldsource>guard</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="functionBar/FunctionWidget.ui" line="217"/>
-        <source>更多</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3914,6 +3883,21 @@ add an account first</source>
         <location filename="guard/GuardKeyUpdatingInfoDialog.cpp" line="42"/>
         <source>%1 guards have updated. %2 guards have not yet.</source>
         <translation type="unfinished">%1 个guard已更新，%2 个guard还未更新。</translation>
+    </message>
+</context>
+<context>
+    <name>HXChain</name>
+    <message>
+        <location filename="wallet.cpp" line="173"/>
+        <location filename="wallet.cpp" line="197"/>
+        <source>Fail to launch %1 !</source>
+        <translation type="unfinished">启动 %1 失败!</translation>
+    </message>
+    <message>
+        <location filename="wallet.cpp" line="606"/>
+        <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
+        <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
+        <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
     </message>
 </context>
 <context>
@@ -5012,7 +4996,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="57"/>
-        <source>There&apos;s no contract!</source>
+        <source>There are no orders!</source>
+        <oldsource>There&apos;s no contract!</oldsource>
         <translation type="unfinished">当前没有挂单！</translation>
     </message>
     <message>
@@ -5365,8 +5350,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.cpp" line="46"/>
-        <source>There&apos;s no contract!</source>
-        <translation type="unfinished">当前没有合约！</translation>
+        <source>There are no orders!</source>
+        <oldsource>There&apos;s no contract!</oldsource>
+        <translation type="unfinished">当前没有挂单！</translation>
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.cpp" line="161"/>
@@ -6725,7 +6711,7 @@ update or not?</source>
         <translation type="obsolete">还没有消息!</translation>
     </message>
     <message>
-        <location filename="titlebar.cpp" line="61"/>
+        <location filename="titlebar.cpp" line="60"/>
         <source>Sure to close the Wallet?</source>
         <translation type="unfinished">确定关闭钱包?</translation>
     </message>
@@ -7141,21 +7127,6 @@ p, li { white-space: pre-wrap; }
         <location filename="transfer/transferrecordwidget.cpp" line="135"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
-    </message>
-</context>
-<context>
-    <name>HXChain</name>
-    <message>
-        <location filename="wallet.cpp" line="173"/>
-        <location filename="wallet.cpp" line="197"/>
-        <source>Fail to launch %1 !</source>
-        <translation type="unfinished">启动 %1 失败!</translation>
-    </message>
-    <message>
-        <location filename="wallet.cpp" line="606"/>
-        <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
-        <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
-        <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
     </message>
 </context>
 <context>

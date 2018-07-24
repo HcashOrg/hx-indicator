@@ -24,11 +24,9 @@
         <file>pic2/wrong.png</file>
         <file>pic2/arrow.png</file>
         <file>pic2/noLogo.png</file>
-        <file>pic2/logo130x50.png</file>
         <file>pic2/follow.png</file>
         <file>pic2/unfollow.png</file>
         <file>pic2/qrcode.png</file>
-        <file>pic2/contractLogo.png</file>
         <file>pic2/contactBtn2_En.png</file>
         <file>pic2/contactBtn2_hover_En.png</file>
         <file>pic2/send.png</file>
@@ -41,8 +39,6 @@
     </qresource>
     <qresource prefix="/ui">
         <file>wallet_ui/passwordLineEditBg.png</file>
-        <file>wallet_ui/loginBg.png</file>
-        <file>wallet_ui/accountBtn.png</file>
         <file>wallet_ui/accountBtn_unselected.png</file>
         <file>wallet_ui/advanceBtn.png</file>
         <file>wallet_ui/advanceBtn_unselected.png</file>
@@ -57,7 +53,6 @@
         <file>wallet_ui/minimizeBtn.png</file>
         <file>wallet_ui/setBtn.png</file>
         <file>wallet_ui/lockBtn.png</file>
-        <file>wallet_ui/logo_52x34.png</file>
         <file>wallet_ui/loading.png</file>
         <file>wallet_ui/scan.png</file>
         <file>wallet_ui/qrcode.png</file>
@@ -107,7 +102,6 @@
         <file>wallet_ui/whitebord.png</file>
         <file>wallet_ui/trade.png</file>
         <file>wallet_ui/tradeConfirm.png</file>
-        <file>wallet_ui/addContact.png</file>
         <file>wallet_ui/contactPic.png</file>
         <file>wallet_ui/off.png</file>
         <file>wallet_ui/on.png</file>
@@ -139,6 +133,9 @@
         <file>wallet_ui/back_dialog.png</file>
         <file>wallet_ui/blue_circle.png</file>
         <file>wallet_ui/gray_circle.png</file>
+        <file>wallet_ui/white_close.png</file>
+        <file>wallet_ui/help_pic.png</file>
+        <file>wallet_ui/addContact.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>

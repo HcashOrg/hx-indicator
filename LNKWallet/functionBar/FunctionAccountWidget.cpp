@@ -2,6 +2,8 @@
 #include "ui_FunctionAccountWidget.h"
 
 #include "extra/style.h"
+#include <QPainter>
+#include <QDebug>
 
 FunctionAccountWidget::FunctionAccountWidget(QWidget *parent) :
     QWidget(parent),
@@ -26,27 +28,27 @@ void FunctionAccountWidget::DefaultShow()
 
 void FunctionAccountWidget::AssetShowSlots()
 {
-    ui->toolButton_miner->setChecked(false);
-    ui->toolButton_asset->setChecked(true);
-    ui->toolButton_bonus->setChecked(false);
+    ui->pushButton_miner->setChecked(false);
+    ui->pushButton_asset->setChecked(true);
+    ui->pushButton_bonus->setChecked(false);
 
     emit showAccountSignal();
 }
 
 void FunctionAccountWidget::MinerShowSlots()
 {
-    ui->toolButton_miner->setChecked(true);
-    ui->toolButton_asset->setChecked(false);
-    ui->toolButton_bonus->setChecked(false);
+    ui->pushButton_miner->setChecked(true);
+    ui->pushButton_asset->setChecked(false);
+    ui->pushButton_bonus->setChecked(false);
 
     emit showMinerSignal();
 }
 
 void FunctionAccountWidget::BonusShowSlots()
 {
-    ui->toolButton_miner->setChecked(false);
-    ui->toolButton_asset->setChecked(false);
-    ui->toolButton_bonus->setChecked(true);
+    ui->pushButton_miner->setChecked(false);
+    ui->pushButton_asset->setChecked(false);
+    ui->pushButton_bonus->setChecked(true);
 
     emit showBonusSignal();
 }
@@ -54,21 +56,31 @@ void FunctionAccountWidget::BonusShowSlots()
 void FunctionAccountWidget::InitWidget()
 {
     InitStyle();
-    ui->toolButton_asset->setCheckable(true);
-    ui->toolButton_miner->setCheckable(true);
-    ui->toolButton_bonus->setCheckable(true);
+    ui->pushButton_asset->setCheckable(true);
+    ui->pushButton_miner->setCheckable(true);
+    ui->pushButton_bonus->setCheckable(true);
 
-    connect(ui->toolButton_asset,&QToolButton::clicked,this,&FunctionAccountWidget::AssetShowSlots);
-    connect(ui->toolButton_miner,&QToolButton::clicked,this,&FunctionAccountWidget::MinerShowSlots);
-    connect(ui->toolButton_bonus,&QToolButton::clicked,this,&FunctionAccountWidget::BonusShowSlots);
+    connect(ui->pushButton_asset,&QPushButton::clicked,this,&FunctionAccountWidget::AssetShowSlots);
+    connect(ui->pushButton_miner,&QPushButton::clicked,this,&FunctionAccountWidget::MinerShowSlots);
+    connect(ui->pushButton_bonus,&QPushButton::clicked,this,&FunctionAccountWidget::BonusShowSlots);
 }
 
 void FunctionAccountWidget::InitStyle()
 {
-    setAutoFillBackground(true);
-    QPalette palette;
-    palette.setColor(QPalette::Window, QColor(84,116,235));
-    setPalette(palette);
+    setStyleSheet(FUNCTIONBAR_PUSHBUTTON_STYLE );
+}
 
-    setStyleSheet(FUNCTIONBAR_TOOLBUTTON_STYLE);
+void FunctionAccountWidget::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+
+    QLinearGradient linear(QPointF(0, 480), QPointF(130, 0));
+    linear.setColorAt(0, QColor(56,19,56));
+    linear.setColorAt(1, QColor(27,17,44));
+    linear.setSpread(QGradient::PadSpread);
+    painter.setBrush(linear);
+    painter.drawRect(QRect(-1,-1,131,481));
+
+    painter.setPen(QColor(45,29,71));
+    painter.drawLine(20,62,110,62);
 }

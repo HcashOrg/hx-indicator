@@ -54,7 +54,7 @@ MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&MyExchangeContractPage::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->ordersTableWidget);
-    blankWidget->setTextTip(tr("There's no contract!"));
+    blankWidget->setTextTip(tr("There are no orders!"));
 
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->ordersTableWidget);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>120</width>
-    <height>530</height>
+    <width>130</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,17 +24,17 @@
    </property>
    <property name="font">
     <font>
-     <family>Microsoft YaHei UI Light</family>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
-     <weight>50</weight>
+     <weight>75</weight>
      <italic>false</italic>
-     <bold>false</bold>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: #A6B9FF;
-font: 16px &quot;Microsoft YaHei UI Light&quot;;
-padding-left: 18px;</string>
+    <string notr="true">color: white;
+font: bold 14px &quot;微软雅黑&quot;;
+padding-left: 15px;</string>
    </property>
    <property name="text">
     <string>市场</string>
@@ -43,13 +43,13 @@ padding-left: 18px;</string>
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QToolButton" name="onchainOrderBtn">
+  <widget class="QPushButton" name="onchainOrderBtn">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>60</y>
-     <width>120</width>
-     <height>30</height>
+     <x>18</x>
+     <y>70</y>
+     <width>112</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -61,13 +61,13 @@ padding-left: 18px;</string>
     <string>挂单中心</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="myOrderBtn">
+  <widget class="QPushButton" name="myOrderBtn">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>90</y>
-     <width>120</width>
-     <height>32</height>
+     <x>18</x>
+     <y>110</y>
+     <width>112</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">

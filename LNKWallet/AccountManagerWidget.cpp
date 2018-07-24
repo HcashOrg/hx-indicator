@@ -181,7 +181,7 @@ void AccountManagerWidget::InitWidget()
         item->setTextAlignment(Qt::AlignLeft);
         item->setFlags(Qt::ItemIsEnabled);
         ui->tableWidget->insertRow(ui->tableWidget->rowCount());
-        ui->tableWidget->setRowHeight(ui->tableWidget->rowCount()-1,66);
+        ui->tableWidget->setRowHeight(ui->tableWidget->rowCount()-1,70);
         ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,0,item);
 
         AccountInfoWidget* w = new AccountInfoWidget;
@@ -191,11 +191,15 @@ void AccountManagerWidget::InitWidget()
         ToolButtonWidget *button1 = new ToolButtonWidget();
         button1->setText(tr("delete"));
         button1->setInitGray(true);
+        button1->setBackgroundColor("transparent");
+        button1->setButtonStyle(OKBTN_STYLE);
         ui->tableWidget->setIndexWidget(ui->tableWidget->model()->index(ui->tableWidget->rowCount()-1,1),button1);
 
         ToolButtonWidget *button2 = new ToolButtonWidget();
         button2->setText(tr("export"));
         button2->setInitGray(false);
+        button2->setBackgroundColor("transparent");
+        button2->setButtonStyle(CANCELBTN_STYLE);
         ui->tableWidget->setIndexWidget(ui->tableWidget->model()->index(ui->tableWidget->rowCount()-1,2),button2);
 
         connect(button1,&ToolButtonWidget::clicked,this,&AccountManagerWidget::deleteButtonSlots);
@@ -223,11 +227,11 @@ void AccountManagerWidget::InitStyle()
     ui->tableWidget->setColumnWidth(0,435);
     ui->tableWidget->setColumnWidth(1,60);
     ui->tableWidget->setColumnWidth(2,60);
-    ui->tableWidget->setStyleSheet("QTableView{border:none;font:12px \"Microsoft YaHei UI Light\";}");
+    ui->tableWidget->setStyleSheet("QTableView{border:none;font:12px \"Microsoft YaHei UI Light\";background-color:rgb(229,226,240);}");
 
-    ui->toolButton->setStyleSheet("QToolButton{background-color:#5474EB; border:none;border-radius:10px;color: rgb(255, 255, 255);}"
-                                  "QToolButton:hover{background-color:#00D2FF;}");
+    ui->toolButton->setStyleSheet(OKBTN_STYLE);
 
     ui->tableWidget->setFocusPolicy(Qt::NoFocus);
+
 }
 
