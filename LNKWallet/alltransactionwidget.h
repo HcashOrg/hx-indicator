@@ -53,6 +53,9 @@ private slots:
 
 private:
     Ui::AllTransactionWidget *ui;
+
+    void paintEvent(QPaintEvent*);
+
     bool inited = false;
     TypeChoice typeChoice = AllType;
     TimeChoice timeChoice = AllTime;

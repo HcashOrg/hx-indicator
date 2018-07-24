@@ -21,7 +21,7 @@
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>50</y>
      <width>200</width>
      <height>26</height>
@@ -39,15 +39,15 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>92</y>
+     <x>60</x>
+     <y>102</y>
      <width>50</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(198, 202, 212);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>类型</string>
@@ -56,15 +56,15 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>150</y>
+     <x>60</x>
+     <y>160</y>
      <width>50</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(198, 202, 212);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>时间</string>
@@ -73,10 +73,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="typeAllBtn">
    <property name="geometry">
     <rect>
-     <x>125</x>
-     <y>90</y>
-     <width>50</width>
-     <height>24</height>
+     <x>110</x>
+     <y>100</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -93,9 +93,9 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>90</y>
-     <width>50</width>
-     <height>24</height>
+     <y>100</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -111,10 +111,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="typeDepositBtn">
    <property name="geometry">
     <rect>
-     <x>255</x>
-     <y>90</y>
-     <width>50</width>
-     <height>24</height>
+     <x>270</x>
+     <y>100</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -130,10 +130,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="typeWithdrawBtn">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>90</y>
-     <width>50</width>
-     <height>24</height>
+     <x>350</x>
+     <y>100</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -149,10 +149,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="typeContractBtn">
    <property name="geometry">
     <rect>
-     <x>385</x>
-     <y>90</y>
-     <width>70</width>
-     <height>24</height>
+     <x>430</x>
+     <y>100</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -168,10 +168,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="typeOtherBtn">
    <property name="geometry">
     <rect>
-     <x>125</x>
-     <y>120</y>
-     <width>50</width>
-     <height>24</height>
+     <x>110</x>
+     <y>130</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -187,10 +187,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="timeAllBtn">
    <property name="geometry">
     <rect>
-     <x>125</x>
-     <y>150</y>
-     <width>50</width>
-     <height>24</height>
+     <x>110</x>
+     <y>160</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -207,9 +207,9 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>150</y>
-     <width>50</width>
-     <height>24</height>
+     <y>160</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -225,10 +225,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="timeWeekBtn">
    <property name="geometry">
     <rect>
-     <x>255</x>
-     <y>150</y>
-     <width>50</width>
-     <height>24</height>
+     <x>270</x>
+     <y>160</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -244,10 +244,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="timeMonthBtn">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>150</y>
-     <width>50</width>
-     <height>24</height>
+     <x>350</x>
+     <y>160</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -260,37 +260,13 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <string>本月</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>180</y>
-     <width>100</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
-   </property>
-   <property name="text">
-    <string>当前账号</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>200</y>
-     <width>100</width>
-     <height>20</height>
+     <width>165</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -307,34 +283,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <string notr="true"/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>180</y>
-     <width>100</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
-   </property>
-   <property name="text">
-    <string>地址</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="addressLabel">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>250</x>
      <y>200</y>
      <width>300</width>
      <height>20</height>
@@ -361,10 +313,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QTableWidget" name="transactionsTableWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>60</x>
      <y>230</y>
-     <width>670</width>
-     <height>240</height>
+     <width>650</width>
+     <height>230</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -532,10 +484,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="typeMineBtn">
    <property name="geometry">
     <rect>
-     <x>470</x>
-     <y>90</y>
-     <width>70</width>
-     <height>24</height>
+     <x>510</x>
+     <y>100</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -551,10 +503,10 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="typeGuaranteeBtn">
    <property name="geometry">
     <rect>
-     <x>555</x>
-     <y>90</y>
-     <width>70</width>
-     <height>24</height>
+     <x>590</x>
+     <y>100</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -570,26 +522,26 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QLineEdit" name="searchLineEdit">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>540</x>
      <y>50</y>
-     <width>176</width>
-     <height>24</height>
+     <width>150</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">border:1px solid rgb(198,202,212);border-top-left-radius:12px;border-bottom-left-radius:12px;
-color: rgb(198,202,212);padding: 0px 10px 0px 10px;
-font: 12px &quot;微软雅黑&quot;;
+    <string notr="true">border:1px solid rgb(212,208,217);border-top-left-radius:4px;border-bottom-left-radius:4px;
+color: rgb(137,129,161);padding: 0px 5px 0px 5px;
+font: 11px &quot;微软雅黑&quot;;
 </string>
    </property>
   </widget>
   <widget class="QPushButton" name="searchBtn">
    <property name="geometry">
     <rect>
-     <x>645</x>
+     <x>689</x>
      <y>50</y>
-     <width>50</width>
-     <height>24</height>
+     <width>18</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -616,9 +568,9 @@ font: 12px &quot;微软雅黑&quot;;
    <property name="geometry">
     <rect>
      <x>190</x>
-     <y>120</y>
-     <width>50</width>
-     <height>24</height>
+     <y>130</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -634,10 +586,10 @@ font: 12px &quot;微软雅黑&quot;;
   <widget class="QToolButton" name="typeProposalBtn">
    <property name="geometry">
     <rect>
-     <x>255</x>
-     <y>120</y>
-     <width>50</width>
-     <height>24</height>
+     <x>270</x>
+     <y>130</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">
@@ -653,10 +605,10 @@ font: 12px &quot;微软雅黑&quot;;
   <widget class="QToolButton" name="typeBonusBtn">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>120</y>
-     <width>50</width>
-     <height>24</height>
+     <x>350</x>
+     <y>130</y>
+     <width>60</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="cursor">

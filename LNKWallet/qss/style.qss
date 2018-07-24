@@ -1,14 +1,14 @@
-QComboBox{background-color:transparent;border:none;color: black;padding-left: 5px;font: 14px \"Microsoft YaHei UI Light\";}
+QComboBox{background-color:rgb(243,241,250);border:1px solid rgb(219,216,232);color: rgb(137,129,161);padding-left: 5px;font: 11px \"Microsoft YaHei UI Light\";border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:4px;border-bottom-right-radius:4px;}
 /*QComboBox:on{border:1px solid rgb(93,107,144);}*/
-QComboBox::drop-down {background:transparent;border:none;}
+QComboBox::drop-down {background:rgb(196,191,214);border:none;border-top-right-radius:4px;border-bottom-right-radius:4px;}
 QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}
-QComboBox::down-arrow:on {image: url(:/ui/wallet_ui/downArrow_on.png);}
+/*QComboBox::down-arrow:on {image: url(:/ui/wallet_ui/downArrow_on.png);}*/
 QComboBox QAbstractItemView {outline: 0px;}
-/*QComboBox QAbstractItemView::item { min-height: 30px;color:rgb(192,196,212);selection-color: white;background-color: rgb(58,62,82);selection-background-color: rgb(44,48,67);}*/
+QComboBox QAbstractItemView{/* min-height: 18px;*/ color:rgb(83,61,138);selection-color: white;background-color: rgb(243,241,250);selection-background-color: rgb(196,191,214);}
 /*QComboBox QAbstractItemView::item:hover {color: white;background-color: rgb(44,48,67);}*/
 
 
-QScrollBar:vertical{border:none; width:20px;background:white;padding:20px 4px 20px 8px;}
+QScrollBar:vertical{border:none; width:20px;background:rgb(243,241,250);padding:20px 4px 20px 8px;}
 QScrollBar::handle:vertical{width:8px;background:rgb(83,61,138);border-radius:4px;min-height:20;}
 QScrollBar::handle:vertical:hover{background:rgb(103,81,158);}
 QScrollBar::add-line:vertical{height:0px;}
@@ -37,7 +37,7 @@ QSpinBox::up-arrow:hover {image: url(:/ui/wallet_ui/spinUpArrow_hover.png);}
 QSpinBox::down-arrow {image: url(:/ui/wallet_ui/spinDownArrow.png); width: 5px;height: 3px;}
 QSpinBox::down-arrow:hover {image: url(:/ui/wallet_ui/spinDownArrow_hover.png);}
 
-#title_label{font: bold 20px \"Microsoft YaHei UI Light\";}
+#title_label{font: bold 20px \"Microsoft YaHei UI Light\";color:(52,37,90);}
 #accountNameLabel,#priceLabel{font: bold 14px \"Microsoft YaHei UI Light\";}
 #pathBtn{background:transparent;color:rgb(192,202,212);font: 12px \"Microsoft YaHei UI Light\";}
 #pathBtn:hover{color:rgb(84,116,235);}
