@@ -1,11 +1,11 @@
 #ifndef STYLE_H
 #define STYLE_H
 
-#define OKBTN_STYLE     "QToolButton{font: 10px \"Microsoft YaHei UI Light\";background-color: rgb(84,61,137);border:0px solid white;border-radius:3px;color: white;}"  \
+#define OKBTN_STYLE     "QToolButton{font: 11px \"微软雅黑\";background-color: rgb(84,61,137);border:0px solid white;border-radius:3px;color: white;}"  \
                         "QToolButton:pressed{background-color:rgb(84,61,137);}"\
                         "QToolButton:disabled{background-color:rgb(196,191,214);}"
 
-#define CANCELBTN_STYLE "QToolButton{font: 10px \"Microsoft YaHei UI Light\";background:rgb(235,0,94);color: rgb(255,255,255);border:0px solid rgb(84,116,235);border-radius:3px;}"  \
+#define CANCELBTN_STYLE "QToolButton{font: 11px \"微软雅黑\";background:rgb(235,0,94);color: rgb(255,255,255);border:0px solid rgb(84,116,235);border-radius:3px;}"  \
                         "QToolButton:pressed{background-color:rgb(235,0,94);color: white}"\
                         "QToolButton:disabled{background-color:rgb(196,191,214);}"
 

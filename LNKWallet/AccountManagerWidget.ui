@@ -41,7 +41,7 @@
   <widget class="QToolButton" name="toolButton">
    <property name="geometry">
     <rect>
-     <x>464</x>
+     <x>468</x>
      <y>239</y>
      <width>86</width>
      <height>21</height>

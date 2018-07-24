@@ -269,7 +269,7 @@ void PageScrollWidget::InitWidget()
 
 void PageScrollWidget::InitStyle()
 {
-    setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/circle1.png);background-repeat: no-repeat;background-position: center;border: none;\
+    setStyleSheet("QToolButton{background:transparent;border: none;\
                   max-height:20 px;\
                   max-width:20 px;\
                   min-height:20 px;\
@@ -278,10 +278,10 @@ void PageScrollWidget::InitStyle()
                   font:\"Microsoft YaHei UI\";\
                   font-size:10 px;\
                   font-weight:bold;\
-                  color:#CACACA;}"
-                  "QToolButton:checked{background-image:url(:/ui/wallet_ui/circle.png);background-repeat: no-repeat;background-position: center;border: none;\
-                   background-color:transparent;color:#4861DC;}"
-                  "QToolButton#toolButton_next{border:none;}QToolButton#toolButton_pre{border:none;}"
+                  color:rgb(137,129,161);}"
+                  "QToolButton:checked{color:rgb(96,66,169);}"
+                  "QToolButton#toolButton_next{border-radius:4px;background-color:rgb(96,66,169);background-image:url(:/ui/wallet_ui/next.png);background-repeat: no-repeat;background-position: center;}"
+                  "QToolButton#toolButton_pre{border-radius:4px;background-color:rgb(243,241,250);background-image:url(:/ui/wallet_ui/pre.png);background-repeat: no-repeat;background-position: center;}"
                   "QLineEdit{max-height:20 px;\
                    max-width:30 px;\
                    min-height:20 px;\

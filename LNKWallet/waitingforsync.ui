@@ -23,7 +23,7 @@
   <widget class="QLabel" name="loadingLabel">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>60</x>
      <y>150</y>
      <width>120</width>
      <height>30</height>
@@ -81,7 +81,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size: 8px;</string>
+    <string notr="true">font-size: 10px;</string>
    </property>
    <property name="text">
     <string>v1.0.1</string>

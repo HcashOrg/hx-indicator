@@ -143,7 +143,7 @@
      <x>76</x>
      <y>255</y>
      <width>261</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -233,7 +233,7 @@
      <x>80</x>
      <y>150</y>
      <width>120</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -256,7 +256,7 @@
      <x>78</x>
      <y>205</y>
      <width>261</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="contextMenuPolicy">
@@ -294,7 +294,7 @@
      <x>220</x>
      <y>150</y>
      <width>120</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">

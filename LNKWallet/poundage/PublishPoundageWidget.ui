@@ -170,7 +170,7 @@
      <x>70</x>
      <y>225</y>
      <width>251</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
@@ -180,7 +180,7 @@
      <x>400</x>
      <y>164</y>
      <width>251</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

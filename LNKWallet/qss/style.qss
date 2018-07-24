@@ -16,9 +16,10 @@ QScrollBar::sub-line:vertical{height:0px;}
 QScrollBar::sub-page:vertical {background: transparent;}
 QScrollBar::add-page:vertical {background: transparent;}
 
-QCheckBox{color:rgb(192,196,212);}
-QCheckBox::indicator{ image:url(:/ui/wallet_ui/checkBox_unchecked.png);}
-QCheckBox::indicator:checked{ image:url(:/ui/wallet_ui/checkBox_checked.png); }
+QCheckBox{color:rgb(137,129,161);font-size:10px;}
+QCheckBox:checked{color:rgb(83,61,138);}
+QCheckBox::indicator{ width:15px;height:15px;image:url(:/ui/wallet_ui/checkBox_unchecked.png);background-repeat: no-repeat;background-position: center;border:none;}
+QCheckBox::indicator:checked{ image:url(:/ui/wallet_ui/checkBox_checked.png);background-repeat: no-repeat;background-position: center;border:none; }
 
 
 QLineEdit{background: rgb(243,241,250);color: rgb(84,61,137);font: 11px \"Microsoft YaHei UI Light\";border:1px solid rgb(84,61,137);padding: 0px 10px 0px 6px;border-radius:4px;}
