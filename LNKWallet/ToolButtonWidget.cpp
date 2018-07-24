@@ -53,6 +53,11 @@ void ToolButtonWidget::setBackgroundColor(QString color)
     setStyleSheet(QString("#widget{background-color:%1;}").arg(color));
 }
 
+void ToolButtonWidget::setButtonStyle(const QString &style)
+{
+    ui->toolButton->setStyleSheet(style);
+}
+
 void ToolButtonWidget::InitWidget()
 {
     InitStyle();

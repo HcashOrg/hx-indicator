@@ -8,6 +8,7 @@
 #include <QContextMenuEvent>
 #include <QMessageBox>
 #include <QDebug>
+#include <QPainter>
 
 #include "ContactDataUtil.h"
 #include "extra/style.h"
@@ -398,22 +399,21 @@ void ContactTreeWidget::initTreeStyle()
     setSelectionMode(QAbstractItemView::SingleSelection);
 
     setStyleSheet("QWidget{border:none;}"
-                  "QTreeView{background-color:rgb(84,116,235);border:none;\
-                      color:white;font:65 16px \"Microsoft YaHei UI\";outline:0px;}"
-                  "QTreeView::branch{background:rgb(94,116,235);}"
+                  "QTreeView{background-color:rgb(55,36,88);border:none;padding-left:0px;\
+                      color:rgb(104,86,144);font:65 14px \"Microsoft YaHei UI\";outline:0px;margin-left:5px;}"
                   "QTreeView::item{height:32px;}"
-                  "QTreeView::item::selected{background:#829DFF;border:none;color:white;}"
-                  "QTreeView::branch:selected:has-children:adjoins-item {border-left:2px solid rgb(0,210,255);}"
-                  "QTreeView::branch::selected::adjoins-item{background:#829DFF;}"
-                  "QTreeView::branch::selected::!adjoins-item{border-left:2px solid rgb(0,210,255);background:#829DFF;}"
-                  "QTreeView::branch::hover::adjoins-item,QTreeView::branch::hover::!adjoins-item,QTreeView::item::hover{background:#829DFF;}"
+                  "QTreeView::item::selected{border-bottom:1px solid rgb(255,255,255);color:white;}"
+                  "QTreeView::branch:selected:has-children:adjoins-item {border-bottom:1px solid rgb(255,255,255);}"
+                  "QTreeView::branch::selected::adjoins-item{border-bottom:1px solid rgb(255,255,255);}"
+                  "QTreeView::branch::selected::!adjoins-item{border-bottom:1px solid rgb(255,255,255);}"
+
+        "QTreeView::branch::hover::adjoins-item,QTreeView::branch::hover::!adjoins-item,QTreeView::item::hover{background:rgb(55,36,88);}"
 
         "QTreeView::branch:has-children:!has-siblings:closed,QTreeView::branch:closed:has-children:has-siblings { border-image: none;\
             image: url(:/close.png);}"
 
         "QTreeView::branch:open:has-children:!has-siblings,QTreeView::branch:open:has-children:has-siblings  {\
             border-image: none;image: url(:/open.png);}"
-            "QTreeView::item:has-children{color:#A6B9FF;}"
 
                  );
 
@@ -556,8 +556,13 @@ void ContactTreeWidget::initTreeData()
 
 //void ContactTreeWidget::paintEvent(QPaintEvent *event)
 //{
-//    //QPainter painter(this);
-//    //painter.setPen(QPen(QColor(40,46,66),Qt::SolidLine));
-//    //painter.setBrush(QBrush(QColor(40,46,66),Qt::SolidPattern));
-//    //painter.drawRect(rect());
+//    QPainter painter(this);
+
+//    QLinearGradient linear(QPointF(0, 408), QPointF(130, 0));
+//    linear.setColorAt(0, QColor(56,19,56));
+//    linear.setColorAt(1, QColor(27,17,44));
+//    linear.setSpread(QGradient::PadSpread);
+//    painter.setBrush(linear);
+//    painter.drawRect(QRect(-1,-1,131,408));
+//    QWidget::paintEvent(event);
 //}

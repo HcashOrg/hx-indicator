@@ -117,7 +117,7 @@ void HelpWidget::InitStyle()
 {
     setStyleSheet(
                   OKBTN_STYLE
-                  "QTextBrowser{background-color:transparent;color:#333333;border:none;font-size:12px;font-family:\"Microsoft YaHei UI Light\";}");
+                  "QTextBrowser{background-color:transparent;color:rgb(52,37,90);border:none;}");
 
 }
 
@@ -134,7 +134,7 @@ void HelpWidget::paintEvent(QPaintEvent *event)
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(Qt::white);//最后一位是设置透明属性（在0-255取值）
-    painter.drawRoundedRect(rect(),10,10);
+    painter.drawRoundedRect(rect(),4,4);
     painter.drawRect(0,0,10,10);
 
     QWidget::paintEvent(event);

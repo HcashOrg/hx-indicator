@@ -49,16 +49,17 @@ void ContactSearchWidget::InitWidget()
 
     //防止文本框输入内容位于按钮之下
     QMargins margins = ui->lineEdit->textMargins();
-    ui->lineEdit->setTextMargins(pSearchButton->width()+5, margins.top(),margins.right() , margins.bottom());
+    ui->lineEdit->setTextMargins(margins.left(), margins.top(),pSearchButton->width()+5, margins.bottom());
     ui->lineEdit->setPlaceholderText(tr("name or addr"));
 
-//    QHBoxLayout *pSearchLayout = new QHBoxLayout();
-//    pSearchLayout->addStretch();
-//    pSearchLayout->addWidget(pSearchButton);
-//    pSearchLayout->setSpacing(0);
-//    pSearchLayout->setDirection(QBoxLayout::RightToLeft);
-//    pSearchLayout->setContentsMargins(5, 0, 0, 0);
-//    ui->lineEdit->setLayout(pSearchLayout);
+
+    QHBoxLayout *pSearchLayout = new QHBoxLayout();
+    pSearchLayout->addStretch();
+    pSearchLayout->addWidget(pSearchButton);
+    pSearchLayout->setSpacing(0);
+    pSearchLayout->setDirection(QBoxLayout::LeftToRight);
+    pSearchLayout->setContentsMargins(0, 0, 5, 0);
+    ui->lineEdit->setLayout(pSearchLayout);
 
     connect(pSearchButton, &QPushButton::clicked, this, &ContactSearchWidget::StartSearchSlots);
 
@@ -71,12 +72,12 @@ void ContactSearchWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(94,116,235));
+    palette.setColor(QPalette::Window, QColor(52,37,90));
     setPalette(palette);
 
 
     setStyleSheet("QPushButton{ background:transparent;}"
-                  "QLineEdit{background:rgb(130,157,255);font-size:11px;border:none;color:white;}"
+                  "QLineEdit{background-color:transparent;font-size:10px;border:none;border-radius:0px;color:white;border-bottom:1px solid rgb(81,59,134);}"
                   );
 
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>675</width>
-    <height>320</height>
+    <width>556</width>
+    <height>264</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>13</y>
-     <width>625</width>
-     <height>252</height>
+     <x>0</x>
+     <y>0</y>
+     <width>556</width>
+     <height>231</height>
     </rect>
    </property>
   </widget>
@@ -27,9 +27,9 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>269</y>
-     <width>670</width>
-     <height>41</height>
+     <y>236</y>
+     <width>556</width>
+     <height>26</height>
     </rect>
    </property>
    <property name="font">
@@ -41,10 +41,10 @@
   <widget class="QToolButton" name="toolButton">
    <property name="geometry">
     <rect>
-     <x>575</x>
-     <y>271</y>
-     <width>60</width>
-     <height>20</height>
+     <x>464</x>
+     <y>239</y>
+     <width>86</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
@@ -62,9 +62,9 @@
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>76</y>
-     <width>624</width>
+     <x>0</x>
+     <y>72</y>
+     <width>556</width>
      <height>2</height>
     </rect>
    </property>
@@ -78,9 +78,9 @@
   <widget class="Line" name="line_2">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>164</y>
-     <width>624</width>
+     <x>0</x>
+     <y>146</y>
+     <width>556</width>
      <height>2</height>
     </rect>
    </property>
@@ -91,6 +91,11 @@
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
+  <zorder>tableWidget</zorder>
+  <zorder>stackedWidget</zorder>
+  <zorder>line</zorder>
+  <zorder>line_2</zorder>
+  <zorder>toolButton</zorder>
  </widget>
  <resources/>
  <connections/>

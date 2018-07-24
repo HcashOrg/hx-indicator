@@ -49,8 +49,9 @@ void ContactBriefWidget::InitStyle()
     QPalette pa;
     pa.setColor(QPalette::WindowText,Qt::black);
     ui->title_label->setPalette(pa);
-//    ui->pushButton->setIconSize(QSize(18,18));
-//    ui->pushButton->setIcon(QIcon(":/ui/wallet_ui/addContact.png"));
+    ui->toolButton->setIconSize(QSize(26,26));
+    ui->toolButton->setIcon(QIcon(":/ui/wallet_ui/addContact.png"));
+    ui->toolButton->setStyleSheet("QToolButton{border:none;bakcground:transparent;}");
 
 //    setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/addContact_1.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}"   \
 //                                  "QToolButton:hover{background-image:url(:/ui/wallet_ui/addContact.png);");

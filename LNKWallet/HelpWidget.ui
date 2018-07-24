@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>675</width>
-    <height>410</height>
+    <width>556</width>
+    <height>308</height>
    </rect>
   </property>
   <property name="font">
@@ -21,8 +21,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>240</x>
-     <y>40</y>
+     <x>160</x>
+     <y>0</y>
      <width>200</width>
      <height>31</height>
     </rect>
@@ -40,7 +40,7 @@
     <string notr="true">font: 20px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
-    <string>关于我们</string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
@@ -49,9 +49,9 @@
   <widget class="QTextBrowser" name="textBrowser">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>90</y>
-     <width>630</width>
+     <x>10</x>
+     <y>30</y>
+     <width>321</width>
      <height>201</height>
     </rect>
    </property>
@@ -65,14 +65,15 @@
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Microsoft YaHei UI Light'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Blocklink是一条支持跨链交易且拥有智能合约的高性能区块链。它支持和现有数字货币（比特币，莱特币等）之间的跨链转账，支持链上的多资产转移，也支持通过智能合约支撑各种复杂业务场景。内置去中心化交易所、去中心化POS矿池等系统。兑换流程公开透明，安全可靠。帮助用户快速实现跨链资产的转移和交易，打破链与链之间的流通壁垒。Blocklink致力于更好地进行区块链资源整合，促进价值传递。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;关于我们&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Blocklink是一条支持跨链交易且拥有智能合约的高性能区块链。它支持和现有数字货币（比特币，莱特币等）之间的跨链转账，支持链上的多资产转移，也支持通过智能合约支撑各种复杂业务场景。内置去中心化交易所、去中心化POS矿池等系统。兑换流程公开透明，安全可靠。帮助用户快速实现跨链资产的转移和交易，打破链与链之间的流通壁垒。Blocklink致力于更好地进行区块链资源整合，促进价值传递。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_updatetip">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>308</y>
+     <x>130</x>
+     <y>230</y>
      <width>300</width>
      <height>21</height>
     </rect>
@@ -99,8 +100,8 @@ p, li { white-space: pre-wrap; }
   <widget class="QLabel" name="label_version">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>368</y>
+     <x>128</x>
+     <y>290</y>
      <width>300</width>
      <height>20</height>
     </rect>
@@ -115,8 +116,8 @@ p, li { white-space: pre-wrap; }
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 12px &quot;Microsoft YaHei UI Light&quot;;
-color: rgb(198, 202, 212);</string>
+    <string notr="true">font: 10px &quot;Microsoft YaHei UI Light&quot;;
+color: rgb(163,124,175);</string>
    </property>
    <property name="text">
     <string>Windows桌面版 v</string>
@@ -128,10 +129,10 @@ color: rgb(198, 202, 212);</string>
   <widget class="QToolButton" name="toolButton_update">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>338</y>
-     <width>96</width>
-     <height>30</height>
+     <x>230</x>
+     <y>265</y>
+     <width>92</width>
+     <height>28</height>
     </rect>
    </property>
    <property name="cursor">
@@ -144,10 +145,10 @@ color: rgb(198, 202, 212);</string>
   <widget class="QToolButton" name="toolButton_checkUpdate">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>338</y>
-     <width>96</width>
-     <height>30</height>
+     <x>230</x>
+     <y>265</y>
+     <width>92</width>
+     <height>28</height>
     </rect>
    </property>
    <property name="cursor">
@@ -160,10 +161,10 @@ color: rgb(198, 202, 212);</string>
   <widget class="QToolButton" name="toolButton_restart">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>338</y>
-     <width>96</width>
-     <height>30</height>
+     <x>230</x>
+     <y>265</y>
+     <width>92</width>
+     <height>28</height>
     </rect>
    </property>
    <property name="cursor">
@@ -173,6 +174,30 @@ color: rgb(198, 202, 212);</string>
     <string>立即重启</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label_11">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>17</y>
+     <width>556</width>
+     <height>264</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(229, 226, 240);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>label_11</zorder>
+  <zorder>label</zorder>
+  <zorder>textBrowser</zorder>
+  <zorder>label_updatetip</zorder>
+  <zorder>label_version</zorder>
+  <zorder>toolButton_update</zorder>
+  <zorder>toolButton_checkUpdate</zorder>
+  <zorder>toolButton_restart</zorder>
  </widget>
  <resources/>
  <connections/>

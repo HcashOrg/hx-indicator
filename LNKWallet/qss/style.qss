@@ -21,8 +21,8 @@ QCheckBox::indicator{ image:url(:/ui/wallet_ui/checkBox_unchecked.png);}
 QCheckBox::indicator:checked{ image:url(:/ui/wallet_ui/checkBox_checked.png); }
 
 
-QLineEdit{background: transparent;color: rgb(84,116,235);font: 14px \"Microsoft YaHei UI Light\";border:none;border-bottom:1px solid rgb(192,192,192);padding: 0px 10px 0px 6px;}
-QLineEdit:focus{border-bottom-color:rgb(84,116,235);}
+QLineEdit{background: rgb(243,241,250);color: rgb(84,61,137);font: 11px \"Microsoft YaHei UI Light\";border:1px solid rgb(84,61,137);padding: 0px 10px 0px 6px;border-radius:4px;}
+QLineEdit:focus{border:1px solid rgb(84,61,137);}
 QLineEdit:disabled{color: rgb(151,151,151);}
 
 
@@ -41,5 +41,5 @@ QSpinBox::down-arrow:hover {image: url(:/ui/wallet_ui/spinDownArrow_hover.png);}
 #accountNameLabel,#priceLabel{font: bold 14px \"Microsoft YaHei UI Light\";}
 #pathBtn{background:transparent;color:rgb(192,202,212);font: 12px \"Microsoft YaHei UI Light\";}
 #pathBtn:hover{color:rgb(84,116,235);}
-#welcome_label{background-image: url(:/ui/wallet_ui/Welcome_normal.png);}
+#welcome_label{background-image: url(:/ui/wallet_ui/Welcome.png);}
 #welcome_label_big{background-image: url(:/ui/wallet_ui/Welcome_big.png);}

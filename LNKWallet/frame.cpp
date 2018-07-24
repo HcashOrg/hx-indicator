@@ -1079,8 +1079,8 @@ void Frame::showWaittingForSyncWidget()
 
     waitingForSync->show();
 
-    setGeometry(0,0, waitingForSync->width(), waitingForSync->height());
-    moveWidgetToScreenCenter(this);
+//    setGeometry(0,0, waitingForSync->width(), waitingForSync->height());
+//    moveWidgetToScreenCenter(this);
 }
 
 void Frame::showNewOrImportWalletWidget()
@@ -1277,7 +1277,7 @@ void Frame::jsonDataUpdated(QString id)
             normalLogin = new NormalLogin(this);
 
             firstLogin = NULL;
-            normalLogin->setGeometry(0,0,960,580);
+            normalLogin->move(0,0);
             normalLogin->show();
             connect( normalLogin,SIGNAL(login()), this, SLOT(alreadyLogin()));
             connect( normalLogin,SIGNAL(minimum()),this,SLOT(showMinimized()));
@@ -1293,7 +1293,7 @@ void Frame::jsonDataUpdated(QString id)
         {
             firstLogin = new FirstLogin(this);
             normalLogin = NULL;
-            firstLogin->setGeometry(0,0,960,580);
+            firstLogin->move(0,0);
             firstLogin->show();
             connect( firstLogin,SIGNAL(login()), this, SLOT(alreadyLogin()));
             connect( firstLogin,SIGNAL(minimum()),this,SLOT(showMinimized()));
@@ -1426,7 +1426,7 @@ void Frame::jsonDataUpdated(QString id)
 
             lockPage = new LockPage(this);
             lockPage->setAttribute(Qt::WA_DeleteOnClose);
-            lockPage->setGeometry(0,0,960,580);
+            lockPage->move(0,0);
             connect( lockPage,SIGNAL(unlock()),this,SLOT(unlock()));
             connect( lockPage,SIGNAL(minimum()),this,SLOT(showMinimized()));
             connect( lockPage,SIGNAL(closeWallet()),qApp,SLOT(quit()));
@@ -2136,17 +2136,17 @@ void Frame::paintEvent(QPaintEvent *e)
 
 void Frame::EnlargeRightPart()
 {
-    functionBar->resize(70,functionBar->height());
+    functionBar->resize(60,functionBar->height());
 
-    centralWidget->resize(890,centralWidget->height());
+    centralWidget->resize(900,centralWidget->height());
 
-    centralWidget->move(70, titleBar->height());
+    centralWidget->move(60, titleBar->height());
 //    if(QWidget *widget = centralWidget->childAt(10,10))
 //    {
 //        widget->resize(805,centralWidget->height());
 //    }
 
-    contactPage->resize(890,centralWidget->height());
+    contactPage->resize(900,centralWidget->height());
 
 
     //bottomBar->resize(805,40);

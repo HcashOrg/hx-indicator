@@ -136,19 +136,23 @@ void FunctionWidget::ShowMoreWidgetSlots()
 
     //设置更多按钮
     QAction* actionSet = _p->contextMenu->addAction(tr("Setting"));
-    _p->contextMenu->addSeparator();
+    //_p->contextMenu->addSeparator();
     QAction* actionLock = _p->contextMenu->addAction(tr("Lock"));
-    _p->contextMenu->addSeparator();
+    //_p->contextMenu->addSeparator();
     QAction* actionConsole = _p->contextMenu->addAction(tr("Console"));
-    _p->contextMenu->addSeparator();
+    //_p->contextMenu->addSeparator();
     QMenu *helpMenu = new QMenu(tr("Help"));
-    helpMenu->setStyleSheet(MENU_STYLE);
+    helpMenu->setStyleSheet(
+                "QMenu {border:none;background-color:rgb(199,19,106);width:130px;color:white;}"
+                "QMenu::item {padding:5px 21px;width:130px;color:white;}"
+                "QMenu::item:selected {background-color:rgb(182,13,95);}"
+                "QMenu::right-arrow {padding:0px 10px;image:url(:/wallet_ui/right.png);}");
     helpMenu->setAttribute(Qt::WA_TranslucentBackground, true);
     helpMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | helpMenu->windowFlags());
 
     _p->contextMenu->addMenu(helpMenu);
     QAction* actionAbout = helpMenu->addAction(tr("About Us"));
-    helpMenu->addSeparator();
+    //helpMenu->addSeparator();
     QAction* actionUpdate = helpMenu->addAction(tr("Update"));
 
     connect(actionLock,&QAction::triggered,this,&FunctionWidget::lock);
@@ -161,7 +165,7 @@ void FunctionWidget::ShowMoreWidgetSlots()
 
 
     ui->toolButton_more->setChecked(true);
-    _p->contextMenu->exec(mapToGlobal(QPoint(70,height()-_p->contextMenu->height())));
+    _p->contextMenu->exec(mapToGlobal(QPoint(60,height()-_p->contextMenu->height())));
     ui->toolButton_more->setChecked(false);
 
 
@@ -177,8 +181,8 @@ void FunctionWidget::ShowSettingWidgetSlots()
 
 void FunctionWidget::ShowConsoleWidgetSlots()
 {
-    ConsoleDialog *consoleDialog = new ConsoleDialog();
-    consoleDialog->show();
+    ConsoleDialog consoleDialog /*= new ConsoleDialog()*/;
+    consoleDialog.pop();
 }
 
 void FunctionWidget::ShowAboutWidgetSlots()
@@ -292,10 +296,9 @@ void FunctionWidget::InitStyle()
     _p->contextMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | _p->contextMenu->windowFlags() );
     //_p->contextMenu->setMinimumWidth(88);
     _p->contextMenu->setStyleSheet(
-                "QMenu {border-radius:10px;width:88px;border-bottom-left-radius:0px;background-color:rgba(238,241,253,235);border: 0px solid red;}"
-                "QMenu::item {border-radius:10px;border: 0px solid green;background-color:transparent;padding:5px 21px;}"
-                "QMenu::item:selected {background-color:rgb(130,157,255);}"
-                "QMenu::separator {height: 2px;background-color: #FCFCFC;}"
+                "QMenu {border:none;background-color:rgb(199,19,106);width:130px;color:white;}"
+                "QMenu::item {padding:5px 21px;width:90px;color:white;}"
+                "QMenu::item:selected {background-color:rgb(182,13,95);}"
                 "QMenu::right-arrow {padding:0px 10px;image:url(:/wallet_ui/right.png);}");
 
 

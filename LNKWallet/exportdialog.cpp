@@ -21,8 +21,9 @@ ExportDialog::ExportDialog( QString name, QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
+    ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
+    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
     ui->exportBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
@@ -329,7 +330,7 @@ void ExportDialog::paintEvent(QPaintEvent *event)
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(QRect(0,0,960,580));
+//    painter.drawRect(QRect(0,0,960,580));
 
     QWidget::paintEvent(event);
 }

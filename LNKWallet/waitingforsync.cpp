@@ -74,18 +74,18 @@ void WaitingForSync::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/background.png").scaled(this->size())));
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/login_back.png").scaled(this->size())));
     setPalette(palette);
 
     ui->loadingLabel->setFont(QFont("黑体",12,53));
     QPalette pa;
-    pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
+    pa.setColor(QPalette::WindowText,QColor(243,241,250));
     ui->label_version->setPalette(pa);
 
     ui->loadingLabel->setPalette(pa);
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
-
+    ui->welcome->setPixmap(QPixmap(":/ui/wallet_ui/Welcome.png").scaled(ui->welcome->width(), ui->welcome->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
 }
 
 // 比较版本号 若 a > b返回 1, a = b返回 0, a < b 返回 -1
@@ -135,15 +135,12 @@ int compareVersion( QString a, QString b)
 
 void WaitingForSync::paintEvent(QPaintEvent *e)
 {
-    QStyleOption opt;
-
-    opt.init(this);
-    QPainter p(this);
-    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-
     QPainter painter(this);
-    painter.drawPixmap(238,130,470,320,QPixmap(":/ui/wallet_ui/login.png").scaled(470,320));
-
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QBrush(QColor(243,241,250)));
+    painter.drawRect(0,0,228,24);
+    painter.drawPixmap(7,5,32,12,QPixmap(":/ui/wallet_ui/hx_label_logo.png").scaled(32,12,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    painter.drawPixmap(94,38,36,36,QPixmap(":/ui/wallet_ui/logo_center.png").scaled(36,36,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
     QWidget::paintEvent(e);
 }

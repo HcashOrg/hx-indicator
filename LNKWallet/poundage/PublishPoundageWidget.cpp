@@ -91,6 +91,11 @@ void PublishPoundageWidget::ChangeAccountSlots()
             ui->lineEdit_source->clear();
 
             ui->lineEdit_source->setEnabled(true);
+            if(it.value().amount < 1)
+            {
+                ui->lineEdit_source->setEnabled(false);
+                ui->lineEdit_source->setPlaceholderText(tr("0 LNK"));
+            }
             break;
         }
     }

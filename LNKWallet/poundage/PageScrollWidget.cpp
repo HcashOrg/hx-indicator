@@ -372,3 +372,11 @@ void PageScrollWidget::updateShowTip()
        ui->label->setVisible(false);
     }
 }
+
+void PageScrollWidget::resizeEvent(QResizeEvent *event)
+{
+    ui->widget->resize(rect().size());
+    ui->label->resize(ui->label->width(),rect().height());
+    ui->label->move(ui->label->pos().x(),0);
+    QWidget::resizeEvent(event);
+}

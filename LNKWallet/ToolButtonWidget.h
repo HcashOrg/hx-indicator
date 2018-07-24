@@ -22,6 +22,7 @@ public:
     void setEnabled(bool enabled);
     void setButtonFixSize(int width, int height);
     void setBackgroundColor(QString color);
+    void setButtonStyle(const QString &style);
 private:
     void InitWidget();
     void InitStyle();

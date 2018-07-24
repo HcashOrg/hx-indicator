@@ -1,19 +1,20 @@
 #ifndef STYLE_H
 #define STYLE_H
 
-#define OKBTN_STYLE     "QToolButton{font: 14px \"Microsoft YaHei UI Light\";background-color: rgb(84,116,235);border:0px solid white;border-radius:15px;color: white;}"  \
-                        "QToolButton:pressed{background-color:rgb(70,95,191);}"\
-                        "QToolButton:disabled{background-color:rgb(235,235,235);}"
+#define OKBTN_STYLE     "QToolButton{font: 10px \"Microsoft YaHei UI Light\";background-color: rgb(84,61,137);border:0px solid white;border-radius:3px;color: white;}"  \
+                        "QToolButton:pressed{background-color:rgb(84,61,137);}"\
+                        "QToolButton:disabled{background-color:rgb(196,191,214);}"
 
-#define CANCELBTN_STYLE "QToolButton{font: 14px \"Microsoft YaHei UI Light\";background:white;color: rgb(84,116,235);border:1px solid rgb(84,116,235);border-radius:15px;}"  \
-                        "QToolButton:pressed{background-color:rgb(84,116,235);color: white}"
+#define CANCELBTN_STYLE "QToolButton{font: 10px \"Microsoft YaHei UI Light\";background:rgb(235,0,94);color: rgb(255,255,255);border:0px solid rgb(84,116,235);border-radius:3px;}"  \
+                        "QToolButton:pressed{background-color:rgb(235,0,94);color: white}"\
+                        "QToolButton:disabled{background-color:rgb(196,191,214);}"
 
-#define CLOSEBTN_STYLE  "QToolButton{background-image:url(:/ui/wallet_ui/close.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}"   \
+#define CLOSEBTN_STYLE  "QToolButton{background-image:url(:/ui/wallet_ui/close_button.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}"   \
                         "QToolButton:hover{background-color:rgb(208,228,255);"
 
-#define BACKGROUNDWIDGET_STYLE  "#widget {background-color:rgba(10, 10, 10,100);}"
+#define BACKGROUNDWIDGET_STYLE  "#widget {background-image:url(:/ui/wallet_ui/back_dialog.png);}"
 
-#define CONTAINERWIDGET_STYLE   "#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}"  \
+#define CONTAINERWIDGET_STYLE   "#containerwidget{background-color:rgb(229,226,240);border-radius:4px;}"  \
                                 "QLabel{color:rgb(51,51,51);}"
 
 #define TOOLBUTTON_STYLE_1      "QToolButton{font: 10px \"微软雅黑\";background-color:transparent; border:1px solid rgb(84,61,137);border-radius:9px;color: rgb(84,61,137);}" \
