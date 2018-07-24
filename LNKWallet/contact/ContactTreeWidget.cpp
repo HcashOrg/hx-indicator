@@ -399,7 +399,8 @@ void ContactTreeWidget::initTreeStyle()
     setSelectionMode(QAbstractItemView::SingleSelection);
 
     setStyleSheet("QWidget{border:none;}"
-                  "QTreeView{background-color:rgb(55,36,88);border:none;padding-left:0px;\
+
+                  "QTreeView{background:qlineargradient(spread:pad,x1:0,y1:1,x2:1,y2:0,stop:0 rgba(71,33,84,255),stop:0.5 rgba(55,36,88,255),stop:1 rgba(51,37,90,255));border:none;padding-left:0px;\
                       color:rgb(104,86,144);font:65 14px \"Microsoft YaHei UI\";outline:0px;margin-left:5px;}"
                   "QTreeView::item{height:32px;}"
                   "QTreeView::item::selected{border-bottom:1px solid rgb(255,255,255);color:white;}"
