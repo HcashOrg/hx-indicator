@@ -304,31 +304,17 @@ void WithdrawConfirmPage::showCrosschainTransactions()
             ui->crosschainTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
             ToolButtonWidget *toolButton = new ToolButtonWidget();
             toolButton->setText(ui->crosschainTransactionTableWidget->item(i,5)->text());
-    //            toolButton->setBackgroundColor(itemColor);
             ui->crosschainTransactionTableWidget->setCellWidget(i,5,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,5));
 
             ui->crosschainTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
             ToolButtonWidget *toolButton2 = new ToolButtonWidget();
             toolButton2->setText(ui->crosschainTransactionTableWidget->item(i,6)->text());
-    //            toolButton->setBackgroundColor(itemColor);
             ui->crosschainTransactionTableWidget->setCellWidget(i,6,toolButton2);
             connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,6));
 
 
-            for (int j : {0,1,2,3,4})
-            {
-                if(i%2)
-                {
-                    ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                    ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-                }
-                else
-                {
-                    ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                    ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-                }
-            }
+            tableWidgetSetItemZebraColor(ui->crosschainTransactionTableWidget);
         }
     }
     else if( currentType == 0)
@@ -361,25 +347,10 @@ void WithdrawConfirmPage::showCrosschainTransactions()
             ui->crosschainTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
             ToolButtonWidget *toolButton = new ToolButtonWidget();
             toolButton->setText(ui->crosschainTransactionTableWidget->item(i,5)->text());
-    //            toolButton->setBackgroundColor(itemColor);
             ui->crosschainTransactionTableWidget->setCellWidget(i,5,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,5));
 
-
-
-            for (int j : {0,1,2,3,4})
-            {
-                if(i%2)
-                {
-                    ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                    ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-                }
-                else
-                {
-                    ui->crosschainTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                    ui->crosschainTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-                }
-            }
+            tableWidgetSetItemZebraColor(ui->crosschainTransactionTableWidget);
         }
     }
 

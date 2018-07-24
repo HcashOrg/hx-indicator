@@ -176,15 +176,8 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
 
         rowCount++;
     }
-    //设置表格内容居中
-    for(int i = 0;i < ui->transferRecordTableWidget->rowCount();++i)
-    {
-        for(int j = 0;j < ui->transferRecordTableWidget->columnCount();++j)
-        {
-            ui->transferRecordTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-        }
+    tableWidgetSetItemZebraColor(ui->transferRecordTableWidget);
 
-    }
     int page = (ui->transferRecordTableWidget->rowCount()%ROWNUMBER==0 && ui->transferRecordTableWidget->rowCount() != 0) ?
                 ui->transferRecordTableWidget->rowCount()/ROWNUMBER : ui->transferRecordTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);

@@ -102,8 +102,6 @@ void GuardKeyManagePage::showMultisigInfo()
 
         AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetIds.at(i));
 
-        QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
-
         //资产名
         QString symbol = assetInfo.symbol;
         ui->multisigTableWidget->setItem(i,0,new QTableWidgetItem(symbol));
@@ -122,7 +120,6 @@ void GuardKeyManagePage::showMultisigInfo()
 
             ToolButtonWidget *toolButton = new ToolButtonWidget();
             toolButton->setText(ui->multisigTableWidget->item(i,4)->text());
-            toolButton->setBackgroundColor(itemColor);
             ui->multisigTableWidget->setCellWidget(i,4,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&GuardKeyManagePage::on_multisigTableWidget_cellClicked,this,i,4));
         }
@@ -141,7 +138,6 @@ void GuardKeyManagePage::showMultisigInfo()
 
                 ToolButtonWidget *toolButton = new ToolButtonWidget();
                 toolButton->setText(ui->multisigTableWidget->item(i,5)->text());
-                toolButton->setBackgroundColor(itemColor);
                 toolButton->setEnabled(false);
                 ui->multisigTableWidget->setCellWidget(i,5,toolButton);
                 connect(toolButton,&ToolButtonWidget::clicked,std::bind(&GuardKeyManagePage::on_multisigTableWidget_cellClicked,this,i,5));
@@ -152,7 +148,6 @@ void GuardKeyManagePage::showMultisigInfo()
 
                 ToolButtonWidget *toolButton = new ToolButtonWidget();
                 toolButton->setText(ui->multisigTableWidget->item(i,5)->text());
-                toolButton->setBackgroundColor(itemColor);
                 ui->multisigTableWidget->setCellWidget(i,5,toolButton);
                 connect(toolButton,&ToolButtonWidget::clicked,std::bind(&GuardKeyManagePage::on_multisigTableWidget_cellClicked,this,i,5));
             }
@@ -161,25 +156,11 @@ void GuardKeyManagePage::showMultisigInfo()
 
         AssetIconItem* assetIconItem = new AssetIconItem();
         assetIconItem->setAsset(ui->multisigTableWidget->item(i,0)->text());
-        assetIconItem->setBackgroundColor(itemColor);
         ui->multisigTableWidget->setCellWidget(i, 0, assetIconItem);
 
-
-
-        for (int j : {1,2,3,4})
-        {
-            if(i%2)
-            {
-                ui->multisigTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->multisigTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-            else
-            {
-                ui->multisigTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->multisigTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-            }
-        }
     }
+
+    tableWidgetSetItemZebraColor(ui->multisigTableWidget);
 }
 
 void GuardKeyManagePage::refresh()

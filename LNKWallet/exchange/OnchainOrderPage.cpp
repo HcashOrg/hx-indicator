@@ -138,19 +138,6 @@ void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
 
         ui->ordersTableWidget->setItem(i,3, new QTableWidgetItem(tr("buy")));
 
-        for(int j = 0; j < 4; j++)
-        {
-            ui->ordersTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-            if(i%2)
-            {
-                ui->ordersTableWidget->item(i,j)->setBackgroundColor(QColor(255,255,255));
-            }
-            else
-            {
-                ui->ordersTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-        }
-
         for(int j = 3;j < 4;++j)
         {
             ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
@@ -171,6 +158,8 @@ void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
             connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
         }
     }
+    tableWidgetSetItemZebraColor(ui->ordersTableWidget);
+
     int page = (ui->ordersTableWidget->rowCount()%ROWNUMBER==0 && ui->ordersTableWidget->rowCount() != 0) ?
                 ui->ordersTableWidget->rowCount()/ROWNUMBER : ui->ordersTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);

@@ -26,7 +26,7 @@
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>50</y>
      <width>120</width>
      <height>26</height>
@@ -52,7 +52,7 @@
    <property name="geometry">
     <rect>
      <x>650</x>
-     <y>104</y>
+     <y>90</y>
      <width>60</width>
      <height>18</height>
     </rect>
@@ -81,10 +81,10 @@
   <widget class="QTableWidget" name="accountTableWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>140</y>
-     <width>674</width>
-     <height>322</height>
+     <x>60</x>
+     <y>130</y>
+     <width>650</width>
+     <height>310</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -195,7 +195,7 @@
    <property name="geometry">
     <rect>
      <x>580</x>
-     <y>104</y>
+     <y>90</y>
      <width>60</width>
      <height>18</height>
     </rect>
@@ -224,8 +224,8 @@
   <widget class="QToolButton" name="copyBtn">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>86</y>
+     <x>470</x>
+     <y>94</y>
      <width>11</width>
      <height>11</height>
     </rect>
@@ -248,10 +248,10 @@
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>100</y>
-     <width>111</width>
-     <height>30</height>
+     <x>60</x>
+     <y>90</y>
+     <width>120</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -268,47 +268,27 @@
     <string notr="true"/>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>80</y>
-     <width>100</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
-   </property>
-   <property name="text">
-    <string>当前账号</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="addressLabel">
    <property name="geometry">
     <rect>
      <x>200</x>
-     <y>104</y>
-     <width>290</width>
-     <height>24</height>
+     <y>90</y>
+     <width>260</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <underline>false</underline>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel{color: rgb(192, 196, 212);}</string>
+    <string notr="true">QLabel{color: rgb(137,129,161);font: 11px &quot;微软雅黑&quot;;}
+</string>
    </property>
    <property name="text">
     <string/>
@@ -320,35 +300,11 @@
     <set>Qt::TextSelectableByMouse</set>
    </property>
   </widget>
-  <widget class="QLabel" name="addressLabel2">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>80</y>
-     <width>60</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
-   </property>
-   <property name="text">
-    <string>地址</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QToolButton" name="qrcodeBtn">
    <property name="geometry">
     <rect>
-     <x>285</x>
-     <y>86</y>
+     <x>485</x>
+     <y>94</y>
      <width>11</width>
      <height>11</height>
     </rect>
@@ -371,27 +327,36 @@
   <widget class="QLabel" name="label_op">
    <property name="geometry">
     <rect>
-     <x>525</x>
-     <y>140</y>
-     <width>71</width>
-     <height>40</height>
+     <x>380</x>
+     <y>130</y>
+     <width>330</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
-     <pointsize>12</pointsize>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(137,129,161);font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>操作</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QToolButton" name="allTransactionBtn">
    <property name="geometry">
     <rect>
      <x>510</x>
-     <y>104</y>
+     <y>90</y>
      <width>60</width>
      <height>18</height>
     </rect>
@@ -420,8 +385,8 @@
   <widget class="QPushButton" name="backupBtn">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>53</y>
+     <x>140</x>
+     <y>54</y>
      <width>200</width>
      <height>20</height>
     </rect>
@@ -440,7 +405,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">color: red;
-font: 12px &quot;微软雅黑&quot;;
+font: 11px &quot;微软雅黑&quot;;
 border:none;
 background:transparent;</string>
    </property>
@@ -465,8 +430,6 @@ background:transparent;</string>
   <zorder>importAccountBtn</zorder>
   <zorder>copyBtn</zorder>
   <zorder>accountComboBox</zorder>
-  <zorder>label</zorder>
-  <zorder>addressLabel2</zorder>
   <zorder>qrcodeBtn</zorder>
   <zorder>label_op</zorder>
   <zorder>allTransactionBtn</zorder>

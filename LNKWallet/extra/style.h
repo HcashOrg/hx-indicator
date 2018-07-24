@@ -20,12 +20,16 @@
 #define TOOLBUTTON_STYLE_1      "QToolButton{font: 10px \"微软雅黑\";background-color:transparent; border:1px solid rgb(84,61,137);border-radius:9px;color: rgb(84,61,137);}" \
                                 "QToolButton:pressed{background-color:rgb(83,61,138);color: white;}"
 
-#define TABLEWIDGET_STYLE_1     "QTableView{background-color:white;border:none;border-radius:15px;font: 12px \"Microsoft YaHei UI Light\";}" \
-                                "QHeaderView{border:none;border-bottom:1px solid rgb(240,240,240);border-top-left-radius:15px;border-top-right-radius:15px;background-color:white;color:#C6CAD4;font: 12px \"Microsoft YaHei UI Light\";}" \
-                                "QHeaderView:section{height:40px;border:none;background-color:white;}" \
-                                "QHeaderView:section:first{border-top-left-radius:15px;}" \
-                                "QHeaderView:section:last{border-top-right-radius:15px;}"
+#define TABLEWIDGET_STYLE_1     "QTableView{background-color:rgb(243,241,250);border:none;border-radius:5px;font: 11px \"Microsoft YaHei UI Light\";}" \
+                                "QHeaderView{border:none;border-bottom:1px solid rgb(222,218,236);border-top-left-radius:5px;border-top-right-radius:5px;background-color:rgb(243,241,250);color:rgb(137,129,161);font: 11px \"Microsoft YaHei UI Light\";}" \
+                                "QHeaderView:section{height:30px;border:none;background-color:rgb(243,241,250);}" \
+                                "QHeaderView:section:first{border-top-left-radius:5px;}" \
+                                "QHeaderView:section:last{border-top-right-radius:5px;}"
 
+#define TABLEWIDGET_ITEMCOLOR_1     238,236,245
+#define TABLEWIDGET_ITEMCOLOR_1_STR "238,236,245"
+#define TABLEWIDGET_ITEMCOLOR_2     243,241,250
+#define TABLEWIDGET_ITEMCOLOR_2_STR "243,241,250"
 
 #define COMBOBOX_STYLE_BOTTOMBORDER "QComboBox{background-color:transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,192,192);color: black;padding-left: 5px;font: 14px \"Microsoft YaHei UI Light\";}" \
                                     "QComboBox::drop-down {background:transparent;border:none;}" \

@@ -274,7 +274,6 @@ void ColdHotTransferPage::showColdHotTransactions()
             ui->coldHotTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
             ToolButtonWidget *toolButton = new ToolButtonWidget();
             toolButton->setText(ui->coldHotTransactionTableWidget->item(i,5)->text());
-    //            toolButton->setBackgroundColor(itemColor);
             ui->coldHotTransactionTableWidget->setCellWidget(i,5,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,5));
 
@@ -282,23 +281,10 @@ void ColdHotTransferPage::showColdHotTransactions()
             ui->coldHotTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
             ToolButtonWidget *toolButton2 = new ToolButtonWidget();
             toolButton2->setText(ui->coldHotTransactionTableWidget->item(i,6)->text());
-    //            toolButton->setBackgroundColor(itemColor);
             ui->coldHotTransactionTableWidget->setCellWidget(i,6,toolButton2);
             connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,6));
 
-            for (int j : {0,1,2,3,4})
-            {
-                if(i%2)
-                {
-                    ui->coldHotTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                    ui->coldHotTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-                }
-                else
-                {
-                    ui->coldHotTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                    ui->coldHotTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-                }
-            }
+            tableWidgetSetItemZebraColor(ui->coldHotTransactionTableWidget);
         }
     }
     else if(currentType == 0)
@@ -331,24 +317,10 @@ void ColdHotTransferPage::showColdHotTransactions()
             ui->coldHotTransactionTableWidget->setItem(i, 5, new QTableWidgetItem(tr("check")));
             ToolButtonWidget *toolButton = new ToolButtonWidget();
             toolButton->setText(ui->coldHotTransactionTableWidget->item(i,5)->text());
-    //            toolButton->setBackgroundColor(itemColor);
             ui->coldHotTransactionTableWidget->setCellWidget(i,5,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,5));
 
-
-            for (int j : {0,1,2,3,4})
-            {
-                if(i%2)
-                {
-                    ui->coldHotTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                    ui->coldHotTransactionTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-                }
-                else
-                {
-                    ui->coldHotTransactionTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                    ui->coldHotTransactionTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-                }
-            }
+            tableWidgetSetItemZebraColor(ui->coldHotTransactionTableWidget);
         }
     }
 

@@ -54,11 +54,11 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->accountTableWidget->setColumnWidth(0,140);
-    ui->accountTableWidget->setColumnWidth(1,230);
-    ui->accountTableWidget->setColumnWidth(2,74);
-    ui->accountTableWidget->setColumnWidth(3,74);
-    ui->accountTableWidget->setColumnWidth(4,74);
-    ui->accountTableWidget->setColumnWidth(5,74);
+    ui->accountTableWidget->setColumnWidth(1,180);
+    ui->accountTableWidget->setColumnWidth(2,80);
+    ui->accountTableWidget->setColumnWidth(3,80);
+    ui->accountTableWidget->setColumnWidth(4,80);
+    ui->accountTableWidget->setColumnWidth(5,80);
     ui->accountTableWidget->horizontalHeader()->setStretchLastSection(true);
 
     QString language = HXChain::getInstance()->language;
@@ -123,33 +123,12 @@ qDebug() << "ssssssssssssssss " << keys;
             ui->accountTableWidget->setItem(i,5,new QTableWidgetItem(tr("allot")));
         }
 
-        for(int j = 0; j < 6; j++)
-        {
-            if(ui->accountTableWidget->item(i,j))
-            {
-                ui->accountTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-            }
-
-            //ui->accountTableWidget->item(i,j)->setTextColor(QColor(192,196,212));
-            //
-            //if(i % 2)
-            //{
-            //    ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(43,49,69));
-            //}
-            //else
-            //{
-            //    ui->accountTableWidget->item(i,j)->setBackgroundColor(QColor(40,46,66));
-            //}
-        }
-
-        QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
         for(int j = 2;j < 6;++j)
         {
             if(ui->accountTableWidget->item(i,j))
             {
                 ToolButtonWidget *toolButton = new ToolButtonWidget();
                 toolButton->setText(ui->accountTableWidget->item(i,j)->text());
-                toolButton->setBackgroundColor(itemColor);
                 ui->accountTableWidget->setCellWidget(i,j,toolButton);
                 connect(toolButton,&ToolButtonWidget::clicked,std::bind(&MainPage::on_accountTableWidget_cellClicked,this,i,j));
             }
@@ -157,18 +136,12 @@ qDebug() << "ssssssssssssssss " << keys;
 
         AssetIconItem* assetIconItem = new AssetIconItem();
         assetIconItem->setAsset(ui->accountTableWidget->item(i,0)->text());
-        assetIconItem->setBackgroundColor(itemColor);
         ui->accountTableWidget->setCellWidget(i, 0, assetIconItem);
 
-        if(i%2)
-        {
-            ui->accountTableWidget->item(i,1)->setBackgroundColor(QColor(252,253,255));
-        }
-        else
-        {
-            ui->accountTableWidget->item(i,1)->setBackgroundColor(QColor("white"));
-        }
     }
+
+    tableWidgetSetItemZebraColor(ui->accountTableWidget);
+
     if(ui->accountComboBox->count() == 0)
     {
         ui->accountTableWidget->clearContents();
@@ -563,13 +536,6 @@ void MainPage::InitStyle()
     QPalette palette;
     palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
-
-    QPalette pe;
-    pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
-    ui->label_op->setPalette(pe);
-    QFont font("\"Microsoft YaHei UI Light\" ",20,50);
-    font.setPixelSize(12);
-    ui->label_op->setFont(font);
 
 
     ui->accountTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);

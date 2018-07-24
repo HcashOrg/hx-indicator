@@ -97,15 +97,8 @@ void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
         ui->depositRecordTableWidget->setItem(i,4, new QTableWidgetItem(tr("confirmed")));
 
     }
-    //设置表格内容居中
-    for(int i = 0;i < ui->depositRecordTableWidget->rowCount();++i)
-    {
-        for(int j = 0;j < ui->depositRecordTableWidget->columnCount();++j)
-        {
-            ui->depositRecordTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-        }
+    tableWidgetSetItemZebraColor(ui->depositRecordTableWidget);
 
-    }
     int page = (ui->depositRecordTableWidget->rowCount()%ROWNUMBER==0 && ui->depositRecordTableWidget->rowCount() != 0) ?
                 ui->depositRecordTableWidget->rowCount()/ROWNUMBER : ui->depositRecordTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);

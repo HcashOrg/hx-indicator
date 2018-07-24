@@ -66,28 +66,12 @@ void AssetPage::showAssetsInfo()
         ui->assetTableWidget->setItem(i,4,new QTableWidgetItem(HXChain::getInstance()->guardAccountIdToName(assetInfo.issuer)));
         ui->assetTableWidget->setItem(i,5,new QTableWidgetItem("0.001 " + symbol));
 
-        QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
-
         AssetIconItem* assetIconItem = new AssetIconItem();
         assetIconItem->setAsset(ui->assetTableWidget->item(i,0)->text());
-        assetIconItem->setBackgroundColor(itemColor);
         ui->assetTableWidget->setCellWidget(i, 0, assetIconItem);
-
-
-        for (int j : {1,2,3,4,5})
-        {
-            if(i%2)
-            {
-                ui->assetTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->assetTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-            else
-            {
-                ui->assetTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->assetTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-            }
-        }
     }
+
+    tableWidgetSetItemZebraColor(ui->assetTableWidget);
 }
 
 void AssetPage::paintEvent(QPaintEvent *)

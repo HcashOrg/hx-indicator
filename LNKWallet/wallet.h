@@ -519,7 +519,7 @@ double roundDown(double decimal, int precision = 0);        // 根据精度 向�
 QString removeLastZeros(QString number);        // qstring::number() 对小数的处理有问题  使用std::to_string() 然后把后面的0去掉
 QString getBigNumberString(unsigned long long number,int precision);
 QString decimalToIntegerStr(QString number, int precision);
-void setTextCenter(QTableWidget *const table);
+void tableWidgetSetItemZebraColor(QTableWidget* w, int alignment = Qt::AlignCenter);
 
 enum AddressType
 {

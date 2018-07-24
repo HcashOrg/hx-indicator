@@ -118,7 +118,7 @@ void BonusPage::jsonDataUpdated(QString id)
                 ui->bonusTableWidget->setItem(i,2,new QTableWidgetItem(""));
             }
 
-            setTextCenter(ui->bonusTableWidget);
+            tableWidgetSetItemZebraColor(ui->bonusTableWidget);
         }
 
         checkObtainAllBtnVisible();

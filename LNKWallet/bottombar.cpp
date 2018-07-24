@@ -19,7 +19,7 @@ BottomBar::BottomBar(QWidget *parent) :
     ui->setupUi(this);
 
     ui->nodeNumLabel->setToolTip(tr("Number of connected nodes"));
-    ui->syncLabel->setToolTip(tr("Local block height / Network block height(estimated)"));
+    ui->syncLabel->setToolTip(tr("Local block height"));
 
     connect(HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)),this, SLOT(jsonDataUpdated(QString)));
 
@@ -38,7 +38,7 @@ void BottomBar::retranslator()
     ui->retranslateUi(this);
 
     ui->nodeNumLabel->setToolTip(tr("Number of connected nodes"));
-    ui->syncLabel->setToolTip(tr("Local block height / Network block height(estimated)"));
+    ui->syncLabel->setToolTip(tr("Local block height"));
 }
 
 void BottomBar::jsonDataUpdated(QString id)

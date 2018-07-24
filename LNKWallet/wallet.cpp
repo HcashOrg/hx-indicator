@@ -2,6 +2,8 @@
 
 #include "websocketmanager.h"
 #include "commondialog.h"
+#include "ToolButtonWidget.h"
+#include "control/AssetIconItem.h"
 
 #ifdef WIN32
 #include <Windows.h>
@@ -1651,16 +1653,47 @@ bool operator ==(const ContractInfo &c1, const ContractInfo &c2)
     return c1.contractAddress == c2.contractAddress;
 }
 
-void setTextCenter(QTableWidget * const table)
+
+void tableWidgetSetItemZebraColor(QTableWidget *w, int alignment)
 {
-    if(!table) return;
-    for(int i = 0;i < table->rowCount();++i)
+    for(int row = 0; row < w->rowCount(); row++)
     {
-        for(int j = 0;j < table->columnCount();++j)
+        for(int column = 0; column < w->columnCount(); column++)
         {
-            if(table->item(i,j))
+            QTableWidgetItem* item = w->item(row,column);
+            if(item)
             {
-                table->item(i,j)->setTextAlignment(Qt::AlignCenter);
+                item->setTextAlignment(alignment);
+                if(row % 2)
+                {
+                    item->setBackgroundColor(QColor(238,236,245));
+                }
+                else
+                {
+                    item->setBackgroundColor(QColor(243,241,250));
+                }
+            }
+
+            QWidget* cellWidget = w->cellWidget(row,column);
+            if(cellWidget)
+            {
+                QString itemColor = (row % 2) ? "rgb(238,236,245)" : "rgb(243,241,250)";
+
+                if( QString(cellWidget->metaObject()->className()) == "ToolButtonWidget")
+                {
+                    ToolButtonWidget* tbw = qobject_cast<ToolButtonWidget*>(cellWidget);
+                    tbw->setBackgroundColor(itemColor);
+                }
+                else if( QString(cellWidget->metaObject()->className()) == "AssetIconItem")
+                {
+                    AssetIconItem* ait = qobject_cast<AssetIconItem*>(cellWidget);
+                    ait->setBackgroundColor(itemColor);
+                }
+                else if( QString(cellWidget->metaObject()->className()) == "ToolButtonWidgetItem")
+                {
+                    ToolButtonWidgetItem* tbwi = qobject_cast<ToolButtonWidgetItem*>(cellWidget);
+                    tbwi->setBackgroundColor(itemColor);
+                }
             }
         }
     }

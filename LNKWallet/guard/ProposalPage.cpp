@@ -155,13 +155,11 @@ void ProposalPage::showProposals()
 
             ToolButtonWidget *toolButton = new ToolButtonWidget();
             toolButton->setText(ui->proposalTableWidget->item(i,5)->text());
-//            toolButton->setBackgroundColor(itemColor);
             ui->proposalTableWidget->setCellWidget(i,5,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ProposalPage::on_proposalTableWidget_cellClicked,this,i,5));
 
             ToolButtonWidget *toolButton2 = new ToolButtonWidget();
             toolButton2->setText(ui->proposalTableWidget->item(i,6)->text());
-//            toolButton2->setBackgroundColor(itemColor);
             ui->proposalTableWidget->setCellWidget(i,6,toolButton2);
             connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&ProposalPage::on_proposalTableWidget_cellClicked,this,i,6));
 
@@ -177,20 +175,7 @@ void ProposalPage::showProposals()
         }
 
 
-        for (int j : {0,1,2,4})
-        {
-            if(i%2)
-            {
-                ui->proposalTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->proposalTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-            else
-            {
-                ui->proposalTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->proposalTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-            }
-        }
-
+        tableWidgetSetItemZebraColor(ui->proposalTableWidget);
     }
 }
 

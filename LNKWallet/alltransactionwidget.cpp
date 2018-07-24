@@ -42,13 +42,7 @@ void AllTransactionWidget::init()
     ui->transactionsTableWidget->horizontalHeader()->setVisible(true);
     ui->transactionsTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    ui->transactionsTableWidget->setStyleSheet("QTableView{background-color:rgb(243,241,250);border:none;border-radius:5px;font: 11px \"Microsoft YaHei UI Light\";}"
-                                               "QHeaderView{border:none;border-bottom:1px solid rgb(222,218,236);border-top-left-radius:5px;border-top-right-radius:5px;background-color:rgb(243,241,250);color:rgb(137,129,161);font: 11px \"Microsoft YaHei UI Light\";}"
-                                               "QHeaderView:section{height:30px;border:none;background-color:rgb(243,241,250);}"
-                                               "QHeaderView:section:first{border-top-left-radius:5px;}"
-                                               "QHeaderView:section:last{border-top-right-radius:5px;}");
-
-
+    ui->transactionsTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     setStyleSheet("QToolButton{font:10px \"微软雅黑\";background:transparent;border:1px solid rgb(137,129,161);border-radius:9px;color: rgb(137,129,161);}"
                   "QToolButton::checked{background-color:rgb(83,61,138);color:white;}");
@@ -757,18 +751,8 @@ void AllTransactionWidget::showTransactions()
         }
 
     }
-    //设置表格内容居中
-    for(int i = 0;i < ui->transactionsTableWidget->rowCount();++i)
-    {
-        for(int j = 0;j < ui->transactionsTableWidget->columnCount();++j)
-        {
-            if(ui->transactionsTableWidget->item(i,j))
-            {
-                ui->transactionsTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-            }
-        }
 
-    }
+    tableWidgetSetItemZebraColor(ui->transactionsTableWidget);
 
     hideFilteredTransactions();
 }

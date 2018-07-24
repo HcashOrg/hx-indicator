@@ -176,12 +176,14 @@ void MinerPage::jsonDataUpdated(QString id)
             connect(buttonfore,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_lockBalancesTableWidget_cellPressed,this,i,4));
 
         }
+
+        tableWidgetSetItemZebraColor(ui->lockBalancesTableWidget);
+
         unsigned int curPage = pageWidget_fore->GetCurrentPage();
         pageWidget_fore->SetTotalPage(calPage(ui->lockBalancesTableWidget));
         pageWidget_fore->SetCurrentPage(curPage);
 
         pageWidget_fore->setShowTip(ui->lockBalancesTableWidget->rowCount(),ROWNUMBER);
-        setTextCenter(ui->lockBalancesTableWidget);
         blankWidget_fore->setVisible(0 == size);
         pageWidget_fore->setVisible(0 != size);
         return;
@@ -260,12 +262,14 @@ void MinerPage::jsonDataUpdated(QString id)
 
 
         }
+
+        tableWidgetSetItemZebraColor(ui->incomeTableWidget);
+
         unsigned int curPage = pageWidget_income->GetCurrentPage();
         pageWidget_income->SetTotalPage(calPage(ui->incomeTableWidget));
         pageWidget_income->SetCurrentPage(curPage);
 
         pageWidget_income->setShowTip(ui->incomeTableWidget->rowCount(),ROWNUMBER);
-        setTextCenter(ui->incomeTableWidget);
         pageWidget_income->setVisible(0 != size);
         blankWidget_income->setVisible( 0 == size);
 
@@ -458,11 +462,13 @@ void MinerPage::showIncomeRecord()
         ui->incomeRecordTableWidget->setItem(i,3, new QTableWidgetItem(transactionId));
         ui->incomeRecordTableWidget->setItem(i,4, new QTableWidgetItem(tr("confirmed")));
     }
+    tableWidgetSetItemZebraColor(ui->incomeRecordTableWidget);
+
     unsigned int curPage = pageWidget_record->GetCurrentPage();
     pageWidget_record->SetTotalPage(calPage(ui->incomeRecordTableWidget));
     pageWidget_record->SetCurrentPage(curPage);
     pageWidget_record->setShowTip(ui->incomeRecordTableWidget->rowCount(),ROWNUMBER);
-    setTextCenter(ui->incomeRecordTableWidget);
+
     blankWidget_record->setVisible(0 == size);
     pageWidget_record->setVisible(0 != size);
 }

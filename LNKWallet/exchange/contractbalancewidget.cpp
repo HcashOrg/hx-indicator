@@ -189,20 +189,6 @@ void ContractBalanceWidget::showContractBalances()
         ui->balancesTableWidget->setItem(i,1, new QTableWidgetItem(getBigNumberString(balances.value(key), assetInfo.precision)));
         ui->balancesTableWidget->setItem(i,2, new QTableWidgetItem(tr("withdraw")));
 
-        for(int j = 0; j < 3; j++)
-        {
-            ui->balancesTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-            if(i%2)
-            {
-                ui->balancesTableWidget->item(i,j)->setBackgroundColor(QColor(255,255,255));
-            }
-            else
-            {
-                ui->balancesTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-        }
-
-
         ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,2);
         toolButtonItem->setInitGray(false);
         toolButtonItem->setText(ui->balancesTableWidget->item(i,2)->text());
@@ -210,6 +196,9 @@ void ContractBalanceWidget::showContractBalances()
         connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
 
     }
+
+    tableWidgetSetItemZebraColor(ui->balancesTableWidget);
+
     int page = (ui->balancesTableWidget->rowCount()%ROWNUMBER==0 && ui->balancesTableWidget->rowCount() != 0) ?
                 ui->balancesTableWidget->rowCount()/ROWNUMBER : ui->balancesTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
