@@ -66,7 +66,7 @@ color: rgb(52,37,90);</string>
        <x>140</x>
        <y>65</y>
        <width>331</width>
-       <height>30</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -236,7 +236,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
       <rect>
        <x>40</x>
        <y>65</y>
-       <width>71</width>
+       <width>91</width>
        <height>20</height>
       </rect>
      </property>
