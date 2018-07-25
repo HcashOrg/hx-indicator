@@ -14,20 +14,26 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
     
     ui->setupUi(this);
 
-    setParent(HXChain::getInstance()->mainFrame);
-
+//    HXChain::getInstance()->appendCurrentDialogVector(this);
+//    setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
 
+    QPalette pal = palette();
+     pal.setColor(QPalette::Background, Qt::transparent);
+     setPalette(pal);
+     this->setAutoFillBackground(true);
+
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
+    ui->widget->setStyleSheet("#widget {background-color:white;border-radius:4px;}");
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->widget);
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
-    HXChain::getInstance()->mainFrame->installBlurEffect(ui->containerWidget);
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
     ui->clearBtn->setStyleSheet(CANCELBTN_STYLE);
+    ui->consoleLineEdit->setStyleSheet("QLineEdit{color:#5474EB;}QLineEdit:focus{border-bottom-color:rgb(192,192,192);}");
 
 
     ui->containerWidget->installEventFilter(this);
@@ -71,9 +77,8 @@ void ConsoleDialog::pop()
 //    connect(this,SIGNAL(accepted()),&loop,SLOT(quit()));
 //    loop.exec();  //进入事件 循环处理，阻塞
 
-    move(0,0);
-  //  move( (QApplication::desktop()->width() - this->width())/2 , (QApplication::desktop()->height() - this->height())/2);
-
+//    move(0,0);
+    move( (QApplication::desktop()->width() - this->width())/2 , (QApplication::desktop()->height() - this->height())/2);
     exec();
 }
 
@@ -146,34 +151,34 @@ void ConsoleDialog::on_closeBtn_clicked()
 }
 
 
-//void ConsoleDialog::mousePressEvent(QMouseEvent *event)
-//{
+void ConsoleDialog::mousePressEvent(QMouseEvent *event)
+{
 
-//    if(event->button() == Qt::LeftButton)
-//     {
-//          mouse_press = true;
-//          //鼠标相对于窗体的位置（或者使用event->globalPos() - this->pos()）
-//          move_point = event->pos();;
-//     }
-//}
+    if(event->button() == Qt::LeftButton)
+     {
+          mouse_press = true;
+          //鼠标相对于窗体的位置（或者使用event->globalPos() - this->pos()）
+          move_point = event->pos();;
+     }
+}
 
-//void ConsoleDialog::mouseMoveEvent(QMouseEvent *event)
-//{
-//    //若鼠标左键被按下
-//    if(mouse_press)
-//    {
-//        //鼠标相对于屏幕的位置
-//        QPoint move_pos = event->globalPos();
+void ConsoleDialog::mouseMoveEvent(QMouseEvent *event)
+{
+    //若鼠标左键被按下
+    if(mouse_press)
+    {
+        //鼠标相对于屏幕的位置
+        QPoint move_pos = event->globalPos();
 
-//        //移动主窗体位置
-//        this->move(move_pos - move_point);
-//    }
-//}
+        //移动主窗体位置
+        this->move(move_pos - move_point);
+    }
+}
 
-//void ConsoleDialog::mouseReleaseEvent(QMouseEvent *)
-//{
-//    mouse_press = false;
-//}
+void ConsoleDialog::mouseReleaseEvent(QMouseEvent *)
+{
+    mouse_press = false;
+}
 
 void ConsoleDialog::on_consoleLineEdit_returnPressed()
 {
