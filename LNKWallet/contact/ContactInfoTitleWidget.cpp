@@ -85,7 +85,7 @@ void ContactInfoTitleWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
 
     ui->label_pic->setPixmap(QPixmap(":/contactPic.png").scaled(ui->label_pic->size()));

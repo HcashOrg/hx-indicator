@@ -413,7 +413,7 @@ background:transparent;</string>
     <string>钱包数据更新，点击此处重新备份！</string>
    </property>
    <property name="icon">
-    <iconset resource="wallet.qrc">
+    <iconset>
      <normaloff>:/ui/wallet_ui/redtip.png</normaloff>:/ui/wallet_ui/redtip.png</iconset>
    </property>
    <property name="autoDefault">
@@ -435,8 +435,6 @@ background:transparent;</string>
   <zorder>allTransactionBtn</zorder>
   <zorder>backupBtn</zorder>
  </widget>
- <resources>
-  <include location="wallet.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

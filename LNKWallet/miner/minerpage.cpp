@@ -40,12 +40,11 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->lockBalancesTableWidget->horizontalHeader()->setVisible(true);
     ui->lockBalancesTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     //ui->lockBalancesTableWidget->setColumnCount(5);
-    ui->lockBalancesTableWidget->setColumnWidth(0,140);
-    ui->lockBalancesTableWidget->setColumnWidth(1,140);
-    ui->lockBalancesTableWidget->setColumnWidth(2,80);
+    ui->lockBalancesTableWidget->setColumnWidth(0,160);
+    ui->lockBalancesTableWidget->setColumnWidth(1,150);
+    ui->lockBalancesTableWidget->setColumnWidth(2,160);
     ui->lockBalancesTableWidget->setColumnWidth(3,80);
     ui->lockBalancesTableWidget->setColumnWidth(4,80);
-    ui->lockBalancesTableWidget->setColumnWidth(5,80);
 
 
     ui->incomeTableWidget->installEventFilter(this);
@@ -333,8 +332,8 @@ void MinerPage::on_registerBtn_clicked()
 void MinerPage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
 
     painter.drawRect(rect());
 }
@@ -360,7 +359,6 @@ void MinerPage::updateAccounts()
         ui->stackedWidget->hide();
         ui->lockToMinerBtn->hide();
         ui->accountComboBox->hide();
-        ui->accountLabel->hide();
     }
     else
     {
@@ -368,7 +366,6 @@ void MinerPage::updateAccounts()
         ui->stackedWidget->show();
         ui->lockToMinerBtn->show();
         ui->accountComboBox->show();
-        ui->accountLabel->show();
 
         QStringList keys = HXChain::getInstance()->getRegisteredAccounts();
         ui->accountComboBox->clear();
@@ -480,7 +477,7 @@ void MinerPage::InitStyle()
     ui->incomeRecordBtn->setCheckable(true);
 
     setStyleSheet("QToolButton#forecloseInfoBtn,QToolButton#incomeInfoBtn,QToolButton#incomeRecordBtn{border:none;background:transparent;color:#C6CAD4;font:bold 18px \"Microsoft YaHei UI Light\";}"
-                  "QToolButton#forecloseInfoBtn::checked,QToolButton#incomeInfoBtn::checked,QToolButton#incomeRecordBtn::checked{color:black;}"
+                  "QToolButton#forecloseInfoBtn::checked,QToolButton#incomeInfoBtn::checked,QToolButton#incomeRecordBtn::checked{color:rgb(137,129,161);}"
                   TABLEWIDGET_STYLE_1);
     ui->obtainAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->lockToMinerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
@@ -488,11 +485,6 @@ void MinerPage::InitStyle()
 
     QPalette pe;
     pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
-
-    QFont font("\"Microsoft YaHei UI Light\"",12,50);
-    font.setPixelSize(12);
-    ui->label_op->setFont(font);
-    ui->label_op->setPalette(pe);
 
 }
 

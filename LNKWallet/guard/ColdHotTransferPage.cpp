@@ -44,8 +44,14 @@ ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
     ui->typeCurrentBtn->setCheckable(true);
     ui->typeWaitingBtn->setCheckable(true);
 
-    setStyleSheet("QToolButton{background:transparent;border:none;color: rgb(51,51,51);font:12px \"微软雅黑\";padding:0px 0px 1px 0px;}"
-                  "QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:white;}");
+    setStyleSheet("QPushButton{font:10px \"微软雅黑\";background:transparent;border:none;color: rgb(137,129,161);}"
+                  "QPushButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}");
+
+    ui->typeCurrentBtn->adjustSize();
+    ui->typeCurrentBtn->resize(ui->typeCurrentBtn->width(), 18);
+    ui->typeWaitingBtn->adjustSize();
+    ui->typeWaitingBtn->resize(ui->typeWaitingBtn->width(), 18);
+    ui->typeWaitingBtn->move(ui->typeCurrentBtn->x() + ui->typeCurrentBtn->width() + 30, ui->typeWaitingBtn->y());
 
     init();
 }
@@ -217,10 +223,13 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
 void ColdHotTransferPage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
-
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
     painter.drawRect(rect());
+
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(243,241,250),Qt::SolidPattern));
+    painter.drawRect(0,87,this->width(),24);
 }
 
 void ColdHotTransferPage::on_transferBtn_clicked()

@@ -39,20 +39,20 @@
   <widget class="QComboBox" name="assetComboBox">
    <property name="geometry">
     <rect>
-     <x>600</x>
+     <x>620</x>
      <y>21</y>
-     <width>120</width>
-     <height>25</height>
+     <width>90</width>
+     <height>18</height>
     </rect>
    </property>
   </widget>
   <widget class="QTableWidget" name="transferRecordTableWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>60</x>
      <y>50</y>
-     <width>670</width>
-     <height>242</height>
+     <width>650</width>
+     <height>230</height>
     </rect>
    </property>
    <attribute name="horizontalHeaderVisible">

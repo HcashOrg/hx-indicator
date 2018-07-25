@@ -41,12 +41,13 @@ private:
     void InitStyle();
     void InitCoinType();
 
-    void updateButtonStyle();//切换全部、我的承兑单时
 private:
     Ui::PoundageWidget *ui;
 private:
     class PoundageWidgetPrivate;
     PoundageWidgetPrivate *_p;
+
+    void paintEvent(QPaintEvent*);
 };
 
 #endif // POUNDAGEWIDGET_H

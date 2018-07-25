@@ -40,8 +40,8 @@ MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     ui->ordersTableWidget->setColumnWidth(0,160);
     ui->ordersTableWidget->setColumnWidth(1,160);
     ui->ordersTableWidget->setColumnWidth(2,160);
-    ui->ordersTableWidget->setColumnWidth(3,90);
-    ui->ordersTableWidget->setColumnWidth(4,90);
+    ui->ordersTableWidget->setColumnWidth(3,80);
+    ui->ordersTableWidget->setColumnWidth(4,80);
 
     ui->ordersTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
@@ -469,8 +469,8 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 void MyExchangeContractPage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
 
     painter.drawRect(rect());
 }

@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(248,249,253);</string>
+    <string notr="true">background-color: rgb(229,226,240);</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">

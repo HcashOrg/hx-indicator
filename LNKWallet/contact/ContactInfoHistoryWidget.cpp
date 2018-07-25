@@ -185,7 +185,7 @@ void ContactInfoHistoryWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
 
     QFont font("\"Microsoft YaHei UI Light\"",14,63);

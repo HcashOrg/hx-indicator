@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>530</height>
+    <height>510</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QTableWidget" name="multisigTableWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>160</y>
-     <width>670</width>
-     <height>280</height>
+     <x>60</x>
+     <y>130</y>
+     <width>650</width>
+     <height>310</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -161,10 +161,10 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>95</y>
+     <x>60</x>
+     <y>90</y>
      <width>100</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -185,10 +185,10 @@
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>115</y>
-     <width>111</width>
-     <height>30</height>
+     <x>160</x>
+     <y>90</y>
+     <width>120</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -208,7 +208,7 @@
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>50</y>
      <width>300</width>
      <height>26</height>
@@ -233,10 +233,10 @@
   <widget class="QToolButton" name="historyBtn">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>120</y>
+     <x>650</x>
+     <y>90</y>
      <width>60</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -263,10 +263,10 @@
   <widget class="QToolButton" name="importBtn">
    <property name="geometry">
     <rect>
-     <x>530</x>
-     <y>120</y>
+     <x>540</x>
+     <y>90</y>
      <width>90</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -293,10 +293,10 @@
   <widget class="QToolButton" name="changeAddressBtn">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>120</y>
+     <x>440</x>
+     <y>90</y>
      <width>90</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">

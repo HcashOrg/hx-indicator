@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>530</height>
+    <height>510</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -248,11 +248,11 @@ font: 18px &quot;Microsoft YaHei UI Light&quot;;</string>
      <x>0</x>
      <y>0</y>
      <width>770</width>
-     <height>530</height>
+     <height>510</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(248,249,253);</string>
+    <string notr="true">background-color: rgb(229,226,240);</string>
    </property>
    <widget class="QLabel" name="label">
     <property name="geometry">

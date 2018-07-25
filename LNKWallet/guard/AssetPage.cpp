@@ -29,8 +29,8 @@ AssetPage::AssetPage(QWidget *parent) :
     ui->assetTableWidget->setColumnWidth(1,60);
     ui->assetTableWidget->setColumnWidth(2,140);
     ui->assetTableWidget->setColumnWidth(3,140);
-    ui->assetTableWidget->setColumnWidth(4,90);
-    ui->assetTableWidget->setColumnWidth(5,90);
+    ui->assetTableWidget->setColumnWidth(4,80);
+    ui->assetTableWidget->setColumnWidth(5,80);
     ui->assetTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->assetTableWidget);
@@ -77,8 +77,8 @@ void AssetPage::showAssetsInfo()
 void AssetPage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
 
     painter.drawRect(rect());
 }
