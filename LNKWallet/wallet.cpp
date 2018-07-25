@@ -367,9 +367,9 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("APPDATA="))
         {
 #ifdef TEST_WALLET
-            walletConfigPath = str.mid(8) + "\\LNKWallet_test";
+            walletConfigPath = str.mid(8) + "\\HXWallet_test";
 #else
-            walletConfigPath = str.mid(8) + "\\LNKWallet";
+            walletConfigPath = str.mid(8) + "\\HXWallet";
 #endif
             appDataPath = walletConfigPath + "\\chaindata";
             qDebug() << "appDataPath:" << appDataPath;
@@ -382,9 +382,9 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("HOME="))
         {
 #ifdef TEST_WALLET
-            walletConfigPath = str.mid(5) + "/Library/Application Support/LNKWallet_test";
+            walletConfigPath = str.mid(5) + "/Library/Application Support/HXWallet_test";
 #else
-            walletConfigPath = str.mid(5) + "/Library/Application Support/LNKWallet";
+            walletConfigPath = str.mid(5) + "/Library/Application Support/HXWallet";
 #endif
             appDataPath = walletConfigPath + "/chaindata";
             qDebug() << "appDataPath:" << appDataPath;
@@ -397,9 +397,9 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("HOME="))
         {
 #ifdef TEST_WALLET
-            walletConfigPath = str.mid(5) + "/LNKWallet_test";
+            walletConfigPath = str.mid(5) + "/HXWallet_test";
 #else
-            walletConfigPath = str.mid(5) + "/LNKWallet";
+            walletConfigPath = str.mid(5) + "/HXWallet";
 #endif
             appDataPath = walletConfigPath + "/chaindata";
             qDebug() << "appDataPath:" << appDataPath;
