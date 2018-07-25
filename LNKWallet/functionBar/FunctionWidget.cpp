@@ -363,6 +363,7 @@ void FunctionWidget::paintEvent(QPaintEvent *)
 
     QLinearGradient linear(QPointF(0, 480), QPointF(62, 0));
     linear.setColorAt(1, QColor(87,60,135));
+    linear.setColorAt(0.5, QColor(110,54,129));
     linear.setColorAt(0, QColor(138,49,127));
     linear.setSpread(QGradient::PadSpread);
     painter.setBrush(linear);
