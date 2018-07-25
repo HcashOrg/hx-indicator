@@ -11,6 +11,7 @@
 #include "showcontentdialog.h"
 #include "ColdHotInfoDialog.h"
 
+static const int ROWNUMBER = 6;
 ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ColdHotTransferPage)
@@ -53,6 +54,12 @@ ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
     ui->typeWaitingBtn->resize(ui->typeWaitingBtn->width(), 18);
     ui->typeWaitingBtn->move(ui->typeCurrentBtn->x() + ui->typeCurrentBtn->width() + 30, ui->typeWaitingBtn->y());
 
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ColdHotTransferPage::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->coldHotTransactionTableWidget);
+    blankWidget->setTextTip(tr("当前没有纪录!"));
     init();
 }
 
@@ -332,6 +339,14 @@ void ColdHotTransferPage::showColdHotTransactions()
             tableWidgetSetItemZebraColor(ui->coldHotTransactionTableWidget);
         }
     }
+    int page = (ui->coldHotTransactionTableWidget->rowCount()%ROWNUMBER==0 && ui->coldHotTransactionTableWidget->rowCount() != 0) ?
+                ui->coldHotTransactionTableWidget->rowCount()/ROWNUMBER : ui->coldHotTransactionTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->coldHotTransactionTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
+
+    pageWidget->setVisible(0 != ui->coldHotTransactionTableWidget->rowCount());
+    blankWidget->setVisible(ui->coldHotTransactionTableWidget->rowCount() == 0);
 
 }
 
@@ -487,4 +502,23 @@ void ColdHotTransferPage::on_typeWaitingBtn_clicked()
     ui->typeCurrentBtn->setChecked(false);
     ui->typeWaitingBtn->setChecked(true);
     showColdHotTransactions();
+}
+
+void ColdHotTransferPage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->coldHotTransactionTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->coldHotTransactionTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->coldHotTransactionTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->coldHotTransactionTableWidget->setRowHidden(i,true);
+        }
+    }
 }

@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QLabel>
 
+#include "poundage/PageScrollWidget.h"
+#include "control/BlankDefaultWidget.h"
 namespace Ui {
 class ProposalPage;
 }
@@ -31,10 +33,13 @@ private slots:
 
     void on_proposalTableWidget_cellPressed(int row, int column);
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::ProposalPage *ui;
 
     void paintEvent(QPaintEvent*);
+    PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
 };
 
 class VoteStateLabel : public QLabel

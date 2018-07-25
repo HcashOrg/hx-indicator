@@ -14,6 +14,7 @@
 #include "ChangeCrosschainAddressDialog.h"
 
 
+static const int ROWNUMBER = 7;
 GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GuardKeyManagePage)
@@ -46,6 +47,13 @@ GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
     ui->historyBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->importBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->changeAddressBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&GuardKeyManagePage::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->multisigTableWidget);
+    blankWidget->setTextTip(tr("当前没有纪录!"));
 
     init();
 }
@@ -161,6 +169,14 @@ void GuardKeyManagePage::showMultisigInfo()
     }
 
     tableWidgetSetItemZebraColor(ui->multisigTableWidget);
+    int page = (ui->multisigTableWidget->rowCount()%ROWNUMBER==0 && ui->multisigTableWidget->rowCount() != 0) ?
+                ui->multisigTableWidget->rowCount()/ROWNUMBER : ui->multisigTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->multisigTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
+
+    pageWidget->setVisible(0 != ui->multisigTableWidget->rowCount());
+    blankWidget->setVisible(ui->multisigTableWidget->rowCount() == 0);
 }
 
 void GuardKeyManagePage::refresh()
@@ -322,4 +338,23 @@ void GuardKeyManagePage::on_changeAddressBtn_clicked()
 {
     ChangeCrosschainAddressDialog changeCrosschainAddressDialog;
     changeCrosschainAddressDialog.pop();
+}
+
+void GuardKeyManagePage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->multisigTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->multisigTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->multisigTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->multisigTableWidget->setRowHidden(i,true);
+        }
+    }
 }

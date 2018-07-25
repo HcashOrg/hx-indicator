@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "poundage/PageScrollWidget.h"
+#include "control/BlankDefaultWidget.h"
 namespace Ui {
 class AssetPage;
 }
@@ -21,9 +23,12 @@ public:
 private slots:
     void on_assetTableWidget_cellPressed(int row, int column);
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::AssetPage *ui;
 void paintEvent(QPaintEvent*);
+PageScrollWidget *pageWidget;
+BlankDefaultWidget *blankWidget;
 
 };
 

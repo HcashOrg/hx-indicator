@@ -2,6 +2,8 @@
 #define GUARDKEYMANAGE_H
 
 #include <QWidget>
+#include "poundage/PageScrollWidget.h"
+#include "control/BlankDefaultWidget.h"
 
 namespace Ui {
 class GuardKeyManagePage;
@@ -39,11 +41,14 @@ private slots:
 
     void on_changeAddressBtn_clicked();
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::GuardKeyManagePage *ui;
     bool inited = false;
 
     void paintEvent(QPaintEvent*);
+    PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
 };
 
 #endif // GUARDKEYMANAGE_H

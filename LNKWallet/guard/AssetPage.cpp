@@ -6,6 +6,7 @@
 #include "showcontentdialog.h"
 #include "ToolButtonWidget.h"
 
+static const int ROWNUMBER = 7;
 AssetPage::AssetPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AssetPage)
@@ -34,6 +35,13 @@ AssetPage::AssetPage(QWidget *parent) :
     ui->assetTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->assetTableWidget);
+
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&AssetPage::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->assetTableWidget);
+    blankWidget->setTextTip(tr("当前没有纪录!"));
 
     showAssetsInfo();
 }
@@ -72,6 +80,14 @@ void AssetPage::showAssetsInfo()
     }
 
     tableWidgetSetItemZebraColor(ui->assetTableWidget);
+    int page = (ui->assetTableWidget->rowCount()%ROWNUMBER==0 && ui->assetTableWidget->rowCount() != 0) ?
+                ui->assetTableWidget->rowCount()/ROWNUMBER : ui->assetTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->assetTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
+
+    pageWidget->setVisible(0 != ui->assetTableWidget->rowCount());
+    blankWidget->setVisible(ui->assetTableWidget->rowCount() == 0);
 }
 
 void AssetPage::paintEvent(QPaintEvent *)
@@ -97,5 +113,24 @@ void AssetPage::on_assetTableWidget_cellPressed(int row, int column)
         showContentDialog.exec();
 
         return;
+    }
+}
+
+void AssetPage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->assetTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->assetTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->assetTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->assetTableWidget->setRowHidden(i,true);
+        }
     }
 }

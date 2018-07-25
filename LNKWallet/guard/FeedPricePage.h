@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "poundage/PageScrollWidget.h"
+#include "control/BlankDefaultWidget.h"
 namespace Ui {
 class FeedPricePage;
 }
@@ -25,10 +27,13 @@ private slots:
 
     void on_assetPriceTableWidget_cellClicked(int row, int column);
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::FeedPricePage *ui;
 
     void paintEvent(QPaintEvent*);
+    PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
 };
 
 #endif // FEEDPRICEPAGE_H

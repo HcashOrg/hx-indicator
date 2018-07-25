@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QMap>
 
+#include "poundage/PageScrollWidget.h"
+#include "control/BlankDefaultWidget.h"
 namespace Ui {
 class AssetChangeHistoryWidget;
 }
@@ -31,6 +33,7 @@ private slots:
 
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::AssetChangeHistoryWidget *ui;
     bool inited = false;
@@ -43,6 +46,8 @@ private:
     void refreshKeyState();
 
     void paintEvent(QPaintEvent*);
+    PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
 };
 
 #endif // ASSETCHANGEHISTORYWIDGET_H

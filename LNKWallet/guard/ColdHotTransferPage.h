@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QMap>
 
+#include "poundage/PageScrollWidget.h"
+#include "control/BlankDefaultWidget.h"
 namespace Ui {
 class ColdHotTransferPage;
 }
@@ -70,6 +72,7 @@ private slots:
 
     void on_typeWaitingBtn_clicked();
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::ColdHotTransferPage *ui;
     bool inited = false;
@@ -79,6 +82,8 @@ private:
     void refreshColdHotTtransactionsState();
 
     void paintEvent(QPaintEvent*);
+    PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
 };
 
 #endif // COLDHOTTRANSFERPAGE_H

@@ -8,6 +8,7 @@
 #include "dialog/ErrorResultDialog.h"
 #include "ProposalDetailDialog.h"
 
+static const int ROWNUMBER = 7;
 ProposalPage::ProposalPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ProposalPage)
@@ -38,6 +39,12 @@ ProposalPage::ProposalPage(QWidget *parent) :
     ui->proposalTableWidget->setColumnWidth(6,80);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ProposalPage::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->proposalTableWidget);
+    blankWidget->setTextTip(tr("当前没有历史纪录!"));
     init();
 }
 
@@ -177,6 +184,15 @@ void ProposalPage::showProposals()
 
         tableWidgetSetItemZebraColor(ui->proposalTableWidget);
     }
+
+    int page = (ui->proposalTableWidget->rowCount()%ROWNUMBER==0 && ui->proposalTableWidget->rowCount() != 0) ?
+                ui->proposalTableWidget->rowCount()/ROWNUMBER : ui->proposalTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->proposalTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
+
+    pageWidget->setVisible(0 != ui->proposalTableWidget->rowCount());
+    blankWidget->setVisible(ui->proposalTableWidget->rowCount() == 0);
 }
 
 void ProposalPage::refresh()
@@ -265,6 +281,25 @@ void ProposalPage::on_proposalTableWidget_cellPressed(int row, int column)
         proposalDetailDialog.setProposal(ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString());
         proposalDetailDialog.pop();
         return;
+    }
+}
+
+void ProposalPage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->proposalTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->proposalTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->proposalTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->proposalTableWidget->setRowHidden(i,true);
+        }
     }
 }
 

@@ -6,6 +6,7 @@
 #include "ToolButtonWidget.h"
 #include "FeedPriceDialog.h"
 
+static const int ROWNUMBER = 7;
 FeedPricePage::FeedPricePage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FeedPricePage)
@@ -33,6 +34,12 @@ FeedPricePage::FeedPricePage(QWidget *parent) :
     ui->assetPriceTableWidget->setColumnWidth(3,100);
     ui->assetPriceTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&FeedPricePage::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->assetPriceTableWidget);
+    blankWidget->setTextTip(tr("当前没有纪录!"));
     init();
 }
 
@@ -104,6 +111,14 @@ void FeedPricePage::showAssetsPrice()
     }
 
     tableWidgetSetItemZebraColor(ui->assetPriceTableWidget);
+    int page = (ui->assetPriceTableWidget->rowCount()%ROWNUMBER==0 && ui->assetPriceTableWidget->rowCount() != 0) ?
+                ui->assetPriceTableWidget->rowCount()/ROWNUMBER : ui->assetPriceTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->assetPriceTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
+
+    pageWidget->setVisible(0 != ui->assetPriceTableWidget->rowCount());
+    blankWidget->setVisible(ui->assetPriceTableWidget->rowCount() == 0);
 }
 
 void FeedPricePage::refresh()
@@ -133,6 +148,25 @@ void FeedPricePage::on_assetPriceTableWidget_cellClicked(int row, int column)
         feedPriceDialog.pop();
 
         refresh();
+    }
+}
+
+void FeedPricePage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->assetPriceTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->assetPriceTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->assetPriceTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->assetPriceTableWidget->setRowHidden(i,true);
+        }
     }
 }
 

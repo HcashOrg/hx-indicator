@@ -7,6 +7,8 @@
 #include "showcontentdialog.h"
 #include "commondialog.h"
 
+
+static const int ROWNUMBER = 6;
 AssetChangeHistoryWidget::AssetChangeHistoryWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AssetChangeHistoryWidget)
@@ -32,6 +34,13 @@ AssetChangeHistoryWidget::AssetChangeHistoryWidget(QWidget *parent) :
     ui->changeHistoryTableWidget->setColumnWidth(4,80);
     ui->changeHistoryTableWidget->setColumnWidth(5,80);
     ui->changeHistoryTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&AssetChangeHistoryWidget::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->changeHistoryTableWidget);
+    blankWidget->setTextTip(tr("当前没有历史纪录!"));
 
     init();
 }
@@ -153,6 +162,14 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
             }
 
             tableWidgetSetItemZebraColor(ui->changeHistoryTableWidget);
+            int page = (ui->changeHistoryTableWidget->rowCount()%ROWNUMBER==0 && ui->changeHistoryTableWidget->rowCount() != 0) ?
+                        ui->changeHistoryTableWidget->rowCount()/ROWNUMBER : ui->changeHistoryTableWidget->rowCount()/ROWNUMBER+1;
+            pageWidget->SetTotalPage(page);
+            pageWidget->setShowTip(ui->changeHistoryTableWidget->rowCount(),ROWNUMBER);
+            pageChangeSlot(0);
+
+            pageWidget->setVisible(0 != ui->changeHistoryTableWidget->rowCount());
+            blankWidget->setVisible(ui->changeHistoryTableWidget->rowCount() == 0);
         }
 
         return;
@@ -298,4 +315,23 @@ void AssetChangeHistoryWidget::on_accountComboBox_currentIndexChanged(const QStr
 
     HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
     fetchMultisigAccountPair();
+}
+
+void AssetChangeHistoryWidget::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->changeHistoryTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->changeHistoryTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->changeHistoryTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->changeHistoryTableWidget->setRowHidden(i,true);
+        }
+    }
 }

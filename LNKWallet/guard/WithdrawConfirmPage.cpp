@@ -9,6 +9,7 @@
 #include "showcontentdialog.h"
 #include "WithdrawInfoDialog.h"
 
+static const int ROWNUMBER = 6;
 WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::WithdrawConfirmPage)
@@ -49,6 +50,12 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     ui->typeWaitingBtn->resize(ui->typeWaitingBtn->width(), 18);
     ui->typeWaitingBtn->move(ui->typeCurrentBtn->x() + ui->typeCurrentBtn->width() + 30, ui->typeWaitingBtn->y());
 
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&WithdrawConfirmPage::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->crosschainTransactionTableWidget);
+    blankWidget->setTextTip(tr("当前没有纪录!"));
     init();
 }
 
@@ -362,6 +369,14 @@ void WithdrawConfirmPage::showCrosschainTransactions()
             tableWidgetSetItemZebraColor(ui->crosschainTransactionTableWidget);
         }
     }
+    int page = (ui->crosschainTransactionTableWidget->rowCount()%ROWNUMBER==0 && ui->crosschainTransactionTableWidget->rowCount() != 0) ?
+                ui->crosschainTransactionTableWidget->rowCount()/ROWNUMBER : ui->crosschainTransactionTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->crosschainTransactionTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
+
+    pageWidget->setVisible(0 != ui->crosschainTransactionTableWidget->rowCount());
+    blankWidget->setVisible(ui->crosschainTransactionTableWidget->rowCount() == 0);
 
 
 }
@@ -459,4 +474,23 @@ void WithdrawConfirmPage::on_typeWaitingBtn_clicked()
     ui->typeCurrentBtn->setChecked(false);
     ui->typeWaitingBtn->setChecked(true);
     showCrosschainTransactions();
+}
+
+void WithdrawConfirmPage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->crosschainTransactionTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->crosschainTransactionTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->crosschainTransactionTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->crosschainTransactionTableWidget->setRowHidden(i,true);
+        }
+    }
 }
