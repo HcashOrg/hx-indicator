@@ -59,12 +59,13 @@ void FunctionExchangeWidget::paintEvent(QPaintEvent *)
     QPainter painter(this);
 
     QLinearGradient linear(QPointF(0, 480), QPointF(130, 0));
-    linear.setColorAt(0, QColor(56,19,56));
-    linear.setColorAt(1, QColor(27,17,44));
+    linear.setColorAt(0, QColor(71,33,84));
+    linear.setColorAt(0.5, QColor(55,36,88));
+    linear.setColorAt(1, QColor(51,37,90));
     linear.setSpread(QGradient::PadSpread);
     painter.setBrush(linear);
     painter.drawRect(QRect(-1,-1,131,481));
 
-    painter.setPen(QColor(45,29,71));
+    painter.setPen(QColor(81,59,134));
     painter.drawLine(20,62,110,62);
 }

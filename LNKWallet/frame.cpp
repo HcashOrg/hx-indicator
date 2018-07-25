@@ -362,7 +362,7 @@ void Frame::alreadyLogin()
 
     topLeftWidget = new QWidget(this);
     topLeftWidget->setGeometry(0,0,190,63);
-    topLeftWidget->setStyleSheet("background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(14,2,8), stop:1 rgba(19,9,20));");
+    topLeftWidget->setStyleSheet("background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(82,61,137), stop:1 rgba(84,64,144));");
     QLabel* logoLabel = new QLabel(topLeftWidget);
     logoLabel->setGeometry(50,15,92,35);
     logoLabel->setPixmap(QPixmap(":/ui/wallet_ui/HX_logo.png"));
@@ -2136,17 +2136,17 @@ void Frame::paintEvent(QPaintEvent *e)
 
 void Frame::EnlargeRightPart()
 {
-    functionBar->resize(60,functionBar->height());
+    functionBar->resize(62,functionBar->height());
 
-    centralWidget->resize(900,centralWidget->height());
+    centralWidget->resize(898,centralWidget->height());
 
-    centralWidget->move(60, titleBar->height());
+    centralWidget->move(62, titleBar->height());
 //    if(QWidget *widget = centralWidget->childAt(10,10))
 //    {
 //        widget->resize(805,centralWidget->height());
 //    }
 
-    contactPage->resize(900,centralWidget->height());
+    contactPage->resize(898,centralWidget->height());
 
 
     //bottomBar->resize(805,40);

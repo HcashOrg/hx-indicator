@@ -77,7 +77,7 @@ void ContactSearchWidget::InitStyle()
 
 
     setStyleSheet("QPushButton{ background:transparent;}"
-                  "QLineEdit{background-color:transparent;font-size:10px;border:none;border-radius:0px;color:white;border-bottom:1px solid rgb(81,59,134);}"
+                  "QLineEdit{background-color:transparent;font-size:11px;border:none;border-radius:0px;color:white;border-bottom:1px solid rgb(81,59,134);}"
                   );
 
 }

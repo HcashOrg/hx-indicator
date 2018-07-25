@@ -72,7 +72,7 @@ SetDialog::SetDialog(QWidget *parent) :
                   "QToolButton#toolButton_help,QToolButton#toolButton_set{font-size:11px;border:none;background:transparent;color:white;border-top-left-radius:4px;border-top-right-radius:4px;}"
                   "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{color:rgb(52,37,90);background:#FFFFFF;}"
 
-                  "QToolButton#depositBtn{color:black;}"
+                  "QToolButton#depositBtn{color:rgb(84,61,137);}"
 
 
                   "QSpinBox::up-button {width:0;height:0;}"

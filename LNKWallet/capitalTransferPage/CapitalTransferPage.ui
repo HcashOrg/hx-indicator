@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>530</height>
+    <height>510</height>
    </rect>
   </property>
   <property name="font">
@@ -29,7 +29,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>110</y>
+     <y>100</y>
      <width>121</width>
      <height>26</height>
     </rect>
@@ -54,8 +54,8 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>150</y>
-     <width>131</width>
+     <y>140</y>
+     <width>161</width>
      <height>16</height>
     </rect>
    </property>
@@ -66,8 +66,8 @@
   <widget class="QLabel" name="label_number">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>150</y>
+     <x>386</x>
+     <y>140</y>
      <width>171</width>
      <height>20</height>
     </rect>
@@ -80,7 +80,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>273</y>
+     <y>263</y>
      <width>150</width>
      <height>16</height>
     </rect>
@@ -92,8 +92,8 @@
   <widget class="QLabel" name="label_fee">
    <property name="geometry">
     <rect>
-     <x>301</x>
-     <y>363</y>
+     <x>322</x>
+     <y>351</y>
      <width>171</width>
      <height>20</height>
     </rect>
@@ -106,7 +106,7 @@
    <property name="geometry">
     <rect>
      <x>540</x>
-     <y>100</y>
+     <y>90</y>
      <width>12</width>
      <height>12</height>
     </rect>
@@ -131,7 +131,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>298</y>
+     <y>288</y>
      <width>80</width>
      <height>18</height>
     </rect>
@@ -153,7 +153,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>326</y>
+     <y>316</y>
      <width>80</width>
      <height>18</height>
     </rect>
@@ -175,7 +175,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>230</y>
+     <y>220</y>
      <width>101</width>
      <height>16</height>
     </rect>
@@ -187,9 +187,9 @@
   <widget class="QLineEdit" name="lineEdit_number">
    <property name="geometry">
     <rect>
-     <x>302</x>
-     <y>228</y>
-     <width>251</width>
+     <x>322</x>
+     <y>218</y>
+     <width>231</width>
      <height>21</height>
     </rect>
    </property>
@@ -206,9 +206,9 @@
   <widget class="QLineEdit" name="lineEdit_address">
    <property name="geometry">
     <rect>
-     <x>302</x>
-     <y>326</y>
-     <width>251</width>
+     <x>322</x>
+     <y>316</y>
+     <width>231</width>
      <height>21</height>
     </rect>
    </property>
@@ -226,7 +226,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>363</y>
+     <y>351</y>
      <width>100</width>
      <height>16</height>
     </rect>
@@ -239,7 +239,7 @@
    <property name="geometry">
     <rect>
      <x>337</x>
-     <y>399</y>
+     <y>389</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -264,7 +264,7 @@
    <property name="geometry">
     <rect>
      <x>306</x>
-     <y>250</y>
+     <y>240</y>
      <width>241</width>
      <height>41</height>
     </rect>
@@ -284,7 +284,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
    <property name="geometry">
     <rect>
      <x>330</x>
-     <y>110</y>
+     <y>100</y>
      <width>171</width>
      <height>20</height>
     </rect>
@@ -301,7 +301,7 @@ color: rgb(255, 0, 0);</string>
    <property name="geometry">
     <rect>
      <x>195</x>
-     <y>80</y>
+     <y>70</y>
      <width>380</width>
      <height>370</height>
     </rect>
@@ -318,8 +318,8 @@ border-radius:15px;</string>
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>190</y>
-     <width>81</width>
+     <y>180</y>
+     <width>91</width>
      <height>16</height>
     </rect>
    </property>
@@ -333,15 +333,15 @@ border-radius:15px;</string>
     </font>
    </property>
    <property name="text">
-    <string>Tunnel地址:</string>
+    <string>Tunnel:</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_tunnelAddress">
    <property name="geometry">
     <rect>
-     <x>293</x>
-     <y>189</y>
-     <width>271</width>
+     <x>283</x>
+     <y>179</y>
+     <width>281</width>
      <height>20</height>
     </rect>
    </property>

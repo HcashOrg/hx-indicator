@@ -116,13 +116,13 @@ void CapitalConfirmWidget::paintEvent(QPaintEvent *event)
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(QRect(0,0,960,580));
+    painter.drawRect(QRect(0,0,960,543));
 
 
 //    painter.setBrush(QColor(255,255,255,255));
 //    painter.drawRect(220,60,320,425);
 
-    painter.drawPixmap(320,60,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
+    painter.drawPixmap(320,41,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
 
     QWidget::paintEvent(event);
 }

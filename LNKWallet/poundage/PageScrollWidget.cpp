@@ -340,6 +340,7 @@ void PageScrollWidget::ResetButton()
     for(unsigned int i = 0; i < _p->buttonNumber;++i)
     {
         QToolButton *toolButton = new QToolButton(this);
+        toolButton->setCursor(QCursor(Qt::PointingHandCursor));
         toolButton->setToolButtonStyle(Qt::ToolButtonTextOnly);
         toolButton->setCheckable(true);
         connect(toolButton,&QToolButton::clicked,this,&PageScrollWidget::buttonClickSlots);
