@@ -31,12 +31,12 @@ ContractBalanceWidget::ContractBalanceWidget(QWidget *parent) :
     ui->balancesTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->balancesTableWidget->horizontalHeader()->setFixedHeight(35);
     ui->balancesTableWidget->horizontalHeader()->setVisible(true);
-    ui->balancesTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->balancesTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->balancesTableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->balancesTableWidget->verticalHeader()->setVisible(false);
     ui->balancesTableWidget->setColumnWidth(0,250);
     ui->balancesTableWidget->setColumnWidth(1,250);
-    ui->balancesTableWidget->setColumnWidth(2,160);
+    ui->balancesTableWidget->setColumnWidth(2,130);
 
     ui->balancesTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
@@ -163,8 +163,8 @@ void ContractBalanceWidget::jsonDataUpdated(QString id)
 void ContractBalanceWidget::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
 
     painter.drawRect(rect());
 }
@@ -190,7 +190,6 @@ void ContractBalanceWidget::showContractBalances()
         ui->balancesTableWidget->setItem(i,2, new QTableWidgetItem(tr("withdraw")));
 
         ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,2);
-        toolButtonItem->setInitGray(false);
         toolButtonItem->setText(ui->balancesTableWidget->item(i,2)->text());
         ui->balancesTableWidget->setCellWidget(i,2,toolButtonItem);
         connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));

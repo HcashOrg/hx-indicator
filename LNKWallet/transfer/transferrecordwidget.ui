@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>530</height>
+    <height>510</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QTableWidget" name="transferRecordTableWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>60</x>
      <y>130</y>
-     <width>670</width>
-     <height>322</height>
+     <width>650</width>
+     <height>310</height>
     </rect>
    </property>
    <property name="showGrid">
@@ -113,10 +113,10 @@
   <widget class="QComboBox" name="assetComboBox">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>80</y>
+     <x>60</x>
+     <y>90</y>
      <width>120</width>
-     <height>30</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -125,38 +125,10 @@
     </font>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>80</y>
-     <width>60</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>&quot;微软雅黑&quot;</family>
-     <pointsize>-1</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 14px \&quot;微软雅黑\&quot;;</string>
-   </property>
-   <property name="text">
-    <string>币种</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>50</y>
      <width>200</width>
      <height>26</height>
@@ -176,7 +148,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>477</y>
+     <y>470</y>
      <width>770</width>
      <height>41</height>
     </rect>

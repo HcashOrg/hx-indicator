@@ -193,9 +193,9 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
 void TransferRecordWidget::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
-    painter.drawRect(0,0,770,530);
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
+    painter.drawRect(0,0,770,510);
 }
 
 void TransferRecordWidget::on_assetComboBox_currentIndexChanged(const QString &arg1)

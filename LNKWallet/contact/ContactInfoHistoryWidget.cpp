@@ -188,13 +188,6 @@ void ContactInfoHistoryWidget::InitStyle()
     palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
 
-    QFont font("\"Microsoft YaHei UI Light\"",14,63);
-    font.setPixelSize(20);
-    ui->label->setFont(font);
-    QPalette pa;
-    pa.setColor(QPalette::WindowText,Qt::black);
-    ui->label->setPalette(pa);
-
 
     ui->transferRecordTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->transferRecordTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);

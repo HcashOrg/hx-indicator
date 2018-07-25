@@ -137,13 +137,17 @@ void PoundageShowWidget::InitStyle()
 
 //    ui->tableView->setPalette(palette);
 
+
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     //ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->tableView->verticalHeader()->setMinimumSectionSize(40);
     ui->tableView->verticalHeader()->setVisible(false);
     ui->tableView->setShowGrid(false);
-    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableView->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableView->setFocusPolicy(Qt::NoFocus);
+    ui->tableView->setMouseTracking(true);
+    ui->tableView->setShowGrid(false);
 
     ui->tableView->setStyleSheet(TABLEWIDGET_STYLE_1);
 }

@@ -28,7 +28,7 @@ AssetChangeHistoryWidget::AssetChangeHistoryWidget(QWidget *parent) :
     ui->changeHistoryTableWidget->setColumnWidth(0,120);
     ui->changeHistoryTableWidget->setColumnWidth(1,140);
     ui->changeHistoryTableWidget->setColumnWidth(2,140);
-    ui->changeHistoryTableWidget->setColumnWidth(3,100);
+    ui->changeHistoryTableWidget->setColumnWidth(3,80);
     ui->changeHistoryTableWidget->setColumnWidth(4,80);
     ui->changeHistoryTableWidget->setColumnWidth(5,80);
     ui->changeHistoryTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);

@@ -139,7 +139,7 @@ void ContactAddWidget::InitWidget()
     connect(ui->lineEdit_address,&QLineEdit::textEdited,this,&ContactAddWidget::addressChangeSlots);
     connect(ui->toolButton,&QToolButton::clicked,this,&ContactAddWidget::addNewContactSlots);
 
-    HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->widget);
 }
 
 void ContactAddWidget::InitComboBox()

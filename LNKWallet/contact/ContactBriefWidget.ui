@@ -21,8 +21,8 @@
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>73</x>
-     <y>41</y>
+     <x>60</x>
+     <y>50</y>
      <width>200</width>
      <height>26</height>
     </rect>
@@ -58,9 +58,7 @@
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true">
-
-</string>
+    <string notr="true"/>
    </property>
    <property name="text">
     <string/>
