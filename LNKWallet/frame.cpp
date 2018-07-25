@@ -2136,17 +2136,17 @@ void Frame::paintEvent(QPaintEvent *e)
 
 void Frame::EnlargeRightPart()
 {
-    functionBar->resize(60,functionBar->height());
+    functionBar->resize(62,functionBar->height());
 
-    centralWidget->resize(900,centralWidget->height());
+    centralWidget->resize(898,centralWidget->height());
 
-    centralWidget->move(60, titleBar->height());
+    centralWidget->move(62, titleBar->height());
 //    if(QWidget *widget = centralWidget->childAt(10,10))
 //    {
 //        widget->resize(805,centralWidget->height());
 //    }
 
-    contactPage->resize(900,centralWidget->height());
+    contactPage->resize(898,centralWidget->height());
 
 
     //bottomBar->resize(805,40);
