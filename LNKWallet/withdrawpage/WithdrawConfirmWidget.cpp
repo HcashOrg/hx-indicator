@@ -136,34 +136,35 @@ void WithdrawConfirmWidget::InitWidget()
     connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &WithdrawConfirmWidget::jsonDataUpdated);
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&WithdrawConfirmWidget::ConfirmSlots);
     connect(ui->toolButton_cancel,&QToolButton::clicked,this,&WithdrawConfirmWidget::CancelSlots);
+    connect(ui->closeBtn,&QToolButton::clicked,this,&WithdrawConfirmWidget::CancelSlots);
     connect(ui->lineEdit,&QLineEdit::textEdited,this,&WithdrawConfirmWidget::passwordChangeSlots);
 }
 
 void WithdrawConfirmWidget::InitStyle()
 {
     setAttribute(Qt::WA_TranslucentBackground, true);
-    //setAutoFillBackground(true);
-    //QPalette palette;
-    //palette.setColor(QPalette::Background, QColor(10,10,10,100));
-    //setPalette(palette);
+    ui->widget->setObjectName("widget");
+    ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
+    ui->containerWidget->setObjectName("containerwidget");
+    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
     ui->toolButton_cancel->setStyleSheet(CANCELBTN_STYLE);
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 }
 
 void WithdrawConfirmWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
 
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(QRect(0,0,960,580));
+//    painter.setPen(Qt::NoPen);
+//    painter.drawPixmap(rect(),QPixmap(":/ui/wallet_ui/back_dialog.png.png").scaled(size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
 
-//    painter.setBrush(QColor(255,255,255,255));
-//    painter.drawRect(220,60,320,425);
+////    painter.setBrush(QColor(255,255,255,255));
+////    painter.drawRect(220,60,320,425);
 
-    painter.drawPixmap(320,60,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
+//    painter.drawPixmap(320,60,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
 
     QWidget::paintEvent(event);
 }

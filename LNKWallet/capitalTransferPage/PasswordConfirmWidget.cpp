@@ -102,19 +102,10 @@ void PasswordConfirmWidget::paintEvent(QPaintEvent *event)
     painter.drawPixmap(rect(),QPixmap(":/ui/wallet_ui/back_dialog.png").scaled(rect().size(),Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(rect());
+    painter.setBrush(QColor(229,226,240,255));
+    painter.drawRoundedRect(QRect(355,200,380,185),5,5);
 
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(255,255,255,255));
-    painter.drawRoundedRect(QRect(355,200,380,185),10,10);
 
-    QRadialGradient radial(385, 385, 390, 385,385);
-    radial.setColorAt(0, QColor(0,0,0,15));
-    radial.setColorAt(1, QColor(188,235,248,15));
-    painter.setBrush(radial);
-    painter.setPen(Qt::NoPen);
-    painter.drawRoundedRect(QRect(350,195,390,195),10,10);
 
 
     QWidget::paintEvent(event);

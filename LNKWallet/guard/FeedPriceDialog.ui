@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>960</width>
-    <height>580</height>
+    <height>543</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>0</x>
      <y>0</y>
      <width>960</width>
-     <height>580</height>
+     <height>543</height>
     </rect>
    </property>
    <property name="font">
@@ -33,7 +33,7 @@
     <property name="geometry">
      <rect>
       <x>280</x>
-      <y>120</y>
+      <y>101</y>
       <width>400</width>
       <height>340</height>
      </rect>
@@ -46,7 +46,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true"/>
     </property>
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">

@@ -26,32 +26,16 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
 
-//    ui->widget->setObjectName("widget");
-//    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
-//    ui->containerWidget->setObjectName("containerwidget");
-//    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
+    ui->widget->setObjectName("widget");
+    ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
+    ui->containerWidget->setObjectName("containerwidget");
+    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
-//    QFont font("\"Microsoft YaHei UI Light\"",10,50);
-//    QPalette pa;
-//    pa.setColor(QPalette::WindowText,QColor(0xC6,0xCA,0xD4));
-
-//    ui->label_2->setPalette(pa);
-//    ui->label_2->setFont(font);
-//    ui->label_3->setPalette(pa);
-//    ui->label_3->setFont(font);
-//    ui->label_4->setPalette(pa);
-//    ui->label_4->setFont(font);
-//    ui->label_5->setPalette(pa);
-//    ui->label_5->setFont(font);
-//    ui->label_6->setPalette(pa);
-//    ui->label_6->setFont(font);
 
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
-    ui->closeBtn->setVisible(false);
 
-//    setStyleSheet("QLineEdit{color:blue;background:transparent;border-width:0;border-style:outset;lineedit-password-mask-delay: 1000;}");
 
     ui->containerWidget->installEventFilter(this);
 
@@ -173,11 +157,11 @@ void TransferConfirmDialog::paintEvent(QPaintEvent *event)
     QPainter painter(this);
 
 
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(rect());
+//    painter.setPen(Qt::NoPen);
+//    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
+//    painter.drawRect(rect());
 
-    painter.drawPixmap(320,55,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
+//    painter.drawPixmap(320,55,325,450,QPixmap(":/ui/wallet_ui/trade.png").scaled(325,450));
 
     QWidget::paintEvent(event);
 
