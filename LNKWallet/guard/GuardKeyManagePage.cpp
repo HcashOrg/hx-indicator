@@ -39,7 +39,7 @@ GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
     ui->multisigTableWidget->setColumnWidth(0,120);
     ui->multisigTableWidget->setColumnWidth(1,140);
     ui->multisigTableWidget->setColumnWidth(2,140);
-    ui->multisigTableWidget->setColumnWidth(3,100);
+    ui->multisigTableWidget->setColumnWidth(3,80);
     ui->multisigTableWidget->setColumnWidth(4,80);
     ui->multisigTableWidget->setColumnWidth(5,80);
     ui->multisigTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);

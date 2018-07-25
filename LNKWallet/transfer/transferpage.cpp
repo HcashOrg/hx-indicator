@@ -122,7 +122,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     ui->memoLabel->setVisible(true);
     ui->memoTextEdit->setVisible(true);
 
-    HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->widget);
 }
 
 TransferPage::~TransferPage()
@@ -227,7 +227,7 @@ void TransferPage::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
 
     ui->sendBtn->setStyleSheet(OKBTN_STYLE);

@@ -18,183 +18,168 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>30</y>
-     <width>200</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei UI Light</family>
-     <pointsize>-1</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(198, 202, 212);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
-   </property>
-   <property name="text">
-    <string>账户地址</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>30</y>
-     <width>200</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei UI Light</family>
-     <pointsize>-1</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(198, 202, 212);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
-   </property>
-   <property name="text">
-    <string>备注名</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_remark">
-   <property name="geometry">
-    <rect>
-     <x>406</x>
-     <y>60</y>
-     <width>300</width>
-     <height>30</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>120</y>
-     <width>200</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei UI Light</family>
-     <pointsize>-1</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(198, 202, 212);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
-   </property>
-   <property name="text">
-    <string>分组</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox_group">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>150</y>
-     <width>291</width>
-     <height>30</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_tip">
-   <property name="geometry">
-    <rect>
-     <x>80</x>
-     <y>90</y>
-     <width>200</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
-   </property>
-   <property name="text">
-    <string>提示</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEdit_address">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>60</y>
-     <width>300</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-     <horstretch>7</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="toolButton">
-   <property name="geometry">
-    <rect>
-     <x>337</x>
-     <y>200</y>
-     <width>96</width>
-     <height>30</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="text">
-    <string>确定</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_back">
+  <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
      <x>50</x>
-     <y>10</y>
+     <y>20</y>
      <width>670</width>
      <height>270</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);
-border-radius:15px;</string>
+    <string notr="true">QLabel{font: 11px &quot;微软雅黑&quot;;color:rgb(52,37,90);}
+#widget{background-color: rgb(255, 255, 255);border-radius:15px;}</string>
    </property>
-   <property name="text">
-    <string/>
-   </property>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>200</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>-1</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>账户地址</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>200</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>-1</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>分组</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_tip">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>70</y>
+      <width>200</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+    </property>
+    <property name="text">
+     <string>提示</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox_group">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>130</y>
+      <width>291</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton">
+    <property name="geometry">
+     <rect>
+      <x>287</x>
+      <y>220</y>
+      <width>96</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>确定</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>20</y>
+      <width>200</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>-1</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>备注名</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_address">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>40</y>
+      <width>300</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+      <horstretch>7</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_remark">
+    <property name="geometry">
+     <rect>
+      <x>356</x>
+      <y>40</y>
+      <width>300</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
-  <zorder>label_back</zorder>
-  <zorder>label</zorder>
-  <zorder>label_2</zorder>
-  <zorder>lineEdit_remark</zorder>
-  <zorder>label_3</zorder>
-  <zorder>comboBox_group</zorder>
-  <zorder>label_tip</zorder>
-  <zorder>lineEdit_address</zorder>
-  <zorder>toolButton</zorder>
  </widget>
  <resources/>
  <connections/>

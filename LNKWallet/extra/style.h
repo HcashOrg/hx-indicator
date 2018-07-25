@@ -26,11 +26,6 @@
                                 "QHeaderView:section:first{border-top-left-radius:5px;}" \
                                 "QHeaderView:section:last{border-top-right-radius:5px;}"
 
-#define TABLEWIDGET_ITEMCOLOR_1     238,236,245
-#define TABLEWIDGET_ITEMCOLOR_1_STR "238,236,245"
-#define TABLEWIDGET_ITEMCOLOR_2     243,241,250
-#define TABLEWIDGET_ITEMCOLOR_2_STR "243,241,250"
-
 #define COMBOBOX_STYLE_BOTTOMBORDER "QComboBox{background-color:transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,192,192);color: black;padding-left: 5px;font: 14px \"Microsoft YaHei UI Light\";}" \
                                     "QComboBox::drop-down {background:transparent;border:none;}" \
                                     "QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}" \

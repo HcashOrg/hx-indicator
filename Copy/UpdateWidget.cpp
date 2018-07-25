@@ -15,7 +15,7 @@ static const QString OKBTN_STYLE =  "QToolButton{font: 14px \"Microsoft YaHei UI
 static const QString TEMP_FOLDER_NAME = "temp";
 static const QString PACKAGE_UN = "blocklink";
 static const QString PACKAGE_NAME = "blocklink.zip";
-static const QString MAINEXE_NAME = "LNKWallet.exe";
+static const QString MAINEXE_NAME = "HXWallet.exe";
 
 UpdateWidget::UpdateWidget(QWidget *parent) :
     QWidget(parent),

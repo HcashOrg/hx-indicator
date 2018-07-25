@@ -162,14 +162,14 @@ void PublishPoundageWidget::InitWidget()
 
     ui->label_fee->setText("  "+HXChain::getInstance()->feeChargeInfo.poundagePublishFee+" LNK");
 
-    HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->widget);
 }
 
 void PublishPoundageWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
 
     //ui->label_fee->setFrameShape(QFrame::Box);

@@ -111,18 +111,22 @@
    <property name="geometry">
     <rect>
      <x>97</x>
-     <y>94</y>
+     <y>95</y>
      <width>80</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <family>微软雅黑</family>
      <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">font-size: 10px;</string>
+    <string notr="true">font: 11px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>v1.0.1</string>
@@ -155,13 +159,13 @@
     <rect>
      <x>10</x>
      <y>116</y>
-     <width>201</width>
+     <width>210</width>
      <height>16</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(243, 241, 250);
-font: 75 10px &quot;Microsoft JhengHei UI Light&quot;;</string>
+font: 11px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>Select the path of the wallet data</string>
