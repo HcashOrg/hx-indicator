@@ -165,7 +165,7 @@ void FunctionWidget::ShowMoreWidgetSlots()
 
 
     ui->toolButton_more->setChecked(true);
-    _p->contextMenu->exec(mapToGlobal(QPoint(60,height()-_p->contextMenu->height())));
+    _p->contextMenu->exec(mapToGlobal(QPoint(ui->toolButton_more->width(),height()-_p->contextMenu->height())));
     ui->toolButton_more->setChecked(false);
 
 
@@ -296,8 +296,8 @@ void FunctionWidget::InitStyle()
     _p->contextMenu->setWindowFlags(Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint | _p->contextMenu->windowFlags() );
     //_p->contextMenu->setMinimumWidth(88);
     _p->contextMenu->setStyleSheet(
-                "QMenu {border:none;background-color:rgb(199,19,106);width:130px;color:white;}"
-                "QMenu::item {padding:5px 21px;width:90px;color:white;}"
+                "QMenu {border:none;background-color:rgb(199,19,106);width:128px;color:white;}"
+                "QMenu::item {padding:5px 21px;width:88px;color:white;}"
                 "QMenu::item:selected {background-color:rgb(182,13,95);}"
                 "QMenu::right-arrow {padding:0px 10px;image:url(:/wallet_ui/right.png);}");
 
@@ -362,8 +362,8 @@ void FunctionWidget::paintEvent(QPaintEvent *)
     QPainter painter(this);
 
     QLinearGradient linear(QPointF(0, 480), QPointF(62, 0));
-    linear.setColorAt(0, QColor(119,20,64));
-    linear.setColorAt(1, QColor(20,4,12));
+    linear.setColorAt(1, QColor(87,60,135));
+    linear.setColorAt(0, QColor(138,49,127));
     linear.setSpread(QGradient::PadSpread);
     painter.setBrush(linear);
     painter.drawRect(QRect(-1,-1,63,481));

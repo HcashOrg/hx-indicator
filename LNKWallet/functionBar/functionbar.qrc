@@ -6,10 +6,10 @@
         <file>more.png</file>
         <file>exchange.png</file>
         <file>guard.png</file>
+        <file>more_checked.png</file>
         <file>account_checked.png</file>
+        <file>exchange_checked.png</file>
         <file>advance_checked.png</file>
         <file>contact_checked.png</file>
-        <file>exchange_checked.png</file>
-        <file>more_checked.png</file>
     </qresource>
 </RCC>
