@@ -123,7 +123,7 @@ Frame::Frame(): timer(NULL),
         setLanguage(language);
     }
 
-    setGeometry(0,0, 960, 580);
+    setGeometry(0,0, 960, 543);
     moveWidgetToScreenCenter(this);
 
     shadowWidget = new ShadowWidget(this);
@@ -324,7 +324,7 @@ qDebug() << "~Frame end;";
 
 void Frame::alreadyLogin()
 {
-    setGeometry(0,0, 960, 580);
+    setGeometry(0,0, 960, 543);
     moveWidgetToScreenCenter(this);
 
     titleBar = new TitleBar(this);
@@ -520,7 +520,7 @@ qDebug() << "autolock ";
 
 void Frame::unlock()
 {
-    setGeometry(0,0, 960, 580);
+    setGeometry(0,0, 960, 543);
     moveWidgetToScreenCenter(this);
 
     if( HXChain::getInstance()->notProduce)

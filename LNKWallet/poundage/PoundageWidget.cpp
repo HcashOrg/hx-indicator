@@ -57,7 +57,7 @@ PoundageWidget::~PoundageWidget()
 void PoundageWidget::autoRefreshSlots()
 {
     std::lock_guard<std::mutex> lock(_p->refreshMutex);
-    if(ui->toolButton_allPoundage->isChecked())
+    if(ui->pushButton_allPoundage->isChecked())
     {
         _p->allPoundageSheet->clear();
         //刷新目前对应的承税单
@@ -89,7 +89,7 @@ void PoundageWidget::autoRefreshSlots()
         HXChain::getInstance()->postRPC("poundage_finish_all_list",toJsonFormat("finish_all_list",QJsonArray()));
 
     }
-    else if(ui->toolButton_myPoundage->isChecked())
+    else if(ui->pushButton_myPoundage->isChecked())
     {
         _p->myPoundageSheet->clear();
 
@@ -130,27 +130,25 @@ void PoundageWidget::PublishPoundageSlots()
 
 void PoundageWidget::ShowAllPoundageSlots()
 {
-    ui->toolButton_allPoundage->setChecked(true);
-    ui->toolButton_myPoundage->setChecked(false);
+    ui->pushButton_allPoundage->setChecked(true);
+    ui->pushButton_myPoundage->setChecked(false);
 
     autoRefreshSlots();
     ui->stackedWidget->setCurrentWidget(_p->allPoundageWidget);
-    updateButtonStyle();
 }
 
 void PoundageWidget::ShowMyPoundageSlots()
 {
-    ui->toolButton_allPoundage->setChecked(false);
-    ui->toolButton_myPoundage->setChecked(true);
+    ui->pushButton_allPoundage->setChecked(false);
+    ui->pushButton_myPoundage->setChecked(true);
 
     autoRefreshSlots();
     ui->stackedWidget->setCurrentWidget(_p->myPoundageWidget);
-    updateButtonStyle();
 }
 
 void PoundageWidget::SortByStuffSlots()
 {
-    std::shared_ptr<PoundageSheet> data = ui->toolButton_allPoundage->isChecked()?
+    std::shared_ptr<PoundageSheet> data = ui->pushButton_allPoundage->isChecked()?
                                           _p->allPoundageSheet : _p->myPoundageSheet;
 
     switch (ui->comboBox_sortType->currentData(Qt::UserRole).value<int>()) {
@@ -169,7 +167,7 @@ void PoundageWidget::SortByStuffSlots()
     default:
         break;
     }
-    if(ui->toolButton_allPoundage->isChecked())
+    if(ui->pushButton_allPoundage->isChecked())
     {
         _p->allPoundageWidget->InitData(_p->allPoundageSheet);
     }
@@ -295,10 +293,10 @@ void PoundageWidget::InitWidget()
     InitStyle();
 
     //
-    ui->toolButton_allPoundage->setCheckable(true);
-    ui->toolButton_allPoundage->setChecked(true);
-    ui->toolButton_myPoundage->setCheckable(true);
-    ui->toolButton_myPoundage->setChecked(false);
+    ui->pushButton_allPoundage->setCheckable(true);
+    ui->pushButton_allPoundage->setChecked(true);
+    ui->pushButton_myPoundage->setCheckable(true);
+    ui->pushButton_myPoundage->setChecked(false);
     //初始化排序comboBox
     ui->comboBox_sortType->clear();
 //    ui->comboBox_sortType->addItem(tr("时间由早到晚"),0);
@@ -318,8 +316,8 @@ void PoundageWidget::InitWidget()
     connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &PoundageWidget::jsonDataUpdated);
 
     connect(ui->toolButton_publishPoundage,&QToolButton::clicked,this,&PoundageWidget::PublishPoundageSlots);
-    connect(ui->toolButton_allPoundage,&QToolButton::clicked,this,&PoundageWidget::ShowAllPoundageSlots);
-    connect(ui->toolButton_myPoundage,&QToolButton::clicked,this,&PoundageWidget::ShowMyPoundageSlots);
+    connect(ui->pushButton_allPoundage,&QToolButton::clicked,this,&PoundageWidget::ShowAllPoundageSlots);
+    connect(ui->pushButton_myPoundage,&QToolButton::clicked,this,&PoundageWidget::ShowMyPoundageSlots);
 
     connect(ui->comboBox_sortType,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&PoundageWidget::SortByStuffSlots);
     connect(ui->comboBox_coinType,static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),this,&PoundageWidget::autoRefreshSlots);
@@ -328,30 +326,27 @@ void PoundageWidget::InitWidget()
     connect(_p->allPoundageWidget,&PoundageShowWidget::SetDefaultPoundageSignal,this,&PoundageWidget::SetDefaultPoundageSlots);
     connect(_p->myPoundageWidget,&PoundageShowWidget::SetDefaultPoundageSignal,this,&PoundageWidget::SetDefaultPoundageSlots);
     autoRefreshSlots();
-    updateButtonStyle();
 }
 
 void PoundageWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
-
-    QFont font("\"Microsoft YaHei UI Light\"",14,50);
-    font.setPixelSize(14);
-    ui->label->setFont(font);
-    ui->label_2->setFont(font);
 
     ui->toolButton_publishPoundage->setStyleSheet(TOOLBUTTON_STYLE_1);
 
-    setStyleSheet("QToolButton#toolButton_allPoundage{background:transparent;color:rgb(144,144,144);\
-                                                      font-family: \"Microsoft YaHei UI Light\";font:14px;font-weight:600;text-align:left;}\
-                   QToolButton#toolButton_allPoundage:checked{color:rgb(0,0,0);}\
-                   QToolButton#toolButton_myPoundage{background:transparent;color:rgb(144,144,144);\
-                                                     font-family: \"Microsoft YaHei UI Light\";font:14px;font-weight:600;text-align:left;}\
-                   QToolButton#toolButton_myPoundage:checked{color:rgb(0,0,0);}"
-                   TABLEWIDGET_STYLE_1);
+
+    setStyleSheet("QPushButton{font:10px \"微软雅黑\";background:transparent;border:none;color: rgb(137,129,161);}"
+                  "QPushButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}"
+                  TABLEWIDGET_STYLE_1);
+
+    ui->pushButton_allPoundage->adjustSize();
+    ui->pushButton_allPoundage->resize(ui->pushButton_allPoundage->width(), 18);
+    ui->pushButton_myPoundage->adjustSize();
+    ui->pushButton_myPoundage->resize(ui->pushButton_myPoundage->width(), 18);
+    ui->pushButton_myPoundage->move(ui->pushButton_allPoundage->x() + ui->pushButton_allPoundage->width() + 30, ui->pushButton_myPoundage->y());
 }
 
 void PoundageWidget::InitCoinType()
@@ -369,16 +364,14 @@ void PoundageWidget::InitCoinType()
     }
 }
 
-void PoundageWidget::updateButtonStyle()
+void PoundageWidget::paintEvent(QPaintEvent *)
 {
-    QPalette pa;
-    pa.setColor(QPalette::WindowText,Qt::black);
+    QPainter painter(this);
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
+    painter.drawRect(rect());
 
-    QPalette pa1;
-    pa1.setColor(QPalette::WindowText,QColor(192,202,212));
-
-    ui->label->setPalette(ui->toolButton_allPoundage->isChecked()?pa:pa1);
-    ui->frame->setVisible(ui->toolButton_allPoundage->isChecked());
-    ui->label_2->setPalette(ui->toolButton_myPoundage->isChecked()?pa:pa1);
-    ui->frame_2->setVisible(ui->toolButton_myPoundage->isChecked());
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(243,241,250),Qt::SolidPattern));
+    painter.drawRect(0,87,this->width(),24);
 }

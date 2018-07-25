@@ -146,15 +146,8 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
 
         rowCount++;
     }
-    //设置表格内容居中
-    for(int i = 0;i < ui->withdrawRecordTableWidget->rowCount();++i)
-    {
-        for(int j = 0;j < ui->withdrawRecordTableWidget->columnCount();++j)
-        {
-            ui->withdrawRecordTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-        }
+    tableWidgetSetItemZebraColor(ui->withdrawRecordTableWidget);
 
-    }
     int page = (ui->withdrawRecordTableWidget->rowCount()%ROWNUMBER==0 && ui->withdrawRecordTableWidget->rowCount() != 0) ?
                 ui->withdrawRecordTableWidget->rowCount()/ROWNUMBER : ui->withdrawRecordTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);

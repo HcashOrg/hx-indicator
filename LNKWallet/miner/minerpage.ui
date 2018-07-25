@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>530</height>
+    <height>510</height>
    </rect>
   </property>
   <property name="font">
@@ -24,7 +24,7 @@
      <x>640</x>
      <y>90</y>
      <width>60</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -48,38 +48,13 @@
     <string>注册</string>
    </property>
   </widget>
-  <widget class="QLabel" name="accountLabel">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>80</y>
-     <width>60</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
-   </property>
-   <property name="text">
-    <string>当前账户</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>111</x>
-     <y>77</y>
-     <width>111</width>
-     <height>30</height>
+     <x>60</x>
+     <y>90</y>
+     <width>120</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -103,7 +78,7 @@
      <x>560</x>
      <y>90</y>
      <width>60</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -133,20 +108,20 @@
      <x>0</x>
      <y>120</y>
      <width>770</width>
-     <height>411</height>
+     <height>390</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="incomePage">
     <widget class="QTableWidget" name="incomeTableWidget">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>60</x>
        <y>10</y>
-       <width>670</width>
-       <height>322</height>
+       <width>650</width>
+       <height>310</height>
       </rect>
      </property>
      <property name="cursor" stdset="0">
@@ -251,10 +226,10 @@
     <widget class="QTableWidget" name="lockBalancesTableWidget">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>60</x>
        <y>10</y>
-       <width>670</width>
-       <height>322</height>
+       <width>650</width>
+       <height>310</height>
       </rect>
      </property>
      <property name="cursor" stdset="0">
@@ -372,20 +347,29 @@
     <widget class="QLabel" name="label_op">
      <property name="geometry">
       <rect>
-       <x>575</x>
+       <x>530</x>
        <y>10</y>
-       <width>71</width>
-       <height>40</height>
+       <width>180</width>
+       <height>30</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>微软雅黑</family>
-       <pointsize>12</pointsize>
+       <family>Microsoft YaHei UI Light</family>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color:rgb(137,129,161);font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>操作</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </widget>
@@ -393,10 +377,10 @@
     <widget class="QTableWidget" name="incomeRecordTableWidget">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>60</x>
        <y>10</y>
-       <width>670</width>
-       <height>322</height>
+       <width>650</width>
+       <height>310</height>
       </rect>
      </property>
      <property name="cursor" stdset="0">
@@ -517,7 +501,7 @@
   <widget class="QToolButton" name="incomeInfoBtn">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>60</x>
      <y>30</y>
      <width>91</width>
      <height>31</height>
@@ -548,7 +532,7 @@
   <widget class="QToolButton" name="forecloseInfoBtn">
    <property name="geometry">
     <rect>
-     <x>146</x>
+     <x>166</x>
      <y>30</y>
      <width>91</width>
      <height>31</height>
@@ -598,7 +582,7 @@
   <widget class="QToolButton" name="incomeRecordBtn">
    <property name="geometry">
     <rect>
-     <x>256</x>
+     <x>276</x>
      <y>30</y>
      <width>91</width>
      <height>31</height>
@@ -629,7 +613,7 @@
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
-     <x>127</x>
+     <x>147</x>
      <y>36</y>
      <width>21</width>
      <height>21</height>
@@ -642,7 +626,7 @@
   <widget class="Line" name="line_2">
    <property name="geometry">
     <rect>
-     <x>236</x>
+     <x>256</x>
      <y>34</y>
      <width>21</width>
      <height>21</height>
@@ -658,7 +642,7 @@
      <x>460</x>
      <y>90</y>
      <width>80</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">

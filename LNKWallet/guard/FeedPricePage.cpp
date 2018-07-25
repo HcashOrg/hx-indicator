@@ -93,34 +93,17 @@ void FeedPricePage::showAssetsPrice()
         ui->assetPriceTableWidget->setItem(i, 2, new QTableWidgetItem(str));
 
 
-        QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
-
         AssetIconItem* assetIconItem = new AssetIconItem();
         assetIconItem->setAsset(ui->assetPriceTableWidget->item(i,0)->text());
-        assetIconItem->setBackgroundColor(itemColor);
         ui->assetPriceTableWidget->setCellWidget(i, 0, assetIconItem);
 
         ToolButtonWidget *toolButton = new ToolButtonWidget();
         toolButton->setText(ui->assetPriceTableWidget->item(i,3)->text());
-        toolButton->setBackgroundColor(itemColor);
         ui->assetPriceTableWidget->setCellWidget(i,3,toolButton);
         connect(toolButton,&ToolButtonWidget::clicked,std::bind(&FeedPricePage::on_assetPriceTableWidget_cellClicked,this,i,3));
-
-
-        for (int j : {1,2})
-        {
-            if(i%2)
-            {
-                ui->assetPriceTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->assetPriceTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-            else
-            {
-                ui->assetPriceTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->assetPriceTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-            }
-        }
     }
+
+    tableWidgetSetItemZebraColor(ui->assetPriceTableWidget);
 }
 
 void FeedPricePage::refresh()
@@ -136,8 +119,8 @@ void FeedPricePage::jsonDataUpdated(QString id)
 void FeedPricePage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
 
     painter.drawRect(rect());
 }
@@ -152,3 +135,4 @@ void FeedPricePage::on_assetPriceTableWidget_cellClicked(int row, int column)
         refresh();
     }
 }
+

@@ -40,8 +40,8 @@ MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     ui->ordersTableWidget->setColumnWidth(0,160);
     ui->ordersTableWidget->setColumnWidth(1,160);
     ui->ordersTableWidget->setColumnWidth(2,160);
-    ui->ordersTableWidget->setColumnWidth(3,90);
-    ui->ordersTableWidget->setColumnWidth(4,90);
+    ui->ordersTableWidget->setColumnWidth(3,80);
+    ui->ordersTableWidget->setColumnWidth(4,80);
 
     ui->ordersTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
@@ -143,19 +143,6 @@ void MyExchangeContractPage::showOrders()
         ui->ordersTableWidget->setItem(i,3, new QTableWidgetItem(tr("cancel")));
         ui->ordersTableWidget->setItem(i,4, new QTableWidgetItem(tr("add")));
 
-        for(int j = 0; j < 5; j++)
-        {
-            ui->ordersTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-            if(i%2)
-            {
-                ui->ordersTableWidget->item(i,j)->setBackgroundColor(QColor(255,255,255));
-            }
-            else
-            {
-                ui->ordersTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-        }
-
         for(int j = 3;j < 5;++j)
         {
             ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
@@ -165,6 +152,8 @@ void MyExchangeContractPage::showOrders()
             connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
         }
     }
+    tableWidgetSetItemZebraColor(ui->ordersTableWidget);
+
     int page = (ui->ordersTableWidget->rowCount()%ROWNUMBER==0 && ui->ordersTableWidget->rowCount() != 0) ?
                 ui->ordersTableWidget->rowCount()/ROWNUMBER : ui->ordersTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
@@ -480,8 +469,8 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 void MyExchangeContractPage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
 
     painter.drawRect(rect());
 }

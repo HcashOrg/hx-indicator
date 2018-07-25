@@ -141,33 +141,18 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
                                                                                                      QJsonArray() ));
                 }
 
-                QString itemColor = (row % 2) ?"rgb(252,253,255)":"white";
-
                 AssetIconItem* assetIconItem = new AssetIconItem();
                 assetIconItem->setAsset(ui->changeHistoryTableWidget->item(row,0)->text());
-                assetIconItem->setBackgroundColor(itemColor);
                 ui->changeHistoryTableWidget->setCellWidget(row, 0, assetIconItem);
 
                 ToolButtonWidget *toolButton = new ToolButtonWidget();
                 toolButton->setText(ui->changeHistoryTableWidget->item(row,5)->text());
-                toolButton->setBackgroundColor(itemColor);
                 ui->changeHistoryTableWidget->setCellWidget(row,5,toolButton);
                 connect(toolButton,&ToolButtonWidget::clicked,std::bind(&AssetChangeHistoryWidget::on_changeHistoryTableWidget_cellClicked,this,row,5));
 
-                for(int j = 1; j < 5; j++)
-                {
-                    if(row%2)
-                    {
-                        ui->changeHistoryTableWidget->item(row,j)->setTextAlignment(Qt::AlignCenter);
-                        ui->changeHistoryTableWidget->item(row,j)->setBackgroundColor(QColor(252,253,255));
-                    }
-                    else
-                    {
-                        ui->changeHistoryTableWidget->item(row,j)->setTextAlignment(Qt::AlignCenter);
-                        ui->changeHistoryTableWidget->item(row,j)->setBackgroundColor(QColor("white"));
-                    }
-                }
             }
+
+            tableWidgetSetItemZebraColor(ui->changeHistoryTableWidget);
         }
 
         return;
@@ -301,8 +286,8 @@ void AssetChangeHistoryWidget::refreshKeyState()
 void AssetChangeHistoryWidget::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
 
     painter.drawRect(rect());
 }

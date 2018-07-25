@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>530</height>
+    <height>510</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QTableWidget" name="ordersTableWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>60</x>
      <y>160</y>
-     <width>670</width>
-     <height>282</height>
+     <width>650</width>
+     <height>270</height>
     </rect>
    </property>
    <column>
@@ -70,7 +70,7 @@
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>50</y>
      <width>200</width>
      <height>26</height>
@@ -86,10 +86,10 @@
   <widget class="QComboBox" name="assetComboBox2">
    <property name="geometry">
     <rect>
-     <x>250</x>
+     <x>220</x>
      <y>120</y>
      <width>80</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -109,10 +109,10 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>120</y>
      <width>60</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -133,10 +133,10 @@
   <widget class="QComboBox" name="assetComboBox">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>120</x>
      <y>120</y>
      <width>80</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -153,38 +153,13 @@
     <string notr="true"/>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>223</x>
-     <y>127</y>
-     <width>14</width>
-     <height>5</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑 Light</family>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);
-background-image: url(:/ui/wallet_ui/switch.png);</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>130</x>
+     <x>120</x>
      <y>90</y>
-     <width>80</width>
-     <height>20</height>
+     <width>180</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -204,10 +179,10 @@ background-image: url(:/ui/wallet_ui/switch.png);</string>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>90</y>
      <width>60</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -229,7 +204,7 @@ background-image: url(:/ui/wallet_ui/switch.png);</string>
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>480</y>
+     <y>470</y>
      <width>770</width>
      <height>41</height>
     </rect>

@@ -29,8 +29,8 @@ AssetPage::AssetPage(QWidget *parent) :
     ui->assetTableWidget->setColumnWidth(1,60);
     ui->assetTableWidget->setColumnWidth(2,140);
     ui->assetTableWidget->setColumnWidth(3,140);
-    ui->assetTableWidget->setColumnWidth(4,90);
-    ui->assetTableWidget->setColumnWidth(5,90);
+    ui->assetTableWidget->setColumnWidth(4,80);
+    ui->assetTableWidget->setColumnWidth(5,80);
     ui->assetTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->assetTableWidget);
@@ -66,35 +66,19 @@ void AssetPage::showAssetsInfo()
         ui->assetTableWidget->setItem(i,4,new QTableWidgetItem(HXChain::getInstance()->guardAccountIdToName(assetInfo.issuer)));
         ui->assetTableWidget->setItem(i,5,new QTableWidgetItem("0.001 " + symbol));
 
-        QString itemColor = (i % 2) ?"rgb(252,253,255)":"white";
-
         AssetIconItem* assetIconItem = new AssetIconItem();
         assetIconItem->setAsset(ui->assetTableWidget->item(i,0)->text());
-        assetIconItem->setBackgroundColor(itemColor);
         ui->assetTableWidget->setCellWidget(i, 0, assetIconItem);
-
-
-        for (int j : {1,2,3,4,5})
-        {
-            if(i%2)
-            {
-                ui->assetTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->assetTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-            else
-            {
-                ui->assetTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->assetTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-            }
-        }
     }
+
+    tableWidgetSetItemZebraColor(ui->assetTableWidget);
 }
 
 void AssetPage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
 
     painter.drawRect(rect());
 }

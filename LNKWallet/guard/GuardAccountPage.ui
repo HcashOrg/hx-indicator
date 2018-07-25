@@ -16,7 +16,7 @@
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>50</y>
      <width>200</width>
      <height>26</height>
@@ -41,10 +41,10 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>95</y>
+     <x>60</x>
+     <y>90</y>
      <width>100</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -65,10 +65,10 @@
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>115</y>
-     <width>111</width>
-     <height>30</height>
+     <x>160</x>
+     <y>90</y>
+     <width>120</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -88,9 +88,9 @@
   <widget class="QLabel" name="label_back">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>160</y>
-     <width>670</width>
+     <x>60</x>
+     <y>140</y>
+     <width>650</width>
      <height>175</height>
     </rect>
    </property>
@@ -105,8 +105,8 @@ border-radius:15px;</string>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>187</y>
+     <x>80</x>
+     <y>167</y>
      <width>120</width>
      <height>20</height>
     </rect>
@@ -121,9 +121,9 @@ border-radius:15px;</string>
   <widget class="QLabel" name="guardTypeLabel">
    <property name="geometry">
     <rect>
-     <x>65</x>
-     <y>217</y>
-     <width>300</width>
+     <x>75</x>
+     <y>197</y>
+     <width>290</width>
      <height>20</height>
     </rect>
    </property>
@@ -140,8 +140,8 @@ border-radius:15px;</string>
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>187</y>
+     <x>390</x>
+     <y>167</y>
      <width>120</width>
      <height>20</height>
     </rect>
@@ -156,9 +156,9 @@ border-radius:15px;</string>
   <widget class="QLabel" name="guardIdLabel">
    <property name="geometry">
     <rect>
-     <x>395</x>
-     <y>217</y>
-     <width>300</width>
+     <x>385</x>
+     <y>197</y>
+     <width>290</width>
      <height>20</height>
     </rect>
    </property>
@@ -175,8 +175,8 @@ border-radius:15px;</string>
   <widget class="QLabel" name="label_6">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>249</y>
+     <x>80</x>
+     <y>229</y>
      <width>120</width>
      <height>20</height>
     </rect>
@@ -191,8 +191,8 @@ border-radius:15px;</string>
   <widget class="QLabel" name="addressLabel">
    <property name="geometry">
     <rect>
-     <x>65</x>
-     <y>279</y>
+     <x>75</x>
+     <y>259</y>
      <width>300</width>
      <height>20</height>
     </rect>
@@ -210,8 +210,8 @@ border-radius:15px;</string>
   <widget class="QLabel" name="guardLabel">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>124</y>
+     <x>290</x>
+     <y>93</y>
      <width>12</width>
      <height>12</height>
     </rect>

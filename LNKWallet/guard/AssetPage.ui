@@ -16,10 +16,10 @@
   <widget class="QTableWidget" name="assetTableWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>60</x>
      <y>120</y>
-     <width>670</width>
-     <height>320</height>
+     <width>650</width>
+     <height>310</height>
     </rect>
    </property>
    <property name="cursor" stdset="0">
@@ -65,7 +65,7 @@
     <enum>Qt::SolidLine</enum>
    </property>
    <attribute name="horizontalHeaderVisible">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>
@@ -161,7 +161,7 @@
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>50</y>
      <width>200</width>
      <height>26</height>

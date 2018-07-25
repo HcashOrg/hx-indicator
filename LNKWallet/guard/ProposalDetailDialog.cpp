@@ -92,19 +92,7 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
             ui->voteStateTableWidget->setItem(i, 1, new QTableWidgetItem(tr("not voted")));
         }
 
-        for (int j : {0,1})
-        {
-            if(i%2)
-            {
-                ui->voteStateTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->voteStateTableWidget->item(i,j)->setBackgroundColor(QColor(252,253,255));
-            }
-            else
-            {
-                ui->voteStateTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
-                ui->voteStateTableWidget->item(i,j)->setBackgroundColor(QColor("white"));
-            }
-        }
+        tableWidgetSetItemZebraColor(ui->voteStateTableWidget);
     }
 
 
