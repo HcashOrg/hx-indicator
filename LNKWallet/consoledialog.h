@@ -20,9 +20,9 @@ public:
     void pop();
 
 protected:
-//    void mousePressEvent(QMouseEvent*event);
-//    void mouseMoveEvent(QMouseEvent *event);
-//    void mouseReleaseEvent(QMouseEvent *);
+    void mousePressEvent(QMouseEvent*event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *);
 
 private slots:
     void on_closeBtn_clicked();

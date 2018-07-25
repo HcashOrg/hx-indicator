@@ -66,7 +66,7 @@ color: rgb(52,37,90);</string>
        <x>140</x>
        <y>65</y>
        <width>331</width>
-       <height>30</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -94,7 +94,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
 font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
-      <string>提现手续费</string>
+      <string>手续费</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_totalNumber">
@@ -152,7 +152,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
       <rect>
        <x>40</x>
        <y>160</y>
-       <width>71</width>
+       <width>91</width>
        <height>20</height>
       </rect>
      </property>
@@ -178,7 +178,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
 font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
-      <string>提现数额</string>
+      <string>到账数额</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_4">
@@ -245,7 +245,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
 font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
-      <string>提至地址</string>
+      <string>到账地址</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit">
