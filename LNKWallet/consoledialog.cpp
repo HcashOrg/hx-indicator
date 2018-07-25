@@ -33,7 +33,7 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
     ui->clearBtn->setStyleSheet(CANCELBTN_STYLE);
-    ui->consoleLineEdit->setStyleSheet("QLineEdit{color:#5474EB;}QLineEdit:focus{border-bottom-color:rgb(192,192,192);}");
+    ui->consoleLineEdit->setStyleSheet("QLineEdit{color:#5474EB;font-size:12px;}");
 
 
     ui->containerWidget->installEventFilter(this);
