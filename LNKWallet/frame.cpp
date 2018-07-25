@@ -362,7 +362,7 @@ void Frame::alreadyLogin()
 
     topLeftWidget = new QWidget(this);
     topLeftWidget->setGeometry(0,0,190,63);
-    topLeftWidget->setStyleSheet("background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(14,2,8), stop:1 rgba(19,9,20));");
+    topLeftWidget->setStyleSheet("background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(82,61,137), stop:1 rgba(84,64,144));");
     QLabel* logoLabel = new QLabel(topLeftWidget);
     logoLabel->setGeometry(50,15,92,35);
     logoLabel->setPixmap(QPixmap(":/ui/wallet_ui/HX_logo.png"));
