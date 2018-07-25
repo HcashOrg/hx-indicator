@@ -20,9 +20,9 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
     setWindowFlags(Qt::FramelessWindowHint);
 
     ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet("#widget {background-color:rgba(10, 10, 10,100);}");
+    ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
+    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);

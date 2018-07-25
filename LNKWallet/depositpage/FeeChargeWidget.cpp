@@ -85,8 +85,9 @@ void FeeChargeWidget::InitStyle()
     setAttribute(Qt::WA_TranslucentBackground, true);
 
     ui->widget->setObjectName("widget");
+    ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet("#containerwidget{background-color:rgb(255,255,255);border-radius:10px;}");
+    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
     ui->toolButton_cancel->setStyleSheet(CANCELBTN_STYLE);
@@ -97,9 +98,9 @@ void FeeChargeWidget::paintEvent(QPaintEvent *event)
 {
     QPainter painter(this);
 
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
-    painter.drawRect(rect());
+//    painter.setPen(Qt::NoPen);
+//    painter.setBrush(QColor(10,10,10,100));//最后一位是设置透明属性（在0-255取值）
+//    painter.drawRect(rect());
 
     QWidget::paintEvent(event);
 }
