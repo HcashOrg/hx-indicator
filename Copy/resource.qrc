@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>resource/login_back.png</file>
         <file>resource/Welcome.png</file>
+        <file>resource/hx_label_logo.png</file>
+        <file>resource/logo_center.png</file>
     </qresource>
 </RCC>

@@ -49,7 +49,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 12pt &quot;Microsoft YaHei UI&quot;;</string>
+    <string notr="true">font: 12pt &quot;Microsoft YaHei UI&quot;;
+color:white;</string>
    </property>
    <property name="text">
     <string>TextLabel</string>

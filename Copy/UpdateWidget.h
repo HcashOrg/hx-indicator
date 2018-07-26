@@ -14,6 +14,8 @@ class UpdateWidget : public QWidget
 public:
     explicit UpdateWidget(QWidget *parent = 0);
     ~UpdateWidget();
+protected:
+    void paintEvent(QPaintEvent *e);
 private slots:
     void startMove();
 

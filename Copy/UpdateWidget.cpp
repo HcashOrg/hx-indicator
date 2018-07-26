@@ -6,6 +6,7 @@
 #include <QString>
 #include <QProcess>
 #include <QDebug>
+#include <QPainter>
 
 #include "DataUtil.h"
 
@@ -105,4 +106,16 @@ void UpdateWidget::InitStyle()
 
     ui->toolButton_close->setStyleSheet(CANCELBTN_STYLE);
     ui->toolButton_restart->setStyleSheet(OKBTN_STYLE);
+}
+
+void UpdateWidget::paintEvent(QPaintEvent *e)
+{
+    QPainter painter(this);
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QBrush(QColor(243,241,250)));
+    painter.drawRect(0,0,228,24);
+    painter.drawPixmap(7,5,32,12,QPixmap(":/resource/hx_label_logo.png").scaled(32,12,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+    painter.drawPixmap(94,38,36,36,QPixmap(":/resource/logo_center.png").scaled(36,36,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+
+    QWidget::paintEvent(e);
 }
