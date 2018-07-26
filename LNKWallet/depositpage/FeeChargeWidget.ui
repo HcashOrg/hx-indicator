@@ -99,7 +99,7 @@
       </font>
      </property>
      <property name="text">
-      <string>本操作需要收取固定手续费:@ LNK</string>
+      <string>本操作需要收取固定手续费:@ HX</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_char">

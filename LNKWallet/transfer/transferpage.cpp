@@ -234,8 +234,8 @@ void TransferPage::InitStyle()
     ui->transferRecordBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
 
-    ui->memoTextEdit->setStyleSheet("QTextEdit{background: transparent;color: rgb(84,116,235);font: 14px \"Microsoft YaHei UI Light\";border:none;border-bottom:1px solid rgb(192,192,192);padding: 0px 10px 0px 6px;}\
-                                    QTextEdit:focus{border-bottom-color:rgb(84,116,235);}\
+    ui->memoTextEdit->setStyleSheet("QTextEdit{background: transparent;color: rgb(83,61,138);font: 11px \"Microsoft YaHei UI Light\";border:none;border-bottom:1px solid rgb(83,61,138);}\
+                                    QTextEdit:focus{border-bottom-color:rgb(83,61,138);}\
                                     QTextEdit:disabled{color: rgb(151,151,151);}");
 
 //    ui->toolButton_chooseContact->setIconSize(QSize(12,12));
@@ -396,7 +396,7 @@ void TransferPage::sendtoLineEdit_textChanged(const QString &arg1)
     if( type == AccountAddress)
     {
         ui->tipLabel4->setText(tr("Valid account address."));
-        ui->tipLabel4->setStyleSheet("color: rgb(43,230,131);");
+        ui->tipLabel4->setStyleSheet("color: rgb(52,37,90);");
         ui->tipLabel4->show();
 //        calculateCallContractFee();
     }
@@ -445,7 +445,7 @@ void TransferPage::memoTextEdit_textChanged()
 //    {
 //        ui->tipLabel6->hide();
 //    }
-    double fee = static_cast<double>(ba.size())*10/1024 + HXChain::getInstance()->feeChargeInfo.transferFee.toDouble();
+    double fee = static_cast<double>(ba.size())*0.01/1024 + HXChain::getInstance()->feeChargeInfo.transferFee.toDouble();
     emit feeChangeSignal(fee);
 }
 

@@ -73,7 +73,7 @@ void PublishPoundageWidget::ChangeAccountSlots()
     if(accountInfo.assetAmountMap.isEmpty())
     {
         ui->lineEdit_source->setEnabled(false);
-        ui->lineEdit_source->setPlaceholderText(tr("0 LNK"));
+        ui->lineEdit_source->setPlaceholderText(tr("0 HX"));
         return;
     }
     for(auto it = accountInfo.assetAmountMap.constBegin();it != accountInfo.assetAmountMap.constEnd();++it)
@@ -94,7 +94,7 @@ void PublishPoundageWidget::ChangeAccountSlots()
             if(it.value().amount < 1)
             {
                 ui->lineEdit_source->setEnabled(false);
-                ui->lineEdit_source->setPlaceholderText(tr("0 LNK"));
+                ui->lineEdit_source->setPlaceholderText(tr("0 HX"));
             }
             break;
         }
@@ -160,7 +160,7 @@ void PublishPoundageWidget::InitWidget()
     ChangeAccountSlots();
     ChangeAssetSlots();
 
-    ui->label_fee->setText("  "+HXChain::getInstance()->feeChargeInfo.poundagePublishFee+" LNK");
+    ui->label_fee->setText("  "+HXChain::getInstance()->feeChargeInfo.poundagePublishFee+" HX");
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->widget);
 }

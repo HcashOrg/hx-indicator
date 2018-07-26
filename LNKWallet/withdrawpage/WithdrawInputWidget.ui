@@ -62,7 +62,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
 font:12px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
-    <string>LNK</string>
+    <string>HX</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

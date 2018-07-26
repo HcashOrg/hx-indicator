@@ -66,10 +66,10 @@ SetDialog::SetDialog(QWidget *parent) :
 //    ui->accountBtn->setIcon(QIcon(":/ui/wallet_ui/gray_circle.png"));
 
 
-    setStyleSheet("QToolButton{background-color:transparent;border:none;color:rgb(137,129,161);}"
+    setStyleSheet("QToolButton{background-color:transparent;border:none;color:rgb(137,129,161);font: 9px \"微软雅黑\";}"
                   "QToolButton::checked{color:rgb(83,61,138);}"
 
-                  "QToolButton#toolButton_help,QToolButton#toolButton_set{font-size:11px;border:none;background:transparent;color:white;border-top-left-radius:4px;border-top-right-radius:4px;}"
+                  "QToolButton#toolButton_help,QToolButton#toolButton_set{font: 9px \"微软雅黑\";border:none;background:transparent;color:white;border-top-left-radius:4px;border-top-right-radius:4px;}"
                   "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{color:rgb(52,37,90);background:#FFFFFF;}"
 
                   "QToolButton#depositBtn{color:rgb(84,61,137);}"
@@ -79,7 +79,7 @@ SetDialog::SetDialog(QWidget *parent) :
                   "QSpinBox::down-button {width:0;height:0;}"
                   "QSpinBox::up-arrow {width:0;height:0;}"
                   "QSpinBox::down-arrow {width:0;height:0;}"
-                  "QSpinBox{background-color: white;border:1px solid rgb(84,61,137);border-radius:4px;color:rgb(56,36,88);height:24px;}"
+                  "QSpinBox{font: 11px \"微软雅黑\";background-color: white;border:1px solid rgb(84,61,137);border-radius:4px;color:rgb(56,36,88);height:24px;}"
                   "QSpinBox:focus{border:1px solid rgb(84,61,137);border-radius:4px;}"
                   "QSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:1px solid gray;}"
 
@@ -129,17 +129,12 @@ SetDialog::SetDialog(QWidget *parent) :
     }
 
     QString fee = HXChain::getInstance()->feeType;
-    if("LNK" == fee){
-        ui->comboBox_fee->setCurrentIndex(0);
+    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
+        ui->comboBox_fee->addItem(asset.symbol);
     }
-    else if("BTC" == fee)
-    {
-        ui->comboBox_fee->setCurrentIndex(1);
-    }
-    else if("LTC" == fee)
-    {
-        ui->comboBox_fee->setCurrentIndex(2);
-    }
+    ui->feeCheckBox->setVisible(false);
+    ui->comboBox_fee->setCurrentText(fee);
+
 
     ui->minimizeCheckBox->setChecked( HXChain::getInstance()->minimizeToTray);
     ui->closeCheckBox->setChecked( HXChain::getInstance()->closeToMinimize);
@@ -270,8 +265,8 @@ void SetDialog::on_saveBtn_clicked()
     }
 
 
-    HXChain::getInstance()->configFile->setValue("/settings/feeType", ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"LNK");
-    HXChain::getInstance()->feeType = ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"LNK";
+    HXChain::getInstance()->configFile->setValue("/settings/feeType", ui->comboBox_fee->currentText());
+    HXChain::getInstance()->feeType = ui->comboBox_fee->currentText();
 
 
     HXChain::getInstance()->configFile->setValue("/settings/autoDeposit", ui->depositBtn->isChecked());

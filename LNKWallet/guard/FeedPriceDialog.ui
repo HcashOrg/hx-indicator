@@ -102,7 +102,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
+      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
      </property>
      <property name="text">
       <string/>
@@ -286,7 +286,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
+      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 14px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
      </property>
      <property name="text">
       <string/>

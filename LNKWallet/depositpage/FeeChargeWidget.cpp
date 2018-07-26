@@ -26,7 +26,7 @@ FeeChargeWidget::FeeChargeWidget(double feeNumber,const QString &feeType,const Q
 {
     ui->setupUi(this);
     _p->chooseWidget = new FeeChooseWidget(feeNumber,feeType,accountName,this);
-    ui->label_2->setText(_p->tip.arg(feeNumber).arg("LNK"));
+    ui->label_2->setText(_p->tip.arg(feeNumber).arg("HX"));
     ui->label_char->setVisible(false);
     InitWidget();
 }

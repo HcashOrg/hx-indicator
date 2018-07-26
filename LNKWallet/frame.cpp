@@ -174,8 +174,8 @@ Frame::Frame(): timer(NULL),
             HXChain::getInstance()->notProduce      =  true;
             HXChain::getInstance()->configFile->setValue("/settings/language","English");
             HXChain::getInstance()->language = "English";
-            HXChain::getInstance()->configFile->setValue("/settings/feeType","LNK");
-            HXChain::getInstance()->feeType = "LNK";
+            HXChain::getInstance()->configFile->setValue("/settings/feeType","HX");
+            HXChain::getInstance()->feeType = "HX";
 
             HXChain::getInstance()->configFile->setValue("/settings/backupNeeded",false);
             HXChain::getInstance()->IsBackupNeeded = false;

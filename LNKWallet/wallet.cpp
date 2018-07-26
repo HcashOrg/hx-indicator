@@ -42,8 +42,8 @@ HXChain::HXChain()
         notProduce      =  true;
         configFile->setValue("/settings/language","English");
         language = "English";
-        configFile->setValue("/settings/feeType","LNK");
-        feeType = "LNK";
+        configFile->setValue("/settings/feeType","HX");
+        feeType = "HX";
         configFile->setValue("/settings/feeOrderID","");
         feeOrderID = "";
         configFile->setValue("/settings/backupNeeded",false);

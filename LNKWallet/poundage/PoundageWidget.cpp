@@ -268,7 +268,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
 
 void PoundageWidget::DeletePoundageSlots(const QString &orderID,const QString &accountName)
 {
-    FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.poundageCancelFee.toDouble(),"LNK",
+    FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.poundageCancelFee.toDouble(),"HX",
                                                      accountName,HXChain::getInstance()->mainFrame);
     feeCharge->setAttribute(Qt::WA_DeleteOnClose);
     feeCharge->show();

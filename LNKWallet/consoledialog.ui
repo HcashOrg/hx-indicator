@@ -47,10 +47,10 @@
     <widget class="QTextBrowser" name="consoleBrowser">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>65</y>
-       <width>310</width>
-       <height>222</height>
+       <x>26</x>
+       <y>44</y>
+       <width>331</width>
+       <height>251</height>
       </rect>
      </property>
      <property name="font">
@@ -65,13 +65,13 @@
       <enum>Qt::DefaultContextMenu</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(0, 0, 0);</string>
+      <string notr="true"/>
      </property>
     </widget>
     <widget class="QToolButton" name="clearBtn">
      <property name="geometry">
       <rect>
-       <x>148</x>
+       <x>146</x>
        <y>364</y>
        <width>96</width>
        <height>30</height>
@@ -100,9 +100,9 @@
     <widget class="QLineEdit" name="consoleLineEdit">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>26</x>
        <y>320</y>
-       <width>310</width>
+       <width>331</width>
        <height>30</height>
       </rect>
      </property>
@@ -121,22 +121,24 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>40</x>
-       <y>8</y>
-       <width>80</width>
+       <x>26</x>
+       <y>17</y>
+       <width>91</width>
        <height>21</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <family>Microsoft YaHei UI Light</family>
-       <pointsize>12</pointsize>
-       <weight>50</weight>
+       <family>微软雅黑</family>
+       <pointsize>-1</pointsize>
+       <weight>9</weight>
+       <italic>false</italic>
        <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(0, 0, 0);</string>
+      <string notr="true">color: rgb(52,37,90);
+font: 75 18px &quot;微软雅黑&quot;;</string>
      </property>
      <property name="text">
       <string>控制台</string>
@@ -148,10 +150,10 @@
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>335</x>
-       <y>20</y>
-       <width>12</width>
-       <height>12</height>
+       <x>365</x>
+       <y>5</y>
+       <width>11</width>
+       <height>11</height>
       </rect>
      </property>
      <property name="cursor">
@@ -167,7 +169,7 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>45</x>
+       <x>26</x>
        <y>300</y>
        <width>311</width>
        <height>20</height>
@@ -175,14 +177,16 @@
      </property>
      <property name="font">
       <font>
-       <family>Microsoft YaHei UI Light</family>
-       <weight>50</weight>
+       <family>微软雅黑</family>
+       <pointsize>-1</pointsize>
+       <weight>6</weight>
        <italic>false</italic>
        <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(0, 0, 0);</string>
+      <string notr="true">color: rgb(52,37,90);
+font: 53 10px &quot;微软雅黑&quot;;</string>
      </property>
      <property name="text">
       <string>在此输入命令并回车</string>
@@ -191,8 +195,8 @@
     <widget class="QCheckBox" name="checkBox">
      <property name="geometry">
       <rect>
-       <x>254</x>
-       <y>296</y>
+       <x>240</x>
+       <y>297</y>
        <width>91</width>
        <height>20</height>
       </rect>
@@ -204,6 +208,30 @@
       <string>RPC方式</string>
      </property>
     </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>362</x>
+       <y>2</y>
+       <width>17</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(243, 241, 250);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <zorder>consoleBrowser</zorder>
+    <zorder>clearBtn</zorder>
+    <zorder>consoleLineEdit</zorder>
+    <zorder>label</zorder>
+    <zorder>label_2</zorder>
+    <zorder>checkBox</zorder>
+    <zorder>label_3</zorder>
+    <zorder>closeBtn</zorder>
    </widget>
   </widget>
  </widget>

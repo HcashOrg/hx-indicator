@@ -51,8 +51,8 @@
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>250</x>
-       <y>330</y>
+       <x>200</x>
+       <y>320</y>
        <width>100</width>
        <height>30</height>
       </rect>
@@ -178,8 +178,8 @@
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
       <rect>
-       <x>130</x>
-       <y>330</y>
+       <x>80</x>
+       <y>320</y>
        <width>100</width>
        <height>30</height>
       </rect>
@@ -252,7 +252,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
+      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
      </property>
      <property name="text">
       <string/>
@@ -271,7 +271,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(192,202,212);padding:0px 0px 0px 5px;}</string>
+      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
      </property>
      <property name="text">
       <string/>

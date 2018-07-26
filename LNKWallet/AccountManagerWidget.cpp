@@ -227,7 +227,7 @@ void AccountManagerWidget::InitStyle()
     ui->tableWidget->setColumnWidth(0,435);
     ui->tableWidget->setColumnWidth(1,60);
     ui->tableWidget->setColumnWidth(2,60);
-    ui->tableWidget->setStyleSheet("QTableView{border:none;font:12px \"Microsoft YaHei UI Light\";background-color:rgb(229,226,240);}");
+    ui->tableWidget->setStyleSheet("QTableView{border:none;font:12px \"微软雅黑\";background-color:rgb(229,226,240);color:rgb(137,129,161);}");
 
     ui->toolButton->setStyleSheet(OKBTN_STYLE);
 

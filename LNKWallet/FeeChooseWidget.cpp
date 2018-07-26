@@ -125,7 +125,7 @@ void FeeChooseWidget::feeTypeChanged()
     {
         _p->poundageID = "";
         _p->coinNumber = _p->feeNumber;
-        _p->feeType = "LNK";
+        _p->feeType = "HX";
         refreshUI();
     }
 }
@@ -165,7 +165,7 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
 {
     if(poundage == nullptr)
     {
-        _p->feeType = "LNK";
+        _p->feeType = "HX";
         _p->coinNumber = _p->feeNumber;
         _p->poundageID = "";
         _p->poundageTip = tr("cannot find proper acceptance!");
@@ -222,7 +222,7 @@ void FeeChooseWidget::refreshUI()
     }
 
     //ui->label_fee->setText(QString::number(_p->coinNumber) + " " + _p->feeType);
-    ui->label_fee->setText(QString::number(_p->feeNumber,'f',5)+" LNK");
+    ui->label_fee->setText(QString::number(_p->feeNumber,'f',5)+" HX");
 
     updatePoundageID();
 }
@@ -299,7 +299,7 @@ void FeeChooseWidget::InitWidget()
     InitCoinType();
     ResetAccountBalance();
 
-    if(_p->feeType == "LNK")
+    if(_p->feeType == "HX")
     {
         ui->checkBox->setChecked(false);
     }
@@ -327,8 +327,11 @@ void FeeChooseWidget::InitStyle()
 {
     QFont font("\"Microsoft YaHei UI Light\"",9,50);
     QPalette pa;
-    pa.setColor(QPalette::WindowText,QColor(0x54,0x74,0xEB));
+    pa.setColor(QPalette::WindowText,QColor(83,61,138));
     ui->label_poundage->setPalette(pa);
     ui->label_poundage->setFont(font);
+
+    ui->label_fee->setPalette(pa);
+    ui->label_fee->setFont(font);
 
 }

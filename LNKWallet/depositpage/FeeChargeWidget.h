@@ -12,7 +12,7 @@ class FeeChargeWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit FeeChargeWidget(double feeNumber = 20,const QString &feeType = "LNK",const QString &accountName="",QWidget *parent = 0);
+    explicit FeeChargeWidget(double feeNumber = 20,const QString &feeType = "HX",const QString &accountName="",QWidget *parent = 0);
     ~FeeChargeWidget();
 public:
     void SetInfo(const QString &info,bool vi = true);

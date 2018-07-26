@@ -83,9 +83,9 @@
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>70</y>
+       <y>73</y>
        <width>90</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
      <property name="font">
@@ -105,7 +105,7 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>141</x>
        <y>70</y>
        <width>40</width>
        <height>30</height>
@@ -130,9 +130,9 @@
      <property name="geometry">
       <rect>
        <x>180</x>
-       <y>70</y>
+       <y>73</y>
        <width>90</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
      <property name="font">
@@ -185,9 +185,9 @@
      <property name="geometry">
       <rect>
        <x>99</x>
-       <y>110</y>
+       <y>113</y>
        <width>171</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
     </widget>
@@ -195,9 +195,9 @@
      <property name="geometry">
       <rect>
        <x>99</x>
-       <y>147</y>
+       <y>150</y>
        <width>171</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
     </widget>
@@ -236,8 +236,8 @@
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>450</x>
-       <y>16</y>
+       <x>472</x>
+       <y>10</y>
        <width>18</width>
        <height>18</height>
       </rect>
@@ -275,9 +275,9 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>184</y>
+       <y>187</y>
        <width>171</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
      <property name="echoMode">

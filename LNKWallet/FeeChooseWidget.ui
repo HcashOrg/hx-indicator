@@ -57,8 +57,15 @@
      <property name="font">
       <font>
        <family>微软雅黑</family>
-       <pointsize>10</pointsize>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font: 12px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
      </property>
      <property name="text">
       <string>手续费</string>
@@ -84,7 +91,7 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>30</height>
+         <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -98,8 +105,11 @@
          <pointsize>10</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <property name="text">
-        <string>20  LNK</string>
+        <string>20  HX</string>
        </property>
       </widget>
      </item>
@@ -128,13 +138,13 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>30</height>
+         <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>30</height>
+         <height>25</height>
         </size>
        </property>
        <property name="font">
@@ -201,7 +211,7 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>30</height>
+         <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -234,7 +244,7 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>30</height>
+         <height>0</height>
         </size>
        </property>
        <property name="maximumSize">

@@ -73,9 +73,9 @@
     <property name="geometry">
      <rect>
       <x>50</x>
-      <y>140</y>
+      <y>143</y>
       <width>280</width>
-      <height>30</height>
+      <height>24</height>
      </rect>
     </property>
    </widget>
@@ -101,7 +101,7 @@
    <widget class="QToolButton" name="allBtn">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>263</x>
       <y>145</y>
       <width>60</width>
       <height>20</height>
@@ -109,6 +109,11 @@
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:transparent;
+color: rgb(83,61,138);
+font: 11px &quot;微软雅黑&quot;;</string>
     </property>
     <property name="text">
      <string>全部兑换</string>
