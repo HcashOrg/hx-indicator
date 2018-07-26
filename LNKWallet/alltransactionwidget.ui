@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>530</height>
+    <height>510</height>
    </rect>
   </property>
   <property name="font">
@@ -558,7 +558,7 @@ font: 11px &quot;微软雅黑&quot;;
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>483</y>
+     <y>466</y>
      <width>770</width>
      <height>41</height>
     </rect>
