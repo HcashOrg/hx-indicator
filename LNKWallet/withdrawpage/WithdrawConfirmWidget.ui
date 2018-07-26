@@ -63,15 +63,15 @@ color: rgb(52,37,90);</string>
     <widget class="QLabel" name="label_address">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>157</x>
        <y>65</y>
-       <width>331</width>
+       <width>311</width>
        <height>21</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(52,37,90);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>address</string>
@@ -85,13 +85,13 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
       <rect>
        <x>40</x>
        <y>125</y>
-       <width>71</width>
+       <width>111</width>
        <height>20</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(52,37,90);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>提现手续费</string>
@@ -100,7 +100,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <widget class="QLabel" name="label_totalNumber">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>157</x>
        <y>160</y>
        <width>260</width>
        <height>20</height>
@@ -108,7 +108,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(52,37,90);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>nu</string>
@@ -133,7 +133,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <widget class="QLabel" name="label_actualNumber">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>157</x>
        <y>95</y>
        <width>241</width>
        <height>20</height>
@@ -141,7 +141,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(52,37,90);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>address</string>
@@ -152,13 +152,13 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
       <rect>
        <x>40</x>
        <y>160</y>
-       <width>71</width>
+       <width>111</width>
        <height>20</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(52,37,90);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>共需支付</string>
@@ -169,13 +169,13 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
       <rect>
        <x>40</x>
        <y>95</y>
-       <width>71</width>
+       <width>111</width>
        <height>20</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(52,37,90);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>提现数额</string>
@@ -186,13 +186,13 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
       <rect>
        <x>40</x>
        <y>195</y>
-       <width>71</width>
+       <width>111</width>
        <height>20</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(52,37,90);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>钱包密码</string>
@@ -217,7 +217,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <widget class="QLabel" name="label_feeNumber">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>157</x>
        <y>125</y>
        <width>261</width>
        <height>20</height>
@@ -225,7 +225,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(52,37,90);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>address</string>
@@ -236,13 +236,13 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
       <rect>
        <x>40</x>
        <y>65</y>
-       <width>91</width>
+       <width>111</width>
        <height>20</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(52,37,90);
-font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
      </property>
      <property name="text">
       <string>提至地址</string>
@@ -251,7 +251,7 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <widget class="QLineEdit" name="lineEdit">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>157</x>
        <y>195</y>
        <width>260</width>
        <height>30</height>
@@ -264,8 +264,8 @@ font: 12px &quot;Microsoft YaHei UI Light&quot;;</string>
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>450</x>
-       <y>20</y>
+       <x>459</x>
+       <y>11</y>
        <width>13</width>
        <height>13</height>
       </rect>
