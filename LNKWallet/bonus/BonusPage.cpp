@@ -9,6 +9,7 @@
 #include "dialog/TransactionResultDialog.h"
 
 
+static const int ROWNUMBER = 7;
 BonusPage::BonusPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::BonusPage)
@@ -42,6 +43,12 @@ BonusPage::BonusPage(QWidget *parent) :
     ui->obtainAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
 
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&BonusPage::pageChangeSlot);
+
+    blankWidget = new BlankDefaultWidget(ui->bonusTableWidget);
+    blankWidget->setTextTip(tr("当前没有纪录!"));
     init();
 }
 
@@ -120,6 +127,14 @@ void BonusPage::jsonDataUpdated(QString id)
 
             tableWidgetSetItemZebraColor(ui->bonusTableWidget);
         }
+        int page = (ui->bonusTableWidget->rowCount()%ROWNUMBER==0 && ui->bonusTableWidget->rowCount() != 0) ?
+                    ui->bonusTableWidget->rowCount()/ROWNUMBER : ui->bonusTableWidget->rowCount()/ROWNUMBER+1;
+        pageWidget->SetTotalPage(page);
+        pageWidget->setShowTip(ui->bonusTableWidget->rowCount(),ROWNUMBER);
+        pageChangeSlot(0);
+
+        pageWidget->setVisible(0 != ui->bonusTableWidget->rowCount());
+        blankWidget->setVisible(ui->bonusTableWidget->rowCount() == 0);
 
         checkObtainAllBtnVisible();
 
@@ -249,4 +264,23 @@ void BonusPage::on_obtainAllBtn_clicked()
                                                        << true ));
     });
     feeCharge->show();
+}
+
+void BonusPage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->bonusTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->bonusTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->bonusTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->bonusTableWidget->setRowHidden(i,true);
+        }
+    }
 }

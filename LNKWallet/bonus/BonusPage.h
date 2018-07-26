@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "poundage/PageScrollWidget.h"
+#include "control/BlankDefaultWidget.h"
 namespace Ui {
 class BonusPage;
 }
@@ -27,6 +29,7 @@ private slots:
 
     void on_obtainAllBtn_clicked();
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::BonusPage *ui;
 
@@ -35,6 +38,8 @@ private:
     void fetchBonusBalance();
 
     void checkObtainAllBtnVisible();
+    PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
 };
 
 #endif // BONUSPAGE_H
