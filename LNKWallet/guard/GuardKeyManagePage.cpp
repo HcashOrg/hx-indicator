@@ -34,7 +34,7 @@ GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
     ui->multisigTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->multisigTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->multisigTableWidget->horizontalHeader()->setVisible(true);
-    ui->multisigTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->multisigTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->multisigTableWidget->setColumnWidth(0,120);
     ui->multisigTableWidget->setColumnWidth(1,140);

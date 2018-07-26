@@ -51,7 +51,7 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->accountTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->accountTableWidget->horizontalHeader()->setVisible(true);
-    ui->accountTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->accountTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->accountTableWidget->setColumnWidth(0,140);
     ui->accountTableWidget->setColumnWidth(1,180);

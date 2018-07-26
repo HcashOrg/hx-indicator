@@ -26,7 +26,7 @@ FeedPricePage::FeedPricePage(QWidget *parent) :
     ui->assetPriceTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->assetPriceTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->assetPriceTableWidget->horizontalHeader()->setVisible(true);
-    ui->assetPriceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->assetPriceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->assetPriceTableWidget->setColumnWidth(0,140);
     ui->assetPriceTableWidget->setColumnWidth(1,210);

@@ -28,7 +28,7 @@ OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
     ui->ordersTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->ordersTableWidget->horizontalHeader()->setFixedHeight(35);
     ui->ordersTableWidget->horizontalHeader()->setVisible(true);
-    ui->ordersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->ordersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->ordersTableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->ordersTableWidget->verticalHeader()->setVisible(false);
     ui->ordersTableWidget->setColumnWidth(0,190);

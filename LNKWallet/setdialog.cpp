@@ -66,10 +66,10 @@ SetDialog::SetDialog(QWidget *parent) :
 //    ui->accountBtn->setIcon(QIcon(":/ui/wallet_ui/gray_circle.png"));
 
 
-    setStyleSheet("QToolButton{background-color:transparent;border:none;color:rgb(137,129,161);}"
+    setStyleSheet("QToolButton{background-color:transparent;border:none;color:rgb(137,129,161);font: 9px \"微软雅黑\";}"
                   "QToolButton::checked{color:rgb(83,61,138);}"
 
-                  "QToolButton#toolButton_help,QToolButton#toolButton_set{font: 10px \"微软雅黑\";border:none;background:transparent;color:white;border-top-left-radius:4px;border-top-right-radius:4px;}"
+                  "QToolButton#toolButton_help,QToolButton#toolButton_set{font: 9px \"微软雅黑\";border:none;background:transparent;color:white;border-top-left-radius:4px;border-top-right-radius:4px;}"
                   "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{color:rgb(52,37,90);background:#FFFFFF;}"
 
                   "QToolButton#depositBtn{color:rgb(84,61,137);}"

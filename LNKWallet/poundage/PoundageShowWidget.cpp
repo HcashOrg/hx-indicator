@@ -139,7 +139,7 @@ void PoundageShowWidget::InitStyle()
 
 
     ui->tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    //ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    //ui->tableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableView->verticalHeader()->setMinimumSectionSize(40);
     ui->tableView->verticalHeader()->setVisible(false);
     ui->tableView->setShowGrid(false);

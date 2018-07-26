@@ -25,7 +25,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>0</y>
+     <y>-2</y>
      <width>960</width>
      <height>543</height>
     </rect>
@@ -119,7 +119,7 @@
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 53 10px &quot;Microsoft YaHei UI&quot;;</string>
+        <string notr="true">font: 53 9px &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="text">
         <string>通用设置</string>
@@ -195,7 +195,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -313,7 +313,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -342,7 +342,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -443,7 +443,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -472,7 +472,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -548,7 +548,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -607,7 +607,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -684,7 +684,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>111</y>
+           <y>107</y>
            <width>291</width>
            <height>24</height>
           </rect>
@@ -705,7 +705,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>168</y>
+           <y>160</y>
            <width>291</width>
            <height>24</height>
           </rect>
@@ -751,7 +751,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>147</y>
+           <y>139</y>
            <width>100</width>
            <height>20</height>
           </rect>
@@ -766,7 +766,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -779,10 +779,10 @@ color:rgb(137,129,161);</string>
         <widget class="QLabel" name="tipLabel3">
          <property name="geometry">
           <rect>
-           <x>172</x>
-           <y>63</y>
-           <width>151</width>
-           <height>16</height>
+           <x>202</x>
+           <y>58</y>
+           <width>121</width>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -816,7 +816,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -829,9 +829,9 @@ color:rgb(137,129,161);</string>
         <widget class="QLabel" name="tipLabel2">
          <property name="geometry">
           <rect>
-           <x>172</x>
-           <y>174</y>
-           <width>151</width>
+           <x>212</x>
+           <y>161</y>
+           <width>111</width>
            <height>20</height>
           </rect>
          </property>
@@ -851,7 +851,7 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>91</y>
+           <y>87</y>
            <width>100</width>
            <height>20</height>
           </rect>
@@ -866,7 +866,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 10px &quot;微软雅黑&quot;;
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -879,10 +879,10 @@ color:rgb(137,129,161);</string>
         <widget class="QLabel" name="tipLabel">
          <property name="geometry">
           <rect>
-           <x>172</x>
-           <y>115</y>
-           <width>151</width>
-           <height>16</height>
+           <x>202</x>
+           <y>106</y>
+           <width>121</width>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -937,16 +937,13 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 12px &quot;微软雅黑&quot;;
+          <string notr="true">font: 10px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
           <string>修改钱包密码</string>
          </property>
         </widget>
-        <zorder>tipLabel3</zorder>
-        <zorder>tipLabel</zorder>
-        <zorder>tipLabel2</zorder>
         <zorder>newPwdLineEdit</zorder>
         <zorder>confirmPwdLineEdit</zorder>
         <zorder>confirmBtn</zorder>
@@ -955,6 +952,9 @@ color:rgb(137,129,161);</string>
         <zorder>label_9</zorder>
         <zorder>oldPwdLineEdit</zorder>
         <zorder>label</zorder>
+        <zorder>tipLabel</zorder>
+        <zorder>tipLabel2</zorder>
+        <zorder>tipLabel3</zorder>
        </widget>
        <widget class="AccountManagerWidget" name="accountmanager"/>
       </widget>
@@ -980,7 +980,7 @@ color:rgb(137,129,161);</string>
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 53 10px &quot;Microsoft YaHei UI&quot;;</string>
+        <string notr="true">font: 53 9px &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="text">
         <string>安全设置</string>
@@ -1011,7 +1011,7 @@ color:rgb(137,129,161);</string>
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 53 10px &quot;Microsoft YaHei UI&quot;;</string>
+        <string notr="true">font: 53 9px &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="text">
         <string>账户管理</string>

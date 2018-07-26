@@ -24,7 +24,7 @@ AssetChangeHistoryWidget::AssetChangeHistoryWidget(QWidget *parent) :
     ui->changeHistoryTableWidget->setShowGrid(false);//隐藏表格线
     ui->changeHistoryTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->changeHistoryTableWidget->horizontalHeader()->setVisible(true);
-    ui->changeHistoryTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->changeHistoryTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->changeHistoryTableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->changeHistoryTableWidget->verticalHeader()->setVisible(false);
     ui->changeHistoryTableWidget->setColumnWidth(0,120);

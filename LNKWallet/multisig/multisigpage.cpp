@@ -31,7 +31,7 @@ MultiSigPage::MultiSigPage(QWidget *parent) :
 //    ui->multiSigTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->multiSigTableWidget->horizontalHeader()->setVisible(true);
     ui->multiSigTableWidget->verticalHeader()->setVisible(false);
-    ui->multiSigTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->multiSigTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 
     ui->multiSigTableWidget->setColumnWidth(0,310);

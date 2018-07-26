@@ -445,7 +445,7 @@ void TransferPage::memoTextEdit_textChanged()
 //    {
 //        ui->tipLabel6->hide();
 //    }
-    double fee = static_cast<double>(ba.size())*10/1024 + HXChain::getInstance()->feeChargeInfo.transferFee.toDouble();
+    double fee = static_cast<double>(ba.size())*0.01/1024 + HXChain::getInstance()->feeChargeInfo.transferFee.toDouble();
     emit feeChangeSignal(fee);
 }
 

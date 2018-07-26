@@ -39,7 +39,7 @@ MultiSigInfoDialog::MultiSigInfoDialog(QString _multiSigAddress, QWidget *parent
     ui->infoTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->infoTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->infoTableWidget->horizontalHeader()->setVisible(true);
-    ui->infoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->infoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 
     ui->infoTableWidget->setColumnWidth(0,300);

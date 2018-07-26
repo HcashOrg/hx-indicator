@@ -24,7 +24,7 @@ AssetPage::AssetPage(QWidget *parent) :
     ui->assetTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->assetTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->assetTableWidget->horizontalHeader()->setVisible(true);
-    ui->assetTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->assetTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->assetTableWidget->setColumnWidth(0,140);
     ui->assetTableWidget->setColumnWidth(1,60);

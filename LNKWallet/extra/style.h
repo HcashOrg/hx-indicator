@@ -20,6 +20,9 @@
 #define TOOLBUTTON_STYLE_1      "QToolButton{font: 10px \"微软雅黑\";background-color:transparent; border:1px solid rgb(84,61,137);border-radius:9px;color: rgb(84,61,137);}" \
                                 "QToolButton:pressed{background-color:rgb(83,61,138);color: white;}"
 
+#define PUSHBUTTON_CHECK_STYLE  "QPushButton{font:10px \"微软雅黑\";background:transparent;border:none;color: rgb(137,129,161);}" \
+                                "QPushButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}"
+
 #define TABLEWIDGET_STYLE_1     "QTableView{background-color:rgb(243,241,250);border:none;border-radius:5px;font: 11px \"Microsoft YaHei UI Light\";}" \
                                 "QHeaderView{border:none;border-bottom:1px solid rgb(222,218,236);border-top-left-radius:5px;border-top-right-radius:5px;background-color:rgb(243,241,250);color:rgb(137,129,161);font: 11px \"Microsoft YaHei UI Light\";}" \
                                 "QHeaderView:section{height:30px;border:none;background-color:rgb(243,241,250);}" \
