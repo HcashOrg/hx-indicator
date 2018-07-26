@@ -14,6 +14,8 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+
     setParent(HXChain::getInstance()->mainFrame);
 
     setAttribute(Qt::WA_TranslucentBackground, true);
@@ -30,14 +32,16 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
     ui->okBtn2->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn2->setStyleSheet(CANCELBTN_STYLE);
 
-    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    QRegExp regx("[a-z][a-z0-9\-]+$");
+    QValidator *validator = new QRegExpValidator(regx, this);
+    ui->registerNameLineEdit->setValidator( validator );
+    ui->registerNameLineEdit->setMaxLength(63);
 
     ui->stackedWidget_fee->addWidget(new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.minerRegisterFee.toDouble(),
                                                          HXChain::getInstance()->feeType));
     ui->stackedWidget_fee->setCurrentIndex(0);
     ui->stackedWidget_fee->currentWidget()->resize(ui->stackedWidget_fee->size());
     init();
-    ui->registerNameLineEdit->setMaxLength(63);
 }
 
 RegisterDialog::~RegisterDialog()
