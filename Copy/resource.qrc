@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
-        <file>resource/background.png</file>
-        <file>resource/login.png</file>
-        <file>resource/welcomeLabel.png</file>
+        <file>resource/login_back.png</file>
+        <file>resource/Welcome.png</file>
     </qresource>
 </RCC>

@@ -9,8 +9,16 @@
 
 #include "DataUtil.h"
 
-static const QString OKBTN_STYLE =  "QToolButton{font: 14px \"Microsoft YaHei UI Light\";background-color: rgb(84,116,235);border:0px solid white;border-radius:15px;color: white;}"  \
-                        "QToolButton:hover{background-color:rgb(235,235,235);}" ;
+#define OKBTN_STYLE    "QToolButton{font: 11px \"微软雅黑\";background-color: rgb(84,61,137);border:0px solid white;border-radius:3px;color: white;}"  \
+                        "QToolButton:pressed{background-color:rgb(84,61,137);}"\
+                        "QToolButton:disabled{background-color:rgb(196,191,214);}"
+
+#define CANCELBTN_STYLE "QToolButton{font: 11px \"微软雅黑\";background:rgb(235,0,94);color: rgb(255,255,255);border:0px solid rgb(84,116,235);border-radius:3px;}"  \
+                        "QToolButton:pressed{background-color:rgb(235,0,94);color: white}"\
+                        "QToolButton:disabled{background-color:rgb(196,191,214);}"
+
+#define CLOSEBTN_STYLE  "QToolButton{background-image:url(:/ui/wallet_ui/close_button.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}"   \
+                        "QToolButton:hover{background-color:rgb(208,228,255);"
 
 static const QString TEMP_FOLDER_NAME = "temp";
 static const QString PACKAGE_UN = "blocklink";
@@ -83,24 +91,18 @@ void UpdateWidget::InitWidget()
 void UpdateWidget::InitStyle()
 {
     setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    
+    
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setBrush( QPalette::Window,
-                     QBrush(QPixmap(":/resource/background.png").scaled(// 缩放背景图.
-                         this->size(),
-                         Qt::IgnoreAspectRatio,
-                         Qt::SmoothTransformation)));
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/resource/login_back.png").scaled(this->size(),
+                                                                                               Qt::IgnoreAspectRatio,
+                                                                                               Qt::SmoothTransformation)));
     setPalette(palette);
+    
+    ui->welcome->setPixmap(QPixmap(":/resource/Welcome.png").scaled(ui->welcome->width(), ui->welcome->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
 
-    //label背景
-    ui->label->setPixmap(QPixmap(":/resource/login.png").scaled(ui->label->size(),
-                                                                     Qt::IgnoreAspectRatio,
-                                                                     Qt::SmoothTransformation));
-    //label图标
-    ui->label_logo->setPixmap(QPixmap(":/resource/welcomeLabel.png").scaled(ui->label_logo->size(),
-                                                                     Qt::IgnoreAspectRatio,
-                                                                     Qt::SmoothTransformation));
 
-    ui->toolButton_close->setStyleSheet(OKBTN_STYLE);
+    ui->toolButton_close->setStyleSheet(CANCELBTN_STYLE);
     ui->toolButton_restart->setStyleSheet(OKBTN_STYLE);
 }
