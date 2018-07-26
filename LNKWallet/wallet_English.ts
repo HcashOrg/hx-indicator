@@ -1219,27 +1219,27 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Cancel</translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.ui" line="114"/>
+        <location filename="exchange/BuyOrderWidget.ui" line="119"/>
         <source>全部兑换</source>
         <translation type="unfinished">All</translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.ui" line="127"/>
+        <location filename="exchange/BuyOrderWidget.ui" line="132"/>
         <source>支付数量</source>
         <translation type="unfinished">Amount</translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.ui" line="140"/>
+        <location filename="exchange/BuyOrderWidget.ui" line="145"/>
         <source>手续费</source>
         <translation type="unfinished">Fee</translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.ui" line="159"/>
+        <location filename="exchange/BuyOrderWidget.ui" line="164"/>
         <source>确定</source>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.ui" line="172"/>
+        <location filename="exchange/BuyOrderWidget.ui" line="177"/>
         <source>合约地址</source>
         <translation type="unfinished">Contract address</translation>
     </message>
@@ -1993,7 +1993,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="consoledialog.ui" line="142"/>
+        <location filename="consoledialog.ui" line="144"/>
         <source>控制台</source>
         <translation type="unfinished">Console</translation>
     </message>
@@ -2003,12 +2003,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">clear</translation>
     </message>
     <message>
-        <location filename="consoledialog.ui" line="188"/>
+        <location filename="consoledialog.ui" line="192"/>
         <source>在此输入命令并回车</source>
         <translation type="unfinished">Enter the command and then press Enter</translation>
     </message>
     <message>
-        <location filename="consoledialog.ui" line="204"/>
+        <location filename="consoledialog.ui" line="208"/>
         <source>RPC方式</source>
         <translation type="unfinished">Using RPC</translation>
     </message>
@@ -3258,7 +3258,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="depositpage/FeeChargeWidget.ui" line="102"/>
-        <source>本操作需要收取固定手续费:@ LNK</source>
+        <source>本操作需要收取固定手续费:@ HX</source>
+        <oldsource>本操作需要收取固定手续费:@ LNK</oldsource>
         <translation type="unfinished">You need to pay the fee for this operation:@ LNK</translation>
     </message>
     <message>
@@ -3285,27 +3286,27 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.ui" line="64"/>
+        <location filename="FeeChooseWidget.ui" line="71"/>
         <source>手续费</source>
         <translation type="unfinished">Fee</translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.ui" line="102"/>
-        <source>20  LNK</source>
+        <location filename="FeeChooseWidget.ui" line="112"/>
+        <source>20  HX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.ui" line="147"/>
+        <location filename="FeeChooseWidget.ui" line="157"/>
         <source>使用承兑单</source>
         <translation type="unfinished">Use acceptance</translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.ui" line="214"/>
+        <location filename="FeeChooseWidget.ui" line="224"/>
         <source>汇率:@  币种:#  余额:$</source>
         <translation type="unfinished">rate:@ coin:# balance:$</translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.ui" line="250"/>
+        <location filename="FeeChooseWidget.ui" line="260"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3933,9 +3934,9 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="38"/>
-        <source>SENATOR账户信息</source>
-        <oldsource>Guard账户信息</oldsource>
-        <translation type="unfinished">SENATOR Account Info</translation>
+        <source>Senator账户信息</source>
+        <oldsource>SENATOR账户信息</oldsource>
+        <translation type="unfinished">Senator Account Info</translation>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="64"/>
@@ -4221,28 +4222,28 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="HelpWidget.ui" line="94"/>
+        <location filename="HelpWidget.ui" line="95"/>
         <source>暂无更新</source>
         <translation type="unfinished">No updates</translation>
     </message>
     <message>
-        <location filename="HelpWidget.ui" line="158"/>
+        <location filename="HelpWidget.ui" line="159"/>
         <source>检查更新</source>
         <translation type="unfinished">Check updates</translation>
     </message>
     <message>
-        <location filename="HelpWidget.ui" line="174"/>
+        <location filename="HelpWidget.ui" line="175"/>
         <source>立即重启</source>
         <translation type="unfinished">Restart</translation>
     </message>
     <message>
-        <location filename="HelpWidget.ui" line="123"/>
+        <location filename="HelpWidget.ui" line="124"/>
         <source>Windows桌面版 v</source>
         <oldsource>Windows桌面版 v1.0.1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="HelpWidget.ui" line="142"/>
+        <location filename="HelpWidget.ui" line="143"/>
         <source>升级</source>
         <translation type="unfinished">Update</translation>
     </message>
@@ -4305,17 +4306,17 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="164"/>
+        <location filename="importdialog.ui" line="172"/>
         <source>私钥</source>
         <translation type="unfinished">Key</translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="191"/>
+        <location filename="importdialog.ui" line="199"/>
         <source>导入</source>
         <translation type="unfinished">Import</translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="228"/>
+        <location filename="importdialog.ui" line="244"/>
         <source>账户名</source>
         <translation type="unfinished">Account name</translation>
     </message>
@@ -4329,7 +4330,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="obsolete">Please select or enter your private key.</translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="210"/>
+        <location filename="importdialog.ui" line="218"/>
         <source>取消</source>
         <translation type="unfinished">Cancel</translation>
     </message>
@@ -5295,7 +5296,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="namedialog.ui" line="172"/>
+        <location filename="namedialog.ui" line="173"/>
         <source>账户名</source>
         <oldsource>账户名：</oldsource>
         <translation type="unfinished">Account name:</translation>
@@ -5674,8 +5675,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="59"/>
-        <source>可用金额(LNK)</source>
-        <oldsource>余额(LNK)</oldsource>
+        <source>可用金额(HX)</source>
+        <oldsource>可用金额(LNK)</oldsource>
         <translation type="unfinished">BALANCE(LNK)</translation>
     </message>
     <message>
@@ -6075,51 +6076,55 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.ui" line="134"/>
+        <location filename="poundage/PublishPoundageWidget.ui" line="112"/>
+        <source>20 HX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="poundage/PublishPoundageWidget.ui" line="129"/>
+        <source>HX 数量：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="poundage/PublishPoundageWidget.ui" line="150"/>
         <source>确定</source>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.ui" line="78"/>
+        <location filename="poundage/PublishPoundageWidget.ui" line="86"/>
         <source>取消</source>
         <translation type="unfinished">Cancel</translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.ui" line="44"/>
+        <location filename="poundage/PublishPoundageWidget.ui" line="48"/>
         <source>发布账号：</source>
         <oldsource>发行账号：</oldsource>
         <translation type="unfinished">ACCOUNT:</translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.ui" line="113"/>
         <source>LNK 数量：</source>
-        <translation type="unfinished">AMOUNT OF LNK:</translation>
+        <translation type="obsolete">AMOUNT OF LNK:</translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.ui" line="180"/>
+        <location filename="poundage/PublishPoundageWidget.ui" line="204"/>
         <source>承兑数量:</source>
         <translation type="unfinished">ACCEPT AMOUNT:</translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.ui" line="239"/>
+        <location filename="poundage/PublishPoundageWidget.ui" line="263"/>
         <source>发布承兑单</source>
         <oldsource>发行承兑单</oldsource>
         <translation type="unfinished">Release</translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.ui" line="57"/>
+        <location filename="poundage/PublishPoundageWidget.ui" line="65"/>
         <source>承兑币种:</source>
         <translation type="unfinished">ACCEPT COIN</translation>
     </message>
     <message>
-        <location filename="poundage/PublishPoundageWidget.ui" line="157"/>
+        <location filename="poundage/PublishPoundageWidget.ui" line="177"/>
         <source>手续费:</source>
         <translation type="unfinished">FEE:</translation>
-    </message>
-    <message>
-        <location filename="poundage/PublishPoundageWidget.ui" line="100"/>
-        <source>20 LNK</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="poundage/PublishPoundageWidget.cpp" line="55"/>
@@ -6129,7 +6134,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="poundage/PublishPoundageWidget.cpp" line="76"/>
         <location filename="poundage/PublishPoundageWidget.cpp" line="97"/>
-        <source>0 LNK</source>
+        <source>0 HX</source>
+        <oldsource>0 LNK</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6175,33 +6181,33 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="miner/registerdialog.ui" line="108"/>
-        <location filename="miner/registerdialog.ui" line="348"/>
+        <location filename="miner/registerdialog.ui" line="360"/>
         <source>确定</source>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
         <location filename="miner/registerdialog.ui" line="135"/>
-        <location filename="miner/registerdialog.ui" line="321"/>
+        <location filename="miner/registerdialog.ui" line="333"/>
         <source>取消</source>
         <translation type="unfinished">Cancel</translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.ui" line="148"/>
+        <location filename="miner/registerdialog.ui" line="152"/>
         <source>注册为账户名</source>
         <translation type="unfinished">Name to be registered</translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.ui" line="180"/>
+        <location filename="miner/registerdialog.ui" line="188"/>
         <source>待注册账户</source>
         <translation type="unfinished">Account to be registered</translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.ui" line="250"/>
+        <location filename="miner/registerdialog.ui" line="262"/>
         <source>账户地址</source>
         <translation type="unfinished">Address</translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.ui" line="374"/>
+        <location filename="miner/registerdialog.ui" line="390"/>
         <source>输入钱包密码：</source>
         <translation type="unfinished">Password:</translation>
     </message>
@@ -6452,7 +6458,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="setdialog.ui" line="176"/>
-        <location filename="setdialog.ui" line="747"/>
+        <location filename="setdialog.ui" line="732"/>
         <source>保存</source>
         <translation type="unfinished">Save</translation>
     </message>
@@ -6476,12 +6482,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="obsolete">Transaction fee</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="823"/>
+        <location filename="setdialog.ui" line="808"/>
         <source>旧密码：</source>
         <translation type="unfinished">Old:</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="873"/>
+        <location filename="setdialog.ui" line="858"/>
         <source>新密码：</source>
         <translation type="unfinished">New:</translation>
     </message>
@@ -6514,70 +6520,59 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Coin type for fee</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="479"/>
-        <location filename="setdialog.ui" line="518"/>
-        <source>LNK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="setdialog.ui" line="498"/>
         <source>0.00001</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="523"/>
-        <source>BTC</source>
+        <location filename="setdialog.ui" line="479"/>
+        <source>HX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="528"/>
-        <source>LTC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="setdialog.ui" line="555"/>
+        <location filename="setdialog.ui" line="540"/>
         <source>充值自动划转</source>
         <translation type="unfinished">Auto-allot when deposit</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="585"/>
+        <location filename="setdialog.ui" line="570"/>
         <location filename="setdialog.cpp" line="53"/>
-        <location filename="setdialog.cpp" line="365"/>
+        <location filename="setdialog.cpp" line="360"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="614"/>
+        <location filename="setdialog.ui" line="599"/>
         <source>单步合约执行费用</source>
         <translation type="unfinished">Fee of contract execution for single step</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="642"/>
+        <location filename="setdialog.ui" line="627"/>
         <source>优先选择支付币种</source>
         <translation type="unfinished">Preferential asset</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="659"/>
+        <location filename="setdialog.ui" line="644"/>
         <source>开启后，充值的资产将被自动划转至多签地址</source>
         <translation type="unfinished">deposited assets will transfer to multi signature address automatically!</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="773"/>
+        <location filename="setdialog.ui" line="758"/>
         <source>再次输入：</source>
         <translation type="unfinished">Again:</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="944"/>
+        <location filename="setdialog.ui" line="929"/>
         <source>修改钱包密码</source>
         <translation type="unfinished">Modify the password</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="986"/>
+        <location filename="setdialog.ui" line="971"/>
         <source>安全设置</source>
         <translation type="unfinished">Safety</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1017"/>
+        <location filename="setdialog.ui" line="1002"/>
         <source>账户管理</source>
         <translation type="unfinished">Account</translation>
     </message>
@@ -6639,30 +6634,30 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="setdialog.cpp" line="53"/>
-        <location filename="setdialog.cpp" line="370"/>
+        <location filename="setdialog.cpp" line="365"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="417"/>
-        <location filename="setdialog.cpp" line="470"/>
+        <location filename="setdialog.cpp" line="412"/>
+        <location filename="setdialog.cpp" line="465"/>
         <source>at least 8 letters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="444"/>
-        <location filename="setdialog.cpp" line="469"/>
-        <location filename="setdialog.cpp" line="489"/>
+        <location filename="setdialog.cpp" line="439"/>
+        <location filename="setdialog.cpp" line="464"/>
+        <location filename="setdialog.cpp" line="484"/>
         <source>not consistent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="518"/>
+        <location filename="setdialog.cpp" line="513"/>
         <source>wrong password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="537"/>
+        <location filename="setdialog.cpp" line="532"/>
         <source>Fail to modify the password!</source>
         <oldsource>Fail to set password!</oldsource>
         <translation type="unfinished"></translation>
@@ -7196,8 +7191,13 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;微软雅黑&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <oldsource>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;微软雅黑&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;微软雅黑&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7830,7 +7830,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.ui" line="65"/>
-        <source>LNK</source>
+        <source>HX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

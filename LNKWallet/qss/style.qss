@@ -1,4 +1,4 @@
-QComboBox{min-height:24px;max-height:24px;background-color:rgb(243,241,250);border:1px solid rgb(219,216,232);color: rgb(137,129,161);padding-left: 5px;font: 11px \"Microsoft YaHei UI Light\";border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:4px;border-bottom-right-radius:4px;}
+QComboBox{min-height:18px;max-height:24px;background-color:rgb(243,241,250);border:1px solid rgb(219,216,232);color: rgb(137,129,161);padding-left: 5px;font: 11px \"Microsoft YaHei UI Light\";border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:4px;border-bottom-right-radius:4px;}
 /*QComboBox:on{border:1px solid rgb(93,107,144);}*/
 QComboBox::drop-down {background:rgb(196,191,214);border:none;border-top-right-radius:4px;border-bottom-right-radius:4px;}
 QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}
@@ -22,7 +22,7 @@ QCheckBox::indicator{ width:15px;height:15px;image:url(:/ui/wallet_ui/checkBox_u
 QCheckBox::indicator:checked{ image:url(:/ui/wallet_ui/checkBox_checked.png);background-repeat: no-repeat;background-position: center;border:none; }
 
 
-QLineEdit{min-height:24px;max-height:24px;background: rgb(243,241,250);color: rgb(84,61,137);font: 11px \"Microsoft YaHei UI Light\";border:1px solid rgb(84,61,137);padding: 0px 10px 0px 6px;border-radius:4px;}
+QLineEdit{min-height:18px;max-height:24px;background: rgb(243,241,250);color: rgb(84,61,137);font: 11px \"Microsoft YaHei UI Light\";border:1px solid rgb(84,61,137);padding: 0px 10px 0px 6px;border-radius:4px;}
 QLineEdit:focus{border:1px solid rgb(84,61,137);}
 QLineEdit:disabled{color: rgb(151,151,151);}
 

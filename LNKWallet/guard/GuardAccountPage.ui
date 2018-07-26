@@ -35,7 +35,7 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>SENATOR账户信息</string>
+    <string>Senator账户信息</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
