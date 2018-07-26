@@ -396,7 +396,7 @@ void TransferPage::sendtoLineEdit_textChanged(const QString &arg1)
     if( type == AccountAddress)
     {
         ui->tipLabel4->setText(tr("Valid account address."));
-        ui->tipLabel4->setStyleSheet("color: rgb(43,230,131);");
+        ui->tipLabel4->setStyleSheet("color: rgb(52,37,90);");
         ui->tipLabel4->show();
 //        calculateCallContractFee();
     }
