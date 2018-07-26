@@ -326,7 +326,7 @@ color:rgb(137,129,161);</string>
         <widget class="QLabel" name="label_3">
          <property name="geometry">
           <rect>
-           <x>83</x>
+           <x>48</x>
            <y>50</y>
            <width>31</width>
            <height>16</height>
@@ -456,7 +456,7 @@ color:rgb(137,129,161);</string>
         <widget class="QLabel" name="unitLabel2">
          <property name="geometry">
           <rect>
-           <x>466</x>
+           <x>495</x>
            <y>98</y>
            <width>35</width>
            <height>20</height>

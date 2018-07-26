@@ -69,7 +69,7 @@ SetDialog::SetDialog(QWidget *parent) :
     setStyleSheet("QToolButton{background-color:transparent;border:none;color:rgb(137,129,161);}"
                   "QToolButton::checked{color:rgb(83,61,138);}"
 
-                  "QToolButton#toolButton_help,QToolButton#toolButton_set{font-size:11px;border:none;background:transparent;color:white;border-top-left-radius:4px;border-top-right-radius:4px;}"
+                  "QToolButton#toolButton_help,QToolButton#toolButton_set{font: 10px \"微软雅黑\";border:none;background:transparent;color:white;border-top-left-radius:4px;border-top-right-radius:4px;}"
                   "QToolButton#toolButton_help::checked,QToolButton#toolButton_set::checked{color:rgb(52,37,90);background:#FFFFFF;}"
 
                   "QToolButton#depositBtn{color:rgb(84,61,137);}"
@@ -79,7 +79,7 @@ SetDialog::SetDialog(QWidget *parent) :
                   "QSpinBox::down-button {width:0;height:0;}"
                   "QSpinBox::up-arrow {width:0;height:0;}"
                   "QSpinBox::down-arrow {width:0;height:0;}"
-                  "QSpinBox{background-color: white;border:1px solid rgb(84,61,137);border-radius:4px;color:rgb(56,36,88);height:24px;}"
+                  "QSpinBox{font: 11px \"微软雅黑\";background-color: white;border:1px solid rgb(84,61,137);border-radius:4px;color:rgb(56,36,88);height:24px;}"
                   "QSpinBox:focus{border:1px solid rgb(84,61,137);border-radius:4px;}"
                   "QSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:1px solid gray;}"
 

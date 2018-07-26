@@ -110,7 +110,7 @@ void NameDialog::on_nameLineEdit_textChanged(const QString &arg1)
     {
 
         ui->okBtn->setEnabled(false);
-        ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("More than 63 characters!") + "</font></body>" );
+        ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#EB005E>" + tr("More than 63 characters!") + "</font></body>" );
 
         return;
     }
@@ -120,7 +120,7 @@ void NameDialog::on_nameLineEdit_textChanged(const QString &arg1)
     if( isExistInWallet(addrName) )
     {
         ui->okBtn->setEnabled(false);
-        ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr( "This name has been used") + "</font></body>" );
+        ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#EB005E>" + tr( "This name has been used") + "</font></body>" );
         return;
     }
 
@@ -149,12 +149,12 @@ void NameDialog::jsonDataUpdated(QString id)
         if( result.startsWith("\"result\":{\"id\":\"0.0.0\""))
         {
             ui->okBtn->setEnabled(true);
-            ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#2be683>" + tr( "The name is available") + "</font></body>" );
+            ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#543D89>" + tr( "The name is available") + "</font></body>" );
         }
         else
         {
             ui->okBtn->setEnabled(false);
-            ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr( "This name has been used") + "</font></body>" );
+            ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#EB005E>" + tr( "This name has been used") + "</font></body>" );
         }
 
         return;
