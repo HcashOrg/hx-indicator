@@ -17,7 +17,7 @@
 #define CONTAINERWIDGET_STYLE   "#containerwidget{background-color:rgb(229,226,240);border-radius:4px;}"  \
                                 "QLabel{color:rgb(51,51,51);}"
 
-#define TOOLBUTTON_STYLE_1      "QToolButton{font: 10px \"微软雅黑\";background-color:transparent; border:1px solid rgb(84,61,137);border-radius:9px;color: rgb(84,61,137);}" \
+#define TOOLBUTTON_STYLE_1      "QToolButton{font: 8px \"微软雅黑\";background-color:transparent; border:1px solid rgb(84,61,137);border-radius:9px;color: rgb(84,61,137);}" \
                                 "QToolButton:pressed{background-color:rgb(83,61,138);color: white;}"
 
 #define PUSHBUTTON_CHECK_STYLE  "QPushButton{font:10px \"微软雅黑\";background:transparent;border:none;color: rgb(137,129,161);}" \

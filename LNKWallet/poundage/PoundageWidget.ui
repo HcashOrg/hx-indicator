@@ -87,7 +87,7 @@
     <string notr="true">font: 50 10px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
-    <string>发行承兑单</string>
+    <string>发布承兑单</string>
    </property>
   </widget>
   <widget class="QComboBox" name="comboBox_sortType">
@@ -132,7 +132,7 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <pointsize>9</pointsize>
     </font>
    </property>
    <property name="cursor">
@@ -142,7 +142,7 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>最新</string>
+    <string>所有</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_myPoundage">
@@ -162,14 +162,14 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>14</pointsize>
+     <pointsize>9</pointsize>
     </font>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="text">
-    <string>我发起的</string>
+    <string>我发布的</string>
    </property>
   </widget>
  </widget>

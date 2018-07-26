@@ -158,7 +158,7 @@
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>160</x>
+     <x>170</x>
      <y>130</y>
      <width>120</width>
      <height>18</height>
@@ -183,20 +183,25 @@
     <rect>
      <x>60</x>
      <y>130</y>
-     <width>100</width>
+     <width>110</width>
      <height>18</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </property>
    <property name="text">
-    <string>当前guard账号</string>
+    <string>当前SENATOR账号</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

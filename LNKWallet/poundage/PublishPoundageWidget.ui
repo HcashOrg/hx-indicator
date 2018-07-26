@@ -41,7 +41,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>发行账号：</string>
+     <string>发布账号：</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -236,7 +236,7 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>发行承兑单</string>
+    <string>发布承兑单</string>
    </property>
   </widget>
  </widget>

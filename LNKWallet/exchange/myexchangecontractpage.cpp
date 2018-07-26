@@ -34,12 +34,12 @@ MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     ui->ordersTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->ordersTableWidget->horizontalHeader()->setFixedHeight(35);
     ui->ordersTableWidget->horizontalHeader()->setVisible(true);
-    ui->ordersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->ordersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->ordersTableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->ordersTableWidget->verticalHeader()->setVisible(false);
     ui->ordersTableWidget->setColumnWidth(0,160);
     ui->ordersTableWidget->setColumnWidth(1,160);
-    ui->ordersTableWidget->setColumnWidth(2,160);
+    ui->ordersTableWidget->setColumnWidth(2,150);
     ui->ordersTableWidget->setColumnWidth(3,80);
     ui->ordersTableWidget->setColumnWidth(4,80);
 
@@ -146,7 +146,6 @@ void MyExchangeContractPage::showOrders()
         for(int j = 3;j < 5;++j)
         {
             ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
-            toolButtonItem->setInitGray(j%2 != 0);
             toolButtonItem->setText(ui->ordersTableWidget->item(i,j)->text());
             ui->ordersTableWidget->setCellWidget(i,j,toolButtonItem);
             connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
@@ -168,15 +167,15 @@ void MyExchangeContractPage::updateTableHeaders()
 {
     if(ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())
     {
-        ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("Sell"));
-        ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("Buy"));
-        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("Price"));
+        ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("SELL"));
+        ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("BUY"));
+        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("PRICE"));
     }
     else
     {
-        ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("Sell / %1").arg(ui->assetComboBox->currentText()));
-        ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("Buy / %1").arg(ui->assetComboBox2->currentText()));
-        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("Price (%1/%2)").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()));
+        ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("SELL / %1").arg(ui->assetComboBox->currentText()));
+        ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("BUY / %1").arg(ui->assetComboBox2->currentText()));
+        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("PRICE (%1/%2)").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()));
     }
 }
 

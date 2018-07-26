@@ -47,7 +47,7 @@
      <string notr="true">QLabel{font: 14px &quot;微软雅黑&quot;;color:rgb(52,37,90);}</string>
     </property>
     <property name="text">
-     <string>暂无代理收益</string>
+     <string>暂无Senator收益</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>

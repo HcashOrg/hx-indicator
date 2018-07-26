@@ -24,10 +24,10 @@ AssetPage::AssetPage(QWidget *parent) :
     ui->assetTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->assetTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->assetTableWidget->horizontalHeader()->setVisible(true);
-    ui->assetTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->assetTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->assetTableWidget->setColumnWidth(0,140);
-    ui->assetTableWidget->setColumnWidth(1,60);
+    ui->assetTableWidget->setColumnWidth(0,120);
+    ui->assetTableWidget->setColumnWidth(1,80);
     ui->assetTableWidget->setColumnWidth(2,140);
     ui->assetTableWidget->setColumnWidth(3,140);
     ui->assetTableWidget->setColumnWidth(4,80);
@@ -41,7 +41,7 @@ AssetPage::AssetPage(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&AssetPage::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->assetTableWidget);
-    blankWidget->setTextTip(tr("当前没有纪录!"));
+    blankWidget->setTextTip(tr("There are no records currently!"));
 
     showAssetsInfo();
 }

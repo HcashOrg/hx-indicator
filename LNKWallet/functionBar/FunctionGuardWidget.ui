@@ -94,7 +94,7 @@ padding-left: 15px;</string>
     </font>
    </property>
    <property name="text">
-    <string>提案</string>
+    <string> 提案 </string>
    </property>
   </widget>
   <widget class="QLabel" name="label_normal_2">

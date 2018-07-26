@@ -27,10 +27,10 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
 
     ui->crosschainTransactionTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->crosschainTransactionTableWidget->horizontalHeader()->setVisible(true);
-    ui->crosschainTransactionTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->crosschainTransactionTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->crosschainTransactionTableWidget->setColumnWidth(0,120);
-    ui->crosschainTransactionTableWidget->setColumnWidth(1,100);
+    ui->crosschainTransactionTableWidget->setColumnWidth(0,110);
+    ui->crosschainTransactionTableWidget->setColumnWidth(1,90);
     ui->crosschainTransactionTableWidget->setColumnWidth(2,100);
     ui->crosschainTransactionTableWidget->setColumnWidth(3,100);
     ui->crosschainTransactionTableWidget->setColumnWidth(4,80);
@@ -54,7 +54,7 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&WithdrawConfirmPage::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->crosschainTransactionTableWidget);
-    blankWidget->setTextTip(tr("当前没有纪录!"));
+    blankWidget->setTextTip(tr("There are no withdraw trxs to authorize currently!"));
     init();
 }
 
@@ -83,7 +83,7 @@ void WithdrawConfirmPage::init()
 
         QLabel* label = new QLabel(this);
         label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
-        label->setText(tr("There are no guard accounts in the wallet."));
+        label->setText(tr("There are no senator accounts in the wallet."));
     }
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->crosschainTransactionTableWidget);
@@ -212,7 +212,7 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":"))
         {            
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Transaction of guard-sign-crosschain has been sent out!"));
+            commonDialog.setText(tr("Transaction of senator-sign-crosschain has been sent out!"));
             commonDialog.pop();
         }
         else if(result.startsWith("\"error\":"))

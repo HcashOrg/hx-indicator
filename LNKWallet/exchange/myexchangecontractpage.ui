@@ -42,17 +42,22 @@
     <rect>
      <x>60</x>
      <y>90</y>
-     <width>60</width>
+     <width>70</width>
      <height>18</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </property>
    <property name="text">
     <string>当前账户</string>
@@ -64,7 +69,7 @@
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>130</x>
      <y>90</y>
      <width>180</width>
      <height>18</height>
@@ -119,7 +124,7 @@
   <widget class="QComboBox" name="assetComboBox2">
    <property name="geometry">
     <rect>
-     <x>220</x>
+     <x>230</x>
      <y>120</y>
      <width>80</width>
      <height>18</height>
@@ -220,7 +225,7 @@
   <widget class="QComboBox" name="assetComboBox">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>130</x>
      <y>120</y>
      <width>80</width>
      <height>18</height>
@@ -245,17 +250,22 @@
     <rect>
      <x>60</x>
      <y>120</y>
-     <width>60</width>
+     <width>70</width>
      <height>18</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>微软雅黑</family>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(192, 196, 212);</string>
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </property>
    <property name="text">
     <string>交易对</string>

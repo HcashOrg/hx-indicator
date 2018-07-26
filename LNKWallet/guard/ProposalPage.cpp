@@ -28,10 +28,10 @@ ProposalPage::ProposalPage(QWidget *parent) :
     ui->proposalTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->proposalTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->proposalTableWidget->horizontalHeader()->setVisible(true);
-    ui->proposalTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->proposalTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->proposalTableWidget->setColumnWidth(0,120);
-    ui->proposalTableWidget->setColumnWidth(1,100);
+    ui->proposalTableWidget->setColumnWidth(0,110);
+    ui->proposalTableWidget->setColumnWidth(1,90);
     ui->proposalTableWidget->setColumnWidth(2,100);
     ui->proposalTableWidget->setColumnWidth(3,100);
     ui->proposalTableWidget->setColumnWidth(4,80);
@@ -44,7 +44,7 @@ ProposalPage::ProposalPage(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ProposalPage::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->proposalTableWidget);
-    blankWidget->setTextTip(tr("当前没有历史纪录!"));
+    blankWidget->setTextTip(tr("There are no proposals currently!"));
     init();
 }
 
@@ -73,7 +73,7 @@ void ProposalPage::init()
 
         QLabel* label = new QLabel(this);
         label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
-        label->setText(tr("There are no guard accounts in the wallet."));
+        label->setText(tr("There are no senator accounts in the wallet."));
     }
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->proposalTableWidget);
@@ -136,7 +136,7 @@ void ProposalPage::showProposals()
         QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
         if(address.isEmpty())
         {
-            ui->proposalTableWidget->setItem(i,4,new QTableWidgetItem(tr("no guard")));
+            ui->proposalTableWidget->setItem(i,4,new QTableWidgetItem(tr("no senator")));
         }
         else if(info.approvedKeys.contains(address))
         {
@@ -154,7 +154,7 @@ void ProposalPage::showProposals()
         }
 
 
-        if(!address.isEmpty())          // 如果有guard账户
+        if(!address.isEmpty())          // 如果有senator账户
         {
             ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(tr("approve")));
             ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("disapprove")));

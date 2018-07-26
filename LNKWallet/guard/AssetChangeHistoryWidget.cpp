@@ -24,7 +24,7 @@ AssetChangeHistoryWidget::AssetChangeHistoryWidget(QWidget *parent) :
     ui->changeHistoryTableWidget->setShowGrid(false);//隐藏表格线
     ui->changeHistoryTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->changeHistoryTableWidget->horizontalHeader()->setVisible(true);
-    ui->changeHistoryTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->changeHistoryTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->changeHistoryTableWidget->horizontalHeader()->setStretchLastSection(true);
     ui->changeHistoryTableWidget->verticalHeader()->setVisible(false);
     ui->changeHistoryTableWidget->setColumnWidth(0,120);
@@ -40,7 +40,7 @@ AssetChangeHistoryWidget::AssetChangeHistoryWidget(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&AssetChangeHistoryWidget::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->changeHistoryTableWidget);
-    blankWidget->setTextTip(tr("当前没有历史纪录!"));
+    blankWidget->setTextTip(tr("There are no records currently!"));
 
     init();
 }
@@ -72,7 +72,7 @@ void AssetChangeHistoryWidget::init()
 
         QLabel* label = new QLabel(this);
         label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
-        label->setText(tr("There are no guard accounts in the wallet."));
+        label->setText(tr("There are no senator accounts in the wallet."));
     }
 
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();

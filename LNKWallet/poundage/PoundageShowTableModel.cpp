@@ -50,7 +50,7 @@ QVariant PoundageShowTableModel::headerData(int section, Qt::Orientation orienta
                 case 1:
                     return tr("交易对象");
                 case 2:
-                    return tr("Owner");
+                    return tr("OWNER");
                 case 3:
                     return tr("发布者\ ");
                 case 4:

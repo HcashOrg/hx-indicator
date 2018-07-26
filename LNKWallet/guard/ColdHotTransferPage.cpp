@@ -58,7 +58,7 @@ ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ColdHotTransferPage::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->coldHotTransactionTableWidget);
-    blankWidget->setTextTip(tr("当前没有纪录!"));
+    blankWidget->setTextTip(tr("There are no cold-hot trxs currently!"));
     init();
 }
 
@@ -89,7 +89,7 @@ void ColdHotTransferPage::init()
 
         QLabel* label = new QLabel(this);
         label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
-        label->setText(tr("There are no guard accounts in the wallet."));
+        label->setText(tr("There are no senator accounts in the wallet."));
     }
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->coldHotTransactionTableWidget);
@@ -211,7 +211,7 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":null"))
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Transaction of guard-sign-coldhot has been sent out!"));
+            commonDialog.setText(tr("Transaction of senator-sign-coldhot has been sent out!"));
             commonDialog.pop();
         }
         else if(result.startsWith("\"error\":"))

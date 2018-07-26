@@ -428,58 +428,58 @@
         <location filename="alltransactionwidget.ui" line="53"/>
         <location filename="alltransactionwidget.ui" line="472"/>
         <source>类型</source>
-        <translation type="unfinished">Type</translation>
+        <translation type="unfinished">TYPE</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="70"/>
         <source>时间</source>
-        <translation type="unfinished">Time</translation>
+        <translation type="unfinished">TIME</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="89"/>
         <location filename="alltransactionwidget.ui" line="203"/>
         <source>全部</source>
-        <translation type="unfinished">All</translation>
+        <translation type="unfinished">ALL</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="108"/>
         <source>转账</source>
-        <translation type="unfinished">Transfer</translation>
+        <translation type="unfinished">TRANSFER</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="127"/>
         <source>充值</source>
-        <translation type="unfinished">Deposit</translation>
+        <translation type="unfinished">DEPOSIT</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="146"/>
         <source>提现</source>
-        <translation type="unfinished">Withdraw</translation>
+        <translation type="unfinished">WITHDRAW</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="165"/>
         <source>合约相关</source>
-        <translation type="unfinished">Contract</translation>
+        <translation type="unfinished">CONTRACT</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="184"/>
         <source>其他</source>
-        <translation type="unfinished">Other</translation>
+        <translation type="unfinished">OTHER</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="222"/>
         <source>今天</source>
-        <translation type="unfinished">1 day</translation>
+        <translation type="unfinished">1 DAY</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="241"/>
         <source>本周</source>
-        <translation type="unfinished">1 week</translation>
+        <translation type="unfinished">1 WEEK</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="260"/>
         <source>本月</source>
-        <translation type="unfinished">1 month</translation>
+        <translation type="unfinished">1 MONTH</translation>
     </message>
     <message>
         <source>当前账号</source>
@@ -492,62 +492,62 @@
     <message>
         <location filename="alltransactionwidget.ui" line="381"/>
         <source>区块高度</source>
-        <translation type="unfinished">Block</translation>
+        <translation type="unfinished">BLOCK</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="394"/>
         <source>时间（GMT）</source>
-        <translation type="unfinished">Time(GMT)</translation>
+        <translation type="unfinished">TIME(GMT)</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="407"/>
         <source>对方账户</source>
-        <translation type="unfinished">Opposite</translation>
+        <translation type="unfinished">OPPOSITE</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="420"/>
         <source>数量</source>
-        <translation type="unfinished">Amount</translation>
+        <translation type="unfinished">AMOUNT</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="433"/>
         <source>手续费(LNK)</source>
-        <translation type="unfinished">Fee(LNK)</translation>
+        <translation type="unfinished">FEE(LNK)</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="446"/>
         <source>交易ID</source>
-        <translation type="unfinished">Transaction ID</translation>
+        <translation type="unfinished">TRANSACTION ID</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="459"/>
         <source>状态</source>
-        <translation type="unfinished">State</translation>
+        <translation type="unfinished">STATE</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="500"/>
         <source>挖矿相关</source>
-        <translation type="unfinished">Mine</translation>
+        <translation type="unfinished">MINE</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="519"/>
         <source>承兑单</source>
-        <translation type="unfinished">Acceptance</translation>
+        <translation type="unfinished">ACCEPTANCE</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="583"/>
         <source>喂价</source>
-        <translation type="unfinished">Quote</translation>
+        <translation type="unfinished">QUOTE</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="602"/>
         <source>提案</source>
-        <translation type="unfinished">Proposal</translation>
+        <translation type="unfinished">PROPOSAL</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="621"/>
         <source>分红</source>
-        <translation type="unfinished">Bonus</translation>
+        <translation type="unfinished">BONUS</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="50"/>
@@ -854,55 +854,59 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="27"/>
-        <location filename="guard/AssetChangeHistoryWidget.ui" line="184"/>
+        <location filename="guard/AssetChangeHistoryWidget.ui" line="194"/>
         <source>币种</source>
-        <translation type="unfinished">Coin</translation>
+        <translation type="unfinished">CURRENCY</translation>
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="40"/>
         <source>热钱包多签地址</source>
         <oldsource>多签地址（热钱包）</oldsource>
-        <translation type="unfinished">Hot Multisig-Address</translation>
+        <translation type="unfinished">HOT MULTISIG-ADDRESS</translation>
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="53"/>
         <source>冷钱包多签地址</source>
         <oldsource>多签地址（冷钱包）</oldsource>
-        <translation type="unfinished">Cold Multisig-Address</translation>
+        <translation type="unfinished">COLD MULTISIG-ADDRESS</translation>
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="66"/>
         <source>生效区块</source>
-        <translation type="unfinished">Effective Block</translation>
+        <translation type="unfinished">EFFECTIVE BLOCK</translation>
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="79"/>
         <source>私钥状态</source>
         <oldsource>状态</oldsource>
-        <translation type="unfinished">Key State</translation>
+        <translation type="unfinished">KEY STATUS</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.ui" line="137"/>
+        <location filename="guard/AssetChangeHistoryWidget.ui" line="142"/>
+        <source>当前senator账号</source>
+        <translation type="unfinished">CURRENT SENATOR</translation>
+    </message>
+    <message>
         <source>当前guard账号</source>
-        <translation type="unfinished">Current Guard</translation>
+        <translation type="obsolete">Current Guard</translation>
     </message>
     <message>
         <source>当前资产</source>
         <translation type="obsolete">Current Coin</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.ui" line="212"/>
+        <location filename="guard/AssetChangeHistoryWidget.ui" line="222"/>
         <source>变更历史</source>
         <translation type="unfinished">Multisig-Address Change History</translation>
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.cpp" line="43"/>
-        <source>当前没有历史纪录!</source>
+        <source>There are no records currently!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.cpp" line="75"/>
-        <source>There are no guard accounts in the wallet.</source>
+        <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -988,32 +992,32 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/AssetPage.ui" line="84"/>
         <source>币种</source>
-        <translation type="unfinished">Coin</translation>
+        <translation type="unfinished">CURRENCY</translation>
     </message>
     <message>
         <location filename="guard/AssetPage.ui" line="97"/>
         <source>精度</source>
-        <translation type="unfinished">Precision</translation>
+        <translation type="unfinished">PRECISION</translation>
     </message>
     <message>
         <location filename="guard/AssetPage.ui" line="110"/>
         <source>热钱包多签地址</source>
-        <translation type="unfinished">Hot Multisig-Address</translation>
+        <translation type="unfinished">HOT MULTISIG-ADDRESS</translation>
     </message>
     <message>
         <location filename="guard/AssetPage.ui" line="123"/>
         <source>冷钱包多签地址</source>
-        <translation type="unfinished">Cold Multisig-Address</translation>
+        <translation type="unfinished">COLD MULTISIG-ADDRESS</translation>
     </message>
     <message>
         <location filename="guard/AssetPage.ui" line="136"/>
         <source>创建者</source>
-        <translation type="unfinished">Publisher</translation>
+        <translation type="unfinished">PUBLISHER</translation>
     </message>
     <message>
         <location filename="guard/AssetPage.ui" line="149"/>
         <source>手续费</source>
-        <translation type="unfinished">Fee</translation>
+        <translation type="unfinished">FEE</translation>
     </message>
     <message>
         <location filename="guard/AssetPage.ui" line="183"/>
@@ -1021,8 +1025,13 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Asset Info</translation>
     </message>
     <message>
-        <location filename="guard/AssetPage.cpp" line="44"/>
         <source>当前没有纪录!</source>
+        <translation type="obsolete">There&apos;s no bonus record!</translation>
+    </message>
+    <message>
+        <location filename="guard/AssetPage.cpp" line="44"/>
+        <source>There are no records currently!</source>
+        <oldsource>There are no records!</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1119,22 +1128,22 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="bonus/BonusPage.ui" line="132"/>
         <source>币种</source>
-        <translation type="unfinished">Coin</translation>
+        <translation type="unfinished">COIN</translation>
     </message>
     <message>
         <location filename="bonus/BonusPage.ui" line="145"/>
         <source>分红数量</source>
-        <translation type="unfinished">Amount of Bonus</translation>
+        <translation type="unfinished">AMOUNT OF BONUS</translation>
     </message>
     <message>
         <location filename="bonus/BonusPage.ui" line="189"/>
         <source>领取全部</source>
-        <translation type="unfinished">get all</translation>
+        <translation type="unfinished">GET ALL</translation>
     </message>
     <message>
         <location filename="bonus/BonusPage.cpp" line="51"/>
         <source>当前没有纪录!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">There&apos;s no bonus record!</translation>
     </message>
     <message>
         <location filename="bonus/BonusPage.cpp" line="115"/>
@@ -1143,12 +1152,14 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="bonus/BonusPage.cpp" line="152"/>
-        <source>Transaction of obtain-bonus has been sent out!</source>
+        <source>Transaction of get-bonus has been sent out!</source>
+        <oldsource>Transaction of obtain-bonus has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="bonus/BonusPage.cpp" line="160"/>
-        <source>Fail to obtain bonus!</source>
+        <source>Fail to get bonus!</source>
+        <oldsource>Fail to obtain bonus!</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1822,66 +1833,75 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/ColdHotTransferPage.ui" line="84"/>
         <source>申请时间（GMT）</source>
-        <translation type="unfinished">Time(GMT)</translation>
+        <translation type="unfinished">TIME(GMT)</translation>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.ui" line="97"/>
         <source>金额</source>
-        <translation type="unfinished">Amount</translation>
+        <translation type="unfinished">AMOUNT</translation>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.ui" line="110"/>
         <source>转出地址</source>
-        <translation type="unfinished">From</translation>
+        <translation type="unfinished">FROM</translation>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.ui" line="123"/>
         <source>转入地址</source>
-        <translation type="unfinished">To</translation>
+        <translation type="unfinished">TO</translation>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.ui" line="136"/>
         <source>状态</source>
-        <translation type="unfinished">State</translation>
+        <translation type="unfinished">STATE</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="199"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="204"/>
+        <source>当前SENATOR账号</source>
+        <translation type="unfinished">CURRENT SENATOR</translation>
+    </message>
+    <message>
         <source>当前guard账号</source>
-        <translation type="unfinished">Current Guard</translation>
+        <translation type="obsolete">Current Guard</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="232"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="237"/>
         <source>发起资产变更</source>
-        <translation type="unfinished">Create</translation>
+        <translation type="unfinished">CREATE</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="257"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="262"/>
         <source>资产变更</source>
         <translation type="unfinished">Cold-Hot Trx</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="276"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="281"/>
         <source>正在授权</source>
-        <translation type="unfinished">Confirming</translation>
+        <translation type="unfinished">CONFIRMING</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="295"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="300"/>
         <source>等待授权</source>
-        <translation type="unfinished">Waiting</translation>
+        <translation type="unfinished">WAITING</translation>
+    </message>
+    <message>
+        <source>当前没有纪录!</source>
+        <translation type="obsolete">There&apos;s no bonus record!</translation>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="61"/>
-        <source>当前没有纪录!</source>
+        <source>There are no cold-hot trxs currently!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="92"/>
-        <source>There are no guard accounts in the wallet.</source>
+        <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="214"/>
-        <source>Transaction of guard-sign-coldhot has been sent out!</source>
+        <source>Transaction of senator-sign-coldhot has been sent out!</source>
+        <oldsource>Transaction of guard-sign-coldhot has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2003,17 +2023,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="contact/ContactAddWidget.ui" line="56"/>
         <source>账户地址</source>
-        <translation type="unfinished">Address</translation>
+        <translation type="unfinished">ADDRESS</translation>
     </message>
     <message>
         <location filename="contact/ContactAddWidget.ui" line="153"/>
         <source>备注名</source>
-        <translation type="unfinished">Remark name</translation>
+        <translation type="unfinished">REMARK NAME</translation>
     </message>
     <message>
         <location filename="contact/ContactAddWidget.ui" line="81"/>
         <source>分组</source>
-        <translation type="unfinished">Group</translation>
+        <translation type="unfinished">GROUP</translation>
     </message>
     <message>
         <location filename="contact/ContactAddWidget.ui" line="97"/>
@@ -2164,37 +2184,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="contact/ContactInfoHistoryWidget.ui" line="36"/>
         <source>交易记录</source>
-        <translation type="unfinished">Transaction record</translation>
+        <translation type="unfinished">Transaction Record</translation>
     </message>
     <message>
         <location filename="contact/ContactInfoHistoryWidget.ui" line="66"/>
         <source>区块高度</source>
-        <translation type="unfinished">Block</translation>
+        <translation type="unfinished">BLOCK</translation>
     </message>
     <message>
         <location filename="contact/ContactInfoHistoryWidget.ui" line="79"/>
         <source>我的地址</source>
-        <translation type="unfinished">My address</translation>
+        <translation type="unfinished">MY ADDRESS</translation>
     </message>
     <message>
         <location filename="contact/ContactInfoHistoryWidget.ui" line="92"/>
         <source>数量</source>
-        <translation type="unfinished">Amount</translation>
+        <translation type="unfinished">AMOUNT</translation>
     </message>
     <message>
         <location filename="contact/ContactInfoHistoryWidget.ui" line="105"/>
         <source>手续费</source>
-        <translation type="unfinished">Fee</translation>
+        <translation type="unfinished">FEE</translation>
     </message>
     <message>
         <location filename="contact/ContactInfoHistoryWidget.ui" line="118"/>
         <source>交易ID</source>
-        <translation type="unfinished">Transaction ID</translation>
+        <translation type="unfinished">TRANSACTION ID</translation>
     </message>
     <message>
         <location filename="contact/ContactInfoHistoryWidget.ui" line="131"/>
         <source>交易状态</source>
-        <translation type="unfinished">state</translation>
+        <translation type="unfinished">STATE</translation>
     </message>
     <message>
         <location filename="contact/ContactInfoHistoryWidget.cpp" line="37"/>
@@ -2227,7 +2247,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="contact/ContactInfoTitleWidget.ui" line="53"/>
         <source>地址：</source>
-        <translation type="unfinished">Address:</translation>
+        <translation type="unfinished">ADDRESS:</translation>
     </message>
     <message>
         <location filename="contact/ContactInfoTitleWidget.ui" line="75"/>
@@ -2252,7 +2272,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="contact/ContactInfoTitleWidget.ui" line="115"/>
         <source>转 账</source>
-        <translation type="unfinished">transfer</translation>
+        <translation type="unfinished">TRANSFER</translation>
     </message>
     <message>
         <location filename="contact/ContactInfoTitleWidget.ui" line="140"/>
@@ -2396,17 +2416,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="exchange/contractbalancewidget.ui" line="34"/>
         <source>充值合约</source>
-        <translation type="unfinished">Deposit</translation>
+        <translation type="unfinished">DEPOSIT</translation>
     </message>
     <message>
         <location filename="exchange/contractbalancewidget.ui" line="48"/>
         <source>币种</source>
-        <translation type="unfinished">Coin</translation>
+        <translation type="unfinished">COIN</translation>
     </message>
     <message>
         <location filename="exchange/contractbalancewidget.ui" line="61"/>
         <source>余额</source>
-        <translation type="unfinished">Balance</translation>
+        <translation type="unfinished">BALANCE</translation>
     </message>
     <message>
         <location filename="exchange/contractbalancewidget.ui" line="91"/>
@@ -2416,12 +2436,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="exchange/contractbalancewidget.ui" line="117"/>
         <source>合约地址</source>
-        <translation type="unfinished">Contract address</translation>
+        <translation type="unfinished">CONTRACT ADDRESS</translation>
     </message>
     <message>
         <location filename="exchange/contractbalancewidget.ui" line="162"/>
         <source>开放合约</source>
-        <translation type="unfinished">open for users</translation>
+        <translation type="unfinished">OPEN FOR ALL</translation>
     </message>
     <message>
         <location filename="exchange/contractbalancewidget.cpp" line="46"/>
@@ -3448,36 +3468,44 @@ Cover it or not?</source>
     <message>
         <location filename="guard/FeedPricePage.ui" line="84"/>
         <source>币种</source>
-        <translation type="unfinished">Coin</translation>
+        <translation type="unfinished">CURRENCY</translation>
     </message>
     <message>
         <location filename="guard/FeedPricePage.ui" line="97"/>
         <source>最新喂价时间（GMT）</source>
-        <translation type="unfinished">Latest Feed Time</translation>
+        <translation type="unfinished">LATEST QUOTE TIME</translation>
     </message>
     <message>
         <location filename="guard/FeedPricePage.ui" line="110"/>
         <source>喂价比例（/LNK）</source>
-        <translation type="unfinished">Price(/LNK)</translation>
+        <translation type="unfinished">PRICE(/LNK)</translation>
     </message>
     <message>
-        <location filename="guard/FeedPricePage.ui" line="168"/>
+        <location filename="guard/FeedPricePage.ui" line="173"/>
+        <source>当前senator账号</source>
+        <translation type="unfinished">CURRENT SENATOR</translation>
+    </message>
+    <message>
         <source>当前guard账号</source>
-        <translation type="unfinished">Current Guard</translation>
+        <translation type="obsolete">Current Guard</translation>
     </message>
     <message>
-        <location filename="guard/FeedPricePage.ui" line="196"/>
+        <location filename="guard/FeedPricePage.ui" line="201"/>
         <source>市场喂价</source>
         <translation type="unfinished">Market Price</translation>
     </message>
     <message>
-        <location filename="guard/FeedPricePage.cpp" line="42"/>
         <source>当前没有纪录!</source>
+        <translation type="obsolete">There&apos;s no bonus record!</translation>
+    </message>
+    <message>
+        <location filename="guard/FeedPricePage.cpp" line="42"/>
+        <source>There is no currency price currently!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/FeedPricePage.cpp" line="71"/>
-        <source>There are no guard accounts in the wallet.</source>
+        <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3795,6 +3823,10 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="97"/>
+        <source> 提案 </source>
+        <translation type="unfinished">Proposal</translation>
+    </message>
+    <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="124"/>
         <source>提案</source>
         <translation type="unfinished">PROPOSAL</translation>
@@ -3817,7 +3849,7 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="211"/>
         <source>提现授权</source>
-        <translation type="unfinished">ConfirmWithdraw</translation>
+        <translation type="unfinished">Withdraw</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="229"/>
@@ -3901,43 +3933,55 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="38"/>
-        <source>Guard账户信息</source>
-        <translation type="unfinished">Guard Account Info</translation>
+        <source>SENATOR账户信息</source>
+        <oldsource>Guard账户信息</oldsource>
+        <translation type="unfinished">SENATOR Account Info</translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.ui" line="59"/>
-        <source>当前guard账号</source>
-        <oldsource>当前账号</oldsource>
-        <translation type="unfinished">Current Guard</translation>
+        <location filename="guard/GuardAccountPage.ui" line="64"/>
+        <source>当前SENATOR账号</source>
+        <translation type="unfinished">CURRENT SENATOR</translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.ui" line="118"/>
-        <source>Guard类型</source>
-        <translation type="unfinished">Type of Guard</translation>
+        <location filename="guard/GuardAccountPage.ui" line="123"/>
+        <source>SENATOR类型</source>
+        <translation type="unfinished">TYPE OF SENATOR</translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.ui" line="153"/>
-        <source>Guard ID</source>
+        <location filename="guard/GuardAccountPage.ui" line="158"/>
+        <source>SENATOR ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.ui" line="188"/>
+        <source>当前guard账号</source>
+        <oldsource>当前账号</oldsource>
+        <translation type="obsolete">Current Guard</translation>
+    </message>
+    <message>
+        <source>Guard类型</source>
+        <translation type="obsolete">Type of Guard</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardAccountPage.ui" line="193"/>
         <source>账户地址</source>
-        <translation type="unfinished">Address</translation>
+        <translation type="unfinished">ADDRESS</translation>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.cpp" line="41"/>
-        <source>There are no guard accounts in the wallet.</source>
+        <source>There are no senator accounts in the wallet.</source>
+        <oldsource>There are no senator accounts in the wallet.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.cpp" line="58"/>
-        <source>formal guard</source>
+        <source>formal senator</source>
+        <oldsource>formal guard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.cpp" line="63"/>
-        <source>informal guard</source>
+        <source>informal senator</source>
+        <oldsource>informal guard</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3950,8 +3994,9 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardIncomePage.ui" line="50"/>
-        <source>暂无代理收益</source>
-        <translation type="unfinished">There is no guard income currently.</translation>
+        <source>暂无Senator收益</source>
+        <oldsource>暂无代理收益</oldsource>
+        <translation type="unfinished">There is no senator income currently.</translation>
     </message>
 </context>
 <context>
@@ -3964,66 +4009,74 @@ Cover it or not?</source>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="84"/>
         <source>币种</source>
-        <translation type="unfinished">Coin</translation>
+        <translation type="unfinished">CURRENCY</translation>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="97"/>
         <source>热钱包多签地址</source>
-        <translation type="unfinished">Hot Multisig-Address</translation>
+        <translation type="unfinished">HOT MULTISIG-ADDRESS</translation>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="110"/>
         <source>冷钱包多签地址</source>
-        <translation type="unfinished">Cold Multisig-Address</translation>
+        <translation type="unfinished">COLD MULTISIG-ADDRESS</translation>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="123"/>
         <source>生效区块</source>
-        <translation type="unfinished">Effective Block</translation>
+        <translation type="unfinished">EFFECTIVE BLOCK</translation>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="136"/>
         <source>状态</source>
-        <translation type="unfinished">State</translation>
+        <translation type="unfinished">STATUS</translation>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="149"/>
         <source>操作</source>
-        <translation type="unfinished">Operation</translation>
+        <translation type="unfinished">OPERATION</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.ui" line="179"/>
+        <location filename="guard/GuardKeyManagePage.ui" line="184"/>
+        <source>当前senator账号</source>
+        <translation type="unfinished">CURRENT SENATOR</translation>
+    </message>
+    <message>
         <source>当前guard账号</source>
-        <translation type="unfinished">Current Guard</translation>
+        <translation type="obsolete">Current Guard</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.ui" line="230"/>
+        <location filename="guard/GuardKeyManagePage.ui" line="235"/>
         <source>Guard私钥管理</source>
-        <translation type="unfinished">Guard Key Management</translation>
+        <translation type="unfinished">Senator Key Management</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.ui" line="260"/>
+        <location filename="guard/GuardKeyManagePage.ui" line="265"/>
         <source>变更记录</source>
-        <translation type="unfinished">History</translation>
+        <translation type="unfinished">HISTORY</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.ui" line="290"/>
+        <location filename="guard/GuardKeyManagePage.ui" line="295"/>
         <source>导入跨链私钥</source>
-        <translation type="unfinished">Import</translation>
+        <translation type="unfinished">IMPORT</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.ui" line="320"/>
+        <location filename="guard/GuardKeyManagePage.ui" line="325"/>
         <source>变更多签地址</source>
-        <translation type="unfinished">Change M-A</translation>
+        <translation type="unfinished">CHANGE M-A</translation>
+    </message>
+    <message>
+        <source>当前没有纪录!</source>
+        <translation type="obsolete">There&apos;s no bonus record!</translation>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.cpp" line="56"/>
-        <source>当前没有纪录!</source>
+        <source>There are no records!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.cpp" line="88"/>
-        <source>There are no guard accounts in the wallet.</source>
+        <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4039,7 +4092,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.cpp" line="137"/>
-        <source>no guard</source>
+        <source>no senator</source>
+        <oldsource>no guard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4504,22 +4558,22 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="mainpage.ui" line="78"/>
         <source>创建账户</source>
-        <translation type="unfinished">New</translation>
+        <translation type="unfinished">NEW</translation>
     </message>
     <message>
         <location filename="mainpage.ui" line="149"/>
         <source>币种</source>
-        <translation type="unfinished">Coin</translation>
+        <translation type="unfinished">COIN</translation>
     </message>
     <message>
         <location filename="mainpage.ui" line="162"/>
         <source>余额</source>
-        <translation type="unfinished">Balance</translation>
+        <translation type="unfinished">BALANCE</translation>
     </message>
     <message>
         <location filename="mainpage.ui" line="221"/>
         <source>导入账户</source>
-        <translation type="unfinished">Import</translation>
+        <translation type="unfinished">IMPORT</translation>
     </message>
     <message>
         <source>当前账号</source>
@@ -4528,7 +4582,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="mainpage.ui" line="382"/>
         <source>交易记录</source>
-        <translation type="unfinished">Records</translation>
+        <translation type="unfinished">RECORDS</translation>
     </message>
     <message>
         <location filename="mainpage.ui" line="413"/>
@@ -4543,7 +4597,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="mainpage.ui" line="349"/>
         <source>操作</source>
-        <translation type="unfinished">Operation</translation>
+        <translation type="unfinished">OPERATION</translation>
     </message>
     <message>
         <source>余额/GOP</source>
@@ -4656,7 +4710,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="miner/minerpage.ui" line="48"/>
         <source>注册</source>
-        <translation type="unfinished">Register</translation>
+        <translation type="unfinished">REGISTER</translation>
     </message>
     <message>
         <source>当前账户</source>
@@ -4665,7 +4719,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="miner/minerpage.ui" line="102"/>
         <source>质押资产</source>
-        <translation type="unfinished">Pledge</translation>
+        <translation type="unfinished">MORTGAGE</translation>
     </message>
     <message>
         <source>币种</source>
@@ -4674,64 +4728,64 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="miner/minerpage.ui" line="186"/>
         <source>来自miner</source>
-        <translation type="unfinished">From Miner</translation>
+        <translation type="unfinished">FROM MINER</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="199"/>
         <location filename="miner/minerpage.ui" line="458"/>
         <source>数量</source>
-        <translation type="unfinished">Amount</translation>
+        <translation type="unfinished">AMOUNT</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="207"/>
         <location filename="miner/minerpage.ui" line="369"/>
         <source>操作</source>
-        <translation type="unfinished">Operation</translation>
+        <translation type="unfinished">OPERATION</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="294"/>
         <source>质押miner账户</source>
-        <translation type="unfinished">MinerPledged</translation>
+        <translation type="unfinished">MINER MORTGAGED TO</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="307"/>
         <source>质押币种</source>
-        <translation type="unfinished">Coin</translation>
+        <translation type="unfinished">COIN</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="320"/>
         <source>质押数量</source>
-        <translation type="unfinished">Amount pledged</translation>
+        <translation type="unfinished">AMOUNT MORTGAGE</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="445"/>
         <source>区块高度</source>
-        <translation type="unfinished">Block</translation>
+        <translation type="unfinished">BLOCK</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="466"/>
         <source>手续费</source>
-        <translation type="unfinished">Fee</translation>
+        <translation type="unfinished">FEE</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="474"/>
         <source>交易ID</source>
-        <translation type="unfinished">Transaction ID</translation>
+        <translation type="unfinished">TRANSACTION ID</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="482"/>
         <source>交易状态</source>
-        <translation type="unfinished">state</translation>
+        <translation type="unfinished">STATE</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="529"/>
         <source>当前收益</source>
-        <translation type="unfinished">Income</translation>
+        <translation type="unfinished">INCOME</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="560"/>
         <source>质押信息</source>
-        <translation type="unfinished">Pledge</translation>
+        <translation type="unfinished">MORTGAGE</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="573"/>
@@ -4741,12 +4795,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="miner/minerpage.ui" line="610"/>
         <source>收益记录</source>
-        <translation type="unfinished">Record</translation>
+        <translation type="unfinished">RECORD</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="640"/>
         <source>领取全部</source>
-        <translation type="unfinished">get all</translation>
+        <translation type="unfinished">GET ALL</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="659"/>
@@ -4795,17 +4849,20 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="289"/>
-        <source>Transaction of obtain-income has been sent out!</source>
+        <source>Transaction of get-income has been sent out!</source>
+        <oldsource>Transaction of obtain-income has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="300"/>
-        <source>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</source>
+        <source>This account&apos;s mining income is less than %1 %2 ! You can not get it.</source>
+        <oldsource>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="305"/>
-        <source>Fail to obtain mining income!</source>
+        <source>Fail to get mining income!</source>
+        <oldsource>Fail to obtain mining income!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5071,47 +5128,47 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <location filename="exchange/myexchangecontractpage.ui" line="37"/>
         <source>挂交易单</source>
         <oldsource>挂卖单</oldsource>
-        <translation type="unfinished">Sell</translation>
+        <translation type="unfinished">SELL</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.ui" line="58"/>
+        <location filename="exchange/myexchangecontractpage.ui" line="63"/>
         <source>当前账户</source>
-        <translation type="unfinished">Account</translation>
+        <translation type="unfinished">ACCOUNT</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.ui" line="100"/>
+        <location filename="exchange/myexchangecontractpage.ui" line="105"/>
         <source>查看合约余额</source>
-        <translation type="unfinished">ContractBalance</translation>
+        <translation type="unfinished">CONTRACT BALANCE</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.ui" line="116"/>
+        <location filename="exchange/myexchangecontractpage.ui" line="121"/>
         <source>我的挂单</source>
         <translation type="unfinished">My Orders</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.ui" line="153"/>
+        <location filename="exchange/myexchangecontractpage.ui" line="158"/>
         <source>卖</source>
-        <translation type="unfinished">Sell</translation>
+        <translation type="unfinished">SELL</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.ui" line="166"/>
+        <location filename="exchange/myexchangecontractpage.ui" line="171"/>
         <source>买</source>
-        <translation type="unfinished">Buy</translation>
+        <translation type="unfinished">BUY</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.ui" line="179"/>
+        <location filename="exchange/myexchangecontractpage.ui" line="184"/>
         <source>价格</source>
-        <translation type="unfinished">Price</translation>
+        <translation type="unfinished">PRICE</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.ui" line="217"/>
+        <location filename="exchange/myexchangecontractpage.ui" line="222"/>
         <source>全部撤销</source>
-        <translation type="unfinished">CancelAll</translation>
+        <translation type="unfinished">CANCEL ALL</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.ui" line="261"/>
+        <location filename="exchange/myexchangecontractpage.ui" line="271"/>
         <source>交易对</source>
-        <translation type="unfinished">OrderPair</translation>
+        <translation type="unfinished">ORDER PAIR</translation>
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="57"/>
@@ -5130,95 +5187,101 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="exchange/myexchangecontractpage.cpp" line="170"/>
+        <source>SELL</source>
+        <oldsource>Sell</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="171"/>
-        <source>Sell</source>
+        <source>BUY</source>
+        <oldsource>Buy</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="172"/>
-        <source>Buy</source>
+        <source>PRICE</source>
+        <oldsource>Price</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="173"/>
-        <source>Price</source>
+        <location filename="exchange/myexchangecontractpage.cpp" line="176"/>
+        <source>SELL / %1</source>
+        <oldsource>Sell / %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="177"/>
-        <source>Sell / %1</source>
+        <source>BUY / %1</source>
+        <oldsource>Buy / %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="178"/>
-        <source>Buy / %1</source>
+        <source>PRICE (%1/%2)</source>
+        <oldsource>Price (%1/%2)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="179"/>
-        <source>Price (%1/%2)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="246"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="245"/>
         <source>Create exchange contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="253"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="252"/>
         <source>Fail to register exchange contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="321"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="320"/>
         <source>Sure to cancel this order? You need to pay the fee for contract execution.</source>
         <oldsource>Sure to withdraw this order? You need to pay the fee for contract execution.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="349"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="348"/>
         <source>Transaction of cancel-order has been sent out!</source>
         <oldsource>Transaction of withdraw-order has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="356"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="355"/>
         <source>Fail to cancel sell-order!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="381"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="380"/>
         <source>You need to pay the fee for contract execution.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="410"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="409"/>
         <source>Transaction of cancel-order-pair has been sent out!</source>
         <oldsource>Transaction of withdraw-order-pair has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="417"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="416"/>
         <source>Fail to cancel sell-order pair!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="442"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="441"/>
         <source>register contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="482"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="481"/>
         <source>You don&apos;t have an exchange contract at the moment. Will you create it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="498"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="497"/>
         <source>Can not find file contracts/blocklink_exchange.glua.gpc!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="602"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="601"/>
         <source>Sure to cancel all orders of %1-to-%2 ?</source>
         <oldsource>Sure to withdraw all orders of %1-to-%2 ?</oldsource>
         <translation type="unfinished"></translation>
@@ -5413,32 +5476,32 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="exchange/OnchainOrderPage.ui" line="27"/>
         <source>卖</source>
-        <translation type="unfinished">Sell</translation>
+        <translation type="unfinished">SELL</translation>
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.ui" line="40"/>
         <source>买</source>
-        <translation type="unfinished">Buy</translation>
+        <translation type="unfinished">BUY</translation>
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.ui" line="53"/>
         <source>价格</source>
-        <translation type="unfinished">Price</translation>
+        <translation type="unfinished">PRICE</translation>
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.ui" line="83"/>
         <source>挂单中心</source>
-        <translation type="unfinished">OrderCenter</translation>
+        <translation type="unfinished">Order Center</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.ui" line="127"/>
+        <location filename="exchange/OnchainOrderPage.ui" line="132"/>
         <source>交易对</source>
-        <translation type="unfinished">OrderPair</translation>
+        <translation type="unfinished">ORDER PAIR</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.ui" line="197"/>
+        <location filename="exchange/OnchainOrderPage.ui" line="207"/>
         <source>当前账户</source>
-        <translation type="unfinished">Account</translation>
+        <translation type="unfinished">ACCOUNT</translation>
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.cpp" line="46"/>
@@ -5457,37 +5520,43 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="exchange/OnchainOrderPage.cpp" line="227"/>
+        <source>SELL</source>
+        <oldsource>Sell</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="exchange/OnchainOrderPage.cpp" line="228"/>
-        <source>Sell</source>
+        <source>BUY</source>
+        <oldsource>Buy</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.cpp" line="229"/>
-        <source>Buy</source>
+        <source>PRICE</source>
+        <oldsource>Price</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="230"/>
-        <source>Price</source>
+        <location filename="exchange/OnchainOrderPage.cpp" line="233"/>
+        <source>SELL / %1</source>
+        <oldsource>Sell / %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.cpp" line="234"/>
-        <source>Sell / %1</source>
+        <source>BUY / %1</source>
+        <oldsource>Buy / %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.cpp" line="235"/>
-        <source>Buy / %1</source>
+        <source>PRICE (%1/%2)</source>
+        <oldsource>Price (%1/%2)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="236"/>
-        <source>Price (%1/%2)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="248"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="247"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5581,7 +5650,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="51"/>
         <source>交易对象</source>
-        <translation type="unfinished">AcceptCoin</translation>
+        <translation type="unfinished">ACCEPT COIN</translation>
     </message>
     <message>
         <source>发布者地址</source>
@@ -5589,29 +5658,30 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="53"/>
-        <source>Owner</source>
+        <source>OWNER</source>
+        <oldsource>Owner</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="55"/>
         <source>发布者 </source>
-        <translation type="unfinished">Owner</translation>
+        <translation type="unfinished">OWNER</translation>
     </message>
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="57"/>
         <source>汇率</source>
-        <translation type="unfinished">Rate</translation>
+        <translation type="unfinished">RATE</translation>
     </message>
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="59"/>
         <source>可用金额(LNK)</source>
         <oldsource>余额(LNK)</oldsource>
-        <translation type="unfinished">Balance(LNK)</translation>
+        <translation type="unfinished">BALANCE(LNK)</translation>
     </message>
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="61"/>
         <source>总额</source>
-        <translation type="unfinished">Total</translation>
+        <translation type="unfinished">TOTAL</translation>
     </message>
 </context>
 <context>
@@ -5651,8 +5721,9 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="poundage/PoundageWidget.ui" line="90"/>
-        <source>发行承兑单</source>
-        <translation type="unfinished">Release</translation>
+        <source>发布承兑单</source>
+        <oldsource>发行承兑单</oldsource>
+        <translation type="unfinished">RELEASE</translation>
     </message>
     <message>
         <location filename="poundage/PoundageWidget.ui" line="109"/>
@@ -5666,13 +5737,15 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="poundage/PoundageWidget.ui" line="145"/>
-        <source>最新</source>
-        <translation type="unfinished">Newest</translation>
+        <source>所有</source>
+        <oldsource>最新</oldsource>
+        <translation type="unfinished">ALL</translation>
     </message>
     <message>
         <location filename="poundage/PoundageWidget.ui" line="172"/>
-        <source>我发起的</source>
-        <translation type="unfinished">MyAcceptance</translation>
+        <source>我发布的</source>
+        <oldsource>我发起的</oldsource>
+        <translation type="unfinished">MY ACCEPTANCE</translation>
     </message>
     <message>
         <location filename="poundage/PoundageWidget.cpp" line="116"/>
@@ -5868,35 +5941,36 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="guard/ProposalPage.ui" line="84"/>
         <source>失效时间（GMT）</source>
-        <translation type="unfinished">Expiration(GMT)</translation>
+        <translation type="unfinished">EXPIRATION(GMT)</translation>
     </message>
     <message>
         <location filename="guard/ProposalPage.ui" line="97"/>
         <source>发起人</source>
-        <translation type="unfinished">Proposer</translation>
+        <translation type="unfinished">PROPOSER</translation>
     </message>
     <message>
         <location filename="guard/ProposalPage.ui" line="110"/>
         <source>类型（点击查看）</source>
-        <translation type="unfinished">Type(click)</translation>
+        <translation type="unfinished">TYPE(CLICK)</translation>
     </message>
     <message>
         <location filename="guard/ProposalPage.ui" line="123"/>
         <source>投票状态</source>
-        <translation type="unfinished">Voting State</translation>
+        <translation type="unfinished">VOTING STATE</translation>
     </message>
     <message>
         <location filename="guard/ProposalPage.ui" line="136"/>
         <source>我的投票</source>
-        <translation type="unfinished">My Vote</translation>
+        <translation type="unfinished">MY VOTE</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.ui" line="176"/>
-        <source>当前guard账号</source>
-        <translation type="unfinished">Current Guard</translation>
+        <location filename="guard/ProposalPage.ui" line="181"/>
+        <source>当前SENATOR账号</source>
+        <oldsource>当前guard账号</oldsource>
+        <translation type="unfinished">CURRENT SENATOR</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.ui" line="227"/>
+        <location filename="guard/ProposalPage.ui" line="232"/>
         <source>提案</source>
         <translation type="unfinished">Proposal</translation>
     </message>
@@ -5918,12 +5992,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="47"/>
-        <source>当前没有历史纪录!</source>
+        <source>There are no proposals currently!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="76"/>
-        <source>There are no guard accounts in the wallet.</source>
+        <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5943,7 +6017,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="139"/>
-        <source>no guard</source>
+        <source>no senator</source>
+        <oldsource>no guard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6011,33 +6086,35 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="44"/>
-        <source>发行账号：</source>
-        <translation type="unfinished">Account:</translation>
+        <source>发布账号：</source>
+        <oldsource>发行账号：</oldsource>
+        <translation type="unfinished">ACCOUNT:</translation>
     </message>
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="113"/>
         <source>LNK 数量：</source>
-        <translation type="unfinished">Amount of LNK:</translation>
+        <translation type="unfinished">AMOUNT OF LNK:</translation>
     </message>
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="180"/>
         <source>承兑数量:</source>
-        <translation type="unfinished">Accept amount:</translation>
+        <translation type="unfinished">ACCEPT AMOUNT:</translation>
     </message>
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="239"/>
-        <source>发行承兑单</source>
+        <source>发布承兑单</source>
+        <oldsource>发行承兑单</oldsource>
         <translation type="unfinished">Release</translation>
     </message>
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="57"/>
         <source>承兑币种:</source>
-        <translation type="unfinished">Accept coin</translation>
+        <translation type="unfinished">ACCEPT COIN</translation>
     </message>
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="157"/>
         <source>手续费:</source>
-        <translation type="unfinished">Fee:</translation>
+        <translation type="unfinished">FEE:</translation>
     </message>
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="100"/>
@@ -7415,51 +7492,58 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/WithdrawConfirmPage.ui" line="84"/>
         <source>申请时间（GMT）</source>
-        <translation type="unfinished">Time(GMT)</translation>
+        <translation type="unfinished">TIME(GMT)</translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.ui" line="97"/>
         <source>提现金额</source>
-        <translation type="unfinished">Amount</translation>
+        <translation type="unfinished">AMOUNT</translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.ui" line="110"/>
         <source>申请人</source>
-        <translation type="unfinished">Withdraw Account</translation>
+        <translation type="unfinished">APPLIER ACCOUNT</translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.ui" line="123"/>
         <source>提现地址</source>
-        <translation type="unfinished">To address</translation>
+        <translation type="unfinished">TO ADDRESS</translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.ui" line="136"/>
         <source>状态</source>
-        <translation type="unfinished">State</translation>
+        <translation type="unfinished">STATUS</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="199"/>
-        <source>当前guard账号</source>
-        <translation type="unfinished">Current Guard</translation>
+        <location filename="guard/WithdrawConfirmPage.ui" line="204"/>
+        <source>当前SENATOR账号</source>
+        <oldsource>当前guard账号</oldsource>
+        <translation type="unfinished">CURRENT SENATOR</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="227"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="232"/>
         <source>提现授权</source>
-        <translation type="unfinished">Confirm Withdraw</translation>
+        <translation type="unfinished">Authorized Withdraw</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="246"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="251"/>
         <source>正在授权</source>
-        <translation type="unfinished">Confirming</translation>
+        <translation type="unfinished">CONFIRMING</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="265"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="270"/>
         <source>等待授权</source>
-        <translation type="unfinished">Waiting</translation>
+        <translation type="unfinished">WAITING</translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="57"/>
+        <source>There are no withdraw trxs to authorize currently!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="215"/>
-        <source>Transaction of guard-sign-crosschain has been sent out!</source>
+        <source>Transaction of senator-sign-crosschain has been sent out!</source>
+        <oldsource>Transaction of guard-sign-crosschain has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7495,13 +7579,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="57"/>
         <source>当前没有纪录!</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">There&apos;s no bonus record!</translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="86"/>
-        <source>There are no guard accounts in the wallet.</source>
+        <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

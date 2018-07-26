@@ -149,7 +149,7 @@ void BonusPage::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":{"))
         {
             TransactionResultDialog transactionResultDialog;
-            transactionResultDialog.setInfoText(tr("Transaction of obtain-bonus has been sent out!"));
+            transactionResultDialog.setInfoText(tr("Transaction of get-bonus has been sent out!"));
             transactionResultDialog.setDetailText(result);
             transactionResultDialog.pop();
         }
@@ -157,7 +157,7 @@ void BonusPage::jsonDataUpdated(QString id)
         {
             ErrorResultDialog errorResultDialog;
             errorResultDialog.setDetailText(result);
-            errorResultDialog.setInfoText(tr("Fail to obtain bonus!"));
+            errorResultDialog.setInfoText(tr("Fail to get bonus!"));
             errorResultDialog.pop();
         }
 

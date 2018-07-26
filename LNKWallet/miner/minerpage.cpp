@@ -38,7 +38,7 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->lockBalancesTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->lockBalancesTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->lockBalancesTableWidget->horizontalHeader()->setVisible(true);
-    ui->lockBalancesTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->lockBalancesTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     //ui->lockBalancesTableWidget->setColumnCount(5);
     ui->lockBalancesTableWidget->setColumnWidth(0,160);
     ui->lockBalancesTableWidget->setColumnWidth(1,150);
@@ -286,7 +286,7 @@ void MinerPage::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":{"))
         {
             TransactionResultDialog transactionResultDialog;
-            transactionResultDialog.setInfoText(tr("Transaction of obtain-income has been sent out!"));
+            transactionResultDialog.setInfoText(tr("Transaction of get-income has been sent out!"));
             transactionResultDialog.setDetailText(result);
             transactionResultDialog.pop();
         }
@@ -297,12 +297,12 @@ void MinerPage::jsonDataUpdated(QString id)
 
             if(result.contains("pay_back_obj.second.amount >= min_payback_balance: doesnt get enough pay back"))
             {
-                errorResultDialog.setInfoText(tr("This account's mining income is less than %1 %2 ! You can not obtain it.")
+                errorResultDialog.setInfoText(tr("This account's mining income is less than %1 %2 ! You can not get it.")
                                               .arg(0.6).arg(ASSET_NAME));
             }
             else
             {
-                errorResultDialog.setInfoText(tr("Fail to obtain mining income!"));
+                errorResultDialog.setInfoText(tr("Fail to get mining income!"));
             }
 
             errorResultDialog.pop();

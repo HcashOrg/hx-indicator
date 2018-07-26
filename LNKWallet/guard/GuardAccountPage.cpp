@@ -38,7 +38,7 @@ void GuardAccountPage::init()
 
         QLabel* label = new QLabel(this);
         label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
-        label->setText(tr("There are no guard accounts in the wallet."));
+        label->setText(tr("There are no senator accounts in the wallet."));
     }
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
@@ -55,12 +55,12 @@ void GuardAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg
     QStringList normalGuards = HXChain::getInstance()->allGuardMap.keys();
     if(formalGuards.contains(ui->accountComboBox->currentText()))
     {
-        ui->guardTypeLabel->setText(tr("formal guard"));
+        ui->guardTypeLabel->setText(tr("formal senator"));
         ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_formal.png"));
     }
     else if(normalGuards.contains(ui->accountComboBox->currentText()))
     {
-        ui->guardTypeLabel->setText(tr("informal guard"));
+        ui->guardTypeLabel->setText(tr("informal senator"));
         ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_normal.png"));
     }
 }

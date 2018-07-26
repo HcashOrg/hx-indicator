@@ -150,7 +150,6 @@ void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
             }
             else
             {
-                toolButtonItem->setInitGray(false);
                 toolButtonItem->setText(ui->ordersTableWidget->item(i,j)->text());          
             }
 
@@ -225,15 +224,15 @@ void OnchainOrderPage::updateTableHeaders()
 {
     if(ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())
     {
-        ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("Sell"));
-        ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("Buy"));
-        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("Price"));
+        ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("SELL"));
+        ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("BUY"));
+        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("PRICE"));
     }
     else
     {
-        ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("Sell / %1").arg(ui->assetComboBox->currentText()));
-        ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("Buy / %1").arg(ui->assetComboBox2->currentText()));
-        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("Price (%1/%2)").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()));
+        ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("SELL / %1").arg(ui->assetComboBox->currentText()));
+        ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("BUY / %1").arg(ui->assetComboBox2->currentText()));
+        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("PRICE (%1/%2)").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()));
     }
 
 }

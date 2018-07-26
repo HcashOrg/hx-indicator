@@ -34,13 +34,13 @@ GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
     ui->multisigTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->multisigTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->multisigTableWidget->horizontalHeader()->setVisible(true);
-    ui->multisigTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->multisigTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->multisigTableWidget->setColumnWidth(0,120);
     ui->multisigTableWidget->setColumnWidth(1,140);
     ui->multisigTableWidget->setColumnWidth(2,140);
-    ui->multisigTableWidget->setColumnWidth(3,80);
-    ui->multisigTableWidget->setColumnWidth(4,80);
+    ui->multisigTableWidget->setColumnWidth(3,100);
+    ui->multisigTableWidget->setColumnWidth(4,70);
     ui->multisigTableWidget->setColumnWidth(5,80);
     ui->multisigTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
@@ -53,7 +53,7 @@ GuardKeyManagePage::GuardKeyManagePage(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&GuardKeyManagePage::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->multisigTableWidget);
-    blankWidget->setTextTip(tr("当前没有纪录!"));
+    blankWidget->setTextTip(tr("There are no records!"));
 
     init();
 }
@@ -85,7 +85,7 @@ void GuardKeyManagePage::init()
 
         QLabel* label = new QLabel(this);
         label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
-        label->setText(tr("There are no guard accounts in the wallet."));
+        label->setText(tr("There are no senator accounts in the wallet."));
     }
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->multisigTableWidget);
@@ -134,7 +134,7 @@ void GuardKeyManagePage::showMultisigInfo()
 
         if(ui->accountComboBox->currentText().isEmpty())
         {
-            ui->multisigTableWidget->setItem(i,5,new QTableWidgetItem(tr("no guard")));
+            ui->multisigTableWidget->setItem(i,5,new QTableWidgetItem(tr("no senator")));
         }
         else
         {

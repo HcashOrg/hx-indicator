@@ -44,7 +44,7 @@ void AllTransactionWidget::init()
 
     ui->transactionsTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
-    setStyleSheet("QToolButton{font:10px \"微软雅黑\";background:transparent;border:1px solid rgb(137,129,161);border-radius:9px;color: rgb(137,129,161);}"
+    setStyleSheet("QToolButton{font:8px \"微软雅黑\";background:transparent;border:1px solid rgb(137,129,161);border-radius:9px;color: rgb(137,129,161);}"
                   "QToolButton::checked{background-color:rgb(83,61,138);color:white;}");
 
     ui->searchLineEdit->setPlaceholderText(tr("address or transaction id"));

@@ -39,7 +39,7 @@ FeedPricePage::FeedPricePage(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&FeedPricePage::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->assetPriceTableWidget);
-    blankWidget->setTextTip(tr("当前没有纪录!"));
+    blankWidget->setTextTip(tr("There is no currency price currently!"));
     init();
 }
 
@@ -68,7 +68,7 @@ void FeedPricePage::init()
 
         QLabel* label = new QLabel(this);
         label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
-        label->setText(tr("There are no guard accounts in the wallet."));
+        label->setText(tr("There are no senator accounts in the wallet."));
     }
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->assetPriceTableWidget);
