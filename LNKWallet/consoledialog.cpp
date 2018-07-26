@@ -33,8 +33,7 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
 
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
     ui->clearBtn->setStyleSheet(CANCELBTN_STYLE);
-    ui->consoleLineEdit->setStyleSheet("QLineEdit{color:#5474EB;font-size:12px;}");
-
+    ui->consoleLineEdit->setStyleSheet("QLineEdit{color:rgb(52,37,90);font-size:12px;}");
 
     ui->containerWidget->installEventFilter(this);
 
@@ -46,7 +45,7 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
 
 //    ui->consoleLineEdit->setStyleSheet("color:black;border:1px solid #CCCCCC;border-radius:3px;");
 //    ui->consoleLineEdit->setTextMargins(8,0,0,0);
-//    ui->consoleBrowser->setStyleSheet("QTextBrowser{color:black;border:1px solid #CCCCCC;border-radius:3px;}");
+    ui->consoleBrowser->setStyleSheet("QTextBrowser{color:rgb(52,37,90);border:none;border-radius:10px;outline:1px solid rgb(196,191,214);outline-radius:8px;}");
 
     ui->consoleLineEdit->setFocus();
 

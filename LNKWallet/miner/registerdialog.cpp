@@ -84,7 +84,7 @@ void RegisterDialog::jsonDataUpdated(QString id)
         }
         else if(result.startsWith("\"error\":"))
         {
-            ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
+            ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#EB005E>" + tr("Wrong password!") + "</font></body>" );
         }
 
         return;
@@ -147,12 +147,12 @@ void RegisterDialog::jsonDataUpdated(QString id)
         if( result.startsWith("\"result\":{\"id\":\"0.0.0\""))
         {
             ui->okBtn->setEnabled(true);
-            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#2be683>" + tr( "The name is available") + "</font></body>" );
+            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#543D89>" + tr( "The name is available") + "</font></body>" );
         }
         else
         {
             ui->okBtn->setEnabled(false);
-            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr( "This name has been used") + "</font></body>" );
+            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#EB005E>" + tr( "This name has been used") + "</font></body>" );
         }
 
         return;

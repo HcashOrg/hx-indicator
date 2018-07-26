@@ -97,9 +97,9 @@
      <property name="geometry">
       <rect>
        <x>96</x>
-       <y>151</y>
+       <y>154</y>
        <width>161</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
     </widget>
@@ -107,7 +107,7 @@
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>157</y>
+       <y>156</y>
        <width>61</width>
        <height>20</height>
       </rect>
@@ -117,7 +117,7 @@
      </property>
      <property name="styleSheet">
       <string notr="true">background:transparent;
-color: rgb(84, 116, 235);
+color: rgb(83,61,138);
 font: 11px &quot;微软雅黑&quot;;</string>
      </property>
      <property name="text">
@@ -147,9 +147,9 @@ font: 11px &quot;微软雅黑&quot;;</string>
      <property name="geometry">
       <rect>
        <x>96</x>
-       <y>191</y>
+       <y>193</y>
        <width>161</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
      <property name="echoMode">
@@ -198,9 +198,9 @@ font: 11px &quot;微软雅黑&quot;;</string>
      <property name="geometry">
       <rect>
        <x>96</x>
-       <y>114</y>
+       <y>117</y>
        <width>90</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
      <property name="font">
@@ -221,9 +221,9 @@ font: 11px &quot;微软雅黑&quot;;</string>
      <property name="geometry">
       <rect>
        <x>96</x>
-       <y>80</y>
+       <y>83</y>
        <width>120</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
      <property name="text">
@@ -246,8 +246,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>450</x>
-       <y>16</y>
+       <x>471</x>
+       <y>12</y>
        <width>18</width>
        <height>18</height>
       </rect>

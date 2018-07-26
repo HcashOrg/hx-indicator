@@ -18,7 +18,7 @@ class FeeChooseWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit FeeChooseWidget(double feeNumber=20,const QString &coinType="LNK",const QString &accountName = "",QWidget *parent = 0);
+    explicit FeeChooseWidget(double feeNumber=20,const QString &coinType="HX",const QString &accountName = "",QWidget *parent = 0);
     ~FeeChooseWidget();
 public:
     const QString &GetFeeID()const;//获取手续费承兑单id--若为空，则表示未选择或者没有合适的承兑单

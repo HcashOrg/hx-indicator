@@ -56,7 +56,7 @@ QVariant PoundageShowTableModel::headerData(int section, Qt::Orientation orienta
                 case 4:
                     return tr("汇率");
                 case 5:
-                    return tr("可用金额(LNK)");
+                    return tr("可用金额(HX)");
                 case 6:
                     return tr("总额");
                 default:
@@ -115,7 +115,7 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
             }
             else if(index.column() == 1)
             {
-                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->chainType+" : "+"LNK";
+                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->chainType+" : "+"HX";
             }
             else if(index.column() == 2)
             {

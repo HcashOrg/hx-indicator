@@ -181,7 +181,7 @@ void DepositPage::InitWidget()
     connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &DepositPage::jsonDataUpdated);
 
 
-    _p->fee = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.tunnelBindFee.toDouble(),"LNK",_p->name,
+    _p->fee = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.tunnelBindFee.toDouble(),"HX",_p->name,
                                                     HXChain::getInstance()->mainFrame);
     _p->fee->raise();
     connect(_p->fee,&FeeChargeWidget::cancelSignal,this,&DepositPage::close);

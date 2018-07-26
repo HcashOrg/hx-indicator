@@ -129,7 +129,7 @@ SetDialog::SetDialog(QWidget *parent) :
     }
 
     QString fee = HXChain::getInstance()->feeType;
-    if("LNK" == fee){
+    if("HX" == fee){
         ui->comboBox_fee->setCurrentIndex(0);
     }
     else if("BTC" == fee)
@@ -270,8 +270,8 @@ void SetDialog::on_saveBtn_clicked()
     }
 
 
-    HXChain::getInstance()->configFile->setValue("/settings/feeType", ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"LNK");
-    HXChain::getInstance()->feeType = ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"LNK";
+    HXChain::getInstance()->configFile->setValue("/settings/feeType", ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"HX");
+    HXChain::getInstance()->feeType = ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"HX";
 
 
     HXChain::getInstance()->configFile->setValue("/settings/autoDeposit", ui->depositBtn->isChecked());

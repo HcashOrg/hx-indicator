@@ -218,9 +218,9 @@
     <property name="geometry">
      <rect>
       <x>380</x>
-      <y>161</y>
+      <y>160</y>
       <width>241</width>
-      <height>30</height>
+      <height>24</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -230,8 +230,8 @@
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'SimSun'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'微软雅黑';&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'微软雅黑'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="placeholderText">
      <string>请输入备注</string>
@@ -240,10 +240,10 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="tipLabel4">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>86</y>
+      <x>143</x>
+      <y>88</y>
       <width>120</width>
-      <height>30</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -332,7 +332,7 @@ p, li { white-space: pre-wrap; }
       <x>380</x>
       <y>138</y>
       <width>80</width>
-      <height>30</height>
+      <height>24</height>
      </rect>
     </property>
     <property name="font">
@@ -355,7 +355,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>380</x>
-      <y>201</y>
+      <y>190</y>
       <width>221</width>
       <height>16</height>
      </rect>
@@ -392,7 +392,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QToolButton" name="toolButton_chooseContact">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>271</x>
       <y>95</y>
       <width>12</width>
       <height>12</height>
@@ -408,8 +408,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QLabel" name="tipLabel3">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>193</y>
+      <x>30</x>
+      <y>190</y>
       <width>161</width>
       <height>20</height>
      </rect>
@@ -424,38 +424,6 @@ p, li { white-space: pre-wrap; }
      <string>余额不足</string>
     </property>
    </widget>
-   <zorder>changeAccountLabel</zorder>
-   <zorder>sendtoLabel</zorder>
-   <zorder>stackedWidget</zorder>
-   <zorder>amountLabel</zorder>
-   <zorder>amountLineEdit</zorder>
-   <zorder>assetComboBox</zorder>
-   <zorder>memoTextEdit</zorder>
-   <zorder>tipLabel4</zorder>
-   <zorder>sendBtn</zorder>
-   <zorder>label</zorder>
-   <zorder>accountComboBox</zorder>
-   <zorder>memoLabel</zorder>
-   <zorder>tipLabel6</zorder>
-   <zorder>sendtoLineEdit</zorder>
-   <zorder>toolButton_chooseContact</zorder>
-   <zorder>tipLabel3</zorder>
-   <zorder>changeAccountLabel</zorder>
-   <zorder>sendtoLabel</zorder>
-   <zorder>stackedWidget</zorder>
-   <zorder>amountLabel</zorder>
-   <zorder>amountLineEdit</zorder>
-   <zorder>assetComboBox</zorder>
-   <zorder>memoTextEdit</zorder>
-   <zorder>tipLabel4</zorder>
-   <zorder>sendBtn</zorder>
-   <zorder>label</zorder>
-   <zorder>accountComboBox</zorder>
-   <zorder>memoLabel</zorder>
-   <zorder>tipLabel6</zorder>
-   <zorder>sendtoLineEdit</zorder>
-   <zorder>toolButton_chooseContact</zorder>
-   <zorder>tipLabel3</zorder>
   </widget>
   <zorder>widget</zorder>
   <zorder>title_label</zorder>
