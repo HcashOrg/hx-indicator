@@ -29,7 +29,7 @@ ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
 
     ui->coldHotTransactionTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->coldHotTransactionTableWidget->horizontalHeader()->setVisible(true);
-    ui->coldHotTransactionTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->coldHotTransactionTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->coldHotTransactionTableWidget->setColumnWidth(0,120);
     ui->coldHotTransactionTableWidget->setColumnWidth(1,100);
@@ -45,8 +45,7 @@ ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
     ui->typeCurrentBtn->setCheckable(true);
     ui->typeWaitingBtn->setCheckable(true);
 
-    setStyleSheet("QPushButton{font:10px \"微软雅黑\";background:transparent;border:none;color: rgb(137,129,161);}"
-                  "QPushButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}");
+    setStyleSheet(PUSHBUTTON_CHECK_STYLE);
 
     ui->typeCurrentBtn->adjustSize();
     ui->typeCurrentBtn->resize(ui->typeCurrentBtn->width(), 18);

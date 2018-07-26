@@ -22,7 +22,7 @@
    <property name="geometry">
     <rect>
      <x>640</x>
-     <y>90</y>
+     <y>130</y>
      <width>60</width>
      <height>18</height>
     </rect>
@@ -52,7 +52,7 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>90</y>
+     <y>130</y>
      <width>120</width>
      <height>18</height>
     </rect>
@@ -76,7 +76,7 @@
    <property name="geometry">
     <rect>
      <x>560</x>
-     <y>90</y>
+     <y>130</y>
      <width>60</width>
      <height>18</height>
     </rect>
@@ -106,22 +106,22 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>120</y>
+     <y>170</y>
      <width>770</width>
-     <height>390</height>
+     <height>340</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="incomePage">
     <widget class="QTableWidget" name="incomeTableWidget">
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>10</y>
+       <y>0</y>
        <width>650</width>
-       <height>310</height>
+       <height>270</height>
       </rect>
      </property>
      <property name="cursor" stdset="0">
@@ -215,7 +215,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>364</y>
+       <y>300</y>
        <width>770</width>
        <height>40</height>
       </rect>
@@ -227,9 +227,9 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>10</y>
+       <y>0</y>
        <width>650</width>
-       <height>310</height>
+       <height>270</height>
       </rect>
      </property>
      <property name="cursor" stdset="0">
@@ -338,7 +338,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>363</y>
+       <y>300</y>
        <width>770</width>
        <height>40</height>
       </rect>
@@ -348,7 +348,7 @@
      <property name="geometry">
       <rect>
        <x>530</x>
-       <y>10</y>
+       <y>0</y>
        <width>180</width>
        <height>30</height>
       </rect>
@@ -378,9 +378,9 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>10</y>
+       <y>0</y>
        <width>650</width>
-       <height>310</height>
+       <height>270</height>
       </rect>
      </property>
      <property name="cursor" stdset="0">
@@ -490,7 +490,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>364</y>
+       <y>300</y>
        <width>770</width>
        <height>40</height>
       </rect>
@@ -498,19 +498,19 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QToolButton" name="incomeInfoBtn">
+  <widget class="QPushButton" name="incomeInfoBtn">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>30</y>
-     <width>91</width>
-     <height>31</height>
+     <y>90</y>
+     <width>70</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>14</pointsize>
+     <pointsize>10</pointsize>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
@@ -529,19 +529,19 @@
     <string>当前收益</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="forecloseInfoBtn">
+  <widget class="QPushButton" name="forecloseInfoBtn">
    <property name="geometry">
     <rect>
      <x>166</x>
-     <y>30</y>
-     <width>91</width>
-     <height>31</height>
+     <y>90</y>
+     <width>70</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>14</pointsize>
+     <pointsize>10</pointsize>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
@@ -579,19 +579,19 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QToolButton" name="incomeRecordBtn">
+  <widget class="QPushButton" name="incomeRecordBtn">
    <property name="geometry">
     <rect>
      <x>276</x>
-     <y>30</y>
-     <width>91</width>
-     <height>31</height>
+     <y>90</y>
+     <width>70</width>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>微软雅黑</family>
-     <pointsize>14</pointsize>
+     <pointsize>10</pointsize>
      <weight>50</weight>
      <italic>false</italic>
      <bold>false</bold>
@@ -610,37 +610,11 @@
     <string>收益记录</string>
    </property>
   </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>147</x>
-     <y>36</y>
-     <width>21</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_2">
-   <property name="geometry">
-    <rect>
-     <x>256</x>
-     <y>34</y>
-     <width>21</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
-   </property>
-  </widget>
   <widget class="QToolButton" name="obtainAllBtn">
    <property name="geometry">
     <rect>
      <x>460</x>
-     <y>90</y>
+     <y>130</y>
      <width>80</width>
      <height>18</height>
     </rect>
@@ -666,6 +640,35 @@
     <string>领取全部</string>
    </property>
   </widget>
+  <widget class="QLabel" name="title_label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>50</y>
+     <width>200</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <kerning>true</kerning>
+    </font>
+   </property>
+   <property name="text">
+    <string>挖矿</string>
+   </property>
+  </widget>
+  <zorder>title_label</zorder>
+  <zorder>registerBtn</zorder>
+  <zorder>accountComboBox</zorder>
+  <zorder>lockToMinerBtn</zorder>
+  <zorder>stackedWidget</zorder>
+  <zorder>incomeInfoBtn</zorder>
+  <zorder>forecloseInfoBtn</zorder>
+  <zorder>tipLabel</zorder>
+  <zorder>incomeRecordBtn</zorder>
+  <zorder>obtainAllBtn</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -28,7 +28,7 @@ ProposalPage::ProposalPage(QWidget *parent) :
     ui->proposalTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->proposalTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->proposalTableWidget->horizontalHeader()->setVisible(true);
-    ui->proposalTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->proposalTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->proposalTableWidget->setColumnWidth(0,120);
     ui->proposalTableWidget->setColumnWidth(1,100);

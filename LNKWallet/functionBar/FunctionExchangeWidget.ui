@@ -33,7 +33,7 @@
    </property>
    <property name="styleSheet">
     <string notr="true">color: white;
-font: bold 14px &quot;微软雅黑&quot;;
+font: bold 13px &quot;微软雅黑&quot;;
 padding-left: 15px;</string>
    </property>
    <property name="text">
@@ -76,7 +76,7 @@ padding-left: 15px;</string>
     </font>
    </property>
    <property name="text">
-    <string>  我的挂单</string>
+    <string>我的挂单</string>
    </property>
   </widget>
  </widget>

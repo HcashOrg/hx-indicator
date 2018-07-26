@@ -36,6 +36,7 @@ private slots:
 
     //设置默认承税单
     void SetDefaultPoundageSlots(const QString &orderID);
+
 private:
     void InitWidget();
     void InitStyle();

@@ -27,7 +27,7 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
 
     ui->crosschainTransactionTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->crosschainTransactionTableWidget->horizontalHeader()->setVisible(true);
-    ui->crosschainTransactionTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->crosschainTransactionTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->crosschainTransactionTableWidget->setColumnWidth(0,120);
     ui->crosschainTransactionTableWidget->setColumnWidth(1,100);
@@ -41,8 +41,7 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     ui->typeCurrentBtn->setCheckable(true);
     ui->typeWaitingBtn->setCheckable(true);
 
-    setStyleSheet("QPushButton{font:10px \"微软雅黑\";background:transparent;border:none;color: rgb(137,129,161);}"
-                  "QPushButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}");
+    setStyleSheet(PUSHBUTTON_CHECK_STYLE);
 
     ui->typeCurrentBtn->adjustSize();
     ui->typeCurrentBtn->resize(ui->typeCurrentBtn->width(), 18);

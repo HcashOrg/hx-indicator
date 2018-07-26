@@ -48,7 +48,7 @@ CreateMultiSigDialog::CreateMultiSigDialog(QWidget *parent) :
     ui->ownersTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->ownersTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->ownersTableWidget->horizontalHeader()->setVisible(true);
-    ui->ownersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->ownersTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
 
     ui->ownersTableWidget->setColumnWidth(0,300);

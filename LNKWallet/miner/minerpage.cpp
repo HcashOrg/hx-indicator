@@ -17,7 +17,7 @@
 #include "control/BlankDefaultWidget.h"
 #include <mutex>
 
-static const int ROWNUMBER = 8;
+static const int ROWNUMBER = 6;
 static std::mutex calMutex;
 MinerPage::MinerPage(QWidget *parent) :
     QWidget(parent),
@@ -334,8 +334,11 @@ void MinerPage::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
     painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
-
     painter.drawRect(rect());
+
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(243,241,250),Qt::SolidPattern));
+    painter.drawRect(0,87,this->width(),24);
 }
 
 void MinerPage::init()
@@ -476,15 +479,23 @@ void MinerPage::InitStyle()
     ui->incomeInfoBtn->setCheckable(true);
     ui->incomeRecordBtn->setCheckable(true);
 
-    setStyleSheet("QToolButton#forecloseInfoBtn,QToolButton#incomeInfoBtn,QToolButton#incomeRecordBtn{border:none;background:transparent;color:#C6CAD4;font:bold 18px \"Microsoft YaHei UI Light\";}"
-                  "QToolButton#forecloseInfoBtn::checked,QToolButton#incomeInfoBtn::checked,QToolButton#incomeRecordBtn::checked{color:rgb(137,129,161);}"
+
+    setStyleSheet(PUSHBUTTON_CHECK_STYLE
                   TABLEWIDGET_STYLE_1);
+
+    ui->incomeInfoBtn->adjustSize();
+    ui->incomeInfoBtn->resize(ui->incomeInfoBtn->width(), 18);
+    ui->forecloseInfoBtn->adjustSize();
+    ui->forecloseInfoBtn->resize(ui->forecloseInfoBtn->width(), 18);
+    ui->forecloseInfoBtn->move(ui->incomeInfoBtn->x() + ui->incomeInfoBtn->width() + 30, ui->forecloseInfoBtn->y());
+    ui->incomeRecordBtn->adjustSize();
+    ui->incomeRecordBtn->resize(ui->incomeRecordBtn->width(), 18);
+    ui->incomeRecordBtn->move(ui->forecloseInfoBtn->x() + ui->forecloseInfoBtn->width() + 30, ui->incomeRecordBtn->y());
+
+
     ui->obtainAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->lockToMinerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->registerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
-
-    QPalette pe;
-    pe.setColor(QPalette::WindowText,QColor(0xC6CAD4));
 
 }
 

@@ -32,7 +32,7 @@ ProposalDetailDialog::ProposalDetailDialog(QWidget *parent) :
     ui->voteStateTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->voteStateTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->voteStateTableWidget->horizontalHeader()->setVisible(true);
-    ui->voteStateTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->voteStateTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->voteStateTableWidget->setColumnWidth(0,300);
     ui->voteStateTableWidget->setColumnWidth(1,80);

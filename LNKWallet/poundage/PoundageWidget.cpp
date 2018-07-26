@@ -338,8 +338,7 @@ void PoundageWidget::InitStyle()
     ui->toolButton_publishPoundage->setStyleSheet(TOOLBUTTON_STYLE_1);
 
 
-    setStyleSheet("QPushButton{font:10px \"微软雅黑\";background:transparent;border:none;color: rgb(137,129,161);}"
-                  "QPushButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}"
+    setStyleSheet(PUSHBUTTON_CHECK_STYLE
                   TABLEWIDGET_STYLE_1);
 
     ui->pushButton_allPoundage->adjustSize();

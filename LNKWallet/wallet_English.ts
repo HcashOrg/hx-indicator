@@ -896,42 +896,47 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Multisig-Address Change History</translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="66"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="43"/>
+        <source>当前没有历史纪录!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="75"/>
         <source>There are no guard accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="122"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="131"/>
         <source>updating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="129"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="138"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="130"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="139"/>
         <source>export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="222"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="239"/>
         <source>There is no corresponding private key in the wallet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="234"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="251"/>
         <source>Select the export path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="277"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="294"/>
         <source>available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="281"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="298"/>
         <source>unavailable</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1014,6 +1019,11 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <location filename="guard/AssetPage.ui" line="183"/>
         <source>资产信息</source>
         <translation type="unfinished">Asset Info</translation>
+    </message>
+    <message>
+        <location filename="guard/AssetPage.cpp" line="44"/>
+        <source>当前没有纪录!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1122,17 +1132,22 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">get all</translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="108"/>
+        <location filename="bonus/BonusPage.cpp" line="51"/>
+        <source>当前没有纪录!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="bonus/BonusPage.cpp" line="115"/>
         <source>get bonus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="137"/>
+        <location filename="bonus/BonusPage.cpp" line="152"/>
         <source>Transaction of obtain-bonus has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="145"/>
+        <location filename="bonus/BonusPage.cpp" line="160"/>
         <source>Fail to obtain bonus!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1254,7 +1269,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="97"/>
-        <source>提现手续费</source>
+        <source>手续费</source>
+        <oldsource>提现手续费</oldsource>
         <translation type="unfinished">Fee</translation>
     </message>
     <message>
@@ -1274,7 +1290,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="181"/>
-        <source>提现数额</source>
+        <source>到账数额</source>
+        <oldsource>提现数额</oldsource>
         <translation type="unfinished">Amount to withdraw</translation>
     </message>
     <message>
@@ -1284,7 +1301,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="248"/>
-        <source>提至地址</source>
+        <source>到账地址</source>
+        <oldsource>提至地址</oldsource>
         <translation type="unfinished">Withdraw to address</translation>
     </message>
     <message>
@@ -1294,21 +1312,9 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Password</translation>
     </message>
     <message>
-        <source>到账数额</source>
-        <translation type="obsolete">Amount</translation>
-    </message>
-    <message>
         <location filename="capitalTransferPage/CapitalConfirmWidget.ui" line="57"/>
         <source>交易确认</source>
         <translation type="unfinished">Confirm the Transaction</translation>
-    </message>
-    <message>
-        <source>手续费</source>
-        <translation type="obsolete">Fee</translation>
-    </message>
-    <message>
-        <source>到账地址</source>
-        <translation type="obsolete">To address</translation>
     </message>
 </context>
 <context>
@@ -1864,60 +1870,65 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Waiting</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="86"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="61"/>
+        <source>当前没有纪录!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="92"/>
         <source>There are no guard accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="208"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="214"/>
         <source>Transaction of guard-sign-coldhot has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="214"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="220"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="281"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="424"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="287"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="438"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="283"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="326"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="289"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="332"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="290"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="296"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="324"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="330"/>
         <source>waiting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="352"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="417"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="366"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="431"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="356"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="370"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="420"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="434"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="427"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="441"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1962,22 +1973,22 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="consoledialog.ui" line="149"/>
+        <location filename="consoledialog.ui" line="142"/>
         <source>控制台</source>
         <translation type="unfinished">Console</translation>
     </message>
     <message>
-        <location filename="consoledialog.ui" line="102"/>
+        <location filename="consoledialog.ui" line="97"/>
         <source>清空</source>
         <translation type="unfinished">clear</translation>
     </message>
     <message>
-        <location filename="consoledialog.ui" line="193"/>
+        <location filename="consoledialog.ui" line="188"/>
         <source>在此输入命令并回车</source>
         <translation type="unfinished">Enter the command and then press Enter</translation>
     </message>
     <message>
-        <location filename="consoledialog.ui" line="209"/>
+        <location filename="consoledialog.ui" line="204"/>
         <source>RPC方式</source>
         <translation type="unfinished">Using RPC</translation>
     </message>
@@ -3460,12 +3471,17 @@ Cover it or not?</source>
         <translation type="unfinished">Market Price</translation>
     </message>
     <message>
-        <location filename="guard/FeedPricePage.cpp" line="64"/>
+        <location filename="guard/FeedPricePage.cpp" line="42"/>
+        <source>当前没有纪录!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/FeedPricePage.cpp" line="71"/>
         <source>There are no guard accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/FeedPricePage.cpp" line="89"/>
+        <location filename="guard/FeedPricePage.cpp" line="96"/>
         <source>quote</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3599,7 +3615,7 @@ Cover it or not?</source>
         <location filename="functionBar/FunctionAccountWidget.ui" line="52"/>
         <source>账户</source>
         <oldsource>账户管理</oldsource>
-        <translation type="unfinished">Account</translation>
+        <translation type="unfinished">ACCOUNT</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionAccountWidget.ui" line="73"/>
@@ -3629,7 +3645,7 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionAdvanceWidget.ui" line="45"/>
         <source>高级</source>
-        <translation type="unfinished">Advance</translation>
+        <translation type="unfinished">ADVANCE</translation>
     </message>
     <message>
         <source>    高级</source>
@@ -3741,7 +3757,7 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="40"/>
         <source>市场</source>
-        <translation type="unfinished">Market</translation>
+        <translation type="unfinished">MARKET</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="61"/>
@@ -3750,7 +3766,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="79"/>
-        <source>  我的挂单</source>
+        <source>我的挂单</source>
+        <oldsource>  我的挂单</oldsource>
         <translation type="unfinished">MyOrders</translation>
     </message>
 </context>
@@ -3764,7 +3781,7 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="40"/>
         <source>账户</source>
-        <translation type="unfinished">Account</translation>
+        <translation type="unfinished">ACCOUNT</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="61"/>
@@ -3780,12 +3797,12 @@ Cover it or not?</source>
         <location filename="functionBar/FunctionGuardWidget.ui" line="97"/>
         <location filename="functionBar/FunctionGuardWidget.ui" line="124"/>
         <source>提案</source>
-        <translation type="unfinished">Proposal</translation>
+        <translation type="unfinished">PROPOSAL</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="154"/>
         <source>高级</source>
-        <translation type="unfinished">Advance</translation>
+        <translation type="unfinished">ADVANCE</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="175"/>
@@ -4000,59 +4017,64 @@ Cover it or not?</source>
         <translation type="unfinished">Change M-A</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="80"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="56"/>
+        <source>当前没有纪录!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardKeyManagePage.cpp" line="88"/>
         <source>There are no guard accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="115"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="123"/>
         <source>no update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="119"/>
-        <location filename="guard/GuardKeyManagePage.cpp" line="222"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="127"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="238"/>
         <source>updating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="129"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="137"/>
         <source>no guard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="137"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="145"/>
         <source>updated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="147"/>
-        <location filename="guard/GuardKeyManagePage.cpp" line="234"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="155"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="250"/>
         <source>update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="181"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="197"/>
         <source>Transaction of updating multisig-address has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="188"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="204"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="198"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="214"/>
         <source>The cross-chain keys has already imported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="238"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="254"/>
         <source>You are changing the key of %1 multisig-address on the chain. Sure to change it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="292"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="308"/>
         <source>Select the file of cross-chain key</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4722,9 +4744,14 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Record</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="666"/>
+        <location filename="miner/minerpage.ui" line="640"/>
         <source>领取全部</source>
         <translation type="unfinished">get all</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="659"/>
+        <source>挖矿</source>
+        <translation type="unfinished">Mining</translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="164"/>
@@ -4787,7 +4814,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="460"/>
+        <location filename="miner/minerpage.cpp" line="463"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5330,7 +5357,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="normallogin.ui" line="76"/>
         <source>登录</source>
-        <translation type="unfinished">Enter</translation>
+        <translation type="unfinished">ENTER</translation>
     </message>
     <message>
         <source>请输入密码</source>
@@ -5549,7 +5576,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <location filename="poundage/PoundageShowTableModel.cpp" line="49"/>
         <source>承兑单id</source>
         <oldsource>发布时间</oldsource>
-        <translation type="unfinished">Time</translation>
+        <translation type="unfinished">ID</translation>
     </message>
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="51"/>
@@ -5874,88 +5901,93 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Proposal</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="99"/>
+        <location filename="guard/ProposalPage.cpp" line="106"/>
         <source>cold-hot trx</source>
         <oldsource>hot-cold trx</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="111"/>
+        <location filename="guard/ProposalPage.cpp" line="118"/>
         <source>cancel cold-hot trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="103"/>
+        <location filename="guard/ProposalPage.cpp" line="110"/>
         <source>update multisig</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="69"/>
+        <location filename="guard/ProposalPage.cpp" line="47"/>
+        <source>当前没有历史纪录!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalPage.cpp" line="76"/>
         <source>There are no guard accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="107"/>
+        <location filename="guard/ProposalPage.cpp" line="114"/>
         <source>set publisher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="115"/>
+        <location filename="guard/ProposalPage.cpp" line="122"/>
         <source>cancel withdraw trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="119"/>
+        <location filename="guard/ProposalPage.cpp" line="126"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="132"/>
+        <location filename="guard/ProposalPage.cpp" line="139"/>
         <source>no guard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="136"/>
+        <location filename="guard/ProposalPage.cpp" line="143"/>
         <source>approved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="141"/>
+        <location filename="guard/ProposalPage.cpp" line="148"/>
         <source>disapproved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="146"/>
+        <location filename="guard/ProposalPage.cpp" line="153"/>
         <source>not voted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="152"/>
+        <location filename="guard/ProposalPage.cpp" line="159"/>
         <source>approve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="153"/>
+        <location filename="guard/ProposalPage.cpp" line="160"/>
         <source>disapprove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="197"/>
+        <location filename="guard/ProposalPage.cpp" line="213"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="204"/>
+        <location filename="guard/ProposalPage.cpp" line="220"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="217"/>
+        <location filename="guard/ProposalPage.cpp" line="233"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="237"/>
+        <location filename="guard/ProposalPage.cpp" line="253"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6221,7 +6253,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selectwalletpathwidget.ui" line="167"/>
+        <location filename="selectwalletpathwidget.ui" line="171"/>
         <source>Select the path of the wallet data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6231,7 +6263,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selectwalletpathwidget.ui" line="128"/>
+        <location filename="selectwalletpathwidget.ui" line="132"/>
         <source>v1.0.1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7336,12 +7368,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
 <context>
     <name>VoteStateLabel</name>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="302"/>
+        <location filename="guard/ProposalPage.cpp" line="337"/>
         <source>not passed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="313"/>
+        <location filename="guard/ProposalPage.cpp" line="348"/>
         <source>voting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7426,54 +7458,59 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Waiting</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="209"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="215"/>
         <source>Transaction of guard-sign-crosschain has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="215"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="221"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="262"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="268"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="311"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="317"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="313"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="356"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="319"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="362"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="319"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="325"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="259"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="383"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="265"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="397"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="80"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="57"/>
+        <source>当前没有纪录!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="86"/>
         <source>There are no guard accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="354"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="360"/>
         <source>waiting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="387"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="401"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>

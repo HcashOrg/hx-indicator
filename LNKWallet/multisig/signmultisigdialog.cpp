@@ -49,7 +49,7 @@ SignMultiSigDialog::SignMultiSigDialog(QWidget *parent) :
     ui->signInfoTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->signInfoTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->signInfoTableWidget->horizontalHeader()->setVisible(true);
-    ui->signInfoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->signInfoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->signInfoTableWidget->setColumnWidth(0,300);
     ui->signInfoTableWidget->setColumnWidth(1,100);
