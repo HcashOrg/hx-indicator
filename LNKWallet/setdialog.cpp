@@ -129,17 +129,12 @@ SetDialog::SetDialog(QWidget *parent) :
     }
 
     QString fee = HXChain::getInstance()->feeType;
-    if("HX" == fee){
-        ui->comboBox_fee->setCurrentIndex(0);
+    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
+        ui->comboBox_fee->addItem(asset.symbol);
     }
-    else if("BTC" == fee)
-    {
-        ui->comboBox_fee->setCurrentIndex(1);
-    }
-    else if("LTC" == fee)
-    {
-        ui->comboBox_fee->setCurrentIndex(2);
-    }
+    ui->feeCheckBox->setVisible(false);
+    ui->comboBox_fee->setCurrentText(fee);
+
 
     ui->minimizeCheckBox->setChecked( HXChain::getInstance()->minimizeToTray);
     ui->closeCheckBox->setChecked( HXChain::getInstance()->closeToMinimize);
@@ -270,8 +265,8 @@ void SetDialog::on_saveBtn_clicked()
     }
 
 
-    HXChain::getInstance()->configFile->setValue("/settings/feeType", ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"HX");
-    HXChain::getInstance()->feeType = ui->feeCheckBox->isChecked()?ui->comboBox_fee->currentText():"HX";
+    HXChain::getInstance()->configFile->setValue("/settings/feeType", ui->comboBox_fee->currentText());
+    HXChain::getInstance()->feeType = ui->comboBox_fee->currentText();
 
 
     HXChain::getInstance()->configFile->setValue("/settings/autoDeposit", ui->depositBtn->isChecked());

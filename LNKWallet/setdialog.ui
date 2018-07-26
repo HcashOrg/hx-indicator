@@ -507,27 +507,12 @@ color:rgb(137,129,161);</string>
         <widget class="QComboBox" name="comboBox_fee">
          <property name="geometry">
           <rect>
-           <x>440</x>
+           <x>310</x>
            <y>46</y>
-           <width>91</width>
+           <width>81</width>
            <height>22</height>
           </rect>
          </property>
-         <item>
-          <property name="text">
-           <string>HX</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>BTC</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>LTC</string>
-          </property>
-         </item>
         </widget>
         <widget class="QLabel" name="label_10">
          <property name="geometry">
