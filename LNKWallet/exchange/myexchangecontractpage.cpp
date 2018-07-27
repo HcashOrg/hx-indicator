@@ -440,7 +440,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
             FeeChargeWidget *fee = new FeeChargeWidget( getBigNumberString(totalAmount, ASSET_PRECISION).toDouble(),HXChain::getInstance()->feeType,
                                                          ui->accountComboBox->currentText(),HXChain::getInstance()->mainFrame);
-
+            //fee->SetTitle(tr("Register Contract"));
             fee->SetInfo(tr("register contract!"));
             connect(fee,&FeeChargeWidget::confirmSignal,[this,stepCount,fee](){
                 QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";

@@ -53,6 +53,11 @@ void FeeChargeWidget::updatePoundageID()
     _p->chooseWidget->updatePoundageID();
 }
 
+void FeeChargeWidget::SetTitle(const QString &title)
+{
+    ui->label_title->setText(title);
+}
+
 void FeeChargeWidget::ConfirmSlots()
 {
     emit confirmSignal();
