@@ -8,7 +8,7 @@ QT       += core gui xml network websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = HXWallet
+TARGET = HXIndicator
 TEMPLATE = app
 
 DEFINES += TEST_WALLET
@@ -23,7 +23,7 @@ win32{
     LIBS += -lShLwApi
 }
 macx{
-#    ICON = lnk.icns
+#    ICON = HX.icns
 QMAKE_MAC_SDK = macosx10.12
 }
 LIBS += -L$$PWD -lqrencode
@@ -434,7 +434,7 @@ DISTFILES += \
     qrencode.lib \
     pic2/Thumbs.db \
     pic2/copyBtn.png \
-    LNK.ico \
+    HX.ico \
     .gitignore \
     LICENSE \
     wallet_English.ts \

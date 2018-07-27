@@ -474,7 +474,7 @@
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="433"/>
-        <source>手续费(LNK)</source>
+        <source>手续费(HX)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2797,12 +2797,12 @@ Contract created successfully!</source>
         <translation type="unfinished">未能生成tunnel账户</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="106"/>
+        <location filename="depositpage/DepositPage.cpp" line="105"/>
         <source>cannot bind tunnel account</source>
         <translation type="unfinished">未能绑定tunnel账户</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="117"/>
+        <location filename="depositpage/DepositPage.cpp" line="116"/>
         <source>Wallet data updated! Please backup your wallet!</source>
         <oldsource>You Should Back Up Your Wallet!</oldsource>
         <translation type="unfinished">钱包数据已更新！请重新备份您的钱包！</translation>
@@ -2828,11 +2828,6 @@ Contract created successfully!</source>
     <message>
         <location filename="depositpage/DepositQrcodeWidget.ui" line="67"/>
         <source>充值地址：</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="depositpage/DepositQrcodeWidget.ui" line="95"/>
-        <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3089,7 +3084,7 @@ Cover it or not?</source>
     <message>
         <location filename="depositpage/FeeChargeWidget.ui" line="102"/>
         <source>本操作需要收取固定手续费:@ HX</source>
-        <oldsource>本操作需要收取固定手续费:@ LNK</oldsource>
+        <oldsource>本操作需要收取固定手续费:@ HX</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3288,7 +3283,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/FeedPricePage.ui" line="110"/>
-        <source>喂价比例（/LNK）</source>
+        <source>喂价比例（/HX）</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3427,27 +3422,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1147"/>
+        <location filename="frame.cpp" line="1120"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1357"/>
+        <location filename="frame.cpp" line="1330"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2086"/>
+        <location filename="frame.cpp" line="2059"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2089"/>
+        <location filename="frame.cpp" line="2062"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2092"/>
+        <location filename="frame.cpp" line="2065"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -3935,7 +3930,7 @@ add an account first</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="608"/>
+        <location filename="wallet.cpp" line="598"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -4102,8 +4097,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="importdialog.cpp" line="124"/>
-        <source>LNK Address:%1  Already Exists!</source>
-        <translation type="unfinished">LNK地址:%1 已存在！</translation>
+        <source>HX Address:%1  Already Exists!</source>
+        <translation type="unfinished">HX地址:%1 已存在！</translation>
     </message>
     <message>
         <location filename="importdialog.cpp" line="269"/>
@@ -5538,7 +5533,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="59"/>
         <source>可用金额(HX)</source>
-        <oldsource>可用金额(LNK)</oldsource>
+        <oldsource>可用金额(HX)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5993,7 +5988,7 @@ p, li { white-space: pre-wrap; }
         <location filename="poundage/PublishPoundageWidget.cpp" line="76"/>
         <location filename="poundage/PublishPoundageWidget.cpp" line="97"/>
         <source>0 HX</source>
-        <oldsource>0 LNK</oldsource>
+        <oldsource>0 HX</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7671,17 +7666,17 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="146"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="150"/>
         <source>全部提现</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="162"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="166"/>
         <source>确定</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="195"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="199"/>
         <source>invalid address!</source>
         <translation type="unfinished"></translation>
     </message>

@@ -61,9 +61,9 @@ bool KeyDataUtil::ReadPrivateKeyFromJson(const QString &jsonStr, KeyDataPtr &dat
     //开始分析
     foreach (QString key, jsonObject.keys())
     {
-        if(key == "LNKAddr")
+        if(key == "HXAddr")
         {
-            data->LNKAddr = jsonObject.value(key).toString();
+            data->HXAddr = jsonObject.value(key).toString();
         }
         else
         {
@@ -80,7 +80,7 @@ bool KeyDataUtil::WritePrivateKeyToJson(const KeyDataPtr &data, QJsonDocument &o
     //构建QJsonDocument
     QJsonObject mainObject;
 
-    mainObject.insert("LNKAddr",data->LNKAddr);
+    mainObject.insert("HXAddr",data->HXAddr);
     for(auto it = data->info_key.begin();it != data->info_key.end();++it)
     {
         mainObject.insert((*it).first,(*it).second);

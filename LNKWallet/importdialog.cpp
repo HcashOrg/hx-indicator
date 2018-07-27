@@ -117,11 +117,11 @@ void ImportDialog::on_importBtn_clicked()
 
     //验证该地址是否已经存在
     foreach(AccountInfo info,HXChain::getInstance()->accountInfoMap){
-        qDebug()<<info.address << " "<<data->LNKAddr;
-        if(info.address == data->LNKAddr)
+        qDebug()<<info.address << " "<<data->HXAddr;
+        if(info.address == data->HXAddr)
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("LNK Address:%1  Already Exists!").arg(data->LNKAddr));
+            commonDialog.setText( tr("HX Address:%1  Already Exists!").arg(data->HXAddr));
             commonDialog.pop();
             return;
         }
@@ -130,9 +130,9 @@ void ImportDialog::on_importBtn_clicked()
     //开始导入私钥
     for(auto it = data->info_key.begin();it != data->info_key.end();++it)
     {
-        if((*it).first == "LNK")
+        if((*it).first == "HX")
         {
-            //导入lnk私钥
+            //导入HX私钥
             HXChain::getInstance()->postRPC( "import-import_key",
                                              toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << (*it).second));
         }

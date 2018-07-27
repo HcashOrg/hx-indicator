@@ -92,7 +92,6 @@ void DepositPage::jsonDataUpdated(QString id)
         //qDebug()<<"crossAddress"<<result;
 
         DepositDataUtil::ParseTunnelData(result,_p->tunnelData);
-        //询问是否绑定账户，需要花费20LNK
         //_p->fee->isHidden()?_p->fee->show():0;
         //绑定通道账户
         BindTunnelAccount();

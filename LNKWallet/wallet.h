@@ -1,28 +1,5 @@
-﻿/*
-                   _ooOoo_
-                  o8888888o
-                  88" . "88
-                  (| -_- |)
-                  O\  =  /O
-               ____/`---'\____
-             .'  \\|     |//  `.
-            /  \\|||  :  |||//  \
-           /  _||||| -:- |||||-  \
-           |   | \\\  -  /// |   |
-           | \_|  ''\---/''  |   |
-           \  .-\__  `-`  ___/-. /
-         ___`. .'  /--.--\  `. . __
-      ."" '<  `.___\_<|>_/___.'  >'"".
-     | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-     \  \ `-.   \_ __\ /__ _/   .-` /  /
-======`-.____`-.___\_____/___.-`____.-'======
-                   `=---='
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-         佛祖保佑       永无BUG
-*/
-
-#ifndef LNK_H
-#define LNK_H
+﻿#ifndef WALLET_H
+#define WALLET_H
 #include <QMap>
 #include <QSettings>
 #include <QProcess>
@@ -64,7 +41,7 @@
 #ifdef  WIN32
 #define WALLET_EXE_FILE     "HX"WALLET_EXE_SUFFIX".exe"
 #else
-#define WALLET_EXE_FILE     "./LNK"WALLET_EXE_SUFFIX
+#define WALLET_EXE_FILE     "./HX"WALLET_EXE_SUFFIX
 #endif
 
 
@@ -538,5 +515,5 @@ void moveWidgetToScreenCenter(QWidget* w);
 QString toJsonFormat(QString instruction, QJsonArray parameters);
 unsigned long long jsonValueToULL(QJsonValue v);
 
-#endif // LNK_H
+#endif // WALLET_H
 

@@ -430,7 +430,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
    </column>
    <column>
     <property name="text">
-     <string>手续费(LNK)</string>
+     <string>手续费(HX)</string>
     </property>
     <property name="font">
      <font>

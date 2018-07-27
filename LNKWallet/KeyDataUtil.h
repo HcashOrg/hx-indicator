@@ -15,7 +15,7 @@ struct KeyDataInfo
     {
 
     }
-    QString LNKAddr;//link地址
+    QString HXAddr;//link地址
     std::map<QString,QString> info_key;//"BTC" + privatekey
 
     std::map<QString,std::pair<QString,QString>> all_key;//"addr + public + peivate

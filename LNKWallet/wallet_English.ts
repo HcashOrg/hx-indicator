@@ -511,8 +511,8 @@
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="433"/>
-        <source>手续费(LNK)</source>
-        <translation type="unfinished">FEE(LNK)</translation>
+        <source>手续费(HX)</source>
+        <translation type="unfinished">FEE(HX)</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="446"/>
@@ -2964,12 +2964,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="106"/>
+        <location filename="depositpage/DepositPage.cpp" line="105"/>
         <source>cannot bind tunnel account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="117"/>
+        <location filename="depositpage/DepositPage.cpp" line="116"/>
         <source>Wallet data updated! Please backup your wallet!</source>
         <oldsource>You Should Back Up Your Wallet!</oldsource>
         <translation type="unfinished"></translation>
@@ -2996,11 +2996,6 @@ p, li { white-space: pre-wrap; }
         <location filename="depositpage/DepositQrcodeWidget.ui" line="67"/>
         <source>充值地址：</source>
         <translation type="unfinished">Deposit address:</translation>
-    </message>
-    <message>
-        <location filename="depositpage/DepositQrcodeWidget.ui" line="95"/>
-        <source>TextLabel</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="depositpage/DepositQrcodeWidget.ui" line="120"/>
@@ -3259,8 +3254,8 @@ Cover it or not?</source>
     <message>
         <location filename="depositpage/FeeChargeWidget.ui" line="102"/>
         <source>本操作需要收取固定手续费:@ HX</source>
-        <oldsource>本操作需要收取固定手续费:@ LNK</oldsource>
-        <translation type="unfinished">You need to pay the fee for this operation:@ LNK</translation>
+        <oldsource>本操作需要收取固定手续费:@ HX</oldsource>
+        <translation type="unfinished">You need to pay the fee for this operation:@ HX</translation>
     </message>
     <message>
         <location filename="depositpage/FeeChargeWidget.ui" line="73"/>
@@ -3478,8 +3473,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/FeedPricePage.ui" line="110"/>
-        <source>喂价比例（/LNK）</source>
-        <translation type="unfinished">PRICE(/LNK)</translation>
+        <source>喂价比例（/HX）</source>
+        <translation type="unfinished">PRICE(/HX)</translation>
     </message>
     <message>
         <location filename="guard/FeedPricePage.ui" line="173"/>
@@ -3608,27 +3603,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1147"/>
+        <location filename="frame.cpp" line="1120"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1357"/>
+        <location filename="frame.cpp" line="1330"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2086"/>
+        <location filename="frame.cpp" line="2059"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2089"/>
+        <location filename="frame.cpp" line="2062"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2092"/>
+        <location filename="frame.cpp" line="2065"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4181,7 +4176,7 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="608"/>
+        <location filename="wallet.cpp" line="598"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -4351,7 +4346,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="importdialog.cpp" line="124"/>
-        <source>LNK Address:%1  Already Exists!</source>
+        <source>HX Address:%1  Already Exists!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5676,8 +5671,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="59"/>
         <source>可用金额(HX)</source>
-        <oldsource>可用金额(LNK)</oldsource>
-        <translation type="unfinished">BALANCE(LNK)</translation>
+        <oldsource>可用金额(HX)</oldsource>
+        <translation type="unfinished">BALANCE(HX)</translation>
     </message>
     <message>
         <location filename="poundage/PoundageShowTableModel.cpp" line="61"/>
@@ -6102,10 +6097,6 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">ACCOUNT:</translation>
     </message>
     <message>
-        <source>LNK 数量：</source>
-        <translation type="obsolete">AMOUNT OF LNK:</translation>
-    </message>
-    <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="204"/>
         <source>承兑数量:</source>
         <translation type="unfinished">ACCEPT AMOUNT:</translation>
@@ -6135,7 +6126,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <location filename="poundage/PublishPoundageWidget.cpp" line="76"/>
         <location filename="poundage/PublishPoundageWidget.cpp" line="97"/>
         <source>0 HX</source>
-        <oldsource>0 LNK</oldsource>
+        <oldsource>0 HX</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7849,17 +7840,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="146"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="150"/>
         <source>全部提现</source>
         <translation type="unfinished">all</translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="162"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="166"/>
         <source>确定</source>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.ui" line="195"/>
+        <location filename="withdrawpage/WithdrawInputWidget.ui" line="199"/>
         <source>invalid address!</source>
         <translation type="unfinished"></translation>
     </message>

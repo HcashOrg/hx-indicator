@@ -191,8 +191,8 @@ qDebug() <<result;
 
             QString privateKey = array2.at(1).toString();
 
-            dataInfo->info_key["LNK"] = privateKey;
-            dataInfo->LNKAddr = array2.at(0).toString();
+            dataInfo->info_key["HX"] = privateKey;
+            dataInfo->HXAddr = array2.at(0).toString();
         }
         else
         {

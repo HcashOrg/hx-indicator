@@ -98,7 +98,7 @@ void GuardKeyManagePage::init()
 void GuardKeyManagePage::showMultisigInfo()
 {
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
-    assetIds.removeAll("1.3.0");    // 不显示LNK
+    assetIds.removeAll("1.3.0");    // 不显示HX
 
     int size = assetIds.size();
     ui->multisigTableWidget->setRowCount(0);

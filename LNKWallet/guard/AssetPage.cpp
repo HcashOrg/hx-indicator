@@ -54,7 +54,7 @@ AssetPage::~AssetPage()
 void AssetPage::showAssetsInfo()
 {
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
-    assetIds.removeAll("1.3.0");    // 不显示LNK
+    assetIds.removeAll("1.3.0");    // 不显示HX
 
     int size = assetIds.size();
     ui->assetTableWidget->setRowCount(size);

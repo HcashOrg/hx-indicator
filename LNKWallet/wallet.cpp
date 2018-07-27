@@ -367,7 +367,7 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("APPDATA="))
         {
 
-            walletConfigPath = str.mid(8) + "\\HXWallet"WALLET_EXE_SUFFIX;
+            walletConfigPath = str.mid(8) + "\\HXIndicator"WALLET_EXE_SUFFIX;
             appDataPath = walletConfigPath + "\\chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;
@@ -379,7 +379,7 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("HOME="))
         {
 
-            walletConfigPath = str.mid(5) + "/Library/Application Support/HXWallet"WALLET_EXE_SUFFIX;
+            walletConfigPath = str.mid(5) + "/Library/Application Support/HXIndicator"WALLET_EXE_SUFFIX;
             appDataPath = walletConfigPath + "/chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;
@@ -390,7 +390,7 @@ void HXChain::getSystemEnvironmentPath()
     {
         if (str.startsWith("HOME="))
         {
-            walletConfigPath = str.mid(5) + "/HXWallet"WALLET_EXE_SUFFIX;
+            walletConfigPath = str.mid(5) + "/HXIndicator"WALLET_EXE_SUFFIX;
             appDataPath = walletConfigPath + "/chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;
@@ -619,7 +619,7 @@ void HXChain::InitFeeCharge()
 
     QJsonObject jsonObject = parse_doucment.object();
     //开始分析
-    QJsonObject feeObj = jsonObject.value("LNKFee").toObject();
+    QJsonObject feeObj = jsonObject.value("HXFee").toObject();
     feeChargeInfo.tunnelBindFee = feeObj.value("BindTunnel").toString();
     feeChargeInfo.minerIncomeFee = feeObj.value("MinerIncome").toString();
     feeChargeInfo.minerForeCloseFee = feeObj.value("MinerForeClose").toString();

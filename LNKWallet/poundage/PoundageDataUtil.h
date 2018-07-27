@@ -25,7 +25,7 @@ public:
     QString chainType;//发行税单类型
     QString sourceCoinID;//源币类型
     QString targetCoinID;//目标币类型
-    double sourceCoinNumber;//源币数量LNK
+    double sourceCoinNumber;//源币数量HX
     double targetCoinNumber;//目标币数量
     double balanceNumber;//账户余额,目标币剩余数量
     bool  poundageFinished;//承兑单是否已经用完余额
