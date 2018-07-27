@@ -70,6 +70,11 @@ QString FeeChooseWidget::GetFeeNumber() const
     return QString::number(_p->coinNumber,'f',pre);
 }
 
+bool FeeChooseWidget::isSufficient() const
+{
+    return !ui->tipLabel->isVisible();
+}
+
 void FeeChooseWidget::updateFeeNumberSlots(double feeNumber)
 {
     _p->feeNumber = std::max<double>(0,feeNumber);
@@ -227,11 +232,12 @@ void FeeChooseWidget::refreshUI()
     updatePoundageID();
 }
 
-bool FeeChooseWidget::checkAccountBalance() const
+bool FeeChooseWidget::checkAccountBalance()
 {
     ui->tipLabel->setVisible(false);
     if(_p->accountName.isEmpty())
     {
+        emit feeSufficient(false);
         return true;
     }
     //当前承兑单币种+金额  与 账户中对应资产比较
@@ -249,11 +255,13 @@ bool FeeChooseWidget::checkAccountBalance() const
 
         ui->tipLabel->setText(_p->feeType+tr(" less than ")+QString::number(_p->coinNumber,'f',pre));
         ui->tipLabel->setVisible(true);
+        emit feeSufficient(false);
         return false;
     }
     else
     {
         ui->tipLabel->setVisible(false);
+        emit feeSufficient(true);
         return true;
     }
 

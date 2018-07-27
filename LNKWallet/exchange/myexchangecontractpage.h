@@ -52,6 +52,8 @@ private slots:
 
     void on_sellBtn_clicked();
 
+    void on_registerBtn_clicked();
+
     void on_balanceBtn_clicked();
 
     void on_withdrawAllBtn_clicked();
