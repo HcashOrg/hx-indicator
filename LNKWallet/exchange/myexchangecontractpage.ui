@@ -300,7 +300,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>注册合约</string>
+    <string>创建合约</string>
    </property>
   </widget>
  </widget>

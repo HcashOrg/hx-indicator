@@ -5173,8 +5173,9 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.ui" line="303"/>
-        <source>注册合约</source>
-        <translation type="unfinished">REGISTE CONTRACT</translation>
+        <source>创建合约</source>
+        <oldsource>注册合约</oldsource>
+        <translation type="unfinished">CREATE CONTRACT</translation>
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="58"/>
@@ -5284,7 +5285,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="500"/>
         <location filename="exchange/myexchangecontractpage.cpp" line="593"/>
-        <source>Can not find file contracts/blocklink_exchange.glua.gpc!</source>
+        <source>Can not find file contracts/hx_exchange.glua.gpc!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

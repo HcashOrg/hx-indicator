@@ -30,7 +30,7 @@
 #define ASSET_PRECISION 5
 #define WALLET_VERSION "1.0.4"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
-#define EXCHANGE_CONTRACT_HASH  "f138267ad4c454097a06fb2d80518ea7e8ef7370"
+#define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
 #ifdef  TEST_WALLET
 #define WALLET_EXE_SUFFIX   "_test"

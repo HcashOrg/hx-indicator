@@ -443,7 +443,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             //fee->SetTitle(tr("Register Contract"));
             fee->SetInfo(tr("register contract!"));
             connect(fee,&FeeChargeWidget::confirmSignal,[this,stepCount,fee](){
-                QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
+                QString filePath = QDir::currentPath() + "/contracts/hx_exchange.lua.gpc";
                 QFileInfo fileInfo(filePath);
                 if(fileInfo.exists())
                 {
@@ -484,7 +484,7 @@ void MyExchangeContractPage::registerContract()
     commonDialog.setText(tr("You don't have an exchange contract at the moment. Will you create it?"));
     if(commonDialog.pop())
     {
-        QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
+        QString filePath = QDir::currentPath() + "/contracts/hx_exchange.lua.gpc";
         QFileInfo fileInfo(filePath);
         if(fileInfo.exists())
         {
@@ -497,7 +497,7 @@ void MyExchangeContractPage::registerContract()
         else
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Can not find file contracts/blocklink_exchange.glua.gpc!"));
+            commonDialog.setText(tr("Can not find file contracts/hx_exchange.glua.gpc!"));
             commonDialog.pop();
         }
     }
@@ -577,7 +577,7 @@ void MyExchangeContractPage::on_registerBtn_clicked()
 
     if(contractAddress.isEmpty())
     {
-        QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
+        QString filePath = QDir::currentPath() + "/contracts/hx_exchange.lua.gpc";
         QFileInfo fileInfo(filePath);
         if(fileInfo.exists())
         {
@@ -590,7 +590,7 @@ void MyExchangeContractPage::on_registerBtn_clicked()
         else
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Can not find file contracts/blocklink_exchange.glua.gpc!"));
+            commonDialog.setText(tr("Can not find file contracts/hx_exchange.glua.gpc!"));
             commonDialog.pop();
         }
     }

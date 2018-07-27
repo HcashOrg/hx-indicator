@@ -5024,7 +5024,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.ui" line="303"/>
-        <source>注册合约</source>
+        <source>创建合约</source>
+        <oldsource>注册合约</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5139,8 +5140,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="500"/>
         <location filename="exchange/myexchangecontractpage.cpp" line="593"/>
-        <source>Can not find file contracts/blocklink_exchange.glua.gpc!</source>
-        <translation type="unfinished">未能找到文件 contracts/blocklink_exchange.glua.gpc！</translation>
+        <source>Can not find file contracts/hx_exchange.glua.gpc!</source>
+        <translation type="unfinished">未能找到文件 contracts/hx_exchange.glua.gpc！</translation>
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="632"/>
