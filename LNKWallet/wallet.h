@@ -62,7 +62,7 @@
 #endif
 
 #ifdef  WIN32
-#define WALLET_EXE_FILE     "LNK"WALLET_EXE_SUFFIX".exe"
+#define WALLET_EXE_FILE     "HX"WALLET_EXE_SUFFIX".exe"
 #else
 #define WALLET_EXE_FILE     "./LNK"WALLET_EXE_SUFFIX
 #endif
