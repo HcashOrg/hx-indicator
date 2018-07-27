@@ -92,7 +92,7 @@
     <string notr="true">font: 13px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
    <property name="textInteractionFlags">
     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
