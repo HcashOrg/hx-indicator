@@ -45,6 +45,8 @@ ProposalDetailDialog::ProposalDetailDialog(QWidget *parent) :
     ui->voteStateBtn->setCheckable(true);
     ui->infoBtn->setChecked(true);
     ui->voteStateBtn->setChecked(false);
+//    ui->infoBtn->setStyleSheet(PUSHBUTTON_CHECK_STYLE);
+//    ui->voteStateBtn->setStyleSheet(PUSHBUTTON_CHECK_STYLE);
 }
 
 ProposalDetailDialog::~ProposalDetailDialog()

@@ -172,8 +172,8 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">QToolButton{color: rgb(137,129, 161);font: 11px &quot;微软雅黑&quot;;background-color: rgb(84,61,137);border:0px solid white;border-radius:3px;}
-QToolButton:hover{color:white;}</string>
+      <string notr="true">QToolButton{color: white;font: 11px &quot;微软雅黑&quot;;background-color: rgb(84,61,137);border:0px solid white;border-radius:3px;}
+</string>
      </property>
      <property name="text">
       <string>选择路径</string>

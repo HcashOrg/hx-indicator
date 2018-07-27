@@ -109,8 +109,8 @@
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">QToolButton{background:transparent;border:none;color: rgb(51,51,51);font:12px &quot;微软雅黑&quot;;padding:0px 0px 1px 0px;}
-QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:white;}</string>
+      <string notr="true">QToolButton{font:10px &quot;微软雅黑&quot;;background:transparent;border:none;color: rgb(137,129,161);} 
+QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}</string>
      </property>
      <property name="text">
       <string>提案信息</string>
@@ -129,8 +129,8 @@ QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:w
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">QToolButton{background:transparent;border:none;color: rgb(51,51,51);font:12px &quot;微软雅黑&quot;;padding:0px 0px 1px 0px;}
-QToolButton::checked{background-color:rgb(84,116,235);border-radius:12px;color:white;}</string>
+      <string notr="true">QToolButton{font:10px &quot;微软雅黑&quot;;background:transparent;border:none;color: rgb(137,129,161);} 
+QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}</string>
      </property>
      <property name="text">
       <string>投票状态</string>
