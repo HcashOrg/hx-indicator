@@ -448,15 +448,27 @@ void MinerPage::showIncomeRecord()
 
 
         QJsonObject object = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
-        QJsonObject amountObject = object.take("pay_back_balance").toArray().at(0).toArray().at(1).toObject();
-        unsigned long long amount = jsonValueToULL(amountObject.take("amount"));
-        QString amountAssetId = amountObject.take("asset_id").toString();
-        AssetInfo amountAssetInfo = HXChain::getInstance()->assetInfoMap.value(amountAssetId);
-        QJsonObject feeObject = object.take("fee").toObject();
-        unsigned long long feeAmount = jsonValueToULL(feeObject.take("amount"));
+
+        QJsonArray balanceArray = object.value("pay_back_balance").toArray();
+        if(balanceArray.size() <= 0)    continue;
+        unsigned long long amount = 0;
+        for(int i = 0; i < balanceArray.size(); i++)
+        {
+            QJsonArray minerAmountArray = balanceArray.at(i).toArray();
+            QJsonObject amountObject = minerAmountArray.at(1).toObject();
+            amount += jsonValueToULL( amountObject.value("amount"));
+        }
+        QString str = "+" + getBigNumberString(amount, ASSET_PRECISION) + " " + ASSET_NAME;
+        if(balanceArray.size() > 1)
+        {
+            str.prepend(tr("total "));
+        }
+
+        QJsonObject feeObject = object.value("fee").toObject();
+        unsigned long long feeAmount = jsonValueToULL(feeObject.value("amount"));
 
         ui->incomeRecordTableWidget->setItem(i,0, new QTableWidgetItem(QString::number(ts.blockNum)));
-        ui->incomeRecordTableWidget->setItem(i,1, new QTableWidgetItem( "+" + getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol));
+        ui->incomeRecordTableWidget->setItem(i,1, new QTableWidgetItem(str));
         ui->incomeRecordTableWidget->item(i,1)->setTextColor(QColor(0,255,0));
         ui->incomeRecordTableWidget->setItem(i,2, new QTableWidgetItem(getBigNumberString(feeAmount, ASSET_PRECISION) + " " + ASSET_NAME));
         ui->incomeRecordTableWidget->setItem(i,3, new QTableWidgetItem(transactionId));

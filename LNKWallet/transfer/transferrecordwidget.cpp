@@ -37,7 +37,7 @@ TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
 
     pageWidget = new PageScrollWidget();
     blankWidget = new BlankDefaultWidget(ui->transferRecordTableWidget);
-    blankWidget->setTextTip(tr("当前账户没有转账记录!"));
+    blankWidget->setTextTip(tr("There no transfer record currently!"));
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->transferRecordTableWidget);
     init();

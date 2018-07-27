@@ -4738,7 +4738,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">钱包中没有未注册账户！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="463"/>
+        <location filename="miner/minerpage.cpp" line="464"/>
+        <source>total </source>
+        <translation type="unfinished">总计</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="475"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>
@@ -7149,8 +7154,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="transfer/transferrecordwidget.cpp" line="40"/>
-        <source>当前账户没有转账记录!</source>
-        <translation type="unfinished"></translation>
+        <source>There no transfer record currently!</source>
+        <translation type="unfinished">当前没有交易记录！</translation>
     </message>
     <message>
         <location filename="transfer/transferrecordwidget.cpp" line="53"/>
@@ -7911,12 +7916,7 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/withdrawrecordwidget.ui" line="125"/>
-        <source>币种</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="withdrawpage/withdrawrecordwidget.ui" line="172"/>
+        <location filename="withdrawpage/withdrawrecordwidget.ui" line="151"/>
         <source>提现记录</source>
         <translation type="unfinished"></translation>
     </message>

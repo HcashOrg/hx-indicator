@@ -4867,7 +4867,12 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="463"/>
+        <location filename="miner/minerpage.cpp" line="464"/>
+        <source>total </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="475"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7302,32 +7307,32 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="transfer/transferrecordwidget.ui" line="36"/>
         <source>区块高度</source>
-        <translation type="unfinished">Block</translation>
+        <translation type="unfinished">BLOCK</translation>
     </message>
     <message>
         <location filename="transfer/transferrecordwidget.ui" line="49"/>
         <source>对方地址</source>
-        <translation type="unfinished">Opposite</translation>
+        <translation type="unfinished">OPPOSITE</translation>
     </message>
     <message>
         <location filename="transfer/transferrecordwidget.ui" line="62"/>
         <source>数量</source>
-        <translation type="unfinished">Amount</translation>
+        <translation type="unfinished">AMOUNT</translation>
     </message>
     <message>
         <location filename="transfer/transferrecordwidget.ui" line="75"/>
         <source>手续费</source>
-        <translation type="unfinished">Fee</translation>
+        <translation type="unfinished">FEE</translation>
     </message>
     <message>
         <location filename="transfer/transferrecordwidget.ui" line="88"/>
         <source>交易ID</source>
-        <translation type="unfinished">Transaction ID</translation>
+        <translation type="unfinished">TRANSACTION ID</translation>
     </message>
     <message>
         <location filename="transfer/transferrecordwidget.ui" line="101"/>
         <source>交易状态</source>
-        <translation type="unfinished">state</translation>
+        <translation type="unfinished">STATUS</translation>
     </message>
     <message>
         <source>币种</source>
@@ -7336,12 +7341,16 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="transfer/transferrecordwidget.ui" line="144"/>
         <source>交易记录</source>
-        <translation type="unfinished">Transaction record</translation>
+        <translation type="unfinished">Transaction Record</translation>
+    </message>
+    <message>
+        <source>当前账户没有转账记录!</source>
+        <translation type="obsolete">There&apos;s no transfer record!</translation>
     </message>
     <message>
         <location filename="transfer/transferrecordwidget.cpp" line="40"/>
-        <source>当前账户没有转账记录!</source>
-        <translation type="unfinished">There&apos;s no transfer record!</translation>
+        <source>There no transfer record currently!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="transfer/transferrecordwidget.cpp" line="53"/>
@@ -8060,40 +8069,39 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="withdrawpage/withdrawrecordwidget.ui" line="33"/>
         <source>区块高度</source>
-        <translation type="unfinished">Block</translation>
+        <translation type="unfinished">BLOCK</translation>
     </message>
     <message>
         <location filename="withdrawpage/withdrawrecordwidget.ui" line="46"/>
         <source>提现地址</source>
-        <translation type="unfinished">To address</translation>
+        <translation type="unfinished">TO ADDRESS</translation>
     </message>
     <message>
         <location filename="withdrawpage/withdrawrecordwidget.ui" line="59"/>
         <source>数量</source>
-        <translation type="unfinished">Amount</translation>
+        <translation type="unfinished">AMOUNT</translation>
     </message>
     <message>
         <location filename="withdrawpage/withdrawrecordwidget.ui" line="72"/>
         <source>手续费</source>
-        <translation type="unfinished">Fee</translation>
+        <translation type="unfinished">FEE</translation>
     </message>
     <message>
         <location filename="withdrawpage/withdrawrecordwidget.ui" line="85"/>
         <source>交易ID</source>
-        <translation type="unfinished">Transaction ID</translation>
+        <translation type="unfinished">TRANSACTION ID</translation>
     </message>
     <message>
         <location filename="withdrawpage/withdrawrecordwidget.ui" line="98"/>
         <source>交易状态</source>
-        <translation type="unfinished">state</translation>
+        <translation type="unfinished">STATUS</translation>
     </message>
     <message>
-        <location filename="withdrawpage/withdrawrecordwidget.ui" line="125"/>
         <source>币种</source>
-        <translation type="unfinished">Coin</translation>
+        <translation type="obsolete">Coin</translation>
     </message>
     <message>
-        <location filename="withdrawpage/withdrawrecordwidget.ui" line="172"/>
+        <location filename="withdrawpage/withdrawrecordwidget.ui" line="151"/>
         <source>提现记录</source>
         <translation type="unfinished">Withdraw Record</translation>
     </message>
