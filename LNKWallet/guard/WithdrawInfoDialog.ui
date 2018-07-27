@@ -114,7 +114,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(198,202,212);}
+      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(137,129,161);}
 
 </string>
      </property>
@@ -150,7 +150,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(198,202,212);}
+      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(137,129,161);}
 
 </string>
      </property>
@@ -192,7 +192,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(198,202,212);}
+      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(137,129,161);}
 
 </string>
      </property>
@@ -234,7 +234,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(198,202,212);}
+      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(137,129,161);}
 
 </string>
      </property>
@@ -294,7 +294,7 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(198,202,212);}
+      <string notr="true">QLabel{font:  10px &quot;微软雅黑&quot;;color: rgb(137,129,161);}
 
 </string>
      </property>

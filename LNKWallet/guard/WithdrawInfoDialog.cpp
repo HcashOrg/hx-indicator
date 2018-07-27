@@ -56,7 +56,7 @@ void WithdrawInfoDialog::setTrxId(QString _trxId)
     QStringList guardAddresses = page->lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
 
     int totalNum = HXChain::getInstance()->formalGuardMap.size();
-    ui->stateLabel->setText(tr("%1 guards have signed. %2 guards have not yet.").arg(guardAddresses.size()).arg(totalNum - guardAddresses.size()));
+    ui->stateLabel->setText(tr("%1 sentors have signed. %2 sentors have not yet.").arg(guardAddresses.size()).arg(totalNum - guardAddresses.size()));
 
     QString str;
     foreach (QString address, guardAddresses)

@@ -1707,7 +1707,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="guard/ColdHotInfoDialog.ui" line="200"/>
-        <source>已签名guard</source>
+        <source>已签名sentor</source>
+        <oldsource>已签名guard</oldsource>
         <translation type="unfinished">Signed Guards</translation>
     </message>
     <message>
@@ -4042,7 +4043,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="235"/>
-        <source>Guard私钥管理</source>
+        <source>Sentor私钥管理</source>
+        <oldsource>Guard私钥管理</oldsource>
         <translation type="unfinished">Senator Key Management</translation>
     </message>
     <message>
@@ -4157,8 +4159,9 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardKeyUpdatingInfoDialog.ui" line="200"/>
-        <source>已更新guard</source>
-        <translation type="unfinished">Updated Guard</translation>
+        <source>已更新sentor</source>
+        <oldsource>已更新guard</oldsource>
+        <translation type="unfinished">Updated Sentor</translation>
     </message>
     <message>
         <location filename="guard/GuardKeyUpdatingInfoDialog.cpp" line="42"/>
@@ -7795,7 +7798,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/WithdrawInfoDialog.ui" line="200"/>
         <source>已签名guard</source>
-        <translation type="unfinished">Signed Guards</translation>
+        <translation type="unfinished">Signed Sentors</translation>
     </message>
     <message>
         <location filename="guard/WithdrawInfoDialog.ui" line="242"/>
@@ -7809,7 +7812,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="guard/WithdrawInfoDialog.cpp" line="59"/>
-        <source>%1 guards have signed. %2 guards have not yet.</source>
+        <source>%1 sentors have signed. %2 sentors have not yet.</source>
+        <oldsource>%1 guards have signed. %2 guards have not yet.</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
