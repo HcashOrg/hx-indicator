@@ -258,3 +258,9 @@ void SellDialog::on_buyAmountLineEdit_textChanged(const QString &arg1)
 {
     estimateContractFee();
 }
+
+void SellDialog::on_depositBtn_clicked()
+{
+    goToDeposit = true;
+    close();
+}

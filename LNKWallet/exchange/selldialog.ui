@@ -320,6 +320,28 @@
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
+    <widget class="QPushButton" name="depositBtn">
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>40</y>
+       <width>200</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: rgb(84,116,235);
+font: 10px &quot;微软雅黑&quot;;
+border:none;
+background:transparent;</string>
+     </property>
+     <property name="text">
+      <string>合约里没有余额？前往充值</string>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

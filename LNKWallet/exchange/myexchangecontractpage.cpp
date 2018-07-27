@@ -564,6 +564,11 @@ void MyExchangeContractPage::on_sellBtn_clicked()
         sellDialog.setSellAsset(ui->assetComboBox->currentText());
         sellDialog.setBuyAsset(ui->assetComboBox2->currentText());
         sellDialog.pop();
+
+        if(sellDialog.goToDeposit)
+        {
+            on_balanceBtn_clicked();
+        }
     }
 
 
@@ -672,6 +677,11 @@ void MyExchangeContractPage::onItemClicked(int _row, int _column)
         sellDialog.setSellAsset(ui->assetComboBox->currentText());
         sellDialog.setBuyAsset(ui->assetComboBox2->currentText());
         sellDialog.pop();
+
+        if(sellDialog.goToDeposit)
+        {
+            on_balanceBtn_clicked();
+        }
 
         return;
     }

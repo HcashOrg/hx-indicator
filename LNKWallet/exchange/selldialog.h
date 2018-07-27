@@ -22,6 +22,8 @@ public:
     void setSellAsset(QString _assetSymbol);
     void setBuyAsset(QString _assetSymbol);
 
+    bool goToDeposit = false;
+
 private slots:
     void jsonDataUpdated(QString id);
 
@@ -38,6 +40,8 @@ private slots:
     void on_sellAmountLineEdit_textChanged(const QString &arg1);
 
     void on_buyAmountLineEdit_textChanged(const QString &arg1);
+
+    void on_depositBtn_clicked();
 
 private:
     Ui::SellDialog *ui;
