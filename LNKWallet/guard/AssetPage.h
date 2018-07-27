@@ -26,9 +26,9 @@ private slots:
     void pageChangeSlot(unsigned int page);
 private:
     Ui::AssetPage *ui;
-void paintEvent(QPaintEvent*);
-PageScrollWidget *pageWidget;
-BlankDefaultWidget *blankWidget;
+    void paintEvent(QPaintEvent*);
+    PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget;
 
 };
 

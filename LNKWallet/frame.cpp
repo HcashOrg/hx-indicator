@@ -1629,6 +1629,10 @@ void Frame::jsonDataUpdated(QString id)
                 QJsonArray array2 = v.toArray();
                 QString account = array2.at(0).toString();
                 GuardInfo info;
+                if(HXChain::getInstance()->formalGuardMap.contains(account))
+                {
+                    info = HXChain::getInstance()->formalGuardMap.value(account);
+                }
                 info.guardId = array2.at(1).toString();
                 info.accountId = HXChain::getInstance()->accountInfoMap.value(account).id;
                 HXChain::getInstance()->formalGuardMap.insert(account, info);

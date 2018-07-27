@@ -248,7 +248,12 @@ void AssetChangeHistoryWidget::on_changeHistoryTableWidget_cellClicked(int row, 
             object.insert(assetSymbol, array);
             QString str = QJsonDocument(object).toJson();
 
-            QString path = QFileDialog::getSaveFileName(this, tr("Select the export path"), "", "(*.gcck)");
+            QString defaultFilePath = QDir::currentPath();
+            defaultFilePath += QString("/%1_%2_%3_%4.gcck").arg(ui->accountComboBox->currentText()).arg(assetSymbol)
+                    .arg(hotAddress.left(5)).arg(coldAddress.left(5));
+            qDebug() << "ddddddddd" << defaultFilePath;
+
+            QString path = QFileDialog::getSaveFileName(this, tr("Select the export path"), defaultFilePath, "(*.gcck)");
             if(!path.isEmpty())
             {
                 QFile file(path);
