@@ -26,8 +26,10 @@ FeeChargeWidget::FeeChargeWidget(double feeNumber,const QString &feeType,const Q
 {
     ui->setupUi(this);
     _p->chooseWidget = new FeeChooseWidget(feeNumber,feeType,accountName,this);
+    connect(_p->chooseWidget,&FeeChooseWidget::feeSufficient,ui->toolButton_confirm,&QToolButton::setEnabled);
     ui->label_2->setText(_p->tip.arg(feeNumber).arg("HX"));
     ui->label_char->setVisible(false);
+    QTimer::singleShot(100,[this](){this->ui->toolButton_confirm->setEnabled(_p->chooseWidget->isSufficient());});
     InitWidget();
 }
 
@@ -49,6 +51,11 @@ void FeeChargeWidget::SetInfo(const QString &info,bool vi)
 void FeeChargeWidget::updatePoundageID()
 {
     _p->chooseWidget->updatePoundageID();
+}
+
+void FeeChargeWidget::SetTitle(const QString &title)
+{
+    ui->label_title->setText(title);
 }
 
 void FeeChargeWidget::ConfirmSlots()

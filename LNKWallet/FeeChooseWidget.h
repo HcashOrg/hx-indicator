@@ -20,10 +20,14 @@ class FeeChooseWidget : public QWidget
 public:
     explicit FeeChooseWidget(double feeNumber=20,const QString &coinType="HX",const QString &accountName = "",QWidget *parent = 0);
     ~FeeChooseWidget();
+signals:
+    void feeSufficient(bool);
 public:
     const QString &GetFeeID()const;//获取手续费承兑单id--若为空，则表示未选择或者没有合适的承兑单
     const QString &GetFeeType()const;//获取手续费类型
     QString GetFeeNumber()const;//获取手续费数量--供显示用，所以为string
+
+    bool isSufficient()const;
 public slots:
     void updateFeeNumberSlots(double feeNumber);
     void updatePoundageID();
@@ -42,7 +46,7 @@ private:
 
     void refreshUI();
 
-    bool checkAccountBalance()const;//足够返回true，否则返回false
+    bool checkAccountBalance();//足够返回true，否则返回false
     void ResetAccountBalance();
     void InitCoinType();
 private:

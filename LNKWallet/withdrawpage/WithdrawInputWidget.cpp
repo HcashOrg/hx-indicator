@@ -117,13 +117,13 @@ void WithdrawInputWidget::confirmButtonSlots()
        )
     {
         CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(tr(QString("number < %1!").arg(via->bottom()).toStdString().c_str()));
+        dia.setText(tr(QString("withdraw number shouldn't < %1!").arg(via->bottom()).toStdString().c_str()));
         dia.pop();
     }
     else if(ui->lineEdit_ammount->text().toDouble() > via->top())
     {
         CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(tr(QString("number > %1!").arg(via->top()).toStdString().c_str()));
+        dia.setText(tr(QString("withdraw number shouldn't > %1!").arg(via->top()).toStdString().c_str()));
         dia.pop();
     }
     else

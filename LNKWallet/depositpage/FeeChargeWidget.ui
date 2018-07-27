@@ -44,8 +44,8 @@
     <widget class="QToolButton" name="toolButton_close">
      <property name="geometry">
       <rect>
-       <x>375</x>
-       <y>20</y>
+       <x>398</x>
+       <y>8</y>
        <width>12</width>
        <height>12</height>
       </rect>
@@ -137,7 +137,7 @@
       <string>取消</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="label_title">
      <property name="geometry">
       <rect>
        <x>70</x>

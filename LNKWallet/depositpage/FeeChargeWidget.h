@@ -17,6 +17,7 @@ public:
 public:
     void SetInfo(const QString &info,bool vi = true);
     void updatePoundageID();
+    void SetTitle(const QString &title);
 signals:
     void cancelSignal();
     void confirmSignal();

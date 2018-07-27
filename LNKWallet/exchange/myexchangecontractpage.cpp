@@ -48,6 +48,7 @@ MyExchangeContractPage::MyExchangeContractPage(QWidget *parent) :
     ui->balanceBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->sellBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->withdrawAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->registerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     pageWidget = new PageScrollWidget();
     ui->stackedWidget->addWidget(pageWidget);
@@ -241,6 +242,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":"))
         {
+            ui->registerBtn->setVisible(false);
             TransactionResultDialog transactionResultDialog;
             transactionResultDialog.setInfoText(tr("Create exchange contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract."));
             transactionResultDialog.setDetailText(result);
@@ -248,6 +250,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
         }
         else if(result.startsWith("\"error\":"))
         {            
+            ui->registerBtn->setVisible(true);
             ErrorResultDialog errorResultDialog;
             errorResultDialog.setInfoText(tr("Fail to register exchange contract!"));
             errorResultDialog.setDetailText(result);
@@ -437,7 +440,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
 
             FeeChargeWidget *fee = new FeeChargeWidget( getBigNumberString(totalAmount, ASSET_PRECISION).toDouble(),HXChain::getInstance()->feeType,
                                                          ui->accountComboBox->currentText(),HXChain::getInstance()->mainFrame);
-
+            //fee->SetTitle(tr("Register Contract"));
             fee->SetInfo(tr("register contract!"));
             connect(fee,&FeeChargeWidget::confirmSignal,[this,stepCount,fee](){
                 QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
@@ -507,6 +510,7 @@ void MyExchangeContractPage::on_accountComboBox_currentIndexChanged(const QStrin
     HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
     QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
 
+    ui->registerBtn->setVisible(contractAddress.isEmpty());
     if(contractAddress.isEmpty())
     {
         ui->ordersTableWidget->setRowCount(0);
@@ -563,6 +567,33 @@ void MyExchangeContractPage::on_sellBtn_clicked()
     }
 
 
+}
+
+void MyExchangeContractPage::on_registerBtn_clicked()
+{
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
+
+    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
+
+    if(contractAddress.isEmpty())
+    {
+        QString filePath = QDir::currentPath() + "/contracts/blocklink_exchange.lua.gpc";
+        QFileInfo fileInfo(filePath);
+        if(fileInfo.exists())
+        {
+            //查询注册合约费用
+            HXChain::getInstance()->postRPC("contract-register_contract_testing",toJsonFormat( "register_contract_testing",
+                                                                                               QJsonArray() << ui->accountComboBox->currentText() << filePath));
+
+
+        }
+        else
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Can not find file contracts/blocklink_exchange.glua.gpc!"));
+            commonDialog.pop();
+        }
+    }
 }
 
 void MyExchangeContractPage::on_balanceBtn_clicked()
