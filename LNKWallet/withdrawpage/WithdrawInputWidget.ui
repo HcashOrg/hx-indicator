@@ -100,7 +100,7 @@ font:12px &quot;Microsoft YaHei UI Light&quot;;</string>
      <x>70</x>
      <y>90</y>
      <width>300</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -118,7 +118,7 @@ font:12px &quot;Microsoft YaHei UI Light&quot;;</string>
      <x>400</x>
      <y>90</y>
      <width>300</width>
-     <height>30</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="font">
@@ -133,14 +133,18 @@ font:12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QToolButton" name="toolButton_all">
    <property name="geometry">
     <rect>
-     <x>635</x>
-     <y>93</y>
+     <x>640</x>
+     <y>90</y>
      <width>60</width>
      <height>24</height>
     </rect>
    </property>
    <property name="cursor">
     <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolButton{color: rgb(137,129, 161);font: 11px &quot;微软雅黑&quot;;background-color: rgb(84,61,137);border:0px solid white;border-radius:3px;}
+QToolButton:hover{color:white;}</string>
    </property>
    <property name="text">
     <string>全部提现</string>

@@ -116,7 +116,7 @@ qDebug() << "ssssssssssssssss " << keys;
         ui->accountTableWidget->setItem(i,1,new QTableWidgetItem(getBigNumberString(map.value(assetId).amount, assetInfo.precision)));
 
         ui->accountTableWidget->setItem(i,2,new QTableWidgetItem(tr("transfer")));
-        if(ui->accountTableWidget->item(i,0)->text() != "LNK")
+        if(ui->accountTableWidget->item(i,0)->text() != ASSET_NAME)
         {
             ui->accountTableWidget->setItem(i,3,new QTableWidgetItem(tr("deposit")));
             ui->accountTableWidget->setItem(i,4,new QTableWidgetItem(tr("withdraw")));

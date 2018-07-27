@@ -255,9 +255,13 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
 
     if(!object.value("error_message").toString().isEmpty())
     {
+        if(!hash.isEmpty())
+        {
+            RemoveTransaction(hash);
+        }
         emit updateMark();
     }
-    qDebug()<<object;
+    qDebug()<<hash<<object;
 }
 
 QString CrossCapitalMark::ParseTransactionID(const QString &jsonString)
@@ -280,6 +284,7 @@ void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id
     paramObject.insert("chainId",symbol);
     paramObject.insert("trxid",id);
     object.insert("params",paramObject);
+    qDebug()<<"query transid"<<id;
     _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
