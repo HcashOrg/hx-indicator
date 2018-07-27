@@ -930,17 +930,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="251"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="256"/>
         <source>Select the export path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="294"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="299"/>
         <source>available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/AssetChangeHistoryWidget.cpp" line="298"/>
+        <location filename="guard/AssetChangeHistoryWidget.cpp" line="303"/>
         <source>unavailable</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3618,17 +3618,17 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2082"/>
+        <location filename="frame.cpp" line="2086"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2085"/>
+        <location filename="frame.cpp" line="2089"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2088"/>
+        <location filename="frame.cpp" line="2092"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6083,7 +6083,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="129"/>
         <source>HX 数量：</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AMMOUTNT OF HX:</translation>
     </message>
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="150"/>
@@ -6119,7 +6119,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="65"/>
         <source>承兑币种:</source>
-        <translation type="unfinished">ACCEPT COIN</translation>
+        <translation type="unfinished">ACCEPT COIN:</translation>
     </message>
     <message>
         <location filename="poundage/PublishPoundageWidget.ui" line="177"/>
@@ -6212,37 +6212,37 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Password:</translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="87"/>
+        <location filename="miner/registerdialog.cpp" line="91"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="115"/>
+        <location filename="miner/registerdialog.cpp" line="119"/>
         <source>Transaction of register-account has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="126"/>
+        <location filename="miner/registerdialog.cpp" line="130"/>
         <source>Balance of this account is not enough!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="130"/>
+        <location filename="miner/registerdialog.cpp" line="134"/>
         <source>Fail to register account!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="150"/>
+        <location filename="miner/registerdialog.cpp" line="154"/>
         <source>The name is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="155"/>
+        <location filename="miner/registerdialog.cpp" line="159"/>
         <source>This name has been used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="174"/>
+        <location filename="miner/registerdialog.cpp" line="178"/>
         <source>The name that will be registered is not the same as current name. Sure to change the name of this account?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7191,13 +7191,13 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;微软雅黑&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;微软雅黑&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <oldsource>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;微软雅黑&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;微软雅黑&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
