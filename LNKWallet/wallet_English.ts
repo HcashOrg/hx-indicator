@@ -4043,8 +4043,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="235"/>
-        <source>Sentor私钥管理</source>
-        <oldsource>Guard私钥管理</oldsource>
+        <source>Senator私钥管理</source>
+        <oldsource>Sentor私钥管理</oldsource>
         <translation type="unfinished">Senator Key Management</translation>
     </message>
     <message>

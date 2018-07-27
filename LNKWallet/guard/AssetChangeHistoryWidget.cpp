@@ -175,10 +175,9 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-dump_crosschain_private_key")
+    if( id.startsWith("id-dump_crosschain_private_key-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -251,7 +250,6 @@ void AssetChangeHistoryWidget::on_changeHistoryTableWidget_cellClicked(int row, 
             QString defaultFilePath = QDir::currentPath();
             defaultFilePath += QString("/%1_%2_%3_%4.gcck").arg(ui->accountComboBox->currentText()).arg(assetSymbol)
                     .arg(hotAddress.left(5)).arg(coldAddress.left(5));
-            qDebug() << "ddddddddd" << defaultFilePath;
 
             QString path = QFileDialog::getSaveFileName(this, tr("Select the export path"), defaultFilePath, "(*.gcck)");
             if(!path.isEmpty())
@@ -282,13 +280,15 @@ void AssetChangeHistoryWidget::fetchMultisigAccountPair()
 
 void AssetChangeHistoryWidget::fetchCrosschainPrivateKey(QString address)
 {
-    HXChain::getInstance()->postRPC( "id-dump_crosschain_private_key", toJsonFormat( "dump_crosschain_private_key",
+    HXChain::getInstance()->postRPC( "id-dump_crosschain_private_key-" + address, toJsonFormat( "dump_crosschain_private_key",
                                                                                      QJsonArray() << address));
 }
 
 void AssetChangeHistoryWidget::refreshKeyState()
 {
     int rowCount = ui->changeHistoryTableWidget->rowCount();
+
+
     for(int i = 0; i < rowCount; i++)
     {
         QString hotAddress = ui->changeHistoryTableWidget->item(i,1)->data(Qt::UserRole).toString();
