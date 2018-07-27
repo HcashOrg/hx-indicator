@@ -49,7 +49,7 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
 
     ui->consoleLineEdit->setFocus();
 
-
+    ui->consoleLineEdit->setContextMenuPolicy(Qt::NoContextMenu);
 //    setStyleSheet("#ConsoleDialog{background-color: rgb(246, 246, 246);}");
 
 //    mouse_press = false;
