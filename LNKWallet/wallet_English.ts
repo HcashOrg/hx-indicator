@@ -1346,7 +1346,6 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Amount can be allot(current account)</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="76"/>
         <location filename="capitalTransferPage/CapitalTransferPage.ui" line="102"/>
         <location filename="capitalTransferPage/CapitalTransferPage.ui" line="277"/>
         <source>TextLabel</source>
@@ -3306,23 +3305,23 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="171"/>
+        <location filename="FeeChooseWidget.cpp" line="176"/>
         <source>cannot find proper acceptance!</source>
         <oldsource>cannot find proper poundage!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="187"/>
+        <location filename="FeeChooseWidget.cpp" line="192"/>
         <source>pay:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="187"/>
+        <location filename="FeeChooseWidget.cpp" line="192"/>
         <source>  rate:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="250"/>
+        <location filename="FeeChooseWidget.cpp" line="256"/>
         <source> less than </source>
         <translation type="unfinished"></translation>
     </message>
@@ -5133,8 +5132,9 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.ui" line="105"/>
-        <source>查看合约余额</source>
-        <translation type="unfinished">CONTRACT BALANCE</translation>
+        <source>我的合约</source>
+        <oldsource>查看合约余额</oldsource>
+        <translation type="unfinished">MY CONTRACT</translation>
     </message>
     <message>
         <location filename="exchange/myexchangecontractpage.ui" line="121"/>
@@ -5167,117 +5167,123 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">ORDER PAIR</translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="57"/>
+        <location filename="exchange/myexchangecontractpage.ui" line="303"/>
+        <source>注册合约</source>
+        <translation type="unfinished">REGISTE CONTRACT</translation>
+    </message>
+    <message>
+        <location filename="exchange/myexchangecontractpage.cpp" line="58"/>
         <source>There are no orders!</source>
         <oldsource>There&apos;s no contract!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="143"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="144"/>
         <source>cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="144"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="145"/>
         <source>add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="170"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="171"/>
         <source>SELL</source>
         <oldsource>Sell</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="171"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="172"/>
         <source>BUY</source>
         <oldsource>Buy</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="172"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="173"/>
         <source>PRICE</source>
         <oldsource>Price</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="176"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="177"/>
         <source>SELL / %1</source>
         <oldsource>Sell / %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="177"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="178"/>
         <source>BUY / %1</source>
         <oldsource>Buy / %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="178"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="179"/>
         <source>PRICE (%1/%2)</source>
         <oldsource>Price (%1/%2)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="245"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="247"/>
         <source>Create exchange contract successfully! Please wait for the confirmation of the block chain. Please do not repeat the creation of the contract.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="252"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="255"/>
         <source>Fail to register exchange contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="320"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="323"/>
         <source>Sure to cancel this order? You need to pay the fee for contract execution.</source>
         <oldsource>Sure to withdraw this order? You need to pay the fee for contract execution.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="348"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="351"/>
         <source>Transaction of cancel-order has been sent out!</source>
         <oldsource>Transaction of withdraw-order has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="355"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="358"/>
         <source>Fail to cancel sell-order!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="380"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="383"/>
         <source>You need to pay the fee for contract execution.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="409"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="412"/>
         <source>Transaction of cancel-order-pair has been sent out!</source>
         <oldsource>Transaction of withdraw-order-pair has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="416"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="419"/>
         <source>Fail to cancel sell-order pair!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="441"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="444"/>
         <source>register contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="481"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="484"/>
         <source>You don&apos;t have an exchange contract at the moment. Will you create it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="497"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="500"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="593"/>
         <source>Can not find file contracts/blocklink_exchange.glua.gpc!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="601"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="632"/>
         <source>Sure to cancel all orders of %1-to-%2 ?</source>
         <oldsource>Sure to withdraw all orders of %1-to-%2 ?</oldsource>
         <translation type="unfinished"></translation>
