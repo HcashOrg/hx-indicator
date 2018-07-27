@@ -146,8 +146,8 @@ void HXChain:: startExe()
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
-    nodeProc->start("lnk_node.exe",strList);
-    qDebug() << "start lnk_node.exe " << strList;
+    nodeProc->start("hx_node.exe",strList);
+    qDebug() << "start hx_node.exe " << strList;
 
 
 //    HXChain::getInstance()->initWebSocketManager();
@@ -161,18 +161,18 @@ void HXChain::onNodeExeStateChanged()
 
     if(nodeProc->state() == QProcess::Starting)
     {
-        qDebug() << QString("%1 is starting").arg("lnk_node.exe");
+        qDebug() << QString("%1 is starting").arg("hx_node.exe");
     }
     else if(nodeProc->state() == QProcess::Running)
     {
-        qDebug() << QString("%1 is running").arg("lnk_node.exe");
+        qDebug() << QString("%1 is running").arg("hx_node.exe");
         connect(&timerForStartExe,SIGNAL(timeout()),this,SLOT(checkNodeExeIsReady()));
         timerForStartExe.start(1000);
     }
     else if(nodeProc->state() == QProcess::NotRunning)
     {
         CommonDialog commonDialog(CommonDialog::OkOnly);
-        commonDialog.setText(tr("Fail to launch %1 !").arg("lnk_node.exe"));
+        commonDialog.setText(tr("Fail to launch %1 !").arg("hx_node.exe"));
         commonDialog.pop();
     }
 }
@@ -183,11 +183,11 @@ void HXChain::onClientExeStateChanged()
 
     if(clientProc->state() == QProcess::Starting)
     {
-        qDebug() << QString("%1 is starting").arg("lnk_client.exe");
+        qDebug() << QString("%1 is starting").arg("hx_client.exe");
     }
     else if(clientProc->state() == QProcess::Running)
     {
-        qDebug() << QString("%1 is running").arg("lnk_client.exe");
+        qDebug() << QString("%1 is running").arg("hx_client.exe");
 
         HXChain::getInstance()->initWebSocketManager();
         emit exeStarted();
@@ -196,7 +196,7 @@ void HXChain::onClientExeStateChanged()
     {
         qDebug() << "client not running" + clientProc->errorString();
         CommonDialog commonDialog(CommonDialog::OkOnly);
-        commonDialog.setText(tr("Fail to launch %1 !").arg("lnk_client.exe"));
+        commonDialog.setText(tr("Fail to launch %1 !").arg("hx_client.exe"));
         commonDialog.pop();
     }
 }
@@ -210,7 +210,7 @@ void HXChain::delayedLaunchClient()
             << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
 
-    clientProc->start("lnk_client.exe",strList);
+    clientProc->start("hx_client.exe",strList);
 }
 
 void HXChain::checkNodeExeIsReady()
@@ -366,11 +366,8 @@ void HXChain::getSystemEnvironmentPath()
     {
         if (str.startsWith("APPDATA="))
         {
-#ifdef TEST_WALLET
-            walletConfigPath = str.mid(8) + "\\HXWallet_test";
-#else
-            walletConfigPath = str.mid(8) + "\\HXWallet";
-#endif
+
+            walletConfigPath = str.mid(8) + "\\HXWallet"WALLET_EXE_SUFFIX;
             appDataPath = walletConfigPath + "\\chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;
@@ -381,11 +378,8 @@ void HXChain::getSystemEnvironmentPath()
     {
         if (str.startsWith("HOME="))
         {
-#ifdef TEST_WALLET
-            walletConfigPath = str.mid(5) + "/Library/Application Support/HXWallet_test";
-#else
-            walletConfigPath = str.mid(5) + "/Library/Application Support/HXWallet";
-#endif
+
+            walletConfigPath = str.mid(5) + "/Library/Application Support/HXWallet"WALLET_EXE_SUFFIX;
             appDataPath = walletConfigPath + "/chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;
@@ -396,11 +390,7 @@ void HXChain::getSystemEnvironmentPath()
     {
         if (str.startsWith("HOME="))
         {
-#ifdef TEST_WALLET
-            walletConfigPath = str.mid(5) + "/HXWallet_test";
-#else
-            walletConfigPath = str.mid(5) + "/HXWallet";
-#endif
+            walletConfigPath = str.mid(5) + "/HXWallet"WALLET_EXE_SUFFIX;
             appDataPath = walletConfigPath + "/chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;

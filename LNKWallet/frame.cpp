@@ -218,33 +218,6 @@ Frame::Frame(): timer(NULL),
 
             setGeometry(0,0, waitingForSync->width(), waitingForSync->height());
             moveWidgetToScreenCenter(this);
-
-//            HXChain::getInstance()->appDataPath = HXChain::getInstance()->configFile->value("/settings/chainPath").toString();
-
-//            QStringList strList;
-//            strList << "--data-dir" << HXChain::getInstance()->configFile->value("/settings/chainPath").toString()
-//                    << "--rpcuser" << "a" << "--rpcpassword" << "b" << "--rpcport" << QString::number( RPC_PORT) << "--server";
-//            if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
-//            {
-//                strList << "--resync-blockchain";
-
-//                QFile file(HXChain::getInstance()->configFile->value("/settings/chainPath").toString() + "\\config.json");
-//                if(file.exists())   file.remove();
-//            }
-//            HXChain::getInstance()->configFile->setValue("settings/resyncNextTime",false);
-
-//            HXChain::getInstance()->proc->start( WALLET_EXE_FILE,strList );
-
-//            if( HXChain::getInstance()->proc->waitForStarted())
-//            {
-//                qDebug() << QString("launch %1 successfully").arg(WALLET_EXE_FILE);
-//            }
-//            else
-//            {
-//                qDebug() << QString("launch %1 failed").arg(WALLET_EXE_FILE);
-//            }
-
-
         }
 
 
