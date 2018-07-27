@@ -184,9 +184,6 @@ void WithdrawInputWidget::InitStyle()
     QPalette palette;
     palette.setColor(QPalette::Window, QColor(248,249,253));
     setPalette(palette);
-
-    ui->toolButton_all->setStyleSheet("QToolButton{background:transparent;color:rgb(192,202,212);font: 12px \"Microsoft YaHei UI Light\";}"
-                                      "QToolButton:hover{color:rgb(84,116,235);}");
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
 }
