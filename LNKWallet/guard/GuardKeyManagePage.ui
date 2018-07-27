@@ -232,7 +232,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>Guard私钥管理</string>
+    <string>Sentor私钥管理</string>
    </property>
   </widget>
   <widget class="QToolButton" name="historyBtn">
