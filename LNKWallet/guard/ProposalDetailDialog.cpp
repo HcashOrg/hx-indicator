@@ -32,7 +32,7 @@ ProposalDetailDialog::ProposalDetailDialog(QWidget *parent) :
     ui->voteStateTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->voteStateTableWidget->horizontalHeader()->setFixedHeight(40);
     ui->voteStateTableWidget->horizontalHeader()->setVisible(true);
-    ui->voteStateTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->voteStateTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->voteStateTableWidget->setColumnWidth(0,300);
     ui->voteStateTableWidget->setColumnWidth(1,80);
@@ -153,6 +153,15 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         ui->withdrawTrxIdLabel->setText(operationObject.value("not_enough_sign_trx_id").toString());
     }
         break;
+    case TRANSACTION_TYPE_CREATE_GUARD:
+    {
+        ui->typeLabel->setText(tr("create senator"));
+        ui->typeStackedWidget->setCurrentIndex(5);
+
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        ui->isFormalLabel->setText(QString("%1").arg(operationObject.value("formal").toBool()));
+        ui->guardAddressLabel->setText(operationObject.value("owner_addr").toString());
+    }
     default:
         break;
     }

@@ -121,6 +121,10 @@ void ProposalPage::showProposals()
         {
             typeStr = tr("cancel withdraw trx");
         }
+        else if(info.proposalOperationType == TRANSACTION_TYPE_CREATE_GUARD)
+        {
+            typeStr = tr("create senator");
+        }
         else
         {
             typeStr = tr("unknown");

@@ -529,6 +529,9 @@ void AllTransactionWidget::showTransactions()
             case TRANSACTION_TYPE_WITHDRAW_CANCEL:
                 str += tr("cancel withdraw trx");
                 break;
+            case TRANSACTION_TYPE_CREATE_GUARD:
+                str += tr("create senator");
+                break;
             default:
                 str += tr("%1 (unkown)").arg(opType);
                 break;
