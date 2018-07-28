@@ -2,6 +2,8 @@
 #include "ui_showcontentdialog.h"
 #include <QClipboard>
 
+#include <QDebug>
+
 ShowContentDialog::ShowContentDialog(QString text, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ShowContentDialog)
@@ -16,8 +18,8 @@ ShowContentDialog::ShowContentDialog(QString text, QWidget *parent) :
     ui->textLabel->setText(text);
     ui->textLabel->adjustSize();
 
-    ui->copyBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
-                               "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
+    ui->copyBtn->setStyleSheet("QToolButton#copyBtn{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                               "QToolButton#copyBtn:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
     ui->copyBtn->setToolTip(tr("copy to clipboard"));
     ui->copyBtn->move( 7, 4);
     ui->textLabel->move( 25, 1);

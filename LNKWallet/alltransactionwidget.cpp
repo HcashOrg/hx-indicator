@@ -790,6 +790,7 @@ void AllTransactionWidget::on_transactionsTableWidget_cellPressed(int row, int c
         showContentDialog.move( ui->transactionsTableWidget->mapToGlobal( QPoint(x, y)));
         showContentDialog.exec();
 
+
         return;
     }
 
