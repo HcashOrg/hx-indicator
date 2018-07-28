@@ -1684,6 +1684,11 @@ void tableWidgetSetItemZebraColor(QTableWidget *w, int alignment)
                     ToolButtonWidgetItem* tbwi = qobject_cast<ToolButtonWidgetItem*>(cellWidget);
                     tbwi->setBackgroundColor(itemColor);
                 }
+                else if( QString(cellWidget->metaObject()->className()) == "VoteStateLabel")
+                {
+                    QLabel* vsl = qobject_cast<QLabel*>(cellWidget);
+                    vsl->setStyleSheet(QString("QLabel{background-color:%1;}").arg(itemColor));
+                }
             }
         }
     }

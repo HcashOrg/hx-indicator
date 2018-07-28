@@ -614,106 +614,117 @@
     <message>
         <location filename="alltransactionwidget.cpp" line="533"/>
         <source>create senator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">创建senator</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="536"/>
+        <source>set senator formal or not</source>
+        <oldsource>set senator formal or informl</oldsource>
+        <translation type="unfinished">设置senator是否为formal</translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="539"/>
+        <source>resign senator</source>
+        <translation type="unfinished">senator辞职</translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="542"/>
         <source>%1 (unkown)</source>
         <translation type="unfinished">%1 （未知）</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="542"/>
+        <location filename="alltransactionwidget.cpp" line="548"/>
         <source>sponsor a proposal</source>
         <translation type="unfinished">发起提案</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="549"/>
+        <location filename="alltransactionwidget.cpp" line="555"/>
         <source>proposal ID: %1</source>
         <translation type="unfinished">提案ID： %1</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="551"/>
+        <location filename="alltransactionwidget.cpp" line="557"/>
         <source>vote for a proposal</source>
         <translation type="unfinished">提案投票</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="567"/>
+        <location filename="alltransactionwidget.cpp" line="573"/>
         <source>lock asset to miner</source>
         <translation type="unfinished">质押资产给miner</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="583"/>
+        <location filename="alltransactionwidget.cpp" line="589"/>
         <source>foreclose asset from miner</source>
         <translation type="unfinished">从miner赎回资产</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="594"/>
-        <location filename="alltransactionwidget.cpp" line="609"/>
+        <location filename="alltransactionwidget.cpp" line="600"/>
+        <location filename="alltransactionwidget.cpp" line="615"/>
         <source>%1 account: %2</source>
         <translation type="unfinished">%1账户: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="600"/>
+        <location filename="alltransactionwidget.cpp" line="606"/>
         <source>deposit %1</source>
         <translation type="unfinished">%1充值</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="615"/>
+        <location filename="alltransactionwidget.cpp" line="621"/>
         <source>withdraw %1</source>
         <translation type="unfinished">%1提现</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="634"/>
+        <location filename="alltransactionwidget.cpp" line="640"/>
         <source>total </source>
         <translation type="unfinished">总计 </translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="643"/>
+        <location filename="alltransactionwidget.cpp" line="649"/>
         <source>get mining income</source>
         <translation type="unfinished">获取挖矿收入</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="650"/>
+        <location filename="alltransactionwidget.cpp" line="656"/>
         <source>issue &quot;%1&quot;</source>
         <translation type="unfinished">发行 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="652"/>
+        <location filename="alltransactionwidget.cpp" line="658"/>
         <source>issue asset</source>
         <translation type="unfinished">发行资产</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="665"/>
+        <location filename="alltransactionwidget.cpp" line="671"/>
         <source>register contract</source>
         <translation type="unfinished">注册合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="678"/>
+        <location filename="alltransactionwidget.cpp" line="684"/>
         <source>call contract</source>
         <translation type="unfinished">合约调用</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="695"/>
+        <location filename="alltransactionwidget.cpp" line="701"/>
         <source>transfer to contract</source>
         <translation type="unfinished">转账到合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="712"/>
+        <location filename="alltransactionwidget.cpp" line="718"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished">创建%1承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="723"/>
+        <location filename="alltransactionwidget.cpp" line="729"/>
         <source>cancel acceptance</source>
         <translation type="unfinished">撤销承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="739"/>
+        <location filename="alltransactionwidget.cpp" line="745"/>
         <source> etc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="749"/>
+        <location filename="alltransactionwidget.cpp" line="755"/>
         <source>get bonus</source>
         <translation type="unfinished">领取分红</translation>
     </message>
@@ -5685,7 +5696,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="136"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="796"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="822"/>
         <source>投票状态</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5763,65 +5774,84 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="679"/>
-        <source>是否正式</source>
+        <source>新senator的账户ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="692"/>
-        <source>Senator地址</source>
+        <location filename="guard/ProposalDetailDialog.ui" line="710"/>
+        <source>辞职senator的账户ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="783"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="728"/>
+        <source>未知的提案类型</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="809"/>
         <source>所需投票者</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="84"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="85"/>
         <source>approved</source>
         <translation type="unfinished">已赞成</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="89"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="90"/>
         <source>disapproved</source>
         <translation type="unfinished">已反对</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="94"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="95"/>
         <source>not voted</source>
         <translation type="unfinished">未投票</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="106"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="107"/>
         <source>cold-hot trx</source>
         <oldsource>hot-cold transfer</oldsource>
         <translation type="unfinished">冷热钱包转账</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="119"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="120"/>
         <source>update multisig-address</source>
         <translation type="unfinished">更新多签地址</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="130"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="131"/>
         <source>set publisher</source>
         <translation type="unfinished">指定喂价人</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="140"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="141"/>
         <source>cancel cold-hot trx</source>
         <oldsource>calcel cold-hot trx</oldsource>
         <translation type="unfinished">取消冷热钱包转账</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="149"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="150"/>
         <source>cancel withdraw trx</source>
         <translation type="unfinished">取消提现交易</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="158"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="159"/>
         <source>create senator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">创建senator</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.cpp" line="168"/>
+        <source>resign senator</source>
+        <translation type="unfinished">senator辞职</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.cpp" line="176"/>
+        <source>unknown(%1)</source>
+        <translation type="unfinished">未知(%1)</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation type="obsolete">未知</translation>
     </message>
 </context>
 <context>
@@ -5906,61 +5936,66 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalPage.cpp" line="126"/>
         <source>create senator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">创建senator</translation>
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="130"/>
+        <source>resign senator</source>
+        <translation type="unfinished">senator辞职</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalPage.cpp" line="134"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="143"/>
+        <location filename="guard/ProposalPage.cpp" line="146"/>
         <source>no senator</source>
         <oldsource>no guard</oldsource>
         <translation type="unfinished">无senator</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="147"/>
+        <location filename="guard/ProposalPage.cpp" line="150"/>
         <source>approved</source>
         <translation type="unfinished">已赞成</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="152"/>
+        <location filename="guard/ProposalPage.cpp" line="155"/>
         <source>disapproved</source>
         <translation type="unfinished">已反对</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="157"/>
+        <location filename="guard/ProposalPage.cpp" line="160"/>
         <source>not voted</source>
         <translation type="unfinished">未投票</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="163"/>
+        <location filename="guard/ProposalPage.cpp" line="166"/>
         <source>approve</source>
         <translation type="unfinished">赞成</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="164"/>
+        <location filename="guard/ProposalPage.cpp" line="167"/>
         <source>disapprove</source>
         <translation type="unfinished">反对</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="217"/>
+        <location filename="guard/ProposalPage.cpp" line="220"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished">包含提案投票的交易已发出，请等待确认</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="224"/>
+        <location filename="guard/ProposalPage.cpp" line="227"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="237"/>
+        <location filename="guard/ProposalPage.cpp" line="240"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished">确定赞成这个提案吗？</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="257"/>
+        <location filename="guard/ProposalPage.cpp" line="260"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished">确定反对这个提案吗？</translation>
     </message>
@@ -6566,7 +6601,7 @@ update or not?</source>
         <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="showcontentdialog.cpp" line="21"/>
+        <location filename="showcontentdialog.cpp" line="23"/>
         <source>copy to clipboard</source>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
@@ -7304,12 +7339,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VoteStateLabel</name>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="341"/>
+        <location filename="guard/ProposalPage.cpp" line="344"/>
         <source>not passed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="352"/>
+        <location filename="guard/ProposalPage.cpp" line="355"/>
         <source>voting</source>
         <translation type="unfinished"></translation>
     </message>

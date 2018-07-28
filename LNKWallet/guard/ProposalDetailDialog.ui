@@ -650,12 +650,12 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         </widget>
        </widget>
        <widget class="QWidget" name="createGuardPage">
-        <widget class="QLabel" name="isFormalLabel">
+        <widget class="QLabel" name="newGuardLabel">
          <property name="geometry">
           <rect>
-           <x>120</x>
-           <y>20</y>
-           <width>120</width>
+           <x>30</x>
+           <y>40</y>
+           <width>200</width>
            <height>20</height>
           </rect>
          </property>
@@ -671,33 +671,22 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
           <rect>
            <x>30</x>
            <y>20</y>
-           <width>80</width>
+           <width>300</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
-          <string>是否正式</string>
+          <string>新senator的账户ID</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_20">
+       </widget>
+       <widget class="QWidget" name="resignGuardPage">
+        <widget class="QLabel" name="resignGuardLabel">
          <property name="geometry">
           <rect>
            <x>30</x>
-           <y>50</y>
-           <width>80</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Senator地址</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="guardAddressLabel">
-         <property name="geometry">
-          <rect>
-           <x>120</x>
-           <y>50</y>
-           <width>300</width>
+           <y>40</y>
+           <width>200</width>
            <height>20</height>
           </rect>
          </property>
@@ -706,6 +695,43 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
          </property>
          <property name="textInteractionFlags">
           <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_20">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>20</y>
+           <width>300</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>辞职senator的账户ID</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="unknownPage">
+        <widget class="QLabel" name="unknownLabel">
+         <property name="geometry">
+          <rect>
+           <x>100</x>
+           <y>40</y>
+           <width>260</width>
+           <height>41</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{font:11px &quot;微软雅黑&quot;;color:rgb(137,129,161);}</string>
+         </property>
+         <property name="text">
+          <string>未知的提案类型</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </widget>

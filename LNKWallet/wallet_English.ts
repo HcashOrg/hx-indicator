@@ -651,102 +651,113 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="536"/>
-        <source>%1 (unkown)</source>
+        <source>set senator formal or not</source>
+        <oldsource>set senator formal or informl</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="539"/>
+        <source>resign senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="542"/>
+        <source>%1 (unkown)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="548"/>
         <source>sponsor a proposal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="549"/>
+        <location filename="alltransactionwidget.cpp" line="555"/>
         <source>proposal ID: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="551"/>
+        <location filename="alltransactionwidget.cpp" line="557"/>
         <source>vote for a proposal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="567"/>
+        <location filename="alltransactionwidget.cpp" line="573"/>
         <source>lock asset to miner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="583"/>
+        <location filename="alltransactionwidget.cpp" line="589"/>
         <source>foreclose asset from miner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="594"/>
-        <location filename="alltransactionwidget.cpp" line="609"/>
+        <location filename="alltransactionwidget.cpp" line="600"/>
+        <location filename="alltransactionwidget.cpp" line="615"/>
         <source>%1 account: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="600"/>
+        <location filename="alltransactionwidget.cpp" line="606"/>
         <source>deposit %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="615"/>
+        <location filename="alltransactionwidget.cpp" line="621"/>
         <source>withdraw %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="634"/>
+        <location filename="alltransactionwidget.cpp" line="640"/>
         <source>total </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="643"/>
+        <location filename="alltransactionwidget.cpp" line="649"/>
         <source>get mining income</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="650"/>
+        <location filename="alltransactionwidget.cpp" line="656"/>
         <source>issue &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="652"/>
+        <location filename="alltransactionwidget.cpp" line="658"/>
         <source>issue asset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="665"/>
+        <location filename="alltransactionwidget.cpp" line="671"/>
         <source>register contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="678"/>
+        <location filename="alltransactionwidget.cpp" line="684"/>
         <source>call contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="695"/>
+        <location filename="alltransactionwidget.cpp" line="701"/>
         <source>transfer to contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="712"/>
+        <location filename="alltransactionwidget.cpp" line="718"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="723"/>
+        <location filename="alltransactionwidget.cpp" line="729"/>
         <source>cancel acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="739"/>
+        <location filename="alltransactionwidget.cpp" line="745"/>
         <source> etc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="749"/>
+        <location filename="alltransactionwidget.cpp" line="755"/>
         <source>get bonus</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5823,7 +5834,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="136"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="796"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="822"/>
         <source>投票状态</source>
         <translation type="unfinished">Voting State</translation>
     </message>
@@ -5901,64 +5912,79 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="679"/>
-        <source>是否正式</source>
-        <translation type="unfinished"></translation>
+        <source>新senator的账户ID</source>
+        <translation type="unfinished">Account ID of the new senator</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="692"/>
-        <source>Senator地址</source>
-        <translation type="unfinished"></translation>
+        <location filename="guard/ProposalDetailDialog.ui" line="710"/>
+        <source>辞职senator的账户ID</source>
+        <translation type="unfinished">Account ID of the resigning senator</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="783"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="728"/>
+        <source>未知的提案类型</source>
+        <translation type="unfinished">unknown proposal type</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="809"/>
         <source>所需投票者</source>
         <translation type="unfinished">Required Voters</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="84"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="85"/>
         <source>approved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="89"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="90"/>
         <source>disapproved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="94"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="95"/>
         <source>not voted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="106"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="107"/>
         <source>cold-hot trx</source>
         <oldsource>hot-cold transfer</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="119"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="120"/>
         <source>update multisig-address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="130"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="131"/>
         <source>set publisher</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="140"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="141"/>
         <source>cancel cold-hot trx</source>
         <oldsource>calcel cold-hot trx</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="149"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="150"/>
         <source>cancel withdraw trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="158"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="159"/>
         <source>create senator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.cpp" line="168"/>
+        <source>resign senator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.cpp" line="176"/>
+        <source>unknown(%1)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6048,57 +6074,62 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="130"/>
+        <source>resign senator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalPage.cpp" line="134"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="143"/>
+        <location filename="guard/ProposalPage.cpp" line="146"/>
         <source>no senator</source>
         <oldsource>no guard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="147"/>
+        <location filename="guard/ProposalPage.cpp" line="150"/>
         <source>approved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="152"/>
+        <location filename="guard/ProposalPage.cpp" line="155"/>
         <source>disapproved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="157"/>
+        <location filename="guard/ProposalPage.cpp" line="160"/>
         <source>not voted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="163"/>
+        <location filename="guard/ProposalPage.cpp" line="166"/>
         <source>approve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="164"/>
+        <location filename="guard/ProposalPage.cpp" line="167"/>
         <source>disapprove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="217"/>
+        <location filename="guard/ProposalPage.cpp" line="220"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="224"/>
+        <location filename="guard/ProposalPage.cpp" line="227"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="237"/>
+        <location filename="guard/ProposalPage.cpp" line="240"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="257"/>
+        <location filename="guard/ProposalPage.cpp" line="260"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6724,7 +6755,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="showcontentdialog.cpp" line="21"/>
+        <location filename="showcontentdialog.cpp" line="23"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7485,12 +7516,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
 <context>
     <name>VoteStateLabel</name>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="341"/>
+        <location filename="guard/ProposalPage.cpp" line="344"/>
         <source>not passed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="352"/>
+        <location filename="guard/ProposalPage.cpp" line="355"/>
         <source>voting</source>
         <translation type="unfinished"></translation>
     </message>

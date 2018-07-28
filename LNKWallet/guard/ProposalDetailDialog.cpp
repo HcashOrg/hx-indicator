@@ -21,6 +21,7 @@ ProposalDetailDialog::ProposalDetailDialog(QWidget *parent) :
 
     ui->closeBtn->setStyleSheet(CANCELBTN_STYLE);
 
+    ui->voteStateTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
     ui->voteStateTableWidget->installEventFilter(this);
     ui->voteStateTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->voteStateTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -35,8 +36,8 @@ ProposalDetailDialog::ProposalDetailDialog(QWidget *parent) :
     ui->voteStateTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->voteStateTableWidget->setColumnWidth(0,300);
-    ui->voteStateTableWidget->setColumnWidth(1,80);
-    ui->voteStateTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+    ui->voteStateTableWidget->setColumnWidth(1,75);
+    ui->voteStateTableWidget->horizontalHeader()->setStretchLastSection(true);
 
     ui->stackedWidget->setCurrentIndex(0);
     ui->typeStackedWidget->setCurrentIndex(0);
@@ -159,10 +160,21 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         ui->typeStackedWidget->setCurrentIndex(5);
 
         QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
-        ui->isFormalLabel->setText(QString("%1").arg(operationObject.value("formal").toBool()));
-        ui->guardAddressLabel->setText(operationObject.value("owner_addr").toString());
+        ui->newGuardLabel->setText(operationObject.value("guard_member_account").toString());
     }
+        break;
+    case TRANSACTION_TYPE_RESIGN_GUARD:
+    {
+        ui->typeLabel->setText(tr("resign senator"));
+        ui->typeStackedWidget->setCurrentIndex(6);
+
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        ui->resignGuardLabel->setText(operationObject.value("guard_member_account").toString());
+    }
+        break;
     default:
+        ui->typeLabel->setText(tr("unknown(%1)").arg(info.proposalOperationType));
+        ui->typeStackedWidget->setCurrentIndex(7);
         break;
     }
 }

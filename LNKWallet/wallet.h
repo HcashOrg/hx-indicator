@@ -19,6 +19,7 @@
 #include <QTimer>
 #include <QGraphicsEffect>
 #include <QTableWidget>
+#include <QLabel>
 
 #include "frame.h"
 #include "extra/style.h"

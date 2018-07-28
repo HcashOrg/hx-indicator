@@ -125,6 +125,10 @@ void ProposalPage::showProposals()
         {
             typeStr = tr("create senator");
         }
+        else if(info.proposalOperationType == TRANSACTION_TYPE_RESIGN_GUARD)
+        {
+            typeStr = tr("resign senator");
+        }
         else
         {
             typeStr = tr("unknown");
@@ -135,7 +139,6 @@ void ProposalPage::showProposals()
         VoteStateLabel* voteStateLabel = new VoteStateLabel;
         voteStateLabel->setVoteNum(info.approvedKeys.size(), info.disapprovedKeys.size(), info.requiredAccounts.size());
         ui->proposalTableWidget->setCellWidget(i,3,voteStateLabel);
-
 
         QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
         if(address.isEmpty())

@@ -70,7 +70,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>时间</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="typeAllBtn">
+  <widget class="QPushButton" name="typeAllBtn">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -89,7 +89,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>全部</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="typeTransferBtn">
+  <widget class="QPushButton" name="typeTransferBtn">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -108,7 +108,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>转账</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="typeDepositBtn">
+  <widget class="QPushButton" name="typeDepositBtn">
    <property name="geometry">
     <rect>
      <x>270</x>
@@ -127,7 +127,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>充值</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="typeWithdrawBtn">
+  <widget class="QPushButton" name="typeWithdrawBtn">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -146,7 +146,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>提现</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="typeContractBtn">
+  <widget class="QPushButton" name="typeContractBtn">
    <property name="geometry">
     <rect>
      <x>430</x>
@@ -165,7 +165,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>合约相关</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="typeOtherBtn">
+  <widget class="QPushButton" name="typeOtherBtn">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -184,7 +184,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>其他</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="timeAllBtn">
+  <widget class="QPushButton" name="timeAllBtn">
    <property name="geometry">
     <rect>
      <x>110</x>
@@ -203,7 +203,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>全部</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="timeDayBtn">
+  <widget class="QPushButton" name="timeDayBtn">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -222,7 +222,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>今天</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="timeWeekBtn">
+  <widget class="QPushButton" name="timeWeekBtn">
    <property name="geometry">
     <rect>
      <x>270</x>
@@ -241,7 +241,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>本周</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="timeMonthBtn">
+  <widget class="QPushButton" name="timeMonthBtn">
    <property name="geometry">
     <rect>
      <x>350</x>
@@ -481,7 +481,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     </property>
    </column>
   </widget>
-  <widget class="QToolButton" name="typeMineBtn">
+  <widget class="QPushButton" name="typeMineBtn">
    <property name="geometry">
     <rect>
      <x>510</x>
@@ -500,7 +500,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <string>挖矿相关</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="typeGuaranteeBtn">
+  <widget class="QPushButton" name="typeGuaranteeBtn">
    <property name="geometry">
     <rect>
      <x>590</x>
@@ -564,7 +564,7 @@ font: 11px &quot;微软雅黑&quot;;
     </rect>
    </property>
   </widget>
-  <widget class="QToolButton" name="typeFeedPriceBtn">
+  <widget class="QPushButton" name="typeFeedPriceBtn">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -583,7 +583,7 @@ font: 11px &quot;微软雅黑&quot;;
     <string>喂价</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="typeProposalBtn">
+  <widget class="QPushButton" name="typeProposalBtn">
    <property name="geometry">
     <rect>
      <x>270</x>
@@ -602,7 +602,7 @@ font: 11px &quot;微软雅黑&quot;;
     <string>提案</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="typeBonusBtn">
+  <widget class="QPushButton" name="typeBonusBtn">
    <property name="geometry">
     <rect>
      <x>350</x>

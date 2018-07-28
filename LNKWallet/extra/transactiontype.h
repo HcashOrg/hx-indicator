@@ -10,7 +10,9 @@
 #define TRANSACTION_TYPE_FEED_PRICE             23      // 喂价
 #define TRANSACTION_TYPE_SPONSOR_PROPOSAL       28      // 发起提案
 #define TRANSACTION_TYPE_PROPOSAL_APPROVE       29      // 提案投票
-#define TRANSACTION_TYPE_CREATE_GUARD           36      // 创建guard
+#define TRANSACTION_TYPE_CREATE_GUARD           35      // 创建guard
+#define TRANSACTION_TYPE_FORMAL_GUARD           36      // 成为正式guard
+#define TRANSACTION_TYPE_RESIGN_GUARD           38      // 使guard辞职
 #define TRANSACTION_TYPE_LOCKBALANCE            55      // 质押资产给miner
 #define TRANSACTION_TYPE_FORECLOSE              56      // 赎回质押资产
 #define TRANSACTION_TYPE_DEPOSIT                60      // 充值交易（多签转link-BTC）
