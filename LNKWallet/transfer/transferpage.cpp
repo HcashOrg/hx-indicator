@@ -210,15 +210,8 @@ void TransferPage::refresh()
 
 void TransferPage::setAmountPrecision()
 {
-    int pre = ASSET_PRECISION;
-    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
-        if(asset.symbol == ui->assetComboBox->currentText())
-        {
-            pre = asset.precision;
-            break;
-        }
-    }
-    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(pre));
+    AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(info.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
 }

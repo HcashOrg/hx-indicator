@@ -586,8 +586,13 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
 
     if(column == 4)
     {
-        ForecloseDialog forecloseDialog(ui->accountComboBox->currentText());
-        QString amountStr = forecloseDialog.pop();
+        if(ui->lockBalancesTableWidget->item(row,0) == NULL || ui->lockBalancesTableWidget->item(row,1) == NULL
+                || ui->lockBalancesTableWidget->item(row,2) == NULL)
+            return;
+
+        ForecloseDialog forecloseDialog(ui->accountComboBox->currentText(), ui->lockBalancesTableWidget->item(row,1)->text(),
+                                        ui->lockBalancesTableWidget->item(row,2)->text());
+        if(!forecloseDialog.pop())  return;
 
         if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
@@ -595,7 +600,7 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
                                          toJsonFormat( "foreclose_balance_from_miner",
                                                        QJsonArray() << ui->lockBalancesTableWidget->item(row,0)->text()
                                                        << ui->accountComboBox->currentText()
-                                                       << amountStr << ui->lockBalancesTableWidget->item(row,1)->text()
+                                                       << forecloseDialog.amountStr << ui->lockBalancesTableWidget->item(row,1)->text()
                                                        << true ));
 
         return;

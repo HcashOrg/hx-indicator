@@ -107,7 +107,7 @@
    </column>
    <column>
     <property name="text">
-     <string>喂价比例（/HX）</string>
+     <string>喂价比例</string>
     </property>
     <property name="font">
      <font>

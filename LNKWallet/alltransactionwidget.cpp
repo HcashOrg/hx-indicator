@@ -674,14 +674,31 @@ void AllTransactionWidget::showTransactions()
         case TRANSACTION_TYPE_CONTRACT_INVOKE:
         {
             QString contractId = operationObject.take("contract_id").toString();
+            QString contractAPI = operationObject.take("contract_api").toString();
+            QString arguments = operationObject.take("contract_arg").toString();
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(contractId));
 
-            QTableWidgetItem* item = new QTableWidgetItem( "-");
-            ui->transactionsTableWidget->setItem(i,3, item);
-            item->setTextColor(QColor(255,0,0));
+            if(contractAPI == "withdrawAsset")
+            {
+                 QString assetSymbol    = arguments.split(",").at(0);
+                 QString amountStr      = arguments.split(",").at(1);
 
-            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("call contract")));
+                 AssetInfo info  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(assetSymbol));
+                 QTableWidgetItem* item = new QTableWidgetItem( QString("+ %1 %2").arg( getBigNumberString(amountStr.toULongLong(), info.precision)).arg(assetSymbol));
+                 ui->transactionsTableWidget->setItem(i,3, item);
+                 item->setTextColor(QColor(0,255,0));
+
+                 ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("exechange contract withdrawAsset")));
+            }
+            else
+            {
+                QTableWidgetItem* item = new QTableWidgetItem( "-");
+                ui->transactionsTableWidget->setItem(i,3, item);
+                item->setTextColor(QColor(255,0,0));
+
+                ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("call contract")));
+            }
         }
             break;
         case TRANSACTION_TYPE_CONTRACT_TRANSFER:

@@ -5,9 +5,11 @@
 #include "commondialog.h"
 #include "FeeChooseWidget.h"
 
-ForecloseDialog::ForecloseDialog(const QString &accountName,QWidget *parent) :
+ForecloseDialog::ForecloseDialog(const QString &accountName, QString _assetSymbol, QString _maxAmount, QWidget *parent) :
     QDialog(parent),
     yesOrNo(false),
+    assetSymbol(_assetSymbol),
+    maxAmount(_maxAmount),
     ui(new Ui::ForecloseDialog)
 {
     ui->setupUi(this);
@@ -30,6 +32,13 @@ ForecloseDialog::ForecloseDialog(const QString &accountName,QWidget *parent) :
                                                      HXChain::getInstance()->feeType,accountName));
     ui->stackedWidget->setCurrentIndex(0);
     ui->stackedWidget->currentWidget()->resize(ui->stackedWidget->size());
+
+
+    AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_assetSymbol));
+    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(info.precision));
+    QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
+    ui->amountLineEdit->setValidator(pReg1);
+    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(_maxAmount).arg(_assetSymbol));
 }
 
 ForecloseDialog::~ForecloseDialog()
@@ -37,19 +46,13 @@ ForecloseDialog::~ForecloseDialog()
     delete ui;
 }
 
-QString ForecloseDialog::pop()
+bool ForecloseDialog::pop()
 {
     move(0,0);
     exec();
 
-    if(yesOrNo)
-    {
-        return ui->amountLineEdit->text();
-    }
-    else
-    {
-        return "";
-    }
+    amountStr = ui->amountLineEdit->text();
+    return yesOrNo;
 }
 
 void ForecloseDialog::on_okBtn_clicked()
@@ -68,4 +71,13 @@ void ForecloseDialog::on_closeBtn_clicked()
 {
     yesOrNo = false;
     close();
+}
+
+
+void ForecloseDialog::on_amountLineEdit_textEdited(const QString &arg1)
+{
+    if(ui->amountLineEdit->text().toDouble() > maxAmount.toDouble())
+    {
+        ui->amountLineEdit->setText(maxAmount);
+    }
 }

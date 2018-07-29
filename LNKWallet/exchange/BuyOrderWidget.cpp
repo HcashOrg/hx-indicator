@@ -67,6 +67,10 @@ void BuyOrderWidget::setOrderInfo(unsigned long long _buyAmount, QString _buySym
     ui->priceLabel->setText(QString::number(price,'g',8) + " " + tr("%1/%2").arg(buySymbol).arg(sellSymbol));
 
     ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(HXChain::getInstance()->getAccountBalance(accountName,sellSymbol)).arg(sellSymbol));
+
+    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(sellAssetInfo.precision));
+    QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
+    ui->amountLineEdit->setValidator(pReg1);
 }
 
 void BuyOrderWidget::setContractAddress(QString _contractAddress)
@@ -188,4 +192,12 @@ void BuyOrderWidget::on_allBtn_clicked()
 void BuyOrderWidget::on_amountLineEdit_textChanged(const QString &arg1)
 {
     estimateContractFee();
+}
+
+void BuyOrderWidget::on_amountLineEdit_textEdited(const QString &arg1)
+{
+    if(ui->amountLineEdit->text().toDouble() > HXChain::getInstance()->getAccountBalance(accountName,sellSymbol).toDouble())
+    {
+        ui->amountLineEdit->setText(HXChain::getInstance()->getAccountBalance(accountName,sellSymbol));
+    }
 }

@@ -732,32 +732,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="684"/>
+        <location filename="alltransactionwidget.cpp" line="692"/>
+        <source>exechange contract withdrawAsset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="700"/>
         <source>call contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="701"/>
+        <location filename="alltransactionwidget.cpp" line="718"/>
         <source>transfer to contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="718"/>
+        <location filename="alltransactionwidget.cpp" line="735"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="729"/>
+        <location filename="alltransactionwidget.cpp" line="746"/>
         <source>cancel acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="745"/>
+        <location filename="alltransactionwidget.cpp" line="762"/>
         <source> etc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="755"/>
+        <location filename="alltransactionwidget.cpp" line="772"/>
         <source>get bonus</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1270,12 +1275,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="89"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="93"/>
         <source>Transaction of buy-order has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="96"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="100"/>
         <source>Transfer to exchange contract failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3410,18 +3415,18 @@ Cover it or not?</source>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="92"/>
         <source>喂价币种</source>
-        <translation type="unfinished">Coin to Feed</translation>
+        <translation type="unfinished">Currency to Quote</translation>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="158"/>
         <source>喂价账户</source>
-        <translation type="unfinished">Feeder Account</translation>
+        <translation type="unfinished">Quoter Account</translation>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="187"/>
         <location filename="guard/FeedPriceDialog.ui" line="273"/>
         <source>喂价</source>
-        <translation type="unfinished">Feed Price</translation>
+        <translation type="unfinished">Quote Price</translation>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="205"/>
@@ -3430,18 +3435,24 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="228"/>
-        <source>: 1</source>
+        <source>1 BTC =</source>
+        <oldsource>: 1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="246"/>
         <source>钱包内没有喂价账户</source>
-        <translation type="unfinished">There is no feeder account in the wallet.</translation>
+        <translation type="unfinished">There is no quoter account in the wallet.</translation>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="310"/>
         <source>当前比例</source>
         <translation type="unfinished">Current Price</translation>
+    </message>
+    <message>
+        <location filename="guard/FeedPriceDialog.ui" line="323"/>
+        <source>HX</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>当前喂价:</source>
@@ -3460,12 +3471,13 @@ Cover it or not?</source>
         <translation type="obsolete">Balance:</translation>
     </message>
     <message>
-        <location filename="guard/FeedPriceDialog.cpp" line="106"/>
-        <source>Transaction of feed-price has been sent out.</source>
+        <location filename="guard/FeedPriceDialog.cpp" line="107"/>
+        <source>Transaction of quote-price has been sent out.</source>
+        <oldsource>Transaction of feed-price has been sent out.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/FeedPriceDialog.cpp" line="113"/>
+        <location filename="guard/FeedPriceDialog.cpp" line="114"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3489,7 +3501,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/FeedPricePage.ui" line="110"/>
-        <source>喂价比例（/HX）</source>
+        <source>喂价比例</source>
+        <oldsource>喂价比例（/HX）</oldsource>
         <translation type="unfinished">PRICE(/HX)</translation>
     </message>
     <message>
@@ -3614,6 +3627,11 @@ Cover it or not?</source>
         <location filename="miner/foreclosedialog.ui" line="125"/>
         <source>赎回数量</source>
         <translation type="unfinished">Amount to foreclose</translation>
+    </message>
+    <message>
+        <location filename="miner/foreclosedialog.cpp" line="41"/>
+        <source>Max: %1 %2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7324,45 +7342,45 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="313"/>
+        <location filename="transfer/transferpage.cpp" line="306"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="413"/>
+        <location filename="transfer/transferpage.cpp" line="406"/>
         <source>You can only send %1s to multisig address currently.</source>
         <oldsource>You can only send %1s to multi-signature address currently.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="306"/>
+        <location filename="transfer/transferpage.cpp" line="299"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="398"/>
+        <location filename="transfer/transferpage.cpp" line="391"/>
         <source>Valid account address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="405"/>
+        <location filename="transfer/transferpage.cpp" line="398"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="419"/>
+        <location filename="transfer/transferpage.cpp" line="412"/>
         <source>Valid multisig address.</source>
         <oldsource>Valid multi-signature address.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="426"/>
+        <location filename="transfer/transferpage.cpp" line="419"/>
         <source>Invalid address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="511"/>
-        <location filename="transfer/transferpage.cpp" line="520"/>
+        <location filename="transfer/transferpage.cpp" line="504"/>
+        <location filename="transfer/transferpage.cpp" line="513"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished"></translation>

@@ -32,6 +32,8 @@ private slots:
 
     void on_amountLineEdit_textChanged(const QString &arg1);
 
+    void on_amountLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::BuyOrderWidget *ui;
     QString accountName;

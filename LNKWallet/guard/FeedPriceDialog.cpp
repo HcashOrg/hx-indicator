@@ -31,6 +31,7 @@ FeedPriceDialog::FeedPriceDialog( QString _assetSymbol, QWidget *parent) :
 //    ui->accountComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
 
     ui->assetLabel->setText(_assetSymbol);
+    ui->assetLabel2->setText(QString("1 %1 =").arg(_assetSymbol));
 
     init();
 }
@@ -103,7 +104,7 @@ void FeedPriceDialog::jsonDataUpdated(QString id)
             close();
 
             TransactionResultDialog transactionResultDialog;
-            transactionResultDialog.setInfoText(tr("Transaction of feed-price has been sent out."));
+            transactionResultDialog.setInfoText(tr("Transaction of quote-price has been sent out."));
             transactionResultDialog.setDetailText(result);
             transactionResultDialog.pop();
         }

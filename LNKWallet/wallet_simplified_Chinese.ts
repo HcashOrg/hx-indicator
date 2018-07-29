@@ -699,32 +699,37 @@
         <translation type="unfinished">注册合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="684"/>
+        <location filename="alltransactionwidget.cpp" line="692"/>
+        <source>exechange contract withdrawAsset</source>
+        <translation type="unfinished">兑换合约提取余额</translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="700"/>
         <source>call contract</source>
         <translation type="unfinished">合约调用</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="701"/>
+        <location filename="alltransactionwidget.cpp" line="718"/>
         <source>transfer to contract</source>
         <translation type="unfinished">转账到合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="718"/>
+        <location filename="alltransactionwidget.cpp" line="735"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished">创建%1承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="729"/>
+        <location filename="alltransactionwidget.cpp" line="746"/>
         <source>cancel acceptance</source>
         <translation type="unfinished">撤销承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="745"/>
+        <location filename="alltransactionwidget.cpp" line="762"/>
         <source> etc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="755"/>
+        <location filename="alltransactionwidget.cpp" line="772"/>
         <source>get bonus</source>
         <translation type="unfinished">领取分红</translation>
     </message>
@@ -1180,12 +1185,12 @@ better not transfer or upgrade</source>
         <translation type="unfinished">最大: %1 %2</translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="89"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="93"/>
         <source>Transaction of buy-order has been sent out!</source>
         <translation type="unfinished">买入交易已发出！</translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="96"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="100"/>
         <source>Transfer to exchange contract failed!</source>
         <translation type="unfinished">转账到合约失败！</translation>
     </message>
@@ -3236,7 +3241,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="228"/>
-        <source>: 1</source>
+        <source>1 BTC =</source>
+        <oldsource>: 1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3247,6 +3253,11 @@ Cover it or not?</source>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="310"/>
         <source>当前比例</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/FeedPriceDialog.ui" line="323"/>
+        <source>HX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3270,12 +3281,13 @@ Cover it or not?</source>
         <translation type="obsolete">合约执行错误： </translation>
     </message>
     <message>
-        <location filename="guard/FeedPriceDialog.cpp" line="106"/>
-        <source>Transaction of feed-price has been sent out.</source>
+        <location filename="guard/FeedPriceDialog.cpp" line="107"/>
+        <source>Transaction of quote-price has been sent out.</source>
+        <oldsource>Transaction of feed-price has been sent out.</oldsource>
         <translation type="unfinished">喂价交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/FeedPriceDialog.cpp" line="113"/>
+        <location filename="guard/FeedPriceDialog.cpp" line="114"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
@@ -3299,7 +3311,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/FeedPricePage.ui" line="110"/>
-        <source>喂价比例（/HX）</source>
+        <source>喂价比例</source>
+        <oldsource>喂价比例（/HX）</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3433,6 +3446,11 @@ Cover it or not?</source>
         <location filename="miner/foreclosedialog.ui" line="125"/>
         <source>赎回数量</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/foreclosedialog.cpp" line="41"/>
+        <source>Max: %1 %2</source>
+        <translation type="unfinished">最大: %1 %2</translation>
     </message>
 </context>
 <context>
@@ -7066,7 +7084,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">消息长度超过40个字节!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="413"/>
+        <location filename="transfer/transferpage.cpp" line="406"/>
         <source>You can only send %1s to multisig address currently.</source>
         <oldsource>You can only send %1s to multi-signature address currently.</oldsource>
         <translation type="unfinished"></translation>
@@ -7100,34 +7118,34 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">交易发送失败：%1</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="313"/>
+        <location filename="transfer/transferpage.cpp" line="306"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished">转账失败！</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="398"/>
+        <location filename="transfer/transferpage.cpp" line="391"/>
         <source>Valid account address.</source>
         <translation type="unfinished">有效的账户地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="405"/>
+        <location filename="transfer/transferpage.cpp" line="398"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished">暂不支持向合约地址转账</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="419"/>
+        <location filename="transfer/transferpage.cpp" line="412"/>
         <source>Valid multisig address.</source>
         <oldsource>Valid multi-signature address.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="426"/>
+        <location filename="transfer/transferpage.cpp" line="419"/>
         <source>Invalid address.</source>
         <translation type="unfinished">无效地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="511"/>
-        <location filename="transfer/transferpage.cpp" line="520"/>
+        <location filename="transfer/transferpage.cpp" line="504"/>
+        <location filename="transfer/transferpage.cpp" line="513"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished">最大: %1</translation>
@@ -7145,7 +7163,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">一个账户不能给自己转账!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="306"/>
+        <location filename="transfer/transferpage.cpp" line="299"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished">交易信息已发出，请等待确认</translation>
     </message>

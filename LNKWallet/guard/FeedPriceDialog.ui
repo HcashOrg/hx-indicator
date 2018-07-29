@@ -208,24 +208,24 @@
     <widget class="QLineEdit" name="quoteLineEdit">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>110</x>
        <y>220</y>
        <width>120</width>
        <height>30</height>
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="assetLabel_2">
+    <widget class="QLabel" name="assetLabel2">
      <property name="geometry">
       <rect>
-       <x>160</x>
+       <x>30</x>
        <y>220</y>
-       <width>100</width>
+       <width>80</width>
        <height>30</height>
       </rect>
      </property>
      <property name="text">
-      <string>: 1</string>
+      <string>1 BTC =</string>
      </property>
     </widget>
     <widget class="QLabel" name="noAcountLabel">
@@ -233,7 +233,7 @@
       <rect>
        <x>30</x>
        <y>150</y>
-       <width>150</width>
+       <width>300</width>
        <height>30</height>
       </rect>
      </property>
@@ -310,6 +310,19 @@
       <string>当前比例</string>
      </property>
     </widget>
+    <widget class="QLabel" name="assetLabel3">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>220</y>
+       <width>50</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>HX</string>
+     </property>
+    </widget>
     <zorder>noAcountLabel</zorder>
     <zorder>closeBtn</zorder>
     <zorder>label_2</zorder>
@@ -319,10 +332,11 @@
     <zorder>okBtn</zorder>
     <zorder>label_4</zorder>
     <zorder>quoteLineEdit</zorder>
-    <zorder>assetLabel_2</zorder>
+    <zorder>assetLabel2</zorder>
     <zorder>label_12</zorder>
     <zorder>currentRateLabel</zorder>
     <zorder>label_5</zorder>
+    <zorder>assetLabel3</zorder>
    </widget>
   </widget>
  </widget>

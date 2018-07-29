@@ -12,10 +12,11 @@ class ForecloseDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ForecloseDialog(const QString &accountName,QWidget *parent = 0);
+    explicit ForecloseDialog(const QString &accountName, QString _assetSymbol, QString _maxAmount,QWidget *parent = 0);
     ~ForecloseDialog();
 
-    QString  pop();
+    bool pop();
+    QString amountStr;
 
 private slots:
     void on_okBtn_clicked();
@@ -23,9 +24,15 @@ private slots:
     void on_cancelBtn_clicked();
 
     void on_closeBtn_clicked();
+
+    void on_amountLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::ForecloseDialog *ui;
-    bool yesOrNo;
+    bool yesOrNo = false;
+    QString assetSymbol;
+    QString maxAmount;
+
 };
 
 #endif // FORECLOSEDIALOG_H

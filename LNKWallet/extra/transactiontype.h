@@ -32,7 +32,7 @@
 #define TRANSACTION_TYPE_CREATE_GUARANTEE       82      // 创建承兑单
 #define TRANSACTION_TYPE_CANCEL_GUARANTEE       83      // 撤销承兑单
 #define TRANSACTION_TYPE_WITHDRAW_CANCEL        84      // guard取消提现提案
-#define TRANSACTION_TYPE_SET_PUBLISHER          85      // 设置喂价人
+#define TRANSACTION_TYPE_SET_PUBLISHER          86      // 设置喂价人
 #define TRANSACTION_TYPE_OBTAIN_BONUS           88      // 领取分红
 
 #endif // TRANSACTIONTYPE_H
