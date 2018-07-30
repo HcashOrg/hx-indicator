@@ -295,10 +295,10 @@ void MinerPage::jsonDataUpdated(QString id)
             ErrorResultDialog errorResultDialog;
             errorResultDialog.setDetailText(result);
 
-            if(result.contains("pay_back_obj.second.amount >= min_payback_balance: doesnt get enough pay back"))
+            if(result.contains("p_back.second.amount >= min_payback_balance"))
             {
                 errorResultDialog.setInfoText(tr("This account's mining income is less than %1 %2 ! You can not get it.")
-                                              .arg(0.6).arg(ASSET_NAME));
+                                              .arg(500).arg(ASSET_NAME));
             }
             else
             {

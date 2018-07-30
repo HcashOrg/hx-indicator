@@ -128,7 +128,7 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         break;
     case TRANSACTION_TYPE_SET_PUBLISHER:
     {
-        ui->typeLabel->setText(tr("set publisher"));
+        ui->typeLabel->setText(tr("set price feeder"));
         ui->typeStackedWidget->setCurrentIndex(2);
 
         QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();

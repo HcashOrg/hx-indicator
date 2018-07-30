@@ -104,7 +104,7 @@ void FeedPriceDialog::jsonDataUpdated(QString id)
             close();
 
             TransactionResultDialog transactionResultDialog;
-            transactionResultDialog.setInfoText(tr("Transaction of quote-price has been sent out."));
+            transactionResultDialog.setInfoText(tr("Transaction of feed-price has been sent out."));
             transactionResultDialog.setDetailText(result);
             transactionResultDialog.pop();
         }

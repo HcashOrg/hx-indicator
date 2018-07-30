@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>450</height>
+    <height>430</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <rect>
      <x>80</x>
      <y>60</y>
-     <width>91</width>
+     <width>150</width>
      <height>20</height>
     </rect>
    </property>
@@ -71,7 +71,7 @@ font:12px &quot;Microsoft YaHei UI Light&quot;;</string>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
-     <x>415</x>
+     <x>410</x>
      <y>60</y>
      <width>80</width>
      <height>20</height>
@@ -186,7 +186,7 @@ color: rgb(255, 11, 35);</string>
    <property name="geometry">
     <rect>
      <x>80</x>
-     <y>130</y>
+     <y>120</y>
      <width>271</width>
      <height>16</height>
     </rect>
@@ -195,7 +195,7 @@ color: rgb(255, 11, 35);</string>
     <string notr="true">color: red;</string>
    </property>
    <property name="text">
-    <string>invalid address!</string>
+    <string>Invalid address!</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_back">
