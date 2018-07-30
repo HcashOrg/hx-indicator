@@ -164,7 +164,7 @@ void NormalLogin::InitStyle()
     ui->enterBtn->setStyleSheet("QToolButton{font: 12px \"Microsoft YaHei UI Light\";background-color:rgb(235,0,94); border:none;border-radius:3px;color: rgb(255, 255, 255);}" \
                                 );
 
-    ui->pwdLineEdit->setStyleSheet("QLineEdit{background: transparent;color: rgb(243,241,250);font: 10px \"Microsoft YaHei UI Light\";border:1px solid rgb(243,241,250);border-radius:4px;padding: 0px 10px 0px 6px;}"
+    ui->pwdLineEdit->setStyleSheet("QLineEdit{max-height:32px;background: transparent;color: rgb(243,241,250);font: 10px \"Microsoft YaHei UI Light\";border:1px solid rgb(243,241,250);border-radius:4px;padding: 0px 10px 0px 6px;}"
                                    "QLineEdit:focus{border:1px solid rgb(243,241,250);}"
                                    "QLineEdit:disabled{color: rgb(151,151,151);}");
     ui->pwdLineEdit->setPlaceholderText(tr("Password"));
