@@ -111,7 +111,7 @@ void ProposalPage::showProposals()
         }
         else if(info.proposalOperationType == TRANSACTION_TYPE_SET_PUBLISHER)
         {
-            typeStr = tr("set publisher");
+            typeStr = tr("set price feeder");
         }
         else if(info.proposalOperationType == TRANSACTION_TYPE_COLDHOT_CANCEL)
         {

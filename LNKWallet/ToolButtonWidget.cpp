@@ -66,7 +66,7 @@ void ToolButtonWidget::InitWidget()
 
 void ToolButtonWidget::InitStyle()
 {
-    ui->toolButton->setStyleSheet("QToolButton{background:transparent; border:none;color: rgb(51, 51, 51);}"
+    ui->toolButton->setStyleSheet("QToolButton{font: 11px \"Microsoft YaHei UI Light\";background:transparent; border:none;color: rgb(51, 51, 51);}"
                                   "QToolButton:hover{color:rgb(84,116,235);}"
                                   "QToolButton:disabled{color:rgb(200,200,200);}"
                                   );

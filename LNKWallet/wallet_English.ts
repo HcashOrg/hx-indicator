@@ -537,7 +537,7 @@
     <message>
         <location filename="alltransactionwidget.ui" line="583"/>
         <source>喂价</source>
-        <translation type="unfinished">QUOTE</translation>
+        <translation type="unfinished">FEEDPRICE</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="602"/>
@@ -606,12 +606,14 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="502"/>
-        <source>asset quote: %1:%2  %3:%4</source>
+        <source>asset feed price: %1:%2  %3:%4</source>
+        <oldsource>asset quote: %1:%2  %3:%4</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="507"/>
-        <source>asset quote</source>
+        <source>asset feed price</source>
+        <oldsource>asset quote</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -631,7 +633,8 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="524"/>
-        <source>set publisher</source>
+        <source>set price feeder</source>
+        <oldsource>set publisher</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3415,18 +3418,18 @@ Cover it or not?</source>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="92"/>
         <source>喂价币种</source>
-        <translation type="unfinished">Currency to Quote</translation>
+        <translation type="unfinished">Currency to Feed</translation>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="158"/>
         <source>喂价账户</source>
-        <translation type="unfinished">Quoter Account</translation>
+        <translation type="unfinished">Feeder Account</translation>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="187"/>
         <location filename="guard/FeedPriceDialog.ui" line="273"/>
         <source>喂价</source>
-        <translation type="unfinished">Quote Price</translation>
+        <translation type="unfinished">Feed Price</translation>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="205"/>
@@ -3442,7 +3445,7 @@ Cover it or not?</source>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="246"/>
         <source>钱包内没有喂价账户</source>
-        <translation type="unfinished">There is no quoter account in the wallet.</translation>
+        <translation type="unfinished">There is no feeder account in the wallet.</translation>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.ui" line="310"/>
@@ -3472,8 +3475,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.cpp" line="107"/>
-        <source>Transaction of quote-price has been sent out.</source>
-        <oldsource>Transaction of feed-price has been sent out.</oldsource>
+        <source>Transaction of feed-price has been sent out.</source>
+        <oldsource>Transaction of quote-price has been sent out.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3497,7 +3500,7 @@ Cover it or not?</source>
     <message>
         <location filename="guard/FeedPricePage.ui" line="97"/>
         <source>最新喂价时间（GMT）</source>
-        <translation type="unfinished">LATEST QUOTE TIME</translation>
+        <translation type="unfinished">LATEST FEED TIME</translation>
     </message>
     <message>
         <location filename="guard/FeedPricePage.ui" line="110"/>
@@ -3535,7 +3538,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/FeedPricePage.cpp" line="96"/>
-        <source>quote</source>
+        <source>feed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4595,7 +4598,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="mainpage.ui" line="149"/>
         <source>币种</source>
-        <translation type="unfinished">COIN</translation>
+        <translation type="unfinished">CURRENCY</translation>
     </message>
     <message>
         <location filename="mainpage.ui" line="162"/>
@@ -5976,7 +5979,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.cpp" line="131"/>
-        <source>set publisher</source>
+        <source>set price feeder</source>
+        <oldsource>set publisher</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6077,7 +6081,8 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="114"/>
-        <source>set publisher</source>
+        <source>set price feeder</source>
+        <oldsource>set publisher</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7941,7 +7946,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.ui" line="149"/>
         <source>全部提现</source>
-        <translation type="unfinished">all</translation>
+        <translation type="unfinished">ALL</translation>
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.ui" line="165"/>
@@ -7950,7 +7955,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.ui" line="198"/>
-        <source>invalid address!</source>
+        <source>Invalid address!</source>
+        <oldsource>invalid address!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7960,7 +7966,18 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.cpp" line="55"/>
-        <source>number limits: 0.001 to %1</source>
+        <source>Amount limits: 0.001 to %1</source>
+        <oldsource>number limits: 0.001 to %1</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/WithdrawInputWidget.cpp" line="120"/>
+        <source>withdraw amount shouldn&apos;t &lt; %1!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/WithdrawInputWidget.cpp" line="126"/>
+        <source>withdraw amount shouldn&apos;t &gt; %1!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8146,7 +8163,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="withdrawpage/WithdrawPage.ui" line="57"/>
         <source>提现记录</source>
-        <translation type="unfinished">Record</translation>
+        <translation type="unfinished">RECORD</translation>
     </message>
 </context>
 <context>

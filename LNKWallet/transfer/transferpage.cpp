@@ -75,7 +75,6 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 
 
     ui->amountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
-    setAmountPrecision();
 
     QRegExp regx("[a-zA-Z0-9\-\.\ \n]+$");
     QValidator *validator = new QRegExpValidator(regx, this);
@@ -123,6 +122,8 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     ui->memoTextEdit->setVisible(true);
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->widget);
+
+    setAmountPrecision();
 }
 
 TransferPage::~TransferPage()
@@ -189,10 +190,6 @@ void TransferPage::on_sendBtn_clicked()
                                                            QJsonArray() << accountName << ui->sendtoLineEdit->text()
                                                            << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
                                                            << remark << true ));
-qDebug() << toJsonFormat( "transfer_to_address",
-                          QJsonArray() << accountName << ui->sendtoLineEdit->text()
-                          << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
-                          << remark << true );
         }
 
     }

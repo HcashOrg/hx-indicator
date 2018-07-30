@@ -115,7 +115,7 @@ struct AssetInfo
     QString id;
     QString symbol;
     QString issuer;
-    int precision;
+    int precision = 0;
     unsigned long long maxSupply;
     QStringList publishers;
     AssetAmount baseAmount;

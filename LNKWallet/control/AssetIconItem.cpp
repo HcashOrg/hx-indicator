@@ -27,6 +27,7 @@ void AssetIconItem::setAsset(QString assetSymbol)
                                         "background-color: %1;").arg(assetColor));
 
     ui->iconLabel->setStyleSheet(QString("border-image: url(:/ui/wallet_ui/coin_%1.png);").arg(assetSymbol));
+    ui->assetLabel->setStyleSheet("QLabel{font: 11px \"Microsoft YaHei UI Light\";color:rgb(52,37,90);}");
     ui->assetLabel->setText(assetSymbol);
 }
 

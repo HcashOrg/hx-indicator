@@ -499,12 +499,12 @@ void AllTransactionWidget::showTransactions()
             unsigned long long quoteAmount = jsonValueToULL(quoteObject.value("amount"));
 
             AssetInfo info = HXChain::getInstance()->assetInfoMap.value(baseAssetid);
-            QString str = tr("asset quote: %1:%2  %3:%4").arg(info.symbol).arg(ASSET_NAME).arg( getBigNumberString(quoteAmount, ASSET_PRECISION))
+            QString str = tr("asset feed price: %1:%2  %3:%4").arg(info.symbol).arg(ASSET_NAME).arg( getBigNumberString(quoteAmount, ASSET_PRECISION))
                     .arg( getBigNumberString(baseAmount, info.precision));
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(str));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
-            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("asset quote")));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("asset feed price")));
         }
             break;
         case TRANSACTION_TYPE_SPONSOR_PROPOSAL:
@@ -521,7 +521,7 @@ void AllTransactionWidget::showTransactions()
                 str += tr("change cold-hot wallet multisig-address");
                 break;
             case TRANSACTION_TYPE_SET_PUBLISHER:
-                str += tr("set publisher");
+                str += tr("set price feeder");
                 break;
             case TRANSACTION_TYPE_COLDHOT_CANCEL:
                 str += tr("cancel cold-hot trx");

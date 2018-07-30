@@ -573,12 +573,14 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="502"/>
-        <source>asset quote: %1:%2  %3:%4</source>
+        <source>asset feed price: %1:%2  %3:%4</source>
+        <oldsource>asset quote: %1:%2  %3:%4</oldsource>
         <translation type="unfinished">资产喂价： %1:%2  %3:%4</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="507"/>
-        <source>asset quote</source>
+        <source>asset feed price</source>
+        <oldsource>asset quote</oldsource>
         <translation type="unfinished">资产喂价</translation>
     </message>
     <message>
@@ -598,7 +600,8 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="524"/>
-        <source>set publisher</source>
+        <source>set price feeder</source>
+        <oldsource>set publisher</oldsource>
         <translation type="unfinished">设置喂价人</translation>
     </message>
     <message>
@@ -3282,8 +3285,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.cpp" line="107"/>
-        <source>Transaction of quote-price has been sent out.</source>
-        <oldsource>Transaction of feed-price has been sent out.</oldsource>
+        <source>Transaction of feed-price has been sent out.</source>
+        <oldsource>Transaction of quote-price has been sent out.</oldsource>
         <translation type="unfinished">喂价交易已发出！</translation>
     </message>
     <message>
@@ -3336,13 +3339,13 @@ Cover it or not?</source>
         <translation type="unfinished">钱包内没有senator账户</translation>
     </message>
     <message>
-        <location filename="guard/FeedPricePage.cpp" line="96"/>
         <source>quote</source>
-        <translation type="unfinished">喂价</translation>
+        <translation type="obsolete">喂价</translation>
     </message>
     <message>
+        <location filename="guard/FeedPricePage.cpp" line="96"/>
         <source>feed</source>
-        <translation type="obsolete">喂价</translation>
+        <translation type="unfinished">喂价</translation>
     </message>
 </context>
 <context>
@@ -5838,7 +5841,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.cpp" line="131"/>
-        <source>set publisher</source>
+        <source>set price feeder</source>
+        <oldsource>set publisher</oldsource>
         <translation type="unfinished">指定喂价人</translation>
     </message>
     <message>
@@ -5943,7 +5947,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="114"/>
-        <source>set publisher</source>
+        <source>set price feeder</source>
+        <oldsource>set publisher</oldsource>
         <translation type="unfinished">设置喂价人</translation>
     </message>
     <message>
@@ -7776,8 +7781,9 @@ update or not?</source>
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.ui" line="198"/>
-        <source>invalid address!</source>
-        <translation type="unfinished"></translation>
+        <source>Invalid address!</source>
+        <oldsource>invalid address!</oldsource>
+        <translation type="unfinished">无效地址</translation>
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.cpp" line="41"/>
@@ -7786,8 +7792,19 @@ update or not?</source>
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.cpp" line="55"/>
-        <source>number limits: 0.001 to %1</source>
-        <translation type="unfinished"></translation>
+        <source>Amount limits: 0.001 to %1</source>
+        <oldsource>number limits: 0.001 to %1</oldsource>
+        <translation type="unfinished">数量限制： 0.001 至 %1</translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/WithdrawInputWidget.cpp" line="120"/>
+        <source>withdraw amount shouldn&apos;t &lt; %1!</source>
+        <translation type="unfinished">提现数量不能小于 %1</translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/WithdrawInputWidget.cpp" line="126"/>
+        <source>withdraw amount shouldn&apos;t &gt; %1!</source>
+        <translation type="unfinished">提现数量不能大于 %1</translation>
     </message>
 </context>
 <context>
