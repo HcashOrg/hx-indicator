@@ -22,6 +22,7 @@ BackupWalletDialog::BackupWalletDialog(QWidget *parent) :
     ui->backupBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->pathBtn->setStyleSheet(OKBTN_STYLE);
 
 }
 

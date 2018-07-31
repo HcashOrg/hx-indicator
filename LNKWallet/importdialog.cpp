@@ -35,6 +35,7 @@ ImportDialog::ImportDialog(QWidget *parent) :
     ui->importBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->pathBtn->setStyleSheet(OKBTN_STYLE);
 
     QRegExp regx("[a-z][a-z0-9\-]+$");
     QValidator *validator = new QRegExpValidator(regx, this);
