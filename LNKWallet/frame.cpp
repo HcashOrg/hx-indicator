@@ -810,6 +810,9 @@ void Frame::autoRefresh()
     case 16:
         coldHotTransferPage->refresh();
         break;
+    case 19:
+        bonusPage->refresh();
+        break;
     default:
         break;
     }
