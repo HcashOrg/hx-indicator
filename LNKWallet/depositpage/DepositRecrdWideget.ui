@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>530</height>
+    <height>510</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QTableWidget" name="depositRecordTableWidget">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>60</x>
      <y>120</y>
-     <width>670</width>
-     <height>322</height>
+     <width>650</width>
+     <height>310</height>
     </rect>
    </property>
    <attribute name="horizontalHeaderVisible">
@@ -97,7 +97,7 @@
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
-     <x>70</x>
+     <x>60</x>
      <y>50</y>
      <width>200</width>
      <height>26</height>
@@ -117,7 +117,7 @@
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>480</y>
+     <y>470</y>
      <width>770</width>
      <height>41</height>
     </rect>

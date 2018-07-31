@@ -137,6 +137,8 @@
         <file>wallet_ui/pre.png</file>
         <file>wallet_ui/checkBox_checked.png</file>
         <file>wallet_ui/checkBox_unchecked.png</file>
+        <file>wallet_ui/minimizeBtn_hover.png</file>
+        <file>wallet_ui/coin_HC.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>

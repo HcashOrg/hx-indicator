@@ -14,9 +14,10 @@ TitleBar::TitleBar(QWidget *parent) :
 
     ui->setupUi(this);
 
-    ui->minBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/minimizeBtn.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}");
+    ui->minBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/minimizeBtn.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                              "QToolButton:hover{background-image:url(:/ui/wallet_ui/minimizeBtn_hover.png);}");
     ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
-                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);");
+                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
 
 //    ui->divLineLabel->setPixmap(QPixmap("pic2/divLine.png"));
 //    ui->divLineLabel->setScaledContents(true);

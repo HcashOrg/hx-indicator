@@ -112,9 +112,9 @@ void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
 void DepositRecrdWideget::paintEvent(QPaintEvent *e)
 {
     QPainter painter(this);
-    painter.setPen(QPen(QColor(248,249,253),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(248,249,253),Qt::SolidPattern));
-    painter.drawRect(0,0,770,530);
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
+    painter.drawRect(0,0,770,510);
     QWidget::paintEvent(e);
 }
 

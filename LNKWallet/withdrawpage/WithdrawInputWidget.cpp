@@ -64,6 +64,8 @@ void WithdrawInputWidget::addressChangeSlots(const QString &address)
 
 void WithdrawInputWidget::numberChangeSlots(const QString &number)
 {
+    checkConfirmBtnEnabled();
+
     QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()));
     if(!via)
     {

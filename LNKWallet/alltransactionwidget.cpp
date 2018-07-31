@@ -434,7 +434,7 @@ void AllTransactionWidget::showTransactions()
                 {
                     QTableWidgetItem* item = new QTableWidgetItem(getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
                     ui->transactionsTableWidget->setItem(i,3, item);
-                    item->setTextColor(QColor(255,255,0));
+                    item->setTextColor(QColor(202,135,0));
 
                     ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("transfer to self")));
                 }
