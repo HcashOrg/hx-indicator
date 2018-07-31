@@ -3371,6 +3371,16 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="firstlogin.ui" line="216"/>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="firstlogin.ui" line="233"/>
+        <source>Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="firstlogin.ui" line="53"/>
         <source>确认密码</source>
         <translation type="unfinished"></translation>
@@ -3382,7 +3392,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="firstlogin.cpp" line="49"/>
-        <location filename="firstlogin.cpp" line="286"/>
+        <location filename="firstlogin.cpp" line="292"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -3423,7 +3433,7 @@ Cover it or not?</source>
         <translation type="obsolete">确定关闭 Goopal 钱包</translation>
     </message>
     <message>
-        <location filename="firstlogin.cpp" line="291"/>
+        <location filename="firstlogin.cpp" line="297"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -3459,27 +3469,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1120"/>
+        <location filename="frame.cpp" line="1123"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1330"/>
+        <location filename="frame.cpp" line="1333"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2059"/>
+        <location filename="frame.cpp" line="2062"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2062"/>
+        <location filename="frame.cpp" line="2065"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2065"/>
+        <location filename="frame.cpp" line="2068"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -4099,27 +4109,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="172"/>
+        <location filename="importdialog.ui" line="171"/>
         <source>私钥</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="199"/>
+        <location filename="importdialog.ui" line="198"/>
         <source>导入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="244"/>
+        <location filename="importdialog.ui" line="243"/>
         <source>账户名</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="146"/>
+        <location filename="importdialog.ui" line="145"/>
         <source>选择路径</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="218"/>
+        <location filename="importdialog.ui" line="217"/>
         <source>取消</source>
         <translation type="unfinished">取消</translation>
     </message>
@@ -6853,7 +6863,7 @@ update or not?</source>
         <translation type="obsolete">还没有消息!</translation>
     </message>
     <message>
-        <location filename="titlebar.cpp" line="60"/>
+        <location filename="titlebar.cpp" line="61"/>
         <source>Sure to close the Wallet?</source>
         <translation type="unfinished">确定关闭钱包?</translation>
     </message>
@@ -7070,13 +7080,13 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">发送</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="154"/>
+        <location filename="transfer/transferpage.cpp" line="155"/>
         <source>Please enter the amount and address.</source>
         <oldsource>Please enter the amount and Add.</oldsource>
         <translation type="unfinished">请输入转账金额和地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="162"/>
+        <location filename="transfer/transferpage.cpp" line="163"/>
         <source>The amount can not be 0</source>
         <translation type="unfinished">金额不能为0</translation>
     </message>
@@ -7089,7 +7099,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">消息长度超过40个字节!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="406"/>
+        <location filename="transfer/transferpage.cpp" line="410"/>
         <source>You can only send %1s to multisig address currently.</source>
         <oldsource>You can only send %1s to multi-signature address currently.</oldsource>
         <translation type="unfinished"></translation>
@@ -7123,34 +7133,39 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">交易发送失败：%1</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="306"/>
+        <location filename="transfer/transferpage.cpp" line="305"/>
+        <source>Balance not enough!</source>
+        <translation type="unfinished">余额不足！</translation>
+    </message>
+    <message>
+        <location filename="transfer/transferpage.cpp" line="309"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished">转账失败！</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="391"/>
+        <location filename="transfer/transferpage.cpp" line="395"/>
         <source>Valid account address.</source>
         <translation type="unfinished">有效的账户地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="398"/>
+        <location filename="transfer/transferpage.cpp" line="402"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished">暂不支持向合约地址转账</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="412"/>
+        <location filename="transfer/transferpage.cpp" line="416"/>
         <source>Valid multisig address.</source>
         <oldsource>Valid multi-signature address.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="419"/>
+        <location filename="transfer/transferpage.cpp" line="423"/>
         <source>Invalid address.</source>
         <translation type="unfinished">无效地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="504"/>
-        <location filename="transfer/transferpage.cpp" line="513"/>
+        <location filename="transfer/transferpage.cpp" line="508"/>
+        <location filename="transfer/transferpage.cpp" line="517"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished">最大: %1</translation>
@@ -7168,7 +7183,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">一个账户不能给自己转账!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="299"/>
+        <location filename="transfer/transferpage.cpp" line="296"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished">交易信息已发出，请等待确认</translation>
     </message>
@@ -7797,12 +7812,12 @@ update or not?</source>
         <translation type="unfinished">数量限制： 0.001 至 %1</translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.cpp" line="120"/>
+        <location filename="withdrawpage/WithdrawInputWidget.cpp" line="116"/>
         <source>withdraw amount shouldn&apos;t &lt; %1!</source>
         <translation type="unfinished">提现数量不能小于 %1</translation>
     </message>
     <message>
-        <location filename="withdrawpage/WithdrawInputWidget.cpp" line="126"/>
+        <location filename="withdrawpage/WithdrawInputWidget.cpp" line="122"/>
         <source>withdraw amount shouldn&apos;t &gt; %1!</source>
         <translation type="unfinished">提现数量不能大于 %1</translation>
     </message>

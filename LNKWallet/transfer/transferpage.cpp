@@ -300,7 +300,14 @@ void TransferPage::jsonDataUpdated(QString id)
         else
         {
             ErrorResultDialog errorResultDialog;
-            errorResultDialog.setInfoText(tr("Fail to transfer!"));
+            if(result.contains("Insufficient Balance"))
+            {
+                errorResultDialog.setInfoText(tr("Balance not enough!"));
+            }
+            else
+            {
+                errorResultDialog.setInfoText(tr("Fail to transfer!"));
+            }
             errorResultDialog.setDetailText(result);
             errorResultDialog.pop();
         }
