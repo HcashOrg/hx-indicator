@@ -734,7 +734,9 @@ void MinerPage::on_obtainAllBtn_clicked()
             array2 << ui->incomeTableWidget->item(i,0)->text();
             QJsonObject object;
             QStringList amountStringList = this->ui->incomeTableWidget->item(i,1)->text().split(" ");
-            object.insert("amount", ui->incomeTableWidget->item(i,1)->data(Qt::UserRole).toString());
+            QString amountStr = ui->incomeTableWidget->item(i,1)->data(Qt::UserRole).toString();
+            if(amountStr.toULongLong() < 1)   continue;
+            object.insert("amount", amountStr);
             object.insert("asset_id", HXChain::getInstance()->getAssetId(amountStringList.at(1)));
             array2 << object;
             array << array2;
