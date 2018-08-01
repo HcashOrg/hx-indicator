@@ -455,6 +455,7 @@ void Frame::showTransferPage(QString accountName,QString assetType)
     closeCurrentPage();
     getAccountInfo();
     HXChain::getInstance()->mainFrame->setCurrentAccount(accountName);
+    qDebug()<<"transaccccccc";
     transferPage = new TransferPage(accountName,centralWidget,assetType);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
@@ -841,6 +842,7 @@ void Frame::showTransferPage()
 {
     closeCurrentPage();
     getAccountInfo();
+    qDebug()<<"transempty";
     transferPage = new TransferPage(HXChain::getInstance()->currentAccount,centralWidget);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
@@ -915,6 +917,7 @@ void Frame::shadowWidgetHide()
 
 void Frame::showTransferPageWithAddress(QString address, QString name)
 {
+    qDebug()<<"transssss"<<HXChain::getInstance()->currentAccount;
     emit titleBackVisible(true);
     closeCurrentPage();
     getAccountInfo();

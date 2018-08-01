@@ -19,6 +19,7 @@ HXChain* HXChain::goo = 0;
 
 HXChain::HXChain()
 {
+    currentAccount = "";
     nodeProc = new QProcess;
     clientProc = new QProcess;
     isExiting = false;
