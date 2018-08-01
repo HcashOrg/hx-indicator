@@ -973,37 +973,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.ui" line="118"/>
+        <location filename="dialog/backupwalletdialog.ui" line="116"/>
         <source>选择路径</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.ui" line="144"/>
+        <location filename="dialog/backupwalletdialog.ui" line="142"/>
         <source>备份</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="68"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="69"/>
         <source>Your wallet has been backed up! Please keep it properly.Never lose or leak it to anyone!</source>
         <translation type="unfinished">钱包已备份！请妥善保管您的钱包文件！千万不要丢失或者泄露给任何人！</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="85"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="86"/>
         <source>Can not find the wallet file!</source>
         <translation type="unfinished">找不到钱包文件！</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="92"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="93"/>
         <source>Wrong file format!</source>
         <translation type="unfinished">文件格式错误！</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="102"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="103"/>
         <source>You have not backup this wallet.If your wallet data is lost or corrupted, you will have no way to get your accounts back.Sure to cancel?</source>
         <translation type="unfinished">您还没有备份该钱包。如果钱包数据丢失或损坏，您将没有任何方法找回您的账户。确定取消备份吗？</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="111"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="112"/>
         <source>Select the path</source>
         <translation type="unfinished">选择路径</translation>
     </message>
@@ -3011,7 +3011,7 @@ Contract created successfully!</source>
     <message>
         <location filename="exportdialog.cpp" line="245"/>
         <source>Export succeeded!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">导出私钥成功！</translation>
     </message>
     <message>
         <source>You have not backup this private key.If your wallet data is lost or corrupted, you will have no way to get your account back.Sure to cancel?</source>
@@ -4109,48 +4109,58 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="171"/>
+        <location filename="importdialog.ui" line="170"/>
         <source>私钥</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="198"/>
+        <location filename="importdialog.ui" line="197"/>
         <source>导入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="243"/>
+        <location filename="importdialog.ui" line="242"/>
         <source>账户名</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="145"/>
+        <location filename="importdialog.ui" line="144"/>
         <source>选择路径</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="217"/>
+        <location filename="importdialog.ui" line="216"/>
         <source>取消</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="77"/>
+        <location filename="importdialog.cpp" line="50"/>
+        <source>.lpk .elpk or %1 private key</source>
+        <translation type="unfinished">.lpk .elpk 或者%1私钥</translation>
+    </message>
+    <message>
+        <location filename="importdialog.cpp" line="80"/>
         <source>Choose your private key file.</source>
         <oldsource>Choose you private key file.</oldsource>
         <translation type="unfinished">选择你的私钥文件</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="113"/>
+        <location filename="importdialog.cpp" line="130"/>
         <source>Wrong file path.</source>
         <translation type="unfinished">错误的文件路径</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="124"/>
+        <location filename="importdialog.cpp" line="141"/>
         <source>HX Address:%1  Already Exists!</source>
         <translation type="unfinished">HX地址:%1 已存在！</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="269"/>
+        <location filename="importdialog.cpp" line="169"/>
+        <source>Wrong HX private key!</source>
+        <translation type="unfinished">错误的HX私钥</translation>
+    </message>
+    <message>
+        <location filename="importdialog.cpp" line="295"/>
         <source>Fail to import key!</source>
         <translation type="unfinished">导入私钥失败！</translation>
     </message>
@@ -4163,7 +4173,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">导入私钥错误：</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="304"/>
+        <location filename="importdialog.cpp" line="330"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished">每当一个新的账户被导入，钱包会在下次启动时重新扫描区块链数据。在此之后该账户的交易将被显示。</translation>
     </message>
@@ -4172,7 +4182,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">已经存在</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="300"/>
+        <location filename="importdialog.cpp" line="326"/>
         <source> has been imported!</source>
         <translation type="unfinished">已经被导入!</translation>
     </message>

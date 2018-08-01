@@ -1077,37 +1077,37 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Select the backup path</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.ui" line="118"/>
+        <location filename="dialog/backupwalletdialog.ui" line="116"/>
         <source>选择路径</source>
         <translation type="unfinished">select</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.ui" line="144"/>
+        <location filename="dialog/backupwalletdialog.ui" line="142"/>
         <source>备份</source>
         <translation type="unfinished">Backup</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="68"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="69"/>
         <source>Your wallet has been backed up! Please keep it properly.Never lose or leak it to anyone!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="85"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="86"/>
         <source>Can not find the wallet file!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="92"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="93"/>
         <source>Wrong file format!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="102"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="103"/>
         <source>You have not backup this wallet.If your wallet data is lost or corrupted, you will have no way to get your accounts back.Sure to cancel?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="111"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="112"/>
         <source>Select the path</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4350,22 +4350,22 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="171"/>
+        <location filename="importdialog.ui" line="170"/>
         <source>私钥</source>
         <translation type="unfinished">Key</translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="198"/>
+        <location filename="importdialog.ui" line="197"/>
         <source>导入</source>
         <translation type="unfinished">Import</translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="243"/>
+        <location filename="importdialog.ui" line="242"/>
         <source>账户名</source>
         <translation type="unfinished">Account name</translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="145"/>
+        <location filename="importdialog.ui" line="144"/>
         <source>选择路径</source>
         <translation type="unfinished">Select</translation>
     </message>
@@ -4374,7 +4374,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="obsolete">Please select or enter your private key.</translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="217"/>
+        <location filename="importdialog.ui" line="216"/>
         <source>取消</source>
         <translation type="unfinished">Cancel</translation>
     </message>
@@ -4383,33 +4383,43 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="obsolete">Select</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="77"/>
+        <location filename="importdialog.cpp" line="50"/>
+        <source>.lpk .elpk or %1 private key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="importdialog.cpp" line="80"/>
         <source>Choose your private key file.</source>
         <oldsource>Choose you private key file.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="113"/>
+        <location filename="importdialog.cpp" line="130"/>
         <source>Wrong file path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="124"/>
+        <location filename="importdialog.cpp" line="141"/>
         <source>HX Address:%1  Already Exists!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="269"/>
+        <location filename="importdialog.cpp" line="169"/>
+        <source>Wrong HX private key!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="importdialog.cpp" line="295"/>
         <source>Fail to import key!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="300"/>
+        <location filename="importdialog.cpp" line="326"/>
         <source> has been imported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="304"/>
+        <location filename="importdialog.cpp" line="330"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
