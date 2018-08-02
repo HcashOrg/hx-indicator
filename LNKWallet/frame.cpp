@@ -1431,8 +1431,14 @@ void Frame::jsonDataUpdated(QString id)
         HXChain::getInstance()->isExiting = true;
         HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()));
 
-        QTimer::singleShot(5000,qApp,SLOT(quit()));
 
+        return;
+    }
+    if("id-witness_node_stop" == id)
+    {
+        HXChain::getInstance()->clientProc->waitForFinished();
+        HXChain::getInstance()->nodeProc->waitForFinished();
+        QTimer::singleShot(1,qApp,SLOT(quit()));
         return;
     }
 
