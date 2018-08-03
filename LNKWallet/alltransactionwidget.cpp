@@ -538,6 +538,9 @@ void AllTransactionWidget::showTransactions()
             case TRANSACTION_TYPE_RESIGN_GUARD:
                 str += tr("resign senator");
                 break;
+            case TRANSACTION_TYPE_PROPOSAL_CONTRACT_TRANSFER_FEE:
+                str += tr("set contract transfer fee");
+                break;
             default:
                 str += tr("%1 (unkown)").arg(opType);
                 break;

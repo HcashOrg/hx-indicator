@@ -129,6 +129,10 @@ void ProposalPage::showProposals()
         {
             typeStr = tr("resign senator");
         }
+        else if(info.proposalOperationType == TRANSACTION_TYPE_PROPOSAL_CONTRACT_TRANSFER_FEE)
+        {
+            typeStr = tr("set contract transfer fee");
+        }
         else
         {
             typeStr = tr("unknown");

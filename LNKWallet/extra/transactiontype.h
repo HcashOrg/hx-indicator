@@ -29,6 +29,7 @@
 #define TRANSACTION_TYPE_CONTRACT_REGISTER      76      // 注册合约
 #define TRANSACTION_TYPE_CONTRACT_INVOKE        79      // 调用合约
 #define TRANSACTION_TYPE_CONTRACT_TRANSFER      81      // 转账到合约
+#define TRANSACTION_TYPE_PROPOSAL_CONTRACT_TRANSFER_FEE  82      // 修改合约转出手续费提案
 #define TRANSACTION_TYPE_CREATE_GUARANTEE       83      // 创建承兑单
 #define TRANSACTION_TYPE_CANCEL_GUARANTEE       84      // 撤销承兑单
 #define TRANSACTION_TYPE_WITHDRAW_CANCEL        85      // guard取消提现提案

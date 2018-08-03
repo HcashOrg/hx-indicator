@@ -289,7 +289,7 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         </rect>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>7</number>
        </property>
        <widget class="QWidget" name="hotColdTransferPage">
         <widget class="QLabel" name="label_3">
@@ -708,6 +708,37 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
          </property>
          <property name="text">
           <string>辞职senator的账户ID</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="contractTransferFeePage">
+        <widget class="QLabel" name="contractTransferFeeLabel">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>50</y>
+           <width>150</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_18">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>20</y>
+           <width>150</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>合约转账费用</string>
          </property>
         </widget>
        </widget>
