@@ -152,7 +152,7 @@ void ProposalPage::showProposals()
         else if(info.approvedKeys.contains(address))
         {
             ui->proposalTableWidget->setItem(i,4,new QTableWidgetItem(tr("approved")));
-            ui->proposalTableWidget->item(i,4)->setTextColor(QColor(0,255,0));
+            ui->proposalTableWidget->item(i,4)->setTextColor(QColor(0,170,0));
         }
         else if(info.disapprovedKeys.contains(address))
         {

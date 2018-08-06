@@ -83,7 +83,7 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         if(info.approvedKeys.contains(address))
         {
             ui->voteStateTableWidget->setItem(i, 1, new QTableWidgetItem(tr("approved")));
-            ui->voteStateTableWidget->item(i,1)->setTextColor(QColor(0,255,0));
+            ui->voteStateTableWidget->item(i,1)->setTextColor(QColor(0,170,0));
         }
         else if(info.disapprovedKeys.contains(address))
         {

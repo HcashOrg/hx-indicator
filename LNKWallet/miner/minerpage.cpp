@@ -469,7 +469,7 @@ void MinerPage::showIncomeRecord()
 
         ui->incomeRecordTableWidget->setItem(i,0, new QTableWidgetItem(QString::number(ts.blockNum)));
         ui->incomeRecordTableWidget->setItem(i,1, new QTableWidgetItem(str));
-        ui->incomeRecordTableWidget->item(i,1)->setTextColor(QColor(0,255,0));
+        ui->incomeRecordTableWidget->item(i,1)->setTextColor(QColor(0,170,0));
         ui->incomeRecordTableWidget->setItem(i,2, new QTableWidgetItem(getBigNumberString(feeAmount, ASSET_PRECISION) + " " + ASSET_NAME));
         ui->incomeRecordTableWidget->setItem(i,3, new QTableWidgetItem(transactionId));
         ui->incomeRecordTableWidget->setItem(i,4, new QTableWidgetItem(tr("confirmed")));
