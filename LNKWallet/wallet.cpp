@@ -138,7 +138,7 @@ void HXChain:: startExe()
     connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
     QStringList strList;
-    strList << "--data-dir=" + HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")
+    strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT);
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())

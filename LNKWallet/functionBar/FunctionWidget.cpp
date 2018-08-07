@@ -7,6 +7,7 @@
 #include "functionBar/FunctionAdvanceWidget.h"
 #include "functionBar/FunctionExchangeWidget.h"
 #include "functionBar/FunctionGuardWidget.h"
+#include "functionBar/FunctionDappWidget.h"
 
 #include "setdialog.h"
 #include "consoledialog.h"
@@ -20,6 +21,7 @@ public:
         ,advanceBar(new FunctionAdvanceWidget())
         ,exchangeBar(new FunctionExchangeWidget())
         ,guardBar(new FunctionGuardWidget())
+        ,dappBar(new FunctionDappWidget())
         ,contextMenu(new QMenu())
     {
 
@@ -29,6 +31,7 @@ public:
     FunctionAdvanceWidget *advanceBar;
     FunctionExchangeWidget *exchangeBar;
     FunctionGuardWidget   *guardBar;
+    FunctionDappWidget      *dappBar;
     QMenu *contextMenu;
 };
 
@@ -54,6 +57,7 @@ void FunctionWidget::retranslator()
     _p->advanceBar->retranslator();
     _p->exchangeBar->retranslator();
     _p->guardBar->retranslator();
+    _p->dappBar->retranslator();
 }
 
 void FunctionWidget::contactShowTransferPageSlots()
@@ -128,6 +132,19 @@ void FunctionWidget::ShowGuardWidgetSlots()
 
     updateCheckState(4);
     emit GuardDefaultSignal();
+}
+
+void FunctionWidget::ShowDappWidgetSlots()
+{
+    ui->stackedWidget->setCurrentWidget(_p->dappBar);
+
+    emit showDappSignal();
+
+    ui->stackedWidget->setVisible(true);
+    emit RestoreSignal();
+
+    updateCheckState(5);
+    emit DappDefaultSignal();
 }
 
 void FunctionWidget::ShowMoreWidgetSlots()
@@ -210,14 +227,8 @@ void FunctionWidget::updateCheckState(int buttonNumber)
     ui->toolButton_advanced->setChecked(2 == buttonNumber);
     ui->toolButton_exchange->setChecked(3 == buttonNumber);
     ui->toolButton_guard->setChecked(4 == buttonNumber);
-    ui->toolButton_more->setChecked(5 == buttonNumber);
-
-//    ui->toolButton_account->setToolButtonStyle( Qt::ToolButtonIconOnly );
-//    ui->toolButton_contact->setToolButtonStyle(Qt::ToolButtonIconOnly );
-//    ui->toolButton_advanced->setToolButtonStyle( Qt::ToolButtonIconOnly );
-//    ui->toolButton_exchange->setToolButtonStyle( Qt::ToolButtonIconOnly );
-//    ui->toolButton_guard->setToolButtonStyle( Qt::ToolButtonIconOnly );
-//    ui->toolButton_more->setToolButtonStyle(Qt::ToolButtonIconOnly );
+    ui->toolButton_dapp->setChecked(5 == buttonNumber);
+    ui->toolButton_more->setChecked(6 == buttonNumber);
 
 }
 
@@ -225,17 +236,21 @@ void FunctionWidget::InitWidget()
 {
     InitStyle();
 
+    ui->toolButton_dapp->hide();
+
     ui->toolButton_contact->setCheckable(true);
     ui->toolButton_account->setCheckable(true);
     ui->toolButton_advanced->setCheckable(true);
     ui->toolButton_exchange->setCheckable(true);
     ui->toolButton_guard->setCheckable(true);
+    ui->toolButton_dapp->setCheckable(true);
     ui->toolButton_more->setCheckable(true);
 
     ui->stackedWidget->addWidget(_p->accountBar);
     ui->stackedWidget->addWidget(_p->advanceBar);
     ui->stackedWidget->addWidget(_p->exchangeBar);
     ui->stackedWidget->addWidget(_p->guardBar);
+    ui->stackedWidget->addWidget(_p->dappBar);
 
     //链接信号槽
     connect(ui->toolButton_contact,&QToolButton::clicked,this,&FunctionWidget::ShowContactWidgetSlots);
@@ -243,6 +258,7 @@ void FunctionWidget::InitWidget()
     connect(ui->toolButton_advanced,&QToolButton::clicked,this,&FunctionWidget::ShowAdvanceWidgetSlots);
     connect(ui->toolButton_exchange,&QToolButton::clicked,this,&FunctionWidget::ShowExchangeWidgetSlots);
     connect(ui->toolButton_guard,&QToolButton::clicked,this,&FunctionWidget::ShowGuardWidgetSlots);
+    connect(ui->toolButton_dapp,&QToolButton::clicked,this,&FunctionWidget::ShowDappWidgetSlots);
     connect(ui->toolButton_more,&QToolButton::clicked,this,&FunctionWidget::ShowMoreWidgetSlots);
 
 
@@ -266,11 +282,14 @@ void FunctionWidget::InitWidget()
     connect(_p->guardBar,&FunctionGuardWidget::showFeedPriceSignal,this,&FunctionWidget::showFeedPriceSignal);
     connect(_p->guardBar,&FunctionGuardWidget::showColdHotTransferSignal,this,&FunctionWidget::showColdHotTransferSignal);
 
+    connect(_p->dappBar,&FunctionDappWidget::showContractTokenSignal,this,&FunctionWidget::showContractTokenSignal);
+
     //链接二级菜单默认单击情况
     connect(this,&FunctionWidget::AccountDefaultSignal,_p->accountBar,&FunctionAccountWidget::DefaultShow);
     connect(this,&FunctionWidget::AdvanceDefaultSignal,_p->advanceBar,&FunctionAdvanceWidget::DefaultShow);
     connect(this,&FunctionWidget::ExchangeDefaultSignal,_p->exchangeBar,&FunctionExchangeWidget::DefaultShow);
     connect(this,&FunctionWidget::GuardDefaultSignal,_p->guardBar,&FunctionGuardWidget::DefaultShow);
+    connect(this,&FunctionWidget::GuardDefaultSignal,_p->dappBar,&FunctionDappWidget::DefaultShow);
 //    ui->toolButton_account->installEventFilter(this);
 //    ui->toolButton_advanced->installEventFilter(this);
 //    ui->toolButton_contact->installEventFilter(this);
@@ -370,3 +389,4 @@ void FunctionWidget::paintEvent(QPaintEvent *)
     painter.drawRect(QRect(-1,-1,63,481));
 
 }
+
