@@ -33,3 +33,7 @@ INCLUDEPATH += $$PWD/quazip/quazip
 win32{
     LIBS += $$PWD/lib/quazip.lib
 }
+
+macx{
+    LIBS += $$PWD/lib/libquazip.a
+}
