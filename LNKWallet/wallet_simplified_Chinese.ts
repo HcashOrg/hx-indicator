@@ -573,12 +573,14 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="502"/>
-        <source>asset quote: %1:%2  %3:%4</source>
+        <source>asset feed price: %1:%2  %3:%4</source>
+        <oldsource>asset quote: %1:%2  %3:%4</oldsource>
         <translation type="unfinished">资产喂价： %1:%2  %3:%4</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="507"/>
-        <source>asset quote</source>
+        <source>asset feed price</source>
+        <oldsource>asset quote</oldsource>
         <translation type="unfinished">资产喂价</translation>
     </message>
     <message>
@@ -598,7 +600,8 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="524"/>
-        <source>set publisher</source>
+        <source>set price feeder</source>
+        <oldsource>set publisher</oldsource>
         <translation type="unfinished">设置喂价人</translation>
     </message>
     <message>
@@ -629,107 +632,112 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="542"/>
+        <source>set contract transfer fee</source>
+        <translation type="unfinished">设置合约转账费用</translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="545"/>
         <source>%1 (unkown)</source>
         <translation type="unfinished">%1 （未知）</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="548"/>
+        <location filename="alltransactionwidget.cpp" line="551"/>
         <source>sponsor a proposal</source>
         <translation type="unfinished">发起提案</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="555"/>
+        <location filename="alltransactionwidget.cpp" line="558"/>
         <source>proposal ID: %1</source>
         <translation type="unfinished">提案ID： %1</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="557"/>
+        <location filename="alltransactionwidget.cpp" line="560"/>
         <source>vote for a proposal</source>
         <translation type="unfinished">提案投票</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="573"/>
+        <location filename="alltransactionwidget.cpp" line="576"/>
         <source>lock asset to miner</source>
         <translation type="unfinished">质押资产给miner</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="589"/>
+        <location filename="alltransactionwidget.cpp" line="592"/>
         <source>foreclose asset from miner</source>
         <translation type="unfinished">从miner赎回资产</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="600"/>
-        <location filename="alltransactionwidget.cpp" line="615"/>
+        <location filename="alltransactionwidget.cpp" line="603"/>
+        <location filename="alltransactionwidget.cpp" line="618"/>
         <source>%1 account: %2</source>
         <translation type="unfinished">%1账户: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="606"/>
+        <location filename="alltransactionwidget.cpp" line="609"/>
         <source>deposit %1</source>
         <translation type="unfinished">%1充值</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="621"/>
+        <location filename="alltransactionwidget.cpp" line="624"/>
         <source>withdraw %1</source>
         <translation type="unfinished">%1提现</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="640"/>
+        <location filename="alltransactionwidget.cpp" line="643"/>
         <source>total </source>
         <translation type="unfinished">总计 </translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="649"/>
+        <location filename="alltransactionwidget.cpp" line="652"/>
         <source>get mining income</source>
         <translation type="unfinished">获取挖矿收入</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="656"/>
+        <location filename="alltransactionwidget.cpp" line="659"/>
         <source>issue &quot;%1&quot;</source>
         <translation type="unfinished">发行 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="658"/>
+        <location filename="alltransactionwidget.cpp" line="661"/>
         <source>issue asset</source>
         <translation type="unfinished">发行资产</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="671"/>
+        <location filename="alltransactionwidget.cpp" line="674"/>
         <source>register contract</source>
         <translation type="unfinished">注册合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="692"/>
+        <location filename="alltransactionwidget.cpp" line="695"/>
         <source>exechange contract withdrawAsset</source>
         <translation type="unfinished">兑换合约提取余额</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="700"/>
+        <location filename="alltransactionwidget.cpp" line="703"/>
         <source>call contract</source>
         <translation type="unfinished">合约调用</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="718"/>
+        <location filename="alltransactionwidget.cpp" line="721"/>
         <source>transfer to contract</source>
         <translation type="unfinished">转账到合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="735"/>
+        <location filename="alltransactionwidget.cpp" line="738"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished">创建%1承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="746"/>
+        <location filename="alltransactionwidget.cpp" line="749"/>
         <source>cancel acceptance</source>
         <translation type="unfinished">撤销承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="762"/>
+        <location filename="alltransactionwidget.cpp" line="765"/>
         <source> etc.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="772"/>
+        <location filename="alltransactionwidget.cpp" line="775"/>
         <source>get bonus</source>
         <translation type="unfinished">领取分红</translation>
     </message>
@@ -970,37 +978,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.ui" line="118"/>
+        <location filename="dialog/backupwalletdialog.ui" line="116"/>
         <source>选择路径</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.ui" line="144"/>
+        <location filename="dialog/backupwalletdialog.ui" line="142"/>
         <source>备份</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="68"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="69"/>
         <source>Your wallet has been backed up! Please keep it properly.Never lose or leak it to anyone!</source>
         <translation type="unfinished">钱包已备份！请妥善保管您的钱包文件！千万不要丢失或者泄露给任何人！</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="85"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="86"/>
         <source>Can not find the wallet file!</source>
         <translation type="unfinished">找不到钱包文件！</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="92"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="93"/>
         <source>Wrong file format!</source>
         <translation type="unfinished">文件格式错误！</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="102"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="103"/>
         <source>You have not backup this wallet.If your wallet data is lost or corrupted, you will have no way to get your accounts back.Sure to cancel?</source>
         <translation type="unfinished">您还没有备份该钱包。如果钱包数据丢失或损坏，您将没有任何方法找回您的账户。确定取消备份吗？</translation>
     </message>
     <message>
-        <location filename="dialog/backupwalletdialog.cpp" line="111"/>
+        <location filename="dialog/backupwalletdialog.cpp" line="112"/>
         <source>Select the path</source>
         <translation type="unfinished">选择路径</translation>
     </message>
@@ -3008,7 +3016,7 @@ Contract created successfully!</source>
     <message>
         <location filename="exportdialog.cpp" line="245"/>
         <source>Export succeeded!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">导出私钥成功！</translation>
     </message>
     <message>
         <source>You have not backup this private key.If your wallet data is lost or corrupted, you will have no way to get your account back.Sure to cancel?</source>
@@ -3282,8 +3290,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/FeedPriceDialog.cpp" line="107"/>
-        <source>Transaction of quote-price has been sent out.</source>
-        <oldsource>Transaction of feed-price has been sent out.</oldsource>
+        <source>Transaction of feed-price has been sent out.</source>
+        <oldsource>Transaction of quote-price has been sent out.</oldsource>
         <translation type="unfinished">喂价交易已发出！</translation>
     </message>
     <message>
@@ -3336,13 +3344,13 @@ Cover it or not?</source>
         <translation type="unfinished">钱包内没有senator账户</translation>
     </message>
     <message>
-        <location filename="guard/FeedPricePage.cpp" line="96"/>
         <source>quote</source>
-        <translation type="unfinished">喂价</translation>
+        <translation type="obsolete">喂价</translation>
     </message>
     <message>
+        <location filename="guard/FeedPricePage.cpp" line="96"/>
         <source>feed</source>
-        <translation type="obsolete">喂价</translation>
+        <translation type="unfinished">喂价</translation>
     </message>
 </context>
 <context>
@@ -3368,6 +3376,16 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="firstlogin.ui" line="216"/>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="firstlogin.ui" line="233"/>
+        <source>Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="firstlogin.ui" line="53"/>
         <source>确认密码</source>
         <translation type="unfinished"></translation>
@@ -3379,7 +3397,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="firstlogin.cpp" line="49"/>
-        <location filename="firstlogin.cpp" line="286"/>
+        <location filename="firstlogin.cpp" line="292"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -3420,7 +3438,7 @@ Cover it or not?</source>
         <translation type="obsolete">确定关闭 Goopal 钱包</translation>
     </message>
     <message>
-        <location filename="firstlogin.cpp" line="291"/>
+        <location filename="firstlogin.cpp" line="297"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -3456,27 +3474,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1120"/>
+        <location filename="frame.cpp" line="1126"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1330"/>
+        <location filename="frame.cpp" line="1336"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2059"/>
+        <location filename="frame.cpp" line="2071"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2062"/>
+        <location filename="frame.cpp" line="2074"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2065"/>
+        <location filename="frame.cpp" line="2077"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -3960,13 +3978,13 @@ add an account first</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="175"/>
-        <location filename="wallet.cpp" line="199"/>
+        <location filename="wallet.cpp" line="176"/>
+        <location filename="wallet.cpp" line="200"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="598"/>
+        <location filename="wallet.cpp" line="599"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -4096,48 +4114,58 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="172"/>
+        <location filename="importdialog.ui" line="170"/>
         <source>私钥</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="199"/>
+        <location filename="importdialog.ui" line="197"/>
         <source>导入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="244"/>
+        <location filename="importdialog.ui" line="242"/>
         <source>账户名</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="146"/>
+        <location filename="importdialog.ui" line="144"/>
         <source>选择路径</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.ui" line="218"/>
+        <location filename="importdialog.ui" line="216"/>
         <source>取消</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="77"/>
+        <location filename="importdialog.cpp" line="50"/>
+        <source>.lpk .elpk or %1 private key</source>
+        <translation type="unfinished">.lpk .elpk 或者%1私钥</translation>
+    </message>
+    <message>
+        <location filename="importdialog.cpp" line="80"/>
         <source>Choose your private key file.</source>
         <oldsource>Choose you private key file.</oldsource>
         <translation type="unfinished">选择你的私钥文件</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="113"/>
+        <location filename="importdialog.cpp" line="130"/>
         <source>Wrong file path.</source>
         <translation type="unfinished">错误的文件路径</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="124"/>
+        <location filename="importdialog.cpp" line="141"/>
         <source>HX Address:%1  Already Exists!</source>
         <translation type="unfinished">HX地址:%1 已存在！</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="269"/>
+        <location filename="importdialog.cpp" line="169"/>
+        <source>Wrong HX private key!</source>
+        <translation type="unfinished">错误的HX私钥</translation>
+    </message>
+    <message>
+        <location filename="importdialog.cpp" line="295"/>
         <source>Fail to import key!</source>
         <translation type="unfinished">导入私钥失败！</translation>
     </message>
@@ -4150,7 +4178,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">导入私钥错误：</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="304"/>
+        <location filename="importdialog.cpp" line="330"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished">每当一个新的账户被导入，钱包会在下次启动时重新扫描区块链数据。在此之后该账户的交易将被显示。</translation>
     </message>
@@ -4159,7 +4187,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">已经存在</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="300"/>
+        <location filename="importdialog.cpp" line="326"/>
         <source> has been imported!</source>
         <translation type="unfinished">已经被导入!</translation>
     </message>
@@ -5714,7 +5742,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="136"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="822"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="853"/>
         <source>投票状态</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5801,12 +5829,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="728"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="741"/>
+        <source>合约转账费用</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="759"/>
         <source>未知的提案类型</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="809"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="840"/>
         <source>所需投票者</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5838,7 +5871,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.cpp" line="131"/>
-        <source>set publisher</source>
+        <source>set price feeder</source>
+        <oldsource>set publisher</oldsource>
         <translation type="unfinished">指定喂价人</translation>
     </message>
     <message>
@@ -5863,7 +5897,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">senator辞职</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="176"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="177"/>
+        <source>set contract transfer fee</source>
+        <translation type="unfinished">设置合约转账费用</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.cpp" line="186"/>
         <source>unknown(%1)</source>
         <translation type="unfinished">未知(%1)</translation>
     </message>
@@ -5943,7 +5982,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="114"/>
-        <source>set publisher</source>
+        <source>set price feeder</source>
+        <oldsource>set publisher</oldsource>
         <translation type="unfinished">设置喂价人</translation>
     </message>
     <message>
@@ -5963,57 +6003,62 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="134"/>
+        <source>set contract transfer fee</source>
+        <translation type="unfinished">设置合约转账费用</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalPage.cpp" line="138"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="146"/>
+        <location filename="guard/ProposalPage.cpp" line="150"/>
         <source>no senator</source>
         <oldsource>no guard</oldsource>
         <translation type="unfinished">无senator</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="150"/>
+        <location filename="guard/ProposalPage.cpp" line="154"/>
         <source>approved</source>
         <translation type="unfinished">已赞成</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="155"/>
+        <location filename="guard/ProposalPage.cpp" line="159"/>
         <source>disapproved</source>
         <translation type="unfinished">已反对</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="160"/>
+        <location filename="guard/ProposalPage.cpp" line="164"/>
         <source>not voted</source>
         <translation type="unfinished">未投票</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="166"/>
+        <location filename="guard/ProposalPage.cpp" line="170"/>
         <source>approve</source>
         <translation type="unfinished">赞成</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="167"/>
+        <location filename="guard/ProposalPage.cpp" line="171"/>
         <source>disapprove</source>
         <translation type="unfinished">反对</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="220"/>
+        <location filename="guard/ProposalPage.cpp" line="224"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished">包含提案投票的交易已发出，请等待确认</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="227"/>
+        <location filename="guard/ProposalPage.cpp" line="231"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="240"/>
+        <location filename="guard/ProposalPage.cpp" line="244"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished">确定赞成这个提案吗？</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="260"/>
+        <location filename="guard/ProposalPage.cpp" line="264"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished">确定反对这个提案吗？</translation>
     </message>
@@ -6848,7 +6893,7 @@ update or not?</source>
         <translation type="obsolete">还没有消息!</translation>
     </message>
     <message>
-        <location filename="titlebar.cpp" line="60"/>
+        <location filename="titlebar.cpp" line="61"/>
         <source>Sure to close the Wallet?</source>
         <translation type="unfinished">确定关闭钱包?</translation>
     </message>
@@ -7065,13 +7110,13 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">发送</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="154"/>
+        <location filename="transfer/transferpage.cpp" line="142"/>
         <source>Please enter the amount and address.</source>
         <oldsource>Please enter the amount and Add.</oldsource>
         <translation type="unfinished">请输入转账金额和地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="162"/>
+        <location filename="transfer/transferpage.cpp" line="150"/>
         <source>The amount can not be 0</source>
         <translation type="unfinished">金额不能为0</translation>
     </message>
@@ -7084,7 +7129,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">消息长度超过40个字节!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="406"/>
+        <location filename="transfer/transferpage.cpp" line="397"/>
         <source>You can only send %1s to multisig address currently.</source>
         <oldsource>You can only send %1s to multi-signature address currently.</oldsource>
         <translation type="unfinished"></translation>
@@ -7118,34 +7163,39 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">交易发送失败：%1</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="306"/>
+        <location filename="transfer/transferpage.cpp" line="292"/>
+        <source>Balance not enough!</source>
+        <translation type="unfinished">余额不足！</translation>
+    </message>
+    <message>
+        <location filename="transfer/transferpage.cpp" line="296"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished">转账失败！</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="391"/>
+        <location filename="transfer/transferpage.cpp" line="382"/>
         <source>Valid account address.</source>
         <translation type="unfinished">有效的账户地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="398"/>
+        <location filename="transfer/transferpage.cpp" line="389"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished">暂不支持向合约地址转账</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="412"/>
+        <location filename="transfer/transferpage.cpp" line="403"/>
         <source>Valid multisig address.</source>
         <oldsource>Valid multi-signature address.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="419"/>
+        <location filename="transfer/transferpage.cpp" line="410"/>
         <source>Invalid address.</source>
         <translation type="unfinished">无效地址</translation>
     </message>
     <message>
+        <location filename="transfer/transferpage.cpp" line="495"/>
         <location filename="transfer/transferpage.cpp" line="504"/>
-        <location filename="transfer/transferpage.cpp" line="513"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished">最大: %1</translation>
@@ -7163,7 +7213,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">一个账户不能给自己转账!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="299"/>
+        <location filename="transfer/transferpage.cpp" line="283"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished">交易信息已发出，请等待确认</translation>
     </message>
@@ -7357,12 +7407,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VoteStateLabel</name>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="344"/>
+        <location filename="guard/ProposalPage.cpp" line="348"/>
         <source>not passed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="355"/>
+        <location filename="guard/ProposalPage.cpp" line="359"/>
         <source>voting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7776,8 +7826,9 @@ update or not?</source>
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.ui" line="198"/>
-        <source>invalid address!</source>
-        <translation type="unfinished"></translation>
+        <source>Invalid address!</source>
+        <oldsource>invalid address!</oldsource>
+        <translation type="unfinished">无效地址</translation>
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.cpp" line="41"/>
@@ -7786,8 +7837,19 @@ update or not?</source>
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.cpp" line="55"/>
-        <source>number limits: 0.001 to %1</source>
-        <translation type="unfinished"></translation>
+        <source>Amount limits: 0.001 to %1</source>
+        <oldsource>number limits: 0.001 to %1</oldsource>
+        <translation type="unfinished">数量限制： 0.001 至 %1</translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/WithdrawInputWidget.cpp" line="116"/>
+        <source>withdraw amount shouldn&apos;t &lt; %1!</source>
+        <translation type="unfinished">提现数量不能小于 %1</translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/WithdrawInputWidget.cpp" line="122"/>
+        <source>withdraw amount shouldn&apos;t &gt; %1!</source>
+        <translation type="unfinished">提现数量不能大于 %1</translation>
     </message>
 </context>
 <context>

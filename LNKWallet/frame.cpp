@@ -455,6 +455,7 @@ void Frame::showTransferPage(QString accountName,QString assetType)
     closeCurrentPage();
     getAccountInfo();
     HXChain::getInstance()->mainFrame->setCurrentAccount(accountName);
+    qDebug()<<"transaccccccc";
     transferPage = new TransferPage(accountName,centralWidget,assetType);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
@@ -810,6 +811,9 @@ void Frame::autoRefresh()
     case 16:
         coldHotTransferPage->refresh();
         break;
+    case 19:
+        bonusPage->refresh();
+        break;
     default:
         break;
     }
@@ -838,6 +842,7 @@ void Frame::showTransferPage()
 {
     closeCurrentPage();
     getAccountInfo();
+    qDebug()<<"transempty";
     transferPage = new TransferPage(HXChain::getInstance()->currentAccount,centralWidget);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
@@ -912,6 +917,7 @@ void Frame::shadowWidgetHide()
 
 void Frame::showTransferPageWithAddress(QString address, QString name)
 {
+    qDebug()<<"transssss"<<HXChain::getInstance()->currentAccount;
     emit titleBackVisible(true);
     closeCurrentPage();
     getAccountInfo();
@@ -1425,8 +1431,14 @@ void Frame::jsonDataUpdated(QString id)
         HXChain::getInstance()->isExiting = true;
         HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()));
 
-        QTimer::singleShot(5000,qApp,SLOT(quit()));
 
+        return;
+    }
+    if("id-witness_node_stop" == id)
+    {
+        HXChain::getInstance()->clientProc->waitForFinished();
+        HXChain::getInstance()->nodeProc->waitForFinished();
+        QTimer::singleShot(1,qApp,SLOT(quit()));
         return;
     }
 

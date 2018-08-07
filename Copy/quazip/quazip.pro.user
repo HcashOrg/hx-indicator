@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 4.2.1, 2018-08-06T10:00:45. -->
+=======
+<!-- Written by QtCreator 4.0.2, 2018-08-06T09:19:09. -->
+>>>>>>> e61e6444272c7abe3109714100ce2fa462b334e5
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -303,8 +307,13 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">qztest</value>
+<<<<<<< HEAD
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/Users/bangong/Desktop/hx/hx-indicator/Copy/quazip/qztest/qztest.pro</value>
+=======
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">qztest2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/kk/Desktop/lnk/hx-indicator/Copy/quazip/qztest/qztest.pro</value>
+>>>>>>> e61e6444272c7abe3109714100ce2fa462b334e5
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">qztest/qztest.pro</value>

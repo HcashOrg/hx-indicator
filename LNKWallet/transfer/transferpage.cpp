@@ -59,23 +59,9 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
         }
     }
 
-    if( accountName.isEmpty())  // 如果是点击账单跳转
-    {
-        if( HXChain::getInstance()->addressMap.size() > 0)
-        {
-            accountName = HXChain::getInstance()->addressMap.keys().at(0);
-        }
-        else  // 如果还没有账户
-        {
-            emit back();    // 跳转在functionbar  这里并没有用
-            return;
-        }
-    }
-
 
 
     ui->amountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
-    setAmountPrecision();
 
     QRegExp regx("[a-zA-Z0-9\-\.\ \n]+$");
     QValidator *validator = new QRegExpValidator(regx, this);
@@ -123,6 +109,8 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     ui->memoTextEdit->setVisible(true);
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->widget);
+
+    setAmountPrecision();
 }
 
 TransferPage::~TransferPage()
@@ -189,10 +177,6 @@ void TransferPage::on_sendBtn_clicked()
                                                            QJsonArray() << accountName << ui->sendtoLineEdit->text()
                                                            << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
                                                            << remark << true ));
-qDebug() << toJsonFormat( "transfer_to_address",
-                          QJsonArray() << accountName << ui->sendtoLineEdit->text()
-                          << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
-                          << remark << true );
         }
 
     }
@@ -235,8 +219,8 @@ void TransferPage::InitStyle()
 //    ui->toolButton_chooseContact->setIcon(QIcon(":/ui/wallet_ui/tans.png"));
 
     setStyleSheet("QToolButton#toolButton_chooseContact{background-image:url(:/ui/wallet_ui/trans.png);border:none;\
-                                                background-color:transparent;background-repeat: no-repeat;background-position: center;}"
-                                                "QToolButton#toolButton_chooseContact:hover{background-color:black;");
+                   background-color:transparent;background-repeat: no-repeat;background-position: center;}\
+                   QToolButton#toolButton_chooseContact:hover{background-color:black;");
 
 }
 
@@ -303,7 +287,14 @@ void TransferPage::jsonDataUpdated(QString id)
         else
         {
             ErrorResultDialog errorResultDialog;
-            errorResultDialog.setInfoText(tr("Fail to transfer!"));
+            if(result.contains("Insufficient Balance"))
+            {
+                errorResultDialog.setInfoText(tr("Balance not enough!"));
+            }
+            else
+            {
+                errorResultDialog.setInfoText(tr("Fail to transfer!"));
+            }
             errorResultDialog.setDetailText(result);
             errorResultDialog.pop();
         }

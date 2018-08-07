@@ -4,7 +4,8 @@
 #include "wallet.h"
 
 //QMap<QString,QString> AssetIconItem::assetColorMap.insert("BTC","#F5A623");
-QMap<QString,QString> AssetIconItem::assetColorMap = {{"HX","#4F3B8D"}, {"BTC","#F5A623"}, {"LTC","#4A4A4A"}, {"UB","#38BDE9"}};
+QMap<QString,QString> AssetIconItem::assetColorMap = {{"HX","#4F3B8D"}, {"BTC","#F5A623"}, {"LTC","#4A4A4A"}, {"UB","#38BDE9"},
+                                                      {"HC","#5c4d93"}};
 
 AssetIconItem::AssetIconItem(QWidget *parent) :
     QWidget(parent),
@@ -27,6 +28,7 @@ void AssetIconItem::setAsset(QString assetSymbol)
                                         "background-color: %1;").arg(assetColor));
 
     ui->iconLabel->setStyleSheet(QString("border-image: url(:/ui/wallet_ui/coin_%1.png);").arg(assetSymbol));
+    ui->assetLabel->setStyleSheet("QLabel{font: 11px \"Microsoft YaHei UI Light\";color:rgb(52,37,90);}");
     ui->assetLabel->setText(assetSymbol);
 }
 

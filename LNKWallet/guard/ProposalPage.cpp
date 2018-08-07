@@ -111,7 +111,7 @@ void ProposalPage::showProposals()
         }
         else if(info.proposalOperationType == TRANSACTION_TYPE_SET_PUBLISHER)
         {
-            typeStr = tr("set publisher");
+            typeStr = tr("set price feeder");
         }
         else if(info.proposalOperationType == TRANSACTION_TYPE_COLDHOT_CANCEL)
         {
@@ -128,6 +128,10 @@ void ProposalPage::showProposals()
         else if(info.proposalOperationType == TRANSACTION_TYPE_RESIGN_GUARD)
         {
             typeStr = tr("resign senator");
+        }
+        else if(info.proposalOperationType == TRANSACTION_TYPE_PROPOSAL_CONTRACT_TRANSFER_FEE)
+        {
+            typeStr = tr("set contract transfer fee");
         }
         else
         {
@@ -148,7 +152,7 @@ void ProposalPage::showProposals()
         else if(info.approvedKeys.contains(address))
         {
             ui->proposalTableWidget->setItem(i,4,new QTableWidgetItem(tr("approved")));
-            ui->proposalTableWidget->item(i,4)->setTextColor(QColor(0,255,0));
+            ui->proposalTableWidget->item(i,4)->setTextColor(QColor(0,170,0));
         }
         else if(info.disapprovedKeys.contains(address))
         {

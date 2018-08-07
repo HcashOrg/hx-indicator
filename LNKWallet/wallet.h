@@ -30,7 +30,7 @@
 #define ASSET_NAME "HX"
 #define ACCOUNT_ADDRESS_PREFIX  "HX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.0.4"           // 版本号
+#define WALLET_VERSION "1.0.6"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
@@ -116,7 +116,7 @@ struct AssetInfo
     QString id;
     QString symbol;
     QString issuer;
-    int precision;
+    int precision = 0;
     unsigned long long maxSupply;
     QStringList publishers;
     AssetAmount baseAmount;

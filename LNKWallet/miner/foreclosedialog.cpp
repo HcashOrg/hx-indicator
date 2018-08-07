@@ -39,6 +39,8 @@ ForecloseDialog::ForecloseDialog(const QString &accountName, QString _assetSymbo
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
     ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(_maxAmount).arg(_assetSymbol));
+
+    ui->okBtn->setEnabled(false);
 }
 
 ForecloseDialog::~ForecloseDialog()
@@ -79,5 +81,14 @@ void ForecloseDialog::on_amountLineEdit_textEdited(const QString &arg1)
     if(ui->amountLineEdit->text().toDouble() > maxAmount.toDouble())
     {
         ui->amountLineEdit->setText(maxAmount);
+    }
+
+    if(ui->amountLineEdit->text().toDouble() != 0)
+    {
+        ui->okBtn->setEnabled(true);
+    }
+    else
+    {
+        ui->okBtn->setEnabled(false);
     }
 }

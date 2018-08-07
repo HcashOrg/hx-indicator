@@ -15,7 +15,7 @@ ImportDialog::ImportDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->privateKeyLineEdit->setEnabled(false);
+//    ui->privateKeyLineEdit->setEnabled(false);
 //    HXChain::getInstance()->appendCurrentDialogVector(this);
 
     setParent(HXChain::getInstance()->mainFrame);
@@ -35,6 +35,7 @@ ImportDialog::ImportDialog(QWidget *parent) :
     ui->importBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->pathBtn->setStyleSheet(OKBTN_STYLE);
 
     QRegExp regx("[a-z][a-z0-9\-]+$");
     QValidator *validator = new QRegExpValidator(regx, this);
@@ -45,6 +46,8 @@ ImportDialog::ImportDialog(QWidget *parent) :
     shadowWidget = new ShadowWidget(this);
     shadowWidget->init(this->size());
     shadowWidget->hide();
+
+    ui->privateKeyLineEdit->setPlaceholderText(tr(".lpk .elpk or %1 private key").arg(ASSET_NAME));
 }
 
 ImportDialog::~ImportDialog()
@@ -86,64 +89,87 @@ void ImportDialog::on_importBtn_clicked()
     if(ui->accountNameLineEdit->text().isEmpty())   return;
     if(ui->privateKeyLineEdit->text().isEmpty())    return;
 
-    KeyDataPtr data = std::make_shared<KeyDataInfo>();
-    if(KeyDataUtil::ReadaPrivateKeyFromPath(ui->privateKeyLineEdit->text(),data))
+    if(ui->privateKeyLineEdit->text().size() == 51 && !ui->privateKeyLineEdit->text().contains(".")
+            && !ui->privateKeyLineEdit->text().contains("/")
+            && !ui->privateKeyLineEdit->text().contains("\\")
+            && !ui->privateKeyLineEdit->text().contains(" "))
     {
-        //解密
-        if(ui->privateKeyLineEdit->text().endsWith(".lpk"))
+        // 如果是HX私钥
+        HXChain::getInstance()->postRPC( "import-import_key",
+                                         toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text()
+                                         << ui->privateKeyLineEdit->text()));
+
+    }
+    else if(QFile(ui->privateKeyLineEdit->text()).exists())
+    {
+        // 如果是私钥文件
+        KeyDataPtr data = std::make_shared<KeyDataInfo>();
+        if(KeyDataUtil::ReadaPrivateKeyFromPath(ui->privateKeyLineEdit->text(),data))
         {
-            data->DecryptBase64();
-        }
-        else if(ui->privateKeyLineEdit->text().endsWith(".elpk"))
-        {
-            ImportEnterPwdDialog importEnterPwdDialog;
-            if(importEnterPwdDialog.pop())
+            //解密
+            if(ui->privateKeyLineEdit->text().endsWith(".lpk"))
             {
-                data->DecryptAES(importEnterPwdDialog.pwd);
+                data->DecryptBase64();
+            }
+            else if(ui->privateKeyLineEdit->text().endsWith(".elpk"))
+            {
+                ImportEnterPwdDialog importEnterPwdDialog;
+                if(importEnterPwdDialog.pop())
+                {
+                    data->DecryptAES(importEnterPwdDialog.pwd);
+                }
+            }
+            else
+            {
+                return;
             }
         }
         else
         {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText( tr("Wrong file path."));
+            commonDialog.pop();
             return;
         }
+
+        //验证该地址是否已经存在
+        foreach(AccountInfo info,HXChain::getInstance()->accountInfoMap){
+            qDebug()<<info.address << " "<<data->HXAddr;
+            if(info.address == data->HXAddr)
+            {
+                CommonDialog commonDialog(CommonDialog::OkOnly);
+                commonDialog.setText( tr("HX Address:%1  Already Exists!").arg(data->HXAddr));
+                commonDialog.pop();
+                return;
+            }
+        }
+
+        //开始导入私钥
+        for(auto it = data->info_key.begin();it != data->info_key.end();++it)
+        {
+            if((*it).first == "HX")
+            {
+                //导入HX私钥
+                HXChain::getInstance()->postRPC( "import-import_key",
+                                                 toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << (*it).second));
+            }
+            else
+            {
+                //导入跨连私钥
+                HXChain::getInstance()->postRPC( "import-import_crosschain_key",
+                                                 toJsonFormat( "import_crosschain_key", QJsonArray() << (*it).second <<(*it).first));
+            }
+        }
+        HXChain::getInstance()->postRPC( "import-finish_import_key", toJsonFormat( "finish_import_key", QJsonArray()));
+
     }
     else
     {
         CommonDialog commonDialog(CommonDialog::OkOnly);
-        commonDialog.setText( tr("Wrong file path."));
+        commonDialog.setText( tr("Wrong HX private key!"));
         commonDialog.pop();
         return;
     }
-
-    //验证该地址是否已经存在
-    foreach(AccountInfo info,HXChain::getInstance()->accountInfoMap){
-        qDebug()<<info.address << " "<<data->HXAddr;
-        if(info.address == data->HXAddr)
-        {
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText( tr("HX Address:%1  Already Exists!").arg(data->HXAddr));
-            commonDialog.pop();
-            return;
-        }
-    }
-
-    //开始导入私钥
-    for(auto it = data->info_key.begin();it != data->info_key.end();++it)
-    {
-        if((*it).first == "HX")
-        {
-            //导入HX私钥
-            HXChain::getInstance()->postRPC( "import-import_key",
-                                             toJsonFormat( "import_key", QJsonArray() << ui->accountNameLineEdit->text() << (*it).second));
-        }
-        else
-        {
-            //导入跨连私钥
-            HXChain::getInstance()->postRPC( "import-import_crosschain_key",
-                                             toJsonFormat( "import_crosschain_key", QJsonArray() << (*it).second <<(*it).first));
-        }
-    }
-    HXChain::getInstance()->postRPC( "import-finish_import_key", toJsonFormat( "finish_import_key", QJsonArray()));
 
     // 如果输入框中是 私钥文件的地址
 //    if( ui->privateKeyLineEdit->text().endsWith(".lpk") )

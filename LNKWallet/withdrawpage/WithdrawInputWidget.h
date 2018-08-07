@@ -32,6 +32,7 @@ private slots:
     void addressValidateSlot(bool va);
 private:
     bool validateAddress(const QString &address);
+    void checkConfirmBtnEnabled();
 private:
     void InitWidget();
     void InitStyle();

@@ -83,7 +83,7 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         if(info.approvedKeys.contains(address))
         {
             ui->voteStateTableWidget->setItem(i, 1, new QTableWidgetItem(tr("approved")));
-            ui->voteStateTableWidget->item(i,1)->setTextColor(QColor(0,255,0));
+            ui->voteStateTableWidget->item(i,1)->setTextColor(QColor(0,170,0));
         }
         else if(info.disapprovedKeys.contains(address))
         {
@@ -128,7 +128,7 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         break;
     case TRANSACTION_TYPE_SET_PUBLISHER:
     {
-        ui->typeLabel->setText(tr("set publisher"));
+        ui->typeLabel->setText(tr("set price feeder"));
         ui->typeStackedWidget->setCurrentIndex(2);
 
         QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
@@ -172,9 +172,19 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         ui->resignGuardLabel->setText(operationObject.value("guard_member_account").toString());
     }
         break;
+    case TRANSACTION_TYPE_PROPOSAL_CONTRACT_TRANSFER_FEE:
+    {
+        ui->typeLabel->setText(tr("set contract transfer fee"));
+        ui->typeStackedWidget->setCurrentIndex(7);
+
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        unsigned long long feeRate = jsonValueToULL( operationObject.value("fee_rate"));
+        ui->contractTransferFeeLabel->setText( getBigNumberString(feeRate, ASSET_PRECISION));
+    }
+        break;
     default:
         ui->typeLabel->setText(tr("unknown(%1)").arg(info.proposalOperationType));
-        ui->typeStackedWidget->setCurrentIndex(7);
+        ui->typeStackedWidget->setCurrentIndex(8);
         break;
     }
 }

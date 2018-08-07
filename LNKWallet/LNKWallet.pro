@@ -165,7 +165,9 @@ SOURCES += main.cpp\
     guard/ChangeCrosschainAddressDialog.cpp \
     guard/WithdrawInfoDialog.cpp \
     guard/ColdHotInfoDialog.cpp \
-    bonus/BonusPage.cpp
+    bonus/BonusPage.cpp \
+    functionBar/FunctionDappWidget.cpp \
+    dapp/ContractTokenPage.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -303,7 +305,9 @@ HEADERS  += firstlogin.h \
     guard/ChangeCrosschainAddressDialog.h \
     guard/WithdrawInfoDialog.h \
     guard/ColdHotInfoDialog.h \
-    bonus/BonusPage.h
+    bonus/BonusPage.h \
+    functionBar/FunctionDappWidget.h \
+    dapp/ContractTokenPage.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -411,7 +415,9 @@ FORMS    += firstlogin.ui \
     guard/ChangeCrosschainAddressDialog.ui \
     guard/WithdrawInfoDialog.ui \
     guard/ColdHotInfoDialog.ui \
-    bonus/BonusPage.ui
+    bonus/BonusPage.ui \
+    functionBar/FunctionDappWidget.ui \
+    dapp/ContractTokenPage.ui
 
 win32{
     DISTFILES += logo.rc

@@ -164,7 +164,7 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
             // 如果是转入
             QTableWidgetItem* item = new QTableWidgetItem( "+ " + getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
             ui->transferRecordTableWidget->setItem(rowCount,2, item);
-            item->setTextColor(QColor(0,255,0));
+            item->setTextColor(QColor(0,170,0));
         }
 
 

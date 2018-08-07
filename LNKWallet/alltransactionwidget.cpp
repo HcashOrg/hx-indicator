@@ -434,7 +434,7 @@ void AllTransactionWidget::showTransactions()
                 {
                     QTableWidgetItem* item = new QTableWidgetItem(getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
                     ui->transactionsTableWidget->setItem(i,3, item);
-                    item->setTextColor(QColor(255,255,0));
+                    item->setTextColor(QColor(202,135,0));
 
                     ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("transfer to self")));
                 }
@@ -455,7 +455,7 @@ void AllTransactionWidget::showTransactions()
                 // 如果是转入
                 QTableWidgetItem* item = new QTableWidgetItem( "+ " + getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
                 ui->transactionsTableWidget->setItem(i,3, item);
-                item->setTextColor(QColor(0,255,0));
+                item->setTextColor(QColor(0,170,0));
 
                 ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("transfer-in")));
             }
@@ -499,12 +499,12 @@ void AllTransactionWidget::showTransactions()
             unsigned long long quoteAmount = jsonValueToULL(quoteObject.value("amount"));
 
             AssetInfo info = HXChain::getInstance()->assetInfoMap.value(baseAssetid);
-            QString str = tr("asset quote: %1:%2  %3:%4").arg(info.symbol).arg(ASSET_NAME).arg( getBigNumberString(quoteAmount, ASSET_PRECISION))
+            QString str = tr("asset feed price: %1:%2  %3:%4").arg(info.symbol).arg(ASSET_NAME).arg( getBigNumberString(quoteAmount, ASSET_PRECISION))
                     .arg( getBigNumberString(baseAmount, info.precision));
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(str));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
-            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("asset quote")));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("asset feed price")));
         }
             break;
         case TRANSACTION_TYPE_SPONSOR_PROPOSAL:
@@ -521,7 +521,7 @@ void AllTransactionWidget::showTransactions()
                 str += tr("change cold-hot wallet multisig-address");
                 break;
             case TRANSACTION_TYPE_SET_PUBLISHER:
-                str += tr("set publisher");
+                str += tr("set price feeder");
                 break;
             case TRANSACTION_TYPE_COLDHOT_CANCEL:
                 str += tr("cancel cold-hot trx");
@@ -537,6 +537,9 @@ void AllTransactionWidget::showTransactions()
                 break;
             case TRANSACTION_TYPE_RESIGN_GUARD:
                 str += tr("resign senator");
+                break;
+            case TRANSACTION_TYPE_PROPOSAL_CONTRACT_TRANSFER_FEE:
+                str += tr("set contract transfer fee");
                 break;
             default:
                 str += tr("%1 (unkown)").arg(opType);
@@ -584,7 +587,7 @@ void AllTransactionWidget::showTransactions()
 
             QTableWidgetItem* item = new QTableWidgetItem( "+ " + getBigNumberString(forecloseAmount, forecloseAssetInfo.precision) + " " + forecloseAssetInfo.symbol);
             ui->transactionsTableWidget->setItem(i,3, item);
-            item->setTextColor(QColor(0,255,0));
+            item->setTextColor(QColor(0,170,0));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("foreclose asset from miner")));
         }
@@ -601,7 +604,7 @@ void AllTransactionWidget::showTransactions()
 
             QTableWidgetItem* item = new QTableWidgetItem( "+ " + amountStr + " " + assetSymbol);
             ui->transactionsTableWidget->setItem(i,3, item);
-            item->setTextColor(QColor(0,255,0));
+            item->setTextColor(QColor(0,170,0));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("deposit %1").arg(assetSymbol)));
         }
@@ -642,7 +645,7 @@ void AllTransactionWidget::showTransactions()
 
                 QTableWidgetItem* item = new QTableWidgetItem( str);
                 ui->transactionsTableWidget->setItem(i,3, item);
-                item->setTextColor(QColor(0,255,0));
+                item->setTextColor(QColor(0,170,0));
             }
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
@@ -687,7 +690,7 @@ void AllTransactionWidget::showTransactions()
                  AssetInfo info  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(assetSymbol));
                  QTableWidgetItem* item = new QTableWidgetItem( QString("+ %1 %2").arg( getBigNumberString(amountStr.toULongLong(), info.precision)).arg(assetSymbol));
                  ui->transactionsTableWidget->setItem(i,3, item);
-                 item->setTextColor(QColor(0,255,0));
+                 item->setTextColor(QColor(0,170,0));
 
                  ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("exechange contract withdrawAsset")));
             }
@@ -749,23 +752,18 @@ void AllTransactionWidget::showTransactions()
         case TRANSACTION_TYPE_OBTAIN_BONUS:
         {
             QJsonArray bonusBalanceArray = operationObject.value("bonus_balance").toArray();
-            if(bonusBalanceArray.size() > 0)
+            QString str;
+            foreach (QJsonValue v, bonusBalanceArray)
             {
-                QJsonArray assetAmountArray = bonusBalanceArray.at(0).toArray();
+                QJsonArray assetAmountArray = v.toArray();
                 QString assetSymbol = assetAmountArray.at(0).toString();
                 unsigned long long amount = jsonValueToULL( assetAmountArray.at(1));
                 AssetInfo amountAssetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId( assetSymbol));
-
-                QString str = "+" + getBigNumberString(amount, amountAssetInfo.precision) + " " + assetSymbol;
-                if(bonusBalanceArray.size() > 1)
-                {
-                    str += tr(" etc.");
-                }
-
-                QTableWidgetItem* item = new QTableWidgetItem( str);
-                ui->transactionsTableWidget->setItem(i,3, item);
-                item->setTextColor(QColor(0,255,0));
+                str = "+" + getBigNumberString(amount, amountAssetInfo.precision) + " " + assetSymbol + "  ";
             }
+            QTableWidgetItem* item = new QTableWidgetItem( str);
+            ui->transactionsTableWidget->setItem(i,3, item);
+            item->setTextColor(QColor(0,170,0));
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
 

@@ -42,6 +42,7 @@ signals:
     void showAdvanceSignal();
     void showExchangeSignal();
     void showGuardSignal();
+    void showDappSignal();
     //点击二级按钮的信号
     void showPoundageSignal();
     void showMultiSigSignal();
@@ -58,6 +59,7 @@ signals:
     void showWithdrawConfirmSignal();
     void showFeedPriceSignal();
     void showColdHotTransferSignal();
+    void showContractTokenSignal();
 
 signals:
     void ShrinkSignal();
@@ -68,18 +70,21 @@ signals:
     void AdvanceDefaultSignal();
     void ExchangeDefaultSignal();
     void GuardDefaultSignal();
+    void DappDefaultSignal();
 private slots:
     void ShowContactWidgetSlots();
     void ShowAccountWidgetSlots();
     void ShowAdvanceWidgetSlots();
     void ShowExchangeWidgetSlots();
     void ShowGuardWidgetSlots();
+    void ShowDappWidgetSlots();
     void ShowMoreWidgetSlots();
 
     void ShowSettingWidgetSlots();
     void ShowConsoleWidgetSlots();
     void ShowAboutWidgetSlots();
     void ShowUpdateWidgetSlots();
+
 private:
     void updateCheckState(int buttonNumber);
 private:

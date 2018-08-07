@@ -52,24 +52,20 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
     validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_ammount->setValidator( validator );
     ui->label_symbol->setText(symbol);
-    ui->label_tipNumber->setText(tr("number limits: 0.001 to %1").arg(number));
+    ui->label_tipNumber->setText(tr("Amount limits: 0.001 to %1").arg(number));
 }
 
 void WithdrawInputWidget::addressChangeSlots(const QString &address)
 {
     _p->addrValid.startValidateAddress(_p->chainType,address);
-//    if(validateAddress(address))
-//    {
-//        ui->toolButton_confirm->setEnabled(true);
-//    }
-//    else
-//    {
-//        ui->toolButton_confirm->setEnabled(false);
-//    }
+
+    checkConfirmBtnEnabled();
 }
 
 void WithdrawInputWidget::numberChangeSlots(const QString &number)
 {
+    checkConfirmBtnEnabled();
+
     QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()));
     if(!via)
     {
@@ -105,7 +101,7 @@ void WithdrawInputWidget::maxButtonSlots()
 }
 
 void WithdrawInputWidget::confirmButtonSlots()
-{
+{ 
     if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
     QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->lineEdit_ammount->validator()));
@@ -117,13 +113,13 @@ void WithdrawInputWidget::confirmButtonSlots()
        )
     {
         CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(tr(QString("withdraw number shouldn't < %1!").arg(via->bottom()).toStdString().c_str()));
+        dia.setText(tr("withdraw amount shouldn't < %1!").arg(via->bottom()).toStdString().c_str());
         dia.pop();
     }
     else if(ui->lineEdit_ammount->text().toDouble() > via->top())
     {
         CommonDialog dia(CommonDialog::OkOnly);
-        dia.setText(tr(QString("withdraw number shouldn't > %1!").arg(via->top()).toStdString().c_str()));
+        dia.setText(tr("withdraw amount shouldn't > %1!").arg(via->top()).toStdString().c_str());
         dia.pop();
     }
     else
@@ -139,7 +135,6 @@ void WithdrawInputWidget::addressValidateSlot(bool va)
     if(va)
     {
         ui->label_tipAddr->setVisible(false);
-
     }
     else
     {
@@ -152,6 +147,18 @@ void WithdrawInputWidget::addressValidateSlot(bool va)
 bool WithdrawInputWidget::validateAddress(const QString &address)
 {
     return !address.isEmpty();
+}
+
+void WithdrawInputWidget::checkConfirmBtnEnabled()
+{
+    if(!ui->lineEdit_address->text().isEmpty() && ui->lineEdit_ammount->text().toDouble() > 0)
+    {
+        ui->toolButton_confirm->setEnabled(true);
+    }
+    else
+    {
+        ui->toolButton_confirm->setEnabled(false);
+    }
 }
 
 void WithdrawInputWidget::InitWidget()
@@ -167,7 +174,6 @@ void WithdrawInputWidget::InitWidget()
     QDoubleValidator *validator = new QDoubleValidator(0,0,0,ui->lineEdit_ammount);
     ui->lineEdit_ammount->setValidator( validator );
 
-    //ui->toolButton_confirm->setEnabled(false);
     connect(ui->lineEdit_address,&QLineEdit::textEdited,this,&WithdrawInputWidget::addressChangeSlots);
     connect(ui->toolButton_all,&QToolButton::clicked,this,&WithdrawInputWidget::maxButtonSlots);
     connect(ui->toolButton_confirm,&QToolButton::clicked,this,&WithdrawInputWidget::confirmButtonSlots);
@@ -176,13 +182,15 @@ void WithdrawInputWidget::InitWidget()
     ui->lineEdit_address->setFocus();
 
     connect(&_p->addrValid,&AddressValidate::AddressValidateSignal,this,&WithdrawInputWidget::addressValidateSlot);
+
+    checkConfirmBtnEnabled();
 }
 
 void WithdrawInputWidget::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setColor(QPalette::Window, QColor(248,249,253));
+    palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);

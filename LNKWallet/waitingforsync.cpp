@@ -41,6 +41,7 @@ WaitingForSync::~WaitingForSync()
 
 void WaitingForSync::on_closeBtn_clicked()
 {
+    qDebug()<<"waitforclose";
     emit closeWallet();
 }
 

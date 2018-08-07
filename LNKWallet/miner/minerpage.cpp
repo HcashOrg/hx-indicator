@@ -295,10 +295,10 @@ void MinerPage::jsonDataUpdated(QString id)
             ErrorResultDialog errorResultDialog;
             errorResultDialog.setDetailText(result);
 
-            if(result.contains("pay_back_obj.second.amount >= min_payback_balance: doesnt get enough pay back"))
+            if(result.contains("p_back.second.amount >= min_payback_balance"))
             {
                 errorResultDialog.setInfoText(tr("This account's mining income is less than %1 %2 ! You can not get it.")
-                                              .arg(0.6).arg(ASSET_NAME));
+                                              .arg(500).arg(ASSET_NAME));
             }
             else
             {
@@ -469,7 +469,7 @@ void MinerPage::showIncomeRecord()
 
         ui->incomeRecordTableWidget->setItem(i,0, new QTableWidgetItem(QString::number(ts.blockNum)));
         ui->incomeRecordTableWidget->setItem(i,1, new QTableWidgetItem(str));
-        ui->incomeRecordTableWidget->item(i,1)->setTextColor(QColor(0,255,0));
+        ui->incomeRecordTableWidget->item(i,1)->setTextColor(QColor(0,170,0));
         ui->incomeRecordTableWidget->setItem(i,2, new QTableWidgetItem(getBigNumberString(feeAmount, ASSET_PRECISION) + " " + ASSET_NAME));
         ui->incomeRecordTableWidget->setItem(i,3, new QTableWidgetItem(transactionId));
         ui->incomeRecordTableWidget->setItem(i,4, new QTableWidgetItem(tr("confirmed")));
@@ -734,7 +734,9 @@ void MinerPage::on_obtainAllBtn_clicked()
             array2 << ui->incomeTableWidget->item(i,0)->text();
             QJsonObject object;
             QStringList amountStringList = this->ui->incomeTableWidget->item(i,1)->text().split(" ");
-            object.insert("amount", ui->incomeTableWidget->item(i,1)->data(Qt::UserRole).toString());
+            QString amountStr = ui->incomeTableWidget->item(i,1)->data(Qt::UserRole).toString();
+            if(amountStr.toULongLong() < 1)   continue;
+            object.insert("amount", amountStr);
             object.insert("asset_id", HXChain::getInstance()->getAssetId(amountStringList.at(1)));
             array2 << object;
             array << array2;
