@@ -24,7 +24,12 @@
 static const QString TEMP_FOLDER_NAME = "temp";
 static const QString PACKAGE_UN = "blocklink";
 static const QString PACKAGE_NAME = "blocklink.zip";
+#ifdef TARGET_OS_MAC
+static const QString MAINEXE_NAME = "./HXIndicator";
+#else
 static const QString MAINEXE_NAME = "HXIndicator.exe";
+#endif
+
 
 UpdateWidget::UpdateWidget(QWidget *parent) :
     QWidget(parent),
