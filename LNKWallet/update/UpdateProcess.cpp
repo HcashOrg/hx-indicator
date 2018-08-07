@@ -110,7 +110,11 @@ void UpdateProcess::GetLatestVersionInfoSlots()
     //下载当前服务器版本
     DownLoadData up;
     up.fileName = UPDATE_DOC_NAME;
+#ifdef TARGET_OS_MAC
+    up.url = _p->serverAddr + serverVersion.url.replace(".xml","_mac.xml");
+#else
     up.url = _p->serverAddr + serverVersion.url;//"http://192.168.1.161/down/blocklink_wallet_upgrade.xml";//测试用，本地文件
+#endif
     qDebug()<<up.url;
     up.filePath = _p->downloadPath + QDir::separator() + up.fileName;
     connect(_p->updateNetwork,&UpdateNetWork::DownLoadFinish,this,&UpdateProcess::DownLoadVersionConfigFinsihed);
