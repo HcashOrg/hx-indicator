@@ -23,8 +23,8 @@ win32{
     LIBS += -lShLwApi
 }
 macx{
-#    ICON = HX.icns
-QMAKE_MAC_SDK = macosx10.12
+    ICON = HX.icns
+    QMAKE_MAC_SDK = macosx10.12
 }
 LIBS += -L$$PWD -lqrencode
 
