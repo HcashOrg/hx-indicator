@@ -106,15 +106,15 @@ void UpdateProcess::GetLatestVersionInfoSlots()
     VersionData serverVersion ;//中间件返回的config地址
     UpdateProgressUtil::ParseVersion(QString(reply->readAll()),serverVersion);
 
+#ifdef TARGET_OS_MAC
+    serverVersion.url.replace(".xml","_mac.xml");//"http://192.168.1.161/down/blocklink_wallet_upgrade.xml";//测试用，本地文件
+#endif
+
     //下载config配置
     //下载当前服务器版本
     DownLoadData up;
     up.fileName = UPDATE_DOC_NAME;
-#ifdef TARGET_OS_MAC
-    up.url = _p->serverAddr + serverVersion.url.replace(".xml","_mac.xml");
-#else
-    up.url = _p->serverAddr + serverVersion.url;//"http://192.168.1.161/down/blocklink_wallet_upgrade.xml";//测试用，本地文件
-#endif
+    up.url = _p->serverAddr + serverVersion.url;
     qDebug()<<up.url;
     up.filePath = _p->downloadPath + QDir::separator() + up.fileName;
     connect(_p->updateNetwork,&UpdateNetWork::DownLoadFinish,this,&UpdateProcess::DownLoadVersionConfigFinsihed);
