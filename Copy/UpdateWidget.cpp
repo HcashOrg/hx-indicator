@@ -56,6 +56,7 @@ void UpdateWidget::startMove()
     //删除压缩文件、解压目录
     qDebug()<<compressPath;
     QFile::remove(compressPath);
+    qDebug()<<"remove zip success";
     DataUtil::deleteDir(tempdir + QDir::separator() + PACKAGE_UN);
 
     //复制临时文件到主目录
@@ -75,9 +76,15 @@ void UpdateWidget::copyFinish()
 
 void UpdateWidget::restartWallet()
 {
+#ifdef TARGET_OS_MAC
+    //mac平台需要获取权限
+        QProcess::execute("chmod",QStringList()<<"777"<<QCoreApplication::applicationDirPath()+"/hx_client");
+        QProcess::execute("chmod",QStringList()<<"777"<<QCoreApplication::applicationDirPath()+"/hx_node");
+        QProcess::execute("chmod",QStringList()<<"777"<<QCoreApplication::applicationDirPath()+"/HXIndicator");
+#endif
     //启动外部复制程序
     QProcess *copproc = new QProcess();
-    copproc->start(MAINEXE_NAME);
+    copproc->startDetached(QCoreApplication::applicationDirPath()+"/HXIndicator");
     close();
 }
 
@@ -88,7 +95,7 @@ void UpdateWidget::InitWidget()
     ui->toolButton_restart->setVisible(false);
 
     ui->update->setText(tr("updating,please wait!"));
-    QTimer::singleShot(500,this,&UpdateWidget::startMove);
+    QTimer::singleShot(1000,this,&UpdateWidget::startMove);
 
     connect(ui->toolButton_close,&QToolButton::clicked,this,&UpdateWidget::close);
     connect(ui->toolButton_restart,&QToolButton::clicked,this,&UpdateWidget::restartWallet);

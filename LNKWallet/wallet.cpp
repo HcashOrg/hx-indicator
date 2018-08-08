@@ -17,9 +17,11 @@
 #ifdef  WIN32
 #define NODE_PROC_NAME      "hx_node.exe"
 #define CLIENT_PROC_NAME    "hx_client.exe"
+#define COPY_PROC_NAME      "Copy.exe"
 #else
 #define NODE_PROC_NAME      "./hx_node"
 #define CLIENT_PROC_NAME    "./hx_client"
+#define COPY_PROC_NAME      "./Copy"
 #endif
 
 HXChain* HXChain::goo = 0;
@@ -1202,8 +1204,12 @@ void HXChain::quit()
     if(isUpdateNeeded)
     {
         //启动外部复制程序
+        qDebug()<<"chmod copy";
+#ifdef TARGET_OS_MAC
+        QProcess::execute("chmod",QStringList()<<"777"<<QCoreApplication::applicationDirPath()+"/Copy");
+#endif
         QProcess *copproc = new QProcess();
-        copproc->start("Copy.exe");
+        copproc->startDetached(COPY_PROC_NAME);
     }
 }
 
