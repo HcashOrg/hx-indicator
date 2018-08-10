@@ -46,6 +46,7 @@
 #include "guard/FeedPricePage.h"
 #include "guard/ColdHotTransferPage.h"
 #include "bonus/BonusPage.h"
+#include "dapp/ContractTokenPage.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -75,6 +76,7 @@ Frame::Frame(): timer(NULL),
     withdrawConfirmPage(NULL),
     feedPricePage(NULL),
     coldHotTransferPage(NULL),
+    contractTokenPage(NULL),
     poundage(nullptr)
 {
 
@@ -362,6 +364,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showWithdrawConfirmSignal,this,&Frame::showWithdrawConfirmPage);
     connect(functionBar,&FunctionWidget::showFeedPriceSignal,this,&Frame::showFeedPricePage);
     connect(functionBar,&FunctionWidget::showColdHotTransferSignal,this,&Frame::showColdHotTransferPage);
+    connect(functionBar,&FunctionWidget::showContractTokenSignal,this,&Frame::showContractTokenPage);
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
@@ -750,6 +753,13 @@ void Frame::closeCurrentPage()
         {
             bonusPage->close();
             bonusPage = NULL;
+        }
+        break;
+    case 20:
+        if(contractTokenPage)
+        {
+            contractTokenPage->close();
+            contractTokenPage = NULL;
         }
         break;
     default:
@@ -1224,6 +1234,15 @@ void Frame::showColdHotTransferPage()
     coldHotTransferPage->setAttribute(Qt::WA_DeleteOnClose);
     coldHotTransferPage->show();
     currentPageNum = 16;
+}
+
+void Frame::showContractTokenPage()
+{
+    closeCurrentPage();
+    contractTokenPage = new ContractTokenPage(centralWidget);
+    contractTokenPage->setAttribute(Qt::WA_DeleteOnClose);
+    contractTokenPage->show();
+    currentPageNum = 20;
 }
 
 void Frame::showMultiSigTransactionPage(QString _multiSigAddress)

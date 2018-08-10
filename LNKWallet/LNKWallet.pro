@@ -168,7 +168,9 @@ SOURCES += main.cpp\
     guard/ColdHotInfoDialog.cpp \
     bonus/BonusPage.cpp \
     functionBar/FunctionDappWidget.cpp \
-    dapp/ContractTokenPage.cpp
+    dapp/ContractTokenPage.cpp \
+    dapp/CreateTokenDialog.cpp \
+    dapp/AddTokenDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -308,7 +310,9 @@ HEADERS  += firstlogin.h \
     guard/ColdHotInfoDialog.h \
     bonus/BonusPage.h \
     functionBar/FunctionDappWidget.h \
-    dapp/ContractTokenPage.h
+    dapp/ContractTokenPage.h \
+    dapp/CreateTokenDialog.h \
+    dapp/AddTokenDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -418,7 +422,9 @@ FORMS    += firstlogin.ui \
     guard/ColdHotInfoDialog.ui \
     bonus/BonusPage.ui \
     functionBar/FunctionDappWidget.ui \
-    dapp/ContractTokenPage.ui
+    dapp/ContractTokenPage.ui \
+    dapp/CreateTokenDialog.ui \
+    dapp/AddTokenDialog.ui
 
 win32{
     DISTFILES += logo.rc

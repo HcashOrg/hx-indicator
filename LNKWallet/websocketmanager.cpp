@@ -133,7 +133,7 @@ void WebSocketManager::onConnected()
 void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
 {
     if(pendingRpcs.size() <= 0)   return;
-//    qDebug() << "message received: " << pendingRpcs.at(0) << _message;
+//    qDebug() << "message received: " << pendingRpcs.at(0) << _isLastFrame;
 
     m_buff += _message;
 

@@ -236,7 +236,7 @@ void FunctionWidget::InitWidget()
 {
     InitStyle();
 
-    ui->toolButton_dapp->hide();
+//    ui->toolButton_dapp->hide();
 
     ui->toolButton_contact->setCheckable(true);
     ui->toolButton_account->setCheckable(true);
@@ -344,6 +344,8 @@ void FunctionWidget::InitStyle()
     ui->toolButton_contact->setStyleSheet("QToolButton{background-image:url(:/functionBar/contact.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
                                           "QToolButton:checked{background-image:url(:/functionBar/contact_checked.png);}");
     ui->toolButton_guard->setStyleSheet("QToolButton{background-image:url(:/functionBar/guard.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                                          "QToolButton:checked{background-image:url(:/functionBar/guard_checked.png);}");
+    ui->toolButton_dapp->setStyleSheet("QToolButton{background-image:url(:/functionBar/guard.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
                                           "QToolButton:checked{background-image:url(:/functionBar/guard_checked.png);}");
     ui->toolButton_more->setStyleSheet("QToolButton{background-image:url(:/functionBar/more.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
                                           "QToolButton:checked{background-color:rgb(199,19,106);background-image:url(:/functionBar/more_checked.png);}");
