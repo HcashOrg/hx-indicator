@@ -1,5 +1,5 @@
 TEMPLATE = lib
-CONFIG += qt warn_on
+CONFIG += qt warn_on staticlib
 QT -= gui
 
 # The ABI version.
@@ -39,8 +39,9 @@ CONFIG(debug, debug|release) {
      win32: TARGET = $$join(TARGET,,,d)
 }
 
+
 unix:!symbian {
-    headers.path=$$PREFIX/include/quazip
+
     headers.files=$$HEADERS
     target.path=$$PREFIX/lib/$${LIB_ARCH}
     INSTALLS += headers target

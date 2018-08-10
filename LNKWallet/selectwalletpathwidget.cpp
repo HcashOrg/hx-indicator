@@ -11,9 +11,6 @@ SelectWalletPathWidget::SelectWalletPathWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-#ifdef TARGET_OS_MAC
-    ui->pwdLineEdit->setAttribute(Qt::WA_MacShowFocusRect,false);
-#endif
 
 
     InitWidget();

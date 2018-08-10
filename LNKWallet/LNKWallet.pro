@@ -23,8 +23,8 @@ win32{
     LIBS += -lShLwApi
 }
 macx{
-#    ICON = HX.icns
-QMAKE_MAC_SDK = macosx10.12
+    ICON = HX.icns
+    QMAKE_MAC_SDK = macosx10.12
 }
 LIBS += -L$$PWD -lqrencode
 
@@ -102,7 +102,6 @@ SOURCES += main.cpp\
     depositpage/DepositDataUtil.cpp \
     depositpage/DepositQrcodeWidget.cpp \
     depositpage/DepositRecrdWideget.cpp\
-    depositpage/DepositPage.cpp \
     exchange/myexchangecontractpage.cpp \
     withdrawpage/WithdrawPage.cpp \
     withdrawpage/WithdrawDataUtil.cpp \

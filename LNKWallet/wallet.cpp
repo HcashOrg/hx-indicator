@@ -14,6 +14,15 @@
 #include <QFrame>
 #include <QDesktopWidget>
 
+#ifdef  WIN32
+#define NODE_PROC_NAME      "hx_node.exe"
+#define CLIENT_PROC_NAME    "hx_client.exe"
+#define COPY_PROC_NAME      "Copy.exe"
+#else
+#define NODE_PROC_NAME      "./hx_node"
+#define CLIENT_PROC_NAME    "./hx_client"
+#define COPY_PROC_NAME      "./Copy"
+#endif
 
 HXChain* HXChain::goo = 0;
 
@@ -147,8 +156,8 @@ void HXChain:: startExe()
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
-    nodeProc->start("hx_node.exe",strList);
-    qDebug() << "start hx_node.exe " << strList;
+    nodeProc->start(NODE_PROC_NAME,strList);
+    qDebug() << "start" << NODE_PROC_NAME << strList;
 
 
 //    HXChain::getInstance()->initWebSocketManager();
@@ -162,18 +171,18 @@ void HXChain::onNodeExeStateChanged()
 
     if(nodeProc->state() == QProcess::Starting)
     {
-        qDebug() << QString("%1 is starting").arg("hx_node.exe");
+        qDebug() << QString("%1 is starting").arg(NODE_PROC_NAME);
     }
     else if(nodeProc->state() == QProcess::Running)
     {
-        qDebug() << QString("%1 is running").arg("hx_node.exe");
+        qDebug() << QString("%1 is running").arg(NODE_PROC_NAME);
         connect(&timerForStartExe,SIGNAL(timeout()),this,SLOT(checkNodeExeIsReady()));
         timerForStartExe.start(1000);
     }
     else if(nodeProc->state() == QProcess::NotRunning)
     {
         CommonDialog commonDialog(CommonDialog::OkOnly);
-        commonDialog.setText(tr("Fail to launch %1 !").arg("hx_node.exe"));
+        commonDialog.setText(tr("Fail to launch %1 !").arg(NODE_PROC_NAME));
         commonDialog.pop();
     }
 }
@@ -184,11 +193,11 @@ void HXChain::onClientExeStateChanged()
 
     if(clientProc->state() == QProcess::Starting)
     {
-        qDebug() << QString("%1 is starting").arg("hx_client.exe");
+        qDebug() << QString("%1 is starting").arg(CLIENT_PROC_NAME);
     }
     else if(clientProc->state() == QProcess::Running)
     {
-        qDebug() << QString("%1 is running").arg("hx_client.exe");
+        qDebug() << QString("%1 is running").arg(CLIENT_PROC_NAME);
 
         HXChain::getInstance()->initWebSocketManager();
         emit exeStarted();
@@ -197,7 +206,7 @@ void HXChain::onClientExeStateChanged()
     {
         qDebug() << "client not running" + clientProc->errorString();
         CommonDialog commonDialog(CommonDialog::OkOnly);
-        commonDialog.setText(tr("Fail to launch %1 !").arg("hx_client.exe"));
+        commonDialog.setText(tr("Fail to launch %1 !").arg(CLIENT_PROC_NAME));
         commonDialog.pop();
     }
 }
@@ -211,7 +220,7 @@ void HXChain::delayedLaunchClient()
             << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
 
-    clientProc->start("hx_client.exe",strList);
+    clientProc->start(CLIENT_PROC_NAME,strList);
 }
 
 void HXChain::checkNodeExeIsReady()
@@ -380,7 +389,7 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("HOME="))
         {
 
-            walletConfigPath = str.mid(5) + "/Library/Application Support/HXIndicator"WALLET_EXE_SUFFIX;
+            walletConfigPath = str.mid(5) + "/Library/Application Support/HXIndicator" WALLET_EXE_SUFFIX;
             appDataPath = walletConfigPath + "/chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;
@@ -1195,8 +1204,12 @@ void HXChain::quit()
     if(isUpdateNeeded)
     {
         //启动外部复制程序
+        qDebug()<<"chmod copy";
+#ifdef TARGET_OS_MAC
+        QProcess::execute("chmod",QStringList()<<"777"<<QCoreApplication::applicationDirPath()+"/Copy");
+#endif
         QProcess *copproc = new QProcess();
-        copproc->start("Copy.exe");
+        copproc->startDetached(COPY_PROC_NAME);
     }
 }
 

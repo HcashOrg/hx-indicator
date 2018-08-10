@@ -20,6 +20,7 @@
 #include <QGraphicsEffect>
 #include <QTableWidget>
 #include <QLabel>
+#include <math.h>
 
 #include "frame.h"
 #include "extra/style.h"
@@ -42,7 +43,7 @@
 #ifdef  WIN32
 #define WALLET_EXE_FILE     "HX"WALLET_EXE_SUFFIX".exe"
 #else
-#define WALLET_EXE_FILE     "./HX"WALLET_EXE_SUFFIX
+#define WALLET_EXE_FILE     "./HX" WALLET_EXE_SUFFIX
 #endif
 
 
