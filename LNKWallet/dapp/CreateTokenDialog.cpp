@@ -176,7 +176,6 @@ void CreateTokenDialog::jsonDataUpdated(QString id)
         {
             initFeeWidget->updateFeeNumberSlots(0);
             ui->initBtn->setEnabled(false);
-
         }
 
         return;
@@ -306,4 +305,9 @@ void CreateTokenDialog::on_initBtn_clicked()
                                      << "init_token"  << params
                                      << true));
 
+}
+
+void CreateTokenDialog::on_accountComboBox_currentIndexChanged(const QString &arg1)
+{
+    calculateInitFee();
 }

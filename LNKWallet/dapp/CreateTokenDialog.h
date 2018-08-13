@@ -40,6 +40,8 @@ private slots:
 
     void on_initBtn_clicked();
 
+    void on_accountComboBox_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::CreateTokenDialog *ui;
     int stepCount = 0;

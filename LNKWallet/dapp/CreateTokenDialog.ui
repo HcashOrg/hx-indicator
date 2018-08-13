@@ -100,7 +100,7 @@
       <string notr="true">color: rgb(192, 196, 212);</string>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="registerContractPage">
       <widget class="QComboBox" name="accountComboBox">

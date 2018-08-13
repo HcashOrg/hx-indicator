@@ -289,7 +289,7 @@ void FunctionWidget::InitWidget()
     connect(this,&FunctionWidget::AdvanceDefaultSignal,_p->advanceBar,&FunctionAdvanceWidget::DefaultShow);
     connect(this,&FunctionWidget::ExchangeDefaultSignal,_p->exchangeBar,&FunctionExchangeWidget::DefaultShow);
     connect(this,&FunctionWidget::GuardDefaultSignal,_p->guardBar,&FunctionGuardWidget::DefaultShow);
-    connect(this,&FunctionWidget::GuardDefaultSignal,_p->dappBar,&FunctionDappWidget::DefaultShow);
+    connect(this,&FunctionWidget::DappDefaultSignal,_p->dappBar,&FunctionDappWidget::DefaultShow);
 //    ui->toolButton_account->installEventFilter(this);
 //    ui->toolButton_advanced->installEventFilter(this);
 //    ui->toolButton_contact->installEventFilter(this);
