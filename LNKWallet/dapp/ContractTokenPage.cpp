@@ -6,6 +6,7 @@
 #include "AddTokenDialog.h"
 #include "ToolButtonWidget.h"
 #include "showcontentdialog.h"
+#include "TokenTransferWidget.h"
 
 ContractTokenPage::ContractTokenPage(QWidget *parent) :
     QWidget(parent),
@@ -59,6 +60,11 @@ void ContractTokenPage::init()
     fetchTokensInfo();
 }
 
+void ContractTokenPage::refresh()
+{
+    fetchTokensBalance();
+}
+
 void ContractTokenPage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
@@ -91,17 +97,22 @@ void ContractTokenPage::fetchTokensInfo()
 
 void ContractTokenPage::fetchTokensBalance()
 {
-    QString accountAddress = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+    QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
 
     QStringList contractIds = contractTokenInfoMap.keys();
 
     foreach (QString contractId, contractIds)
     {
-        HXChain::getInstance()->postRPC( "ContractTokenPage-invoke_contract_offline-balanceOf-" + contractId + "###" + ui->accountComboBox->currentText(),
-                                         toJsonFormat( "invoke_contract_offline",
-                                                       QJsonArray() << ui->accountComboBox->currentText() << contractId
-                                                       << "balanceOf"  << accountAddress));
+        foreach (QString account, accounts)
+        {
+            QString accountAddress = HXChain::getInstance()->accountInfoMap.value(account).address;
 
+            HXChain::getInstance()->postRPC( "ContractTokenPage-invoke_contract_offline-balanceOf-" + contractId + "###" + account,
+                                             toJsonFormat( "invoke_contract_offline",
+                                                           QJsonArray() << account << contractId
+                                                           << "balanceOf"  << accountAddress));
+
+        }
     }
 
     HXChain::getInstance()->postRPC( "ContractTokenPage-invoke_contract_offline-fetchTokensBalance-finish",
@@ -132,7 +143,7 @@ void ContractTokenPage::showAccountTokens()
         ToolButtonWidget *toolButton = new ToolButtonWidget();
         toolButton->setText(ui->tokenTableWidget->item(i,3)->text());
         ui->tokenTableWidget->setCellWidget(i,3,toolButton);
-//        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ContractTokenPage::on_tokenTableWidget_cellClicked,this,i,53));
+        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ContractTokenPage::on_tokenTableWidget_cellClicked,this,i,3));
 
         tableWidgetSetItemZebraColor(ui->tokenTableWidget);
 
@@ -232,8 +243,7 @@ void ContractTokenPage::jsonDataUpdated(QString id)
 
 void ContractTokenPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
-    ui->tokenTableWidget->setRowCount(0);
-    fetchTokensBalance();
+    showAccountTokens();
 }
 
 void ContractTokenPage::on_addTokenBtn_clicked()
@@ -257,6 +267,19 @@ void ContractTokenPage::on_tokenTableWidget_cellClicked(int row, int column)
         showContentDialog.move( ui->tokenTableWidget->mapToGlobal( QPoint(x, y)));
         showContentDialog.exec();
 
+        return;
+    }
+
+    if(column == 3)
+    {
+        emit backBtnVisible(true);
+
+        if( !ui->tokenTableWidget->item(row, 0))    return;
+        TokenTransferWidget* tokenTransferWidget = new TokenTransferWidget( ui->accountComboBox->currentText(),
+                                                                            ui->tokenTableWidget->item(row,0)->text(), this);
+        tokenTransferWidget->setAttribute(Qt::WA_DeleteOnClose);
+        tokenTransferWidget->show();
+        tokenTransferWidget->raise();
         return;
     }
 }

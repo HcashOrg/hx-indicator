@@ -29,6 +29,7 @@
 
 #define ASSET_NAME "HX"
 #define ACCOUNT_ADDRESS_PREFIX  "HX"
+#define CONTRACT_ADDRESS_PREFIX "CHX"
 #define ASSET_PRECISION 5
 #define WALLET_VERSION "1.0.6"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)

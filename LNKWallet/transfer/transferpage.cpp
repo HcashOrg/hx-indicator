@@ -32,38 +32,23 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     ui(new Ui::TransferPage)
 
 {
-	
-
     ui->setupUi(this);
     InitStyle();
 
     //初始化账户comboBox
     // 账户下拉框按字母顺序排序
-    QStringList keys = HXChain::getInstance()->accountInfoMap.keys();
+    QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
+    ui->accountComboBox->addItems(accounts);
 
-    //
-    if(!keys.empty())
+    if(accounts.contains(HXChain::getInstance()->currentAccount))
     {
-        ui->accountComboBox->addItems( keys);
+        ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
-
-    if(ui->accountComboBox->count() != 0)
-    {
-        if( accountName.isEmpty() )
-        {
-            ui->accountComboBox->setCurrentIndex(0);
-        }
-        else
-        {
-            ui->accountComboBox->setCurrentText( accountName);
-        }
-    }
-
 
 
     ui->amountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
 
-    QRegExp regx("[a-zA-Z0-9\-\.\ \n]+$");
+    QRegExp regx("[a-zA-Z0-9\ \n]+$");
     QValidator *validator = new QRegExpValidator(regx, this);
     ui->sendtoLineEdit->setValidator( validator );
     ui->sendtoLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
@@ -380,35 +365,34 @@ void TransferPage::sendtoLineEdit_textChanged(const QString &arg1)
     if( type == AccountAddress)
     {
         ui->tipLabel4->setText(tr("Valid account address."));
-        ui->tipLabel4->setStyleSheet("color: rgb(52,37,90);");
+        ui->tipLabel4->setStyleSheet("color: rgb(0,170,0);");
         ui->tipLabel4->show();
-//        calculateCallContractFee();
     }
     else if( type == ContractAddress)
     {
         ui->tipLabel4->setText(tr("Sending coins to contract address is not supported currently."));
-        ui->tipLabel4->setStyleSheet("color: rgb(255,34,76);");
+        ui->tipLabel4->setStyleSheet("color: rgb(255,0,0);");
         ui->tipLabel4->show();
     }
-    else if( type == MultiSigAddress)
-    {
-        if(ui->assetComboBox->currentIndex() > 0)
-        {
-            ui->tipLabel4->setText(tr("You can only send %1s to multisig address currently.").arg(ASSET_NAME));
-            ui->tipLabel4->setStyleSheet("color: rgb(255,34,76);");
-            ui->tipLabel4->show();
-        }
-        else
-        {
-            ui->tipLabel4->setText(tr("Valid multisig address."));
-            ui->tipLabel4->setStyleSheet("color: rgb(43,230,131);");
-            ui->tipLabel4->show();
-        }
-    }
+//    else if( type == MultiSigAddress)
+//    {
+//        if(ui->assetComboBox->currentIndex() > 0)
+//        {
+//            ui->tipLabel4->setText(tr("You can only send %1s to multisig address currently.").arg(ASSET_NAME));
+//            ui->tipLabel4->setStyleSheet("color: rgb(255,34,76);");
+//            ui->tipLabel4->show();
+//        }
+//        else
+//        {
+//            ui->tipLabel4->setText(tr("Valid multisig address."));
+//            ui->tipLabel4->setStyleSheet("color: rgb(43,230,131);");
+//            ui->tipLabel4->show();
+//        }
+//    }
     else
     {
         ui->tipLabel4->setText(tr("Invalid address."));
-        ui->tipLabel4->setStyleSheet("color: rgb(255,34,76);");
+        ui->tipLabel4->setStyleSheet("color: rgb(255,0,0);");
         ui->tipLabel4->show();
     }
 

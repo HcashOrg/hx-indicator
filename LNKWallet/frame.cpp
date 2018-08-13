@@ -824,6 +824,9 @@ void Frame::autoRefresh()
     case 19:
         bonusPage->refresh();
         break;
+    case 20:
+        contractTokenPage->refresh();
+        break;
     default:
         break;
     }
@@ -1240,6 +1243,7 @@ void Frame::showContractTokenPage()
 {
     closeCurrentPage();
     contractTokenPage = new ContractTokenPage(centralWidget);
+    connect(contractTokenPage,&ContractTokenPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
     contractTokenPage->setAttribute(Qt::WA_DeleteOnClose);
     contractTokenPage->show();
     currentPageNum = 20;
@@ -2054,6 +2058,9 @@ void Frame::onBack()
         break;
     case 12:
         showKeyManagePage();
+        break;
+    case 20:
+        showContractTokenPage();
         break;
     default:
         break;

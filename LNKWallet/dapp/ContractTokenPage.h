@@ -32,7 +32,14 @@ public:
     ~ContractTokenPage();
 
     void init();
+    void refresh();
 
+    QMap<QString,ContractTokenInfo> contractTokenInfoMap;
+    QMap<QString,QMap<QString,TokenBalance>>    accountContractTokenBalanceMap;
+
+
+signals:
+    void backBtnVisible(bool isShow);
 private slots:
     void on_createTokenBtn_clicked();
 
@@ -48,8 +55,6 @@ private:
     Ui::ContractTokenPage *ui;
     void paintEvent(QPaintEvent*);
 
-    QMap<QString,ContractTokenInfo> contractTokenInfoMap;
-    QMap<QString,QMap<QString,TokenBalance>>    accountContractTokenBalanceMap;
     void fetchTokensInfo();
     void fetchTokensBalance();
 

@@ -67,12 +67,14 @@ void CreateTokenDialog::init()
     }
     ui->gpcPathLineEdit->setText(fileInfo.absoluteFilePath());
     ui->gpcPathLineEdit->setEnabled(false);
-    HXChain::getInstance()->postRPC("CreateTokenDialog-register_contract_testing",
-                                    toJsonFormat( "register_contract_testing",
-                                    QJsonArray() << ui->accountComboBox->currentText() << ui->gpcPathLineEdit->text()));
 
+    ui->registerBtn->setEnabled(false);
     ui->initBtn->setEnabled(false);
 
+    registerFeeWidget = new FeeChooseWidget( 0,HXChain::getInstance()->feeType,
+                                                 ui->accountComboBox->currentText(), ui->registerContractPage);
+    registerFeeWidget->move(50,120);
+    calculateRegisterFee();
 }
 
 void CreateTokenDialog::jsonDataUpdated(QString id)
@@ -88,21 +90,13 @@ void CreateTokenDialog::jsonDataUpdated(QString id)
             stepCount = totalFee.step;
 
             unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
-
-            qDebug() << totalAmount;
-
-            registerFeeWidget = new FeeChooseWidget( getBigNumberString(totalAmount, ASSET_PRECISION).toDouble(),HXChain::getInstance()->feeType,
-                                                         ui->accountComboBox->currentText(), ui->registerContractPage);
-            registerFeeWidget->move(50,120);
-            registerFeeWidget->show();
-
-            //fee->SetTitle(tr("Register Contract"));
+            registerFeeWidget->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
+            ui->registerBtn->setEnabled(true);
         }
         else
         {
-//            CommonDialog dia(CommonDialog::OkOnly);
-//            dia.setText(result);
-//            dia.pop();
+            registerFeeWidget->updateFeeNumberSlots(0);
+            ui->registerBtn->setEnabled(false);
         }
 
         return;
@@ -222,6 +216,13 @@ void CreateTokenDialog::on_closeBtn_clicked()
     close();
 }
 
+void CreateTokenDialog::calculateRegisterFee()
+{
+    HXChain::getInstance()->postRPC("CreateTokenDialog-register_contract_testing",
+                                    toJsonFormat( "register_contract_testing",
+                                    QJsonArray() << ui->accountComboBox->currentText() << ui->gpcPathLineEdit->text()));
+}
+
 void CreateTokenDialog::calculateInitFee()
 {
     QString totalSupply = addPrecisionString(ui->totalSupplyLineEdit->text(),ui->precisionSpinBox->text().toInt());
@@ -300,14 +301,14 @@ void CreateTokenDialog::on_initBtn_clicked()
 
     HXChain::getInstance()->postRPC( "CreateTokenDialog-invoke_contract-init_token-" + params, toJsonFormat( "invoke_contract",
                                      QJsonArray() << ui->accountComboBox->currentText()
-                                      << HXChain::getInstance()->currentContractFee() << stepCount
+                                     << HXChain::getInstance()->currentContractFee() << stepCount
                                      << ui->contractIdLabel->text()
-                                     << "init_token"  << params
-                                     << true));
+                                     << "init_token"  << params));
 
 }
 
 void CreateTokenDialog::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
-    calculateInitFee();
+    calculateRegisterFee();
 }
+

@@ -1568,7 +1568,8 @@ AddressType checkAddress(QString address, AddressFlags type)
 
     if(type & ContractAddress)
     {
-        if(address.startsWith("C")  && address.size() == QString("C").size() + 33)
+        if(address.startsWith(CONTRACT_ADDRESS_PREFIX)  && (address.size() == QString(CONTRACT_ADDRESS_PREFIX).size() + 33 ||
+                                                            address.size() == QString(CONTRACT_ADDRESS_PREFIX).size() + 32))
         {
             return ContractAddress;
         }

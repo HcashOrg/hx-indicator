@@ -78,7 +78,6 @@ bool FeeChooseWidget::isSufficient() const
 void FeeChooseWidget::updateFeeNumberSlots(double feeNumber)
 {
     _p->feeNumber = std::max<double>(0,feeNumber);
-
     feeTypeChanged();
 }
 

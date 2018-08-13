@@ -28,8 +28,6 @@ private slots:
 
     void on_closeBtn_clicked();
 
-    void calculateInitFee();
-
     void on_tokenNameLineEdit_textEdited(const QString &arg1);
 
     void on_tokenSymbolLineEdit_textEdited(const QString &arg1);
@@ -47,8 +45,10 @@ private:
     int stepCount = 0;
     FeeChooseWidget* registerFeeWidget = NULL;
     QTimer* timerForRegister = NULL;
+    void calculateRegisterFee();
 
     FeeChooseWidget* initFeeWidget = NULL;
+    void calculateInitFee();
 
     QString intToPrecisionString(int precision);    //将 0-8 转换成1,10,... 100000000等格式
     QString addPrecisionString(QString supply, int precision);     //  比如 20000,2  转换成 2000000
