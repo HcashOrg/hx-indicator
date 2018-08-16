@@ -95,9 +95,9 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
             ui->voteStateTableWidget->setItem(i, 1, new QTableWidgetItem(tr("not voted")));
         }
 
-        tableWidgetSetItemZebraColor(ui->voteStateTableWidget);
     }
 
+    tableWidgetSetItemZebraColor(ui->voteStateTableWidget);
 
     QJsonObject object = QJsonDocument::fromJson(info.transactionStr.toLatin1()).object();
     switch (info.proposalOperationType)

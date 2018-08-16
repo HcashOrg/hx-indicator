@@ -328,9 +328,9 @@ void WithdrawConfirmPage::showCrosschainTransactions()
             ui->crosschainTransactionTableWidget->setCellWidget(i,6,toolButton2);
             connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,6));
 
-
-            tableWidgetSetItemZebraColor(ui->crosschainTransactionTableWidget);
         }
+
+        tableWidgetSetItemZebraColor(ui->crosschainTransactionTableWidget);
     }
     else if( currentType == 0)
     {
@@ -365,8 +365,9 @@ void WithdrawConfirmPage::showCrosschainTransactions()
             ui->crosschainTransactionTableWidget->setCellWidget(i,5,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,5));
 
-            tableWidgetSetItemZebraColor(ui->crosschainTransactionTableWidget);
         }
+
+        tableWidgetSetItemZebraColor(ui->crosschainTransactionTableWidget);
     }
     int page = (ui->crosschainTransactionTableWidget->rowCount()%ROWNUMBER==0 && ui->crosschainTransactionTableWidget->rowCount() != 0) ?
                 ui->crosschainTransactionTableWidget->rowCount()/ROWNUMBER : ui->crosschainTransactionTableWidget->rowCount()/ROWNUMBER+1;

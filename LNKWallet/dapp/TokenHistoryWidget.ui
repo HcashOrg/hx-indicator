@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ContractTokenPage</class>
- <widget class="QWidget" name="ContractTokenPage">
+ <class>TokenHistoryWidget</class>
+ <widget class="QWidget" name="TokenHistoryWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -35,28 +35,24 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>标准合约代币</string>
+    <string>合约代币交易历史</string>
    </property>
   </widget>
-  <widget class="QToolButton" name="createTokenBtn">
+  <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
     <rect>
-     <x>630</x>
+     <x>60</x>
      <y>110</y>
-     <width>80</width>
-     <height>18</height>
+     <width>120</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>微软雅黑</family>
      <weight>50</weight>
-     <italic>false</italic>
      <bold>false</bold>
     </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="focusPolicy">
     <enum>Qt::NoFocus</enum>
@@ -64,11 +60,35 @@
    <property name="styleSheet">
     <string notr="true"/>
    </property>
+  </widget>
+  <widget class="QLabel" name="collectStateLabel">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>130</y>
+     <width>300</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(192, 196, 212);}</string>
+   </property>
    <property name="text">
-    <string>创建合约代币</string>
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
    </property>
   </widget>
-  <widget class="QTableWidget" name="tokenTableWidget">
+  <widget class="QTableWidget" name="tokenRecordTableWidget">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -136,7 +156,7 @@
    </attribute>
    <column>
     <property name="text">
-     <string>代币</string>
+     <string>区块高度</string>
     </property>
     <property name="font">
      <font>
@@ -149,7 +169,7 @@
    </column>
    <column>
     <property name="text">
-     <string>合约地址</string>
+     <string>对方账户</string>
     </property>
     <property name="font">
      <font>
@@ -162,7 +182,12 @@
    </column>
    <column>
     <property name="text">
-     <string>余额</string>
+     <string>数量</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
     </property>
     <property name="textAlignment">
      <set>AlignCenter</set>
@@ -170,17 +195,38 @@
    </column>
    <column>
     <property name="text">
-     <string/>
+     <string>交易ID</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>类型</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
     </property>
    </column>
   </widget>
-  <widget class="QComboBox" name="accountComboBox">
+  <widget class="QComboBox" name="tokenComboBox">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>210</x>
      <y>110</y>
      <width>120</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -195,66 +241,6 @@
    </property>
    <property name="styleSheet">
     <string notr="true"/>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="addTokenBtn">
-   <property name="geometry">
-    <rect>
-     <x>530</x>
-     <y>110</y>
-     <width>80</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>添加合约代币</string>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="historyBtn">
-   <property name="geometry">
-    <rect>
-     <x>430</x>
-     <y>110</y>
-     <width>80</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>交易记录</string>
    </property>
   </widget>
  </widget>

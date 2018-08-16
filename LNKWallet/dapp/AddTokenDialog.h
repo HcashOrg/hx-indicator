@@ -24,6 +24,10 @@ private slots:
 
     void on_okBtn_clicked();
 
+    void on_cancelBtn_clicked();
+
+    void on_contractAddressLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::AddTokenDialog *ui;
 };

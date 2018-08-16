@@ -24,6 +24,10 @@ CreateTokenDialog::CreateTokenDialog(QWidget *parent) :
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
+    ui->registerBtn->setStyleSheet(OKBTN_STYLE);
+    ui->initBtn->setStyleSheet(OKBTN_STYLE);
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+
     QRegExp rx1("[a-zA-Z0-9]{0,20}");
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->tokenNameLineEdit->setValidator(pReg1);
@@ -60,7 +64,7 @@ void CreateTokenDialog::init()
     }
 
     QFileInfo fileInfo(QDir::currentPath() + "/contracts/token.lua.gpc");
-    qDebug() << fileInfo.exists();
+
     if(!fileInfo.exists())
     {
         return;
@@ -130,6 +134,13 @@ void CreateTokenDialog::jsonDataUpdated(QString id)
             });
             timerForRegister->start(5000);
 
+        }
+        else
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Registering contract failed!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
         return;
     }

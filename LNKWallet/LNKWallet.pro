@@ -170,7 +170,8 @@ SOURCES += main.cpp\
     dapp/ContractTokenPage.cpp \
     dapp/CreateTokenDialog.cpp \
     dapp/AddTokenDialog.cpp \
-    dapp/TokenTransferWidget.cpp
+    dapp/TokenTransferWidget.cpp \
+    dapp/TokenHistoryWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -313,7 +314,8 @@ HEADERS  += firstlogin.h \
     dapp/ContractTokenPage.h \
     dapp/CreateTokenDialog.h \
     dapp/AddTokenDialog.h \
-    dapp/TokenTransferWidget.h
+    dapp/TokenTransferWidget.h \
+    dapp/TokenHistoryWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -426,7 +428,8 @@ FORMS    += firstlogin.ui \
     dapp/ContractTokenPage.ui \
     dapp/CreateTokenDialog.ui \
     dapp/AddTokenDialog.ui \
-    dapp/TokenTransferWidget.ui
+    dapp/TokenTransferWidget.ui \
+    dapp/TokenHistoryWidget.ui
 
 win32{
     DISTFILES += logo.rc

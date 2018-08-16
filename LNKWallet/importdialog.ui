@@ -30,10 +30,10 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>331</x>
-      <y>153</y>
+      <x>330</x>
+      <y>175</y>
       <width>300</width>
-      <height>196</height>
+      <height>193</height>
      </rect>
     </property>
     <widget class="QLineEdit" name="privateKeyLineEdit">
@@ -177,7 +177,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
      <property name="geometry">
       <rect>
        <x>52</x>
-       <y>144</y>
+       <y>150</y>
        <width>92</width>
        <height>28</height>
       </rect>
@@ -201,7 +201,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
      <property name="geometry">
       <rect>
        <x>160</x>
-       <y>144</y>
+       <y>150</y>
        <width>92</width>
        <height>28</height>
       </rect>

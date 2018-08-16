@@ -7,6 +7,7 @@
 #include "ToolButtonWidget.h"
 #include "showcontentdialog.h"
 #include "TokenTransferWidget.h"
+#include "TokenHistoryWidget.h"
 
 ContractTokenPage::ContractTokenPage(QWidget *parent) :
     QWidget(parent),
@@ -37,6 +38,7 @@ ContractTokenPage::ContractTokenPage(QWidget *parent) :
 
     ui->addTokenBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->createTokenBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->historyBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     init();
 }
@@ -89,6 +91,8 @@ void ContractTokenPage::fetchTokensInfo()
         HXChain::getInstance()->postRPC( "ContractTokenPage-invoke_contract_offline-precision-" + contractId, toJsonFormat( "invoke_contract_offline",
                                                                                QJsonArray() << ui->accountComboBox->currentText() << contractId
                                                                                << "precision"  << ""));
+        HXChain::getInstance()->postRPC( "ContractTokenPage-get_contract_info-" + contractId, toJsonFormat( "get_contract_info",
+                                                                               QJsonArray() << contractId ));
     }
 
     HXChain::getInstance()->postRPC( "ContractTokenPage-fetchTokensInfo-finish", toJsonFormat( "fetchTokensInfo-finish",
@@ -144,10 +148,10 @@ void ContractTokenPage::showAccountTokens()
         toolButton->setText(ui->tokenTableWidget->item(i,3)->text());
         ui->tokenTableWidget->setCellWidget(i,3,toolButton);
         connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ContractTokenPage::on_tokenTableWidget_cellClicked,this,i,3));
-
-        tableWidgetSetItemZebraColor(ui->tokenTableWidget);
-
     }
+
+    tableWidgetSetItemZebraColor(ui->tokenTableWidget);
+
 }
 
 
@@ -196,6 +200,24 @@ void ContractTokenPage::jsonDataUpdated(QString id)
             QString precision = object.value("result").toString();
 
             contractTokenInfoMap[contractId].precision = precision;
+        }
+        return;
+    }
+
+    if( id.startsWith("ContractTokenPage-get_contract_info-"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        QString contractId = id.mid( QString("ContractTokenPage-get_contract_info-").size());
+
+        if(result.startsWith(QString("\"result\":")))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject object = parse_doucment.object().value("result").toObject();
+            contractTokenInfoMap[contractId].registeredBlock = object.value("registered_block").toInt();
+            contractTokenInfoMap[contractId].ownerAddress = object.value("owner_address").toString();
         }
         return;
     }
@@ -272,9 +294,9 @@ void ContractTokenPage::on_tokenTableWidget_cellClicked(int row, int column)
 
     if(column == 3)
     {
-        emit backBtnVisible(true);
-
         if( !ui->tokenTableWidget->item(row, 0))    return;
+
+        emit backBtnVisible(true);
         TokenTransferWidget* tokenTransferWidget = new TokenTransferWidget( ui->accountComboBox->currentText(),
                                                                             ui->tokenTableWidget->item(row,0)->text(), this);
         tokenTransferWidget->setAttribute(Qt::WA_DeleteOnClose);
@@ -282,4 +304,14 @@ void ContractTokenPage::on_tokenTableWidget_cellClicked(int row, int column)
         tokenTransferWidget->raise();
         return;
     }
+}
+
+void ContractTokenPage::on_historyBtn_clicked()
+{
+    emit backBtnVisible(true);
+    TokenHistoryWidget* tokenHistoryWidget = new TokenHistoryWidget(this);
+    tokenHistoryWidget->setAttribute(Qt::WA_DeleteOnClose);
+    tokenHistoryWidget->show();
+    tokenHistoryWidget->raise();
+    tokenHistoryWidget->setAccount(ui->accountComboBox->currentText());
 }

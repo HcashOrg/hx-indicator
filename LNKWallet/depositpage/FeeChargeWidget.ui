@@ -95,7 +95,7 @@
      <property name="font">
       <font>
        <family>Microsoft YaHei UI Light</family>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="text">
@@ -114,7 +114,7 @@
      <property name="font">
       <font>
        <family>Microsoft YaHei UI Light</family>
-       <pointsize>10</pointsize>
+       <pointsize>9</pointsize>
       </font>
      </property>
      <property name="text">
@@ -149,7 +149,7 @@
      <property name="font">
       <font>
        <family>Microsoft YaHei UI Light</family>
-       <pointsize>14</pointsize>
+       <pointsize>12</pointsize>
       </font>
      </property>
      <property name="text">

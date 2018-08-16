@@ -32,10 +32,10 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>171</y>
-      <width>500</width>
-      <height>200</height>
+      <x>290</x>
+      <y>176</y>
+      <width>380</width>
+      <height>190</height>
      </rect>
     </property>
     <property name="font">
@@ -81,10 +81,10 @@
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>473</x>
-       <y>9</y>
-       <width>18</width>
-       <height>18</height>
+       <x>367</x>
+       <y>5</y>
+       <width>7</width>
+       <height>7</height>
       </rect>
      </property>
      <property name="cursor">
@@ -103,11 +103,15 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>70</y>
+       <x>40</x>
+       <y>60</y>
        <width>100</width>
-       <height>20</height>
+       <height>16</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font: 11px &quot;微软雅黑&quot;;color: rgb(137, 129, 161);}
+</string>
      </property>
      <property name="text">
       <string>合约地址</string>
@@ -116,19 +120,19 @@
     <widget class="QLineEdit" name="contractAddressLineEdit">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>70</y>
+       <x>40</x>
+       <y>80</y>
        <width>300</width>
-       <height>20</height>
+       <height>24</height>
       </rect>
      </property>
     </widget>
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
       <rect>
-       <x>200</x>
-       <y>150</y>
-       <width>100</width>
+       <x>82</x>
+       <y>140</y>
+       <width>96</width>
        <height>30</height>
       </rect>
      </property>
@@ -152,6 +156,42 @@
      </property>
      <property name="text">
       <string>添加</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="cancelBtn">
+     <property name="geometry">
+      <rect>
+       <x>202</x>
+       <y>140</y>
+       <width>96</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>取消</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="tipLabel">
+     <property name="geometry">
+      <rect>
+       <x>45</x>
+       <y>110</y>
+       <width>261</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font: 11px &quot;微软雅黑&quot;;color: rgb(255,0,0);}
+</string>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </widget>

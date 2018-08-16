@@ -1232,6 +1232,8 @@ void Frame::showFeedPricePage()
 
 void Frame::showColdHotTransferPage()
 {
+    emit titleBackVisible(false);
+
     closeCurrentPage();
     coldHotTransferPage = new ColdHotTransferPage(centralWidget);
     coldHotTransferPage->setAttribute(Qt::WA_DeleteOnClose);
@@ -1241,6 +1243,8 @@ void Frame::showColdHotTransferPage()
 
 void Frame::showContractTokenPage()
 {
+    emit titleBackVisible(false);
+
     closeCurrentPage();
     contractTokenPage = new ContractTokenPage(centralWidget);
     connect(contractTokenPage,&ContractTokenPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);

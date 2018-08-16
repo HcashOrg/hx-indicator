@@ -125,8 +125,9 @@ void BonusPage::jsonDataUpdated(QString id)
                 ui->bonusTableWidget->setItem(i,2,new QTableWidgetItem(""));
             }
 
-            tableWidgetSetItemZebraColor(ui->bonusTableWidget);
         }
+        tableWidgetSetItemZebraColor(ui->bonusTableWidget);
+
         int page = (ui->bonusTableWidget->rowCount()%ROWNUMBER==0 && ui->bonusTableWidget->rowCount() != 0) ?
                     ui->bonusTableWidget->rowCount()/ROWNUMBER : ui->bonusTableWidget->rowCount()/ROWNUMBER+1;
         pageWidget->SetTotalPage(page);

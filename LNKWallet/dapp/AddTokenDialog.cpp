@@ -26,9 +26,15 @@ AddTokenDialog::AddTokenDialog(QWidget *parent) :
     ui->containerWidget->setObjectName("containerwidget");
     ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
-    QRegExp rx1("[a-zA-Z0-9]{0,36}");
+    ui->okBtn->setStyleSheet(OKBTN_STYLE);
+    ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
+    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+
+    QRegExp rx1(QString("[a-zA-Z0-9]{0,%1}").arg(QString(CONTRACT_ADDRESS_PREFIX).size() + 33));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->contractAddressLineEdit->setValidator(pReg1);
+
+    ui->contractAddressLineEdit->setFocus();
 }
 
 AddTokenDialog::~AddTokenDialog()
@@ -169,7 +175,26 @@ void AddTokenDialog::on_closeBtn_clicked()
 
 void AddTokenDialog::on_okBtn_clicked()
 {
-    HXChain::getInstance()->postRPC( "AddTokenDialog-get_contract_info", toJsonFormat( "get_contract_info",
-                                                                           QJsonArray() << ui->contractAddressLineEdit->text()));
+    if(ui->contractAddressLineEdit->text().isEmpty())   return;
 
+    if(checkAddress(ui->contractAddressLineEdit->text(), ContractAddress))
+    {
+        HXChain::getInstance()->postRPC( "AddTokenDialog-get_contract_info", toJsonFormat( "get_contract_info",
+                                                                               QJsonArray() << ui->contractAddressLineEdit->text()));
+    }
+    else
+    {
+        ui->tipLabel->setText(tr("This contract address is invalid"));
+    }
+
+}
+
+void AddTokenDialog::on_cancelBtn_clicked()
+{
+    close();
+}
+
+void AddTokenDialog::on_contractAddressLineEdit_textChanged(const QString &arg1)
+{
+    ui->tipLabel->clear();
 }

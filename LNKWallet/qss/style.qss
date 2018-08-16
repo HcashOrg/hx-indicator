@@ -27,9 +27,8 @@ QLineEdit:focus{border:1px solid rgb(84,61,137);}
 QLineEdit:disabled{color: rgb(151,151,151);}
 
 
-QSpinBox{background-color: rgb(32,36,54);color: rgb(192, 196, 212);border:1px solid rgb(28, 32, 46);
-padding: 0px 0px 0px 6px;}
-QSpinBox:focus{border:1px solid rgb(93,107,144);}
+QSpinBox{background: rgb(243,241,250);color: rgb(84,61,137);border:1px solid rgb(84,61,137);padding: 0px 0px 0px 6px;border-radius:4px;}
+QSpinBox:focus{border:1px solid rgb(84,61,137);}
 QSpinBox:disabled{background:transparent;color: rgb(83,90,109);border:1px solid rgb(83,90,109);}
 QSpinBox::up-button {background:transparent;padding:4px 0px 0px 0px;}
 QSpinBox::down-button {background:transparent;padding:0px 0px 5px 0px;}

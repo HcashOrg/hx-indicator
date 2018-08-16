@@ -15,6 +15,8 @@ struct ContractTokenInfo
     QString symbol;
     QString precision;
     QString supply;
+    int registeredBlock = 0;
+    QString ownerAddress;
 };
 
 struct TokenBalance
@@ -50,6 +52,8 @@ private slots:
     void on_addTokenBtn_clicked();
 
     void on_tokenTableWidget_cellClicked(int row, int column);
+
+    void on_historyBtn_clicked();
 
 private:
     Ui::ContractTokenPage *ui;

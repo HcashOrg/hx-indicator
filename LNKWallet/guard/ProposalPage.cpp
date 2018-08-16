@@ -191,10 +191,9 @@ void ProposalPage::showProposals()
                 toolButton2->setEnabled(false);
             }
         }
-
-
-        tableWidgetSetItemZebraColor(ui->proposalTableWidget);
     }
+
+    tableWidgetSetItemZebraColor(ui->proposalTableWidget);
 
     int page = (ui->proposalTableWidget->rowCount()%ROWNUMBER==0 && ui->proposalTableWidget->rowCount() != 0) ?
                 ui->proposalTableWidget->rowCount()/ROWNUMBER : ui->proposalTableWidget->rowCount()/ROWNUMBER+1;

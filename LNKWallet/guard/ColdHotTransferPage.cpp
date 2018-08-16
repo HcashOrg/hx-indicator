@@ -299,8 +299,9 @@ void ColdHotTransferPage::showColdHotTransactions()
             ui->coldHotTransactionTableWidget->setCellWidget(i,6,toolButton2);
             connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,6));
 
-            tableWidgetSetItemZebraColor(ui->coldHotTransactionTableWidget);
         }
+
+        tableWidgetSetItemZebraColor(ui->coldHotTransactionTableWidget);
     }
     else if(currentType == 0)
     {
@@ -334,9 +335,9 @@ void ColdHotTransferPage::showColdHotTransactions()
             toolButton->setText(ui->coldHotTransactionTableWidget->item(i,5)->text());
             ui->coldHotTransactionTableWidget->setCellWidget(i,5,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,5));
-
-            tableWidgetSetItemZebraColor(ui->coldHotTransactionTableWidget);
         }
+
+        tableWidgetSetItemZebraColor(ui->coldHotTransactionTableWidget);
     }
     int page = (ui->coldHotTransactionTableWidget->rowCount()%ROWNUMBER==0 && ui->coldHotTransactionTableWidget->rowCount() != 0) ?
                 ui->coldHotTransactionTableWidget->rowCount()/ROWNUMBER : ui->coldHotTransactionTableWidget->rowCount()/ROWNUMBER+1;

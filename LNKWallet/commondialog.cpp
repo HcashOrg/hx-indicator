@@ -82,8 +82,8 @@ void CommonDialog::adaptSize()
     int height = ui->textLabel->height();
     ui->okBtn->move(ui->okBtn->x(), 30 + height + 30);
     ui->cancelBtn->move(ui->cancelBtn->x(), 30 + height + 30);
-    ui->containerWidget->setGeometry( (960 - ui->containerWidget->width()) / 2, (580 - height - 120) / 2,
-                                      ui->containerWidget->width(), 30 + height + 30 + 60);
+    ui->containerWidget->setGeometry( (960 - ui->containerWidget->width()) / 2, (543 - height - 100) / 2,
+                                      ui->containerWidget->width(), 30 + height + 30 + 50);
 }
 
 bool CommonDialog::pop()
