@@ -33,8 +33,8 @@ TokenHistoryWidget::TokenHistoryWidget(ContractTokenPage *parent) :
 
     ui->tokenRecordTableWidget->setColumnWidth(0,120);
     ui->tokenRecordTableWidget->setColumnWidth(1,140);
-    ui->tokenRecordTableWidget->setColumnWidth(2,120);
-    ui->tokenRecordTableWidget->setColumnWidth(3,140);
+    ui->tokenRecordTableWidget->setColumnWidth(2,140);
+    ui->tokenRecordTableWidget->setColumnWidth(3,120);
     ui->tokenRecordTableWidget->setColumnWidth(4,120);
     ui->tokenRecordTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
@@ -141,53 +141,45 @@ void TokenHistoryWidget::showContractEvents()
 
     for(int i = 0; i < size; i++)
     {
+        int row = size - i - 1;
         ContractEvent event = vector.at(i);
-        ui->tokenRecordTableWidget->setItem(i, 0, new QTableWidgetItem(QString::number(event.block)));
-        ui->tokenRecordTableWidget->setItem(i, 3, new QTableWidgetItem(event.trxId));
+        ui->tokenRecordTableWidget->setItem(row, 0, new QTableWidgetItem(QString::number(event.block)));
+        ui->tokenRecordTableWidget->setItem(row, 1, new QTableWidgetItem(event.trxId));
 
-        if(event.eventName == "Inited")
-        {
-            ui->tokenRecordTableWidget->setItem(i, 1, new QTableWidgetItem("-"));
-            ui->tokenRecordTableWidget->setItem(i, 2, new QTableWidgetItem("+" + event.eventArg));
-            ui->tokenRecordTableWidget->item(i,2)->setTextColor(QColor(0,170,0));
-            ui->tokenRecordTableWidget->setItem(i, 4, new QTableWidgetItem(tr("initial allocation")));
-        }
-        else if(event.eventName == "Transfer")
-        {
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(event.eventArg.toLatin1());
-            QJsonObject argObject = parse_doucment.object();
-            QString toAddress = argObject.value("to").toString();
-            QString fromAddress = argObject.value("from").toString();
-            unsigned long long amount = jsonValueToULL( argObject.value("amount"));
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(event.eventArg.toLatin1());
+        QJsonObject argObject = parse_doucment.object();
+        QString toAddress = argObject.value("to").toString();
+        QString fromAddress = argObject.value("from").toString();
+        unsigned long long amount = jsonValueToULL( argObject.value("amount"));
+        QString memo = argObject.value("memo").toString();
 
-            if(toAddress == accountAddress)
+        ui->tokenRecordTableWidget->setItem(row, 4, new QTableWidgetItem(memo));
+
+        if(toAddress == accountAddress)
+        {
+            if(fromAddress == accountAddress)
             {
-                if(fromAddress == accountAddress)
-                {
-                    // 如果是自己转自己
-                    ui->tokenRecordTableWidget->setItem(i, 1, new QTableWidgetItem(accountAddress));
-                    ui->tokenRecordTableWidget->setItem(i, 2, new QTableWidgetItem(getBigNumberString(amount, tokenInfo.precision.size() - 1) ));
-                    ui->tokenRecordTableWidget->item(i,2)->setTextColor(QColor(202,135,0));
-                    ui->tokenRecordTableWidget->setItem(i, 4, new QTableWidgetItem(tr("transfer to self")));
-                }
-                else
-                {
-                    // 转入
-                    ui->tokenRecordTableWidget->setItem(i, 1, new QTableWidgetItem(fromAddress));
-                    ui->tokenRecordTableWidget->setItem(i, 2, new QTableWidgetItem( "+" + getBigNumberString(amount, tokenInfo.precision.size() - 1) ));
-                    ui->tokenRecordTableWidget->item(i,2)->setTextColor(QColor(0,170,0));
-                    ui->tokenRecordTableWidget->setItem(i, 4, new QTableWidgetItem(tr("transfer-in")));
-                }
+                // 如果是自己转自己
+                ui->tokenRecordTableWidget->setItem(row, 2, new QTableWidgetItem(accountAddress));
+                ui->tokenRecordTableWidget->setItem(row, 3, new QTableWidgetItem(getBigNumberString(amount, tokenInfo.precision.size() - 1) ));
+                ui->tokenRecordTableWidget->item(row,3)->setTextColor(QColor(202,135,0));
             }
             else
             {
-                // 转出
-                ui->tokenRecordTableWidget->setItem(i, 1, new QTableWidgetItem(toAddress));
-                ui->tokenRecordTableWidget->setItem(i, 2, new QTableWidgetItem( "-" + getBigNumberString(amount, tokenInfo.precision.size() - 1) ));
-                ui->tokenRecordTableWidget->item(i,2)->setTextColor(QColor(255,0,0));
-                ui->tokenRecordTableWidget->setItem(i, 4, new QTableWidgetItem(tr("transfer-out")));
+                // 转入
+                ui->tokenRecordTableWidget->setItem(row, 2, new QTableWidgetItem(fromAddress.isEmpty()?"-":fromAddress));
+                ui->tokenRecordTableWidget->setItem(row, 3, new QTableWidgetItem( "+" + getBigNumberString(amount, tokenInfo.precision.size() - 1) ));
+                ui->tokenRecordTableWidget->item(row,3)->setTextColor(QColor(0,170,0));
             }
         }
+        else
+        {
+            // 转出
+            ui->tokenRecordTableWidget->setItem(row, 2, new QTableWidgetItem(toAddress.isEmpty()?"-":fromAddress));
+            ui->tokenRecordTableWidget->setItem(row, 3, new QTableWidgetItem( "-" + getBigNumberString(amount, tokenInfo.precision.size() - 1) ));
+            ui->tokenRecordTableWidget->item(row,3)->setTextColor(QColor(255,0,0));
+        }
+
     }
 
     tableWidgetSetItemZebraColor(ui->tokenRecordTableWidget);
@@ -199,15 +191,16 @@ QVector<ContractEvent> TokenHistoryWidget::filterAccountContractEvents(QString a
     QVector<ContractEvent> result;
     foreach (ContractEvent event, vector)
     {
-        if(event.eventName == "Inited")
-        {
-            ContractTokenInfo tokenInfo = page->contractTokenInfoMap.value(contractId);
-            if(tokenInfo.ownerAddress == accountAddress)
-            {
-                result.append(event);
-            }
-        }
-        else if(event.eventName == "Transfer")
+//        if(event.eventName == "Inited")
+//        {
+//            ContractTokenInfo tokenInfo = page->contractTokenInfoMap.value(contractId);
+//            if(tokenInfo.ownerAddress == accountAddress)
+//            {
+//                result.append(event);
+//            }
+//        }
+//        else
+        if(event.eventName == "Transfer")
         {
             QJsonDocument parse_doucment = QJsonDocument::fromJson(event.eventArg.toLatin1());
             QJsonObject argObject = parse_doucment.object();
@@ -235,7 +228,7 @@ void TokenHistoryWidget::on_tokenComboBox_currentIndexChanged(const QString &arg
 
 void TokenHistoryWidget::on_tokenRecordTableWidget_cellClicked(int row, int column)
 {
-    if( column == 1 || column == 3 || column == 4)
+    if( column == 1 || column == 2 || column == 4)
     {
         if( !ui->tokenRecordTableWidget->item(row, column))    return;
 

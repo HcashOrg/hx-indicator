@@ -229,6 +229,8 @@ void CreateTokenDialog::on_closeBtn_clicked()
 
 void CreateTokenDialog::calculateRegisterFee()
 {
+    QFileInfo fileInfo(ui->gpcPathLineEdit->text());
+    if(!fileInfo.exists())  return;
     HXChain::getInstance()->postRPC("CreateTokenDialog-register_contract_testing",
                                     toJsonFormat( "register_contract_testing",
                                     QJsonArray() << ui->accountComboBox->currentText() << ui->gpcPathLineEdit->text()));

@@ -169,6 +169,19 @@
    </column>
    <column>
     <property name="text">
+     <string>交易ID</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+   </column>
+   <column>
+    <property name="text">
      <string>对方账户</string>
     </property>
     <property name="font">
@@ -195,20 +208,7 @@
    </column>
    <column>
     <property name="text">
-     <string>交易ID</string>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-     </font>
-    </property>
-    <property name="textAlignment">
-     <set>AlignCenter</set>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>类型</string>
+     <string>备注</string>
     </property>
     <property name="font">
      <font>
