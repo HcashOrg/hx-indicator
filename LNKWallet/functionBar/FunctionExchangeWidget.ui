@@ -37,7 +37,7 @@ font: bold 13px &quot;微软雅黑&quot;;
 padding-left: 15px;</string>
    </property>
    <property name="text">
-    <string>市场</string>
+    <string>兑换合约</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -77,6 +77,54 @@ padding-left: 15px;</string>
    </property>
    <property name="text">
     <string>我的挂单</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="contractTokenBtn">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>210</y>
+     <width>112</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>标准代币合约</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_normal_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>140</y>
+     <width>120</width>
+     <height>60</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;
+font: bold 14px &quot;微软雅黑&quot;;
+padding-left: 15px;</string>
+   </property>
+   <property name="text">
+    <string>DAPP</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
  </widget>

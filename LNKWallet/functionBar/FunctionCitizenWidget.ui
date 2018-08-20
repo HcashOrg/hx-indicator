@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FunctionDappWidget</class>
- <widget class="QWidget" name="FunctionDappWidget">
+ <class>FunctionCitizenWidget</class>
+ <widget class="QWidget" name="FunctionCitizenWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -37,13 +37,13 @@ font: bold 13px &quot;微软雅黑&quot;;
 padding-left: 15px;</string>
    </property>
    <property name="text">
-    <string>DAPP</string>
+    <string>Citizen账户</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QPushButton" name="contractTokenBtn">
+  <widget class="QPushButton" name="accountInfoBtn">
    <property name="geometry">
     <rect>
      <x>18</x>
@@ -58,7 +58,25 @@ padding-left: 15px;</string>
     </font>
    </property>
    <property name="text">
-    <string>标准合约代币</string>
+    <string>账户信息</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="proposalBtn">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>100</y>
+     <width>112</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>提案投票</string>
    </property>
   </widget>
  </widget>

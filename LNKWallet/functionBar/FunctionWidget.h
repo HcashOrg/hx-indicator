@@ -51,6 +51,7 @@ signals:
     void showBonusSignal();
     void showOnchainOrderSignal();
     void showMyOrderSignal();
+    void showContractTokenSignal();
     void showGuardAccountSignal();
     void showGuardIncomeSignal();
     void showAssetSignal();
@@ -59,7 +60,8 @@ signals:
     void showWithdrawConfirmSignal();
     void showFeedPriceSignal();
     void showColdHotTransferSignal();
-    void showContractTokenSignal();
+    void showCitizenAccountSignal();
+    void showCitizenProposalSignal();
 
 signals:
     void ShrinkSignal();

@@ -146,7 +146,7 @@
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QToolButton" name="saveBtn">
@@ -814,9 +814,9 @@ color:rgb(137,129,161);</string>
         <widget class="QLabel" name="tipLabel2">
          <property name="geometry">
           <rect>
-           <x>212</x>
+           <x>210</x>
            <y>161</y>
-           <width>111</width>
+           <width>110</width>
            <height>20</height>
           </rect>
          </property>
@@ -864,9 +864,9 @@ color:rgb(137,129,161);</string>
         <widget class="QLabel" name="tipLabel">
          <property name="geometry">
           <rect>
-           <x>202</x>
-           <y>106</y>
-           <width>121</width>
+           <x>210</x>
+           <y>108</y>
+           <width>110</width>
            <height>20</height>
           </rect>
          </property>

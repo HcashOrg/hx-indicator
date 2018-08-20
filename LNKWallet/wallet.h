@@ -104,11 +104,6 @@ struct WalletInfo
 //    QStringList activeMiners;
 };
 
-struct Miner
-{
-    QString name;
-    QString minerId;
-};
 
 typedef QMap<int,unsigned long long>  AssetBalanceMap;
 typedef QMap<QString,unsigned long long>     ExchangeContractBalances;
@@ -314,9 +309,6 @@ public:
 
     bool importedWalletNeedToAddTrackAddresses = false;     // 如果是导入的钱包 需要添加到trackaddress
 
-    QVector<Miner> minersVector;
-    QString getMinerNameFromId(QString _minerId);
-
     int lockMinutes;   // 自动锁定时间
     bool notProduce;   // 是否产块/记账
     bool minimizeToTray;  // 是否最小化到托盘
@@ -458,7 +450,8 @@ public:
 
     QMap<QString,MinerInfo>     minerMap;
     void fetchMiners();
-
+    QString getMinerNameFromId(QString _minerId);
+    QStringList getMyCitizens();
 
     QMap<QString,ProposalInfo>   proposalInfoMap;        // key是proposal id
     void fetchProposals();

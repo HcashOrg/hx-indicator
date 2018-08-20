@@ -47,6 +47,7 @@
 #include "guard/ColdHotTransferPage.h"
 #include "bonus/BonusPage.h"
 #include "dapp/ContractTokenPage.h"
+#include "citizen/CitizenAccountPage.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -77,6 +78,7 @@ Frame::Frame(): timer(NULL),
     feedPricePage(NULL),
     coldHotTransferPage(NULL),
     contractTokenPage(NULL),
+    citizenAccountPage(NULL),
     poundage(nullptr)
 {
 
@@ -365,6 +367,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showFeedPriceSignal,this,&Frame::showFeedPricePage);
     connect(functionBar,&FunctionWidget::showColdHotTransferSignal,this,&Frame::showColdHotTransferPage);
     connect(functionBar,&FunctionWidget::showContractTokenSignal,this,&Frame::showContractTokenPage);
+    connect(functionBar,&FunctionWidget::showCitizenAccountSignal,this,&Frame::showCitizenAccountPage);
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
@@ -760,6 +763,13 @@ void Frame::closeCurrentPage()
         {
             contractTokenPage->close();
             contractTokenPage = NULL;
+        }
+        break;
+    case 21:
+        if(citizenAccountPage)
+        {
+            citizenAccountPage->close();
+            citizenAccountPage = NULL;
         }
         break;
     default:
@@ -1253,6 +1263,17 @@ void Frame::showContractTokenPage()
     currentPageNum = 20;
 }
 
+void Frame::showCitizenAccountPage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    citizenAccountPage = new CitizenAccountPage(centralWidget);
+    citizenAccountPage->setAttribute(Qt::WA_DeleteOnClose);
+    citizenAccountPage->show();
+    currentPageNum = 21;
+}
+
 void Frame::showMultiSigTransactionPage(QString _multiSigAddress)
 {
     closeCurrentPage();
@@ -1591,36 +1612,6 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-list_miners")
-    {
-        QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
-
-        if(result.startsWith("\"result\":"))
-        {
-
-            result.prepend("{");
-            result.append("}");
-
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-            QJsonObject jsonObject = parse_doucment.object();
-            QJsonArray array = jsonObject.take("result").toArray();
-
-            HXChain::getInstance()->minersVector.clear();
-            foreach (QJsonValue v, array)
-            {
-                QJsonArray array2 = v.toArray();
-
-                Miner miner;
-                miner.name = array2.at(0).toString();
-                miner.minerId = array2.at(1).toString();
-                HXChain::getInstance()->minersVector.append(miner);
-            }
-        }
-
-        return;
-    }
-
     if( id == "id-list_guard_members")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
@@ -1744,7 +1735,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id == "id-list_miners")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-//        qDebug() << id << result;
+        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -1760,9 +1751,9 @@ void Frame::jsonDataUpdated(QString id)
             {
                 QJsonArray array2 = v.toArray();
                 QString account = array2.at(0).toString();
-                MinerInfo info;
-                info.minerId = array2.at(1).toString();
-                HXChain::getInstance()->minerMap.insert(account, info);
+//                MinerInfo info;
+//                info.minerId = array2.at(1).toString();
+//                HXChain::getInstance()->minerMap.insert(account, info);
 
                 HXChain::getInstance()->postRPC( "id-get_miner-" + account, toJsonFormat( "get_miner", QJsonArray() << account));
             }
@@ -1774,7 +1765,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id.startsWith("id-get_miner-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-//        qDebug() << id << result;
+        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -1787,15 +1778,22 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonObject object = jsonObject.value("result").toObject();
 
-            if(HXChain::getInstance()->minerMap.contains(account))
-            {
-                HXChain::getInstance()->minerMap[account].accountId     = object.value("miner_account").toString();
-                HXChain::getInstance()->minerMap[account].signingKey    = object.value("signing_key").toString();
-                HXChain::getInstance()->minerMap[account].totalMissed   = object.value("total_missed").toInt();
-                HXChain::getInstance()->minerMap[account].totalProduced = object.value("total_produced").toInt();
-                HXChain::getInstance()->minerMap[account].lastBlock     = object.value("last_confirmed_block_num").toInt();
-                HXChain::getInstance()->minerMap[account].participationRate = object.value("participation_rate").toDouble();
+            HXChain::getInstance()->minerMap[account].minerId       = object.value("id").toString();
+            HXChain::getInstance()->minerMap[account].accountId     = object.value("miner_account").toString();
+            HXChain::getInstance()->minerMap[account].signingKey    = object.value("signing_key").toString();
+            HXChain::getInstance()->minerMap[account].totalMissed   = object.value("total_missed").toInt();
+            HXChain::getInstance()->minerMap[account].totalProduced = object.value("total_produced").toInt();
+            HXChain::getInstance()->minerMap[account].lastBlock     = object.value("last_confirmed_block_num").toInt();
+            HXChain::getInstance()->minerMap[account].participationRate = object.value("participation_rate").toDouble();
 
+            HXChain::getInstance()->minerMap[account].lockBalances.clear();
+            foreach (QJsonValue v, object.value("lockbalance_total").toArray())
+            {
+                AssetAmount aa;
+                QJsonObject assetObject = v.toArray().at(1).toObject();
+                aa.amount = jsonValueToULL( assetObject.value("amount"));
+                aa.assetId = assetObject.value("asset_id").toString();
+                HXChain::getInstance()->minerMap[account].lockBalances += aa;
             }
         }
 
@@ -2130,14 +2128,14 @@ void Frame::init()
 {
     HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
-    HXChain::getInstance()->postRPC( "id-list_miners", toJsonFormat( "list_miners", QJsonArray() << "A" << "100"));
-
     //HXChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.195:5444") ));
 
     HXChain::getInstance()->fetchTransactions();
 
     HXChain::getInstance()->fetchFormalGuards();
     HXChain::getInstance()->fetchAllGuards();
+
+    HXChain::getInstance()->fetchMiners();
 }
 
 

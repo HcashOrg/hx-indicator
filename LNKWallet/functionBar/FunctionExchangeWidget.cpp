@@ -32,6 +32,7 @@ void FunctionExchangeWidget::InitWidget()
     InitStyle();
     ui->onchainOrderBtn->setCheckable(true);
     ui->myOrderBtn->setCheckable(true);
+    ui->contractTokenBtn->setCheckable(true);
 }
 
 void FunctionExchangeWidget::InitStyle()
@@ -44,15 +45,26 @@ void FunctionExchangeWidget::on_onchainOrderBtn_clicked()
 {
     ui->onchainOrderBtn->setChecked(true);
     ui->myOrderBtn->setChecked(false);
+    ui->contractTokenBtn->setChecked(false);
     emit showOnchainOrderSignal();
 }
 
 void FunctionExchangeWidget::on_myOrderBtn_clicked()
 {
     ui->onchainOrderBtn->setChecked(false);
-    ui->myOrderBtn->setChecked(true);
+    ui->myOrderBtn->setChecked(true);    
+    ui->contractTokenBtn->setChecked(false);
     emit showMyOrderSignal();
 }
+
+void FunctionExchangeWidget::on_contractTokenBtn_clicked()
+{
+    ui->onchainOrderBtn->setChecked(false);
+    ui->myOrderBtn->setChecked(false);
+    ui->contractTokenBtn->setChecked(true);
+    emit showContractTokenSignal();
+}
+
 
 void FunctionExchangeWidget::paintEvent(QPaintEvent *)
 {
@@ -68,4 +80,6 @@ void FunctionExchangeWidget::paintEvent(QPaintEvent *)
 
     painter.setPen(QColor(81,59,134));
     painter.drawLine(20,62,110,62);
+    painter.drawLine(20,202,110,202);
 }
+

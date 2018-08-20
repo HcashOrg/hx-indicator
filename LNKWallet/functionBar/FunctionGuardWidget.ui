@@ -37,7 +37,7 @@ font: bold 13px &quot;微软雅黑&quot;;
 padding-left: 15px;</string>
    </property>
    <property name="text">
-    <string>账户</string>
+    <string>Senator账户</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

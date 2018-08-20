@@ -166,12 +166,13 @@ SOURCES += main.cpp\
     guard/WithdrawInfoDialog.cpp \
     guard/ColdHotInfoDialog.cpp \
     bonus/BonusPage.cpp \
-    functionBar/FunctionDappWidget.cpp \
     dapp/ContractTokenPage.cpp \
     dapp/CreateTokenDialog.cpp \
     dapp/AddTokenDialog.cpp \
     dapp/TokenTransferWidget.cpp \
-    dapp/TokenHistoryWidget.cpp
+    dapp/TokenHistoryWidget.cpp \
+    functionBar/FunctionCitizenWidget.cpp \
+    citizen/CitizenAccountPage.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -310,12 +311,13 @@ HEADERS  += firstlogin.h \
     guard/WithdrawInfoDialog.h \
     guard/ColdHotInfoDialog.h \
     bonus/BonusPage.h \
-    functionBar/FunctionDappWidget.h \
     dapp/ContractTokenPage.h \
     dapp/CreateTokenDialog.h \
     dapp/AddTokenDialog.h \
     dapp/TokenTransferWidget.h \
-    dapp/TokenHistoryWidget.h
+    dapp/TokenHistoryWidget.h \
+    functionBar/FunctionCitizenWidget.h \
+    citizen/CitizenAccountPage.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -424,12 +426,13 @@ FORMS    += firstlogin.ui \
     guard/WithdrawInfoDialog.ui \
     guard/ColdHotInfoDialog.ui \
     bonus/BonusPage.ui \
-    functionBar/FunctionDappWidget.ui \
     dapp/ContractTokenPage.ui \
     dapp/CreateTokenDialog.ui \
     dapp/AddTokenDialog.ui \
     dapp/TokenTransferWidget.ui \
-    dapp/TokenHistoryWidget.ui
+    dapp/TokenHistoryWidget.ui \
+    functionBar/FunctionCitizenWidget.ui \
+    citizen/CitizenAccountPage.ui
 
 win32{
     DISTFILES += logo.rc

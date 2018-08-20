@@ -8,6 +8,7 @@
 #define TRANSACTION_TYPE_UNBIND_TUNNEL          11      // 解绑tunnel地址
 #define TRANSACTION_TYPE_UPDATE_ASSET_PK        12      // guard更新冷热钱包多签地址私钥
 #define TRANSACTION_TYPE_FEED_PRICE             23      // 喂价
+#define TRANSACTION_TYPE_CREATE_MINER           24      // 成为citizen
 #define TRANSACTION_TYPE_SPONSOR_PROPOSAL       28      // 发起提案
 #define TRANSACTION_TYPE_PROPOSAL_APPROVE       29      // 提案投票
 #define TRANSACTION_TYPE_CREATE_GUARD           35      // 创建guard

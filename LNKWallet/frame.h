@@ -48,6 +48,7 @@ class WithdrawConfirmPage;
 class FeedPricePage;
 class ColdHotTransferPage;
 class ContractTokenPage;
+class CitizenAccountPage;
 
 class CrossCapitalMark;
 class CustomShadowEffect;
@@ -114,6 +115,8 @@ private slots:
     void showFeedPricePage();
     void showColdHotTransferPage();
     void showContractTokenPage();
+    void showCitizenAccountPage();
+
     void showMultiSigTransactionPage(QString _multiSigAddress);
     void showWaittingForSyncWidget();
     void showNewOrImportWalletWidget();
@@ -153,6 +156,7 @@ private:
     FeedPricePage*      feedPricePage;
     ColdHotTransferPage* coldHotTransferPage;
     ContractTokenPage*  contractTokenPage;
+    CitizenAccountPage* citizenAccountPage;
 
     BottomBar* bottomBar;
     QWidget* centralWidget;
@@ -167,7 +171,7 @@ private:
                          //   6: onchainOrderPage   7:minerPage   8: assetPage     9: multiSigPage   10: multiSigTransactionPage
                          //  11: poundage   12: guardKeyManagePage  13: proposalPage    14: withdrawConfirmPage  15: feedPricePage
                         //   16: coldHotTransferPage    17: guardAccountPage    18: guardIncomePage     19: bonusPage
-                        //   20: contractTokenPage
+                        //   20: contractTokenPage  21: citizenAccountPage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;
     void createTrayIconActions();

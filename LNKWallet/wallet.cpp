@@ -241,16 +241,32 @@ void HXChain::ShowBubbleMessage(const QString &title, const QString &context, in
 
 QString HXChain::getMinerNameFromId(QString _minerId)
 {
-    QString name;
-    foreach (Miner m, minersVector)
+    QString result;
+    foreach (QString key, minerMap.keys())
     {
-        if(m.minerId == _minerId)
+        if(minerMap.value(key).minerId == _minerId)
         {
-            name = m.name;
+            result = key;
+            break;
         }
     }
 
-    return name;
+    return result;
+}
+
+QStringList HXChain::getMyCitizens()
+{
+    QStringList result;
+    QStringList citizens = minerMap.keys();
+    foreach (QString key, accountInfoMap.keys())
+    {
+        if(citizens.contains(key))
+        {
+            result += key;
+        }
+    }
+qDebug() << "cccccccccccccc " << citizens << result;
+    return result;
 }
 
 QString HXChain::currentContractFee()
@@ -770,6 +786,14 @@ void HXChain::parseTransaction(QString result)
         transactionDB.addAccountTransactionId(addr, typeId);
     }
         break;
+    case TRANSACTION_TYPE_CREATE_MINER:
+    {
+        // 成为citizen
+        QString addr = operationObject.take("miner_address").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
     case TRANSACTION_TYPE_SPONSOR_PROPOSAL:
     {
         // 发起提案
@@ -1015,7 +1039,7 @@ QString HXChain::guardAddressToName(QString guardAddress)
 
 void HXChain::fetchMiners()
 {
-    postRPC( "id-list_miners", toJsonFormat( "list_miners", QJsonArray() << "A" << 100));
+    postRPC( "id-list_miners", toJsonFormat( "list_miners", QJsonArray() << "A" << 1000));
 }
 
 void HXChain::fetchProposals()

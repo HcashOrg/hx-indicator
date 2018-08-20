@@ -54,13 +54,7 @@ void LockToMinerDialog::init()
 {
     ui->accountNameLabel->setText(m_accountName);
 
-    QStringList miners;
-    foreach (Miner m, HXChain::getInstance()->minersVector)
-    {
-        miners += m.name;
-    }
-
-    ui->minerComboBox->addItems(miners);
+    ui->minerComboBox->addItems(HXChain::getInstance()->minerMap.keys());
 
     QStringList keys = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString key, keys)

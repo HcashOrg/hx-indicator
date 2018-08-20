@@ -7,7 +7,7 @@
 #include "functionBar/FunctionAdvanceWidget.h"
 #include "functionBar/FunctionExchangeWidget.h"
 #include "functionBar/FunctionGuardWidget.h"
-#include "functionBar/FunctionDappWidget.h"
+#include "functionBar/FunctionCitizenWidget.h"
 
 #include "setdialog.h"
 #include "consoledialog.h"
@@ -21,7 +21,7 @@ public:
         ,advanceBar(new FunctionAdvanceWidget())
         ,exchangeBar(new FunctionExchangeWidget())
         ,guardBar(new FunctionGuardWidget())
-        ,dappBar(new FunctionDappWidget())
+        ,citizenBar(new FunctionCitizenWidget())
         ,contextMenu(new QMenu())
     {
 
@@ -31,7 +31,7 @@ public:
     FunctionAdvanceWidget *advanceBar;
     FunctionExchangeWidget *exchangeBar;
     FunctionGuardWidget   *guardBar;
-    FunctionDappWidget      *dappBar;
+    FunctionCitizenWidget      *citizenBar;
     QMenu *contextMenu;
 };
 
@@ -57,7 +57,7 @@ void FunctionWidget::retranslator()
     _p->advanceBar->retranslator();
     _p->exchangeBar->retranslator();
     _p->guardBar->retranslator();
-    _p->dappBar->retranslator();
+    _p->citizenBar->retranslator();
 }
 
 void FunctionWidget::contactShowTransferPageSlots()
@@ -136,7 +136,7 @@ void FunctionWidget::ShowGuardWidgetSlots()
 
 void FunctionWidget::ShowDappWidgetSlots()
 {
-    ui->stackedWidget->setCurrentWidget(_p->dappBar);
+    ui->stackedWidget->setCurrentWidget(_p->citizenBar);
 
     emit showDappSignal();
 
@@ -250,7 +250,7 @@ void FunctionWidget::InitWidget()
     ui->stackedWidget->addWidget(_p->advanceBar);
     ui->stackedWidget->addWidget(_p->exchangeBar);
     ui->stackedWidget->addWidget(_p->guardBar);
-    ui->stackedWidget->addWidget(_p->dappBar);
+    ui->stackedWidget->addWidget(_p->citizenBar);
 
     //链接信号槽
     connect(ui->toolButton_contact,&QToolButton::clicked,this,&FunctionWidget::ShowContactWidgetSlots);
@@ -272,6 +272,7 @@ void FunctionWidget::InitWidget()
 
     connect(_p->exchangeBar,&FunctionExchangeWidget::showOnchainOrderSignal,this,&FunctionWidget::showOnchainOrderSignal);
     connect(_p->exchangeBar,&FunctionExchangeWidget::showMyOrderSignal,this,&FunctionWidget::showMyOrderSignal);
+    connect(_p->exchangeBar,&FunctionExchangeWidget::showContractTokenSignal,this,&FunctionWidget::showContractTokenSignal);
 
     connect(_p->guardBar,&FunctionGuardWidget::showGuardAccountSignal,this,&FunctionWidget::showGuardAccountSignal);
     connect(_p->guardBar,&FunctionGuardWidget::showGuardIncomeSignal,this,&FunctionWidget::showGuardIncomeSignal);
@@ -282,14 +283,15 @@ void FunctionWidget::InitWidget()
     connect(_p->guardBar,&FunctionGuardWidget::showFeedPriceSignal,this,&FunctionWidget::showFeedPriceSignal);
     connect(_p->guardBar,&FunctionGuardWidget::showColdHotTransferSignal,this,&FunctionWidget::showColdHotTransferSignal);
 
-    connect(_p->dappBar,&FunctionDappWidget::showContractTokenSignal,this,&FunctionWidget::showContractTokenSignal);
+    connect(_p->citizenBar,&FunctionCitizenWidget::showCitizenAccountSignal,this,&FunctionWidget::showCitizenAccountSignal);
+    connect(_p->citizenBar,&FunctionCitizenWidget::showCitizenProposalSignal,this,&FunctionWidget::showCitizenProposalSignal);
 
     //链接二级菜单默认单击情况
     connect(this,&FunctionWidget::AccountDefaultSignal,_p->accountBar,&FunctionAccountWidget::DefaultShow);
     connect(this,&FunctionWidget::AdvanceDefaultSignal,_p->advanceBar,&FunctionAdvanceWidget::DefaultShow);
     connect(this,&FunctionWidget::ExchangeDefaultSignal,_p->exchangeBar,&FunctionExchangeWidget::DefaultShow);
     connect(this,&FunctionWidget::GuardDefaultSignal,_p->guardBar,&FunctionGuardWidget::DefaultShow);
-    connect(this,&FunctionWidget::DappDefaultSignal,_p->dappBar,&FunctionDappWidget::DefaultShow);
+    connect(this,&FunctionWidget::DappDefaultSignal,_p->citizenBar,&FunctionCitizenWidget::DefaultShow);
 //    ui->toolButton_account->installEventFilter(this);
 //    ui->toolButton_advanced->installEventFilter(this);
 //    ui->toolButton_contact->installEventFilter(this);
