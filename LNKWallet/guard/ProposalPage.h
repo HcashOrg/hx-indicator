@@ -20,8 +20,6 @@ public:
 
     void init();
 
-    void showProposals();
-
     void refresh();
 
 private slots:
@@ -36,6 +34,8 @@ private slots:
     void pageChangeSlot(unsigned int page);
 private:
     Ui::ProposalPage *ui;
+
+    void showProposals();
 
     void paintEvent(QPaintEvent*);
     PageScrollWidget *pageWidget;

@@ -36,8 +36,24 @@ ProposalDetailDialog::ProposalDetailDialog(QWidget *parent) :
     ui->voteStateTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->voteStateTableWidget->setColumnWidth(0,300);
-    ui->voteStateTableWidget->setColumnWidth(1,75);
-    ui->voteStateTableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->voteStateTableWidget->setColumnWidth(1,80);
+
+    ui->senatorLockBalanceTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+    ui->senatorLockBalanceTableWidget->installEventFilter(this);
+    ui->senatorLockBalanceTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->senatorLockBalanceTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->senatorLockBalanceTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->senatorLockBalanceTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->senatorLockBalanceTableWidget->setMouseTracking(true);
+    ui->senatorLockBalanceTableWidget->setShowGrid(false);//隐藏表格线
+
+    ui->senatorLockBalanceTableWidget->horizontalHeader()->setSectionsClickable(true);
+//    ui->senatorLockBalanceTableWidget->horizontalHeader()->setFixedHeight(40);
+    ui->senatorLockBalanceTableWidget->horizontalHeader()->setVisible(true);
+    ui->senatorLockBalanceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+
+    ui->senatorLockBalanceTableWidget->setColumnWidth(0,190);
+    ui->senatorLockBalanceTableWidget->setColumnWidth(1,190);
 
     ui->stackedWidget->setCurrentIndex(0);
     ui->typeStackedWidget->setCurrentIndex(0);
@@ -63,7 +79,19 @@ void ProposalDetailDialog::pop()
 
 void ProposalDetailDialog::setProposal(QString _proposalId)
 {
-    ProposalInfo info = HXChain::getInstance()->proposalInfoMap.value(_proposalId);
+    ProposalInfo info;
+    if(HXChain::getInstance()->senatorProposalInfoMap.contains(_proposalId))
+    {
+        info = HXChain::getInstance()->senatorProposalInfoMap.value(_proposalId);
+    }
+    else if(HXChain::getInstance()->citizenProposalInfoMap.contains(_proposalId))
+    {
+        info = HXChain::getInstance()->citizenProposalInfoMap.value(_proposalId);
+    }
+    else
+    {
+        return;
+    }
 
     ui->proposalIdLabel->setText(info.proposalId);
     ui->proposerIdLabel->setText(info.proposer);
@@ -182,9 +210,51 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         ui->contractTransferFeeLabel->setText( getBigNumberString(feeRate, ASSET_PRECISION));
     }
         break;
+    case TRANSACTION_TYPE_FORMAL_GUARD:
+    {
+        ui->typeLabel->setText(tr("set senator formal/informal"));
+        ui->typeStackedWidget->setCurrentIndex(8);
+
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        ui->senatorAddressLabel->setText( operationObject.value("owner_addr").toString());
+        ui->isFormalLabel->setText( operationObject.value("formal").toBool()?"true":"false");
+    }
+        break;
+    case TRANSACTION_TYPE_CROSSCHAIN_FEE:
+    {
+        ui->typeLabel->setText(tr("set crosschain fee"));
+        ui->typeStackedWidget->setCurrentIndex(9);
+
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        QString assetSymbol = operationObject.value("asset_symbol").toString();
+        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(assetSymbol));
+        ui->coinTypeLabel->setText( assetSymbol);
+        ui->crosschainFeeLabel->setText( getBigNumberString( jsonValueToULL(operationObject.value("crosschain_fee")), assetInfo.precision));
+    }
+        break;
+    case TRANSACTION_TYPE_SET_LOCKBALANCE:
+    {
+        ui->typeLabel->setText(tr("set locked balance of senator"));
+        ui->typeStackedWidget->setCurrentIndex(10);
+
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        QJsonArray lockBalanceArray = operationObject.value("lockbalance").toArray();
+        int size = lockBalanceArray.size();
+        ui->senatorLockBalanceTableWidget->setRowCount(size);
+        for(int i = 0; i < size; i++)
+        {
+            QJsonObject assetObject = lockBalanceArray.at(i).toArray().at(1).toObject();
+            QString assetId = assetObject.value("asset_id").toString();
+            AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
+            ui->senatorLockBalanceTableWidget->setItem(i, 0, new QTableWidgetItem( assetInfo.symbol));
+            ui->senatorLockBalanceTableWidget->setItem(i, 1, new QTableWidgetItem( getBigNumberString( jsonValueToULL(assetObject.value("amount")), assetInfo.precision)) );
+        }
+        tableWidgetSetItemZebraColor(ui->senatorLockBalanceTableWidget);
+    }
+        break;
     default:
         ui->typeLabel->setText(tr("unknown(%1)").arg(info.proposalOperationType));
-        ui->typeStackedWidget->setCurrentIndex(8);
+        ui->typeStackedWidget->setCurrentIndex(11);
         break;
     }
 }

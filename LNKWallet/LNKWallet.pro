@@ -172,7 +172,8 @@ SOURCES += main.cpp\
     dapp/TokenTransferWidget.cpp \
     dapp/TokenHistoryWidget.cpp \
     functionBar/FunctionCitizenWidget.cpp \
-    citizen/CitizenAccountPage.cpp
+    citizen/CitizenAccountPage.cpp \
+    citizen/CitizenProposalPage.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -317,7 +318,8 @@ HEADERS  += firstlogin.h \
     dapp/TokenTransferWidget.h \
     dapp/TokenHistoryWidget.h \
     functionBar/FunctionCitizenWidget.h \
-    citizen/CitizenAccountPage.h
+    citizen/CitizenAccountPage.h \
+    citizen/CitizenProposalPage.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -432,7 +434,8 @@ FORMS    += firstlogin.ui \
     dapp/TokenTransferWidget.ui \
     dapp/TokenHistoryWidget.ui \
     functionBar/FunctionCitizenWidget.ui \
-    citizen/CitizenAccountPage.ui
+    citizen/CitizenAccountPage.ui \
+    citizen/CitizenProposalPage.ui
 
 win32{
     DISTFILES += logo.rc

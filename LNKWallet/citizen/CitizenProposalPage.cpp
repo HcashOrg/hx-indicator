@@ -1,17 +1,17 @@
-#include "ProposalPage.h"
-#include "ui_ProposalPage.h"
+#include "CitizenProposalPage.h"
+#include "ui_CitizenProposalPage.h"
 
 #include "wallet.h"
 #include "ToolButtonWidget.h"
 #include "commondialog.h"
 #include "dialog/TransactionResultDialog.h"
 #include "dialog/ErrorResultDialog.h"
-#include "ProposalDetailDialog.h"
+#include "guard/ProposalDetailDialog.h"
+#include "guard/ProposalPage.h"
 
-static const int ROWNUMBER = 7;
-ProposalPage::ProposalPage(QWidget *parent) :
+CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ProposalPage)
+    ui(new Ui::CitizenProposalPage)
 {
     ui->setupUi(this);
 
@@ -39,24 +39,24 @@ ProposalPage::ProposalPage(QWidget *parent) :
     ui->proposalTableWidget->setColumnWidth(6,80);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
-    pageWidget = new PageScrollWidget();
-    ui->stackedWidget->addWidget(pageWidget);
-    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ProposalPage::pageChangeSlot);
+//    pageWidget = new PageScrollWidget();
+//    ui->stackedWidget->addWidget(pageWidget);
+//    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ProposalPage::pageChangeSlot);
 
-    blankWidget = new BlankDefaultWidget(ui->proposalTableWidget);
-    blankWidget->setTextTip(tr("There are no proposals currently!"));
+//    blankWidget = new BlankDefaultWidget(ui->proposalTableWidget);
+//    blankWidget->setTextTip(tr("There are no proposals currently!"));
     init();
 }
 
-ProposalPage::~ProposalPage()
+CitizenProposalPage::~CitizenProposalPage()
 {
     delete ui;
 }
 
-void ProposalPage::init()
+void CitizenProposalPage::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyCitizens();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
@@ -73,7 +73,7 @@ void ProposalPage::init()
 
         QLabel* label = new QLabel(this);
         label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
-        label->setText(tr("There are no senator accounts in the wallet."));
+        label->setText(tr("There are no citizen accounts in the wallet."));
     }
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->proposalTableWidget);
@@ -81,9 +81,45 @@ void ProposalPage::init()
     showProposals();
 }
 
-void ProposalPage::showProposals()
+void CitizenProposalPage::refresh()
 {
-    QStringList keys = HXChain::getInstance()->senatorProposalInfoMap.keys();
+    showProposals();
+}
+
+void CitizenProposalPage::jsonDataUpdated(QString id)
+{
+    if( id == "id-approve_proposal")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result.startsWith("\"result\":{"))             // 成功
+        {
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of voting for the proposal has been sent,please wait for confirmation"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
+        }
+        else
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Failed!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
+        }
+        return;
+    }
+
+}
+
+void CitizenProposalPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
+{
+
+}
+
+void CitizenProposalPage::showProposals()
+{
+    QStringList keys = HXChain::getInstance()->citizenProposalInfoMap.keys();
 
     int size = keys.size();
     ui->proposalTableWidget->setRowCount(0);
@@ -93,7 +129,7 @@ void ProposalPage::showProposals()
     {
         ui->proposalTableWidget->setRowHeight(i,40);
 
-        ProposalInfo info = HXChain::getInstance()->senatorProposalInfoMap.value(keys.at(i));
+        ProposalInfo info = HXChain::getInstance()->citizenProposalInfoMap.value(keys.at(i));
 
         ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(info.expirationTime.replace("T","\n")));
         ui->proposalTableWidget->item(i,0)->setData(Qt::UserRole,info.proposalId);
@@ -101,37 +137,17 @@ void ProposalPage::showProposals()
         ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(HXChain::getInstance()->guardAccountIdToName(info.proposer)));
 
         QString typeStr;
-        if(info.proposalOperationType == TRANSACTION_TYPE_COLDHOT)
+        if(info.proposalOperationType ==  TRANSACTION_TYPE_FORMAL_GUARD)
         {
-            typeStr = tr("cold-hot trx");
+            typeStr = tr("set senator formal/informal");
         }
-        else if(info.proposalOperationType == TRANSACTION_TYPE_CHANGE_ASSET_ACCOUNT)
+        else if(info.proposalOperationType == TRANSACTION_TYPE_CROSSCHAIN_FEE)
         {
-            typeStr = tr("update multisig");
+            typeStr = tr("set crosschain fee");
         }
-        else if(info.proposalOperationType == TRANSACTION_TYPE_SET_PUBLISHER)
+        else if(info.proposalOperationType == TRANSACTION_TYPE_SET_LOCKBALANCE)
         {
-            typeStr = tr("set price feeder");
-        }
-        else if(info.proposalOperationType == TRANSACTION_TYPE_COLDHOT_CANCEL)
-        {
-            typeStr = tr("cancel cold-hot trx");
-        }
-        else if(info.proposalOperationType == TRANSACTION_TYPE_WITHDRAW_CANCEL)
-        {
-            typeStr = tr("cancel withdraw trx");
-        }
-        else if(info.proposalOperationType == TRANSACTION_TYPE_CREATE_GUARD)
-        {
-            typeStr = tr("create senator");
-        }
-        else if(info.proposalOperationType == TRANSACTION_TYPE_RESIGN_GUARD)
-        {
-            typeStr = tr("resign senator");
-        }
-        else if(info.proposalOperationType == TRANSACTION_TYPE_PROPOSAL_CONTRACT_TRANSFER_FEE)
-        {
-            typeStr = tr("set contract transfer fee");
+            typeStr = tr("set locked balance of senator");
         }
         else
         {
@@ -147,7 +163,7 @@ void ProposalPage::showProposals()
         QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
         if(address.isEmpty())
         {
-            ui->proposalTableWidget->setItem(i,4,new QTableWidgetItem(tr("no senator")));
+            ui->proposalTableWidget->setItem(i,4,new QTableWidgetItem(tr("no citizen")));
         }
         else if(info.approvedKeys.contains(address))
         {
@@ -174,12 +190,12 @@ void ProposalPage::showProposals()
             ToolButtonWidget *toolButton = new ToolButtonWidget();
             toolButton->setText(ui->proposalTableWidget->item(i,5)->text());
             ui->proposalTableWidget->setCellWidget(i,5,toolButton);
-            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ProposalPage::on_proposalTableWidget_cellClicked,this,i,5));
+            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,5));
 
             ToolButtonWidget *toolButton2 = new ToolButtonWidget();
             toolButton2->setText(ui->proposalTableWidget->item(i,6)->text());
             ui->proposalTableWidget->setCellWidget(i,6,toolButton2);
-            connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&ProposalPage::on_proposalTableWidget_cellClicked,this,i,6));
+            connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,6));
 
             if(info.approvedKeys.contains(address))
             {
@@ -195,48 +211,28 @@ void ProposalPage::showProposals()
 
     tableWidgetSetItemZebraColor(ui->proposalTableWidget);
 
-    int page = (ui->proposalTableWidget->rowCount()%ROWNUMBER==0 && ui->proposalTableWidget->rowCount() != 0) ?
-                ui->proposalTableWidget->rowCount()/ROWNUMBER : ui->proposalTableWidget->rowCount()/ROWNUMBER+1;
-    pageWidget->SetTotalPage(page);
-    pageWidget->setShowTip(ui->proposalTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
 
-    pageWidget->setVisible(0 != ui->proposalTableWidget->rowCount());
-    blankWidget->setVisible(ui->proposalTableWidget->rowCount() == 0);
 }
 
-void ProposalPage::refresh()
+void CitizenProposalPage::paintEvent(QPaintEvent *)
 {
-    showProposals();
+    QPainter painter(this);
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
+
+    painter.drawRect(rect());
 }
 
-void ProposalPage::jsonDataUpdated(QString id)
+void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column)
 {
-    if( id == "id-approve_proposal")
+    if(column == 2)
     {
-        QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
-
-        if( result.startsWith("\"result\":{"))             // 成功
-        {
-            TransactionResultDialog transactionResultDialog;
-            transactionResultDialog.setInfoText(tr("Transaction of voting for the proposal has been sent,please wait for confirmation"));
-            transactionResultDialog.setDetailText(result);
-            transactionResultDialog.pop();
-        }
-        else
-        {
-            ErrorResultDialog errorResultDialog;
-            errorResultDialog.setInfoText(tr("Failed!"));
-            errorResultDialog.setDetailText(result);
-            errorResultDialog.pop();
-        }
+        ProposalDetailDialog proposalDetailDialog;
+        proposalDetailDialog.setProposal(ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString());
+        proposalDetailDialog.pop();
         return;
     }
-}
 
-void ProposalPage::on_proposalTableWidget_cellClicked(int row, int column)
-{
     if(column == 5)
     {
         CommonDialog commonDialog(CommonDialog::YesOrNo);
@@ -277,88 +273,3 @@ void ProposalPage::on_proposalTableWidget_cellClicked(int row, int column)
         return;
     }
 }
-
-void ProposalPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
-{
-    showProposals();
-}
-
-void ProposalPage::on_proposalTableWidget_cellPressed(int row, int column)
-{
-    if(column == 2)
-    {
-        ProposalDetailDialog proposalDetailDialog;
-        proposalDetailDialog.setProposal(ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString());
-        proposalDetailDialog.pop();
-        return;
-    }
-}
-
-void ProposalPage::pageChangeSlot(unsigned int page)
-{
-    for(int i = 0;i < ui->proposalTableWidget->rowCount();++i)
-    {
-        if(i < page*ROWNUMBER)
-        {
-            ui->proposalTableWidget->setRowHidden(i,true);
-        }
-        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
-        {
-            ui->proposalTableWidget->setRowHidden(i,false);
-        }
-        else
-        {
-            ui->proposalTableWidget->setRowHidden(i,true);
-        }
-    }
-}
-
-void ProposalPage::paintEvent(QPaintEvent *)
-{
-    QPainter painter(this);
-    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
-
-    painter.drawRect(rect());
-}
-
-VoteStateLabel::VoteStateLabel(QWidget *parent)
-{
-    setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-}
-
-VoteStateLabel::~VoteStateLabel()
-{
-
-}
-
-void VoteStateLabel::setVoteNum(int approve, int disapprove, int total)
-{
-    QString str;
-    if( 3 * disapprove >= total )
-    {
-        str = QString("<body><font style=\"font-size:12px\" color=#ff0000>%1("
-                      "<font style=\"font-size:12px\" color=#00ff00>%2</font>"
-                      "/"
-                      "<font style=\"font-size:12px\" color=#ff0000>%3</font>"
-                      "/"
-                      "%4"
-                      ")</font></body>")
-                .arg(tr("not passed")).arg(approve).arg(disapprove).arg(total);
-    }
-    else
-    {
-        str = QString("<body><font style=\"font-size:12px\" color=#ff8400>%1</font>("
-                      "<font style=\"font-size:12px\" color=#00ff00>%2</font>"
-                      "/"
-                      "<font style=\"font-size:12px\" color=#ff0000>%3</font>"
-                      "/"
-                      "%4"
-                      ")</body>")
-                .arg(tr("voting")).arg(approve).arg(disapprove).arg(total);
-    }
-
-    setText(str);
-}
-
-

@@ -2,6 +2,7 @@
 #include "ui_CitizenAccountPage.h"
 
 #include "wallet.h"
+#include "control/AssetIconItem.h"
 
 CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
     QWidget(parent),
@@ -22,8 +23,8 @@ CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
     ui->lockBalanceTableWidget->horizontalHeader()->setVisible(true);
     ui->lockBalanceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->lockBalanceTableWidget->setColumnWidth(0,300);
-    ui->lockBalanceTableWidget->setColumnWidth(1,330);
+    ui->lockBalanceTableWidget->setColumnWidth(0,140);
+    ui->lockBalanceTableWidget->setColumnWidth(1,490);
     ui->lockBalanceTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     init();
@@ -81,7 +82,14 @@ void CitizenAccountPage::showLockBalance()
         AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(aa.assetId);
         ui->lockBalanceTableWidget->setItem( i, 0, new QTableWidgetItem( assetInfo.symbol));
         ui->lockBalanceTableWidget->setItem( i, 1, new QTableWidgetItem( getBigNumberString(aa.amount, assetInfo.precision)));
+
+        AssetIconItem* assetIconItem = new AssetIconItem();
+        assetIconItem->setAsset(ui->lockBalanceTableWidget->item(i,0)->text());
+        ui->lockBalanceTableWidget->setCellWidget(i, 0, assetIconItem);
     }
+
+    tableWidgetSetItemZebraColor(ui->lockBalanceTableWidget);
+
 }
 
 void CitizenAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg1)

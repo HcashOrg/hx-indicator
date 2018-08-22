@@ -453,8 +453,10 @@ public:
     QString getMinerNameFromId(QString _minerId);
     QStringList getMyCitizens();
 
-    QMap<QString,ProposalInfo>   proposalInfoMap;        // key是proposal id
+    QMap<QString,ProposalInfo>   senatorProposalInfoMap;        // key是proposal id
+    QMap<QString,ProposalInfo>   citizenProposalInfoMap;        // key是proposal id
     void fetchProposals();
+    QString citizenAccountIdToName(QString citizenAccountId);
 
 public:
     QMap<QString,MultiSigInfo>  multiSigInfoMap;

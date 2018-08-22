@@ -1,49 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CitizenAccountPage</class>
- <widget class="QWidget" name="CitizenAccountPage">
+ <class>CitizenProposalPage</class>
+ <widget class="QWidget" name="CitizenProposalPage">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>770</width>
-    <height>530</height>
+    <height>510</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="title_label">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>50</y>
-     <width>300</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <pointsize>12</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>Citizen账户信息</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
      <x>60</x>
      <y>90</y>
-     <width>100</width>
+     <width>110</width>
      <height>18</height>
     </rect>
    </property>
@@ -67,92 +42,11 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QComboBox" name="accountComboBox">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>90</y>
-     <width>120</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <weight>50</weight>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="idLabel2">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>90</y>
-     <width>80</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei UI Light</family>
-     <pointsize>-1</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLabel{color: rgb(137,129,161);
-font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
-   </property>
-   <property name="text">
-    <string>Citizen ID</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="idLabel">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>90</y>
-     <width>100</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei UI Light</family>
-     <pointsize>-1</pointsize>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QLabel{color: rgb(137,129,161);
-font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
-  <widget class="QTableWidget" name="lockBalanceTableWidget">
+  <widget class="QTableWidget" name="proposalTableWidget">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>150</y>
+     <y>130</y>
      <width>650</width>
      <height>310</height>
     </rect>
@@ -216,7 +110,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </attribute>
    <column>
     <property name="text">
-     <string>币种</string>
+     <string>失效时间（GMT）</string>
     </property>
     <property name="font">
      <font>
@@ -229,7 +123,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </column>
    <column>
     <property name="text">
-     <string>当前已质押金额</string>
+     <string>发起人</string>
     </property>
     <property name="font">
      <font>
@@ -240,6 +134,103 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      <set>AlignCenter</set>
     </property>
    </column>
+   <column>
+    <property name="text">
+     <string>类型（点击查看）</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>投票状态</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>我的投票</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string/>
+    </property>
+   </column>
+  </widget>
+  <widget class="QComboBox" name="accountComboBox">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>90</y>
+     <width>120</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="title_label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>50</y>
+     <width>200</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>Citizen提案</string>
+   </property>
   </widget>
  </widget>
  <resources/>

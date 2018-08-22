@@ -12,5 +12,7 @@
         <file>contact_checked.png</file>
         <file>exchange_checked.png</file>
         <file>guard_checked.png</file>
+        <file>citizen.png</file>
+        <file>citizen_checked.png</file>
     </qresource>
 </RCC>

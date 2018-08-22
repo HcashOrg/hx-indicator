@@ -42,7 +42,7 @@ signals:
     void showAdvanceSignal();
     void showExchangeSignal();
     void showGuardSignal();
-    void showDappSignal();
+    void showCitizenSignal();
     //点击二级按钮的信号
     void showPoundageSignal();
     void showMultiSigSignal();
@@ -72,14 +72,14 @@ signals:
     void AdvanceDefaultSignal();
     void ExchangeDefaultSignal();
     void GuardDefaultSignal();
-    void DappDefaultSignal();
+    void CitizenDefaultSignal();
 private slots:
     void ShowContactWidgetSlots();
     void ShowAccountWidgetSlots();
     void ShowAdvanceWidgetSlots();
     void ShowExchangeWidgetSlots();
     void ShowGuardWidgetSlots();
-    void ShowDappWidgetSlots();
+    void ShowCitizenWidgetSlots();
     void ShowMoreWidgetSlots();
 
     void ShowSettingWidgetSlots();

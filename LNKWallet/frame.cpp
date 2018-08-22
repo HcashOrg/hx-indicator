@@ -48,6 +48,7 @@
 #include "bonus/BonusPage.h"
 #include "dapp/ContractTokenPage.h"
 #include "citizen/CitizenAccountPage.h"
+#include "citizen/CitizenProposalPage.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -79,6 +80,7 @@ Frame::Frame(): timer(NULL),
     coldHotTransferPage(NULL),
     contractTokenPage(NULL),
     citizenAccountPage(NULL),
+    citizenProposalPage(NULL),
     poundage(nullptr)
 {
 
@@ -368,6 +370,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showColdHotTransferSignal,this,&Frame::showColdHotTransferPage);
     connect(functionBar,&FunctionWidget::showContractTokenSignal,this,&Frame::showContractTokenPage);
     connect(functionBar,&FunctionWidget::showCitizenAccountSignal,this,&Frame::showCitizenAccountPage);
+    connect(functionBar,&FunctionWidget::showCitizenProposalSignal,this,&Frame::showCitizenProposalPage);
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
@@ -429,6 +432,8 @@ void Frame::getAccountInfo()
     HXChain::getInstance()->fetchTransactions();
 
     HXChain::getInstance()->fetchFormalGuards();
+
+    HXChain::getInstance()->fetchMiners();
 }
 
 
@@ -772,6 +777,13 @@ void Frame::closeCurrentPage()
             citizenAccountPage = NULL;
         }
         break;
+    case 22:
+        if(citizenProposalPage)
+        {
+            citizenProposalPage->close();
+            citizenProposalPage = NULL;
+        }
+        break;
     default:
         break;
     }
@@ -836,6 +848,9 @@ void Frame::autoRefresh()
         break;
     case 20:
         contractTokenPage->refresh();
+        break;
+    case 22:
+        citizenProposalPage->refresh();
         break;
     default:
         break;
@@ -1272,6 +1287,17 @@ void Frame::showCitizenAccountPage()
     citizenAccountPage->setAttribute(Qt::WA_DeleteOnClose);
     citizenAccountPage->show();
     currentPageNum = 21;
+}
+
+void Frame::showCitizenProposalPage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    citizenProposalPage = new CitizenProposalPage(centralWidget);
+    citizenProposalPage->setAttribute(Qt::WA_DeleteOnClose);
+    citizenProposalPage->show();
+    currentPageNum = 22;
 }
 
 void Frame::showMultiSigTransactionPage(QString _multiSigAddress)
@@ -1735,7 +1761,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id == "id-list_miners")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -1765,7 +1791,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id.startsWith("id-get_miner-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -1800,7 +1826,7 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if(id == "id-get_proposal_for_voter")
+    if(id == "senator-get_proposal_for_voter")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
@@ -1814,7 +1840,7 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.take("result").toArray();
 
-            HXChain::getInstance()->proposalInfoMap.clear();
+            HXChain::getInstance()->senatorProposalInfoMap.clear();
             foreach (QJsonValue v, array)
             {
                 QJsonObject object = v.toObject();
@@ -1847,7 +1873,62 @@ void Frame::jsonDataUpdated(QString id)
                 info.proposalOperationType = proposedTransactionValue.toObject().take("operations").toArray()
                         .at(0).toArray().at(0).toInt();
 
-                HXChain::getInstance()->proposalInfoMap.insert(info.proposalId, info);
+                HXChain::getInstance()->senatorProposalInfoMap.insert(info.proposalId, info);
+
+            }
+        }
+
+        return;
+    }
+
+    if(id == "citizen-get_proposal_for_voter")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonArray array = jsonObject.take("result").toArray();
+
+//            HXChain::getInstance()->citizenProposalInfoMap.clear();
+            foreach (QJsonValue v, array)
+            {
+                QJsonObject object = v.toObject();
+                ProposalInfo info;
+                info.proposalId = object.take("id").toString();
+                info.proposer   = object.take("proposer").toString();
+                info.expirationTime = object.take("expiration_time").toString();
+                QJsonValue proposedTransactionValue = object.take("proposed_transaction");
+                info.transactionStr = QJsonDocument(proposedTransactionValue.toObject()).toJson();
+                info.type       = object.take("type").toString();
+
+                QJsonArray array2 = object.take("approved_key_approvals").toArray();
+                foreach (QJsonValue v2, array2)
+                {
+                    info.approvedKeys += v2.toString();
+                }
+
+                QJsonArray array3 = object.take("disapproved_key_approvals").toArray();
+                foreach (QJsonValue v3, array3)
+                {
+                    info.disapprovedKeys += v3.toString();
+                }
+
+                QJsonArray array4 = object.take("required_account_approvals").toArray();
+                foreach (QJsonValue v4, array4)
+                {
+                    info.requiredAccounts += v4.toString();
+                }
+
+                info.proposalOperationType = proposedTransactionValue.toObject().take("operations").toArray()
+                        .at(0).toArray().at(0).toInt();
+
+                HXChain::getInstance()->citizenProposalInfoMap.insert(info.proposalId, info);
             }
         }
 

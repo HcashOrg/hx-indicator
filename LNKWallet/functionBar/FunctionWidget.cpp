@@ -134,17 +134,17 @@ void FunctionWidget::ShowGuardWidgetSlots()
     emit GuardDefaultSignal();
 }
 
-void FunctionWidget::ShowDappWidgetSlots()
+void FunctionWidget::ShowCitizenWidgetSlots()
 {
     ui->stackedWidget->setCurrentWidget(_p->citizenBar);
 
-    emit showDappSignal();
+    emit showCitizenSignal();
 
     ui->stackedWidget->setVisible(true);
     emit RestoreSignal();
 
     updateCheckState(5);
-    emit DappDefaultSignal();
+    emit CitizenDefaultSignal();
 }
 
 void FunctionWidget::ShowMoreWidgetSlots()
@@ -227,7 +227,7 @@ void FunctionWidget::updateCheckState(int buttonNumber)
     ui->toolButton_advanced->setChecked(2 == buttonNumber);
     ui->toolButton_exchange->setChecked(3 == buttonNumber);
     ui->toolButton_guard->setChecked(4 == buttonNumber);
-    ui->toolButton_dapp->setChecked(5 == buttonNumber);
+    ui->toolButton_citizen->setChecked(5 == buttonNumber);
     ui->toolButton_more->setChecked(6 == buttonNumber);
 
 }
@@ -236,14 +236,12 @@ void FunctionWidget::InitWidget()
 {
     InitStyle();
 
-//    ui->toolButton_dapp->hide();
-
     ui->toolButton_contact->setCheckable(true);
     ui->toolButton_account->setCheckable(true);
     ui->toolButton_advanced->setCheckable(true);
     ui->toolButton_exchange->setCheckable(true);
     ui->toolButton_guard->setCheckable(true);
-    ui->toolButton_dapp->setCheckable(true);
+    ui->toolButton_citizen->setCheckable(true);
     ui->toolButton_more->setCheckable(true);
 
     ui->stackedWidget->addWidget(_p->accountBar);
@@ -258,7 +256,7 @@ void FunctionWidget::InitWidget()
     connect(ui->toolButton_advanced,&QToolButton::clicked,this,&FunctionWidget::ShowAdvanceWidgetSlots);
     connect(ui->toolButton_exchange,&QToolButton::clicked,this,&FunctionWidget::ShowExchangeWidgetSlots);
     connect(ui->toolButton_guard,&QToolButton::clicked,this,&FunctionWidget::ShowGuardWidgetSlots);
-    connect(ui->toolButton_dapp,&QToolButton::clicked,this,&FunctionWidget::ShowDappWidgetSlots);
+    connect(ui->toolButton_citizen,&QToolButton::clicked,this,&FunctionWidget::ShowCitizenWidgetSlots);
     connect(ui->toolButton_more,&QToolButton::clicked,this,&FunctionWidget::ShowMoreWidgetSlots);
 
 
@@ -291,7 +289,7 @@ void FunctionWidget::InitWidget()
     connect(this,&FunctionWidget::AdvanceDefaultSignal,_p->advanceBar,&FunctionAdvanceWidget::DefaultShow);
     connect(this,&FunctionWidget::ExchangeDefaultSignal,_p->exchangeBar,&FunctionExchangeWidget::DefaultShow);
     connect(this,&FunctionWidget::GuardDefaultSignal,_p->guardBar,&FunctionGuardWidget::DefaultShow);
-    connect(this,&FunctionWidget::DappDefaultSignal,_p->citizenBar,&FunctionCitizenWidget::DefaultShow);
+    connect(this,&FunctionWidget::CitizenDefaultSignal,_p->citizenBar,&FunctionCitizenWidget::DefaultShow);
 //    ui->toolButton_account->installEventFilter(this);
 //    ui->toolButton_advanced->installEventFilter(this);
 //    ui->toolButton_contact->installEventFilter(this);
@@ -347,8 +345,8 @@ void FunctionWidget::InitStyle()
                                           "QToolButton:checked{background-image:url(:/functionBar/contact_checked.png);}");
     ui->toolButton_guard->setStyleSheet("QToolButton{background-image:url(:/functionBar/guard.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
                                           "QToolButton:checked{background-image:url(:/functionBar/guard_checked.png);}");
-    ui->toolButton_dapp->setStyleSheet("QToolButton{background-image:url(:/functionBar/guard.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                          "QToolButton:checked{background-image:url(:/functionBar/guard_checked.png);}");
+    ui->toolButton_citizen->setStyleSheet("QToolButton{background-image:url(:/functionBar/citizen.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                                          "QToolButton:checked{background-image:url(:/functionBar/citizen_checked.png);}");
     ui->toolButton_more->setStyleSheet("QToolButton{background-image:url(:/functionBar/more.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
                                           "QToolButton:checked{background-color:rgb(199,19,106);background-image:url(:/functionBar/more_checked.png);}");
 }

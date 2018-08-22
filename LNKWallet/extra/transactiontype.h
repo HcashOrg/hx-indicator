@@ -35,6 +35,8 @@
 #define TRANSACTION_TYPE_CANCEL_GUARANTEE       84      // 撤销承兑单
 #define TRANSACTION_TYPE_WITHDRAW_CANCEL        85      // guard取消提现提案
 #define TRANSACTION_TYPE_SET_PUBLISHER          86      // 设置喂价人
+#define TRANSACTION_TYPE_CROSSCHAIN_FEE         87      // 设置跨链提现费用
 #define TRANSACTION_TYPE_OBTAIN_BONUS           88      // 领取分红
+#define TRANSACTION_TYPE_SET_LOCKBALANCE        89      // 设置senator的保证金
 
 #endif // TRANSACTIONTYPE_H

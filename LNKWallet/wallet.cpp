@@ -265,7 +265,7 @@ QStringList HXChain::getMyCitizens()
             result += key;
         }
     }
-qDebug() << "cccccccccccccc " << citizens << result;
+
     return result;
 }
 
@@ -1044,8 +1044,24 @@ void HXChain::fetchMiners()
 
 void HXChain::fetchProposals()
 {
-    if(formalGuardMap.size() < 1)   return;
-    postRPC( "id-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << formalGuardMap.keys().at(0)));
+    if(formalGuardMap.size() < 1 || minerMap.size() < 1)   return;
+    postRPC( "senator-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << formalGuardMap.keys().at(0)));
+    postRPC( "citizen-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << minerMap.keys().at(0)));
+}
+
+QString HXChain::citizenAccountIdToName(QString citizenAccountId)
+{
+    QString result;
+    foreach (QString account, minerMap.keys())
+    {
+        if( minerMap.value(account).accountId == citizenAccountId)
+        {
+            result = account;
+            break;
+        }
+    }
+
+    return result;
 }
 
 void HXChain::fetchMyContracts()
