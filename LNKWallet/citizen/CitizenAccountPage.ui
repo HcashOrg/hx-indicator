@@ -113,7 +113,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
 font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </property>
    <property name="text">
-    <string>Citizen ID</string>
+    <string>CITIZEN ID</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -200,7 +200,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <enum>Qt::SolidLine</enum>
    </property>
    <attribute name="horizontalHeaderVisible">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>

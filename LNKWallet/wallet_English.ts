@@ -393,12 +393,59 @@
         <translation type="obsolete">Contract address or name:</translation>
     </message>
     <message>
+        <location filename="dapp/AddTokenDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/AddTokenDialog.ui" line="75"/>
+        <source>添加合约代币</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/AddTokenDialog.ui" line="117"/>
+        <source>合约地址</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/AddTokenDialog.ui" line="158"/>
+        <source>添加</source>
+        <translation type="unfinished">Add</translation>
+    </message>
+    <message>
+        <location filename="dapp/AddTokenDialog.ui" line="177"/>
         <source>取消</source>
-        <translation type="obsolete">Cancel</translation>
+        <translation type="unfinished">Cancel</translation>
     </message>
     <message>
         <source>确定</source>
         <translation type="obsolete">Ok</translation>
+    </message>
+    <message>
+        <location filename="dapp/AddTokenDialog.cpp" line="117"/>
+        <location filename="dapp/AddTokenDialog.cpp" line="163"/>
+        <source>This contract has been added!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/AddTokenDialog.cpp" line="124"/>
+        <source>This contract does not meet the standard!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/AddTokenDialog.cpp" line="132"/>
+        <source>This contract does not exist!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/AddTokenDialog.cpp" line="155"/>
+        <source>This contract has not been initialized!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/AddTokenDialog.cpp" line="187"/>
+        <source>This contract address is invalid</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -560,217 +607,232 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="413"/>
+        <location filename="alltransactionwidget.cpp" line="414"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="439"/>
+        <location filename="alltransactionwidget.cpp" line="440"/>
         <source>transfer to self</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="448"/>
+        <location filename="alltransactionwidget.cpp" line="449"/>
         <source>transfer-out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="460"/>
+        <location filename="alltransactionwidget.cpp" line="461"/>
         <source>transfer-in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="468"/>
+        <location filename="alltransactionwidget.cpp" line="469"/>
         <source>register account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="476"/>
+        <location filename="alltransactionwidget.cpp" line="477"/>
         <source>bind %1 address: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="478"/>
+        <location filename="alltransactionwidget.cpp" line="479"/>
         <source>bind tunnel address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="486"/>
+        <location filename="alltransactionwidget.cpp" line="487"/>
         <source>unbind %1 address: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="488"/>
+        <location filename="alltransactionwidget.cpp" line="489"/>
         <source>unbind tunnel address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="502"/>
+        <location filename="alltransactionwidget.cpp" line="503"/>
         <source>asset feed price: %1:%2  %3:%4</source>
         <oldsource>asset quote: %1:%2  %3:%4</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="507"/>
+        <location filename="alltransactionwidget.cpp" line="508"/>
         <source>asset feed price</source>
         <oldsource>asset quote</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="514"/>
+        <location filename="alltransactionwidget.cpp" line="515"/>
+        <source>create citizen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="522"/>
         <source>type: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="518"/>
+        <location filename="alltransactionwidget.cpp" line="526"/>
         <source>cold-hot wallet trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="521"/>
+        <location filename="alltransactionwidget.cpp" line="529"/>
         <source>change cold-hot wallet multisig-address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="524"/>
+        <location filename="alltransactionwidget.cpp" line="532"/>
         <source>set price feeder</source>
         <oldsource>set publisher</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="527"/>
+        <location filename="alltransactionwidget.cpp" line="535"/>
         <source>cancel cold-hot trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="530"/>
+        <location filename="alltransactionwidget.cpp" line="538"/>
         <source>cancel withdraw trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="533"/>
+        <location filename="alltransactionwidget.cpp" line="541"/>
         <source>create senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="536"/>
+        <location filename="alltransactionwidget.cpp" line="544"/>
         <source>set senator formal or not</source>
         <oldsource>set senator formal or informl</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="539"/>
+        <location filename="alltransactionwidget.cpp" line="547"/>
         <source>resign senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="542"/>
+        <location filename="alltransactionwidget.cpp" line="550"/>
         <source>set contract transfer fee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="545"/>
+        <location filename="alltransactionwidget.cpp" line="553"/>
+        <source>set senator formal/informal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="556"/>
+        <source>set crosschain fee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="559"/>
+        <source>set locked balance of senator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="562"/>
         <source>%1 (unkown)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="551"/>
+        <location filename="alltransactionwidget.cpp" line="568"/>
         <source>sponsor a proposal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="558"/>
+        <location filename="alltransactionwidget.cpp" line="575"/>
         <source>proposal ID: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="560"/>
+        <location filename="alltransactionwidget.cpp" line="577"/>
         <source>vote for a proposal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="576"/>
+        <location filename="alltransactionwidget.cpp" line="593"/>
         <source>lock asset to miner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="592"/>
+        <location filename="alltransactionwidget.cpp" line="609"/>
         <source>foreclose asset from miner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="603"/>
-        <location filename="alltransactionwidget.cpp" line="618"/>
+        <location filename="alltransactionwidget.cpp" line="620"/>
+        <location filename="alltransactionwidget.cpp" line="635"/>
         <source>%1 account: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="609"/>
+        <location filename="alltransactionwidget.cpp" line="626"/>
         <source>deposit %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="624"/>
+        <location filename="alltransactionwidget.cpp" line="641"/>
         <source>withdraw %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="643"/>
+        <location filename="alltransactionwidget.cpp" line="660"/>
         <source>total </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="652"/>
+        <location filename="alltransactionwidget.cpp" line="669"/>
         <source>get mining income</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="659"/>
+        <location filename="alltransactionwidget.cpp" line="676"/>
         <source>issue &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="661"/>
+        <location filename="alltransactionwidget.cpp" line="678"/>
         <source>issue asset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="674"/>
+        <location filename="alltransactionwidget.cpp" line="691"/>
         <source>register contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="695"/>
+        <location filename="alltransactionwidget.cpp" line="712"/>
         <source>exechange contract withdrawAsset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="703"/>
+        <location filename="alltransactionwidget.cpp" line="720"/>
         <source>call contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="721"/>
+        <location filename="alltransactionwidget.cpp" line="738"/>
         <source>transfer to contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="738"/>
+        <location filename="alltransactionwidget.cpp" line="755"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="749"/>
+        <location filename="alltransactionwidget.cpp" line="766"/>
         <source>cancel acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="765"/>
-        <source> etc.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="alltransactionwidget.cpp" line="775"/>
+        <location filename="alltransactionwidget.cpp" line="787"/>
         <source>get bonus</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1180,13 +1242,13 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="152"/>
+        <location filename="bonus/BonusPage.cpp" line="153"/>
         <source>Transaction of get-bonus has been sent out!</source>
         <oldsource>Transaction of obtain-bonus has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bonus/BonusPage.cpp" line="160"/>
+        <location filename="bonus/BonusPage.cpp" line="161"/>
         <source>Fail to get bonus!</source>
         <oldsource>Fail to obtain bonus!</oldsource>
         <translation type="unfinished"></translation>
@@ -1708,6 +1770,163 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
 </context>
 <context>
+    <name>CitizenAccountPage</name>
+    <message>
+        <location filename="citizen/CitizenAccountPage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.ui" line="38"/>
+        <source>Citizen账户信息</source>
+        <translation type="unfinished">Citizen Account Info</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.ui" line="64"/>
+        <source>当前Citizen账号</source>
+        <translation type="unfinished">CURRENT CITIZEN</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.ui" line="116"/>
+        <source>CITIZEN ID</source>
+        <oldsource>Citizen ID</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.ui" line="219"/>
+        <source>币种</source>
+        <translation type="unfinished">CURRENCY</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.ui" line="232"/>
+        <source>当前已质押金额</source>
+        <translation type="unfinished">MORTGAGED AMOUNT</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.cpp" line="60"/>
+        <source>There are no citizen accounts in the wallet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CitizenProposalPage</name>
+    <message>
+        <location filename="citizen/CitizenProposalPage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.ui" line="39"/>
+        <source>当前Citizen账号</source>
+        <translation type="unfinished">CURRENT CITIZEN</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.ui" line="113"/>
+        <source>失效时间（GMT）</source>
+        <translation type="unfinished">EXPIRATION(GMT)</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.ui" line="126"/>
+        <source>发起人</source>
+        <translation type="unfinished">PROPOSER</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.ui" line="139"/>
+        <source>类型（点击查看）</source>
+        <translation type="unfinished">TYPE(CLICK)</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.ui" line="152"/>
+        <source>投票状态</source>
+        <translation type="unfinished">VOTING STATE</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.ui" line="165"/>
+        <source>我的投票</source>
+        <translation type="unfinished">MY VOTE</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.ui" line="232"/>
+        <source>Citizen提案</source>
+        <translation type="unfinished">Citizen Proposal</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="76"/>
+        <source>There are no citizen accounts in the wallet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="99"/>
+        <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="106"/>
+        <source>Failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="142"/>
+        <source>set senator formal/informal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="146"/>
+        <source>set crosschain fee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="150"/>
+        <source>set locked balance of senator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="154"/>
+        <source>unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="166"/>
+        <source>no citizen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="170"/>
+        <source>approved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="175"/>
+        <source>disapproved</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="180"/>
+        <source>not voted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="186"/>
+        <source>approve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="187"/>
+        <source>disapprove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="239"/>
+        <source>Sure to approve this proposal?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="259"/>
+        <source>Sure to disapprove this proposal?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ColdHotInfoDialog</name>
     <message>
         <location filename="guard/ColdHotInfoDialog.ui" line="14"/>
@@ -1940,13 +2159,13 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="287"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="438"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="439"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="289"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="332"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="333"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1956,28 +2175,28 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="330"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="331"/>
         <source>waiting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="366"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="431"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="367"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="432"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="370"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="371"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="434"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="435"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="441"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="442"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2565,6 +2784,54 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ContractTokenPage</name>
+    <message>
+        <location filename="dapp/ContractTokenPage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/ContractTokenPage.ui" line="38"/>
+        <source>标准合约代币</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/ContractTokenPage.ui" line="68"/>
+        <source>创建合约代币</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/ContractTokenPage.ui" line="139"/>
+        <source>代币</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/ContractTokenPage.ui" line="152"/>
+        <source>合约地址</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/ContractTokenPage.ui" line="165"/>
+        <source>余额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/ContractTokenPage.ui" line="227"/>
+        <source>添加合约代币</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/ContractTokenPage.ui" line="257"/>
+        <source>交易记录</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/ContractTokenPage.cpp" line="145"/>
+        <source>transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CreateAssetDialog</name>
     <message>
         <source>取消</source>
@@ -2711,17 +2978,79 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Ok</translation>
     </message>
     <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="75"/>
+        <source>创建合约代币</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="158"/>
+        <source>第一步：注册合约</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="174"/>
+        <source>合约字节码</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="221"/>
+        <source>注册</source>
+        <translation type="unfinished">REGISTER</translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="239"/>
+        <source>合约ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="261"/>
+        <source>交易ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="312"/>
+        <source>等待注册合约交易被区块链确认，请勿关闭窗口</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="336"/>
         <source>资产精度</source>
-        <translation type="obsolete">Precision</translation>
+        <translation type="unfinished">Precision</translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="358"/>
+        <source>代币名</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="380"/>
+        <source>代币符号</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="430"/>
+        <source>初始化</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="514"/>
+        <source>第二步：合约初始化设置</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>返回</source>
         <translation type="obsolete">Back</translation>
     </message>
     <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="139"/>
         <source>选择创建者</source>
         <oldsource>发行账户</oldsource>
-        <translation type="obsolete">Creator</translation>
+        <translation type="unfinished">Creator</translation>
     </message>
     <message>
         <source>合约名</source>
@@ -2742,8 +3071,9 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Create</translation>
     </message>
     <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="469"/>
         <source>资产总量</source>
-        <translation type="obsolete">Total supply</translation>
+        <translation type="unfinished">Total supply</translation>
     </message>
     <message>
         <source>允许花费</source>
@@ -2755,8 +3085,9 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">UB(The cost of creating the contract. 20 UB is suggested.)</translation>
     </message>
     <message>
+        <location filename="dapp/CreateTokenDialog.ui" line="488"/>
         <source>(0-8位小数)</source>
-        <translation type="obsolete">(0-8 decimal)</translation>
+        <translation type="unfinished">(0-8 decimal)</translation>
     </message>
     <message>
         <source>锚定资产</source>
@@ -2782,6 +3113,21 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>创建合约</source>
         <translation type="obsolete">Create a contract</translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.cpp" line="141"/>
+        <source>Registering contract failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.cpp" line="198"/>
+        <source>Transaction of invoking contract function &quot;init_token&quot; has been sent out!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/CreateTokenDialog.cpp" line="207"/>
+        <source>Initializing token failed!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3655,27 +4001,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1126"/>
+        <location filename="frame.cpp" line="1164"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1336"/>
+        <location filename="frame.cpp" line="1410"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2071"/>
+        <location filename="frame.cpp" line="2180"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2074"/>
+        <location filename="frame.cpp" line="2183"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2077"/>
+        <location filename="frame.cpp" line="2186"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3824,6 +4170,30 @@ Cover it or not?</source>
     </message>
 </context>
 <context>
+    <name>FunctionCitizenWidget</name>
+    <message>
+        <location filename="functionBar/FunctionCitizenWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionCitizenWidget.ui" line="40"/>
+        <source>CITIZEN</source>
+        <oldsource>Citizen账户</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionCitizenWidget.ui" line="61"/>
+        <source>账户信息</source>
+        <translation type="unfinished">AccountInfo</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionCitizenWidget.ui" line="79"/>
+        <source>提案投票</source>
+        <translation type="unfinished">Proposal</translation>
+    </message>
+</context>
+<context>
     <name>FunctionExchangeWidget</name>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="14"/>
@@ -3831,9 +4201,13 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionExchangeWidget.ui" line="40"/>
         <source>市场</source>
-        <translation type="unfinished">MARKET</translation>
+        <translation type="obsolete">MARKET</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionExchangeWidget.ui" line="40"/>
+        <source>兑换合约</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="61"/>
@@ -3846,6 +4220,16 @@ Cover it or not?</source>
         <oldsource>  我的挂单</oldsource>
         <translation type="unfinished">MyOrders</translation>
     </message>
+    <message>
+        <location filename="functionBar/FunctionExchangeWidget.ui" line="97"/>
+        <source>标准代币合约</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionExchangeWidget.ui" line="124"/>
+        <source>DAPP</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>FunctionGuardWidget</name>
@@ -3856,7 +4240,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="40"/>
-        <source>账户</source>
+        <source>SENATOR</source>
+        <oldsource>Senator账户</oldsource>
         <translation type="unfinished">ACCOUNT</translation>
     </message>
     <message>
@@ -3942,32 +4327,32 @@ Cover it or not?</source>
         <translation type="obsolete">More</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="138"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="155"/>
         <source>Setting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="140"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="157"/>
         <source>Lock</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="142"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="159"/>
         <source>Console</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="144"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="161"/>
         <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="154"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="171"/>
         <source>About Us</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="156"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="173"/>
         <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3987,7 +4372,8 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="64"/>
-        <source>当前SENATOR账号</source>
+        <source>当前SENATOR账户</source>
+        <oldsource>当前SENATOR账号</oldsource>
         <translation type="unfinished">CURRENT SENATOR</translation>
     </message>
     <message>
@@ -4224,13 +4610,13 @@ Cover it or not?</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="176"/>
-        <location filename="wallet.cpp" line="200"/>
+        <location filename="wallet.cpp" line="185"/>
+        <location filename="wallet.cpp" line="209"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="599"/>
+        <location filename="wallet.cpp" line="624"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -4565,17 +4951,17 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Asset to pledge</translation>
     </message>
     <message>
-        <location filename="miner/locktominerdialog.cpp" line="94"/>
+        <location filename="miner/locktominerdialog.cpp" line="88"/>
         <source>Transaction of lock-to-miner has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/locktominerdialog.cpp" line="101"/>
+        <location filename="miner/locktominerdialog.cpp" line="95"/>
         <source>Fail to lock balance to miner!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/locktominerdialog.cpp" line="132"/>
+        <location filename="miner/locktominerdialog.cpp" line="126"/>
         <source>Max: %1 %2</source>
         <oldsource>total %1 %2</oldsource>
         <translation type="unfinished"></translation>
@@ -5880,7 +6266,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="136"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="853"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1068"/>
         <source>投票状态</source>
         <translation type="unfinished">Voting State</translation>
     </message>
@@ -5972,75 +6358,120 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished">Fee</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="759"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="756"/>
+        <source>Senator地址</source>
+        <translation type="unfinished">Senator Address</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="785"/>
+        <source>是否正式</source>
+        <translation type="unfinished">Is Formal</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="816"/>
+        <source>跨链费用</source>
+        <translation type="unfinished">Crosschain Fee</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="845"/>
+        <source>币种</source>
+        <translation type="unfinished">Currency</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="934"/>
+        <source>保证金币种</source>
+        <translation type="unfinished">CURRENCY LOCKED</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="947"/>
+        <source>保证金金额</source>
+        <translation type="unfinished">AMOUNT LOCKED</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="974"/>
         <source>未知的提案类型</source>
         <translation type="unfinished">unknown proposal type</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="840"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1055"/>
         <source>所需投票者</source>
         <translation type="unfinished">Required Voters</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="85"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="113"/>
         <source>approved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="90"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="118"/>
         <source>disapproved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="95"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="123"/>
         <source>not voted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="107"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="135"/>
         <source>cold-hot trx</source>
         <oldsource>hot-cold transfer</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="120"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="148"/>
         <source>update multisig-address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="131"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="159"/>
         <source>set price feeder</source>
         <oldsource>set publisher</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="141"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="169"/>
         <source>cancel cold-hot trx</source>
         <oldsource>calcel cold-hot trx</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="150"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="178"/>
         <source>cancel withdraw trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="159"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="187"/>
         <source>create senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="168"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="196"/>
         <source>resign senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="177"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="205"/>
         <source>set contract transfer fee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="186"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="215"/>
+        <source>set senator formal/informal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.cpp" line="225"/>
+        <source>set crosschain fee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.cpp" line="237"/>
+        <source>set locked balance of senator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.cpp" line="256"/>
         <source>unknown(%1)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6177,22 +6608,22 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="224"/>
+        <location filename="guard/ProposalPage.cpp" line="223"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="231"/>
+        <location filename="guard/ProposalPage.cpp" line="230"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="244"/>
+        <location filename="guard/ProposalPage.cpp" line="243"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="264"/>
+        <location filename="guard/ProposalPage.cpp" line="263"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7112,6 +7543,156 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     </message>
 </context>
 <context>
+    <name>TokenHistoryWidget</name>
+    <message>
+        <location filename="dapp/TokenHistoryWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenHistoryWidget.ui" line="38"/>
+        <source>合约代币交易历史</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenHistoryWidget.ui" line="159"/>
+        <source>区块高度</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenHistoryWidget.ui" line="172"/>
+        <source>交易ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenHistoryWidget.ui" line="185"/>
+        <source>对方账户</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenHistoryWidget.ui" line="198"/>
+        <source>数量</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenHistoryWidget.ui" line="211"/>
+        <source>备注</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TokenTransferWidget</name>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="49"/>
+        <source>来自账户</source>
+        <translation type="unfinished">FromAccount</translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="74"/>
+        <source>目标账户地址</source>
+        <translation type="unfinished">ToAddress</translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="109"/>
+        <source>数量</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="142"/>
+        <source>最多转账金额：1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="181"/>
+        <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;微软雅黑&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="188"/>
+        <source>请输入备注</source>
+        <translation type="unfinished">input the memo</translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="204"/>
+        <source>无效地址</source>
+        <translation type="unfinished">Invalid</translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="232"/>
+        <source>转账</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="254"/>
+        <source>合约代币</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="299"/>
+        <source>备注</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="318"/>
+        <source>长度超过40个字节</source>
+        <translation type="unfinished">More than 40 bytes</translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="340"/>
+        <source>请输入对方地址</source>
+        <translation type="unfinished">input the address</translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="375"/>
+        <source>余额不足</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="401"/>
+        <source>合约代币转账</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.ui" line="417"/>
+        <source>转账记录</source>
+        <translation type="unfinished">Record</translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.cpp" line="118"/>
+        <source>Transaction of invoking contract function &quot;transfer&quot; has been sent out!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.cpp" line="127"/>
+        <source>Invoking contract function &quot;transfer&quot; failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.cpp" line="174"/>
+        <source>Max: %1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.cpp" line="248"/>
+        <source>Valid account address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dapp/TokenTransferWidget.cpp" line="254"/>
+        <source>Invalid address.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ToolButtonWidget</name>
     <message>
         <location filename="ToolButtonWidget.ui" line="14"/>
@@ -7376,61 +7957,49 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">More than 40 bytes</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="142"/>
+        <location filename="transfer/transferpage.cpp" line="127"/>
         <source>Please enter the amount and address.</source>
         <oldsource>Please enter the amount and Add.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="150"/>
+        <location filename="transfer/transferpage.cpp" line="135"/>
         <source>The amount can not be 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="296"/>
+        <location filename="transfer/transferpage.cpp" line="281"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="397"/>
-        <source>You can only send %1s to multisig address currently.</source>
-        <oldsource>You can only send %1s to multi-signature address currently.</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="transfer/transferpage.cpp" line="283"/>
+        <location filename="transfer/transferpage.cpp" line="268"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="292"/>
+        <location filename="transfer/transferpage.cpp" line="277"/>
         <source>Balance not enough!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="382"/>
+        <location filename="transfer/transferpage.cpp" line="367"/>
         <source>Valid account address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="389"/>
+        <location filename="transfer/transferpage.cpp" line="373"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="403"/>
-        <source>Valid multisig address.</source>
-        <oldsource>Valid multi-signature address.</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="transfer/transferpage.cpp" line="410"/>
+        <location filename="transfer/transferpage.cpp" line="394"/>
         <source>Invalid address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="495"/>
-        <location filename="transfer/transferpage.cpp" line="504"/>
+        <location filename="transfer/transferpage.cpp" line="479"/>
+        <location filename="transfer/transferpage.cpp" line="488"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished"></translation>
@@ -7584,12 +8153,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
 <context>
     <name>VoteStateLabel</name>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="348"/>
+        <location filename="guard/ProposalPage.cpp" line="347"/>
         <source>not passed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="359"/>
+        <location filename="guard/ProposalPage.cpp" line="358"/>
         <source>voting</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7713,7 +8282,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="265"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="397"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="398"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7732,7 +8301,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="401"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="402"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>

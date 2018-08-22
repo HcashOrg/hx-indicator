@@ -540,14 +540,20 @@ void AllTransactionWidget::showTransactions()
             case TRANSACTION_TYPE_CREATE_GUARD:
                 str += tr("create senator");
                 break;
-            case TRANSACTION_TYPE_FORMAL_GUARD:
-                str += tr("set senator formal or not");
-                break;
             case TRANSACTION_TYPE_RESIGN_GUARD:
                 str += tr("resign senator");
                 break;
             case TRANSACTION_TYPE_PROPOSAL_CONTRACT_TRANSFER_FEE:
                 str += tr("set contract transfer fee");
+                break;
+            case TRANSACTION_TYPE_FORMAL_GUARD:
+                str += tr("set senator formal/informal");
+                break;
+            case TRANSACTION_TYPE_CROSSCHAIN_FEE:
+                str += tr("set crosschain fee");
+                break;
+            case TRANSACTION_TYPE_SET_LOCKBALANCE:
+                str += tr("set locked balance of senator");
                 break;
             default:
                 str += tr("%1 (unkown)").arg(opType);
