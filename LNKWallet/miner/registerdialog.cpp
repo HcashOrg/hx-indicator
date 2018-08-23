@@ -1,7 +1,6 @@
 #include "registerdialog.h"
 #include "ui_registerdialog.h"
 
-#include <QPainter>
 #include "wallet.h"
 #include "commondialog.h"
 #include "FeeChooseWidget.h"
@@ -37,8 +36,10 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
     ui->registerNameLineEdit->setValidator( validator );
     ui->registerNameLineEdit->setMaxLength(63);
 
-    ui->stackedWidget_fee->addWidget(new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.minerRegisterFee.toDouble(),
-                                                         HXChain::getInstance()->feeType));
+    FeeChooseWidget *feeWidget = new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.createCitizenFee.toDouble(),
+                                                     HXChain::getInstance()->feeType);
+    connect(feeWidget,&FeeChooseWidget::feeSufficient,ui->okBtn,&QToolButton::setEnabled);
+    ui->stackedWidget_fee->addWidget(feeWidget);
     ui->stackedWidget_fee->setCurrentIndex(0);
     ui->stackedWidget_fee->currentWidget()->resize(ui->stackedWidget_fee->size());
     init();

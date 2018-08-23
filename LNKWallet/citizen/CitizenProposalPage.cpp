@@ -39,6 +39,8 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->proposalTableWidget->setColumnWidth(6,80);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->proposalTableWidget);
+
 //    pageWidget = new PageScrollWidget();
 //    ui->stackedWidget->addWidget(pageWidget);
 //    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ProposalPage::pageChangeSlot);
@@ -55,6 +57,8 @@ CitizenProposalPage::~CitizenProposalPage()
 
 void CitizenProposalPage::init()
 {
+    inited = false;
+
     ui->accountComboBox->clear();
     QStringList accounts = HXChain::getInstance()->getMyCitizens();
     if(accounts.size() > 0)
@@ -76,9 +80,9 @@ void CitizenProposalPage::init()
         label->setText(tr("There are no citizen accounts in the wallet."));
     }
 
-    HXChain::getInstance()->mainFrame->installBlurEffect(ui->proposalTableWidget);
+    inited = true;
 
-    showProposals();
+    on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
 }
 
 void CitizenProposalPage::refresh()
@@ -114,7 +118,14 @@ void CitizenProposalPage::jsonDataUpdated(QString id)
 
 void CitizenProposalPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
+    if(!inited)  return;
 
+    if(!ui->accountComboBox->currentText().isEmpty())
+    {
+        HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+    }
+
+    showProposals();
 }
 
 void CitizenProposalPage::showProposals()

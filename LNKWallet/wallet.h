@@ -262,6 +262,7 @@ struct FeeChargeInfo
     QString poundagePublishFee;//发布承兑单手续费
     QString poundageCancelFee;//撤销承兑单手续费
     QString transferFee;//转账手续费
+    QString createCitizenFee;
 
     QString withDrawFee;//提现手续费--
     QString capitalFee;//资金划转手续费
@@ -441,6 +442,7 @@ public:
     void fetchFormalGuards();
     void fetchAllGuards();
     QStringList getMyFormalGuards();
+    QStringList getMyGuards();
     QMap<QString,QVector<GuardMultisigAddress>> guardMultisigAddressesMap;  // key是 资产名-guard账户Id 的形式 比如 BTC-1.2.23
     GuardMultisigAddress getGuardMultisigByPairId(QString assetSymbol, QString guardName, QString pairId);      // 从guardMultisigAddressesMap，找到对应的
     void fetchGuardAllMultisigAddresses(QString accountId);

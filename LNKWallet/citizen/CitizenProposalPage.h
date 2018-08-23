@@ -28,6 +28,7 @@ private slots:
 
 private:
     Ui::CitizenProposalPage *ui;
+    bool inited = false;
 
     void showProposals();
 

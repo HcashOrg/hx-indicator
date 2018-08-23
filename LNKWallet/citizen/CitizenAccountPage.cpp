@@ -3,6 +3,7 @@
 
 #include "wallet.h"
 #include "control/AssetIconItem.h"
+#include "CreateCitizenDialog.h"
 
 CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
     QWidget(parent),
@@ -27,6 +28,10 @@ CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
     ui->lockBalanceTableWidget->setColumnWidth(1,490);
     ui->lockBalanceTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
+    ui->newCitizenBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->lockBalanceTableWidget);
+
     init();
 }
 
@@ -37,6 +42,8 @@ CitizenAccountPage::~CitizenAccountPage()
 
 void CitizenAccountPage::init()
 {
+    inited = false;
+
     ui->accountComboBox->clear();
     QStringList accounts = HXChain::getInstance()->getMyCitizens();
     if(accounts.size() > 0)
@@ -59,6 +66,15 @@ void CitizenAccountPage::init()
         label->setGeometry(QRect(ui->label->pos(), QSize(300,30)));
         label->setText(tr("There are no citizen accounts in the wallet."));
     }
+
+    inited = true;
+
+    on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
+}
+
+void CitizenAccountPage::refresh()
+{
+    init();
 }
 
 void CitizenAccountPage::paintEvent(QPaintEvent *)
@@ -94,8 +110,19 @@ void CitizenAccountPage::showLockBalance()
 
 void CitizenAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
+    if(!inited || ui->accountComboBox->currentText().isEmpty())  return;
+    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+
     MinerInfo minerInfo = HXChain::getInstance()->minerMap.value(ui->accountComboBox->currentText());
     ui->idLabel->setText(minerInfo.minerId);
+    ui->totalProducedLabel->setText(QString::number(minerInfo.totalProduced));
+    ui->lastBlockLabel->setText(QString::number(minerInfo.lastBlock));
 
     showLockBalance();
+}
+
+void CitizenAccountPage::on_newCitizenBtn_clicked()
+{
+    CreateCitizenDialog createCitizenDialog;
+    createCitizenDialog.pop();
 }

@@ -849,6 +849,9 @@ void Frame::autoRefresh()
     case 20:
         contractTokenPage->refresh();
         break;
+    case 21:
+        citizenAccountPage->refresh();
+        break;
     case 22:
         citizenProposalPage->refresh();
         break;

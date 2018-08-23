@@ -654,6 +654,7 @@ void HXChain::InitFeeCharge()
     feeChargeInfo.poundagePublishFee = feeObj.value("PoundagePublish").toString();
     feeChargeInfo.poundageCancelFee = feeObj.value("PoundageCancel").toString();
     feeChargeInfo.transferFee = feeObj.value("Transfer").toString();
+    feeChargeInfo.createCitizenFee = feeObj.value("CreateCitizen").toString();
 
     //其他费用
     QJsonObject crossfeeObj = jsonObject.value("CrossFee").toObject();
@@ -945,6 +946,21 @@ QStringList HXChain::getMyFormalGuards()
 {
     QStringList result;
     QStringList guards = formalGuardMap.keys();
+    foreach (QString key, accountInfoMap.keys())
+    {
+        if(guards.contains(key))
+        {
+            result += key;
+        }
+    }
+
+    return result;
+}
+
+QStringList HXChain::getMyGuards()
+{
+    QStringList result;
+    QStringList guards = allGuardMap.keys();
     foreach (QString key, accountInfoMap.keys())
     {
         if(guards.contains(key))

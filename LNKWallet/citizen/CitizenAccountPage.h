@@ -17,11 +17,16 @@ public:
 
     void init();
 
+    void refresh();
+
 private slots:
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
+    void on_newCitizenBtn_clicked();
+
 private:
     Ui::CitizenAccountPage *ui;
+    bool inited = false;
 
     void paintEvent(QPaintEvent*);
     void showLockBalance();
