@@ -36,6 +36,11 @@ CreateTokenDialog::CreateTokenDialog(QWidget *parent) :
     QRegExpValidator *pReg2 = new QRegExpValidator(rx2, this);
     ui->tokenSymbolLineEdit->setValidator(pReg2);
 
+    // TODOTOMORROW 可能要根据精度来限制总量输入位数
+    QRegExp rx3("[0-9]{0,18}");
+    QRegExpValidator *pReg3 = new QRegExpValidator(rx3, this);
+    ui->totalSupplyLineEdit->setValidator(pReg3);
+
     init();
 }
 
@@ -193,6 +198,7 @@ void CreateTokenDialog::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":"))
         {
             HXChain::getInstance()->configFile->setValue("/contractTokens/" + ui->contractIdLabel->text(), 1);
+            newTokenAdded = true;
 
             TransactionResultDialog transactionResultDialog;
             transactionResultDialog.setInfoText(tr("Transaction of invoking contract function \"init_token\" has been sent out!"));

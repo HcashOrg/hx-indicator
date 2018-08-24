@@ -76,8 +76,9 @@ void CitizenProposalPage::init()
         ui->accountComboBox->hide();
 
         QLabel* label = new QLabel(this);
-        label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
+        label->setGeometry(QRect(ui->label->pos(), QSize(300,30)));
         label->setText(tr("There are no citizen accounts in the wallet."));
+        label->setStyleSheet("QLabel{color: rgb(137,129,161);font: 11px \"Microsoft YaHei UI Light\";}");
     }
 
     inited = true;

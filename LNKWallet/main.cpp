@@ -114,6 +114,8 @@ int main(int argc, char *argv[])
 //    a.installTranslator(&translator);
     HXChain::getInstance();  // 在frame创建前先创建实例，读取language
     qDebug() <<  "db init: " << HXChain::getInstance()->transactionDB.init();
+    qDebug() <<  "witnessConfig init: " << HXChain::getInstance()->witnessConfig->init();
+
 //    QStringList keys = HXChain::getInstance()->transactionDB.keys();
 
 //    qInstallMessageHandler(outputMessage);  // 重定向qebug 到log.txt

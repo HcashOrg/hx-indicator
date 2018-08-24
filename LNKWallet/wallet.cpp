@@ -38,11 +38,11 @@ HXChain::HXChain()
     getSystemEnvironmentPath();
 
     currentDialog = NULL;
-    hasDelegateSalary = false;
     currentPort = CLIENT_RPC_PORT;
     currentAccount = "";
     transactionFee = 0;
 
+    witnessConfig = new WitnessConfig;
     configFile = new QSettings( walletConfigPath + "/config.ini", QSettings::IniFormat);
     if( configFile->value("/settings/lockMinutes").toInt() == 0)   // 如果第一次，没有config.ini
     {
@@ -118,6 +118,12 @@ HXChain::~HXChain()
     {
         delete configFile;
         configFile = NULL;
+    }
+
+    if (witnessConfig)
+    {
+        delete witnessConfig;
+        witnessConfig = NULL;
     }
 
     if( contactsFile)
@@ -353,33 +359,6 @@ void HXChain::deleteAccountInConfigFile(QString accountName)
 
 
 }
-
-
-TwoAddresses HXChain::getAddress(QString name)
-{
-    TwoAddresses twoAddresses;
-
-    if( name.isEmpty())
-    {
-        return twoAddresses;
-    }
-
-    QString result = jsonDataValue("id_wallet_list_my_addresses");
-
-    int pos = result.indexOf( "\"name\":\"" + name + "\",") ;
-    if( pos != -1)  // 如果 wallet_list_my_addresses 中存在
-    {
-
-        int pos2 = result.indexOf( "\"owner_address\":", pos) + 17;
-        twoAddresses.ownerAddress = result.mid( pos2, result.indexOf( "\"", pos2) - pos2);
-
-        pos2 = result.indexOf( "\"active_address\":", pos) + 18;
-        twoAddresses.activeAddress = result.mid( pos2, result.indexOf( "\"", pos2) - pos2);
-    }
-
-    return twoAddresses;
-}
-
 
 
 void HXChain::getSystemEnvironmentPath()
@@ -1356,77 +1335,7 @@ QString doubleTo5Decimals(double number)
         return num.mid(0,pos);
 }
 
-QString HXChain::registerMapValue(QString key)
-{
-    mutexForRegisterMap.lock();
-    QString value = registerMap.value(key);
-    mutexForRegisterMap.unlock();
 
-    return value;
-}
-
-void HXChain::registerMapInsert(QString key, QString value)
-{
-    mutexForRegisterMap.lock();
-    registerMap.insert(key,value);
-    mutexForRegisterMap.unlock();
-}
-
-int HXChain::registerMapRemove(QString key)
-{
-    mutexForRegisterMap.lock();
-    int number = registerMap.remove(key);
-    mutexForRegisterMap.unlock();
-    return number;
-}
-
-QString HXChain::balanceMapValue(QString key)
-{
-    mutexForBalanceMap.lock();
-    QString value = balanceMap.value(key);
-    mutexForBalanceMap.unlock();
-
-    return value;
-}
-
-void HXChain::balanceMapInsert(QString key, QString value)
-{
-    mutexForBalanceMap.lock();
-    balanceMap.insert(key,value);
-    mutexForBalanceMap.unlock();
-}
-
-int HXChain::balanceMapRemove(QString key)
-{
-    mutexForBalanceMap.lock();
-    int number = balanceMap.remove(key);
-    mutexForBalanceMap.unlock();
-    return number;
-}
-
-TwoAddresses HXChain::addressMapValue(QString key)
-{
-    mutexForAddressMap.lock();
-    TwoAddresses value = addressMap.value(key);
-    mutexForAddressMap.unlock();
-
-    return value;
-}
-
-void HXChain::addressMapInsert(QString key, TwoAddresses value)
-{
-    mutexForAddressMap.lock();
-    addressMap.insert(key,value);
-    mutexForAddressMap.unlock();
-}
-
-int HXChain::addressMapRemove(QString key)
-{
-    mutexForAddressMap.lock();
-    int number = addressMap.remove(key);
-    mutexForAddressMap.unlock();
-    return number;
-}
 
 //bool HXChain::rpcReceivedOrNotMapValue(QString key)
 //{
@@ -1527,21 +1436,6 @@ double roundDown(double decimal, int precision)
     }
 
     return result;
-}
-
-bool isExistInWallet(QString strName)
-{
-    mutexForAddressMap.lock();
-    for (QMap<QString,TwoAddresses>::const_iterator i = HXChain::getInstance()->addressMap.constBegin(); i != HXChain::getInstance()->addressMap.constEnd(); ++i)
-    {
-        if(i.key() == strName)
-        {
-            mutexForAddressMap.unlock();
-            return true;
-        }
-    }
-    mutexForAddressMap.unlock();
-    return false;
 }
 
 QString removeLastZeros(QString number)     // 去掉小数最后面的0

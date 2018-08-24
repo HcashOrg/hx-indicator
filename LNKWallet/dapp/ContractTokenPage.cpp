@@ -159,6 +159,11 @@ void ContractTokenPage::on_createTokenBtn_clicked()
 {
     CreateTokenDialog createTokenDialog;
     createTokenDialog.pop();
+
+    if(createTokenDialog.newTokenAdded)
+    {
+        QTimer::singleShot(5000, this, &ContractTokenPage::fetchTokensInfo);
+    }
 }
 
 void ContractTokenPage::jsonDataUpdated(QString id)
@@ -167,7 +172,7 @@ void ContractTokenPage::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         QString contractId = id.mid( QString("ContractTokenPage-invoke_contract_offline-tokenSymbol-").size());
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith(QString("\"result\":")))
         {
@@ -188,7 +193,7 @@ void ContractTokenPage::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         QString contractId = id.mid( QString("ContractTokenPage-invoke_contract_offline-precision-").size());
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith(QString("\"result\":")))
         {
@@ -225,7 +230,7 @@ void ContractTokenPage::jsonDataUpdated(QString id)
     if( id.startsWith("ContractTokenPage-invoke_contract_offline-balanceOf-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         QString str = id.mid( QString("ContractTokenPage-invoke_contract_offline-balanceOf-").size());
         QString contractId = str.split("###").at(0);
@@ -272,6 +277,11 @@ void ContractTokenPage::on_addTokenBtn_clicked()
 {
     AddTokenDialog addTokenDialog;
     addTokenDialog.pop();
+
+    if(addTokenDialog.newTokenAdded)
+    {
+        QTimer::singleShot(5000, this, &ContractTokenPage::fetchTokensInfo);
+    }
 }
 
 void ContractTokenPage::on_tokenTableWidget_cellClicked(int row, int column)

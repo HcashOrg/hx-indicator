@@ -21,6 +21,8 @@ public:
 
     void init();
 
+    bool newTokenAdded = false;
+
 private slots:
     void jsonDataUpdated(QString id);
 

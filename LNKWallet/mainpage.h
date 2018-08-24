@@ -74,7 +74,6 @@ private:
 
 
     void paintEvent(QPaintEvent*);
-    void updatePending();
     bool eventFilter(QObject *watched, QEvent *e);
 
     BlankDefaultWidget *blankWidget;

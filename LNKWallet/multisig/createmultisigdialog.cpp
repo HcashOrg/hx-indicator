@@ -55,8 +55,8 @@ CreateMultiSigDialog::CreateMultiSigDialog(QWidget *parent) :
     ui->ownersTableWidget->setColumnWidth(1,100);
     ui->ownersTableWidget->setColumnWidth(2,80);
 
-    QStringList keys = HXChain::getInstance()->addressMap.keys();
-    ui->accountComboBox->addItems( keys);
+//    QStringList keys = HXChain::getInstance()->addressMap.keys();
+//    ui->accountComboBox->addItems( keys);
 }
 
 CreateMultiSigDialog::~CreateMultiSigDialog()

@@ -26,6 +26,7 @@
 #include "extra/style.h"
 #include "extra/transactiondb.h"
 #include "extra/transactiontype.h"
+#include "extra/WitnessConfig.h"
 
 #define ASSET_NAME "HX"
 #define ACCOUNT_ADDRESS_PREFIX  "HX"
@@ -56,13 +57,11 @@
 class WorkerThreadManager;
 class WebSocketManager;
 
+class WitnessConfig;
 
 static QMutex mutexForJsonData;
 static QMutex mutexForPending;
 static QMutex mutexForConfigFile;
-static QMutex mutexForRegisterMap;
-static QMutex mutexForBalanceMap;
-static QMutex mutexForAddressMap;
 
 #include <mutex>
 static std::mutex infoMutex;
@@ -229,13 +228,6 @@ struct TransactionInfo
 typedef QVector<TransactionInfo>  TransactionsInfoVector;
 
 
-
-struct TwoAddresses     // owner_address 和 active_address
-{
-    QString ownerAddress;
-    QString activeAddress;
-};
-
 //朱正天---手续费
 struct FeeChargeInfo
 {
@@ -336,30 +328,11 @@ public:
     };
     TotalContractFee parseTotalContractFee(QString result);
 
-    QMap<QString,QString> balanceMap;
-    QMap<QString,TwoAddresses> addressMap;
-    QMap<QString,QString> registerMap;
-    QStringList delegateList;
-    bool hasDelegateSalary;
-    QMap<QString,double> delegateSalaryMap;
-
-    TwoAddresses getAddress(QString);
-
     void deleteAccountInConfigFile(QString);
     void updateJsonDataMap(QString id, QString data);
     QString jsonDataValue(QString id);
     double getPendingAmount(QString name);
     QString getPendingInfo(QString id);
-
-    QString registerMapValue(QString key);
-    void registerMapInsert(QString key, QString value);
-    int registerMapRemove(QString key);
-    QString balanceMapValue(QString key);
-    void balanceMapInsert(QString key, QString value);
-    int balanceMapRemove(QString key);
-    TwoAddresses addressMapValue(QString key);
-    void addressMapInsert(QString key, TwoAddresses value);
-    int addressMapRemove(QString key);
 
     void appendCurrentDialogVector(QWidget*);
     void removeCurrentDialogVector(QWidget *);
@@ -378,6 +351,7 @@ public:
                                             // 为的是自动锁定的时候hide这些dialog
 
     QSettings *configFile;
+    WitnessConfig* witnessConfig = NULL;
 //    void loadAccountInfo();
 
     QString appDataPath;

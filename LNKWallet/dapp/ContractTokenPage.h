@@ -59,10 +59,11 @@ private:
     Ui::ContractTokenPage *ui;
     void paintEvent(QPaintEvent*);
 
+    void showAccountTokens();
+
+private slots:
     void fetchTokensInfo();
     void fetchTokensBalance();
-
-    void showAccountTokens();
 };
 
 #endif // CONTRACTTOKENPAGE_H

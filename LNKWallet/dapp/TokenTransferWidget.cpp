@@ -23,8 +23,6 @@ TokenTransferWidget::TokenTransferWidget(QString _accountName, QString _tokenSym
     setPalette(palette);
 
     ui->sendBtn->setStyleSheet(OKBTN_STYLE);
-    ui->transferRecordBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
-
 
     ui->memoTextEdit->setStyleSheet("QTextEdit{background: transparent;color: rgb(83,61,138);font: 11px \"Microsoft YaHei UI Light\";border:none;border-bottom:1px solid rgb(83,61,138);}"
                                     "QTextEdit:focus{border-bottom-color:rgb(83,61,138);}"

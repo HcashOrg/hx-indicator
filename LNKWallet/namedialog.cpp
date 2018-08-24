@@ -93,8 +93,6 @@ QString NameDialog::pop()
     }
 }
 
-bool isExistInWallet(QString);
-
 void NameDialog::on_nameLineEdit_textChanged(const QString &arg1)
 {
     if( arg1.isEmpty())
@@ -117,7 +115,7 @@ void NameDialog::on_nameLineEdit_textChanged(const QString &arg1)
 
 
     //检查地址名是否在钱包内已经存在
-    if( isExistInWallet(addrName) )
+    if( HXChain::getInstance()->accountInfoMap.keys().contains(addrName))
     {
         ui->okBtn->setEnabled(false);
         ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#EB005E>" + tr( "This name has been used") + "</font></body>" );

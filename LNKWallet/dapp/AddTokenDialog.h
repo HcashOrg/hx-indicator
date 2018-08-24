@@ -17,6 +17,8 @@ public:
 
     void pop();
 
+    bool newTokenAdded = false;
+
 private slots:
     void jsonDataUpdated(QString id);
 

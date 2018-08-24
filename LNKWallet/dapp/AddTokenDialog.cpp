@@ -112,6 +112,7 @@ void AddTokenDialog::jsonDataUpdated(QString id)
                 else
                 {
                     HXChain::getInstance()->configFile->setValue("/contractTokens/" + contractId, 1);
+                    newTokenAdded = true;
 
                     CommonDialog commonDialog(CommonDialog::OkOnly);
                     commonDialog.setText( tr("This contract has been added!") );
@@ -158,6 +159,7 @@ void AddTokenDialog::jsonDataUpdated(QString id)
             else
             {
                 HXChain::getInstance()->configFile->setValue("/contractTokens/" + contractId, 1);
+                newTokenAdded = true;
 
                 CommonDialog commonDialog(CommonDialog::OkOnly);
                 commonDialog.setText( tr("This contract has been added!") );
