@@ -14,7 +14,7 @@ FeeGuaranteeWidget::FeeGuaranteeWidget(QString _guaranteeId, double _feeAmount, 
 
     connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    ui->label->setText(tr("use guaranteeOrder %1").arg(guaranteeId));
+    ui->label->setText(tr("guaranteeId %1").arg(guaranteeId));
 
     fetchGuaranteeOrder();
 }
@@ -26,7 +26,7 @@ FeeGuaranteeWidget::~FeeGuaranteeWidget()
 
 void FeeGuaranteeWidget::setBackgroundColor(QString color)
 {
-    ui->label->setStyleSheet(QString("QLabel{background-color:%1;color:rgb(52,37,90);}").arg(color));
+    ui->label->setStyleSheet(QString("QLabel{background-color:%1;font: 11px \"Microsoft YaHei UI Light\";color:rgb(52,37,90);}").arg(color));
 }
 
 void FeeGuaranteeWidget::jsonDataUpdated(QString id)
@@ -34,7 +34,7 @@ void FeeGuaranteeWidget::jsonDataUpdated(QString id)
     if(id == "FeeGuaranteeWidget-get_guarantee_order-" + trxId)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if( result.startsWith("\"result\":"))             // 成功
         {

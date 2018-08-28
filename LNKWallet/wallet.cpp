@@ -696,19 +696,20 @@ void HXChain::parseTransaction(QString result)
 
     QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
     QJsonObject jsonObject = parse_doucment.object();
-    QJsonObject object = jsonObject.take("result").toObject();
+    QJsonObject object = jsonObject.value("result").toObject();
 
     TransactionStruct ts;
-    ts.transactionId = object.take("trxid").toString();
-    ts.blockNum = object.take("block_num").toInt();
-    ts.expirationTime = object.take("expiration").toString();
+    ts.transactionId = object.value("trxid").toString();
+    ts.blockNum = object.value("block_num").toInt();
+    ts.expirationTime = object.value("expiration").toString();
 
-    QJsonArray array = object.take("operations").toArray().at(0).toArray();
+    QJsonArray array = object.value("operations").toArray().at(0).toArray();
     ts.type = array.at(0).toInt();
     QJsonObject operationObject = array.at(1).toObject();
     ts.operationStr = QJsonDocument(operationObject).toJson();
-    ts.feeAmount = jsonValueToULL( operationObject.take("fee").toObject().take("amount"));
-    if(operationObject.contains("guarantee_id"))
+    ts.feeAmount = jsonValueToULL( operationObject.value("fee").toObject().value("amount"));
+
+    if(operationObject.keys().contains("guarantee_id"))
     {
         ts.guaranteeId = operationObject.value("guarantee_id").toString();
     }
@@ -1577,13 +1578,13 @@ QString toJsonFormat(QString instruction,
 
 QDataStream &operator >>(QDataStream &in, TransactionStruct &data)
 {
-    in >> data.transactionId >> data.type >> data.blockNum >> data.expirationTime >> data.operationStr >> data.feeAmount;
+    in >> data.transactionId >> data.type >> data.blockNum >> data.expirationTime >> data.operationStr >> data.feeAmount >> data.guaranteeId;
     return in;
 }
 
 QDataStream &operator <<(QDataStream &out, const TransactionStruct &data)
 {
-    out << data.transactionId << data.type << data.blockNum << data.expirationTime << data.operationStr << data.feeAmount;
+    out << data.transactionId << data.type << data.blockNum << data.expirationTime << data.operationStr << data.feeAmount << data.guaranteeId;
     return out;
 }
 

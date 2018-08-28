@@ -466,7 +466,7 @@ void Frame::showTransferPage(QString accountName,QString assetType)
     closeCurrentPage();
     getAccountInfo();
     HXChain::getInstance()->mainFrame->setCurrentAccount(accountName);
-    qDebug()<<"transaccccccc";
+
     transferPage = new TransferPage(accountName,centralWidget,assetType);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
