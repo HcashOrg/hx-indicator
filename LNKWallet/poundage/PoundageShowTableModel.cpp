@@ -95,7 +95,7 @@ int PoundageShowTableModel::rowCount(const QModelIndex &parent) const
 
 int PoundageShowTableModel::columnCount(const QModelIndex &parent) const
 {
-   return 7;
+   return 8;
 }
 
 QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
@@ -139,6 +139,10 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
             {
                 return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->targetCoinNumber;
             }
+            else if(index.column() == 7)
+            {
+                return tr("delete");
+            }
         case Qt::TextAlignmentRole:
             return Qt::AlignCenter;
         case Qt::ForegroundRole:
@@ -146,6 +150,9 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
         case Qt::UserRole:
             return QVariant::fromValue<std::shared_ptr<PoundageUnit>>(_p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]);
             break;
+    case Qt::BackgroundRole:
+        return QBrush(0==index.row()%2?QColor(243,241,250):QColor(238,236,245));
+        break;
         default:
             break;
         }
