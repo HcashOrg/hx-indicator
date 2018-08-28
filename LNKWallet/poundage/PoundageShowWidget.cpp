@@ -13,6 +13,7 @@
 #include "wallet.h"
 #include "showcontentdialog.h"
 #include "control/BlankDefaultWidget.h"
+#include "ToolButtonWidget.h"
 
 Q_DECLARE_METATYPE(std::shared_ptr<PoundageUnit>)
 
@@ -78,6 +79,20 @@ void PoundageShowWidget::InitData(const std::shared_ptr<PoundageSheet> &data)
 
 
     _p->blankWidget->setVisible(data->size() == 0);
+
+    //设置删除按钮
+    for(int i = 0;i < _p->tableModel->rowCount();++i)
+    {
+        ToolButtonWidget *toolButton = new ToolButtonWidget();
+        toolButton->setText(tr("delete"));
+        toolButton->setBackgroundColor(0==i%2?"rgb(243,241,250)":"rgb(238,236,245)"  );
+        connect(toolButton,&ToolButtonWidget::clicked,[i,this](){
+            emit DeletePoundageSignal(this->_p->tableModel->index(i,0).data(Qt::UserRole).value<std::shared_ptr<PoundageUnit>>()->poundageID,
+                                      HXChain::getInstance()->addressToName(this->_p->tableModel->index(i,0).data(Qt::UserRole).value<std::shared_ptr<PoundageUnit>>()->ownerAdress));
+        });
+
+        ui->tableView->setIndexWidget(_p->tableModel->index(i,7),toolButton);
+    }
 }
 
 void PoundageShowWidget::DeletePoundageSlots()
@@ -99,6 +114,7 @@ void PoundageShowWidget::EnableContextMenu(bool enable)
 void PoundageShowWidget::EnableDeleteAction(bool enable)
 {
     _p->isDeleteActionEnabled = enable;
+    ui->tableView->setColumnHidden(7,!enable);
 }
 
 void PoundageShowWidget::EnalbeDefaultAction(bool enable)
@@ -120,6 +136,7 @@ void PoundageShowWidget::InitWidget()
     ui->tableView->hideColumn(3);
 //    ui->tableView->hideColumn(2);
     ui->tableView->hideColumn(6);
+    ui->tableView->hideColumn(7);
 
     ui->stackedWidget_pageBar->addWidget(_p->pageWidget);
     ui->stackedWidget_pageBar->setCurrentWidget(_p->pageWidget);
