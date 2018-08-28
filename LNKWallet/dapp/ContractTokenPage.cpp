@@ -50,6 +50,7 @@ ContractTokenPage::~ContractTokenPage()
 
 void ContractTokenPage::init()
 {
+    inited = false;
     ui->accountComboBox->clear();
     QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
     ui->accountComboBox->addItems(accounts);
@@ -59,6 +60,7 @@ void ContractTokenPage::init()
         ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
 
+    inited = true;
     fetchTokensInfo();
 }
 
@@ -270,6 +272,9 @@ void ContractTokenPage::jsonDataUpdated(QString id)
 
 void ContractTokenPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
+    if(!inited)     return;
+    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+
     showAccountTokens();
 }
 

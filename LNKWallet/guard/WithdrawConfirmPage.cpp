@@ -204,7 +204,7 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if(id == "id-guard_sign_crosschain_transaction")
+    if(id == "id-senator_sign_crosschain_transaction")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
@@ -277,7 +277,7 @@ void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked(int ro
 
             if(!generatedTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
             {
-                HXChain::getInstance()->postRPC( "id-guard_sign_crosschain_transaction", toJsonFormat( "guard_sign_crosschain_transaction",
+                HXChain::getInstance()->postRPC( "id-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
                                                  QJsonArray() << generatedTrxId << ui->accountComboBox->currentText()));
 
             }
@@ -302,10 +302,7 @@ void WithdrawConfirmPage::showCrosschainTransactions()
 
             ApplyTransaction at = applyTransactionMap.value(keys.at(i));
 
-            QDateTime time = QDateTime::fromString(at.expirationTime, "yyyy-MM-ddThh:mm:ss");
-            time = time.addSecs(-600);       // 时间减10分钟
-            QString currentDateTime = time.toString("yyyy-MM-dd\nhh:mm:ss");
-            ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
+            ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(toLocalTime(at.expirationTime)));
             ui->crosschainTransactionTableWidget->item(i,0)->setData(Qt::UserRole, at.trxId);
 
             ui->crosschainTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(at.amount + " " + at.assetSymbol));
@@ -345,10 +342,7 @@ void WithdrawConfirmPage::showCrosschainTransactions()
 
             ApplyTransaction at = pendingApplyTransactionMap.value(keys.at(i));
 
-            QDateTime time = QDateTime::fromString(at.expirationTime, "yyyy-MM-ddThh:mm:ss");
-            time = time.addSecs(-600);       // 时间减10分钟
-            QString currentDateTime = time.toString("yyyy-MM-dd\nhh:mm:ss");
-            ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
+            ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(toLocalTime(at.expirationTime)));
             ui->crosschainTransactionTableWidget->item(i,0)->setData(Qt::UserRole, at.trxId);
 
             ui->crosschainTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(at.amount + " " + at.assetSymbol));

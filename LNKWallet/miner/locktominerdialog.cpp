@@ -75,7 +75,7 @@ void LockToMinerDialog::setAsset(QString _assetName)
 
 void LockToMinerDialog::jsonDataUpdated(QString id)
 {
-    if( id == "id-lock_balance_to_miner")
+    if( id == "id-lock_balance_to_citizen")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 
@@ -103,8 +103,8 @@ void LockToMinerDialog::on_okBtn_clicked()
 {
     if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-    HXChain::getInstance()->postRPC( "id-lock_balance_to_miner",
-                                     toJsonFormat( "lock_balance_to_miner",
+    HXChain::getInstance()->postRPC( "id-lock_balance_to_citizen",
+                                     toJsonFormat( "lock_balance_to_citizen",
                                                    QJsonArray() << ui->minerComboBox->currentText() << m_accountName
                                                    << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
                                                    << true ));

@@ -81,7 +81,7 @@
    </attribute>
    <column>
     <property name="text">
-     <string>申请时间（GMT）</string>
+     <string>申请时间</string>
     </property>
     <property name="font">
      <font>

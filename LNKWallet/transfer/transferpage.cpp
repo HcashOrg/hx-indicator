@@ -4,8 +4,6 @@
 #include <windows.h>
 #endif
 
-
-
 #include "transferpage.h"
 #include "ui_transferpage.h"
 #include "wallet.h"

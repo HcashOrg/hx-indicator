@@ -203,7 +203,7 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if(id == "id-guard_sign_coldhot_transaction")
+    if(id == "id-senator_sign_coldhot_transaction")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
@@ -272,10 +272,7 @@ void ColdHotTransferPage::showColdHotTransactions()
 
             ColdHotTransaction cht = coldHotTransactionMap.value(keys.at(i));
 
-            QDateTime time = QDateTime::fromString(cht.expirationTime, "yyyy-MM-ddThh:mm:ss");
-    //                time = time.addSecs(-600);       // 时间减10分钟
-            QString currentDateTime = time.toString("yyyy-MM-dd\nhh:mm:ss");
-            ui->coldHotTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
+            ui->coldHotTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(toLocalTime(cht.expirationTime)));
             ui->coldHotTransactionTableWidget->item(i,0)->setData(Qt::UserRole, cht.trxId);
 
             ui->coldHotTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(cht.amount + " " + cht.assetSymbol));
@@ -316,10 +313,7 @@ void ColdHotTransferPage::showColdHotTransactions()
 
             ColdHotTransaction cht = pendingColdHotTransactionMap.value(keys.at(i));
 
-            QDateTime time = QDateTime::fromString(cht.expirationTime, "yyyy-MM-ddThh:mm:ss");
-    //                time = time.addSecs(-600);       // 时间减10分钟
-            QString currentDateTime = time.toString("yyyy-MM-dd\nhh:mm:ss");
-            ui->coldHotTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(currentDateTime));
+            ui->coldHotTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(toLocalTime(cht.expirationTime)));
             ui->coldHotTransactionTableWidget->item(i,0)->setData(Qt::UserRole, cht.trxId);
 
             ui->coldHotTransactionTableWidget->setItem(i, 1, new QTableWidgetItem(cht.amount + " " + cht.assetSymbol));
@@ -455,7 +449,7 @@ void ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked(int row, 
 
                 if(!chcTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
                 {
-                    HXChain::getInstance()->postRPC( "id-guard_sign_coldhot_transaction", toJsonFormat( "guard_sign_coldhot_transaction",
+                    HXChain::getInstance()->postRPC( "id-senator_sign_coldhot_transaction", toJsonFormat( "senator_sign_coldhot_transaction",
                                                                                                         QJsonArray() << chcTrxId << ui->accountComboBox->currentText()));
 
                 }

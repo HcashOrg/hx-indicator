@@ -1641,7 +1641,7 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-list_guard_members")
+    if( id == "id-list_senator_members")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
@@ -1671,7 +1671,7 @@ void Frame::jsonDataUpdated(QString id)
 
                 HXChain::getInstance()->fetchProposals();
 
-                HXChain::getInstance()->postRPC( "id-get_guard_member-" + account, toJsonFormat( "get_guard_member", QJsonArray() << account));
+                HXChain::getInstance()->postRPC( "id-get_senator_member-" + account, toJsonFormat( "get_senator_member", QJsonArray() << account));
                 //            HXChain::getInstance()->fetchGuardAllMultisigAddresses(accountId);
 
                 HXChain::getInstance()->postRPC( "guard-get_account-" + account, toJsonFormat( "get_account", QJsonArray() << account));
@@ -1682,14 +1682,14 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id.startsWith("id-get_guard_member-"))
+    if( id.startsWith("id-get_senator_member-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
-            QString account = id.mid(QString("id-get_guard_member-").size());
+            QString account = id.mid(QString("id-get_senator_member-").size());
 
             result.prepend("{");
             result.append("}");
@@ -1736,7 +1736,7 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-list_all_guards")
+    if( id == "id-list_all_senators")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
@@ -1761,7 +1761,7 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-list_miners")
+    if( id == "id-list_citizens")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
@@ -1784,21 +1784,21 @@ void Frame::jsonDataUpdated(QString id)
 //                info.minerId = array2.at(1).toString();
 //                HXChain::getInstance()->minerMap.insert(account, info);
 
-                HXChain::getInstance()->postRPC( "id-get_miner-" + account, toJsonFormat( "get_miner", QJsonArray() << account));
+                HXChain::getInstance()->postRPC( "id-get_citizen-" + account, toJsonFormat( "get_citizen", QJsonArray() << account));
             }
         }
 
         return;
     }
 
-    if( id.startsWith("id-get_miner-"))
+    if( id.startsWith("id-get_citizen-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
-            QString account = id.mid(QString("id-get_miner-").size());
+            QString account = id.mid(QString("id-get_citizen-").size());
 
             result.prepend("{");
             result.append("}");

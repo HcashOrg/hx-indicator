@@ -154,6 +154,7 @@ void TokenTransferWidget::on_accountComboBox_currentIndexChanged(const QString &
 {
     if(!inited) return;
     setTokenBalance();
+    transferFeeWidget->updateAccountNameSlots(ui->accountComboBox->currentText(), true);
 }
 
 void TokenTransferWidget::on_tokenComboBox_currentIndexChanged(const QString &arg1)
@@ -171,6 +172,10 @@ void TokenTransferWidget::setTokenBalance()
     TokenBalance balance = page->accountContractTokenBalanceMap.value(ui->accountComboBox->currentText()).value(contractId);
     ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(getBigNumberString(balance.amount.toULongLong(), tokenInfo.precision.size() - 1))
                                            .arg(tokenInfo.symbol));
+
+    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(tokenInfo.precision.size() - 1));
+    QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
+    ui->amountLineEdit->setValidator(pReg1);
 }
 
 void TokenTransferWidget::calculateTransferFee()

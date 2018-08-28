@@ -188,7 +188,7 @@ void MinerPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-foreclose_balance_from_miner")
+    if( id == "id-foreclose_balance_from_citizen")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 
@@ -596,8 +596,8 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
 
         if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
-        HXChain::getInstance()->postRPC( "id-foreclose_balance_from_miner",
-                                         toJsonFormat( "foreclose_balance_from_miner",
+        HXChain::getInstance()->postRPC( "id-foreclose_balance_from_citizen",
+                                         toJsonFormat( "foreclose_balance_from_citizen",
                                                        QJsonArray() << ui->lockBalancesTableWidget->item(row,0)->text()
                                                        << ui->accountComboBox->currentText()
                                                        << forecloseDialog.amountStr << ui->lockBalancesTableWidget->item(row,1)->text()

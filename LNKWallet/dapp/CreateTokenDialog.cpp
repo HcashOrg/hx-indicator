@@ -36,10 +36,7 @@ CreateTokenDialog::CreateTokenDialog(QWidget *parent) :
     QRegExpValidator *pReg2 = new QRegExpValidator(rx2, this);
     ui->tokenSymbolLineEdit->setValidator(pReg2);
 
-    // TODOTOMORROW 可能要根据精度来限制总量输入位数
-    QRegExp rx3("[0-9]{0,18}");
-    QRegExpValidator *pReg3 = new QRegExpValidator(rx3, this);
-    ui->totalSupplyLineEdit->setValidator(pReg3);
+    setTotalSupplyValidator();
 
     init();
 }
@@ -82,6 +79,7 @@ void CreateTokenDialog::init()
 
     registerFeeWidget = new FeeChooseWidget( 0,HXChain::getInstance()->feeType,
                                                  ui->accountComboBox->currentText(), ui->registerContractPage);
+    connect(registerFeeWidget,&FeeChooseWidget::feeSufficient,ui->registerBtn,&QToolButton::setEnabled);
     registerFeeWidget->move(50,120);
     calculateRegisterFee();
 }
@@ -100,11 +98,12 @@ void CreateTokenDialog::jsonDataUpdated(QString id)
 
             unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
             registerFeeWidget->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
-            ui->registerBtn->setEnabled(true);
+            registerFeeWidget->updateAccountNameSlots(ui->accountComboBox->currentText(), true);
         }
         else
         {
             registerFeeWidget->updateFeeNumberSlots(0);
+            registerFeeWidget->updateAccountNameSlots(ui->accountComboBox->currentText(), true);
             ui->registerBtn->setEnabled(false);
         }
 
@@ -226,6 +225,7 @@ void CreateTokenDialog::on_registerBtn_clicked()
     HXChain::getInstance()->postRPC( "CreateTokenDialog-register_contract", toJsonFormat( "register_contract",
                                                                            QJsonArray() << ui->accountComboBox->currentText() << HXChain::getInstance()->currentContractFee()
                                                                            << stepCount  << ui->gpcPathLineEdit->text()));
+    ui->registerBtn->setEnabled(false);
 }
 
 void CreateTokenDialog::on_closeBtn_clicked()
@@ -292,8 +292,10 @@ void CreateTokenDialog::on_tokenSymbolLineEdit_textEdited(const QString &arg1)
 
 void CreateTokenDialog::on_precisionSpinBox_valueChanged(int arg1)
 {
+    ui->totalSupplyLineEdit->clear();
     setTotalSupplyValidator();
-    calculateInitFee();
+
+    ui->initBtn->setEnabled(false);
 }
 
 void CreateTokenDialog::on_totalSupplyLineEdit_textEdited(const QString &arg1)

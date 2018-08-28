@@ -84,7 +84,7 @@ void WebSocketManager::run()
 {
     timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(onTimer()));
-    timer->start(10);
+    timer->start(1);
 
     m_webSocket = new QWebSocket;
     connect(m_webSocket,SIGNAL(connected()),this,SLOT(onConnected()));
@@ -114,7 +114,7 @@ void WebSocketManager::onTimer()
         }
 
         loopCount++;
-        if(loopCount > 100)
+        if(loopCount > 1000)
         {
             pendingRpcs.removeFirst();
             busy = false;

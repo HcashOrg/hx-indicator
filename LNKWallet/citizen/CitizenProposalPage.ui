@@ -110,7 +110,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </attribute>
    <column>
     <property name="text">
-     <string>失效时间（GMT）</string>
+     <string>失效时间</string>
     </property>
     <property name="font">
      <font>

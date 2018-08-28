@@ -913,12 +913,12 @@ void HXChain::checkPendingTransactions()
 
 void HXChain::fetchFormalGuards()
 {
-    postRPC( "id-list_guard_members", toJsonFormat( "list_guard_members", QJsonArray() << "A" << 100));
+    postRPC( "id-list_senator_members", toJsonFormat( "list_senator_members", QJsonArray() << "A" << 100));
 }
 
 void HXChain::fetchAllGuards()
 {
-    postRPC( "id-list_all_guards", toJsonFormat( "list_all_guards", QJsonArray() << "A" << 100));
+    postRPC( "id-list_all_senators", toJsonFormat( "list_all_senators", QJsonArray() << "A" << 100));
 }
 
 QStringList HXChain::getMyFormalGuards()
@@ -1034,7 +1034,7 @@ QString HXChain::guardAddressToName(QString guardAddress)
 
 void HXChain::fetchMiners()
 {
-    postRPC( "id-list_miners", toJsonFormat( "list_miners", QJsonArray() << "A" << 1000));
+    postRPC( "id-list_citizens", toJsonFormat( "list_citizens", QJsonArray() << "A" << 1000));
 }
 
 void HXChain::fetchProposals()
@@ -1657,4 +1657,13 @@ void tableWidgetSetItemZebraColor(QTableWidget *w, int alignment)
             }
         }
     }
+}
+
+QString toLocalTime(QString timeStr)
+{
+    timeStr.replace("T"," ");
+    QDateTime dateTime = QDateTime::fromString(timeStr,"yyyy-MM-dd hh:mm:ss");
+    dateTime.setTimeSpec(Qt::UTC);
+    QDateTime localTime = dateTime.toLocalTime();
+    return localTime.toString("yyyy-MM-dd hh:mm:ss");
 }

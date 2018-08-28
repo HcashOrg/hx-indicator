@@ -95,7 +95,7 @@ void ProposalPage::showProposals()
 
         ProposalInfo info = HXChain::getInstance()->senatorProposalInfoMap.value(keys.at(i));
 
-        ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(info.expirationTime.replace("T","\n")));
+        ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(toLocalTime(info.expirationTime)));
         ui->proposalTableWidget->item(i,0)->setData(Qt::UserRole,info.proposalId);
 
         ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(HXChain::getInstance()->guardAccountIdToName(info.proposer)));

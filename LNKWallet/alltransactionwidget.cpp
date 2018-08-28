@@ -408,7 +408,7 @@ void AllTransactionWidget::showTransactions()
         }
 
         ui->transactionsTableWidget->setItem(i,0, new QTableWidgetItem(QString::number(ts.blockNum)));
-        ui->transactionsTableWidget->setItem(i,1, new QTableWidgetItem(ts.expirationTime.replace("T", " ")));
+        ui->transactionsTableWidget->setItem(i,1, new QTableWidgetItem(toLocalTime(ts.expirationTime)));
         ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(getBigNumberString(ts.feeAmount, ASSET_PRECISION)));
         ui->transactionsTableWidget->setItem(i,5, new QTableWidgetItem(transactionId));
         ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("confirmed")));

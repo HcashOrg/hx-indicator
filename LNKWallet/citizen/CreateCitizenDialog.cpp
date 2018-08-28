@@ -79,7 +79,7 @@ void CreateCitizenDialog::jsonDataUpdated(QString id)
 
         if(result == "\"result\":null")
         {
-            HXChain::getInstance()->postRPC(  "id-create_miner", toJsonFormat("create_miner",
+            HXChain::getInstance()->postRPC(  "id-create_citizen", toJsonFormat("create_citizen",
                                                                               QJsonArray() << ui->accountComboBox->currentText()
                                                                               << "" << true ));
 
@@ -92,7 +92,7 @@ void CreateCitizenDialog::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-create_miner")
+    if( id == "id-create_citizen")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;

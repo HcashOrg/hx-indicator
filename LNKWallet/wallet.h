@@ -32,7 +32,7 @@
 #define ACCOUNT_ADDRESS_PREFIX  "HX"
 #define CONTRACT_ADDRESS_PREFIX "CHX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.0.6"           // 版本号
+#define WALLET_VERSION "1.0.7"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
@@ -471,6 +471,7 @@ QString removeLastZeros(QString number);        // qstring::number() 对小数�
 QString getBigNumberString(unsigned long long number,int precision);
 QString decimalToIntegerStr(QString number, int precision);
 void tableWidgetSetItemZebraColor(QTableWidget* w, int alignment = Qt::AlignCenter);
+QString toLocalTime(QString timeStr);
 
 enum AddressType
 {

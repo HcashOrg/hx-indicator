@@ -57,6 +57,7 @@ private slots:
 
 private:
     Ui::ContractTokenPage *ui;
+    bool inited = false;
     void paintEvent(QPaintEvent*);
 
     void showAccountTokens();

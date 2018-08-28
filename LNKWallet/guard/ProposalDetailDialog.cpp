@@ -95,7 +95,7 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
 
     ui->proposalIdLabel->setText(info.proposalId);
     ui->proposerIdLabel->setText(info.proposer);
-    ui->expirationTimeLabel->setText(info.expirationTime);
+    ui->expirationTimeLabel->setText(toLocalTime(info.expirationTime));
 
     int size = info.requiredAccounts.size();
     ui->voteStateTableWidget->setRowCount(0);
