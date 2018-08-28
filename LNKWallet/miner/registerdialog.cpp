@@ -36,7 +36,7 @@ RegisterDialog::RegisterDialog(QWidget *parent) :
     ui->registerNameLineEdit->setValidator( validator );
     ui->registerNameLineEdit->setMaxLength(63);
 
-    FeeChooseWidget *feeWidget = new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.createCitizenFee.toDouble(),
+    FeeChooseWidget *feeWidget = new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.minerRegisterFee.toDouble(),
                                                      HXChain::getInstance()->feeType);
     connect(feeWidget,&FeeChooseWidget::feeSufficient,ui->okBtn,&QToolButton::setEnabled);
     ui->stackedWidget_fee->addWidget(feeWidget);

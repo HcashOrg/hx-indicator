@@ -4,6 +4,7 @@
 #include "commondialog.h"
 #include "ToolButtonWidget.h"
 #include "control/AssetIconItem.h"
+#include "control/FeeGuaranteeWidget.h"
 
 #ifdef WIN32
 #include <Windows.h>
@@ -707,6 +708,10 @@ void HXChain::parseTransaction(QString result)
     QJsonObject operationObject = array.at(1).toObject();
     ts.operationStr = QJsonDocument(operationObject).toJson();
     ts.feeAmount = jsonValueToULL( operationObject.take("fee").toObject().take("amount"));
+    if(operationObject.contains("guarantee_id"))
+    {
+        ts.guaranteeId = operationObject.value("guarantee_id").toString();
+    }
 
     transactionDB.insertTransactionStruct(ts.transactionId,ts);
     qDebug() << "ttttttttttttt " << ts.type << ts.transactionId  << ts.feeAmount;
@@ -802,6 +807,14 @@ void HXChain::parseTransaction(QString result)
     {
         // 赎回质押资产
         QString addr = operationObject.take("foreclose_addr").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_SENATOR_LOCK_BALANCE:
+    {
+        // senator交保证金
+        QString addr = operationObject.take("lock_address").toString();
 
         transactionDB.addAccountTransactionId(addr, typeId);
     }
@@ -1638,6 +1651,11 @@ void tableWidgetSetItemZebraColor(QTableWidget *w, int alignment)
                 {
                     ToolButtonWidget* tbw = qobject_cast<ToolButtonWidget*>(cellWidget);
                     tbw->setBackgroundColor(itemColor);
+                }
+                else if( QString(cellWidget->metaObject()->className()) == "FeeGuaranteeWidget")
+                {
+                    FeeGuaranteeWidget* fgw = qobject_cast<FeeGuaranteeWidget*>(cellWidget);
+                    fgw->setBackgroundColor(itemColor);
                 }
                 else if( QString(cellWidget->metaObject()->className()) == "AssetIconItem")
                 {

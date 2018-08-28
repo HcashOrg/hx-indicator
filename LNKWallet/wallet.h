@@ -176,6 +176,7 @@ struct TransactionStruct
     QString expirationTime;
     QString operationStr;
     unsigned long long feeAmount = 0;
+    QString guaranteeId;
 
 public:
 

@@ -5,6 +5,7 @@
 #include "showcontentdialog.h"
 #include "control/BlankDefaultWidget.h"
 #include "poundage/PageScrollWidget.h"
+#include "control/FeeGuaranteeWidget.h"
 
 static const int ROWNUMBER = 5;
 AllTransactionWidget::AllTransactionWidget(QWidget *parent) :
@@ -317,6 +318,7 @@ void AllTransactionWidget::showTransactions()
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_UNBIND_TUNNEL);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CREATE_MINER);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_ISSUE_ASSET);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SENATOR_LOCK_BALANCE);
         break;
     case FeedPriceType:
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_FEED_PRICE);
@@ -409,10 +411,19 @@ void AllTransactionWidget::showTransactions()
 
         ui->transactionsTableWidget->setItem(i,0, new QTableWidgetItem(QString::number(ts.blockNum)));
         ui->transactionsTableWidget->setItem(i,1, new QTableWidgetItem(toLocalTime(ts.expirationTime)));
-        ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(getBigNumberString(ts.feeAmount, ASSET_PRECISION)));
         ui->transactionsTableWidget->setItem(i,5, new QTableWidgetItem(transactionId));
         ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("confirmed")));
 
+        if(ts.guaranteeId.isEmpty())
+        {
+            ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(getBigNumberString(ts.feeAmount, ASSET_PRECISION)));
+        }
+        else
+        {
+            FeeGuaranteeWidget* feeGuaranteeWidget = new FeeGuaranteeWidget(ts.guaranteeId, getBigNumberString(ts.feeAmount, ASSET_PRECISION).toDouble()
+                                                                            , transactionId);
+            ui->transactionsTableWidget->setCellWidget(i,4, feeGuaranteeWidget);
+        }
 
         QJsonObject operationObject = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
 
@@ -604,6 +615,21 @@ void AllTransactionWidget::showTransactions()
             item->setTextColor(QColor(0,170,0));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("foreclose asset from miner")));
+        }
+            break;
+        case TRANSACTION_TYPE_SENATOR_LOCK_BALANCE:
+        {
+            unsigned long long lockAmount = jsonValueToULL(operationObject.take("lock_asset_amount"));
+            QString lockAssetId = operationObject.take("lock_asset_id").toString();
+            AssetInfo lockAssetInfo = HXChain::getInstance()->assetInfoMap.value(lockAssetId);
+
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
+
+            QTableWidgetItem* item = new QTableWidgetItem( "- " + getBigNumberString(lockAmount, lockAssetInfo.precision) + " " + lockAssetInfo.symbol);
+            ui->transactionsTableWidget->setItem(i,3, item);
+            item->setTextColor(QColor(255,0,0));
+
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator lock balance")));
         }
             break;
         case TRANSACTION_TYPE_DEPOSIT:

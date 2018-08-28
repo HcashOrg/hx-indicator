@@ -16,6 +16,7 @@
 #define TRANSACTION_TYPE_RESIGN_GUARD           38      // 使guard辞职
 #define TRANSACTION_TYPE_LOCKBALANCE            55      // 质押资产给miner
 #define TRANSACTION_TYPE_FORECLOSE              56      // 赎回质押资产
+#define TRANSACTION_TYPE_SENATOR_LOCK_BALANCE   57      // senator交保证金
 #define TRANSACTION_TYPE_DEPOSIT                60      // 充值交易（多签转link-BTC）
 #define TRANSACTION_TYPE_WITHDRAW               61      // 提现交易
 #define TRANSACTION_TYPE_WITHDRAW_CROSSCHAIN    62
