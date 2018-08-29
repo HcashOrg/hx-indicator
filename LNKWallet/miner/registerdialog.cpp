@@ -214,6 +214,13 @@ void RegisterDialog::on_cancelBtn_clicked()
 
 void RegisterDialog::on_registerNameLineEdit_textChanged(const QString &arg1)
 {
+    if(ui->registerNameLineEdit->text().isEmpty())
+    {
+        ui->okBtn->setEnabled(false);
+        ui->tipLabel->clear();
+        return;
+    }
+
     HXChain::getInstance()->postRPC( "id-get_account-" + ui->registerNameLineEdit->text(),
                                      toJsonFormat( "get_account", QJsonArray() << ui->registerNameLineEdit->text() ));
 }

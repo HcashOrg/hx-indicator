@@ -176,7 +176,8 @@ SOURCES += main.cpp\
     citizen/CitizenProposalPage.cpp \
     citizen/CreateCitizenDialog.cpp \
     extra/WitnessConfig.cpp \
-    control/FeeGuaranteeWidget.cpp
+    control/FeeGuaranteeWidget.cpp \
+    dialog/ExitingWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -325,7 +326,8 @@ HEADERS  += firstlogin.h \
     citizen/CitizenProposalPage.h \
     citizen/CreateCitizenDialog.h \
     extra/WitnessConfig.h \
-    control/FeeGuaranteeWidget.h
+    control/FeeGuaranteeWidget.h \
+    dialog/ExitingWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -443,7 +445,8 @@ FORMS    += firstlogin.ui \
     citizen/CitizenAccountPage.ui \
     citizen/CitizenProposalPage.ui \
     citizen/CreateCitizenDialog.ui \
-    control/FeeGuaranteeWidget.ui
+    control/FeeGuaranteeWidget.ui \
+    dialog/ExitingWidget.ui
 
 win32{
     DISTFILES += logo.rc

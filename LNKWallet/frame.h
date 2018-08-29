@@ -30,6 +30,7 @@ class SmartContractPage;
 class MultiSigPage;
 class MultiSigTransactionPage;
 class NewOrImportWalletWidget;
+class ExitingWidget;
 
 class DepositAutomatic;
 class ContactWidget;
@@ -205,6 +206,8 @@ private:
     QTranslator translator;         //  选择语言
     QTranslator menuTranslator;     //  右键菜单语言
     QTranslator translatorForTextBrowser;   // QTextBrowser的右键菜单翻译
+
+    ExitingWidget* exitingWidget = NULL;
 
 private:
     void paintEvent(QPaintEvent* e);

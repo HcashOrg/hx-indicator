@@ -49,6 +49,7 @@
 #include "dapp/ContractTokenPage.h"
 #include "citizen/CitizenAccountPage.h"
 #include "citizen/CitizenProposalPage.h"
+#include "dialog/ExitingWidget.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -1504,17 +1505,22 @@ void Frame::jsonDataUpdated(QString id)
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
-        hide();
         HXChain::getInstance()->isExiting = true;
         HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()));
-
+        exitingWidget = new ExitingWidget(this);
+        exitingWidget->show();
+        resize(exitingWidget->size());
 
         return;
     }
+
     if("id-witness_node_stop" == id)
     {
         HXChain::getInstance()->clientProc->waitForFinished();
         HXChain::getInstance()->nodeProc->waitForFinished();
+
+        if(exitingWidget)   hide();
+
         QTimer::singleShot(1,qApp,SLOT(quit()));
         return;
     }

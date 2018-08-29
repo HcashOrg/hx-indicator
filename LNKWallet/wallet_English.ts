@@ -3577,6 +3577,19 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ExitingWidget</name>
+    <message>
+        <location filename="dialog/ExitingWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="dialog/ExitingWidget.ui" line="29"/>
+        <source>正在关闭钱包 . . .</source>
+        <translation type="unfinished">Waiting for closing the wallet . . .</translation>
+    </message>
+</context>
+<context>
     <name>ExportDialog</name>
     <message>
         <location filename="exportdialog.ui" line="19"/>
@@ -4086,27 +4099,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1167"/>
+        <location filename="frame.cpp" line="1168"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1413"/>
+        <location filename="frame.cpp" line="1414"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2183"/>
+        <location filename="frame.cpp" line="2189"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2186"/>
+        <location filename="frame.cpp" line="2192"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2189"/>
+        <location filename="frame.cpp" line="2195"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6227,6 +6240,11 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <source>总额</source>
         <translation type="unfinished">TOTAL</translation>
     </message>
+    <message>
+        <location filename="poundage/PoundageShowTableModel.cpp" line="144"/>
+        <source>delete</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PoundageShowWidget</name>
@@ -6236,17 +6254,18 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="56"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="57"/>
         <source>当前无承兑单!</source>
         <translation type="unfinished">There&apos;s no poundage!</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="159"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="176"/>
         <source>setDefault</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowWidget.cpp" line="160"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="87"/>
+        <location filename="poundage/PoundageShowWidget.cpp" line="177"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>
