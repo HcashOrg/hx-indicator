@@ -56,7 +56,7 @@ void ColdHotInfoDialog::setTrxId(QString _trxId)
     QString crosschainTrxId = page->lookupCrosschainTrxByColdHotTrxId(_trxId);
     QStringList guardAddresses = page->lookupSignedGuardByCrosschainTrx(crosschainTrxId);
 
-    int totalNum = HXChain::getInstance()->formalGuardMap.size();
+    int totalNum = HXChain::getInstance()->getFormalGuards().size();
     ui->stateLabel->setText(tr("%1 guards have signed. %2 guards have not yet.").arg(guardAddresses.size()).arg(totalNum - guardAddresses.size()));
 
     QString str;

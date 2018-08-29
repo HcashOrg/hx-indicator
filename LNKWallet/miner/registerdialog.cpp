@@ -151,7 +151,11 @@ void RegisterDialog::jsonDataUpdated(QString id)
 
         if( result.startsWith("\"result\":{\"id\":\"0.0.0\""))
         {
-            ui->okBtn->setEnabled(true);
+            if(FeeChooseWidget *feeWidget = qobject_cast<FeeChooseWidget*>(ui->stackedWidget_fee->currentWidget()))
+            {
+                ui->okBtn->setEnabled(feeWidget->isSufficient());
+            }
+
             ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#543D89>" + tr( "The name is available") + "</font></body>" );
         }
         else

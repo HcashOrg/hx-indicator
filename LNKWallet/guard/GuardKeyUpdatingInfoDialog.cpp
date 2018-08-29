@@ -38,7 +38,7 @@ void GuardKeyUpdatingInfoDialog::setAsset(QString _assetSymbol)
 {
     ui->assetLabel->setText(_assetSymbol);
     QStringList guardAccountIds = HXChain::getInstance()->getInstance()->getAssetMultisigUpdatedGuards(_assetSymbol);
-    int totalNum = HXChain::getInstance()->formalGuardMap.size();
+    int totalNum = HXChain::getInstance()->getFormalGuards().size();
     ui->stateLabel->setText(tr("%1 guards have updated. %2 guards have not yet.").arg(guardAccountIds.size()).arg(totalNum - guardAccountIds.size()));
 
     QString str;

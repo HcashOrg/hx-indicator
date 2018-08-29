@@ -474,14 +474,10 @@ void HXChain::parseAccountInfo()
                 accountInfo.name = name;
                 accountInfo.address = object.take("addr").toString();
 
-                if(formalGuardMap.contains(accountInfo.name))
+                if(allGuardMap.contains(accountInfo.name) && allGuardMap.value(accountInfo.name).accountId == accountInfo.id)
                 {
-                    accountInfo.guardId = formalGuardMap.value(accountInfo.name).guardId;
-                    accountInfo.isFormalGuard = true;
-                }
-                else if(allGuardMap.contains(accountInfo.name))
-                {
-                    accountInfo.guardId = allGuardMap.value(accountInfo.name);
+                    accountInfo.guardId = allGuardMap.value(accountInfo.name).guardId;
+                    accountInfo.isFormalGuard = allGuardMap.value(accountInfo.name).isFormal;
                 }
 
                 accountInfoMap.insert(accountInfo.name,accountInfo);
@@ -925,10 +921,10 @@ void HXChain::checkPendingTransactions()
     }
 }
 
-void HXChain::fetchFormalGuards()
-{
-    postRPC( "id-list_senator_members", toJsonFormat( "list_senator_members", QJsonArray() << "A" << 100));
-}
+//void HXChain::fetchFormalGuards()
+//{
+//    postRPC( "id-list_senator_members", toJsonFormat( "list_senator_members", QJsonArray() << "A" << 100));
+//}
 
 void HXChain::fetchAllGuards()
 {
@@ -938,12 +934,17 @@ void HXChain::fetchAllGuards()
 QStringList HXChain::getMyFormalGuards()
 {
     QStringList result;
-    QStringList guards = formalGuardMap.keys();
+
     foreach (QString key, accountInfoMap.keys())
     {
-        if(guards.contains(key))
+        if(allGuardMap.contains(key))
         {
-            result += key;
+            AccountInfo accountInfo = accountInfoMap.value(key);
+            GuardInfo   guardInfo   = allGuardMap.value(key);
+            if(accountInfo.id == guardInfo.accountId && guardInfo.isFormal)
+            {
+                result += key;
+            }
         }
     }
 
@@ -953,10 +954,30 @@ QStringList HXChain::getMyFormalGuards()
 QStringList HXChain::getMyGuards()
 {
     QStringList result;
-    QStringList guards = allGuardMap.keys();
+
     foreach (QString key, accountInfoMap.keys())
     {
-        if(guards.contains(key))
+        if(allGuardMap.contains(key))
+        {
+            AccountInfo accountInfo = accountInfoMap.value(key);
+            GuardInfo   guardInfo   = allGuardMap.value(key);
+            if(accountInfo.id == guardInfo.accountId)
+            {
+                result += key;
+            }
+        }
+    }
+
+    return result;
+}
+
+QStringList HXChain::getFormalGuards()
+{
+    QStringList result;
+
+    foreach (QString key, allGuardMap.keys())
+    {
+        if(allGuardMap.value(key).isFormal)
         {
             result += key;
         }
@@ -965,9 +986,10 @@ QStringList HXChain::getMyGuards()
     return result;
 }
 
+
 GuardMultisigAddress HXChain::getGuardMultisigByPairId(QString assetSymbol, QString guardName, QString pairId)
 {
-    QString guardAccountId = formalGuardMap.value(guardName).accountId;
+    QString guardAccountId = allGuardMap.value(guardName).accountId;
     QVector<GuardMultisigAddress> v = guardMultisigAddressesMap.value(assetSymbol + "-" + guardAccountId);
 
     GuardMultisigAddress result;
@@ -998,10 +1020,10 @@ void HXChain::fetchGuardAllMultisigAddresses(QString accountId)
 QStringList HXChain::getAssetMultisigUpdatedGuards(QString assetSymbol)
 {
     QStringList result;
-    QStringList keys = formalGuardMap.keys();
+    QStringList keys = allGuardMap.keys();
     foreach (QString key, keys)
     {
-        QString accountId = formalGuardMap.value(key).accountId;
+        QString accountId = allGuardMap.value(key).accountId;
         QVector<GuardMultisigAddress> vector = guardMultisigAddressesMap.value(assetSymbol + "-" + accountId);
         foreach (GuardMultisigAddress gma, vector)
         {
@@ -1019,9 +1041,9 @@ QStringList HXChain::getAssetMultisigUpdatedGuards(QString assetSymbol)
 QString HXChain::guardAccountIdToName(QString guardAccountId)
 {
     QString result;
-    foreach (QString account, formalGuardMap.keys())
+    foreach (QString account, allGuardMap.keys())
     {
-        if( formalGuardMap.value(account).accountId == guardAccountId)
+        if( allGuardMap.value(account).accountId == guardAccountId)
         {
             result = account;
             break;
@@ -1034,9 +1056,9 @@ QString HXChain::guardAccountIdToName(QString guardAccountId)
 QString HXChain::guardAddressToName(QString guardAddress)
 {
     QString result;
-    foreach (QString account, formalGuardMap.keys())
+    foreach (QString account, allGuardMap.keys())
     {
-        if( formalGuardMap.value(account).address == guardAddress)
+        if( allGuardMap.value(account).address == guardAddress)
         {
             result = account;
             break;
@@ -1053,8 +1075,8 @@ void HXChain::fetchMiners()
 
 void HXChain::fetchProposals()
 {
-    if(formalGuardMap.size() < 1 || minerMap.size() < 1)   return;
-    postRPC( "senator-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << formalGuardMap.keys().at(0)));
+    if(allGuardMap.size() < 1 || minerMap.size() < 1)   return;
+    postRPC( "senator-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << allGuardMap.keys().at(0)));
     postRPC( "citizen-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << minerMap.keys().at(0)));
 }
 

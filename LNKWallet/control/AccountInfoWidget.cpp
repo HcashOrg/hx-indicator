@@ -33,15 +33,16 @@ void AccountInfoWidget::setAccount(QString accountName)
     AccountInfo info = HXChain::getInstance()->accountInfoMap.value(accountName);
     ui->addressLabel->setText(info.address);
 
-    QStringList formalGuards = HXChain::getInstance()->formalGuardMap.keys();
-    QStringList normalGuards = HXChain::getInstance()->allGuardMap.keys();
-    if(formalGuards.contains(accountName))
+    if(HXChain::getInstance()->allGuardMap.contains(accountName))
     {
-        ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_formal.png"));
-    }
-    else if(normalGuards.contains(accountName))
-    {
-        ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_normal.png"));
+        if(HXChain::getInstance()->allGuardMap.value(accountName).isFormal)
+        {
+            ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_formal.png"));
+        }
+        else
+        {
+            ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_normal.png"));
+        }
     }
     else
     {

@@ -432,7 +432,8 @@ void Frame::getAccountInfo()
 
     HXChain::getInstance()->fetchTransactions();
 
-    HXChain::getInstance()->fetchFormalGuards();
+//    HXChain::getInstance()->fetchFormalGuards();
+    HXChain::getInstance()->fetchAllGuards();
 
     HXChain::getInstance()->fetchMiners();
 }
@@ -1647,7 +1648,7 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-list_senator_members")
+    if( id == "id-list_all_senators")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
@@ -1661,28 +1662,29 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.take("result").toArray();
 
-            //        HXChain::getInstance()->formalGuardMap.clear();
+            QMap<QString,GuardInfo> guardMap;
             foreach (QJsonValue v, array)
             {
                 QJsonArray array2 = v.toArray();
                 QString account = array2.at(0).toString();
                 GuardInfo info;
-                if(HXChain::getInstance()->formalGuardMap.contains(account))
+                if(HXChain::getInstance()->allGuardMap.contains(account))
                 {
-                    info = HXChain::getInstance()->formalGuardMap.value(account);
+                    info = HXChain::getInstance()->allGuardMap.value(account);
                 }
                 info.guardId = array2.at(1).toString();
-                info.accountId = HXChain::getInstance()->accountInfoMap.value(account).id;
-                HXChain::getInstance()->formalGuardMap.insert(account, info);
+//                info.accountId = HXChain::getInstance()->accountInfoMap.value(account).id;
+                guardMap.insert(account, info);
 
-                HXChain::getInstance()->fetchProposals();
 
                 HXChain::getInstance()->postRPC( "id-get_senator_member-" + account, toJsonFormat( "get_senator_member", QJsonArray() << account));
                 //            HXChain::getInstance()->fetchGuardAllMultisigAddresses(accountId);
 
-                HXChain::getInstance()->postRPC( "guard-get_account-" + account, toJsonFormat( "get_account", QJsonArray() << account));
-
             }
+            HXChain::getInstance()->allGuardMap = guardMap;
+
+            HXChain::getInstance()->fetchProposals();
+
         }
 
         return;
@@ -1704,13 +1706,16 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonObject object = jsonObject.take("result").toObject();
 
-            if(HXChain::getInstance()->formalGuardMap.contains(account))
+            if(HXChain::getInstance()->allGuardMap.contains(account))
             {
-                HXChain::getInstance()->formalGuardMap[account].accountId   = object.take("guard_member_account").toString();
-                HXChain::getInstance()->formalGuardMap[account].voteId      = object.take("vote_id").toString();
-                HXChain::getInstance()->formalGuardMap[account].isFormal    = object.take("formal").toBool();
+                QString accountId = object.take("guard_member_account").toString();
+                HXChain::getInstance()->allGuardMap[account].accountId   = accountId;
+                HXChain::getInstance()->allGuardMap[account].voteId      = object.take("vote_id").toString();
+                HXChain::getInstance()->allGuardMap[account].isFormal    = object.take("formal").toBool();
 
-                HXChain::getInstance()->fetchGuardAllMultisigAddresses(HXChain::getInstance()->formalGuardMap[account].accountId);
+                HXChain::getInstance()->postRPC( "guard-get_account-" + accountId, toJsonFormat( "get_account", QJsonArray() << accountId));
+
+                HXChain::getInstance()->fetchGuardAllMultisigAddresses(accountId);
             }
         }
 
@@ -1731,41 +1736,43 @@ void Frame::jsonDataUpdated(QString id)
 
             QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
             QJsonObject jsonObject = parse_doucment.object();
-            QJsonObject object = jsonObject.take("result").toObject();
-
-            if(HXChain::getInstance()->formalGuardMap.contains(account))
+            QJsonObject object = jsonObject.value("result").toObject();
+            QString name = object.value("name").toString();
+            if(HXChain::getInstance()->allGuardMap.contains(name))
             {
-                HXChain::getInstance()->formalGuardMap[account].address = object.take("addr").toString();
+                HXChain::getInstance()->allGuardMap[name].address = object.value("addr").toString();
             }
         }
 
         return;
     }
 
-    if( id == "id-list_all_senators")
-    {
-        QString result = HXChain::getInstance()->jsonDataValue(id);
-//        qDebug() << id << result;
+//    if( id == "id-list_all_senators")
+//    {
+//        QString result = HXChain::getInstance()->jsonDataValue(id);
+////        qDebug() << id << result;
 
-        if(result.startsWith("\"result\":"))
-        {
-            result.prepend("{");
-            result.append("}");
+//        if(result.startsWith("\"result\":"))
+//        {
+//            result.prepend("{");
+//            result.append("}");
 
-            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-            QJsonObject jsonObject = parse_doucment.object();
-            QJsonArray array = jsonObject.take("result").toArray();
+//            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+//            QJsonObject jsonObject = parse_doucment.object();
+//            QJsonArray array = jsonObject.take("result").toArray();
 
-            HXChain::getInstance()->allGuardMap.clear();
-            foreach (QJsonValue v, array)
-            {
-                QJsonArray array2 = v.toArray();
-                HXChain::getInstance()->allGuardMap.insert(array2.at(0).toString(),array2.at(1).toString());
-            }
-        }
+//            HXChain::getInstance()->allGuardMap.clear();
+//            foreach (QJsonValue v, array)
+//            {
+//                QJsonArray array2 = v.toArray();
+//                HXChain::getInstance()->allGuardMap.insert(array2.at(0).toString(),array2.at(1).toString());
+//            }
 
-        return;
-    }
+
+//        }
+
+//        return;
+//    }
 
     if( id == "id-list_citizens")
     {
@@ -1781,7 +1788,6 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.value("result").toArray();
 
-            //        HXChain::getInstance()->formalGuardMap.clear();
             foreach (QJsonValue v, array)
             {
                 QJsonArray array2 = v.toArray();
@@ -2222,7 +2228,7 @@ void Frame::init()
 
     HXChain::getInstance()->fetchTransactions();
 
-    HXChain::getInstance()->fetchFormalGuards();
+//    HXChain::getInstance()->fetchFormalGuards();
     HXChain::getInstance()->fetchAllGuards();
 
     HXChain::getInstance()->fetchMiners();

@@ -138,7 +138,7 @@ void GuardKeyManagePage::showMultisigInfo()
         }
         else
         {
-            QString accountId = HXChain::getInstance()->formalGuardMap.value(ui->accountComboBox->currentText()).accountId;
+            QString accountId = HXChain::getInstance()->allGuardMap.value(ui->accountComboBox->currentText()).accountId;
 
             if(guardAccountIds.contains(accountId))
             {

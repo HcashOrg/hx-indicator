@@ -412,12 +412,12 @@ public:
     void parseTransaction(QString result);
     void checkPendingTransactions();    // 查看pending的交易有没有被确认， 如果过期了就从DB删掉
 
-    QMap<QString,GuardInfo>   formalGuardMap;
-    QMap<QString,QString>   allGuardMap;
-    void fetchFormalGuards();
+    QMap<QString,GuardInfo>   allGuardMap;
+//    void fetchFormalGuards();
     void fetchAllGuards();
     QStringList getMyFormalGuards();
     QStringList getMyGuards();
+    QStringList getFormalGuards();
     QMap<QString,QVector<GuardMultisigAddress>> guardMultisigAddressesMap;  // key是 资产名-guard账户Id 的形式 比如 BTC-1.2.23
     GuardMultisigAddress getGuardMultisigByPairId(QString assetSymbol, QString guardName, QString pairId);      // 从guardMultisigAddressesMap，找到对应的
     void fetchGuardAllMultisigAddresses(QString accountId);

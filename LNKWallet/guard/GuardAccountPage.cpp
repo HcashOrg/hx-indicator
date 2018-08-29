@@ -20,7 +20,7 @@ GuardAccountPage::~GuardAccountPage()
 void GuardAccountPage::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
+    QStringList accounts = HXChain::getInstance()->getMyGuards();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
@@ -46,19 +46,17 @@ void GuardAccountPage::init()
 
 void GuardAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
-    GuardInfo info = HXChain::getInstance()->formalGuardMap.value(ui->accountComboBox->currentText());
+    GuardInfo info = HXChain::getInstance()->allGuardMap.value(ui->accountComboBox->currentText());
 
     ui->guardIdLabel->setText(info.guardId);
     ui->addressLabel->setText(info.address);
 
-    QStringList formalGuards = HXChain::getInstance()->formalGuardMap.keys();
-    QStringList normalGuards = HXChain::getInstance()->allGuardMap.keys();
-    if(formalGuards.contains(ui->accountComboBox->currentText()))
+    if(info.isFormal)
     {
         ui->guardTypeLabel->setText(tr("formal senator"));
         ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_formal.png"));
     }
-    else if(normalGuards.contains(ui->accountComboBox->currentText()))
+    else
     {
         ui->guardTypeLabel->setText(tr("informal senator"));
         ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_normal.png"));
