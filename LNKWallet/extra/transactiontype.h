@@ -17,7 +17,7 @@
 #define TRANSACTION_TYPE_LOCKBALANCE            55      // 质押资产给miner
 #define TRANSACTION_TYPE_FORECLOSE              56      // 赎回质押资产
 #define TRANSACTION_TYPE_SENATOR_LOCK_BALANCE   57      // senator交保证金
-#define TRANSACTION_TYPE_DEPOSIT                60      // 充值交易（多签转link-BTC）
+#define TRANSACTION_TYPE_DEPOSIT                60      // 充值交易（多签转HX-BTC）
 #define TRANSACTION_TYPE_WITHDRAW               61      // 提现交易
 #define TRANSACTION_TYPE_WITHDRAW_CROSSCHAIN    62
 #define TRANSACTION_TYPE_WITHDRAW_SIGN          63      // 提现交易签名
@@ -39,5 +39,8 @@
 #define TRANSACTION_TYPE_CROSSCHAIN_FEE         87      // 设置跨链提现费用
 #define TRANSACTION_TYPE_OBTAIN_BONUS           88      // 领取分红
 #define TRANSACTION_TYPE_SET_LOCKBALANCE        89      // 设置senator的保证金
+
+
+#define TRANSACTION_TYPE_USE_GUARANTEE_ORDER    830     // 承兑单被使用
 
 #endif // TRANSACTIONTYPE_H

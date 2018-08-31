@@ -6,14 +6,14 @@
 
 TransactionDB::TransactionDB()
 {
-    m_transactionStructDB = NULL;
-    m_accountTransactionIdsDB = NULL;
+
 }
 
 TransactionDB::~TransactionDB()
 {
     if(m_transactionStructDB)  delete m_transactionStructDB;
     if(m_accountTransactionIdsDB)  delete m_accountTransactionIdsDB;
+    if(m_guaranteeOrderDB)  delete m_guaranteeOrderDB;
 }
 
 bool TransactionDB::init()
@@ -30,8 +30,9 @@ bool TransactionDB::init()
 
     leveldb::Status status = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/transactionStruct").toStdString(), &m_transactionStructDB);
     leveldb::Status status2 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/accountTransactionIds").toStdString(), &m_accountTransactionIdsDB);
+    leveldb::Status status3 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/guaranteeOrder").toStdString(), &m_guaranteeOrderDB);
     qDebug() << "transactionstruct db init" << status.ok() << QString::fromStdString( status.ToString());
-    if(status.ok() && status2.ok())
+    if(status.ok() && status2.ok() && status3.ok())
     {
         return true;
     }
@@ -85,6 +86,39 @@ void TransactionDB::removeTransactionStruct(QString _transactionId)
     {
         removeAccountTransactionId(key, _transactionId);
     }
+}
+
+void TransactionDB::insertGuaranteeOrder(QString _guaranteeId, GuaranteeOrder _order)
+{
+    QByteArray ba;
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::WriteOnly);
+
+    QDataStream out(&buffer);
+    //序列化对象信息
+    out << _order;
+    buffer.close();
+
+    writeToDB(m_guaranteeOrderDB, _guaranteeId, ba);
+}
+
+GuaranteeOrder TransactionDB::getGuaranteeOrder(QString _guaranteeId)
+{
+    QByteArray value = readFromDB(m_guaranteeOrderDB, _guaranteeId);
+
+    if(value.isEmpty())     return GuaranteeOrder();
+
+    //读取文件流信息
+    QBuffer buffer(&value);
+    buffer.open(QIODevice::ReadOnly);
+
+    QDataStream in(&buffer);
+    //反序列化，获取对象信息
+    GuaranteeOrder guaranteeOrder;
+    in >> guaranteeOrder;
+    buffer.close();
+
+    return guaranteeOrder;
 }
 
 QVector<TransactionStruct> TransactionDB::lookupTransactionStruct(QString _address, int _type)

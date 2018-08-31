@@ -414,16 +414,18 @@ void AllTransactionWidget::showTransactions()
         ui->transactionsTableWidget->setItem(i,5, new QTableWidgetItem(transactionId));
         ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("confirmed")));
 
-        if(ts.guaranteeId.isEmpty())
-        {
-            ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(getBigNumberString(ts.feeAmount, ASSET_PRECISION)));
-        }
-        else
-        {
-            FeeGuaranteeWidget* feeGuaranteeWidget = new FeeGuaranteeWidget(ts.guaranteeId, getBigNumberString(ts.feeAmount, ASSET_PRECISION).toDouble()
-                                                                            , transactionId);
-            ui->transactionsTableWidget->setCellWidget(i,4, feeGuaranteeWidget);
-        }
+//        if(ts.guaranteeId.isEmpty())
+//        {
+//            ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(getBigNumberString(ts.feeAmount, ASSET_PRECISION)));
+//        }
+//        else
+//        {
+//            FeeGuaranteeWidget* feeGuaranteeWidget = new FeeGuaranteeWidget(ts.guaranteeId, getBigNumberString(ts.feeAmount, ASSET_PRECISION).toDouble()
+//                                                                            , transactionId);
+//            ui->transactionsTableWidget->setCellWidget(i,4, feeGuaranteeWidget);
+//        }
+        int useGuaranteeOrderType = 0;  // 0:未使用承兑单  1:使用别人的承兑单  2:别人使用我的承兑单  3:使用了自己的承兑单
+        QString guaranteeOrderOwnerAddress = HXChain::getInstance()->transactionDB.getGuaranteeOrder(ts.guaranteeId).ownerAddress;
 
         QJsonObject operationObject = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
 
@@ -471,6 +473,8 @@ void AllTransactionWidget::showTransactions()
 
                 ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("transfer-in")));
             }
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(fromAddress, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_REGISTER_ACCOUNT:
@@ -478,6 +482,8 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("register account")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_BIND_TUNNEL:
@@ -524,6 +530,8 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("create citizen")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_SPONSOR_PROPOSAL:
@@ -690,6 +698,8 @@ void AllTransactionWidget::showTransactions()
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("get mining income")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_ISSUE_ASSET:
@@ -712,6 +722,8 @@ void AllTransactionWidget::showTransactions()
             item->setTextColor(QColor(255,0,0));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("register contract")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_CONTRACT_INVOKE:
@@ -742,6 +754,8 @@ void AllTransactionWidget::showTransactions()
 
                 ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("call contract")));
             }
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_CONTRACT_TRANSFER:
@@ -759,6 +773,8 @@ void AllTransactionWidget::showTransactions()
             item->setTextColor(QColor(255,0,0));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("transfer to contract")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_CREATE_GUARANTEE:
@@ -776,17 +792,35 @@ void AllTransactionWidget::showTransactions()
             item->setTextColor(QColor(255,0,0));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("create %1 acceptance").arg(acceptSymbol)));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_CANCEL_GUARANTEE:
         {
-            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
+            QString cancelGuaranteeOrderId = operationObject.value("cancel_guarantee_id").toString();
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(cancelGuaranteeOrderId));
 
-            QTableWidgetItem* item = new QTableWidgetItem( "-");
+            GuaranteeOrder go = HXChain::getInstance()->transactionDB.getGuaranteeOrder(cancelGuaranteeOrderId);
+            QString str;
+            if(!go.id.isEmpty())
+            {
+                AssetInfo originAssetInfo = HXChain::getInstance()->assetInfoMap.value(go.originAssetAmount.assetId);
+                AssetInfo targetAssetInfo = HXChain::getInstance()->assetInfoMap.value(go.targetAssetAmount.assetId);
+                double originAmount = getBigNumberString(go.originAssetAmount.amount, originAssetInfo.precision).toDouble();
+                double targetAmount = getBigNumberString(go.targetAssetAmount.amount, targetAssetInfo.precision).toDouble();
+                double finishedAmount = getBigNumberString(go.finishedAssetAmount.amount, targetAssetInfo.precision).toDouble();
+                double leftAmount = (1 - finishedAmount / targetAmount) * originAmount;
+                str = QString::number(leftAmount, 'g', originAssetInfo.precision);
+            }
+
+            QTableWidgetItem* item = new QTableWidgetItem( QString("+ %1 %2").arg(str).arg(ASSET_NAME));
             ui->transactionsTableWidget->setItem(i,3, item);
             item->setTextColor(QColor(255,0,0));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("cancel acceptance")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_OBTAIN_BONUS:
@@ -808,6 +842,49 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("get bonus")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+        }
+            break;
+        default:
+            break;
+        }
+
+        switch (useGuaranteeOrderType) {
+        case 0:
+        {
+            ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(getBigNumberString(ts.feeAmount, ASSET_PRECISION)));
+        }
+            break;
+        case 1:
+        {
+            GuaranteeOrder go = HXChain::getInstance()->transactionDB.getGuaranteeOrder(ts.guaranteeId);
+            AssetInfo targetAssetInfo = HXChain::getInstance()->assetInfoMap.value(go.targetAssetAmount.assetId);
+            QString str = QString("%1 %2 (%3)").arg(calculateGuaranteeOrderAmount(go.id, getBigNumberString(ts.feeAmount, ASSET_PRECISION).toDouble()), 0, 'g',targetAssetInfo.precision)
+                    .arg(targetAssetInfo.symbol).arg(go.id);
+            ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(str));
+        }
+            break;
+        case 2:
+        {
+            GuaranteeOrder go = HXChain::getInstance()->transactionDB.getGuaranteeOrder(ts.guaranteeId);
+            AssetInfo targetAssetInfo = HXChain::getInstance()->assetInfoMap.value(go.targetAssetAmount.assetId);
+            QString str = QString("+%1 %2 (%3)").arg(calculateGuaranteeOrderAmount(go.id, getBigNumberString(ts.feeAmount, ASSET_PRECISION).toDouble()), 0, 'g',targetAssetInfo.precision)
+                    .arg(targetAssetInfo.symbol).arg(go.id);
+
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(str));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("acceptance is used")));
+        }
+            break;
+        case 3:
+        {
+            GuaranteeOrder go = HXChain::getInstance()->transactionDB.getGuaranteeOrder(ts.guaranteeId);
+            AssetInfo targetAssetInfo = HXChain::getInstance()->assetInfoMap.value(go.targetAssetAmount.assetId);
+            QString str = QString("%1 %2 (%3)").arg(calculateGuaranteeOrderAmount(go.id, getBigNumberString(ts.feeAmount, ASSET_PRECISION).toDouble()), 0, 'g',targetAssetInfo.precision)
+                    .arg(targetAssetInfo.symbol).arg(go.id);
+            ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(str));
         }
             break;
         default:
@@ -819,6 +896,36 @@ void AllTransactionWidget::showTransactions()
     tableWidgetSetItemZebraColor(ui->transactionsTableWidget);
 
     hideFilteredTransactions();
+}
+
+int AllTransactionWidget::checkUseGuaranteeOrderType(QString payer, QString currentAddress, QString ownerAddress)
+{
+    int result = 0;
+    if(ownerAddress.isEmpty())
+    {
+        // 没使用承兑单
+        result = 0;
+    }
+    else if(currentAddress == ownerAddress)
+    {
+        if(payer == currentAddress)
+        {
+            // 手续费支付者是自己，说明是使用了自己的承兑单
+            result = 3;
+        }
+        else
+        {
+            // 手续费支付者不是自己，说明是别人使用了我的承兑单
+            result = 2;
+        }
+    }
+    else
+    {
+        // 当前账户不是承兑单发布者，说明使用了别人的承兑单
+        result = 1;
+    }
+
+    return result;
 }
 
 
@@ -896,5 +1003,18 @@ void AllTransactionWidget::paintEvent(QPaintEvent *)
     painter.drawRect(0,90,this->width(),98);
 }
 
+double AllTransactionWidget::calculateGuaranteeOrderAmount(QString _guaranteeId, double _feeAmount)
+{
+    GuaranteeOrder go = HXChain::getInstance()->transactionDB.getGuaranteeOrder(_guaranteeId);
+    if(go.id.isEmpty()) return 0;
+
+    AssetInfo originAssetInfo = HXChain::getInstance()->assetInfoMap.value(go.originAssetAmount.assetId);
+    double originAmount = getBigNumberString( go.originAssetAmount.amount, originAssetInfo.precision).toDouble();
+
+    AssetInfo targetAssetInfo = HXChain::getInstance()->assetInfoMap.value(go.targetAssetAmount.assetId);
+    double targetAmount = getBigNumberString( go.targetAssetAmount.amount, targetAssetInfo.precision).toDouble();
+
+    return _feeAmount / originAmount * targetAmount;
+}
 
 

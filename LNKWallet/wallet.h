@@ -199,6 +199,27 @@ public:
     friend QDataStream& operator <<(QDataStream &out,const TransactionTypeId& data);
 };
 
+struct GuaranteeOrder
+{
+    QString id;
+    QString ownerAddress;
+    QString chainType;
+    QString time;
+    AssetAmount originAssetAmount;
+    AssetAmount targetAssetAmount;
+    AssetAmount finishedAssetAmount;
+    QStringList records;
+    bool finished = false;
+
+public:
+    bool operator ==(const GuaranteeOrder &_guaranteeOrder) const
+    {
+        return this->id == _guaranteeOrder.id;
+    }
+
+    friend QDataStream& operator >>(QDataStream &in,GuaranteeOrder& data);
+    friend QDataStream& operator <<(QDataStream &out,const GuaranteeOrder& data);
+};
 
 struct Entry
 {

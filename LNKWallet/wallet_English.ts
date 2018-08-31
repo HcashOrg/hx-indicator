@@ -608,227 +608,232 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="451"/>
+        <location filename="alltransactionwidget.cpp" line="453"/>
         <source>transfer to self</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="460"/>
+        <location filename="alltransactionwidget.cpp" line="462"/>
         <source>transfer-out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="472"/>
+        <location filename="alltransactionwidget.cpp" line="474"/>
         <source>transfer-in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="480"/>
+        <location filename="alltransactionwidget.cpp" line="484"/>
         <source>register account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="488"/>
+        <location filename="alltransactionwidget.cpp" line="494"/>
         <source>bind %1 address: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="490"/>
+        <location filename="alltransactionwidget.cpp" line="496"/>
         <source>bind tunnel address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="498"/>
+        <location filename="alltransactionwidget.cpp" line="504"/>
         <source>unbind %1 address: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="500"/>
+        <location filename="alltransactionwidget.cpp" line="506"/>
         <source>unbind tunnel address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="514"/>
+        <location filename="alltransactionwidget.cpp" line="520"/>
         <source>asset feed price: %1:%2  %3:%4</source>
         <oldsource>asset quote: %1:%2  %3:%4</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="519"/>
+        <location filename="alltransactionwidget.cpp" line="525"/>
         <source>asset feed price</source>
         <oldsource>asset quote</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="526"/>
+        <location filename="alltransactionwidget.cpp" line="532"/>
         <source>create citizen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="533"/>
+        <location filename="alltransactionwidget.cpp" line="541"/>
         <source>type: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="537"/>
+        <location filename="alltransactionwidget.cpp" line="545"/>
         <source>cold-hot wallet trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="540"/>
+        <location filename="alltransactionwidget.cpp" line="548"/>
         <source>change cold-hot wallet multisig-address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="543"/>
+        <location filename="alltransactionwidget.cpp" line="551"/>
         <source>set price feeder</source>
         <oldsource>set publisher</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="546"/>
+        <location filename="alltransactionwidget.cpp" line="554"/>
         <source>cancel cold-hot trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="549"/>
+        <location filename="alltransactionwidget.cpp" line="557"/>
         <source>cancel withdraw trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="552"/>
+        <location filename="alltransactionwidget.cpp" line="560"/>
         <source>create senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="555"/>
+        <location filename="alltransactionwidget.cpp" line="563"/>
         <source>resign senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="558"/>
+        <location filename="alltransactionwidget.cpp" line="566"/>
         <source>set contract transfer fee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="561"/>
+        <location filename="alltransactionwidget.cpp" line="569"/>
         <source>set senator formal/informal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="564"/>
+        <location filename="alltransactionwidget.cpp" line="572"/>
         <source>set crosschain fee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="567"/>
+        <location filename="alltransactionwidget.cpp" line="575"/>
         <source>set locked balance of senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="570"/>
+        <location filename="alltransactionwidget.cpp" line="578"/>
         <source>%1 (unkown)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="576"/>
+        <location filename="alltransactionwidget.cpp" line="584"/>
         <source>sponsor a proposal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="583"/>
+        <location filename="alltransactionwidget.cpp" line="591"/>
         <source>proposal ID: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="585"/>
+        <location filename="alltransactionwidget.cpp" line="593"/>
         <source>vote for a proposal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="601"/>
+        <location filename="alltransactionwidget.cpp" line="609"/>
         <source>lock asset to miner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="617"/>
+        <location filename="alltransactionwidget.cpp" line="625"/>
         <source>foreclose asset from miner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="632"/>
+        <location filename="alltransactionwidget.cpp" line="640"/>
         <source>senator lock balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="643"/>
-        <location filename="alltransactionwidget.cpp" line="658"/>
+        <location filename="alltransactionwidget.cpp" line="651"/>
+        <location filename="alltransactionwidget.cpp" line="666"/>
         <source>%1 account: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="649"/>
+        <location filename="alltransactionwidget.cpp" line="657"/>
         <source>deposit %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="664"/>
+        <location filename="alltransactionwidget.cpp" line="672"/>
         <source>withdraw %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="683"/>
+        <location filename="alltransactionwidget.cpp" line="691"/>
         <source>total </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="692"/>
+        <location filename="alltransactionwidget.cpp" line="700"/>
         <source>get mining income</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="699"/>
+        <location filename="alltransactionwidget.cpp" line="709"/>
         <source>issue &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="701"/>
+        <location filename="alltransactionwidget.cpp" line="711"/>
         <source>issue asset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="714"/>
+        <location filename="alltransactionwidget.cpp" line="724"/>
         <source>register contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="735"/>
+        <location filename="alltransactionwidget.cpp" line="747"/>
         <source>exechange contract withdrawAsset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="743"/>
+        <location filename="alltransactionwidget.cpp" line="755"/>
         <source>call contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="761"/>
+        <location filename="alltransactionwidget.cpp" line="775"/>
         <source>transfer to contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="778"/>
+        <location filename="alltransactionwidget.cpp" line="794"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="789"/>
+        <location filename="alltransactionwidget.cpp" line="821"/>
         <source>cancel acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="810"/>
+        <location filename="alltransactionwidget.cpp" line="844"/>
         <source>get bonus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="878"/>
+        <source>acceptance is used</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4099,27 +4104,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1168"/>
+        <location filename="frame.cpp" line="1169"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1414"/>
+        <location filename="frame.cpp" line="1415"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2189"/>
+        <location filename="frame.cpp" line="2242"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2192"/>
+        <location filename="frame.cpp" line="2245"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2195"/>
+        <location filename="frame.cpp" line="2248"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4505,13 +4510,13 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.cpp" line="58"/>
+        <location filename="guard/GuardAccountPage.cpp" line="56"/>
         <source>formal senator</source>
         <oldsource>formal guard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.cpp" line="63"/>
+        <location filename="guard/GuardAccountPage.cpp" line="61"/>
         <source>informal senator</source>
         <oldsource>informal guard</oldsource>
         <translation type="unfinished"></translation>
@@ -4714,7 +4719,7 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="604"/>
+        <location filename="wallet.cpp" line="600"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -6892,17 +6897,17 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="155"/>
+        <location filename="miner/registerdialog.cpp" line="159"/>
         <source>The name is available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="160"/>
+        <location filename="miner/registerdialog.cpp" line="164"/>
         <source>This name has been used</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/registerdialog.cpp" line="179"/>
+        <location filename="miner/registerdialog.cpp" line="183"/>
         <source>The name that will be registered is not the same as current name. Sure to change the name of this account?</source>
         <translation type="unfinished"></translation>
     </message>

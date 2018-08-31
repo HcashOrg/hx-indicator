@@ -10,6 +10,7 @@
 class TransactionStruct;
 class TransactionTypeId;
 typedef QVector<TransactionTypeId>  TransactionTypeIds;
+class GuaranteeOrder;
 
 class TransactionDB
 {
@@ -32,6 +33,9 @@ public:
 
     void removeTransactionStruct(QString _transactionId);
 
+    void insertGuaranteeOrder(QString _guaranteeId, GuaranteeOrder _order);
+    GuaranteeOrder getGuaranteeOrder(QString _guaranteeId);
+
     bool writeToDB(leveldb::DB* _db, QString _key, QByteArray _value);
     QByteArray readFromDB(leveldb::DB* _db, QString _key);
     bool removeFromDB(leveldb::DB* _db, QString _key);
@@ -39,8 +43,9 @@ public:
     QStringList getKeys(leveldb::DB* _db);
 
 private:
-    leveldb::DB* m_transactionStructDB;
-    leveldb::DB* m_accountTransactionIdsDB;
+    leveldb::DB* m_transactionStructDB = NULL;
+    leveldb::DB* m_accountTransactionIdsDB = NULL;
+    leveldb::DB* m_guaranteeOrderDB = NULL;
 };
 
 #endif // TransactionDB_H

@@ -65,9 +65,11 @@ private:
     void hideFilteredTransactions();
 
     void showTransactions();
+    int  checkUseGuaranteeOrderType(QString payer, QString currentAddress, QString ownerAddress);
 
     void init();
 
+    double calculateGuaranteeOrderAmount(QString _guaranteeId, double _feeAmount = 0);
 
     PageScrollWidget *pageWidget;
     BlankDefaultWidget *blankWidget;

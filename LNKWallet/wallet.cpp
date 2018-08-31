@@ -708,6 +708,24 @@ void HXChain::parseTransaction(QString result)
     if(operationObject.keys().contains("guarantee_id"))
     {
         ts.guaranteeId = operationObject.value("guarantee_id").toString();
+        if( transactionDB.getGuaranteeOrder(ts.guaranteeId).id.isEmpty())
+        {
+            // 如果之前未获取过 就获取一下
+            postRPC( "Transaction-get_guarantee_order-" + ts.transactionId, toJsonFormat( "get_guarantee_order", QJsonArray() << ts.guaranteeId));
+        }
+        else
+        {
+            TransactionTypeId typeId;
+            typeId.type = ts.type;
+            typeId.transactionId = ts.transactionId;
+            HXChain::getInstance()->transactionDB.addAccountTransactionId(transactionDB.getGuaranteeOrder(ts.guaranteeId).ownerAddress, typeId);
+        }
+    }
+
+    if(ts.type == TRANSACTION_TYPE_CANCEL_GUARANTEE)
+    {
+        QString canceledId = operationObject.value("cancel_guarantee_id").toString();
+        postRPC( "Transaction-get_guarantee_order-", toJsonFormat( "get_guarantee_order", QJsonArray() << canceledId));
     }
 
     transactionDB.insertTransactionStruct(ts.transactionId,ts);
@@ -1624,6 +1642,23 @@ QDataStream &operator <<(QDataStream &out, const TransactionTypeId &data)
 
 }
 
+QDataStream &operator >>(QDataStream &in, GuaranteeOrder &data)
+{
+    in >> data.id >> data.ownerAddress >> data.chainType >> data.time >> data.originAssetAmount.amount >> data.originAssetAmount.assetId
+            >> data.targetAssetAmount.amount >> data.targetAssetAmount.assetId >> data.finishedAssetAmount.amount >> data.finishedAssetAmount.assetId
+            >> data.records >> data.finished;
+    return in;
+}
+
+QDataStream &operator <<(QDataStream &out, const GuaranteeOrder &data)
+{
+    out << data.id << data.ownerAddress << data.chainType << data.time << data.originAssetAmount.amount << data.originAssetAmount.assetId
+            << data.targetAssetAmount.amount << data.targetAssetAmount.assetId << data.finishedAssetAmount.amount << data.finishedAssetAmount.assetId
+            << data.records << data.finished;
+    return out;
+}
+
+
 unsigned long long jsonValueToULL(QJsonValue v)
 {
     unsigned long long result = 0;
@@ -1708,3 +1743,4 @@ QString toLocalTime(QString timeStr)
     QDateTime localTime = dateTime.toLocalTime();
     return localTime.toString("yyyy-MM-dd hh:mm:ss");
 }
+

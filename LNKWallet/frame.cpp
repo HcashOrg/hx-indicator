@@ -1910,7 +1910,7 @@ void Frame::jsonDataUpdated(QString id)
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.take("result").toArray();
 
-//            HXChain::getInstance()->citizenProposalInfoMap.clear();
+            HXChain::getInstance()->citizenProposalInfoMap.clear();
             foreach (QJsonValue v, array)
             {
                 QJsonObject object = v.toObject();
@@ -2115,6 +2115,53 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
+    if( id.startsWith("Transaction-get_guarantee_order-"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result ;
+
+        if(result.startsWith("\"result\":"))
+        {
+            QString relativeTrxId = id.mid(QString("Transaction-get_guarantee_order-").size());
+
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject object = parse_doucment.object().value("result").toObject();
+            GuaranteeOrder go;
+            go.id = object.value("id").toString();
+            go.ownerAddress = object.value("owner_addr").toString();
+            go.chainType = object.value("chain_type").toString();
+            go.time = object.value("time").toString();
+            go.originAssetAmount.amount = jsonValueToULL( object.value("asset_orign").toObject().value("amount"));
+            go.originAssetAmount.assetId = object.value("asset_orign").toObject().value("asset_id").toString();
+            go.targetAssetAmount.amount = jsonValueToULL( object.value("asset_target").toObject().value("amount"));
+            go.targetAssetAmount.assetId = object.value("asset_target").toObject().value("asset_id").toString();
+            go.finishedAssetAmount.amount = jsonValueToULL( object.value("asset_finished").toObject().value("amount"));
+            go.finishedAssetAmount.assetId = object.value("asset_finished").toObject().value("asset_id").toString();
+            go.finished = object.value("finished").toBool();
+
+            QJsonArray recordsArray = object.value("records").toArray();
+            foreach (QJsonValue v, recordsArray)
+            {
+                go.records += v.toString();
+            }
+
+            HXChain::getInstance()->transactionDB.insertGuaranteeOrder(go.id, go);
+
+            if(!relativeTrxId.isEmpty())
+            {
+                TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(relativeTrxId);
+                TransactionTypeId typeId;
+                typeId.type = ts.type;
+                typeId.transactionId = relativeTrxId;
+                HXChain::getInstance()->transactionDB.addAccountTransactionId(go.ownerAddress, typeId);
+            }
+        }
+
+        return;
+    }
 }
 
 void Frame::onBack()
