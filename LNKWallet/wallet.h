@@ -412,6 +412,10 @@ public:
     QMap<QString,AssetInfo>   assetInfoMap;
     QString getAssetId(QString symbol);
 
+    QMap<QString,int>   crosschainWithdrawStateMap;
+    void fetchCrosschainTransactions();
+    void clearCrosschainWithdrawStateMapByState(int state);
+
 private:
     bool isBlockSyncFinish;
 public:

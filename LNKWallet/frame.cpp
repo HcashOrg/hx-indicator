@@ -436,6 +436,8 @@ void Frame::getAccountInfo()
     HXChain::getInstance()->fetchAllGuards();
 
     HXChain::getInstance()->fetchMiners();
+
+    HXChain::getInstance()->fetchCrosschainTransactions();
 }
 
 
@@ -2157,6 +2159,39 @@ void Frame::jsonDataUpdated(QString id)
                 typeId.type = ts.type;
                 typeId.transactionId = relativeTrxId;
                 HXChain::getInstance()->transactionDB.addAccountTransactionId(go.ownerAddress, typeId);
+            }
+        }
+
+        return;
+    }
+
+    if(id.startsWith("WithdrawState-get_crosschain_transaction-"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+
+        int state = id.mid(QString("WithdrawState-get_crosschain_transaction-").size()).toInt();
+        qDebug() << id << result << state;
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonArray array = jsonObject.take("result").toArray();
+
+        HXChain::getInstance()->clearCrosschainWithdrawStateMapByState(state);
+        foreach (QJsonValue v, array)
+        {
+            QJsonArray array2 = v.toArray();
+            QString trxId = array2.at(0).toString();
+            QJsonObject object = array2.at(1).toObject();
+            QJsonArray operationArray = object.take("operations").toArray();
+            QJsonArray array3 = operationArray.at(0).toArray();
+            int operationType = array3.at(0).toInt();
+
+            if(operationType == TRANSACTION_TYPE_WITHDRAW)
+            {
+                HXChain::getInstance()->crosschainWithdrawStateMap.insert(trxId, state);
             }
         }
 

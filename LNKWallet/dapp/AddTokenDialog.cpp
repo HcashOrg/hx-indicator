@@ -122,7 +122,7 @@ void AddTokenDialog::jsonDataUpdated(QString id)
             else
             {
                 CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText( tr("This contract does not meet the standard!") );
+                commonDialog.setText( tr("This contract does not comply with the standard!") );
                 commonDialog.pop();
             }
 

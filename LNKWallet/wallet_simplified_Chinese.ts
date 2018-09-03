@@ -396,27 +396,28 @@
         <location filename="dapp/AddTokenDialog.cpp" line="118"/>
         <location filename="dapp/AddTokenDialog.cpp" line="165"/>
         <source>This contract has been added!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">该合约已被添加！</translation>
     </message>
     <message>
         <location filename="dapp/AddTokenDialog.cpp" line="125"/>
-        <source>This contract does not meet the standard!</source>
-        <translation type="unfinished"></translation>
+        <source>This contract does not comply with the standard!</source>
+        <oldsource>This contract does not meet the standard!</oldsource>
+        <translation type="unfinished">该合约不符合代币合约标准！</translation>
     </message>
     <message>
         <location filename="dapp/AddTokenDialog.cpp" line="133"/>
         <source>This contract does not exist!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">合约不存在！</translation>
     </message>
     <message>
         <location filename="dapp/AddTokenDialog.cpp" line="156"/>
         <source>This contract has not been initialized!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">合约未初始化！</translation>
     </message>
     <message>
         <location filename="dapp/AddTokenDialog.cpp" line="189"/>
         <source>This contract address is invalid</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">合约地址不合法！</translation>
     </message>
 </context>
 <context>
@@ -563,6 +564,7 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="415"/>
+        <location filename="alltransactionwidget.cpp" line="695"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>
@@ -745,62 +747,78 @@
         <translation type="unfinished">%1提现</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="691"/>
+        <location filename="alltransactionwidget.cpp" line="683"/>
+        <source>canceled</source>
+        <translation type="unfinished">已被取消</translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="686"/>
+        <source>waiting for signature</source>
+        <translation type="unfinished">等待签名中</translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="689"/>
+        <location filename="alltransactionwidget.cpp" line="692"/>
+        <source>being signed</source>
+        <translation type="unfinished">正在签名</translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="718"/>
         <source>total </source>
         <translation type="unfinished">总计 </translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="700"/>
+        <location filename="alltransactionwidget.cpp" line="727"/>
         <source>get mining income</source>
         <translation type="unfinished">获取挖矿收入</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="709"/>
+        <location filename="alltransactionwidget.cpp" line="736"/>
         <source>issue &quot;%1&quot;</source>
         <translation type="unfinished">发行 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="711"/>
+        <location filename="alltransactionwidget.cpp" line="738"/>
         <source>issue asset</source>
         <translation type="unfinished">发行资产</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="724"/>
+        <location filename="alltransactionwidget.cpp" line="751"/>
         <source>register contract</source>
         <translation type="unfinished">注册合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="747"/>
+        <location filename="alltransactionwidget.cpp" line="774"/>
         <source>exechange contract withdrawAsset</source>
         <translation type="unfinished">兑换合约提取余额</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="755"/>
+        <location filename="alltransactionwidget.cpp" line="782"/>
         <source>call contract</source>
         <translation type="unfinished">合约调用</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="775"/>
+        <location filename="alltransactionwidget.cpp" line="802"/>
         <source>transfer to contract</source>
         <translation type="unfinished">转账到合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="794"/>
+        <location filename="alltransactionwidget.cpp" line="821"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished">创建%1承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="821"/>
+        <location filename="alltransactionwidget.cpp" line="848"/>
         <source>cancel acceptance</source>
         <translation type="unfinished">撤销承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="844"/>
+        <location filename="alltransactionwidget.cpp" line="871"/>
         <source>get bonus</source>
         <translation type="unfinished">领取分红</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="878"/>
+        <location filename="alltransactionwidget.cpp" line="905"/>
         <source>acceptance is used</source>
         <translation type="unfinished">承兑单被使用</translation>
     </message>
@@ -2927,42 +2945,42 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="312"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="315"/>
         <source>等待注册合约交易被区块链确认，请勿关闭窗口</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="336"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="339"/>
         <source>资产精度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="358"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="361"/>
         <source>代币名</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="380"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="383"/>
         <source>代币符号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="430"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="433"/>
         <source>初始化</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="469"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="472"/>
         <source>资产总量</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="488"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="491"/>
         <source>(0-8位小数)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="514"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="517"/>
         <source>第二步：合约初始化设置</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3070,17 +3088,17 @@ Contract created successfully!</source>
     <message>
         <location filename="dapp/CreateTokenDialog.cpp" line="145"/>
         <source>Registering contract failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">注册合约失败！</translation>
     </message>
     <message>
         <location filename="dapp/CreateTokenDialog.cpp" line="203"/>
         <source>Transaction of invoking contract function &quot;init_token&quot; has been sent out!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">初始化合约的交易已发出！</translation>
     </message>
     <message>
         <location filename="dapp/CreateTokenDialog.cpp" line="212"/>
         <source>Initializing token failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">初始化失败！</translation>
     </message>
 </context>
 <context>
@@ -3940,27 +3958,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1169"/>
+        <location filename="frame.cpp" line="1171"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1415"/>
+        <location filename="frame.cpp" line="1417"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2242"/>
+        <location filename="frame.cpp" line="2277"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2245"/>
+        <location filename="frame.cpp" line="2280"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2248"/>
+        <location filename="frame.cpp" line="2283"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -4486,7 +4504,7 @@ add an account first</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="600"/>
+        <location filename="wallet.cpp" line="627"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -8773,7 +8791,23 @@ update or not?</source>
         <translation type="unfinished">全部</translation>
     </message>
     <message>
-        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="145"/>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="154"/>
+        <source>canceled</source>
+        <translation type="unfinished">已被取消</translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="157"/>
+        <source>waiting for signature</source>
+        <translation type="unfinished">等待签名中</translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="160"/>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="163"/>
+        <source>being signed</source>
+        <translation type="unfinished">正在签名</translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="166"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>

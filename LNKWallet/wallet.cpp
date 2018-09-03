@@ -590,6 +590,33 @@ QString HXChain::getAssetId(QString symbol)
     return id;
 }
 
+void HXChain::fetchCrosschainTransactions()
+{
+    HXChain::getInstance()->postRPC( "WithdrawState-get_crosschain_transaction-" + QString::number(0), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 0));
+
+    HXChain::getInstance()->postRPC( "WithdrawState-get_crosschain_transaction-" + QString::number(1), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 1));
+
+    HXChain::getInstance()->postRPC( "WithdrawState-get_crosschain_transaction-" + QString::number(3), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 3));
+
+    HXChain::getInstance()->postRPC( "WithdrawState-get_crosschain_transaction-" + QString::number(4), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 4));
+
+}
+
+void HXChain::clearCrosschainWithdrawStateMapByState(int state)
+{
+    foreach (QString key, crosschainWithdrawStateMap.keys())
+    {
+        if(crosschainWithdrawStateMap.value(key) == state)
+        {
+            crosschainWithdrawStateMap.remove(key);
+        }
+    }
+}
+
 bool HXChain::ValidateOnChainOperation()
 {
     if(GetBlockSyncFinish()) return true;

@@ -670,6 +670,33 @@ void AllTransactionWidget::showTransactions()
             item->setTextColor(QColor(255,0,0));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("withdraw %1").arg(assetSymbol)));
+
+            int state = -1;
+            if(HXChain::getInstance()->crosschainWithdrawStateMap.contains(transactionId))
+            {
+                state = HXChain::getInstance()->crosschainWithdrawStateMap.value(transactionId);
+            }
+
+            switch (state)
+            {
+            case -1:
+                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("canceled")));
+                break;
+            case 0:
+                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("waiting for signature")));
+                break;
+            case 1:
+                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("being signed")));
+                break;
+            case 3:
+                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("being signed")));
+                break;
+            case 4:
+                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("confirmed")));
+                break;
+            default:
+                break;
+            }
         }
             break;
         case TRANSACTION_TYPE_MINE_INCOME:

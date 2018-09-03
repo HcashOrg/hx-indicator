@@ -400,12 +400,12 @@
     <message>
         <location filename="dapp/AddTokenDialog.ui" line="75"/>
         <source>添加合约代币</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Add Token</translation>
     </message>
     <message>
         <location filename="dapp/AddTokenDialog.ui" line="117"/>
         <source>合约地址</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Contract Address</translation>
     </message>
     <message>
         <location filename="dapp/AddTokenDialog.ui" line="158"/>
@@ -429,7 +429,8 @@
     </message>
     <message>
         <location filename="dapp/AddTokenDialog.cpp" line="125"/>
-        <source>This contract does not meet the standard!</source>
+        <source>This contract does not comply with the standard!</source>
+        <oldsource>This contract does not meet the standard!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -560,7 +561,7 @@
     <message>
         <location filename="alltransactionwidget.ui" line="446"/>
         <source>交易ID</source>
-        <translation type="unfinished">TRANSACTION ID</translation>
+        <translation type="unfinished">TRX ID</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="459"/>
@@ -604,6 +605,7 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="415"/>
+        <location filename="alltransactionwidget.cpp" line="695"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -777,62 +779,78 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="691"/>
+        <location filename="alltransactionwidget.cpp" line="683"/>
+        <source>canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="686"/>
+        <source>waiting for signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="689"/>
+        <location filename="alltransactionwidget.cpp" line="692"/>
+        <source>being signed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="718"/>
         <source>total </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="700"/>
+        <location filename="alltransactionwidget.cpp" line="727"/>
         <source>get mining income</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="709"/>
+        <location filename="alltransactionwidget.cpp" line="736"/>
         <source>issue &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="711"/>
+        <location filename="alltransactionwidget.cpp" line="738"/>
         <source>issue asset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="724"/>
+        <location filename="alltransactionwidget.cpp" line="751"/>
         <source>register contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="747"/>
+        <location filename="alltransactionwidget.cpp" line="774"/>
         <source>exechange contract withdrawAsset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="755"/>
+        <location filename="alltransactionwidget.cpp" line="782"/>
         <source>call contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="775"/>
+        <location filename="alltransactionwidget.cpp" line="802"/>
         <source>transfer to contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="794"/>
+        <location filename="alltransactionwidget.cpp" line="821"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="821"/>
+        <location filename="alltransactionwidget.cpp" line="848"/>
         <source>cancel acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="844"/>
+        <location filename="alltransactionwidget.cpp" line="871"/>
         <source>get bonus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="878"/>
+        <location filename="alltransactionwidget.cpp" line="905"/>
         <source>acceptance is used</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1810,12 +1828,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="citizen/CitizenAccountPage.ui" line="297"/>
         <source>总出块数</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">TOTAL PRODUCED</translation>
     </message>
     <message>
         <location filename="citizen/CitizenAccountPage.ui" line="355"/>
         <source>上次出块</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">LAST PRODUCED</translation>
     </message>
     <message>
         <location filename="citizen/CitizenAccountPage.cpp" line="67"/>
@@ -1839,7 +1857,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <location filename="citizen/CitizenProposalPage.ui" line="113"/>
         <source>失效时间</source>
         <oldsource>失效时间（GMT）</oldsource>
-        <translation type="unfinished">EXPIRATION(GMT)</translation>
+        <translation type="unfinished">EXPIRATION</translation>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="126"/>
@@ -2474,7 +2492,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="contact/ContactInfoHistoryWidget.ui" line="118"/>
         <source>交易ID</source>
-        <translation type="unfinished">TRANSACTION ID</translation>
+        <translation type="unfinished">TRX ID</translation>
     </message>
     <message>
         <location filename="contact/ContactInfoHistoryWidget.ui" line="131"/>
@@ -2810,37 +2828,37 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="dapp/ContractTokenPage.ui" line="38"/>
         <source>标准合约代币</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Standard Token</translation>
     </message>
     <message>
         <location filename="dapp/ContractTokenPage.ui" line="68"/>
         <source>创建合约代币</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CREATE TOKEN</translation>
     </message>
     <message>
         <location filename="dapp/ContractTokenPage.ui" line="139"/>
         <source>代币</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">TOKEN</translation>
     </message>
     <message>
         <location filename="dapp/ContractTokenPage.ui" line="152"/>
         <source>合约地址</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CONTRACT ADDRESS</translation>
     </message>
     <message>
         <location filename="dapp/ContractTokenPage.ui" line="165"/>
         <source>余额</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">BALANCE</translation>
     </message>
     <message>
         <location filename="dapp/ContractTokenPage.ui" line="227"/>
         <source>添加合约代币</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ADD TOKEN</translation>
     </message>
     <message>
         <location filename="dapp/ContractTokenPage.ui" line="257"/>
         <source>交易记录</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">RECORD</translation>
     </message>
     <message>
         <location filename="dapp/ContractTokenPage.cpp" line="147"/>
@@ -3062,17 +3080,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="dapp/CreateTokenDialog.ui" line="75"/>
         <source>创建合约代币</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CREATE TOKEN</translation>
     </message>
     <message>
         <location filename="dapp/CreateTokenDialog.ui" line="158"/>
         <source>第一步：注册合约</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">First Step: Register Contract</translation>
     </message>
     <message>
         <location filename="dapp/CreateTokenDialog.ui" line="174"/>
         <source>合约字节码</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ByteCode</translation>
     </message>
     <message>
         <location filename="dapp/CreateTokenDialog.ui" line="221"/>
@@ -3082,42 +3100,42 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="dapp/CreateTokenDialog.ui" line="239"/>
         <source>合约ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Contract Id</translation>
     </message>
     <message>
         <location filename="dapp/CreateTokenDialog.ui" line="261"/>
         <source>交易ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Trx Id</translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="312"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="315"/>
         <source>等待注册合约交易被区块链确认，请勿关闭窗口</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Waiting for the confirmation of the register-contract-trx. Please don&apos;t close this dialog.</translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="336"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="339"/>
         <source>资产精度</source>
         <translation type="unfinished">Precision</translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="358"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="361"/>
         <source>代币名</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Token Name</translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="380"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="383"/>
         <source>代币符号</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Token Symbol</translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="430"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="433"/>
         <source>初始化</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">INITIALIZE</translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="514"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="517"/>
         <source>第二步：合约初始化设置</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Second Step: Initialize Contract</translation>
     </message>
     <message>
         <source>返回</source>
@@ -3148,7 +3166,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Create</translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="469"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="472"/>
         <source>资产总量</source>
         <translation type="unfinished">Total supply</translation>
     </message>
@@ -3162,7 +3180,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">UB(The cost of creating the contract. 20 UB is suggested.)</translation>
     </message>
     <message>
-        <location filename="dapp/CreateTokenDialog.ui" line="488"/>
+        <location filename="dapp/CreateTokenDialog.ui" line="491"/>
         <source>(0-8位小数)</source>
         <translation type="unfinished">(0-8 decimal)</translation>
     </message>
@@ -4104,27 +4122,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1169"/>
+        <location filename="frame.cpp" line="1171"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1415"/>
+        <location filename="frame.cpp" line="1417"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2242"/>
+        <location filename="frame.cpp" line="2277"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2245"/>
+        <location filename="frame.cpp" line="2280"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2248"/>
+        <location filename="frame.cpp" line="2283"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4310,7 +4328,7 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="40"/>
         <source>兑换合约</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">EXCHANGE</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="61"/>
@@ -4326,7 +4344,7 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="97"/>
         <source>标准代币合约</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">StandardToken</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="124"/>
@@ -4719,7 +4737,7 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="600"/>
+        <location filename="wallet.cpp" line="627"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -5319,7 +5337,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="miner/minerpage.ui" line="474"/>
         <source>交易ID</source>
-        <translation type="unfinished">TRANSACTION ID</translation>
+        <translation type="unfinished">TRX ID</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="482"/>
@@ -7661,32 +7679,32 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="dapp/TokenHistoryWidget.ui" line="38"/>
         <source>合约代币交易历史</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Token Trx Records</translation>
     </message>
     <message>
         <location filename="dapp/TokenHistoryWidget.ui" line="159"/>
         <source>区块高度</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">BLOCK</translation>
     </message>
     <message>
         <location filename="dapp/TokenHistoryWidget.ui" line="172"/>
         <source>交易ID</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">TRX ID</translation>
     </message>
     <message>
         <location filename="dapp/TokenHistoryWidget.ui" line="185"/>
         <source>对方账户</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">OPPOSITE</translation>
     </message>
     <message>
         <location filename="dapp/TokenHistoryWidget.ui" line="198"/>
         <source>数量</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AMOUNT</translation>
     </message>
     <message>
         <location filename="dapp/TokenHistoryWidget.ui" line="211"/>
         <source>备注</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">MEMO</translation>
     </message>
 </context>
 <context>
@@ -8143,7 +8161,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="transfer/transferrecordwidget.ui" line="88"/>
         <source>交易ID</source>
-        <translation type="unfinished">TRANSACTION ID</translation>
+        <translation type="unfinished">TRX ID</translation>
     </message>
     <message>
         <location filename="transfer/transferrecordwidget.ui" line="101"/>
@@ -8918,7 +8936,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="withdrawpage/withdrawrecordwidget.ui" line="85"/>
         <source>交易ID</source>
-        <translation type="unfinished">TRANSACTION ID</translation>
+        <translation type="unfinished">TRX ID</translation>
     </message>
     <message>
         <location filename="withdrawpage/withdrawrecordwidget.ui" line="98"/>
@@ -8945,7 +8963,23 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="145"/>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="154"/>
+        <source>canceled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="157"/>
+        <source>waiting for signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="160"/>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="163"/>
+        <source>being signed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="166"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>

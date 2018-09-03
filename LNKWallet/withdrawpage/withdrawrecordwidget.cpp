@@ -142,7 +142,32 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
         AssetInfo feeAssetInfo = HXChain::getInstance()->assetInfoMap.value(feeAssetId);
         ui->withdrawRecordTableWidget->setItem(rowCount,3, new QTableWidgetItem(getBigNumberString(feeAmount, feeAssetInfo.precision)));
 
-        ui->withdrawRecordTableWidget->setItem(rowCount,5, new QTableWidgetItem(tr("confirmed")));
+        int state = -1;
+        if(HXChain::getInstance()->crosschainWithdrawStateMap.contains(transactionId))
+        {
+            state = HXChain::getInstance()->crosschainWithdrawStateMap.value(transactionId);
+        }
+
+        switch (state)
+        {
+        case -1:
+            ui->withdrawRecordTableWidget->setItem(rowCount,5, new QTableWidgetItem(tr("canceled")));
+            break;
+        case 0:
+            ui->withdrawRecordTableWidget->setItem(rowCount,5, new QTableWidgetItem(tr("waiting for signature")));
+            break;
+        case 1:
+            ui->withdrawRecordTableWidget->setItem(rowCount,5, new QTableWidgetItem(tr("being signed")));
+            break;
+        case 3:
+            ui->withdrawRecordTableWidget->setItem(rowCount,5, new QTableWidgetItem(tr("being signed")));
+            break;
+        case 4:
+            ui->withdrawRecordTableWidget->setItem(rowCount,5, new QTableWidgetItem(tr("confirmed")));
+            break;
+        default:
+            break;
+        }
 
         rowCount++;
     }

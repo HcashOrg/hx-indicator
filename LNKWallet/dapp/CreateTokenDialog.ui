@@ -308,6 +308,9 @@
          <height>40</height>
         </rect>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{color: rgb(255, 0, 0);}</string>
+       </property>
        <property name="text">
         <string>等待注册合约交易被区块链确认，请勿关闭窗口</string>
        </property>
