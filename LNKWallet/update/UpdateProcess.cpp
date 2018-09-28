@@ -13,6 +13,7 @@
 
 #include "UpdateProgressUtil.h"
 #include "UpdateNetWork.h"
+#include "wallet.h"
 
 static const QString UPDATE_DOC_NAME = "blocklink_wallet_upgrade.xml";
 static const QString UPDATE_DIR_NAME = "temp";
@@ -135,13 +136,27 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
         return;//说明出错，没必要进行了
     }
 
-    //对比分析出需要下载的版本信息及目录
-    UpdateProgressUtil::ExtractUpdateData(_p->localVersionData,_p->serverVersionData,
-                                          _p->downloadPath+QDir::separator()+COPY_DIR_NAME,_p->downloadPath,
-                                          _p->updateList);
-    qDebug()<<"download size---"<<_p->updateList.size();
-    //发送版本信息
-    emit NewstVersionSignal(_p->updateList.empty()?"":_p->serverVersionData->version);
+    if( _p->localVersionData->version.isEmpty())
+    {
+        _p->localVersionData->version = WALLET_VERSION;
+    }
+
+    if( UpdateProgressUtil::CompareVersion( _p->localVersionData->version, _p->serverVersionData->version)
+            == UpdateProgressUtil::AFTER)
+    {
+        // 如果需要更新
+        //对比分析出需要下载的版本信息及目录
+        UpdateProgressUtil::ExtractUpdateData(_p->localVersionData,_p->serverVersionData,
+                                              _p->downloadPath+QDir::separator()+COPY_DIR_NAME,_p->downloadPath,
+                                              _p->updateList);
+        qDebug()<<"download size---"<<_p->updateList.size();
+        //发送版本信息
+        emit NewstVersionSignal(_p->updateList.empty()?"":_p->serverVersionData->version);
+    }
+    else
+    {
+        emit NewstVersionSignal("");
+    }
 }
 
 void UpdateProcess::DownloadEmptySlot()

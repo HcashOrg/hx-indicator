@@ -95,7 +95,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <rect>
      <x>330</x>
      <y>90</y>
-     <width>80</width>
+     <width>100</width>
      <height>18</height>
     </rect>
    </property>
@@ -122,7 +122,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
   <widget class="QLabel" name="idLabel">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>430</x>
      <y>90</y>
      <width>100</width>
      <height>18</height>
@@ -276,7 +276,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <rect>
      <x>60</x>
      <y>120</y>
-     <width>80</width>
+     <width>100</width>
      <height>18</height>
     </rect>
    </property>
@@ -334,7 +334,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <rect>
      <x>330</x>
      <y>120</y>
-     <width>80</width>
+     <width>100</width>
      <height>18</height>
     </rect>
    </property>
@@ -361,7 +361,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
   <widget class="QLabel" name="lastBlockLabel">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>430</x>
      <y>120</y>
      <width>100</width>
      <height>18</height>

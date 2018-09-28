@@ -7727,7 +7727,7 @@ With decentralized trading system &amp; POS mining pool system, it enables a sec
     <message>
         <location filename="dapp/TokenTransferWidget.ui" line="109"/>
         <source>数量</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Amount</translation>
     </message>
     <message>
         <location filename="dapp/TokenTransferWidget.ui" line="142"/>
@@ -7756,17 +7756,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="dapp/TokenTransferWidget.ui" line="232"/>
         <source>转账</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Send</translation>
     </message>
     <message>
         <location filename="dapp/TokenTransferWidget.ui" line="254"/>
         <source>合约代币</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Token</translation>
     </message>
     <message>
         <location filename="dapp/TokenTransferWidget.ui" line="299"/>
         <source>备注</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Memo</translation>
     </message>
     <message>
         <location filename="dapp/TokenTransferWidget.ui" line="318"/>
@@ -7781,12 +7781,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="dapp/TokenTransferWidget.ui" line="375"/>
         <source>余额不足</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">not enough balance</translation>
     </message>
     <message>
         <location filename="dapp/TokenTransferWidget.ui" line="401"/>
         <source>合约代币转账</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Send Token</translation>
     </message>
     <message>
         <source>转账记录</source>

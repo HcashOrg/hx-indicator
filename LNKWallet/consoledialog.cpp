@@ -210,7 +210,7 @@ void ConsoleDialog::on_consoleLineEdit_returnPressed()
     }
 
     HXChain::getInstance()->postRPC( "console-" + str, toJsonFormat( command, array ));
-
+qDebug() <<  "ccccccccc " << toJsonFormat( command, array );
     ui->consoleLineEdit->clear();
 
     return;

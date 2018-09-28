@@ -60,7 +60,7 @@ void UpdateProgressUtil::ParseVersion(const QString &jsonStr,VersionData &data)
 {
     QJsonObject object  = QJsonDocument::fromJson(jsonStr.toUtf8()).object().value("result").toObject();
     data.url = object.value("downloadUrl").toString();
-    qDebug()<<object.value("latestVersion").toString();
+    qDebug()<< object.value("latestVersion").toString();
 }
 
 bool UpdateProgressUtil::ParseXmlDoc(const QDomDocument &doc, VersionInfoPtr &data)
