@@ -78,7 +78,7 @@
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <widget class="QToolButton" name="okBtn">
@@ -184,9 +184,9 @@ color:rgb(137,129,161);</string>
       <widget class="QLabel" name="addressLabel">
        <property name="geometry">
         <rect>
-         <x>90</x>
-         <y>23</y>
-         <width>361</width>
+         <x>120</x>
+         <y>20</y>
+         <width>300</width>
          <height>24</height>
         </rect>
        </property>
@@ -214,8 +214,8 @@ color:rgb(137,129,161);</string>
         <rect>
          <x>30</x>
          <y>20</y>
-         <width>61</width>
-         <height>30</height>
+         <width>90</width>
+         <height>24</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -246,9 +246,9 @@ color:rgb(137,129,161);</string>
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>120</y>
+         <y>110</y>
          <width>150</width>
-         <height>40</height>
+         <height>60</height>
         </rect>
        </property>
        <property name="styleSheet">

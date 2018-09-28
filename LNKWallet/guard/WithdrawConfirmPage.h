@@ -70,6 +70,9 @@ private slots:
     void on_typeWaitingBtn_clicked();
 
     void pageChangeSlot(unsigned int page);
+
+    void on_autoConfirmBtn_clicked();
+
 private:
     Ui::WithdrawConfirmPage *ui;
 

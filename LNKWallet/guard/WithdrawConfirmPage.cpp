@@ -90,6 +90,10 @@ void WithdrawConfirmPage::init()
 
     ui->typeCurrentBtn->setChecked(true);
 
+    ui->autoConfirmBtn->setCheckable(true);
+    ui->autoConfirmBtn->setChecked(HXChain::getInstance()->autoWithdrawConfirm);
+    ui->autoConfirmBtn->hide();
+
     fetchCrosschainTransactions();
 }
 
@@ -487,4 +491,11 @@ void WithdrawConfirmPage::pageChangeSlot(unsigned int page)
             ui->crosschainTransactionTableWidget->setRowHidden(i,true);
         }
     }
+}
+
+void WithdrawConfirmPage::on_autoConfirmBtn_clicked()
+{
+    HXChain::getInstance()->autoWithdrawConfirm = !HXChain::getInstance()->autoWithdrawConfirm;
+    HXChain::getInstance()->configFile->setValue("/settings/autoWithdrawConfirm", HXChain::getInstance()->autoWithdrawConfirm);
+    ui->autoConfirmBtn->setChecked(HXChain::getInstance()->autoWithdrawConfirm);
 }

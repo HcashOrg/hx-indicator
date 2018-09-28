@@ -167,3 +167,8 @@ void CreateCitizenDialog::on_okBtn2_clicked()
     HXChain::getInstance()->postRPC( "id-unlock-CreateCitizenDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }
+
+void CreateCitizenDialog::on_pwdLineEdit_textEdited(const QString &arg1)
+{
+    ui->tipLabel2->clear();
+}

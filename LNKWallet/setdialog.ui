@@ -146,7 +146,7 @@
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QToolButton" name="saveBtn">
@@ -546,10 +546,10 @@ color:rgb(137,129,161);</string>
         <widget class="QToolButton" name="depositBtn">
          <property name="geometry">
           <rect>
-           <x>180</x>
-           <y>168</y>
-           <width>71</width>
-           <height>20</height>
+           <x>190</x>
+           <y>170</y>
+           <width>44</width>
+           <height>16</height>
           </rect>
          </property>
          <property name="font">

@@ -41,7 +41,6 @@ HXChain::HXChain()
     currentDialog = NULL;
     currentPort = CLIENT_RPC_PORT;
     currentAccount = "";
-    transactionFee = 0;
 
     witnessConfig = new WitnessConfig;
     configFile = new QSettings( walletConfigPath + "/config.ini", QSettings::IniFormat);
@@ -71,22 +70,25 @@ HXChain::HXChain()
         configFile->setValue("settings/contractFee",1);
         middlewarePath = "http://117.78.44.37:5005/api";
         configFile->setValue("settings/middlewarePath",middlewarePath);
+        configFile->setValue("/settings/autoWithdrawConfirm",false);
+        autoWithdrawConfirm = false;
     }
     else
     {
         lockMinutes     = configFile->value("/settings/lockMinutes").toInt();
-        notProduce      = !configFile->value("/settings/notAutoLock").toBool();
-        minimizeToTray  = configFile->value("/settings/minimizeToTray").toBool();
-        closeToMinimize = configFile->value("/settings/closeToMinimize").toBool();
+        notProduce      = !configFile->value("/settings/notAutoLock",false).toBool();
+        minimizeToTray  = configFile->value("/settings/minimizeToTray",false).toBool();
+        closeToMinimize = configFile->value("/settings/closeToMinimize",false).toBool();
         language        = configFile->value("/settings/language").toString();
         feeType         = configFile->value("/settings/feeType").toString();
         feeOrderID      = configFile->value("/settings/feeOrderID").toString();
-        IsBackupNeeded  = configFile->value("/settings/backupNeeded").toBool();
-        autoDeposit     = configFile->value("/settings/autoDeposit").toBool();
+        IsBackupNeeded  = configFile->value("/settings/backupNeeded",false).toBool();
+        autoDeposit     = configFile->value("/settings/autoDeposit",false).toBool();
         resyncNextTime  = configFile->value("/settings/resyncNextTime",false).toBool();
         contractFee     = configFile->value("/settings/contractFee",1).toULongLong();
         middlewarePath  = configFile->value("/settings/middlewarePath","http://117.78.44.37:5005/api").toString();
         importedWalletNeedToAddTrackAddresses = configFile->value("/settings/importedWalletNeedToAddTrackAddresses",false).toBool();
+        autoWithdrawConfirm = configFile->value("/settings/autoWithdrawConfirm",false).toBool();
     }
 
     QFile file( walletConfigPath + "/log.txt");       // 每次启动清空 log.txt文件

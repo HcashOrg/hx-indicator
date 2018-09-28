@@ -1071,11 +1071,19 @@ void Frame::setLanguage(QString language)
         case 19:
             showBonusPage();
             break;
+        case 20:
+            showContractTokenPage();
+            break;
+        case 21:
+            showCitizenAccountPage();
+            break;
+        case 22:
+            showCitizenProposalPage();
+            break;
         default:
             break;
         }
     }
-
     
 }
 

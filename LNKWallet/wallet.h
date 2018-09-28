@@ -32,7 +32,7 @@
 #define ACCOUNT_ADDRESS_PREFIX  "HX"
 #define CONTRACT_ADDRESS_PREFIX "CHX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.0.7"           // 版本号
+#define WALLET_VERSION "1.0.8"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
@@ -334,9 +334,10 @@ public:
     bool IsBackupNeeded;//是否需要备份钱包
     QString feeOrderID;//承兑单id
     bool autoDeposit;//充值自动划转
-    QString currentAccount; // 保存当前账户  切换页面的时候默认选择当前账户
+    bool autoWithdrawConfirm = false;
     FeeChargeInfo feeChargeInfo;//手续费情况
-    unsigned long long transactionFee;
+
+    QString currentAccount; // 保存当前账户  切换页面的时候默认选择当前账户
     QString currentSellAssetId;
     QString currentBuyAssetId;
 

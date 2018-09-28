@@ -280,6 +280,19 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     </rect>
    </property>
   </widget>
+  <widget class="QToolButton" name="autoConfirmBtn">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>100</y>
+     <width>38</width>
+     <height>19</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

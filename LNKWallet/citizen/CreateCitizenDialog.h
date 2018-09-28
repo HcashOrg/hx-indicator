@@ -34,6 +34,8 @@ private slots:
 
     void on_okBtn2_clicked();
 
+    void on_pwdLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::CreateCitizenDialog *ui;
 };

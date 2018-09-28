@@ -1823,7 +1823,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="citizen/CitizenAccountPage.ui" line="271"/>
         <source>创建新Citizen</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CREATE CITIZEN</translation>
     </message>
     <message>
         <location filename="citizen/CitizenAccountPage.ui" line="297"/>
@@ -2899,17 +2899,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="citizen/CreateCitizenDialog.ui" line="152"/>
         <source>可用账户</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Available Account</translation>
     </message>
     <message>
         <location filename="citizen/CreateCitizenDialog.ui" line="226"/>
         <source>账户地址</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Account Address</translation>
     </message>
     <message>
         <location filename="citizen/CreateCitizenDialog.ui" line="259"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;已注册账户才可以成为Citizen，点击&lt;/span&gt;&lt;a href=&quot;showRegisterDialog&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;注册&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;新账户&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Only a registered account can become a citizen. Click to &lt;/span&gt;&lt;a href=&quot;showRegisterDialog&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;register&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt; a new account.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="citizen/CreateCitizenDialog.ui" line="364"/>

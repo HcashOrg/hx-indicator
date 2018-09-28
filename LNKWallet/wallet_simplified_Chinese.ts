@@ -2783,12 +2783,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="citizen/CreateCitizenDialog.cpp" line="89"/>
         <source>Wrong password!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">错误的密码！</translation>
     </message>
     <message>
         <location filename="citizen/CreateCitizenDialog.cpp" line="104"/>
         <source>Transaction of create-citizen has been sent out!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">创建citizen交易已发出！</translation>
     </message>
     <message>
         <location filename="citizen/CreateCitizenDialog.cpp" line="115"/>

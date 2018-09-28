@@ -216,7 +216,7 @@ void WithdrawMultiSigDialog::init()
     QStringList keys = HXChain::getInstance()->multiSigInfoMap.keys();
     ui->multiSigAddressComboBox->addItems(keys);
 
-    ui->feeLabel->setText( getBigNumberString(HXChain::getInstance()->transactionFee,ASSET_PRECISION));
+//    ui->feeLabel->setText( getBigNumberString(HXChain::getInstance()->transactionFee,ASSET_PRECISION));
 
     QString path = HXChain::getInstance()->walletConfigPath;
     path.replace("\\","/");
