@@ -655,7 +655,7 @@ void HXChain::InitFeeCharge()
     feeChargeInfo.minerIncomeFee = feeObj.value("MinerIncome").toString();
     feeChargeInfo.minerForeCloseFee = feeObj.value("MinerForeClose").toString();
     feeChargeInfo.minerRedeemFee = feeObj.value("MinerRedeem").toString();
-    feeChargeInfo.minerRegisterFee = feeObj.value("MinerRegister").toString();
+    feeChargeInfo.accountRegisterFee = feeObj.value("AccountRegister").toString();
     feeChargeInfo.poundagePublishFee = feeObj.value("PoundagePublish").toString();
     feeChargeInfo.poundageCancelFee = feeObj.value("PoundageCancel").toString();
     feeChargeInfo.transferFee = feeObj.value("Transfer").toString();

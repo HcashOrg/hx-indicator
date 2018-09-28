@@ -172,3 +172,8 @@ void CreateCitizenDialog::on_pwdLineEdit_textEdited(const QString &arg1)
 {
     ui->tipLabel2->clear();
 }
+
+void CreateCitizenDialog::on_cancelBtn2_clicked()
+{
+    close();
+}

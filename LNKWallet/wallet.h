@@ -255,7 +255,7 @@ struct FeeChargeInfo
 {
     FeeChargeInfo()
     {
-        minerRegisterFee = "0";
+        accountRegisterFee = "0";
         minerIncomeFee = "0";
         minerForeCloseFee = "0";
         minerRedeemFee = "0";
@@ -268,7 +268,7 @@ struct FeeChargeInfo
         capitalFee = "0";
     }
 
-    QString minerRegisterFee;//挖矿注册手续费
+    QString accountRegisterFee;//账号注册手续费
     QString minerIncomeFee;//领取收益手续费
     QString minerForeCloseFee;//质押资产手续费
     QString minerRedeemFee;//赎回资产手续费
