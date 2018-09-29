@@ -79,12 +79,15 @@ TransactionStruct TransactionDB::getTransactionStruct(QString _transactionId)
 
 void TransactionDB::removeTransactionStruct(QString _transactionId)
 {
-    removeFromDB(m_transactionStructDB, _transactionId);
-
-    QStringList keys = getKeys(m_accountTransactionIdsDB);
-    foreach (QString key, keys)
+    if(m_transactionStructDB)
     {
-        removeAccountTransactionId(key, _transactionId);
+        removeFromDB(m_transactionStructDB, _transactionId);
+
+        QStringList keys = getKeys(m_accountTransactionIdsDB);
+        foreach (QString key, keys)
+        {
+            removeAccountTransactionId(key, _transactionId);
+        }
     }
 }
 
@@ -125,27 +128,30 @@ QVector<TransactionStruct> TransactionDB::lookupTransactionStruct(QString _addre
 {
     QVector<TransactionStruct> result;
 
-    QStringList keys = getKeys(m_transactionStructDB);
-    foreach (QString key, keys)
+    if(m_transactionStructDB)
     {
-        TransactionStruct ts = getTransactionStruct(key);
-        if(ts.type == _type)
+        QStringList keys = getKeys(m_transactionStructDB);
+        foreach (QString key, keys)
         {
-            switch (ts.type)
+            TransactionStruct ts = getTransactionStruct(key);
+            if(ts.type == _type)
             {
-            case 0:
-            {
-                QJsonObject object = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
-                QString fromAddress = object.take("from_addr").toString();
-                QString toAddress   = object.take("to_addr").toString();
-                if(fromAddress == _address || toAddress == _address)
+                switch (ts.type)
                 {
-                    result.append(ts);
+                case 0:
+                {
+                    QJsonObject object = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
+                    QString fromAddress = object.take("from_addr").toString();
+                    QString toAddress   = object.take("to_addr").toString();
+                    if(fromAddress == _address || toAddress == _address)
+                    {
+                        result.append(ts);
+                    }
                 }
-            }
-                break;
-            default:
-                break;
+                    break;
+                default:
+                    break;
+                }
             }
         }
     }
@@ -157,14 +163,18 @@ QStringList TransactionDB::getPendingTransactions()
 {
     QStringList result;
 
-    QStringList keys = getKeys(m_transactionStructDB);
-    foreach (QString key, keys)
+    if(m_transactionStructDB)
     {
-        TransactionStruct ts = getTransactionStruct(key);
-        if(ts.blockNum == 0)
+        QStringList keys = getKeys(m_transactionStructDB);
+        foreach (QString key, keys)
         {
-            result << ts.transactionId;
+            TransactionStruct ts = getTransactionStruct(key);
+            if(ts.blockNum == 0)
+            {
+                result << ts.transactionId;
+            }
         }
+
     }
 
     return result;
@@ -273,6 +283,7 @@ bool TransactionDB::removeFromDB(leveldb::DB *_db, QString _key)
 
 QStringList TransactionDB::getKeys(leveldb::DB *_db)
 {
+    qDebug() << "111111 " << _db;
     leveldb::Iterator* it = _db->NewIterator(leveldb::ReadOptions());
     QStringList keys;
     for (it->SeekToFirst(); it->Valid(); it->Next())
@@ -280,6 +291,7 @@ QStringList TransactionDB::getKeys(leveldb::DB *_db)
         keys.append(QString::fromStdString(it->key().ToString()));
     }
     delete it;
+    qDebug() << "222222 " << keys;
 
     return   keys;
 }
