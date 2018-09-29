@@ -67,7 +67,7 @@
     <rect>
      <x>52</x>
      <y>3</y>
-     <width>81</width>
+     <width>120</width>
      <height>18</height>
     </rect>
    </property>
@@ -78,7 +78,7 @@
     </font>
    </property>
    <property name="text">
-    <string>BLOCKLINK</string>
+    <string>HYPEREXCHANGE</string>
    </property>
   </widget>
  </widget>

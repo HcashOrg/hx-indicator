@@ -3958,27 +3958,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1171"/>
+        <location filename="frame.cpp" line="1179"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1417"/>
+        <location filename="frame.cpp" line="1425"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2277"/>
+        <location filename="frame.cpp" line="2285"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2280"/>
+        <location filename="frame.cpp" line="2288"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2283"/>
+        <location filename="frame.cpp" line="2291"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -4498,13 +4498,13 @@ add an account first</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="192"/>
-        <location filename="wallet.cpp" line="216"/>
+        <location filename="wallet.cpp" line="194"/>
+        <location filename="wallet.cpp" line="218"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="627"/>
+        <location filename="wallet.cpp" line="629"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -4524,13 +4524,13 @@ add an account first</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Microsoft YaHei UI Light&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;关于我们&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;Blocklink是一条支持跨链交易且拥有智能合约的高性能区块链。它支持和现有数字货币（比特币，莱特币等）之间的跨链转账，支持链上的多资产转移，也支持通过智能合约支撑各种复杂业务场景。内置去中心化交易所、去中心化POS矿池等系统。兑换流程公开透明，安全可靠。帮助用户快速实现跨链资产的转移和交易，打破链与链之间的流通壁垒。Blocklink致力于更好地进行区块链资源整合，促进价值传递。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;HyperExchange是一条支持跨链交易且拥有智能合约的高性能区块链，是HCASH“强耦合，双聚焦”生态系统中的重要组成部分。作为HCASH并生双链生态的枢纽之一，它支持和现有数字货币（比特币，莱特币等）之间的跨链转账，支持链上的多资产转移，也支持通过智能合约支撑各种复杂业务场景。内置去中心化交易所、去中心化POS矿池等系统。兑换流程公开透明，安全可靠。帮助用户快速实现跨链资产的转移和交易，打破链与链之间的流通壁垒。HyperExchange致力于更好地进行区块链资源整合，为HCASH生态提供区块链间价值互通互联方案，促进价值传递，壮大HCASH生态。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <oldsource>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Microsoft YaHei UI Light&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;关于我们&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Blocklink是一条支持跨链交易且拥有智能合约的高性能区块链。它支持和现有数字货币（比特币，莱特币等）之间的跨链转账，支持链上的多资产转移，也支持通过智能合约支撑各种复杂业务场景。内置去中心化交易所、去中心化POS矿池等系统。兑换流程公开透明，安全可靠。帮助用户快速实现跨链资产的转移和交易，打破链与链之间的流通壁垒。Blocklink致力于更好地进行区块链资源整合，促进价值传递。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;关于我们&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:9pt;&quot;&gt;HyperExchange是一条支持跨链交易且拥有智能合约的高性能区块链。它支持和现有数字货币（比特币，莱特币等）之间的跨链转账，支持链上的多资产转移，也支持通过智能合约支撑各种复杂业务场景。内置去中心化交易所、去中心化POS矿池等系统。兑换流程公开透明，安全可靠。帮助用户快速实现跨链资产的转移和交易，打破链与链之间的流通壁垒。HyperExchange致力于更好地进行区块链资源整合，促进价值传递。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5142,7 +5142,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="notifyWidget/MessageNotifyWidget.ui" line="81"/>
-        <source>BLOCKLINK</source>
+        <source>HYPEREXCHANGE</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8217,45 +8217,50 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="guard/WithdrawConfirmPage.ui" line="293"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="57"/>
         <source>There are no withdraw trxs to authorize currently!</source>
         <translation type="unfinished">现在没有待授权的提现交易！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="215"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="219"/>
         <source>Transaction of senator-sign-crosschain has been sent out!</source>
         <oldsource>Transaction of guard-sign-crosschain has been sent out!</oldsource>
         <translation type="unfinished">senator签名交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="221"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="225"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="268"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="272"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished">%1 已经签名过了！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="314"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="318"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="316"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="356"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="320"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="360"/>
         <source>check</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="322"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="326"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="265"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="392"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="269"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="396"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
@@ -8265,12 +8270,12 @@ update or not?</source>
         <translation type="unfinished">钱包内没有senator账户</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="354"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="358"/>
         <source>waiting</source>
         <translation type="unfinished">等待中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="396"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="400"/>
         <source>unsigned</source>
         <translation type="unfinished">未签名</translation>
     </message>

@@ -8,6 +8,8 @@
 #include "wallet.h"
 #include "DepositDataUtil.h"
 
+static const QMap<QString,QString>  leastDepositAmountMap = {{"HC","0.01"}};
+
 DepositQrcodeWidget::DepositQrcodeWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DepositQrcodeWidget)
@@ -31,7 +33,12 @@ void DepositQrcodeWidget::SetQRString(const QString &data)
 void DepositQrcodeWidget::SetSymbol(const QString &symbol)
 {
     ui->label_warning->setText(ui->label_warning->text().replace("BTC",symbol));
+
     ui->tipLabel->setText(ui->tipLabel->text().replace("BTC",symbol));
+    if(leastDepositAmountMap.contains(symbol))
+    {
+        ui->tipLabel->setText(ui->tipLabel->text().replace("0.001",leastDepositAmountMap.value(symbol)));
+    }
 }
 
 void DepositQrcodeWidget::CopySlots()

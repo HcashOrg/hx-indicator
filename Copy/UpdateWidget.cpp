@@ -22,8 +22,8 @@
                         "QToolButton:hover{background-color:rgb(208,228,255);"
 
 static const QString TEMP_FOLDER_NAME = "temp";
-static const QString PACKAGE_UN = "blocklink";
-static const QString PACKAGE_NAME = "blocklink.zip";
+static const QString PACKAGE_UN = "hyperexchange";
+static const QString PACKAGE_NAME = "hyperexchange.zip";
 #ifdef TARGET_OS_MAC
 static const QString MAINEXE_NAME = "./HXIndicator";
 #else
