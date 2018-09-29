@@ -15,7 +15,7 @@
 #include "UpdateNetWork.h"
 #include "wallet.h"
 
-static const QString UPDATE_DOC_NAME = "blocklink_wallet_upgrade.xml";
+static const QString UPDATE_DOC_NAME = "hyperexchange_wallet_upgrade.xml";
 static const QString UPDATE_DIR_NAME = "temp";
 static const QString COPY_DIR_NAME = "copy";
 
@@ -108,7 +108,7 @@ void UpdateProcess::GetLatestVersionInfoSlots()
     UpdateProgressUtil::ParseVersion(QString(reply->readAll()),serverVersion);
 
 #ifdef TARGET_OS_MAC
-    serverVersion.url.replace(".xml","_mac.xml");//"http://192.168.1.161/down/blocklink_wallet_upgrade.xml";//测试用，本地文件
+    serverVersion.url.replace(".xml","_mac.xml");//"http://192.168.1.161/down/hyperexchange_wallet_upgrade.xml";//测试用，本地文件
 #endif
 
     //下载config配置
