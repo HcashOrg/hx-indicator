@@ -4772,9 +4772,8 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Microsoft YaHei UI Light&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;HyperExchange --- a high performance, smart contract embedded block chain supports cross-chain transactions. We are committed to intergrade block chain technology to optimize value transfer service.
-It supports cross-chain transaction between current major digital currencies (bitcoin, litecoin, for instance), facilitates multiple assets on-chain transfer, and assists complex business scenario via smart contract.
-With decentralized trading system &amp; POS mining pool system, it enables a secure, transparent exchange, greatly help you to do cross-chain transfer and trade without chain barriers. 
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;HyperExchange--- a high performance, smart contract embedded blockchain supports cross-chain transactions. As one of the core hub in the HCASH  “interlinked,
+bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade blockchain technology to optimize value transfer service. It supports cross-chain transaction between current major digital currencies (bitcoin, litecoin, for instance), facilitates multiple assets on-chain transfer, and assists complex business scenario via smart contract. With decentralized trading system &amp; PoS mining pool system, it enables a secure, transparent exchange, greatly help you to do cross-chain transfer and trade without chain barriers. HyperExchange is committed to better integrating blockchain resources, providing interoperability solutions for HCASH ecosystem, improving value transformation and expanding HCASH ecosystem.
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
