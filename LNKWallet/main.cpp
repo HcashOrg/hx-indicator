@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
     qDebug() <<  "witnessConfig init: " << HXChain::getInstance()->witnessConfig->init();
 
 //    QStringList keys = HXChain::getInstance()->transactionDB.keys();
-    qInstallMessageHandler(myMessageOutput);
+//    qInstallMessageHandler(myMessageOutput);
 //    removeUpdateDeleteFile();
 
     if(checkOnly()==false)  return 0;    // 防止程序多次启动

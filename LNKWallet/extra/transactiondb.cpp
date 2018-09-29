@@ -31,7 +31,9 @@ bool TransactionDB::init()
     leveldb::Status status = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/transactionStruct").toStdString(), &m_transactionStructDB);
     leveldb::Status status2 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/accountTransactionIds").toStdString(), &m_accountTransactionIdsDB);
     leveldb::Status status3 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/guaranteeOrder").toStdString(), &m_guaranteeOrderDB);
-    qDebug() << "transactionstruct db init" << status.ok() << QString::fromStdString( status.ToString());
+    qDebug() << "transactionstruct db init" << status.ok() << QString::fromStdString( status.ToString())
+                                            << status2.ok() << QString::fromStdString( status2.ToString())
+                                            << status2.ok() << QString::fromStdString( status2.ToString());
     if(status.ok() && status2.ok() && status3.ok())
     {
         return true;
@@ -256,6 +258,7 @@ TransactionTypeIds TransactionDB::getAccountTransactionTypeIdsByType(QString _ac
 
 bool TransactionDB::writeToDB(leveldb::DB* _db, QString _key, QByteArray _value)
 {
+    if(_db == NULL)     return false;
     std::string stdKeyStr = _key.toStdString();
     leveldb::Slice key = stdKeyStr;
     std::string stdValueStr = _value.toStdString();
@@ -267,6 +270,7 @@ bool TransactionDB::writeToDB(leveldb::DB* _db, QString _key, QByteArray _value)
 
 QByteArray TransactionDB::readFromDB(leveldb::DB* _db, QString _key)
 {
+    if(_db == NULL)     return QByteArray();
     std::string strValue = "";
     std::string stdStr = _key.toStdString();
     leveldb::Slice key = stdStr;
@@ -276,6 +280,7 @@ QByteArray TransactionDB::readFromDB(leveldb::DB* _db, QString _key)
 
 bool TransactionDB::removeFromDB(leveldb::DB *_db, QString _key)
 {
+    if(_db == NULL)     return false;
     std::string stdStr = _key.toStdString();
     leveldb::Slice key = stdStr;
     return _db->Delete(leveldb::WriteOptions(), key).ok();
@@ -283,7 +288,7 @@ bool TransactionDB::removeFromDB(leveldb::DB *_db, QString _key)
 
 QStringList TransactionDB::getKeys(leveldb::DB *_db)
 {
-    qDebug() << "111111 " << _db;
+    if(_db == NULL)     return QStringList();
     leveldb::Iterator* it = _db->NewIterator(leveldb::ReadOptions());
     QStringList keys;
     for (it->SeekToFirst(); it->Valid(); it->Next())
@@ -291,7 +296,6 @@ QStringList TransactionDB::getKeys(leveldb::DB *_db)
         keys.append(QString::fromStdString(it->key().ToString()));
     }
     delete it;
-    qDebug() << "222222 " << keys;
 
     return   keys;
 }
