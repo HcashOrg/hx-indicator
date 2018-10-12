@@ -40,10 +40,27 @@ ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
     ui->coldHotTransactionTableWidget->setColumnWidth(6,80);
     ui->coldHotTransactionTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
+    ui->ethFinalTrxTableWidget->installEventFilter(this);
+    ui->ethFinalTrxTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->ethFinalTrxTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->ethFinalTrxTableWidget->setFocusPolicy(Qt::NoFocus);
+    ui->ethFinalTrxTableWidget->setMouseTracking(true);
+    ui->ethFinalTrxTableWidget->setShowGrid(false);//隐藏表格线
+
+    ui->ethFinalTrxTableWidget->horizontalHeader()->setSectionsClickable(true);
+    ui->ethFinalTrxTableWidget->horizontalHeader()->setVisible(true);
+    ui->ethFinalTrxTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+
+    ui->ethFinalTrxTableWidget->setColumnWidth(0,500);
+    ui->ethFinalTrxTableWidget->setColumnWidth(1,80);
+    ui->ethFinalTrxTableWidget->setColumnWidth(2,80);
+    ui->ethFinalTrxTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+
     ui->transferBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     ui->typeCurrentBtn->setCheckable(true);
     ui->typeWaitingBtn->setCheckable(true);
+    ui->typeETHBtn->setCheckable(true);
 
     setStyleSheet(PUSHBUTTON_CHECK_STYLE);
 
@@ -52,10 +69,15 @@ ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
     ui->typeWaitingBtn->adjustSize();
     ui->typeWaitingBtn->resize(ui->typeWaitingBtn->width(), 18);
     ui->typeWaitingBtn->move(ui->typeCurrentBtn->x() + ui->typeCurrentBtn->width() + 30, ui->typeWaitingBtn->y());
+    ui->typeETHBtn->adjustSize();
+    ui->typeETHBtn->resize(ui->typeETHBtn->width(), 18);
+    ui->typeETHBtn->move(ui->typeWaitingBtn->x() + ui->typeWaitingBtn->width() + 30, ui->typeETHBtn->y());
 
     pageWidget = new PageScrollWidget();
     ui->stackedWidget->addWidget(pageWidget);
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ColdHotTransferPage::pageChangeSlot);
+
+    ui->stackedWidget2->setCurrentIndex(0);
 
     blankWidget = new BlankDefaultWidget(ui->coldHotTransactionTableWidget);
     blankWidget->setTextTip(tr("There are no cold-hot trxs currently!"));
@@ -70,6 +92,8 @@ ColdHotTransferPage::~ColdHotTransferPage()
 void ColdHotTransferPage::init()
 {
     inited = false;
+
+    connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
     ui->accountComboBox->clear();
     QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
@@ -104,6 +128,7 @@ void ColdHotTransferPage::init()
 void ColdHotTransferPage::refresh()
 {
     fetchColdHotTransaction();
+    fetchEthBalance();
 }
 
 void ColdHotTransferPage::jsonDataUpdated(QString id)
@@ -136,6 +161,33 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
             else if(type == 0)
             {
                 pendingColdHotTransactionMap.clear();
+            }
+            else if(type == 6)
+            {
+                ethFinalTrxMap.clear();
+                foreach (QJsonValue v, array)
+                {
+                    QJsonArray array2 = v.toArray();
+                    QJsonObject object = array2.at(1).toObject();
+                    QJsonArray operationArray = object.take("operations").toArray();
+                    QJsonArray array3 = operationArray.at(0).toArray();
+                    int operationType = array3.at(0).toInt();
+                    QJsonObject operationObject = array3.at(1).toObject();
+
+                    if( operationType == TRANSACTION_TYPE_COLDHOT_FINAL)
+                    {
+                        QJsonObject ethObject = operationObject.value("coldhot_trx_original_chain").toObject();
+                        ETHFinalTrx eft;
+                        eft.trxId = array2.at(0).toString();
+                        eft.signer = ethObject.value("signer").toString();
+                        eft.nonce = ethObject.value("nonce").toString();
+
+                        ethFinalTrxMap.insert(eft.trxId, eft);
+                    }
+                }
+
+                showEthFinalTrxs();
+                return;
             }
 
             foreach (QJsonValue v, array)
@@ -189,12 +241,11 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
                 }
             }
 
-
-            if(type != 2)
+            if(type == 0 || type == 1)
             {
                 showColdHotTransactions();
             }
-            else
+            else if(type == 2)
             {
                 refreshColdHotTtransactionsState();
             }
@@ -223,6 +274,82 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
         }
 
         return;
+    }
+
+    if(id.startsWith("ColdHotTransferPage-get_multi_address_obj-ETH-"))
+    {
+        QString accountId = id.mid(QString("ColdHotTransferPage-get_multi_address_obj-ETH-").size());
+        AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+        if(accountId != accountInfo.id)     return;
+
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonObject ethMultisigObject = jsonObject.value("result").toArray().at(0).toObject();
+
+        QString hotAddress = ethMultisigObject.value("new_address_hot").toString();
+        QString coldAddress = ethMultisigObject.value("new_address_cold").toString();
+
+        QJsonObject object;
+        object.insert("jsonrpc","2.0");
+        object.insert("id",1011);
+        object.insert("method","Zchain.Address.GetBalance");
+        QJsonObject paramObject;
+        paramObject.insert("chainId","ETH");
+        paramObject.insert("addr",hotAddress);
+        object.insert("params",paramObject);
+        httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+
+        paramObject.insert("addr",coldAddress);
+        object.insert("params",paramObject);
+        object.insert("id",1012);
+        httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+
+        return;
+    }
+
+    if(id == "id-senator_sign_eths_coldhot_final_trx")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":null"))
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Transaction of senator-sign-eth-coldhot-final has been sent out!"));
+            commonDialog.pop();
+        }
+        else if(result.startsWith("\"error\":"))
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Failed!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
+        }
+
+        return;
+    }
+}
+
+void ColdHotTransferPage::httpReplied(QByteArray _data, int _status)
+{
+    QJsonObject object  = QJsonDocument::fromJson(_data).object();
+    int id = object.value("id").toInt();
+    QJsonObject resultObject = object.value("result").toObject();
+    QString assetSymbol = resultObject.value("chainId").toString().toUpper();
+    QString balance = resultObject.value("balance").toString();
+    QString address = resultObject.value("address").toString();
+
+    if(id == 1011)
+    {
+        ui->hotAddressBalanceLabel->setText( QString("%1 (%2 ETH)").arg(address).arg(balance));
+    }
+    else if(id == 1012)
+    {
+        ui->coldAddressBalanceLabel->setText( QString("%1 (%2 ETH)").arg(address).arg(balance));
     }
 }
 
@@ -254,6 +381,9 @@ void ColdHotTransferPage::fetchColdHotTransaction()
 
     HXChain::getInstance()->postRPC( "id-get_coldhot_transaction-" + QString::number(2), toJsonFormat( "get_coldhot_transaction",
                                                                                      QJsonArray() << 2));
+
+    HXChain::getInstance()->postRPC( "id-get_coldhot_transaction-" + QString::number(6), toJsonFormat( "get_coldhot_transaction",
+                                                                                     QJsonArray() << 6));
 
 }
 
@@ -349,6 +479,7 @@ void ColdHotTransferPage::refreshColdHotTtransactionsState()
     if(currentType != 1)    return;
 
     int rowCount = ui->coldHotTransactionTableWidget->rowCount();
+
     for(int i = 0; i < rowCount; i++)
     {
         QString trxId = ui->coldHotTransactionTableWidget->item(i,0)->data(Qt::UserRole).toString();
@@ -365,6 +496,43 @@ void ColdHotTransferPage::refreshColdHotTtransactionsState()
             ui->coldHotTransactionTableWidget->item(i,4)->setText(tr("unsigned"));
         }
     }
+}
+
+void ColdHotTransferPage::fetchEthBalance()
+{
+    AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+
+    HXChain::getInstance()->postRPC( "ColdHotTransferPage-get_multi_address_obj-ETH-" + accountInfo.id, toJsonFormat( "get_multi_address_obj",
+                                                                                                     QJsonArray() << "ETH" << accountInfo.id));
+}
+
+void ColdHotTransferPage::showEthFinalTrxs()
+{
+    QStringList keys = ethFinalTrxMap.keys();
+    int size = keys.size();
+    ui->ethFinalTrxTableWidget->setRowCount(0);
+    ui->ethFinalTrxTableWidget->setRowCount(size);
+
+    for(int i = 0; i < size; i++)
+    {
+        ui->ethFinalTrxTableWidget->setRowHeight(i,40);
+
+        ETHFinalTrx eft = ethFinalTrxMap.value(keys.at(i));
+
+        ui->ethFinalTrxTableWidget->setItem(i, 0, new QTableWidgetItem(eft.signer));
+        ui->ethFinalTrxTableWidget->item(i,0)->setData(Qt::UserRole, eft.trxId);
+
+        ui->ethFinalTrxTableWidget->setItem(i, 1, new QTableWidgetItem(eft.nonce));
+
+        ui->ethFinalTrxTableWidget->setItem(i, 2, new QTableWidgetItem(tr("sign")));
+        ToolButtonWidget *toolButton = new ToolButtonWidget();
+        toolButton->setText(ui->ethFinalTrxTableWidget->item(i,2)->text());
+        ui->ethFinalTrxTableWidget->setCellWidget(i,2,toolButton);
+        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_ethFinalTrxTableWidget_cellClicked,this,i,2));
+
+    }
+
+    tableWidgetSetItemZebraColor(ui->ethFinalTrxTableWidget);
 }
 
 QString ColdHotTransferPage::lookupCrosschainTrxByColdHotTrxId(QString coldHotTrxId)
@@ -462,6 +630,8 @@ void ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked(int row, 
 
 void ColdHotTransferPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
+    ui->hotAddressBalanceLabel->clear();
+    ui->coldAddressBalanceLabel->clear();
     refresh();
 }
 
@@ -485,17 +655,30 @@ void ColdHotTransferPage::on_coldHotTransactionTableWidget_cellPressed(int row, 
 void ColdHotTransferPage::on_typeCurrentBtn_clicked()
 {
     currentType = 1;
+    ui->stackedWidget2->setCurrentIndex(0);
     ui->typeCurrentBtn->setChecked(true);
     ui->typeWaitingBtn->setChecked(false);
+    ui->typeETHBtn->setChecked(false);
     showColdHotTransactions();
 }
 
 void ColdHotTransferPage::on_typeWaitingBtn_clicked()
 {
     currentType = 0;
+    ui->stackedWidget2->setCurrentIndex(0);
     ui->typeCurrentBtn->setChecked(false);
     ui->typeWaitingBtn->setChecked(true);
+    ui->typeETHBtn->setChecked(false);
     showColdHotTransactions();
+}
+
+void ColdHotTransferPage::on_typeETHBtn_clicked()
+{
+    currentType = 2;
+    ui->stackedWidget2->setCurrentIndex(1);
+    ui->typeCurrentBtn->setChecked(false);
+    ui->typeWaitingBtn->setChecked(false);
+    ui->typeETHBtn->setChecked(true);
 }
 
 void ColdHotTransferPage::pageChangeSlot(unsigned int page)
@@ -515,4 +698,29 @@ void ColdHotTransferPage::pageChangeSlot(unsigned int page)
             ui->coldHotTransactionTableWidget->setRowHidden(i,true);
         }
     }
+}
+
+
+
+void ColdHotTransferPage::on_ethFinalTrxTableWidget_cellClicked(int row, int column)
+{
+    if(column == 2)
+    {
+        if(ui->ethFinalTrxTableWidget->item(row,0))
+        {
+            QString trxId = ui->ethFinalTrxTableWidget->item(row,0)->data(Qt::UserRole).toString();
+
+            qDebug() << trxId;
+
+            HXChain::getInstance()->postRPC( "id-senator_sign_eths_coldhot_final_trx",
+                                             toJsonFormat( "senator_sign_eths_coldhot_final_trx",
+                                                           QJsonArray() << trxId << ui->accountComboBox->currentText()));
+
+            qDebug() << toJsonFormat( "senator_sign_eths_multi_account_create_trx",
+                                      QJsonArray() << trxId << ui->accountComboBox->currentText());
+        }
+
+        return;
+    }
+
 }

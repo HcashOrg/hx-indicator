@@ -104,7 +104,7 @@ void ColdHotTransferDialog::httpReplied(QByteArray _data, int _status)
     if(assetSymbol != ui->assetComboBox->currentText())     return;
 
     AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(assetSymbol));
-    queriedBalance = object.take("balance").toDouble();
+    queriedBalance = jsonValueToDouble( object.value("balance"));
     qDebug() << assetSymbol << info.symbol << queriedBalance << info.precision << QString::number(queriedBalance, 'g', info.precision);
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(info.precision));

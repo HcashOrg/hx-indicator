@@ -55,12 +55,18 @@
     <rect>
      <x>222</x>
      <y>140</y>
-     <width>221</width>
-     <height>16</height>
+     <width>160</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
     <string>当前账户可划转</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QLabel" name="label_number">
@@ -69,11 +75,14 @@
      <x>446</x>
      <y>140</y>
      <width>121</width>
-     <height>16</height>
+     <height>30</height>
     </rect>
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">

@@ -1366,49 +1366,49 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="102"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="277"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="111"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="286"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="89"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="98"/>
         <source>划转操作</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="149"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="158"/>
         <source>充值</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="171"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="180"/>
         <source>提现</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="184"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="193"/>
         <source>划转数量</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="235"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="244"/>
         <source>手续费</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="260"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="269"/>
         <source>确定</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="336"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="345"/>
         <source>Tunnel:</source>
         <oldsource>Tunnel地址:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="358"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="367"/>
         <source>1111</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1417,7 +1417,7 @@ better not transfer or upgrade</source>
         <translation type="obsolete">%1地址</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="403"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="405"/>
         <source>please wait</source>
         <translation type="unfinished">请稍等</translation>
     </message>
@@ -1428,7 +1428,7 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="96"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="401"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="403"/>
         <source>select withdraw to input address</source>
         <translation type="unfinished">选择提现并输入提现地址</translation>
     </message>
@@ -1457,18 +1457,18 @@ better not transfer or upgrade</source>
         <translation type="unfinished">转账失败！</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="336"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="338"/>
         <source>number cannot less than </source>
         <translation type="unfinished">数量不能小于 </translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="343"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="345"/>
         <source>balance left should not less than </source>
         <oldsource>balance less than </oldsource>
         <translation type="unfinished">剩余金额不能少于 </translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="376"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="378"/>
         <source> %1 is pending!</source>
         <translation type="unfinished">%1 已划出，尚未到账！</translation>
     </message>
@@ -1477,7 +1477,7 @@ better not transfer or upgrade</source>
         <translation type="obsolete">操作完成！</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="240"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="242"/>
         <source>max:</source>
         <translation type="unfinished">最大:</translation>
     </message>
@@ -2016,117 +2016,151 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="84"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="187"/>
+        <source>ETH签名</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.ui" line="271"/>
         <source>申请时间</source>
         <oldsource>申请时间（GMT）</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="97"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="284"/>
         <source>金额</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="110"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="297"/>
         <source>转出地址</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="123"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="310"/>
         <source>转入地址</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="136"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="323"/>
         <source>状态</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="204"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="415"/>
+        <source>待签名交易地址</source>
+        <oldsource>待签名ETH交易地址</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.ui" line="428"/>
+        <source>NONCE</source>
+        <oldsource>nonce</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.ui" line="468"/>
+        <source>ETH热地址余额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.ui" line="497"/>
+        <source>ETH冷地址余额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.ui" line="62"/>
         <source>当前SENATOR账号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="237"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="95"/>
         <source>发起资产变更</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="262"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="120"/>
         <source>资产变更</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="281"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="139"/>
         <source>正在授权</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.ui" line="300"/>
+        <location filename="guard/ColdHotTransferPage.ui" line="158"/>
         <source>等待授权</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="61"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="83"/>
         <source>There are no cold-hot trxs currently!</source>
         <translation type="unfinished">当前没有冷热钱包转账交易！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="92"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="116"/>
         <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished">钱包内没有senator账户</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="214"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="265"/>
         <source>Transaction of senator-sign-coldhot has been sent out!</source>
         <oldsource>Transaction of guard-sign-coldhot has been sent out!</oldsource>
         <translation type="unfinished">包含senator签名冷热钱包转账的交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="220"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="271"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="328"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="284"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="433"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="322"/>
+        <source>Transaction of senator-sign-eth-coldhot-final has been sent out!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="414"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="601"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="286"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="327"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="416"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="457"/>
         <source>check</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="293"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="423"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="527"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="325"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="455"/>
         <source>waiting</source>
         <translation type="unfinished">等待中</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="361"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="426"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="492"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="594"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="365"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="496"/>
         <source>unsigned</source>
         <translation type="unfinished">未签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="429"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="597"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished">%1已经签名了该冷热钱包转账交易！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="436"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="604"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished">正在检查%1的签名！</translation>
     </message>
@@ -4498,13 +4532,13 @@ add an account first</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="194"/>
-        <location filename="wallet.cpp" line="218"/>
+        <location filename="wallet.cpp" line="196"/>
+        <location filename="wallet.cpp" line="220"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="629"/>
+        <location filename="wallet.cpp" line="631"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -8171,111 +8205,145 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="84"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="170"/>
+        <source>ETH签名</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.ui" line="254"/>
         <source>申请时间（GMT）</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="97"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="267"/>
         <source>提现金额</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="110"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="280"/>
         <source>申请人</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="123"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="293"/>
         <source>提现地址</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="136"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="306"/>
         <source>状态</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="204"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="398"/>
+        <source>待签名交易地址</source>
+        <oldsource>待签名ETH交易地址</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.ui" line="411"/>
+        <source>NONCE</source>
+        <oldsource>nonce</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.ui" line="451"/>
+        <source>ETH热地址余额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.ui" line="480"/>
+        <source>ETH冷地址余额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.ui" line="62"/>
         <source>当前SENATOR账号</source>
         <oldsource>当前guard账号</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="232"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="90"/>
         <source>提现授权</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="251"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="109"/>
         <source>正在授权</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="270"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="128"/>
         <source>等待授权</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.ui" line="293"/>
+        <location filename="guard/WithdrawConfirmPage.ui" line="151"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="57"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="80"/>
         <source>There are no withdraw trxs to authorize currently!</source>
         <translation type="unfinished">现在没有待授权的提现交易！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="219"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="276"/>
         <source>Transaction of senator-sign-crosschain has been sent out!</source>
         <oldsource>Transaction of guard-sign-crosschain has been sent out!</oldsource>
         <translation type="unfinished">senator签名交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="225"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="282"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="339"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="272"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="333"/>
+        <source>Transaction of senator-sign-eth-withdraw-final has been sent out!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="405"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished">%1 已经签名过了！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="318"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="451"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="320"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="360"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="453"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="493"/>
         <source>check</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="326"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="459"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="565"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="269"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="396"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="402"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="529"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="86"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="111"/>
         <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished">钱包内没有senator账户</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="358"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="491"/>
         <source>waiting</source>
         <translation type="unfinished">等待中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="400"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="533"/>
         <source>unsigned</source>
         <translation type="unfinished">未签名</translation>
     </message>

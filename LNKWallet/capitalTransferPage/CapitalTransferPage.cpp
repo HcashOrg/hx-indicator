@@ -15,8 +15,8 @@
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
 
-static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001},{"HC",0.001}};
-static const QMap<QString,QString> fee_charge = {{"BTC","0.001"},{"LTC","0.001"},{"HC","0.01"}};
+static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001},{"HC",0.001},{"ETH",0.0001}};
+static const QMap<QString,QString> fee_charge = {{"BTC","0.001"},{"LTC","0.001"},{"HC","0.01"},{"ETH","0.001"}};
 class CapitalTransferPage::CapitalTransferPagePrivate
 {
 public:
@@ -228,10 +228,12 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
 
 void CapitalTransferPage::httpReplied(QByteArray _data, int _status)
 {
-//    qDebug() << "auto--http-- " << _data << _status;
+    qDebug() << "auto--http-- " << _data << _status;
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
-    _p->asset_max_ammount = QString::number(std::max<double>(0,object.value("balance").toDouble()),'f',_p->precision) ;
+
+    double balance = jsonValueToDouble(object.value("balance"));
+    _p->asset_max_ammount = QString::number(std::max<double>(0,balance),'f',_p->precision) ;
     ui->label_number->setText(_p->asset_max_ammount + " "+_p->symbol);
 
     QDoubleValidator *validator = new QDoubleValidator(0,_p->asset_max_ammount.toDouble(),_p->precision,this);

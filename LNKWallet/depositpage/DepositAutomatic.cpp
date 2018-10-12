@@ -350,7 +350,7 @@ void DepositAutomatic::httpReplied(QByteArray _data, int _status)
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
     QString tunnel   = object.value("address").toString();
-    QString number = QString::number(object.value("balance").toDouble());
+    QString number = QString::number( jsonValueToDouble(object.value("balance")));
 
 
     if(object.value("address").toString() == "finish")

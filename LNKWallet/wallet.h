@@ -515,7 +515,8 @@ AddressType   checkAddress(QString address, AddressFlags type = AccountAddress);
 void moveWidgetToScreenCenter(QWidget* w);
 
 QString toJsonFormat(QString instruction, QJsonArray parameters);
-unsigned long long jsonValueToULL(QJsonValue v);
+unsigned long long jsonValueToULL(QJsonValue& v);
+double jsonValueToDouble(QJsonValue& v);
 
 #endif // WALLET_H
 

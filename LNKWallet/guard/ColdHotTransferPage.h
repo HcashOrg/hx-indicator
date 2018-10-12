@@ -6,6 +6,8 @@
 
 #include "poundage/PageScrollWidget.h"
 #include "control/BlankDefaultWidget.h"
+#include "extra/HttpManager.h"
+
 namespace Ui {
 class ColdHotTransferPage;
 }
@@ -37,6 +39,13 @@ struct ColdHotSignTransaction
     QString guardAddress;
 };
 
+struct ETHFinalTrx
+{
+    QString trxId;
+    QString signer;
+    QString nonce;
+};
+
 class ColdHotTransferPage : public QWidget
 {
     Q_OBJECT
@@ -56,9 +65,12 @@ public:
     QMap<QString,ColdHotSignTransaction> coldHotSignTransactionMap;
     QString lookupCrosschainTrxByColdHotTrxId(QString coldHotTrxId);
     QStringList lookupSignedGuardByCrosschainTrx(QString crosschainTrxId);
+    QMap<QString,ETHFinalTrx> ethFinalTrxMap;
 
 private slots:
     void jsonDataUpdated(QString id);
+
+    void httpReplied(QByteArray _data, int _status);
 
     void on_transferBtn_clicked();
 
@@ -72,14 +84,23 @@ private slots:
 
     void on_typeWaitingBtn_clicked();
 
+    void on_typeETHBtn_clicked();
+
     void pageChangeSlot(unsigned int page);
+
+    void on_ethFinalTrxTableWidget_cellClicked(int row, int column);
+
 private:
     Ui::ColdHotTransferPage *ui;
     bool inited = false;
+    HttpManager httpManager;
 
     void fetchColdHotTransaction();
     void showColdHotTransactions();
     void refreshColdHotTtransactionsState();
+
+    void fetchEthBalance();
+    void showEthFinalTrxs();
 
     void paintEvent(QPaintEvent*);
     PageScrollWidget *pageWidget;
