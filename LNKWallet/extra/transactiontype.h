@@ -41,8 +41,8 @@
 #define TRANSACTION_TYPE_CROSSCHAIN_FEE         87      // 设置跨链提现费用
 #define TRANSACTION_TYPE_OBTAIN_BONUS           88      // 领取分红
 #define TRANSACTION_TYPE_SET_LOCKBALANCE        89      // 设置senator的保证金
-
-
-#define TRANSACTION_TYPE_USE_GUARANTEE_ORDER    830     // 承兑单被使用
+#define TRANSACTION_TYPE_SIGN_ETH_MULTI_CREATE  97      // senator签名创建以太多签账户 senator_sign_eths_multi_account_create_trx
+#define TRANSACTION_TYPE_SIGN_ETH_FINAL         98      // senator签名以太交易 senator_sign_eths_final_trx
+#define TRANSACTION_TYPE_SIGN_ETH_COLDHOT_FINAL 100     // senator签名以太冷热钱包转账交易 senator_sign_eths_final_trx
 
 #endif // TRANSACTIONTYPE_H

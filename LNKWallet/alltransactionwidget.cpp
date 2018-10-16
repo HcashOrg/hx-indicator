@@ -319,6 +319,9 @@ void AllTransactionWidget::showTransactions()
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CREATE_MINER);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_ISSUE_ASSET);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SENATOR_LOCK_BALANCE);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SIGN_ETH_MULTI_CREATE);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SIGN_ETH_FINAL);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SIGN_ETH_COLDHOT_FINAL);
         break;
     case FeedPriceType:
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_FEED_PRICE);
@@ -869,6 +872,33 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("get bonus")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+        }
+            break;
+        case TRANSACTION_TYPE_SIGN_ETH_MULTI_CREATE:
+        {
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator sign to create ETH multi-sig account")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+        }
+            break;
+        case TRANSACTION_TYPE_SIGN_ETH_FINAL:
+        {
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator sign ETH trx")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+        }
+            break;
+        case TRANSACTION_TYPE_SIGN_ETH_COLDHOT_FINAL:
+        {
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator sign ETH cold-hot trx")));
 
             useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }

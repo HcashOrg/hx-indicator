@@ -956,6 +956,27 @@ void HXChain::parseTransaction(QString result)
         transactionDB.addAccountTransactionId(ownerAddr, typeId);
     }
         break;
+    case TRANSACTION_TYPE_SIGN_ETH_MULTI_CREATE:
+    {
+        QString guardAddr = operationObject.take("guard_sign_address").toString();
+
+        transactionDB.addAccountTransactionId(guardAddr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_SIGN_ETH_FINAL:
+    {
+        QString guardAddr = operationObject.take("guard_address").toString();
+
+        transactionDB.addAccountTransactionId(guardAddr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_SIGN_ETH_COLDHOT_FINAL:
+    {
+        QString guardAddr = operationObject.take("guard_address").toString();
+
+        transactionDB.addAccountTransactionId(guardAddr, typeId);
+    }
+        break;
     default:
         break;
     }
