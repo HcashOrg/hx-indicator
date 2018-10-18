@@ -284,14 +284,6 @@ struct FeeChargeInfo
     QString capitalFee;//资金划转手续费
 };
 
-struct MultiSigInfo
-{
-    QString multiSigAddress;
-    int requires;
-    QStringList owners;
-    AssetBalanceMap balanceMap;
-};
-
 class HXChain : public QObject
 {
     Q_OBJECT
@@ -463,11 +455,6 @@ public:
     void fetchProposals();
     QString citizenAccountIdToName(QString citizenAccountId);
 
-public:
-    QMap<QString,MultiSigInfo>  multiSigInfoMap;
-
-    QMap<QString,TransactionsInfoVector> multiSigTransactionsMap;   // key是多签地址
-    void parseMultiSigTransactions(QString result, QString multiSigAddress);
 
 signals:
     void jsonDataUpdated(QString);

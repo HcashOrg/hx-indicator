@@ -23,14 +23,15 @@ class CreateMultisigWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit CreateMultisigWidget( QString _account, QString _pubKey, QWidget *parent = 0);
+    explicit CreateMultisigWidget( QWidget *parent = 0);
     ~CreateMultisigWidget();
 
-    QString account;
     QVector<AccountPubKey> accountPubKeyVector;
     void showPubKeys();
 
 private slots:
+    void jsonDataUpdated(QString id);
+
     void on_addPubKeyBtn_clicked();
 
     void on_requiredLineEdit_textEdited(const QString &arg1);

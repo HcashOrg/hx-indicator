@@ -4,7 +4,7 @@
 #include "wallet.h"
 #include "FeeChooseWidget.h"
 
-ConfirmCreateMultiSigDialog::ConfirmCreateMultiSigDialog(QString account, QWidget *parent) :
+ConfirmCreateMultiSigDialog::ConfirmCreateMultiSigDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ConfirmCreateMultiSigDialog)
 {
@@ -30,7 +30,6 @@ ConfirmCreateMultiSigDialog::ConfirmCreateMultiSigDialog(QString account, QWidge
 
     QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
     ui->accountComboBox->addItems(accounts);
-    ui->accountComboBox->setCurrentText(account);
 
     feeWidget = new FeeChooseWidget( 0.002,HXChain::getInstance()->feeType,
                                                  ui->accountComboBox->currentText(), ui->containerWidget);
@@ -47,10 +46,12 @@ ConfirmCreateMultiSigDialog::~ConfirmCreateMultiSigDialog()
     delete ui;
 }
 
-void ConfirmCreateMultiSigDialog::pop()
+bool ConfirmCreateMultiSigDialog::pop()
 {
     move(0,0);
     exec();
+
+    return yesOrNo;
 }
 
 void ConfirmCreateMultiSigDialog::jsonDataUpdated(QString id)
@@ -61,8 +62,9 @@ void ConfirmCreateMultiSigDialog::jsonDataUpdated(QString id)
 
         if(result == "\"result\":null")
         {
-
-
+            yesOrNo = true;
+            account = ui->accountComboBox->currentText();
+            close();
         }
         else if(result.startsWith("\"error\":"))
         {

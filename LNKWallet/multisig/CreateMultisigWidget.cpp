@@ -4,13 +4,15 @@
 #include "wallet.h"
 #include "AddPubKeyDialog.h"
 #include "ConfirmCreateMultiSigDialog.h"
+#include "commondialog.h"
 
-CreateMultisigWidget::CreateMultisigWidget(QString _account, QString _pubKey, QWidget *parent) :
+CreateMultisigWidget::CreateMultisigWidget(QWidget *parent) :
     QWidget(parent),
-    account(_account),
     ui(new Ui::CreateMultisigWidget)
 {
     ui->setupUi(this);
+
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->pubKeyTableWidget->installEventFilter(this);
     ui->pubKeyTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -33,11 +35,6 @@ CreateMultisigWidget::CreateMultisigWidget(QString _account, QString _pubKey, QW
     QValidator *validator = new QRegExpValidator(regx, this);
     ui->requiredLineEdit->setValidator( validator );
 
-    AccountPubKey apk;
-    apk.account = _account;
-    apk.pubKey = _pubKey;
-    accountPubKeyVector.append(apk);
-
     showPubKeys();
 }
 
@@ -59,6 +56,26 @@ void CreateMultisigWidget::showPubKeys()
     }
 
     ui->totalNumLabel->setText(QString("/ %1").arg(size));
+    on_requiredLineEdit_textEdited(ui->requiredLineEdit->text());
+}
+
+void CreateMultisigWidget::jsonDataUpdated(QString id)
+{
+    if( id == "CreateMultisigWidget-create_multisignature_address" )
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+        result.prepend("{");
+        result.append("}");
+        QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
+        QString pubKey = object.value("result").toString();
+        HXChain::getInstance()->configFile->setValue("/multisigAddresses/" + pubKey, 1);
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText(tr("Multi-sig address created: %1").arg(pubKey));
+        commonDialog.pop();
+
+        return;
+    }
 }
 
 void CreateMultisigWidget::on_addPubKeyBtn_clicked()
@@ -102,8 +119,21 @@ void CreateMultisigWidget::on_requiredLineEdit_textEdited(const QString &arg1)
 
 void CreateMultisigWidget::on_createBtn_clicked()
 {
-    ConfirmCreateMultiSigDialog confirmCreateMultiSigDialog(account);
-    confirmCreateMultiSigDialog.pop();
+    ConfirmCreateMultiSigDialog confirmCreateMultiSigDialog;
+    if(confirmCreateMultiSigDialog.pop())
+    {
+        QJsonArray pubKeysArray;
+        foreach (const AccountPubKey& pk, accountPubKeyVector)
+        {
+            pubKeysArray << pk.pubKey;
+        }
+
+        HXChain::getInstance()->postRPC( "CreateMultisigWidget-create_multisignature_address",
+                                         toJsonFormat( "create_multisignature_address",
+                                                       QJsonArray() << confirmCreateMultiSigDialog.account << pubKeysArray
+                                                       << ui->requiredLineEdit->text().toInt() << true ));
+
+    }
 }
 
 void CreateMultisigWidget::on_pubKeyTableWidget_cellClicked(int row, int column)

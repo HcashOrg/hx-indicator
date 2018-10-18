@@ -14,10 +14,12 @@ class ConfirmCreateMultiSigDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ConfirmCreateMultiSigDialog( QString account, QWidget *parent = 0);
+    explicit ConfirmCreateMultiSigDialog( QWidget *parent = 0);
     ~ConfirmCreateMultiSigDialog();
 
-    void pop();
+    QString account;
+    bool yesOrNo = false;
+    bool pop();
 
 private slots:
     void jsonDataUpdated(QString id);
