@@ -254,7 +254,8 @@ color:rgb(137,129,161);</string>
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(170, 0, 0);</string>
+        <string notr="true">color: rgb(170, 0, 0);
+background-color:transparent;</string>
        </property>
        <property name="text">
         <string>TextLabel</string>
