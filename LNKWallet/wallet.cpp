@@ -1633,17 +1633,18 @@ AddressType checkAddress(QString address, AddressFlags type)
 
     if(type & MultiSigAddress)
     {
-        if(address.startsWith("M")  && address.size() == QString("M").size() + 33)
+        if(address.startsWith(MULTISIG_ADDRESS_PREFIX)  && (address.size() == QString(MULTISIG_ADDRESS_PREFIX).size() + 33 ||
+                                                            address.size() == QString(MULTISIG_ADDRESS_PREFIX).size() + 32))
         {
             return MultiSigAddress;
         }
     }
 
-    if(type & ScriptAddress)
+    if(type & PubKey)
     {
-        if(address.startsWith("S")  && address.size() == QString("S").size() + 33)
+        if(address.startsWith(PUBKEY_PREFIX)  && (address.size() == QString(PUBKEY_PREFIX).size() + 50))
         {
-            return ScriptAddress;
+            return PubKey;
         }
     }
 

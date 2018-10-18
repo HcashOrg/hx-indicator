@@ -28,7 +28,6 @@ class SelectWalletPathWidget;
 class ShadowWidget;
 class SmartContractPage;
 class MultiSigPage;
-class MultiSigTransactionPage;
 class NewOrImportWalletWidget;
 class ExitingWidget;
 
@@ -120,7 +119,6 @@ private slots:
     void showCitizenAccountPage();
     void showCitizenProposalPage();
 
-    void showMultiSigTransactionPage(QString _multiSigAddress);
     void showWaittingForSyncWidget();
     void showNewOrImportWalletWidget();
 
@@ -144,7 +142,6 @@ private:
     MainPage*   mainPage;
     TransferPage* transferPage;
     MultiSigPage* multiSigPage;
-    MultiSigTransactionPage* multiSigTransactionPage;
     MinerPage* minerPage;
     BonusPage* bonusPage;
     OnchainOrderPage* onchainOrderPage;
@@ -172,7 +169,7 @@ private:
     NewOrImportWalletWidget* newOrImportWalletWidget;
 
     int currentPageNum;  //  0:mainPage   1:  2:delegatePgae  3:transferPage    4:contactPage    5:myExchangeContractPage
-                         //   6: onchainOrderPage   7:minerPage   8: assetPage     9: multiSigPage   10: multiSigTransactionPage
+                         //   6: onchainOrderPage   7:minerPage   8: assetPage     9: multiSigPage
                          //  11: poundage   12: guardKeyManagePage  13: proposalPage    14: withdrawConfirmPage  15: feedPricePage
                         //   16: coldHotTransferPage    17: guardAccountPage    18: guardIncomePage     19: bonusPage
                         //   20: contractTokenPage  21: citizenAccountPage  22: citizenProposalPage

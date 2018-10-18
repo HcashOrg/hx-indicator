@@ -29,8 +29,6 @@
 #include "selectwalletpathwidget.h"
 #include "control/shadowwidget.h"
 #include "commondialog.h"
-#include "multisig/multisigpage.h"
-#include "multisig/multisigtransactionpage.h"
 #include "neworimportwalletwidget.h"
 #include "exchange/OnchainOrderPage.h"
 #include "exchange/myexchangecontractpage.h"
@@ -50,6 +48,7 @@
 #include "citizen/CitizenAccountPage.h"
 #include "citizen/CitizenProposalPage.h"
 #include "dialog/ExitingWidget.h"
+#include "multisig/MultiSigPage.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -68,7 +67,6 @@ Frame::Frame(): timer(NULL),
     selectWalletPathWidget(NULL),
     newOrImportWalletWidget(NULL),
     multiSigPage(NULL),
-    multiSigTransactionPage(NULL),
     minerPage(NULL),
     bonusPage(NULL),
     guardAccountPage(NULL),
@@ -701,8 +699,6 @@ void Frame::closeCurrentPage()
         multiSigPage = NULL;
         break;
     case 10:
-        multiSigTransactionPage->close();
-        multiSigTransactionPage = NULL;
         break;
     case 11:
         if(poundage)
@@ -828,10 +824,9 @@ void Frame::autoRefresh()
     case 8:
         break;
     case 9:
-        multiSigPage->refresh();
+//        multiSigPage->refresh();
         break;
     case 10:
-        multiSigTransactionPage->refresh();
     case 12:
         guardKeyManagePage->refresh();
         break;
@@ -1039,10 +1034,6 @@ void Frame::setLanguage(QString language)
             showMultiSigPage();
             break;
         case 10:
-            if(multiSigTransactionPage != NULL)
-            {
-                showMultiSigTransactionPage(multiSigTransactionPage->multiSigAddress);
-            }
             break;
         case 11:
             showPoundagePage();
@@ -1139,12 +1130,10 @@ void Frame::showMultiSigPage()
     emit titleBackVisible(false);
     closeCurrentPage();
     multiSigPage = new MultiSigPage(centralWidget);
-    connect(multiSigPage,SIGNAL(goToTransferPage(QString,QString)),this,SLOT(showTransferPageWithAddress(QString,QString)));
-    connect(multiSigPage,SIGNAL(showMultiSigTransactionPage(QString)),this,SLOT(showMultiSigTransactionPage(QString)));
+    connect(multiSigPage,&MultiSigPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
     multiSigPage->setAttribute(Qt::WA_DeleteOnClose);
     multiSigPage->show();
     currentPageNum = 9;
-    //朱正天 functionBar->choosePage(7);
 }
 
 void Frame::showPoundagePage()
@@ -1315,16 +1304,6 @@ void Frame::showCitizenProposalPage()
     currentPageNum = 22;
 }
 
-void Frame::showMultiSigTransactionPage(QString _multiSigAddress)
-{
-    closeCurrentPage();
-    multiSigTransactionPage = new MultiSigTransactionPage(_multiSigAddress, centralWidget);
-    connect(multiSigTransactionPage,SIGNAL(back()),this,SLOT(showMultiSigPage()));
-    multiSigTransactionPage->setAttribute(Qt::WA_DeleteOnClose);
-    multiSigTransactionPage->show();
-    currentPageNum = 10;
-  //朱正天  functionBar->choosePage(7);
-}
 
 void Frame::jsonDataUpdated(QString id)
 {
@@ -2238,6 +2217,7 @@ void Frame::onBack()
     case 8:
         break;
     case 9:
+        showMultiSigPage();
         break;
     case 10:
         break;

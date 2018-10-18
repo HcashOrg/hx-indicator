@@ -55,15 +55,6 @@ SOURCES += main.cpp\
     control/mycheckbtn.cpp \
     control/qrcodedialog.cpp \
     control/qrcodewidget.cpp \
-    multisig/multisigpage.cpp \
-    multisig/addmultisigdialog.cpp \
-    multisig/choosemultisigoperationdialog.cpp \
-    multisig/multisiginfodialog.cpp \
-    multisig/createmultisigdialog.cpp \
-    multisig/addownerdialog.cpp \
-    multisig/withdrawmultisigdialog.cpp \
-    multisig/signmultisigdialog.cpp \
-    multisig/multisigtransactionpage.cpp \
     dialog/checkpwddialog.cpp \
     AES/aes.cpp \
     AES/aesencryptor.cpp \
@@ -177,7 +168,11 @@ SOURCES += main.cpp\
     citizen/CreateCitizenDialog.cpp \
     extra/WitnessConfig.cpp \
     control/FeeGuaranteeWidget.cpp \
-    dialog/ExitingWidget.cpp
+    dialog/ExitingWidget.cpp \
+    multisig/MultiSigPage.cpp \
+    multisig/CreateMultisigWidget.cpp \
+    multisig/AddPubKeyDialog.cpp \
+    multisig/ConfirmCreateMultiSigDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -202,15 +197,6 @@ HEADERS  += firstlogin.h \
     control/qrcodedialog.h \
     control/qrcodewidget.h \
     control/qrencode.h \
-    multisig/multisigpage.h \
-    multisig/addmultisigdialog.h \
-    multisig/choosemultisigoperationdialog.h \
-    multisig/multisiginfodialog.h \
-    multisig/createmultisigdialog.h \
-    multisig/addownerdialog.h \
-    multisig/withdrawmultisigdialog.h \
-    multisig/signmultisigdialog.h \
-    multisig/multisigtransactionpage.h \
     dialog/checkpwddialog.h \
     AES/aes.h \
     AES/aesencryptor.h \
@@ -327,7 +313,11 @@ HEADERS  += firstlogin.h \
     citizen/CreateCitizenDialog.h \
     extra/WitnessConfig.h \
     control/FeeGuaranteeWidget.h \
-    dialog/ExitingWidget.h
+    dialog/ExitingWidget.h \
+    multisig/MultiSigPage.h \
+    multisig/CreateMultisigWidget.h \
+    multisig/AddPubKeyDialog.h \
+    multisig/ConfirmCreateMultiSigDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -346,15 +336,6 @@ FORMS    += firstlogin.ui \
     control/shadowwidget.ui \
     selectwalletpathwidget.ui \
     control/qrcodedialog.ui \
-    multisig/multisigpage.ui \
-    multisig/addmultisigdialog.ui \
-    multisig/choosemultisigoperationdialog.ui \
-    multisig/multisiginfodialog.ui \
-    multisig/createmultisigdialog.ui \
-    multisig/addownerdialog.ui \
-    multisig/withdrawmultisigdialog.ui \
-    multisig/signmultisigdialog.ui \
-    multisig/multisigtransactionpage.ui \
     dialog/checkpwddialog.ui \
     dialog/exportsetpwddialog.ui \
     dialog/importenterpwddialog.ui \
@@ -446,7 +427,11 @@ FORMS    += firstlogin.ui \
     citizen/CitizenProposalPage.ui \
     citizen/CreateCitizenDialog.ui \
     control/FeeGuaranteeWidget.ui \
-    dialog/ExitingWidget.ui
+    dialog/ExitingWidget.ui \
+    multisig/MultiSigPage.ui \
+    multisig/CreateMultisigWidget.ui \
+    multisig/AddPubKeyDialog.ui \
+    multisig/ConfirmCreateMultiSigDialog.ui
 
 win32{
     DISTFILES += logo.rc

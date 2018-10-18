@@ -29,8 +29,10 @@
 #include "extra/WitnessConfig.h"
 
 #define ASSET_NAME "HX"
-#define ACCOUNT_ADDRESS_PREFIX  "HX"
-#define CONTRACT_ADDRESS_PREFIX "CHX"
+#define ACCOUNT_ADDRESS_PREFIX  "HXN"
+#define CONTRACT_ADDRESS_PREFIX "HXC"
+#define MULTISIG_ADDRESS_PREFIX "HXM"
+#define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 #define WALLET_VERSION "1.0.8"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
@@ -505,7 +507,7 @@ enum AddressType
     AccountAddress = 0x01,
     ContractAddress = 0x02,
     MultiSigAddress = 0x04,
-    ScriptAddress = 0x08,
+    PubKey = 0x08,
     InvalidAddress = 0x00
 };
 Q_DECLARE_FLAGS(AddressFlags, AddressType)

@@ -15,29 +15,21 @@ public:
     explicit MultiSigPage(QWidget *parent = 0);
     ~MultiSigPage();
 
-    void refresh();
-
-    void updateMultiSigList();
-
 signals:
-    void goToTransferPage(QString,QString);
-    void showMultiSigTransactionPage(QString);
+    void backBtnVisible(bool isShow);
 
 private slots:
     void jsonDataUpdated(QString id);
 
-    void on_importMultiSigBtn_clicked();
-
-    void on_multiSigTableWidget_cellPressed(int row, int column);
-
     void on_createMultiSigBtn_clicked();
 
-    void on_signMultiSigBtn_clicked();
+    void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::MultiSigPage *ui;
 
-    void paintEvent(QPaintEvent* e);
+    void init();
+    void paintEvent(QPaintEvent*);
 };
 
 #endif // MULTISIGPAGE_H

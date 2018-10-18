@@ -94,7 +94,7 @@ bool ContactAddWidget::validateAddress(const QString &address)
     if(!_p->contactSheet->validateAddress(address)) return false;
     //调用全局检测函数
 
-    AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress | ScriptAddress);
+    AddressType type = checkAddress(address,AccountAddress | ContractAddress | MultiSigAddress );
     if( type == AccountAddress)
     {
         return true;
