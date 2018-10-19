@@ -140,7 +140,7 @@ void TransferPage::on_sendBtn_clicked()
 
 
     AddressType type = checkAddress(ui->sendtoLineEdit->text(),AccountAddress | MultiSigAddress);
-    if( type == AccountAddress)
+    if( type == AccountAddress || type == MultiSigAddress)
     {
         TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(),ui->amountLineEdit->text(), ui->assetComboBox->currentText(), feeWidget->GetFeeNumber(), feeWidget->GetFeeType(), remark);
         bool yOrN = transferConfirmDialog.pop();
@@ -366,27 +366,18 @@ void TransferPage::sendtoLineEdit_textChanged(const QString &arg1)
         ui->tipLabel4->setStyleSheet("color: rgb(0,170,0);");
         ui->tipLabel4->show();
     }
+    else if( type == MultiSigAddress)
+    {
+        ui->tipLabel4->setText(tr("Valid multi-sig address."));
+        ui->tipLabel4->setStyleSheet("color: rgb(0,170,0);");
+        ui->tipLabel4->show();
+    }
     else if( type == ContractAddress)
     {
         ui->tipLabel4->setText(tr("Sending coins to contract address is not supported currently."));
         ui->tipLabel4->setStyleSheet("color: rgb(255,0,0);");
         ui->tipLabel4->show();
     }
-//    else if( type == MultiSigAddress)
-//    {
-//        if(ui->assetComboBox->currentIndex() > 0)
-//        {
-//            ui->tipLabel4->setText(tr("You can only send %1s to multisig address currently.").arg(ASSET_NAME));
-//            ui->tipLabel4->setStyleSheet("color: rgb(255,34,76);");
-//            ui->tipLabel4->show();
-//        }
-//        else
-//        {
-//            ui->tipLabel4->setText(tr("Valid multisig address."));
-//            ui->tipLabel4->setStyleSheet("color: rgb(43,230,131);");
-//            ui->tipLabel4->show();
-//        }
-//    }
     else
     {
         ui->tipLabel4->setText(tr("Invalid address."));

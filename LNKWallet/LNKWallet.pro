@@ -172,7 +172,9 @@ SOURCES += main.cpp\
     multisig/MultiSigPage.cpp \
     multisig/CreateMultisigWidget.cpp \
     multisig/AddPubKeyDialog.cpp \
-    multisig/ConfirmCreateMultiSigDialog.cpp
+    multisig/ConfirmCreateMultiSigDialog.cpp \
+    multisig/MultiSigTransferWidget.cpp \
+    multisig/MultiSigTrxResultDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -317,7 +319,9 @@ HEADERS  += firstlogin.h \
     multisig/MultiSigPage.h \
     multisig/CreateMultisigWidget.h \
     multisig/AddPubKeyDialog.h \
-    multisig/ConfirmCreateMultiSigDialog.h
+    multisig/ConfirmCreateMultiSigDialog.h \
+    multisig/MultiSigTransferWidget.h \
+    multisig/MultiSigTrxResultDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -431,7 +435,9 @@ FORMS    += firstlogin.ui \
     multisig/MultiSigPage.ui \
     multisig/CreateMultisigWidget.ui \
     multisig/AddPubKeyDialog.ui \
-    multisig/ConfirmCreateMultiSigDialog.ui
+    multisig/ConfirmCreateMultiSigDialog.ui \
+    multisig/MultiSigTransferWidget.ui \
+    multisig/MultiSigTrxResultDialog.ui
 
 win32{
     DISTFILES += logo.rc

@@ -128,6 +128,7 @@ void CreateMultisigWidget::on_createBtn_clicked()
             pubKeysArray << pk.pubKey;
         }
 
+
         HXChain::getInstance()->postRPC( "CreateMultisigWidget-create_multisignature_address",
                                          toJsonFormat( "create_multisignature_address",
                                                        QJsonArray() << confirmCreateMultiSigDialog.account << pubKeysArray

@@ -23,9 +23,10 @@ public:
     explicit MultiSigPage(QWidget *parent = 0);
     ~MultiSigPage();
 
-private:
-    void fetchMultisigInfo();
+public:
     QMap<QString,MultiSigInfo>  multiSigInfoMap;
+    void fetchMultisigInfo();
+    void showMultiSigInfo();
 
     QMap<QString,AssetAmountMap>    multiSigBalancesMap;
     void fetchBalances();
@@ -41,7 +42,17 @@ private slots:
 
 //    void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
-    void on_multisigTableWidget_cellClicked(int row, int column);
+    void on_balanceTableWidget_cellClicked(int row, int column);
+
+    void on_typeBalanceBtn_clicked();
+
+    void on_typeInfoBtn_clicked();
+
+    void on_typeSignBtn_clicked();
+
+    void on_multiSigAddressComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_copyBtn_clicked();
 
 private:
     Ui::MultiSigPage *ui;

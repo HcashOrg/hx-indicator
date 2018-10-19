@@ -64,6 +64,8 @@ void ConfirmCreateMultiSigDialog::jsonDataUpdated(QString id)
         {
             yesOrNo = true;
             account = ui->accountComboBox->currentText();
+
+            feeWidget->updatePoundageID();
             close();
         }
         else if(result.startsWith("\"error\":"))
