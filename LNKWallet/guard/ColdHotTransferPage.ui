@@ -412,12 +412,20 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      </attribute>
      <column>
       <property name="text">
-       <string>待签名交易地址</string>
+       <string>币种</string>
       </property>
       <property name="font">
        <font>
         <family>微软雅黑</family>
        </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>签名地址</string>
       </property>
       <property name="textAlignment">
        <set>AlignCenter</set>
@@ -565,6 +573,58 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      </property>
     </widget>
    </widget>
+  </widget>
+  <widget class="QComboBox" name="assetComboBox">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>130</y>
+     <width>120</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="assetLabel">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>130</y>
+     <width>80</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
+   </property>
+   <property name="text">
+    <string>币种</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
   </widget>
  </widget>
  <resources/>

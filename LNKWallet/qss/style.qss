@@ -43,3 +43,15 @@ QSpinBox::down-arrow:hover {image: url(:/ui/wallet_ui/spinDownArrow_hover.png);}
 #pathBtn:hover{color:rgb(84,116,235);}
 #welcome_label{background-image: url(:/ui/wallet_ui/Welcome.png);}
 #welcome_label_big{background-image: url(:/ui/wallet_ui/Welcome_big.png);}
+
+QToolButton[BtnStyle="ok"]{font: 11px \"微软雅黑\";background-color: rgb(84,61,137);border:0px solid white;border-radius:3px;color: white;}
+QToolButton[BtnStyle="ok"]:pressed{background-color:rgb(84,61,137);}
+QToolButton[BtnStyle="ok"]:disabled{background-color:rgb(196,191,214);}
+QToolButton[BtnStyle="copy"]{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}
+QToolButton[BtnStyle="copy"]:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}
+QToolButton[BtnStyle="closeDialog"]{background-image:url(:/ui/wallet_ui/close_button.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}
+QToolButton[BtnStyle="closeDialog"]:hover{background-color:rgb(208,228,255);}
+
+QWidget[WidgetStyle="dialogBg"]{background-image:url(:/ui/wallet_ui/back_dialog.png);}
+QWidget[WidgetStyle="container"]{background-color:rgb(229,226,240);border-radius:4px;}
+QLabel[WidgetStyle="container"]{color:rgb(51,51,51);}

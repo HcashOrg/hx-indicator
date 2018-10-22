@@ -46,9 +46,9 @@
    <property name="geometry">
     <rect>
      <x>100</x>
-     <y>242</y>
-     <width>200</width>
-     <height>21</height>
+     <y>235</y>
+     <width>180</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -73,10 +73,10 @@
   <widget class="QLabel" name="label_address">
    <property name="geometry">
     <rect>
-     <x>310</x>
-     <y>238</y>
-     <width>300</width>
-     <height>31</height>
+     <x>290</x>
+     <y>235</y>
+     <width>400</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -153,6 +153,37 @@ border-radius:15px;</string>
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="label_ercTip">
+   <property name="geometry">
+    <rect>
+     <x>85</x>
+     <y>255</y>
+     <width>600</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 12px &quot;微软雅黑&quot;;</string>
+   </property>
+   <property name="text">
+    <string>需同时向充值地址充值至少0.00045 ETH （当前ETH余额 0 ETH）</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
   <zorder>label_back</zorder>
   <zorder>label_qrcode</zorder>
   <zorder>label_warning</zorder>
@@ -160,6 +191,7 @@ border-radius:15px;</string>
   <zorder>label_address</zorder>
   <zorder>toolButton</zorder>
   <zorder>tipLabel</zorder>
+  <zorder>label_ercTip</zorder>
  </widget>
  <resources/>
  <connections/>

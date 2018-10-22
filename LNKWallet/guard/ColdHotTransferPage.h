@@ -44,6 +44,7 @@ struct ETHFinalTrx
     QString trxId;
     QString signer;
     QString nonce;
+    QString symbol;
 };
 
 class ColdHotTransferPage : public QWidget
@@ -90,10 +91,15 @@ private slots:
 
     void on_ethFinalTrxTableWidget_cellClicked(int row, int column);
 
+    void on_assetComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_ethFinalTrxTableWidget_cellPressed(int row, int column);
+
 private:
     Ui::ColdHotTransferPage *ui;
     bool inited = false;
     HttpManager httpManager;
+    void fetchCoinBalance(int id, QString chainId, QString address);
 
     void fetchColdHotTransaction();
     void showColdHotTransactions();

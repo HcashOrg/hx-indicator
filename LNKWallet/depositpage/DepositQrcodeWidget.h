@@ -2,6 +2,7 @@
 #define DEPOSITQRCODEWIDGET_H
 
 #include <QWidget>
+#include "extra/HttpManager.h"
 
 namespace Ui {
 class DepositQrcodeWidget;
@@ -16,9 +17,17 @@ public:
     ~DepositQrcodeWidget();
 public:
     void SetQRString(const QString &data);
-    void SetSymbol(const QString &symbol);
+    void SetSymbol(const QString &_symbol);
 private:
     void CopySlots();
+
+private:
+    QString symbol;
+    HttpManager httpManager;////用于查询通道账户余额
+    void PostQueryTunnelMoney(const QString &symbol,const QString &tunnelAddress);
+private slots:
+    void httpReplied(QByteArray _data, int _status);
+
 private:
     void InitWidget();
     void InitStyle();

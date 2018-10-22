@@ -84,9 +84,14 @@ private slots:
 
     void on_ethFinalTrxTableWidget_cellClicked(int row, int column);
 
+    void onAssetComboBoxCurrentIndexChanged(const QString &arg1);
+
+    void on_ethFinalTrxTableWidget_cellPressed(int row, int column);
+
 private:
     Ui::WithdrawConfirmPage *ui;
     HttpManager httpManager;
+    void fetchCoinBalance(int id, QString chainId, QString address);
 
     void showCrosschainTransactions();
     void refreshCrosschainTransactionsState();

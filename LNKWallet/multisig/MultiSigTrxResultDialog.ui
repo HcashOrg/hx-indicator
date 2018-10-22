@@ -22,6 +22,9 @@
      <height>543</height>
     </rect>
    </property>
+   <property name="WidgetStyle" stdset="0">
+    <string>dialogBg</string>
+   </property>
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
@@ -35,6 +38,9 @@
      <font>
       <family>Microsoft YaHei UI Light</family>
      </font>
+    </property>
+    <property name="WidgetStyle" stdset="0">
+     <string>container</string>
     </property>
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
@@ -62,6 +68,9 @@
      <property name="text">
       <string>确定</string>
      </property>
+     <property name="BtnStyle" stdset="0">
+      <string>ok</string>
+     </property>
     </widget>
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
@@ -83,6 +92,9 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+     <property name="BtnStyle" stdset="0">
+      <string>closeDialog</string>
      </property>
     </widget>
     <widget class="QLabel" name="infoLabel">
@@ -130,30 +142,6 @@
       </rect>
      </property>
     </widget>
-    <widget class="QToolButton" name="copyBtn2">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>250</y>
-       <width>11</width>
-       <height>11</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>微软雅黑</family>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
     <widget class="QTextBrowser" name="trxCodeTextBrowser">
      <property name="geometry">
       <rect>
@@ -199,6 +187,36 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+     <property name="BtnStyle" stdset="0">
+      <string>copy</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="copyBtn2">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>250</y>
+       <width>11</width>
+       <height>11</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="BtnStyle" stdset="0">
+      <string>copy</string>
      </property>
     </widget>
    </widget>

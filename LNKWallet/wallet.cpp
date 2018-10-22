@@ -594,6 +594,21 @@ QString HXChain::getAssetId(QString symbol)
     return id;
 }
 
+QStringList HXChain::getETHAssets()
+{
+    QStringList result;
+    foreach (QString key, HXChain::getInstance()->assetInfoMap.keys())
+    {
+        AssetInfo info = HXChain::getInstance()->assetInfoMap.value(key);
+        if( info.symbol == "ETH" || info.symbol.startsWith("ERC"))
+        {
+            result += info.symbol;
+        }
+    }
+
+    return result;
+}
+
 void HXChain::fetchCrosschainTransactions()
 {
     HXChain::getInstance()->postRPC( "WithdrawState-get_crosschain_transaction-" + QString::number(0), toJsonFormat( "get_crosschain_transaction",

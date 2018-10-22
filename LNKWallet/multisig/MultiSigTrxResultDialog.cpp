@@ -18,13 +18,7 @@ MultiSigTrxResultDialog::MultiSigTrxResultDialog(QWidget *parent) :
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint);
 
-    ui->widget->setObjectName("widget");
-    ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
-    ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
 
-    ui->okBtn->setStyleSheet(OKBTN_STYLE);
-    ui->closeBtn->setStyleSheet(CANCELBTN_STYLE);
 }
 
 MultiSigTrxResultDialog::~MultiSigTrxResultDialog()

@@ -406,6 +406,7 @@ public:
 
     QMap<QString,AssetInfo>   assetInfoMap;
     QString getAssetId(QString symbol);
+    QStringList getETHAssets();
 
     QMap<QString,int>   crosschainWithdrawStateMap;
     void fetchCrosschainTransactions();

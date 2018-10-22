@@ -9,6 +9,7 @@
 #include "showcontentdialog.h"
 #include "WithdrawInfoDialog.h"
 #include "ColdHotTransferPage.h"
+#include "control/AssetIconItem.h"
 
 static const int ROWNUMBER = 6;
 WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
@@ -50,9 +51,10 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     ui->ethFinalTrxTableWidget->horizontalHeader()->setVisible(true);
     ui->ethFinalTrxTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->ethFinalTrxTableWidget->setColumnWidth(0,500);
-    ui->ethFinalTrxTableWidget->setColumnWidth(1,80);
+    ui->ethFinalTrxTableWidget->setColumnWidth(0,120);
+    ui->ethFinalTrxTableWidget->setColumnWidth(1,380);
     ui->ethFinalTrxTableWidget->setColumnWidth(2,80);
+    ui->ethFinalTrxTableWidget->setColumnWidth(3,80);
     ui->ethFinalTrxTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->typeCurrentBtn->setCheckable(true);
@@ -90,6 +92,12 @@ void WithdrawConfirmPage::init()
 {
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
+    QStringList assets = HXChain::getInstance()->getETHAssets();
+    ui->assetComboBox->addItems(assets);
+    connect(ui->assetComboBox,SIGNAL(currentIndexChanged(QString)),this,SLOT(onAssetComboBoxCurrentIndexChanged(QString)));
+    ui->assetComboBox->hide();
+    ui->assetLabel->hide();
+
     ui->accountComboBox->clear();
     QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     if(accounts.size() > 0)
@@ -110,6 +118,7 @@ void WithdrawConfirmPage::init()
         label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
         label->setText(tr("There are no senator accounts in the wallet."));
     }
+
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->crosschainTransactionTableWidget);
 
@@ -190,6 +199,7 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
                     eft.trxId = array2.at(0).toString();
                     eft.signer = ethObject.value("signer").toString();
                     eft.nonce = ethObject.value("nonce").toString();
+                    eft.symbol = operationObject.value("asset_symbol").toString();
 
                     ethFinalTrxMap.insert(eft.trxId, eft);
                 }
@@ -287,9 +297,9 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if(id.startsWith("WithdrawConfirmPage-get_multi_address_obj-ETH-"))
+    if(id.startsWith("WithdrawConfirmPage-get_multi_address_obj-" + ui->assetComboBox->currentText() + "-"))
     {
-        QString accountId = id.mid(QString("WithdrawConfirmPage-get_multi_address_obj-ETH-").size());
+        QString accountId = id.mid(QString("WithdrawConfirmPage-get_multi_address_obj-" + ui->assetComboBox->currentText() + "-").size());
         AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
         if(accountId != accountInfo.id)     return;
 
@@ -304,20 +314,19 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
         QString hotAddress = ethMultisigObject.value("new_address_hot").toString();
         QString coldAddress = ethMultisigObject.value("new_address_cold").toString();
 
-        QJsonObject object;
-        object.insert("jsonrpc","2.0");
-        object.insert("id",1011);
-        object.insert("method","Zchain.Address.GetBalance");
-        QJsonObject paramObject;
-        paramObject.insert("chainId","ETH");
-        paramObject.insert("addr",hotAddress);
-        object.insert("params",paramObject);
-        httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+        if(ui->assetComboBox->currentText() == "ETH")
+        {
+            fetchCoinBalance(1011,"ETH",hotAddress);
+            fetchCoinBalance(1012,"ETH",coldAddress);
+        }
+        else
+        {
+            fetchCoinBalance(1011,"ETH",hotAddress);
+            fetchCoinBalance(1012,"ETH",coldAddress);
+//            fetchCoinBalance(1013,ui->assetComboBox->currentText(),hotAddress);
+//            fetchCoinBalance(1014,ui->assetComboBox->currentText(),coldAddress);
 
-        paramObject.insert("addr",coldAddress);
-        object.insert("params",paramObject);
-        object.insert("id",1012);
-        httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+        }
 
         return;
     }
@@ -539,8 +548,9 @@ void WithdrawConfirmPage::fetchEthBalance()
 {
     AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
 
-    HXChain::getInstance()->postRPC( "WithdrawConfirmPage-get_multi_address_obj-ETH-" + accountInfo.id, toJsonFormat( "get_multi_address_obj",
-                                                                                                     QJsonArray() << "ETH" << accountInfo.id));
+    HXChain::getInstance()->postRPC( "WithdrawConfirmPage-get_multi_address_obj-" + ui->assetComboBox->currentText() + "-" + accountInfo.id,
+                                     toJsonFormat( "get_multi_address_obj",
+                                                   QJsonArray() << ui->assetComboBox->currentText() << accountInfo.id));
 
 }
 
@@ -557,16 +567,21 @@ void WithdrawConfirmPage::showEthFinalTrxs()
 
         ETHFinalTrx eft = ethFinalTrxMap.value(keys.at(i));
 
-        ui->ethFinalTrxTableWidget->setItem(i, 0, new QTableWidgetItem(eft.signer));
-        ui->ethFinalTrxTableWidget->item(i,0)->setData(Qt::UserRole, eft.trxId);
+        ui->ethFinalTrxTableWidget->setItem(i, 0, new QTableWidgetItem(eft.symbol));
+        AssetIconItem* assetIconItem = new AssetIconItem();
+        assetIconItem->setAsset(ui->ethFinalTrxTableWidget->item(i,0)->text());
+        ui->ethFinalTrxTableWidget->setCellWidget(i, 0, assetIconItem);
 
-        ui->ethFinalTrxTableWidget->setItem(i, 1, new QTableWidgetItem(eft.nonce));
+        ui->ethFinalTrxTableWidget->setItem(i, 1, new QTableWidgetItem(eft.signer));
+        ui->ethFinalTrxTableWidget->item(i,1)->setData(Qt::UserRole, eft.trxId);
 
-        ui->ethFinalTrxTableWidget->setItem(i, 2, new QTableWidgetItem(tr("sign")));
+        ui->ethFinalTrxTableWidget->setItem(i, 2, new QTableWidgetItem(eft.nonce));
+
+        ui->ethFinalTrxTableWidget->setItem(i, 3, new QTableWidgetItem(tr("sign")));
         ToolButtonWidget *toolButton = new ToolButtonWidget();
-        toolButton->setText(ui->ethFinalTrxTableWidget->item(i,2)->text());
-        ui->ethFinalTrxTableWidget->setCellWidget(i,2,toolButton);
-        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_ethFinalTrxTableWidget_cellClicked,this,i,2));
+        toolButton->setText(ui->ethFinalTrxTableWidget->item(i,3)->text());
+        ui->ethFinalTrxTableWidget->setCellWidget(i,3,toolButton);
+        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_ethFinalTrxTableWidget_cellClicked,this,i,3));
 
     }
 
@@ -638,6 +653,8 @@ void WithdrawConfirmPage::on_typeCurrentBtn_clicked()
     ui->typeCurrentBtn->setChecked(true);
     ui->typeWaitingBtn->setChecked(false);
     ui->typeETHBtn->setChecked(false);
+    ui->assetComboBox->hide();
+    ui->assetLabel->hide();
     showCrosschainTransactions();
 }
 
@@ -648,6 +665,8 @@ void WithdrawConfirmPage::on_typeWaitingBtn_clicked()
     ui->typeCurrentBtn->setChecked(false);
     ui->typeWaitingBtn->setChecked(true);
     ui->typeETHBtn->setChecked(false);
+    ui->assetComboBox->hide();
+    ui->assetLabel->hide();
     showCrosschainTransactions();
 }
 
@@ -657,6 +676,8 @@ void WithdrawConfirmPage::on_typeETHBtn_clicked()
     ui->stackedWidget2->setCurrentIndex(1);
     ui->typeCurrentBtn->setChecked(false);
     ui->typeWaitingBtn->setChecked(false);
+    ui->assetComboBox->show();
+    ui->assetLabel->show();
     ui->typeETHBtn->setChecked(true);
 }
 
@@ -690,11 +711,11 @@ void WithdrawConfirmPage::on_autoConfirmBtn_clicked()
 
 void WithdrawConfirmPage::on_ethFinalTrxTableWidget_cellClicked(int row, int column)
 {
-    if(column == 2)
+    if(column == 3)
     {
-        if(ui->ethFinalTrxTableWidget->item(row,0))
+        if(ui->ethFinalTrxTableWidget->item(row,1))
         {
-            QString trxId = ui->ethFinalTrxTableWidget->item(row,0)->data(Qt::UserRole).toString();
+            QString trxId = ui->ethFinalTrxTableWidget->item(row,1)->data(Qt::UserRole).toString();
 
             qDebug() << trxId;
 
@@ -703,6 +724,43 @@ void WithdrawConfirmPage::on_ethFinalTrxTableWidget_cellClicked(int row, int col
                                                            QJsonArray() << trxId << ui->accountComboBox->currentText()));
 
         }
+
+        return;
+    }
+}
+
+void WithdrawConfirmPage::onAssetComboBoxCurrentIndexChanged(const QString &arg1)
+{
+    ui->hotAddressBalanceLabel->clear();
+    ui->coldAddressBalanceLabel->clear();
+    refresh();
+}
+
+void WithdrawConfirmPage::fetchCoinBalance(int id, QString chainId, QString address)
+{
+    QJsonObject object;
+    object.insert("jsonrpc","2.0");
+    object.insert("id",id);
+    object.insert("method","Zchain.Address.GetBalance");
+    QJsonObject paramObject;
+    paramObject.insert("chainId",chainId);
+    paramObject.insert("addr",address);
+    object.insert("params",paramObject);
+    httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+}
+
+void WithdrawConfirmPage::on_ethFinalTrxTableWidget_cellPressed(int row, int column)
+{
+    if( column == 1)
+    {
+        ShowContentDialog showContentDialog( ui->ethFinalTrxTableWidget->item(row, column)->text(),this);
+
+        int x = ui->ethFinalTrxTableWidget->columnViewportPosition(column) + ui->ethFinalTrxTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->ethFinalTrxTableWidget->rowViewportPosition(row) - 10 + ui->ethFinalTrxTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->ethFinalTrxTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
 
         return;
     }

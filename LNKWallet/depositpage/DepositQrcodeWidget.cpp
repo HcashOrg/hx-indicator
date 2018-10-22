@@ -8,7 +8,7 @@
 #include "wallet.h"
 #include "DepositDataUtil.h"
 
-static const QMap<QString,QString>  leastDepositAmountMap = {{"HC","0.01"}};
+static const QMap<QString,QString>  leastDepositAmountMap = {{"HC","0.01"},{"ETH","0.025"},{"ERCBCC","0"}};
 
 DepositQrcodeWidget::DepositQrcodeWidget(QWidget *parent) :
     QWidget(parent),
@@ -28,10 +28,21 @@ void DepositQrcodeWidget::SetQRString(const QString &data)
     QImage image = DepositDataUtil::CreateQRcodeImage(data);
     ui->label_qrcode->setPixmap(QPixmap::fromImage(image).scaled(ui->label_qrcode->size()));
     ui->label_address->setText(data);
+
+    if(symbol.startsWith("ERC"))
+    {
+        ui->label_ercTip->show();
+        PostQueryTunnelMoney("ETH",data);
+    }
+    else
+    {
+        ui->label_ercTip->hide();
+    }
 }
 
-void DepositQrcodeWidget::SetSymbol(const QString &symbol)
+void DepositQrcodeWidget::SetSymbol(const QString &_symbol)
 {
+    symbol = _symbol;
     ui->label_warning->setText(ui->label_warning->text().replace("BTC",symbol));
 
     ui->tipLabel->setText(ui->tipLabel->text().replace("BTC",symbol));
@@ -39,6 +50,8 @@ void DepositQrcodeWidget::SetSymbol(const QString &symbol)
     {
         ui->tipLabel->setText(ui->tipLabel->text().replace("0.001",leastDepositAmountMap.value(symbol)));
     }
+
+
 }
 
 void DepositQrcodeWidget::CopySlots()
@@ -46,11 +59,39 @@ void DepositQrcodeWidget::CopySlots()
     QApplication::clipboard()->setText(ui->label_address->text());
 }
 
+void DepositQrcodeWidget::PostQueryTunnelMoney(const QString &symbol, const QString &tunnelAddress)
+{
+    if(symbol.isEmpty() || tunnelAddress.isEmpty()) return;
+    QJsonObject object;
+    object.insert("jsonrpc","2.0");
+    object.insert("id",45);
+    object.insert("method","Zchain.Address.GetBalance");
+    QJsonObject paramObject;
+    paramObject.insert("chainId",symbol);
+    paramObject.insert("addr",tunnelAddress);
+    object.insert("params",paramObject);
+    httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+
+}
+
+void DepositQrcodeWidget::httpReplied(QByteArray _data, int _status)
+{
+    qDebug() << "DepositQrcodeWidget httpReplied " << _data << _status;
+
+    QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
+
+    QString balance = object.value("balance").toString();
+    ui->label_ercTip->setText(ui->label_ercTip->text().replace("0 ETH", balance + "ETH"));
+}
+
 void DepositQrcodeWidget::InitWidget()
 {
     InitStyle();
 
+    ui->label_ercTip->hide();
+
     connect(ui->toolButton,&QToolButton::clicked,this,&DepositQrcodeWidget::CopySlots);
+    connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 }
 
 void DepositQrcodeWidget::InitStyle()
