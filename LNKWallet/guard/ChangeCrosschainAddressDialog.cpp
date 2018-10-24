@@ -69,8 +69,6 @@ void ChangeCrosschainAddressDialog::init()
     QIntValidator *validator = new QIntValidator(1, 60 * 60 * 24 * 365,this);
     ui->timeLineEdit->setValidator(validator);
 
-    getSenatorMultiAddress();
-
 }
 
 void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
@@ -78,7 +76,7 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
     if( id == "ChangeCrosschainAddressDialog-get_multisig_account_pair-" + ui->assetComboBox->currentText())
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if( result.startsWith("\"result\":"))             // 成功
         {
@@ -152,7 +150,7 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
     if( id == "ChangeCrosschainAddressDialog-get_eth_multi_account_trx-" + ui->assetComboBox->currentText())
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if( result.startsWith("\"result\":"))             // 成功
         {
@@ -215,7 +213,7 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
     if( id.startsWith("ChangeCrosschainAddressDialog-get_multi_address_obj-" + ui->assetComboBox->currentText()))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if( result.startsWith("\"result\":"))             // 成功
         {
@@ -233,6 +231,7 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
                 {
                     QString newHotAddress = object.value("new_address_hot").toString();
                     QString newColdAddress = object.value("new_address_cold").toString();
+
                     if(newHotAddress == ethTrx.guardSignHotAddress && newColdAddress == ethTrx.guardSignColdAddress)
                     {
                         signerId = object.value("guard_account").toString();
@@ -264,6 +263,8 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
 
         if( result == "\"result\":null")             // 成功
         {
+            close();
+
             CommonDialog commonDialog(CommonDialog::OkOnly);
             commonDialog.setText(tr("Trx has been signed! Wait for confirmation."));
             commonDialog.pop();
@@ -281,24 +282,21 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
 void ChangeCrosschainAddressDialog::httpReplied(QByteArray _data, int _status)
 {
     QJsonObject object  = QJsonDocument::fromJson(_data).object();
+    qDebug() << "bbbbbbbbbbbb " << object;
     int id = object.value("id").toInt();
     QJsonObject resultObject = object.value("result").toObject();
-    QString assetSymbol = resultObject.value("chainId").toString().toUpper();
-    if(assetSymbol == ui->assetComboBox->currentText())
+
+    QString balance = resultObject.value("balance").toString();
+    QString address = resultObject.value("address").toString();
+
+    if(id == 1011)
     {
-        QString balance = resultObject.value("balance").toString();
-        QString address = resultObject.value("address").toString();
-
-        if(id == 1011)
-        {
-            ui->senatorHotAddressLabel->setText( QString("%1 (%2 ETH)").arg(address).arg(balance));
-        }
-        else if(id == 1012)
-        {
-            ui->senatorColdAddressLabel->setText( QString("%1 (%2 ETH)").arg(address).arg(balance));
-        }
+        ui->senatorHotAddressLabel->setText( QString("%1 (%2 ETH)").arg(address).arg(balance));
     }
-
+    else if(id == 1012)
+    {
+        ui->senatorColdAddressLabel->setText( QString("%1 (%2 ETH)").arg(address).arg(balance));
+    }
 }
 
 void ChangeCrosschainAddressDialog::on_okBtn_clicked()
@@ -359,11 +357,14 @@ void ChangeCrosschainAddressDialog::on_assetComboBox_currentIndexChanged(const Q
     ui->senatorColdAddressLabel->clear();
     needSenatorSign = false;
     signerId = "";
+    ui->signerLabel->clear();
 
     if(ui->assetComboBox->currentText() == "ETH" || ui->assetComboBox->currentText().startsWith("ERC"))
     {
         HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_eth_multi_account_trx-" + ui->assetComboBox->currentText(),
                                          toJsonFormat( "get_eth_multi_account_trx", QJsonArray() << 0));
+
+        getSenatorMultiAddress();
     }
     else
     {
