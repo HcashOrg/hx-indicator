@@ -46,13 +46,13 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+     <string notr="true"/>
     </property>
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
        <x>200</x>
-       <y>320</y>
+       <y>330</y>
        <width>100</width>
        <height>30</height>
       </rect>
@@ -128,7 +128,7 @@
        <x>210</x>
        <y>90</y>
        <width>120</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
      <property name="font">
@@ -145,7 +145,7 @@
       <string notr="true"/>
      </property>
     </widget>
-    <widget class="QLabel" name="label_3">
+    <widget class="QLabel" name="accountLabel">
      <property name="geometry">
       <rect>
        <x>210</x>
@@ -179,7 +179,7 @@
      <property name="geometry">
       <rect>
        <x>80</x>
-       <y>320</y>
+       <y>330</y>
        <width>100</width>
        <height>30</height>
       </rect>
@@ -207,7 +207,7 @@
        <x>30</x>
        <y>90</y>
        <width>120</width>
-       <height>30</height>
+       <height>24</height>
       </rect>
      </property>
      <property name="font">
@@ -224,70 +224,307 @@
       <string notr="true"/>
      </property>
     </widget>
-    <widget class="QLabel" name="label_5">
+    <widget class="QStackedWidget" name="stackedWidget">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>130</y>
-       <width>200</width>
-       <height>20</height>
+       <x>0</x>
+       <y>120</y>
+       <width>400</width>
+       <height>200</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="page">
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>10</y>
+         <width>200</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
 
 </string>
-     </property>
-     <property name="text">
-      <string>最新热钱包地址</string>
-     </property>
+       </property>
+       <property name="text">
+        <string>最新热钱包地址</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>120</y>
+         <width>120</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+       </property>
+       <property name="text">
+        <string>终止确认时间（秒）</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="hotAddressLabel">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>60</y>
+         <width>200</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+       </property>
+       <property name="text">
+        <string>最新冷钱包地址</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="timeLineEdit">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>140</y>
+         <width>120</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>86400</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="coldAddressLabel">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>80</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_2">
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>0</y>
+         <width>300</width>
+         <height>50</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{font:  11px &quot;微软雅黑&quot;;color: rgb(151, 151, 151);}
+
+</string>
+       </property>
+       <property name="text">
+        <string>ETH和ERC代币变更多签地址时需要在ETH链上创建新的多签账户，并由随机一名senator签名</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="trxIdLabel">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>70</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>50</y>
+         <width>200</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+       </property>
+       <property name="text">
+        <string>待签名交易ID</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="senatorHotAddressLabel">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>120</y>
+         <width>360</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 11px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>100</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+       </property>
+       <property name="text">
+        <string>Senator热钱包地址(需保证至少有0.025 ETH)</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>150</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
+
+</string>
+       </property>
+       <property name="text">
+        <string>Senator冷钱包地址(需保证至少有0.025 ETH)</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="senatorColdAddressLabel">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>170</y>
+         <width>360</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 11px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </widget>
     </widget>
-    <widget class="QLabel" name="hotAddressLabel">
+    <widget class="QLabel" name="signerLabel">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>150</y>
-       <width>300</width>
+       <x>210</x>
+       <y>90</y>
+       <width>180</width>
        <height>20</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
+      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(137,129,161);}
+
+</string>
      </property>
      <property name="text">
       <string/>
      </property>
-     <property name="textInteractionFlags">
-      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QLabel" name="coldAddressLabel">
+    <widget class="QLabel" name="signerLabel2">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>200</y>
-       <width>300</width>
+       <x>210</x>
+       <y>70</y>
+       <width>180</width>
        <height>20</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,202,212);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(137,129,161);padding:0px 0px 0px 5px;}</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="textInteractionFlags">
-      <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_6">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>180</y>
-       <width>200</width>
-       <height>20</height>
-      </rect>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
@@ -295,40 +532,22 @@
 </string>
      </property>
      <property name="text">
-      <string>最新冷钱包地址</string>
+      <string>随机的签名senator</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QLineEdit" name="timeLineEdit">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>260</y>
-       <width>120</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>86400</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_7">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>240</y>
-       <width>120</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{font:  12px &quot;微软雅黑&quot;;color: rgb(51, 51, 51);}
-
-</string>
-     </property>
-     <property name="text">
-      <string>终止确认时间（秒）</string>
-     </property>
-    </widget>
+    <zorder>stackedWidget</zorder>
+    <zorder>closeBtn</zorder>
+    <zorder>label</zorder>
+    <zorder>label_2</zorder>
+    <zorder>accountComboBox</zorder>
+    <zorder>accountLabel</zorder>
+    <zorder>okBtn</zorder>
+    <zorder>assetComboBox</zorder>
+    <zorder>signerLabel</zorder>
+    <zorder>signerLabel2</zorder>
    </widget>
   </widget>
  </widget>

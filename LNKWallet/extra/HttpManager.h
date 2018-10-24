@@ -15,6 +15,8 @@ public:
     void get(const QString url);
     void post(const QString url, const QByteArray& data);
 
+    void fetchCoinBalance(int id, QString chainId, QString address);
+
 public slots:
     void requestFinished(QNetworkReply *reply);
 

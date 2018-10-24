@@ -32,7 +32,6 @@ MultiSigPage::MultiSigPage(QWidget *parent) :
     ui->balanceTableWidget->setColumnWidth(1,180);
     ui->balanceTableWidget->setColumnWidth(2,160);
     ui->balanceTableWidget->horizontalHeader()->setStretchLastSection(true);
-    ui->balanceTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->infoTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->infoTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -49,7 +48,6 @@ MultiSigPage::MultiSigPage(QWidget *parent) :
     ui->infoTableWidget->setColumnWidth(0,400);
     ui->infoTableWidget->setColumnWidth(1,180);
     ui->infoTableWidget->horizontalHeader()->setStretchLastSection(true);
-    ui->infoTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->typeBalanceBtn->setCheckable(true);
     ui->typeInfoBtn->setCheckable(true);

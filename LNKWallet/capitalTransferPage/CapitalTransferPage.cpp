@@ -395,7 +395,18 @@ void CapitalTransferPage::InitWidget()
 
     ui->label_tip->setWordWrap(true);
     ui->label_tip->setVisible(false);
-    ui->label_fee->setText(_p->fee + " " +_p->symbol);
+
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
+    if(_p->symbol == "ETH" || _p->symbol.startsWith("ERC"))
+    {
+        AssetInfo ethInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId("ETH"));
+        ui->label_fee->setText( getBigNumberString(assetInfo.fee, ethInfo.precision) + " " + ethInfo.symbol);
+    }
+    else
+    {
+        ui->label_fee->setText( getBigNumberString(assetInfo.fee, assetInfo.precision) + " " +_p->symbol);
+    }
+
 
 //    ui->toolButton_confirm->setVisible(false);
     ui->toolButton_confirm->setEnabled(false);

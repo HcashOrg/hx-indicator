@@ -26,6 +26,19 @@ void HttpManager::post(const QString url, const QByteArray &data)
     networkAccessManager.post(httpRequest, data);
 }
 
+void HttpManager::fetchCoinBalance(int id, QString chainId, QString address)
+{
+    QJsonObject object;
+    object.insert("jsonrpc","2.0");
+    object.insert("id",id);
+    object.insert("method","Zchain.Address.GetBalance");
+    QJsonObject paramObject;
+    paramObject.insert("chainId",chainId);
+    paramObject.insert("addr",address);
+    object.insert("params",paramObject);
+    post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+}
+
 void HttpManager::requestFinished(QNetworkReply *reply)
 {
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();

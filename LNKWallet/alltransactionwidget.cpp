@@ -880,7 +880,9 @@ void AllTransactionWidget::showTransactions()
         {
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
-            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator sign to create ETH multi-sig account")));
+
+            QString chainType = operationObject.value("chain_type").toString();
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator sign to create %1 multi-sig account").arg(chainType)));
 
             useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }

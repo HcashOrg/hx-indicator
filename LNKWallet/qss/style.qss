@@ -51,7 +51,16 @@ QToolButton[BtnStyle="copy"]{background-image:url(:/ui/wallet_ui/copy.png);backg
 QToolButton[BtnStyle="copy"]:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}
 QToolButton[BtnStyle="closeDialog"]{background-image:url(:/ui/wallet_ui/close_button.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}
 QToolButton[BtnStyle="closeDialog"]:hover{background-color:rgb(208,228,255);}
+QToolButton[BtnStyle="btn1"]{font: 8px \"微软雅黑\";background-color:transparent; border:1px solid rgb(84,61,137);border-radius:9px;color: rgb(84,61,137);}
+QToolButton[BtnStyle="btn1"]:pressed{background-color:rgb(83,61,138);color: white;}
 
 QWidget[WidgetStyle="dialogBg"]{background-image:url(:/ui/wallet_ui/back_dialog.png);}
 QWidget[WidgetStyle="container"]{background-color:rgb(229,226,240);border-radius:4px;}
 QLabel[WidgetStyle="container"]{color:rgb(51,51,51);}
+
+
+QTableView{background-color:rgb(243,241,250);border:none;border-radius:5px;font: 11px \"Microsoft YaHei UI Light\";color:rgb(52,37,90);}
+QHeaderView{border:none;border-bottom:1px solid rgb(222,218,236);border-top-left-radius:5px;border-top-right-radius:5px;background-color:rgb(243,241,250);color:rgb(137,129,161);font: 11px \"Microsoft YaHei UI Light\";}
+QHeaderView:section{height:30px;border:none;background-color:rgb(243,241,250);}
+QHeaderView:section:first{border-top-left-radius:5px;}
+QHeaderView:section:last{border-top-right-radius:5px;}

@@ -1572,6 +1572,7 @@ void Frame::jsonDataUpdated(QString id)
                                 if(assetInfo.symbol != ASSET_NAME)
                                 {
                                     HXChain::getInstance()->postRPC( "id-get_current_multi_address-" + assetInfo.symbol, toJsonFormat( "get_current_multi_address", QJsonArray() << assetInfo.symbol));
+                                    HXChain::getInstance()->postRPC( "id-get_asset_imp-" + assetInfo.symbol, toJsonFormat( "get_asset_imp", QJsonArray() << assetInfo.symbol));
                                 }
 
 
@@ -1631,6 +1632,33 @@ void Frame::jsonDataUpdated(QString id)
                 HXChain::getInstance()->assetInfoMap[assetId].hotAddress = object.take("bind_account_hot").toString();
                 HXChain::getInstance()->assetInfoMap[assetId].coldAddress = object.take("bind_account_cold").toString();
                 HXChain::getInstance()->assetInfoMap[assetId].effectiveBlock = object.take("effective_block_num").toInt();
+            }
+        }
+
+        return;
+    }
+
+    if( id.startsWith("id-get_asset_imp-"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result;
+        if(result.startsWith("\"result\":"))
+        {
+            QString assetSymbol = id.mid(QString("id-get_asset_imp-").size());
+            QString assetId = HXChain::getInstance()->getAssetId(assetSymbol);
+
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonObject object = jsonObject.take("result").toObject();
+
+            if(HXChain::getInstance()->assetInfoMap.contains(assetId))
+            {
+                QJsonObject dynamicDataObject = object.value("dynamic_data").toObject();
+                HXChain::getInstance()->assetInfoMap[assetId].withdrawLimit = jsonValueToULL( dynamicDataObject.value("withdraw_limition"));
+                HXChain::getInstance()->assetInfoMap[assetId].fee = jsonValueToULL( dynamicDataObject.value("fee_pool"));
             }
         }
 

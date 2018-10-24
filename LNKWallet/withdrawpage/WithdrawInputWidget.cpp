@@ -39,20 +39,13 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
 {
     _p->chainType = symbol;
     ui->lineEdit_ammount->setPlaceholderText(tr("Max: %1").arg(number));
-    int pre = 5;
-    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
-        if(asset.symbol == symbol)
-        {
-            pre = asset.precision;
-            break;
-        }
-    }
-
-    QDoubleValidator *validator = new QDoubleValidator(0.001,number.toDouble(),pre,this);
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId(symbol));
+    QDoubleValidator *validator = new QDoubleValidator(getBigNumberString(assetInfo.withdrawLimit, assetInfo.precision).toDouble(),
+                                                       number.toDouble(), assetInfo.precision, this);
     validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_ammount->setValidator( validator );
     ui->label_symbol->setText(symbol);
-    ui->label_tipNumber->setText(tr("Amount limits: 0.001 to %1").arg(number));
+    ui->label_tipNumber->setText(tr("Amount limits: %1 to %2").arg(validator->bottom()).arg(number));
 }
 
 void WithdrawInputWidget::addressChangeSlots(const QString &address)
@@ -161,6 +154,7 @@ void WithdrawInputWidget::checkConfirmBtnEnabled()
     }
 }
 
+
 void WithdrawInputWidget::InitWidget()
 {
     InitStyle();
@@ -221,3 +215,4 @@ void WithdrawInputWidget::paintEvent(QPaintEvent *event)
 //    painter.restore();
     QWidget::paintEvent(event);
 }
+

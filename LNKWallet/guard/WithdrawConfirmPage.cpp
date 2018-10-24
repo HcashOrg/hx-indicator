@@ -19,6 +19,7 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     ui->setupUi(this);
 
     connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
     ui->crosschainTransactionTableWidget->installEventFilter(this);
     ui->crosschainTransactionTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -90,7 +91,6 @@ WithdrawConfirmPage::~WithdrawConfirmPage()
 
 void WithdrawConfirmPage::init()
 {
-    connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
     QStringList assets = HXChain::getInstance()->getETHAssets();
     ui->assetComboBox->addItems(assets);
@@ -115,7 +115,7 @@ void WithdrawConfirmPage::init()
         ui->accountComboBox->hide();
 
         QLabel* label = new QLabel(this);
-        label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
+        label->setGeometry(QRect(ui->label->pos(), QSize(280,18)));
         label->setText(tr("There are no senator accounts in the wallet."));
     }
 
@@ -309,7 +309,7 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
 
         QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
         QJsonObject jsonObject = parse_doucment.object();
-        QJsonObject ethMultisigObject = jsonObject.value("result").toArray().at(0).toObject();
+        QJsonObject ethMultisigObject = jsonObject.value("result").toArray().last().toObject();
 
         QString hotAddress = ethMultisigObject.value("new_address_hot").toString();
         QString coldAddress = ethMultisigObject.value("new_address_cold").toString();

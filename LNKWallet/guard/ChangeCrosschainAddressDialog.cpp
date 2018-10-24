@@ -14,6 +14,7 @@ ChangeCrosschainAddressDialog::ChangeCrosschainAddressDialog(QWidget *parent) :
     ui->setupUi(this);
 
     connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
     setParent(HXChain::getInstance()->mainFrame);
 
@@ -47,6 +48,8 @@ void ChangeCrosschainAddressDialog::pop()
 
 void ChangeCrosschainAddressDialog::init()
 {
+    ui->stackedWidget->setCurrentIndex(0);
+
     ui->accountComboBox->clear();
     QStringList accounts = HXChain::getInstance()->getMyFormalGuards();
     ui->accountComboBox->addItems(accounts);
@@ -65,6 +68,9 @@ void ChangeCrosschainAddressDialog::init()
 
     QIntValidator *validator = new QIntValidator(1, 60 * 60 * 24 * 365,this);
     ui->timeLineEdit->setValidator(validator);
+
+    getSenatorMultiAddress();
+
 }
 
 void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
@@ -142,28 +148,200 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
 
         return;
     }
+
+    if( id == "ChangeCrosschainAddressDialog-get_eth_multi_account_trx-" + ui->assetComboBox->currentText())
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result.startsWith("\"result\":"))             // 成功
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonArray array = jsonObject.value("result").toArray();
+
+            foreach (QJsonValue v, array)
+            {
+                QJsonObject object = v.toObject();
+                QString symbol = object.value("symbol").toString();
+                if(symbol == ui->assetComboBox->currentText())
+                {
+                    ethTrx.symbol = symbol;
+                    ethTrx.trxId = object.value("multi_account_create_trx_id").toString();
+
+                    QJsonArray operationArray = object.value("object_transaction").toObject().value("operations").toArray();
+                    QJsonObject object2 = operationArray.at(0).toArray().at(1).toObject();
+                    ethTrx.guardSignHotAddress = object2.value("guard_sign_hot_address").toString();
+                    ethTrx.guardSignColdAddress = object2.value("guard_sign_cold_address").toString();
+
+                    ui->trxIdLabel->setText(ethTrx.trxId);
+                    ui->senatorHotAddressLabel->setText(ethTrx.guardSignHotAddress);
+                    ui->senatorColdAddressLabel->setText(ethTrx.guardSignColdAddress);
+
+                    httpManager.fetchCoinBalance(1011,"ETH",ethTrx.guardSignHotAddress);
+                    httpManager.fetchCoinBalance(1012,"ETH",ethTrx.guardSignColdAddress);
+                    needSenatorSign = true;
+                    break;
+                }
+            }
+
+            if(needSenatorSign)
+            {
+                ui->stackedWidget->setCurrentIndex(1);
+                ui->accountLabel->hide();
+                ui->accountComboBox->hide();
+                ui->signerLabel->show();
+                ui->signerLabel2->show();
+            }
+            else
+            {
+                ui->stackedWidget->setCurrentIndex(0);
+                ui->accountLabel->show();
+                ui->accountComboBox->show();
+                ui->signerLabel->hide();
+                ui->signerLabel2->hide();
+
+                queryMultiAccountPair();
+            }
+        }
+
+        return;
+
+    }
+
+    if( id.startsWith("ChangeCrosschainAddressDialog-get_multi_address_obj-" + ui->assetComboBox->currentText()))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result.startsWith("\"result\":"))             // 成功
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonArray array = jsonObject.value("result").toArray();
+            foreach (QJsonValue v, array)
+            {
+                QJsonObject object = v.toObject();
+                QString multiSigAccountPairId = object.value("multisig_account_pair_object_id").toString();
+                if(multiSigAccountPairId == "2.7.0")
+                {
+                    QString newHotAddress = object.value("new_address_hot").toString();
+                    QString newColdAddress = object.value("new_address_cold").toString();
+                    if(newHotAddress == ethTrx.guardSignHotAddress && newColdAddress == ethTrx.guardSignColdAddress)
+                    {
+                        signerId = object.value("guard_account").toString();
+
+                        ui->signerLabel->setText(HXChain::getInstance()->guardAccountIdToName(signerId));
+                    }
+                    continue;
+                }
+            }
+
+        }
+
+        return;
+    }
+
+    if( id == "Finish-get_multi_address_obj-" + ui->assetComboBox->currentText())
+    {
+        if(signerId.isEmpty())      // 如果本钱包内没有signer
+        {
+            ui->signerLabel->setText(tr("Signer not in this wallet."));
+        }
+
+        return;
+    }
+
+    if( id == "ChangeCrosschainAddressDialog-senator_sign_eths_multi_account_create_trx")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+
+        if( result == "\"result\":null")             // 成功
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Trx has been signed! Wait for confirmation."));
+            commonDialog.pop();
+        }
+        else
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Failed!"));
+            errorResultDialog.setDetailText(result);
+        }
+        return;
+    }
+}
+
+void ChangeCrosschainAddressDialog::httpReplied(QByteArray _data, int _status)
+{
+    QJsonObject object  = QJsonDocument::fromJson(_data).object();
+    int id = object.value("id").toInt();
+    QJsonObject resultObject = object.value("result").toObject();
+    QString assetSymbol = resultObject.value("chainId").toString().toUpper();
+    if(assetSymbol == ui->assetComboBox->currentText())
+    {
+        QString balance = resultObject.value("balance").toString();
+        QString address = resultObject.value("address").toString();
+
+        if(id == 1011)
+        {
+            ui->senatorHotAddressLabel->setText( QString("%1 (%2 ETH)").arg(address).arg(balance));
+        }
+        else if(id == 1012)
+        {
+            ui->senatorColdAddressLabel->setText( QString("%1 (%2 ETH)").arg(address).arg(balance));
+        }
+    }
+
 }
 
 void ChangeCrosschainAddressDialog::on_okBtn_clicked()
 {
-    if(ui->hotAddressLabel->text().isEmpty() || ui->hotAddressLabel->text() == tr("There are no new multisig-address to change to!"))
+    if(needSenatorSign)
     {
-        return;
-    }
+        if(signerId.isEmpty())
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("You have no signer senator in this wallet!"));
+            commonDialog.pop();
+            return;
+        }
 
-    if(ui->timeLineEdit->text().toInt() < 3600)
+        CommonDialog commonDialog(CommonDialog::OkAndCancel);
+        commonDialog.setText(tr("Sure to sign this trx?"));
+        if(commonDialog.pop())
+        {
+            HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-senator_sign_eths_multi_account_create_trx", toJsonFormat( "senator_sign_eths_multi_account_create_trx",
+                                             QJsonArray() << ui->trxIdLabel->text() << ui->signerLabel->text() ));
+        }
+    }
+    else
     {
-        CommonDialog commonDialog(CommonDialog::OkOnly);
-        commonDialog.setText(tr("The expiration time should not less than 3600s(1 hour) !"));
-        commonDialog.pop();
+        if(ui->hotAddressLabel->text().isEmpty() || ui->hotAddressLabel->text() == tr("There are no new multisig-address to change to!"))
+        {
+            return;
+        }
 
-        return;
+        if(ui->timeLineEdit->text().toInt() < 3600)
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("The expiration time should not less than 3600s(1 hour) !"));
+            commonDialog.pop();
+
+            return;
+        }
+
+        HXChain::getInstance()->postRPC( "id-account_change_for_crosschain", toJsonFormat( "account_change_for_crosschain",
+                                         QJsonArray() << ui->accountComboBox->currentText() << ui->assetComboBox->currentText()
+                                         << ui->hotAddressLabel->text() << ui->coldAddressLabel->text()
+                                         << ui->timeLineEdit->text().toInt() << true ));
     }
-
-    HXChain::getInstance()->postRPC( "id-account_change_for_crosschain", toJsonFormat( "account_change_for_crosschain",
-                                     QJsonArray() << ui->accountComboBox->currentText() << ui->assetComboBox->currentText()
-                                     << ui->hotAddressLabel->text() << ui->coldAddressLabel->text()
-                                     << ui->timeLineEdit->text().toInt() << true ));
 
 }
 
@@ -176,8 +354,50 @@ void ChangeCrosschainAddressDialog::on_assetComboBox_currentIndexChanged(const Q
 {
     ui->hotAddressLabel->clear();
     ui->coldAddressLabel->clear();
+    ui->trxIdLabel->clear();
+    ui->senatorHotAddressLabel->clear();
+    ui->senatorColdAddressLabel->clear();
+    needSenatorSign = false;
+    signerId = "";
 
+    if(ui->assetComboBox->currentText() == "ETH" || ui->assetComboBox->currentText().startsWith("ERC"))
+    {
+        HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_eth_multi_account_trx-" + ui->assetComboBox->currentText(),
+                                         toJsonFormat( "get_eth_multi_account_trx", QJsonArray() << 0));
+    }
+    else
+    {
+        ui->stackedWidget->setCurrentIndex(0);
+        ui->accountLabel->show();
+        ui->accountComboBox->show();
+        ui->signerLabel->hide();
+        ui->signerLabel2->hide();
+
+        queryMultiAccountPair();
+    }
+
+}
+
+
+void ChangeCrosschainAddressDialog::queryMultiAccountPair()
+{
     HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_multisig_account_pair-" + ui->assetComboBox->currentText(),
                                      toJsonFormat( "get_multisig_account_pair", QJsonArray() << ui->assetComboBox->currentText()));
 
+}
+
+void ChangeCrosschainAddressDialog::getSenatorMultiAddress()
+{
+    QStringList guards = HXChain::getInstance()->getMyFormalGuards();
+
+    foreach (QString guard, guards)
+    {
+        AccountInfo info = HXChain::getInstance()->accountInfoMap.value(guard);
+        HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_multi_address_obj-" + ui->assetComboBox->currentText() + "-" + info.id,
+                                         toJsonFormat( "get_multi_address_obj", QJsonArray() << ui->assetComboBox->currentText()
+                                                                                << info.id));
+    }
+
+    HXChain::getInstance()->postRPC( "Finish-get_multi_address_obj-" + ui->assetComboBox->currentText(),
+                                     toJsonFormat( "get_multi_address_obj", QJsonArray() ));
 }

@@ -67,7 +67,7 @@ void FeedPricePage::init()
         ui->accountComboBox->hide();
 
         QLabel* label = new QLabel(this);
-        label->setGeometry(QRect(ui->accountComboBox->pos(), QSize(300,30)));
+        label->setGeometry(QRect(ui->label->pos(), QSize(300,18)));
         label->setText(tr("There are no senator accounts in the wallet."));
     }
 

@@ -135,6 +135,9 @@
    <property name="text">
     <string>添加公钥</string>
    </property>
+   <property name="BtnStyle" stdset="0">
+    <string>btn1</string>
+   </property>
   </widget>
   <widget class="QToolButton" name="addLocalAccountBtn">
    <property name="geometry">
@@ -164,6 +167,9 @@
    </property>
    <property name="text">
     <string>添加本地账户</string>
+   </property>
+   <property name="BtnStyle" stdset="0">
+    <string>btn1</string>
    </property>
   </widget>
   <widget class="QLabel" name="addressLabel">

@@ -34,7 +34,7 @@
 #define MULTISIG_ADDRESS_PREFIX "HXM"
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.0.8"           // 版本号
+#define WALLET_VERSION "1.0.9"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
@@ -114,7 +114,7 @@ struct AssetInfo
     QString symbol;
     QString issuer;
     int precision = 0;
-    unsigned long long maxSupply;
+    unsigned long long maxSupply = 0;
     QStringList publishers;
     AssetAmount baseAmount;
     AssetAmount quoteAmount;
@@ -124,6 +124,9 @@ struct AssetInfo
     QString hotAddress;     // 热钱包地址
     QString coldAddress;    // 冷钱包地址
     int     effectiveBlock = -1; // 生效区块
+
+    unsigned long long fee = 0;
+    unsigned long long withdrawLimit = 0;
 };
 
 struct GuardInfo

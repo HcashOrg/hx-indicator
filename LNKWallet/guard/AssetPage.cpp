@@ -72,7 +72,7 @@ void AssetPage::showAssetsInfo()
         ui->assetTableWidget->setItem(i,2,new QTableWidgetItem(assetInfo.hotAddress));
         ui->assetTableWidget->setItem(i,3,new QTableWidgetItem(assetInfo.coldAddress));
         ui->assetTableWidget->setItem(i,4,new QTableWidgetItem(HXChain::getInstance()->guardAccountIdToName(assetInfo.issuer)));
-        ui->assetTableWidget->setItem(i,5,new QTableWidgetItem("0.001 " + symbol));
+        ui->assetTableWidget->setItem(i,5,new QTableWidgetItem(getBigNumberString(assetInfo.fee, assetInfo.precision) + " " + symbol));
 
         AssetIconItem* assetIconItem = new AssetIconItem();
         assetIconItem->setAsset(ui->assetTableWidget->item(i,0)->text());

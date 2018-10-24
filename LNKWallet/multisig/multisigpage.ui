@@ -18,7 +18,7 @@
     <rect>
      <x>60</x>
      <y>50</y>
-     <width>120</width>
+     <width>200</width>
      <height>26</height>
     </rect>
    </property>
@@ -90,6 +90,9 @@
    <property name="text">
     <string>新建多签地址</string>
    </property>
+   <property name="BtnStyle" stdset="0">
+    <string>btn1</string>
+   </property>
   </widget>
   <widget class="QPushButton" name="typeBalanceBtn">
    <property name="geometry">
@@ -158,7 +161,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="QTableWidget" name="balanceTableWidget">
@@ -211,6 +214,9 @@
      </property>
      <property name="gridStyle">
       <enum>Qt::SolidLine</enum>
+     </property>
+     <property name="TableStyle" stdset="0">
+      <string>table1</string>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
@@ -312,6 +318,9 @@
      <property name="gridStyle">
       <enum>Qt::SolidLine</enum>
      </property>
+     <property name="TableStyle" stdset="0">
+      <string>table1</string>
+     </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
      </attribute>
@@ -373,7 +382,7 @@
    <property name="geometry">
     <rect>
      <x>370</x>
-     <y>133</y>
+     <y>134</y>
      <width>11</width>
      <height>11</height>
     </rect>
@@ -391,6 +400,9 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="BtnStyle" stdset="0">
+    <string>copy</string>
    </property>
   </widget>
  </widget>
