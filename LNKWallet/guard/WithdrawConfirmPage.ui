@@ -180,7 +180,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="trxPage">
     <widget class="QTableWidget" name="crosschainTransactionTableWidget">

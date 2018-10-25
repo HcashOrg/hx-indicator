@@ -16,11 +16,6 @@
 #define MIN_CONTRACT_FEE    1
 #define MAX_CONTRACT_FEE    100
 
-#define SETDIALOG_GENERALBTN_SELECTED_STYLE     "QToolButton{background-color:rgb(70,82,113);color:white;border:1px solid rgb(70,82,113);border-top-left-radius: 12px;border-bottom-left-radius: 12px;}"
-#define SETDIALOG_GENERALBTN_UNSELECTED_STYLE   "QToolButton{background:transparent;color:rgb(192,196,212);border:1px solid rgb(70,82,113);border-top-left-radius: 12px;border-bottom-left-radius: 12px;}"
-#define SETDIALOG_SAVEBTN_SELECTED_STYLE        "QToolButton{background-color:rgb(70,82,113);color:white;border:1px solid rgb(70,82,113);border-top-right-radius: 12px;border-bottom-right-radius: 12px;}"
-#define SETDIALOG_SAVEBTN_UNSELECTED_STYLE      "QToolButton{background-color:transparent;color:rgb(192,196,212);border:1px solid rgb(70,82,113);border-top-right-radius: 12px;border-bottom-right-radius: 12px;}"
-
 
 SetDialog::SetDialog(QWidget *parent) :
     QDialog(parent),
@@ -353,8 +348,6 @@ void SetDialog::on_generalBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
     updateButtonIcon(0);
-    //ui->generalBtn->setStyleSheet(SETDIALOG_GENERALBTN_SELECTED_STYLE);
-    //ui->safeBtn->setStyleSheet(SETDIALOG_SAVEBTN_UNSELECTED_STYLE);
 }
 
 void SetDialog::on_depositBtn_clicked()
@@ -376,9 +369,6 @@ void SetDialog::on_safeBtn_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
     updateButtonIcon(1);
-
-    //ui->generalBtn->setStyleSheet(SETDIALOG_GENERALBTN_UNSELECTED_STYLE);
-    //ui->safeBtn->setStyleSheet(SETDIALOG_SAVEBTN_SELECTED_STYLE);
 }
 
 void SetDialog::on_accountBtn_clicked()
@@ -614,4 +604,22 @@ void SetDialog::on_contractFeeLineEdit_editingFinished()
         ui->contractFeeLineEdit->setText(getBigNumberString(MAX_CONTRACT_FEE,ASSET_PRECISION));
     }
 
+}
+
+void SetDialog::on_pathBtn_clicked()
+{
+#ifdef WIN32
+            QProcess::startDetached("explorer \"" + ui->dataPathLineEdit->text() + "\"");
+#else
+            QProcess::startDetached("open \"" + ui->dataPathLineEdit->text() + "\"");
+#endif
+}
+
+void SetDialog::on_pathBtn2_clicked()
+{
+#ifdef WIN32
+            QProcess::startDetached("explorer \"" + ui->configPathLineEdit->text() + "\"");
+#else
+            QProcess::startDetached("open \"" + ui->configPathLineEdit->text() + "\"");
+#endif
 }

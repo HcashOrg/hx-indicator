@@ -59,6 +59,10 @@ private slots:
 
     void on_contractFeeLineEdit_editingFinished();
 
+    void on_pathBtn_clicked();
+
+    void on_pathBtn2_clicked();
+
 private:
     void updateButtonIcon(int buttonNumber);
 protected:

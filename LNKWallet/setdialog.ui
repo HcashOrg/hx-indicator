@@ -1029,6 +1029,68 @@ color:rgb(137,129,161);</string>
           <enum>QLineEdit::Normal</enum>
          </property>
         </widget>
+        <widget class="QToolButton" name="pathBtn">
+         <property name="geometry">
+          <rect>
+           <x>480</x>
+           <y>42</y>
+           <width>40</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <pointsize>-1</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QToolButton{font: 9px &quot;微软雅黑&quot;;background:transparent;border:0px solid white;color: rgb(137,129,161);} QToolButton:hover{color:rgb(107,99,131);}</string>
+         </property>
+         <property name="text">
+          <string>打开</string>
+         </property>
+        </widget>
+        <widget class="QToolButton" name="pathBtn2">
+         <property name="geometry">
+          <rect>
+           <x>480</x>
+           <y>92</y>
+           <width>40</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <pointsize>-1</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QToolButton{font: 9px &quot;微软雅黑&quot;;background:transparent;border:0px solid white;color: rgb(137,129,161);} QToolButton:hover{color:rgb(107,99,131);}</string>
+         </property>
+         <property name="text">
+          <string>打开</string>
+         </property>
+        </widget>
         <zorder>newPwdLineEdit</zorder>
         <zorder>confirmPwdLineEdit</zorder>
         <zorder>confirmBtn</zorder>
@@ -1044,6 +1106,9 @@ color:rgb(137,129,161);</string>
         <zorder>dataPathLineEdit</zorder>
         <zorder>label_13</zorder>
         <zorder>configPathLineEdit</zorder>
+        <zorder>label_helppic</zorder>
+        <zorder>pathBtn</zorder>
+        <zorder>pathBtn2</zorder>
        </widget>
        <widget class="AccountManagerWidget" name="accountmanager"/>
       </widget>

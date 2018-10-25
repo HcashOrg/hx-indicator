@@ -14,56 +14,56 @@ MultiSigPage::MultiSigPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+//    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    ui->balanceTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
-    ui->balanceTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->balanceTableWidget->setFocusPolicy(Qt::NoFocus);
-//    ui->balanceTableWidget->setFrameShape(QFrame::NoFrame);
-    ui->balanceTableWidget->setMouseTracking(true);
-    ui->balanceTableWidget->setShowGrid(false);//隐藏表格线
+//    ui->balanceTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+//    ui->balanceTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+//    ui->balanceTableWidget->setFocusPolicy(Qt::NoFocus);
+////    ui->balanceTableWidget->setFrameShape(QFrame::NoFrame);
+//    ui->balanceTableWidget->setMouseTracking(true);
+//    ui->balanceTableWidget->setShowGrid(false);//隐藏表格线
 
-    ui->balanceTableWidget->horizontalHeader()->setSectionsClickable(true);
-//    ui->balanceTableWidget->horizontalHeader()->setFixedHeight(40);
-    ui->balanceTableWidget->horizontalHeader()->setVisible(true);
-    ui->balanceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+//    ui->balanceTableWidget->horizontalHeader()->setSectionsClickable(true);
+////    ui->balanceTableWidget->horizontalHeader()->setFixedHeight(40);
+//    ui->balanceTableWidget->horizontalHeader()->setVisible(true);
+//    ui->balanceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->balanceTableWidget->setColumnWidth(0,140);
-    ui->balanceTableWidget->setColumnWidth(1,180);
-    ui->balanceTableWidget->setColumnWidth(2,160);
-    ui->balanceTableWidget->horizontalHeader()->setStretchLastSection(true);
+//    ui->balanceTableWidget->setColumnWidth(0,140);
+//    ui->balanceTableWidget->setColumnWidth(1,180);
+//    ui->balanceTableWidget->setColumnWidth(2,160);
+//    ui->balanceTableWidget->horizontalHeader()->setStretchLastSection(true);
 
-    ui->infoTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
-    ui->infoTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->infoTableWidget->setFocusPolicy(Qt::NoFocus);
-//    ui->infoTableWidget->setFrameShape(QFrame::NoFrame);
-    ui->infoTableWidget->setMouseTracking(true);
-    ui->infoTableWidget->setShowGrid(false);//隐藏表格线
+//    ui->infoTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+//    ui->infoTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+//    ui->infoTableWidget->setFocusPolicy(Qt::NoFocus);
+////    ui->infoTableWidget->setFrameShape(QFrame::NoFrame);
+//    ui->infoTableWidget->setMouseTracking(true);
+//    ui->infoTableWidget->setShowGrid(false);//隐藏表格线
 
-    ui->infoTableWidget->horizontalHeader()->setSectionsClickable(true);
-//    ui->infoTableWidget->horizontalHeader()->setFixedHeight(40);
-    ui->infoTableWidget->horizontalHeader()->setVisible(true);
-    ui->infoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+//    ui->infoTableWidget->horizontalHeader()->setSectionsClickable(true);
+////    ui->infoTableWidget->horizontalHeader()->setFixedHeight(40);
+//    ui->infoTableWidget->horizontalHeader()->setVisible(true);
+//    ui->infoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->infoTableWidget->setColumnWidth(0,400);
-    ui->infoTableWidget->setColumnWidth(1,180);
-    ui->infoTableWidget->horizontalHeader()->setStretchLastSection(true);
+//    ui->infoTableWidget->setColumnWidth(0,400);
+//    ui->infoTableWidget->setColumnWidth(1,180);
+//    ui->infoTableWidget->horizontalHeader()->setStretchLastSection(true);
 
-    ui->typeBalanceBtn->setCheckable(true);
-    ui->typeInfoBtn->setCheckable(true);
-    ui->typeSignBtn->setCheckable(true);
-    ui->typeBalanceBtn->adjustSize();
-    ui->typeBalanceBtn->resize(ui->typeBalanceBtn->width(), 18);
-    ui->typeInfoBtn->adjustSize();
-    ui->typeInfoBtn->resize(ui->typeInfoBtn->width(), 18);
-    ui->typeInfoBtn->move(ui->typeBalanceBtn->x() + ui->typeBalanceBtn->width() + 30, ui->typeInfoBtn->y());
-    ui->typeSignBtn->adjustSize();
-    ui->typeSignBtn->resize(ui->typeSignBtn->width(), 18);
-    ui->typeSignBtn->move(ui->typeInfoBtn->x() + ui->typeInfoBtn->width() + 30, ui->typeSignBtn->y());
+//    ui->typeBalanceBtn->setCheckable(true);
+//    ui->typeInfoBtn->setCheckable(true);
+//    ui->typeSignBtn->setCheckable(true);
+//    ui->typeBalanceBtn->adjustSize();
+//    ui->typeBalanceBtn->resize(ui->typeBalanceBtn->width(), 18);
+//    ui->typeInfoBtn->adjustSize();
+//    ui->typeInfoBtn->resize(ui->typeInfoBtn->width(), 18);
+//    ui->typeInfoBtn->move(ui->typeBalanceBtn->x() + ui->typeBalanceBtn->width() + 30, ui->typeInfoBtn->y());
+//    ui->typeSignBtn->adjustSize();
+//    ui->typeSignBtn->resize(ui->typeSignBtn->width(), 18);
+//    ui->typeSignBtn->move(ui->typeInfoBtn->x() + ui->typeInfoBtn->width() + 30, ui->typeSignBtn->y());
 
-    setStyleSheet(PUSHBUTTON_CHECK_STYLE);
+//    setStyleSheet(PUSHBUTTON_CHECK_STYLE);
 
-    init();
+//    init();
 }
 
 MultiSigPage::~MultiSigPage()

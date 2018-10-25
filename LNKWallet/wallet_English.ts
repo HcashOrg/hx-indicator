@@ -2286,46 +2286,52 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="420"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="613"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="358"/>
+        <source>no key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="456"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="575"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="654"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="422"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="463"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="458"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="499"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="429"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="539"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="366"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="465"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="461"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="497"/>
         <source>waiting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="498"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="606"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="534"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="647"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="502"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="538"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="609"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="650"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="616"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="657"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5723,8 +5729,9 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="unfinished">Sign M-S transaction</translation>
     </message>
     <message>
+        <location filename="multisig/MultiSigPage.ui" line="442"/>
         <source>暂未支持多重签名</source>
-        <translation type="obsolete">Multi-sig has not been supported yet!</translation>
+        <translation type="unfinished">Multi-sig has not been supported yet!</translation>
     </message>
     <message>
         <location filename="multisig/MultiSigPage.cpp" line="84"/>
@@ -7490,8 +7497,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="setdialog.ui" line="570"/>
-        <location filename="setdialog.cpp" line="53"/>
-        <location filename="setdialog.cpp" line="365"/>
+        <location filename="setdialog.cpp" line="48"/>
+        <location filename="setdialog.cpp" line="358"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7523,20 +7530,26 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="setdialog.ui" line="955"/>
         <source>钱包数据路径：</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wallet Data Path</translation>
     </message>
     <message>
         <location filename="setdialog.ui" line="1005"/>
         <source>钱包配置路径：</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Wallet Config Path</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1075"/>
+        <location filename="setdialog.ui" line="1060"/>
+        <location filename="setdialog.ui" line="1091"/>
+        <source>打开</source>
+        <translation type="unfinished">open</translation>
+    </message>
+    <message>
+        <location filename="setdialog.ui" line="1140"/>
         <source>安全设置</source>
         <translation type="unfinished">Safety</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1106"/>
+        <location filename="setdialog.ui" line="1171"/>
         <source>账户管理</source>
         <translation type="unfinished">Account</translation>
     </message>
@@ -7597,31 +7610,31 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">vote</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="53"/>
-        <location filename="setdialog.cpp" line="370"/>
+        <location filename="setdialog.cpp" line="48"/>
+        <location filename="setdialog.cpp" line="363"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="417"/>
-        <location filename="setdialog.cpp" line="470"/>
+        <location filename="setdialog.cpp" line="407"/>
+        <location filename="setdialog.cpp" line="460"/>
         <source>at least 8 letters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="444"/>
-        <location filename="setdialog.cpp" line="469"/>
-        <location filename="setdialog.cpp" line="489"/>
+        <location filename="setdialog.cpp" line="434"/>
+        <location filename="setdialog.cpp" line="459"/>
+        <location filename="setdialog.cpp" line="479"/>
         <source>not consistent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="518"/>
+        <location filename="setdialog.cpp" line="508"/>
         <source>wrong password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="537"/>
+        <location filename="setdialog.cpp" line="527"/>
         <source>Fail to modify the password!</source>
         <oldsource>Fail to set password!</oldsource>
         <translation type="unfinished"></translation>

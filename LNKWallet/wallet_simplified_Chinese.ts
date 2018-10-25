@@ -2179,46 +2179,52 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="420"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="613"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="358"/>
+        <source>no key</source>
+        <translation type="unfinished">无私钥</translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="456"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="575"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="654"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="422"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="463"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="458"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="499"/>
         <source>check</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="429"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="539"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="366"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="465"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="461"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="497"/>
         <source>waiting</source>
         <translation type="unfinished">等待中</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="498"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="606"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="534"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="647"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="502"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="538"/>
         <source>unsigned</source>
         <translation type="unfinished">未签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="609"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="650"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished">%1已经签名了该冷热钱包转账交易！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="616"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="657"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished">正在检查%1的签名！</translation>
     </message>
@@ -5556,6 +5562,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="multisig/MultiSigPage.ui" line="442"/>
+        <source>暂未支持多重签名</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="multisig/MultiSigPage.ui" line="151"/>
         <source>签名多签交易</source>
         <translation type="unfinished"></translation>
@@ -7326,8 +7337,8 @@ update or not?</source>
     </message>
     <message>
         <location filename="setdialog.ui" line="570"/>
-        <location filename="setdialog.cpp" line="53"/>
-        <location filename="setdialog.cpp" line="365"/>
+        <location filename="setdialog.cpp" line="48"/>
+        <location filename="setdialog.cpp" line="358"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7367,12 +7378,18 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1075"/>
+        <location filename="setdialog.ui" line="1060"/>
+        <location filename="setdialog.ui" line="1091"/>
+        <source>打开</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setdialog.ui" line="1140"/>
         <source>安全设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1106"/>
+        <location filename="setdialog.ui" line="1171"/>
         <source>账户管理</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7400,31 +7417,31 @@ update or not?</source>
         <translation type="obsolete">修改</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="53"/>
-        <location filename="setdialog.cpp" line="370"/>
+        <location filename="setdialog.cpp" line="48"/>
+        <location filename="setdialog.cpp" line="363"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="417"/>
-        <location filename="setdialog.cpp" line="470"/>
+        <location filename="setdialog.cpp" line="407"/>
+        <location filename="setdialog.cpp" line="460"/>
         <source>at least 8 letters</source>
         <translation type="unfinished">密码至少为8位</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="444"/>
-        <location filename="setdialog.cpp" line="469"/>
-        <location filename="setdialog.cpp" line="489"/>
+        <location filename="setdialog.cpp" line="434"/>
+        <location filename="setdialog.cpp" line="459"/>
+        <location filename="setdialog.cpp" line="479"/>
         <source>not consistent</source>
         <translation type="unfinished">两次密码不一致</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="518"/>
+        <location filename="setdialog.cpp" line="508"/>
         <source>wrong password</source>
         <translation type="unfinished">密码错误</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="537"/>
+        <location filename="setdialog.cpp" line="527"/>
         <source>Fail to modify the password!</source>
         <oldsource>Fail to set password!</oldsource>
         <translation type="unfinished">修改密码失败！</translation>

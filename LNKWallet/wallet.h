@@ -51,8 +51,6 @@
 #endif
 
 
-//  密码输入错误5次后 锁定一段时间 (秒)
-#define PWD_LOCK_TIME  7200
 #define NODE_RPC_PORT   50320
 #define CLIENT_RPC_PORT 50321
 
