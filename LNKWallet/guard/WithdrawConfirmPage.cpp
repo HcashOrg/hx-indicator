@@ -53,9 +53,9 @@ WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
     ui->ethFinalTrxTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->ethFinalTrxTableWidget->setColumnWidth(0,120);
-    ui->ethFinalTrxTableWidget->setColumnWidth(1,380);
+    ui->ethFinalTrxTableWidget->setColumnWidth(1,360);
     ui->ethFinalTrxTableWidget->setColumnWidth(2,80);
-    ui->ethFinalTrxTableWidget->setColumnWidth(3,80);
+    ui->ethFinalTrxTableWidget->setColumnWidth(3,100);
     ui->ethFinalTrxTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->typeCurrentBtn->setCheckable(true);
@@ -121,6 +121,7 @@ void WithdrawConfirmPage::init()
 
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->crosschainTransactionTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->ethFinalTrxTableWidget);
 
     ui->typeCurrentBtn->setChecked(true);
 
@@ -352,6 +353,42 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
 
         return;
     }
+
+    if(id.startsWith("WithdrawConfirmPage-dump_crosschain_private_key-"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        QStringList strList = id.mid(QString("WithdrawConfirmPage-dump_crosschain_private_key-").size()).split("-");
+        QString signer = strList.at(0);
+        QString rowStr = strList.at(1);
+        int row = rowStr.toInt();
+
+        if(ui->ethFinalTrxTableWidget->item(row,1) && ui->ethFinalTrxTableWidget->item(row,3))
+        {
+            if(ui->ethFinalTrxTableWidget->item(row,1)->text() == signer)
+            {
+                if(result == "\"result\":[]")       // 钱包内无对应私钥
+                {
+                    ui->ethFinalTrxTableWidget->item(row,3)->setText(tr("no key"));
+
+                    ToolButtonWidget* tbw = static_cast<ToolButtonWidget*>(ui->ethFinalTrxTableWidget->cellWidget(row,3));
+                    tbw->setText(ui->ethFinalTrxTableWidget->item(row,3)->text());
+                    tbw->setEnabled(false);
+                }
+                else if(result.startsWith("\"result\":[["))     //有私钥
+                {
+                    ui->ethFinalTrxTableWidget->item(row,3)->setText(tr("sign"));
+
+                    ToolButtonWidget* tbw = static_cast<ToolButtonWidget*>(ui->ethFinalTrxTableWidget->cellWidget(row,3));
+                    tbw->setText(ui->ethFinalTrxTableWidget->item(row,3)->text());
+                    tbw->setEnabled(true);
+                }
+            }
+        }
+
+        return;
+    }
 }
 
 void WithdrawConfirmPage::httpReplied(QByteArray _data, int _status)
@@ -577,12 +614,16 @@ void WithdrawConfirmPage::showEthFinalTrxs()
 
         ui->ethFinalTrxTableWidget->setItem(i, 2, new QTableWidgetItem(eft.nonce));
 
-        ui->ethFinalTrxTableWidget->setItem(i, 3, new QTableWidgetItem(tr("sign")));
+        ui->ethFinalTrxTableWidget->setItem(i, 3, new QTableWidgetItem(tr("checking")));
         ToolButtonWidget *toolButton = new ToolButtonWidget();
         toolButton->setText(ui->ethFinalTrxTableWidget->item(i,3)->text());
+        toolButton->setEnabled(false);
         ui->ethFinalTrxTableWidget->setCellWidget(i,3,toolButton);
         connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_ethFinalTrxTableWidget_cellClicked,this,i,3));
 
+        HXChain::getInstance()->postRPC( "WithdrawConfirmPage-dump_crosschain_private_key-" + QString("%1-%2").arg(eft.signer).arg(i),
+                                         toJsonFormat( "dump_crosschain_private_key",
+                                                       QJsonArray() << eft.signer));
     }
 
     tableWidgetSetItemZebraColor(ui->ethFinalTrxTableWidget);

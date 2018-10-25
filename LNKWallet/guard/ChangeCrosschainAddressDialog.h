@@ -54,6 +54,8 @@ private:
     HttpManager httpManager;
     int needSenatorSign = false;
     QString signerId;
+    double hotBalance = 0;
+    double coldBalance = 0;
 
     void queryMultiAccountPair();
     void getSenatorMultiAddress();

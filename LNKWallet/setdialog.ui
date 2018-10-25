@@ -146,7 +146,7 @@
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QToolButton" name="saveBtn">
@@ -669,8 +669,8 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>107</y>
-           <width>291</width>
+           <y>110</y>
+           <width>260</width>
            <height>24</height>
           </rect>
          </property>
@@ -691,7 +691,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
           <rect>
            <x>37</x>
            <y>160</y>
-           <width>291</width>
+           <width>260</width>
            <height>24</height>
           </rect>
          </property>
@@ -736,7 +736,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>139</y>
+           <y>140</y>
            <width>100</width>
            <height>20</height>
           </rect>
@@ -764,9 +764,9 @@ color:rgb(137,129,161);</string>
         <widget class="QLabel" name="tipLabel3">
          <property name="geometry">
           <rect>
-           <x>202</x>
-           <y>58</y>
-           <width>121</width>
+           <x>180</x>
+           <y>61</y>
+           <width>110</width>
            <height>20</height>
           </rect>
          </property>
@@ -814,7 +814,7 @@ color:rgb(137,129,161);</string>
         <widget class="QLabel" name="tipLabel2">
          <property name="geometry">
           <rect>
-           <x>210</x>
+           <x>180</x>
            <y>161</y>
            <width>110</width>
            <height>20</height>
@@ -836,7 +836,7 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>87</y>
+           <y>90</y>
            <width>100</width>
            <height>20</height>
           </rect>
@@ -864,8 +864,8 @@ color:rgb(137,129,161);</string>
         <widget class="QLabel" name="tipLabel">
          <property name="geometry">
           <rect>
-           <x>210</x>
-           <y>108</y>
+           <x>180</x>
+           <y>111</y>
            <width>110</width>
            <height>20</height>
           </rect>
@@ -886,8 +886,8 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>58</y>
-           <width>291</width>
+           <y>60</y>
+           <width>260</width>
            <height>24</height>
           </rect>
          </property>
@@ -907,7 +907,7 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>37</x>
-           <y>11</y>
+           <y>10</y>
            <width>200</width>
            <height>30</height>
           </rect>
@@ -929,6 +929,106 @@ color:rgb(137,129,161);</string>
           <string>修改钱包密码</string>
          </property>
         </widget>
+        <widget class="QLabel" name="label_12">
+         <property name="geometry">
+          <rect>
+           <x>320</x>
+           <y>40</y>
+           <width>100</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <pointsize>-1</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
+         </property>
+         <property name="text">
+          <string>钱包数据路径：</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="dataPathLineEdit">
+         <property name="geometry">
+          <rect>
+           <x>320</x>
+           <y>60</y>
+           <width>200</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
+         </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::DefaultContextMenu</enum>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::Normal</enum>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_13">
+         <property name="geometry">
+          <rect>
+           <x>320</x>
+           <y>90</y>
+           <width>100</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <pointsize>-1</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font: 9px &quot;微软雅黑&quot;;
+color:rgb(137,129,161);</string>
+         </property>
+         <property name="text">
+          <string>钱包配置路径：</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="configPathLineEdit">
+         <property name="geometry">
+          <rect>
+           <x>320</x>
+           <y>110</y>
+           <width>200</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
+         </property>
+         <property name="contextMenuPolicy">
+          <enum>Qt::DefaultContextMenu</enum>
+         </property>
+         <property name="echoMode">
+          <enum>QLineEdit::Normal</enum>
+         </property>
+        </widget>
         <zorder>newPwdLineEdit</zorder>
         <zorder>confirmPwdLineEdit</zorder>
         <zorder>confirmBtn</zorder>
@@ -940,6 +1040,10 @@ color:rgb(137,129,161);</string>
         <zorder>tipLabel</zorder>
         <zorder>tipLabel2</zorder>
         <zorder>tipLabel3</zorder>
+        <zorder>label_12</zorder>
+        <zorder>dataPathLineEdit</zorder>
+        <zorder>label_13</zorder>
+        <zorder>configPathLineEdit</zorder>
        </widget>
        <widget class="AccountManagerWidget" name="accountmanager"/>
       </widget>

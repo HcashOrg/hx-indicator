@@ -1500,7 +1500,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="405"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="445"/>
         <source>please wait</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1511,7 +1511,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="96"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="403"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="443"/>
         <source>select withdraw to input address</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1545,19 +1545,27 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="338"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="339"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="350"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="363"/>
         <source>number cannot less than </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="345"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="370"/>
         <source>balance left should not less than </source>
         <oldsource>balance less than </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="378"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="403"/>
         <source> %1 is pending!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="427"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="431"/>
+        <source>about</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1641,32 +1649,32 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Expiration(s)</translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="114"/>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="115"/>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="326"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="112"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="113"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="334"/>
         <source>There are no new multisig-address to change to!</source>
         <oldsource>There are no new multi-sig address to change to!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="138"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="136"/>
         <source>Transaction of change-multisig proposal has been sent out. You can check the voting state in the proposal page.</source>
         <oldsource>Transaction of update-multisig proposal has been sent out. You can check the voting state in the proposal page.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="145"/>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="274"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="143"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="275"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="255"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="254"/>
         <source>Signer not in this wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="268"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="269"/>
         <source>Trx has been signed! Wait for confirmation.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1676,12 +1684,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="317"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="319"/>
+        <source>Balance of hot &amp; cold address should not be 0!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="325"/>
         <source>Sure to sign this trx?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="334"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="342"/>
         <source>The expiration time should not less than 3600s(1 hour) !</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2256,63 +2269,63 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="275"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="276"/>
         <source>Transaction of senator-sign-coldhot has been sent out!</source>
         <oldsource>Transaction of guard-sign-coldhot has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="281"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="333"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="282"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="334"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="327"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="328"/>
         <source>Transaction of senator-sign-eth-coldhot-final has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="419"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="612"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="420"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="613"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="421"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="462"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="422"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="463"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="428"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="538"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="429"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="539"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="460"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="461"/>
         <source>waiting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="497"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="605"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="498"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="606"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="501"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="502"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="608"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="609"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="615"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="616"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4856,13 +4869,13 @@ Cover it or not?</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="196"/>
-        <location filename="wallet.cpp" line="220"/>
+        <location filename="wallet.cpp" line="197"/>
+        <location filename="wallet.cpp" line="221"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="646"/>
+        <location filename="wallet.cpp" line="647"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -7478,7 +7491,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="setdialog.ui" line="570"/>
         <location filename="setdialog.cpp" line="53"/>
-        <location filename="setdialog.cpp" line="360"/>
+        <location filename="setdialog.cpp" line="365"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7508,12 +7521,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Modify the password</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="971"/>
+        <location filename="setdialog.ui" line="955"/>
+        <source>钱包数据路径：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setdialog.ui" line="1005"/>
+        <source>钱包配置路径：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setdialog.ui" line="1075"/>
         <source>安全设置</source>
         <translation type="unfinished">Safety</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1002"/>
+        <location filename="setdialog.ui" line="1106"/>
         <source>账户管理</source>
         <translation type="unfinished">Account</translation>
     </message>
@@ -7575,30 +7598,30 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="setdialog.cpp" line="53"/>
-        <location filename="setdialog.cpp" line="365"/>
+        <location filename="setdialog.cpp" line="370"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="412"/>
-        <location filename="setdialog.cpp" line="465"/>
+        <location filename="setdialog.cpp" line="417"/>
+        <location filename="setdialog.cpp" line="470"/>
         <source>at least 8 letters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="439"/>
-        <location filename="setdialog.cpp" line="464"/>
-        <location filename="setdialog.cpp" line="484"/>
+        <location filename="setdialog.cpp" line="444"/>
+        <location filename="setdialog.cpp" line="469"/>
+        <location filename="setdialog.cpp" line="489"/>
         <source>not consistent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="513"/>
+        <location filename="setdialog.cpp" line="518"/>
         <source>wrong password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="532"/>
+        <location filename="setdialog.cpp" line="537"/>
         <source>Fail to modify the password!</source>
         <oldsource>Fail to set password!</oldsource>
         <translation type="unfinished"></translation>
@@ -8614,47 +8637,53 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="286"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="287"/>
         <source>Transaction of senator-sign-crosschain has been sent out!</source>
         <oldsource>Transaction of guard-sign-crosschain has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="292"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="348"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="293"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="349"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="342"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="343"/>
         <source>Transaction of senator-sign-eth-withdraw-final has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="414"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="373"/>
+        <source>no key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="451"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="460"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="497"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="617"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="462"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="502"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="499"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="539"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="468"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="580"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="381"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="505"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="411"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="538"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="448"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="575"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8668,12 +8697,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="500"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="537"/>
         <source>waiting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="542"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="579"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8692,7 +8721,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="withdrawpage/WithdrawConfirmWidget.ui" line="57"/>
-        <source>交易确认</source>
+        <source>提现确认</source>
+        <oldsource>交易确认</oldsource>
         <translation type="unfinished">Confirm Transaction</translation>
     </message>
     <message>

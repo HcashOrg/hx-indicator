@@ -14,6 +14,7 @@
 #include <QApplication>
 #include <QFrame>
 #include <QDesktopWidget>
+#include <QtMath>
 
 #ifdef  WIN32
 #define NODE_PROC_NAME      "hx_node.exe"
@@ -377,7 +378,7 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("APPDATA="))
         {
 
-            walletConfigPath = str.mid(8) + "\\HXIndicator"WALLET_EXE_SUFFIX;
+            walletConfigPath = str.mid(8) + "\\HXIndicator"WALLET_EXE_SUFFIX"_"WALLET_VERSION;
             appDataPath = walletConfigPath + "\\chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;
@@ -1439,13 +1440,10 @@ void HXChain::postRPC(QString _rpcId, QString _rpcCmd)
 
 double roundDown(double decimal, int precision)
 {
-    int precisonFigureNum   = QString::number( precision, 'g', 15).count() - 1;
-
-    double result = QString::number(decimal,'f',precisonFigureNum).toDouble();
+    double result = QString::number(decimal,'f',precision).toDouble();
     if( result > decimal)
     {
-        if( precision == 0)     precision = 1;
-        result = result - 1.0 / precision;
+        result = result - qPow(10, 0 - precision);
     }
 
     return result;

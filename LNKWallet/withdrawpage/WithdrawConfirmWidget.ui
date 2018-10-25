@@ -25,8 +25,8 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>85</y>
+      <x>240</x>
+      <y>110</y>
       <width>481</width>
       <height>321</height>
      </rect>
@@ -54,7 +54,7 @@
 color: rgb(52,37,90);</string>
      </property>
      <property name="text">
-      <string>交易确认</string>
+      <string>提现确认</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>

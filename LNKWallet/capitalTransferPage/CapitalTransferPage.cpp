@@ -15,14 +15,14 @@
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
 
-static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001},{"HC",0.001},{"ETH",0.0001}};
-static const QMap<QString,QString> fee_charge = {{"BTC","0.001"},{"LTC","0.001"},{"HC","0.01"},{"ETH","0.001"}};
+static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001},{"HC",0.001}};
+//static const QMap<QString,QString> fee_charge = {{"BTC","0.001"},{"LTC","0.001"},{"HC","0.01"},{"ETH","0.001"}};
 class CapitalTransferPage::CapitalTransferPagePrivate
 {
 public:
     CapitalTransferPagePrivate(const CapitalTransferInput &data)
         :account_name(data.account_name),account_address(data.account_address),symbol(data.symbol)
-        ,fee(fee_charge.value(data.symbol))
+//        ,fee(fee_charge.value(data.symbol))
         ,actualNumber("0")
         ,precision(5)
     {
@@ -41,7 +41,7 @@ public:
 
     QString tunnel_account_address;
     QString asset_max_ammount;
-    QString fee;
+//    QString fee;
 
     int precision;
 
@@ -330,24 +330,49 @@ void CapitalTransferPage::CreateTransaction()
         return;
     }
 
-    _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble(),'f',_p->precision);
-    double extraNumber = _p->asset_max_ammount.toDouble() - ui->lineEdit_number->text().toDouble();
-    //qDebug()<<_p->actualNumber<<extraNumber<<dust_number[_p->symbol];
-    if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
+    if(_p->symbol == "ETH")
     {
-        ui->label_tip->setText(tr("number cannot less than ")+QString::number(dust_number[_p->symbol]+_p->fee.toDouble(),'f',_p->precision));
-        ui->label_tip->setVisible(true);
-        ui->toolButton_confirm->setEnabled(false);
-        return;
+        _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - 0.00021,'f',_p->precision);
+        if(ui->lineEdit_number->text().toDouble() < 0.001)
+        {
+            ui->label_tip->setText(tr("number cannot less than ") + "0.001");
+            ui->label_tip->setVisible(true);
+            ui->toolButton_confirm->setEnabled(false);
+            return;
+        }
     }
-    else if(extraNumber > 1e-10 && extraNumber < dust_number[_p->symbol])
+    else if(_p->symbol.startsWith("ERC"))
     {
-        ui->label_tip->setText(tr("balance left should not less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
-        ui->label_tip->setVisible(true);
-        ui->toolButton_confirm->setEnabled(false);
-        return;
+        _p->actualNumber = ui->lineEdit_number->text().toDouble();
+        if(ui->lineEdit_number->text().toDouble() < 0.001)
+        {
+            ui->label_tip->setText(tr("number cannot less than ") + "0.001");
+            ui->label_tip->setVisible(true);
+            ui->toolButton_confirm->setEnabled(false);
+            return;
+        }
     }
-
+    else
+    {
+        _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - getBigNumberString( assetInfo.fee, assetInfo.precision).toDouble(),'f',_p->precision);
+        double extraNumber = _p->asset_max_ammount.toDouble() - ui->lineEdit_number->text().toDouble();
+        //qDebug()<<_p->actualNumber<<extraNumber<<dust_number[_p->symbol];
+        if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
+        {
+            ui->label_tip->setText(tr("number cannot less than ") + QString::number(dust_number[_p->symbol] + getBigNumberString( assetInfo.fee, assetInfo.precision).toDouble(),'f',_p->precision));
+            ui->label_tip->setVisible(true);
+            ui->toolButton_confirm->setEnabled(false);
+            return;
+        }
+        else if(extraNumber > 1e-10 && extraNumber < dust_number[_p->symbol])
+        {
+            ui->label_tip->setText(tr("balance left should not less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
+            ui->label_tip->setVisible(true);
+            ui->toolButton_confirm->setEnabled(false);
+            return;
+        }
+    }
 
     ui->label_tip->setVisible(false);
     if(ui->radioButton_deposit->isChecked())
@@ -396,14 +421,18 @@ void CapitalTransferPage::InitWidget()
     ui->label_tip->setWordWrap(true);
     ui->label_tip->setVisible(false);
 
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
-    if(_p->symbol == "ETH" || _p->symbol.startsWith("ERC"))
+
+    if(_p->symbol == "ETH")
     {
-        AssetInfo ethInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId("ETH"));
-        ui->label_fee->setText( getBigNumberString(assetInfo.fee, ethInfo.precision) + " " + ethInfo.symbol);
+        ui->label_fee->setText( tr("about") + " 0.00021 ETH");
+    }
+    else if(_p->symbol.startsWith("ERC"))
+    {
+        ui->label_fee->setText( tr("about") + " 0.00045 ETH");
     }
     else
     {
+        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
         ui->label_fee->setText( getBigNumberString(assetInfo.fee, assetInfo.precision) + " " +_p->symbol);
     }
 

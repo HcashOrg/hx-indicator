@@ -116,16 +116,10 @@ void WithdrawConfirmWidget::InitData()
 {
     ui->label_address->setText(_p->crosschain_account);
     ui->label_totalNumber->setText(_p->ammount + "  " + _p->symbol);
-    ui->label_feeNumber->setText(HXChain::getInstance()->feeChargeInfo.withDrawFee + " " + _p->symbol);
-    int pre = 5;
-    foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
-        if(asset.symbol == _p->symbol)
-        {
-            pre = asset.precision;
-            break;
-        }
-    }
-    ui->label_actualNumber->setText(QString::number(_p->ammount.toDouble()-HXChain::getInstance()->feeChargeInfo.withDrawFee.toDouble(),'f',pre)+" "+_p->symbol);
+    AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
+    ui->label_feeNumber->setText(getBigNumberString( info.fee, info.precision) + " " + _p->symbol);
+    ui->label_actualNumber->setText(QString::number(_p->ammount.toDouble() - getBigNumberString( info.fee, info.precision).toDouble()
+                                                    ,'f',info.precision) + " " + _p->symbol);
 }
 
 void WithdrawConfirmWidget::InitWidget()

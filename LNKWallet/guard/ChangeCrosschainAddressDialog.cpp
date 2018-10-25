@@ -292,10 +292,12 @@ void ChangeCrosschainAddressDialog::httpReplied(QByteArray _data, int _status)
     if(id == 1011)
     {
         ui->senatorHotAddressLabel->setText( QString("%1 (%2 ETH)").arg(address).arg(balance));
+        hotBalance = balance.toDouble();
     }
     else if(id == 1012)
     {
         ui->senatorColdAddressLabel->setText( QString("%1 (%2 ETH)").arg(address).arg(balance));
+        coldBalance = balance.toDouble();
     }
 }
 
@@ -307,6 +309,14 @@ void ChangeCrosschainAddressDialog::on_okBtn_clicked()
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
             commonDialog.setText(tr("You have no signer senator in this wallet!"));
+            commonDialog.pop();
+            return;
+        }
+
+        if(hotBalance <= 0 || coldBalance <= 0)
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Balance of hot & cold address should not be 0!"));
             commonDialog.pop();
             return;
         }
@@ -358,6 +368,8 @@ void ChangeCrosschainAddressDialog::on_assetComboBox_currentIndexChanged(const Q
     needSenatorSign = false;
     signerId = "";
     ui->signerLabel->clear();
+    hotBalance = 0;
+    coldBalance = 0;
 
     if(ui->assetComboBox->currentText() == "ETH" || ui->assetComboBox->currentText().startsWith("ERC"))
     {

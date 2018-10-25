@@ -105,14 +105,14 @@ void ColdHotTransferDialog::httpReplied(QByteArray _data, int _status)
 
     AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(assetSymbol));
     queriedBalance = jsonValueToDouble( object.value("balance"));
-    qDebug() << assetSymbol << info.symbol << queriedBalance << info.precision << QString::number(queriedBalance, 'g', info.precision);
+    qDebug() << assetSymbol << info.symbol << queriedBalance << info.precision << QString::number( roundDown( queriedBalance, info.precision), 'g', info.precision);
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(info.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
     ui->amountLineEdit->clear();
 
-    ui->amountLineEdit->setPlaceholderText(tr("max:") + QString::number(queriedBalance, 'f', info.precision));
+    ui->amountLineEdit->setPlaceholderText(tr("max:") + QString::number(roundDown( queriedBalance, info.precision), 'f', info.precision));
 //    ui->amountLineEdit->setPlaceholderText("ssss");
 }
 

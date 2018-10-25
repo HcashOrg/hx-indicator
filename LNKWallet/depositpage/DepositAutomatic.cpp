@@ -379,10 +379,10 @@ void DepositAutomatic::updateData()
 
     QMap<QString,AccountInfo> accountInfoMap = HXChain::getInstance()->accountInfoMap;
     QMap<QString,AssetInfo> assetInfoMap = HXChain::getInstance()->assetInfoMap;
-    qDebug()<<accountInfoMap.size() << assetInfoMap.size();
+
     foreach (AccountInfo info, accountInfoMap) {
         foreach(AssetInfo assetInfo,assetInfoMap){
-            if(assetInfo.id != "1.3.0")
+            if(assetInfo.id != "1.3.0" && assetInfo.symbol != "ETH" && !assetInfo.symbol.startsWith("ERC"))
             {
                 std::shared_ptr<DataPrivate::accountInfo> da = std::make_shared<DataPrivate::accountInfo>();
                 da->accountAddress = info.address;
@@ -393,7 +393,7 @@ void DepositAutomatic::updateData()
         }
     }
     foreach(AssetInfo assetInfo,assetInfoMap){
-        if(assetInfo.id != "1.3.0")
+        if(assetInfo.id != "1.3.0" && assetInfo.symbol != "ETH" && !assetInfo.symbol.startsWith("ERC"))
         {
             _p->assetSymbols.push_back(assetInfo.symbol);
         }

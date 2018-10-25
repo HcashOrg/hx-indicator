@@ -158,6 +158,11 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->confirmPwdLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
     ui->lockTimeSpinBox->setAttribute(Qt::WA_InputMethodEnabled, false);
 
+    ui->dataPathLineEdit->setReadOnly(true);
+    ui->configPathLineEdit->setReadOnly(true);
+    ui->dataPathLineEdit->setText(HXChain::getInstance()->appDataPath);
+    ui->configPathLineEdit->setText(HXChain::getInstance()->walletConfigPath);
+
     ui->toolButton_help->setCheckable(true);
     ui->toolButton_set->setCheckable(true);
     ui->toolButton_set->setChecked(true);
