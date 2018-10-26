@@ -354,12 +354,12 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if(id.startsWith("WithdrawConfirmPage-dump_crosschain_private_key-"))
+    if(id.startsWith("WithdrawConfirmPage+dump_crosschain_private_key+"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
-        QStringList strList = id.mid(QString("WithdrawConfirmPage-dump_crosschain_private_key-").size()).split("-");
+        QStringList strList = id.mid(QString("WithdrawConfirmPage+dump_crosschain_private_key+").size()).split("+");
         QString signer = strList.at(0);
         QString rowStr = strList.at(1);
         int row = rowStr.toInt();
@@ -621,7 +621,7 @@ void WithdrawConfirmPage::showEthFinalTrxs()
         ui->ethFinalTrxTableWidget->setCellWidget(i,3,toolButton);
         connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_ethFinalTrxTableWidget_cellClicked,this,i,3));
 
-        HXChain::getInstance()->postRPC( "WithdrawConfirmPage-dump_crosschain_private_key-" + QString("%1-%2").arg(eft.signer).arg(i),
+        HXChain::getInstance()->postRPC( "WithdrawConfirmPage+dump_crosschain_private_key+" + QString("%1+%2").arg(eft.signer).arg(i),
                                          toJsonFormat( "dump_crosschain_private_key",
                                                        QJsonArray() << eft.signer));
     }

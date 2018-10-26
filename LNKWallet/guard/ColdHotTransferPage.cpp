@@ -339,12 +339,12 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if(id.startsWith("ColdHotTransferPage-dump_crosschain_private_key-"))
+    if(id.startsWith("ColdHotTransferPage+dump_crosschain_private_key+"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
 
-        QStringList strList = id.mid(QString("ColdHotTransferPage-dump_crosschain_private_key-").size()).split("-");
+        QStringList strList = id.mid(QString("ColdHotTransferPage+dump_crosschain_private_key+").size()).split("+");
         QString signer = strList.at(0);
         QString rowStr = strList.at(1);
         int row = rowStr.toInt();
@@ -579,7 +579,7 @@ void ColdHotTransferPage::showEthFinalTrxs()
         ui->ethFinalTrxTableWidget->setCellWidget(i,3,toolButton);
         connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_ethFinalTrxTableWidget_cellClicked,this,i,3));
 
-        HXChain::getInstance()->postRPC( "ColdHotTransferPage-dump_crosschain_private_key-" + QString("%1-%2").arg(eft.signer).arg(i),
+        HXChain::getInstance()->postRPC( "ColdHotTransferPage+dump_crosschain_private_key+" + QString("%1+%2").arg(eft.signer).arg(i),
                                          toJsonFormat( "dump_crosschain_private_key",
                                                        QJsonArray() << eft.signer));
 

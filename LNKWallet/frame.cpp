@@ -1975,8 +1975,6 @@ void Frame::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":"))
         {
             QString str = id.mid(QString("id-get_multi_address_obj-").size());
-            QString assetSymbol = str.split("-").at(0);
-            QString accountId = str.split("-").at(1);
 
             result.prepend("{");
             result.append("}");
@@ -2031,7 +2029,7 @@ void Frame::jsonDataUpdated(QString id)
 
                 if(contractInfo.hashValue == EXCHANGE_CONTRACT_HASH)
                 {
-                    HXChain::getInstance()->postRPC( "id-invoke_contract_offline-state-" + accountName + "-" + contractInfo.contractAddress, toJsonFormat( "invoke_contract_offline",
+                    HXChain::getInstance()->postRPC( "id+invoke_contract_offline+state+" + accountName + "+" + contractInfo.contractAddress, toJsonFormat( "invoke_contract_offline",
                                                                                            QJsonArray() << accountName << contractInfo.contractAddress
                                                                                            << "state"  << ""));
                 }
@@ -2047,14 +2045,14 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id.startsWith("id-invoke_contract_offline-state-"))
+    if( id.startsWith("id+invoke_contract_offline+state+"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 
         if(result.startsWith("\"result\":"))
         {
-            QString str = id.mid(QString("id-invoke_contract_offline-state-").size());
-            QStringList strList = str.split("-");
+            QString str = id.mid(QString("id+invoke_contract_offline+state+").size());
+            QStringList strList = str.split("+");
             QString accountName = strList.at(0);
             QString contractAddress = strList.at(1);
 

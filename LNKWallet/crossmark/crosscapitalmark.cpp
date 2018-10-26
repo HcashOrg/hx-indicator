@@ -220,7 +220,7 @@ void CrossCapitalMark::RemoveTransaction(const QString &tranID)
 
 void CrossCapitalMark::jsonDataUpdated(const QString &id)
 {
-    if(id.startsWith("mark_decoderawtransaction-"))
+    if(id.startsWith("mark_decoderawtransaction+"))
     {//解析出交易id
         QString accountName ;
         QString symbol ;
@@ -290,7 +290,7 @@ void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id
 
 void CrossCapitalMark::ParsePostID(const QString &postID, QString &name, QString &symbol, double &number)
 {
-    QStringList listStr = postID.split("-");
+    QStringList listStr = postID.split("+");
     name = listStr.at(1);
     symbol = listStr.at(2);
     number = listStr.at(3).toDouble();
@@ -344,7 +344,7 @@ void CrossCapitalMark::TransactionInput(const QString &jsonString,const QString 
     QJsonObject jsonObject = parse_doucment.object();
     QString transHex = jsonObject.value("result").toString();
     //解锁交易id
-    HXChain::getInstance()->postRPC( "mark_decoderawtransaction-"+accountName+"-"+symbol+"-"+QString::number(number),
+    HXChain::getInstance()->postRPC( "mark_decoderawtransaction+"+accountName+"+"+symbol+"+"+QString::number(number),
                                      toJsonFormat( "decoderawtransaction", QJsonArray()
                                      << transHex<<symbol ));
 }
