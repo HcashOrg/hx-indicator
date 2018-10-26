@@ -378,7 +378,7 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("APPDATA="))
         {
 
-            walletConfigPath = str.mid(8) + "\\HXIndicator"WALLET_EXE_SUFFIX"_"WALLET_VERSION;
+            walletConfigPath = str.mid(8) + "\\HXIndicator" WALLET_EXE_SUFFIX "_" WALLET_VERSION;
             appDataPath = walletConfigPath + "\\chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;
@@ -390,7 +390,7 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("HOME="))
         {
 
-            walletConfigPath = str.mid(5) + "/Library/Application Support/HXIndicator" WALLET_EXE_SUFFIX;
+            walletConfigPath = str.mid(5) + "/Library/Application Support/HXIndicator" WALLET_EXE_SUFFIX "_" WALLET_VERSION;
             appDataPath = walletConfigPath + "/chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;
@@ -1617,7 +1617,7 @@ QDataStream &operator <<(QDataStream &out, const GuaranteeOrder &data)
 }
 
 
-unsigned long long jsonValueToULL(QJsonValue &v)
+unsigned long long jsonValueToULL(QJsonValue v)
 {
     unsigned long long result = 0;
     if(v.isString())
@@ -1632,7 +1632,7 @@ unsigned long long jsonValueToULL(QJsonValue &v)
     return result;
 }
 
-double jsonValueToDouble(QJsonValue &v)
+double jsonValueToDouble(QJsonValue v)
 {
     double result = 0;
     if(v.isString())
