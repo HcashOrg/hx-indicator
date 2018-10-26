@@ -69,8 +69,8 @@ HXChain::HXChain()
         configFile->setValue("settings/resyncNextTime",false);
         contractFee = 1;
         configFile->setValue("settings/contractFee",1);
-//        middlewarePath = "http://117.78.44.37:5005/api";
-        middlewarePath = "http://192.168.1.164:5000/api";
+        middlewarePath = "http://117.78.44.37:5005/api";
+//        middlewarePath = "http://192.168.1.164:5000/api";
         configFile->setValue("settings/middlewarePath",middlewarePath);
         configFile->setValue("/settings/autoWithdrawConfirm",false);
         autoWithdrawConfirm = false;
@@ -88,8 +88,8 @@ HXChain::HXChain()
         autoDeposit     = configFile->value("/settings/autoDeposit",false).toBool();
         resyncNextTime  = configFile->value("/settings/resyncNextTime",false).toBool();
         contractFee     = configFile->value("/settings/contractFee",1).toULongLong();
-//        middlewarePath  = configFile->value("/settings/middlewarePath","http://117.78.44.37:5005/api").toString();
-        middlewarePath  = configFile->value("/settings/middlewarePath","http://192.168.1.164:5000/api").toString();
+        middlewarePath  = configFile->value("/settings/middlewarePath","http://117.78.44.37:5005/api").toString();
+//        middlewarePath  = configFile->value("/settings/middlewarePath","http://192.168.1.164:5000/api").toString();
         importedWalletNeedToAddTrackAddresses = configFile->value("/settings/importedWalletNeedToAddTrackAddresses",false).toBool();
         autoWithdrawConfirm = configFile->value("/settings/autoWithdrawConfirm",false).toBool();
     }
@@ -156,24 +156,24 @@ HXChain*   HXChain::getInstance()
 
 void HXChain:: startExe()
 {
-//    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
+    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
-//    QStringList strList;
-//    strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
-//            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT);
+    QStringList strList;
+    strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
+            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT);
 
-//    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
-//    {
-//        strList << "--replay";
-//    }
-//    HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
+    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+    {
+        strList << "--replay";
+    }
+    HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
-//    nodeProc->start(NODE_PROC_NAME,strList);
-//    qDebug() << "start" << NODE_PROC_NAME << strList;
+    nodeProc->start(NODE_PROC_NAME,strList);
+    qDebug() << "start" << NODE_PROC_NAME << strList;
 
 
-    HXChain::getInstance()->initWebSocketManager();
-    emit exeStarted();
+//    HXChain::getInstance()->initWebSocketManager();
+//    emit exeStarted();
 }
 
 void HXChain::onNodeExeStateChanged()
