@@ -84,6 +84,7 @@ void AllTransactionWidget::init()
     ui->accountComboBox->clear();
     QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
     ui->accountComboBox->addItems(accounts);
+    ui->accountComboBox->addItems(HXChain::getInstance()->getMyMultiSigAddresses());
 
     if(accounts.contains(HXChain::getInstance()->currentAccount))
     {
@@ -994,10 +995,17 @@ void AllTransactionWidget::on_accountComboBox_currentTextChanged(const QString &
 {
     if(!inited)     return;
 
-    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
+    if(checkAddress(ui->accountComboBox->currentText(),MultiSigAddress) == MultiSigAddress)
+    {
+        ui->addressLabel->setText(ui->accountComboBox->currentText());
+    }
+    else
+    {
+        HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
 
-    AccountInfo info = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
-    ui->addressLabel->setText(info.address);
+        AccountInfo info = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+        ui->addressLabel->setText(info.address);
+    }
 
     showTransactions();
 }

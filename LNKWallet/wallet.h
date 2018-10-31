@@ -90,6 +90,8 @@ struct AccountInfo
     QString guardId;        // "1.5.X" 为空则不是guard
     bool    isFormalGuard = false;
 
+    QString pubKey;
+
     AssetAmountMap   assetAmountMap;
     QVector<ContractInfo> contractsVector;
 };
@@ -396,6 +398,7 @@ public:
     QMap<QString,ExchangeContractBalances>  accountExchangeContractBalancesMap;
     void parseAccountInfo();
     void fetchAccountBalances(QString _accountName);
+    void fetchAccountPubKey(QString _accountName);
     void fetchMyContracts();
     bool    isMyAddress(QString _address);
     QString addressToName(QString _address);
@@ -404,6 +407,7 @@ public:
     QStringList getUnregisteredAccounts();
     QString getExchangeContractAddress(QString _accountName);   // 没有兑换合约则返回空  有多个返回第一个
     QString getExchangeContractState(QString _accountName);   // 没有兑换合约则返回空  有多个返回第一个
+    QStringList getMyMultiSigAddresses();
 
     QMap<QString,AssetInfo>   assetInfoMap;
     QString getAssetId(QString symbol);

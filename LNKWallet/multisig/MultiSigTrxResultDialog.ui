@@ -162,7 +162,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>交易代码（使用公钥对此签名）</string>
+      <string>交易字节码（使用公钥对此签名）</string>
      </property>
     </widget>
     <widget class="QToolButton" name="copyBtn">

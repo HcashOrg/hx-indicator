@@ -9,6 +9,7 @@ class CreateMultisigWidget;
 
 struct AccountPubKey
 {
+    AccountPubKey(QString _pubKey = ""):pubKey(_pubKey){}
     QString account;
     QString pubKey;
 
@@ -39,6 +40,8 @@ private slots:
     void on_createBtn_clicked();
 
     void on_pubKeyTableWidget_cellClicked(int row, int column);
+
+    void on_addLocalAccountBtn_clicked();
 
 private:
     Ui::CreateMultisigWidget *ui;

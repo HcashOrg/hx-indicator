@@ -25,6 +25,8 @@ private slots:
 
     void on_cancelBtn_clicked();
 
+    void on_pubKeyLineEdit_textEdited(const QString &arg1);
+
 private:
     Ui::AddPubKeyDialog *ui;
 };

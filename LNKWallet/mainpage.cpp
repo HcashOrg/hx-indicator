@@ -92,6 +92,7 @@ void MainPage::updateAccountList()
 {
     AccountInfo info = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
     ui->addressLabel->setText(info.address);
+    ui->pubKeyLabel->setText( info.pubKey);
 
 
     AssetAmountMap map = info.assetAmountMap;
@@ -447,10 +448,12 @@ void MainPage::on_copyBtn_clicked()
 {
     QClipboard* clipBoard = QApplication::clipboard();
     clipBoard->setText(ui->addressLabel->text());
+}
 
-//    CommonDialog commonDialog(CommonDialog::OkOnly);
-//    commonDialog.setText(tr("Copy to clipboard"));
-//    commonDialog.pop();
+void MainPage::on_copyBtn2_clicked()
+{
+    QClipboard* clipBoard = QApplication::clipboard();
+    clipBoard->setText(ui->pubKeyLabel->text());
 }
 
 void MainPage::on_qrcodeBtn_clicked()
@@ -476,6 +479,9 @@ void MainPage::InitStyle()
     ui->copyBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
     ui->copyBtn->setToolTip(tr("copy to clipboard"));
+    ui->copyBtn2->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/copy.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                               "QToolButton:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}");
+    ui->copyBtn2->setToolTip(tr("copy to clipboard"));
 
     ui->qrcodeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/qrcode.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
                                  "QToolButton:hover{background-image:url(:/ui/wallet_ui/qrcode_hover.png);}");
@@ -506,3 +512,5 @@ void MainPage::on_backupBtn_clicked()
     BackupWalletDialog backupWalletDialog;
     backupWalletDialog.pop();
 }
+
+

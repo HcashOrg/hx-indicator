@@ -177,7 +177,7 @@
     <rect>
      <x>60</x>
      <y>100</y>
-     <width>160</width>
+     <width>180</width>
      <height>20</height>
     </rect>
    </property>
@@ -272,6 +272,9 @@
    </property>
    <property name="text">
     <string>创建</string>
+   </property>
+   <property name="BtnStyle" stdset="0">
+    <string>ok</string>
    </property>
   </widget>
   <widget class="QLabel" name="title_label">

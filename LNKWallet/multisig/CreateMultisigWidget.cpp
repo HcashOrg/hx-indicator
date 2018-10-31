@@ -5,6 +5,8 @@
 #include "AddPubKeyDialog.h"
 #include "ConfirmCreateMultiSigDialog.h"
 #include "commondialog.h"
+#include "AddLocalPubKeyDialog.h"
+#include "showcontentdialog.h"
 
 CreateMultisigWidget::CreateMultisigWidget(QWidget *parent) :
     QWidget(parent),
@@ -55,6 +57,8 @@ void CreateMultisigWidget::showPubKeys()
         ui->pubKeyTableWidget->setItem( i, 1, new QTableWidgetItem( tr("delete")));
     }
 
+    tableWidgetSetItemZebraColor(ui->pubKeyTableWidget);
+
     ui->totalNumLabel->setText(QString("/ %1").arg(size));
     on_requiredLineEdit_textEdited(ui->requiredLineEdit->text());
 }
@@ -65,14 +69,37 @@ void CreateMultisigWidget::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
-        result.prepend("{");
-        result.append("}");
-        QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
-        QString pubKey = object.value("result").toString();
-        HXChain::getInstance()->configFile->setValue("/multisigAddresses/" + pubKey, 1);
-        CommonDialog commonDialog(CommonDialog::OkOnly);
-        commonDialog.setText(tr("Multi-sig address created: %1").arg(pubKey));
-        commonDialog.pop();
+
+        if( result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+            QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
+            QString pubKey = object.value("result").toString();
+            HXChain::getInstance()->configFile->setValue("/multisigAddresses/" + pubKey, 1);
+
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Multi-sig address created: %1").arg(pubKey));
+            commonDialog.pop();
+        }
+        else
+        {
+            if(result.contains("unspecified: Assert Exception: !itr->multisignatures.valid():") && result.contains("\"multisignature\":\""))
+            {
+                int pos = result.indexOf("\"multisignature\":\"");
+                QString address = result.mid( pos, result.indexOf(',',pos) - pos);
+
+                CommonDialog commonDialog(CommonDialog::OkOnly);
+                commonDialog.setText(tr("Multi-sig address %1 has already been created in the past. You can not create it again.").arg(address));
+                commonDialog.pop();
+            }
+            else
+            {
+                CommonDialog commonDialog(CommonDialog::OkOnly);
+                commonDialog.setText(tr("Fail to create the multi-sig address!"));
+                commonDialog.pop();
+            }
+        }
 
         return;
     }
@@ -119,6 +146,14 @@ void CreateMultisigWidget::on_requiredLineEdit_textEdited(const QString &arg1)
 
 void CreateMultisigWidget::on_createBtn_clicked()
 {
+    if(accountPubKeyVector.size() < 2)
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText(tr("A multi-sig address needs at least 2 public keys."));
+        commonDialog.pop();
+        return;
+    }
+
     ConfirmCreateMultiSigDialog confirmCreateMultiSigDialog;
     if(confirmCreateMultiSigDialog.pop())
     {
@@ -139,6 +174,22 @@ void CreateMultisigWidget::on_createBtn_clicked()
 
 void CreateMultisigWidget::on_pubKeyTableWidget_cellClicked(int row, int column)
 {
+    if(column == 0)
+    {
+        if( !ui->pubKeyTableWidget->item(row, column))    return;
+
+        ShowContentDialog showContentDialog( ui->pubKeyTableWidget->item(row, column)->text(),this);
+
+        int x = ui->pubKeyTableWidget->columnViewportPosition(column) + ui->pubKeyTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->pubKeyTableWidget->rowViewportPosition(row) - 10 + ui->pubKeyTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->pubKeyTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
+
     if(column == 1)
     {
         QTableWidgetItem* item = ui->pubKeyTableWidget->item(row,0);
@@ -148,5 +199,36 @@ void CreateMultisigWidget::on_pubKeyTableWidget_cellClicked(int row, int column)
             showPubKeys();
         }
         return;
+    }
+}
+
+void CreateMultisigWidget::on_addLocalAccountBtn_clicked()
+{
+    AddLocalPubKeyDialog addLocalPubKeyDialog;
+    addLocalPubKeyDialog.setAddedPubKeys(accountPubKeyVector);
+    if(addLocalPubKeyDialog.pop())
+    {
+        qDebug() << "aaaaaaaaaaa " << addLocalPubKeyDialog.addedAccounts;
+        foreach (QString account, HXChain::getInstance()->accountInfoMap.keys())
+        {
+            QString pubKey = HXChain::getInstance()->accountInfoMap.value(account).pubKey;
+            if(addLocalPubKeyDialog.addedAccounts.contains(account))
+            {
+                if(!accountPubKeyVector.contains(pubKey))
+                {
+                    accountPubKeyVector.append(pubKey);
+                }
+            }
+            else
+            {
+                if(accountPubKeyVector.contains(pubKey))
+                {
+                    accountPubKeyVector.removeAll(pubKey);
+                }
+            }
+
+        }
+
+        showPubKeys();
     }
 }

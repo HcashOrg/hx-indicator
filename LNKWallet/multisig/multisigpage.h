@@ -11,7 +11,7 @@ class MultiSigPage;
 struct MultiSigInfo
 {
     QString owner;
-    QStringList pubKeys;
+    QStringList addresses;
     int required = 0;
 };
 
@@ -53,6 +53,22 @@ private slots:
     void on_multiSigAddressComboBox_currentIndexChanged(const QString &arg1);
 
     void on_copyBtn_clicked();
+
+    void on_trxCodeTextBrowser_textChanged();
+
+    void on_accountComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_signBtn_clicked();
+
+    void on_sendSignatureBtn_clicked();
+
+    void on_copyBtn2_clicked();
+
+    void on_addMultiSigBtn_clicked();
+
+    void on_deleteBtn_clicked();
+
+    void on_infoTableWidget_cellClicked(int row, int column);
 
 private:
     Ui::MultiSigPage *ui;

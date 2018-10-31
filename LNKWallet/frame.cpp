@@ -1409,6 +1409,11 @@ void Frame::jsonDataUpdated(QString id)
         foreach (QString accountName, HXChain::getInstance()->accountInfoMap.keys())
         {
             HXChain::getInstance()->fetchAccountBalances(accountName);
+
+            if(HXChain::getInstance()->accountInfoMap.value(accountName).pubKey.isEmpty())
+            {
+                HXChain::getInstance()->fetchAccountPubKey(accountName);
+            }
         }
 
         HXChain::getInstance()->fetchMyContracts();
@@ -1455,7 +1460,27 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
+    if( id.startsWith("id+get_pubkey_from_account+") )
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
 
+        if(result.startsWith("\"result\":"))
+        {
+            QString accountName = id.mid(QString("id+get_pubkey_from_account+").size());
+
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QString pubKey = jsonObject.take("result").toString();
+
+            HXChain::getInstance()->accountInfoMap[accountName].pubKey = pubKey;
+        }
+
+        return;
+    }
 
     if( id == "id-lock")
     {

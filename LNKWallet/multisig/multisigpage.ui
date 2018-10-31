@@ -38,62 +38,6 @@
     <string>多重签名</string>
    </property>
   </widget>
-  <widget class="QComboBox" name="multiSigAddressComboBox">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>130</y>
-     <width>300</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <weight>50</weight>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-  </widget>
-  <widget class="QToolButton" name="createMultiSigBtn">
-   <property name="geometry">
-    <rect>
-     <x>610</x>
-     <y>130</y>
-     <width>100</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-     <weight>50</weight>
-     <italic>false</italic>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string>新建多签地址</string>
-   </property>
-   <property name="BtnStyle" stdset="0">
-    <string>btn1</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="typeBalanceBtn">
    <property name="geometry">
     <rect>
@@ -151,301 +95,648 @@
     <string>签名多签交易</string>
    </property>
   </widget>
-  <widget class="QStackedWidget" name="stackedWidget">
+  <widget class="QStackedWidget" name="stackedWidget2">
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>170</y>
+     <y>120</y>
      <width>770</width>
-     <height>340</height>
+     <height>390</height>
     </rect>
    </property>
    <property name="currentIndex">
     <number>1</number>
    </property>
-   <widget class="QWidget" name="page">
-    <widget class="QTableWidget" name="balanceTableWidget">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>0</y>
-       <width>650</width>
-       <height>270</height>
-      </rect>
-     </property>
-     <property name="cursor" stdset="0">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::Box</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAsNeeded</enum>
-     </property>
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="autoScroll">
-      <bool>true</bool>
-     </property>
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::NoSelection</enum>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>19</width>
-       <height>12</height>
-      </size>
-     </property>
-     <property name="showGrid">
-      <bool>true</bool>
-     </property>
-     <property name="gridStyle">
-      <enum>Qt::SolidLine</enum>
-     </property>
-     <property name="TableStyle" stdset="0">
-      <string>table1</string>
-     </property>
-     <attribute name="horizontalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="horizontalHeaderCascadingSectionResizes">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="horizontalHeaderHighlightSections">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="verticalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="verticalHeaderHighlightSections">
-      <bool>false</bool>
-     </attribute>
-     <column>
-      <property name="text">
-       <string>币种</string>
-      </property>
-      <property name="font">
-       <font>
-        <family>微软雅黑</family>
-       </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>余额</string>
-      </property>
-      <property name="font">
-       <font>
-        <family>微软雅黑</family>
-       </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string/>
-      </property>
-     </column>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="page_2">
-    <widget class="QTableWidget" name="infoTableWidget">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>40</y>
-       <width>650</width>
-       <height>230</height>
-      </rect>
-     </property>
-     <property name="cursor" stdset="0">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::Box</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAsNeeded</enum>
-     </property>
-     <property name="horizontalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
-     </property>
-     <property name="autoScroll">
-      <bool>true</bool>
-     </property>
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::NoSelection</enum>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>19</width>
-       <height>12</height>
-      </size>
-     </property>
-     <property name="showGrid">
-      <bool>true</bool>
-     </property>
-     <property name="gridStyle">
-      <enum>Qt::SolidLine</enum>
-     </property>
-     <property name="TableStyle" stdset="0">
-      <string>table1</string>
-     </property>
-     <attribute name="horizontalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="horizontalHeaderCascadingSectionResizes">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="horizontalHeaderHighlightSections">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="verticalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="verticalHeaderHighlightSections">
-      <bool>false</bool>
-     </attribute>
-     <column>
-      <property name="text">
-       <string>公钥</string>
-      </property>
-      <property name="font">
-       <font>
-        <family>微软雅黑</family>
-       </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="font">
-       <font>
-        <family>微软雅黑</family>
-       </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignCenter</set>
-      </property>
-     </column>
-    </widget>
-    <widget class="QLabel" name="requiredLabel">
+   <widget class="QWidget" name="page_3">
+    <widget class="QComboBox" name="multiSigAddressComboBox">
      <property name="geometry">
       <rect>
        <x>60</x>
        <y>10</y>
        <width>300</width>
-       <height>20</height>
+       <height>18</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="copyBtn">
+     <property name="geometry">
+      <rect>
+       <x>370</x>
+       <y>14</y>
+       <width>11</width>
+       <height>11</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
      </property>
      <property name="text">
       <string/>
      </property>
+     <property name="BtnStyle" stdset="0">
+      <string>copy</string>
+     </property>
+    </widget>
+    <widget class="QStackedWidget" name="stackedWidget">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>50</y>
+       <width>770</width>
+       <height>340</height>
+      </rect>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="page">
+      <widget class="QTableWidget" name="balanceTableWidget">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>0</y>
+         <width>650</width>
+         <height>270</height>
+        </rect>
+       </property>
+       <property name="cursor" stdset="0">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarAsNeeded</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="autoScroll">
+        <bool>true</bool>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::NoSelection</enum>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>19</width>
+         <height>12</height>
+        </size>
+       </property>
+       <property name="showGrid">
+        <bool>true</bool>
+       </property>
+       <property name="gridStyle">
+        <enum>Qt::SolidLine</enum>
+       </property>
+       <property name="TableStyle" stdset="0">
+        <string>table1</string>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderCascadingSectionResizes">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderHighlightSections">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderHighlightSections">
+        <bool>false</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>币种</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="textAlignment">
+         <set>AlignCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>余额</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="textAlignment">
+         <set>AlignCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string/>
+        </property>
+       </column>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_2">
+      <widget class="QTableWidget" name="infoTableWidget">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>40</y>
+         <width>650</width>
+         <height>230</height>
+        </rect>
+       </property>
+       <property name="cursor" stdset="0">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Box</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarAsNeeded</enum>
+       </property>
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="autoScroll">
+        <bool>true</bool>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::NoSelection</enum>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>19</width>
+         <height>12</height>
+        </size>
+       </property>
+       <property name="showGrid">
+        <bool>true</bool>
+       </property>
+       <property name="gridStyle">
+        <enum>Qt::SolidLine</enum>
+       </property>
+       <property name="TableStyle" stdset="0">
+        <string>table1</string>
+       </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderCascadingSectionResizes">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="horizontalHeaderHighlightSections">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderHighlightSections">
+        <bool>false</bool>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>地址</string>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="textAlignment">
+         <set>AlignCenter</set>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="font">
+         <font>
+          <family>微软雅黑</family>
+         </font>
+        </property>
+        <property name="textAlignment">
+         <set>AlignCenter</set>
+        </property>
+       </column>
+      </widget>
+      <widget class="QLabel" name="requiredLabel">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>10</y>
+         <width>300</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QToolButton" name="createMultiSigBtn">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>10</y>
+       <width>100</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>新建多签地址</string>
+     </property>
+     <property name="BtnStyle" stdset="0">
+      <string>btn1</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="addMultiSigBtn">
+     <property name="geometry">
+      <rect>
+       <x>500</x>
+       <y>10</y>
+       <width>100</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>添加现有多签</string>
+     </property>
+     <property name="BtnStyle" stdset="0">
+      <string>btn1</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="deleteBtn">
+     <property name="geometry">
+      <rect>
+       <x>440</x>
+       <y>10</y>
+       <width>50</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>删除</string>
+     </property>
+     <property name="BtnStyle" stdset="0">
+      <string>btn1</string>
+     </property>
     </widget>
    </widget>
-  </widget>
-  <widget class="QToolButton" name="copyBtn">
-   <property name="geometry">
-    <rect>
-     <x>370</x>
-     <y>134</y>
-     <width>11</width>
-     <height>11</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>微软雅黑</family>
-    </font>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="focusPolicy">
-    <enum>Qt::NoFocus</enum>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="BtnStyle" stdset="0">
-    <string>copy</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>770</width>
-     <height>510</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(229,226,240);</string>
-   </property>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>190</y>
-      <width>470</width>
-      <height>60</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>微软雅黑</family>
-      <pointsize>-1</pointsize>
-      <weight>50</weight>
-      <italic>false</italic>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QLabel{font: 14px &quot;微软雅黑&quot;;color:rgb(52,37,90);}</string>
-    </property>
-    <property name="text">
-     <string>暂未支持多重签名</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
+   <widget class="QWidget" name="page_4">
+    <widget class="QTextBrowser" name="trxCodeTextBrowser">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>40</y>
+       <width>300</width>
+       <height>120</height>
+      </rect>
+     </property>
+     <property name="readOnly">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>10</y>
+       <width>260</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>输入待签名交易字节码</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>10</y>
+       <width>200</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>交易结构体</string>
+     </property>
+    </widget>
+    <widget class="QTextBrowser" name="trxStructTextBrowser">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>40</y>
+       <width>300</width>
+       <height>120</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="addressLabel">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>170</y>
+       <width>300</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{color: rgb(137,129,161);font: 11px &quot;微软雅黑&quot;;}
+</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="textInteractionFlags">
+      <set>Qt::TextSelectableByMouse</set>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="accountComboBox">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>170</y>
+       <width>120</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="signerAccountLabel">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>170</y>
+       <width>100</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>选择签名账户</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="noAccountLabel">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>170</y>
+       <width>300</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>钱包内没有该多签地址的账户</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="signBtn">
+     <property name="geometry">
+      <rect>
+       <x>337</x>
+       <y>240</y>
+       <width>96</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>签名</string>
+     </property>
+     <property name="BtnStyle" stdset="0">
+      <string>ok</string>
+     </property>
+    </widget>
+    <widget class="QTextBrowser" name="trxSignedextBrowser">
+     <property name="geometry">
+      <rect>
+       <x>235</x>
+       <y>200</y>
+       <width>300</width>
+       <height>120</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="sendSignatureBtn">
+     <property name="geometry">
+      <rect>
+       <x>337</x>
+       <y>330</y>
+       <width>96</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>发送签名</string>
+     </property>
+     <property name="BtnStyle" stdset="0">
+      <string>ok</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="copyBtn2">
+     <property name="geometry">
+      <rect>
+       <x>545</x>
+       <y>200</y>
+       <width>11</width>
+       <height>11</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>微软雅黑</family>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="BtnStyle" stdset="0">
+      <string>copy</string>
+     </property>
+    </widget>
+    <zorder>trxSignedextBrowser</zorder>
+    <zorder>noAccountLabel</zorder>
+    <zorder>trxCodeTextBrowser</zorder>
+    <zorder>label</zorder>
+    <zorder>label_2</zorder>
+    <zorder>trxStructTextBrowser</zorder>
+    <zorder>addressLabel</zorder>
+    <zorder>accountComboBox</zorder>
+    <zorder>signerAccountLabel</zorder>
+    <zorder>signBtn</zorder>
+    <zorder>sendSignatureBtn</zorder>
+    <zorder>copyBtn2</zorder>
    </widget>
   </widget>
+  <zorder>stackedWidget2</zorder>
+  <zorder>title_label</zorder>
+  <zorder>typeBalanceBtn</zorder>
+  <zorder>typeInfoBtn</zorder>
+  <zorder>typeSignBtn</zorder>
  </widget>
  <resources/>
  <connections/>

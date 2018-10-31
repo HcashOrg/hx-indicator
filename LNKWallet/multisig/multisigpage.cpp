@@ -7,6 +7,11 @@
 #include "ToolButtonWidget.h"
 #include "control/AssetIconItem.h"
 #include "MultiSigTransferWidget.h"
+#include "commondialog.h"
+#include "dialog/TransactionResultDialog.h"
+#include "dialog/ErrorResultDialog.h"
+#include "AddMultiSigAddressDialog.h"
+#include "showcontentdialog.h"
 
 MultiSigPage::MultiSigPage(QWidget *parent) :
     QWidget(parent),
@@ -14,56 +19,56 @@ MultiSigPage::MultiSigPage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-//    ui->balanceTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
-//    ui->balanceTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-//    ui->balanceTableWidget->setFocusPolicy(Qt::NoFocus);
-////    ui->balanceTableWidget->setFrameShape(QFrame::NoFrame);
-//    ui->balanceTableWidget->setMouseTracking(true);
-//    ui->balanceTableWidget->setShowGrid(false);//隐藏表格线
+    ui->balanceTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->balanceTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->balanceTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->balanceTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->balanceTableWidget->setMouseTracking(true);
+    ui->balanceTableWidget->setShowGrid(false);//隐藏表格线
 
-//    ui->balanceTableWidget->horizontalHeader()->setSectionsClickable(true);
-////    ui->balanceTableWidget->horizontalHeader()->setFixedHeight(40);
-//    ui->balanceTableWidget->horizontalHeader()->setVisible(true);
-//    ui->balanceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->balanceTableWidget->horizontalHeader()->setSectionsClickable(true);
+//    ui->balanceTableWidget->horizontalHeader()->setFixedHeight(40);
+    ui->balanceTableWidget->horizontalHeader()->setVisible(true);
+    ui->balanceTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-//    ui->balanceTableWidget->setColumnWidth(0,140);
-//    ui->balanceTableWidget->setColumnWidth(1,180);
-//    ui->balanceTableWidget->setColumnWidth(2,160);
-//    ui->balanceTableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->balanceTableWidget->setColumnWidth(0,140);
+    ui->balanceTableWidget->setColumnWidth(1,300);
+    ui->balanceTableWidget->setColumnWidth(2,190);
+    ui->balanceTableWidget->horizontalHeader()->setStretchLastSection(true);
 
-//    ui->infoTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
-//    ui->infoTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-//    ui->infoTableWidget->setFocusPolicy(Qt::NoFocus);
-////    ui->infoTableWidget->setFrameShape(QFrame::NoFrame);
-//    ui->infoTableWidget->setMouseTracking(true);
-//    ui->infoTableWidget->setShowGrid(false);//隐藏表格线
+    ui->infoTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->infoTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->infoTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->infoTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->infoTableWidget->setMouseTracking(true);
+    ui->infoTableWidget->setShowGrid(false);//隐藏表格线
 
-//    ui->infoTableWidget->horizontalHeader()->setSectionsClickable(true);
-////    ui->infoTableWidget->horizontalHeader()->setFixedHeight(40);
-//    ui->infoTableWidget->horizontalHeader()->setVisible(true);
-//    ui->infoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->infoTableWidget->horizontalHeader()->setSectionsClickable(true);
+//    ui->infoTableWidget->horizontalHeader()->setFixedHeight(40);
+    ui->infoTableWidget->horizontalHeader()->setVisible(true);
+    ui->infoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-//    ui->infoTableWidget->setColumnWidth(0,400);
-//    ui->infoTableWidget->setColumnWidth(1,180);
-//    ui->infoTableWidget->horizontalHeader()->setStretchLastSection(true);
+    ui->infoTableWidget->setColumnWidth(0,400);
+    ui->infoTableWidget->setColumnWidth(1,180);
+    ui->infoTableWidget->horizontalHeader()->setStretchLastSection(true);
 
-//    ui->typeBalanceBtn->setCheckable(true);
-//    ui->typeInfoBtn->setCheckable(true);
-//    ui->typeSignBtn->setCheckable(true);
-//    ui->typeBalanceBtn->adjustSize();
-//    ui->typeBalanceBtn->resize(ui->typeBalanceBtn->width(), 18);
-//    ui->typeInfoBtn->adjustSize();
-//    ui->typeInfoBtn->resize(ui->typeInfoBtn->width(), 18);
-//    ui->typeInfoBtn->move(ui->typeBalanceBtn->x() + ui->typeBalanceBtn->width() + 30, ui->typeInfoBtn->y());
-//    ui->typeSignBtn->adjustSize();
-//    ui->typeSignBtn->resize(ui->typeSignBtn->width(), 18);
-//    ui->typeSignBtn->move(ui->typeInfoBtn->x() + ui->typeInfoBtn->width() + 30, ui->typeSignBtn->y());
+    ui->typeBalanceBtn->setCheckable(true);
+    ui->typeInfoBtn->setCheckable(true);
+    ui->typeSignBtn->setCheckable(true);
+    ui->typeBalanceBtn->adjustSize();
+    ui->typeBalanceBtn->resize(ui->typeBalanceBtn->width(), 18);
+    ui->typeInfoBtn->adjustSize();
+    ui->typeInfoBtn->resize(ui->typeInfoBtn->width(), 18);
+    ui->typeInfoBtn->move(ui->typeBalanceBtn->x() + ui->typeBalanceBtn->width() + 30, ui->typeInfoBtn->y());
+    ui->typeSignBtn->adjustSize();
+    ui->typeSignBtn->resize(ui->typeSignBtn->width(), 18);
+    ui->typeSignBtn->move(ui->typeInfoBtn->x() + ui->typeInfoBtn->width() + 30, ui->typeSignBtn->y());
 
-//    setStyleSheet(PUSHBUTTON_CHECK_STYLE);
+    setStyleSheet(PUSHBUTTON_CHECK_STYLE);
 
-//    init();
+    init();
 }
 
 MultiSigPage::~MultiSigPage()
@@ -81,17 +86,29 @@ void MultiSigPage::fetchMultisigInfo()
 void MultiSigPage::showMultiSigInfo()
 {
     MultiSigInfo info = multiSigInfoMap.value(ui->multiSigAddressComboBox->currentText());
-    ui->requiredLabel->setText(tr("Required / Total   %1 / %2").arg(info.required).arg(info.pubKeys.size()));
+    ui->requiredLabel->setText(tr("Required / Total   %1 / %2").arg(info.required).arg(info.addresses.size()));
 
     ui->infoTableWidget->setRowCount(0);
-    ui->infoTableWidget->setRowCount(info.pubKeys.size());
+    ui->infoTableWidget->setRowCount(info.addresses.size());
 
-    for(int i = 0; i < info.pubKeys.size(); i++)
+    for(int i = 0; i < info.addresses.size(); i++)
     {
         ui->infoTableWidget->setRowHeight(i,40);
 
-        ui->infoTableWidget->setItem( i, 0, new QTableWidgetItem( info.pubKeys.at(i)));
+        ui->infoTableWidget->setItem( i, 0, new QTableWidgetItem( info.addresses.at(i)));
+
+        QString accountName = HXChain::getInstance()->addressToName(info.addresses.at(i));
+        if(accountName.isEmpty())
+        {
+            ui->infoTableWidget->setItem( i, 1, new QTableWidgetItem( tr("non local account")));
+        }
+        else
+        {
+            ui->infoTableWidget->setItem( i, 1, new QTableWidgetItem( accountName));
+        }
     }
+
+    tableWidgetSetItemZebraColor(ui->infoTableWidget);
 }
 
 
@@ -206,7 +223,7 @@ void MultiSigPage::jsonDataUpdated(QString id)
         QJsonArray array2 = array.at(1).toArray();
         foreach (QJsonValue v, array2)
         {
-            info.pubKeys += v.toString();
+            info.addresses += v.toString();
         }
         multiSigInfoMap.insert(info.owner, info);
 
@@ -214,7 +231,120 @@ void MultiSigPage::jsonDataUpdated(QString id)
         return;
     }
 
+    if( id.startsWith("SignMultiSigTrx+get_multisig_address+"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+        result.prepend("{");
+        result.append("}");
+        QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
+        QJsonObject resultObject = object.value("result").toObject();
+        QJsonArray array = resultObject.value("multisignatures").toArray().at(0).toArray();
 
+        QJsonArray array2 = array.at(1).toArray();
+        QStringList signerAccounts;
+        foreach (QJsonValue v, array2)
+        {
+            QString account = HXChain::getInstance()->addressToName(v.toString());
+            if(!account.isEmpty())
+            {
+                signerAccounts += account;
+            }
+        }
+        if(signerAccounts.size() > 0)
+        {
+            ui->signerAccountLabel->show();
+            ui->accountComboBox->show();
+            ui->addressLabel->show();
+            ui->noAccountLabel->hide();
+
+            ui->accountComboBox->clear();
+            ui->accountComboBox->addItems(signerAccounts);
+        }
+        else
+        {
+            ui->signerAccountLabel->hide();
+            ui->accountComboBox->hide();
+            ui->addressLabel->hide();
+            ui->noAccountLabel->show();
+        }
+
+        return;
+    }
+
+    if( id == "MultiSigPage+decode_multisig_transaction")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+            QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
+            QJsonObject resultObject = object.value("result").toObject();
+            ui->trxStructTextBrowser->setText( QJsonDocument(resultObject).toJson());
+
+            QJsonObject operationObject = resultObject.value("operations").toArray().at(0).toArray().at(1).toObject();
+            QString fromAddress = operationObject.value("from_addr").toString();
+            HXChain::getInstance()->postRPC( "SignMultiSigTrx+get_multisig_address+" + fromAddress,
+                                             toJsonFormat( "get_multisig_address", QJsonArray() << fromAddress ));
+
+        }
+        else
+        {
+            ui->trxStructTextBrowser->setText("error: \n" + result);
+        }
+        return;
+    }
+
+    if( id == "MultiSigPage+sign_multisig_trx")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+            QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
+            QString signedCode = object.value("result").toString();
+            ui->trxSignedextBrowser->setText( signedCode);
+            ui->trxSignedextBrowser->show();
+            ui->copyBtn2->show();
+            ui->signBtn->hide();
+            ui->sendSignatureBtn->show();
+        }
+        else
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Sign multi-sig trx failed!"));
+            commonDialog.pop();
+        }
+        return;
+    }
+
+    if( id == "MultiSigPage+combine_transaction")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result.startsWith("\"result\":"))             // 成功
+        {
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Signature of multi-sig trx has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
+        }
+        else
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Failed!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
+        }
+        return;
+    }
 }
 
 void MultiSigPage::on_createMultiSigBtn_clicked()
@@ -237,6 +367,16 @@ void MultiSigPage::init()
 
     ui->typeBalanceBtn->setChecked(true);
     ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget2->setCurrentIndex(0);
+
+    ui->signerAccountLabel->hide();
+    ui->accountComboBox->hide();
+    ui->addressLabel->hide();
+    ui->noAccountLabel->hide();
+    ui->signBtn->hide();
+    ui->trxSignedextBrowser->hide();
+    ui->copyBtn2->hide();
+    ui->sendSignatureBtn->hide();
 
     fetchMultisigInfo();
     fetchBalances();
@@ -247,8 +387,11 @@ void MultiSigPage::paintEvent(QPaintEvent *)
     QPainter painter(this);
     painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
     painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
-
     painter.drawRect(rect());
+
+    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
+    painter.setBrush(QBrush(QColor(243,241,250),Qt::SolidPattern));
+    painter.drawRect(0,87,this->width(),24);
 }
 
 //void MultiSigPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
@@ -286,6 +429,7 @@ void MultiSigPage::on_typeBalanceBtn_clicked()
     ui->typeSignBtn->setChecked(false);
 
     ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget2->setCurrentIndex(0);
 }
 
 void MultiSigPage::on_typeInfoBtn_clicked()
@@ -295,6 +439,7 @@ void MultiSigPage::on_typeInfoBtn_clicked()
     ui->typeSignBtn->setChecked(false);
 
     ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget2->setCurrentIndex(0);
 }
 
 void MultiSigPage::on_typeSignBtn_clicked()
@@ -302,15 +447,123 @@ void MultiSigPage::on_typeSignBtn_clicked()
     ui->typeBalanceBtn->setChecked(false);
     ui->typeInfoBtn->setChecked(false);
     ui->typeSignBtn->setChecked(true);
+
+    ui->stackedWidget2->setCurrentIndex(1);
 }
 
 void MultiSigPage::on_multiSigAddressComboBox_currentIndexChanged(const QString &arg1)
 {
     fetchBalances();
+    fetchMultisigInfo();
 }
 
 void MultiSigPage::on_copyBtn_clicked()
 {
     QClipboard* clipBoard = QApplication::clipboard();
     clipBoard->setText(ui->multiSigAddressComboBox->currentText());
+}
+
+void MultiSigPage::on_trxCodeTextBrowser_textChanged()
+{
+    ui->signerAccountLabel->hide();
+    ui->accountComboBox->hide();
+    ui->addressLabel->hide();
+    ui->noAccountLabel->hide();
+    ui->trxStructTextBrowser->clear();
+    ui->signBtn->hide();
+    ui->trxSignedextBrowser->hide();
+    ui->copyBtn2->hide();
+    ui->sendSignatureBtn->hide();
+
+    if(!ui->trxCodeTextBrowser->toPlainText().isEmpty())
+    {
+        HXChain::getInstance()->postRPC( "MultiSigPage+decode_multisig_transaction",
+                                         toJsonFormat( "decode_multisig_transaction",
+                                                       QJsonArray() << ui->trxCodeTextBrowser->toPlainText() ));
+    }
+
+}
+
+void MultiSigPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
+{
+    AccountInfo info = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+    ui->addressLabel->setText(info.address);
+    ui->signBtn->show();
+    ui->trxSignedextBrowser->hide();
+    ui->copyBtn2->hide();
+    ui->sendSignatureBtn->hide();
+}
+
+void MultiSigPage::on_signBtn_clicked()
+{
+    HXChain::getInstance()->postRPC( "MultiSigPage+sign_multisig_trx",
+                                     toJsonFormat( "sign_multisig_trx",
+                                                   QJsonArray() << ui->addressLabel->text()
+                                                   << ui->trxCodeTextBrowser->toPlainText()));
+}
+
+void MultiSigPage::on_sendSignatureBtn_clicked()
+{
+    HXChain::getInstance()->postRPC( "MultiSigPage+combine_transaction",
+                                     toJsonFormat( "combine_transaction",
+                                                   QJsonArray() <<  (QJsonArray() << ui->trxSignedextBrowser->toPlainText())
+                                                   << true));
+
+}
+
+void MultiSigPage::on_copyBtn2_clicked()
+{
+    QClipboard* clipBoard = QApplication::clipboard();
+    clipBoard->setText(ui->trxSignedextBrowser->toPlainText());
+}
+
+void MultiSigPage::on_addMultiSigBtn_clicked()
+{
+    AddMultiSigAddressDialog addMultiSigAddressDialog;
+    addMultiSigAddressDialog.pop();
+
+    if(!addMultiSigAddressDialog.multiSigAddress.isEmpty())
+    {
+        HXChain::getInstance()->configFile->setValue("/multisigAddresses/" + addMultiSigAddressDialog.multiSigAddress, 1);
+        init();
+
+        HXChain::getInstance()->addTrackAddress(addMultiSigAddressDialog.multiSigAddress);
+
+        HXChain::getInstance()->resyncNextTime = true;
+        HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText( tr("Everytime a new multi-sig address is added, the wallet will rescan the blockchain data when launched next time."
+                                  " After that the transactions of this multi-sig address will be shown.") );
+        commonDialog.pop();
+    }
+}
+
+void MultiSigPage::on_deleteBtn_clicked()
+{
+    if(ui->multiSigAddressComboBox->currentText().isEmpty())    return;
+
+    CommonDialog commonDialog(CommonDialog::OkAndCancel);
+    commonDialog.setText(tr("Sure to delete this multi-sig address locally? This operation won't affect the data on the chain."));
+    if(commonDialog.pop())
+    {
+        HXChain::getInstance()->configFile->remove("/multisigAddresses/" + ui->multiSigAddressComboBox->currentText());
+        init();
+    }
+}
+
+void MultiSigPage::on_infoTableWidget_cellClicked(int row, int column)
+{
+    if(column == 0)
+    {
+        if( !ui->infoTableWidget->item(row, column))    return;
+
+        ShowContentDialog showContentDialog( ui->infoTableWidget->item(row, column)->text(),this);
+
+        int x = ui->infoTableWidget->columnViewportPosition(column) + ui->infoTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->infoTableWidget->rowViewportPosition(row) - 10 + ui->infoTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->infoTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+    }
 }

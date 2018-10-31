@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddPubKeyDialog</class>
- <widget class="QDialog" name="AddPubKeyDialog">
+ <class>AddMultiSigAddressDialog</class>
+ <widget class="QDialog" name="AddMultiSigAddressDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -86,7 +86,7 @@
       <string/>
      </property>
     </widget>
-    <widget class="QLineEdit" name="pubKeyLineEdit">
+    <widget class="QLineEdit" name="addressLineEdit">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -134,7 +134,7 @@
       <rect>
        <x>20</x>
        <y>16</y>
-       <width>121</width>
+       <width>200</width>
        <height>21</height>
       </rect>
      </property>
@@ -152,7 +152,7 @@
 color: rgb(137, 129, 161);</string>
      </property>
      <property name="text">
-      <string>输入公钥</string>
+      <string>输入已经创建的多签地址</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

@@ -508,6 +508,11 @@ void HXChain::fetchAccountBalances(QString _accountName)
     postRPC( "id-get_account_balances-" + _accountName, toJsonFormat( "get_account_balances", QJsonArray() << _accountName));
 }
 
+void HXChain::fetchAccountPubKey(QString _accountName)
+{
+    postRPC( "id+get_pubkey_from_account+" + _accountName, toJsonFormat( "get_pubkey_from_account", QJsonArray() << _accountName));
+}
+
 QString HXChain::getAccountBalance(QString _accountName, QString _assetSymbol)
 {
     AssetAmountMap map = accountInfoMap.value(_accountName).assetAmountMap;
@@ -576,6 +581,14 @@ QString HXChain::getExchangeContractState(QString _accountName)
     }
 
     return result;
+}
+
+QStringList HXChain::getMyMultiSigAddresses()
+{
+    configFile->beginGroup("/multisigAddresses");
+    QStringList keys = configFile->childKeys();
+    configFile->endGroup();
+    return keys;
 }
 
 
@@ -1198,6 +1211,11 @@ bool HXChain::isMyAddress(QString _address)
         if(accountInfoMap.value(key).address == _address)   result = true;
     }
 
+    if(!result)
+    {
+        if(getMyMultiSigAddresses().contains(_address))     result = true;
+    }
+
     return result;
 }
 
@@ -1213,7 +1231,7 @@ QString HXChain::addressToName(QString _address)
         }
     }
 
-    return _address;
+    return "";
 }
 
 
