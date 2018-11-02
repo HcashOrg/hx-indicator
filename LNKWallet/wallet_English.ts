@@ -338,7 +338,7 @@
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="multisig/AddMultiSigAddressDialog.ui" line="151"/>
+        <location filename="multisig/AddMultiSigAddressDialog.ui" line="155"/>
         <source>输入已经创建的多签地址</source>
         <translation type="unfinished">Enter existing multi-sig address</translation>
     </message>
@@ -424,7 +424,7 @@
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="multisig/AddPubKeyDialog.ui" line="151"/>
+        <location filename="multisig/AddPubKeyDialog.ui" line="155"/>
         <source>输入公钥</source>
         <translation type="unfinished">Enter a pubkey</translation>
     </message>
@@ -1957,8 +1957,23 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">LAST PRODUCED</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="67"/>
+        <location filename="citizen/CitizenAccountPage.ui" line="417"/>
+        <source>开启挖矿</source>
+        <translation type="unfinished">START MINING</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.cpp" line="72"/>
         <source>There are no citizen accounts in the wallet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.cpp" line="110"/>
+        <source>Mining configuration has been written. This citizen account will start mining when the wallet is launched next time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.cpp" line="185"/>
+        <source>Sure to open the mining function of this citizen account?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4367,17 +4382,17 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2316"/>
+        <location filename="frame.cpp" line="2315"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2319"/>
+        <location filename="frame.cpp" line="2318"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2322"/>
+        <location filename="frame.cpp" line="2321"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>

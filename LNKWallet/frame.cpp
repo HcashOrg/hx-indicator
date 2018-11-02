@@ -1463,7 +1463,6 @@ void Frame::jsonDataUpdated(QString id)
     if( id.startsWith("id+get_pubkey_from_account+") )
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {

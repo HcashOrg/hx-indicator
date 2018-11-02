@@ -715,7 +715,7 @@ void HXChain::addTrackAddress(QString _address)
 
             file.resize(0);
             QTextStream ts(&file);
-            ts << str.toLatin1();
+            ts << str.toUtf8();
             file.close();
         }
     }

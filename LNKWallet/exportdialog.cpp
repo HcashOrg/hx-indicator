@@ -82,7 +82,7 @@ void ExportDialog::on_cancelBtn_clicked()
 
 void ExportDialog::getPrivateKey()
 {
-    HXChain::getInstance()->postRPC( "id-dump_private_key-" + accoutName, toJsonFormat( "dump_private_key", QJsonArray() << accoutName << "0" ));
+    HXChain::getInstance()->postRPC( "id-dump_private_key-" + accoutName, toJsonFormat( "dump_private_key", QJsonArray() << accoutName  ));
 
     //开始查找私钥
     HXChain::getInstance()->postRPC( "export-dump_crosschain_private_keys", toJsonFormat( "dump_crosschain_private_keys", QJsonArray()));

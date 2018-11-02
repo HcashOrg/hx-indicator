@@ -158,6 +158,15 @@ int main(int argc, char *argv[])
     HXChain::getInstance();  // 在frame创建前先创建实例，读取language
     qDebug() <<  "db init: " << HXChain::getInstance()->transactionDB.init();
     qDebug() <<  "witnessConfig init: " << HXChain::getInstance()->witnessConfig->init();
+//    HXChain::getInstance()->witnessConfig->append("trackaddress", "axiba",  true);
+//    HXChain::getInstance()->witnessConfig->modify("crosschain-ip", "192.168.1.111");
+//    HXChain::getInstance()->witnessConfig->remove("crosschain-port");
+//    qDebug() << HXChain::getInstance()->witnessConfig->value("private-key");
+//    HXChain::getInstance()->witnessConfig->addPrivateKey("GGGGGGG", "BBBBBBBBB");
+//    HXChain::getInstance()->witnessConfig->addMiner("1.6.27");
+//    HXChain::getInstance()->witnessConfig->addMiner("1.6.25");
+//    qDebug() << HXChain::getInstance()->witnessConfig->getMiners();
+//     HXChain::getInstance()->witnessConfig->save();
 
 //    QStringList keys = HXChain::getInstance()->transactionDB.keys();
 //    qInstallMessageHandler(myMessageOutput);

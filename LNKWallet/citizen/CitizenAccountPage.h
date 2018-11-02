@@ -20,9 +20,13 @@ public:
     void refresh();
 
 private slots:
+    void jsonDataUpdated(QString id);
+
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
     void on_newCitizenBtn_clicked();
+
+    void on_startMineBtn_clicked();
 
 private:
     Ui::CitizenAccountPage *ui;

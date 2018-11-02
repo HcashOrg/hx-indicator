@@ -4,12 +4,15 @@
 #include "wallet.h"
 #include "control/AssetIconItem.h"
 #include "CreateCitizenDialog.h"
+#include "commondialog.h"
 
 CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CitizenAccountPage)
 {
     ui->setupUi(this);
+
+    connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
     ui->lockBalanceTableWidget->installEventFilter(this);
     ui->lockBalanceTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -29,8 +32,10 @@ CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
     ui->lockBalanceTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->newCitizenBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->startMineBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->lockBalanceTableWidget);
+
 
     init();
 }
@@ -78,6 +83,36 @@ void CitizenAccountPage::refresh()
     init();
 }
 
+void CitizenAccountPage::jsonDataUpdated(QString id)
+{
+    if( id == "CitizenAccountPage+dump_private_key+" + ui->accountComboBox->currentText())
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonArray array = jsonObject.take("result").toArray();
+        if(array.size() > 0)
+        {
+            QJsonArray array2 = array.at(0).toArray();
+            QString privateKey = array2.at(1).toString();
+            AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+            HXChain::getInstance()->witnessConfig->addPrivateKey( accountInfo.pubKey, privateKey);
+            HXChain::getInstance()->witnessConfig->setProductionEnabled(true);
+
+            MinerInfo minerInfo = HXChain::getInstance()->minerMap.value(ui->accountComboBox->currentText());
+            HXChain::getInstance()->witnessConfig->addMiner(minerInfo.minerId);
+            HXChain::getInstance()->witnessConfig->save();
+
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Mining configuration has been written. This citizen account will start mining when the wallet is launched next time."));
+            commonDialog.pop();
+        }
+    }
+}
+
 void CitizenAccountPage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
@@ -119,6 +154,22 @@ void CitizenAccountPage::on_accountComboBox_currentIndexChanged(const QString &a
     ui->totalProducedLabel->setText(QString::number(minerInfo.totalProduced));
     ui->lastBlockLabel->setText(QString::number(minerInfo.lastBlock));
 
+    if(!minerInfo.minerId.isEmpty())
+    {
+        if(HXChain::getInstance()->witnessConfig->isProductionEnabled() && HXChain::getInstance()->witnessConfig->getMiners().contains(minerInfo.minerId))
+        {
+            ui->startMineBtn->hide();
+        }
+        else
+        {
+            ui->startMineBtn->show();
+        }
+    }
+    else
+    {
+        ui->startMineBtn->hide();
+    }
+
     showLockBalance();
 }
 
@@ -126,4 +177,16 @@ void CitizenAccountPage::on_newCitizenBtn_clicked()
 {
     CreateCitizenDialog createCitizenDialog;
     createCitizenDialog.pop();
+}
+
+void CitizenAccountPage::on_startMineBtn_clicked()
+{
+    CommonDialog commonDialog(CommonDialog::OkAndCancel);
+    commonDialog.setText(tr("Sure to open the mining function of this citizen account?"));
+    if(commonDialog.pop())
+    {
+        HXChain::getInstance()->postRPC( "CitizenAccountPage+dump_private_key+" + ui->accountComboBox->currentText(),
+                                         toJsonFormat( "dump_private_key", QJsonArray() << ui->accountComboBox->currentText() ));
+
+    }
 }
