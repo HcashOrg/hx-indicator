@@ -45,7 +45,7 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
 
 //    ui->consoleLineEdit->setStyleSheet("color:black;border:1px solid #CCCCCC;border-radius:3px;");
 //    ui->consoleLineEdit->setTextMargins(8,0,0,0);
-//    ui->consoleBrowser->setStyleSheet("QTextBrowser{color:rgb(52,37,90);border:none;border-radius:10px;outline:1px solid rgb(196,191,214);outline-radius:8px;}");
+    ui->consoleBrowser->setStyleSheet(TEXTBROWSER_READONLY);
 
     ui->consoleLineEdit->setFocus();
 

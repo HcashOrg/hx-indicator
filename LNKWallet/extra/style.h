@@ -55,5 +55,6 @@
                         "QMenu::separator {height: 2px;background-color: #FCFCFC;}"\
                         "QMenu::right-arrow {padding:0px 10px;image:url(:/wallet_ui/right.png);}"
 
+#define TEXTBROWSER_READONLY    "QTextBrowser{color:rgb(52,37,90);border:none;border-radius:10px;outline:1px solid rgb(196,191,214);outline-radius:8px;}"
 
 #endif // STYLE_H

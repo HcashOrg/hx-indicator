@@ -65,5 +65,4 @@ QHeaderView:section{height:30px;border:none;background-color:rgb(243,241,250);}
 QHeaderView:section:first{border-top-left-radius:5px;}
 QHeaderView:section:last{border-top-right-radius:5px;}
 
-QTextBrowser{color:rgb(52,37,90);border:1px solid rgb(84,61,137);}
-QTextBrowser:re{border:none;}
+QTextBrowser{color:rgb(0,0,0);border:1px solid rgb(84,61,137);}
