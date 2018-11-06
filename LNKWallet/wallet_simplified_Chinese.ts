@@ -319,12 +319,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="59"/>
+        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="60"/>
         <source>This multi-sig address does not exist on the chain!</source>
         <translation type="unfinished">该多签地址在链上不存在！</translation>
     </message>
     <message>
-        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="106"/>
+        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="105"/>
         <source>Invalid multi-sig address.</source>
         <translation type="unfinished">不合法的多签地址！</translation>
     </message>
@@ -5418,7 +5418,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="186"/>
-        <source>来自miner</source>
+        <source>来自CITIZEN</source>
+        <oldsource>来自miner</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5435,7 +5436,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="294"/>
-        <source>质押miner账户</source>
+        <source>质押CITIZEN账户</source>
+        <oldsource>质押miner账户</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5746,42 +5748,42 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">%1 已创建！</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="89"/>
+        <location filename="multisig/MultiSigPage.cpp" line="91"/>
         <source>Required / Total   %1 / %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="103"/>
+        <location filename="multisig/MultiSigPage.cpp" line="105"/>
         <source>non local account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="144"/>
+        <location filename="multisig/MultiSigPage.cpp" line="146"/>
         <source>transfer</source>
         <translation type="unfinished">转账</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="321"/>
+        <location filename="multisig/MultiSigPage.cpp" line="323"/>
         <source>Sign multi-sig trx failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="335"/>
+        <location filename="multisig/MultiSigPage.cpp" line="337"/>
         <source>Signature of multi-sig trx has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="342"/>
+        <location filename="multisig/MultiSigPage.cpp" line="344"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="535"/>
+        <location filename="multisig/MultiSigPage.cpp" line="538"/>
         <source>Everytime a new multi-sig address is added, the wallet will rescan the blockchain data when launched next time. After that the transactions of this multi-sig address will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="546"/>
+        <location filename="multisig/MultiSigPage.cpp" line="549"/>
         <source>Sure to delete this multi-sig address locally? This operation won&apos;t affect the data on the chain.</source>
         <translation type="unfinished"></translation>
     </message>

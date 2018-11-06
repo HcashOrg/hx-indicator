@@ -155,7 +155,7 @@ SetDialog::SetDialog(QWidget *parent) :
 
     ui->dataPathLineEdit->setReadOnly(true);
     ui->configPathLineEdit->setReadOnly(true);
-    ui->dataPathLineEdit->setText(HXChain::getInstance()->appDataPath);
+    ui->dataPathLineEdit->setText(HXChain::getInstance()->configFile->value("/settings/chainPath").toString());
     ui->configPathLineEdit->setText(HXChain::getInstance()->walletConfigPath);
 
     ui->toolButton_help->setCheckable(true);

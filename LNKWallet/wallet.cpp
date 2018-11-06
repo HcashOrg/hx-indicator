@@ -378,7 +378,7 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("APPDATA="))
         {
 
-            walletConfigPath = str.mid(8) + "\\HXIndicator" WALLET_EXE_SUFFIX "_" WALLET_VERSION;
+            walletConfigPath = str.mid(8) + "\\HXIndicator" WALLET_EXE_SUFFIX "_" "1.0.9";
             appDataPath = walletConfigPath + "\\chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;

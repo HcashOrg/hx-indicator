@@ -366,6 +366,7 @@ void MultiSigPage::init()
     QStringList keys = HXChain::getInstance()->configFile->childKeys();
     HXChain::getInstance()->configFile->endGroup();
     ui->multiSigAddressComboBox->addItems(keys);
+    ui->requiredLabel->setVisible(keys.size() > 0);
 
     ui->typeBalanceBtn->setChecked(true);
     ui->stackedWidget->setCurrentIndex(0);

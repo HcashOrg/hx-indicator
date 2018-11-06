@@ -1328,7 +1328,7 @@ void Frame::jsonDataUpdated(QString id)
             normalLogin->show();
             connect( normalLogin,SIGNAL(login()), this, SLOT(alreadyLogin()));
             connect( normalLogin,SIGNAL(minimum()),this,SLOT(showMinimized()));
-            connect( normalLogin,SIGNAL(closeWallet()),qApp,SLOT(quit()));
+            connect( normalLogin,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
             connect( normalLogin,SIGNAL(tray()),this,SLOT(hide()));
             connect( normalLogin,SIGNAL(showShadowWidget()), this, SLOT(shadowWidgetShow()));
             connect( normalLogin,SIGNAL(hideShadowWidget()), this,SLOT(shadowWidgetHide()));
@@ -1344,7 +1344,7 @@ void Frame::jsonDataUpdated(QString id)
             firstLogin->show();
             connect( firstLogin,SIGNAL(login()), this, SLOT(alreadyLogin()));
             connect( firstLogin,SIGNAL(minimum()),this,SLOT(showMinimized()));
-            connect( firstLogin,SIGNAL(closeWallet()),qApp,SLOT(quit()));
+            connect( firstLogin,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
             connect( firstLogin,SIGNAL(tray()),this,SLOT(hide()));
             connect( firstLogin,SIGNAL(showShadowWidget()), this, SLOT(shadowWidgetShow()));
             connect( firstLogin,SIGNAL(hideShadowWidget()), this,SLOT(shadowWidgetHide()));
@@ -1500,7 +1500,7 @@ void Frame::jsonDataUpdated(QString id)
             lockPage->move(0,0);
             connect( lockPage,SIGNAL(unlock()),this,SLOT(unlock()));
             connect( lockPage,SIGNAL(minimum()),this,SLOT(showMinimized()));
-            connect( lockPage,SIGNAL(closeWallet()),qApp,SLOT(quit()));
+            connect( lockPage,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
             connect( lockPage,SIGNAL(tray()),this,SLOT(hide()));
             connect( lockPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
             connect( lockPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));

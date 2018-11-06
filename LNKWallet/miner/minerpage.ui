@@ -183,7 +183,7 @@
      </attribute>
      <column>
       <property name="text">
-       <string>来自miner</string>
+       <string>来自CITIZEN</string>
       </property>
       <property name="font">
        <font>
@@ -291,7 +291,7 @@
      </attribute>
      <column>
       <property name="text">
-       <string>质押miner账户</string>
+       <string>质押CITIZEN账户</string>
       </property>
       <property name="font">
        <font>

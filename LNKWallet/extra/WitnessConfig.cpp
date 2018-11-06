@@ -23,7 +23,17 @@ WitnessConfig::~WitnessConfig()
 
 int WitnessConfig::init()
 {
-    file = new QFile(HXChain::getInstance()->appDataPath + "/config.ini");
+    QString filePath;
+    if( HXChain::getInstance()->configFile->contains("/settings/chainPath"))
+    {
+        filePath = HXChain::getInstance()->configFile->value("/settings/chainPath").toString() + "/config.ini";
+    }
+    else
+    {
+        filePath = HXChain::getInstance()->appDataPath + "/config.ini";
+    }
+
+    file = new QFile(filePath);
     bool readOk = file->open(QIODevice::ReadOnly);
     if(readOk)
     {

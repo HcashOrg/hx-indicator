@@ -343,12 +343,12 @@
         <translation type="unfinished">Enter existing multi-sig address</translation>
     </message>
     <message>
-        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="59"/>
+        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="60"/>
         <source>This multi-sig address does not exist on the chain!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="106"/>
+        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="105"/>
         <source>Invalid multi-sig address.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5549,8 +5549,9 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="186"/>
-        <source>来自miner</source>
-        <translation type="unfinished">FROM MINER</translation>
+        <source>来自CITIZEN</source>
+        <oldsource>来自miner</oldsource>
+        <translation type="unfinished">FROM CITIZEN</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="199"/>
@@ -5566,8 +5567,9 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="294"/>
-        <source>质押miner账户</source>
-        <translation type="unfinished">MINER MORTGAGED TO</translation>
+        <source>质押CITIZEN账户</source>
+        <oldsource>质押miner账户</oldsource>
+        <translation type="unfinished">CITIZEN MORTGAGED TO</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="307"/>
@@ -5895,42 +5897,42 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="obsolete">Multi-sig has not been supported yet!</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="89"/>
+        <location filename="multisig/MultiSigPage.cpp" line="91"/>
         <source>Required / Total   %1 / %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="103"/>
+        <location filename="multisig/MultiSigPage.cpp" line="105"/>
         <source>non local account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="144"/>
+        <location filename="multisig/MultiSigPage.cpp" line="146"/>
         <source>transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="321"/>
+        <location filename="multisig/MultiSigPage.cpp" line="323"/>
         <source>Sign multi-sig trx failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="335"/>
+        <location filename="multisig/MultiSigPage.cpp" line="337"/>
         <source>Signature of multi-sig trx has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="342"/>
+        <location filename="multisig/MultiSigPage.cpp" line="344"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="535"/>
+        <location filename="multisig/MultiSigPage.cpp" line="538"/>
         <source>Everytime a new multi-sig address is added, the wallet will rescan the blockchain data when launched next time. After that the transactions of this multi-sig address will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="546"/>
+        <location filename="multisig/MultiSigPage.cpp" line="549"/>
         <source>Sure to delete this multi-sig address locally? This operation won&apos;t affect the data on the chain.</source>
         <translation type="unfinished"></translation>
     </message>

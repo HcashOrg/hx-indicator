@@ -38,8 +38,8 @@ AddLocalPubKeyDialog::AddLocalPubKeyDialog(QWidget *parent) :
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->tableWidget->setColumnWidth(0,80);
-    ui->tableWidget->setColumnWidth(1,350);
-    ui->tableWidget->setColumnWidth(2,30);
+    ui->tableWidget->setColumnWidth(1,340);
+    ui->tableWidget->setColumnWidth(2,20);
     ui->tableWidget->horizontalHeader()->setStretchLastSection(true);
 
     showLocalAccountPubKeys();
