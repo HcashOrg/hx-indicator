@@ -3263,6 +3263,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="multisig/CreateMultisigWidget.cpp" line="62"/>
+        <source>/ %1 (Max: 15)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="multisig/CreateMultisigWidget.cpp" line="82"/>
         <source>Multi-sig address created: %1</source>
         <translation type="unfinished"></translation>
@@ -3278,7 +3283,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/CreateMultisigWidget.cpp" line="152"/>
+        <location filename="multisig/CreateMultisigWidget.cpp" line="117"/>
+        <location filename="multisig/CreateMultisigWidget.cpp" line="243"/>
+        <source>Multi-sig supports at most 15 public keys!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="multisig/CreateMultisigWidget.cpp" line="160"/>
         <source>A multi-sig address needs at least 2 public keys.</source>
         <translation type="unfinished"></translation>
     </message>

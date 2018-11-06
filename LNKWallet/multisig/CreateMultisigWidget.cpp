@@ -59,7 +59,7 @@ void CreateMultisigWidget::showPubKeys()
 
     tableWidgetSetItemZebraColor(ui->pubKeyTableWidget);
 
-    ui->totalNumLabel->setText(QString("/ %1").arg(size));
+    ui->totalNumLabel->setText(tr("/ %1 (Max: 15)").arg(size));
     on_requiredLineEdit_textEdited(ui->requiredLineEdit->text());
 }
 
@@ -111,6 +111,14 @@ void CreateMultisigWidget::on_addPubKeyBtn_clicked()
     addPubKeyDialog.pop();
     if(!addPubKeyDialog.pubKey.isEmpty())
     {
+        if(accountPubKeyVector.size() + 1 > 15)
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Multi-sig supports at most 15 public keys!"));
+            commonDialog.pop();
+            return;
+        }
+
         AccountPubKey apk;
         apk.pubKey = addPubKeyDialog.pubKey;
         if(!accountPubKeyVector.contains(apk))
@@ -209,6 +217,7 @@ void CreateMultisigWidget::on_addLocalAccountBtn_clicked()
     if(addLocalPubKeyDialog.pop())
     {
         qDebug() << "aaaaaaaaaaa " << addLocalPubKeyDialog.addedAccounts;
+        QVector<AccountPubKey> tempVector = accountPubKeyVector;
         foreach (QString account, HXChain::getInstance()->accountInfoMap.keys())
         {
             QString pubKey = HXChain::getInstance()->accountInfoMap.value(account).pubKey;
@@ -226,7 +235,15 @@ void CreateMultisigWidget::on_addLocalAccountBtn_clicked()
                     accountPubKeyVector.removeAll(pubKey);
                 }
             }
+        }
 
+        if(accountPubKeyVector.size() > 15)
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Multi-sig supports at most 15 public keys!"));
+            commonDialog.pop();
+            accountPubKeyVector = tempVector;
+            return;
         }
 
         showPubKeys();

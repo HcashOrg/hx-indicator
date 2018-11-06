@@ -34,7 +34,7 @@
     <widget class="QToolButton" name="cancelBtn">
      <property name="geometry">
       <rect>
-       <x>279</x>
+       <x>268</x>
        <y>250</y>
        <width>92</width>
        <height>28</height>
@@ -53,7 +53,7 @@
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
       <rect>
-       <x>170</x>
+       <x>160</x>
        <y>250</y>
        <width>92</width>
        <height>28</height>

@@ -3124,6 +3124,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">删除</translation>
     </message>
     <message>
+        <location filename="multisig/CreateMultisigWidget.cpp" line="62"/>
+        <source>/ %1 (Max: 15)</source>
+        <translation type="unfinished">/ %1 (最大: 15)</translation>
+    </message>
+    <message>
         <location filename="multisig/CreateMultisigWidget.cpp" line="82"/>
         <source>Multi-sig address created: %1</source>
         <translation type="unfinished">多签地址已创建：%1</translation>
@@ -3139,7 +3144,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">创建多签地址失败！</translation>
     </message>
     <message>
-        <location filename="multisig/CreateMultisigWidget.cpp" line="152"/>
+        <location filename="multisig/CreateMultisigWidget.cpp" line="117"/>
+        <location filename="multisig/CreateMultisigWidget.cpp" line="243"/>
+        <source>Multi-sig supports at most 15 public keys!</source>
+        <translation type="unfinished">多重签名最多支持15个公钥！</translation>
+    </message>
+    <message>
+        <location filename="multisig/CreateMultisigWidget.cpp" line="160"/>
         <source>A multi-sig address needs at least 2 public keys.</source>
         <translation type="unfinished">一个多签地址至少需要2个公钥。</translation>
     </message>
