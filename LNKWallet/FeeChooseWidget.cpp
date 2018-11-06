@@ -130,7 +130,7 @@ void FeeChooseWidget::feeTypeChanged()
     {
         _p->poundageID = "";
         _p->coinNumber = _p->feeNumber;
-        _p->feeType = "HX";
+        _p->feeType = ASSET_NAME;
         refreshUI();
     }
 }
@@ -170,7 +170,7 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
 {
     if(poundage == nullptr)
     {
-        _p->feeType = "HX";
+        _p->feeType = ASSET_NAME;
         _p->coinNumber = _p->feeNumber;
         _p->poundageID = "";
         _p->poundageTip = tr("cannot find proper acceptance!");
@@ -181,7 +181,7 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
         _p->coinNumber = poundage->targetCoinNumber/poundage->sourceCoinNumber*_p->feeNumber;
         _p->poundageID = poundage->poundageID;
         double rate = poundage->sourceCoinNumber/poundage->targetCoinNumber;
-        int pre = 5;
+        int pre = ASSET_PRECISION;
         foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
             if(asset.symbol == _p->feeType)
             {
@@ -189,7 +189,7 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
                 break;
             }
         }
-        _p->poundageTip = tr("pay:") + QString::number(_p->coinNumber,'f',pre) + " " + _p->feeType + tr("  rate:") + QString::number(rate);
+        _p->poundageTip = tr("pay:") + QString::number(_p->coinNumber,'f',pre) + " " + _p->feeType + tr("  rate: 1:") + QString::number(rate,'f',ASSET_PRECISION);
 
     }
 }
@@ -307,7 +307,7 @@ void FeeChooseWidget::InitWidget()
     InitCoinType();
     ResetAccountBalance();
 
-    if(_p->feeType == "HX")
+    if(_p->feeType == ASSET_NAME)
     {
         ui->checkBox->setChecked(false);
     }

@@ -115,11 +115,13 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
             }
             else if(index.column() == 1)
             {
-                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->chainType+" : "+"HX";
+                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->chainType+" : "+ASSET_NAME;
             }
             else if(index.column() == 2)
             {
-                return HXChain::getInstance()->addressToName(_p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->ownerAdress);
+                QString addr = _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->ownerAdress;
+                QString name = HXChain::getInstance()->addressToName(addr);
+                return name.isEmpty()?addr:name;
             }
             else if(index.column() == 3)
             {
