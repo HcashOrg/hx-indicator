@@ -27,7 +27,7 @@ FeeChargeWidget::FeeChargeWidget(double feeNumber,const QString &feeType,const Q
     ui->setupUi(this);
     _p->chooseWidget = new FeeChooseWidget(feeNumber,feeType,accountName,this);
     connect(_p->chooseWidget,&FeeChooseWidget::feeSufficient,ui->toolButton_confirm,&QToolButton::setEnabled);
-    ui->label_2->setText(_p->tip.arg(feeNumber).arg("HX"));
+    ui->label_2->setText(_p->tip.arg(feeNumber).arg(ASSET_NAME));
     ui->label_char->setVisible(false);
     QTimer::singleShot(100,[this](){this->ui->toolButton_confirm->setEnabled(_p->chooseWidget->isSufficient());});
     InitWidget();

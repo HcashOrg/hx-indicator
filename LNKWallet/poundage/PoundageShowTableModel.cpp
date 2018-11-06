@@ -115,7 +115,7 @@ QVariant PoundageShowTableModel::data(const QModelIndex &index, int role) const
             }
             else if(index.column() == 1)
             {
-                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->chainType+" : "+"HX";
+                return _p->data->poundages[index.row()+_p->currentPage*_p->pageMaxRow]->chainType+" : "+ASSET_NAME;
             }
             else if(index.column() == 2)
             {
