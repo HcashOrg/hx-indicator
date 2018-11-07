@@ -40,7 +40,7 @@
      <rect>
       <x>202</x>
       <y>120</y>
-      <width>49</width>
+      <width>55</width>
       <height>20</height>
      </rect>
     </property>
@@ -54,9 +54,9 @@
    <widget class="QToolButton" name="toolButton_help">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>256</x>
       <y>120</y>
-      <width>49</width>
+      <width>55</width>
       <height>20</height>
      </rect>
     </property>
@@ -100,9 +100,9 @@
       <widget class="QToolButton" name="generalBtn">
        <property name="geometry">
         <rect>
-         <x>160</x>
+         <x>152</x>
          <y>14</y>
-         <width>43</width>
+         <width>51</width>
          <height>28</height>
         </rect>
        </property>
@@ -119,7 +119,7 @@
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 53 9px &quot;Microsoft YaHei UI&quot;;</string>
+        <string notr="true">font: 53 11px &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="text">
         <string>通用设置</string>
@@ -195,7 +195,7 @@
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 9px &quot;微软雅黑&quot;;
+          <string notr="true">font: 11px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -313,7 +313,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 9px &quot;微软雅黑&quot;;
+          <string notr="true">font: 11px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -443,7 +443,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 9px &quot;微软雅黑&quot;;
+          <string notr="true">font: 11px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -592,7 +592,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 9px &quot;微软雅黑&quot;;
+          <string notr="true">font: 11px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -1114,9 +1114,9 @@ color:rgb(137,129,161);</string>
       <widget class="QToolButton" name="safeBtn">
        <property name="geometry">
         <rect>
-         <x>254</x>
+         <x>249</x>
          <y>14</y>
-         <width>40</width>
+         <width>51</width>
          <height>28</height>
         </rect>
        </property>
@@ -1133,7 +1133,7 @@ color:rgb(137,129,161);</string>
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 53 9px &quot;Microsoft YaHei UI&quot;;</string>
+        <string notr="true">font: 53 11px &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="text">
         <string>安全设置</string>
@@ -1145,9 +1145,9 @@ color:rgb(137,129,161);</string>
       <widget class="QToolButton" name="accountBtn">
        <property name="geometry">
         <rect>
-         <x>355</x>
+         <x>351</x>
          <y>14</y>
-         <width>40</width>
+         <width>51</width>
          <height>28</height>
         </rect>
        </property>
@@ -1164,7 +1164,7 @@ color:rgb(137,129,161);</string>
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 53 9px &quot;Microsoft YaHei UI&quot;;</string>
+        <string notr="true">font: 53 11px &quot;Microsoft YaHei UI&quot;;</string>
        </property>
        <property name="text">
         <string>账户管理</string>
