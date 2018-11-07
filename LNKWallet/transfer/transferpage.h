@@ -70,7 +70,7 @@ private:
     QString assetType;
     QWidget* currentTopWidget;  // 保存当前顶层窗口
 
-    FeeChooseWidget *feeWidget;
+    FeeChooseWidget *feeWidget = NULL;
     //QString feeID;//手续费承兑单id
     bool inited;
     bool assetUpdating;

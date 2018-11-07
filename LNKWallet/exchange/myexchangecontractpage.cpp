@@ -484,14 +484,13 @@ void MyExchangeContractPage::registerContract()
     commonDialog.setText(tr("You don't have an exchange contract at the moment. Will you create it?"));
     if(commonDialog.pop())
     {
-        QString filePath = QDir::currentPath() + "/contracts/hx_exchange.lua.gpc";
+        QString filePath = "contracts/hx_exchange.lua.gpc";
         QFileInfo fileInfo(filePath);
         if(fileInfo.exists())
         {
             //查询注册合约费用
             HXChain::getInstance()->postRPC("contract-register_contract_testing",toJsonFormat( "register_contract_testing",
                                                                                                QJsonArray() << ui->accountComboBox->currentText() << filePath));
-
 
         }
         else
@@ -582,7 +581,7 @@ void MyExchangeContractPage::on_registerBtn_clicked()
 
     if(contractAddress.isEmpty())
     {
-        QString filePath = QDir::currentPath() + "/contracts/hx_exchange.lua.gpc";
+        QString filePath = "contracts/hx_exchange.lua.gpc";
         QFileInfo fileInfo(filePath);
         if(fileInfo.exists())
         {

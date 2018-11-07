@@ -19,6 +19,9 @@ public:
     void setFromAddress(QString address);
     void setAsset(QString asset);
 
+signals:
+    void usePoundage();
+
 private slots:
     void jsonDataUpdated(QString id);
 
@@ -29,6 +32,8 @@ private slots:
     void on_toolButton_chooseContact_clicked();
 
     void selectContactSlots(const QString &name,const QString &address);
+
+    void on_memoTextEdit_textChanged();
 
 private:
     Ui::MultiSigTransferWidget *ui;

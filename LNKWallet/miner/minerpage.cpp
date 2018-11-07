@@ -577,6 +577,8 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
 {
     if(column == 3)
     {
+        if(ui->lockBalancesTableWidget->item(row,0) == NULL || ui->lockBalancesTableWidget->item(row,1) == NULL)    return;
+
         LockToMinerDialog lockToMinerDialog(ui->accountComboBox->currentText());
         lockToMinerDialog.setMiner(ui->lockBalancesTableWidget->item(row,0)->text());
         lockToMinerDialog.setAsset(ui->lockBalancesTableWidget->item(row,1)->text());

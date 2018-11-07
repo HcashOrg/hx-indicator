@@ -22,7 +22,8 @@ void FunctionAdvanceWidget::retranslator()
 }
 void FunctionAdvanceWidget::DefaultShow()
 {
-    PoundageShowSlots();
+//    PoundageShowSlots();
+    MultiSigShowSlots();
 }
 
 void FunctionAdvanceWidget::PoundageShowSlots()

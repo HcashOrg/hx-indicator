@@ -9,6 +9,7 @@
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
 #include "MultiSigTrxResultDialog.h"
+#include "FeeChooseWidget.h"
 
 MultiSigTransferWidget::MultiSigTransferWidget(QWidget *parent) :
     QWidget(parent),
@@ -37,6 +38,13 @@ MultiSigTransferWidget::MultiSigTransferWidget(QWidget *parent) :
         ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(key).symbol);
     }
     connect(ui->assetComboBox,SIGNAL(currentIndexChanged(QString)),this,SLOT(onAssetComboBoxCurrentIndexChanged(QString)));
+
+    feeWidget = new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.transferFee.toDouble(),HXChain::getInstance()->feeType);
+    ui->stackedWidget->addWidget(feeWidget);
+    ui->stackedWidget->setCurrentWidget(feeWidget);
+    ui->stackedWidget->currentWidget()->resize(ui->stackedWidget->size());
+    connect(this,&MultiSigTransferWidget::usePoundage,feeWidget,&FeeChooseWidget::updatePoundageID);
+
 }
 
 MultiSigTransferWidget::~MultiSigTransferWidget()
@@ -47,6 +55,9 @@ MultiSigTransferWidget::~MultiSigTransferWidget()
 void MultiSigTransferWidget::setFromAddress(QString address)
 {
     ui->fromAddressLabel->setText(address);
+
+    MultiSigPage* page = static_cast<MultiSigPage*>(this->parent());
+    feeWidget->setBalance(page->multiSigBalancesMap.value(address));
 }
 
 void MultiSigTransferWidget::setAsset(QString asset)
@@ -115,6 +126,7 @@ void MultiSigTransferWidget::on_sendBtn_clicked()
     AddressType type = checkAddress(ui->sendtoLineEdit->text(),AccountAddress | MultiSigAddress);
     if( type == AccountAddress || type == MultiSigAddress)
     {
+        emit usePoundage();
         HXChain::getInstance()->postRPC( "MultiSigTransferWidget-transfer_from_to_address",
                                          toJsonFormat( "transfer_from_to_address",
                                                        QJsonArray() << ui->fromAddressLabel->text() << ui->sendtoLineEdit->text()
@@ -174,4 +186,13 @@ void MultiSigTransferWidget::on_toolButton_chooseContact_clicked()
 void MultiSigTransferWidget::selectContactSlots(const QString &name, const QString &address)
 {
     ui->sendtoLineEdit->setText(address);
+}
+
+void MultiSigTransferWidget::on_memoTextEdit_textChanged()
+{
+    QTextCodec* utfCodec = QTextCodec::codecForName("UTF-8");
+    QByteArray ba = utfCodec->fromUnicode(ui->memoTextEdit->toPlainText());
+    double fee = static_cast<double>(ba.size())*0.01/1024 + HXChain::getInstance()->feeChargeInfo.transferFee.toDouble();
+
+    feeWidget->updateFeeNumberSlots(fee);
 }

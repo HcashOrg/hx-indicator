@@ -82,8 +82,8 @@ void FeedPriceDialog::init()
         ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
 
-    QString str = QString("%1 : %2").arg( getBigNumberString(assetInfo.quoteAmount.amount, ASSET_PRECISION))
-            .arg( getBigNumberString(assetInfo.baseAmount.amount, assetInfo.precision));
+    QString str = QString("%1 : %2 %3").arg( getBigNumberString(assetInfo.baseAmount.amount, assetInfo.precision)).
+            arg( getBigNumberString(assetInfo.quoteAmount.amount, ASSET_PRECISION)).arg(ASSET_NAME);
     ui->currentRateLabel->setText(str);
 
 

@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <mutex>
 #include "poundage/PoundageDataUtil.h"
-#include "wallet.h"
+
 
 class FeeChooseWidget::DataPrivate
 {
@@ -73,6 +73,17 @@ QString FeeChooseWidget::GetFeeNumber() const
 bool FeeChooseWidget::isSufficient() const
 {
     return !ui->tipLabel->isVisible();
+}
+
+void FeeChooseWidget::setBalance(AssetAmountMap _balance)
+{
+    foreach (AssetAmount aa, _balance)
+    {
+        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(aa.assetId);
+        _p->accountAssets[assetInfo.symbol] = _balance.value(aa.assetId).amount / pow(10.,assetInfo.precision);
+    }
+
+    checkAccountBalance();
 }
 
 void FeeChooseWidget::updateFeeNumberSlots(double feeNumber)

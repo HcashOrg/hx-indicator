@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <QWidget>
+#include "wallet.h"
 //////////////////////////////////////////////////////////////////////////
 ///<summary>手续费承兑单选择界面 </summary>
 ///
@@ -28,6 +29,8 @@ public:
     QString GetFeeNumber()const;//获取手续费数量--供显示用，所以为string
 
     bool isSufficient()const;
+
+    void setBalance(AssetAmountMap _balance);
 public slots:
     void updateFeeNumberSlots(double feeNumber);
     void updatePoundageID();
