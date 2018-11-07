@@ -389,9 +389,9 @@
      <property name="geometry">
       <rect>
        <x>610</x>
-       <y>10</y>
+       <y>9</y>
        <width>100</width>
-       <height>18</height>
+       <height>20</height>
       </rect>
      </property>
      <property name="font">
@@ -422,9 +422,9 @@
      <property name="geometry">
       <rect>
        <x>500</x>
-       <y>10</y>
+       <y>9</y>
        <width>100</width>
-       <height>18</height>
+       <height>20</height>
       </rect>
      </property>
      <property name="font">
@@ -454,10 +454,10 @@
     <widget class="QToolButton" name="deleteBtn">
      <property name="geometry">
       <rect>
-       <x>440</x>
-       <y>10</y>
-       <width>50</width>
-       <height>18</height>
+       <x>430</x>
+       <y>9</y>
+       <width>60</width>
+       <height>20</height>
       </rect>
      </property>
      <property name="font">

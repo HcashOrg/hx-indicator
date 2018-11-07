@@ -245,9 +245,9 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    <property name="geometry">
     <rect>
      <x>610</x>
-     <y>90</y>
+     <y>89</y>
      <width>100</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -391,9 +391,9 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    <property name="geometry">
     <rect>
      <x>610</x>
-     <y>120</y>
+     <y>119</y>
      <width>100</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">

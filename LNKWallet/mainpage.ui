@@ -51,10 +51,10 @@
   <widget class="QToolButton" name="addAccountBtn">
    <property name="geometry">
     <rect>
-     <x>650</x>
-     <y>90</y>
-     <width>60</width>
-     <height>18</height>
+     <x>640</x>
+     <y>114</y>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -194,10 +194,10 @@
   <widget class="QToolButton" name="importAccountBtn">
    <property name="geometry">
     <rect>
-     <x>580</x>
-     <y>90</y>
-     <width>60</width>
-     <height>18</height>
+     <x>560</x>
+     <y>114</y>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -358,10 +358,10 @@
   <widget class="QToolButton" name="allTransactionBtn">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>90</y>
-     <width>60</width>
-     <height>18</height>
+     <x>640</x>
+     <y>89</y>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">

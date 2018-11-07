@@ -42,7 +42,7 @@
      <x>60</x>
      <y>102</y>
      <width>50</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -59,7 +59,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
      <x>60</x>
      <y>160</y>
      <width>50</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -75,8 +75,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>110</x>
      <y>100</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -94,8 +94,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>190</x>
      <y>100</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -113,8 +113,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>270</x>
      <y>100</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -132,8 +132,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>350</x>
      <y>100</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -151,8 +151,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>430</x>
      <y>100</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -170,8 +170,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>110</x>
      <y>130</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -189,8 +189,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>110</x>
      <y>160</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -208,8 +208,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>190</x>
      <y>160</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -227,8 +227,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>270</x>
      <y>160</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -246,8 +246,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>350</x>
      <y>160</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -486,8 +486,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>510</x>
      <y>100</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -505,8 +505,8 @@ font: 11px &quot;微软雅黑&quot;;</string>
     <rect>
      <x>590</x>
      <y>100</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -569,8 +569,8 @@ font: 11px &quot;微软雅黑&quot;;
     <rect>
      <x>190</x>
      <y>130</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -588,8 +588,8 @@ font: 11px &quot;微软雅黑&quot;;
     <rect>
      <x>270</x>
      <y>130</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">
@@ -607,8 +607,8 @@ font: 11px &quot;微软雅黑&quot;;
     <rect>
      <x>350</x>
      <y>130</y>
-     <width>60</width>
-     <height>18</height>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="cursor">

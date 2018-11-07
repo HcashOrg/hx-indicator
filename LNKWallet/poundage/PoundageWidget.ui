@@ -65,10 +65,10 @@
   <widget class="QToolButton" name="toolButton_publishPoundage">
    <property name="geometry">
     <rect>
-     <x>640</x>
-     <y>130</y>
-     <width>70</width>
-     <height>18</height>
+     <x>630</x>
+     <y>129</y>
+     <width>80</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">

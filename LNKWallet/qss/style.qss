@@ -51,7 +51,7 @@ QToolButton[BtnStyle="copy"]{background-image:url(:/ui/wallet_ui/copy.png);backg
 QToolButton[BtnStyle="copy"]:hover{background-image:url(:/ui/wallet_ui/copy_hover.png);}
 QToolButton[BtnStyle="closeDialog"]{background-image:url(:/ui/wallet_ui/close_button.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}
 QToolButton[BtnStyle="closeDialog"]:hover{background-color:rgb(208,228,255);}
-QToolButton[BtnStyle="btn1"]{font: 8px \"微软雅黑\";background-color:transparent; border:1px solid rgb(84,61,137);border-radius:9px;color: rgb(84,61,137);}
+QToolButton[BtnStyle="btn1"]{font: 11px \"微软雅黑\";background-color:transparent; border:1px solid rgb(84,61,137);border-radius:9px;color: rgb(84,61,137);}
 QToolButton[BtnStyle="btn1"]:pressed{background-color:rgb(83,61,138);color: white;}
 
 QWidget[WidgetStyle="dialogBg"]{background-image:url(:/ui/wallet_ui/back_dialog.png);}

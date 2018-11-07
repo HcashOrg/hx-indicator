@@ -238,10 +238,10 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
   <widget class="QToolButton" name="historyBtn">
    <property name="geometry">
     <rect>
-     <x>650</x>
-     <y>90</y>
-     <width>60</width>
-     <height>18</height>
+     <x>640</x>
+     <y>89</y>
+     <width>70</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -269,9 +269,9 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    <property name="geometry">
     <rect>
      <x>540</x>
-     <y>90</y>
+     <y>89</y>
      <width>90</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
@@ -299,9 +299,9 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    <property name="geometry">
     <rect>
      <x>440</x>
-     <y>90</y>
+     <y>89</y>
      <width>90</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">

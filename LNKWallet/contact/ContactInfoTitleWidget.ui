@@ -97,9 +97,9 @@
   <widget class="QToolButton" name="transferBtn">
    <property name="geometry">
     <rect>
-     <x>640</x>
+     <x>630</x>
      <y>40</y>
-     <width>60</width>
+     <width>70</width>
      <height>20</height>
     </rect>
    </property>

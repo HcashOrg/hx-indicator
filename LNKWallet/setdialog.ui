@@ -146,7 +146,7 @@
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QToolButton" name="saveBtn">
@@ -533,7 +533,7 @@ color:rgb(137,129,161);</string>
           </font>
          </property>
          <property name="styleSheet">
-          <string notr="true">font: 9px &quot;微软雅黑&quot;;
+          <string notr="true">font: 11px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
          </property>
          <property name="text">
@@ -1106,7 +1106,6 @@ color:rgb(137,129,161);</string>
         <zorder>dataPathLineEdit</zorder>
         <zorder>label_13</zorder>
         <zorder>configPathLineEdit</zorder>
-        <zorder>label_helppic</zorder>
         <zorder>pathBtn</zorder>
         <zorder>pathBtn2</zorder>
        </widget>
