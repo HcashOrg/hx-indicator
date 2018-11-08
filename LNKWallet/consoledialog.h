@@ -2,6 +2,8 @@
 #define CONSOLEDIALOG_H
 
 #include <QDialog>
+#include <QString>
+#include <QStringList>
 
 namespace Ui {
 class ConsoleDialog;
@@ -32,7 +34,8 @@ private slots:
     void jsonDataUpdated(QString id);
 
     void on_clearBtn_clicked();
-
+private:
+    void parseHelpCommand(const QString &helpStr,QStringList &helpList);
 private:
     Ui::ConsoleDialog *ui;
     QVector<QString> cmdVector;
