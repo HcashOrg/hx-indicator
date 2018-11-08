@@ -2,7 +2,7 @@
 #include "ui_consoledialog.h"
 #include "wallet.h"
 
-
+#include <QCompleter>
 #include <QKeyEvent>
 #include <QDesktopWidget>
 
@@ -55,7 +55,8 @@ ConsoleDialog::ConsoleDialog(QWidget *parent) :
 //    mouse_press = false;
 
     ui->checkBox->hide();  // rpc选项隐藏
-    
+    //查询帮助，自动提示功能解析
+    HXChain::getInstance()->postRPC("completer_help",toJsonFormat("help",QJsonArray()));
 }
 
 ConsoleDialog::~ConsoleDialog()
@@ -231,9 +232,46 @@ void ConsoleDialog::jsonDataUpdated(QString id)
         ui->consoleBrowser->append("\n");
         return;
     }
+    else if("completer_help" == id)
+    {
+        QString result = HXChain::getInstance()->jsonDataValue( id);
+        result.prepend("{");
+        result.append("}");
+
+        QJsonParseError json_error;
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toUtf8(),&json_error);
+        if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject())return;
+
+        QStringList wordList;
+        parseHelpCommand(parse_doucment.object().value("result").toString(),wordList);
+        QCompleter *completer = new QCompleter(wordList, this);
+        completer->popup()->setObjectName("completer");
+        completer->setCaseSensitivity(Qt::CaseInsensitive);
+        ui->consoleLineEdit->setCompleter(completer);
+    }
 }
 
 void ConsoleDialog::on_clearBtn_clicked()
 {
     ui->consoleBrowser->clear();
+}
+
+void ConsoleDialog::parseHelpCommand(const QString &helpStr, QStringList &helpList)
+{
+    helpList.clear();
+    QStringList enter = helpStr.split("\n");
+    foreach (QString str, enter) {
+    if(-1 == str.indexOf(QRegExp("^[a-zA-Z]"))) continue;
+
+        QStringList temp = str.split("(");
+        if(!temp.isEmpty())
+        {
+            QStringList space = temp.front().split(QRegExp("\\s+"));
+            if(space.size() >= 2)
+            {
+                helpList.append(space.last());
+            }
+        }
+    }
+
 }
