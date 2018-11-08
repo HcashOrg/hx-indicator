@@ -24,16 +24,11 @@
                                 "QPushButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}"
 
 #define TABLEWIDGET_STYLE_1     "QTableView{background-color:rgb(243,241,250);border:none;border-radius:5px;font: 11px \"Microsoft YaHei UI Light\";color:rgb(52,37,90);}" \
-                                "QHeaderView{border:none;border-bottom:1px solid rgb(222,218,236);border-top-left-radius:5px;border-top-right-radius:5px;background-color:rgb(243,241,250);color:rgb(137,129,161);font: 11px \"Microsoft YaHei UI Light\";}" \
+                                "QHeaderView{border:none;border-bottom:1px solid rgb(222,218,236);border-top-left-radius:5px;border-top-right-radius:5px;background-color:rgb(243,241,250);color:rgb(137,129,161);font: bold 11px \"Microsoft YaHei UI Light\";}" \
                                 "QHeaderView:section{height:30px;border:none;background-color:rgb(243,241,250);}" \
                                 "QHeaderView:section:first{border-top-left-radius:5px;}" \
                                 "QHeaderView:section:last{border-top-right-radius:5px;}"
 
-#define COMBOBOX_STYLE_BOTTOMBORDER "QComboBox{background-color:transparent;border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(192,192,192);color: black;padding-left: 5px;font: 14px \"Microsoft YaHei UI Light\";}" \
-                                    "QComboBox::drop-down {background:transparent;border:none;}" \
-                                    "QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}" \
-                                    "QComboBox::down-arrow:on {image: url(:/ui/wallet_ui/downArrow_on.png);}" \
-                                    "QComboBox QAbstractItemView {outline: 0px;}"
 
 #define FUNCTIONBAR_PUSHBUTTON_STYLE    "QPushButton{color:rgb(110,94,144);text-align:left;background:transparent;border:none;font-size:12px;font-family:\"Microsoft YaHei UI Light\";}" \
                                         "QPushButton:checked{color:rgb(233,232,233);border-bottom:1px solid rgb(229,226,240);}"

@@ -39,11 +39,15 @@ private slots:
 
     void on_incomeRecordBtn_clicked();
 
+    void on_citizenInfoBtn_clicked();
+
     void pageChangeSlot(unsigned int page);
 
     void on_incomeRecordTableWidget_cellPressed(int row, int column);
 
     void on_obtainAllBtn_clicked();
+
+    void on_sortTypeComboBox_currentIndexChanged(const QString &arg1);
 
 private:
     Ui::MinerPage *ui;
@@ -56,6 +60,7 @@ private:
     void fetchLockBalance();
     void fetchAccountIncome();
     void showIncomeRecord();
+    void showCitizenInfo();
 
     void InitStyle();
     void updateCheckState(int number);//0 1 2
@@ -64,12 +69,14 @@ private:
 
     unsigned int calPage(const QTableWidget *const table)const;
 
-    PageScrollWidget *pageWidget_income;
-    BlankDefaultWidget *blankWidget_income;
-    BlankDefaultWidget *blankWidget_fore;
-    BlankDefaultWidget *blankWidget_record;
-    PageScrollWidget *pageWidget_fore;
-    PageScrollWidget *pageWidget_record;
+    BlankDefaultWidget *blankWidget_income = NULL;
+    BlankDefaultWidget *blankWidget_fore = NULL;
+    BlankDefaultWidget *blankWidget_record = NULL;
+    BlankDefaultWidget *blankWidget_citizen = NULL;
+    PageScrollWidget *pageWidget_income = NULL;
+    PageScrollWidget *pageWidget_fore = NULL;
+    PageScrollWidget *pageWidget_record = NULL;
+    PageScrollWidget *pageWidget_citizen = NULL;
 };
 
 #endif // MINERPAGE_H

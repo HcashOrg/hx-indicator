@@ -28,8 +28,6 @@ FeedPriceDialog::FeedPriceDialog( QString _assetSymbol, QWidget *parent) :
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->closeBtn->setStyleSheet(CANCELBTN_STYLE);
 
-//    ui->accountComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
-
     ui->assetLabel->setText(_assetSymbol);
     ui->assetLabel2->setText(QString("1 %1 =").arg(_assetSymbol));
 

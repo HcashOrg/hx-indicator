@@ -1172,6 +1172,15 @@ void HXChain::fetchMiners()
     postRPC( "id-list_citizens", toJsonFormat( "list_citizens", QJsonArray() << "A" << 1000));
 }
 
+void HXChain::fetchCitizenPayBack()
+{
+    QStringList citizens = minerMap.keys();
+    foreach (QString citizen, citizens)
+    {
+        postRPC( "citizen+get_account+" + citizen, toJsonFormat( "get_account", QJsonArray() << citizen));
+    }
+}
+
 void HXChain::fetchProposals()
 {
     if(allGuardMap.size() < 1 || minerMap.size() < 1)   return;

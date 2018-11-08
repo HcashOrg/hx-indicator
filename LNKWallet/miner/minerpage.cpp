@@ -2,6 +2,8 @@
 #include "ui_minerpage.h"
 
 #include <QPainter>
+#include <mutex>
+#include <QListView>
 #include "wallet.h"
 #include "registerdialog.h"
 #include "locktominerdialog.h"
@@ -15,7 +17,7 @@
 #include "depositpage/FeeChargeWidget.h"
 #include "showcontentdialog.h"
 #include "control/BlankDefaultWidget.h"
-#include <mutex>
+
 
 static const int ROWNUMBER = 6;
 static std::mutex calMutex;
@@ -81,6 +83,19 @@ MinerPage::MinerPage(QWidget *parent) :
 //    ui->incomeRecordTableWidget->setColumnWidth(1,140);
 //    ui->incomeRecordTableWidget->setColumnWidth(2,140);
 
+    ui->citizenInfoTableWidget->installEventFilter(this);
+    ui->citizenInfoTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->citizenInfoTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->citizenInfoTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->citizenInfoTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->citizenInfoTableWidget->setMouseTracking(true);
+    ui->citizenInfoTableWidget->setShowGrid(false);//隐藏表格线
+
+    ui->citizenInfoTableWidget->horizontalHeader()->setSectionsClickable(true);
+//    ui->citizenInfoTableWidget->horizontalHeader()->setFixedHeight(30);
+    ui->citizenInfoTableWidget->horizontalHeader()->setVisible(true);
+    ui->citizenInfoTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
 
     pageWidget_income = new PageScrollWidget();
     ui->stackedWidget_income->addWidget(pageWidget_income);
@@ -88,9 +103,12 @@ MinerPage::MinerPage(QWidget *parent) :
     ui->stackedWidget_fore->addWidget(pageWidget_fore);
     pageWidget_record = new PageScrollWidget();
     ui->stackedWidget_record->addWidget(pageWidget_record);
+    pageWidget_citizen = new PageScrollWidget();
+    ui->stackedWidget_citizen->addWidget(pageWidget_citizen);
     connect(pageWidget_income,&PageScrollWidget::currentPageChangeSignal,this,&MinerPage::pageChangeSlot);
     connect(pageWidget_fore,&PageScrollWidget::currentPageChangeSignal,this,&MinerPage::pageChangeSlot);
     connect(pageWidget_record,&PageScrollWidget::currentPageChangeSignal,this,&MinerPage::pageChangeSlot);
+    connect(pageWidget_citizen,&PageScrollWidget::currentPageChangeSignal,this,&MinerPage::pageChangeSlot);
 
     blankWidget_income = new BlankDefaultWidget(ui->incomeTableWidget);
     blankWidget_income->setTextTip(tr("There's no income!"));
@@ -98,10 +116,13 @@ MinerPage::MinerPage(QWidget *parent) :
     blankWidget_fore->setTextTip(tr("There's no foreclose information!"));
     blankWidget_record = new BlankDefaultWidget(ui->incomeRecordTableWidget);
     blankWidget_record->setTextTip(tr("There's no income record!"));
+    blankWidget_citizen = new BlankDefaultWidget(ui->citizenInfoTableWidget);
+    blankWidget_citizen->setTextTip(tr("There's no citizen!"));
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->incomeRecordTableWidget);
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->incomeTableWidget);
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->lockBalancesTableWidget);
+    HXChain::getInstance()->mainFrame->installBlurEffect(ui->citizenInfoTableWidget);
     InitStyle();
     init();
 }
@@ -118,6 +139,9 @@ void MinerPage::refresh()
     fetchLockBalance();
     fetchAccountIncome();
     showIncomeRecord();
+    showCitizenInfo();
+
+    HXChain::getInstance()->fetchCitizenPayBack();
 }
 
 void MinerPage::jsonDataUpdated(QString id)
@@ -485,12 +509,135 @@ void MinerPage::showIncomeRecord()
     pageWidget_record->setVisible(0 != size);
 }
 
+void MinerPage::showCitizenInfo()
+{
+    QStringList citizens = HXChain::getInstance()->minerMap.keys();
+
+
+    QStringList sortedKeys;     // 按权重排序
+    for(int i = 0; i < citizens.size(); i++)
+    {
+        if(sortedKeys.size() == 0)
+        {
+            sortedKeys.append(citizens.at(i));
+            continue;
+        }
+
+        switch (ui->sortTypeComboBox->currentIndex())
+        {
+        case 0:
+            for(int j = 0; j < sortedKeys.size(); j++)
+            {
+                if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).pledgeWeight
+                        < HXChain::getInstance()->minerMap.value(citizens.at(i)).pledgeWeight)
+                {
+                    sortedKeys.insert( j, citizens.at(i));
+                    break;
+                }
+
+                if(j == sortedKeys.size() - 1)
+                {
+                    sortedKeys.append( citizens.at(i));
+                    break;
+                }
+            }
+            break;
+        case 1:
+            for(int j = 0; j < sortedKeys.size(); j++)
+            {
+                if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).totalProduced
+                        < HXChain::getInstance()->minerMap.value(citizens.at(i)).totalProduced)
+                {
+                    sortedKeys.insert( j, citizens.at(i));
+                    break;
+                }
+
+                if(j == sortedKeys.size() - 1)
+                {
+                    sortedKeys.append( citizens.at(i));
+                    break;
+                }
+            }
+            break;
+        case 2:
+            for(int j = 0; j < sortedKeys.size(); j++)
+            {
+                if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).totalMissed
+                        > HXChain::getInstance()->minerMap.value(citizens.at(i)).totalMissed)
+                {
+                    sortedKeys.insert( j, citizens.at(i));
+                    break;
+                }
+
+                if(j == sortedKeys.size() - 1)
+                {
+                    sortedKeys.append( citizens.at(i));
+                    break;
+                }
+            }
+            break;
+        case 3:
+            for(int j = 0; j < sortedKeys.size(); j++)
+            {
+                if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).payBack
+                        > HXChain::getInstance()->minerMap.value(citizens.at(i)).payBack)
+                {
+                    sortedKeys.insert( j, citizens.at(i));
+                    break;
+                }
+
+                if(j == sortedKeys.size() - 1)
+                {
+                    sortedKeys.append( citizens.at(i));
+                    break;
+                }
+            }
+            break;
+        default:
+            break;
+        }
+
+
+    }
+
+
+    int size = sortedKeys.size();
+    ui->citizenInfoTableWidget->setRowCount(0);
+    ui->citizenInfoTableWidget->setRowCount(size);
+
+    for(int i = 0; i < size; i++)
+    {
+        ui->citizenInfoTableWidget->setRowHeight(i,40);
+        MinerInfo minerInfo = HXChain::getInstance()->minerMap.value(sortedKeys.at(i));
+        ui->citizenInfoTableWidget->setItem(i,0, new QTableWidgetItem(sortedKeys.at(i)));
+        ui->citizenInfoTableWidget->setItem(i,1, new QTableWidgetItem( getBigNumberString(minerInfo.pledgeWeight,0)));
+        ui->citizenInfoTableWidget->setItem(i,2, new QTableWidgetItem( QString::number(minerInfo.totalProduced)));
+        ui->citizenInfoTableWidget->setItem(i,3, new QTableWidgetItem( QString::number(minerInfo.totalMissed)));
+        ui->citizenInfoTableWidget->setItem(i,4, new QTableWidgetItem( QString::number(minerInfo.lastBlock)));
+        if(minerInfo.payBack >= 0)
+        {
+            ui->citizenInfoTableWidget->setItem(i,5, new QTableWidgetItem( QString("%1 \%").arg(minerInfo.payBack)));
+        }
+
+    }
+
+    tableWidgetSetItemZebraColor(ui->citizenInfoTableWidget);
+
+    unsigned int curPage = pageWidget_citizen->GetCurrentPage();
+    pageWidget_citizen->SetTotalPage(calPage(ui->citizenInfoTableWidget));
+    pageWidget_citizen->SetCurrentPage(curPage);
+    pageWidget_citizen->setShowTip(ui->citizenInfoTableWidget->rowCount(),ROWNUMBER);
+
+    blankWidget_citizen->setVisible(0 == size);
+    pageWidget_citizen->setVisible(0 != size);
+}
+
 void MinerPage::InitStyle()
 {
     ui->forecloseInfoBtn->setCheckable(true);
     ui->incomeInfoBtn->setCheckable(true);
     ui->incomeRecordBtn->setCheckable(true);
-
+    ui->citizenInfoBtn->setCheckable(true);
 
     setStyleSheet(PUSHBUTTON_CHECK_STYLE
                   TABLEWIDGET_STYLE_1);
@@ -503,12 +650,13 @@ void MinerPage::InitStyle()
     ui->incomeRecordBtn->adjustSize();
     ui->incomeRecordBtn->resize(ui->incomeRecordBtn->width(), 18);
     ui->incomeRecordBtn->move(ui->forecloseInfoBtn->x() + ui->forecloseInfoBtn->width() + 30, ui->incomeRecordBtn->y());
-
+    ui->citizenInfoBtn->adjustSize();
+    ui->citizenInfoBtn->resize(ui->citizenInfoBtn->width(), 18);
+    ui->citizenInfoBtn->move(ui->incomeRecordBtn->x() + ui->incomeRecordBtn->width() + 30, ui->incomeRecordBtn->y());
 
     ui->obtainAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->lockToMinerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->registerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
-
 }
 
 void MinerPage::updateCheckState(int number)
@@ -516,6 +664,7 @@ void MinerPage::updateCheckState(int number)
     ui->incomeInfoBtn->setChecked(0 == number);
     ui->forecloseInfoBtn->setChecked(1 == number);
     ui->incomeRecordBtn->setChecked(2 == number);
+    ui->citizenInfoBtn->setChecked(3 == number);
 }
 
 void MinerPage::checkObtainAllBtnVisible()
@@ -667,6 +816,15 @@ void MinerPage::on_incomeRecordBtn_clicked()
     checkObtainAllBtnVisible();
 }
 
+
+void MinerPage::on_citizenInfoBtn_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+    updateCheckState(3);
+
+    checkObtainAllBtnVisible();
+}
+
 void MinerPage::pageChangeSlot(unsigned int page)
 {
     QTableWidget *table = nullptr;
@@ -681,6 +839,10 @@ void MinerPage::pageChangeSlot(unsigned int page)
     else if(sender() == pageWidget_record)
     {
         table = ui->incomeRecordTableWidget;
+    }
+    else if(sender() == pageWidget_citizen)
+    {
+        table = ui->citizenInfoTableWidget;
     }
     if(!table) return;
 
@@ -751,4 +913,10 @@ void MinerPage::on_obtainAllBtn_clicked()
                                                        << true ));
     });
     feeCharge->show();
+}
+
+
+void MinerPage::on_sortTypeComboBox_currentIndexChanged(const QString &arg1)
+{
+    showCitizenInfo();
 }

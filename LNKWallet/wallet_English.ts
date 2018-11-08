@@ -1720,52 +1720,52 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Expiration(s)</translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="112"/>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="113"/>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="334"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="109"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="110"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="331"/>
         <source>There are no new multisig-address to change to!</source>
         <oldsource>There are no new multi-sig address to change to!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="136"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="133"/>
         <source>Transaction of change-multisig proposal has been sent out. You can check the voting state in the proposal page.</source>
         <oldsource>Transaction of update-multisig proposal has been sent out. You can check the voting state in the proposal page.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="143"/>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="275"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="140"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="272"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="254"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="251"/>
         <source>Signer not in this wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="269"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="266"/>
         <source>Trx has been signed! Wait for confirmation.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="311"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="308"/>
         <source>You have no signer senator in this wallet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="319"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="316"/>
         <source>Balance of hot &amp; cold address should not be 0!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="325"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="322"/>
         <source>Sure to sign this trx?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="342"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="339"/>
         <source>The expiration time should not less than 3600s(1 hour) !</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2226,17 +2226,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Amount</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferDialog.cpp" line="84"/>
+        <location filename="guard/ColdHotTransferDialog.cpp" line="80"/>
         <source>Transaction of cold-hot-trx proposal has been sent out. You can check the voting state in the proposal page.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferDialog.cpp" line="91"/>
+        <location filename="guard/ColdHotTransferDialog.cpp" line="87"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferDialog.cpp" line="115"/>
+        <location filename="guard/ColdHotTransferDialog.cpp" line="111"/>
         <source>max:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4050,23 +4050,23 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="176"/>
+        <location filename="FeeChooseWidget.cpp" line="187"/>
         <source>cannot find proper acceptance!</source>
         <oldsource>cannot find proper poundage!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="192"/>
+        <location filename="FeeChooseWidget.cpp" line="203"/>
         <source>pay:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="192"/>
-        <source>  rate:</source>
+        <location filename="FeeChooseWidget.cpp" line="203"/>
+        <source>  rate: 1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="FeeChooseWidget.cpp" line="256"/>
+        <location filename="FeeChooseWidget.cpp" line="267"/>
         <source> less than </source>
         <translation type="unfinished"></translation>
     </message>
@@ -4207,13 +4207,13 @@ Cover it or not?</source>
         <translation type="obsolete">Balance:</translation>
     </message>
     <message>
-        <location filename="guard/FeedPriceDialog.cpp" line="107"/>
+        <location filename="guard/FeedPriceDialog.cpp" line="105"/>
         <source>Transaction of feed-price has been sent out.</source>
         <oldsource>Transaction of quote-price has been sent out.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/FeedPriceDialog.cpp" line="114"/>
+        <location filename="guard/FeedPriceDialog.cpp" line="112"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4393,17 +4393,17 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2315"/>
+        <location filename="frame.cpp" line="2342"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2318"/>
+        <location filename="frame.cpp" line="2345"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2321"/>
+        <location filename="frame.cpp" line="2348"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5613,105 +5613,165 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="unfinished">STATE</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="529"/>
+        <location filename="miner/minerpage.ui" line="569"/>
+        <source>CITIZEN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="582"/>
+        <source>权重</source>
+        <translation type="unfinished">PLEDGE WEIGHT</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="590"/>
+        <source>总出块数</source>
+        <translation type="unfinished">TOTAL PRODUCED</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="598"/>
+        <source>missed块数</source>
+        <translation type="unfinished">TOTAL MISSED</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="606"/>
+        <source>上次出块</source>
+        <translation type="unfinished">LAST PRODUCED</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="614"/>
+        <source>矿池手续费</source>
+        <translation type="unfinished">FEE</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="661"/>
         <source>当前收益</source>
         <translation type="unfinished">INCOME</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="560"/>
+        <location filename="miner/minerpage.ui" line="692"/>
         <source>质押信息</source>
         <translation type="unfinished">MORTGAGE</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="573"/>
+        <location filename="miner/minerpage.ui" line="705"/>
         <source>您的钱包内还没有注册账户,请先注册。</source>
         <translation type="unfinished">You have no registered account in the wallet.Please register one.</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="610"/>
+        <location filename="miner/minerpage.ui" line="742"/>
         <source>收益记录</source>
         <translation type="unfinished">RECORD</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="640"/>
+        <location filename="miner/minerpage.ui" line="772"/>
         <source>领取全部</source>
         <translation type="unfinished">GET ALL</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="659"/>
+        <location filename="miner/minerpage.ui" line="796"/>
         <source>挖矿</source>
         <translation type="unfinished">Mining</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="164"/>
+        <location filename="miner/minerpage.ui" line="827"/>
+        <source>CITIZEN信息</source>
+        <translation type="unfinished">CITIZEN INFO</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="855"/>
+        <source>权重由高到低</source>
+        <translation type="unfinished">Weight high-low</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="860"/>
+        <source>出块数由多到少</source>
+        <translation type="unfinished">Produced high-low</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="865"/>
+        <source>missed数由少到多</source>
+        <translation type="unfinished">Missed low-high</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="870"/>
+        <source>手续费由低到高</source>
+        <translation type="unfinished">Fee low-high</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="188"/>
         <source>add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="171"/>
+        <location filename="miner/minerpage.cpp" line="195"/>
         <source>foreclose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="200"/>
+        <location filename="miner/minerpage.cpp" line="224"/>
         <source>Transaction of foreclose-asset has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="96"/>
+        <location filename="miner/minerpage.cpp" line="114"/>
         <source>There&apos;s no income!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="98"/>
+        <location filename="miner/minerpage.cpp" line="116"/>
         <source>There&apos;s no foreclose information!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="100"/>
+        <location filename="miner/minerpage.cpp" line="118"/>
         <source>There&apos;s no income record!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="207"/>
+        <location filename="miner/minerpage.cpp" line="120"/>
+        <source>There&apos;s no citizen!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="231"/>
         <source>Fail to foreclose asset from miner!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="249"/>
+        <location filename="miner/minerpage.cpp" line="273"/>
         <source>get income</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="289"/>
+        <location filename="miner/minerpage.cpp" line="313"/>
         <source>Transaction of get-income has been sent out!</source>
         <oldsource>Transaction of obtain-income has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="300"/>
+        <location filename="miner/minerpage.cpp" line="324"/>
         <source>This account&apos;s mining income is less than %1 %2 ! You can not get it.</source>
         <oldsource>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="305"/>
+        <location filename="miner/minerpage.cpp" line="329"/>
         <source>Fail to get mining income!</source>
         <oldsource>Fail to obtain mining income!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="322"/>
+        <location filename="miner/minerpage.cpp" line="346"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="464"/>
+        <location filename="miner/minerpage.cpp" line="488"/>
         <source>total </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="475"/>
+        <location filename="miner/minerpage.cpp" line="499"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6087,27 +6147,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Balance not enough!</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigTransferWidget.cpp" line="80"/>
+        <location filename="multisig/MultiSigTransferWidget.cpp" line="91"/>
         <source>Balance not enough!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigTransferWidget.cpp" line="84"/>
+        <location filename="multisig/MultiSigTransferWidget.cpp" line="95"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigTransferWidget.cpp" line="100"/>
+        <location filename="multisig/MultiSigTransferWidget.cpp" line="111"/>
         <source>Please enter the amount and address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigTransferWidget.cpp" line="108"/>
+        <location filename="multisig/MultiSigTransferWidget.cpp" line="119"/>
         <source>The amount can not be 0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigTransferWidget.cpp" line="151"/>
+        <location filename="multisig/MultiSigTransferWidget.cpp" line="163"/>
         <source>Max: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6333,13 +6393,13 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="500"/>
-        <location filename="exchange/myexchangecontractpage.cpp" line="598"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="499"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="597"/>
         <source>Can not find file contracts/hx_exchange.glua.gpc!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/myexchangecontractpage.cpp" line="637"/>
+        <location filename="exchange/myexchangecontractpage.cpp" line="636"/>
         <source>Sure to cancel all orders of %1-to-%2 ?</source>
         <oldsource>Sure to withdraw all orders of %1-to-%2 ?</oldsource>
         <translation type="unfinished"></translation>
@@ -6742,7 +6802,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">TOTAL</translation>
     </message>
     <message>
-        <location filename="poundage/PoundageShowTableModel.cpp" line="144"/>
+        <location filename="poundage/PoundageShowTableModel.cpp" line="146"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7749,12 +7809,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">open</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1140"/>
+        <location filename="setdialog.ui" line="1139"/>
         <source>安全设置</source>
         <translation type="unfinished">Safety</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1171"/>
+        <location filename="setdialog.ui" line="1170"/>
         <source>账户管理</source>
         <translation type="unfinished">Account</translation>
     </message>
@@ -8461,13 +8521,13 @@ p, li { white-space: pre-wrap; }
         <source>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;微软雅黑&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;微软雅黑&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <oldsource>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;微软雅黑&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;SimSun&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;微软雅黑&apos;;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

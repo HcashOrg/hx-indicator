@@ -26,10 +26,6 @@ ColdHotTransferDialog::ColdHotTransferDialog(QWidget *parent) :
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->closeBtn->setStyleSheet(CANCELBTN_STYLE);
 
-//    ui->assetComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
-//    ui->accountComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
-//    ui->typeComboBox->setStyleSheet(COMBOBOX_STYLE_BOTTOMBORDER);
-
     init();
 }
 

@@ -340,13 +340,13 @@
     <font>
      <family>Microsoft YaHei UI Light</family>
      <pointsize>-1</pointsize>
-     <weight>50</weight>
+     <weight>75</weight>
      <italic>false</italic>
-     <bold>false</bold>
+     <bold>true</bold>
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">color:rgb(137,129,161);font: 11px &quot;Microsoft YaHei UI Light&quot;;</string>
+    <string notr="true">color:rgb(137,129,161);font: bold 11px &quot;Microsoft YaHei UI Light&quot;;</string>
    </property>
    <property name="text">
     <string>操作</string>

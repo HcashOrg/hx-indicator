@@ -153,11 +153,13 @@ struct MinerInfo
     QString minerId;
     QString accountId;
     QString signingKey;
+    unsigned long long pledgeWeight;
     int totalMissed = 0;
     int totalProduced = 0;
     int lastBlock = -1;
     double participationRate = 0;
     QVector<AssetAmount>    lockBalances;
+    int payBack = -1;    // 挖矿手续费
 };
 
 struct ProposalInfo
@@ -453,6 +455,7 @@ public:
 
     QMap<QString,MinerInfo>     minerMap;
     void fetchMiners();
+    void fetchCitizenPayBack();     // 挖矿手续费
     QString getMinerNameFromId(QString _minerId);
     QStringList getMyCitizens();
 

@@ -1863,6 +1863,7 @@ void Frame::jsonDataUpdated(QString id)
             HXChain::getInstance()->minerMap[account].minerId       = object.value("id").toString();
             HXChain::getInstance()->minerMap[account].accountId     = object.value("miner_account").toString();
             HXChain::getInstance()->minerMap[account].signingKey    = object.value("signing_key").toString();
+            HXChain::getInstance()->minerMap[account].pledgeWeight   = jsonValueToULL( object.value("pledge_weight"));
             HXChain::getInstance()->minerMap[account].totalMissed   = object.value("total_missed").toInt();
             HXChain::getInstance()->minerMap[account].totalProduced = object.value("total_produced").toInt();
             HXChain::getInstance()->minerMap[account].lastBlock     = object.value("last_confirmed_block_num").toInt();
@@ -1876,6 +1877,32 @@ void Frame::jsonDataUpdated(QString id)
                 aa.amount = jsonValueToULL( assetObject.value("amount"));
                 aa.assetId = assetObject.value("asset_id").toString();
                 HXChain::getInstance()->minerMap[account].lockBalances += aa;
+            }
+
+        }
+
+        return;
+    }
+
+    if( id.startsWith("citizen+get_account+"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        //        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            QString account = id.mid(QString("citizen+get_account+").size());
+
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonObject object = jsonObject.value("result").toObject();
+            QJsonObject optionsObject = object.value("options").toObject();
+            if(HXChain::getInstance()->minerMap.contains(account))
+            {
+                HXChain::getInstance()->minerMap[account].payBack = optionsObject.value("miner_pledge_pay_back").toInt();
             }
         }
 
