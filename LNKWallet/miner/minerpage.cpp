@@ -374,6 +374,7 @@ void MinerPage::init()
 
     refresh();
     checkObtainAllBtnVisible();
+    ui->sortTypeComboBox->hide();
 }
 
 void MinerPage::updateAccounts()
@@ -798,6 +799,7 @@ void MinerPage::on_incomeInfoBtn_clicked()
     updateCheckState(0);
 
     checkObtainAllBtnVisible();
+    ui->sortTypeComboBox->hide();
 }
 
 void MinerPage::on_forecloseInfoBtn_clicked()
@@ -806,6 +808,7 @@ void MinerPage::on_forecloseInfoBtn_clicked()
     updateCheckState(1);
 
     checkObtainAllBtnVisible();
+    ui->sortTypeComboBox->hide();
 }
 
 void MinerPage::on_incomeRecordBtn_clicked()
@@ -814,6 +817,7 @@ void MinerPage::on_incomeRecordBtn_clicked()
     updateCheckState(2);
 
     checkObtainAllBtnVisible();
+    ui->sortTypeComboBox->hide();
 }
 
 
@@ -823,6 +827,7 @@ void MinerPage::on_citizenInfoBtn_clicked()
     updateCheckState(3);
 
     checkObtainAllBtnVisible();
+    ui->sortTypeComboBox->show();
 }
 
 void MinerPage::pageChangeSlot(unsigned int page)

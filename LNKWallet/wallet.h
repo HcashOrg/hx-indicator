@@ -184,6 +184,7 @@ struct TransactionStruct
     QString operationStr;
     unsigned long long feeAmount = 0;
     QString guaranteeId;
+    QString trxState;   // 如果是跨链(61)的交易 查询状态
 
 public:
 
@@ -414,10 +415,6 @@ public:
     QMap<QString,AssetInfo>   assetInfoMap;
     QString getAssetId(QString symbol);
     QStringList getETHAssets();
-
-    QMap<QString,int>   crosschainWithdrawStateMap;
-    void fetchCrosschainTransactions();
-    void clearCrosschainWithdrawStateMapByState(int state);
 
 private:
     bool isBlockSyncFinish;

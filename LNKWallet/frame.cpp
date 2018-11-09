@@ -435,7 +435,7 @@ void Frame::getAccountInfo()
 
     HXChain::getInstance()->fetchMiners();
 
-    HXChain::getInstance()->fetchCrosschainTransactions();
+//    HXChain::getInstance()->fetchCrosschainTransactions();
 }
 
 
@@ -2148,6 +2148,13 @@ void Frame::jsonDataUpdated(QString id)
                 {
                     HXChain::getInstance()->postRPC( "id-get_transaction-" + transactionId, toJsonFormat( "get_transaction", QJsonArray() << transactionId));
                 }
+                else if(ts.type == TRANSACTION_TYPE_WITHDRAW && ts.trxState != "withdraw_transaction_confirm")
+                {
+                    QJsonObject operationObject = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
+                    QString withdrawAccount = operationObject.value("withdraw_account").toString();
+                    HXChain::getInstance()->postRPC( "id+get_account_crosschain_transaction+" + transactionId,
+                                                     toJsonFormat( "get_account_crosschain_transaction", QJsonArray() << withdrawAccount << transactionId));
+                }
             }
         }
 
@@ -2176,6 +2183,29 @@ void Frame::jsonDataUpdated(QString id)
             {
                 HXChain::getInstance()->transactionDB.removeTransactionStruct(trxId);
             }
+        }
+
+        return;
+    }
+
+    if( id.startsWith("id+get_account_crosschain_transaction+"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result ;
+        if(result.startsWith("\"result\":"))
+        {
+            QString trxId = id.mid(QString("id+get_account_crosschain_transaction+").size());
+
+            result.prepend("{");
+            result.append("}");
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject object = parse_doucment.object();
+            QJsonObject object2 = object.value("result").toArray().at(0).toObject();
+            QString trxState = object2.value("trx_state").toString();
+
+            TransactionStruct ts = HXChain::getInstance()->transactionDB.getTransactionStruct(trxId);
+            ts.trxState = trxState;
+            HXChain::getInstance()->transactionDB.insertTransactionStruct(trxId,ts);
         }
 
         return;
@@ -2229,38 +2259,6 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if(id.startsWith("WithdrawState-get_crosschain_transaction-"))
-    {
-        QString result = HXChain::getInstance()->jsonDataValue(id);
-
-        int state = id.mid(QString("WithdrawState-get_crosschain_transaction-").size()).toInt();
-        qDebug() << id << result << state;
-
-        result.prepend("{");
-        result.append("}");
-
-        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-        QJsonObject jsonObject = parse_doucment.object();
-        QJsonArray array = jsonObject.take("result").toArray();
-
-        HXChain::getInstance()->clearCrosschainWithdrawStateMapByState(state);
-        foreach (QJsonValue v, array)
-        {
-            QJsonArray array2 = v.toArray();
-            QString trxId = array2.at(0).toString();
-            QJsonObject object = array2.at(1).toObject();
-            QJsonArray operationArray = object.take("operations").toArray();
-            QJsonArray array3 = operationArray.at(0).toArray();
-            int operationType = array3.at(0).toInt();
-
-            if(operationType == TRANSACTION_TYPE_WITHDRAW)
-            {
-                HXChain::getInstance()->crosschainWithdrawStateMap.insert(trxId, state);
-            }
-        }
-
-        return;
-    }
 }
 
 void Frame::onBack()

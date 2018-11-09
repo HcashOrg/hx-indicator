@@ -675,32 +675,45 @@ void AllTransactionWidget::showTransactions()
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("withdraw %1").arg(assetSymbol)));
 
-            int state = -1;
-            if(HXChain::getInstance()->crosschainWithdrawStateMap.contains(transactionId))
+            if(ts.trxState == "withdraw_without_sign_trx_uncreate")
             {
-                state = HXChain::getInstance()->crosschainWithdrawStateMap.value(transactionId);
+                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("waiting for signature")));
+            }
+            else if( ts.trxState == "withdraw_without_sign_trx_create" || ts.trxState == "withdraw_combine_trx_create")
+            {
+                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("being signed")));
+            }
+            else if( ts.trxState == "withdraw_transaction_confirm")
+            {
+                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("confirmed")));
             }
 
-            switch (state)
-            {
-            case -1:
-                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("canceled")));
-                break;
-            case 0:
-                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("waiting for signature")));
-                break;
-            case 1:
-                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("being signed")));
-                break;
-            case 3:
-                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("being signed")));
-                break;
-            case 4:
-                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("confirmed")));
-                break;
-            default:
-                break;
-            }
+//            int state = -1;
+//            if(HXChain::getInstance()->crosschainWithdrawStateMap.contains(transactionId))
+//            {
+//                state = HXChain::getInstance()->crosschainWithdrawStateMap.value(transactionId);
+//            }
+
+//            switch (state)
+//            {
+//            case -1:
+//                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("canceled")));
+//                break;
+//            case 0:
+//                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("waiting for signature")));
+//                break;
+//            case 1:
+//                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("being signed")));
+//                break;
+//            case 3:
+//                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("being signed")));
+//                break;
+//            case 4:
+//                ui->transactionsTableWidget->setItem(i,6, new QTableWidgetItem(tr("confirmed")));
+//                break;
+//            default:
+//                break;
+//            }
         }
             break;
         case TRANSACTION_TYPE_MINE_INCOME:

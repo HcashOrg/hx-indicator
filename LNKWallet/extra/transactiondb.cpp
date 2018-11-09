@@ -46,7 +46,7 @@ bool TransactionDB::init()
 
 
 
-void TransactionDB::insertTransactionStruct(QString _transactionId, TransactionStruct _struct)
+void TransactionDB::insertTransactionStruct(QString _transactionId, TransactionStruct& _struct)
 {
     QByteArray ba;
     QBuffer buffer(&ba);
