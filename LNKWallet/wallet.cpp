@@ -27,6 +27,7 @@
 #endif
 
 HXChain* HXChain::goo = 0;
+static const QMap<QString,double>    defaultAutoWithdrawAmountMap = { {"BTC",10},{"LTC",1000},{"HC",10000},{"ETH",100} };
 
 HXChain::HXChain()
 {
@@ -69,8 +70,7 @@ HXChain::HXChain()
         configFile->setValue("settings/resyncNextTime",false);
         contractFee = 1;
         configFile->setValue("settings/contractFee",1);
-        middlewarePath = "http://117.78.44.37:5005/api";
-//        middlewarePath = "http://192.168.1.164:5000/api";
+        middlewarePath = MIDDLE_DEFAULT_URL;
         configFile->setValue("settings/middlewarePath",middlewarePath);
         configFile->setValue("/settings/autoWithdrawConfirm",false);
         autoWithdrawConfirm = false;
@@ -88,11 +88,12 @@ HXChain::HXChain()
         autoDeposit     = configFile->value("/settings/autoDeposit",false).toBool();
         resyncNextTime  = configFile->value("/settings/resyncNextTime",false).toBool();
         contractFee     = configFile->value("/settings/contractFee",1).toULongLong();
-        middlewarePath  = configFile->value("/settings/middlewarePath","http://117.78.44.37:5005/api").toString();
+        middlewarePath  = configFile->value("/settings/middlewarePath",MIDDLE_DEFAULT_URL).toString();
 //        middlewarePath  = configFile->value("/settings/middlewarePath","http://192.168.1.164:5000/api").toString();
         importedWalletNeedToAddTrackAddresses = configFile->value("/settings/importedWalletNeedToAddTrackAddresses",false).toBool();
         autoWithdrawConfirm = configFile->value("/settings/autoWithdrawConfirm",false).toBool();
     }
+    loadAutoWithdrawAmount();
 
     QFile file( walletConfigPath + "/log.txt");       // 每次启动清空 log.txt文件
     file.open(QIODevice::Truncate | QIODevice::WriteOnly);
@@ -378,7 +379,7 @@ void HXChain::getSystemEnvironmentPath()
         if (str.startsWith("APPDATA="))
         {
 
-            walletConfigPath = str.mid(8) + "\\HXIndicator" WALLET_EXE_SUFFIX "_" "1.0.9";
+            walletConfigPath = str.mid(8) + "\\HXIndicator" WALLET_EXE_SUFFIX "_" "1.0.11";
             appDataPath = walletConfigPath + "\\chaindata";
             qDebug() << "appDataPath:" << appDataPath;
             break;
@@ -1140,6 +1141,109 @@ QString HXChain::guardAddressToName(QString guardAddress)
 
     return result;
 }
+
+void HXChain::loadAutoWithdrawAmount()
+{
+    configFile->beginGroup("/AutoWithdrawAmount");
+    QStringList keys = configFile->childKeys();
+    foreach (QString key, keys)
+    {
+        double amount = configFile->value(key,0).toDouble();
+        senatorAutoWithdrawAmountMap.insert(key, amount);
+    }
+    configFile->endGroup();
+}
+
+double HXChain::getAssetAutoWithdrawLimit(QString symbol)
+{
+    if(senatorAutoWithdrawAmountMap.contains(symbol))
+    {
+        return senatorAutoWithdrawAmountMap.value(symbol);
+    }
+
+    if(defaultAutoWithdrawAmountMap.contains(symbol))
+    {
+        return defaultAutoWithdrawAmountMap.value(symbol);
+    }
+
+    return 0;
+}
+
+void HXChain::autoWithdrawSign()
+{
+    QStringList keys = HXChain::getInstance()->applyTransactionMap.keys();
+    foreach (QString key, keys)
+    {
+        ApplyTransaction at = HXChain::getInstance()->applyTransactionMap.value(key);
+        QString generatedTrxId = HXChain::getInstance()->lookupGeneratedTrxByApplyTrxId(at.trxId);
+        QStringList guardAddresses = HXChain::getInstance()->lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
+
+        foreach (QString account, HXChain::getInstance()->getMyFormalGuards())
+        {
+            QString accountAddress = HXChain::getInstance()->accountInfoMap.value(account).address;
+            if(!guardAddresses.contains(accountAddress))
+            {
+                if(at.amount.toDouble() <= getAssetAutoWithdrawLimit(at.assetSymbol))
+                {
+                    HXChain::getInstance()->postRPC( "id-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
+                                                     QJsonArray() << generatedTrxId << account));
+                }
+            }
+        }
+    }
+}
+
+
+void HXChain::fetchCrosschainTransactions()
+{
+    postRPC( "id-get_crosschain_transaction-" + QString::number(0), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 0));
+
+    postRPC( "id-get_crosschain_transaction-" + QString::number(1), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 1));
+
+    postRPC( "id-get_crosschain_transaction-" + QString::number(2), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 2));
+
+    postRPC( "id-get_crosschain_transaction-" + QString::number(7), toJsonFormat( "get_crosschain_transaction",
+                                                                                    QJsonArray() << 7));
+
+}
+
+QString HXChain::lookupGeneratedTrxByApplyTrxId(QString applyTrxId)
+{
+    QString generatedTrxId;
+    QStringList keys = HXChain::getInstance()->generatedTransactionMap.keys();
+    foreach (QString key, keys)
+    {
+        GeneratedTransaction gt = HXChain::getInstance()->generatedTransactionMap.value(key);
+        if(gt.ccwTrxIds.contains(applyTrxId))
+        {
+            generatedTrxId = gt.trxId;
+            break;
+        }
+    }
+
+    return generatedTrxId;
+}
+
+QStringList HXChain::lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId)
+{
+    QStringList result;
+    QStringList keys = signTransactionMap.keys();
+
+    foreach (QString key, keys)
+    {
+        SignTransaction st = signTransactionMap.value(key);
+        if(st.generatedTrxId == generatedTrxId)
+        {
+            result += st.guardAddress;
+        }
+    }
+
+    return result;
+}
+
 
 void HXChain::fetchMiners()
 {

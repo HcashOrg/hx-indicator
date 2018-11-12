@@ -176,7 +176,8 @@ SOURCES += main.cpp\
     multisig/MultiSigTransferWidget.cpp \
     multisig/MultiSigTrxResultDialog.cpp \
     multisig/AddLocalPubKeyDialog.cpp \
-    multisig/AddMultiSigAddressDialog.cpp
+    multisig/AddMultiSigAddressDialog.cpp \
+    guard/AutoWithdrawSetDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -325,7 +326,8 @@ HEADERS  += firstlogin.h \
     multisig/MultiSigTransferWidget.h \
     multisig/MultiSigTrxResultDialog.h \
     multisig/AddLocalPubKeyDialog.h \
-    multisig/AddMultiSigAddressDialog.h
+    multisig/AddMultiSigAddressDialog.h \
+    guard/AutoWithdrawSetDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -443,7 +445,8 @@ FORMS    += firstlogin.ui \
     multisig/MultiSigTransferWidget.ui \
     multisig/MultiSigTrxResultDialog.ui \
     multisig/AddLocalPubKeyDialog.ui \
-    multisig/AddMultiSigAddressDialog.ui
+    multisig/AddMultiSigAddressDialog.ui \
+    guard/AutoWithdrawSetDialog.ui
 
 win32{
     DISTFILES += logo.rc

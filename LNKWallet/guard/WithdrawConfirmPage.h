@@ -11,32 +11,6 @@ namespace Ui {
 class WithdrawConfirmPage;
 }
 
-class ETHFinalTrx;
-
-struct ApplyTransaction
-{
-    QString trxId;
-    QString expirationTime;
-    QString withdrawAddress;
-    QString amount;
-    QString assetSymbol;
-    QString assetId;
-    QString crosschainAddress;
-    QString memo;
-};
-struct GeneratedTransaction
-{
-    QString trxId;
-    QStringList ccwTrxIds;      // 交易里包含的apply交易
-};
-
-struct SignTransaction
-{
-    QString trxId;
-    QString generatedTrxId;
-    QString guardAddress;
-};
-
 class WithdrawConfirmPage : public QWidget
 {
     Q_OBJECT
@@ -49,16 +23,11 @@ public:
 
     void refresh();
 
-    void fetchCrosschainTransactions();
-
     int currentType = 1;
-    QMap<QString,ApplyTransaction> applyTransactionMap;
-    QMap<QString,ApplyTransaction> pendingApplyTransactionMap;
-    QMap<QString,GeneratedTransaction> generatedTransactionMap;
-    QMap<QString,SignTransaction>   signTransactionMap;
-    QString lookupGeneratedTrxByApplyTrxId(QString applyTrxId);
-    QStringList lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId);
-    QMap<QString,ETHFinalTrx> ethFinalTrxMap;
+
+    void showCrosschainTransactions();
+    void refreshCrosschainTransactionsState();
+    void showEthFinalTrxs();
 
 private slots:
     void jsonDataUpdated(QString id);
@@ -79,25 +48,22 @@ private slots:
     
     void pageChangeSlot(unsigned int page);
 
-    void on_autoConfirmBtn_clicked();
-
-
     void on_ethFinalTrxTableWidget_cellClicked(int row, int column);
 
     void onAssetComboBoxCurrentIndexChanged(const QString &arg1);
 
     void on_ethFinalTrxTableWidget_cellPressed(int row, int column);
 
+    void on_autoSignCheckBox_stateChanged(int arg1);
+
+    void on_autoSignSetBtn_clicked();
+
 private:
     Ui::WithdrawConfirmPage *ui;
     HttpManager httpManager;
     void fetchCoinBalance(int id, QString chainId, QString address);
-
-    void showCrosschainTransactions();
-    void refreshCrosschainTransactionsState();
-
     void fetchEthBalance();
-    void showEthFinalTrxs();
+
 
     void paintEvent(QPaintEvent*);
     PageScrollWidget *pageWidget;

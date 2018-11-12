@@ -158,6 +158,8 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->dataPathLineEdit->setText(HXChain::getInstance()->configFile->value("/settings/chainPath").toString());
     ui->configPathLineEdit->setText(HXChain::getInstance()->walletConfigPath);
 
+    ui->middlewareLineEdit->setText(HXChain::getInstance()->middlewarePath);
+
     ui->toolButton_help->setCheckable(true);
     ui->toolButton_set->setCheckable(true);
     ui->toolButton_set->setChecked(true);
@@ -284,6 +286,9 @@ void SetDialog::on_saveBtn_clicked()
 
     HXChain::getInstance()->contractFee = ui->contractFeeLineEdit->text().toDouble() * qPow(10,ASSET_PRECISION);
     HXChain::getInstance()->configFile->setValue("/settings/contractFee", HXChain::getInstance()->contractFee);
+
+    HXChain::getInstance()->middlewarePath = ui->middlewareLineEdit->text();
+    HXChain::getInstance()->configFile->setValue("/settings/middlewarePath", HXChain::getInstance()->middlewarePath);
 
     mutexForConfigFile.unlock();
 

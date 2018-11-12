@@ -1,7 +1,7 @@
 #include "ColdHotTransferPage.h"
 #include "ui_ColdHotTransferPage.h"
 
-#include "wallet.h"
+
 #include "ColdHotTransferDialog.h"
 #include "ToolButtonWidget.h"
 #include "dialog/TransactionResultDialog.h"
