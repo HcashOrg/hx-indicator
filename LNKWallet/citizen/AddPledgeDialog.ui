@@ -146,6 +146,10 @@
        <height>21</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
+     </property>
      <property name="text">
       <string>当前质押费用:</string>
      </property>
@@ -181,6 +185,10 @@
        <width>81</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      </property>
      <property name="text">
       <string>追加提案费:</string>

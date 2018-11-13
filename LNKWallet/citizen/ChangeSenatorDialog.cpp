@@ -1,6 +1,7 @@
 #include "ChangeSenatorDialog.h"
 #include "ui_ChangeSenatorDialog.h"
 
+#include <limits>
 #include <functional>
 #include "wallet.h"
 #include "FeeChooseWidget.h"
@@ -96,7 +97,7 @@ void ChangeSenatorDialog::InitWidget()
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
 
-
+    installDoubleValidator(ui->lineEdit_feeNumber,0,(std::numeric_limits<double>::max)(),ASSET_PRECISION);
     InitData();
 
 
@@ -128,5 +129,25 @@ void ChangeSenatorDialog::InitData()
 //    QMap<QString,AccountInfo> account(HXChain::getInstance()->accountInfoMap);
 //    foreach (AccountInfo info, account) {
 //        ui->account->addItem(info.name,QVariant::fromValue<AccountInfo>(info));
-//    }
+    //    }
+}
+
+void ChangeSenatorDialog::installDoubleValidator(QLineEdit *line, double mi, double ma, int pre)
+{
+    QDoubleValidator *validator = new QDoubleValidator(mi,ma,pre);
+    validator->setNotation(QDoubleValidator::StandardNotation);
+    line->setValidator( validator );
+    connect(line,&QLineEdit::textChanged,[line](){
+        //修正数值
+        QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(line->validator()));
+        if(!via)
+        {
+            return;
+        }
+        if(line->text().toDouble() > via->top())
+        {
+            line->setText(line->text().remove(line->text().length()-1,1));
+            return;
+        }
+    });
 }

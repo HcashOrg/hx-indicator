@@ -33,6 +33,7 @@ void CreateSenatorDialog::jsonDataUpdated(QString id)
             transactionResultDialog.setInfoText(tr("Transaction of create senator has been sent,please wait for confirmation"));
             transactionResultDialog.setDetailText(result);
             transactionResultDialog.pop();
+            emit CreateSenatorSuccess();
         }
         else
         {

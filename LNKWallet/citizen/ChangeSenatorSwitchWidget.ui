@@ -102,6 +102,10 @@
      <height>16</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
+   </property>
    <property name="text">
     <string>更换为</string>
    </property>
@@ -118,6 +122,10 @@
      <height>16</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
+   </property>
    <property name="text">
     <string>更换为</string>
    </property>
@@ -133,6 +141,10 @@
      <width>70</width>
      <height>16</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </property>
    <property name="text">
     <string>更换为</string>

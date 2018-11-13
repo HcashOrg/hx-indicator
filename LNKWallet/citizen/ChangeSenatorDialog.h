@@ -2,7 +2,7 @@
 #define CHANGESENATORDIALOG_H
 
 #include <QDialog>
-
+class QLineEdit;
 namespace Ui {
 class ChangeSenatorDialog;
 }
@@ -20,6 +20,7 @@ private slots:
 private:
     void InitWidget();
     void InitData();
+    void installDoubleValidator(QLineEdit *line,double mi,double ma,int pre);
 private:
     Ui::ChangeSenatorDialog *ui;
 };

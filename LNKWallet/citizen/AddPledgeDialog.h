@@ -25,6 +25,7 @@ private:
     Ui::AddPledgeDialog *ui;
     QString accountName;
     ProposalInfo proposalInfo;
+    void installDoubleValidator(QLineEdit *line, double mi, double ma, int pre);
 };
 
 #endif // ADDPLEDGEDIALOG_H

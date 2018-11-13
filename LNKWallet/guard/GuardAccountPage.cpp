@@ -68,6 +68,7 @@ void GuardAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg
 void GuardAccountPage::on_newSenatorBtn_clicked()
 {
     CreateSenatorDialog dia;
+    connect(&dia,&CreateSenatorDialog::CreateSenatorSuccess,this,&GuardAccountPage::init);
     dia.exec();
 }
 

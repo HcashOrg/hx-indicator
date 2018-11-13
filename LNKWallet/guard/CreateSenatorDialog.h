@@ -14,6 +14,8 @@ class CreateSenatorDialog : public QDialog
 public:
     explicit CreateSenatorDialog(QWidget *parent = 0);
     ~CreateSenatorDialog();
+signals:
+    void CreateSenatorSuccess();
 private slots:
     void jsonDataUpdated(QString id);
 

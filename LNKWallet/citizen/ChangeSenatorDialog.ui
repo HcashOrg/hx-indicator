@@ -150,11 +150,15 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>50</x>
        <y>70</y>
-       <width>71</width>
+       <width>101</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      </property>
      <property name="text">
       <string>发起人:</string>
@@ -163,11 +167,15 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>50</x>
        <y>102</y>
-       <width>71</width>
+       <width>91</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      </property>
      <property name="text">
       <string>更换名单:</string>
@@ -181,6 +189,10 @@
        <width>211</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      </property>
      <property name="text">
       <string>（一次提议最多可更换三人）</string>
@@ -210,10 +222,14 @@
      <property name="geometry">
       <rect>
        <x>410</x>
-       <y>90</y>
+       <y>102</y>
        <width>71</width>
        <height>21</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      </property>
      <property name="text">
       <string>提案费:</string>
@@ -222,8 +238,8 @@
     <widget class="QLineEdit" name="lineEdit_feeNumber">
      <property name="geometry">
       <rect>
-       <x>470</x>
-       <y>90</y>
+       <x>480</x>
+       <y>100</y>
        <width>171</width>
        <height>20</height>
       </rect>

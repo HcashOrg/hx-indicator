@@ -80,6 +80,8 @@ void AddPledgeDialog::InitWidget()
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
+    installDoubleValidator(ui->lineEdit_feeNumber,0,(std::numeric_limits<double>::max)(),ASSET_PRECISION);
+
     InitData();
 
     connect(ui->closeBtn,&QToolButton::clicked,this,&QDialog::close);
@@ -100,4 +102,24 @@ void AddPledgeDialog::InitWidget()
 void AddPledgeDialog::InitData()
 {
     ui->currentPledge->setText(proposalInfo.pledge);
+}
+
+void AddPledgeDialog::installDoubleValidator(QLineEdit *line, double mi, double ma, int pre)
+{
+    QDoubleValidator *validator = new QDoubleValidator(mi,ma,pre);
+    validator->setNotation(QDoubleValidator::StandardNotation);
+    line->setValidator( validator );
+    connect(line,&QLineEdit::textChanged,[line](){
+        //修正数值
+        QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(line->validator()));
+        if(!via)
+        {
+            return;
+        }
+        if(line->text().toDouble() > via->top())
+        {
+            line->setText(line->text().remove(line->text().length()-1,1));
+            return;
+        }
+    });
 }
