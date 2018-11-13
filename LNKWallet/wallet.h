@@ -34,9 +34,10 @@
 #define MULTISIG_ADDRESS_PREFIX "HXM"
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.0.10"           // 版本号
+#define WALLET_VERSION "1.0.11"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
+#define MIDDLE_DEFAULT_URL      "http://39.98.59.190:5005/api"
 
 #ifdef  TEST_WALLET
 #define WALLET_EXE_SUFFIX   "_test"
@@ -286,11 +287,44 @@ struct FeeChargeInfo
     QString poundagePublishFee;//发布承兑单手续费
     QString poundageCancelFee;//撤销承兑单手续费
     QString transferFee;//转账手续费
-    QString createCitizenFee;
+    QString createCitizenFee;//创建citizen手续费
     QString ChangeSenatorFee;//citizen发起更换senator手续费
+    QString createSenatorFee;//创建senator手续费
 
     QString withDrawFee;//提现手续费--
     QString capitalFee;//资金划转手续费
+};
+
+struct ETHFinalTrx
+{
+    QString trxId;
+    QString signer;
+    QString nonce;
+    QString symbol;
+};
+
+struct ApplyTransaction
+{
+    QString trxId;
+    QString expirationTime;
+    QString withdrawAddress;
+    QString amount;
+    QString assetSymbol;
+    QString assetId;
+    QString crosschainAddress;
+    QString memo;
+};
+struct GeneratedTransaction
+{
+    QString trxId;
+    QStringList ccwTrxIds;      // 交易里包含的apply交易
+};
+
+struct SignTransaction
+{
+    QString trxId;
+    QString generatedTrxId;
+    QString guardAddress;
 };
 
 class HXChain : public QObject
@@ -440,6 +474,7 @@ public:
     void parseTransaction(QString result);
     void checkPendingTransactions();    // 查看pending的交易有没有被确认， 如果过期了就从DB删掉
 
+    // senator相关
     QMap<QString,GuardInfo>   allGuardMap;
 //    void fetchFormalGuards();
     void fetchAllGuards();
@@ -453,6 +488,24 @@ public:
     QString guardAccountIdToName(QString guardAccountId);
     QString guardAddressToName(QString guardAddress);
 
+    // 自动提现
+    QMap<QString,double>    senatorAutoWithdrawAmountMap;
+    void loadAutoWithdrawAmount();          // 从config.ini读取各币种自动提现限额 未设置的币种赋default值
+    double getAssetAutoWithdrawLimit(QString symbol);
+    void autoWithdrawSign();
+
+    // 查询提现交易
+    void fetchCrosschainTransactions();
+    QMap<QString,ApplyTransaction> applyTransactionMap;
+    QMap<QString,ApplyTransaction> pendingApplyTransactionMap;
+    QMap<QString,GeneratedTransaction> generatedTransactionMap;
+    QMap<QString,SignTransaction>   signTransactionMap;
+    QString lookupGeneratedTrxByApplyTrxId(QString applyTrxId);
+    QStringList lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId);
+    QMap<QString,ETHFinalTrx> ethFinalTrxMap;
+
+
+    // citizen相关
     QMap<QString,MinerInfo>     minerMap;
     void fetchMiners();
     void fetchCitizenPayBack();     // 挖矿手续费

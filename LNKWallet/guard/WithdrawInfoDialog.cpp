@@ -41,19 +41,19 @@ void WithdrawInfoDialog::setTrxId(QString _trxId)
     ApplyTransaction at;
     if(page->currentType == 1)
     {
-        at = page->applyTransactionMap.value(_trxId);
+        at = HXChain::getInstance()->applyTransactionMap.value(_trxId);
     }
     else if(page->currentType == 0)
     {
-        at = page->pendingApplyTransactionMap.value(_trxId);
+        at = HXChain::getInstance()->pendingApplyTransactionMap.value(_trxId);
     }
 
     ui->amountLabel->setText(QString("%1 %2").arg(at.amount).arg(at.assetSymbol));
     ui->withdrawAddressLabel->setText(at.withdrawAddress);
     ui->crosschainAddressLabel->setText(at.crosschainAddress);
 
-    QString generatedTrxId = page->lookupGeneratedTrxByApplyTrxId(_trxId);
-    QStringList guardAddresses = page->lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
+    QString generatedTrxId = HXChain::getInstance()->lookupGeneratedTrxByApplyTrxId(_trxId);
+    QStringList guardAddresses = HXChain::getInstance()->lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
 
     int totalNum = HXChain::getInstance()->getFormalGuards().size();
     ui->stateLabel->setText(tr("%1 sentors have signed. %2 sentors have not yet.").arg(guardAddresses.size()).arg(totalNum - guardAddresses.size()));

@@ -68,6 +68,8 @@ private slots:
     void on_backupBtn_clicked();
 
 
+    void on_registerBtn_clicked();
+
 private:
     void InitStyle();
 private:

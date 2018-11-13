@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddLocalPubKeyDialog</class>
- <widget class="QDialog" name="AddLocalPubKeyDialog">
+ <class>AutoWithdrawSetDialog</class>
+ <widget class="QDialog" name="AutoWithdrawSetDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -66,7 +66,7 @@
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>确定</string>
+      <string>保存</string>
      </property>
     </widget>
     <widget class="QToolButton" name="closeBtn">
@@ -175,7 +175,7 @@
      </column>
      <column>
       <property name="text">
-       <string>自动授权限额</string>
+       <string>自动签名限额</string>
       </property>
       <property name="textAlignment">
        <set>AlignCenter</set>

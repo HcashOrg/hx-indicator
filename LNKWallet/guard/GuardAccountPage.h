@@ -20,6 +20,7 @@ public:
 private slots:
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
+    void on_newSenatorBtn_clicked();
 private:
     Ui::GuardAccountPage *ui;
 

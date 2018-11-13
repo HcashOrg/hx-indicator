@@ -10,6 +10,7 @@
 #include "WithdrawInfoDialog.h"
 #include "ColdHotTransferPage.h"
 #include "control/AssetIconItem.h"
+#include "AutoWithdrawSetDialog.h"
 
 static const int ROWNUMBER = 6;
 WithdrawConfirmPage::WithdrawConfirmPage(QWidget *parent) :
@@ -125,158 +126,21 @@ void WithdrawConfirmPage::init()
 
     ui->typeCurrentBtn->setChecked(true);
 
-    ui->autoConfirmBtn->setCheckable(true);
-    ui->autoConfirmBtn->setChecked(HXChain::getInstance()->autoWithdrawConfirm);
-    ui->autoConfirmBtn->hide();
+    ui->autoSignCheckBox->setChecked(HXChain::getInstance()->autoWithdrawConfirm);
+    ui->autoSignSetBtn->setVisible(ui->autoSignCheckBox->isChecked());
 
-    fetchCrosschainTransactions();
+    HXChain::getInstance()->fetchCrosschainTransactions();
 }
 
 void WithdrawConfirmPage::refresh()
 {
-    fetchCrosschainTransactions();
     fetchEthBalance();
 }
 
-void WithdrawConfirmPage::fetchCrosschainTransactions()
-{
-    HXChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(0), toJsonFormat( "get_crosschain_transaction",
-                                                                                    QJsonArray() << 0));
-
-    HXChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(1), toJsonFormat( "get_crosschain_transaction",
-                                                                                    QJsonArray() << 1));
-
-    HXChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(2), toJsonFormat( "get_crosschain_transaction",
-                                                                                    QJsonArray() << 2));
-
-    HXChain::getInstance()->postRPC( "id-get_crosschain_transaction-" + QString::number(7), toJsonFormat( "get_crosschain_transaction",
-                                                                                    QJsonArray() << 7));
-}
 
 void WithdrawConfirmPage::jsonDataUpdated(QString id)
 {
-    if(id.startsWith("id-get_crosschain_transaction-"))
-    {
-        QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
-
-        result.prepend("{");
-        result.append("}");
-
-        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-        QJsonObject jsonObject = parse_doucment.object();
-        QJsonArray array = jsonObject.take("result").toArray();
-
-        int type = id.mid(QString("id-get_crosschain_transaction-").size()).toInt();
-        if(type == 1)
-        {
-            applyTransactionMap.clear();
-            generatedTransactionMap.clear();
-        }
-        else if(type == 2)
-        {
-            signTransactionMap.clear();
-        }
-        else if(type == 0)
-        {
-            pendingApplyTransactionMap.clear();
-        }
-        else if(type == 7)
-        {
-            ethFinalTrxMap.clear();
-            foreach (QJsonValue v, array)
-            {
-                QJsonArray array2 = v.toArray();
-                QJsonObject object = array2.at(1).toObject();
-                QJsonArray operationArray = object.take("operations").toArray();
-                QJsonArray array3 = operationArray.at(0).toArray();
-                int operationType = array3.at(0).toInt();
-                QJsonObject operationObject = array3.at(1).toObject();
-
-                if( operationType == TRANSACTION_TYPE_WITHDRAW_FINAL)
-                {
-                    QJsonObject ethObject = operationObject.value("cross_chain_trx").toObject();
-                    ETHFinalTrx eft;
-                    eft.trxId = array2.at(0).toString();
-                    eft.signer = ethObject.value("signer").toString();
-                    eft.nonce = ethObject.value("nonce").toString();
-                    eft.symbol = operationObject.value("asset_symbol").toString();
-
-                    ethFinalTrxMap.insert(eft.trxId, eft);
-                }
-            }
-
-            showEthFinalTrxs();
-            return;
-        }
-
-
-        foreach (QJsonValue v, array)
-        {
-            QJsonArray array2 = v.toArray();
-            QJsonObject object = array2.at(1).toObject();
-            QJsonArray operationArray = object.take("operations").toArray();
-            QJsonArray array3 = operationArray.at(0).toArray();
-            int operationType = array3.at(0).toInt();
-            QJsonObject operationObject = array3.at(1).toObject();
-
-            if(operationType == TRANSACTION_TYPE_WITHDRAW_CROSSCHAIN)
-            {
-                GeneratedTransaction gt;
-                gt.trxId = array2.at(0).toString();
-                QJsonArray ccwArray = operationObject.take("ccw_trx_ids").toArray();
-                foreach (QJsonValue v, ccwArray)
-                {
-                    gt.ccwTrxIds += v.toString();
-                }
-
-                generatedTransactionMap.insert(gt.trxId, gt);
-            }
-            else if(operationType == TRANSACTION_TYPE_WITHDRAW)
-            {
-                ApplyTransaction at;
-                at.trxId            = array2.at(0).toString();
-                at.expirationTime   = object.take("expiration").toString();
-                at.withdrawAddress  = operationObject.take("withdraw_account").toString();
-                at.amount           = operationObject.take("amount").toString();
-                at.assetSymbol      = operationObject.take("asset_symbol").toString();
-                at.assetId          = operationObject.take("asset_id").toString();
-                at.crosschainAddress  = operationObject.take("crosschain_account").toString();
-                at.memo             = operationObject.take("memo").toString();
-
-                if(type == 0)
-                {
-                    pendingApplyTransactionMap.insert(at.trxId, at);
-                }
-                else
-                {
-                    applyTransactionMap.insert(at.trxId, at);
-                }
-            }
-            else if(operationType == TRANSACTION_TYPE_WITHDRAW_SIGN)
-            {
-                SignTransaction st;
-                st.trxId            = array2.at(0).toString();
-                st.generatedTrxId   = operationObject.take("ccw_trx_id").toString();
-                st.guardAddress     = operationObject.take("guard_address").toString();
-
-                signTransactionMap.insert(st.trxId, st);
-            }
-        }
-
-        if(type != 2)
-        {
-            showCrosschainTransactions();
-        }
-        else
-        {
-            refreshCrosschainTransactionsState();
-        }
-
-        return;
-    }
-
-    if(id == "id-senator_sign_crosschain_transaction")
+    if(id == "WithdrawConfirmPage-senator_sign_crosschain_transaction")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
@@ -456,11 +320,11 @@ void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked(int ro
 
             QString trxId = ui->crosschainTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
 
-            QString generatedTrxId = lookupGeneratedTrxByApplyTrxId(trxId);
+            QString generatedTrxId = HXChain::getInstance()->lookupGeneratedTrxByApplyTrxId(trxId);
 
             if(!generatedTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
             {
-                HXChain::getInstance()->postRPC( "id-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
+                HXChain::getInstance()->postRPC( "WithdrawConfirmPage-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
                                                  QJsonArray() << generatedTrxId << ui->accountComboBox->currentText()));
 
             }
@@ -474,7 +338,7 @@ void WithdrawConfirmPage::showCrosschainTransactions()
 {
     if(currentType == 1)
     {
-        QStringList keys = applyTransactionMap.keys();
+        QStringList keys = HXChain::getInstance()->applyTransactionMap.keys();
         int size = keys.size();
         ui->crosschainTransactionTableWidget->setRowCount(0);
         ui->crosschainTransactionTableWidget->setRowCount(size);
@@ -483,7 +347,7 @@ void WithdrawConfirmPage::showCrosschainTransactions()
         {
             ui->crosschainTransactionTableWidget->setRowHeight(i,40);
 
-            ApplyTransaction at = applyTransactionMap.value(keys.at(i));
+            ApplyTransaction at = HXChain::getInstance()->applyTransactionMap.value(keys.at(i));
 
             ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(toLocalTime(at.expirationTime)));
             ui->crosschainTransactionTableWidget->item(i,0)->setData(Qt::UserRole, at.trxId);
@@ -514,7 +378,7 @@ void WithdrawConfirmPage::showCrosschainTransactions()
     }
     else if( currentType == 0)
     {
-        QStringList keys = pendingApplyTransactionMap.keys();
+        QStringList keys = HXChain::getInstance()->pendingApplyTransactionMap.keys();
         int size = keys.size();
         ui->crosschainTransactionTableWidget->setRowCount(0);
         ui->crosschainTransactionTableWidget->setRowCount(size);
@@ -523,7 +387,7 @@ void WithdrawConfirmPage::showCrosschainTransactions()
         {
             ui->crosschainTransactionTableWidget->setRowHeight(i,40);
 
-            ApplyTransaction at = pendingApplyTransactionMap.value(keys.at(i));
+            ApplyTransaction at = HXChain::getInstance()->pendingApplyTransactionMap.value(keys.at(i));
 
             ui->crosschainTransactionTableWidget->setItem(i, 0, new QTableWidgetItem(toLocalTime(at.expirationTime)));
             ui->crosschainTransactionTableWidget->item(i,0)->setData(Qt::UserRole, at.trxId);
@@ -566,8 +430,8 @@ void WithdrawConfirmPage::refreshCrosschainTransactionsState()
     for(int i = 0; i < rowCount; i++)
     {
         QString trxId = ui->crosschainTransactionTableWidget->item(i,0)->data(Qt::UserRole).toString();
-        QString generatedTrxId = lookupGeneratedTrxByApplyTrxId(trxId);
-        QStringList guardAddresses = lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
+        QString generatedTrxId = HXChain::getInstance()->lookupGeneratedTrxByApplyTrxId(trxId);
+        QStringList guardAddresses = HXChain::getInstance()->lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
 
         QString currentAddress = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
         if(guardAddresses.contains(currentAddress))
@@ -593,7 +457,7 @@ void WithdrawConfirmPage::fetchEthBalance()
 
 void WithdrawConfirmPage::showEthFinalTrxs()
 {
-    QStringList keys = ethFinalTrxMap.keys();
+    QStringList keys = HXChain::getInstance()->ethFinalTrxMap.keys();
     int size = keys.size();
     ui->ethFinalTrxTableWidget->setRowCount(0);
     ui->ethFinalTrxTableWidget->setRowCount(size);
@@ -602,7 +466,7 @@ void WithdrawConfirmPage::showEthFinalTrxs()
     {
         ui->ethFinalTrxTableWidget->setRowHeight(i,40);
 
-        ETHFinalTrx eft = ethFinalTrxMap.value(keys.at(i));
+        ETHFinalTrx eft = HXChain::getInstance()->ethFinalTrxMap.value(keys.at(i));
 
         ui->ethFinalTrxTableWidget->setItem(i, 0, new QTableWidgetItem(eft.symbol));
         AssetIconItem* assetIconItem = new AssetIconItem();
@@ -627,40 +491,6 @@ void WithdrawConfirmPage::showEthFinalTrxs()
     }
 
     tableWidgetSetItemZebraColor(ui->ethFinalTrxTableWidget);
-}
-
-QString WithdrawConfirmPage::lookupGeneratedTrxByApplyTrxId(QString applyTrxId)
-{
-    QString generatedTrxId;
-    QStringList keys = generatedTransactionMap.keys();
-    foreach (QString key, keys)
-    {
-        GeneratedTransaction gt = generatedTransactionMap.value(key);
-        if(gt.ccwTrxIds.contains(applyTrxId))
-        {
-            generatedTrxId = gt.trxId;
-            break;
-        }
-    }
-
-    return generatedTrxId;
-}
-
-QStringList WithdrawConfirmPage::lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId)
-{
-    QStringList result;
-    QStringList keys = signTransactionMap.keys();
-
-    foreach (QString key, keys)
-    {
-        SignTransaction st = signTransactionMap.value(key);
-        if(st.generatedTrxId == generatedTrxId)
-        {
-            result += st.guardAddress;
-        }
-    }
-
-    return result;
 }
 
 void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellPressed(int row, int column)
@@ -741,14 +571,6 @@ void WithdrawConfirmPage::pageChangeSlot(unsigned int page)
     }
 }
 
-void WithdrawConfirmPage::on_autoConfirmBtn_clicked()
-{
-    HXChain::getInstance()->autoWithdrawConfirm = !HXChain::getInstance()->autoWithdrawConfirm;
-    HXChain::getInstance()->configFile->setValue("/settings/autoWithdrawConfirm", HXChain::getInstance()->autoWithdrawConfirm);
-    ui->autoConfirmBtn->setChecked(HXChain::getInstance()->autoWithdrawConfirm);
-}
-
-
 
 void WithdrawConfirmPage::on_ethFinalTrxTableWidget_cellClicked(int row, int column)
 {
@@ -805,4 +627,18 @@ void WithdrawConfirmPage::on_ethFinalTrxTableWidget_cellPressed(int row, int col
 
         return;
     }
+}
+
+void WithdrawConfirmPage::on_autoSignCheckBox_stateChanged(int arg1)
+{
+    HXChain::getInstance()->autoWithdrawConfirm = !HXChain::getInstance()->autoWithdrawConfirm;
+    HXChain::getInstance()->configFile->setValue("/settings/autoWithdrawConfirm", HXChain::getInstance()->autoWithdrawConfirm);
+
+    ui->autoSignSetBtn->setVisible(ui->autoSignCheckBox->isChecked());
+}
+
+void WithdrawConfirmPage::on_autoSignSetBtn_clicked()
+{
+    AutoWithdrawSetDialog autoWithdrawSetDialog;
+    autoWithdrawSetDialog.pop();
 }

@@ -7,6 +7,7 @@
 #include "poundage/PageScrollWidget.h"
 #include "control/BlankDefaultWidget.h"
 #include "extra/HttpManager.h"
+#include "wallet.h"
 
 namespace Ui {
 class ColdHotTransferPage;
@@ -39,13 +40,7 @@ struct ColdHotSignTransaction
     QString guardAddress;
 };
 
-struct ETHFinalTrx
-{
-    QString trxId;
-    QString signer;
-    QString nonce;
-    QString symbol;
-};
+
 
 class ColdHotTransferPage : public QWidget
 {

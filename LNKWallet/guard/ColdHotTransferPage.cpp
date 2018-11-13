@@ -1,7 +1,7 @@
 #include "ColdHotTransferPage.h"
 #include "ui_ColdHotTransferPage.h"
 
-#include "wallet.h"
+
 #include "ColdHotTransferDialog.h"
 #include "ToolButtonWidget.h"
 #include "dialog/TransactionResultDialog.h"
@@ -11,6 +11,7 @@
 #include "showcontentdialog.h"
 #include "ColdHotInfoDialog.h"
 #include "control/AssetIconItem.h"
+#include "SelectColdKeyFileDialog.h"
 
 static const int ROWNUMBER = 6;
 ColdHotTransferPage::ColdHotTransferPage(QWidget *parent) :
@@ -659,19 +660,37 @@ void ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked(int row, 
                 return;
             }
 
-            CheckPwdDialog checkPwdDialog;
-            if(!checkPwdDialog.pop())   return;
+//            CheckPwdDialog checkPwdDialog;
+//            if(!checkPwdDialog.pop())   return;
 
-            if(ui->coldHotTransactionTableWidget->item(row,0))
+            if(ui->coldHotTransactionTableWidget->item(row,0) && ui->coldHotTransactionTableWidget->item(row,2)
+                    && ui->coldHotTransactionTableWidget->item(row,3))
             {
                 QString trxId = ui->coldHotTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
-
                 QString chcTrxId = lookupCrosschainTrxByColdHotTrxId(trxId);
 
                 if(!chcTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
                 {
-                    HXChain::getInstance()->postRPC( "id-senator_sign_coldhot_transaction", toJsonFormat( "senator_sign_coldhot_transaction",
-                                                                                                        QJsonArray() << chcTrxId << ui->accountComboBox->currentText()));
+                    // 判断是冷转热还是热转冷 冷转热需要冷钱包私钥
+                    ColdHotTransaction cht = coldHotTransactionMap.value(trxId);
+                    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(cht.assetId);
+                    if(assetInfo.coldAddress == cht.withdrawAddress)
+                    {
+                        SelectColdKeyFileDialog selectColdKeyFileDialog;
+                        selectColdKeyFileDialog.pop();
+                        if(!selectColdKeyFileDialog.filePath.isEmpty() && !selectColdKeyFileDialog.pwd.isEmpty())
+                        {
+                            HXChain::getInstance()->postRPC( "id-senator_sign_coldhot_transaction", toJsonFormat( "senator_sign_coldhot_transaction",
+                                                             QJsonArray() << chcTrxId << ui->accountComboBox->currentText()
+                                                             << selectColdKeyFileDialog.filePath << selectColdKeyFileDialog.pwd));
+                        }
+                    }
+                    else
+                    {
+                        HXChain::getInstance()->postRPC( "id-senator_sign_coldhot_transaction", toJsonFormat( "senator_sign_coldhot_transaction",
+                                                         QJsonArray() << chcTrxId << ui->accountComboBox->currentText()
+                                                         << "" << ""));
+                    }
 
                 }
             }

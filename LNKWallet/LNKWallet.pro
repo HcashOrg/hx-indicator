@@ -179,7 +179,11 @@ SOURCES += main.cpp\
     multisig/AddMultiSigAddressDialog.cpp \
     citizen/ChangeSenatorDialog.cpp \
     citizen/ChangeSenatorSwitchWidget.cpp \
-    citizen/AddPledgeDialog.cpp
+    citizen/AddPledgeDialog.cpp\
+    guard/AutoWithdrawSetDialog.cpp \
+    guard/ColdKeyPathDialog.cpp \
+    guard/SelectColdKeyFileDialog.cpp \
+    guard/CreateSenatorDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -331,7 +335,11 @@ HEADERS  += firstlogin.h \
     multisig/AddMultiSigAddressDialog.h \
     citizen/ChangeSenatorDialog.h \
     citizen/ChangeSenatorSwitchWidget.h \
-    citizen/AddPledgeDialog.h
+    citizen/AddPledgeDialog.h\
+    guard/AutoWithdrawSetDialog.h \
+    guard/ColdKeyPathDialog.h \
+    guard/SelectColdKeyFileDialog.h \
+    guard/CreateSenatorDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -452,7 +460,11 @@ FORMS    += firstlogin.ui \
     multisig/AddMultiSigAddressDialog.ui \
     citizen/ChangeSenatorDialog.ui \
     citizen/ChangeSenatorSwitchWidget.ui \
-    citizen/AddPledgeDialog.ui
+    citizen/AddPledgeDialog.ui\
+    guard/AutoWithdrawSetDialog.ui \
+    guard/ColdKeyPathDialog.ui \
+    guard/SelectColdKeyFileDialog.ui \
+    guard/CreateSenatorDialog.ui
 
 win32{
     DISTFILES += logo.rc

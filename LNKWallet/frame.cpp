@@ -435,7 +435,7 @@ void Frame::getAccountInfo()
 
     HXChain::getInstance()->fetchMiners();
 
-//    HXChain::getInstance()->fetchCrosschainTransactions();
+    HXChain::getInstance()->fetchCrosschainTransactions();
 }
 
 
@@ -2262,6 +2262,148 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
+    if(id.startsWith("id-get_crosschain_transaction-"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonArray array = jsonObject.take("result").toArray();
+
+        int type = id.mid(QString("id-get_crosschain_transaction-").size()).toInt();
+        if(type == 1)
+        {
+            HXChain::getInstance()->applyTransactionMap.clear();
+            HXChain::getInstance()->generatedTransactionMap.clear();
+        }
+        else if(type == 2)
+        {
+            HXChain::getInstance()->signTransactionMap.clear();
+        }
+        else if(type == 0)
+        {
+            HXChain::getInstance()->pendingApplyTransactionMap.clear();
+        }
+        else if(type == 7)
+        {
+            HXChain::getInstance()->ethFinalTrxMap.clear();
+            foreach (QJsonValue v, array)
+            {
+                QJsonArray array2 = v.toArray();
+                QJsonObject object = array2.at(1).toObject();
+                QJsonArray operationArray = object.take("operations").toArray();
+                QJsonArray array3 = operationArray.at(0).toArray();
+                int operationType = array3.at(0).toInt();
+                QJsonObject operationObject = array3.at(1).toObject();
+
+                if( operationType == TRANSACTION_TYPE_WITHDRAW_FINAL)
+                {
+                    QJsonObject ethObject = operationObject.value("cross_chain_trx").toObject();
+                    ETHFinalTrx eft;
+                    eft.trxId = array2.at(0).toString();
+                    eft.signer = ethObject.value("signer").toString();
+                    eft.nonce = ethObject.value("nonce").toString();
+                    eft.symbol = operationObject.value("asset_symbol").toString();
+
+                    HXChain::getInstance()->ethFinalTrxMap.insert(eft.trxId, eft);
+                }
+            }
+
+            if(withdrawConfirmPage)
+            {
+                withdrawConfirmPage->showEthFinalTrxs();
+            }
+
+            return;
+        }
+
+        foreach (QJsonValue v, array)
+        {
+            QJsonArray array2 = v.toArray();
+            QJsonObject object = array2.at(1).toObject();
+            QJsonArray operationArray = object.take("operations").toArray();
+            QJsonArray array3 = operationArray.at(0).toArray();
+            int operationType = array3.at(0).toInt();
+            QJsonObject operationObject = array3.at(1).toObject();
+
+            if(operationType == TRANSACTION_TYPE_WITHDRAW_CROSSCHAIN)
+            {
+                GeneratedTransaction gt;
+                gt.trxId = array2.at(0).toString();
+                QJsonArray ccwArray = operationObject.take("ccw_trx_ids").toArray();
+                foreach (QJsonValue v, ccwArray)
+                {
+                    gt.ccwTrxIds += v.toString();
+                }
+
+                HXChain::getInstance()->generatedTransactionMap.insert(gt.trxId, gt);
+            }
+            else if(operationType == TRANSACTION_TYPE_WITHDRAW)
+            {
+                ApplyTransaction at;
+                at.trxId            = array2.at(0).toString();
+                at.expirationTime   = object.take("expiration").toString();
+                at.withdrawAddress  = operationObject.take("withdraw_account").toString();
+                at.amount           = operationObject.take("amount").toString();
+                at.assetSymbol      = operationObject.take("asset_symbol").toString();
+                at.assetId          = operationObject.take("asset_id").toString();
+                at.crosschainAddress  = operationObject.take("crosschain_account").toString();
+                at.memo             = operationObject.take("memo").toString();
+
+                if(type == 0)
+                {
+                    HXChain::getInstance()->pendingApplyTransactionMap.insert(at.trxId, at);
+                }
+                else
+                {
+                    HXChain::getInstance()->applyTransactionMap.insert(at.trxId, at);
+                }
+            }
+            else if(operationType == TRANSACTION_TYPE_WITHDRAW_SIGN)
+            {
+                SignTransaction st;
+                st.trxId            = array2.at(0).toString();
+                st.generatedTrxId   = operationObject.take("ccw_trx_id").toString();
+                st.guardAddress     = operationObject.take("guard_address").toString();
+
+                HXChain::getInstance()->signTransactionMap.insert(st.trxId, st);
+            }
+        }
+
+        if(type != 2)
+        {
+            if(withdrawConfirmPage)
+            {
+                withdrawConfirmPage->showCrosschainTransactions();
+            }
+        }
+        else
+        {
+            if(withdrawConfirmPage)
+            {
+                withdrawConfirmPage->refreshCrosschainTransactionsState();
+            }
+
+            if(HXChain::getInstance()->autoWithdrawConfirm)
+            {
+                HXChain::getInstance()->autoWithdrawSign();
+            }
+        }
+
+        return;
+    }
+
+    if(id == "id-senator_sign_crosschain_transaction")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        return;
+    }
 }
 
 void Frame::onBack()

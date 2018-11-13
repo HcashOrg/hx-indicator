@@ -2,12 +2,14 @@
 #include "ui_GuardAccountPage.h"
 
 #include "wallet.h"
+#include "CreateSenatorDialog.h"
 
 GuardAccountPage::GuardAccountPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GuardAccountPage)
 {
     ui->setupUi(this);
+    ui->newSenatorBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     init();
 }
@@ -61,6 +63,12 @@ void GuardAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg
         ui->guardTypeLabel->setText(tr("informal senator"));
         ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_normal.png"));
     }
+}
+
+void GuardAccountPage::on_newSenatorBtn_clicked()
+{
+    CreateSenatorDialog dia;
+    dia.exec();
 }
 
 void GuardAccountPage::paintEvent(QPaintEvent *)

@@ -517,6 +517,36 @@ background:transparent;</string>
     <set>Qt::TextSelectableByMouse</set>
    </property>
   </widget>
+  <widget class="QToolButton" name="registerBtn">
+   <property name="geometry">
+    <rect>
+     <x>560</x>
+     <y>89</y>
+     <width>70</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>注册</string>
+   </property>
+  </widget>
   <zorder>addressLabel</zorder>
   <zorder>title_label</zorder>
   <zorder>addAccountBtn</zorder>
@@ -531,6 +561,7 @@ background:transparent;</string>
   <zorder>pubKeyLabel</zorder>
   <zorder>copyBtn2</zorder>
   <zorder>pubKeyLabel_2</zorder>
+  <zorder>registerBtn</zorder>
  </widget>
  <resources>
   <include location="wallet.qrc"/>
