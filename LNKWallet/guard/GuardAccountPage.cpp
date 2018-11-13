@@ -3,6 +3,7 @@
 
 #include "wallet.h"
 #include "CreateSenatorDialog.h"
+#include "SenatorChangeSenatorDialog.h"
 
 GuardAccountPage::GuardAccountPage(QWidget *parent) :
     QWidget(parent),
@@ -10,6 +11,7 @@ GuardAccountPage::GuardAccountPage(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->newSenatorBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->changeSenator->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     init();
 }
@@ -21,6 +23,7 @@ GuardAccountPage::~GuardAccountPage()
 
 void GuardAccountPage::init()
 {
+    ui->changeSenator->setVisible(false);
     ui->accountComboBox->clear();
     QStringList accounts = HXChain::getInstance()->getMyGuards();
     if(accounts.size() > 0)
@@ -63,12 +66,23 @@ void GuardAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg
         ui->guardTypeLabel->setText(tr("informal senator"));
         ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_normal.png"));
     }
+
+    if("PERMANENT" == info.senatorType)
+    {
+        ui->changeSenator->setVisible(true);
+    }
 }
 
 void GuardAccountPage::on_newSenatorBtn_clicked()
 {
     CreateSenatorDialog dia;
     connect(&dia,&CreateSenatorDialog::CreateSenatorSuccess,this,&GuardAccountPage::init);
+    dia.exec();
+}
+
+void GuardAccountPage::on_changeSenator_clicked()
+{
+    SenatorChangeSenatorDialog dia;
     dia.exec();
 }
 

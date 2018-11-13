@@ -1,38 +1,35 @@
-#include "ChangeSenatorDialog.h"
-#include "ui_ChangeSenatorDialog.h"
+#include "SenatorChangeSenatorDialog.h"
+#include "ui_SenatorChangeSenatorDialog.h"
 
 #include <limits>
 #include <functional>
 #include "wallet.h"
-#include "FeeChooseWidget.h"
 #include "dialog/TransactionResultDialog.h"
 #include "dialog/ErrorResultDialog.h"
 #include "capitalTransferPage/PasswordConfirmWidget.h"
 
-//Q_DECLARE_METATYPE(AccountInfo)
-
-ChangeSenatorDialog::ChangeSenatorDialog(QWidget *parent) :
+SenatorChangeSenatorDialog::SenatorChangeSenatorDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ChangeSenatorDialog)
+    ui(new Ui::SenatorChangeSenatorDialog)
 {
     ui->setupUi(this);
     InitWidget();
 }
 
-ChangeSenatorDialog::~ChangeSenatorDialog()
+SenatorChangeSenatorDialog::~SenatorChangeSenatorDialog()
 {
     delete ui;
 }
 
-void ChangeSenatorDialog::ChangeSenatorSlots()
+void SenatorChangeSenatorDialog::ChangeSenatorSlots()
 {
-    if(ui->account->currentText().isEmpty() || ui->lineEdit_feeNumber->text().isEmpty()) return;
+    if(ui->account->currentText().isEmpty()) return;
 
     QMap<QString,QString> replaceMap = ui->replaceWidget->getReplacePair();
     if(replaceMap.isEmpty()) return;
 
     QString proposingAccount = ui->account->currentText();
-    QString feeNumber = ui->lineEdit_feeNumber->text();
+    int expiration_time = static_cast<int>(ui->lineEdit_expTime->text().toDouble()*3600);
     //发起更换提案
     QJsonArray replaceArr;
     QMapIterator<QString, QString> i(replaceMap);
@@ -44,21 +41,17 @@ void ChangeSenatorDialog::ChangeSenatorSlots()
     }
     //输入密码框
     PasswordConfirmWidget *wi = new PasswordConfirmWidget(HXChain::getInstance()->mainFrame);
-    connect(wi,&PasswordConfirmWidget::confirmSignal,[this,proposingAccount,feeNumber,replaceArr](){
-        if(FeeChooseWidget* feeWidget = dynamic_cast<FeeChooseWidget*>(this->ui->stackedWidget_fee->currentWidget()))
-        {
-            feeWidget->updatePoundageID();
-        }
-        HXChain::getInstance()->postRPC("id_change_senator",toJsonFormat("citizen_referendum_for_senator",
-                                        QJsonArray()<<proposingAccount<<feeNumber<<replaceArr<<true));
+    connect(wi,&PasswordConfirmWidget::confirmSignal,[this,proposingAccount,expiration_time,replaceArr](){
+        HXChain::getInstance()->postRPC("id_senator_change_senator",toJsonFormat("update_senator_formal",
+                                        QJsonArray()<<proposingAccount<<replaceArr<<expiration_time<<true));
 
     });
     wi->show();
 }
 
-void ChangeSenatorDialog::jsonDataUpdated(QString id)
+void SenatorChangeSenatorDialog::jsonDataUpdated(QString id)
 {
-    if("id_change_senator" == id)
+    if("id_senator_change_senator" == id)
     {
         close();
         QString result = HXChain::getInstance()->jsonDataValue(id);
@@ -79,7 +72,7 @@ void ChangeSenatorDialog::jsonDataUpdated(QString id)
     }
 }
 
-void ChangeSenatorDialog::InitWidget()
+void SenatorChangeSenatorDialog::InitWidget()
 {
     setParent(HXChain::getInstance()->mainFrame);
     move(0,0);
@@ -96,45 +89,37 @@ void ChangeSenatorDialog::InitWidget()
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
+    installDoubleValidator(ui->lineEdit_expTime,0,720.0,1);
 
-    installDoubleValidator(ui->lineEdit_feeNumber,0,(std::numeric_limits<double>::max)(),ASSET_PRECISION);
     InitData();
-
+    if(ui->account->currentText().isEmpty())
+    {
+        ui->okBtn->setEnabled(false);
+    }
 
     connect(ui->closeBtn,&QToolButton::clicked,this,&QDialog::close);
     connect(ui->cancelBtn,&QToolButton::clicked,this,&QDialog::close);
-    connect(ui->okBtn,&QToolButton::clicked,this,&ChangeSenatorDialog::ChangeSenatorSlots);
-    connect(HXChain::getInstance(),&HXChain::jsonDataUpdated,this,&ChangeSenatorDialog::jsonDataUpdated);
-
-
-    FeeChooseWidget *feeWidget = new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.ChangeSenatorFee.toDouble(),
-                                                     HXChain::getInstance()->feeType,ui->account->currentText());
-    connect(feeWidget,&FeeChooseWidget::feeSufficient,ui->okBtn,&QToolButton::setEnabled);
-    connect(ui->lineEdit_feeNumber,&QLineEdit::textChanged,[feeWidget](const QString &number){
-        feeWidget->updateFeeNumberSlots(number.toDouble());
-    });
-    connect(ui->account,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
-            std::bind(&FeeChooseWidget::updateAccountNameSlots,feeWidget,std::placeholders::_1,true));
-    ui->stackedWidget_fee->addWidget(feeWidget);
-    ui->stackedWidget_fee->setCurrentIndex(0);
-    ui->stackedWidget_fee->currentWidget()->resize(ui->stackedWidget_fee->size());
+    connect(ui->okBtn,&QToolButton::clicked,this,&SenatorChangeSenatorDialog::ChangeSenatorSlots);
+    connect(HXChain::getInstance(),&HXChain::jsonDataUpdated,this,&SenatorChangeSenatorDialog::jsonDataUpdated);
 
 }
 
-void ChangeSenatorDialog::InitData()
+void SenatorChangeSenatorDialog::InitData()
 {
     //初始化账户combobox
-    QStringList accounts = HXChain::getInstance()->getMyCitizens();
-    ui->account->addItems(accounts);
+    QStringList accounts = HXChain::getInstance()->getMyGuards();
+    foreach (QString acc, accounts) {
 
-    ui->replaceWidget->InitData(false);
-//    QMap<QString,AccountInfo> account(HXChain::getInstance()->accountInfoMap);
-//    foreach (AccountInfo info, account) {
-//        ui->account->addItem(info.name,QVariant::fromValue<AccountInfo>(info));
-    //    }
+        GuardInfo info = HXChain::getInstance()->allGuardMap.value(acc);
+        if("PERMANENT" == info.senatorType)
+        {
+            ui->account->addItem(acc);
+        }
+    }
+    ui->replaceWidget->InitData(true);
 }
 
-void ChangeSenatorDialog::installDoubleValidator(QLineEdit *line, double mi, double ma, int pre)
+void SenatorChangeSenatorDialog::installDoubleValidator(QLineEdit *line, double mi, double ma, int pre)
 {
     QDoubleValidator *validator = new QDoubleValidator(mi,ma,pre);
     validator->setNotation(QDoubleValidator::StandardNotation);

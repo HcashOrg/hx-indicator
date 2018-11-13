@@ -21,6 +21,8 @@ private slots:
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
     void on_newSenatorBtn_clicked();
+
+    void on_changeSenator_clicked();
 private:
     Ui::GuardAccountPage *ui;
 

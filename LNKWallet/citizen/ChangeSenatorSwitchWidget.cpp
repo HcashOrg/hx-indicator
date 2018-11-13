@@ -49,20 +49,27 @@ void ChangeSenatorSwitchWidget::AddProposalSlots()
 
 void ChangeSenatorSwitchWidget::InitWidget()
 {
-    InitData();
+//    InitData();
     SetItemVisible(2,false);
     SetItemVisible(3,false);
     connect(ui->addBtn,&QToolButton::clicked,this,&ChangeSenatorSwitchWidget::AddProposalSlots);
 }
 
-void ChangeSenatorSwitchWidget::InitData()
+void ChangeSenatorSwitchWidget::InitData(bool showPermanent)
 {
+    ui->senator1->clear();
+    ui->senator2->clear();
+    ui->senator3->clear();
+    ui->candidate1->clear();
+    ui->candidate2->clear();
+    ui->candidate3->clear();
+
     //初始化提案combobox
     QMap<QString,GuardInfo> allSenator(HXChain::getInstance()->allGuardMap);
     QMapIterator<QString, GuardInfo> i(allSenator);
     while (i.hasNext()) {
         i.next();
-        if("EXTERNAL" != i.value().senatorType) continue;
+        if(!showPermanent && ("EXTERNAL" != i.value().senatorType)) continue;
         if(i.value().isFormal)
         {
             ui->senator1->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
