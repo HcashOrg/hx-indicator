@@ -91,6 +91,7 @@ void AddPledgeDialog::InitWidget()
 
     FeeChooseWidget *feeWidget = new FeeChooseWidget(0,HXChain::getInstance()->feeType,accountName);
     connect(feeWidget,&FeeChooseWidget::feeSufficient,ui->okBtn,&QToolButton::setEnabled);
+    QTimer::singleShot(100,[this,feeWidget](){this->ui->okBtn->setEnabled(feeWidget->isSufficient());});
     connect(ui->lineEdit_feeNumber,&QLineEdit::textChanged,[feeWidget](const QString &number){
         feeWidget->updateFeeNumberSlots(number.toDouble());
     });

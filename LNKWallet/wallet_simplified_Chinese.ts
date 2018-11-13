@@ -404,17 +404,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/AddPledgeDialog.ui" line="150"/>
+        <location filename="citizen/AddPledgeDialog.ui" line="154"/>
         <source>当前质押费用:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/AddPledgeDialog.ui" line="163"/>
+        <location filename="citizen/AddPledgeDialog.ui" line="167"/>
         <source>number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/AddPledgeDialog.ui" line="186"/>
+        <location filename="citizen/AddPledgeDialog.ui" line="194"/>
         <source>追加提案费:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1837,37 +1837,37 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.ui" line="160"/>
+        <location filename="citizen/ChangeSenatorDialog.ui" line="164"/>
         <source>发起人:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.ui" line="173"/>
+        <location filename="citizen/ChangeSenatorDialog.ui" line="181"/>
         <source>更换名单:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.ui" line="186"/>
+        <location filename="citizen/ChangeSenatorDialog.ui" line="198"/>
         <source>（一次提议最多可更换三人）</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.ui" line="219"/>
+        <location filename="citizen/ChangeSenatorDialog.ui" line="235"/>
         <source>提案费:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.ui" line="232"/>
+        <location filename="citizen/ChangeSenatorDialog.ui" line="248"/>
         <source>最少为1000HX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.cpp" line="67"/>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="68"/>
         <source>Transaction of changing senators has been sent,please wait for confirmation</source>
         <translation type="unfinished">已经发起更换Senator投票，请等待</translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.cpp" line="74"/>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="75"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
@@ -1885,9 +1885,9 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="106"/>
-        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="122"/>
-        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="138"/>
+        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="110"/>
+        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="130"/>
+        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="150"/>
         <source>更换为</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4814,19 +4814,24 @@ add an account first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.cpp" line="43"/>
+        <location filename="guard/GuardAccountPage.ui" line="285"/>
+        <source>更换Senator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardAccountPage.cpp" line="46"/>
         <source>There are no senator accounts in the wallet.</source>
         <oldsource>There are no senator accounts in the wallet.</oldsource>
         <translation type="unfinished">钱包内没有senator账户</translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.cpp" line="58"/>
+        <location filename="guard/GuardAccountPage.cpp" line="61"/>
         <source>formal senator</source>
         <oldsource>formal guard</oldsource>
         <translation type="unfinished">正式senator</translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.cpp" line="63"/>
+        <location filename="guard/GuardAccountPage.cpp" line="66"/>
         <source>informal senator</source>
         <oldsource>informal guard</oldsource>
         <translation type="unfinished">非正式senator</translation>
@@ -7840,6 +7845,64 @@ update or not?</source>
         <source>Max: %1 %2</source>
         <oldsource>Total %1 %2</oldsource>
         <translation type="unfinished">最大: %1 %2</translation>
+    </message>
+</context>
+<context>
+    <name>SenatorChangeSenatorDialog</name>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished">确定</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="69"/>
+        <source>取消</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="89"/>
+        <source>更换Senator提案</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="115"/>
+        <source>确定</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="164"/>
+        <source>发起人:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="181"/>
+        <source>更换名单:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="198"/>
+        <source>（一次提议最多可更换三人）</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="225"/>
+        <source>失效时间(h):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="238"/>
+        <source>不超过720小时</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.cpp" line="61"/>
+        <source>Transaction of changing senators has been sent,please wait for confirmation</source>
+        <translation type="unfinished">已经发起更换Senator投票，请等待</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.cpp" line="68"/>
+        <source>Failed!</source>
+        <translation type="unfinished">失败！</translation>
     </message>
 </context>
 <context>

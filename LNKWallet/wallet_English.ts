@@ -437,17 +437,17 @@
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="citizen/AddPledgeDialog.ui" line="150"/>
+        <location filename="citizen/AddPledgeDialog.ui" line="154"/>
         <source>当前质押费用:</source>
         <translation type="unfinished">Current Pledge:</translation>
     </message>
     <message>
-        <location filename="citizen/AddPledgeDialog.ui" line="163"/>
+        <location filename="citizen/AddPledgeDialog.ui" line="167"/>
         <source>number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/AddPledgeDialog.ui" line="186"/>
+        <location filename="citizen/AddPledgeDialog.ui" line="194"/>
         <source>追加提案费:</source>
         <translation type="unfinished">Add Pledge:</translation>
     </message>
@@ -1895,37 +1895,37 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.ui" line="160"/>
+        <location filename="citizen/ChangeSenatorDialog.ui" line="164"/>
         <source>发起人:</source>
         <translation type="unfinished">Proposer:</translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.ui" line="173"/>
+        <location filename="citizen/ChangeSenatorDialog.ui" line="181"/>
         <source>更换名单:</source>
         <translation type="unfinished">Nomination List:</translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.ui" line="186"/>
+        <location filename="citizen/ChangeSenatorDialog.ui" line="198"/>
         <source>（一次提议最多可更换三人）</source>
         <translation type="unfinished">(Three Nomination Most)</translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.ui" line="219"/>
+        <location filename="citizen/ChangeSenatorDialog.ui" line="235"/>
         <source>提案费:</source>
         <translation type="unfinished">Pledge:</translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.ui" line="232"/>
+        <location filename="citizen/ChangeSenatorDialog.ui" line="248"/>
         <source>最少为1000HX</source>
         <translation type="unfinished">1000HX At Least</translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.cpp" line="67"/>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="68"/>
         <source>Transaction of changing senators has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.cpp" line="74"/>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="75"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1943,9 +1943,9 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="106"/>
-        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="122"/>
-        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="138"/>
+        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="110"/>
+        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="130"/>
+        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="150"/>
         <source>更换为</source>
         <translation type="unfinished">Replaced By</translation>
     </message>
@@ -5016,6 +5016,11 @@ Cover it or not?</source>
         <translation type="unfinished">CREATE SENATOR</translation>
     </message>
     <message>
+        <location filename="guard/GuardAccountPage.ui" line="285"/>
+        <source>更换Senator</source>
+        <translation type="unfinished">CHANGE SENATOR</translation>
+    </message>
+    <message>
         <source>当前guard账号</source>
         <oldsource>当前账号</oldsource>
         <translation type="obsolete">Current Guard</translation>
@@ -5030,19 +5035,19 @@ Cover it or not?</source>
         <translation type="unfinished">ADDRESS</translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.cpp" line="43"/>
+        <location filename="guard/GuardAccountPage.cpp" line="46"/>
         <source>There are no senator accounts in the wallet.</source>
         <oldsource>There are no senator accounts in the wallet.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.cpp" line="58"/>
+        <location filename="guard/GuardAccountPage.cpp" line="61"/>
         <source>formal senator</source>
         <oldsource>formal guard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardAccountPage.cpp" line="63"/>
+        <location filename="guard/GuardAccountPage.cpp" line="66"/>
         <source>informal senator</source>
         <oldsource>informal guard</oldsource>
         <translation type="unfinished"></translation>
@@ -7975,6 +7980,64 @@ p, li { white-space: pre-wrap; }
         <location filename="exchange/selldialog.cpp" line="194"/>
         <source>Max: %1 %2</source>
         <oldsource>Total %1 %2</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SenatorChangeSenatorDialog</name>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="69"/>
+        <source>取消</source>
+        <translation type="unfinished">Cancel</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="89"/>
+        <source>更换Senator提案</source>
+        <translation type="unfinished">Change Senator</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="115"/>
+        <source>确定</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="164"/>
+        <source>发起人:</source>
+        <translation type="unfinished">Proposer:</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="181"/>
+        <source>更换名单:</source>
+        <translation type="unfinished">Nomination List:</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="198"/>
+        <source>（一次提议最多可更换三人）</source>
+        <translation type="unfinished">(Three Nomination Most)</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="225"/>
+        <source>失效时间(h):</source>
+        <translation type="unfinished">Expiration Time(h):</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.ui" line="238"/>
+        <source>不超过720小时</source>
+        <translation type="unfinished">720 hours at most</translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.cpp" line="61"/>
+        <source>Transaction of changing senators has been sent,please wait for confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SenatorChangeSenatorDialog.cpp" line="68"/>
+        <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

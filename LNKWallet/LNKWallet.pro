@@ -183,7 +183,8 @@ SOURCES += main.cpp\
     guard/AutoWithdrawSetDialog.cpp \
     guard/ColdKeyPathDialog.cpp \
     guard/SelectColdKeyFileDialog.cpp \
-    guard/CreateSenatorDialog.cpp
+    guard/CreateSenatorDialog.cpp \
+    guard/SenatorChangeSenatorDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -339,7 +340,8 @@ HEADERS  += firstlogin.h \
     guard/AutoWithdrawSetDialog.h \
     guard/ColdKeyPathDialog.h \
     guard/SelectColdKeyFileDialog.h \
-    guard/CreateSenatorDialog.h
+    guard/CreateSenatorDialog.h \
+    guard/SenatorChangeSenatorDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -464,7 +466,8 @@ FORMS    += firstlogin.ui \
     guard/AutoWithdrawSetDialog.ui \
     guard/ColdKeyPathDialog.ui \
     guard/SelectColdKeyFileDialog.ui \
-    guard/CreateSenatorDialog.ui
+    guard/CreateSenatorDialog.ui \
+    guard/SenatorChangeSenatorDialog.ui
 
 win32{
     DISTFILES += logo.rc
