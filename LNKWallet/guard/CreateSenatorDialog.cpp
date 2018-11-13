@@ -113,9 +113,10 @@ void CreateSenatorDialog::InitData()
     QStringList keys = HXChain::getInstance()->getRegisteredAccounts();
     QStringList miners = HXChain::getInstance()->minerMap.keys();
     QStringList citizens = HXChain::getInstance()->getMyCitizens();
+    QStringList senators = HXChain::getInstance()->getMyGuards();
     foreach (QString key, keys)
     {
-        if(miners.contains(key) || citizens.contains(key))
+        if(miners.contains(key) || citizens.contains(key) || senators.contains(key))
         {
             keys.removeAll(key);
         }
