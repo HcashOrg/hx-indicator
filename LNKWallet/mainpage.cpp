@@ -27,6 +27,7 @@
 #include "dialog/ErrorResultDialog.h"
 #include "control/AssetIconItem.h"
 #include "control/BlankDefaultWidget.h"
+#include "miner/registerdialog.h"
 
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
@@ -489,6 +490,7 @@ void MainPage::InitStyle()
     ui->allTransactionBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->importAccountBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->addAccountBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->registerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 //    ui->accountComboBox->setStyleSheet("QComboBox{border: none;background:transparent;font: 12pt \"Microsoft YaHei UI Light\";\
 //               background-position: center left;color: black;selection-background-color: darkgray;}");
 
@@ -514,3 +516,18 @@ void MainPage::on_backupBtn_clicked()
 }
 
 
+
+void MainPage::on_registerBtn_clicked()
+{
+    if(HXChain::getInstance()->getUnregisteredAccounts().isEmpty())
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText(tr("There are no unregistered accounts in the wallet!"));
+        commonDialog.pop();
+    }
+    else
+    {
+        RegisterDialog registerDialog;
+        registerDialog.pop();
+    }
+}

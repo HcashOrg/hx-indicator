@@ -177,7 +177,9 @@ SOURCES += main.cpp\
     multisig/MultiSigTrxResultDialog.cpp \
     multisig/AddLocalPubKeyDialog.cpp \
     multisig/AddMultiSigAddressDialog.cpp \
-    guard/AutoWithdrawSetDialog.cpp
+    guard/AutoWithdrawSetDialog.cpp \
+    guard/ColdKeyPathDialog.cpp \
+    guard/SelectColdKeyFileDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -327,7 +329,9 @@ HEADERS  += firstlogin.h \
     multisig/MultiSigTrxResultDialog.h \
     multisig/AddLocalPubKeyDialog.h \
     multisig/AddMultiSigAddressDialog.h \
-    guard/AutoWithdrawSetDialog.h
+    guard/AutoWithdrawSetDialog.h \
+    guard/ColdKeyPathDialog.h \
+    guard/SelectColdKeyFileDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -446,7 +450,9 @@ FORMS    += firstlogin.ui \
     multisig/MultiSigTrxResultDialog.ui \
     multisig/AddLocalPubKeyDialog.ui \
     multisig/AddMultiSigAddressDialog.ui \
-    guard/AutoWithdrawSetDialog.ui
+    guard/AutoWithdrawSetDialog.ui \
+    guard/ColdKeyPathDialog.ui \
+    guard/SelectColdKeyFileDialog.ui
 
 win32{
     DISTFILES += logo.rc

@@ -12,6 +12,7 @@
 #include "dialog/ErrorResultDialog.h"
 #include "AssetChangeHistoryWidget.h"
 #include "ChangeCrosschainAddressDialog.h"
+#include "ColdKeyPathDialog.h"
 
 
 static const int ROWNUMBER = 7;
@@ -250,15 +251,14 @@ void GuardKeyManagePage::on_multisigTableWidget_cellClicked(int row, int column)
         if(ui->multisigTableWidget->item(row,5)->text() != tr("update"))    return;
 
         QString assetSymbol = ui->multisigTableWidget->item(row,0)->text();
-        CommonDialog commonDialog(CommonDialog::YesOrNo);
-        commonDialog.setText(tr("You are changing the key of %1 multisig-address on the chain. Sure to change it?").arg(assetSymbol));
-        if(commonDialog.pop())
-        {
-            CheckPwdDialog checkPwdDialog;
-            if(!checkPwdDialog.pop())   return;
 
+        ColdKeyPathDialog coldKeyPathDialog(ui->accountComboBox->currentText());
+        coldKeyPathDialog.pop();
+        if(!coldKeyPathDialog.filePath.isEmpty() && !coldKeyPathDialog.pwd.isEmpty())
+        {
             HXChain::getInstance()->postRPC( "id-update_asset_private_keys", toJsonFormat( "update_asset_private_keys",
-                                    QJsonArray() << ui->accountComboBox->currentText() << assetSymbol << true));
+                                    QJsonArray() << ui->accountComboBox->currentText() << assetSymbol
+                                    << coldKeyPathDialog.filePath << coldKeyPathDialog.pwd << true));
 
         }
 

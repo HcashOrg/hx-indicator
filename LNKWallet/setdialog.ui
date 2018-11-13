@@ -518,7 +518,7 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>25</x>
-           <y>168</y>
+           <y>172</y>
            <width>140</width>
            <height>20</height>
           </rect>
@@ -547,7 +547,7 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>190</x>
-           <y>170</y>
+           <y>174</y>
            <width>44</width>
            <height>16</height>
           </rect>
@@ -631,14 +631,14 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>25</x>
-           <y>184</y>
+           <y>192</y>
            <width>261</width>
-           <height>40</height>
+           <height>30</height>
           </rect>
          </property>
          <property name="styleSheet">
           <string notr="true">color: rgb(255, 0, 0);
-font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
+font: 11px &quot;微软雅黑&quot;;</string>
          </property>
          <property name="text">
           <string>开启后，充值的资产将被自动划转至多签地址</string>

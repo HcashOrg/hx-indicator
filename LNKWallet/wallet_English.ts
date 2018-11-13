@@ -2380,80 +2380,118 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="obsolete">There&apos;s no bonus record!</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="86"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="87"/>
         <source>There are no cold-hot trxs currently!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="125"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="126"/>
         <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="276"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="277"/>
         <source>Transaction of senator-sign-coldhot has been sent out!</source>
         <oldsource>Transaction of guard-sign-coldhot has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="282"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="334"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="283"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="335"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="328"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="329"/>
         <source>Transaction of senator-sign-eth-coldhot-final has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="358"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="359"/>
         <source>no key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="456"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="575"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="654"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="457"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="576"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="655"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="458"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="499"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="459"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="500"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="366"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="465"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="367"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="466"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="497"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="498"/>
         <source>waiting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="534"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="647"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="535"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="648"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="538"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="539"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="650"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="651"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="657"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="658"/>
         <source>Wait for checking the signature of %1!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ColdKeyPathDialog</name>
+    <message>
+        <location filename="guard/ColdKeyPathDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdKeyPathDialog.ui" line="139"/>
+        <source>选择路径</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdKeyPathDialog.ui" line="165"/>
+        <source>创建冷钱包私钥文件</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdKeyPathDialog.ui" line="192"/>
+        <source>创建</source>
+        <translation type="unfinished">Create</translation>
+    </message>
+    <message>
+        <location filename="guard/ColdKeyPathDialog.ui" line="211"/>
+        <source>取消</source>
+        <translation type="unfinished">Cancel</translation>
+    </message>
+    <message>
+        <location filename="guard/ColdKeyPathDialog.ui" line="237"/>
+        <source>设置私钥文件密码</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdKeyPathDialog.cpp" line="58"/>
+        <source>Select the path</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4922,61 +4960,56 @@ Cover it or not?</source>
         <translation type="obsolete">There&apos;s no bonus record!</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="56"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="57"/>
         <source>There are no records!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="88"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="89"/>
         <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="123"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="124"/>
         <source>no update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="127"/>
-        <location filename="guard/GuardKeyManagePage.cpp" line="238"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="128"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="239"/>
         <source>updating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="137"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="138"/>
         <source>no senator</source>
         <oldsource>no guard</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="145"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="146"/>
         <source>updated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="155"/>
-        <location filename="guard/GuardKeyManagePage.cpp" line="250"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="156"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="251"/>
         <source>update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="197"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="198"/>
         <source>Transaction of updating multisig-address has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="204"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="205"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="214"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="215"/>
         <source>The cross-chain keys has already imported.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="254"/>
-        <source>You are changing the key of %1 multisig-address on the chain. Sure to change it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5443,6 +5476,11 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="unfinished">PUBKEY</translation>
     </message>
     <message>
+        <location filename="mainpage.ui" line="547"/>
+        <source>注册</source>
+        <translation type="unfinished">REGISTER</translation>
+    </message>
+    <message>
         <source>当前账号</source>
         <translation type="obsolete">Account</translation>
     </message>
@@ -5508,39 +5546,44 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="obsolete">Delegate</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="76"/>
+        <location filename="mainpage.cpp" line="77"/>
         <source>there&apos;s no account or assest!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="119"/>
+        <location filename="mainpage.cpp" line="120"/>
         <source>transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="122"/>
+        <location filename="mainpage.cpp" line="123"/>
         <source>deposit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="123"/>
+        <location filename="mainpage.cpp" line="124"/>
         <source>withdraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="124"/>
+        <location filename="mainpage.cpp" line="125"/>
         <source>allot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="363"/>
+        <location filename="mainpage.cpp" line="364"/>
         <source>Fail to create account!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="481"/>
-        <location filename="mainpage.cpp" line="484"/>
+        <location filename="mainpage.cpp" line="482"/>
+        <location filename="mainpage.cpp" line="485"/>
         <source>copy to clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainpage.cpp" line="525"/>
+        <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7566,6 +7609,44 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>名字</source>
         <translation type="obsolete">Name</translation>
+    </message>
+</context>
+<context>
+    <name>SelectColdKeyFileDialog</name>
+    <message>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="139"/>
+        <source>选择路径</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="165"/>
+        <source>选择冷钱包私钥文件</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="192"/>
+        <source>确定</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="211"/>
+        <source>取消</source>
+        <translation type="unfinished">Cancel</translation>
+    </message>
+    <message>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="237"/>
+        <source>私钥文件密码</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/SelectColdKeyFileDialog.cpp" line="57"/>
+        <source>Choose your private key file.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
