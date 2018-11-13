@@ -99,7 +99,7 @@ void CreateSenatorDialog::InitWidget()
 
     FeeChooseWidget *feeWidget = new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.createSenatorFee.toDouble(),
                                                      HXChain::getInstance()->feeType,ui->accountComboBox->currentText());
-//    QTimer::singleShot(100,[this,feeWidget](){this->ui->okBtn->setEnabled(feeWidget->isSufficient());});
+    QTimer::singleShot(100,[this,feeWidget](){this->ui->okBtn->setEnabled(feeWidget->isSufficient() && !ui->accountComboBox->currentText().isEmpty());});
     connect(feeWidget,&FeeChooseWidget::feeSufficient,ui->okBtn,&QToolButton::setEnabled);
     connect(ui->accountComboBox,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated),
             std::bind(&FeeChooseWidget::updateAccountNameSlots,feeWidget,std::placeholders::_1,true));
