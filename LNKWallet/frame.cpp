@@ -1753,6 +1753,7 @@ void Frame::jsonDataUpdated(QString id)
                 HXChain::getInstance()->allGuardMap[account].accountId   = accountId;
                 HXChain::getInstance()->allGuardMap[account].voteId      = object.take("vote_id").toString();
                 HXChain::getInstance()->allGuardMap[account].isFormal    = object.take("formal").toBool();
+                HXChain::getInstance()->allGuardMap[account].senatorType = object.take("senator_type").toString();
 
                 HXChain::getInstance()->postRPC( "guard-get_account-" + accountId, toJsonFormat( "get_account", QJsonArray() << accountId));
 
@@ -2007,6 +2008,8 @@ void Frame::jsonDataUpdated(QString id)
                 {
                     info.requiredAccounts += v4.toString();
                 }
+
+                info.pledge = getBigNumberString(object.take("pledge").toDouble(),ASSET_PRECISION);
 
                 info.proposalOperationType = proposedTransactionValue.toObject().take("operations").toArray()
                         .at(0).toArray().at(0).toInt();

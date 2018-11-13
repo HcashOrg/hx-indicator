@@ -26,6 +26,7 @@ private slots:
 
     void on_proposalTableWidget_cellClicked(int row, int column);
 
+    void on_changeSenatorBtn_clicked();
 private:
     Ui::CitizenProposalPage *ui;
     bool inited = false;

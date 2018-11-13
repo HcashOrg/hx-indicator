@@ -8,6 +8,10 @@
 #include "dialog/ErrorResultDialog.h"
 #include "guard/ProposalDetailDialog.h"
 #include "guard/ProposalPage.h"
+#include "citizen/ChangeSenatorDialog.h"
+#include "citizen/AddPledgeDialog.h"
+
+Q_DECLARE_METATYPE(ProposalInfo)
 
 CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     QWidget(parent),
@@ -30,14 +34,17 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->proposalTableWidget->horizontalHeader()->setVisible(true);
     ui->proposalTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->proposalTableWidget->setColumnWidth(0,110);
+    ui->proposalTableWidget->setColumnWidth(0,90);
     ui->proposalTableWidget->setColumnWidth(1,90);
     ui->proposalTableWidget->setColumnWidth(2,100);
     ui->proposalTableWidget->setColumnWidth(3,100);
     ui->proposalTableWidget->setColumnWidth(4,80);
-    ui->proposalTableWidget->setColumnWidth(5,80);
-    ui->proposalTableWidget->setColumnWidth(6,80);
+    ui->proposalTableWidget->setColumnWidth(5,60);
+    ui->proposalTableWidget->setColumnWidth(6,60);
+    ui->proposalTableWidget->setColumnWidth(7,60);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+
+    ui->changeSenatorBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->proposalTableWidget);
 
@@ -146,20 +153,23 @@ void CitizenProposalPage::showProposals()
         ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(toLocalTime(info.expirationTime)));
         ui->proposalTableWidget->item(i,0)->setData(Qt::UserRole,info.proposalId);
 
-        ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(HXChain::getInstance()->guardAccountIdToName(info.proposer)));
+        QMap<QString,MinerInfo> allCitizen(HXChain::getInstance()->minerMap);
+        QMapIterator<QString, MinerInfo> it(allCitizen);
+        QString citizenName = "";
+        while (it.hasNext()) {
+            it.next();
+            if(info.proposer == it.value().accountId)
+            {
+                citizenName = it.key();
+                break;
+            }
+        }
+        ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(citizenName));
 
         QString typeStr;
-        if(info.proposalOperationType ==  TRANSACTION_TYPE_FORMAL_GUARD)
+        if(TRANSACTION_TYPE_CITIZEN_CHANGE_SENATOR == info.proposalOperationType)
         {
-            typeStr = tr("set senator formal/informal");
-        }
-        else if(info.proposalOperationType == TRANSACTION_TYPE_CROSSCHAIN_FEE)
-        {
-            typeStr = tr("set crosschain fee");
-        }
-        else if(info.proposalOperationType == TRANSACTION_TYPE_SET_LOCKBALANCE)
-        {
-            typeStr = tr("set locked balance of senator");
+            typeStr = tr("change senator");
         }
         else
         {
@@ -197,6 +207,7 @@ void CitizenProposalPage::showProposals()
         {
             ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(tr("approve")));
             ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("disapprove")));
+            ui->proposalTableWidget->setItem(i,7,new QTableWidgetItem(tr("addPledge")));
 
 
             ToolButtonWidget *toolButton = new ToolButtonWidget();
@@ -208,6 +219,12 @@ void CitizenProposalPage::showProposals()
             toolButton2->setText(ui->proposalTableWidget->item(i,6)->text());
             ui->proposalTableWidget->setCellWidget(i,6,toolButton2);
             connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,6));
+
+            ToolButtonWidget *tooButton3 = new ToolButtonWidget();
+            tooButton3->setText(ui->proposalTableWidget->item(i,7)->text());
+            ui->proposalTableWidget->setCellWidget(i,7,tooButton3);
+            ui->proposalTableWidget->item(i,7)->setData(Qt::UserRole,QVariant::fromValue<ProposalInfo>(info));
+            connect(tooButton3,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,7));
 
             if(info.approvedKeys.contains(address))
             {
@@ -257,7 +274,7 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
             QJsonObject object;
             object.insert("key_approvals_to_add", array);
 
-            HXChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_proposal",
+            HXChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_referendum",
                                     QJsonArray() << ui->accountComboBox->currentText()
                                     << ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString()
                                     << object << true));
@@ -277,11 +294,23 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
             QJsonObject object;
             object.insert("key_approvals_to_remove", array);
 
-            HXChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_proposal",
+            HXChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_referendum",
                                     QJsonArray() << ui->accountComboBox->currentText()
                                     << ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString()
                                     << object << true));
         }
         return;
     }
+
+    if(7 == column)
+    {
+        AddPledgeDialog dia(ui->accountComboBox->currentText(),ui->proposalTableWidget->item(row,column)->data(Qt::UserRole).value<ProposalInfo>());
+        dia.exec();
+    }
+}
+
+void CitizenProposalPage::on_changeSenatorBtn_clicked()
+{
+    ChangeSenatorDialog dia;
+    dia.exec();
 }

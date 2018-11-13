@@ -252,9 +252,44 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         tableWidgetSetItemZebraColor(ui->senatorLockBalanceTableWidget);
     }
         break;
+    case TRANSACTION_TYPE_CITIZEN_CHANGE_SENATOR:
+    {
+        ui->typeLabel->setText(tr("citizen vote for changing senator"));
+        ui->typeStackedWidget->setCurrentIndex(11);
+
+        QString changeStr = tr("%1      replaced by        %2");
+        ui->label_fee->setText(info.pledge);
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        QJsonArray arr = operationObject.value("replace_queue").toArray();
+        int i = 0;
+        ui->label_change1->setVisible(false);
+        ui->label_change2->setVisible(false);
+        ui->label_change3->setVisible(false);
+        foreach (QJsonValue val, arr) {
+            QJsonArray pair = val.toArray();
+            if(0 == i)
+            {
+                ui->label_change1->setText(changeStr.arg(pair.at(0).toString()).arg(pair.at(1).toString()));
+                ui->label_change1->setVisible(true);
+            }
+            else if(1 == i)
+            {
+                ui->label_change2->setText(changeStr.arg(pair.at(0).toString()).arg(pair.at(1).toString()));
+                ui->label_change2->setVisible(true);
+            }
+            else if(2 == i)
+            {
+                ui->label_change3->setText(changeStr.arg(pair.at(0).toString()).arg(pair.at(1).toString()));
+                ui->label_change3->setVisible(true);
+            }
+            ++i;
+        }
+
+    }
+        break;
     default:
         ui->typeLabel->setText(tr("unknown(%1)").arg(info.proposalOperationType));
-        ui->typeStackedWidget->setCurrentIndex(11);
+        ui->typeStackedWidget->setCurrentIndex(12);
         break;
     }
 }

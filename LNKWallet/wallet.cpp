@@ -665,6 +665,7 @@ void HXChain::InitFeeCharge()
     feeChargeInfo.poundageCancelFee = feeObj.value("PoundageCancel").toString();
     feeChargeInfo.transferFee = feeObj.value("Transfer").toString();
     feeChargeInfo.createCitizenFee = feeObj.value("CreateCitizen").toString();
+    feeChargeInfo.ChangeSenatorFee = feeObj.value("ChangeSenator").toString();
 
     //其他费用
     QJsonObject crossfeeObj = jsonObject.value("CrossFee").toObject();
@@ -1159,7 +1160,7 @@ void HXChain::fetchProposals()
 {
     if(allGuardMap.size() < 1 || minerMap.size() < 1)   return;
     postRPC( "senator-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << allGuardMap.keys().at(0)));
-    postRPC( "citizen-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << minerMap.keys().at(0)));
+    postRPC( "citizen-get_proposal_for_voter", toJsonFormat( "get_referendum_for_voter", QJsonArray() << minerMap.keys().at(0)));
 }
 
 QString HXChain::citizenAccountIdToName(QString citizenAccountId)

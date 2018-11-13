@@ -136,6 +136,7 @@ struct GuardInfo
     QString voteId;
     bool    isFormal = true;
     QString address;
+    QString senatorType;//EXTERNAL or PERMANENT
 };
 
 struct GuardMultisigAddress
@@ -168,6 +169,7 @@ struct ProposalInfo
     QString proposer;       // 发起提案的人
     QString expirationTime; // 失效时间
     QString transactionStr; // 提案的交易
+    QString pledge;
     QStringList    approvedKeys;       // 已投支持票的人
     QStringList    disapprovedKeys;    // 已投反对票的人
     QStringList    requiredAccounts;   // 需要的投票人
@@ -285,6 +287,7 @@ struct FeeChargeInfo
     QString poundageCancelFee;//撤销承兑单手续费
     QString transferFee;//转账手续费
     QString createCitizenFee;
+    QString ChangeSenatorFee;//citizen发起更换senator手续费
 
     QString withDrawFee;//提现手续费--
     QString capitalFee;//资金划转手续费

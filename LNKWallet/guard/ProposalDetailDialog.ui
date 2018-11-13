@@ -289,7 +289,7 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         </rect>
        </property>
        <property name="currentIndex">
-        <number>10</number>
+        <number>11</number>
        </property>
        <widget class="QWidget" name="hotColdTransferPage">
         <widget class="QLabel" name="label_3">
@@ -955,6 +955,99 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
            <set>AlignCenter</set>
           </property>
          </column>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="citizenChangeSenatorPage">
+        <widget class="QLabel" name="label_25">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>10</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>手续费</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_fee">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>10</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_27">
+         <property name="geometry">
+          <rect>
+           <x>270</x>
+           <y>10</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>投票结果</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_votestate">
+         <property name="geometry">
+          <rect>
+           <x>350</x>
+           <y>10</y>
+           <width>54</width>
+           <height>12</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>投票中</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_change1">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>40</y>
+           <width>251</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>投票中</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_change2">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>60</y>
+           <width>251</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>投票中</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_change3">
+         <property name="geometry">
+          <rect>
+           <x>80</x>
+           <y>90</y>
+           <width>251</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>投票中</string>
+         </property>
         </widget>
        </widget>
        <widget class="QWidget" name="unknownPage">

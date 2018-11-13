@@ -176,7 +176,10 @@ SOURCES += main.cpp\
     multisig/MultiSigTransferWidget.cpp \
     multisig/MultiSigTrxResultDialog.cpp \
     multisig/AddLocalPubKeyDialog.cpp \
-    multisig/AddMultiSigAddressDialog.cpp
+    multisig/AddMultiSigAddressDialog.cpp \
+    citizen/ChangeSenatorDialog.cpp \
+    citizen/ChangeSenatorSwitchWidget.cpp \
+    citizen/AddPledgeDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -325,7 +328,10 @@ HEADERS  += firstlogin.h \
     multisig/MultiSigTransferWidget.h \
     multisig/MultiSigTrxResultDialog.h \
     multisig/AddLocalPubKeyDialog.h \
-    multisig/AddMultiSigAddressDialog.h
+    multisig/AddMultiSigAddressDialog.h \
+    citizen/ChangeSenatorDialog.h \
+    citizen/ChangeSenatorSwitchWidget.h \
+    citizen/AddPledgeDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -443,7 +449,10 @@ FORMS    += firstlogin.ui \
     multisig/MultiSigTransferWidget.ui \
     multisig/MultiSigTrxResultDialog.ui \
     multisig/AddLocalPubKeyDialog.ui \
-    multisig/AddMultiSigAddressDialog.ui
+    multisig/AddMultiSigAddressDialog.ui \
+    citizen/ChangeSenatorDialog.ui \
+    citizen/ChangeSenatorSwitchWidget.ui \
+    citizen/AddPledgeDialog.ui
 
 win32{
     DISTFILES += logo.rc
