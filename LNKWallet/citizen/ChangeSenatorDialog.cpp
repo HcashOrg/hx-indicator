@@ -110,6 +110,7 @@ void ChangeSenatorDialog::InitWidget()
     FeeChooseWidget *feeWidget = new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.ChangeSenatorFee.toDouble(),
                                                      HXChain::getInstance()->feeType,ui->account->currentText());
     connect(feeWidget,&FeeChooseWidget::feeSufficient,ui->okBtn,&QToolButton::setEnabled);
+    QTimer::singleShot(100,[this,feeWidget](){this->ui->okBtn->setEnabled(feeWidget->isSufficient() && !ui->account->currentText().isEmpty());});
     connect(ui->lineEdit_feeNumber,&QLineEdit::textChanged,[feeWidget](const QString &number){
         feeWidget->updateFeeNumberSlots(number.toDouble());
     });
