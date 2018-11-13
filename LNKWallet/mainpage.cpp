@@ -519,6 +519,8 @@ void MainPage::on_backupBtn_clicked()
 
 void MainPage::on_registerBtn_clicked()
 {
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
+
     if(HXChain::getInstance()->getUnregisteredAccounts().isEmpty())
     {
         CommonDialog commonDialog(CommonDialog::OkOnly);
