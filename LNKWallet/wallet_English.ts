@@ -2001,7 +2001,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="130"/>
         <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="150"/>
         <source>更换为</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Replaced By</translation>
     </message>
 </context>
 <context>
