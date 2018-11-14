@@ -4845,10 +4845,64 @@ add an account first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.ui" line="50"/>
-        <source>暂无Senator收益</source>
-        <oldsource>暂无代理收益</oldsource>
+        <location filename="guard/GuardIncomePage.ui" line="62"/>
+        <source>当前SENATOR账号</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.ui" line="146"/>
+        <source>来自CITIZEN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.ui" line="159"/>
+        <source>金额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.ui" line="211"/>
+        <source>提案</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.ui" line="237"/>
+        <source>总计收益</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.ui" line="299"/>
+        <source>领取全部</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="43"/>
+        <source>There are no proposals currently!</source>
+        <translation type="unfinished">当前没有提案</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="72"/>
+        <source>There are no senator accounts in the wallet.</source>
+        <translation type="unfinished">钱包内没有senator账户</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="116"/>
+        <source>Transaction of get-income has been sent out!</source>
+        <translation type="unfinished">领取挖矿收入交易已发出！</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="127"/>
+        <source>This account&apos;s mining income is less than %1 %2 ! You can not get it.</source>
+        <translation type="unfinished">该账户的挖矿收益还不到 %1 %2，还不能领取！</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="132"/>
+        <source>Fail to get mining income!</source>
+        <translation type="unfinished">领取挖矿收益失败！</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="175"/>
+        <source>obtain</source>
+        <translation type="unfinished">领取</translation>
     </message>
 </context>
 <context>
@@ -5603,7 +5657,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">创建账户失败！</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="525"/>
+        <location filename="mainpage.cpp" line="527"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished">钱包中没有未注册账户！</translation>
     </message>
@@ -7036,7 +7090,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="136"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1161"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1183"/>
         <source>投票状态</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7159,7 +7213,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="971"/>
-        <source>手续费</source>
+        <source>质押资产(HX)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7170,18 +7224,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="1010"/>
         <location filename="guard/ProposalDetailDialog.ui" line="1023"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1036"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1049"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1039"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1055"/>
         <source>投票中</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1067"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1071"/>
+        <source>更换名单：</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="1089"/>
         <source>未知的提案类型</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1148"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1170"/>
         <source>所需投票者</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7261,7 +7320,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalDetailDialog.cpp" line="257"/>
         <source>citizen vote for changing senator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">更换Senator提案</translation>
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.cpp" line="260"/>
@@ -7269,7 +7328,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">%1      更换为        %2</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="291"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="312"/>
         <source>unknown(%1)</source>
         <translation type="unfinished">未知(%1)</translation>
     </message>
