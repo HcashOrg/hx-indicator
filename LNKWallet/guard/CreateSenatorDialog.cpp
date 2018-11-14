@@ -122,5 +122,9 @@ void CreateSenatorDialog::InitData()
         }
     }
     ui->accountComboBox->addItems(keys);
+    ui->addressLabel->setText(HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address);
+    connect(ui->accountComboBox,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentTextChanged),[this](const QString &name){
+        this->ui->addressLabel->setText(HXChain::getInstance()->accountInfoMap.value(name).address);
+    });
 
 }

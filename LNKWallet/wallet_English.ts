@@ -425,7 +425,7 @@
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="89"/>
         <source>追加更换Senator提案费用</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fee Charge of Adding the vote of Changing Senator </translation>
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="115"/>
@@ -435,7 +435,7 @@
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="154"/>
         <source>当前质押费用:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Current Pledge:</translation>
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="167"/>
@@ -445,7 +445,7 @@
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="194"/>
         <source>追加提案费:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Add Pledge(HX):</translation>
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.cpp" line="52"/>
@@ -1941,7 +1941,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="89"/>
         <source>更换Senator提案</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Proposal of Changing Senator</translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="115"/>
@@ -1951,27 +1951,27 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="164"/>
         <source>发起人:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Proposer:</translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="181"/>
         <source>更换名单:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nomination List:</translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="198"/>
         <source>（一次提议最多可更换三人）</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(Three Nominations At Most)</translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="235"/>
         <source>提案费:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pledge(HX):</translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="248"/>
         <source>最少为1000HX</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">1000HX At Least</translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.cpp" line="68"/>
@@ -3577,12 +3577,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/CreateSenatorDialog.ui" line="226"/>
         <source>账户地址</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Address</translation>
     </message>
     <message>
         <location filename="guard/CreateSenatorDialog.ui" line="259"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;已注册的非Citizen账户才可以成为Senator，点击&lt;/span&gt;&lt;a href=&quot;showRegisterDialog&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;注册&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;新账户&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;only none-citizen registered account can be senator，click&lt;/span&gt;&lt;a href=&quot;showRegisterDialog&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;register&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;new account&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="guard/CreateSenatorDialog.cpp" line="33"/>
@@ -7440,7 +7440,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="997"/>
         <source>投票结果</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Result</translation>
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="1010"/>
@@ -7448,7 +7448,7 @@ p, li { white-space: pre-wrap; }
         <location filename="guard/ProposalDetailDialog.ui" line="1039"/>
         <location filename="guard/ProposalDetailDialog.ui" line="1055"/>
         <source>投票中</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Voting</translation>
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="1071"/>

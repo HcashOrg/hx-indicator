@@ -411,12 +411,12 @@
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="167"/>
         <source>number</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">数量</translation>
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="194"/>
         <source>追加提案费:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">追加提案费(HX):</translation>
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.cpp" line="52"/>
@@ -1912,7 +1912,7 @@ better not transfer or upgrade</source>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="235"/>
         <source>提案费:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">质押费用(HX):</translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="248"/>
@@ -1922,7 +1922,7 @@ better not transfer or upgrade</source>
     <message>
         <location filename="citizen/ChangeSenatorDialog.cpp" line="68"/>
         <source>Transaction of changing senators has been sent,please wait for confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">更换Senator提案已经发出，请等待确认</translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.cpp" line="75"/>
@@ -2229,7 +2229,7 @@ better not transfer or upgrade</source>
     <message>
         <location filename="citizen/CitizenProposalPage.cpp" line="218"/>
         <source>addPledge</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">追加</translation>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.cpp" line="283"/>
@@ -3460,7 +3460,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/CreateSenatorDialog.cpp" line="33"/>
         <source>Transaction of create senator has been sent,please wait for confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">注册成为senator交易已经发出，请等待</translation>
     </message>
     <message>
         <location filename="guard/CreateSenatorDialog.cpp" line="41"/>
@@ -7389,7 +7389,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalDetailDialog.cpp" line="260"/>
         <source>%1      replaced by        %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1      更换为        %2</translation>
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.cpp" line="312"/>
