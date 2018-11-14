@@ -2182,17 +2182,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">CHANGE FEE</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="75"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="81"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="113"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="119"/>
         <source>Mining configuration has been written. This citizen account will start mining when the wallet is launched next time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="188"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="202"/>
         <source>Sure to open the mining function of this citizen account?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2246,72 +2246,72 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">CHANGE SENATOR</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="87"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="95"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="111"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="119"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="118"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="126"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="172"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="180"/>
         <source>change senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="176"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="184"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="188"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="196"/>
         <source>no citizen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="192"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="200"/>
         <source>approved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="197"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="205"/>
         <source>disapproved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="202"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="210"/>
         <source>not voted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="208"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="216"/>
         <source>approve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="209"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="217"/>
         <source>disapprove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="210"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="218"/>
         <source>addPledge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="268"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="283"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="288"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="303"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4235,17 +4235,17 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="245"/>
+        <location filename="exportdialog.cpp" line="257"/>
         <source>Please keep your private key properly.Never lose or leak it to anyone!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="245"/>
+        <location filename="exportdialog.cpp" line="257"/>
         <source>Export succeeded!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="291"/>
+        <location filename="exportdialog.cpp" line="303"/>
         <source>Wrong file format!</source>
         <oldsource>Wrong file format.</oldsource>
         <translation type="unfinished"></translation>
@@ -5683,8 +5683,9 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="160"/>
-        <source>质押miner</source>
-        <translation type="unfinished">Miner to pledge to</translation>
+        <source>质押Citizen</source>
+        <oldsource>质押CITIZEN</oldsource>
+        <translation type="unfinished">Citizen</translation>
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="199"/>

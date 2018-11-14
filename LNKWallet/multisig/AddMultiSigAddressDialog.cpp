@@ -46,9 +46,10 @@ void AddMultiSigAddressDialog::pop()
 
 void AddMultiSigAddressDialog::jsonDataUpdated(QString id)
 {
-    if( id == "AddMultiSigAddressDialog-get_multisig_address-" + multiSigAddress)
+    if( id == "AddMultiSigAddressDialog-get_multisig_address-" + ui->addressLineEdit->text())
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
         if(result.startsWith("\"result\":"))
         {
             multiSigAddress = ui->addressLineEdit->text();
@@ -69,8 +70,8 @@ void AddMultiSigAddressDialog::on_okBtn_clicked()
 {
     if(checkAddress(ui->addressLineEdit->text(), MultiSigAddress) == MultiSigAddress)
     {
-        HXChain::getInstance()->postRPC( "AddMultiSigAddressDialog-get_multisig_address-" + multiSigAddress,
-                                         toJsonFormat( "get_multisig_address", QJsonArray() << multiSigAddress ));
+        HXChain::getInstance()->postRPC( "AddMultiSigAddressDialog-get_multisig_address-" + ui->addressLineEdit->text(),
+                                         toJsonFormat( "get_multisig_address", QJsonArray() << ui->addressLineEdit->text() ));
 
     }
 }

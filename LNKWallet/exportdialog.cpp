@@ -223,6 +223,8 @@ qDebug() <<result;
         HXChain::getInstance()->postRPC( "export-finish-tunnel",
                                          toJsonFormat( "export-finish-tunnel", QJsonArray()));
 
+
+
     }
     else if(id.startsWith("export-get_binding_account-"))
     {
@@ -236,6 +238,16 @@ qDebug() <<result;
     }
     else if(id == "export-finish-tunnel")
     {
+        AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(accoutName);
+        foreach (AssetInfo assetInfo, HXChain::getInstance()->assetInfoMap)
+        {
+            QVector<GuardMultisigAddress> vector = HXChain::getInstance()->guardMultisigAddressesMap.value(assetInfo.symbol + "-" + accountInfo.id);
+            foreach (GuardMultisigAddress gma, vector)
+            {
+                dataInfo->MatchPrivateKey(gma.pairId, gma.hotAddress);
+            }
+        }
+
         if(SaveToPath())
         {
             close();

@@ -2096,17 +2096,17 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="75"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="81"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished">钱包内没有citizen账户。</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="113"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="119"/>
         <source>Mining configuration has been written. This citizen account will start mining when the wallet is launched next time.</source>
         <translation type="unfinished">挖矿配置已被写入。该citizen账户会在下次钱包启动时开始挖矿。</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="188"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="202"/>
         <source>Sure to open the mining function of this citizen account?</source>
         <translation type="unfinished">确认打开该citizen账户的挖矿功能吗？</translation>
     </message>
@@ -2160,17 +2160,17 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="87"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="95"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished">钱包内没有citizen账户。</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="111"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="119"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished">包含提案投票的交易已发出，请等待确认</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="118"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="126"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
@@ -2187,57 +2187,57 @@ better not transfer or upgrade</source>
         <translation type="obsolete">设置senator保证金</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="172"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="180"/>
         <source>change senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="176"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="184"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="188"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="196"/>
         <source>no citizen</source>
         <translation type="unfinished">无citizen</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="192"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="200"/>
         <source>approved</source>
         <translation type="unfinished">已赞成</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="197"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="205"/>
         <source>disapproved</source>
         <translation type="unfinished">已反对</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="202"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="210"/>
         <source>not voted</source>
         <translation type="unfinished">未投票</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="208"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="216"/>
         <source>approve</source>
         <translation type="unfinished">赞成</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="209"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="217"/>
         <source>disapprove</source>
         <translation type="unfinished">反对</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="210"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="218"/>
         <source>addPledge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="268"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="283"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished">确定赞成这个提案吗？</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="288"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="303"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished">确定反对这个提案吗？</translation>
     </message>
@@ -4056,7 +4056,7 @@ Contract created successfully!</source>
         <translation type="unfinished">选择路径</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="245"/>
+        <location filename="exportdialog.cpp" line="257"/>
         <source>Export succeeded!</source>
         <translation type="unfinished">导出私钥成功！</translation>
     </message>
@@ -4092,7 +4092,7 @@ Cover it or not?</source>
         <translation type="obsolete"> 成功！</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="245"/>
+        <location filename="exportdialog.cpp" line="257"/>
         <source>Please keep your private key properly.Never lose or leak it to anyone!</source>
         <translation type="unfinished">请妥善保管您的私钥，绝对不要丢失或泄露给任何人！</translation>
     </message>
@@ -4101,7 +4101,7 @@ Cover it or not?</source>
         <translation type="obsolete">.gkey 成功!</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="291"/>
+        <location filename="exportdialog.cpp" line="303"/>
         <source>Wrong file format!</source>
         <oldsource>Wrong file format.</oldsource>
         <translation type="unfinished">文件格式错误！</translation>
@@ -5546,7 +5546,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="160"/>
-        <source>质押miner</source>
+        <source>质押Citizen</source>
+        <oldsource>质押CITIZEN</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

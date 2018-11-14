@@ -157,7 +157,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>质押miner</string>
+      <string>质押Citizen</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
