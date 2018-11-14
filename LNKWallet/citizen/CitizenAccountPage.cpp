@@ -6,7 +6,9 @@
 #include "CreateCitizenDialog.h"
 #include "commondialog.h"
 #include "ChangePayBackDialog.h"
+#include "poundage/PageScrollWidget.h"
 
+static const int ROWNUMBER = 7;
 CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::CitizenAccountPage)
@@ -38,6 +40,10 @@ CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->lockBalanceTableWidget);
 
+
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&CitizenAccountPage::pageChangeSlot);
 
     init();
 }
@@ -143,6 +149,14 @@ void CitizenAccountPage::showLockBalance()
         ui->lockBalanceTableWidget->setCellWidget(i, 0, assetIconItem);
     }
 
+    int page = (ui->lockBalanceTableWidget->rowCount()%ROWNUMBER==0 && ui->lockBalanceTableWidget->rowCount() != 0) ?
+                ui->lockBalanceTableWidget->rowCount()/ROWNUMBER : ui->lockBalanceTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->lockBalanceTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
+
+    pageWidget->setVisible(0 != ui->lockBalanceTableWidget->rowCount());
+
     tableWidgetSetItemZebraColor(ui->lockBalanceTableWidget);
 
 }
@@ -202,5 +216,25 @@ void CitizenAccountPage::on_changeFeeBtn_clicked()
         dia.exec();
     }
 
+
+}
+
+void CitizenAccountPage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->lockBalanceTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->lockBalanceTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->lockBalanceTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->lockBalanceTableWidget->setRowHidden(i,true);
+        }
+    }
 
 }

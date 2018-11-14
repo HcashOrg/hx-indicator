@@ -2,7 +2,7 @@
 #define CITIZENACCOUNTPAGE_H
 
 #include <QWidget>
-
+class PageScrollWidget;
 namespace Ui {
 class CitizenAccountPage;
 }
@@ -30,12 +30,14 @@ private slots:
 
     void on_changeFeeBtn_clicked();
 
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::CitizenAccountPage *ui;
     bool inited = false;
 
     void paintEvent(QPaintEvent*);
     void showLockBalance();
+    PageScrollWidget *pageWidget;
 };
 
 #endif // CITIZENACCOUNTPAGE_H

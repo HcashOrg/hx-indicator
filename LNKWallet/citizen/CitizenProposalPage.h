@@ -2,6 +2,7 @@
 #define CITIZENPROPOSALPAGE_H
 
 #include <QWidget>
+class PageScrollWidget;
 
 namespace Ui {
 class CitizenProposalPage;
@@ -27,6 +28,8 @@ private slots:
     void on_proposalTableWidget_cellClicked(int row, int column);
 
     void on_changeSenatorBtn_clicked();
+
+    void pageChangeSlot(unsigned int page);
 private:
     Ui::CitizenProposalPage *ui;
     bool inited = false;
@@ -34,6 +37,7 @@ private:
     void showProposals();
 
     void paintEvent(QPaintEvent*);
+    PageScrollWidget *pageWidget;
 };
 
 #endif // CITIZENPROPOSALPAGE_H

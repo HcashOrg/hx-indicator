@@ -10,6 +10,9 @@
 #include "guard/ProposalPage.h"
 #include "citizen/ChangeSenatorDialog.h"
 #include "citizen/AddPledgeDialog.h"
+#include "poundage/PageScrollWidget.h"
+
+static const int ROWNUMBER = 7;
 
 Q_DECLARE_METATYPE(ProposalInfo)
 
@@ -47,6 +50,11 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->changeSenatorBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->proposalTableWidget);
+
+
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&CitizenProposalPage::pageChangeSlot);
 
 //    pageWidget = new PageScrollWidget();
 //    ui->stackedWidget->addWidget(pageWidget);
@@ -238,6 +246,13 @@ void CitizenProposalPage::showProposals()
         }
     }
 
+    int page = (ui->proposalTableWidget->rowCount()%ROWNUMBER==0 && ui->proposalTableWidget->rowCount() != 0) ?
+                ui->proposalTableWidget->rowCount()/ROWNUMBER : ui->proposalTableWidget->rowCount()/ROWNUMBER+1;
+    pageWidget->SetTotalPage(page);
+    pageWidget->setShowTip(ui->proposalTableWidget->rowCount(),ROWNUMBER);
+    pageChangeSlot(0);
+
+    pageWidget->setVisible(0 != ui->proposalTableWidget->rowCount());
     tableWidgetSetItemZebraColor(ui->proposalTableWidget);
 
 
@@ -313,4 +328,23 @@ void CitizenProposalPage::on_changeSenatorBtn_clicked()
 {
     ChangeSenatorDialog dia;
     dia.exec();
+}
+
+void CitizenProposalPage::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->proposalTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->proposalTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->proposalTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->proposalTableWidget->setRowHidden(i,true);
+        }
+    }
 }
