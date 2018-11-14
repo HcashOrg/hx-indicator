@@ -319,12 +319,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="60"/>
+        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="61"/>
         <source>This multi-sig address does not exist on the chain!</source>
         <translation type="unfinished">该多签地址在链上不存在！</translation>
     </message>
     <message>
-        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="105"/>
+        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="106"/>
         <source>Invalid multi-sig address.</source>
         <translation type="unfinished">不合法的多签地址！</translation>
     </message>
@@ -1843,7 +1843,8 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="citizen/ChangePayBackDialog.ui" line="177"/>
-        <source>最多为100%</source>
+        <source>最多为20%</source>
+        <oldsource>最多为100%</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8020,7 +8021,7 @@ update or not?</source>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.cpp" line="61"/>
         <source>Transaction of changing senators has been sent,please wait for confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">更换Senator提案已经发出，请等待确认</translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.cpp" line="68"/>
