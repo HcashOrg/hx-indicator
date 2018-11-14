@@ -28,6 +28,8 @@ private slots:
 
     void on_startMineBtn_clicked();
 
+    void on_changeFeeBtn_clicked();
+
 private:
     Ui::CitizenAccountPage *ui;
     bool inited = false;

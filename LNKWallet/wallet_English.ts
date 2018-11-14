@@ -1873,6 +1873,64 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
 </context>
 <context>
+    <name>ChangePayBackDialog</name>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="69"/>
+        <source>取消</source>
+        <translation type="unfinished">Cancel</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="89"/>
+        <source>修改矿池手续费用</source>
+        <translation type="unfinished">Change Payback Rate</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="115"/>
+        <source>确定</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="164"/>
+        <source>修改为(%):</source>
+        <translation type="unfinished">Change To(%):</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="177"/>
+        <source>最多为100%</source>
+        <translation type="unfinished">100% Most</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="194"/>
+        <source>当前矿池管理费(%):</source>
+        <translation type="unfinished">Current Rate(%):</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="211"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="228"/>
+        <source>账户:</source>
+        <translation type="unfinished">Account:</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.cpp" line="55"/>
+        <source>Transaction of changing payback rate has been sent,please wait for confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.cpp" line="62"/>
+        <source>Failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChangeSenatorDialog</name>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="14"/>
@@ -2123,17 +2181,22 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">START MINING</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="72"/>
+        <location filename="citizen/CitizenAccountPage.ui" line="447"/>
+        <source>更改矿池手续费</source>
+        <translation type="unfinished">CHANGE FEE</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.cpp" line="75"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="110"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="113"/>
         <source>Mining configuration has been written. This citizen account will start mining when the wallet is launched next time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="185"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="188"/>
         <source>Sure to open the mining function of this citizen account?</source>
         <translation type="unfinished"></translation>
     </message>

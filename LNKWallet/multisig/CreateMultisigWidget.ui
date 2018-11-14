@@ -142,10 +142,10 @@
   <widget class="QToolButton" name="addLocalAccountBtn">
    <property name="geometry">
     <rect>
-     <x>500</x>
+     <x>479</x>
      <y>100</y>
-     <width>100</width>
-     <height>18</height>
+     <width>121</width>
+     <height>20</height>
     </rect>
    </property>
    <property name="font">
