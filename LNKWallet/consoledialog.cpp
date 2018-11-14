@@ -261,9 +261,9 @@ void ConsoleDialog::parseHelpCommand(const QString &helpStr, QStringList &helpLi
     helpList.clear();
     QStringList enter = helpStr.split("\n");
     foreach (QString str, enter) {
-    if(-1 == str.indexOf(QRegExp("^[a-zA-Z]"))) continue;
-
-        QStringList temp = str.split("(");
+        QString strTrim = str.trimmed();
+        if(-1 == strTrim.indexOf(QRegExp("^[a-zA-Z]"))) continue;
+        QStringList temp = strTrim.split("(");
         if(!temp.isEmpty())
         {
             QStringList space = temp.front().split(QRegExp("\\s+"));

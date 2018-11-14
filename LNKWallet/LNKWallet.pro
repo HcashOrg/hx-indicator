@@ -184,7 +184,8 @@ SOURCES += main.cpp\
     guard/ColdKeyPathDialog.cpp \
     guard/SelectColdKeyFileDialog.cpp \
     guard/CreateSenatorDialog.cpp \
-    guard/SenatorChangeSenatorDialog.cpp
+    guard/SenatorChangeSenatorDialog.cpp \
+    citizen/ChangePayBackDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -341,7 +342,8 @@ HEADERS  += firstlogin.h \
     guard/ColdKeyPathDialog.h \
     guard/SelectColdKeyFileDialog.h \
     guard/CreateSenatorDialog.h \
-    guard/SenatorChangeSenatorDialog.h
+    guard/SenatorChangeSenatorDialog.h \
+    citizen/ChangePayBackDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -467,7 +469,8 @@ FORMS    += firstlogin.ui \
     guard/ColdKeyPathDialog.ui \
     guard/SelectColdKeyFileDialog.ui \
     guard/CreateSenatorDialog.ui \
-    guard/SenatorChangeSenatorDialog.ui
+    guard/SenatorChangeSenatorDialog.ui \
+    citizen/ChangePayBackDialog.ui
 
 win32{
     DISTFILES += logo.rc

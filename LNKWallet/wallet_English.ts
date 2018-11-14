@@ -1869,6 +1869,64 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
 </context>
 <context>
+    <name>ChangePayBackDialog</name>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="69"/>
+        <source>取消</source>
+        <translation type="unfinished">Cancel</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="89"/>
+        <source>修改矿池手续费用</source>
+        <translation type="unfinished">Change Payback Rate</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="115"/>
+        <source>确定</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="164"/>
+        <source>修改为(%):</source>
+        <translation type="unfinished">Change To(%):</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="177"/>
+        <source>最多为100%</source>
+        <translation type="unfinished">100% Most</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="194"/>
+        <source>当前矿池管理费(%):</source>
+        <translation type="unfinished">Current Rate(%):</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="211"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.ui" line="228"/>
+        <source>账户:</source>
+        <translation type="unfinished">Account:</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.cpp" line="55"/>
+        <source>Transaction of changing payback rate has been sent,please wait for confirmation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangePayBackDialog.cpp" line="64"/>
+        <source>Failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChangeSenatorDialog</name>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="14"/>
@@ -2119,17 +2177,22 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">START MINING</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="72"/>
+        <location filename="citizen/CitizenAccountPage.ui" line="447"/>
+        <source>更改矿池手续费</source>
+        <translation type="unfinished">CHANGE FEE</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenAccountPage.cpp" line="75"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="110"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="113"/>
         <source>Mining configuration has been written. This citizen account will start mining when the wallet is launched next time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="185"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="188"/>
         <source>Sure to open the mining function of this citizen account?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2180,7 +2243,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="253"/>
         <source>更换senator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CHANGE SENATOR</translation>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.cpp" line="87"/>
@@ -5009,7 +5072,7 @@ Cover it or not?</source>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="255"/>
         <source>创建新Senator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">NEW SENATOR</translation>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="285"/>
@@ -7243,7 +7306,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="136"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1161"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1183"/>
         <source>投票状态</source>
         <translation type="unfinished">Voting State</translation>
     </message>
@@ -7366,8 +7429,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="971"/>
+        <source>质押资产(HX)</source>
+        <translation type="unfinished">Pledge(HX)</translation>
+    </message>
+    <message>
         <source>手续费</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Pledge</translation>
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="997"/>
@@ -7377,18 +7444,23 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="1010"/>
         <location filename="guard/ProposalDetailDialog.ui" line="1023"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1036"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1049"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1039"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1055"/>
         <source>投票中</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1067"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1071"/>
+        <source>更换名单：</source>
+        <translation type="unfinished">Nomination List:</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="1089"/>
         <source>未知的提案类型</source>
         <translation type="unfinished">unknown proposal type</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1148"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1170"/>
         <source>所需投票者</source>
         <translation type="unfinished">Required Voters</translation>
     </message>
@@ -7476,7 +7548,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="291"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="312"/>
         <source>unknown(%1)</source>
         <translation type="unfinished"></translation>
     </message>

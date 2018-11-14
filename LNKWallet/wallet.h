@@ -290,6 +290,7 @@ struct FeeChargeInfo
     QString createCitizenFee;//创建citizen手续费
     QString ChangeSenatorFee;//citizen发起更换senator手续费
     QString createSenatorFee;//创建senator手续费
+    QString changePaybackFee;//修改citizen矿池管理费用
 
     QString withDrawFee;//提现手续费--
     QString capitalFee;//资金划转手续费

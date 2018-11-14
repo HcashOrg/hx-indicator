@@ -5,6 +5,7 @@
 #include "control/AssetIconItem.h"
 #include "CreateCitizenDialog.h"
 #include "commondialog.h"
+#include "ChangePayBackDialog.h"
 
 CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
     QWidget(parent),
@@ -33,6 +34,7 @@ CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
 
     ui->newCitizenBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->startMineBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->changeFeeBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->lockBalanceTableWidget);
 
@@ -48,6 +50,7 @@ CitizenAccountPage::~CitizenAccountPage()
 void CitizenAccountPage::init()
 {
     inited = false;
+    HXChain::getInstance()->fetchCitizenPayBack();
 
     ui->accountComboBox->clear();
     QStringList accounts = HXChain::getInstance()->getMyCitizens();
@@ -189,4 +192,15 @@ void CitizenAccountPage::on_startMineBtn_clicked()
                                          toJsonFormat( "dump_private_key", QJsonArray() << ui->accountComboBox->currentText() ));
 
     }
+}
+
+void CitizenAccountPage::on_changeFeeBtn_clicked()
+{
+    if(!ui->accountComboBox->currentText().isEmpty())
+    {
+        ChangePayBackDialog dia(ui->accountComboBox->currentText());
+        dia.exec();
+    }
+
+
 }

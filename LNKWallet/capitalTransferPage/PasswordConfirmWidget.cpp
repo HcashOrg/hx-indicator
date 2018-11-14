@@ -70,7 +70,7 @@ void PasswordConfirmWidget::passwordReturnPressed()
 void PasswordConfirmWidget::InitWidget()
 {
     InitStyle();
-
+    ui->lineEdit->setFocus();
     ui->toolButton_confirm->setEnabled(false);
     ui->lineEdit->setPlaceholderText(tr("please input password..."));
     connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &PasswordConfirmWidget::jsonDataUpdated);

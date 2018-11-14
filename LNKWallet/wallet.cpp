@@ -668,6 +668,7 @@ void HXChain::InitFeeCharge()
     feeChargeInfo.createCitizenFee = feeObj.value("CreateCitizen").toString();
     feeChargeInfo.ChangeSenatorFee = feeObj.value("ChangeSenator").toString();
     feeChargeInfo.createSenatorFee = feeObj.value("CreateSenator").toString();
+    feeChargeInfo.changePaybackFee = feeObj.value("ChangePayback").toString();
 
     //其他费用
     QJsonObject crossfeeObj = jsonObject.value("CrossFee").toObject();

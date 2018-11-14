@@ -261,25 +261,46 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         ui->label_fee->setText(info.pledge);
         QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
         QJsonArray arr = operationObject.value("replace_queue").toArray();
+
+        QMap<QString,GuardInfo> allGuard(HXChain::getInstance()->allGuardMap);
+        QMap<QString,QString> replaceMap;
+        foreach (QJsonValue val, arr) {
+            QString oldSenator ,newSenator;
+            QMapIterator<QString, GuardInfo> it(allGuard);
+            while (it.hasNext()) {
+                it.next();
+                if(val.toArray().at(0).toString() == it.value().accountId)
+                {
+                    oldSenator = it.key();
+                }
+                else if(val.toArray().at(1).toString() == it.value().accountId)
+                {
+                    newSenator = it.key();
+                }
+            }
+            replaceMap[oldSenator] = newSenator;
+        }
+
         int i = 0;
         ui->label_change1->setVisible(false);
         ui->label_change2->setVisible(false);
         ui->label_change3->setVisible(false);
-        foreach (QJsonValue val, arr) {
-            QJsonArray pair = val.toArray();
+        QMapIterator<QString, QString> it(replaceMap);
+        while (it.hasNext()) {
+            it.next();
             if(0 == i)
             {
-                ui->label_change1->setText(changeStr.arg(pair.at(0).toString()).arg(pair.at(1).toString()));
+                ui->label_change1->setText(changeStr.arg(it.key()).arg(it.value()));
                 ui->label_change1->setVisible(true);
             }
             else if(1 == i)
             {
-                ui->label_change2->setText(changeStr.arg(pair.at(0).toString()).arg(pair.at(1).toString()));
+                ui->label_change2->setText(changeStr.arg(it.key()).arg(it.value()));
                 ui->label_change2->setVisible(true);
             }
             else if(2 == i)
             {
-                ui->label_change3->setText(changeStr.arg(pair.at(0).toString()).arg(pair.at(1).toString()));
+                ui->label_change3->setText(changeStr.arg(it.key()).arg(it.value()));
                 ui->label_change3->setVisible(true);
             }
             ++i;
