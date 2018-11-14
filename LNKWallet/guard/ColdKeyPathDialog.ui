@@ -83,6 +83,9 @@
      <property name="text">
       <string/>
      </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
      <property name="readOnly">
       <bool>false</bool>
      </property>
@@ -162,7 +165,7 @@
 font: 11px &quot;微软雅黑&quot;;</string>
      </property>
      <property name="text">
-      <string>创建冷钱包私钥文件</string>
+      <string>保存冷钱包私钥文件</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>
@@ -234,7 +237,7 @@ font: 11px &quot;微软雅黑&quot;;</string>
 font: 11px &quot;微软雅黑&quot;;</string>
      </property>
      <property name="text">
-      <string>设置私钥文件密码</string>
+      <string>私钥文件密码</string>
      </property>
      <property name="wordWrap">
       <bool>true</bool>

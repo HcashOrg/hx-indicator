@@ -27,8 +27,14 @@ private slots:
 
     void on_pathBtn_clicked();
 
+    void on_pkFileLineEdit_textChanged(const QString &arg1);
+
+    void on_pwdLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::SelectColdKeyFileDialog *ui;
+
+    void checkOkBtnEnabled();
 };
 
 #endif // SELECTCOLDKEYFILEDIALOG_H

@@ -1086,13 +1086,13 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <location filename="guard/AssetChangeHistoryWidget.ui" line="40"/>
         <source>热钱包多签地址</source>
         <oldsource>多签地址（热钱包）</oldsource>
-        <translation type="unfinished">HOT MULTISIG-ADDRESS</translation>
+        <translation type="unfinished">HOT MULTISIG-ADDR</translation>
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="53"/>
         <source>冷钱包多签地址</source>
         <oldsource>多签地址（冷钱包）</oldsource>
-        <translation type="unfinished">COLD MULTISIG-ADDRESS</translation>
+        <translation type="unfinished">COLD MULTISIG-ADDR</translation>
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.ui" line="66"/>
@@ -2001,7 +2001,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="130"/>
         <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="150"/>
         <source>更换为</source>
-        <translation type="unfinished">Replaced By</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -5200,12 +5200,12 @@ Cover it or not?</source>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="97"/>
         <source>热钱包多签地址</source>
-        <translation type="unfinished">HOT MULTISIG-ADDRESS</translation>
+        <translation type="unfinished">HOT MULTISIG-ADDR</translation>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="110"/>
         <source>冷钱包多签地址</source>
-        <translation type="unfinished">COLD MULTISIG-ADDRESS</translation>
+        <translation type="unfinished">COLD MULTISIG-ADDR</translation>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.ui" line="123"/>

@@ -23,6 +23,9 @@ ColdKeyPathDialog::ColdKeyPathDialog(QString _accountName, QWidget *parent) :
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->pathBtn->setStyleSheet(OKBTN_STYLE);
+
+    checkOkBtnEnabled();
 }
 
 ColdKeyPathDialog::~ColdKeyPathDialog()
@@ -55,12 +58,35 @@ void ColdKeyPathDialog::on_closeBtn_clicked()
 
 void ColdKeyPathDialog::on_pathBtn_clicked()
 {
-    QString file = QFileDialog::getExistingDirectory(this,tr( "Select the path"), QDir::currentPath());
+    QString file = QFileDialog::getSaveFileName(this,tr( "Select the path to save the private key of the cold address"),
+                                                QDir::currentPath() + "/" + accountName + ".ckey", "*.ckey" , NULL, QFileDialog::DontConfirmOverwrite);
     if( !file.isEmpty())
     {
 #ifdef WIN32
         file.replace("\\","/");
 #endif
-        ui->pkFileLineEdit->setText( file + "/"  + accountName + ".ckey");
+        ui->pkFileLineEdit->setText( file);
     }
+}
+
+void ColdKeyPathDialog::checkOkBtnEnabled()
+{
+    if(ui->pkFileLineEdit->text().isEmpty() || ui->pwdLineEdit->text().isEmpty())
+    {
+        ui->okBtn->setEnabled(false);
+    }
+    else
+    {
+        ui->okBtn->setEnabled(true);
+    }
+}
+
+void ColdKeyPathDialog::on_pkFileLineEdit_textChanged(const QString &arg1)
+{
+    checkOkBtnEnabled();
+}
+
+void ColdKeyPathDialog::on_pwdLineEdit_textChanged(const QString &arg1)
+{
+    checkOkBtnEnabled();
 }

@@ -143,7 +143,7 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
                 ui->changeHistoryTableWidget->item(row,1)->setData(Qt::UserRole, gma.hotAddress);
                 ui->changeHistoryTableWidget->item(row,2)->setData(Qt::UserRole, gma.coldAddress);
                 fetchCrosschainPrivateKey(gma.hotAddress);
-                fetchCrosschainPrivateKey(gma.coldAddress);
+//                fetchCrosschainPrivateKey(gma.coldAddress);
                 if(i == size - 1)
                 {
                     HXChain::getInstance()->postRPC( "finish-dump_crosschain_private_key", toJsonFormat( "finish-dump_crosschain_private_key",
@@ -229,10 +229,10 @@ void AssetChangeHistoryWidget::on_changeHistoryTableWidget_cellClicked(int row, 
     {
         QString assetSymbol = ui->changeHistoryTableWidget->item(row,0)->text();
         QString hotAddress = ui->changeHistoryTableWidget->item(row,1)->data(Qt::UserRole).toString();
-        QString coldAddress = ui->changeHistoryTableWidget->item(row,2)->data(Qt::UserRole).toString();
+//        QString coldAddress = ui->changeHistoryTableWidget->item(row,2)->data(Qt::UserRole).toString();
 
-        if(hotAddress.isEmpty() || coldAddress.isEmpty() || !crosschainKeyObjectMap.contains(hotAddress)
-                || !crosschainKeyObjectMap.contains(coldAddress))
+        if(hotAddress.isEmpty() /* || coldAddress.isEmpty() */ || !crosschainKeyObjectMap.contains(hotAddress)
+               /* ||  !crosschainKeyObjectMap.contains(coldAddress) */)
         {
             CommonDialog commonDialog(CommonDialog::OkOnly);
             commonDialog.setText(tr("There is no corresponding private key in the wallet"));
@@ -242,14 +242,14 @@ void AssetChangeHistoryWidget::on_changeHistoryTableWidget_cellClicked(int row, 
         {
             QJsonArray array;
             array.append(crosschainKeyObjectMap.value(hotAddress));
-            array.append(crosschainKeyObjectMap.value(coldAddress));
+//            array.append(crosschainKeyObjectMap.value(coldAddress));
             QJsonObject object;
             object.insert(assetSymbol, array);
             QString str = QJsonDocument(object).toJson();
 
             QString defaultFilePath = QDir::currentPath();
-            defaultFilePath += QString("/%1_%2_%3_%4.gcck").arg(ui->accountComboBox->currentText()).arg(assetSymbol)
-                    .arg(hotAddress.left(5)).arg(coldAddress.left(5));
+            defaultFilePath += QString("/%1_%2_%3.gcck").arg(ui->accountComboBox->currentText()).arg(assetSymbol)
+                    .arg(hotAddress.left(5));
 
             QString path = QFileDialog::getSaveFileName(this, tr("Select the export path"), defaultFilePath, "(*.gcck)");
             if(!path.isEmpty())
@@ -292,9 +292,9 @@ void AssetChangeHistoryWidget::refreshKeyState()
     for(int i = 0; i < rowCount; i++)
     {
         QString hotAddress = ui->changeHistoryTableWidget->item(i,1)->data(Qt::UserRole).toString();
-        QString coldAddress = ui->changeHistoryTableWidget->item(i,2)->data(Qt::UserRole).toString();
+//        QString coldAddress = ui->changeHistoryTableWidget->item(i,2)->data(Qt::UserRole).toString();
 
-        if(crosschainKeyObjectMap.contains(hotAddress) && crosschainKeyObjectMap.contains(coldAddress))
+        if(crosschainKeyObjectMap.contains(hotAddress) /* && crosschainKeyObjectMap.contains(coldAddress) */)
         {
             ui->changeHistoryTableWidget->item(i,4)->setText(tr("available"));
         }

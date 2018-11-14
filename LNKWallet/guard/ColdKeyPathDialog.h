@@ -27,10 +27,16 @@ private slots:
 
     void on_pathBtn_clicked();
 
+    void on_pkFileLineEdit_textChanged(const QString &arg1);
+
+    void on_pwdLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::ColdKeyPathDialog *ui;
 
     QString accountName;
+
+    void checkOkBtnEnabled();
 };
 
 #endif // COLDKEYPATHDIALOG_H

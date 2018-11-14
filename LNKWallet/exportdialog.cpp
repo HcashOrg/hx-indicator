@@ -244,7 +244,7 @@ qDebug() <<result;
             QVector<GuardMultisigAddress> vector = HXChain::getInstance()->guardMultisigAddressesMap.value(assetInfo.symbol + "-" + accountInfo.id);
             foreach (GuardMultisigAddress gma, vector)
             {
-                dataInfo->MatchPrivateKey(gma.pairId, gma.hotAddress);
+                dataInfo->MatchPrivateKey(assetInfo.symbol + "-" + gma.pairId, gma.hotAddress);
             }
         }
 

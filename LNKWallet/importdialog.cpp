@@ -155,9 +155,18 @@ void ImportDialog::on_importBtn_clicked()
             }
             else
             {
-                //导入跨连私钥
-                HXChain::getInstance()->postRPC( "import-import_crosschain_key",
-                                                 toJsonFormat( "import_crosschain_key", QJsonArray() << (*it).second <<(*it).first));
+                if((*it).first.contains("-"))
+                {
+                    QString symbol = (*it).first.split("-").at(0);
+                    HXChain::getInstance()->postRPC( "import-import_crosschain_key",
+                                                     toJsonFormat( "import_crosschain_key", QJsonArray() << (*it).second << symbol));
+                }
+                else
+                {
+                    //导入跨连私钥
+                    HXChain::getInstance()->postRPC( "import-import_crosschain_key",
+                                                     toJsonFormat( "import_crosschain_key", QJsonArray() << (*it).second <<(*it).first));
+                }
             }
         }
         HXChain::getInstance()->postRPC( "import-finish_import_key", toJsonFormat( "finish_import_key", QJsonArray()));

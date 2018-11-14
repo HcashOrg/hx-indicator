@@ -202,7 +202,14 @@ void GuardKeyManagePage::jsonDataUpdated(QString id)
         else
         {
             ErrorResultDialog errorResultDialog;
-            errorResultDialog.setInfoText(tr("Failed!"));
+            if(result.contains("AES error:"))
+            {
+                errorResultDialog.setInfoText(tr("Wrong password!"));
+            }
+            else
+            {
+                errorResultDialog.setInfoText(tr("Failed!"));
+            }
             errorResultDialog.setDetailText(result);
             errorResultDialog.pop();
         }
