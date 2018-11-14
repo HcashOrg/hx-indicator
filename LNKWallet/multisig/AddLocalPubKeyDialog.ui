@@ -25,16 +25,16 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>230</x>
       <y>110</y>
-      <width>360</width>
+      <width>500</width>
       <height>300</height>
      </rect>
     </property>
     <widget class="QToolButton" name="cancelBtn">
      <property name="geometry">
       <rect>
-       <x>188</x>
+       <x>268</x>
        <y>250</y>
        <width>92</width>
        <height>28</height>
@@ -53,7 +53,7 @@
     <widget class="QToolButton" name="okBtn">
      <property name="geometry">
       <rect>
-       <x>80</x>
+       <x>130</x>
        <y>250</y>
        <width>92</width>
        <height>28</height>
@@ -72,7 +72,7 @@
     <widget class="QToolButton" name="closeBtn">
      <property name="geometry">
       <rect>
-       <x>347</x>
+       <x>487</x>
        <y>5</y>
        <width>7</width>
        <height>7</height>
@@ -96,7 +96,7 @@
       <rect>
        <x>30</x>
        <y>30</y>
-       <width>300</width>
+       <width>440</width>
        <height>190</height>
       </rect>
      </property>
@@ -179,6 +179,11 @@
       </property>
       <property name="textAlignment">
        <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string/>
       </property>
      </column>
     </widget>
