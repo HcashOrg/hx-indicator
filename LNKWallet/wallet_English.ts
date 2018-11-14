@@ -347,12 +347,12 @@
         <translation type="unfinished">Enter existing multi-sig address</translation>
     </message>
     <message>
-        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="60"/>
+        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="61"/>
         <source>This multi-sig address does not exist on the chain!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="105"/>
+        <location filename="multisig/AddMultiSigAddressDialog.cpp" line="106"/>
         <source>Invalid multi-sig address.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1897,8 +1897,9 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="citizen/ChangePayBackDialog.ui" line="177"/>
-        <source>最多为100%</source>
-        <translation type="unfinished">100% Most</translation>
+        <source>最多为20%</source>
+        <oldsource>最多为100%</oldsource>
+        <translation type="unfinished">20% Most</translation>
     </message>
     <message>
         <location filename="citizen/ChangePayBackDialog.ui" line="194"/>
@@ -8126,7 +8127,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="89"/>
         <source>更换Senator提案</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Proposal of Changing Senator</translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="115"/>
@@ -8136,17 +8137,17 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="164"/>
         <source>发起人:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Proposer:</translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="181"/>
         <source>更换名单:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nomination List:</translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="198"/>
         <source>（一次提议最多可更换三人）</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(Three Nominations At Most)</translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="225"/>

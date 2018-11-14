@@ -174,7 +174,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
       </rect>
      </property>
      <property name="placeholderText">
-      <string>最多为100%</string>
+      <string>最多为20%</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_5">

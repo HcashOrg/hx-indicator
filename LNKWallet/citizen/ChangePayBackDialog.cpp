@@ -86,7 +86,7 @@ void ChangePayBackDialog::InitWidget()
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
 
-    installDoubleValidator(ui->lineEdit_feeNumber,0,100);
+    installDoubleValidator(ui->lineEdit_feeNumber,0,20);
     InitData();
 
 
