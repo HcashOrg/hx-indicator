@@ -17,7 +17,7 @@ QScrollBar::sub-line:vertical{height:0px;}
 QScrollBar::sub-page:vertical {background: transparent;}
 QScrollBar::add-page:vertical {background: transparent;}
 
-QCheckBox{color:rgb(137,129,161);font-size:11px;}
+QCheckBox{color:rgb(137,129,161);font: 11px \"微软雅黑\";}
 QCheckBox:checked{color:rgb(83,61,138);}
 QCheckBox::indicator{ width:15px;height:15px;image:url(:/ui/wallet_ui/checkBox_unchecked.png);background-repeat: no-repeat;background-position: center;border:none;}
 QCheckBox::indicator:checked{ image:url(:/ui/wallet_ui/checkBox_checked.png);background-repeat: no-repeat;background-position: center;border:none; }

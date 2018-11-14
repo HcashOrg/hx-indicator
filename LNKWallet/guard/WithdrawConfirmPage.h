@@ -60,6 +60,7 @@ private slots:
 
 private:
     Ui::WithdrawConfirmPage *ui;
+    bool inited = false;
     HttpManager httpManager;
     void fetchCoinBalance(int id, QString chainId, QString address);
     void fetchEthBalance();

@@ -240,9 +240,9 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
   <widget class="QToolButton" name="changeSenatorBtn">
    <property name="geometry">
     <rect>
-     <x>580</x>
+     <x>590</x>
      <y>90</y>
-     <width>121</width>
+     <width>120</width>
      <height>20</height>
     </rect>
    </property>

@@ -311,21 +311,17 @@
     </message>
     <message>
         <location filename="multisig/AddLocalPubKeyDialog.ui" line="165"/>
-        <source>币种</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="multisig/AddLocalPubKeyDialog.ui" line="178"/>
-        <source>自动授权限额</source>
-        <translation type="unfinished"></translation>
+        <source>账户名</source>
+        <translation type="unfinished">ACCOUNT</translation>
     </message>
     <message>
         <source>账户</source>
         <translation type="obsolete">ACCOUNT</translation>
     </message>
     <message>
+        <location filename="multisig/AddLocalPubKeyDialog.ui" line="178"/>
         <source>公钥</source>
-        <translation type="obsolete">PUBKEY</translation>
+        <translation type="unfinished">PUBKEY</translation>
     </message>
 </context>
 <context>
@@ -429,7 +425,7 @@
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="89"/>
         <source>追加更换Senator提案费用</source>
-        <translation type="unfinished">Add Pledge of Changing Senator</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="115"/>
@@ -439,7 +435,7 @@
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="154"/>
         <source>当前质押费用:</source>
-        <translation type="unfinished">Current Pledge:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="167"/>
@@ -449,7 +445,7 @@
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="194"/>
         <source>追加提案费:</source>
-        <translation type="unfinished">Add Pledge:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.cpp" line="52"/>
@@ -1288,12 +1284,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/AutoWithdrawSetDialog.ui" line="165"/>
         <source>币种</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">COIN</translation>
     </message>
     <message>
         <location filename="guard/AutoWithdrawSetDialog.ui" line="178"/>
         <source>自动签名限额</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">AUTO SIGN LIMIT</translation>
     </message>
 </context>
 <context>
@@ -1925,7 +1921,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangePayBackDialog.cpp" line="62"/>
+        <location filename="citizen/ChangePayBackDialog.cpp" line="64"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1945,7 +1941,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="89"/>
         <source>更换Senator提案</source>
-        <translation type="unfinished">Change Senator</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="115"/>
@@ -1955,27 +1951,27 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="164"/>
         <source>发起人:</source>
-        <translation type="unfinished">Proposer:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="181"/>
         <source>更换名单:</source>
-        <translation type="unfinished">Nomination List:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="198"/>
         <source>（一次提议最多可更换三人）</source>
-        <translation type="unfinished">(Three Nomination Most)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="235"/>
         <source>提案费:</source>
-        <translation type="unfinished">Pledge:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.ui" line="248"/>
         <source>最少为1000HX</source>
-        <translation type="unfinished">1000HX At Least</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.cpp" line="68"/>
@@ -2005,7 +2001,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="130"/>
         <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="150"/>
         <source>更换为</source>
-        <translation type="unfinished">Replaced By</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3492,7 +3488,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="multisig/CreateMultisigWidget.ui" line="169"/>
         <source>添加本地账户</source>
-        <translation type="unfinished">ADD LOCAL ACCOUNT</translation>
+        <translation type="unfinished">LOCAL ACCOUNT</translation>
     </message>
     <message>
         <location filename="multisig/CreateMultisigWidget.ui" line="198"/>
@@ -3581,12 +3577,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/CreateSenatorDialog.ui" line="226"/>
         <source>账户地址</source>
-        <translation type="unfinished">Address</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/CreateSenatorDialog.ui" line="259"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;已注册的非Citizen账户才可以成为Senator，点击&lt;/span&gt;&lt;a href=&quot;showRegisterDialog&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;注册&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;新账户&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;Only a anti-citizen registered account can become a senator. Click to&lt;/span&gt;&lt;a href=&quot;showRegisterDialog&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;register&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-size:8pt;&quot;&gt;new account&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/CreateSenatorDialog.cpp" line="33"/>
@@ -5076,12 +5072,12 @@ Cover it or not?</source>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="255"/>
         <source>创建新Senator</source>
-        <translation type="unfinished">CREATE SENATOR</translation>
+        <translation type="unfinished">NEW SENATOR</translation>
     </message>
     <message>
         <location filename="guard/GuardAccountPage.ui" line="285"/>
         <source>更换Senator</source>
-        <translation type="unfinished">CHANGE SENATOR</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>当前guard账号</source>
@@ -5847,43 +5843,43 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="obsolete">Delegate</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="77"/>
+        <location filename="mainpage.cpp" line="76"/>
         <source>there&apos;s no account or assest!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="120"/>
+        <location filename="mainpage.cpp" line="119"/>
         <source>transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="123"/>
+        <location filename="mainpage.cpp" line="122"/>
         <source>deposit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="124"/>
+        <location filename="mainpage.cpp" line="123"/>
         <source>withdraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="125"/>
+        <location filename="mainpage.cpp" line="124"/>
         <source>allot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="364"/>
+        <location filename="mainpage.cpp" line="363"/>
         <source>Fail to create account!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="482"/>
-        <location filename="mainpage.cpp" line="485"/>
+        <location filename="mainpage.cpp" line="474"/>
+        <location filename="mainpage.cpp" line="477"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="527"/>
+        <location filename="mainpage.cpp" line="519"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7443,7 +7439,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="997"/>
         <source>投票结果</source>
-        <translation type="unfinished">Result</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="1010"/>
@@ -7451,7 +7447,7 @@ p, li { white-space: pre-wrap; }
         <location filename="guard/ProposalDetailDialog.ui" line="1039"/>
         <location filename="guard/ProposalDetailDialog.ui" line="1055"/>
         <source>投票中</source>
-        <translation type="unfinished">Duration</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="1071"/>
@@ -8129,7 +8125,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="89"/>
         <source>更换Senator提案</source>
-        <translation type="unfinished">Change Senator</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="115"/>
@@ -8139,27 +8135,27 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="164"/>
         <source>发起人:</source>
-        <translation type="unfinished">Proposer:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="181"/>
         <source>更换名单:</source>
-        <translation type="unfinished">Nomination List:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="198"/>
         <source>（一次提议最多可更换三人）</source>
-        <translation type="unfinished">(Three Nomination Most)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="225"/>
         <source>失效时间(h):</source>
-        <translation type="unfinished">Expiration Time(h):</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="238"/>
         <source>不超过720小时</source>
-        <translation type="unfinished">720 hours at most</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.cpp" line="61"/>
@@ -9383,12 +9379,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/WithdrawConfirmPage.ui" line="617"/>
         <source>开启小额自动授权</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Auto Sign</translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.ui" line="636"/>
         <source>设置</source>
-        <translation type="unfinished">Settings</translation>
+        <translation type="unfinished">Limit</translation>
     </message>
     <message>
         <source>待签名交易地址</source>
@@ -9438,53 +9434,53 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="151"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="154"/>
         <source>Transaction of senator-sign-crosschain has been sent out!</source>
         <oldsource>Transaction of guard-sign-crosschain has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="157"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="213"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="160"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="216"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="207"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="210"/>
         <source>Transaction of senator-sign-eth-withdraw-final has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="237"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="240"/>
         <source>no key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="315"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="318"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="361"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="481"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="364"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="484"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="363"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="403"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="366"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="406"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="245"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="369"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="248"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="372"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="312"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="439"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="315"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="442"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9498,12 +9494,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="401"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="404"/>
         <source>waiting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="443"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="446"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>
