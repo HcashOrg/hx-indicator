@@ -48,8 +48,6 @@ private slots:
 
     void jsonDataUpdated(QString id);
 
-    void showExportDialog(QString name);
-
 
 //    void showDetailWidget(QString name);
 

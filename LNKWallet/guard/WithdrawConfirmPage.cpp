@@ -129,7 +129,10 @@ void WithdrawConfirmPage::init()
     ui->autoSignCheckBox->setChecked(HXChain::getInstance()->autoWithdrawConfirm);
     ui->autoSignSetBtn->setVisible(ui->autoSignCheckBox->isChecked());
 
+
     HXChain::getInstance()->fetchCrosschainTransactions();
+
+    inited = true;
 }
 
 void WithdrawConfirmPage::refresh()
@@ -631,6 +634,8 @@ void WithdrawConfirmPage::on_ethFinalTrxTableWidget_cellPressed(int row, int col
 
 void WithdrawConfirmPage::on_autoSignCheckBox_stateChanged(int arg1)
 {
+    if(!inited) return;
+
     HXChain::getInstance()->autoWithdrawConfirm = !HXChain::getInstance()->autoWithdrawConfirm;
     HXChain::getInstance()->configFile->setValue("/settings/autoWithdrawConfirm", HXChain::getInstance()->autoWithdrawConfirm);
 

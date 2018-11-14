@@ -287,12 +287,12 @@
     </message>
     <message>
         <location filename="multisig/AddLocalPubKeyDialog.ui" line="165"/>
-        <source>币种</source>
+        <source>账户名</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="multisig/AddLocalPubKeyDialog.ui" line="178"/>
-        <source>自动授权限额</source>
+        <source>公钥</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -421,7 +421,7 @@
     <message>
         <location filename="citizen/AddPledgeDialog.cpp" line="52"/>
         <source>Transaction of adding pledge has been sent,please wait for confirmation</source>
-        <translation type="unfinished">追加提案质押费用已经发送，请等待确认</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.cpp" line="59"/>
@@ -1864,7 +1864,7 @@ better not transfer or upgrade</source>
     <message>
         <location filename="citizen/ChangeSenatorDialog.cpp" line="68"/>
         <source>Transaction of changing senators has been sent,please wait for confirmation</source>
-        <translation type="unfinished">已经发起更换Senator投票，请等待</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/ChangeSenatorDialog.cpp" line="75"/>
@@ -2166,7 +2166,7 @@ better not transfer or upgrade</source>
     <message>
         <location filename="citizen/CitizenProposalPage.cpp" line="210"/>
         <source>addPledge</source>
-        <translation type="unfinished">追加</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.cpp" line="268"/>
@@ -4845,10 +4845,64 @@ add an account first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.ui" line="50"/>
-        <source>暂无Senator收益</source>
-        <oldsource>暂无代理收益</oldsource>
+        <location filename="guard/GuardIncomePage.ui" line="62"/>
+        <source>当前SENATOR账号</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.ui" line="146"/>
+        <source>来自CITIZEN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.ui" line="159"/>
+        <source>金额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.ui" line="211"/>
+        <source>提案</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.ui" line="237"/>
+        <source>总计收益</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.ui" line="299"/>
+        <source>领取全部</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="43"/>
+        <source>There are no proposals currently!</source>
+        <translation type="unfinished">当前没有提案</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="72"/>
+        <source>There are no senator accounts in the wallet.</source>
+        <translation type="unfinished">钱包内没有senator账户</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="116"/>
+        <source>Transaction of get-income has been sent out!</source>
+        <translation type="unfinished">领取挖矿收入交易已发出！</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="127"/>
+        <source>This account&apos;s mining income is less than %1 %2 ! You can not get it.</source>
+        <translation type="unfinished">该账户的挖矿收益还不到 %1 %2，还不能领取！</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="132"/>
+        <source>Fail to get mining income!</source>
+        <translation type="unfinished">领取挖矿收益失败！</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="175"/>
+        <source>obtain</source>
+        <translation type="unfinished">领取</translation>
     </message>
 </context>
 <context>
@@ -5573,37 +5627,37 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">如果出现余额不正确或交易记录不正确的现象，尝试重新扫描区块，即可恢复</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="77"/>
+        <location filename="mainpage.cpp" line="76"/>
         <source>there&apos;s no account or assest!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="120"/>
+        <location filename="mainpage.cpp" line="119"/>
         <source>transfer</source>
         <translation type="unfinished">转账</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="123"/>
+        <location filename="mainpage.cpp" line="122"/>
         <source>deposit</source>
         <translation type="unfinished">充值</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="124"/>
+        <location filename="mainpage.cpp" line="123"/>
         <source>withdraw</source>
         <translation type="unfinished">提现</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="125"/>
+        <location filename="mainpage.cpp" line="124"/>
         <source>allot</source>
         <translation type="unfinished">划转</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="364"/>
+        <location filename="mainpage.cpp" line="363"/>
         <source>Fail to create account!</source>
         <translation type="unfinished">创建账户失败！</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="525"/>
+        <location filename="mainpage.cpp" line="519"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished">钱包中没有未注册账户！</translation>
     </message>
@@ -5628,8 +5682,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">复制到剪贴板</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="482"/>
-        <location filename="mainpage.cpp" line="485"/>
+        <location filename="mainpage.cpp" line="474"/>
+        <location filename="mainpage.cpp" line="477"/>
         <source>copy to clipboard</source>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
@@ -7266,7 +7320,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalDetailDialog.cpp" line="260"/>
         <source>%1      replaced by        %2</source>
-        <translation type="unfinished">%1      更换为        %2</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.cpp" line="291"/>
@@ -7897,7 +7951,7 @@ update or not?</source>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.cpp" line="61"/>
         <source>Transaction of changing senators has been sent,please wait for confirmation</source>
-        <translation type="unfinished">已经发起更换Senator投票，请等待</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.cpp" line="68"/>
@@ -9082,53 +9136,53 @@ update or not?</source>
         <translation type="unfinished">现在没有待授权的提现交易！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="151"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="154"/>
         <source>Transaction of senator-sign-crosschain has been sent out!</source>
         <oldsource>Transaction of guard-sign-crosschain has been sent out!</oldsource>
         <translation type="unfinished">senator签名交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="157"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="213"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="160"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="216"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="207"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="210"/>
         <source>Transaction of senator-sign-eth-withdraw-final has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="237"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="240"/>
         <source>no key</source>
         <translation type="unfinished">无私钥</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="315"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="318"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished">%1 已经签名过了！</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="361"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="481"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="364"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="484"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="363"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="403"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="366"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="406"/>
         <source>check</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="245"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="369"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="248"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="372"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="312"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="439"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="315"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="442"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
@@ -9138,12 +9192,12 @@ update or not?</source>
         <translation type="unfinished">钱包内没有senator账户</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="401"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="404"/>
         <source>waiting</source>
         <translation type="unfinished">等待中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="443"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="446"/>
         <source>unsigned</source>
         <translation type="unfinished">未签名</translation>
     </message>

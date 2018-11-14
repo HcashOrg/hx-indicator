@@ -162,7 +162,7 @@
      </attribute>
      <column>
       <property name="text">
-       <string>币种</string>
+       <string>账户名</string>
       </property>
       <property name="font">
        <font>
@@ -175,7 +175,7 @@
      </column>
      <column>
       <property name="text">
-       <string>自动授权限额</string>
+       <string>公钥</string>
       </property>
       <property name="textAlignment">
        <set>AlignCenter</set>

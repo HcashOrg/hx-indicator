@@ -12,7 +12,6 @@
 #include "wallet.h"
 
 #include "namedialog.h"
-#include "exportdialog.h"
 #include "importdialog.h"
 #include "commondialog.h"
 #include "showcontentdialog.h"
@@ -427,13 +426,6 @@ bool MainPage::eventFilter(QObject *watched, QEvent *e)
 //    }
 
     return QWidget::eventFilter(watched,e);
-}
-
-
-void MainPage::showExportDialog(QString name)
-{
-    ExportDialog exportDialog(name);
-    exportDialog.pop();
 }
 
 
