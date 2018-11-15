@@ -45,6 +45,7 @@
 #define TRANSACTION_TYPE_SIGN_ETH_MULTI_CREATE  97      // senator签名创建以太多签账户 senator_sign_eths_multi_account_create_trx
 #define TRANSACTION_TYPE_SIGN_ETH_FINAL         98      // senator签名以太交易 senator_sign_eths_final_trx
 #define TRANSACTION_TYPE_SIGN_ETH_COLDHOT_FINAL 100     // senator签名以太冷热钱包转账交易 senator_sign_eths_final_trx
+#define TRANSACTION_TYPE_CITIZEN_PROPOSAL       101     // citizen发起提案
 #define TRANSACTION_TYPE_CITIZEN_CHANGE_SENATOR 102     // citizen发起更换senator的提案
 #define TRANSACTION_TYPE_BLACKLIST              105     // 黑名单提案
 

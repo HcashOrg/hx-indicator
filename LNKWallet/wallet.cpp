@@ -1000,6 +1000,13 @@ void HXChain::parseTransaction(QString result)
         transactionDB.addAccountTransactionId(guardAddr, typeId);
     }
         break;
+    case TRANSACTION_TYPE_CITIZEN_PROPOSAL:
+    {
+        QString addr = operationObject.take("fee_paying_account").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
     default:
         break;
     }

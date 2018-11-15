@@ -332,6 +332,7 @@ void AllTransactionWidget::showTransactions()
     case ProposalType:
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SPONSOR_PROPOSAL);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_PROPOSAL_APPROVE);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CITIZEN_PROPOSAL);
         break;
     case BonusType:
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_OBTAIN_BONUS);
@@ -934,6 +935,26 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator sign ETH cold-hot trx")));
 
             useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+        }
+            break;
+        case TRANSACTION_TYPE_CITIZEN_PROPOSAL:
+        {
+            QJsonObject proposedOpObject = operationObject.value("proposed_ops").toArray().at(0).toObject();
+            int opType = proposedOpObject.value("op").toArray().at(0).toInt();
+            QString str = tr("type: ");
+            switch (opType)
+            {
+            case TRANSACTION_TYPE_CITIZEN_CHANGE_SENATOR:
+                str += tr("change senator");
+                break;
+            default:
+                str += tr("%1 (unkown)").arg(opType);
+                break;
+            }
+
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(str));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("citizen sponsor a proposal")));
         }
             break;
         default:
