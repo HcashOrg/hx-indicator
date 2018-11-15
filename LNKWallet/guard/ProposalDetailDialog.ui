@@ -963,7 +963,7 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
           <rect>
            <x>30</x>
            <y>10</y>
-           <width>91</width>
+           <width>71</width>
            <height>16</height>
           </rect>
          </property>
@@ -974,7 +974,7 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         <widget class="QLabel" name="label_fee">
          <property name="geometry">
           <rect>
-           <x>130</x>
+           <x>110</x>
            <y>10</y>
            <width>54</width>
            <height>12</height>
@@ -1001,9 +1001,9 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
          <property name="geometry">
           <rect>
            <x>320</x>
-           <y>10</y>
-           <width>54</width>
-           <height>12</height>
+           <y>8</y>
+           <width>61</width>
+           <height>16</height>
           </rect>
          </property>
          <property name="text">
