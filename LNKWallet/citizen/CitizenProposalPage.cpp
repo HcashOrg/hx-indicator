@@ -382,6 +382,6 @@ QString CitizenProposalPage::calProposalWeight(const ProposalInfo &info) const
             --gcd;
         }
         qDebug()<<"aaaaa"<<gcd<<alreadyWeight/gcd<<allWeight/gcd;
-        return QString::number(alreadyWeight/gcd)+"/"+QString::number(allWeight/gcd);
+        return QString::number(alreadyWeight/gcd)+"/\n"+QString::number(allWeight/gcd);
     }
 }
