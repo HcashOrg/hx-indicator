@@ -269,11 +269,11 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
             QMapIterator<QString, GuardInfo> it(allGuard);
             while (it.hasNext()) {
                 it.next();
-                if(val.toArray().at(0).toString() == it.value().accountId)
+                if(val.toArray().at(1).toString() == it.value().accountId)
                 {
                     oldSenator = it.key();
                 }
-                else if(val.toArray().at(1).toString() == it.value().accountId)
+                else if(val.toArray().at(0).toString() == it.value().accountId)
                 {
                     newSenator = it.key();
                 }
