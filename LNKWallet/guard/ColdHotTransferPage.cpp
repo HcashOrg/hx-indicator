@@ -280,8 +280,18 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
         else if(result.startsWith("\"error\":"))
         {
             ErrorResultDialog errorResultDialog;
-            errorResultDialog.setInfoText(tr("Failed!"));
-            errorResultDialog.setDetailText(result);
+            if(result.contains("AES error:"))
+            {
+                errorResultDialog.setInfoText(tr("Wrong password!"));
+            }
+            else if(result.contains("cold key can't be found in keyfile"))
+            {
+                errorResultDialog.setInfoText(tr("Wrong key of the cold wallet!"));
+            }
+            else
+            {
+                errorResultDialog.setInfoText(tr("Failed!"));
+            }            errorResultDialog.setDetailText(result);
             errorResultDialog.pop();
         }
 
@@ -792,7 +802,8 @@ void ColdHotTransferPage::on_ethFinalTrxTableWidget_cellClicked(int row, int col
 
             HXChain::getInstance()->postRPC( "id-senator_sign_eths_coldhot_final_trx",
                                              toJsonFormat( "senator_sign_eths_coldhot_final_trx",
-                                                           QJsonArray() << trxId << ui->accountComboBox->currentText()));
+                                                           QJsonArray() << trxId << ui->accountComboBox->currentText()
+                                                           << "" << ""));
 
         }
 

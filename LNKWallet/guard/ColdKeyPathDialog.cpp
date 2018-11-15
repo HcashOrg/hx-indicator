@@ -58,7 +58,7 @@ void ColdKeyPathDialog::on_closeBtn_clicked()
 
 void ColdKeyPathDialog::on_pathBtn_clicked()
 {
-    QString file = QFileDialog::getSaveFileName(this,tr( "Select the path to save the private key of the cold address"),
+    QString file = QFileDialog::getSaveFileName(this,tr( "Select the path to save the private key of the cold wallet"),
                                                 QDir::currentPath() + "/" + accountName + ".ckey", "*.ckey" , NULL, QFileDialog::DontConfirmOverwrite);
     if( !file.isEmpty())
     {

@@ -323,7 +323,8 @@ void ChangeCrosschainAddressDialog::on_okBtn_clicked()
         if(commonDialog.pop())
         {
             HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-senator_sign_eths_multi_account_create_trx", toJsonFormat( "senator_sign_eths_multi_account_create_trx",
-                                             QJsonArray() << ui->trxIdLabel->text() << ui->signerLabel->text() ));
+                                             QJsonArray() << ui->trxIdLabel->text() << ui->signerLabel->text()
+                                             << "" << ""));
         }
     }
     else

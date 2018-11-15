@@ -800,6 +800,14 @@ void HXChain::parseTransaction(QString result)
         transactionDB.addAccountTransactionId(payer, typeId);
     }
         break;
+    case TRANSACTION_TYPE_UPDATE_ACCOUNT:
+    {
+        // 变更挖矿管理费
+        QString addr = operationObject.value("addr").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
     case TRANSACTION_TYPE_BIND_TUNNEL:
     {
         // 绑定tunnel地址
@@ -844,6 +852,14 @@ void HXChain::parseTransaction(QString result)
     {
         // 提案投票
         QString addr = operationObject.take("fee_paying_account").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_CREATE_GUARD:
+    {
+        // 创建senator
+        QString addr = operationObject.take("fee_pay_address").toString();
 
         transactionDB.addAccountTransactionId(addr, typeId);
     }

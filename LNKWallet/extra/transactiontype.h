@@ -4,6 +4,7 @@
 // 不同类型交易对应的operation类型
 #define TRANSACTION_TYPE_NORMAL                 0       // 普通交易
 #define TRANSACTION_TYPE_REGISTER_ACCOUNT       5       // 注册账户
+#define TRANSACTION_TYPE_UPDATE_ACCOUNT         6       // 更新账户信息（挖矿管理费）
 #define TRANSACTION_TYPE_BIND_TUNNEL            10      // 绑定tunnel地址
 #define TRANSACTION_TYPE_UNBIND_TUNNEL          11      // 解绑tunnel地址
 #define TRANSACTION_TYPE_UPDATE_ASSET_PK        12      // guard更新冷热钱包多签地址私钥
@@ -11,7 +12,7 @@
 #define TRANSACTION_TYPE_CREATE_MINER           24      // 成为citizen
 #define TRANSACTION_TYPE_SPONSOR_PROPOSAL       28      // 发起提案
 #define TRANSACTION_TYPE_PROPOSAL_APPROVE       29      // 提案投票
-#define TRANSACTION_TYPE_CREATE_GUARD           35      // 创建guard
+#define TRANSACTION_TYPE_CREATE_GUARD           35      // 创建senator
 #define TRANSACTION_TYPE_FORMAL_GUARD           36      // 成为正式guard
 #define TRANSACTION_TYPE_RESIGN_GUARD           38      // 使guard辞职
 #define TRANSACTION_TYPE_LOCKBALANCE            55      // 质押资产给miner
@@ -45,5 +46,6 @@
 #define TRANSACTION_TYPE_SIGN_ETH_FINAL         98      // senator签名以太交易 senator_sign_eths_final_trx
 #define TRANSACTION_TYPE_SIGN_ETH_COLDHOT_FINAL 100     // senator签名以太冷热钱包转账交易 senator_sign_eths_final_trx
 #define TRANSACTION_TYPE_CITIZEN_CHANGE_SENATOR 102     // citizen发起更换senator的提案
+#define TRANSACTION_TYPE_BLACKLIST              105     // 黑名单提案
 
 #endif // TRANSACTIONTYPE_H

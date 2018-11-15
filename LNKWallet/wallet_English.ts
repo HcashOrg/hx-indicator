@@ -710,262 +710,267 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="419"/>
-        <location filename="alltransactionwidget.cpp" line="688"/>
+        <location filename="alltransactionwidget.cpp" line="421"/>
+        <location filename="alltransactionwidget.cpp" line="705"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="457"/>
+        <location filename="alltransactionwidget.cpp" line="459"/>
         <source>transfer to self</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="466"/>
+        <location filename="alltransactionwidget.cpp" line="468"/>
         <source>transfer-out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="478"/>
+        <location filename="alltransactionwidget.cpp" line="480"/>
         <source>transfer-in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="488"/>
+        <location filename="alltransactionwidget.cpp" line="490"/>
         <source>register account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="498"/>
+        <location filename="alltransactionwidget.cpp" line="499"/>
+        <source>citizen change mining fee</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="509"/>
         <source>bind %1 address: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="500"/>
+        <location filename="alltransactionwidget.cpp" line="511"/>
         <source>bind tunnel address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="508"/>
+        <location filename="alltransactionwidget.cpp" line="519"/>
         <source>unbind %1 address: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="510"/>
+        <location filename="alltransactionwidget.cpp" line="521"/>
         <source>unbind tunnel address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="524"/>
+        <location filename="alltransactionwidget.cpp" line="535"/>
         <source>asset feed price: %1:%2  %3:%4</source>
         <oldsource>asset quote: %1:%2  %3:%4</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="529"/>
+        <location filename="alltransactionwidget.cpp" line="540"/>
         <source>asset feed price</source>
         <oldsource>asset quote</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="536"/>
+        <location filename="alltransactionwidget.cpp" line="547"/>
         <source>create citizen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="545"/>
+        <location filename="alltransactionwidget.cpp" line="556"/>
         <source>type: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="549"/>
+        <location filename="alltransactionwidget.cpp" line="560"/>
         <source>cold-hot wallet trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="552"/>
+        <location filename="alltransactionwidget.cpp" line="563"/>
         <source>change cold-hot wallet multisig-address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="555"/>
+        <location filename="alltransactionwidget.cpp" line="566"/>
         <source>set price feeder</source>
         <oldsource>set publisher</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="558"/>
+        <location filename="alltransactionwidget.cpp" line="569"/>
         <source>cancel cold-hot trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="561"/>
+        <location filename="alltransactionwidget.cpp" line="572"/>
         <source>cancel withdraw trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="564"/>
+        <location filename="alltransactionwidget.cpp" line="612"/>
         <source>create senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="567"/>
+        <location filename="alltransactionwidget.cpp" line="575"/>
         <source>resign senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="570"/>
+        <location filename="alltransactionwidget.cpp" line="578"/>
         <source>set contract transfer fee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="573"/>
+        <location filename="alltransactionwidget.cpp" line="581"/>
         <source>set senator formal/informal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="576"/>
+        <location filename="alltransactionwidget.cpp" line="584"/>
         <source>set crosschain fee</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="579"/>
+        <location filename="alltransactionwidget.cpp" line="587"/>
         <source>set locked balance of senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="582"/>
+        <location filename="alltransactionwidget.cpp" line="590"/>
         <source>%1 (unkown)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="588"/>
+        <location filename="alltransactionwidget.cpp" line="596"/>
         <source>sponsor a proposal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="595"/>
+        <location filename="alltransactionwidget.cpp" line="603"/>
         <source>proposal ID: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="597"/>
+        <location filename="alltransactionwidget.cpp" line="605"/>
         <source>vote for a proposal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="613"/>
+        <location filename="alltransactionwidget.cpp" line="630"/>
         <source>lock asset to miner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="629"/>
+        <location filename="alltransactionwidget.cpp" line="646"/>
         <source>foreclose asset from miner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="644"/>
+        <location filename="alltransactionwidget.cpp" line="661"/>
         <source>senator lock balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="655"/>
-        <location filename="alltransactionwidget.cpp" line="670"/>
+        <location filename="alltransactionwidget.cpp" line="672"/>
+        <location filename="alltransactionwidget.cpp" line="687"/>
         <source>%1 account: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="661"/>
+        <location filename="alltransactionwidget.cpp" line="678"/>
         <source>deposit %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="676"/>
+        <location filename="alltransactionwidget.cpp" line="693"/>
         <source>withdraw %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="680"/>
+        <location filename="alltransactionwidget.cpp" line="697"/>
         <source>waiting for signature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="684"/>
+        <location filename="alltransactionwidget.cpp" line="701"/>
         <source>being signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="735"/>
+        <location filename="alltransactionwidget.cpp" line="752"/>
         <source>total </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="744"/>
+        <location filename="alltransactionwidget.cpp" line="761"/>
         <source>get mining income</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="753"/>
+        <location filename="alltransactionwidget.cpp" line="770"/>
         <source>issue &quot;%1&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="755"/>
+        <location filename="alltransactionwidget.cpp" line="772"/>
         <source>issue asset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="768"/>
+        <location filename="alltransactionwidget.cpp" line="785"/>
         <source>register contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="791"/>
+        <location filename="alltransactionwidget.cpp" line="808"/>
         <source>exechange contract withdrawAsset</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="799"/>
+        <location filename="alltransactionwidget.cpp" line="816"/>
         <source>call contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="819"/>
+        <location filename="alltransactionwidget.cpp" line="836"/>
         <source>transfer to contract</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="838"/>
+        <location filename="alltransactionwidget.cpp" line="855"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="865"/>
+        <location filename="alltransactionwidget.cpp" line="882"/>
         <source>cancel acceptance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="888"/>
+        <location filename="alltransactionwidget.cpp" line="905"/>
         <source>get bonus</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="899"/>
+        <location filename="alltransactionwidget.cpp" line="916"/>
         <source>senator sign to create %1 multi-sig account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="908"/>
+        <location filename="alltransactionwidget.cpp" line="925"/>
         <source>senator sign ETH trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="917"/>
+        <location filename="alltransactionwidget.cpp" line="934"/>
         <source>senator sign ETH cold-hot trx</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="951"/>
+        <location filename="alltransactionwidget.cpp" line="968"/>
         <source>acceptance is used</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1801,7 +1806,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="109"/>
         <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="110"/>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="331"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="332"/>
         <source>There are no new multisig-address to change to!</source>
         <oldsource>There are no new multi-sig address to change to!</oldsource>
         <translation type="unfinished"></translation>
@@ -1844,7 +1849,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="339"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="340"/>
         <source>The expiration time should not less than 3600s(1 hour) !</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2582,63 +2587,73 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="283"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="335"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="285"/>
+        <source>Wrong password!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="289"/>
+        <source>Wrong key of the cold wallet!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="293"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="345"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="329"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="339"/>
         <source>Transaction of senator-sign-eth-coldhot-final has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="359"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="369"/>
         <source>no key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="457"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="576"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="655"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="467"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="586"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="665"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="459"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="500"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="469"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="510"/>
         <source>check</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="367"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="466"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="377"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="476"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="498"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="508"/>
         <source>waiting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="535"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="648"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="545"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="658"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="539"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="549"/>
         <source>unsigned</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="651"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="661"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="658"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="668"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2651,33 +2666,34 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.ui" line="139"/>
+        <location filename="guard/ColdKeyPathDialog.ui" line="142"/>
         <source>选择路径</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Select</translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.ui" line="165"/>
-        <source>创建冷钱包私钥文件</source>
-        <translation type="unfinished"></translation>
+        <location filename="guard/ColdKeyPathDialog.ui" line="168"/>
+        <source>保存冷钱包私钥文件</source>
+        <translation type="unfinished">Save the key of cold wallet</translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.ui" line="192"/>
+        <location filename="guard/ColdKeyPathDialog.ui" line="240"/>
+        <source>私钥文件密码</source>
+        <translation type="unfinished">Password</translation>
+    </message>
+    <message>
+        <location filename="guard/ColdKeyPathDialog.ui" line="195"/>
         <source>创建</source>
         <translation type="unfinished">Create</translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.ui" line="211"/>
+        <location filename="guard/ColdKeyPathDialog.ui" line="214"/>
         <source>取消</source>
         <translation type="unfinished">Cancel</translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.ui" line="237"/>
-        <source>设置私钥文件密码</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="guard/ColdKeyPathDialog.cpp" line="58"/>
-        <source>Select the path</source>
+        <location filename="guard/ColdKeyPathDialog.cpp" line="61"/>
+        <source>Select the path to save the private key of the cold wallet</source>
+        <oldsource>Select the path to save the private key of the cold address</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5274,7 +5290,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.cpp" line="128"/>
-        <location filename="guard/GuardKeyManagePage.cpp" line="239"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="246"/>
         <source>updating</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5291,7 +5307,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.cpp" line="156"/>
-        <location filename="guard/GuardKeyManagePage.cpp" line="251"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="258"/>
         <source>update</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5301,17 +5317,22 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="205"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="207"/>
+        <source>Wrong password!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/GuardKeyManagePage.cpp" line="211"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="215"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="222"/>
         <source>The cross-chain keys has already imported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="308"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="315"/>
         <source>Select the file of cross-chain key</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5542,22 +5563,22 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="169"/>
+        <location filename="importdialog.cpp" line="178"/>
         <source>Wrong HX private key!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="295"/>
+        <location filename="importdialog.cpp" line="304"/>
         <source>Fail to import key!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="326"/>
+        <location filename="importdialog.cpp" line="335"/>
         <source> has been imported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="330"/>
+        <location filename="importdialog.cpp" line="339"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7955,33 +7976,34 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.ui" line="139"/>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="142"/>
         <source>选择路径</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Select</translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.ui" line="165"/>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="168"/>
         <source>选择冷钱包私钥文件</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Select the key of the cold wallet</translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.ui" line="192"/>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="195"/>
         <source>确定</source>
         <translation type="unfinished">Ok</translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.ui" line="211"/>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="214"/>
         <source>取消</source>
         <translation type="unfinished">Cancel</translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.ui" line="237"/>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="240"/>
         <source>私钥文件密码</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Password</translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.cpp" line="57"/>
-        <source>Choose your private key file.</source>
+        <location filename="guard/SelectColdKeyFileDialog.cpp" line="60"/>
+        <source>Select your private key file of the cold wallet</source>
+        <oldsource>Select your private key file of the cold address</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -676,48 +676,53 @@
         <translation type="unfinished">当前没有交易记录！</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="419"/>
-        <location filename="alltransactionwidget.cpp" line="688"/>
+        <location filename="alltransactionwidget.cpp" line="421"/>
+        <location filename="alltransactionwidget.cpp" line="705"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="457"/>
+        <location filename="alltransactionwidget.cpp" line="459"/>
         <source>transfer to self</source>
         <translation type="unfinished">转账给自己</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="466"/>
+        <location filename="alltransactionwidget.cpp" line="468"/>
         <source>transfer-out</source>
         <translation type="unfinished">转出</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="478"/>
+        <location filename="alltransactionwidget.cpp" line="480"/>
         <source>transfer-in</source>
         <translation type="unfinished">转入</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="488"/>
+        <location filename="alltransactionwidget.cpp" line="490"/>
         <source>register account</source>
         <translation type="unfinished">注册账户</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="498"/>
+        <location filename="alltransactionwidget.cpp" line="499"/>
+        <source>citizen change mining fee</source>
+        <translation type="unfinished">citizen变更挖矿管理费</translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="509"/>
         <source>bind %1 address: %2</source>
         <translation type="unfinished">绑定%1地址: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="500"/>
+        <location filename="alltransactionwidget.cpp" line="511"/>
         <source>bind tunnel address</source>
         <translation type="unfinished">绑定tunnel地址</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="508"/>
+        <location filename="alltransactionwidget.cpp" line="519"/>
         <source>unbind %1 address: %2</source>
         <translation type="unfinished">解绑%1地址: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="510"/>
+        <location filename="alltransactionwidget.cpp" line="521"/>
         <source>unbind tunnel address</source>
         <translation type="unfinished">解绑tunnel地址</translation>
     </message>
@@ -726,55 +731,55 @@
         <translation type="obsolete">喂价</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="524"/>
+        <location filename="alltransactionwidget.cpp" line="535"/>
         <source>asset feed price: %1:%2  %3:%4</source>
         <oldsource>asset quote: %1:%2  %3:%4</oldsource>
         <translation type="unfinished">资产喂价： %1:%2  %3:%4</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="529"/>
+        <location filename="alltransactionwidget.cpp" line="540"/>
         <source>asset feed price</source>
         <oldsource>asset quote</oldsource>
         <translation type="unfinished">资产喂价</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="536"/>
+        <location filename="alltransactionwidget.cpp" line="547"/>
         <source>create citizen</source>
         <translation type="unfinished">创建citizen</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="545"/>
+        <location filename="alltransactionwidget.cpp" line="556"/>
         <source>type: </source>
         <translation type="unfinished">类型： </translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="549"/>
+        <location filename="alltransactionwidget.cpp" line="560"/>
         <source>cold-hot wallet trx</source>
         <translation type="unfinished">冷热钱包互转</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="552"/>
+        <location filename="alltransactionwidget.cpp" line="563"/>
         <source>change cold-hot wallet multisig-address</source>
         <translation type="unfinished">变更冷热钱包多签地址</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="555"/>
+        <location filename="alltransactionwidget.cpp" line="566"/>
         <source>set price feeder</source>
         <oldsource>set publisher</oldsource>
         <translation type="unfinished">设置喂价人</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="558"/>
+        <location filename="alltransactionwidget.cpp" line="569"/>
         <source>cancel cold-hot trx</source>
         <translation type="unfinished">取消冷热钱包转账</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="561"/>
+        <location filename="alltransactionwidget.cpp" line="572"/>
         <source>cancel withdraw trx</source>
         <translation type="unfinished">取消提现交易</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="564"/>
+        <location filename="alltransactionwidget.cpp" line="612"/>
         <source>create senator</source>
         <translation type="unfinished">创建senator</translation>
     </message>
@@ -784,78 +789,78 @@
         <translation type="obsolete">设置senator是否为formal</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="567"/>
+        <location filename="alltransactionwidget.cpp" line="575"/>
         <source>resign senator</source>
         <translation type="unfinished">senator辞职</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="570"/>
+        <location filename="alltransactionwidget.cpp" line="578"/>
         <source>set contract transfer fee</source>
         <translation type="unfinished">设置合约转账费用</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="573"/>
+        <location filename="alltransactionwidget.cpp" line="581"/>
         <source>set senator formal/informal</source>
         <translation type="unfinished">设置senator为正式/非正式</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="576"/>
+        <location filename="alltransactionwidget.cpp" line="584"/>
         <source>set crosschain fee</source>
         <translation type="unfinished">设置跨链提现手续费</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="579"/>
+        <location filename="alltransactionwidget.cpp" line="587"/>
         <source>set locked balance of senator</source>
         <translation type="unfinished">设置senator保证金</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="582"/>
+        <location filename="alltransactionwidget.cpp" line="590"/>
         <source>%1 (unkown)</source>
         <translation type="unfinished">%1 （未知）</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="588"/>
+        <location filename="alltransactionwidget.cpp" line="596"/>
         <source>sponsor a proposal</source>
         <translation type="unfinished">发起提案</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="595"/>
+        <location filename="alltransactionwidget.cpp" line="603"/>
         <source>proposal ID: %1</source>
         <translation type="unfinished">提案ID： %1</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="597"/>
+        <location filename="alltransactionwidget.cpp" line="605"/>
         <source>vote for a proposal</source>
         <translation type="unfinished">提案投票</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="613"/>
+        <location filename="alltransactionwidget.cpp" line="630"/>
         <source>lock asset to miner</source>
         <translation type="unfinished">质押资产给miner</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="629"/>
+        <location filename="alltransactionwidget.cpp" line="646"/>
         <source>foreclose asset from miner</source>
         <translation type="unfinished">从miner赎回资产</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="644"/>
+        <location filename="alltransactionwidget.cpp" line="661"/>
         <source>senator lock balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="655"/>
-        <location filename="alltransactionwidget.cpp" line="670"/>
+        <location filename="alltransactionwidget.cpp" line="672"/>
+        <location filename="alltransactionwidget.cpp" line="687"/>
         <source>%1 account: %2</source>
         <translation type="unfinished">%1账户: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="661"/>
+        <location filename="alltransactionwidget.cpp" line="678"/>
         <source>deposit %1</source>
         <translation type="unfinished">%1充值</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="676"/>
+        <location filename="alltransactionwidget.cpp" line="693"/>
         <source>withdraw %1</source>
         <translation type="unfinished">%1提现</translation>
     </message>
@@ -864,72 +869,72 @@
         <translation type="obsolete">已被取消</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="680"/>
+        <location filename="alltransactionwidget.cpp" line="697"/>
         <source>waiting for signature</source>
         <translation type="unfinished">等待签名中</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="684"/>
+        <location filename="alltransactionwidget.cpp" line="701"/>
         <source>being signed</source>
         <translation type="unfinished">正在签名</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="735"/>
+        <location filename="alltransactionwidget.cpp" line="752"/>
         <source>total </source>
         <translation type="unfinished">总计 </translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="744"/>
+        <location filename="alltransactionwidget.cpp" line="761"/>
         <source>get mining income</source>
         <translation type="unfinished">获取挖矿收入</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="753"/>
+        <location filename="alltransactionwidget.cpp" line="770"/>
         <source>issue &quot;%1&quot;</source>
         <translation type="unfinished">发行 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="755"/>
+        <location filename="alltransactionwidget.cpp" line="772"/>
         <source>issue asset</source>
         <translation type="unfinished">发行资产</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="768"/>
+        <location filename="alltransactionwidget.cpp" line="785"/>
         <source>register contract</source>
         <translation type="unfinished">注册合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="791"/>
+        <location filename="alltransactionwidget.cpp" line="808"/>
         <source>exechange contract withdrawAsset</source>
         <translation type="unfinished">兑换合约提取余额</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="799"/>
+        <location filename="alltransactionwidget.cpp" line="816"/>
         <source>call contract</source>
         <translation type="unfinished">合约调用</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="819"/>
+        <location filename="alltransactionwidget.cpp" line="836"/>
         <source>transfer to contract</source>
         <translation type="unfinished">转账到合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="838"/>
+        <location filename="alltransactionwidget.cpp" line="855"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished">创建%1承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="865"/>
+        <location filename="alltransactionwidget.cpp" line="882"/>
         <source>cancel acceptance</source>
         <translation type="unfinished">撤销承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="888"/>
+        <location filename="alltransactionwidget.cpp" line="905"/>
         <source>get bonus</source>
         <translation type="unfinished">领取分红</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="899"/>
+        <location filename="alltransactionwidget.cpp" line="916"/>
         <source>senator sign to create %1 multi-sig account</source>
         <translation type="unfinished">senator签名创建%1多签账户</translation>
     </message>
@@ -938,17 +943,17 @@
         <translation type="obsolete">senator签名创建以太多签账户</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="908"/>
+        <location filename="alltransactionwidget.cpp" line="925"/>
         <source>senator sign ETH trx</source>
         <translation type="unfinished">senator签名以太交易</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="917"/>
+        <location filename="alltransactionwidget.cpp" line="934"/>
         <source>senator sign ETH cold-hot trx</source>
         <translation type="unfinished">senator签名以太冷热钱包转账交易</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="951"/>
+        <location filename="alltransactionwidget.cpp" line="968"/>
         <source>acceptance is used</source>
         <translation type="unfinished">承兑单被使用</translation>
     </message>
@@ -1735,7 +1740,7 @@ better not transfer or upgrade</source>
     <message>
         <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="109"/>
         <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="110"/>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="331"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="332"/>
         <source>There are no new multisig-address to change to!</source>
         <oldsource>There are no new multi-sig address to change to!</oldsource>
         <translation type="unfinished">没有新的可变更多签地址</translation>
@@ -1778,7 +1783,7 @@ better not transfer or upgrade</source>
         <translation type="unfinished">确认签名？</translation>
     </message>
     <message>
-        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="339"/>
+        <location filename="guard/ChangeCrosschainAddressDialog.cpp" line="340"/>
         <source>The expiration time should not less than 3600s(1 hour) !</source>
         <translation type="unfinished">超时时间请勿少于3600秒（1小时）！</translation>
     </message>
@@ -2487,63 +2492,73 @@ better not transfer or upgrade</source>
         <translation type="unfinished">包含senator签名冷热钱包转账的交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="283"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="335"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="285"/>
+        <source>Wrong password!</source>
+        <translation type="unfinished">密码错误！</translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="289"/>
+        <source>Wrong key of the cold wallet!</source>
+        <translation type="unfinished">错误的冷钱包私钥！</translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="293"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="345"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="329"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="339"/>
         <source>Transaction of senator-sign-eth-coldhot-final has been sent out!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="359"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="369"/>
         <source>no key</source>
         <translation type="unfinished">无私钥</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="457"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="576"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="655"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="467"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="586"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="665"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="459"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="500"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="469"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="510"/>
         <source>check</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="367"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="466"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="377"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="476"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="498"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="508"/>
         <source>waiting</source>
         <translation type="unfinished">等待中</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="535"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="648"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="545"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="658"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="539"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="549"/>
         <source>unsigned</source>
         <translation type="unfinished">未签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="651"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="661"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished">%1已经签名了该冷热钱包转账交易！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="658"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="668"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished">正在检查%1的签名！</translation>
     </message>
@@ -2556,34 +2571,39 @@ better not transfer or upgrade</source>
         <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.ui" line="139"/>
+        <location filename="guard/ColdKeyPathDialog.ui" line="142"/>
         <source>选择路径</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.ui" line="165"/>
-        <source>创建冷钱包私钥文件</source>
+        <location filename="guard/ColdKeyPathDialog.ui" line="168"/>
+        <source>保存冷钱包私钥文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.ui" line="192"/>
+        <location filename="guard/ColdKeyPathDialog.ui" line="240"/>
+        <source>私钥文件密码</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdKeyPathDialog.ui" line="195"/>
         <source>创建</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.ui" line="211"/>
+        <location filename="guard/ColdKeyPathDialog.ui" line="214"/>
         <source>取消</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.ui" line="237"/>
-        <source>设置私钥文件密码</source>
-        <translation type="unfinished"></translation>
+        <source>Select the path</source>
+        <translation type="obsolete">选择路径</translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.cpp" line="58"/>
-        <source>Select the path</source>
-        <translation type="unfinished">选择路径</translation>
+        <location filename="guard/ColdKeyPathDialog.cpp" line="61"/>
+        <source>Select the path to save the private key of the cold wallet</source>
+        <oldsource>Select the path to save the private key of the cold address</oldsource>
+        <translation type="unfinished">选择路径保存冷钱包私钥</translation>
     </message>
 </context>
 <context>
@@ -5049,7 +5069,7 @@ add an account first</source>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.cpp" line="128"/>
-        <location filename="guard/GuardKeyManagePage.cpp" line="239"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="246"/>
         <source>updating</source>
         <translation type="unfinished">更新中</translation>
     </message>
@@ -5066,7 +5086,7 @@ add an account first</source>
     </message>
     <message>
         <location filename="guard/GuardKeyManagePage.cpp" line="156"/>
-        <location filename="guard/GuardKeyManagePage.cpp" line="251"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="258"/>
         <source>update</source>
         <translation type="unfinished">更新</translation>
     </message>
@@ -5076,12 +5096,17 @@ add an account first</source>
         <translation type="unfinished">更新多签地址的交易已发出，请等待确认。</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="205"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="207"/>
+        <source>Wrong password!</source>
+        <translation type="unfinished">密码错误！</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardKeyManagePage.cpp" line="211"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="215"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="222"/>
         <source>The cross-chain keys has already imported.</source>
         <translation type="unfinished">跨链私钥已被导入！</translation>
     </message>
@@ -5090,7 +5115,7 @@ add an account first</source>
         <translation type="obsolete">您正在变更%1多签地址的私钥。确定变更吗？</translation>
     </message>
     <message>
-        <location filename="guard/GuardKeyManagePage.cpp" line="308"/>
+        <location filename="guard/GuardKeyManagePage.cpp" line="315"/>
         <source>Select the file of cross-chain key</source>
         <translation type="unfinished">选择跨链私钥文件</translation>
     </message>
@@ -5319,12 +5344,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">HX地址:%1 已存在！</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="169"/>
+        <location filename="importdialog.cpp" line="178"/>
         <source>Wrong HX private key!</source>
         <translation type="unfinished">错误的HX私钥</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="295"/>
+        <location filename="importdialog.cpp" line="304"/>
         <source>Fail to import key!</source>
         <translation type="unfinished">导入私钥失败！</translation>
     </message>
@@ -5337,7 +5362,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">导入私钥错误：</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="330"/>
+        <location filename="importdialog.cpp" line="339"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished">每当一个新的账户被导入，钱包会在下次启动时重新扫描区块链数据。在此之后该账户的交易将被显示。</translation>
     </message>
@@ -5346,7 +5371,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">已经存在</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="326"/>
+        <location filename="importdialog.cpp" line="335"/>
         <source> has been imported!</source>
         <translation type="unfinished">已经被导入!</translation>
     </message>
@@ -7806,34 +7831,39 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.ui" line="139"/>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="142"/>
         <source>选择路径</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.ui" line="165"/>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="168"/>
         <source>选择冷钱包私钥文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.ui" line="192"/>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="195"/>
         <source>确定</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.ui" line="211"/>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="214"/>
         <source>取消</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.ui" line="237"/>
+        <location filename="guard/SelectColdKeyFileDialog.ui" line="240"/>
         <source>私钥文件密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/SelectColdKeyFileDialog.cpp" line="57"/>
         <source>Choose your private key file.</source>
-        <translation type="unfinished">选择你的私钥文件</translation>
+        <translation type="obsolete">选择你的私钥文件</translation>
+    </message>
+    <message>
+        <location filename="guard/SelectColdKeyFileDialog.cpp" line="60"/>
+        <source>Select your private key file of the cold wallet</source>
+        <oldsource>Select your private key file of the cold address</oldsource>
+        <translation type="unfinished">选择冷钱包私钥文件</translation>
     </message>
 </context>
 <context>

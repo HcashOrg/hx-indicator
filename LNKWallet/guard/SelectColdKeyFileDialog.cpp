@@ -22,6 +22,7 @@ SelectColdKeyFileDialog::SelectColdKeyFileDialog(QWidget *parent) :
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->pathBtn->setStyleSheet(OKBTN_STYLE);
 
     checkOkBtnEnabled();
 }
@@ -56,7 +57,7 @@ void SelectColdKeyFileDialog::on_closeBtn_clicked()
 
 void SelectColdKeyFileDialog::on_pathBtn_clicked()
 {
-    QString file = QFileDialog::getOpenFileName(this, tr("Select your private key file of the cold address"),"","(*.ckey)");
+    QString file = QFileDialog::getOpenFileName(this, tr("Select your private key file of the cold wallet"),"","(*.ckey)");
 #ifdef WIN32
     file.replace("\\","/");
 #endif

@@ -315,9 +315,11 @@ void AllTransactionWidget::showTransactions()
         break;
     case OtherType:
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_REGISTER_ACCOUNT);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_UPDATE_ACCOUNT);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_BIND_TUNNEL);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_UNBIND_TUNNEL);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CREATE_MINER);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CREATE_GUARD);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_ISSUE_ASSET);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SENATOR_LOCK_BALANCE);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SIGN_ETH_MULTI_CREATE);
@@ -490,6 +492,15 @@ void AllTransactionWidget::showTransactions()
             useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
+        case TRANSACTION_TYPE_UPDATE_ACCOUNT:
+        {
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("citizen change mining fee")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+        }
+            break;
         case TRANSACTION_TYPE_BIND_TUNNEL:
         {
             QString crosschainType = operationObject.take("crosschain_type").toString();
@@ -560,9 +571,6 @@ void AllTransactionWidget::showTransactions()
             case TRANSACTION_TYPE_WITHDRAW_CANCEL:
                 str += tr("cancel withdraw trx");
                 break;
-            case TRANSACTION_TYPE_CREATE_GUARD:
-                str += tr("create senator");
-                break;
             case TRANSACTION_TYPE_RESIGN_GUARD:
                 str += tr("resign senator");
                 break;
@@ -595,6 +603,15 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(tr("proposal ID: %1").arg(proposalId)));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("vote for a proposal")));
+        }
+            break;
+        case TRANSACTION_TYPE_CREATE_GUARD:
+        {
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("create senator")));
+
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_LOCKBALANCE:
