@@ -369,6 +369,10 @@ QString CitizenProposalPage::calProposalWeight(const ProposalInfo &info) const
             }
         }
     }
+    if(0 == alreadyWeight)
+    {
+        return QString::number(alreadyWeight)+"/"+QString::number(allWeight);
+    }
     qDebug()<<"bbbbbbb"<<alreadyWeight<<allWeight;
     unsigned long long gcd = std::min<unsigned long long>(allWeight,alreadyWeight);
     while(allWeight%gcd != 0 || alreadyWeight%gcd != 0)
