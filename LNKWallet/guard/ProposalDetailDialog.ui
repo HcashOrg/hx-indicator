@@ -987,10 +987,10 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         <widget class="QLabel" name="label_27">
          <property name="geometry">
           <rect>
-           <x>240</x>
+           <x>230</x>
            <y>10</y>
-           <width>54</width>
-           <height>12</height>
+           <width>81</width>
+           <height>20</height>
           </rect>
          </property>
          <property name="text">
@@ -1000,9 +1000,9 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         <widget class="QLabel" name="label_votestate">
          <property name="geometry">
           <rect>
-           <x>320</x>
-           <y>8</y>
-           <width>61</width>
+           <x>330</x>
+           <y>10</y>
+           <width>81</width>
            <height>16</height>
           </rect>
          </property>
@@ -1074,14 +1074,30 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         <widget class="QLabel" name="label_weight">
          <property name="geometry">
           <rect>
-           <x>230</x>
+           <x>320</x>
            <y>30</y>
-           <width>221</width>
+           <width>121</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
           <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_weight_2">
+         <property name="geometry">
+          <rect>
+           <x>230</x>
+           <y>30</y>
+           <width>81</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>投票占比(%):</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>

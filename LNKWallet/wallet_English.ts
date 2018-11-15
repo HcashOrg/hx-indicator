@@ -2254,87 +2254,86 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">MY VOTE</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="178"/>
         <source>权重比例</source>
-        <translation type="unfinished">WEIGHT</translation>
+        <translation type="obsolete">WEIGHT</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="245"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="237"/>
         <source>Citizen提案</source>
         <translation type="unfinished">Citizen Proposal</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="261"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="253"/>
         <source>更换senator</source>
         <translation type="unfinished">CHANGE SENATOR</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="96"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="95"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="120"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="119"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="127"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="126"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="181"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="180"/>
         <source>change senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="185"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="184"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="197"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="196"/>
         <source>no citizen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="201"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="200"/>
         <source>approved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="206"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="205"/>
         <source>disapproved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="211"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="210"/>
         <source>not voted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="217"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="216"/>
         <source>approve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="218"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="217"/>
         <source>disapprove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="219"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="218"/>
         <source>addPledge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="284"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="283"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="304"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="303"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4728,17 +4727,17 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2485"/>
+        <location filename="frame.cpp" line="2486"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2488"/>
+        <location filename="frame.cpp" line="2489"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2491"/>
+        <location filename="frame.cpp" line="2492"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7346,7 +7345,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="136"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1183"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1215"/>
         <source>投票状态</source>
         <translation type="unfinished">Voting State</translation>
     </message>
@@ -7495,12 +7494,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Nomination List:</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1089"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1100"/>
+        <source>投票占比(%):</source>
+        <translation type="unfinished">VoteRate(%):</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalDetailDialog.ui" line="1121"/>
         <source>未知的提案类型</source>
         <translation type="unfinished">unknown proposal type</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1170"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1202"/>
         <source>所需投票者</source>
         <translation type="unfinished">Required Voters</translation>
     </message>
@@ -7583,12 +7587,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="260"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="261"/>
         <source>%1      replaced by        %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="312"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="313"/>
         <source>unknown(%1)</source>
         <translation type="unfinished"></translation>
     </message>

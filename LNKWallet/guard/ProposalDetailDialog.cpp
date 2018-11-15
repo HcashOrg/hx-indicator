@@ -354,11 +354,19 @@ QString ProposalDetailDialog::calProposalWeight(const ProposalInfo &info) const
             }
         }
     }
+    if(0 != allWeight)
+    {
+        return QString::number(alreadyWeight*1.0/allWeight,'g',2)+"%";
+    }
+    else
+    {
+        return "0";
+    }
 //    qDebug()<<"bbbbbbb"<<alreadyWeight<<allWeight;
 //    unsigned long long gcd = std::min<unsigned long long>(allWeight,alreadyWeight);
 //    if(0 == gcd)
 //    {
-        return QString::number(alreadyWeight)+"/"+QString::number(allWeight);
+//        return QString::number(alreadyWeight)+"/"+QString::number(allWeight);
 //    }
 //    else
 //    {
