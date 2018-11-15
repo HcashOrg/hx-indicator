@@ -1904,7 +1904,7 @@ void Frame::jsonDataUpdated(QString id)
             if(HXChain::getInstance()->minerMap.contains(account))
             {
                 HXChain::getInstance()->minerMap[account].payBack = optionsObject.value("miner_pledge_pay_back").toInt();
-                HXChain::getInstance()->minerMap[account].address = optionsObject.value("addr").toString();
+                HXChain::getInstance()->minerMap[account].address = object.value("addr").toString();
             }
         }
 
