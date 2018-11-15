@@ -1000,7 +1000,7 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         <widget class="QLabel" name="label_votestate">
          <property name="geometry">
           <rect>
-           <x>330</x>
+           <x>320</x>
            <y>10</y>
            <width>81</width>
            <height>16</height>
@@ -1084,7 +1084,7 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
           <string/>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
         </widget>
         <widget class="QLabel" name="label_weight_2">
@@ -1100,7 +1100,7 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
           <string>投票占比(%):</string>
          </property>
          <property name="alignment">
-          <set>Qt::AlignCenter</set>
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
         </widget>
        </widget>
