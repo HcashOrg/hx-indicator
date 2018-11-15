@@ -40,11 +40,11 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->proposalTableWidget->setColumnWidth(0,80);
     ui->proposalTableWidget->setColumnWidth(1,80);
     ui->proposalTableWidget->setColumnWidth(2,80);
-    ui->proposalTableWidget->setColumnWidth(3,80);
+    ui->proposalTableWidget->setColumnWidth(3,85);
     ui->proposalTableWidget->setColumnWidth(4,80);
-    ui->proposalTableWidget->setColumnWidth(5,60);
-    ui->proposalTableWidget->setColumnWidth(6,60);
-    ui->proposalTableWidget->setColumnWidth(7,60);
+    ui->proposalTableWidget->setColumnWidth(5,65);
+    ui->proposalTableWidget->setColumnWidth(6,55);
+    ui->proposalTableWidget->setColumnWidth(7,55);
     ui->proposalTableWidget->setColumnWidth(8,60);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 

@@ -2256,7 +2256,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="178"/>
         <source>权重比例</source>
-        <translation type="unfinished">PledgeWeight</translation>
+        <translation type="unfinished">WEIGHT</translation>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="245"/>
