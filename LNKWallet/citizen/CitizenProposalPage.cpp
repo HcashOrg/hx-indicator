@@ -355,15 +355,15 @@ QString CitizenProposalPage::calProposalWeight(const ProposalInfo &info) const
     unsigned long long allWeight = 0;
     unsigned long long alreadyWeight = 0;
     QMap<QString,MinerInfo> allMiner(HXChain::getInstance()->minerMap);
-    foreach(QString requireKey,info.requiredAccounts){
+    foreach(QString requireAddress,info.requiredAccounts){//该requireaccounts
         QMapIterator<QString, MinerInfo> i(allMiner);
         while (i.hasNext()) {
             i.next();
-            if(requireKey == i.value().signingKey)
+            if(requireAddress == i.value().address)
             {
                 allWeight += i.value().pledgeWeight;
             }
-            if(info.approvedKeys.contains(i.value().signingKey))
+            if(info.approvedKeys.contains(i.value().address))
             {
                 alreadyWeight += i.value().pledgeWeight;
             }

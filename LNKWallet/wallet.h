@@ -155,6 +155,7 @@ struct MinerInfo
     QString minerId;
     QString accountId;
     QString signingKey;
+    QString address;//账户地址
     unsigned long long pledgeWeight;
     int totalMissed = 0;
     int totalProduced = 0;
