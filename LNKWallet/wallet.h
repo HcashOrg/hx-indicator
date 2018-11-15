@@ -37,7 +37,7 @@
 #define WALLET_VERSION "1.1.0"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
-#define MIDDLE_DEFAULT_URL      "http://39.98.59.190:5005/api"
+#define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"
 
 #ifdef  TEST_WALLET
 #define WALLET_EXE_SUFFIX   "_test"

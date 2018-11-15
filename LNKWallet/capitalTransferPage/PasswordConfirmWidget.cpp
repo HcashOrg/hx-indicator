@@ -103,9 +103,7 @@ void PasswordConfirmWidget::paintEvent(QPaintEvent *event)
 
     painter.setPen(Qt::NoPen);
     painter.setBrush(QColor(229,226,240,255));
-    painter.drawRoundedRect(QRect(355,200,380,185),5,5);
-
-
+    painter.drawRoundedRect(QRect(300,170,360,185),5,5);
 
 
     QWidget::paintEvent(event);
