@@ -37,15 +37,14 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->proposalTableWidget->horizontalHeader()->setVisible(true);
     ui->proposalTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->proposalTableWidget->setColumnWidth(0,80);
-    ui->proposalTableWidget->setColumnWidth(1,80);
-    ui->proposalTableWidget->setColumnWidth(2,80);
-    ui->proposalTableWidget->setColumnWidth(3,85);
+    ui->proposalTableWidget->setColumnWidth(0,90);
+    ui->proposalTableWidget->setColumnWidth(1,90);
+    ui->proposalTableWidget->setColumnWidth(2,100);
+    ui->proposalTableWidget->setColumnWidth(3,100);
     ui->proposalTableWidget->setColumnWidth(4,80);
-    ui->proposalTableWidget->setColumnWidth(5,65);
-    ui->proposalTableWidget->setColumnWidth(6,55);
-    ui->proposalTableWidget->setColumnWidth(7,55);
-    ui->proposalTableWidget->setColumnWidth(8,60);
+    ui->proposalTableWidget->setColumnWidth(5,60);
+    ui->proposalTableWidget->setColumnWidth(6,60);
+    ui->proposalTableWidget->setColumnWidth(7,60);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->changeSenatorBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
@@ -211,29 +210,29 @@ void CitizenProposalPage::showProposals()
             ui->proposalTableWidget->setItem(i,4,new QTableWidgetItem(tr("not voted")));
         }
 
-        ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(calProposalWeight(info)));
+//        ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(calProposalWeight(info)));
         if(!address.isEmpty())          // 如果有senator账户
         {
-            ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("approve")));
-            ui->proposalTableWidget->setItem(i,7,new QTableWidgetItem(tr("disapprove")));
-            ui->proposalTableWidget->setItem(i,8,new QTableWidgetItem(tr("addPledge")));
+            ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(tr("approve")));
+            ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("disapprove")));
+            ui->proposalTableWidget->setItem(i,7,new QTableWidgetItem(tr("addPledge")));
 
 
             ToolButtonWidget *toolButton = new ToolButtonWidget();
-            toolButton->setText(ui->proposalTableWidget->item(i,6)->text());
-            ui->proposalTableWidget->setCellWidget(i,6,toolButton);
-            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,6));
+            toolButton->setText(ui->proposalTableWidget->item(i,5)->text());
+            ui->proposalTableWidget->setCellWidget(i,5,toolButton);
+            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,5));
 
             ToolButtonWidget *toolButton2 = new ToolButtonWidget();
-            toolButton2->setText(ui->proposalTableWidget->item(i,7)->text());
-            ui->proposalTableWidget->setCellWidget(i,7,toolButton2);
-            connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,7));
+            toolButton2->setText(ui->proposalTableWidget->item(i,6)->text());
+            ui->proposalTableWidget->setCellWidget(i,6,toolButton2);
+            connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,6));
 
             ToolButtonWidget *tooButton3 = new ToolButtonWidget();
-            tooButton3->setText(ui->proposalTableWidget->item(i,8)->text());
-            ui->proposalTableWidget->setCellWidget(i,8,tooButton3);
-            ui->proposalTableWidget->item(i,8)->setData(Qt::UserRole,QVariant::fromValue<ProposalInfo>(info));
-            connect(tooButton3,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,8));
+            tooButton3->setText(ui->proposalTableWidget->item(i,7)->text());
+            ui->proposalTableWidget->setCellWidget(i,7,tooButton3);
+            ui->proposalTableWidget->item(i,7)->setData(Qt::UserRole,QVariant::fromValue<ProposalInfo>(info));
+            connect(tooButton3,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,7));
 
             if(info.approvedKeys.contains(address))
             {
@@ -278,7 +277,7 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
         return;
     }
 
-    if(column == 6)
+    if(column == 5)
     {
         CommonDialog commonDialog(CommonDialog::YesOrNo);
         commonDialog.setText(tr("Sure to approve this proposal?"));
@@ -298,7 +297,7 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
         return;
     }
 
-    if(column == 7)
+    if(column == 6)
     {
         CommonDialog commonDialog(CommonDialog::YesOrNo);
         commonDialog.setText(tr("Sure to disapprove this proposal?"));
@@ -318,7 +317,7 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
         return;
     }
 
-    if(8 == column)
+    if(7 == column)
     {
         AddPledgeDialog dia(ui->accountComboBox->currentText(),ui->proposalTableWidget->item(row,column)->data(Qt::UserRole).value<ProposalInfo>());
         dia.exec();
@@ -350,38 +349,3 @@ void CitizenProposalPage::pageChangeSlot(unsigned int page)
     }
 }
 
-QString CitizenProposalPage::calProposalWeight(const ProposalInfo &info) const
-{
-    unsigned long long allWeight = 0;
-    unsigned long long alreadyWeight = 0;
-    QMap<QString,MinerInfo> allMiner(HXChain::getInstance()->minerMap);
-    foreach(QString requireAddress,info.requiredAccounts){//该requireaccounts
-        QMapIterator<QString, MinerInfo> i(allMiner);
-        while (i.hasNext()) {
-            i.next();
-            if(requireAddress == i.value().address)
-            {
-                allWeight += i.value().pledgeWeight;
-            }
-            if(info.approvedKeys.contains(i.value().address))
-            {
-                alreadyWeight += i.value().pledgeWeight;
-            }
-        }
-    }
-    qDebug()<<"bbbbbbb"<<alreadyWeight<<allWeight;
-    unsigned long long gcd = std::min<unsigned long long>(allWeight,alreadyWeight);
-    if(0 == gcd)
-    {
-        return QString::number(alreadyWeight)+"/\n"+QString::number(allWeight);
-    }
-    else
-    {
-        while(allWeight%gcd != 0 || alreadyWeight%gcd != 0)
-        {
-            --gcd;
-        }
-        qDebug()<<"aaaaa"<<gcd<<alreadyWeight/gcd<<allWeight/gcd;
-        return QString::number(alreadyWeight/gcd)+"/\n"+QString::number(allWeight/gcd);
-    }
-}

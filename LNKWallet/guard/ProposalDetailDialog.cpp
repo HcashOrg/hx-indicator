@@ -257,6 +257,7 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         ui->typeLabel->setText(tr("citizen vote for changing senator"));
         ui->typeStackedWidget->setCurrentIndex(11);
 
+        ui->label_weight->setText(calProposalWeight(info));
         QString changeStr = tr("%1      replaced by        %2");
         ui->label_fee->setText(info.pledge);
         QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
@@ -332,4 +333,40 @@ void ProposalDetailDialog::on_voteStateBtn_clicked()
 void ProposalDetailDialog::on_closeBtn_clicked()
 {
     close();
+}
+
+QString ProposalDetailDialog::calProposalWeight(const ProposalInfo &info) const
+{
+    unsigned long long allWeight = 0;
+    unsigned long long alreadyWeight = 0;
+    QMap<QString,MinerInfo> allMiner(HXChain::getInstance()->minerMap);
+    foreach(QString requireAddress,info.requiredAccounts){//该requireaccounts
+        QMapIterator<QString, MinerInfo> i(allMiner);
+        while (i.hasNext()) {
+            i.next();
+            if(requireAddress == i.value().address)
+            {
+                allWeight += i.value().pledgeWeight;
+            }
+            if(info.approvedKeys.contains(i.value().address))
+            {
+                alreadyWeight += i.value().pledgeWeight;
+            }
+        }
+    }
+//    qDebug()<<"bbbbbbb"<<alreadyWeight<<allWeight;
+//    unsigned long long gcd = std::min<unsigned long long>(allWeight,alreadyWeight);
+//    if(0 == gcd)
+//    {
+        return QString::number(alreadyWeight)+"/\n"+QString::number(allWeight);
+//    }
+//    else
+//    {
+//        while(allWeight%gcd != 0 || alreadyWeight%gcd != 0)
+//        {
+//            --gcd;
+//        }
+//        qDebug()<<"aaaaa"<<gcd<<alreadyWeight/gcd<<allWeight/gcd;
+//        return QString::number(alreadyWeight/gcd)+"/\n"+QString::number(allWeight/gcd);
+//    }
 }

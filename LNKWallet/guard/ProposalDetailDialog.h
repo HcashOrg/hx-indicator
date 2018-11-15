@@ -2,6 +2,7 @@
 #define PROPOSALDETAILDIALOG_H
 
 #include <QDialog>
+struct ProposalInfo;
 
 namespace Ui {
 class ProposalDetailDialog;
@@ -27,6 +28,7 @@ private slots:
 
 private:
     Ui::ProposalDetailDialog *ui;
+    QString calProposalWeight(const ProposalInfo &info)const;
 };
 
 #endif // PROPOSALDETAILDIALOG_H

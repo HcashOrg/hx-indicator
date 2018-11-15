@@ -963,7 +963,7 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
           <rect>
            <x>30</x>
            <y>10</y>
-           <width>71</width>
+           <width>81</width>
            <height>16</height>
           </rect>
          </property>
@@ -974,10 +974,10 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         <widget class="QLabel" name="label_fee">
          <property name="geometry">
           <rect>
-           <x>110</x>
+           <x>114</x>
            <y>10</y>
-           <width>54</width>
-           <height>12</height>
+           <width>71</width>
+           <height>16</height>
           </rect>
          </property>
          <property name="text">
@@ -1069,6 +1069,19 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
          </property>
          <property name="text">
           <string>更换名单：</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_weight">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>30</y>
+           <width>211</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </widget>

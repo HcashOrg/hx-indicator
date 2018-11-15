@@ -3,7 +3,6 @@
 
 #include <QWidget>
 class PageScrollWidget;
-struct ProposalInfo;
 namespace Ui {
 class CitizenProposalPage;
 }
@@ -31,7 +30,6 @@ private slots:
 
     void pageChangeSlot(unsigned int page);
 
-    QString calProposalWeight(const ProposalInfo &info)const;
 private:
     Ui::CitizenProposalPage *ui;
     bool inited = false;
