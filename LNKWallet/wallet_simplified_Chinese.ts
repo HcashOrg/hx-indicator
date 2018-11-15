@@ -4971,34 +4971,40 @@ add an account first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="43"/>
+        <location filename="guard/GuardIncomePage.cpp" line="44"/>
         <source>There are no proposals currently!</source>
         <translation type="unfinished">当前没有提案</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="72"/>
+        <location filename="guard/GuardIncomePage.cpp" line="73"/>
         <source>There are no senator accounts in the wallet.</source>
         <translation type="unfinished">钱包内没有senator账户</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="116"/>
+        <location filename="guard/GuardIncomePage.cpp" line="117"/>
         <source>Transaction of get-income has been sent out!</source>
         <translation type="unfinished">领取挖矿收入交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="127"/>
+        <location filename="guard/GuardIncomePage.cpp" line="128"/>
         <source>This account&apos;s mining income is less than %1 %2 ! You can not get it.</source>
         <translation type="unfinished">该账户的挖矿收益还不到 %1 %2，还不能领取！</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="132"/>
+        <location filename="guard/GuardIncomePage.cpp" line="133"/>
         <source>Fail to get mining income!</source>
         <translation type="unfinished">领取挖矿收益失败！</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="175"/>
+        <location filename="guard/GuardIncomePage.cpp" line="176"/>
         <source>obtain</source>
         <translation type="unfinished">领取</translation>
+    </message>
+    <message>
+        <location filename="guard/GuardIncomePage.cpp" line="224"/>
+        <location filename="guard/GuardIncomePage.cpp" line="281"/>
+        <source>You need to pay %1 %2 for this operation. Continue?</source>
+        <translation type="unfinished">你需要支付 %1 %2 手续费。是否继续？</translation>
     </message>
 </context>
 <context>
@@ -6085,6 +6091,12 @@ p, li { white-space: pre-wrap; }
         <location filename="miner/minerpage.cpp" line="500"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="777"/>
+        <location filename="miner/minerpage.cpp" line="907"/>
+        <source>You need to pay %1 %2 for this operation. Continue?</source>
+        <translation type="unfinished">你需要支付 %1 %2 手续费。是否继续？</translation>
     </message>
 </context>
 <context>

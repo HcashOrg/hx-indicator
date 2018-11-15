@@ -5,6 +5,7 @@
 #include "depositpage/FeeChargeWidget.h"
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
+#include "commondialog.h"
 
 static const int ROWNUMBER = 7;
 GuardIncomePage::GuardIncomePage(QWidget *parent) :
@@ -214,10 +215,15 @@ void GuardIncomePage::on_senatorIncomeTableWidget_cellClicked(int row, int colum
 
         QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
-        FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
-                                                         HXChain::getInstance()->feeType,ui->accountComboBox->currentText(),
-                                                         HXChain::getInstance()->mainFrame);
-        connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address,row](){
+//        FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
+//                                                         HXChain::getInstance()->feeType,ui->accountComboBox->currentText(),
+//                                                         HXChain::getInstance()->mainFrame);
+//        connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address,row](){
+
+        CommonDialog commonDialog(CommonDialog::YesOrNo);
+        commonDialog.setText(tr("You need to pay %1 %2 for this operation. Continue?").arg(HXChain::getInstance()->feeChargeInfo.minerIncomeFee).arg(ASSET_NAME));
+        if(commonDialog.pop())
+        {
             QJsonArray array;
             QJsonArray array2;
             QString citizen = ui->senatorIncomeTableWidget->item(row,0)->text();
@@ -232,8 +238,9 @@ void GuardIncomePage::on_senatorIncomeTableWidget_cellClicked(int row, int colum
                                                            QJsonArray() << address
                                                            << array
                                                            << true ));
-        });
-        feeCharge->show();
+        }
+//        });
+//        feeCharge->show();
 
         return;
     }
@@ -265,12 +272,16 @@ void GuardIncomePage::on_obtainAllBtn_clicked()
 
     QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
-    FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
-                                                     HXChain::getInstance()->feeType,ui->accountComboBox->currentText(),
-                                                     HXChain::getInstance()->mainFrame);
-    connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address](){
-        QJsonArray array;
+//    FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
+//                                                     HXChain::getInstance()->feeType,ui->accountComboBox->currentText(),
+//                                                     HXChain::getInstance()->mainFrame);
+//    connect(feeCharge,&FeeChargeWidget::confirmSignal,[this,address](){
 
+    CommonDialog commonDialog(CommonDialog::YesOrNo);
+    commonDialog.setText(tr("You need to pay %1 %2 for this operation. Continue?").arg(HXChain::getInstance()->feeChargeInfo.minerIncomeFee).arg(ASSET_NAME));
+    if(commonDialog.pop())
+    {
+        QJsonArray array;
         QStringList citizens = incomeFromCitizenMap.keys();
         for(int i = 0; i < citizens.size(); i++)
         {
@@ -289,6 +300,7 @@ void GuardIncomePage::on_obtainAllBtn_clicked()
                                                        QJsonArray() << address
                                                        << array
                                                        << true ));
-    });
-    feeCharge->show();
+    }
+//    });
+//    feeCharge->show();
 }
