@@ -110,13 +110,19 @@ void ChangePayBackDialog::InitData()
     QStringList citizens =  HXChain::getInstance()->getMyCitizens();
     foreach (QString info, citizens) {
         QMap<QString,MinerInfo> miners(HXChain::getInstance()->minerMap);
-        QString rate = QString::number(miners.value(info).payBack);
-        ui->account->addItem(info,rate);
+        if(miners.contains(info))
+        {
+            QString rate = QString::number(miners.value(info).payBack);
+            ui->account->addItem(info,rate);
+        }
     }
     //初始化label
-    ui->label_rate->setText(ui->account->currentData().toString());
-    connect(ui->account,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentTextChanged),[this](){
-        this->ui->label_rate->setText(this->ui->account->currentData().toString());});
+    if(!ui->account->currentData().toString().isEmpty())
+    {
+        ui->label_rate->setText(ui->account->currentData().toString());
+        connect(ui->account,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::currentTextChanged),[this](){
+            this->ui->label_rate->setText(this->ui->account->currentData().toString());});
+    }
 }
 
 void ChangePayBackDialog::installDoubleValidator(QLineEdit *line, int mi, int ma)
