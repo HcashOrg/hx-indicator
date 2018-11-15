@@ -369,16 +369,19 @@ QString CitizenProposalPage::calProposalWeight(const ProposalInfo &info) const
             }
         }
     }
-    if(0 == alreadyWeight)
+    qDebug()<<"bbbbbbb"<<alreadyWeight<<allWeight;
+    unsigned long long gcd = std::min<unsigned long long>(allWeight,alreadyWeight);
+    if(0 == gcd)
     {
         return QString::number(alreadyWeight)+"/"+QString::number(allWeight);
     }
-    qDebug()<<"bbbbbbb"<<alreadyWeight<<allWeight;
-    unsigned long long gcd = std::min<unsigned long long>(allWeight,alreadyWeight);
-    while(allWeight%gcd != 0 || alreadyWeight%gcd != 0)
+    else
     {
-        --gcd;
+        while(allWeight%gcd != 0 || alreadyWeight%gcd != 0)
+        {
+            --gcd;
+        }
+        qDebug()<<"aaaaa"<<gcd<<alreadyWeight/gcd<<allWeight/gcd;
+        return QString::number(alreadyWeight/gcd)+"/"+QString::number(allWeight/gcd);
     }
-    qDebug()<<"aaaaa"<<gcd<<alreadyWeight/gcd<<allWeight/gcd;
-    return QString::number(alreadyWeight/gcd)+"/"+QString::number(allWeight/gcd);
 }
