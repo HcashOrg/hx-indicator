@@ -1074,14 +1074,17 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         <widget class="QLabel" name="label_weight">
          <property name="geometry">
           <rect>
-           <x>240</x>
+           <x>230</x>
            <y>30</y>
-           <width>211</width>
+           <width>221</width>
            <height>20</height>
           </rect>
          </property>
          <property name="text">
           <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </widget>

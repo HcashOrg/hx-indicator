@@ -358,7 +358,7 @@ QString ProposalDetailDialog::calProposalWeight(const ProposalInfo &info) const
 //    unsigned long long gcd = std::min<unsigned long long>(allWeight,alreadyWeight);
 //    if(0 == gcd)
 //    {
-        return QString::number(alreadyWeight)+"/\n"+QString::number(allWeight);
+        return QString::number(alreadyWeight)+"/"+QString::number(allWeight);
 //    }
 //    else
 //    {
