@@ -2168,27 +2168,32 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="237"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="178"/>
+        <source>权重比例</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.ui" line="245"/>
         <source>Citizen提案</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="253"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="261"/>
         <source>更换senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="95"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="96"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished">钱包内没有citizen账户。</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="119"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="120"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished">包含提案投票的交易已发出，请等待确认</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="126"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="127"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
@@ -2205,57 +2210,57 @@ better not transfer or upgrade</source>
         <translation type="obsolete">设置senator保证金</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="180"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="181"/>
         <source>change senator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">更换senator</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="184"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="185"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="196"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="197"/>
         <source>no citizen</source>
         <translation type="unfinished">无citizen</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="200"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="201"/>
         <source>approved</source>
         <translation type="unfinished">已赞成</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="205"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="206"/>
         <source>disapproved</source>
         <translation type="unfinished">已反对</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="210"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="211"/>
         <source>not voted</source>
         <translation type="unfinished">未投票</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="216"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="217"/>
         <source>approve</source>
         <translation type="unfinished">赞成</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="217"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="218"/>
         <source>disapprove</source>
         <translation type="unfinished">反对</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="218"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="219"/>
         <source>addPledge</source>
         <translation type="unfinished">追加</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="283"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="284"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished">确定赞成这个提案吗？</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="303"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="304"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished">确定反对这个提案吗？</translation>
     </message>
