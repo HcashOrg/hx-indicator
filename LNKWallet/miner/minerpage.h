@@ -67,6 +67,7 @@ private:
 
     void checkObtainAllBtnVisible();
 
+    int count = 0;
     void autoLockToCitizen();
     void autoObtain();
 

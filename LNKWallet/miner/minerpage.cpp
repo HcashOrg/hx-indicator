@@ -143,8 +143,14 @@ void MinerPage::refresh()
 
     HXChain::getInstance()->fetchCitizenPayBack();
 
-//    autoObtain();
-//    autoLockToCitizen();
+//    count++;
+//    if(count > 20)
+//    {
+//        autoObtain();
+//        autoLockToCitizen();
+//        count = 0;
+//    }
+
 }
 
 void MinerPage::jsonDataUpdated(QString id)

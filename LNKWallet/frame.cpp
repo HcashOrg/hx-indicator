@@ -259,23 +259,23 @@ Frame::~Frame()
         centralWidget = NULL;
     }
 
-	if (titleBar)
-	{
-		delete titleBar;
-		titleBar = NULL;
-	}
+    if (titleBar)
+    {
+        delete titleBar;
+        titleBar = NULL;
+    }
 
     if (timer)
-	{
-		delete timer;
-		timer = NULL;
-	}
+    {
+        delete timer;
+        timer = NULL;
+    }
 
-	if (bottomBar)
-	{
-		delete bottomBar;
-		bottomBar = NULL;
-	}
+    if (bottomBar)
+    {
+        delete bottomBar;
+        bottomBar = NULL;
+    }
 
     if (lockPage)
     {
@@ -1075,7 +1075,7 @@ void Frame::setLanguage(QString language)
             break;
         }
     }
-    
+
 }
 
 void Frame::showWaittingForSyncWidget()
@@ -1435,6 +1435,7 @@ void Frame::jsonDataUpdated(QString id)
             QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
             QJsonObject jsonObject = parse_doucment.object();
             QJsonArray array = jsonObject.take("result").toArray();
+            AssetAmountMap map;
             for(int i = 0; i < array.size(); i++)
             {
                 QJsonObject object = array.at(i).toObject();
@@ -1451,11 +1452,11 @@ void Frame::jsonDataUpdated(QString id)
                     assetAmount.amount = QString::number(value.toDouble(),'g',12).toULongLong();
                 }
 
-                HXChain::getInstance()->accountInfoMap[accountName].assetAmountMap.insert(assetAmount.assetId,assetAmount);
+                map.insert(assetAmount.assetId,assetAmount);
             }
+            HXChain::getInstance()->accountInfoMap[accountName].assetAmountMap = map;
+
         }
-
-
 
         return;
     }
