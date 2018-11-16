@@ -65,8 +65,25 @@ void DepositPage::jsonDataUpdated(QString id)
         _p->tunnle_address = DepositDataUtil::parseTunnelAddress(result);
         if(_p->tunnle_address.isEmpty())
         {
-            //生成通道账户
-            GenerateAddress();
+            //如果本地没有缓存，则新建，否则生成一个
+            QString tunn = HXChain::getInstance()->configFile->value(QString("/tunnel/%1%2").arg(_p->address).arg(_p->assetSymbol)).toString();
+            if(tunn.isEmpty())
+            {
+                //生成通道账户
+                GenerateAddress();
+            }
+            else
+            {
+                //发送绑定信号
+                _p->tunnelData->address = tunn;
+
+                //绑定通道账户
+                CommonDialog dia(CommonDialog::OkOnly);
+                dia.setText(tr("tunnel account checked!please update sys-time!"));
+                dia.pop();
+
+                BindTunnelAccount();
+            }
         }
         else
         {
@@ -93,7 +110,7 @@ void DepositPage::jsonDataUpdated(QString id)
 
         DepositDataUtil::ParseTunnelData(result,_p->tunnelData);
         //_p->fee->isHidden()?_p->fee->show():0;
-        //绑定通道账户
+
         BindTunnelAccount();
     }
     else if("deposit_bind_tunnel_account" == id)
@@ -102,12 +119,13 @@ void DepositPage::jsonDataUpdated(QString id)
         qDebug() << id << result;
         if( result.isEmpty() || result.startsWith("\"error"))
         {
-            _p->qrcodeWidget->SetQRString(tr("cannot bind tunnel account"));
+            _p->qrcodeWidget->SetQRString(tr("cannot bind tunnel address.%1").arg(_p->tunnelData->address));
             return;
         }
         result.prepend("{");
         result.append("}");
         _p->qrcodeWidget->SetQRString(_p->tunnelData->address);
+        HXChain::getInstance()->configFile->setValue(QString("/tunnel/%1%2").arg(_p->address).arg(_p->assetSymbol),_p->tunnelData->address);
         //qDebug()<<"tunnelrunnel"<<result;
         //提示保存信息
         HXChain::getInstance()->configFile->setValue("/settings/backupNeeded",true);
