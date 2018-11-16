@@ -182,7 +182,7 @@ void ConsoleDialog::mouseReleaseEvent(QMouseEvent *)
 
 void ConsoleDialog::on_consoleLineEdit_returnPressed()
 {
-    if("lock" == ui->consoleLineEdit->text().trimmed())
+    if("lock" == ui->consoleLineEdit->text().trimmed() || "witness_node_stop"== ui->consoleLineEdit->text().trimmed())
     {
         return;
     }
@@ -277,4 +277,5 @@ void ConsoleDialog::parseHelpCommand(const QString &helpStr, QStringList &helpLi
         }
     }
     helpList.removeAll("lock");
+    helpList.removeAll("witness_node_stop");
 }

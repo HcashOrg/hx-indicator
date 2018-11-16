@@ -1530,8 +1530,8 @@ void Frame::jsonDataUpdated(QString id)
 
     if("id-witness_node_stop" == id)
     {
-        HXChain::getInstance()->clientProc->waitForFinished();
-        HXChain::getInstance()->nodeProc->waitForFinished();
+        HXChain::getInstance()->nodeProc->waitForFinished(60000);
+        HXChain::getInstance()->clientProc->waitForFinished(60000);
 
         if(exitingWidget)   hide();
 
