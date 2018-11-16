@@ -1839,7 +1839,10 @@ void Frame::jsonDataUpdated(QString id)
 //                info.minerId = array2.at(1).toString();
 //                HXChain::getInstance()->minerMap.insert(account, info);
 
-                HXChain::getInstance()->postRPC( "id-get_citizen-" + account, toJsonFormat( "get_citizen", QJsonArray() << account));
+                if(!account.isEmpty())
+                {
+                    HXChain::getInstance()->postRPC( "id-get_citizen-" + account, toJsonFormat( "get_citizen", QJsonArray() << account));
+                }
             }
         }
 
