@@ -233,7 +233,7 @@ void OnchainOrderPage::updateTableHeaders()
     {
         ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("SELL / %1").arg(ui->assetComboBox->currentText()));
         ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("BUY / %1").arg(ui->assetComboBox2->currentText()));
-        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("PRICE (%2/%1)").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()));
+        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("PRICE (%1/%2)").arg(ui->assetComboBox2->currentText()).arg(ui->assetComboBox->currentText()));
     }
 
 }
