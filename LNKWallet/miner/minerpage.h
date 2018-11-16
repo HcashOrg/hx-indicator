@@ -67,6 +67,9 @@ private:
 
     void checkObtainAllBtnVisible();
 
+    void autoLockToCitizen();
+    void autoObtain();
+
     unsigned int calPage(const QTableWidget *const table)const;
 
     BlankDefaultWidget *blankWidget_income = NULL;

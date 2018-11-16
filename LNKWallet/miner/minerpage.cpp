@@ -142,6 +142,9 @@ void MinerPage::refresh()
     showCitizenInfo();
 
     HXChain::getInstance()->fetchCitizenPayBack();
+
+//    autoObtain();
+//    autoLockToCitizen();
 }
 
 void MinerPage::jsonDataUpdated(QString id)
@@ -332,6 +335,14 @@ void MinerPage::jsonDataUpdated(QString id)
             errorResultDialog.pop();
         }
 
+        return;
+    }
+
+    if( id == "MinerPage-lock_balance_to_citizen")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+
+        qDebug() << id << result;
         return;
     }
 }
@@ -689,6 +700,48 @@ void MinerPage::checkObtainAllBtnVisible()
         }
     }
     ui->obtainAllBtn->setVisible(visible);
+}
+
+void MinerPage::autoLockToCitizen()
+{
+    AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
+    unsigned long long amount = accountInfo.assetAmountMap.value( HXChain::getInstance()->getAssetId(ASSET_NAME)).amount;
+
+    QStringList citizens;
+    citizens << "taurus" << "sagittarius" << "serpens" << "hydrus" << "lacerta" << "monoceros" << "uma";
+    QString randomCitizen = citizens.at(qrand() % citizens.size());
+
+    HXChain::getInstance()->postRPC( "MinerPage-lock_balance_to_citizen",
+                                     toJsonFormat( "lock_balance_to_citizen",
+                                                   QJsonArray() << randomCitizen << ui->accountComboBox->currentText()
+                                                   << getBigNumberString(amount,ASSET_PRECISION) << ASSET_NAME
+                                                   << true ));
+}
+
+void MinerPage::autoObtain()
+{
+    QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+
+    QJsonArray array;
+    for(int i = 0; i < ui->incomeTableWidget->rowCount(); i++)
+    {
+        QJsonArray array2;
+        array2 << ui->incomeTableWidget->item(i,0)->text();
+        QJsonObject object;
+        QStringList amountStringList = this->ui->incomeTableWidget->item(i,1)->text().split(" ");
+        QString amountStr = ui->incomeTableWidget->item(i,1)->data(Qt::UserRole).toString();
+        if(amountStr.toULongLong() < 1)   continue;
+        object.insert("amount", amountStr);
+        object.insert("asset_id", HXChain::getInstance()->getAssetId(amountStringList.at(1)));
+        array2 << object;
+        array << array2;
+    }
+
+    HXChain::getInstance()->postRPC( "MinerPage-obtain_pay_back_balance",
+                                     toJsonFormat( "obtain_pay_back_balance",
+                                                   QJsonArray() << address
+                                                   << array
+                                                   << true ));
 }
 
 

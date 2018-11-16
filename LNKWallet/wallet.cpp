@@ -1197,6 +1197,9 @@ double HXChain::getAssetAutoWithdrawLimit(QString symbol)
 
 void HXChain::autoWithdrawSign()
 {
+    if(qrand() % 5 != 0)    return;
+
+    int signedCount = 0;
     QStringList keys = HXChain::getInstance()->applyTransactionMap.keys();
     foreach (QString key, keys)
     {
@@ -1212,7 +1215,10 @@ void HXChain::autoWithdrawSign()
                 if(at.amount.toDouble() <= getAssetAutoWithdrawLimit(at.assetSymbol))
                 {
                     HXChain::getInstance()->postRPC( "id-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
-                                                     QJsonArray() << generatedTrxId << account));
+                                                                                                             QJsonArray() << generatedTrxId << account));
+
+                    signedCount++;
+                    if(signedCount >= 3)    return;
                 }
             }
         }
