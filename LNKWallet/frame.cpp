@@ -1491,7 +1491,7 @@ void Frame::jsonDataUpdated(QString id)
 
         QString result = HXChain::getInstance()->jsonDataValue(id);
 
-        if( result == "\"result\":null")
+//        if( result == "\"result\":null")
         {
             shadowWidgetHide();
 

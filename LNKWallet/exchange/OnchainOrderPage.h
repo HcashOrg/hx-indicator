@@ -2,6 +2,7 @@
 #define ONCHAINORDERPAGE_H
 
 #include <QWidget>
+#include <QJsonArray>
 
 #include "extra/HttpManager.h"
 
@@ -51,6 +52,8 @@ private:
 
     BlankDefaultWidget *blankWidget;
     PageScrollWidget *pageWidget;
+
+    QJsonArray sortArray(const QJsonArray &data,bool greater);
 };
 
 #endif // ONCHAINORDERPAGE_H

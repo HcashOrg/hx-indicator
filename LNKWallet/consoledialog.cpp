@@ -182,7 +182,10 @@ void ConsoleDialog::mouseReleaseEvent(QMouseEvent *)
 
 void ConsoleDialog::on_consoleLineEdit_returnPressed()
 {
-    
+    if("lock" == ui->consoleLineEdit->text().trimmed())
+    {
+        return;
+    }
 
     if( !ui->consoleLineEdit->text().simplified().isEmpty())
     {
@@ -273,5 +276,5 @@ void ConsoleDialog::parseHelpCommand(const QString &helpStr, QStringList &helpLi
             }
         }
     }
-
+    helpList.removeAll("lock");
 }

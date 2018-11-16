@@ -106,8 +106,9 @@ void OnchainOrderPage::jsonDataUpdated(QString id)
 void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
 {
     QJsonObject object  = QJsonDocument::fromJson(_data).object();
-    QJsonArray  array   = object.take("result").toObject().take("data").toArray();
+    QJsonArray  arr   = object.take("result").toObject().take("data").toArray();
 
+    QJsonArray  array = sortArray(arr,false);
     int size = array.size();
     ui->ordersTableWidget->setRowCount(size);
     for(int i = 0; i < size; i++)
@@ -235,6 +236,36 @@ void OnchainOrderPage::updateTableHeaders()
         ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("PRICE (%1/%2)").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()));
     }
 
+}
+
+QJsonArray OnchainOrderPage::sortArray(const QJsonArray &data, bool greater)
+{
+    std::vector<std::pair<double,QJsonValue>> result;
+    int size = data.size();
+    for(int i = 0; i < size; i++)
+    {
+        QJsonObject dataObject = data.at(i).toObject();
+
+        unsigned long long sellAmount = jsonValueToULL(dataObject.value("from_supply"));
+        QString sellSymbol = dataObject.value("from_asset").toString();
+        unsigned long long buyAmount = jsonValueToULL(dataObject.value("to_supply"));
+        QString buySymbol = dataObject.value("to_asset").toString();
+
+        AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(sellSymbol));
+        AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(buySymbol));
+
+        double price = (double)sellAmount / qPow(10,sellAssetInfo.precision) / buyAmount * qPow(10,buyAssetInfo.precision);
+
+        result.emplace_back(std::make_pair(price,data.at(i)));
+    }
+    std::stable_sort(result.begin(),result.end(),[greater](std::pair<double,QJsonValue> fi,std::pair<double,QJsonValue>se){
+        return greater ? (fi.first < se.first):(fi.first > se.first);
+    });
+    QJsonArray arr;
+    std::for_each(result.begin(),result.end(),[&arr](std::pair<double,QJsonValue> info){
+        arr.push_back(info.second);
+    });
+    return arr;
 }
 
 void OnchainOrderPage::onItemClicked(int _row, int _column)
