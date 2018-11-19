@@ -8374,23 +8374,30 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Wallet Data Path</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1057"/>
+        <location filename="setdialog.ui" line="1053"/>
+        <location filename="setdialog.ui" line="1084"/>
+        <location filename="setdialog.ui" line="1146"/>
+        <source>默认数据备份路径，请勿删除</source>
+        <translation type="unfinished">Default Backup Folder,Please Don&apos;t Delete.</translation>
+    </message>
+    <message>
+        <location filename="setdialog.ui" line="1060"/>
         <source>钱包配置路径：</source>
         <translation type="unfinished">Wallet Config Path</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1112"/>
-        <location filename="setdialog.ui" line="1143"/>
+        <location filename="setdialog.ui" line="1118"/>
+        <location filename="setdialog.ui" line="1152"/>
         <source>打开</source>
         <translation type="unfinished">open</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1191"/>
+        <location filename="setdialog.ui" line="1200"/>
         <source>安全设置</source>
         <translation type="unfinished">Safety</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1222"/>
+        <location filename="setdialog.ui" line="1231"/>
         <source>账户管理</source>
         <translation type="unfinished">Account</translation>
     </message>

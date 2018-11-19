@@ -20,9 +20,10 @@ public:
     void InitData(bool showPermanent = false);
 private slots:
     void AddProposalSlots();
+    void RemoveProposalSlots();
 private:
     void InitWidget();
-    void SetItemVisible(int n,bool vi);//n== 1,2,3
+    void SetItemVisible(int n,bool vi);//n== 2,3
 private:
     Ui::ChangeSenatorSwitchWidget *ui;
 };

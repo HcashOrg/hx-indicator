@@ -16,7 +16,7 @@
   <widget class="QToolButton" name="addBtn">
    <property name="geometry">
     <rect>
-     <x>125</x>
+     <x>110</x>
      <y>39</y>
      <width>30</width>
      <height>30</height>
@@ -161,6 +161,36 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      <width>100</width>
      <height>22</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="delBtn">
+   <property name="geometry">
+    <rect>
+     <x>145</x>
+     <y>40</y>
+     <width>30</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="BtnStyle" stdset="0">
+    <string>senatordel</string>
    </property>
   </widget>
  </widget>

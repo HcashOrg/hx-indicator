@@ -375,6 +375,7 @@ public:
     bool autoDeposit;//充值自动划转
     bool autoWithdrawConfirm = false;
     FeeChargeInfo feeChargeInfo;//手续费情况
+    bool autoBackupWallet;//自动备份钱包json
 
     QString currentAccount; // 保存当前账户  切换页面的时候默认选择当前账户
     QString currentSellAssetId;

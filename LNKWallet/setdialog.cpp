@@ -51,6 +51,7 @@ SetDialog::SetDialog(QWidget *parent) :
 
     ui->generalBtn->setChecked(false);
 
+    ui->checkbox_AutoBackup->setChecked(HXChain::getInstance()->autoBackupWallet);
 //    ui->generalBtn->setIconSize(QSize(12,12));
 //    ui->generalBtn->setIcon(QIcon(":/ui/wallet_ui/gray_circle.png"));
 
@@ -289,6 +290,9 @@ void SetDialog::on_saveBtn_clicked()
 
     HXChain::getInstance()->middlewarePath = ui->middlewareLineEdit->text();
     HXChain::getInstance()->configFile->setValue("/settings/middlewarePath", HXChain::getInstance()->middlewarePath);
+
+    HXChain::getInstance()->autoBackupWallet = ui->checkbox_AutoBackup->isChecked();
+    HXChain::getInstance()->configFile->setValue("/settings/autoBackupWallet", HXChain::getInstance()->autoBackupWallet);
 
     mutexForConfigFile.unlock();
 

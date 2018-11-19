@@ -74,6 +74,10 @@ HXChain::HXChain()
         configFile->setValue("settings/middlewarePath",middlewarePath);
         configFile->setValue("/settings/autoWithdrawConfirm",false);
         autoWithdrawConfirm = false;
+
+        configFile->setValue("/settings/autoBackupWallet",true);
+        autoBackupWallet = true;
+
     }
     else
     {
@@ -92,6 +96,8 @@ HXChain::HXChain()
 //        middlewarePath  = configFile->value("/settings/middlewarePath","http://192.168.1.164:5000/api").toString();
         importedWalletNeedToAddTrackAddresses = configFile->value("/settings/importedWalletNeedToAddTrackAddresses",false).toBool();
         autoWithdrawConfirm = configFile->value("/settings/autoWithdrawConfirm",false).toBool();
+
+        autoBackupWallet = configFile->value("/settings/autoBackupWallet",true).toBool();
     }
     loadAutoWithdrawAmount();
 
@@ -705,6 +711,8 @@ void HXChain::addTrackAddress(QString _address)
 
 void HXChain::autoSaveWalletFile()
 {
+    if(!HXChain::getInstance()->autoBackupWallet) return;
+
     QFileInfo fileInfo(appDataPath + "/wallet.json");
     if(fileInfo.size() > 0)
     {

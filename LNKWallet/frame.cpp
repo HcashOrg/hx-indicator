@@ -195,6 +195,8 @@ Frame::Frame(): timer(NULL),
             HXChain::getInstance()->closeToMinimize = false;
             HXChain::getInstance()->configFile->setValue("/settings/closeToMinimize",false);
 
+            HXChain::getInstance()->configFile->setValue("/settings/autoBackupWallet",true);
+            HXChain::getInstance()->autoBackupWallet = true;
         }
         else
         {

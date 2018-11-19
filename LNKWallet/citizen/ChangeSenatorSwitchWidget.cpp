@@ -47,12 +47,25 @@ void ChangeSenatorSwitchWidget::AddProposalSlots()
     }
 }
 
+void ChangeSenatorSwitchWidget::RemoveProposalSlots()
+{
+    if(ui->senator3->isVisible())
+    {
+        SetItemVisible(3,false);
+    }
+    else if(ui->senator2->isVisible())
+    {
+        SetItemVisible(2,false);
+    }
+}
+
 void ChangeSenatorSwitchWidget::InitWidget()
 {
 //    InitData();
     SetItemVisible(2,false);
     SetItemVisible(3,false);
     connect(ui->addBtn,&QToolButton::clicked,this,&ChangeSenatorSwitchWidget::AddProposalSlots);
+    connect(ui->delBtn,&QToolButton::clicked,this,&ChangeSenatorSwitchWidget::RemoveProposalSlots);
 }
 
 void ChangeSenatorSwitchWidget::InitData(bool showPermanent)
@@ -69,12 +82,14 @@ void ChangeSenatorSwitchWidget::InitData(bool showPermanent)
     QMapIterator<QString, GuardInfo> i(allSenator);
     while (i.hasNext()) {
         i.next();
-        if(!showPermanent && ("EXTERNAL" != i.value().senatorType)) continue;
         if(i.value().isFormal)
         {
-            ui->senator1->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
-            ui->senator2->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
-            ui->senator3->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
+            if((showPermanent && ("PERMANENT" == i.value().senatorType)) || (!showPermanent && ("EXTERNAL" == i.value().senatorType)))
+            {
+                ui->senator1->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
+                ui->senator2->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
+                ui->senator3->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
+            }
         }
         else
         {
@@ -83,17 +98,15 @@ void ChangeSenatorSwitchWidget::InitData(bool showPermanent)
             ui->candidate3->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
         }
     }
+    if(0 == ui->senator1->count()  || 0 == ui->candidate1->count())
+    {
+        ui->addBtn->setVisible(false);
+    }
 }
 
 void ChangeSenatorSwitchWidget::SetItemVisible(int n, bool vi)
 {
-    if(1==n)
-    {
-        ui->senator1->setVisible(vi);
-        ui->label1->setVisible(vi);
-        ui->candidate1->setVisible(vi);
-    }
-    else if(2==n)
+    if(2==n)
     {
         ui->senator2->setVisible(vi);
         ui->label2->setVisible(vi);
@@ -105,17 +118,23 @@ void ChangeSenatorSwitchWidget::SetItemVisible(int n, bool vi)
         ui->label3->setVisible(vi);
         ui->candidate3->setVisible(vi);
     }
+
     if(ui->senator3->isVisible())
     {
         ui->addBtn->move(ui->addBtn->x(), ui->label3->geometry().bottomRight().y()+5);
+        ui->delBtn->move(ui->delBtn->x(), ui->label3->geometry().bottomRight().y()+5);
     }
     else if(ui->senator2->isVisible())
     {
         ui->addBtn->move(ui->addBtn->x(),ui->label2->geometry().bottomRight().y()+5);
+        ui->delBtn->move(ui->delBtn->x(),ui->label2->geometry().bottomRight().y()+5);
     }
     else
     {
         ui->addBtn->move(ui->addBtn->x(),ui->label1->geometry().bottomRight().y()+5);
+        ui->delBtn->move(ui->delBtn->x(),ui->label1->geometry().bottomRight().y()+5);
     }
+
     ui->addBtn->setVisible(!ui->senator3->isVisible());
+    ui->delBtn->setVisible(ui->senator2->isVisible());
 }

@@ -146,7 +146,7 @@
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QToolButton" name="saveBtn">
@@ -694,6 +694,34 @@ color:rgb(137,129,161);</string>
           <enum>QLineEdit::Normal</enum>
          </property>
         </widget>
+        <widget class="QCheckBox" name="checkbox_AutoBackup">
+         <property name="geometry">
+          <rect>
+           <x>310</x>
+           <y>194</y>
+           <width>240</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="text">
+          <string>自动备份</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
         <zorder>contractFeeLineEdit</zorder>
         <zorder>saveBtn</zorder>
         <zorder>label_2</zorder>
@@ -715,6 +743,7 @@ color:rgb(137,129,161);</string>
         <zorder>label_autotip</zorder>
         <zorder>label_14</zorder>
         <zorder>middlewareLineEdit</zorder>
+        <zorder>checkbox_AutoBackup</zorder>
        </widget>
        <widget class="QWidget" name="page_2">
         <widget class="QLineEdit" name="newPwdLineEdit">
@@ -1049,6 +1078,9 @@ color:rgb(137,129,161);</string>
            <bold>false</bold>
           </font>
          </property>
+         <property name="toolTip">
+          <string>默认数据备份路径，请勿删除</string>
+         </property>
          <property name="styleSheet">
           <string notr="true">font: 9px &quot;微软雅黑&quot;;
 color:rgb(137,129,161);</string>
@@ -1076,6 +1108,9 @@ color:rgb(137,129,161);</string>
          </property>
          <property name="contextMenuPolicy">
           <enum>Qt::DefaultContextMenu</enum>
+         </property>
+         <property name="toolTip">
+          <string>默认数据备份路径，请勿删除</string>
          </property>
          <property name="echoMode">
           <enum>QLineEdit::Normal</enum>
@@ -1135,6 +1170,9 @@ color:rgb(137,129,161);</string>
          </property>
          <property name="focusPolicy">
           <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string>默认数据备份路径，请勿删除</string>
          </property>
          <property name="styleSheet">
           <string notr="true">QToolButton{font: 9px &quot;微软雅黑&quot;;background:transparent;border:0px solid white;color: rgb(137,129,161);} QToolButton:hover{color:rgb(107,99,131);}</string>
