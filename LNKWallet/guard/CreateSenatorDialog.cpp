@@ -104,7 +104,7 @@ void CreateSenatorDialog::InitWidget()
     connect(ui->accountComboBox,static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated),
             std::bind(&FeeChooseWidget::updateAccountNameSlots,feeWidget,std::placeholders::_1,true));
     ui->stackedWidget_fee->addWidget(feeWidget);
-    ui->stackedWidget_fee->setCurrentIndex(0);
+    ui->stackedWidget_fee->setCurrentWidget(feeWidget);
     ui->stackedWidget_fee->currentWidget()->resize(ui->stackedWidget_fee->size());
 }
 
