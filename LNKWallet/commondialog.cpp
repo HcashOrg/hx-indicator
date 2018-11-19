@@ -15,8 +15,6 @@ CommonDialog::CommonDialog(commonDialogType _type, QWidget *parent) :
     setParent(HXChain::getInstance()->mainFrame);
     move(HXChain::getInstance()->mainFrame->pos());
 
-    HXChain::getInstance()->appendCurrentDialogVector(this);
-
     setAttribute(Qt::WA_TranslucentBackground, true);
     setWindowFlags(Qt::FramelessWindowHint | Qt::Tool);
 
@@ -54,11 +52,8 @@ CommonDialog::CommonDialog(commonDialogType _type, QWidget *parent) :
 
 CommonDialog::~CommonDialog()
 {
-    
     qDebug() << "CommonDialog  delete ";
     delete ui;
-    HXChain::getInstance()->removeCurrentDialogVector(this);
-    
 }
 
 void CommonDialog::on_okBtn_clicked()

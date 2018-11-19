@@ -378,8 +378,6 @@ void Frame::alreadyLogin()
 //    QTimer::singleShot(1000,mainPage,SLOT(show()));
     mainPage->show();
     currentPageNum = 0;
-    connect(mainPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
-    connect(mainPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(mainPage,SIGNAL(showTransferPage(QString,QString)),this,SLOT(showTransferPage(QString,QString)));
     connect(mainPage,SIGNAL(newAccount(QString)),this,SLOT(newAccount(QString)));
     connect(mainPage,&MainPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
@@ -428,7 +426,7 @@ void Frame::getAccountInfo()
 
     HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
-    HXChain::getInstance()->fetchTransactions();
+//    HXChain::getInstance()->fetchTransactions();
 
 //    HXChain::getInstance()->fetchFormalGuards();
     HXChain::getInstance()->fetchAllGuards();
@@ -472,8 +470,6 @@ void Frame::showTransferPage(QString accountName,QString assetType)
     transferPage = new TransferPage(accountName,centralWidget,assetType);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
-    connect(transferPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
-    connect(transferPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     transferPage->show();
 
     currentPageNum = 3;
@@ -487,7 +483,7 @@ void Frame::showLockPage()
 {
 
     timer->stop();
-    shadowWidgetShow();
+//    shadowWidgetShow();
 
 
     HXChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray()));
@@ -870,8 +866,6 @@ void Frame::showMainPage()
     mainPage->setAttribute(Qt::WA_DeleteOnClose);
     mainPage->show();
     currentPageNum = 0;
-    connect(mainPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
-    connect(mainPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     connect(mainPage,SIGNAL(showTransferPage(QString,QString)),this,SLOT(showTransferPage(QString,QString)));
     connect(mainPage,SIGNAL(newAccount(QString)),this,SLOT(newAccount(QString)));
     connect(mainPage,&MainPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
@@ -886,8 +880,6 @@ void Frame::showTransferPage()
     transferPage = new TransferPage(HXChain::getInstance()->currentAccount,centralWidget);
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
-    connect(transferPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
-    connect(transferPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     transferPage->show();
     currentPageNum = 3;
    //朱正天 functionBar->choosePage(2);
@@ -965,8 +957,6 @@ void Frame::showTransferPageWithAddress(QString address, QString name)
     transferPage->setAttribute(Qt::WA_DeleteOnClose);
     transferPage->setAddress(address);
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
-    connect(transferPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
-    connect(transferPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
     transferPage->show();
     currentPageNum = 3;
    //朱正天 functionBar->choosePage(2);
@@ -1330,8 +1320,6 @@ void Frame::jsonDataUpdated(QString id)
             connect( normalLogin,SIGNAL(minimum()),this,SLOT(showMinimized()));
             connect( normalLogin,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
             connect( normalLogin,SIGNAL(tray()),this,SLOT(hide()));
-            connect( normalLogin,SIGNAL(showShadowWidget()), this, SLOT(shadowWidgetShow()));
-            connect( normalLogin,SIGNAL(hideShadowWidget()), this,SLOT(shadowWidgetHide()));
 
             setGeometry(0,0, normalLogin->width(), normalLogin->height());
             moveWidgetToScreenCenter(this);
@@ -1346,8 +1334,6 @@ void Frame::jsonDataUpdated(QString id)
             connect( firstLogin,SIGNAL(minimum()),this,SLOT(showMinimized()));
             connect( firstLogin,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
             connect( firstLogin,SIGNAL(tray()),this,SLOT(hide()));
-            connect( firstLogin,SIGNAL(showShadowWidget()), this, SLOT(shadowWidgetShow()));
-            connect( firstLogin,SIGNAL(hideShadowWidget()), this,SLOT(shadowWidgetHide()));
 
             setGeometry(0,0, firstLogin->width(), firstLogin->height());
             moveWidgetToScreenCenter(this);
@@ -1494,7 +1480,6 @@ void Frame::jsonDataUpdated(QString id)
 
 //        if( result == "\"result\":null")
         {
-            shadowWidgetHide();
 
             lockPage = new LockPage(this);
             lockPage->setAttribute(Qt::WA_DeleteOnClose);
@@ -1503,11 +1488,7 @@ void Frame::jsonDataUpdated(QString id)
             connect( lockPage,SIGNAL(minimum()),this,SLOT(showMinimized()));
             connect( lockPage,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
             connect( lockPage,SIGNAL(tray()),this,SLOT(hide()));
-            connect( lockPage,SIGNAL(showShadowWidget()),this,SLOT(shadowWidgetShow()));
-            connect( lockPage,SIGNAL(hideShadowWidget()),this,SLOT(shadowWidgetHide()));
             lockPage->show();
-
-            HXChain::getInstance()->hideCurrentDialog();
 
             setGeometry(0,0, lockPage->width(), lockPage->height());
             moveWidgetToScreenCenter(this);

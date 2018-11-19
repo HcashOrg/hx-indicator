@@ -144,7 +144,7 @@ void MinerPage::refresh()
     HXChain::getInstance()->fetchCitizenPayBack();
 
 //    count++;
-//    if(count > 20)
+//    if(count > 50)
 //    {
 //        autoObtain();
 //        autoLockToCitizen();
@@ -531,13 +531,38 @@ void MinerPage::showCitizenInfo()
 {
     QStringList citizens = HXChain::getInstance()->minerMap.keys();
 
+    QStringList sortedKeysByPledgeWeight;
+    for(int i = 0; i < citizens.size(); i++)
+    {
+        if(sortedKeysByPledgeWeight.size() == 0)
+        {
+            sortedKeysByPledgeWeight.append(citizens.at(i));
+            continue;
+        }
+
+        for(int j = 0; j < sortedKeysByPledgeWeight.size(); j++)
+        {
+            if(HXChain::getInstance()->minerMap.value(sortedKeysByPledgeWeight.at(j)).pledgeWeight
+                    < HXChain::getInstance()->minerMap.value(citizens.at(i)).pledgeWeight)
+            {
+                sortedKeysByPledgeWeight.insert( j, citizens.at(i));
+                break;
+            }
+
+            if(j == sortedKeysByPledgeWeight.size() - 1)
+            {
+                sortedKeysByPledgeWeight.append( citizens.at(i));
+                break;
+            }
+        }
+    }
 
     QStringList sortedKeys;     // 按权重排序
-    for(int i = 0; i < citizens.size(); i++)
+    for(int i = 0; i < sortedKeysByPledgeWeight.size(); i++)
     {
         if(sortedKeys.size() == 0)
         {
-            sortedKeys.append(citizens.at(i));
+            sortedKeys.append(sortedKeysByPledgeWeight.at(i));
             continue;
         }
 
@@ -547,15 +572,15 @@ void MinerPage::showCitizenInfo()
             for(int j = 0; j < sortedKeys.size(); j++)
             {
                 if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).pledgeWeight
-                        < HXChain::getInstance()->minerMap.value(citizens.at(i)).pledgeWeight)
+                        < HXChain::getInstance()->minerMap.value(sortedKeysByPledgeWeight.at(i)).pledgeWeight)
                 {
-                    sortedKeys.insert( j, citizens.at(i));
+                    sortedKeys.insert( j, sortedKeysByPledgeWeight.at(i));
                     break;
                 }
 
                 if(j == sortedKeys.size() - 1)
                 {
-                    sortedKeys.append( citizens.at(i));
+                    sortedKeys.append( sortedKeysByPledgeWeight.at(i));
                     break;
                 }
             }
@@ -564,15 +589,15 @@ void MinerPage::showCitizenInfo()
             for(int j = 0; j < sortedKeys.size(); j++)
             {
                 if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).totalProduced
-                        < HXChain::getInstance()->minerMap.value(citizens.at(i)).totalProduced)
+                        < HXChain::getInstance()->minerMap.value(sortedKeysByPledgeWeight.at(i)).totalProduced)
                 {
-                    sortedKeys.insert( j, citizens.at(i));
+                    sortedKeys.insert( j, sortedKeysByPledgeWeight.at(i));
                     break;
                 }
 
                 if(j == sortedKeys.size() - 1)
                 {
-                    sortedKeys.append( citizens.at(i));
+                    sortedKeys.append( sortedKeysByPledgeWeight.at(i));
                     break;
                 }
             }
@@ -581,15 +606,15 @@ void MinerPage::showCitizenInfo()
             for(int j = 0; j < sortedKeys.size(); j++)
             {
                 if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).totalMissed
-                        > HXChain::getInstance()->minerMap.value(citizens.at(i)).totalMissed)
+                        > HXChain::getInstance()->minerMap.value(sortedKeysByPledgeWeight.at(i)).totalMissed)
                 {
-                    sortedKeys.insert( j, citizens.at(i));
+                    sortedKeys.insert( j, sortedKeysByPledgeWeight.at(i));
                     break;
                 }
 
                 if(j == sortedKeys.size() - 1)
                 {
-                    sortedKeys.append( citizens.at(i));
+                    sortedKeys.append( sortedKeysByPledgeWeight.at(i));
                     break;
                 }
             }
@@ -598,15 +623,15 @@ void MinerPage::showCitizenInfo()
             for(int j = 0; j < sortedKeys.size(); j++)
             {
                 if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).payBack
-                        > HXChain::getInstance()->minerMap.value(citizens.at(i)).payBack)
+                        > HXChain::getInstance()->minerMap.value(sortedKeysByPledgeWeight.at(i)).payBack)
                 {
-                    sortedKeys.insert( j, citizens.at(i));
+                    sortedKeys.insert( j, sortedKeysByPledgeWeight.at(i));
                     break;
                 }
 
                 if(j == sortedKeys.size() - 1)
                 {
-                    sortedKeys.append( citizens.at(i));
+                    sortedKeys.append( sortedKeysByPledgeWeight.at(i));
                     break;
                 }
             }
@@ -617,6 +642,7 @@ void MinerPage::showCitizenInfo()
 
 
     }
+
 
 
     int size = sortedKeys.size();
