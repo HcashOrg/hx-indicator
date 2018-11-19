@@ -101,7 +101,7 @@ void ChangePayBackDialog::InitWidget()
     connect(feeWidget,&FeeChooseWidget::feeSufficient,ui->okBtn,&QToolButton::setEnabled);
     QTimer::singleShot(100,[this,feeWidget](){this->ui->okBtn->setEnabled(feeWidget->isSufficient());});
     ui->stackedWidget_fee->addWidget(feeWidget);
-    ui->stackedWidget_fee->setCurrentIndex(0);
+    ui->stackedWidget_fee->setCurrentWidget(feeWidget);
     ui->stackedWidget_fee->currentWidget()->resize(ui->stackedWidget_fee->size());
 }
 

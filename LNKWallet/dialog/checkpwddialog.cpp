@@ -61,6 +61,7 @@ void CheckPwdDialog::jsonDataUpdated(QString id)
         }
         else
         {
+            ui->okBtn->setEnabled(true);
             ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
         }
 
@@ -77,6 +78,7 @@ void CheckPwdDialog::on_okBtn_clicked()
 
     if(!ui->okBtn->isEnabled())     return;
 
+    ui->okBtn->setEnabled(false);
     HXChain::getInstance()->postRPC( "id-unlock-CheckPwdDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }

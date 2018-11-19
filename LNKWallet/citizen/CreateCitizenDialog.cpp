@@ -86,6 +86,7 @@ void CreateCitizenDialog::jsonDataUpdated(QString id)
         }
         else if(result.startsWith("\"error\":"))
         {
+            ui->okBtn2->setEnabled(true);
             ui->tipLabel2->setText("<body><font style=\"font-size:12px\" color=#EB005E>" + tr("Wrong password!") + "</font></body>" );
         }
 
@@ -164,6 +165,7 @@ void CreateCitizenDialog::on_okBtn2_clicked()
 {
     if( ui->pwdLineEdit->text().isEmpty())  return;
 
+    ui->okBtn2->setEnabled(false);
     HXChain::getInstance()->postRPC( "id-unlock-CreateCitizenDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }
