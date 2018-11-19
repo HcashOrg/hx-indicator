@@ -71,6 +71,10 @@ void GuardAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg
     {
         ui->changeSenator->setVisible(true);
     }
+    else
+    {
+        ui->changeSenator->setVisible(false);
+    }
 }
 
 void GuardAccountPage::on_newSenatorBtn_clicked()
