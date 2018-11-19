@@ -70,6 +70,7 @@ void ConfirmCreateMultiSigDialog::jsonDataUpdated(QString id)
         }
         else if(result.startsWith("\"error\":"))
         {
+            ui->okBtn->setEnabled(true);
             ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#EB005E>" + tr("Wrong password!") + "</font></body>" );
         }
         return;
@@ -80,6 +81,7 @@ void ConfirmCreateMultiSigDialog::on_okBtn_clicked()
 {
     if( ui->pwdLineEdit->text().isEmpty())  return;
 
+    ui->okBtn->setEnabled(false);
     HXChain::getInstance()->postRPC( "ConfirmCreateMultiSigDialog-unlock", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }

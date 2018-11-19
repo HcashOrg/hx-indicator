@@ -96,7 +96,7 @@ void AddPledgeDialog::InitWidget()
         feeWidget->updateFeeNumberSlots(number.toDouble());
     });
     ui->stackedWidget_fee->addWidget(feeWidget);
-    ui->stackedWidget_fee->setCurrentIndex(0);
+    ui->stackedWidget_fee->setCurrentWidget(feeWidget);
     ui->stackedWidget_fee->currentWidget()->resize(ui->stackedWidget_fee->size());
 }
 

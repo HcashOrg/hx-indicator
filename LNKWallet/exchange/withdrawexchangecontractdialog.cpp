@@ -89,6 +89,7 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
         }
         else if(result.startsWith("\"error\":"))
         {
+            ui->okBtn->setEnabled(true);
             ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
         }
 
@@ -144,6 +145,7 @@ void WithdrawExchangeContractDialog::on_okBtn_clicked()
     if(ui->amountLineEdit->text().toDouble() <= 0)  return;
     if(ui->pwdLineEdit->text().isEmpty())          return;
 
+    ui->okBtn->setEnabled(false);
     HXChain::getInstance()->postRPC( "id-unlock-WithdrawExchangeContractDialog", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
                                                ));
 }
