@@ -713,7 +713,10 @@ void HXChain::autoSaveWalletFile()
 
         QFile file(appDataPath + "/wallet.json");
         qDebug() << "auto save wallet.json " << file.copy(appDataPath + "/wallet.json.autobak");
+        qDebug() << "auto save wallet.json at configpath" << file.copy(walletConfigPath + "/wallet.json.autobak");
     }
+
+
 }
 
 void HXChain::fetchTransactions()
