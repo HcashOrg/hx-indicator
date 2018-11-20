@@ -1967,6 +1967,11 @@ better not transfer or upgrade</source>
         <source>更换为</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="citizen/ChangeSenatorSwitchWidget.ui" line="193"/>
+        <source>senatordel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CheckPwdDialog</name>
@@ -2626,22 +2631,22 @@ better not transfer or upgrade</source>
         <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="commondialog.cpp" line="29"/>
+        <location filename="commondialog.cpp" line="27"/>
         <source>Ok</source>
         <translation type="unfinished">确定</translation>
     </message>
     <message>
-        <location filename="commondialog.cpp" line="30"/>
+        <location filename="commondialog.cpp" line="28"/>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="commondialog.cpp" line="48"/>
+        <location filename="commondialog.cpp" line="46"/>
         <source>Yes</source>
         <translation type="unfinished">是</translation>
     </message>
     <message>
-        <location filename="commondialog.cpp" line="49"/>
+        <location filename="commondialog.cpp" line="47"/>
         <source>No</source>
         <translation type="unfinished">否</translation>
     </message>
@@ -4575,27 +4580,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1168"/>
+        <location filename="frame.cpp" line="1160"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1404"/>
+        <location filename="frame.cpp" line="1392"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2490"/>
+        <location filename="frame.cpp" line="2473"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2493"/>
+        <location filename="frame.cpp" line="2476"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2496"/>
+        <location filename="frame.cpp" line="2479"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -5189,13 +5194,13 @@ add an account first</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="198"/>
-        <location filename="wallet.cpp" line="222"/>
+        <location filename="wallet.cpp" line="204"/>
+        <location filename="wallet.cpp" line="228"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="635"/>
+        <location filename="wallet.cpp" line="641"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -6102,8 +6107,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">已确认</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="836"/>
-        <location filename="miner/minerpage.cpp" line="966"/>
+        <location filename="miner/minerpage.cpp" line="862"/>
+        <location filename="miner/minerpage.cpp" line="992"/>
         <source>You need to pay %1 %2 for this operation. Continue?</source>
         <translation type="unfinished">你需要支付 %1 %2 手续费。是否继续？</translation>
     </message>
@@ -8121,7 +8126,7 @@ update or not?</source>
     </message>
     <message>
         <location filename="setdialog.ui" line="176"/>
-        <location filename="setdialog.ui" line="784"/>
+        <location filename="setdialog.ui" line="813"/>
         <source>保存</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8146,12 +8151,12 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="860"/>
+        <location filename="setdialog.ui" line="889"/>
         <source>旧密码：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="910"/>
+        <location filename="setdialog.ui" line="939"/>
         <source>新密码：</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8188,7 +8193,7 @@ update or not?</source>
     <message>
         <location filename="setdialog.ui" line="570"/>
         <location filename="setdialog.cpp" line="48"/>
-        <location filename="setdialog.cpp" line="363"/>
+        <location filename="setdialog.cpp" line="367"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8214,38 +8219,50 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="810"/>
+        <location filename="setdialog.ui" line="719"/>
+        <source>自动备份</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setdialog.ui" line="839"/>
         <source>再次输入：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="981"/>
+        <location filename="setdialog.ui" line="1010"/>
         <source>修改钱包密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1007"/>
+        <location filename="setdialog.ui" line="1036"/>
         <source>钱包数据路径：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1057"/>
+        <location filename="setdialog.ui" line="1082"/>
+        <location filename="setdialog.ui" line="1113"/>
+        <location filename="setdialog.ui" line="1175"/>
+        <source>默认数据备份路径，请勿删除</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="setdialog.ui" line="1089"/>
         <source>钱包配置路径：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1112"/>
-        <location filename="setdialog.ui" line="1143"/>
+        <location filename="setdialog.ui" line="1147"/>
+        <location filename="setdialog.ui" line="1181"/>
         <source>打开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1191"/>
+        <location filename="setdialog.ui" line="1229"/>
         <source>安全设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1222"/>
+        <location filename="setdialog.ui" line="1260"/>
         <source>账户管理</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8274,30 +8291,30 @@ update or not?</source>
     </message>
     <message>
         <location filename="setdialog.cpp" line="48"/>
-        <location filename="setdialog.cpp" line="368"/>
+        <location filename="setdialog.cpp" line="372"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="412"/>
-        <location filename="setdialog.cpp" line="465"/>
+        <location filename="setdialog.cpp" line="416"/>
+        <location filename="setdialog.cpp" line="469"/>
         <source>at least 8 letters</source>
         <translation type="unfinished">密码至少为8位</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="439"/>
-        <location filename="setdialog.cpp" line="464"/>
-        <location filename="setdialog.cpp" line="484"/>
+        <location filename="setdialog.cpp" line="443"/>
+        <location filename="setdialog.cpp" line="468"/>
+        <location filename="setdialog.cpp" line="488"/>
         <source>not consistent</source>
         <translation type="unfinished">两次密码不一致</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="513"/>
+        <location filename="setdialog.cpp" line="517"/>
         <source>wrong password</source>
         <translation type="unfinished">密码错误</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="532"/>
+        <location filename="setdialog.cpp" line="536"/>
         <source>Fail to modify the password!</source>
         <oldsource>Fail to set password!</oldsource>
         <translation type="unfinished">修改密码失败！</translation>

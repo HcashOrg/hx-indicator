@@ -141,6 +141,7 @@
         <file>wallet_ui/coin_HC.png</file>
         <file>wallet_ui/coin_ETH.png</file>
         <file>wallet_ui/senator_add.png</file>
+        <file>wallet_ui/senator_del.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>
