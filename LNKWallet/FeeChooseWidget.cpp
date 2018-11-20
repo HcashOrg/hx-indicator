@@ -10,7 +10,7 @@ class FeeChooseWidget::DataPrivate
 {
 public:
     DataPrivate(double number,const QString &type,const QString &account)
-        :feeNumber(number),feeType(type),accountName(account)
+        :feeNumber(number),feeType(type.isEmpty()?ASSET_NAME:type),accountName(account)
     {
 
     }
