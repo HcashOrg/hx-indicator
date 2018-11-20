@@ -14,7 +14,7 @@ namespace leveldb {
 
 // Update Makefile if you change these
 static const int kMajorVersion = 1;
-static const int kMinorVersion = 18;
+static const int kMinorVersion = 13;
 
 struct Options;
 struct ReadOptions;
@@ -139,6 +139,12 @@ class DB {
   // Therefore the following call will compact the entire database:
   //    db->CompactRange(NULL, NULL);
   virtual void CompactRange(const Slice* begin, const Slice* end) = 0;
+
+  // Suspends the background compaction thread.  This methods
+  // returns once suspended.
+  virtual void SuspendCompactions() = 0;
+  // Resumes a suspended background compation thread.
+  virtual void ResumeCompactions() = 0;
 
  private:
   // No copying allowed

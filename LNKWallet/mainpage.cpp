@@ -61,15 +61,15 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->setColumnWidth(5,80);
     ui->accountTableWidget->horizontalHeader()->setStretchLastSection(true);
 
-    QString language = HXChain::getInstance()->language;
-    if( language.isEmpty())
-    {
-        retranslator("English");
-    }
-    else
-    {
-        retranslator(language);
-    }
+//    QString language = HXChain::getInstance()->language;
+//    if( language.isEmpty())
+//    {
+//        retranslator("Simplified Chinese");
+//    }
+//    else
+//    {
+//        retranslator(language);
+//    }
 
 
     blankWidget = new BlankDefaultWidget(ui->accountTableWidget);

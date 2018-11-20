@@ -1,6 +1,7 @@
 #include "PageScrollWidget.h"
 #include "ui_PageScrollWidget.h"
 
+#include <QIntValidator>
 
 class PageScrollWidget::PageScrollWidgetPrivate
 {

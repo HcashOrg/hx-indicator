@@ -36,7 +36,7 @@ bool checkOnly()
 LONG WINAPI TopLevelExceptionFilter(struct _EXCEPTION_POINTERS *pExceptionInfo)
 {
     qDebug() << "Enter TopLevelExceptionFilter Function" ;
-    HANDLE hFile = CreateFile(  _T(L"project.dmp"),GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+    HANDLE hFile = CreateFile(  _T("project.dmp"),GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
     MINIDUMP_EXCEPTION_INFORMATION stExceptionParam;
     stExceptionParam.ThreadId    = GetCurrentThreadId();
     stExceptionParam.ExceptionPointers = pExceptionInfo;

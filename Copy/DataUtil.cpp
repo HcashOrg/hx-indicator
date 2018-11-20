@@ -3,6 +3,7 @@
 #include <QDir>
 #include <QFile>
 #include <QDebug>
+#include <QMutex>
 #include "quazip/quazip/quazip.h"
 #include "quazip/quazip/quazipfile.h"
 

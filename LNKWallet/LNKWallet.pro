@@ -18,11 +18,11 @@ win32{
     QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
 
     LIBS += -lDbgHelp
-    LIBS += User32.Lib
     LIBS += -limm32
     LIBS += -lShLwApi
 }
 macx{
+    LIBS += User32.Lib
     ICON = HX.icns
     QMAKE_MAC_SDK = macosx10.12
 }

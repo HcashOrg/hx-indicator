@@ -52,8 +52,8 @@ HXChain::HXChain()
         lockMinutes     = 5;
         configFile->setValue("/settings/notAutoLock",false);
         notProduce      =  true;
-        configFile->setValue("/settings/language","English");
-        language = "English";
+        configFile->setValue("/settings/language","Simplified Chinese");
+        language = "Simplified Chinese";
         configFile->setValue("/settings/feeType","HX");
         feeType = "HX";
         configFile->setValue("/settings/feeOrderID","");

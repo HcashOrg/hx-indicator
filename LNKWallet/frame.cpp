@@ -120,8 +120,8 @@ Frame::Frame(): timer(NULL),
     QString language = HXChain::getInstance()->language;
     if( language.isEmpty())
     {
-//        setLanguage("Simplified Chinese");
-        setLanguage("English");
+        setLanguage("Simplified Chinese");
+//        setLanguage("English");
     }
     else
     {
@@ -177,8 +177,8 @@ Frame::Frame(): timer(NULL),
             HXChain::getInstance()->lockMinutes     = 5;
             HXChain::getInstance()->configFile->setValue("/settings/notAutoLock",false);
             HXChain::getInstance()->notProduce      =  true;
-            HXChain::getInstance()->configFile->setValue("/settings/language","English");
-            HXChain::getInstance()->language = "English";
+            HXChain::getInstance()->configFile->setValue("/settings/language","Simplified Chinese");
+            HXChain::getInstance()->language = "Simplified Chinese";
             HXChain::getInstance()->configFile->setValue("/settings/feeType","HX");
             HXChain::getInstance()->feeType = "HX";
 
@@ -553,7 +553,7 @@ void Frame::settingSaved()
     QString language = HXChain::getInstance()->language;
     if( language.isEmpty())
     {
-        setLanguage("English");
+        setLanguage("Simplified Chinese");
     }
     else
     {
