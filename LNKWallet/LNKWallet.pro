@@ -20,6 +20,7 @@ win32{
     LIBS += -lDbgHelp
     LIBS += -limm32
     LIBS += -lShLwApi
+    LIBS += User32.Lib
 }
 macx{
     LIBS += User32.Lib
