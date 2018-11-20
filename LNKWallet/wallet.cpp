@@ -86,7 +86,7 @@ HXChain::HXChain()
         minimizeToTray  = configFile->value("/settings/minimizeToTray",false).toBool();
         closeToMinimize = configFile->value("/settings/closeToMinimize",false).toBool();
         language        = configFile->value("/settings/language").toString();
-        feeType         = configFile->value("/settings/feeType").toString();
+        feeType         = configFile->value("/settings/feeType","HX").toString();
         feeOrderID      = configFile->value("/settings/feeOrderID").toString();
         IsBackupNeeded  = configFile->value("/settings/backupNeeded",false).toBool();
         autoDeposit     = configFile->value("/settings/autoDeposit",false).toBool();
@@ -730,9 +730,12 @@ void HXChain::autoSaveWalletFile()
 
 void HXChain::fetchTransactions()
 {
-    postRPC( "id-list_transactions", toJsonFormat( "list_transactions", QJsonArray() << 0 << -1));
+    if(trxQueryingFinished)
+    {
+        postRPC( "id+list_transactions+" + QString::number(walletInfo.blockHeight), toJsonFormat( "list_transactions", QJsonArray() << blockTrxFetched << -1));
+        trxQueryingFinished = false;
+    }
 
-    checkPendingTransactions();
 }
 
 void HXChain::parseTransaction(QString result)

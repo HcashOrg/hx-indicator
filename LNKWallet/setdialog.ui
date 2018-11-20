@@ -716,7 +716,7 @@ color:rgb(137,129,161);</string>
           <enum>Qt::NoFocus</enum>
          </property>
          <property name="text">
-          <string>自动备份</string>
+          <string>自动备份（位于钱包配置路径）</string>
          </property>
          <property name="checked">
           <bool>true</bool>

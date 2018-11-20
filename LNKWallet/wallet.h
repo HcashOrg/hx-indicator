@@ -473,6 +473,8 @@ public:
 
 public:
     TransactionDB transactionDB;
+    int  blockTrxFetched = 0;
+    bool trxQueryingFinished = true;
     void fetchTransactions();
     void parseTransaction(QString result);
     void checkPendingTransactions();    // 查看pending的交易有没有被确认， 如果过期了就从DB删掉

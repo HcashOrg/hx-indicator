@@ -5194,13 +5194,13 @@ add an account first</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="204"/>
-        <location filename="wallet.cpp" line="228"/>
+        <location filename="wallet.cpp" line="205"/>
+        <location filename="wallet.cpp" line="229"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="641"/>
+        <location filename="wallet.cpp" line="642"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -6995,7 +6995,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PageScrollWidget.cpp" line="362"/>
+        <location filename="poundage/PageScrollWidget.cpp" line="363"/>
         <source>currently show %1-%2,total %3</source>
         <oldsource>currently show %1-%2 items,total %3 items</oldsource>
         <translation type="unfinished">当前显示%1-%2，共%3条</translation>
@@ -8220,7 +8220,8 @@ update or not?</source>
     </message>
     <message>
         <location filename="setdialog.ui" line="719"/>
-        <source>自动备份</source>
+        <source>自动备份（位于钱包配置路径）</source>
+        <oldsource>自动备份</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -428,7 +428,7 @@ void Frame::getAccountInfo()
 
     HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
-//    HXChain::getInstance()->fetchTransactions();
+    HXChain::getInstance()->fetchTransactions();
 
 //    HXChain::getInstance()->fetchFormalGuards();
     HXChain::getInstance()->fetchAllGuards();
@@ -2117,7 +2117,7 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "id-list_transactions")
+    if( id.startsWith("id+list_transactions+"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 
@@ -2147,8 +2147,22 @@ void Frame::jsonDataUpdated(QString id)
                                                      toJsonFormat( "get_account_crosschain_transaction", QJsonArray() << withdrawAccount << transactionId));
                 }
             }
+
+            QString blockHeight = id.mid(QString("id+list_transactions+").size());
+            HXChain::getInstance()->postRPC( "Finish+list_transactions+" + blockHeight, toJsonFormat( "Finish-list_transactions", QJsonArray()));
         }
 
+
+        return;
+    }
+
+    if( id.startsWith("Finish+list_transactions+"))
+    {
+        int blockHeight = id.mid(QString("Finish-list_transactions+").size()).toInt();
+        HXChain::getInstance()->blockTrxFetched = blockHeight;
+        HXChain::getInstance()->trxQueryingFinished = true;
+
+        HXChain::getInstance()->checkPendingTransactions();
 
         return;
     }

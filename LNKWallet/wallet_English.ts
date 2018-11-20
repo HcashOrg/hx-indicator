@@ -5411,13 +5411,13 @@ Cover it or not?</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="204"/>
-        <location filename="wallet.cpp" line="228"/>
+        <location filename="wallet.cpp" line="205"/>
+        <location filename="wallet.cpp" line="229"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="641"/>
+        <location filename="wallet.cpp" line="642"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -7128,7 +7128,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="poundage/PageScrollWidget.cpp" line="362"/>
+        <location filename="poundage/PageScrollWidget.cpp" line="363"/>
         <source>currently show %1-%2,total %3</source>
         <oldsource>currently show %1-%2 items,total %3 items</oldsource>
         <translation type="unfinished"></translation>
@@ -8365,8 +8365,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="setdialog.ui" line="719"/>
-        <source>自动备份</source>
-        <translation type="unfinished">Auto Backup Wallet</translation>
+        <source>自动备份（位于钱包配置路径）</source>
+        <oldsource>自动备份</oldsource>
+        <translation type="unfinished">Auto Backup Wallet(in the config path)</translation>
     </message>
     <message>
         <location filename="setdialog.ui" line="839"/>
