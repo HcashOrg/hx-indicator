@@ -812,10 +812,7 @@ void ColdHotTransferPage::on_ethFinalTrxTableWidget_cellClicked(int row, int col
 
 }
 
-void ColdHotTransferPage::on_assetComboBox_currentIndexChanged(const QString &arg1)
-{
 
-}
 
 void ColdHotTransferPage::on_ethFinalTrxTableWidget_cellPressed(int row, int column)
 {
@@ -832,6 +829,13 @@ void ColdHotTransferPage::on_ethFinalTrxTableWidget_cellPressed(int row, int col
 
         return;
     }
+}
+
+void ColdHotTransferPage::onAssetComboBoxCurrentIndexChanged(const QString &arg1)
+{
+    ui->hotAddressBalanceLabel->clear();
+    ui->coldAddressBalanceLabel->clear();
+    refresh();
 }
 
 void ColdHotTransferPage::fetchCoinBalance(int id, QString chainId, QString address)

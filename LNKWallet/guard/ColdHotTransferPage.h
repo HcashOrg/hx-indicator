@@ -86,9 +86,10 @@ private slots:
 
     void on_ethFinalTrxTableWidget_cellClicked(int row, int column);
 
-    void on_assetComboBox_currentIndexChanged(const QString &arg1);
-
     void on_ethFinalTrxTableWidget_cellPressed(int row, int column);
+
+    void onAssetComboBoxCurrentIndexChanged(const QString &arg1);
+
 
 private:
     Ui::ColdHotTransferPage *ui;
