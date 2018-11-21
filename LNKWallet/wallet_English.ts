@@ -692,7 +692,7 @@
     <message>
         <location filename="alltransactionwidget.ui" line="602"/>
         <source>提案</source>
-        <translation type="unfinished">PROPOSAL</translation>
+        <translation type="unfinished">PROPOSALS</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.ui" line="621"/>
@@ -1143,7 +1143,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/AssetChangeHistoryWidget.cpp" line="43"/>
         <source>There are no records currently!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">There are currently no records!</translation>
     </message>
     <message>
         <location filename="guard/AssetChangeHistoryWidget.cpp" line="75"/>
@@ -1273,7 +1273,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <location filename="guard/AssetPage.cpp" line="44"/>
         <source>There are no records currently!</source>
         <oldsource>There are no records!</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">There are currently no records!</translation>
     </message>
 </context>
 <context>
@@ -1417,7 +1417,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="bonus/BonusPage.cpp" line="51"/>
         <source>当前没有纪录!</source>
-        <translation type="unfinished">There&apos;s no bonus record!</translation>
+        <translation type="unfinished">There are no bonus records!</translation>
     </message>
     <message>
         <location filename="bonus/BonusPage.cpp" line="115"/>
@@ -2177,7 +2177,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="citizen/CitizenAccountPage.ui" line="232"/>
         <source>当前已质押金额</source>
-        <translation type="unfinished">MORTGAGED AMOUNT</translation>
+        <translation type="unfinished">PLEDGE AMOUNT</translation>
     </message>
     <message>
         <location filename="citizen/CitizenAccountPage.ui" line="271"/>
@@ -2265,7 +2265,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="237"/>
         <source>Citizen提案</source>
-        <translation type="unfinished">Citizen Proposal</translation>
+        <translation type="unfinished">Citizen Proposals</translation>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="253"/>
@@ -3378,7 +3378,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="dapp/ContractTokenPage.ui" line="257"/>
         <source>交易记录</source>
-        <translation type="unfinished">RECORD</translation>
+        <translation type="unfinished">RECORDS</translation>
     </message>
     <message>
         <location filename="dapp/ContractTokenPage.cpp" line="147"/>
@@ -4727,27 +4727,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1182"/>
+        <location filename="frame.cpp" line="1181"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1414"/>
+        <location filename="frame.cpp" line="1407"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2509"/>
+        <location filename="frame.cpp" line="2519"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2512"/>
+        <location filename="frame.cpp" line="2522"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2515"/>
+        <location filename="frame.cpp" line="2525"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4793,7 +4793,7 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionAdvanceWidget.ui" line="45"/>
         <source>高级</source>
-        <translation type="unfinished">ADVANCE</translation>
+        <translation type="unfinished">ADVANCED</translation>
     </message>
     <message>
         <source>    高级</source>
@@ -4816,7 +4816,7 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionAdvanceWidget.ui" line="98"/>
         <source>手续费承兑单</source>
-        <translation type="unfinished">FeeAcceptance</translation>
+        <translation type="unfinished">Fee Acceptance</translation>
     </message>
 </context>
 <context>
@@ -4911,12 +4911,12 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionCitizenWidget.ui" line="61"/>
         <source>账户信息</source>
-        <translation type="unfinished">AccountInfo</translation>
+        <translation type="unfinished">Account Info</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionCitizenWidget.ui" line="79"/>
         <source>提案投票</source>
-        <translation type="unfinished">Proposal</translation>
+        <translation type="unfinished">Proposals</translation>
     </message>
 </context>
 <context>
@@ -4938,18 +4938,18 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="61"/>
         <source>挂单中心</source>
-        <translation type="unfinished">OrderCenter</translation>
+        <translation type="unfinished">Order Centre</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="79"/>
         <source>我的挂单</source>
         <oldsource>  我的挂单</oldsource>
-        <translation type="unfinished">MyOrders</translation>
+        <translation type="unfinished">My Orders</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="97"/>
         <source>标准代币合约</source>
-        <translation type="unfinished">StandardToken</translation>
+        <translation type="unfinished">Standard Token</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionExchangeWidget.ui" line="124"/>
@@ -4973,52 +4973,52 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="61"/>
         <source>资产信息</source>
-        <translation type="unfinished">AssetInfo</translation>
+        <translation type="unfinished">Asset Info</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="79"/>
         <source>私钥管理</source>
-        <translation type="unfinished">KeyManage</translation>
+        <translation type="unfinished">Key Management</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="97"/>
         <source> 提案 </source>
-        <translation type="unfinished">Proposal</translation>
+        <translation type="unfinished">Proposals</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="124"/>
         <source>提案</source>
-        <translation type="unfinished">PROPOSAL</translation>
+        <translation type="unfinished">PROPOSALS</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="154"/>
         <source>高级</source>
-        <translation type="unfinished">ADVANCE</translation>
+        <translation type="unfinished">ADVANCED</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="175"/>
         <source>账户信息</source>
-        <translation type="unfinished">AccountInfo</translation>
+        <translation type="unfinished">Account Info</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="193"/>
         <source>我的收益</source>
-        <translation type="unfinished">MyIncome</translation>
+        <translation type="unfinished">My Income</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="211"/>
         <source>提现授权</source>
-        <translation type="unfinished">Withdraw</translation>
+        <translation type="unfinished">Withdrawal</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="229"/>
         <source>市场喂价</source>
-        <translation type="unfinished">MarketPrice</translation>
+        <translation type="unfinished">Market Price</translation>
     </message>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="247"/>
         <source>资产变更</source>
-        <translation type="unfinished">Cold-Hot Trx</translation>
+        <translation type="unfinished">Hot &amp; Cold Trx</translation>
     </message>
 </context>
 <context>
@@ -5452,8 +5452,7 @@ p, li { white-space: pre-wrap; }
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Microsoft YaHei UI Light&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;HyperExchange--- a high performance, smart contract embedded blockchain supports cross-chain transactions. As one of the core hub in the HCASH  “interlinked,
-bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade blockchain technology to optimize value transfer service. It supports cross-chain transaction between current major digital currencies (bitcoin, litecoin, for instance), facilitates multiple assets on-chain transfer, and assists complex business scenario via smart contract. With decentralized trading system &amp; PoS mining pool system, it enables a secure, transparent exchange, greatly help you to do cross-chain transfer and trade without chain barriers. HyperExchange is committed to better integrating blockchain resources, providing interoperability solutions for HCASH ecosystem, improving value transformation and expanding HCASH ecosystem.
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;HyperExchange is designed to help the HCASH ecosystem achieve value through connecting blockchains together. Through injecting resources into its ecosystem from its developers and integrating resources from other chains, HyperExchange is able to build an ‘interlinked, bifocal’ dual-token and dual-chain ecosystem with HyperCash (HC) acting as the HCASH main chain, and the HyperExchange (HX) focusing on expanding the HCASH ecosystem. HyperExchange will enable accessibility among blockchain and non-blockchain networks, and will provide HC holders with benefits such as an increased weight of mining and more administrative decision-making power within the network. Besides cross-chain functionality, HyperExchange will have Turing Complete smart contract functionality. In a cross-chain application scenario, the underlying blockchain virtual machine, and the SDK and RPC support multiple development languages, providing required flexibility configuration and the ability to exchange multiple assets.
 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
@@ -5464,7 +5463,7 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
     <message>
         <location filename="HelpWidget.ui" line="159"/>
         <source>检查更新</source>
-        <translation type="unfinished">Check updates</translation>
+        <translation type="unfinished">Check for updates</translation>
     </message>
     <message>
         <location filename="HelpWidget.ui" line="175"/>
@@ -5605,12 +5604,12 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="335"/>
+        <location filename="importdialog.cpp" line="336"/>
         <source> has been imported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="339"/>
+        <location filename="importdialog.cpp" line="340"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5700,7 +5699,7 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <location filename="lockpage.cpp" line="97"/>
         <source>Sure to close the Wallet?</source>
         <oldsource>Sure to close Hcash Wallet?</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Are you sure you would like to close the wallet?</translation>
     </message>
     <message>
         <location filename="lockpage.cpp" line="143"/>
@@ -5923,18 +5922,18 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="363"/>
+        <location filename="mainpage.cpp" line="365"/>
         <source>Fail to create account!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="474"/>
-        <location filename="mainpage.cpp" line="477"/>
+        <location filename="mainpage.cpp" line="476"/>
+        <location filename="mainpage.cpp" line="479"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="519"/>
+        <location filename="mainpage.cpp" line="521"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5983,7 +5982,7 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <location filename="miner/minerpage.ui" line="102"/>
         <location filename="miner/minerpage.ui" line="622"/>
         <source>质押资产</source>
-        <translation type="unfinished">MORTGAGE</translation>
+        <translation type="unfinished">PLEDGE</translation>
     </message>
     <message>
         <source>币种</source>
@@ -6011,7 +6010,7 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <location filename="miner/minerpage.ui" line="294"/>
         <source>质押CITIZEN账户</source>
         <oldsource>质押miner账户</oldsource>
-        <translation type="unfinished">CITIZEN MORTGAGED TO</translation>
+        <translation type="unfinished">CITIZEN PLEDGE TO</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="307"/>
@@ -6021,7 +6020,7 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
     <message>
         <location filename="miner/minerpage.ui" line="320"/>
         <source>质押数量</source>
-        <translation type="unfinished">AMOUNT MORTGAGE</translation>
+        <translation type="unfinished">AMOUNT PLEDGE</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="445"/>
@@ -6081,17 +6080,17 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
     <message>
         <location filename="miner/minerpage.ui" line="700"/>
         <source>质押信息</source>
-        <translation type="unfinished">MORTGAGE</translation>
+        <translation type="unfinished">PLEDGE</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="713"/>
         <source>您的钱包内还没有注册账户,请先注册。</source>
-        <translation type="unfinished">You have no registered account in the wallet.Please register one.</translation>
+        <translation type="unfinished">You have no registered accounts in your wallet. Please register one.</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="750"/>
         <source>收益记录</source>
-        <translation type="unfinished">RECORD</translation>
+        <translation type="unfinished">RECORDS</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="780"/>
@@ -6214,7 +6213,7 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
     <message>
         <location filename="miner/minerpage.cpp" line="669"/>
         <source>MORTGAGE</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">pledge</translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="877"/>
@@ -6445,12 +6444,12 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="538"/>
+        <location filename="multisig/MultiSigPage.cpp" line="539"/>
         <source>Everytime a new multi-sig address is added, the wallet will rescan the blockchain data when launched next time. After that the transactions of this multi-sig address will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="549"/>
+        <location filename="multisig/MultiSigPage.cpp" line="550"/>
         <source>Sure to delete this multi-sig address locally? This operation won&apos;t affect the data on the chain.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7056,7 +7055,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="exchange/OnchainOrderPage.ui" line="83"/>
         <source>挂单中心</source>
-        <translation type="unfinished">Order Center</translation>
+        <translation type="unfinished">Order Centre</translation>
     </message>
     <message>
         <location filename="exchange/OnchainOrderPage.ui" line="132"/>
@@ -7264,7 +7263,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="poundage/PoundageShowWidget.cpp" line="57"/>
         <source>当前无承兑单!</source>
-        <translation type="unfinished">There&apos;s no poundage!</translation>
+        <translation type="unfinished">There are no accepted fees!</translation>
     </message>
     <message>
         <location filename="poundage/PoundageShowWidget.cpp" line="176"/>
@@ -7671,7 +7670,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalPage.ui" line="232"/>
         <source>提案</source>
-        <translation type="unfinished">Proposal</translation>
+        <translation type="unfinished">Proposals</translation>
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="106"/>
@@ -7692,7 +7691,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalPage.cpp" line="47"/>
         <source>There are no proposals currently!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">There are currently no proposals!</translation>
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="76"/>
@@ -8266,7 +8265,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="setdialog.ui" line="125"/>
         <source>通用设置</source>
-        <translation type="unfinished">Common</translation>
+        <translation type="unfinished">General</translation>
     </message>
     <message>
         <location filename="setdialog.ui" line="176"/>
@@ -10003,7 +10002,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="withdrawpage/WithdrawPage.ui" line="57"/>
         <source>提现记录</source>
-        <translation type="unfinished">RECORD</translation>
+        <translation type="unfinished">RECORDS</translation>
     </message>
 </context>
 <context>
