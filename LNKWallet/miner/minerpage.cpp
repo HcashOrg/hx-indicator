@@ -660,9 +660,24 @@ void MinerPage::showCitizenInfo()
         ui->citizenInfoTableWidget->setItem(i,4, new QTableWidgetItem( QString::number(minerInfo.lastBlock)));
         if(minerInfo.payBack >= 0)
         {
-            ui->citizenInfoTableWidget->setItem(i,5, new QTableWidgetItem( QString("%1 \%").arg(minerInfo.payBack)));
+            ui->citizenInfoTableWidget->setItem(i,5, new QTableWidgetItem( QString("%1 %").arg(minerInfo.payBack)));
         }
+        else
+        {
+            ui->citizenInfoTableWidget->setItem(i,5, new QTableWidgetItem( tr("unknown")));
+        }
+        ui->citizenInfoTableWidget->setItem(i,6,new QTableWidgetItem(tr("MORTGAGE")));
 
+        ToolButtonWidget *buttonInc = new ToolButtonWidget();
+        buttonInc->setText(ui->citizenInfoTableWidget->item(i,6)->text());
+        buttonInc->setButtonFixSize(120,40);
+        ui->citizenInfoTableWidget->setCellWidget(i,6,buttonInc);
+        QString minerName = ui->citizenInfoTableWidget->item(i,0)->text();
+        connect(buttonInc,&ToolButtonWidget::clicked,[minerName,this](){
+            LockToMinerDialog lockToMinerDialog(ui->accountComboBox->currentText());
+            lockToMinerDialog.setMiner(minerName);
+            lockToMinerDialog.pop();
+        });
     }
 
     tableWidgetSetItemZebraColor(ui->citizenInfoTableWidget);
