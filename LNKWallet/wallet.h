@@ -34,7 +34,7 @@
 #define MULTISIG_ADDRESS_PREFIX "HXM"
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.1.2"           // 版本号
+#define WALLET_VERSION "1.1.3"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 #define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"

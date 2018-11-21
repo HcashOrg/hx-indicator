@@ -52,6 +52,7 @@ int WitnessConfig::init()
 
 void WitnessConfig::save()
 {
+    mutex.lock();
     if(file->open(QIODevice::WriteOnly))
     {
         QString dataStr;
@@ -67,6 +68,7 @@ void WitnessConfig::save()
         ts << dataStr.toUtf8();
         file->close();
     }
+    mutex.unlock();
 }
 
 void WitnessConfig::modify(QString key, QString value, bool isString)
@@ -184,8 +186,9 @@ void WitnessConfig::addTrackAddress(QString address)
 
 QStringList WitnessConfig::getTrackAddresses()
 {
-    return QStringList();
+    return this->allValue("track-address");
 }
+
 
 void WitnessConfig::addPrivateKey(QString pubKey, QString privateKey)
 {

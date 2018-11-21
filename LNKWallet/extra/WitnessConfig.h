@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QFile>
+#include <QMutex>
 
 class WitnessConfig : public QObject
 {
@@ -33,6 +34,7 @@ public slots:
 private:
     QFile* file = NULL;
     QStringList data;
+    QMutex mutex;
 };
 
 #endif // WITNESSCONFIG_H

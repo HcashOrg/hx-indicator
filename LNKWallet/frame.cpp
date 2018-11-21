@@ -1397,13 +1397,6 @@ void Frame::jsonDataUpdated(QString id)
 
         if(HXChain::getInstance()->importedWalletNeedToAddTrackAddresses)
         {
-            foreach (QString accountName, HXChain::getInstance()->accountInfoMap.keys())
-            {
-                qDebug() << accountName << HXChain::getInstance()->accountInfoMap.value(accountName).address;
-                HXChain::getInstance()->witnessConfig->addTrackAddress(HXChain::getInstance()->accountInfoMap.value(accountName).address);
-                HXChain::getInstance()->witnessConfig->save();
-            }
-
             HXChain::getInstance()->importedWalletNeedToAddTrackAddresses = false;
             HXChain::getInstance()->configFile->setValue("/settings/importedWalletNeedToAddTrackAddresses",false);
 
@@ -1416,8 +1409,17 @@ void Frame::jsonDataUpdated(QString id)
             commonDialog.pop();
         }
 
+        QStringList trackAddresses = HXChain::getInstance()->witnessConfig->getTrackAddresses();
         foreach (QString accountName, HXChain::getInstance()->accountInfoMap.keys())
         {
+            // 检查track-address
+            QString address = HXChain::getInstance()->accountInfoMap.value(accountName).address;
+            if(!trackAddresses.contains(address))
+            {
+                HXChain::getInstance()->witnessConfig->addTrackAddress(address);
+                HXChain::getInstance()->witnessConfig->save();
+            }
+
             HXChain::getInstance()->fetchAccountBalances(accountName);
 
             if(HXChain::getInstance()->accountInfoMap.value(accountName).pubKey.isEmpty())
