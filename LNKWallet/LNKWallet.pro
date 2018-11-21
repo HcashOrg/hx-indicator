@@ -23,7 +23,6 @@ win32{
     LIBS += User32.Lib
 }
 macx{
-    LIBS += User32.Lib
     ICON = HX.icns
     QMAKE_MAC_SDK = macosx10.12
 }

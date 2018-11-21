@@ -188,6 +188,7 @@ private:
     RECT rtDefault;
 #endif
 
+    int getInfoCount = 0;
     void  getAccountInfo();
     void startTimerForAutoRefresh();      // 自动刷新
     QTimer* timerForAutoRefresh;

@@ -424,6 +424,7 @@ QString toThousandFigure( int number)     // 转换为0001,0015  这种数字格
 
 void Frame::getAccountInfo()
 {
+
     HXChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QJsonArray()));
 
     HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
@@ -433,7 +434,10 @@ void Frame::getAccountInfo()
 //    HXChain::getInstance()->fetchFormalGuards();
     HXChain::getInstance()->fetchAllGuards();
 
-    HXChain::getInstance()->fetchMiners();
+    if(getInfoCount % 10 == 0)
+    {
+        HXChain::getInstance()->fetchMiners();
+    }
 
     HXChain::getInstance()->fetchCrosschainTransactions();
 }
@@ -792,6 +796,7 @@ void Frame::closeCurrentPage()
 
 void Frame::autoRefresh()
 {
+    getInfoCount++;
     getAccountInfo();
 
     bottomBar->refresh();
@@ -1835,7 +1840,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id.startsWith("id-get_citizen-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-//        qDebug() << id << result;
+//        qDebug() << id ;
 
         if(result.startsWith("\"result\":"))
         {
