@@ -163,25 +163,25 @@ HXChain*   HXChain::getInstance()
 
 void HXChain:: startExe()
 {
-//    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
+    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
-//    QStringList strList;
-//    strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
-//            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
-//            << "--rewind-on-close";
+    QStringList strList;
+    strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
+            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << "--rewind-on-close";
 
-//    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
-//    {
-//        strList << "--replay";
-//    }
-//    HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
+    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+    {
+        strList << "--replay";
+    }
+    HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
-//    nodeProc->start(NODE_PROC_NAME,strList);
-//    qDebug() << "start" << NODE_PROC_NAME << strList;
+    nodeProc->start(NODE_PROC_NAME,strList);
+    qDebug() << "start" << NODE_PROC_NAME << strList;
 
 
-    HXChain::getInstance()->initWebSocketManager();
-    emit exeStarted();
+//    HXChain::getInstance()->initWebSocketManager();
+//    emit exeStarted();
 }
 
 void HXChain::onNodeExeStateChanged()

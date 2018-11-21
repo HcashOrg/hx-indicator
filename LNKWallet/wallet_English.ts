@@ -1663,7 +1663,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.ui" line="376"/>
-        <source>1111</source>
+        <source>empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3158,34 +3158,34 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="427"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="428"/>
         <source>MoveToGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="429"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="430"/>
         <source>AddGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="431"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="432"/>
         <source>EditGroup</source>
         <oldsource>EidtGroup</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="432"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="433"/>
         <source>DeleteGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="434"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="435"/>
         <source>EditContact</source>
         <oldsource>EditPerson</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="435"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="436"/>
         <source>DeleteContact</source>
         <oldsource>DeletePerson</oldsource>
         <translation type="unfinished"></translation>
@@ -4727,27 +4727,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1160"/>
+        <location filename="frame.cpp" line="1182"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1392"/>
+        <location filename="frame.cpp" line="1414"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2473"/>
+        <location filename="frame.cpp" line="2509"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2476"/>
+        <location filename="frame.cpp" line="2512"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2479"/>
+        <location filename="frame.cpp" line="2515"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5981,6 +5981,7 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="102"/>
+        <location filename="miner/minerpage.ui" line="622"/>
         <source>质押资产</source>
         <translation type="unfinished">MORTGAGE</translation>
     </message>
@@ -6073,57 +6074,57 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="unfinished">FEE</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="661"/>
+        <location filename="miner/minerpage.ui" line="669"/>
         <source>当前收益</source>
         <translation type="unfinished">INCOME</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="692"/>
+        <location filename="miner/minerpage.ui" line="700"/>
         <source>质押信息</source>
         <translation type="unfinished">MORTGAGE</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="705"/>
+        <location filename="miner/minerpage.ui" line="713"/>
         <source>您的钱包内还没有注册账户,请先注册。</source>
         <translation type="unfinished">You have no registered account in the wallet.Please register one.</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="742"/>
+        <location filename="miner/minerpage.ui" line="750"/>
         <source>收益记录</source>
         <translation type="unfinished">RECORD</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="772"/>
+        <location filename="miner/minerpage.ui" line="780"/>
         <source>领取全部</source>
         <translation type="unfinished">GET ALL</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="796"/>
+        <location filename="miner/minerpage.ui" line="804"/>
         <source>挖矿</source>
         <translation type="unfinished">Mining</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="827"/>
+        <location filename="miner/minerpage.ui" line="835"/>
         <source>CITIZEN信息</source>
         <translation type="unfinished">CITIZEN INFO</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="855"/>
+        <location filename="miner/minerpage.ui" line="863"/>
         <source>权重由高到低</source>
         <translation type="unfinished">Weight high-low</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="860"/>
+        <location filename="miner/minerpage.ui" line="868"/>
         <source>出块数由多到少</source>
         <translation type="unfinished">Produced high-low</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="865"/>
+        <location filename="miner/minerpage.ui" line="873"/>
         <source>missed数由少到多</source>
         <translation type="unfinished">Missed low-high</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="870"/>
+        <location filename="miner/minerpage.ui" line="878"/>
         <source>手续费由低到高</source>
         <translation type="unfinished">Fee low-high</translation>
     </message>
@@ -6206,8 +6207,18 @@ bifocal” dual-token and dual-chain ecosystem, we are committed to intergrade b
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="862"/>
-        <location filename="miner/minerpage.cpp" line="992"/>
+        <location filename="miner/minerpage.cpp" line="667"/>
+        <source>unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="669"/>
+        <source>MORTGAGE</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="877"/>
+        <location filename="miner/minerpage.cpp" line="1007"/>
         <source>You need to pay %1 %2 for this operation. Continue?</source>
         <translation type="unfinished"></translation>
     </message>

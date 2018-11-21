@@ -491,7 +491,24 @@ void Frame::showLockPage()
     timer->stop();
 //    shadowWidgetShow();
 
-
+    if( lockPage )
+    {
+        qDebug() << "already exist a lockpage";
+        return;
+    }
+    else
+    {
+        lockPage = new LockPage(this);
+        lockPage->setAttribute(Qt::WA_DeleteOnClose);
+        lockPage->move(0,0);
+        connect( lockPage,SIGNAL(unlock()),this,SLOT(unlock()));
+        connect( lockPage,SIGNAL(minimum()),this,SLOT(showMinimized()));
+        connect( lockPage,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
+        connect( lockPage,SIGNAL(tray()),this,SLOT(hide()));
+        lockPage->show();
+        setGeometry(0,0, lockPage->width(), lockPage->height());
+        moveWidgetToScreenCenter(this);
+    }
     HXChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray()));
 qDebug() << "lock ";
 
@@ -499,11 +516,11 @@ qDebug() << "lock ";
 
 void Frame::autoLock()
 {
+    showLockPage();
+//    timer->stop();
 
-    timer->stop();
-
-    HXChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray() ));
-qDebug() << "autolock ";
+//    HXChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray() ));
+//qDebug() << "autolock ";
 
 }
 
@@ -1477,29 +1494,29 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "id-lock")
     {
-        if( lockPage )
-        {
-            qDebug() << "already exist a lockpage";
-            return;
-        }
+//        if( lockPage )
+//        {
+//            qDebug() << "already exist a lockpage";
+//            return;
+//        }
 
-        QString result = HXChain::getInstance()->jsonDataValue(id);
+//        QString result = HXChain::getInstance()->jsonDataValue(id);
 
-//        if( result == "\"result\":null")
-        {
+////        if( result == "\"result\":null")
+//        {
 
-            lockPage = new LockPage(this);
-            lockPage->setAttribute(Qt::WA_DeleteOnClose);
-            lockPage->move(0,0);
-            connect( lockPage,SIGNAL(unlock()),this,SLOT(unlock()));
-            connect( lockPage,SIGNAL(minimum()),this,SLOT(showMinimized()));
-            connect( lockPage,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
-            connect( lockPage,SIGNAL(tray()),this,SLOT(hide()));
-            lockPage->show();
+//            lockPage = new LockPage(this);
+//            lockPage->setAttribute(Qt::WA_DeleteOnClose);
+//            lockPage->move(0,0);
+//            connect( lockPage,SIGNAL(unlock()),this,SLOT(unlock()));
+//            connect( lockPage,SIGNAL(minimum()),this,SLOT(showMinimized()));
+//            connect( lockPage,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
+//            connect( lockPage,SIGNAL(tray()),this,SLOT(hide()));
+//            lockPage->show();
 
-            setGeometry(0,0, lockPage->width(), lockPage->height());
-            moveWidgetToScreenCenter(this);
-        }
+//            setGeometry(0,0, lockPage->width(), lockPage->height());
+//            moveWidgetToScreenCenter(this);
+//        }
         return;
     }
 
