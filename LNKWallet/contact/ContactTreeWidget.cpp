@@ -1,7 +1,7 @@
 #include "ContactTreeWidget.h"
 #include "ui_ContactTreeWidget.h"
 
-
+#include <QScrollBar>
 #include <QTreeWidgetItem>
 #include <QMenu>
 #include <QLineEdit>
@@ -396,6 +396,7 @@ void ContactTreeWidget::initTreeStyle()
 {
     setWindowFlags(Qt::FramelessWindowHint);//无边框
     setHeaderHidden(true);
+    horizontalScrollBar()->setVisible(false);
     setSelectionMode(QAbstractItemView::SingleSelection);
 
     setStyleSheet("QWidget{border:none;}"
