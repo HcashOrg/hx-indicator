@@ -1938,12 +1938,17 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.cpp" line="68"/>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="38"/>
+        <source>pledge amount shouldn&apos;t less than 1000!</source>
+        <translation type="unfinished">质押费用不可小于1000！</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="77"/>
         <source>Transaction of changing senators has been sent,please wait for confirmation</source>
         <translation type="unfinished">更换Senator提案已经发出，请等待确认</translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.cpp" line="75"/>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="84"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>

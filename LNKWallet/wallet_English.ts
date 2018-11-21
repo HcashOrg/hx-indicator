@@ -1992,12 +1992,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">1000HX At Least</translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.cpp" line="68"/>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="38"/>
+        <source>pledge amount shouldn&apos;t less than 1000!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="77"/>
         <source>Transaction of changing senators has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.cpp" line="75"/>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="84"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5200,7 +5205,7 @@ Cover it or not?</source>
     <message>
         <location filename="guard/GuardIncomePage.cpp" line="44"/>
         <source>There are no proposals currently!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">There are currently no proposals!</translation>
     </message>
     <message>
         <location filename="guard/GuardIncomePage.cpp" line="73"/>
@@ -8763,7 +8768,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="titlebar.cpp" line="61"/>
         <source>Sure to close the Wallet?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Are you sure you would like to close the wallet?</translation>
     </message>
 </context>
 <context>
