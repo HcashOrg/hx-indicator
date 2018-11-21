@@ -431,7 +431,6 @@ void Frame::getAccountInfo()
 
     HXChain::getInstance()->fetchTransactions();
 
-//    HXChain::getInstance()->fetchFormalGuards();
     HXChain::getInstance()->fetchAllGuards();
 
     if(getInfoCount % 10 == 0)
@@ -1384,7 +1383,8 @@ void Frame::jsonDataUpdated(QString id)
             foreach (QString accountName, HXChain::getInstance()->accountInfoMap.keys())
             {
                 qDebug() << accountName << HXChain::getInstance()->accountInfoMap.value(accountName).address;
-                HXChain::getInstance()->addTrackAddress(HXChain::getInstance()->accountInfoMap.value(accountName).address);
+                HXChain::getInstance()->witnessConfig->addTrackAddress(HXChain::getInstance()->accountInfoMap.value(accountName).address);
+                HXChain::getInstance()->witnessConfig->save();
             }
 
             HXChain::getInstance()->importedWalletNeedToAddTrackAddresses = false;
@@ -1832,8 +1832,16 @@ void Frame::jsonDataUpdated(QString id)
                     HXChain::getInstance()->postRPC( "id-get_citizen-" + account, toJsonFormat( "get_citizen", QJsonArray() << account));
                 }
             }
+
+            HXChain::getInstance()->postRPC( "Finish+get_citizen", toJsonFormat( "Finish+get_citizen", QJsonArray()));
         }
 
+        return;
+    }
+
+    if( id == "Finish+get_citizen")
+    {
+        HXChain::getInstance()->fetchCitizensFinished = true;
         return;
     }
 

@@ -467,7 +467,6 @@ public:
 private:
     void InitFeeCharge();//设置手续费
 public:
-    void addTrackAddress(QString _address);     // 在chaindata/config.ini中添加 track-address
 
     void autoSaveWalletFile();      // 自动备份钱包文件
 
@@ -512,6 +511,7 @@ public:
 
     // citizen相关
     QMap<QString,MinerInfo>     minerMap;
+    bool fetchCitizensFinished = true;
     void fetchMiners();
     void fetchCitizenPayBack();     // 挖矿手续费
     QString getMinerNameFromId(QString _minerId);

@@ -163,25 +163,25 @@ HXChain*   HXChain::getInstance()
 
 void HXChain:: startExe()
 {
-//    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
+    connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
-//    QStringList strList;
-//    strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
-//            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
-//            << "--rewind-on-close";
+    QStringList strList;
+    strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
+            << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << "--rewind-on-close";
 
-//    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
-//    {
-//        strList << "--replay";
-//    }
-//    HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
+    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+    {
+        strList << "--replay";
+    }
+    HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
 
-//    nodeProc->start(NODE_PROC_NAME,strList);
-//    qDebug() << "start" << NODE_PROC_NAME << strList;
+    nodeProc->start(NODE_PROC_NAME,strList);
+    qDebug() << "start" << NODE_PROC_NAME << strList;
 
 
-    HXChain::getInstance()->initWebSocketManager();
-    emit exeStarted();
+//    HXChain::getInstance()->initWebSocketManager();
+//    emit exeStarted();
 }
 
 void HXChain::onNodeExeStateChanged()
@@ -681,33 +681,6 @@ void HXChain::InitFeeCharge()
     QJsonObject crossfeeObj = jsonObject.value("CrossFee").toObject();
     feeChargeInfo.withDrawFee = crossfeeObj.value("WithDraw").toString();
     feeChargeInfo.capitalFee = crossfeeObj.value("Capital").toString();
-}
-
-void HXChain::addTrackAddress(QString _address)
-{
-    QFile file(HXChain::getInstance()->appDataPath + "/config.ini");
-    if(file.exists())
-    {
-        if(file.open(QIODevice::ReadWrite))
-        {
-            QString str = file.readAll();
-#ifdef WIN32
-            QString str2 = "track-address = \"" + _address + "\"\r\n";
-#else
-            QString str2 = "track-address = \"" + _address + "\"\n";
-#endif
-            str.prepend(str2);
-
-            file.resize(0);
-            QTextStream ts(&file);
-            ts << str.toUtf8();
-            file.close();
-        }
-    }
-    else
-    {
-        qDebug() << "can not find chaindata/config.ini ";
-    }
 }
 
 void HXChain::autoSaveWalletFile()
@@ -1294,7 +1267,9 @@ QStringList HXChain::lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId)
 
 void HXChain::fetchMiners()
 {
+    if(!fetchCitizensFinished)  return;
     postRPC( "id-list_citizens", toJsonFormat( "list_citizens", QJsonArray() << "A" << 1000));
+    fetchCitizensFinished = false;
 }
 
 void HXChain::fetchCitizenPayBack()

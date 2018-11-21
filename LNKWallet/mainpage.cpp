@@ -353,7 +353,9 @@ void MainPage::jsonDataUpdated(QString id)
             QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
             QJsonObject jsonObject = parse_doucment.object();
             QString address = jsonObject.take("result").toString();
-            HXChain::getInstance()->addTrackAddress(address);
+            HXChain::getInstance()->witnessConfig->addTrackAddress(address);
+            HXChain::getInstance()->witnessConfig->save();
+
 
             QTimer::singleShot(5000,this,&MainPage::init);
         }

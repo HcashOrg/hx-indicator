@@ -19,6 +19,7 @@ public:
     QString value(QString key);                 // 如果有key有多项 只返回第一个 如果没有 返回""
     QStringList allValue(QString key);          // 一key多值的情况 获取全部值
 
+    void addTrackAddress(QString address);
     QStringList getTrackAddresses();
     void addPrivateKey(QString pubKey, QString privateKey);
     void addMiner(QString minerId);

@@ -66,8 +66,6 @@ void WitnessConfig::save()
         QTextStream ts(file);
         ts << dataStr.toUtf8();
         file->close();
-
-        file->close();
     }
 }
 
@@ -177,6 +175,11 @@ QStringList WitnessConfig::allValue(QString key)
     result.removeDuplicates();
 
     return result;
+}
+
+void WitnessConfig::addTrackAddress(QString address)
+{
+    this->append("track-address", address, true);
 }
 
 QStringList WitnessConfig::getTrackAddresses()
