@@ -113,12 +113,12 @@ void WebSocketManager::onTimer()
 //            qDebug() << "busy is " << pendingRpcs.at(0);
         }
 
-        loopCount++;
-        if(loopCount > 1000)
-        {
-            pendingRpcs.removeFirst();
-            busy = false;
-        }
+//        loopCount++;
+//        if(loopCount > 1000)
+//        {
+//            pendingRpcs.removeFirst();
+//            busy = false;
+//        }
     }
 
 }

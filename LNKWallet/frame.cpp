@@ -1851,7 +1851,6 @@ void Frame::jsonDataUpdated(QString id)
                 if(!account.isEmpty())
                 {
                     HXChain::getInstance()->postRPC( "id-get_citizen-" + account, toJsonFormat( "get_citizen", QJsonArray() << account));
-                    qDebug() << "cccccccccc " << account;
                 }
             }
 
@@ -1863,7 +1862,6 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "Finish+get_citizen")
     {
-        qDebug() << "ggggggggggggggggggggg " << HXChain::getInstance()->fetchCitizensFinished;
         HXChain::getInstance()->fetchCitizensFinished = true;
         return;
     }

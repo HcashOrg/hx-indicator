@@ -1270,7 +1270,6 @@ void HXChain::fetchMiners()
     if(!fetchCitizensFinished)  return;
     fetchCitizensFinished = false;
     postRPC( "id-list_citizens", toJsonFormat( "list_citizens", QJsonArray() << "A" << 1000));
-    qDebug() << "fffffffffffffffffff ";
 }
 
 void HXChain::fetchCitizenPayBack()
