@@ -181,6 +181,7 @@ QStringList WitnessConfig::allValue(QString key)
 
 void WitnessConfig::addTrackAddress(QString address)
 {
+    if(address.isEmpty())       return;
     this->append("track-address", address, true);
 }
 
@@ -192,6 +193,7 @@ QStringList WitnessConfig::getTrackAddresses()
 
 void WitnessConfig::addPrivateKey(QString pubKey, QString privateKey)
 {
+    if(pubKey.isEmpty() || privateKey.isEmpty())    return;
     QString pks = this->value("private-key");
     QJsonArray array = QJsonDocument::fromJson( pks.toUtf8()).array();
     QJsonArray array2;
@@ -202,6 +204,7 @@ void WitnessConfig::addPrivateKey(QString pubKey, QString privateKey)
 
 void WitnessConfig::addMiner(QString minerId)
 {
+    if(minerId.isEmpty())       return;
     this->append("miner-id", minerId, true);
 }
 

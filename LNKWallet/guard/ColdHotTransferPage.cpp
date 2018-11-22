@@ -583,6 +583,7 @@ void ColdHotTransferPage::showEthFinalTrxs()
 
         ui->ethFinalTrxTableWidget->setItem(i, 2, new QTableWidgetItem(eft.nonce));
 
+#ifndef SAFE_VERSION
         ui->ethFinalTrxTableWidget->setItem(i, 3, new QTableWidgetItem(tr("checking")));
         ToolButtonWidget *toolButton = new ToolButtonWidget();
         toolButton->setText(ui->ethFinalTrxTableWidget->item(i,3)->text());
@@ -593,6 +594,14 @@ void ColdHotTransferPage::showEthFinalTrxs()
         HXChain::getInstance()->postRPC( "ColdHotTransferPage+dump_crosschain_private_key+" + QString("%1+%2").arg(eft.signer).arg(i),
                                          toJsonFormat( "dump_crosschain_private_key",
                                                        QJsonArray() << eft.signer));
+#else
+        ui->ethFinalTrxTableWidget->setItem(i, 3, new QTableWidgetItem(tr("sign")));
+        ToolButtonWidget *toolButton = new ToolButtonWidget();
+        toolButton->setText(ui->ethFinalTrxTableWidget->item(i,3)->text());
+        toolButton->setEnabled(true);
+        ui->ethFinalTrxTableWidget->setCellWidget(i,3,toolButton);
+        connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_ethFinalTrxTableWidget_cellClicked,this,i,3));
+#endif
 
     }
 
