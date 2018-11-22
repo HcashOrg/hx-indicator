@@ -2185,7 +2185,7 @@ void Frame::jsonDataUpdated(QString id)
             }
 
             QString blockHeight = id.mid(QString("id+list_transactions+").size());
-            HXChain::getInstance()->postRPC( "Finish+list_transactions+" + blockHeight, toJsonFormat( "Finish-list_transactions", QJsonArray()));
+            HXChain::getInstance()->postRPC( "Finish+list_transactions+" + blockHeight, toJsonFormat( "Finish+list_transactions", QJsonArray()));
         }
 
 
@@ -2194,9 +2194,11 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id.startsWith("Finish+list_transactions+"))
     {
+        HXChain::getInstance()->trxQueryingFinished = true;
+        if(!HXChain::getInstance()->transactionDB.inited)   return;
+
         int blockHeight = id.mid(QString("Finish-list_transactions+").size()).toInt();
         HXChain::getInstance()->blockTrxFetched = blockHeight;
-        HXChain::getInstance()->trxQueryingFinished = true;
 
         HXChain::getInstance()->checkPendingTransactions();
 

@@ -842,7 +842,9 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
                 || ui->lockBalancesTableWidget->item(row,2) == NULL)
             return;
 
-        ForecloseDialog forecloseDialog(ui->accountComboBox->currentText(), ui->lockBalancesTableWidget->item(row,1)->text(),
+        QString citizenName = ui->lockBalancesTableWidget->item(row,0)->text();
+        QString assetSymbol = ui->lockBalancesTableWidget->item(row,1)->text();
+        ForecloseDialog forecloseDialog(ui->accountComboBox->currentText(), assetSymbol,
                                         ui->lockBalancesTableWidget->item(row,2)->text());
         if(!forecloseDialog.pop())  return;
 
@@ -850,9 +852,9 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
 
         HXChain::getInstance()->postRPC( "id-foreclose_balance_from_citizen",
                                          toJsonFormat( "foreclose_balance_from_citizen",
-                                                       QJsonArray() << ui->lockBalancesTableWidget->item(row,0)->text()
+                                                       QJsonArray() << citizenName
                                                        << ui->accountComboBox->currentText()
-                                                       << forecloseDialog.amountStr << ui->lockBalancesTableWidget->item(row,1)->text()
+                                                       << forecloseDialog.amountStr << assetSymbol
                                                        << true ));
 
         return;
@@ -863,10 +865,15 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
 {
     if(column == 2)
     {
-        if(ui->incomeTableWidget->item(row,column)->text().isEmpty())       return;
+        if(ui->incomeTableWidget->item(row,0) == NULL || ui->incomeTableWidget->item(row,1) == NULL
+                || ui->incomeTableWidget->item(row,2) == NULL)       return;
         if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
+
         QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+        QString citizenName = ui->incomeTableWidget->item(row,0)->text();
+        QStringList amountStringList = this->ui->incomeTableWidget->item(row,1)->text().split(" ");
+        QString amountStr = ui->incomeTableWidget->item(row,1)->data(Qt::UserRole).toString();
 
 //        FeeChargeWidget *feeCharge = new FeeChargeWidget(HXChain::getInstance()->feeChargeInfo.minerIncomeFee.toDouble(),
 //                                                         HXChain::getInstance()->feeType,ui->accountComboBox->currentText(),
@@ -879,10 +886,9 @@ void MinerPage::on_incomeTableWidget_cellPressed(int row, int column)
         {
             QJsonArray array;
             QJsonArray array2;
-            array2 << ui->incomeTableWidget->item(row,0)->text();
+            array2 << citizenName;
             QJsonObject object;
-            QStringList amountStringList = this->ui->incomeTableWidget->item(row,1)->text().split(" ");
-            object.insert("amount", ui->incomeTableWidget->item(row,1)->data(Qt::UserRole).toString());
+            object.insert("amount", amountStr);
             object.insert("asset_id", HXChain::getInstance()->getAssetId(amountStringList.at(1)));
             array2 << object;
             array << array2;

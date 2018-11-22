@@ -621,6 +621,25 @@ font: 11px &quot;微软雅黑&quot;;
     <string>分红</string>
    </property>
   </widget>
+  <widget class="QToolButton" name="clearDBBtn">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>200</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>重新采集交易</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

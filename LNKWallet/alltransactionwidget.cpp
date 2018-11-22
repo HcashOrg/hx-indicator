@@ -6,6 +6,7 @@
 #include "control/BlankDefaultWidget.h"
 #include "poundage/PageScrollWidget.h"
 #include "control/FeeGuaranteeWidget.h"
+#include "commondialog.h"
 
 static const int ROWNUMBER = 5;
 AllTransactionWidget::AllTransactionWidget(QWidget *parent) :
@@ -47,6 +48,7 @@ void AllTransactionWidget::init()
 
     setStyleSheet("QPushButton[checkable=\"true\"]{font:10px \"微软雅黑\";background:transparent;border:1px solid rgb(137,129,161);border-radius:9px;color: rgb(137,129,161);}"
                   "QPushButton::checked{background-color:rgb(83,61,138);color:white;}");
+    ui->clearDBBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     ui->searchLineEdit->setPlaceholderText(tr("address or transaction id"));
 
@@ -1136,3 +1138,21 @@ double AllTransactionWidget::calculateGuaranteeOrderAmount(QString _guaranteeId,
 }
 
 
+
+void AllTransactionWidget::on_clearDBBtn_clicked()
+{
+    CommonDialog commonDialog(CommonDialog::YesOrNo);
+    commonDialog.setText(tr("Sure to clear the cache and recollect trxs? This will not affect you assets on chain."));
+    if(commonDialog.pop())
+    {
+        HXChain::getInstance()->transactionDB.clearAllDBs();
+
+        ui->transactionsTableWidget->setRowCount(0);
+        pageWidget->setVisible(false);
+        blankWidget->setVisible(false);
+
+
+        HXChain::getInstance()->blockTrxFetched = 0;
+        HXChain::getInstance()->fetchTransactions();
+    }
+}

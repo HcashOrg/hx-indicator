@@ -18,6 +18,7 @@ public:
     TransactionDB();
     ~TransactionDB();
 
+    bool inited = false;
     bool init();
 
     void insertTransactionStruct(QString _transactionId, TransactionStruct &_struct);
@@ -41,6 +42,8 @@ public:
     bool removeFromDB(leveldb::DB* _db, QString _key);
 
     QStringList getKeys(leveldb::DB* _db);
+
+    bool clearAllDBs();
 
 private:
     leveldb::DB* m_transactionStructDB = NULL;

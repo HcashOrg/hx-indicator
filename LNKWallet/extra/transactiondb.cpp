@@ -34,6 +34,8 @@ bool TransactionDB::init()
     qDebug() << "transactionstruct db init" << status.ok() << QString::fromStdString( status.ToString())
                                             << status2.ok() << QString::fromStdString( status2.ToString())
                                             << status2.ok() << QString::fromStdString( status2.ToString());
+
+    inited = true;
     if(status.ok() && status2.ok() && status3.ok())
     {
         return true;
@@ -258,6 +260,7 @@ TransactionTypeIds TransactionDB::getAccountTransactionTypeIdsByType(QString _ac
 
 bool TransactionDB::writeToDB(leveldb::DB* _db, QString _key, QByteArray _value)
 {
+    if(!inited)         return false;
     if(_db == NULL)     return false;
     std::string stdKeyStr = _key.toStdString();
     leveldb::Slice key = stdKeyStr;
@@ -269,7 +272,8 @@ bool TransactionDB::writeToDB(leveldb::DB* _db, QString _key, QByteArray _value)
 }
 
 QByteArray TransactionDB::readFromDB(leveldb::DB* _db, QString _key)
-{
+{ 
+    if(!inited)         return QByteArray();
     if(_db == NULL)     return QByteArray();
     std::string strValue = "";
     std::string stdStr = _key.toStdString();
@@ -280,6 +284,7 @@ QByteArray TransactionDB::readFromDB(leveldb::DB* _db, QString _key)
 
 bool TransactionDB::removeFromDB(leveldb::DB *_db, QString _key)
 {
+    if(!inited)         return false;
     if(_db == NULL)     return false;
     std::string stdStr = _key.toStdString();
     leveldb::Slice key = stdStr;
@@ -288,6 +293,7 @@ bool TransactionDB::removeFromDB(leveldb::DB *_db, QString _key)
 
 QStringList TransactionDB::getKeys(leveldb::DB *_db)
 {
+    if(!inited)         return QStringList();
     if(_db == NULL)     return QStringList();
     leveldb::Iterator* it = _db->NewIterator(leveldb::ReadOptions());
     QStringList keys;
@@ -298,5 +304,20 @@ QStringList TransactionDB::getKeys(leveldb::DB *_db)
     delete it;
 
     return   keys;
+}
+
+bool TransactionDB::clearAllDBs()
+{
+    inited = false;
+    if(m_transactionStructDB)  delete m_transactionStructDB;
+    if(m_accountTransactionIdsDB)  delete m_accountTransactionIdsDB;
+    if(m_guaranteeOrderDB)  delete m_guaranteeOrderDB;
+
+    leveldb::Options options;
+    leveldb::DestroyDB((HXChain::getInstance()->walletConfigPath + "/transactionDB/transactionStruct").toStdString(), options);
+    leveldb::DestroyDB((HXChain::getInstance()->walletConfigPath + "/transactionDB/accountTransactionIds").toStdString(), options);
+    leveldb::DestroyDB((HXChain::getInstance()->walletConfigPath + "/transactionDB/guaranteeOrder").toStdString(), options);
+
+    return init();
 }
 

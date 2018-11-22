@@ -51,6 +51,8 @@ private slots:
 
 
 
+    void on_clearDBBtn_clicked();
+
 private:
     Ui::AllTransactionWidget *ui;
 
