@@ -372,6 +372,8 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showContractTokenSignal,this,&Frame::showContractTokenPage);
     connect(functionBar,&FunctionWidget::showCitizenAccountSignal,this,&Frame::showCitizenAccountPage);
     connect(functionBar,&FunctionWidget::showCitizenProposalSignal,this,&Frame::showCitizenProposalPage);
+
+    qDebug() <<  "witnessConfig init: " << HXChain::getInstance()->witnessConfig->init();
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
@@ -1849,6 +1851,7 @@ void Frame::jsonDataUpdated(QString id)
                 if(!account.isEmpty())
                 {
                     HXChain::getInstance()->postRPC( "id-get_citizen-" + account, toJsonFormat( "get_citizen", QJsonArray() << account));
+                    qDebug() << "cccccccccc " << account;
                 }
             }
 
@@ -1860,6 +1863,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "Finish+get_citizen")
     {
+        qDebug() << "ggggggggggggggggggggg " << HXChain::getInstance()->fetchCitizensFinished;
         HXChain::getInstance()->fetchCitizensFinished = true;
         return;
     }
