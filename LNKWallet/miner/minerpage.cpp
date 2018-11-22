@@ -670,7 +670,7 @@ void MinerPage::showCitizenInfo()
 
         ToolButtonWidget *buttonInc = new ToolButtonWidget();
         buttonInc->setText(ui->citizenInfoTableWidget->item(i,6)->text());
-        buttonInc->setButtonFixSize(120,40);
+        buttonInc->setButtonFixSize(100,40);
         ui->citizenInfoTableWidget->setCellWidget(i,6,buttonInc);
         QString minerName = ui->citizenInfoTableWidget->item(i,0)->text();
         connect(buttonInc,&ToolButtonWidget::clicked,[minerName,this](){

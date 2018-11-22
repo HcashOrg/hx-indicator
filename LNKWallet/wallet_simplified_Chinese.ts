@@ -1938,12 +1938,17 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.cpp" line="68"/>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="38"/>
+        <source>pledge amount shouldn&apos;t less than 1000!</source>
+        <translation type="unfinished">质押费用不可小于1000！</translation>
+    </message>
+    <message>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="77"/>
         <source>Transaction of changing senators has been sent,please wait for confirmation</source>
         <translation type="unfinished">更换Senator提案已经发出，请等待确认</translation>
     </message>
     <message>
-        <location filename="citizen/ChangeSenatorDialog.cpp" line="75"/>
+        <location filename="citizen/ChangeSenatorDialog.cpp" line="84"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
@@ -4580,27 +4585,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1182"/>
+        <location filename="frame.cpp" line="1181"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1414"/>
+        <location filename="frame.cpp" line="1407"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2509"/>
+        <location filename="frame.cpp" line="2519"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2512"/>
+        <location filename="frame.cpp" line="2522"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2515"/>
+        <location filename="frame.cpp" line="2525"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -5394,7 +5399,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">导入私钥错误：</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="339"/>
+        <location filename="importdialog.cpp" line="340"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished">每当一个新的账户被导入，钱包会在下次启动时重新扫描区块链数据。在此之后该账户的交易将被显示。</translation>
     </message>
@@ -5403,7 +5408,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">已经存在</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="335"/>
+        <location filename="importdialog.cpp" line="336"/>
         <source> has been imported!</source>
         <translation type="unfinished">已经被导入!</translation>
     </message>
@@ -5774,12 +5779,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">划转</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="363"/>
+        <location filename="mainpage.cpp" line="365"/>
         <source>Fail to create account!</source>
         <translation type="unfinished">创建账户失败！</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="519"/>
+        <location filename="mainpage.cpp" line="521"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished">钱包中没有未注册账户！</translation>
     </message>
@@ -5804,8 +5809,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">复制到剪贴板</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="474"/>
-        <location filename="mainpage.cpp" line="477"/>
+        <location filename="mainpage.cpp" line="476"/>
+        <location filename="mainpage.cpp" line="479"/>
         <source>copy to clipboard</source>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
@@ -6315,12 +6320,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="538"/>
+        <location filename="multisig/MultiSigPage.cpp" line="539"/>
         <source>Everytime a new multi-sig address is added, the wallet will rescan the blockchain data when launched next time. After that the transactions of this multi-sig address will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="549"/>
+        <location filename="multisig/MultiSigPage.cpp" line="550"/>
         <source>Sure to delete this multi-sig address locally? This operation won&apos;t affect the data on the chain.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7543,7 +7548,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/ProposalPage.cpp" line="47"/>
         <source>There are no proposals currently!</source>
-        <translation type="unfinished">当前没有提案</translation>
+        <translation type="unfinished">当前没有提案!</translation>
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="76"/>

@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
-    qInstallMessageHandler(DataUtil::myMessageOutput);
+//    qInstallMessageHandler(DataUtil::myMessageOutput);
     UpdateWidget wi;
     wi.show();
 

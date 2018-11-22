@@ -7,6 +7,7 @@
 #include "FeeChooseWidget.h"
 #include "dialog/TransactionResultDialog.h"
 #include "dialog/ErrorResultDialog.h"
+#include "commondialog.h"
 #include "capitalTransferPage/PasswordConfirmWidget.h"
 
 //Q_DECLARE_METATYPE(AccountInfo)
@@ -30,6 +31,14 @@ void ChangeSenatorDialog::ChangeSenatorSlots()
 
     QMap<QString,QString> replaceMap = ui->replaceWidget->getReplacePair();
     if(replaceMap.isEmpty()) return;
+
+    if(ui->lineEdit_feeNumber->text().toDouble() < 1000)
+    {
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr("pledge amount shouldn't less than 1000!"));
+        dia.pop();
+        return;
+    }
 
     QString proposingAccount = ui->account->currentText();
     QString feeNumber = ui->lineEdit_feeNumber->text();
