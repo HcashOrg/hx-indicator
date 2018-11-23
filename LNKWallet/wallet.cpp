@@ -31,6 +31,7 @@ static const QMap<QString,double>    defaultAutoWithdrawAmountMap = { {"BTC",10}
 
 HXChain::HXChain()
 {
+    officialMiddleWareUrl<<MIDDLE_DEFAULT_URL<<"http://47.74.23.176:5005/api";
     currentAccount = "";
     nodeProc = new QProcess;
     clientProc = new QProcess;

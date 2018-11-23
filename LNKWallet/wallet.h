@@ -456,8 +456,11 @@ public:
     QString getAssetId(QString symbol);
     QStringList getETHAssets();
 
+    const QStringList &getOfficialMiddleWareUrls()const{return officialMiddleWareUrl;}
+    void setOfficialMiddleWareUrls(const QStringList &urls){officialMiddleWareUrl = urls;}
 private:
     bool isBlockSyncFinish;
+    QStringList officialMiddleWareUrl;//官方的中间件地址集(目前写死，将来可能可以通过服务获取，调用set接口修改即可)
 public:
     //在bottombar中使用，外部勿用
     void SetBlockSyncFinish(bool fi){std::lock_guard<std::mutex> infoLock(infoMutex); isBlockSyncFinish = fi;}

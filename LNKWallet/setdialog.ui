@@ -673,27 +673,6 @@ color:rgb(137,129,161);</string>
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
         </widget>
-        <widget class="QLineEdit" name="middlewareLineEdit">
-         <property name="geometry">
-          <rect>
-           <x>25</x>
-           <y>140</y>
-           <width>216</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <family>微软雅黑</family>
-          </font>
-         </property>
-         <property name="contextMenuPolicy">
-          <enum>Qt::DefaultContextMenu</enum>
-         </property>
-         <property name="echoMode">
-          <enum>QLineEdit::Normal</enum>
-         </property>
-        </widget>
         <widget class="QCheckBox" name="checkbox_AutoBackup">
          <property name="geometry">
           <rect>
@@ -722,6 +701,30 @@ color:rgb(137,129,161);</string>
           <bool>true</bool>
          </property>
         </widget>
+        <widget class="QComboBox" name="middlewareCombobox">
+         <property name="geometry">
+          <rect>
+           <x>25</x>
+           <y>140</y>
+           <width>216</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+          </font>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::ClickFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
         <zorder>contractFeeLineEdit</zorder>
         <zorder>saveBtn</zorder>
         <zorder>label_2</zorder>
@@ -742,8 +745,8 @@ color:rgb(137,129,161);</string>
         <zorder>feeCheckBox</zorder>
         <zorder>label_autotip</zorder>
         <zorder>label_14</zorder>
-        <zorder>middlewareLineEdit</zorder>
         <zorder>checkbox_AutoBackup</zorder>
+        <zorder>middlewareCombobox</zorder>
        </widget>
        <widget class="QWidget" name="page_2">
         <widget class="QLineEdit" name="newPwdLineEdit">
