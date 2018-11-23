@@ -159,7 +159,13 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->dataPathLineEdit->setText(HXChain::getInstance()->configFile->value("/settings/chainPath").toString());
     ui->configPathLineEdit->setText(HXChain::getInstance()->walletConfigPath);
 
-    ui->middlewareLineEdit->setText(HXChain::getInstance()->middlewarePath);
+    ui->middlewareCombobox->addItems(HXChain::getInstance()->getOfficialMiddleWareUrls());//->setText(HXChain::getInstance()->middlewarePath);
+    if(!HXChain::getInstance()->getOfficialMiddleWareUrls().contains(HXChain::getInstance()->middlewarePath))
+    {
+        ui->middlewareCombobox->addItem(HXChain::getInstance()->middlewarePath);
+    }
+    ui->middlewareCombobox->setCurrentText(HXChain::getInstance()->middlewarePath);
+    ui->middlewareCombobox->setEditable(true);
 
     ui->toolButton_help->setCheckable(true);
     ui->toolButton_set->setCheckable(true);
@@ -288,7 +294,7 @@ void SetDialog::on_saveBtn_clicked()
     HXChain::getInstance()->contractFee = ui->contractFeeLineEdit->text().toDouble() * qPow(10,ASSET_PRECISION);
     HXChain::getInstance()->configFile->setValue("/settings/contractFee", HXChain::getInstance()->contractFee);
 
-    HXChain::getInstance()->middlewarePath = ui->middlewareLineEdit->text();
+    HXChain::getInstance()->middlewarePath = ui->middlewareCombobox->currentText();
     HXChain::getInstance()->configFile->setValue("/settings/middlewarePath", HXChain::getInstance()->middlewarePath);
 
     HXChain::getInstance()->autoBackupWallet = ui->checkbox_AutoBackup->isChecked();
