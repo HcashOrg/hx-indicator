@@ -860,11 +860,6 @@
    </property>
    <item>
     <property name="text">
-     <string>按名称排序</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
      <string>权重由高到低</string>
     </property>
    </item>
@@ -881,6 +876,11 @@
    <item>
     <property name="text">
      <string>手续费由低到高</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>按名称排序</string>
     </property>
    </item>
   </widget>

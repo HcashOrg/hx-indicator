@@ -571,22 +571,6 @@ void MinerPage::showCitizenInfo()
         case 0:
             for(int j = 0; j < sortedKeys.size(); j++)
             {
-                if(sortedKeys.at(j) > sortedKeysByPledgeWeight.at(i))
-                {
-                    sortedKeys.insert( j, sortedKeysByPledgeWeight.at(i));
-                    break;
-                }
-
-                if(j == sortedKeys.size() - 1)
-                {
-                    sortedKeys.append( sortedKeysByPledgeWeight.at(i));
-                    break;
-                }
-            }
-            break;
-        case 1:
-            for(int j = 0; j < sortedKeys.size(); j++)
-            {
                 if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).pledgeWeight
                         < HXChain::getInstance()->minerMap.value(sortedKeysByPledgeWeight.at(i)).pledgeWeight)
                 {
@@ -601,7 +585,7 @@ void MinerPage::showCitizenInfo()
                 }
             }
             break;
-        case 2:
+        case 1:
             for(int j = 0; j < sortedKeys.size(); j++)
             {
                 if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).totalProduced
@@ -618,7 +602,7 @@ void MinerPage::showCitizenInfo()
                 }
             }
             break;
-        case 3:
+        case 2:
             for(int j = 0; j < sortedKeys.size(); j++)
             {
                 if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).totalMissed
@@ -635,11 +619,27 @@ void MinerPage::showCitizenInfo()
                 }
             }
             break;
-        case 4:
+        case 3:
             for(int j = 0; j < sortedKeys.size(); j++)
             {
                 if(HXChain::getInstance()->minerMap.value(sortedKeys.at(j)).payBack
                         > HXChain::getInstance()->minerMap.value(sortedKeysByPledgeWeight.at(i)).payBack)
+                {
+                    sortedKeys.insert( j, sortedKeysByPledgeWeight.at(i));
+                    break;
+                }
+
+                if(j == sortedKeys.size() - 1)
+                {
+                    sortedKeys.append( sortedKeysByPledgeWeight.at(i));
+                    break;
+                }
+            }
+            break;
+        case 4:
+            for(int j = 0; j < sortedKeys.size(); j++)
+            {
+                if(sortedKeys.at(j) > sortedKeysByPledgeWeight.at(i))
                 {
                     sortedKeys.insert( j, sortedKeysByPledgeWeight.at(i));
                     break;
