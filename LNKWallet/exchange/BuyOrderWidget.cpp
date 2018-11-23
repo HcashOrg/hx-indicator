@@ -41,7 +41,7 @@ BuyOrderWidget::~BuyOrderWidget()
 
 void BuyOrderWidget::init()
 {
-
+    ui->okBtn->setEnabled(false);
 }
 
 void BuyOrderWidget::setAccount(QString _accountName)
@@ -112,6 +112,7 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
 
         if(result.startsWith("\"result\":"))
         {
+            ui->okBtn->setEnabled(true);
             HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
             stepCount = totalFee.step;
             unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
@@ -119,6 +120,10 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
 
             ui->feeLabel->setText(getBigNumberString(totalAmount,ASSET_PRECISION)
                                           + " " + ASSET_NAME);
+        }
+        else
+        {
+            ui->okBtn->setEnabled(false);
         }
 
         return;
@@ -136,7 +141,11 @@ void BuyOrderWidget::paintEvent(QPaintEvent *)
 
 void BuyOrderWidget::estimateContractFee()
 {
-    if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty())   return;
+    if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty())
+    {
+        ui->okBtn->setEnabled(false);
+        return;
+    }
 
 
     // 计算实际能买到的数量
