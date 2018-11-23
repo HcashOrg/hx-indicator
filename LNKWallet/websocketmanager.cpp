@@ -33,21 +33,24 @@ void WebSocketManager::processRPC(QString _rpcId, QString _rpcCmd)
     m_webSocket->sendTextMessage(_rpcCmd);
 }
 
-void WebSocketManager::processRPCs(QString _rpcId, QString _rpcCmd)
+void WebSocketManager::processRPCs(QString _rpcId, QString _rpcCmd, int _priority)
 {
-    if(pendingRpcs.contains(_rpcId))      return;
+//    if(pendingRpcs.contains(_rpcId))      return;
 
-    pendingRpcs.append(_rpcId + "***" + _rpcCmd);
+//    pendingRpcs.append(_rpcId + "***" + _rpcCmd);
 
-    if(busy)
-    {
-        if(pendingRpcs.size() > 0)
-        {
-//            qDebug() << "busy is " << pendingRpcs.at(0);
-        }
+    if(pendingRpcs.value(_priority).contains(_rpcId))   return;
+    pendingRpcs[_priority].append(_rpcId + "***" + _rpcCmd);
 
-        return;
-    }
+//    if(busy)
+//    {
+//        if(pendingRpcs.size() > 0)
+//        {
+////            qDebug() << "busy is " << pendingRpcs.at(0);
+//        }
+
+//        return;
+//    }
 
 //retry:
 //    if(!busy)
@@ -100,27 +103,41 @@ void WebSocketManager::run()
 
 void WebSocketManager::onTimer()
 {
-    if(pendingRpcs.size() > 0)
-    {
-        if(!busy)
-        {
-//            qDebug()<<pendingRpcs.size();
-            QStringList rpc = pendingRpcs.at(0).split("***");
-            processRPC(rpc.at(0),rpc.at(1));
-        }
-        else
-        {
-//            qDebug() << "busy is " << pendingRpcs.at(0);
-        }
-
-//        loopCount++;
-//        if(loopCount > 1000)
+//    if(pendingRpcs.size() > 0)
+//    {
+//        if(!busy)
 //        {
-//            pendingRpcs.removeFirst();
-//            busy = false;
+////            qDebug()<<pendingRpcs.size();
+//            QStringList rpc = pendingRpcs.at(0).split("***");
+//            processRPC(rpc.at(0),rpc.at(1));
 //        }
-    }
+//        else
+//        {
+////            qDebug() << "busy is " << pendingRpcs.at(0);
+//        }
 
+////        loopCount++;
+////        if(loopCount > 1000)
+////        {
+////            pendingRpcs.removeFirst();
+////            busy = false;
+////        }
+//    }
+
+    if(!busy)
+    {
+        foreach(int i, pendingRpcs.keys())
+        {
+            QStringList& rpcs = pendingRpcs[i];
+            if(rpcs.size() == 0)    continue;
+
+            processingRpc = rpcs.takeFirst();
+            QStringList rpc = processingRpc.split("***");
+            processRPC(rpc.at(0),rpc.at(1));
+
+            return;
+        }
+    }
 }
 
 void WebSocketManager::onConnected()
@@ -132,7 +149,8 @@ void WebSocketManager::onConnected()
 
 void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
 {
-    if(pendingRpcs.size() <= 0)   return;
+    if(processingRpc.isEmpty())   return;
+//    if(pendingRpcs.size() <= 0)   return;
 //    qDebug() << "message received: " << pendingRpcs.at(0) << _isLastFrame;
 
     m_buff += _message;
@@ -145,9 +163,10 @@ void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
         QString result = m_buff.mid( QString("{\"id\":32800,\"jsonrpc\":\"2.0\",").size());
         result = result.left( result.size() - 1);
 
-        HXChain::getInstance()->updateJsonDataMap(pendingRpcs.at(0).split("***").at(0), result);
+        HXChain::getInstance()->updateJsonDataMap(processingRpc.split("***").at(0), result);
 
-        pendingRpcs.removeFirst();
+//        pendingRpcs.removeFirst();
+        processingRpc.clear();
 
         m_buff.clear();
 

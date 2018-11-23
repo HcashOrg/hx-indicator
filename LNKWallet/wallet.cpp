@@ -1008,7 +1008,9 @@ void HXChain::checkPendingTransactions()
     QStringList trxIds = transactionDB.getPendingTransactions();
     foreach (QString trxId, trxIds)
     {
-        postRPC( "id-get_transaction-" + trxId, toJsonFormat( "get_transaction", QJsonArray() << trxId));
+        postRPC( "id-get_transaction-" + trxId,
+                 toJsonFormat( "get_transaction", QJsonArray() << trxId),
+                 1);
     }
 }
 
@@ -1539,11 +1541,11 @@ void HXChain::initWebSocketManager()
     wsManager->start();
     wsManager->moveToThread(wsManager);
 
-    connect(this, SIGNAL(rpcPosted(QString,QString)), wsManager, SLOT(processRPCs(QString,QString)));
+    connect(this, SIGNAL(rpcPosted(QString,QString,int)), wsManager, SLOT(processRPCs(QString,QString,int)));
 
 }
 
-void HXChain::postRPC(QString _rpcId, QString _rpcCmd)
+void HXChain::postRPC(QString _rpcId, QString _rpcCmd, int _priority)
 {
 //    if( rpcReceivedOrNotMap.contains( _rpcId))
 //    {

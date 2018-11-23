@@ -1728,7 +1728,9 @@ void Frame::jsonDataUpdated(QString id)
                 guardMap.insert(account, info);
 
 
-                HXChain::getInstance()->postRPC( "id-get_senator_member-" + account, toJsonFormat( "get_senator_member", QJsonArray() << account));
+                HXChain::getInstance()->postRPC( "id-get_senator_member-" + account,
+                                                 toJsonFormat( "get_senator_member", QJsonArray() << account),
+                                                 1);
                 //            HXChain::getInstance()->fetchGuardAllMultisigAddresses(accountId);
 
             }
@@ -1765,7 +1767,9 @@ void Frame::jsonDataUpdated(QString id)
                 HXChain::getInstance()->allGuardMap[account].isFormal    = object.take("formal").toBool();
                 HXChain::getInstance()->allGuardMap[account].senatorType = object.take("senator_type").toString();
 
-                HXChain::getInstance()->postRPC( "guard-get_account-" + accountId, toJsonFormat( "get_account", QJsonArray() << accountId));
+                HXChain::getInstance()->postRPC( "guard-get_account-" + accountId,
+                                                 toJsonFormat( "get_account", QJsonArray() << accountId),
+                                                 1);
 
                 HXChain::getInstance()->fetchGuardAllMultisigAddresses(accountId);
             }
@@ -1850,11 +1854,13 @@ void Frame::jsonDataUpdated(QString id)
 
                 if(!account.isEmpty())
                 {
-                    HXChain::getInstance()->postRPC( "id-get_citizen-" + account, toJsonFormat( "get_citizen", QJsonArray() << account));
+                    HXChain::getInstance()->postRPC( "id-get_citizen-" + account,
+                                                     toJsonFormat( "get_citizen", QJsonArray() << account),
+                                                     1);
                 }
             }
 
-            HXChain::getInstance()->postRPC( "Finish+get_citizen", toJsonFormat( "Finish+get_citizen", QJsonArray()));
+            HXChain::getInstance()->postRPC( "Finish+get_citizen", toJsonFormat( "Finish+get_citizen", QJsonArray()), 1);
         }
 
         return;
@@ -2171,7 +2177,9 @@ void Frame::jsonDataUpdated(QString id)
 //qDebug() << "list_transactions " << ts.transactionId <<ts.type;
                 if(ts.type == -1 || ts.blockNum == 0)
                 {
-                    HXChain::getInstance()->postRPC( "id-get_transaction-" + transactionId, toJsonFormat( "get_transaction", QJsonArray() << transactionId));
+                    HXChain::getInstance()->postRPC( "id-get_transaction-" + transactionId,
+                                                     toJsonFormat( "get_transaction", QJsonArray() << transactionId),
+                                                     1);
                 }
                 else if(ts.type == TRANSACTION_TYPE_WITHDRAW && ts.trxState != "withdraw_transaction_confirm")
                 {
@@ -2183,7 +2191,9 @@ void Frame::jsonDataUpdated(QString id)
             }
 
             QString blockHeight = id.mid(QString("id+list_transactions+").size());
-            HXChain::getInstance()->postRPC( "Finish+list_transactions+" + blockHeight, toJsonFormat( "Finish+list_transactions", QJsonArray()));
+            HXChain::getInstance()->postRPC( "Finish+list_transactions+" + blockHeight,
+                                             toJsonFormat( "Finish+list_transactions", QJsonArray()),
+                                             1);
         }
 
 

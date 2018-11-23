@@ -406,7 +406,7 @@ public:
     WebSocketManager* wsManager;
     void initWebSocketManager();
 
-    void postRPC(QString _rpcId, QString _rpcCmd);
+    void postRPC(QString _rpcId, QString _rpcCmd, int _priority = 0);
 
     void getContactsFile();  // contacts.dat 改放到数据路径
 
@@ -526,7 +526,7 @@ public:
 signals:
     void jsonDataUpdated(QString);
 
-    void rpcPosted(QString rpcId, QString rpcCmd);
+    void rpcPosted(QString rpcId, QString rpcCmd, int priority = 0);
 
 private:
 

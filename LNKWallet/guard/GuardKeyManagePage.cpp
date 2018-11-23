@@ -313,7 +313,7 @@ void GuardKeyManagePage::on_historyBtn_clicked()
 void GuardKeyManagePage::on_importBtn_clicked()
 {
     QString filePath = QFileDialog::getOpenFileName(this, tr("Select the file of cross-chain key"), "", "*.gcck");
-    qDebug() << "Fffffffffff " << filePath;
+    qDebug() << "GuardKeyManagePage filepath " << filePath;
 
     QFile file(filePath);
     if(!file.open(QIODevice::ReadOnly))     return;
