@@ -2551,8 +2551,8 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="467"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="586"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="665"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="587"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="674"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
@@ -2565,6 +2565,7 @@ better not transfer or upgrade</source>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="377"/>
         <location filename="guard/ColdHotTransferPage.cpp" line="476"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="598"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
@@ -2575,7 +2576,7 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="545"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="658"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="667"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
@@ -2585,12 +2586,12 @@ better not transfer or upgrade</source>
         <translation type="unfinished">未签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="661"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="670"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished">%1已经签名了该冷热钱包转账交易！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="668"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="677"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished">正在检查%1的签名！</translation>
     </message>
@@ -4605,17 +4606,17 @@ Cover it or not?</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2525"/>
+        <location filename="frame.cpp" line="2523"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2528"/>
+        <location filename="frame.cpp" line="2526"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2531"/>
+        <location filename="frame.cpp" line="2529"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -5209,13 +5210,13 @@ add an account first</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="205"/>
-        <location filename="wallet.cpp" line="229"/>
+        <location filename="wallet.cpp" line="208"/>
+        <location filename="wallet.cpp" line="232"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="642"/>
+        <location filename="wallet.cpp" line="645"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -6013,21 +6014,26 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="863"/>
-        <source>权重由高到低</source>
+        <source>按名称排序</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="868"/>
-        <source>出块数由多到少</source>
+        <source>权重由高到低</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="873"/>
-        <source>missed数由少到多</source>
+        <source>出块数由多到少</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="878"/>
+        <source>missed数由少到多</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="883"/>
         <source>手续费由低到高</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6123,18 +6129,18 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">已确认</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="667"/>
+        <location filename="miner/minerpage.cpp" line="683"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="669"/>
+        <location filename="miner/minerpage.cpp" line="685"/>
         <source>MORTGAGE</source>
         <translation type="unfinished">质押</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="877"/>
-        <location filename="miner/minerpage.cpp" line="1007"/>
+        <location filename="miner/minerpage.cpp" line="900"/>
+        <location filename="miner/minerpage.cpp" line="1029"/>
         <source>You need to pay %1 %2 for this operation. Continue?</source>
         <translation type="unfinished">你需要支付 %1 %2 手续费。是否继续？</translation>
     </message>
@@ -9346,7 +9352,7 @@ update or not?</source>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="364"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="484"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="485"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
@@ -9359,6 +9365,7 @@ update or not?</source>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="248"/>
         <location filename="guard/WithdrawConfirmPage.cpp" line="372"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="496"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>

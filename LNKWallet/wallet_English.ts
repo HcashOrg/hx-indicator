@@ -2650,8 +2650,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="467"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="586"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="665"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="587"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="674"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2664,6 +2664,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="377"/>
         <location filename="guard/ColdHotTransferPage.cpp" line="476"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="598"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2674,7 +2675,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="545"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="658"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="667"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2684,12 +2685,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="661"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="670"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="668"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="677"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4752,17 +4753,17 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2525"/>
+        <location filename="frame.cpp" line="2523"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2528"/>
+        <location filename="frame.cpp" line="2526"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2531"/>
+        <location filename="frame.cpp" line="2529"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5426,13 +5427,13 @@ Cover it or not?</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="205"/>
-        <location filename="wallet.cpp" line="229"/>
+        <location filename="wallet.cpp" line="208"/>
+        <location filename="wallet.cpp" line="232"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="642"/>
+        <location filename="wallet.cpp" line="645"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -6124,21 +6125,26 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="863"/>
+        <source>按名称排序</source>
+        <translation type="unfinished">Name Raise</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="868"/>
         <source>权重由高到低</source>
         <translation type="unfinished">Weight high-low</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="868"/>
+        <location filename="miner/minerpage.ui" line="873"/>
         <source>出块数由多到少</source>
         <translation type="unfinished">Produced high-low</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="873"/>
+        <location filename="miner/minerpage.ui" line="878"/>
         <source>missed数由少到多</source>
         <translation type="unfinished">Missed low-high</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="878"/>
+        <location filename="miner/minerpage.ui" line="883"/>
         <source>手续费由低到高</source>
         <translation type="unfinished">Fee low-high</translation>
     </message>
@@ -6221,18 +6227,18 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="667"/>
+        <location filename="miner/minerpage.cpp" line="683"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="669"/>
+        <location filename="miner/minerpage.cpp" line="685"/>
         <source>MORTGAGE</source>
         <translation type="unfinished">pledge</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="877"/>
-        <location filename="miner/minerpage.cpp" line="1007"/>
+        <location filename="miner/minerpage.cpp" line="900"/>
+        <location filename="miner/minerpage.cpp" line="1029"/>
         <source>You need to pay %1 %2 for this operation. Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9567,7 +9573,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="364"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="484"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="485"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9580,6 +9586,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="248"/>
         <location filename="guard/WithdrawConfirmPage.cpp" line="372"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="496"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
