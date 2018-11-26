@@ -304,7 +304,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
 //            this->PostQueryTunnelMoney(info->assetSymbol,info->tunnelAddress);
 //        });
 
-        PostQueryTunnelMoney("finish","finish");
+        QTimer::singleShot(500,[this](){this->PostQueryTunnelMoney("autofinish","autofinish");});
     }
     else if("automatic-finish-money" == id)
     {//开始创建交易
@@ -348,7 +348,7 @@ void DepositAutomatic::httpReplied(QByteArray _data, int _status)
 {//解析查询余额的返回，补全账户信息
 //    qDebug() << "auto--http-- " << _data << _status;
 
-    if(QString(_data).contains("error"))
+    if(QString(_data).contains("autofinish"))
     {
         //结束查找余额--必须等余额查完了再创建交易--余额的查询很慢
         FinishQueryMoney();
