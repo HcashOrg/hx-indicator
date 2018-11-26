@@ -186,7 +186,8 @@ SOURCES += main.cpp\
     guard/SelectColdKeyFileDialog.cpp \
     guard/CreateSenatorDialog.cpp \
     guard/SenatorChangeSenatorDialog.cpp \
-    citizen/ChangePayBackDialog.cpp
+    citizen/ChangePayBackDialog.cpp \
+    capitalTransferPage/CaptialNotify.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -344,7 +345,8 @@ HEADERS  += firstlogin.h \
     guard/SelectColdKeyFileDialog.h \
     guard/CreateSenatorDialog.h \
     guard/SenatorChangeSenatorDialog.h \
-    citizen/ChangePayBackDialog.h
+    citizen/ChangePayBackDialog.h \
+    capitalTransferPage/CaptialNotify.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \

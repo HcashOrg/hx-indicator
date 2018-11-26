@@ -58,10 +58,21 @@ void ToolButtonWidget::setButtonStyle(const QString &style)
     ui->toolButton->setStyleSheet(style);
 }
 
+void ToolButtonWidget::setRedpointVisiable(bool is)
+{
+    redLabel->setVisible(is);
+}
+
 void ToolButtonWidget::InitWidget()
 {
     InitStyle();
     connect(ui->toolButton,&QToolButton::clicked,this,&ToolButtonWidget::clicked);
+
+    redLabel = new QLabel(ui->toolButton);
+    redLabel->resize(8,8);
+    redLabel->setPixmap(QPixmap(":/ui/wallet_ui/redpoint.png"));
+    redLabel->raise();
+    redLabel->setVisible(false);
 }
 
 void ToolButtonWidget::InitStyle()
@@ -78,6 +89,7 @@ void ToolButtonWidget::resizeEvent(QResizeEvent *event)
 {
     ui->toolButton->setGeometry((this->width() - ui->toolButton->width()) / 2, (this->height() - ui->toolButton->height()) / 2,
                                 ui->toolButton->width(), ui->toolButton->height());
+    redLabel->move(ui->toolButton->width()-redLabel->width(),0);
 }
 
 ToolButtonWidgetItem::ToolButtonWidgetItem(int _row, int _column, QWidget *parent)

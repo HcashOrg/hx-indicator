@@ -348,12 +348,7 @@ void DepositAutomatic::httpReplied(QByteArray _data, int _status)
 {//解析查询余额的返回，补全账户信息
 //    qDebug() << "auto--http-- " << _data << _status;
 
-    QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
-    QString tunnel   = object.value("address").toString();
-    QString number = QString::number( jsonValueToDouble(object.value("balance")));
-
-
-    if(object.value("address").toString() == "finish")
+    if(QString(_data).contains("error"))
     {
         //结束查找余额--必须等余额查完了再创建交易--余额的查询很慢
         FinishQueryMoney();
@@ -364,6 +359,12 @@ void DepositAutomatic::httpReplied(QByteArray _data, int _status)
         }
         return;
     }
+
+    QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
+    QString tunnel   = object.value("address").toString();
+    QString number = QString::number( jsonValueToDouble(object.value("balance")));
+
+
 
     _p->updateMoney(tunnel,number);
 

@@ -2,6 +2,7 @@
 #define TOOLBUTTONWIDGET_H
 
 #include <QWidget>
+#include <QLabel>
 
 namespace Ui {
 class ToolButtonWidget;
@@ -23,6 +24,8 @@ public:
     void setButtonFixSize(int width, int height);
     void setBackgroundColor(QString color);
     void setButtonStyle(const QString &style);
+
+    void setRedpointVisiable(bool is = false);
 private:
     void InitWidget();
     void InitStyle();
@@ -30,6 +33,7 @@ private:
     Ui::ToolButtonWidget *ui;
 
     virtual void resizeEvent(QResizeEvent *event);
+    QLabel *redLabel;
 };
 
 class ToolButtonWidgetItem : public ToolButtonWidget
