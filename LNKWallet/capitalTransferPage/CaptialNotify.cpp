@@ -169,7 +169,6 @@ void CaptialNotify::jsonDataUpdated(const QString &id)
     {
         qDebug()<<id;/*
         QTimer::singleShot(50,[this](){*/
-            qDebug()<<"hhhhhhhhhhhhhh";
             this->_p->SetInUpdateFalse();
             emit checkTunnelMoneyFinish();
 

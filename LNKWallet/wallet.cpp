@@ -254,8 +254,11 @@ void HXChain::delayedLaunchClient()
 void HXChain::checkNodeExeIsReady()
 {
     QString str = nodeProc->readAllStandardError();
-    qDebug() << "node exe standardError: " << str ;
-    logToFile( QStringList() << "node exe standardError: " << str );
+    if(!str.isEmpty())
+    {
+        qDebug() << "node exe standardError: " << str ;
+        logToFile( QStringList() << "node exe standardError: " << str );
+    }
 
     if(str.contains("Chain ID is"))
     {

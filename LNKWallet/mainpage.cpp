@@ -545,7 +545,6 @@ void MainPage::activeTunnelMoneyNotify()
 {
     captialNotify = new CaptialNotify(this);
     connect(captialNotify,&CaptialNotify::checkTunnelMoneyFinish,[this](){
-        qDebug()<<"fffffffffffffffffffff";
         QString accountName = this->ui->accountComboBox->currentText();
         //获取该账户所有的tunnel余额，判断是否充足
         for(int i = 0;i < this->ui->accountTableWidget->rowCount();++i)

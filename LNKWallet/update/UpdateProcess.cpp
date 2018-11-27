@@ -125,6 +125,7 @@ void UpdateProcess::GetLatestVersionInfoSlots()
     DownLoadData up;
     up.fileName = UPDATE_DOC_NAME;
     up.url = _p->serverAddr + serverVersion.url;
+//    up.url.replace(".xml","_test.xml");
     qDebug()<<up.url;
     up.filePath = _p->downloadPath + QDir::separator() + up.fileName;
     connect(_p->updateNetwork,&UpdateNetWork::DownLoadFinish,this,&UpdateProcess::DownLoadVersionConfigFinsihed);
