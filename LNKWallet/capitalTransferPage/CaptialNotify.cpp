@@ -167,11 +167,13 @@ void CaptialNotify::jsonDataUpdated(const QString &id)
         PostQueryTunnelMoney("captialnotifyfinish","captialnotifyfinish");//结束签名,可以进行刷新
     }else if("CaptialNotify-finish-money" == id)
     {
-        QTimer::singleShot(500,[this](){
+        qDebug()<<id;/*
+        QTimer::singleShot(50,[this](){*/
+            qDebug()<<"hhhhhhhhhhhhhh";
             this->_p->SetInUpdateFalse();
             emit checkTunnelMoneyFinish();
 
-        });
+//        });
     }
 }
 

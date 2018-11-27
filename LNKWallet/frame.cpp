@@ -1549,6 +1549,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if("id-witness_node_stop" == id)
     {
+        qDebug()<<id;
         HXChain::getInstance()->nodeProc->waitForFinished(-1);
         HXChain::getInstance()->clientProc->waitForFinished(-1);
 
