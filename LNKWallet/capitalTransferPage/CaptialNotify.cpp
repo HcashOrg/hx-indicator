@@ -112,7 +112,7 @@ CaptialNotify::CaptialNotify(QObject *parent)
     , _p(new DataPrivate())
 {
     _p->timer = new QTimer(this);
-    _p->timer->start(10000);
+    _p->timer->start(20000);
 
     connect(_p->timer,&QTimer::timeout,this,&CaptialNotify::updateData);
 
