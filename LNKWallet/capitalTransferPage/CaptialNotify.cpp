@@ -267,7 +267,7 @@ void CaptialNotify::ParseTunnel(const QString &jsonString)
         QString tunnelAddress = object[0].toObject().value("bind_account").toString();
         if(!accountAddress.isEmpty() && !accountAddress.isEmpty() && !symbol.isEmpty())
         {
-            qDebug()<<"bbbbbbbbbbbbbbbbb"<<accountAddress<<symbol<<tunnelAddress;
+//            qDebug()<<"bbbbbbbbbbbbbbbbb"<<accountAddress<<symbol<<tunnelAddress;
             _p->updateTunnel(accountAddress,symbol,tunnelAddress);
 
         }
