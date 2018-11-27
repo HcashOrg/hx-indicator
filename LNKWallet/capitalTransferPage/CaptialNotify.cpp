@@ -112,7 +112,6 @@ CaptialNotify::CaptialNotify(QObject *parent)
     , _p(new DataPrivate())
 {
     _p->timer = new QTimer(this);
-    _p->timer->start(20000);
 
     connect(_p->timer,&QTimer::timeout,this,&CaptialNotify::updateData);
 
@@ -137,7 +136,8 @@ bool CaptialNotify::isAccountTunnelMoneyEmpty(const QString &accountName, const 
 void CaptialNotify::startCheckTunnelMoney()
 {
     _p->isNotifyOn = true;
-    updateData();
+    _p->timer->start(1);
+    _p->timer->setInterval(20000);
 }
 
 void CaptialNotify::stopCheckTunnelMoney()
