@@ -700,11 +700,14 @@ void HXChain::autoSaveWalletFile()
     QFileInfo fileInfo(appDataPath + "/wallet.json");
     if(fileInfo.size() > 0)
     {
+        QFile file(appDataPath + "/wallet.json");
+
         QFile autoSaveFile(appDataPath + "/wallet.json.autobak");
         qDebug() << "auto save remove " << autoSaveFile.remove();
-
-        QFile file(appDataPath + "/wallet.json");
         qDebug() << "auto save wallet.json " << file.copy(appDataPath + "/wallet.json.autobak");
+
+        QFile autoSaveFile2(walletConfigPath + "/wallet.json.autobak");
+        qDebug() << "auto save remove 2 " << autoSaveFile2.remove();
         qDebug() << "auto save wallet.json at configpath" << file.copy(walletConfigPath + "/wallet.json.autobak");
     }
 
