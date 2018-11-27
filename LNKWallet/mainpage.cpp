@@ -547,7 +547,7 @@ void MainPage::activeTunnelMoneyNotify()
             bool isMoneyEmpty = this->captialNotify->isAccountTunnelMoneyEmpty(accountName,assetName);
             if(ToolButtonWidget *button = dynamic_cast<ToolButtonWidget*>(this->ui->accountTableWidget->cellWidget(i,5)))
             {
-                qDebug()<<"nnnnnnnnnn"<<accountName<<assetName<<isMoneyEmpty;
+//                qDebug()<<"nnnnnnnnnn"<<accountName<<assetName<<isMoneyEmpty;
                 button->setRedpointVisiable(!isMoneyEmpty);
             }
 

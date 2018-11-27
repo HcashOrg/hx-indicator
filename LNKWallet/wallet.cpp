@@ -182,7 +182,7 @@ void HXChain:: startExe()
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
-
+    logToFile( QStringList() << "start" << NODE_PROC_NAME << strList);
 
 //    HXChain::getInstance()->initWebSocketManager();
 //    emit exeStarted();
@@ -191,15 +191,19 @@ void HXChain:: startExe()
 void HXChain::onNodeExeStateChanged()
 {
     qDebug() << "node exe state " << nodeProc->state();
+
     if(isExiting)   return;
 
     if(nodeProc->state() == QProcess::Starting)
     {
         qDebug() << QString("%1 is starting").arg(NODE_PROC_NAME);
+        logToFile( QStringList() << QString("%1 is starting").arg(NODE_PROC_NAME));
     }
     else if(nodeProc->state() == QProcess::Running)
     {
         qDebug() << QString("%1 is running").arg(NODE_PROC_NAME);
+        logToFile( QStringList() << QString("%1 is running").arg(NODE_PROC_NAME));
+
         connect(&timerForStartExe,SIGNAL(timeout()),this,SLOT(checkNodeExeIsReady()));
         timerForStartExe.start(1000);
     }
@@ -251,6 +255,8 @@ void HXChain::checkNodeExeIsReady()
 {
     QString str = nodeProc->readAllStandardError();
     qDebug() << "node exe standardError: " << str ;
+    logToFile( QStringList() << "node exe standardError: " << str );
+
     if(str.contains("Chain ID is"))
     {
         timerForStartExe.stop();

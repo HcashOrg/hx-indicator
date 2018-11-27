@@ -27,6 +27,7 @@
 #include "extra/transactiondb.h"
 #include "extra/transactiontype.h"
 #include "extra/WitnessConfig.h"
+#include "extra/LogToFile.h"
 
 #define ASSET_NAME "HX"
 #define ACCOUNT_ADDRESS_PREFIX  "HXN"
