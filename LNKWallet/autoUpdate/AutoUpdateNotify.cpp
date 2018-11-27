@@ -86,7 +86,7 @@ void AutoUpdateNotify::CheckResultSlot(const QString &version,bool isupdateForce
     if(version.isEmpty()) return;
     if(_p->updateProcess->getUpdateLogInfo().contains("not found"))
     {
-        checkUpdate();
+        UpdateWrongSlot();
         return;
     }
 
@@ -125,11 +125,14 @@ void AutoUpdateNotify::CheckResultSlot(const QString &version,bool isupdateForce
 void AutoUpdateNotify::UpdateWrongSlot()
 {
     qDebug()<<"aeaeaeae";
-    _p->isInDetect = false;
-    _p->isAutoDetectOn=true;
-    _p->isForceUpdate = false;
-    _p->version = "";
-    HXChain::getInstance()->SetUpdateNeeded(false);
+    QTimer::singleShot(10000,[this](){
+        _p->isInDetect = false;
+        _p->isAutoDetectOn=true;
+        _p->isForceUpdate = false;
+        _p->version = "";
+        HXChain::getInstance()->SetUpdateNeeded(false);
+        this->checkUpdate();
+    });
 }
 
 void AutoUpdateNotify::UpdateFinishSlot()
