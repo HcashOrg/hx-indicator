@@ -113,7 +113,7 @@ CaptialNotify::CaptialNotify(QObject *parent)
     , _p(new DataPrivate())
 {
     _p->timer = new QTimer(this);
-    _p->timer->start(30000);
+    _p->timer->start(10000);
 
     connect(_p->timer,&QTimer::timeout,this,&CaptialNotify::updateData);
 
@@ -168,7 +168,7 @@ void CaptialNotify::jsonDataUpdated(const QString &id)
         PostQueryTunnelMoney("captialnotifyfinish","captialnotifyfinish");//结束签名,可以进行刷新
     }else if("CaptialNotify-finish-money" == id)
     {
-        QTimer::singleShot(100,[this](){
+        QTimer::singleShot(500,[this](){
             this->_p->SetInUpdateFalse();
             emit checkTunnelMoneyFinish();
 
@@ -178,8 +178,8 @@ void CaptialNotify::jsonDataUpdated(const QString &id)
 
 void CaptialNotify::httpReplied(QByteArray _data, int _status)
 {//解析查询余额的返回，补全账户信息
-//    qDebug() << "auto--http-- " << _data << _status;
-    if(QString(_data).contains("error"))
+    qDebug() << "auto--http-- " << _data << _status;
+    if(QString(_data).contains("captialnotifyfinish"))
     {
         //结束查找余额--必须等余额查完了再创建交易--余额的查询很慢,而且容易错位到达
         FinishQueryMoney();
