@@ -83,7 +83,13 @@ void AutoUpdateNotify::InitData()
 void AutoUpdateNotify::CheckResultSlot(const QString &version,bool isupdateForce)
 {
     _p->isInDetect = false;
-    if(version.isEmpty() || _p->updateProcess->getUpdateLogInfo().contains("not found")) return;
+    if(version.isEmpty()) return;
+    if(_p->updateProcess->getUpdateLogInfo().contains("not found"))
+    {
+        checkUpdate();
+        return;
+    }
+
     _p->version = version;
     _p->isForceUpdate =isupdateForce;
     _p->isAutoDetectOn=false;

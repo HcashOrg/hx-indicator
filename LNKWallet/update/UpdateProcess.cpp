@@ -16,7 +16,7 @@
 #include "wallet.h"
 
 static const QString UPDATE_DOC_NAME = "hyperexchange_wallet_upgrade.xml";
-static const QString UPDATE_LOG_INFO = "hyperexchange_walletupgrade_loginfo.txt";
+static const QString UPDATE_LOG_INFO = "hyperexchange_walletupgrade_loginfo.xml";
 static const QString UPDATE_DIR_NAME = "temp";
 static const QString COPY_DIR_NAME = "copy";
 
