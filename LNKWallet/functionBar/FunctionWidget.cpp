@@ -205,7 +205,7 @@ void FunctionWidget::ShowConsoleWidgetSlots()
 void FunctionWidget::ShowAboutWidgetSlots()
 {
     SetDialog setDialog;
-    setDialog.setHelpFirst(true);
+    setDialog.setHelpFirst(false);
     connect(&setDialog,SIGNAL(settingSaved()),HXChain::getInstance()->mainFrame,SLOT(settingSaved()));
     setDialog.pop();
 

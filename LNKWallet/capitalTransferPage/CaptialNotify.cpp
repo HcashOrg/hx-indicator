@@ -77,8 +77,7 @@ public:
                         break;
                     }
                 }
-                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-HXChain::getInstance()->feeChargeInfo.capitalFee.toDouble())
-                                                     ,'f',pre);
+                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()),'f',pre);
                 if((*it)->assetNumber.toDouble() < 1e-8)
                 {
                     accounts.erase(it);
@@ -178,7 +177,7 @@ void CaptialNotify::jsonDataUpdated(const QString &id)
 
 void CaptialNotify::httpReplied(QByteArray _data, int _status)
 {//解析查询余额的返回，补全账户信息
-    qDebug() << "auto--http-- " << _data << _status;
+    qDebug() << "CaptialNotify--http-- " << _data << _status;
     if(QString(_data).contains("captialnotifyfinish"))
     {
         //结束查找余额--必须等余额查完了再创建交易--余额的查询很慢,而且容易错位到达
@@ -266,6 +265,7 @@ void CaptialNotify::ParseTunnel(const QString &jsonString)
         QString tunnelAddress = object[0].toObject().value("bind_account").toString();
         if(!accountAddress.isEmpty() && !accountAddress.isEmpty() && !symbol.isEmpty())
         {
+            qDebug()<<"bbbbbbbbbbbbbbbbb"<<accountAddress<<symbol<<tunnelAddress;
             _p->updateTunnel(accountAddress,symbol,tunnelAddress);
 
         }

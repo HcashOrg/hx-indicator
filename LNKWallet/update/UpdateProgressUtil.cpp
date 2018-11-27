@@ -130,6 +130,10 @@ bool UpdateProgressUtil::ParseXmlDoc(const QDomDocument &doc, VersionInfoPtr &da
             {
                 data->updateVersion = e.text();
             }
+            else if("ForceUpdate" == e.tagName())
+            {
+                data->isUpdateForced = (e.text()=="true");
+            }
 
         }
         n = n.nextSibling();  //下一个兄弟节点

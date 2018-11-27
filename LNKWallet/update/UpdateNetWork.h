@@ -19,8 +19,8 @@ private:
     void startDownLoad();
 signals:
     void TaskEmpty();
-    void DownLoadFinish(const QString &filename);
-    void DwonLoadWrong(const QString &filename);
+    void DownLoadFinish(const QString &filePath);
+    void DwonLoadWrong(const QString &filePath);
 
 private slots:
     void DownLoadReadSlots();

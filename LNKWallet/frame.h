@@ -53,6 +53,7 @@ class CitizenProposalPage;
 
 class CrossCapitalMark;
 class CustomShadowEffect;
+class AutoUpdateNotify;
 class Frame:public QFrame
 {
     Q_OBJECT
@@ -217,6 +218,7 @@ private:
     DepositAutomatic *autoDeposit;
 public:
     CrossCapitalMark *crossMark;
+    AutoUpdateNotify *autoupdate;//自动更新
 public:
     void installBlurEffect(QWidget *widget);
 };

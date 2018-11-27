@@ -208,11 +208,11 @@ void SetDialog::pop()
 
 void SetDialog::setHelpFirst(bool helpfirst)
 {
+    on_toolButton_help_clicked();
     if(helpfirst)
     {
-        on_toolButton_help_clicked();
+        ui->page_help->CheckUpdateSlot();
     }
-
 }
 
 

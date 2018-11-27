@@ -19,7 +19,8 @@ public:
     struct accountInfo
     {
         accountInfo()
-            :transactionFinished(false)
+            :captialFee(0)
+            ,transactionFinished(false)
         {
 
         }
@@ -30,6 +31,7 @@ public:
         QString assetSymbol;
         QString assetMultiAddress;
         QString assetNumber;
+        double captialFee;
 
         QJsonObject transactionDetail;
         bool transactionFinished;
@@ -104,7 +106,7 @@ public:
                         break;
                     }
                 }
-                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-HXChain::getInstance()->feeChargeInfo.capitalFee.toDouble())
+                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-(*it)->captialFee)
                                                      ,'f',pre);
                 //qDebug()<<"update-money---"<<tunnelAddress<<(*it)->assetMultiAddress<<(*it)->assetNumber;
                 if((*it)->assetNumber.toDouble() < 1e-11)
@@ -389,6 +391,7 @@ void DepositAutomatic::updateData()
                 da->accountAddress = info.address;
                 da->accountName = info.name;
                 da->assetSymbol = assetInfo.symbol;
+                da->captialFee = static_cast<double>(assetInfo.fee)/std::max<int>(1,assetInfo.precision);
                 _p->accounts.push_back(da);
             }
         }

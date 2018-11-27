@@ -49,6 +49,7 @@
 #include "citizen/CitizenProposalPage.h"
 #include "dialog/ExitingWidget.h"
 #include "multisig/MultiSigPage.h"
+#include "autoUpdate/AutoUpdateNotify.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -80,7 +81,8 @@ Frame::Frame(): timer(NULL),
     contractTokenPage(NULL),
     citizenAccountPage(NULL),
     citizenProposalPage(NULL),
-    poundage(nullptr)
+    poundage(nullptr),
+    autoupdate(new AutoUpdateNotify())
 {
 
 #ifdef TARGET_OS_MAC
@@ -397,6 +399,10 @@ void Frame::alreadyLogin()
 
     init();
     functionBar->DefaultShow();
+
+    //自动更新
+//    AutoUpdateNotify *autoupdate = new AutoUpdateNotify();
+    autoupdate->startAutoDetect();
 }
 
 
@@ -1528,7 +1534,10 @@ void Frame::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
-
+        if(autoupdate)
+        {
+            autoupdate->stopAutoDetect();
+        }
         HXChain::getInstance()->isExiting = true;
         HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()));
         exitingWidget = new ExitingWidget(this);
@@ -2636,6 +2645,7 @@ void Frame::newAccount(QString name)
 
 void Frame::onCloseWallet()
 {
+    qDebug()<<"closeclose";
     HXChain::getInstance()->postRPC( "id-lock-onCloseWallet", toJsonFormat( "lock", QJsonArray()));
 }
 

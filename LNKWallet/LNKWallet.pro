@@ -187,7 +187,9 @@ SOURCES += main.cpp\
     guard/CreateSenatorDialog.cpp \
     guard/SenatorChangeSenatorDialog.cpp \
     citizen/ChangePayBackDialog.cpp \
-    capitalTransferPage/CaptialNotify.cpp
+    capitalTransferPage/CaptialNotify.cpp \
+    autoUpdate/AutoUpdateNotify.cpp \
+    autoUpdate/AutoUpdateDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -346,7 +348,9 @@ HEADERS  += firstlogin.h \
     guard/CreateSenatorDialog.h \
     guard/SenatorChangeSenatorDialog.h \
     citizen/ChangePayBackDialog.h \
-    capitalTransferPage/CaptialNotify.h
+    capitalTransferPage/CaptialNotify.h \
+    autoUpdate/AutoUpdateNotify.h \
+    autoUpdate/AutoUpdateDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -473,7 +477,8 @@ FORMS    += firstlogin.ui \
     guard/SelectColdKeyFileDialog.ui \
     guard/CreateSenatorDialog.ui \
     guard/SenatorChangeSenatorDialog.ui \
-    citizen/ChangePayBackDialog.ui
+    citizen/ChangePayBackDialog.ui \
+    autoUpdate/AutoUpdateDialog.ui
 
 win32{
     DISTFILES += logo.rc

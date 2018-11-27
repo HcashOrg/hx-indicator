@@ -38,31 +38,27 @@ UpdateNetWork::UpdateNetWork(QObject *parent) : QObject(parent)
 
 void UpdateNetWork::DownLoadFile(const DownLoadData &data)
 {
-    std::lock_guard<std::mutex> loc(_p->listMutex);
-    if(_p->downloadList.empty())
     {
+        std::lock_guard<std::mutex> loc(_p->listMutex);
         _p->downloadList.append(data);
+    }
+    if(1 == _p->downloadList.size())
+    {
         startDownLoad();
     }
-    else
-    {
-        _p->downloadList.append(data);
-    }
-
 }
 
 void UpdateNetWork::DownLoadFile(const QList<DownLoadData> &data)
 {
-    std::lock_guard<std::mutex> loc(_p->listMutex);
-    if(_p->downloadList.empty())
     {
+        std::lock_guard<std::mutex> loc(_p->listMutex);
         _p->downloadList.append(data);
+    }
+    if(data.size() == _p->downloadList.size())
+    {
         startDownLoad();
     }
-    else
-    {
-        _p->downloadList.append(data);
-    }
+
 }
 
 void UpdateNetWork::startDownLoad()
@@ -120,10 +116,12 @@ void UpdateNetWork::DownLoadFinishSlots()
     _p->currentFile->flush();
     _p->currentFile->close();
 
-    emit DownLoadFinish(_p->downloadList.front().fileName);
+    emit DownLoadFinish(_p->downloadList.front().filePath);
 
-    std::lock_guard<std::mutex> loc(_p->listMutex);
-    _p->downloadList.removeFirst();
+    {
+        std::lock_guard<std::mutex> loc(_p->listMutex);
+        _p->downloadList.removeFirst();
+    }
     if(!_p->downloadList.isEmpty())
     {
         startDownLoad();
@@ -137,7 +135,7 @@ void UpdateNetWork::DownLoadFinishSlots()
 
 void UpdateNetWork::DownLoadErrorSlots(QNetworkReply::NetworkError code)
 {
-
-    emit DwonLoadWrong(_p->downloadList.front().fileName);
+    qDebug()<<"downwrong"<<code;
+    emit DwonLoadWrong(_p->downloadList.front().filePath);
 }
 
