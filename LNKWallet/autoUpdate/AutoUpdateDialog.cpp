@@ -61,6 +61,7 @@ void AutoUpdateDialog::InitWidget()
     ui->label_pic->setPixmap(QPixmap(":/ui/wallet_ui/auto_update.png"));
     connect(ui->cancelBtn,&QToolButton::clicked,this,&AutoUpdateDialog::close);
     connect(ui->closeBtn,&QToolButton::clicked,this,&AutoUpdateDialog::close);
+    connect(ui->okBtn,&QToolButton::clicked,this,&AutoUpdateDialog::confirmUpdateSlots);
 
 
 }
