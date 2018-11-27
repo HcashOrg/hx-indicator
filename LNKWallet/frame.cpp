@@ -2313,7 +2313,7 @@ void Frame::jsonDataUpdated(QString id)
     if(id.startsWith("id-get_crosschain_transaction-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         result.prepend("{");
         result.append("}");
@@ -2436,7 +2436,7 @@ void Frame::jsonDataUpdated(QString id)
                 withdrawConfirmPage->refreshCrosschainTransactionsState();
             }
 
-            if(HXChain::getInstance()->autoWithdrawConfirm)
+            if(HXChain::getInstance()->autoWithdrawConfirm && HXChain::getInstance()->walletInfo.participation.toDouble() >= 80)
             {
                 HXChain::getInstance()->autoWithdrawSign();
             }

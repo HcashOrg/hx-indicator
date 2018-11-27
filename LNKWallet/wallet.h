@@ -103,6 +103,7 @@ struct WalletInfo
     QString blockId;
     QString blockAge;
     QString chainId;
+    QString participation;
 //    QStringList activeMiners;
 };
 
