@@ -63,6 +63,7 @@ void BottomBar::jsonDataUpdated(QString id)
         HXChain::getInstance()->walletInfo.blockId = object.take("head_block_id").toString();
         HXChain::getInstance()->walletInfo.blockAge = object.take("head_block_age").toString();
         HXChain::getInstance()->walletInfo.chainId = object.take("chain_id").toString();
+        HXChain::getInstance()->walletInfo.participation = object.take("participation").toString();
 
 //        HXChain::getInstance()->walletInfo.activeMiners.clear();
 //        QJsonArray array = object.take("active_miners").toArray();

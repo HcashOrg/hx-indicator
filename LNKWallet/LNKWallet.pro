@@ -189,7 +189,8 @@ SOURCES += main.cpp\
     citizen/ChangePayBackDialog.cpp \
     capitalTransferPage/CaptialNotify.cpp \
     autoUpdate/AutoUpdateNotify.cpp \
-    autoUpdate/AutoUpdateDialog.cpp
+    autoUpdate/AutoUpdateDialog.cpp\
+    extra/LogToFile.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -350,7 +351,8 @@ HEADERS  += firstlogin.h \
     citizen/ChangePayBackDialog.h \
     capitalTransferPage/CaptialNotify.h \
     autoUpdate/AutoUpdateNotify.h \
-    autoUpdate/AutoUpdateDialog.h
+    autoUpdate/AutoUpdateDialog.h\
+    extra/LogToFile.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \

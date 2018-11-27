@@ -104,7 +104,7 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 
     QByteArray localMsg = msg.toLocal8Bit();
 
-    QString strMsg("");
+    QString strMsg;
     switch(type)
     {
     case QtDebugMsg:

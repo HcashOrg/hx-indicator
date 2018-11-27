@@ -216,8 +216,8 @@ void DepositAutomatic::PostCreateTransaction(const QString &fromAddress, const Q
                                      toJsonFormat( "createrawtransaction", QJsonArray()
                                      << fromAddress<<toAddress<<number<<symbol ));
 
-    qDebug()<<"auto-post-trasaction----"<<toJsonFormat( "createrawtransaction", QJsonArray()
-                                                        << fromAddress<<toAddress<<number<<symbol );
+//    qDebug()<<"auto-post-trasaction----"<<toJsonFormat( "createrawtransaction", QJsonArray()
+//                                                        << fromAddress<<toAddress<<number<<symbol );
 
 }
 
@@ -326,7 +326,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
         result.prepend("{");
         result.append("}");
         ParseTransaction(address,result);
-        qDebug()<<id<<"-----"<<HXChain::getInstance()->jsonDataValue( id);
+//        qDebug()<<id<<"-----"<<HXChain::getInstance()->jsonDataValue( id);
     }
     else if("automatic-finish-transaction" == id)
     {//进行签名

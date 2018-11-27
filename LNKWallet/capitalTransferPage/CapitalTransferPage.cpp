@@ -228,7 +228,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
 
 void CapitalTransferPage::httpReplied(QByteArray _data, int _status)
 {
-    qDebug() << "auto--http-- " << _data << _status;
+//    qDebug() << "auto--http-- " << _data << _status;
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
 

@@ -65,7 +65,7 @@ void AutoUpdateNotify::checkUpdate()
     _p->isInDetect = true;
     _p->version = "";
     _p->isForceUpdate = false;
-    _p->updateTimer->setInterval(10000);
+    _p->updateTimer->setInterval(3600000);
     _p->updateProcess->InitServerURL(HXChain::getInstance()->middlewarePath);
     _p->updateProcess->checkUpdate();
 }

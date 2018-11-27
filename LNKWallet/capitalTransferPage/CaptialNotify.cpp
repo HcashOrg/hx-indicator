@@ -177,7 +177,9 @@ void CaptialNotify::jsonDataUpdated(const QString &id)
 
 void CaptialNotify::httpReplied(QByteArray _data, int _status)
 {//解析查询余额的返回，补全账户信息
+
     qDebug() << "CaptialNotify--http-- " << _data << _status;
+
     if(QString(_data).contains("captialnotifyfinish"))
     {
         //结束查找余额--必须等余额查完了再创建交易--余额的查询很慢,而且容易错位到达
