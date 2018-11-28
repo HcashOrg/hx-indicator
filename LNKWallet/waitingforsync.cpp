@@ -51,7 +51,10 @@ void WaitingForSync::on_closeBtn_clicked()
 
 void WaitingForSync::outputMessage(const QString &message)
 {
-    ui->waitSync->append(message);
+    if(!message.isEmpty())
+    {
+        ui->waitSync->append(message);
+    }
 }
 
 void WaitingForSync::checkConnected()
