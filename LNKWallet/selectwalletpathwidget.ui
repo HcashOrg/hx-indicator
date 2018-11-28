@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>228</width>
-    <height>366</height>
+    <width>680</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="font">
@@ -21,8 +21,8 @@
   <widget class="QToolButton" name="pathBtn">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>142</y>
+     <x>172</x>
+     <y>252</y>
      <width>21</width>
      <height>24</height>
     </rect>
@@ -45,9 +45,9 @@
   <widget class="QLineEdit" name="pathLineEdit">
    <property name="geometry">
     <rect>
-     <x>8</x>
-     <y>140</y>
-     <width>191</width>
+     <x>25</x>
+     <y>250</y>
+     <width>131</width>
      <height>32</height>
     </rect>
    </property>
@@ -69,10 +69,10 @@
   <widget class="QToolButton" name="closeBtn">
    <property name="geometry">
     <rect>
-     <x>210</x>
+     <x>650</x>
      <y>8</y>
-     <width>7</width>
-     <height>7</height>
+     <width>16</width>
+     <height>16</height>
     </rect>
    </property>
    <property name="cursor">
@@ -88,8 +88,8 @@
   <widget class="QToolButton" name="okBtn">
    <property name="geometry">
     <rect>
-     <x>45</x>
-     <y>180</y>
+     <x>25</x>
+     <y>290</y>
      <width>135</width>
      <height>34</height>
     </rect>
@@ -110,8 +110,8 @@
   <widget class="QLabel" name="label_version">
    <property name="geometry">
     <rect>
-     <x>97</x>
-     <y>95</y>
+     <x>26</x>
+     <y>114</y>
      <width>80</width>
      <height>18</height>
     </rect>
@@ -126,46 +126,24 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 11px &quot;微软雅黑&quot;;</string>
+    <string notr="true">font: 14px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>v1.0.1</string>
    </property>
   </widget>
-  <widget class="QLabel" name="welcome">
-   <property name="geometry">
-    <rect>
-     <x>72</x>
-     <y>82</y>
-     <width>78</width>
-     <height>15</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>黑体</family>
-     <pointsize>16</pointsize>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>120</y>
+     <x>25</x>
+     <y>215</y>
      <width>210</width>
-     <height>16</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(243, 241, 250);
-font: 11px &quot;微软雅黑&quot;;</string>
+font: 12px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>Select the path of the wallet data</string>
@@ -176,7 +154,6 @@ font: 11px &quot;微软雅黑&quot;;</string>
   <zorder>closeBtn</zorder>
   <zorder>okBtn</zorder>
   <zorder>label_version</zorder>
-  <zorder>welcome</zorder>
   <zorder>label</zorder>
  </widget>
  <resources/>

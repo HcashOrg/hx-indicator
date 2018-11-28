@@ -28,6 +28,7 @@ signals:
 private slots:
     void on_closeBtn_clicked();
 
+    void outputMessage(const QString &message);
 
 public:
     QTimer* timerForWSConnected;

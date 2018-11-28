@@ -349,6 +349,8 @@ public:
     QProcess* nodeProc;
     QProcess* clientProc;
     QTimer    timerForStartExe;
+signals:
+    void exeOutputMessage(const QString &mess);
 private slots:
     void onNodeExeStateChanged();
     void onClientExeStateChanged();

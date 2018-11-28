@@ -4063,17 +4063,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="101"/>
+        <location filename="depositpage/DepositPage.cpp" line="106"/>
+        <source>private-key-missing!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="depositpage/DepositPage.cpp" line="108"/>
+        <source>Cann&apos;t find pri-key in your wallet!Please contact official team for supportting!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="depositpage/DepositPage.cpp" line="120"/>
         <source>cannot generate tunnel account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="122"/>
+        <location filename="depositpage/DepositPage.cpp" line="141"/>
         <source>cannot bind tunnel address.%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="134"/>
+        <location filename="depositpage/DepositPage.cpp" line="153"/>
         <source>Wallet data updated! Please backup your wallet!</source>
         <oldsource>You Should Back Up Your Wallet!</oldsource>
         <translation type="unfinished"></translation>
@@ -4279,50 +4289,50 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Export</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="35"/>
+        <location filename="exportdialog.cpp" line="36"/>
         <source>Export </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="35"/>
+        <location filename="exportdialog.cpp" line="36"/>
         <source> &apos;s private key to:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="53"/>
+        <location filename="exportdialog.cpp" line="54"/>
         <source>Select the path</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="75"/>
+        <location filename="exportdialog.cpp" line="76"/>
         <source>You have not backup this account.If your wallet data is lost or corrupted, you will have no way to get your account back.Sure to cancel?</source>
         <oldsource>You have not backup this wallet.If your wallet data is lost or corrupted, you will have no way to get your account back.Sure to cancel?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="149"/>
+        <location filename="exportdialog.cpp" line="150"/>
         <source> already exists!
 Cover it or not?</source>
         <oldsource> already exists! Cover it or not?</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="158"/>
+        <location filename="exportdialog.cpp" line="159"/>
         <source>Wrong path!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="257"/>
+        <location filename="exportdialog.cpp" line="258"/>
         <source>Please keep your private key properly.Never lose or leak it to anyone!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="257"/>
+        <location filename="exportdialog.cpp" line="258"/>
         <source>Export succeeded!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="303"/>
+        <location filename="exportdialog.cpp" line="304"/>
         <source>Wrong file format!</source>
         <oldsource>Wrong file format.</oldsource>
         <translation type="unfinished"></translation>
@@ -4676,12 +4686,12 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="firstlogin.ui" line="216"/>
+        <location filename="firstlogin.ui" line="194"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="firstlogin.ui" line="233"/>
+        <location filename="firstlogin.ui" line="211"/>
         <source>Again</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4705,7 +4715,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="firstlogin.cpp" line="49"/>
-        <location filename="firstlogin.cpp" line="292"/>
+        <location filename="firstlogin.cpp" line="289"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4725,7 +4735,7 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="firstlogin.cpp" line="297"/>
+        <location filename="firstlogin.cpp" line="294"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4771,17 +4781,17 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2542"/>
+        <location filename="frame.cpp" line="2543"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2545"/>
+        <location filename="frame.cpp" line="2546"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2548"/>
+        <location filename="frame.cpp" line="2549"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5451,7 +5461,7 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="652"/>
+        <location filename="wallet.cpp" line="664"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -5618,32 +5628,32 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="130"/>
+        <location filename="importdialog.cpp" line="139"/>
         <source>Wrong file path.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="141"/>
+        <location filename="importdialog.cpp" line="150"/>
         <source>HX Address:%1  Already Exists!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="178"/>
+        <location filename="importdialog.cpp" line="187"/>
         <source>Wrong HX private key!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="304"/>
+        <location filename="importdialog.cpp" line="313"/>
         <source>Fail to import key!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="336"/>
+        <location filename="importdialog.cpp" line="345"/>
         <source> has been imported!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="340"/>
+        <location filename="importdialog.cpp" line="349"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5694,18 +5704,18 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Password</translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="84"/>
+        <location filename="lockpage.ui" line="128"/>
         <source>v1.0.1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="114"/>
-        <location filename="lockpage.cpp" line="179"/>
+        <location filename="lockpage.ui" line="158"/>
+        <location filename="lockpage.cpp" line="178"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="158"/>
+        <location filename="lockpage.ui" line="85"/>
         <source>登录</source>
         <translation type="unfinished">Enter</translation>
     </message>
@@ -5715,7 +5725,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="lockpage.cpp" line="36"/>
-        <location filename="lockpage.cpp" line="193"/>
+        <location filename="lockpage.cpp" line="191"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5741,7 +5751,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="198"/>
+        <location filename="lockpage.cpp" line="196"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5936,38 +5946,38 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="122"/>
+        <location filename="mainpage.cpp" line="128"/>
         <source>transfer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="125"/>
+        <location filename="mainpage.cpp" line="131"/>
         <source>deposit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="126"/>
+        <location filename="mainpage.cpp" line="132"/>
         <source>withdraw</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="127"/>
+        <location filename="mainpage.cpp" line="133"/>
         <source>allot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="372"/>
+        <location filename="mainpage.cpp" line="378"/>
         <source>Fail to create account!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="483"/>
-        <location filename="mainpage.cpp" line="486"/>
+        <location filename="mainpage.cpp" line="489"/>
+        <location filename="mainpage.cpp" line="492"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="528"/>
+        <location filename="mainpage.cpp" line="534"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7016,7 +7026,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="normallogin.ui" line="51"/>
-        <location filename="normallogin.cpp" line="170"/>
+        <location filename="normallogin.cpp" line="169"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7044,7 +7054,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="normallogin.cpp" line="34"/>
-        <location filename="normallogin.cpp" line="183"/>
+        <location filename="normallogin.cpp" line="182"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7064,7 +7074,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="normallogin.cpp" line="188"/>
+        <location filename="normallogin.cpp" line="187"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8123,7 +8133,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selectwalletpathwidget.ui" line="171"/>
+        <location filename="selectwalletpathwidget.ui" line="149"/>
         <source>Select the path of the wallet data</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9438,12 +9448,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="waitingforsync.ui" line="44"/>
-        <source>LOADING...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="waitingforsync.ui" line="87"/>
+        <location filename="waitingforsync.ui" line="60"/>
         <source>v1.0.1</source>
         <translation type="unfinished"></translation>
     </message>

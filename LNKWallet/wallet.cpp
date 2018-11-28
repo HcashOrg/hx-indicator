@@ -256,6 +256,7 @@ void HXChain::checkNodeExeIsReady()
     QString str = nodeProc->readAllStandardError();
     if(!str.isEmpty())
     {
+        emit exeOutputMessage(str);
         qDebug() << "node exe standardError: " << str ;
         logToFile( QStringList() << "node exe standardError: " << str, 0, "node_output_log.txt" );
     }
@@ -271,6 +272,7 @@ void HXChain::checkNodeExeIsReady()
 void HXChain::readNodeOutput()
 {
     QString str = nodeProc->readAllStandardError();
+    emit exeOutputMessage(str);
     logToFile( QStringList() << "node exe standardError: " << str, 0, "node_output_log.txt" );
 }
 
