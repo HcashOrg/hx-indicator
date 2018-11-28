@@ -1237,6 +1237,7 @@ void HXChain::autoWithdrawSign()
                         HXChain::getInstance()->postRPC( "id-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
                                                                                                                  QJsonArray() << generatedTrxId << account));
                         singedAccountTrxs << account + "+++" + generatedTrxId;
+                        logToFile( QStringList() << "senator_sign_crosschain_transaction" << generatedTrxId << account);
                         signedCount++;
                         if(signedCount >= 3)    return;
                     }
