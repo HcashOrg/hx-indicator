@@ -13,6 +13,7 @@ ExportDialog::ExportDialog( QString name, QWidget *parent) :
 {
     ui->setupUi(this);
     dataInfo = std::make_shared<KeyDataInfo>();
+    dataInfo->AccountName = name;
 
 //    HXChain::getInstance()->appendCurrentDialogVector(this);
     setParent(HXChain::getInstance()->mainFrame);

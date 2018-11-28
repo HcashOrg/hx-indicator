@@ -51,6 +51,7 @@ AutoUpdateNotify::~AutoUpdateNotify()
 void AutoUpdateNotify::startAutoDetect()
 {
     _p->isAutoDetectOn = true;
+    _p->isInDetect = false;
     _p->updateTimer->start(1000);
 }
 
@@ -90,49 +91,17 @@ void AutoUpdateNotify::CheckResultSlot(const QString &version,bool isupdateForce
         return;
     }
 
+    _p->isInDetect = true;
     _p->version = version;
     _p->isForceUpdate =isupdateForce;
-    _p->isAutoDetectOn=false;
     _p->updateProcess->startUpdate();
-
-
-
-//    connect(_p->updateProcess,&UpdateProcess::updateFinish,[version,isupdateForce,this](){
-//        qDebug()<<"llllllllllllllllllllllllllll";
-//        static AutoUpdateDialog *dia = new AutoUpdateDialog();
-//        if(dia->isVisible())
-//        {
-//            return;
-//        }
-////        dia->setAttribute(Qt::WA_DeleteOnClose);
-//        dia->setVersion(version,isupdateForce);
-//        dia->setUpdateLog(this->_p->updateProcess->getUpdateLogInfo());
-//        if(dia->pop())
-//        {
-//            _p->isAutoDetectOn=false;
-//            HXChain::getInstance()->SetUpdateNeeded(true);
-//            HXChain::getInstance()->mainFrame->onCloseWallet();
-//        }
-//        else
-//        {
-//            _p->isInDetect = false;
-//            _p->isAutoDetectOn=true;
-//            HXChain::getInstance()->SetUpdateNeeded(false);
-//        }
-//    });
 }
 
 void AutoUpdateNotify::UpdateWrongSlot()
 {
     qDebug()<<"aeaeaeae";
-    QTimer::singleShot(10000,[this](){
-        _p->isInDetect = false;
-        _p->isAutoDetectOn=true;
-        _p->isForceUpdate = false;
-        _p->version = "";
-        HXChain::getInstance()->SetUpdateNeeded(false);
-        this->checkUpdate();
-    });
+    _p->isInDetect = true;
+    QTimer::singleShot(10000,this,&AutoUpdateNotify::recheckNow);
 }
 
 void AutoUpdateNotify::UpdateFinishSlot()
@@ -157,4 +126,13 @@ void AutoUpdateNotify::UpdateFinishSlot()
         _p->isAutoDetectOn=true;
         HXChain::getInstance()->SetUpdateNeeded(false);
     }
+}
+
+void AutoUpdateNotify::recheckNow()
+{
+    _p->isInDetect = false;
+    _p->isForceUpdate = false;
+    _p->version = "";
+    HXChain::getInstance()->SetUpdateNeeded(false);
+    this->checkUpdate();
 }

@@ -87,7 +87,26 @@ void DepositPage::jsonDataUpdated(QString id)
         }
         else
         {
+            //检测用户是否有对应tunnel的私钥
+            checkTunnelPriKey();
+        }
+
+    }
+    else if("deposit-dump_crosschain_private_keys" == id)
+    {
+        //寻找到是否有该地址对应的私钥
+        QString result = HXChain::getInstance()->jsonDataValue( id);
+        if(result.contains(_p->tunnle_address))
+        {
             _p->qrcodeWidget->SetQRString(_p->tunnle_address);
+        }
+        else
+        {
+            //提醒用户私钥丢失
+            _p->qrcodeWidget->SetQRString(tr("private-key-missing!"));
+            CommonDialog dia(CommonDialog::OkOnly);
+            dia.setText(tr("Cann't find pri-key in your wallet!"));
+            dia.pop();
         }
 
     }
@@ -95,7 +114,7 @@ void DepositPage::jsonDataUpdated(QString id)
     {
         //解析返回的通道地址，并且绑定地址
         QString result = HXChain::getInstance()->jsonDataValue( id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
         if( result.isEmpty() || result.startsWith("\"error"))
         {
             _p->qrcodeWidget->SetQRString(tr("cannot generate tunnel account"));
@@ -186,6 +205,12 @@ void DepositPage::BindTunnelAccount()
     HXChain::getInstance()->postRPC("deposit_bind_tunnel_account",
                                     toJsonFormat("bind_tunnel_account",
                                                  QJsonArray()<<_p->name<<_p->tunnelData->address<<_p->assetSymbol<<true));
+}
+
+void DepositPage::checkTunnelPriKey()
+{//开始查找私钥
+    HXChain::getInstance()->postRPC( "deposit-dump_crosschain_private_keys", toJsonFormat( "dump_crosschain_private_keys", QJsonArray()));
+
 }
 
 void DepositPage::InitWidget()
