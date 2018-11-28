@@ -202,16 +202,16 @@ Frame::Frame(): timer(NULL),
         }
         else
         {
-            if(fileInfo.size() == 0)
-            {
-                QFile autoSaveFile(path + "/wallet.json.autobak");
-                if(autoSaveFile.exists())
-                {
-                    QFile oldFile(path + "/wallet.json");
-                    qDebug() << "remove corrupted wallet.json : " << oldFile.remove();
-                    qDebug() << "recover auto backup wallet.json : " << autoSaveFile.copy(path + "/wallet.json");
-                }
-            }
+//            if(fileInfo.size() == 0)
+//            {
+//                QFile autoSaveFile(path + "/wallet.json.autobak");
+//                if(autoSaveFile.exists())
+//                {
+//                    QFile oldFile(path + "/wallet.json");
+//                    qDebug() << "remove corrupted wallet.json : " << oldFile.remove();
+//                    qDebug() << "recover auto backup wallet.json : " << autoSaveFile.copy(path + "/wallet.json");
+//                }
+//            }
 
 
             HXChain::getInstance()->startExe();
