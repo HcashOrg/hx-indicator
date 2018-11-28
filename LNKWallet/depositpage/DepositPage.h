@@ -37,6 +37,7 @@ private:
     void GetBindTunnelAccount();
     void GenerateAddress();
     void BindTunnelAccount();
+    void checkTunnelPriKey();
 private:
     void InitWidget();
     void InitStyle();

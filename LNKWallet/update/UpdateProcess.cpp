@@ -162,10 +162,10 @@ void UpdateProcess::DownLoadVersionConfigFinsihed(const QString &dstFilename)
         return;//说明出错，没必要进行了
     }
 
-    if( _p->localVersionData->version.isEmpty())
-    {
+//    if( _p->localVersionData->version.isEmpty())
+//    {
         _p->localVersionData->version = WALLET_VERSION;
-    }
+//    }
 
     if( UpdateProgressUtil::CompareVersion( _p->localVersionData->version, _p->serverVersionData->version)
             == UpdateProgressUtil::AFTER)

@@ -20,6 +20,8 @@ private slots:
     void UpdateWrongSlot();
     void UpdateFinishSlot();
 private:
+    void recheckNow();
+private:
     class DataPrivate;
     DataPrivate *_p;
 
