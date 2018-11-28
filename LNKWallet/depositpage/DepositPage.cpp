@@ -105,7 +105,7 @@ void DepositPage::jsonDataUpdated(QString id)
             //提醒用户私钥丢失
             _p->qrcodeWidget->SetQRString(tr("private-key-missing!"));
             CommonDialog dia(CommonDialog::OkOnly);
-            dia.setText(tr("Cann't find pri-key in your wallet!"));
+            dia.setText(tr("Cann't find pri-key in your wallet!Please contact official team for supportting!"));
             dia.pop();
         }
 
