@@ -257,14 +257,21 @@ void HXChain::checkNodeExeIsReady()
     if(!str.isEmpty())
     {
         qDebug() << "node exe standardError: " << str ;
-        logToFile( QStringList() << "node exe standardError: " << str );
+        logToFile( QStringList() << "node exe standardError: " << str, 0, "node_output_log.txt" );
     }
 
     if(str.contains("Chain ID is"))
     {
         timerForStartExe.stop();
         QTimer::singleShot(1000,this,SLOT(delayedLaunchClient()));
+        connect(nodeProc, SIGNAL(readyRead()), this, SLOT(readNodeOutput()));
     }
+}
+
+void HXChain::readNodeOutput()
+{
+    QString str = nodeProc->readAllStandardError();
+    logToFile( QStringList() << "node exe standardError: " << str, 0, "node_output_log.txt" );
 }
 
 void HXChain::ShowBubbleMessage(const QString &title, const QString &context, int msecs, QSystemTrayIcon::MessageIcon icon)

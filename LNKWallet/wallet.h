@@ -354,6 +354,7 @@ private slots:
     void onClientExeStateChanged();
     void delayedLaunchClient();
     void checkNodeExeIsReady();
+    void readNodeOutput();
 signals:
     void exeStarted();
 

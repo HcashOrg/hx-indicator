@@ -3,6 +3,6 @@
 
 #include <QtCore>
 
-void logToFile(const QStringList& msg, int level = 0);
+void logToFile(const QStringList& msg, int level = 0, QString fileName = "");
 
 #endif // LOGTOFILE_H
