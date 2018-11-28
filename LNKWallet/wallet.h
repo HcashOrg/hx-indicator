@@ -356,6 +356,7 @@ private slots:
     void onClientExeStateChanged();
     void delayedLaunchClient();
     void checkNodeExeIsReady();
+    void readNodeOutput();
 signals:
     void exeStarted();
 
@@ -504,6 +505,8 @@ public:
     void loadAutoWithdrawAmount();          // 从config.ini读取各币种自动提现限额 未设置的币种赋default值
     double getAssetAutoWithdrawLimit(QString symbol);
     void autoWithdrawSign();
+    int lastSignBlock = -1;
+    QStringList singedAccountTrxs;
 
     // 查询提现交易
     void fetchCrosschainTransactions();
