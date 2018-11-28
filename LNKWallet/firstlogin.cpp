@@ -98,12 +98,12 @@ void FirstLogin::on_createBtn_clicked()
 
 void FirstLogin::paintEvent(QPaintEvent *e)
 {
-    QPainter painter(this);
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(QBrush(QColor(243,241,250)));
-    painter.drawRect(0,0,228,24);
-    painter.drawPixmap(7,5,32,12,QPixmap(":/ui/wallet_ui/hx_label_logo.png").scaled(32,12,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
-    painter.drawPixmap(94,38,36,36,QPixmap(":/ui/wallet_ui/logo_center.png").scaled(36,36,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+//    QPainter painter(this);
+//    painter.setPen(Qt::NoPen);
+//    painter.setBrush(QBrush(QColor(243,241,250)));
+//    painter.drawRect(0,0,228,24);
+//    painter.drawPixmap(7,5,32,12,QPixmap(":/ui/wallet_ui/hx_label_logo.png").scaled(32,12,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+//    painter.drawPixmap(94,38,36,36,QPixmap(":/ui/wallet_ui/logo_center.png").scaled(36,36,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
 
     QWidget::paintEvent(e);
@@ -260,7 +260,7 @@ void FirstLogin::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/login_back.png").scaled(this->size())));
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/cover.png").scaled(this->size())));
     setPalette(palette);
 
 
@@ -268,18 +268,15 @@ void FirstLogin::InitStyle()
     pa.setColor(QPalette::WindowText,QColor(243,241,250));
     ui->label_version->setPalette(pa);
 
-    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
+    ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/cover_close.png);background-repeat: no-repeat;background-position: center;border: none;}");
 
-    ui->createBtn->setStyleSheet(CANCELBTN_STYLE);
-    //welcome
-    ui->welcome->setPixmap(QPixmap(":/ui/wallet_ui/Welcome.png").scaled(ui->welcome->width(), ui->welcome->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    ui->createBtn->setStyleSheet("QToolButton{font: 12px \"Microsoft YaHei UI Light\";background-color:rgb(255,255,255); border:none;border-radius:3px;color: rgb(59, 22, 136);}" \
+                                 );
 
-    ui->pwdLineEdit->setStyleSheet("QLineEdit{max-height:32px;background: transparent;color: rgb(243,241,250);font: 10px \"Microsoft YaHei UI Light\";border:1px solid rgb(243,241,250);border-radius:4px;padding: 0px 10px 0px 6px;}"
-                                   "QLineEdit:focus{border:1px solid rgb(243,241,250);}"
+    ui->pwdLineEdit->setStyleSheet("QLineEdit{max-height:32px;background: transparent;color: rgb(243,241,250);font: 10px \"Microsoft YaHei UI Light\";border:none;border-radius:0px;border-bottom:1px solid rgb(243,241,250);padding: 0px 10px 0px 6px;}"
                                    "QLineEdit:disabled{color: rgb(151,151,151);}");
-    ui->pwdLineEdit2->setStyleSheet("QLineEdit{max-height:32px;background: transparent;color: rgb(243,241,250);font: 10px \"Microsoft YaHei UI Light\";border:1px solid rgb(243,241,250);border-radius:4px;padding: 0px 10px 0px 6px;}"
-                                   "QLineEdit:focus{border:1px solid rgb(243,241,250);}"
-                                   "QLineEdit:disabled{color: rgb(151,151,151);}");
+    ui->pwdLineEdit2->setStyleSheet("QLineEdit{max-height:32px;background: transparent;color: rgb(243,241,250);font: 10px \"Microsoft YaHei UI Light\";border:none;border-radius:0px;border-bottom:1px solid rgb(243,241,250);padding: 0px 10px 0px 6px;}"
+                                    "QLineEdit:disabled{color: rgb(151,151,151);}");
 }
 
 void FirstLogin::keyPressEvent(QKeyEvent *e)
