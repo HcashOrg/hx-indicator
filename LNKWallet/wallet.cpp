@@ -78,7 +78,6 @@ HXChain::HXChain()
 
         configFile->setValue("/settings/autoBackupWallet",true);
         autoBackupWallet = true;
-
     }
     else
     {
@@ -174,11 +173,13 @@ void HXChain:: startExe()
 #endif
             ;
 
-    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
