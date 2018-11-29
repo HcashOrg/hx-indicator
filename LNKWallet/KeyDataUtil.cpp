@@ -65,6 +65,10 @@ bool KeyDataUtil::ReadPrivateKeyFromJson(const QString &jsonStr, KeyDataPtr &dat
         {
             data->HXAddr = jsonObject.value(key).toString();
         }
+        else if(key == "AccountName")
+        {
+            data->AccountName = jsonObject.value(key).toString();
+        }
         else
         {
             data->info_key[key] = jsonObject.value(key).toString();
@@ -81,6 +85,7 @@ bool KeyDataUtil::WritePrivateKeyToJson(const KeyDataPtr &data, QJsonDocument &o
     QJsonObject mainObject;
 
     mainObject.insert("HXAddr",data->HXAddr);
+    mainObject.insert("AccountName",data->AccountName);
     for(auto it = data->info_key.begin();it != data->info_key.end();++it)
     {
         mainObject.insert((*it).first,(*it).second);

@@ -23,7 +23,8 @@ public:
 class VersionInfo
 {
 public:
-    QString version;
+    QString version;//总版本
+    bool isUpdateForced=false;//是否是强制更新版本
     QString serverPath;
     QString updateVersion;//更新器版本
     std::vector<std::shared_ptr<VersionData>> file_data;

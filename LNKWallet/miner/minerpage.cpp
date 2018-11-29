@@ -492,7 +492,7 @@ void MinerPage::showIncomeRecord()
         QJsonObject object = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
 
         QJsonArray balanceArray = object.value("pay_back_balance").toArray();
-        if(balanceArray.size() <= 0)    continue;
+//        if(balanceArray.size() <= 0)    continue;
         unsigned long long amount = 0;
         for(int i = 0; i < balanceArray.size(); i++)
         {

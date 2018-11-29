@@ -1199,6 +1199,24 @@
     </message>
 </context>
 <context>
+    <name>AutoUpdateDialog</name>
+    <message>
+        <location filename="autoUpdate/AutoUpdateDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished">确定</translation>
+    </message>
+    <message>
+        <location filename="autoUpdate/AutoUpdateDialog.ui" line="63"/>
+        <source>取消</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <location filename="autoUpdate/AutoUpdateDialog.ui" line="90"/>
+        <source>立即更新</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AutoWithdrawSetDialog</name>
     <message>
         <location filename="guard/AutoWithdrawSetDialog.ui" line="14"/>
@@ -3900,12 +3918,22 @@ Contract created successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="101"/>
+        <location filename="depositpage/DepositPage.cpp" line="106"/>
+        <source>private-key-missing!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="depositpage/DepositPage.cpp" line="108"/>
+        <source>Cann&apos;t find pri-key in your wallet!Please contact official team for supportting!</source>
+        <translation type="unfinished">该通道账户对应私钥丢失，请联系官方团队为您提供技术支持！</translation>
+    </message>
+    <message>
+        <location filename="depositpage/DepositPage.cpp" line="120"/>
         <source>cannot generate tunnel account</source>
         <translation type="unfinished">未能生成tunnel账户</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="122"/>
+        <location filename="depositpage/DepositPage.cpp" line="141"/>
         <source>cannot bind tunnel address.%1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3914,7 +3942,7 @@ Contract created successfully!</source>
         <translation type="obsolete">未能绑定tunnel账户</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="134"/>
+        <location filename="depositpage/DepositPage.cpp" line="153"/>
         <source>Wallet data updated! Please backup your wallet!</source>
         <oldsource>You Should Back Up Your Wallet!</oldsource>
         <translation type="unfinished">钱包数据已更新！请重新备份您的钱包！</translation>
@@ -4104,22 +4132,22 @@ Contract created successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="35"/>
+        <location filename="exportdialog.cpp" line="36"/>
         <source>Export </source>
         <translation type="unfinished">导出账户 </translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="35"/>
+        <location filename="exportdialog.cpp" line="36"/>
         <source> &apos;s private key to:</source>
         <translation type="unfinished"> 的私钥至:</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="53"/>
+        <location filename="exportdialog.cpp" line="54"/>
         <source>Select the path</source>
         <translation type="unfinished">选择路径</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="257"/>
+        <location filename="exportdialog.cpp" line="258"/>
         <source>Export succeeded!</source>
         <translation type="unfinished">导出私钥成功！</translation>
     </message>
@@ -4128,13 +4156,13 @@ Contract created successfully!</source>
         <translation type="obsolete">您还没有备份私钥，如果钱包数据丢失或损坏，您将没有任何途径找回你的账户！确认取消备份吗？</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="75"/>
+        <location filename="exportdialog.cpp" line="76"/>
         <source>You have not backup this account.If your wallet data is lost or corrupted, you will have no way to get your account back.Sure to cancel?</source>
         <oldsource>You have not backup this wallet.If your wallet data is lost or corrupted, you will have no way to get your account back.Sure to cancel?</oldsource>
         <translation type="unfinished">您还没有备份该账户。如果钱包数据丢失或损坏，您将没有任何方法找回您的账户。确定取消备份吗？</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="149"/>
+        <location filename="exportdialog.cpp" line="150"/>
         <source> already exists!
 Cover it or not?</source>
         <oldsource> already exists! Cover it or not?</oldsource>
@@ -4142,7 +4170,7 @@ Cover it or not?</source>
 是否覆盖？</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="158"/>
+        <location filename="exportdialog.cpp" line="159"/>
         <source>Wrong path!</source>
         <translation type="unfinished">错误的路径！</translation>
     </message>
@@ -4155,7 +4183,7 @@ Cover it or not?</source>
         <translation type="obsolete"> 成功！</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="257"/>
+        <location filename="exportdialog.cpp" line="258"/>
         <source>Please keep your private key properly.Never lose or leak it to anyone!</source>
         <translation type="unfinished">请妥善保管您的私钥，绝对不要丢失或泄露给任何人！</translation>
     </message>
@@ -4164,7 +4192,7 @@ Cover it or not?</source>
         <translation type="obsolete">.gkey 成功!</translation>
     </message>
     <message>
-        <location filename="exportdialog.cpp" line="303"/>
+        <location filename="exportdialog.cpp" line="304"/>
         <source>Wrong file format!</source>
         <oldsource>Wrong file format.</oldsource>
         <translation type="unfinished">文件格式错误！</translation>
@@ -4498,12 +4526,12 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="firstlogin.ui" line="216"/>
+        <location filename="firstlogin.ui" line="194"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="firstlogin.ui" line="233"/>
+        <location filename="firstlogin.ui" line="211"/>
         <source>Again</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4519,7 +4547,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="firstlogin.cpp" line="49"/>
-        <location filename="firstlogin.cpp" line="292"/>
+        <location filename="firstlogin.cpp" line="289"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -4560,7 +4588,7 @@ Cover it or not?</source>
         <translation type="obsolete">确定关闭 Goopal 钱包</translation>
     </message>
     <message>
-        <location filename="firstlogin.cpp" line="297"/>
+        <location filename="firstlogin.cpp" line="294"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -4596,27 +4624,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1183"/>
+        <location filename="frame.cpp" line="1189"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1409"/>
+        <location filename="frame.cpp" line="1415"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2523"/>
+        <location filename="frame.cpp" line="2543"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2526"/>
+        <location filename="frame.cpp" line="2546"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2529"/>
+        <location filename="frame.cpp" line="2549"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -5210,13 +5238,13 @@ add an account first</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="208"/>
-        <location filename="wallet.cpp" line="232"/>
+        <location filename="wallet.cpp" line="213"/>
+        <location filename="wallet.cpp" line="237"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="645"/>
+        <location filename="wallet.cpp" line="664"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -5382,22 +5410,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">选择你的私钥文件</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="130"/>
+        <location filename="importdialog.cpp" line="139"/>
         <source>Wrong file path.</source>
         <translation type="unfinished">错误的文件路径</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="141"/>
+        <location filename="importdialog.cpp" line="150"/>
         <source>HX Address:%1  Already Exists!</source>
         <translation type="unfinished">HX地址:%1 已存在！</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="178"/>
+        <location filename="importdialog.cpp" line="187"/>
         <source>Wrong HX private key!</source>
         <translation type="unfinished">错误的HX私钥</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="304"/>
+        <location filename="importdialog.cpp" line="313"/>
         <source>Fail to import key!</source>
         <translation type="unfinished">导入私钥失败！</translation>
     </message>
@@ -5410,7 +5438,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">导入私钥错误：</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="340"/>
+        <location filename="importdialog.cpp" line="349"/>
         <source>Everytime a new account is imported, the wallet will rescan the blockchain data when launched next time. After that the transactions of the account will be shown.</source>
         <translation type="unfinished">每当一个新的账户被导入，钱包会在下次启动时重新扫描区块链数据。在此之后该账户的交易将被显示。</translation>
     </message>
@@ -5419,7 +5447,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">已经存在</translation>
     </message>
     <message>
-        <location filename="importdialog.cpp" line="336"/>
+        <location filename="importdialog.cpp" line="345"/>
         <source> has been imported!</source>
         <translation type="unfinished">已经被导入!</translation>
     </message>
@@ -5512,24 +5540,24 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">欢迎，</translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="84"/>
+        <location filename="lockpage.ui" line="128"/>
         <source>v1.0.1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="114"/>
-        <location filename="lockpage.cpp" line="179"/>
+        <location filename="lockpage.ui" line="158"/>
+        <location filename="lockpage.cpp" line="178"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.ui" line="158"/>
+        <location filename="lockpage.ui" line="85"/>
         <source>登录</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="lockpage.cpp" line="36"/>
-        <location filename="lockpage.cpp" line="193"/>
+        <location filename="lockpage.cpp" line="191"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -5591,7 +5619,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">锁定剩余</translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="198"/>
+        <location filename="lockpage.cpp" line="196"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -5765,37 +5793,37 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">如果出现余额不正确或交易记录不正确的现象，尝试重新扫描区块，即可恢复</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="76"/>
+        <location filename="mainpage.cpp" line="78"/>
         <source>there&apos;s no account or assest!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="119"/>
+        <location filename="mainpage.cpp" line="128"/>
         <source>transfer</source>
         <translation type="unfinished">转账</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="122"/>
+        <location filename="mainpage.cpp" line="131"/>
         <source>deposit</source>
         <translation type="unfinished">充值</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="123"/>
+        <location filename="mainpage.cpp" line="132"/>
         <source>withdraw</source>
         <translation type="unfinished">提现</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="124"/>
+        <location filename="mainpage.cpp" line="133"/>
         <source>allot</source>
         <translation type="unfinished">划转</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="365"/>
+        <location filename="mainpage.cpp" line="378"/>
         <source>Fail to create account!</source>
         <translation type="unfinished">创建账户失败！</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="521"/>
+        <location filename="mainpage.cpp" line="534"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished">钱包中没有未注册账户！</translation>
     </message>
@@ -5820,8 +5848,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">复制到剪贴板</translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="476"/>
-        <location filename="mainpage.cpp" line="479"/>
+        <location filename="mainpage.cpp" line="489"/>
+        <location filename="mainpage.cpp" line="492"/>
         <source>copy to clipboard</source>
         <translation type="unfinished">复制到剪贴板</translation>
     </message>
@@ -6013,27 +6041,27 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="863"/>
+        <location filename="miner/minerpage.ui" line="883"/>
         <source>按名称排序</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="868"/>
+        <location filename="miner/minerpage.ui" line="863"/>
         <source>权重由高到低</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="873"/>
+        <location filename="miner/minerpage.ui" line="868"/>
         <source>出块数由多到少</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="878"/>
+        <location filename="miner/minerpage.ui" line="873"/>
         <source>missed数由少到多</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.ui" line="883"/>
+        <location filename="miner/minerpage.ui" line="878"/>
         <source>手续费由低到高</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6825,7 +6853,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="normallogin.ui" line="51"/>
-        <location filename="normallogin.cpp" line="170"/>
+        <location filename="normallogin.cpp" line="169"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6854,7 +6882,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="normallogin.cpp" line="34"/>
-        <location filename="normallogin.cpp" line="183"/>
+        <location filename="normallogin.cpp" line="182"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -6910,7 +6938,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">锁定剩余</translation>
     </message>
     <message>
-        <location filename="normallogin.cpp" line="188"/>
+        <location filename="normallogin.cpp" line="187"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -7962,7 +7990,7 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="selectwalletpathwidget.ui" line="171"/>
+        <location filename="selectwalletpathwidget.ui" line="149"/>
         <source>Select the path of the wallet data</source>
         <translation type="unfinished">选择钱包数据路径</translation>
     </message>
@@ -8158,7 +8186,7 @@ update or not?</source>
     </message>
     <message>
         <location filename="setdialog.ui" line="176"/>
-        <location filename="setdialog.ui" line="813"/>
+        <location filename="setdialog.ui" line="816"/>
         <source>保存</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8183,12 +8211,12 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="889"/>
+        <location filename="setdialog.ui" line="892"/>
         <source>旧密码：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="939"/>
+        <location filename="setdialog.ui" line="942"/>
         <source>新密码：</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8225,7 +8253,7 @@ update or not?</source>
     <message>
         <location filename="setdialog.ui" line="570"/>
         <location filename="setdialog.cpp" line="48"/>
-        <location filename="setdialog.cpp" line="367"/>
+        <location filename="setdialog.cpp" line="373"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8251,51 +8279,51 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="719"/>
+        <location filename="setdialog.ui" line="698"/>
         <source>自动备份（位于钱包配置路径）</source>
         <oldsource>自动备份</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="839"/>
+        <location filename="setdialog.ui" line="842"/>
         <source>再次输入：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1010"/>
+        <location filename="setdialog.ui" line="1013"/>
         <source>修改钱包密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1036"/>
+        <location filename="setdialog.ui" line="1039"/>
         <source>钱包数据路径：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1082"/>
-        <location filename="setdialog.ui" line="1113"/>
-        <location filename="setdialog.ui" line="1175"/>
+        <location filename="setdialog.ui" line="1085"/>
+        <location filename="setdialog.ui" line="1116"/>
+        <location filename="setdialog.ui" line="1178"/>
         <source>默认数据备份路径，请勿删除</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1089"/>
+        <location filename="setdialog.ui" line="1092"/>
         <source>钱包配置路径：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1147"/>
-        <location filename="setdialog.ui" line="1181"/>
+        <location filename="setdialog.ui" line="1150"/>
+        <location filename="setdialog.ui" line="1184"/>
         <source>打开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1229"/>
+        <location filename="setdialog.ui" line="1232"/>
         <source>安全设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1260"/>
+        <location filename="setdialog.ui" line="1263"/>
         <source>账户管理</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8324,30 +8352,30 @@ update or not?</source>
     </message>
     <message>
         <location filename="setdialog.cpp" line="48"/>
-        <location filename="setdialog.cpp" line="372"/>
+        <location filename="setdialog.cpp" line="378"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="416"/>
-        <location filename="setdialog.cpp" line="469"/>
+        <location filename="setdialog.cpp" line="422"/>
+        <location filename="setdialog.cpp" line="475"/>
         <source>at least 8 letters</source>
         <translation type="unfinished">密码至少为8位</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="443"/>
-        <location filename="setdialog.cpp" line="468"/>
-        <location filename="setdialog.cpp" line="488"/>
+        <location filename="setdialog.cpp" line="449"/>
+        <location filename="setdialog.cpp" line="474"/>
+        <location filename="setdialog.cpp" line="494"/>
         <source>not consistent</source>
         <translation type="unfinished">两次密码不一致</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="517"/>
+        <location filename="setdialog.cpp" line="523"/>
         <source>wrong password</source>
         <translation type="unfinished">密码错误</translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="536"/>
+        <location filename="setdialog.cpp" line="542"/>
         <source>Fail to modify the password!</source>
         <oldsource>Fail to set password!</oldsource>
         <translation type="unfinished">修改密码失败！</translation>
@@ -9189,17 +9217,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="waitingforsync.ui" line="44"/>
-        <source>LOADING...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Welcome,</source>
         <oldsource>Welcom,</oldsource>
         <translation type="obsolete">欢迎，</translation>
     </message>
     <message>
-        <location filename="waitingforsync.ui" line="87"/>
+        <location filename="waitingforsync.ui" line="60"/>
         <source>v1.0.1</source>
         <translation type="unfinished"></translation>
     </message>

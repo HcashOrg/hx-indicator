@@ -31,6 +31,10 @@ void WebSocketManager::processRPC(QString _rpcId, QString _rpcCmd)
     m_rpcId = _rpcId;
     m_buff.clear();
     m_webSocket->sendTextMessage(_rpcCmd);
+
+//    logToFile( QStringList() << QString("rpc posted: %1 %2").arg(_rpcId)
+//               .arg(_rpcCmd) );
+
 }
 
 void WebSocketManager::processRPCs(QString _rpcId, QString _rpcCmd, int _priority)
@@ -123,6 +127,16 @@ void WebSocketManager::onTimer()
 ////            busy = false;
 ////        }
 //    }
+
+    if( !processingRpc.isEmpty())
+    {
+        loopCount++;
+        if(loopCount >= 1000 && loopCount % 1000 == 0 )
+        {
+            logToFile( QStringList() << QString("rpc timeout: %1 %2").arg(QString::number(loopCount / 1000))
+                       .arg(processingRpc) );
+        }
+    }
 
     if(!busy)
     {

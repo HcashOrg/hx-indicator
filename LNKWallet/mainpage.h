@@ -11,6 +11,7 @@ class MainPage;
 
 #define MODULE_MAIN_PAGE "MAIN_PAGE"
 class BlankDefaultWidget;
+class CaptialNotify;
 class MainPage : public QWidget
 {
     Q_OBJECT
@@ -68,6 +69,8 @@ private slots:
 
     void on_registerBtn_clicked();
 
+    //自动划转提醒
+    void activeTunnelMoneyNotify();
 private:
     void InitStyle();
 private:
@@ -79,6 +82,7 @@ private:
     bool eventFilter(QObject *watched, QEvent *e);
 
     BlankDefaultWidget *blankWidget;
+    CaptialNotify *captialNotify;
 };
 
 #endif // MAINPAGE_H

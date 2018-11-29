@@ -9,13 +9,14 @@ class UpdateProcess : public QObject
 public:
     explicit UpdateProcess(QObject *parent = 0);
 signals:
-    void NewstVersionSignal(const QString &version);//没有更新则为空
+    void NewstVersionSignal(const QString &version,bool isUpdateForced = false);//没有更新则为空,,true则表示强制更新版本
     void updateFinish();
     void updateWrong();
 public:
   void InitServerURL(const QString &url);
   void checkUpdate();
   void startUpdate();
+  const QString &getUpdateLogInfo()const;
 private:
     //获取最新版本信息，下载配置文件
     void GetLatestVersionInfo();
@@ -24,7 +25,7 @@ private:
 private slots:
     //获取最新版本的响应，内容估计不多，直接链接finish信号，无需断点传送
     void GetLatestVersionInfoSlots();
-    void DownLoadVersionConfigFinsihed();
+    void DownLoadVersionConfigFinsihed(const QString &dstFilename);
 
     //获取下载完毕信号
     void DownloadEmptySlot();

@@ -16,6 +16,7 @@ struct KeyDataInfo
 
     }
     QString HXAddr;//link地址
+    QString AccountName;//账户名称
     std::map<QString,QString> info_key;//"BTC" + privatekey
 
     std::map<QString,std::pair<QString,QString>> all_key;//"addr + public + peivate

@@ -14,8 +14,9 @@ class HelpWidget : public QWidget
 public:
     explicit HelpWidget(QWidget *parent = 0);
     ~HelpWidget();
-private slots:
+public slots:
     void CheckUpdateSlot();
+private slots:
     void CheckResultSlot(const QString &version);
 
     void UpdateSlot();

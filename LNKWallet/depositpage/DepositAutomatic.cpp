@@ -19,7 +19,8 @@ public:
     struct accountInfo
     {
         accountInfo()
-            :transactionFinished(false)
+            :captialFee(0)
+            ,transactionFinished(false)
         {
 
         }
@@ -30,6 +31,7 @@ public:
         QString assetSymbol;
         QString assetMultiAddress;
         QString assetNumber;
+        double captialFee;
 
         QJsonObject transactionDetail;
         bool transactionFinished;
@@ -104,7 +106,7 @@ public:
                         break;
                     }
                 }
-                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-HXChain::getInstance()->feeChargeInfo.capitalFee.toDouble())
+                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-(*it)->captialFee)
                                                      ,'f',pre);
                 //qDebug()<<"update-money---"<<tunnelAddress<<(*it)->assetMultiAddress<<(*it)->assetNumber;
                 if((*it)->assetNumber.toDouble() < 1e-11)
@@ -214,8 +216,8 @@ void DepositAutomatic::PostCreateTransaction(const QString &fromAddress, const Q
                                      toJsonFormat( "createrawtransaction", QJsonArray()
                                      << fromAddress<<toAddress<<number<<symbol ));
 
-    qDebug()<<"auto-post-trasaction----"<<toJsonFormat( "createrawtransaction", QJsonArray()
-                                                        << fromAddress<<toAddress<<number<<symbol );
+//    qDebug()<<"auto-post-trasaction----"<<toJsonFormat( "createrawtransaction", QJsonArray()
+//                                                        << fromAddress<<toAddress<<number<<symbol );
 
 }
 
@@ -304,7 +306,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
 //            this->PostQueryTunnelMoney(info->assetSymbol,info->tunnelAddress);
 //        });
 
-        PostQueryTunnelMoney("finish","finish");
+        QTimer::singleShot(500,[this](){this->PostQueryTunnelMoney("autofinish","autofinish");});
     }
     else if("automatic-finish-money" == id)
     {//开始创建交易
@@ -324,7 +326,7 @@ void DepositAutomatic::jsonDataUpdated(const QString &id)
         result.prepend("{");
         result.append("}");
         ParseTransaction(address,result);
-        qDebug()<<id<<"-----"<<HXChain::getInstance()->jsonDataValue( id);
+//        qDebug()<<id<<"-----"<<HXChain::getInstance()->jsonDataValue( id);
     }
     else if("automatic-finish-transaction" == id)
     {//进行签名
@@ -348,12 +350,7 @@ void DepositAutomatic::httpReplied(QByteArray _data, int _status)
 {//解析查询余额的返回，补全账户信息
 //    qDebug() << "auto--http-- " << _data << _status;
 
-    QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
-    QString tunnel   = object.value("address").toString();
-    QString number = QString::number( jsonValueToDouble(object.value("balance")));
-
-
-    if(object.value("address").toString() == "finish")
+    if(QString(_data).contains("autofinish"))
     {
         //结束查找余额--必须等余额查完了再创建交易--余额的查询很慢
         FinishQueryMoney();
@@ -364,6 +361,12 @@ void DepositAutomatic::httpReplied(QByteArray _data, int _status)
         }
         return;
     }
+
+    QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
+    QString tunnel   = object.value("address").toString();
+    QString number = QString::number( jsonValueToDouble(object.value("balance")));
+
+
 
     _p->updateMoney(tunnel,number);
 
@@ -388,6 +391,7 @@ void DepositAutomatic::updateData()
                 da->accountAddress = info.address;
                 da->accountName = info.name;
                 da->assetSymbol = assetInfo.symbol;
+                da->captialFee = static_cast<double>(assetInfo.fee)/std::max<int>(1,static_cast<int>(pow(10,assetInfo.precision)));
                 _p->accounts.push_back(da);
             }
         }

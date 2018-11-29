@@ -82,6 +82,15 @@ void ImportDialog::on_pathBtn_clicked()
     file.replace("\\","/");
 #endif
     ui->privateKeyLineEdit->setText(file);
+
+    KeyDataPtr data = std::make_shared<KeyDataInfo>();
+    if(KeyDataUtil::ReadaPrivateKeyFromPath(ui->privateKeyLineEdit->text(),data))
+    {
+        if(!data->AccountName.isEmpty())
+        {
+            ui->accountNameLineEdit->setText(data->AccountName);
+        }
+    }
 }
 
 void ImportDialog::on_importBtn_clicked()

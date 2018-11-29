@@ -27,6 +27,7 @@
 #include "extra/transactiondb.h"
 #include "extra/transactiontype.h"
 #include "extra/WitnessConfig.h"
+#include "extra/LogToFile.h"
 
 #define ASSET_NAME "HX"
 #define ACCOUNT_ADDRESS_PREFIX  "HXN"
@@ -34,7 +35,7 @@
 #define MULTISIG_ADDRESS_PREFIX "HXM"
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.1.5"           // 版本号
+#define WALLET_VERSION "1.1.7"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 #define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"
@@ -103,6 +104,7 @@ struct WalletInfo
     QString blockId;
     QString blockAge;
     QString chainId;
+    QString participation;
 //    QStringList activeMiners;
 };
 
@@ -347,11 +349,14 @@ public:
     QProcess* nodeProc;
     QProcess* clientProc;
     QTimer    timerForStartExe;
+signals:
+    void exeOutputMessage(const QString &mess);
 private slots:
     void onNodeExeStateChanged();
     void onClientExeStateChanged();
     void delayedLaunchClient();
     void checkNodeExeIsReady();
+    void readNodeOutput();
 signals:
     void exeStarted();
 
@@ -500,6 +505,8 @@ public:
     void loadAutoWithdrawAmount();          // 从config.ini读取各币种自动提现限额 未设置的币种赋default值
     double getAssetAutoWithdrawLimit(QString symbol);
     void autoWithdrawSign();
+    int lastSignBlock = -1;
+    QStringList singedAccountTrxs;
 
     // 查询提现交易
     void fetchCrosschainTransactions();

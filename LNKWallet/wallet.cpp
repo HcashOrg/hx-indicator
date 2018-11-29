@@ -182,7 +182,7 @@ void HXChain:: startExe()
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
-
+    logToFile( QStringList() << "start" << NODE_PROC_NAME << strList);
 
 //    HXChain::getInstance()->initWebSocketManager();
 //    emit exeStarted();
@@ -191,15 +191,19 @@ void HXChain:: startExe()
 void HXChain::onNodeExeStateChanged()
 {
     qDebug() << "node exe state " << nodeProc->state();
+
     if(isExiting)   return;
 
     if(nodeProc->state() == QProcess::Starting)
     {
         qDebug() << QString("%1 is starting").arg(NODE_PROC_NAME);
+        logToFile( QStringList() << QString("%1 is starting").arg(NODE_PROC_NAME));
     }
     else if(nodeProc->state() == QProcess::Running)
     {
         qDebug() << QString("%1 is running").arg(NODE_PROC_NAME);
+        logToFile( QStringList() << QString("%1 is running").arg(NODE_PROC_NAME));
+
         connect(&timerForStartExe,SIGNAL(timeout()),this,SLOT(checkNodeExeIsReady()));
         timerForStartExe.start(1000);
     }
@@ -250,12 +254,26 @@ void HXChain::delayedLaunchClient()
 void HXChain::checkNodeExeIsReady()
 {
     QString str = nodeProc->readAllStandardError();
-    qDebug() << "node exe standardError: " << str ;
+    if(!str.isEmpty())
+    {
+        emit exeOutputMessage(str);
+        qDebug() << "node exe standardError: " << str ;
+        logToFile( QStringList() << "node exe standardError: " << str, 0, "node_output_log.txt" );
+    }
+
     if(str.contains("Chain ID is"))
     {
         timerForStartExe.stop();
         QTimer::singleShot(1000,this,SLOT(delayedLaunchClient()));
+        connect(nodeProc, SIGNAL(readyRead()), this, SLOT(readNodeOutput()));
     }
+}
+
+void HXChain::readNodeOutput()
+{
+    QString str = nodeProc->readAllStandardError();
+    emit exeOutputMessage(str);
+    logToFile( QStringList() << "node exe standardError: " << str, 0, "node_output_log.txt" );
 }
 
 void HXChain::ShowBubbleMessage(const QString &title, const QString &context, int msecs, QSystemTrayIcon::MessageIcon icon)
@@ -694,12 +712,16 @@ void HXChain::autoSaveWalletFile()
     QFileInfo fileInfo(appDataPath + "/wallet.json");
     if(fileInfo.size() > 0)
     {
-        QFile autoSaveFile(appDataPath + "/wallet.json.autobak");
-        qDebug() << "auto save remove " << autoSaveFile.remove();
-
         QFile file(appDataPath + "/wallet.json");
-        qDebug() << "auto save wallet.json " << file.copy(appDataPath + "/wallet.json.autobak");
-        qDebug() << "auto save wallet.json at configpath" << file.copy(walletConfigPath + "/wallet.json.autobak");
+
+        QString autoBakName = QString("/wallet_%1.json.autobak").arg(QDateTime::currentDateTime().toString("yyyy_MM_dd_hh_mm_ss"));
+        QFile autoSaveFile(appDataPath + autoBakName);
+        qDebug() << "auto save remove " << autoSaveFile.remove();
+        qDebug() << "auto save wallet.json " << file.copy(appDataPath + autoBakName);
+
+        QFile autoSaveFile2(walletConfigPath + autoBakName);
+        qDebug() << "auto save remove 2 " << autoSaveFile2.remove();
+        qDebug() << "auto save wallet.json at configpath" << file.copy(walletConfigPath + autoBakName);
     }
 
 
@@ -1193,29 +1215,38 @@ void HXChain::autoWithdrawSign()
 {
     if(qrand() % 5 != 0)    return;
 
-    int signedCount = 0;
-    QStringList keys = HXChain::getInstance()->applyTransactionMap.keys();
-    foreach (QString key, keys)
+    if(HXChain::getInstance()->walletInfo.blockAge.contains("second")
+            && HXChain::getInstance()->walletInfo.blockHeight > lastSignBlock)
     {
-        ApplyTransaction at = HXChain::getInstance()->applyTransactionMap.value(key);
-        QString generatedTrxId = HXChain::getInstance()->lookupGeneratedTrxByApplyTrxId(at.trxId);
-        QStringList guardAddresses = HXChain::getInstance()->lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
+        lastSignBlock = HXChain::getInstance()->walletInfo.blockHeight;
 
-        foreach (QString account, HXChain::getInstance()->getMyFormalGuards())
+        int signedCount = 0;
+        QStringList keys = HXChain::getInstance()->applyTransactionMap.keys();
+        foreach (QString key, keys)
         {
-            QString accountAddress = HXChain::getInstance()->accountInfoMap.value(account).address;
-            if(!guardAddresses.contains(accountAddress))
-            {
-                if(at.amount.toDouble() <= getAssetAutoWithdrawLimit(at.assetSymbol))
-                {
-                    HXChain::getInstance()->postRPC( "id-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
-                                                                                                             QJsonArray() << generatedTrxId << account));
+            ApplyTransaction at = HXChain::getInstance()->applyTransactionMap.value(key);
+            QString generatedTrxId = HXChain::getInstance()->lookupGeneratedTrxByApplyTrxId(at.trxId);
+            QStringList guardAddresses = HXChain::getInstance()->lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
 
-                    signedCount++;
-                    if(signedCount >= 3)    return;
+            foreach (QString account, HXChain::getInstance()->getMyFormalGuards())
+            {
+                if(singedAccountTrxs.contains(account + "+++" + generatedTrxId))    continue;
+                QString accountAddress = HXChain::getInstance()->accountInfoMap.value(account).address;
+                if(!guardAddresses.contains(accountAddress))
+                {
+                    if(at.amount.toDouble() <= getAssetAutoWithdrawLimit(at.assetSymbol))
+                    {
+                        HXChain::getInstance()->postRPC( "id-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
+                                                                                                                 QJsonArray() << generatedTrxId << account));
+                        singedAccountTrxs << account + "+++" + generatedTrxId;
+                        logToFile( QStringList() << "senator_sign_crosschain_transaction" << generatedTrxId << account);
+                        signedCount++;
+                        if(signedCount >= 3)    return;
+                    }
                 }
             }
         }
+
     }
 }
 

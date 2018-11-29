@@ -49,6 +49,7 @@
 #include "citizen/CitizenProposalPage.h"
 #include "dialog/ExitingWidget.h"
 #include "multisig/MultiSigPage.h"
+#include "autoUpdate/AutoUpdateNotify.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -80,7 +81,8 @@ Frame::Frame(): timer(NULL),
     contractTokenPage(NULL),
     citizenAccountPage(NULL),
     citizenProposalPage(NULL),
-    poundage(nullptr)
+    poundage(nullptr),
+    autoupdate(new AutoUpdateNotify())
 {
 
 #ifdef TARGET_OS_MAC
@@ -200,16 +202,16 @@ Frame::Frame(): timer(NULL),
         }
         else
         {
-            if(fileInfo.size() == 0)
-            {
-                QFile autoSaveFile(path + "/wallet.json.autobak");
-                if(autoSaveFile.exists())
-                {
-                    QFile oldFile(path + "/wallet.json");
-                    qDebug() << "remove corrupted wallet.json : " << oldFile.remove();
-                    qDebug() << "recover auto backup wallet.json : " << autoSaveFile.copy(path + "/wallet.json");
-                }
-            }
+//            if(fileInfo.size() == 0)
+//            {
+//                QFile autoSaveFile(path + "/wallet.json.autobak");
+//                if(autoSaveFile.exists())
+//                {
+//                    QFile oldFile(path + "/wallet.json");
+//                    qDebug() << "remove corrupted wallet.json : " << oldFile.remove();
+//                    qDebug() << "recover auto backup wallet.json : " << autoSaveFile.copy(path + "/wallet.json");
+//                }
+//            }
 
 
             HXChain::getInstance()->startExe();
@@ -397,6 +399,10 @@ void Frame::alreadyLogin()
 
     init();
     functionBar->DefaultShow();
+
+    //自动更新
+//    AutoUpdateNotify *autoupdate = new AutoUpdateNotify();
+    autoupdate->startAutoDetect();
 }
 
 
@@ -1528,7 +1534,10 @@ void Frame::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
-
+        if(autoupdate)
+        {
+            autoupdate->stopAutoDetect();
+        }
         HXChain::getInstance()->isExiting = true;
         HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()));
         exitingWidget = new ExitingWidget(this);
@@ -1540,6 +1549,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if("id-witness_node_stop" == id)
     {
+        qDebug()<<id;
         HXChain::getInstance()->nodeProc->waitForFinished(-1);
         HXChain::getInstance()->clientProc->waitForFinished(-1);
 
@@ -2313,7 +2323,7 @@ void Frame::jsonDataUpdated(QString id)
     if(id.startsWith("id-get_crosschain_transaction-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         result.prepend("{");
         result.append("}");
@@ -2436,7 +2446,7 @@ void Frame::jsonDataUpdated(QString id)
                 withdrawConfirmPage->refreshCrosschainTransactionsState();
             }
 
-            if(HXChain::getInstance()->autoWithdrawConfirm)
+            if(HXChain::getInstance()->autoWithdrawConfirm && HXChain::getInstance()->walletInfo.participation.toDouble() >= 80)
             {
                 HXChain::getInstance()->autoWithdrawSign();
             }
@@ -2636,6 +2646,7 @@ void Frame::newAccount(QString name)
 
 void Frame::onCloseWallet()
 {
+    qDebug()<<"closeclose";
     HXChain::getInstance()->postRPC( "id-lock-onCloseWallet", toJsonFormat( "lock", QJsonArray()));
 }
 

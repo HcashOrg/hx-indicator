@@ -16,6 +16,7 @@
 #include "wallet.h"
 
 static const QString UPDATE_DOC_NAME = "hyperexchange_wallet_upgrade.xml";
+static const QString UPDATE_LOG_INFO = "hyperexchange_walletupgrade_loginfo.xml";
 static const QString UPDATE_DIR_NAME = "temp";
 static const QString COPY_DIR_NAME = "copy";
 
@@ -50,6 +51,8 @@ public:
     QList<DownLoadData> updateList;//需要更新的列表
 
     bool isWrongHappened;
+
+    QString updateLogInfo;
 };
 
 UpdateProcess::UpdateProcess(QObject *parent)
@@ -73,6 +76,7 @@ void UpdateProcess::checkUpdate()
     disconnect(_p->updateNetwork,&UpdateNetWork::TaskEmpty,this,&UpdateProcess::DownloadEmptySlot);
     //先清空下载的数据
     UpdateProgressUtil::deleteDir(_p->downloadPath);
+    _p->updateLogInfo.clear();
 
     //本地版本文件解析
     qDebug()<<"解析本地文件``"<<QCoreApplication::applicationDirPath() + QDir::separator() + UPDATE_DOC_NAME;
@@ -99,6 +103,11 @@ void UpdateProcess::startUpdate()
 
 }
 
+const QString &UpdateProcess::getUpdateLogInfo() const
+{
+    return _p->updateLogInfo;
+}
+
 void UpdateProcess::GetLatestVersionInfoSlots()
 {
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
@@ -116,15 +125,32 @@ void UpdateProcess::GetLatestVersionInfoSlots()
     DownLoadData up;
     up.fileName = UPDATE_DOC_NAME;
     up.url = _p->serverAddr + serverVersion.url;
+//    up.url.replace(".xml","_test.xml");
     qDebug()<<up.url;
     up.filePath = _p->downloadPath + QDir::separator() + up.fileName;
     connect(_p->updateNetwork,&UpdateNetWork::DownLoadFinish,this,&UpdateProcess::DownLoadVersionConfigFinsihed);
-
+    //更新日志
+    DownLoadData up_log = up;
+    up_log.fileName = UPDATE_LOG_INFO;
+    up_log.url = up_log.url.mid(0,up_log.url.lastIndexOf("/")+1);
+    up_log.url += UPDATE_LOG_INFO;
+    up_log.filePath = _p->downloadPath + QDir::separator() + up_log.fileName;
+    _p->updateNetwork->DownLoadFile(up_log);
     _p->updateNetwork->DownLoadFile(up);
 }
 
-void UpdateProcess::DownLoadVersionConfigFinsihed()
+void UpdateProcess::DownLoadVersionConfigFinsihed(const QString &dstFilename)
 {
+    qDebug()<<"ddddddddddddd"<<dstFilename;
+    if(dstFilename.contains(UPDATE_LOG_INFO))
+    {
+        QFile file(dstFilename);
+        if(!file.open(QIODevice::ReadOnly)) return;
+        _p->updateLogInfo = file.readAll();
+        qDebug()<<"iiiiiiiiiiiiii"<<_p->updateLogInfo;
+        file.close();
+        return;
+    }
     disconnect(_p->updateNetwork,&UpdateNetWork::DownLoadFinish,this,&UpdateProcess::DownLoadVersionConfigFinsihed);
 
     //下载完配置文件后，对比本地、服务器配置，列出需要更新的配置项
@@ -136,10 +162,10 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
         return;//说明出错，没必要进行了
     }
 
-    if( _p->localVersionData->version.isEmpty())
-    {
+//    if( _p->localVersionData->version.isEmpty())
+//    {
         _p->localVersionData->version = WALLET_VERSION;
-    }
+//    }
 
     if( UpdateProgressUtil::CompareVersion( _p->localVersionData->version, _p->serverVersionData->version)
             == UpdateProgressUtil::AFTER)
@@ -149,13 +175,13 @@ void UpdateProcess::DownLoadVersionConfigFinsihed()
         UpdateProgressUtil::ExtractUpdateData(_p->localVersionData,_p->serverVersionData,
                                               _p->downloadPath+QDir::separator()+COPY_DIR_NAME,_p->downloadPath,
                                               _p->updateList);
-        qDebug()<<"download size---"<<_p->updateList.size();
+        qDebug()<<"download size---"<<_p->updateList.size()<<_p->serverVersionData->version;
         //发送版本信息
-        emit NewstVersionSignal(_p->updateList.empty()?"":_p->serverVersionData->version);
+        emit NewstVersionSignal(_p->updateList.empty()?"":_p->serverVersionData->version,_p->serverVersionData->isUpdateForced);
     }
     else
     {
-        emit NewstVersionSignal("");
+        emit NewstVersionSignal("",false);
     }
 }
 
@@ -171,10 +197,14 @@ void UpdateProcess::DownloadEmptySlot()
 
 }
 
-void UpdateProcess::DownloadWrongSlot(const QString &fileName)
+void UpdateProcess::DownloadWrongSlot(const QString &filePath)
 {
-    _p->isWrongHappened = true;
-    emit updateWrong();
+    qDebug()<<"pppppppp"<<filePath;
+    if(!filePath.contains(UPDATE_LOG_INFO))
+    {
+        _p->isWrongHappened = true;
+        emit updateWrong();
+    }
 }
 
 void UpdateProcess::GetLatestVersionInfo()

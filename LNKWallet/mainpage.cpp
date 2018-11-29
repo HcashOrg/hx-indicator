@@ -28,6 +28,8 @@
 #include "control/BlankDefaultWidget.h"
 #include "miner/registerdialog.h"
 
+#include "capitalTransferPage/CaptialNotify.h"
+
 MainPage::MainPage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MainPage)
@@ -79,10 +81,17 @@ MainPage::MainPage(QWidget *parent) :
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->accountTableWidget);
 
+    activeTunnelMoneyNotify();
 }
 
 MainPage::~MainPage()
 {
+    if(captialNotify)
+    {
+        captialNotify->stopCheckTunnelMoney();
+        delete captialNotify;
+        captialNotify = nullptr;
+    }
     delete ui;
 }
 
@@ -132,6 +141,10 @@ void MainPage::updateAccountList()
                 toolButton->setText(ui->accountTableWidget->item(i,j)->text());
                 ui->accountTableWidget->setCellWidget(i,j,toolButton);
                 connect(toolButton,&ToolButtonWidget::clicked,std::bind(&MainPage::on_accountTableWidget_cellClicked,this,i,j));
+                if(5 == j && captialNotify)
+                {
+                    toolButton->setRedpointVisiable(!captialNotify->isAccountTunnelMoneyEmpty(ui->accountComboBox->currentText(),symbol));
+                }
             }
         }
 
@@ -526,4 +539,27 @@ void MainPage::on_registerBtn_clicked()
         RegisterDialog registerDialog;
         registerDialog.pop();
     }
+}
+
+void MainPage::activeTunnelMoneyNotify()
+{
+    captialNotify = new CaptialNotify(this);
+    connect(captialNotify,&CaptialNotify::checkTunnelMoneyFinish,[this](){
+        QString accountName = this->ui->accountComboBox->currentText();
+        //获取该账户所有的tunnel余额，判断是否充足
+        for(int i = 0;i < this->ui->accountTableWidget->rowCount();++i)
+        {
+            QString assetName = this->ui->accountTableWidget->item(i,0)->text();
+            bool isMoneyEmpty = this->captialNotify->isAccountTunnelMoneyEmpty(accountName,assetName);
+            if(ToolButtonWidget *button = dynamic_cast<ToolButtonWidget*>(this->ui->accountTableWidget->cellWidget(i,5)))
+            {
+//                qDebug()<<"nnnnnnnnnn"<<accountName<<assetName<<isMoneyEmpty;
+                button->setRedpointVisiable(!isMoneyEmpty);
+            }
+
+        }
+    });
+    //开启自动获取划转账户金额提醒
+    captialNotify->startCheckTunnelMoney();
+
 }

@@ -4,11 +4,12 @@
 
 #include "commondialog.h"
 #include "websocketmanager.h"
-
+#include "wallet.h"
 
 #include <QTimer>
 #include <QDebug>
 #include <QMovie>
+#include <QScrollBar>
 #include <QDesktopServices>
 
 
@@ -29,6 +30,10 @@ WaitingForSync::WaitingForSync(QWidget *parent) :
     timerForWSConnected = new QTimer(this);
     connect(timerForWSConnected,SIGNAL(timeout()),this,SLOT(checkConnected()));
     timerForWSConnected->start(1000);
+
+
+    connect(HXChain::getInstance(),&HXChain::exeOutputMessage,this,&WaitingForSync::outputMessage);
+
 //    HXChain::getInstance()->initWorkerThreadManager();
 //    connect(HXChain::getInstance()->workerManager,SIGNAL(allConnected()),this,SIGNAL(sync()));
 }
@@ -43,6 +48,20 @@ void WaitingForSync::on_closeBtn_clicked()
 {
     qDebug()<<"waitforclose";
     emit closeWallet();
+}
+
+void WaitingForSync::outputMessage(const QString &message)
+{
+    if(!message.isEmpty())
+    {
+        ui->waitSync->append(message);
+        QScrollBar *scrollbar = ui->waitSync->verticalScrollBar();
+        if(scrollbar)
+        {
+            scrollbar->setSliderPosition(scrollbar->maximum());
+        }
+
+    }
 }
 
 void WaitingForSync::checkConnected()
@@ -75,18 +94,17 @@ void WaitingForSync::InitStyle()
 {
     setAutoFillBackground(true);
     QPalette palette;
-    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/login_back.png").scaled(this->size())));
+    palette.setBrush(QPalette::Window,  QBrush(QPixmap(":/ui/wallet_ui/cover.png").scaled(this->size())));
     setPalette(palette);
 
-    ui->loadingLabel->setFont(QFont("黑体",12,53));
     QPalette pa;
     pa.setColor(QPalette::WindowText,QColor(243,241,250));
     ui->label_version->setPalette(pa);
 
-    ui->loadingLabel->setPalette(pa);
+    ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/cover_close.png);background-repeat: no-repeat;background-position: center;border: none;}");
 
-    ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
-    ui->welcome->setPixmap(QPixmap(":/ui/wallet_ui/Welcome.png").scaled(ui->welcome->width(), ui->welcome->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    ui->waitSync->setStyleSheet("QTextEdit#waitSync{background-color: transparent;color: rgb(255,255,255);\
+                                        font: 14px \"Microsoft YaHei UI Light\";border:none;padding: 0px 10px 0px 6px;}");
 }
 
 // 比较版本号 若 a > b返回 1, a = b返回 0, a < b 返回 -1
@@ -136,12 +154,12 @@ int compareVersion( QString a, QString b)
 
 void WaitingForSync::paintEvent(QPaintEvent *e)
 {
-    QPainter painter(this);
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(QBrush(QColor(243,241,250)));
-    painter.drawRect(0,0,228,24);
-    painter.drawPixmap(7,5,32,12,QPixmap(":/ui/wallet_ui/hx_label_logo.png").scaled(32,12,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
-    painter.drawPixmap(94,38,36,36,QPixmap(":/ui/wallet_ui/logo_center.png").scaled(36,36,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+//    QPainter painter(this);
+//    painter.setPen(Qt::NoPen);
+//    painter.setBrush(QBrush(QColor(243,241,250)));
+//    painter.drawRect(0,0,228,24);
+//    painter.drawPixmap(7,5,32,12,QPixmap(":/ui/wallet_ui/hx_label_logo.png").scaled(32,12,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
+//    painter.drawPixmap(94,38,36,36,QPixmap(":/ui/wallet_ui/logo_center.png").scaled(36,36,Qt::IgnoreAspectRatio,Qt::SmoothTransformation));
 
     QWidget::paintEvent(e);
 }
