@@ -272,8 +272,18 @@ void HXChain::checkNodeExeIsReady()
 void HXChain::readNodeOutput()
 {
     QString str = nodeProc->readAllStandardError();
-    emit exeOutputMessage(str);
-    logToFile( QStringList() << "node exe standardError: " << str, 0, "node_output_log.txt" );
+    if(!str.isEmpty())
+    {
+        emit exeOutputMessage(str);
+        logToFile( QStringList() << "node exe standardError: " << str, 0, "node_output_log.txt" );
+    }
+
+    QString str2 = nodeProc->readAllStandardOutput();
+    if(!str2.isEmpty())
+    {
+        emit exeOutputMessage(str2);
+        logToFile( QStringList() << "node exe standardOutput: " << str2, 0, "node_output_log.txt" );
+    }
 }
 
 void HXChain::ShowBubbleMessage(const QString &title, const QString &context, int msecs, QSystemTrayIcon::MessageIcon icon)
