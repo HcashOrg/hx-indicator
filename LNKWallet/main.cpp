@@ -149,7 +149,8 @@ int main(int argc, char *argv[])
     qDebug()<<QDir::currentPath()<<QCoreApplication::applicationDirPath()<<QCoreApplication::applicationFilePath();
 #ifdef WIN32
     //提前加载libeay32库
-    QString libeay = QCoreApplication::applicationDirPath()+"libeay32.dll";
+    QString libeay = QCoreApplication::applicationDirPath()+"/libeay32.dll";
+    qDebug()<<libeay;
     ::LoadLibrary(LPCWSTR(libeay.utf16()));
 #endif
 #ifdef TARGET_OS_MAC
