@@ -80,7 +80,7 @@ void ImportDialog::on_pathBtn_clicked()
     QString file = QFileDialog::getOpenFileName(this, tr("Choose your private key file."),"","(*.lpk *.elpk)");
 #ifdef WIN32
     file.replace("\\","/");
-#endif	
+#endif
     ui->privateKeyLineEdit->setText(file);
 }
 
@@ -289,7 +289,7 @@ void ImportDialog::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 qDebug()  << id << result;
-        if( result == "\"result\":true")
+        if( result.startsWith("\"result\":"))
         {
 //            ui->importBtn->setEnabled(true);
 
@@ -298,7 +298,7 @@ qDebug()  << id << result;
             HXChain::getInstance()->postRPC( "id-get_account-ImportDialog-" + ui->accountNameLineEdit->text(), toJsonFormat( "get_account", QJsonArray() << ui->accountNameLineEdit->text() ));
 
         }
-        else if( result.mid(0,8) == "\"error\":")
+        else if( result.startsWith("\"error\":"))
         {
             ErrorResultDialog errorResultDialog;
             errorResultDialog.setInfoText(tr("Fail to import key!"));
