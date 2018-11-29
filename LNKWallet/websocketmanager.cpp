@@ -137,9 +137,10 @@ void WebSocketManager::onTimer()
                        .arg(processingRpc) );
         }
 
-        if(loopCount >= 30000 && loopCount % 30000 == 0)
+        if(loopCount >= 60000 && loopCount % 60000 == 0)
         {
             processRPC("testrpc+info", toJsonFormat("info", QJsonArray()));
+            logToFile( QStringList() << QString("test rpc connect: %1 ").arg(QString::number(loopCount / 60000)));
         }
         return;
     }
@@ -177,6 +178,9 @@ void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
         loopCount = 0;
         processingRpc.clear();
         busy = false;
+
+        logToFile( QStringList() << QString("test rpc connect: successfully "));
+
         return;
     }
 
