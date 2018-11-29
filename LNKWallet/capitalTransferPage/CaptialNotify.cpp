@@ -13,7 +13,7 @@ public:
     {
         accountInfo()
             :assetNumber("0")
-
+            ,captialFee(0)
         {
 
         }
@@ -23,6 +23,7 @@ public:
         QString tunnelAddress;
         QString assetSymbol;
         QString assetNumber;
+        double captialFee;
     };
 public:
     DataPrivate()
@@ -77,8 +78,8 @@ public:
                         break;
                     }
                 }
-                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()),'f',pre);
-                if((*it)->assetNumber.toDouble() < 1e-8)
+                (*it)->assetNumber = QString::number(std::max<double>(0,number.toDouble()-(*it)->captialFee),'f',pre);
+                if((*it)->assetNumber.toDouble() < 1e-11)
                 {
                     accounts.erase(it);
                 }
@@ -213,6 +214,7 @@ void CaptialNotify::updateData()
                 da->accountAddress = info.address;
                 da->accountName = info.name;
                 da->assetSymbol = assetInfo.symbol;
+                da->captialFee = static_cast<double>(assetInfo.fee)/std::max<int>(1,static_cast<int>(pow(10,assetInfo.precision)));
                 _p->accounts.push_back(da);
             }
         }
