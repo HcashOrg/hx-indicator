@@ -18,8 +18,8 @@ win32{
     QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
     QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
 
-    LIBS += -lDbgHelp
-    LIBS += -limm32
+#    LIBS += -lDbgHelp
+#    LIBS += -limm32
     LIBS += -lShLwApi
     LIBS += User32.Lib
 }
@@ -497,7 +497,6 @@ TRANSLATIONS +=   wallet_simplified_Chinese.ts  wallet_English.ts
 DISTFILES += \
     contact/search.png \
     leveldb/leveldb.lib \
-    leveldb/ShLwApi.Lib \
     libqrencode.a \
     qrencode.lib \
     pic2/Thumbs.db \
