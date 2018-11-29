@@ -78,7 +78,6 @@ HXChain::HXChain()
 
         configFile->setValue("/settings/autoBackupWallet",true);
         autoBackupWallet = true;
-
     }
     else
     {
@@ -174,11 +173,13 @@ void HXChain:: startExe()
 #endif
             ;
 
-    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool())
+    if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
@@ -272,8 +273,18 @@ void HXChain::checkNodeExeIsReady()
 void HXChain::readNodeOutput()
 {
     QString str = nodeProc->readAllStandardError();
-    emit exeOutputMessage(str);
-    logToFile( QStringList() << "node exe standardError: " << str, 0, "node_output_log.txt" );
+    if(!str.isEmpty())
+    {
+        emit exeOutputMessage(str);
+        logToFile( QStringList() << "node exe standardError: " << str, 0, "node_output_log.txt" );
+    }
+
+    QString str2 = nodeProc->readAllStandardOutput();
+    if(!str2.isEmpty())
+    {
+        emit exeOutputMessage(str2);
+        logToFile( QStringList() << "node exe standardOutput: " << str2, 0, "node_output_log.txt" );
+    }
 }
 
 void HXChain::ShowBubbleMessage(const QString &title, const QString &context, int msecs, QSystemTrayIcon::MessageIcon icon)
