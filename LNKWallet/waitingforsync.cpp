@@ -9,6 +9,7 @@
 #include <QTimer>
 #include <QDebug>
 #include <QMovie>
+#include <QScrollBar>
 #include <QDesktopServices>
 
 
@@ -54,6 +55,12 @@ void WaitingForSync::outputMessage(const QString &message)
     if(!message.isEmpty())
     {
         ui->waitSync->append(message);
+        QScrollBar *scrollbar = ui->waitSync->verticalScrollBar();
+        if(scrollbar)
+        {
+            scrollbar->setSliderPosition(scrollbar->maximum());
+        }
+
     }
 }
 

@@ -391,7 +391,7 @@ void DepositAutomatic::updateData()
                 da->accountAddress = info.address;
                 da->accountName = info.name;
                 da->assetSymbol = assetInfo.symbol;
-                da->captialFee = static_cast<double>(assetInfo.fee)/std::max<int>(1,assetInfo.precision);
+                da->captialFee = static_cast<double>(assetInfo.fee)/std::max<int>(1,static_cast<int>(pow(10,assetInfo.precision)));
                 _p->accounts.push_back(da);
             }
         }
