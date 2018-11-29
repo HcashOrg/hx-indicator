@@ -136,6 +136,13 @@ void WebSocketManager::onTimer()
             logToFile( QStringList() << QString("rpc timeout: %1 %2").arg(QString::number(loopCount / 1000))
                        .arg(processingRpc) );
         }
+
+        if(loopCount >= 60000 && loopCount % 60000 == 0)
+        {
+            processRPC("testrpc+info", toJsonFormat("info", QJsonArray()));
+            logToFile( QStringList() << QString("test rpc connect: %1 ").arg(QString::number(loopCount / 60000)));
+        }
+        return;
     }
 
     if(!busy)
@@ -163,6 +170,20 @@ void WebSocketManager::onConnected()
 
 void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
 {
+    if(m_rpcId == "testrpc+info")
+    {
+        // 如果 rpc还能连接 则丢弃当前 继续处理余下的rpc指令
+        m_buff.clear();
+        m_rpcId.clear();
+        loopCount = 0;
+        processingRpc.clear();
+        busy = false;
+
+        logToFile( QStringList() << QString("test rpc connect: successfully "));
+
+        return;
+    }
+
     if(processingRpc.isEmpty())   return;
 //    if(pendingRpcs.size() <= 0)   return;
 //    qDebug() << "message received: " << pendingRpcs.at(0) << _isLastFrame;
