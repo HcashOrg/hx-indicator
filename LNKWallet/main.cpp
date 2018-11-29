@@ -150,8 +150,11 @@ int main(int argc, char *argv[])
 #ifdef WIN32
     //提前加载libeay32库
     QString libeay = QCoreApplication::applicationDirPath()+"/libeay32.dll";
+    QString ssl = QCoreApplication::applicationDirPath()+"/ssleay32.dll";
     qDebug()<<libeay;
-    ::LoadLibrary(LPCWSTR(libeay.utf16()));
+//    ::LoadLibrary(LPCWSTR(libeay.utf16()));
+//    ::LoadLibrary(LPCWSTR(ssl.utf16()));
+
 #endif
 #ifdef TARGET_OS_MAC
     QDir::setCurrent( QCoreApplication::applicationDirPath());
