@@ -4320,7 +4320,7 @@ Cover it or not?</source>
     <message>
         <location filename="FeeChooseWidget.cpp" line="267"/>
         <source> less than </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">少于</translation>
     </message>
 </context>
 <context>
@@ -6109,68 +6109,106 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="233"/>
+        <location filename="miner/minerpage.cpp" line="237"/>
         <source>Transaction of foreclose-asset has been sent out!</source>
         <translation type="unfinished">赎回资产交易已发出！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="240"/>
+        <location filename="miner/minerpage.cpp" line="244"/>
         <source>Fail to foreclose asset from miner!</source>
         <translation type="unfinished">从miner赎回资产失败！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="282"/>
+        <location filename="miner/minerpage.cpp" line="286"/>
         <source>get income</source>
         <translation type="unfinished">领取收入</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="322"/>
+        <location filename="miner/minerpage.cpp" line="326"/>
         <source>Transaction of get-income has been sent out!</source>
         <oldsource>Transaction of obtain-income has been sent out!</oldsource>
         <translation type="unfinished">领取挖矿收入交易已发出！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="333"/>
+        <location filename="miner/minerpage.cpp" line="337"/>
         <source>This account&apos;s mining income is less than %1 %2 ! You can not get it.</source>
         <oldsource>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</oldsource>
         <translation type="unfinished">该账户的挖矿收益还不到 %1 %2，还不能领取！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="338"/>
+        <location filename="miner/minerpage.cpp" line="342"/>
         <source>Fail to get mining income!</source>
         <oldsource>Fail to obtain mining income!</oldsource>
         <translation type="unfinished">领取挖矿收益失败！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="363"/>
+        <location filename="miner/minerpage.cpp" line="367"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished">钱包中没有未注册账户！</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="506"/>
+        <location filename="miner/minerpage.cpp" line="510"/>
         <source>total </source>
         <translation type="unfinished">总计</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="517"/>
+        <location filename="miner/minerpage.cpp" line="521"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="683"/>
+        <location filename="miner/minerpage.cpp" line="687"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="685"/>
+        <location filename="miner/minerpage.cpp" line="689"/>
         <source>MORTGAGE</source>
         <translation type="unfinished">质押</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="900"/>
-        <location filename="miner/minerpage.cpp" line="1029"/>
+        <location filename="miner/minerpage.cpp" line="904"/>
+        <location filename="miner/minerpage.cpp" line="1033"/>
         <source>You need to pay %1 %2 for this operation. Continue?</source>
         <translation type="unfinished">你需要支付 %1 %2 手续费。是否继续？</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1082"/>
+        <source>Citizen:</source>
+        <translation type="unfinished">Citizen:</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1083"/>
+        <source>Fee:</source>
+        <translation type="unfinished">手续费:</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1084"/>
+        <source>Weight:</source>
+        <translation type="unfinished">权重:</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1085"/>
+        <source>LastProduce:</source>
+        <translation type="unfinished">上次产块高度:</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1086"/>
+        <source>Missed:</source>
+        <translation type="unfinished">Miss块数:</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1087"/>
+        <source>Total:</source>
+        <translation type="unfinished">总产块数:</translation>
+    </message>
+    <message>
+        <source>Weight:%1   Total:%2   Missed:%3
+LastProduce:%4   Fee:%5%</source>
+        <oldsource>Weight:%1 Total:%2 Missed:%3
+LastProduce:%4 Fee:%5%</oldsource>
+        <translation type="obsolete">权重:%1   总出块:%2   Miss块:%3
+上次出块高度:%4   矿池手续费:%5%</translation>
     </message>
 </context>
 <context>
