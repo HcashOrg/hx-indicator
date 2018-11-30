@@ -402,7 +402,9 @@ void Frame::alreadyLogin()
 
     //自动更新
 //    AutoUpdateNotify *autoupdate = new AutoUpdateNotify();
+#ifndef SAFE_VERSION
     autoupdate->startAutoDetect();
+#endif
 }
 
 
@@ -1536,7 +1538,9 @@ void Frame::jsonDataUpdated(QString id)
         qDebug() << id << result;
         if(autoupdate)
         {
+#ifndef SAFE_VERSION
             autoupdate->stopAutoDetect();
+#endif
         }
         HXChain::getInstance()->isExiting = true;
         HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()));
