@@ -73,6 +73,7 @@ void CapitalTransferPage::ConfirmSlots()
     QString actualShow = _p->actualNumber + " "+_p->symbol;
     QString feeShow = ui->label_fee->text();
     QString totalShow = ui->lineEdit_number->text() + " "+_p->symbol;
+    qDebug()<<"pppppppppppp"<<_p->actualNumber;
     CapitalConfirmWidget *confirmWidget = new CapitalConfirmWidget(CapitalConfirmWidget::CapitalConfirmInput(
                                                                    ui->radioButton_deposit->isChecked()?_p->account_address:ui->lineEdit_address->text(),
                                                                    actualShow,feeShow,totalShow),HXChain::getInstance()->mainFrame);
@@ -148,6 +149,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
     else if("captial-get_current_multi_address" == id)
     {//获取到多签地址
         QString result = HXChain::getInstance()->jsonDataValue( id);
+        qDebug()<<id<<result;
         if( result.isEmpty() || result.startsWith("\"error"))
         {
             ui->radioButton_deposit->setEnabled(false);
@@ -344,7 +346,7 @@ void CapitalTransferPage::CreateTransaction()
     }
     else if(_p->symbol.startsWith("ERC"))
     {
-        _p->actualNumber = ui->lineEdit_number->text().toDouble();
+        _p->actualNumber = ui->lineEdit_number->text();
         if(ui->lineEdit_number->text().toDouble() < 0.001)
         {
             ui->label_tip->setText(tr("number cannot less than ") + "0.001");
@@ -377,6 +379,7 @@ void CapitalTransferPage::CreateTransaction()
     ui->label_tip->setVisible(false);
     if(ui->radioButton_deposit->isChecked())
     {//充值修改，发送充值指令问题
+        qDebug()<<"hhhhhhhhhhhhhh"<<_p->actualNumber;
         HXChain::getInstance()->postRPC( "captial-createrawtransaction",
                                          toJsonFormat( "createrawtransaction", QJsonArray()
                                          << _p->tunnel_account_address<<_p->multisig_address<<_p->actualNumber<<_p->symbol ));
