@@ -26,7 +26,7 @@ ChangePayBackDialog::~ChangePayBackDialog()
 
 void ChangePayBackDialog::ChangePaybackSlots()
 {
-    if( ui->lineEdit_feeNumber->text().isEmpty()) return;
+    if( ui->lineEdit_feeNumber->text().isEmpty() || ui->account->currentText().isEmpty()) return;
 
     int number = ui->lineEdit_feeNumber->text().toInt();
     //输入密码框
@@ -37,7 +37,7 @@ void ChangePayBackDialog::ChangePaybackSlots()
             feeWidget->updatePoundageID();
         }
         HXChain::getInstance()->postRPC("id_change_payback_rate",toJsonFormat("set_citizen_pledge_pay_back_rate",
-                                        QJsonArray()<<this->citizenName<<number<<true));
+                                        QJsonArray()<<this->ui->account->currentText()<<number<<true));
 
     });
     wi->show();

@@ -14,17 +14,22 @@ class DepositPage::DepositPagePrivate
 public:
     DepositPagePrivate(const DepositDataInput & data)
         :address(data.accountAddress),name(data.accountName),assetSymbol(data.assetType)
-        ,assetID(data.assetID)
+        ,assetID(data.assetID),actualAssetSymbol(data.assetType)
         ,qrcodeWidget(new DepositQrcodeWidget())
         ,recordWidget(nullptr)
         ,tunnelData(std::make_shared<TunnelData>())
     {
+        if(actualAssetSymbol.startsWith("ERC"))
+        {
+            actualAssetSymbol = "ETH";
+        }
     }
 public:
     QString address;//地址
-    QString name;
-    QString assetSymbol;
-    QString assetID;
+    QString name;//账户名
+    QString assetSymbol;//资产名
+    QString assetID;//资产ID
+    QString actualAssetSymbol;//实际资产名，例如ERC开头的资产，实际资产是ETH
 
     std::shared_ptr<TunnelData> tunnelData;//通道账户信息
 
@@ -43,8 +48,6 @@ DepositPage::DepositPage(const DepositDataInput & data,QWidget *parent) :
     ui->setupUi(this);
     _p->recordWidget = new DepositRecrdWideget(this);
     InitWidget();
-
-    //HXChain::getInstance()->ShowBubbleMessage("fdfd","fdsfds",5);
 }
 
 DepositPage::~DepositPage()
@@ -65,28 +68,38 @@ void DepositPage::jsonDataUpdated(QString id)
         _p->tunnle_address = DepositDataUtil::parseTunnelAddress(result);
         if(_p->tunnle_address.isEmpty())
         {
-            //如果本地没有缓存，则新建，否则生成一个
-            QString tunn = HXChain::getInstance()->configFile->value(QString("/tunnel/%1%2").arg(_p->address).arg(_p->assetSymbol)).toString();
-            if(tunn.isEmpty())
+            if(_p->actualAssetSymbol == _p->assetSymbol)
             {
-                //生成通道账户
-                GenerateAddress();
+                QString tunn = HXChain::getInstance()->configFile->value(QString("/tunnel/%1%2").arg(_p->address).arg(_p->actualAssetSymbol)).toString();
+                //如果本地没有缓存，则新建，否则生成一个
+                if(tunn.isEmpty())
+                {
+                    //生成通道账户
+                    GenerateAddress();
+                }
+                else
+                {
+                    //发送绑定信号
+                    _p->tunnelData->address = tunn;
+
+                    //绑定通道账户
+                    CommonDialog dia(CommonDialog::OkOnly);
+                    dia.setText(tr("tunnel account checked!please update sys-time!"));
+                    dia.pop();
+
+                    BindTunnelAccount();
+                }
             }
             else
             {
-                //发送绑定信号
-                _p->tunnelData->address = tunn;
+                //如果是ERC这种资产//先查询有没有ETHtunnel
+                GetActualBindTunnelAccount();
 
-                //绑定通道账户
-                CommonDialog dia(CommonDialog::OkOnly);
-                dia.setText(tr("tunnel account checked!please update sys-time!"));
-                dia.pop();
-
-                BindTunnelAccount();
             }
         }
         else
         {
+
             //检测用户是否有对应tunnel的私钥
             checkTunnelPriKey();
         }
@@ -129,22 +142,30 @@ void DepositPage::jsonDataUpdated(QString id)
 
         DepositDataUtil::ParseTunnelData(result,_p->tunnelData);
         //_p->fee->isHidden()?_p->fee->show():0;
-
+        if(_p->assetSymbol != _p->actualAssetSymbol)
+        {
+            BindActualTunnelAccount();
+        }
         BindTunnelAccount();
     }
-    else if("deposit_bind_tunnel_account" == id)
+    else if(id.startsWith("deposit_bind_tunnel_account_"))
     {
         QString result = HXChain::getInstance()->jsonDataValue( id);
         qDebug() << id << result;
+        QString bindSymbol = id.mid(QString("deposit_bind_tunnel_account_").length());
         if( result.isEmpty() || result.startsWith("\"error"))
         {
             _p->qrcodeWidget->SetQRString(tr("cannot bind tunnel address.%1").arg(_p->tunnelData->address));
             return;
         }
+        HXChain::getInstance()->configFile->setValue(QString("/tunnel/%1%2").arg(_p->address).arg(_p->actualAssetSymbol),_p->tunnelData->address);
+        if(bindSymbol != _p->assetSymbol)
+        {
+            return;
+        }
         result.prepend("{");
         result.append("}");
         _p->qrcodeWidget->SetQRString(_p->tunnelData->address);
-        HXChain::getInstance()->configFile->setValue(QString("/tunnel/%1%2").arg(_p->address).arg(_p->assetSymbol),_p->tunnelData->address);
         //qDebug()<<"tunnelrunnel"<<result;
         //提示保存信息
         HXChain::getInstance()->configFile->setValue("/settings/backupNeeded",true);
@@ -157,6 +178,43 @@ void DepositPage::jsonDataUpdated(QString id)
             backupWalletDialog.pop();
         }
 
+    }
+    else if(id == "deposit_get_actual_binding_account")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue( id);
+        qDebug() << id << result;
+        result.prepend("{");
+        result.append("}");
+        //提取通道账户地址
+        _p->tunnle_address = DepositDataUtil::parseTunnelAddress(result);
+        if(_p->tunnle_address.isEmpty())
+        {
+            QString tunn = HXChain::getInstance()->configFile->value(QString("/tunnel/%1%2").arg(_p->address).arg(_p->actualAssetSymbol)).toString();
+            if(tunn.isEmpty())
+            {
+                //生成实际资产
+                GenerateAddress();
+            }
+            else
+            {
+                //发送绑定信号
+                _p->tunnelData->address = tunn;
+                //既然已经记录过，但是实际未绑定，可能是时间导致的
+                CommonDialog dia(CommonDialog::OkOnly);
+                dia.setText(tr("tunnel account checked!please update sys-time!"));
+                dia.pop();
+                //绑定tunnel
+                BindActualTunnelAccount();
+                BindTunnelAccount();
+            }
+        }
+        else
+        {
+            //发送绑定信号
+            _p->tunnelData->address = _p->tunnle_address;
+            //绑定tunnel
+            BindTunnelAccount();
+        }
     }
 }
 
@@ -177,6 +235,13 @@ void DepositPage::GetBindTunnelAccount()
 
 }
 
+void DepositPage::GetActualBindTunnelAccount()
+{
+    HXChain::getInstance()->postRPC( "deposit_get_actual_binding_account",
+                                     toJsonFormat( "get_binding_account", QJsonArray()
+                                     << _p->name<<_p->actualAssetSymbol ));
+}
+
 void DepositPage::GenerateAddress()
 {
     if(!HXChain::getInstance()->ValidateOnChainOperation())
@@ -185,10 +250,9 @@ void DepositPage::GenerateAddress()
         close();
         return;
     }
-
     HXChain::getInstance()->postRPC("deposit_create_crosschain_symbol",
                                     toJsonFormat("create_crosschain_symbol",
-                                                 QJsonArray()<<_p->assetSymbol)
+                                                 QJsonArray()<<_p->actualAssetSymbol)
                                     );
 }
 
@@ -202,9 +266,25 @@ void DepositPage::BindTunnelAccount()
         close();
         return;
     }
-    HXChain::getInstance()->postRPC("deposit_bind_tunnel_account",
+    HXChain::getInstance()->postRPC("deposit_bind_tunnel_account_"+_p->assetSymbol,
                                     toJsonFormat("bind_tunnel_account",
                                                  QJsonArray()<<_p->name<<_p->tunnelData->address<<_p->assetSymbol<<true));
+}
+
+void DepositPage::BindActualTunnelAccount()
+{
+    //绑定账户
+    if(!HXChain::getInstance()->ValidateOnChainOperation())
+    {
+
+        emit backBtnVisible(false);
+        close();
+        return;
+    }
+
+    HXChain::getInstance()->postRPC("deposit_bind_tunnel_account_"+_p->actualAssetSymbol,
+                                        toJsonFormat("bind_tunnel_account",
+                                                     QJsonArray()<<_p->name<<_p->tunnelData->address<<_p->actualAssetSymbol<<true));
 }
 
 void DepositPage::checkTunnelPriKey()

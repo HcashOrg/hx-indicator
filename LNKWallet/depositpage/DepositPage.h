@@ -35,8 +35,10 @@ private slots:
 
 private:
     void GetBindTunnelAccount();
+    void GetActualBindTunnelAccount();
     void GenerateAddress();
     void BindTunnelAccount();
+    void BindActualTunnelAccount();
     void checkTunnelPriKey();
 private:
     void InitWidget();
