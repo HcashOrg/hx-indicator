@@ -3913,27 +3913,28 @@ Contract created successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="82"/>
+        <location filename="depositpage/DepositPage.cpp" line="87"/>
+        <location filename="depositpage/DepositPage.cpp" line="204"/>
         <source>tunnel account checked!please update sys-time!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="106"/>
+        <location filename="depositpage/DepositPage.cpp" line="119"/>
         <source>private-key-missing!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="108"/>
+        <location filename="depositpage/DepositPage.cpp" line="121"/>
         <source>Cann&apos;t find pri-key in your wallet!Please contact official team for supportting!</source>
         <translation type="unfinished">该通道账户对应私钥丢失，请联系官方团队为您提供技术支持！</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="120"/>
+        <location filename="depositpage/DepositPage.cpp" line="133"/>
         <source>cannot generate tunnel account</source>
         <translation type="unfinished">未能生成tunnel账户</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="141"/>
+        <location filename="depositpage/DepositPage.cpp" line="158"/>
         <source>cannot bind tunnel address.%1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3942,7 +3943,7 @@ Contract created successfully!</source>
         <translation type="obsolete">未能绑定tunnel账户</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="153"/>
+        <location filename="depositpage/DepositPage.cpp" line="174"/>
         <source>Wallet data updated! Please backup your wallet!</source>
         <oldsource>You Should Back Up Your Wallet!</oldsource>
         <translation type="unfinished">钱包数据已更新！请重新备份您的钱包！</translation>
@@ -8999,7 +9000,7 @@ p, li { white-space: pre-wrap; }
         <location filename="transfer/transferpage.cpp" line="171"/>
         <location filename="transfer/transferpage.cpp" line="320"/>
         <source>Invalid account name!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">无效的账户名！</translation>
     </message>
     <message>
         <location filename="transfer/transferpage.cpp" line="292"/>
@@ -9014,7 +9015,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="transfer/transferpage.cpp" line="326"/>
         <source>Valid account name.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">有效的账户名</translation>
     </message>
     <message>
         <location filename="transfer/transferpage.cpp" line="416"/>
@@ -9024,7 +9025,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="transfer/transferpage.cpp" line="422"/>
         <source>Valid multi-sig address.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">有效的多签地址</translation>
     </message>
     <message>
         <location filename="transfer/transferpage.cpp" line="428"/>
@@ -9034,7 +9035,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="transfer/transferpage.cpp" line="437"/>
         <source>Checking the name...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">检查账户名中...</translation>
     </message>
     <message>
         <source>Invalid address.</source>

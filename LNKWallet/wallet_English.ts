@@ -4058,32 +4058,33 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Record</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="82"/>
+        <location filename="depositpage/DepositPage.cpp" line="87"/>
+        <location filename="depositpage/DepositPage.cpp" line="204"/>
         <source>tunnel account checked!please update sys-time!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="106"/>
+        <location filename="depositpage/DepositPage.cpp" line="119"/>
         <source>private-key-missing!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="108"/>
+        <location filename="depositpage/DepositPage.cpp" line="121"/>
         <source>Cann&apos;t find pri-key in your wallet!Please contact official team for supportting!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="120"/>
+        <location filename="depositpage/DepositPage.cpp" line="133"/>
         <source>cannot generate tunnel account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="141"/>
+        <location filename="depositpage/DepositPage.cpp" line="158"/>
         <source>cannot bind tunnel address.%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="153"/>
+        <location filename="depositpage/DepositPage.cpp" line="174"/>
         <source>Wallet data updated! Please backup your wallet!</source>
         <oldsource>You Should Back Up Your Wallet!</oldsource>
         <translation type="unfinished"></translation>
@@ -9227,7 +9228,7 @@ p, li { white-space: pre-wrap; }
         <location filename="transfer/transferpage.ui" line="389"/>
         <source>请输入对方地址或已注册账户名</source>
         <oldsource>请输入对方地址</oldsource>
-        <translation type="unfinished">input the address</translation>
+        <translation type="unfinished">input the address or registered account name</translation>
     </message>
     <message>
         <location filename="transfer/transferpage.ui" line="237"/>
