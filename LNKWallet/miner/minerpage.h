@@ -50,6 +50,9 @@ private slots:
     void on_sortTypeComboBox_currentIndexChanged(const QString &arg1);
 
 private:
+    QString getCitizenTooltip(const QString &citizenName);
+    void modifyStringLength(QString & first,QString &second,bool fillAppend = true);//fillAppend=true表示在后面补全空格
+private:
     Ui::MinerPage *ui;
 
     void paintEvent(QPaintEvent*);

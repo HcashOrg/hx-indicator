@@ -207,6 +207,10 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->lockBalancesTableWidget->setCellWidget(i,4,buttonfore);
             connect(buttonfore,&ToolButtonWidget::clicked,std::bind(&MinerPage::on_lockBalancesTableWidget_cellPressed,this,i,4));
 
+            QString tooltip = getCitizenTooltip(ui->lockBalancesTableWidget->item(i,0)->text());
+            for(int kk = 0;kk < 4; ++kk){
+                ui->lockBalancesTableWidget->item(i,kk)->setToolTip(tooltip);
+            }
         }
 
         tableWidgetSetItemZebraColor(ui->lockBalancesTableWidget);
@@ -1058,4 +1062,71 @@ void MinerPage::on_obtainAllBtn_clicked()
 void MinerPage::on_sortTypeComboBox_currentIndexChanged(const QString &arg1)
 {
     showCitizenInfo();
+}
+
+QString MinerPage::getCitizenTooltip(const QString &citizenName)
+{
+    if(!HXChain::getInstance()->minerMap.contains(citizenName)) return "";
+    MinerInfo citizenInfo = HXChain::getInstance()->minerMap.value(citizenName);
+    QString name = citizenName;
+    QString fee = QString::number(citizenInfo.payBack) + "%";
+    QString lastBl = QString::number(citizenInfo.lastBlock);
+    QString weight = getBigNumberString(citizenInfo.pledgeWeight,0);
+    QString total = QString::number(citizenInfo.totalProduced);
+    QString miss = QString::number(citizenInfo.totalMissed);
+//    modifyStringLength(name,total,true);
+//    modifyStringLength(fee,miss,true);
+//    modifyStringLength(weight,lastBl,true);
+
+
+    QString nameTi = tr("Citizen:");
+    QString feeTi = tr("Fee:");
+    QString weightTi = tr("Weight:");
+    QString lastBlTi = tr("LastProduce:");
+    QString missTi = tr("Missed:");
+    QString totalTi = tr("Total:");
+//    modifyStringLength(nameTi,totalTi,false);
+//    modifyStringLength(feeTi,missTi,false);
+//    modifyStringLength(weightTi,lastBlTi,false);
+
+
+    QString tipTemplate = "%1%2     %3%4\n%5%6    %7%8\n%9%10    %11%12";
+    QString tooltip = tipTemplate.arg(nameTi).arg(name).arg(feeTi).arg(fee).arg(weightTi).arg(weight)
+                                 .arg(totalTi).arg(total).arg(missTi).arg(miss).arg(lastBlTi).arg(lastBl);
+    return tooltip;
+}
+
+void MinerPage::modifyStringLength(QString &first, QString &second, bool fillAppend)
+{
+    int Len = std::max<int>(first.length(),second.length());
+    if(first.length() < Len)
+    {
+        int fitstLen = first.length();
+        for(int i = 0;i < Len-fitstLen;++i)
+        {
+            if(fillAppend)
+            {
+                first.append(" ");
+            }
+            else
+            {
+                first.insert(0," ");
+            }
+        }
+    }
+    else if(second.length() < Len)
+    {
+        int fitstLen = second.length();
+        for(int i = 0;i < Len-fitstLen;++i)
+        {
+            if(fillAppend)
+            {
+                second.append(" ");
+            }
+            else
+            {
+                second.insert(0," ");
+            }
+        }
+    }
 }
