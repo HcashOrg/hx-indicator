@@ -4624,27 +4624,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1189"/>
+        <location filename="frame.cpp" line="1191"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1415"/>
+        <location filename="frame.cpp" line="1417"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2543"/>
+        <location filename="frame.cpp" line="2547"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2546"/>
+        <location filename="frame.cpp" line="2550"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2549"/>
+        <location filename="frame.cpp" line="2553"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -5238,13 +5238,13 @@ add an account first</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="213"/>
-        <location filename="wallet.cpp" line="237"/>
+        <location filename="wallet.cpp" line="214"/>
+        <location filename="wallet.cpp" line="238"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="664"/>
+        <location filename="wallet.cpp" line="675"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -8881,7 +8881,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="transfer/transferpage.ui" line="389"/>
-        <source>请输入对方地址</source>
+        <source>请输入对方地址或已注册账户名</source>
+        <oldsource>请输入对方地址</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -8956,38 +8957,54 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">交易发送失败：%1</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="275"/>
+        <location filename="transfer/transferpage.cpp" line="168"/>
+        <location filename="transfer/transferpage.cpp" line="171"/>
+        <location filename="transfer/transferpage.cpp" line="320"/>
+        <source>Invalid account name!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="transfer/transferpage.cpp" line="292"/>
         <source>Balance not enough!</source>
         <translation type="unfinished">余额不足！</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="279"/>
+        <location filename="transfer/transferpage.cpp" line="296"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished">转账失败！</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="365"/>
+        <location filename="transfer/transferpage.cpp" line="326"/>
+        <source>Valid account name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="transfer/transferpage.cpp" line="416"/>
         <source>Valid account address.</source>
         <translation type="unfinished">有效的账户地址</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="371"/>
+        <location filename="transfer/transferpage.cpp" line="422"/>
         <source>Valid multi-sig address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="377"/>
+        <location filename="transfer/transferpage.cpp" line="428"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished">暂不支持向合约地址转账</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="383"/>
-        <source>Invalid address.</source>
-        <translation type="unfinished">无效地址</translation>
+        <location filename="transfer/transferpage.cpp" line="437"/>
+        <source>Checking the name...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="468"/>
-        <location filename="transfer/transferpage.cpp" line="477"/>
+        <source>Invalid address.</source>
+        <translation type="obsolete">无效地址</translation>
+    </message>
+    <message>
+        <location filename="transfer/transferpage.cpp" line="525"/>
+        <location filename="transfer/transferpage.cpp" line="534"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished">最大: %1</translation>
@@ -9005,7 +9022,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">一个账户不能给自己转账!</translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="266"/>
+        <location filename="transfer/transferpage.cpp" line="283"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished">交易信息已发出，请等待确认</translation>
     </message>

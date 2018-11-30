@@ -4771,27 +4771,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1189"/>
+        <location filename="frame.cpp" line="1191"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1415"/>
+        <location filename="frame.cpp" line="1417"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2543"/>
+        <location filename="frame.cpp" line="2547"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2546"/>
+        <location filename="frame.cpp" line="2550"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2549"/>
+        <location filename="frame.cpp" line="2553"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5455,13 +5455,13 @@ Cover it or not?</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="213"/>
-        <location filename="wallet.cpp" line="237"/>
+        <location filename="wallet.cpp" line="214"/>
+        <location filename="wallet.cpp" line="238"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="664"/>
+        <location filename="wallet.cpp" line="675"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -9195,7 +9195,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="transfer/transferpage.ui" line="389"/>
-        <source>请输入对方地址</source>
+        <source>请输入对方地址或已注册账户名</source>
+        <oldsource>请输入对方地址</oldsource>
         <translation type="unfinished">input the address</translation>
     </message>
     <message>
@@ -9240,43 +9241,55 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="279"/>
+        <location filename="transfer/transferpage.cpp" line="296"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="266"/>
+        <location filename="transfer/transferpage.cpp" line="283"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="275"/>
+        <location filename="transfer/transferpage.cpp" line="168"/>
+        <location filename="transfer/transferpage.cpp" line="171"/>
+        <location filename="transfer/transferpage.cpp" line="320"/>
+        <source>Invalid account name!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="transfer/transferpage.cpp" line="292"/>
         <source>Balance not enough!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="365"/>
+        <location filename="transfer/transferpage.cpp" line="326"/>
+        <source>Valid account name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="transfer/transferpage.cpp" line="416"/>
         <source>Valid account address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="371"/>
+        <location filename="transfer/transferpage.cpp" line="422"/>
         <source>Valid multi-sig address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="377"/>
+        <location filename="transfer/transferpage.cpp" line="428"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="383"/>
-        <source>Invalid address.</source>
+        <location filename="transfer/transferpage.cpp" line="437"/>
+        <source>Checking the name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="468"/>
-        <location filename="transfer/transferpage.cpp" line="477"/>
+        <location filename="transfer/transferpage.cpp" line="525"/>
+        <location filename="transfer/transferpage.cpp" line="534"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished"></translation>

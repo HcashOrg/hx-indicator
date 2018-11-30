@@ -46,7 +46,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 
     ui->amountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
 
-    QRegExp regx("[a-zA-Z0-9\ \n]+$");
+    QRegExp regx("[a-zA-Z0-9\-]{0,63}");
     QValidator *validator = new QRegExpValidator(regx, this);
     ui->sendtoLineEdit->setValidator( validator );
     ui->sendtoLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
@@ -162,6 +162,23 @@ void TransferPage::on_sendBtn_clicked()
                                                            << remark << true ));
         }
 
+    }
+    else
+    {
+        if( ui->addressLabel->text().isEmpty() || ui->addressLabel->text() == tr("Invalid account name!"))
+        {
+            CommonDialog tipDialog(CommonDialog::OkOnly);
+            tipDialog.setText( tr("Invalid account name!"));
+            tipDialog.pop();
+        }
+        else
+        {
+            HXChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
+                                             toJsonFormat( "transfer_to_address",
+                                                           QJsonArray() << accountName << ui->addressLabel->text()
+                                                           << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                                                           << remark << true ));
+        }
     }
 }
 
@@ -283,6 +300,38 @@ void TransferPage::jsonDataUpdated(QString id)
         }
         return;
     }
+
+    if( id == "TransferPage+get_account+" + ui->sendtoLineEdit->text())
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QString accountAddress = jsonObject.take("result").toObject().take("addr").toString();
+
+            if(accountAddress == "InvalidAddress")
+            {
+                ui->tipLabel4->setText(tr("Invalid account name!"));
+                ui->tipLabel4->setStyleSheet("color: rgb(255,0,0);");
+                ui->addressLabel->clear();
+            }
+            else
+            {
+                ui->tipLabel4->setText(tr("Valid account name."));
+                ui->tipLabel4->setStyleSheet("color: rgb(0,170,0);");
+                ui->addressLabel->setText(accountAddress);
+            }
+        }
+
+        return;
+    }
+
 //    else if("id-get_guarantee_order" == id)
 //    {//查询承兑单id是否还有余额
 //        QString result = HXChain::getInstance()->jsonDataValue(id);
@@ -347,6 +396,8 @@ void TransferPage::assetComboBox_currentIndexChanged(int index)
 
 void TransferPage::sendtoLineEdit_textChanged(const QString &arg1)
 {
+    ui->addressLabel->clear();
+
     if( ui->sendtoLineEdit->text().contains(" ") || ui->sendtoLineEdit->text().contains("\n"))   // 不判断就remove的话 右键菜单撤销看起来等于不能用
     {
         ui->sendtoLineEdit->setText( ui->sendtoLineEdit->text().simplified().remove(" "));
@@ -380,9 +431,15 @@ void TransferPage::sendtoLineEdit_textChanged(const QString &arg1)
     }
     else
     {
-        ui->tipLabel4->setText(tr("Invalid address."));
-        ui->tipLabel4->setStyleSheet("color: rgb(255,0,0);");
+//        ui->tipLabel4->setText(tr("Invalid address."));
+//        ui->tipLabel4->setStyleSheet("color: rgb(255,0,0);");
+//        ui->tipLabel4->show();
+        ui->tipLabel4->setText(tr("Checking the name..."));
+        ui->tipLabel4->setStyleSheet("color: rgb(120,85,0);");
         ui->tipLabel4->show();
+        HXChain::getInstance()->postRPC( "TransferPage+get_account+" + ui->sendtoLineEdit->text(),
+                                         toJsonFormat( "get_account",
+                                                       QJsonArray() << ui->sendtoLineEdit->text() ));
     }
 
 
