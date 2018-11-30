@@ -4320,7 +4320,7 @@ Cover it or not?</source>
     <message>
         <location filename="FeeChooseWidget.cpp" line="267"/>
         <source> less than </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">少于</translation>
     </message>
 </context>
 <context>
