@@ -68,6 +68,13 @@ void DepositPage::jsonDataUpdated(QString id)
         _p->tunnle_address = DepositDataUtil::parseTunnelAddress(result);
         if(_p->tunnle_address.isEmpty())
         {
+            if(!HXChain::getInstance()->witnessConfig->getChainTypes().contains(_p->assetSymbol))
+            {
+                _p->qrcodeWidget->SetQRString("");
+                _p->qrcodeWidget->SetAddress(tr("no %1 plugin").arg(_p->assetSymbol));
+                return;
+            }
+
             if(_p->actualAssetSymbol == _p->assetSymbol)
             {
                 QString tunn = HXChain::getInstance()->configFile->value(QString("/tunnel/%1%2").arg(_p->address).arg(_p->actualAssetSymbol)).toString();
@@ -112,11 +119,13 @@ void DepositPage::jsonDataUpdated(QString id)
         if(result.contains(_p->tunnle_address))
         {
             _p->qrcodeWidget->SetQRString(_p->tunnle_address);
+            _p->qrcodeWidget->SetAddress(_p->tunnle_address);
         }
         else
         {
             //提醒用户私钥丢失
-            _p->qrcodeWidget->SetQRString(tr("private-key-missing!"));
+            _p->qrcodeWidget->SetQRString("");
+            _p->qrcodeWidget->SetAddress(tr("private-key-missing!"));
             CommonDialog dia(CommonDialog::OkOnly);
             dia.setText(tr("Cann't find pri-key in your wallet!Please contact official team for supportting!"));
             dia.pop();
@@ -130,7 +139,8 @@ void DepositPage::jsonDataUpdated(QString id)
 //        qDebug() << id << result;
         if( result.isEmpty() || result.startsWith("\"error"))
         {
-            _p->qrcodeWidget->SetQRString(tr("cannot generate tunnel account"));
+            _p->qrcodeWidget->SetQRString("");
+            _p->qrcodeWidget->SetAddress(tr("cannot generate tunnel account"));
             return;
         }
 
@@ -155,7 +165,8 @@ void DepositPage::jsonDataUpdated(QString id)
         QString bindSymbol = id.mid(QString("deposit_bind_tunnel_account_").length());
         if( result.isEmpty() || result.startsWith("\"error"))
         {
-            _p->qrcodeWidget->SetQRString(tr("cannot bind tunnel address.%1").arg(_p->tunnelData->address));
+            _p->qrcodeWidget->SetQRString("");
+            _p->qrcodeWidget->SetAddress(tr("cannot bind tunnel address.%1").arg(_p->tunnelData->address));
             return;
         }
         HXChain::getInstance()->configFile->setValue(QString("/tunnel/%1%2").arg(_p->address).arg(_p->actualAssetSymbol),_p->tunnelData->address);
@@ -166,6 +177,7 @@ void DepositPage::jsonDataUpdated(QString id)
         result.prepend("{");
         result.append("}");
         _p->qrcodeWidget->SetQRString(_p->tunnelData->address);
+        _p->qrcodeWidget->SetAddress(_p->tunnelData->address);
         //qDebug()<<"tunnelrunnel"<<result;
         //提示保存信息
         HXChain::getInstance()->configFile->setValue("/settings/backupNeeded",true);
@@ -250,6 +262,7 @@ void DepositPage::GenerateAddress()
         close();
         return;
     }
+
     HXChain::getInstance()->postRPC("deposit_create_crosschain_symbol",
                                     toJsonFormat("create_crosschain_symbol",
                                                  QJsonArray()<<_p->actualAssetSymbol)
@@ -266,6 +279,7 @@ void DepositPage::BindTunnelAccount()
         close();
         return;
     }
+
     HXChain::getInstance()->postRPC("deposit_bind_tunnel_account_"+_p->assetSymbol,
                                     toJsonFormat("bind_tunnel_account",
                                                  QJsonArray()<<_p->name<<_p->tunnelData->address<<_p->assetSymbol<<true));
@@ -281,6 +295,7 @@ void DepositPage::BindActualTunnelAccount()
         close();
         return;
     }
+    qDebug() << "bbbbbbbbbb " << _p->actualAssetSymbol;
 
     HXChain::getInstance()->postRPC("deposit_bind_tunnel_account_"+_p->actualAssetSymbol,
                                         toJsonFormat("bind_tunnel_account",

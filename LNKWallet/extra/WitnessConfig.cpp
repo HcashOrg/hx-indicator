@@ -88,6 +88,7 @@ void WitnessConfig::modify(QString key, QString value, bool isString)
 
             QStringList strList2 = str2.split('=');
             QString k = strList2.at(0);
+
             if(k == key)
             {
                 if(isString)

@@ -115,6 +115,9 @@ Frame::Frame(): timer(NULL),
     currentPageNum = 0;
     currentAccount = "";
 
+    qDebug() <<  "witnessConfig init: " << HXChain::getInstance()->witnessConfig->init();
+    connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
+    connect(&httpManager,SIGNAL(httpError(int)),this,SLOT(httpError(int)));
 
     connect(HXChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(jsonDataUpdated(QString)));
 
@@ -213,20 +216,16 @@ Frame::Frame(): timer(NULL),
 //                }
 //            }
 
+            // 先检查config中的chain-types
+            QJsonObject object;
+            object.insert("jsonrpc","2.0");
+            object.insert("id",45);
+            object.insert("method","Zchain.Plugin.QuerySymbol");
+            QJsonObject paramObject;
+            object.insert("params",paramObject);
+            httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 
-            HXChain::getInstance()->startExe();
-
-            waitingForSync = new WaitingForSync(this);
-            waitingForSync->setAttribute(Qt::WA_DeleteOnClose);
-            waitingForSync->move(0,0);
-            connect( waitingForSync,SIGNAL(sync()), this, SLOT(syncFinished()));
-            connect( waitingForSync,SIGNAL(minimum()),this,SLOT(showMinimized()));
-            connect( waitingForSync,SIGNAL(tray()),this,SLOT(hide()));
-            connect( waitingForSync,SIGNAL(closeWallet()),qApp,SLOT(quit()));
-            waitingForSync->show();
-
-            setGeometry(0,0, waitingForSync->width(), waitingForSync->height());
-            moveWidgetToScreenCenter(this);
+            qDebug() <<  HXChain::getInstance()->middlewarePath << QJsonDocument(object).toJson();
         }
 
 
@@ -375,7 +374,6 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showCitizenAccountSignal,this,&Frame::showCitizenAccountPage);
     connect(functionBar,&FunctionWidget::showCitizenProposalSignal,this,&Frame::showCitizenProposalPage);
 
-    qDebug() <<  "witnessConfig init: " << HXChain::getInstance()->witnessConfig->init();
     getAccountInfo();
 
     mainPage = new MainPage(centralWidget);
@@ -2646,6 +2644,55 @@ void Frame::installBlurEffect(QWidget *widget)
 void Frame::newAccount(QString name)
 {
     getAccountInfo();
+}
+
+void Frame::enter()
+{
+    HXChain::getInstance()->startExe();
+
+    waitingForSync = new WaitingForSync(this);
+    waitingForSync->setAttribute(Qt::WA_DeleteOnClose);
+    waitingForSync->move(0,0);
+    connect( waitingForSync,SIGNAL(sync()), this, SLOT(syncFinished()));
+    connect( waitingForSync,SIGNAL(minimum()),this,SLOT(showMinimized()));
+    connect( waitingForSync,SIGNAL(tray()),this,SLOT(hide()));
+    connect( waitingForSync,SIGNAL(closeWallet()),qApp,SLOT(quit()));
+    waitingForSync->show();
+
+    setGeometry(0,0, waitingForSync->width(), waitingForSync->height());
+    moveWidgetToScreenCenter(this);
+}
+
+void Frame::httpReplied(QByteArray _data, int _status)
+{
+    QJsonArray serverArray  = QJsonDocument::fromJson(_data).object().value("result").toArray();
+
+    QString lastStr = HXChain::getInstance()->configFile->value("/settings/lastConfigSymbols").toString();
+    QJsonArray lastArray = QJsonDocument::fromJson(lastStr.toUtf8()).array();
+
+    if(serverArray != lastArray)
+    {
+        QStringList serverSymbols;
+        foreach(const QJsonValue& v, serverArray)
+        {
+            serverSymbols += v.toString();
+        }
+
+        HXChain::getInstance()->witnessConfig->setChainTypes(serverSymbols);
+        HXChain::getInstance()->witnessConfig->save();
+    }
+
+    QString str = QJsonDocument(serverArray).toJson();
+    str = str.simplified();
+    HXChain::getInstance()->configFile->setValue( "/settings/lastConfigSymbols", str);
+
+    enter();
+}
+
+void Frame::httpError(int _status)
+{
+    qDebug() << "Frame::httpError " <<   _status  ;
+    enter();
 }
 
 void Frame::onCloseWallet()
