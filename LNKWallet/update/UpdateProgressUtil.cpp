@@ -24,7 +24,7 @@ UpdateProgressUtil::VersionEnum UpdateProgressUtil::CompareVersion(const QString
     {
         return BEFORE;
     }
-    else if( aList.at(0) < bList.at(0))
+    else if( aList.at(0).toInt() < bList.at(0).toInt())
     {
         return AFTER;
     }
@@ -34,7 +34,7 @@ UpdateProgressUtil::VersionEnum UpdateProgressUtil::CompareVersion(const QString
         {
             return BEFORE;
         }
-        else if( aList.at(1) < bList.at(1))
+        else if( aList.at(1).toInt() < bList.at(1).toInt())
         {
             return AFTER;
         }
@@ -44,7 +44,7 @@ UpdateProgressUtil::VersionEnum UpdateProgressUtil::CompareVersion(const QString
             {
                 return BEFORE;
             }
-            else if( aList.at(2) < bList.at(2))
+            else if( aList.at(2).toInt() < bList.at(2).toInt())
             {
                 return AFTER;
             }
