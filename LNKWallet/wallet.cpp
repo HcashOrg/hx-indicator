@@ -1258,6 +1258,31 @@ void HXChain::autoWithdrawSign()
             }
         }
 
+
+        keys = HXChain::getInstance()->ethFinalTrxMap.keys();
+        foreach (QString key, keys)
+        {
+            ETHFinalTrx eft = HXChain::getInstance()->ethFinalTrxMap.value(key);
+
+            foreach (QString account, HXChain::getInstance()->getMyFormalGuards())
+            {
+                AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(account);
+                QVector<GuardMultisigAddress> vector = HXChain::getInstance()->guardMultisigAddressesMap.value(eft.symbol + "-" + accountInfo.id);
+                foreach(const GuardMultisigAddress& gma, vector)
+                {
+                    if(gma.hotAddress == eft.signer)
+                    {
+                        HXChain::getInstance()->postRPC( "autosign-senator_sign_eths_final_trx", toJsonFormat( "senator_sign_eths_final_trx",
+                                                                         QJsonArray() << eft.trxId << account));
+                        singedAccountTrxs << account + "+++" + eft.trxId;
+                        logToFile( QStringList() << "senator_sign_eths_final_trx" << eft.trxId << account);
+                        signedCount++;
+                        if(signedCount >= 3)    return;
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
 
