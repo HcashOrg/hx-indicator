@@ -138,7 +138,7 @@ void CaptialNotify::startCheckTunnelMoney()
 {
     _p->isNotifyOn = true;
     _p->timer->start(1);
-    _p->timer->setInterval(20000);
+    _p->timer->setInterval(15000);
 }
 
 void CaptialNotify::stopCheckTunnelMoney()
