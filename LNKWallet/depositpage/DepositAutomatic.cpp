@@ -94,10 +94,10 @@ public:
         }
     }
     //更新账户余额
-    void updateMoney(const QString &tunnelAddress,const QString &number){
+    void updateMoney(const QString &tunnelAddress,const QString &assetSymbol,const QString &number){
         std::lock_guard<std::mutex> lockguard(mutexLock);
         for(auto it = accounts.begin();it != accounts.end();++it){
-            if(tunnelAddress == (*it)->tunnelAddress){
+            if(tunnelAddress == (*it)->tunnelAddress && assetSymbol == (*it)->assetSymbol){
                 int pre = 5;
                 foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
                     if(asset.symbol == (*it)->assetSymbol)
@@ -364,11 +364,10 @@ void DepositAutomatic::httpReplied(QByteArray _data, int _status)
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
     QString tunnel   = object.value("address").toString();
+    QString asset = object.value("chainId").toString().toUpper();
     QString number = QString::number( jsonValueToDouble(object.value("balance")));
 
-
-
-    _p->updateMoney(tunnel,number);
+    _p->updateMoney(tunnel,asset,number);
 
 }
 
