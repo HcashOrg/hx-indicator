@@ -89,7 +89,7 @@ Qt::ItemFlags PoundageShowTableModel::flags(const QModelIndex &index) const
 
 int PoundageShowTableModel::rowCount(const QModelIndex &parent) const
 {
-    qDebug()<<std::max<int>(0,std::min<int>(_p->pageMaxRow,_p->data->poundages.size() - _p->currentPage * _p->pageMaxRow));
+//    qDebug()<<std::max<int>(0,std::min<int>(_p->pageMaxRow,_p->data->poundages.size() - _p->currentPage * _p->pageMaxRow));
     return std::max<int>(0,std::min<int>(_p->pageMaxRow,_p->data->poundages.size() - _p->currentPage * _p->pageMaxRow));
 }
 
@@ -168,7 +168,7 @@ void PoundageShowTableModel::InitData(const std::shared_ptr<PoundageSheet> &shee
     _p->data = sheet;
     adjustMaxPage();
     _p->currentPage = 0;
-    qDebug()<<_p->maxPage;
+//    qDebug()<<_p->maxPage;
     endResetModel();
 }
 

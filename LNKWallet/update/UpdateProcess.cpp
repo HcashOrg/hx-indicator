@@ -78,10 +78,10 @@ void UpdateProcess::checkUpdate()
     UpdateProgressUtil::deleteDir(_p->downloadPath);
     _p->updateLogInfo.clear();
 
-    //本地版本文件解析
+    //本地版本文件解析,取消版本对比，
     qDebug()<<"解析本地文件``"<<QCoreApplication::applicationDirPath() + QDir::separator() + UPDATE_DOC_NAME;
-    UpdateProgressUtil::ParseXmlPath(QCoreApplication::applicationDirPath() + QDir::separator() + UPDATE_DOC_NAME,
-                                     _p->localVersionData);
+//    UpdateProgressUtil::ParseXmlPath(QCoreApplication::applicationDirPath() + QDir::separator() + UPDATE_DOC_NAME,
+//                                     _p->localVersionData);
 
     //获取最新的配置
     GetLatestVersionInfo();
