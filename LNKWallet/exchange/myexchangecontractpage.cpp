@@ -705,3 +705,12 @@ void MyExchangeContractPage::pageChangeSlot(unsigned int page)
     }
 
 }
+
+void MyExchangeContractPage::on_swapBtn_clicked()
+{
+    inited = false;
+    QString temp = ui->assetComboBox->currentText();
+    ui->assetComboBox->setCurrentText(ui->assetComboBox2->currentText());
+    inited = true;
+    ui->assetComboBox2->setCurrentText(temp);
+}

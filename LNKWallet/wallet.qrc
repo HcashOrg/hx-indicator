@@ -148,6 +148,8 @@
         <file>wallet_ui/cover_close.png</file>
         <file>wallet_ui/cover_min.png</file>
         <file>wallet_ui/coin_ERCPAX.png</file>
+        <file>wallet_ui/swap.png</file>
+        <file>wallet_ui/swap_hover.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>

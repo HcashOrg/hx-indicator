@@ -86,7 +86,7 @@
   <widget class="QComboBox" name="assetComboBox2">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>250</x>
      <y>120</y>
      <width>80</width>
      <height>18</height>
@@ -163,7 +163,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <rect>
      <x>130</x>
      <y>90</y>
-     <width>180</width>
+     <width>200</width>
      <height>18</height>
     </rect>
    </property>
@@ -218,6 +218,28 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      <width>770</width>
      <height>41</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="swapBtn">
+   <property name="geometry">
+    <rect>
+     <x>222</x>
+     <y>122</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="BtnStyle" stdset="0">
+    <string>swap</string>
    </property>
   </widget>
  </widget>

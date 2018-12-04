@@ -56,6 +56,8 @@ QToolButton[BtnStyle="btn1"]{font: 11px \"微软雅黑\";background-color:transp
 QToolButton[BtnStyle="btn1"]:pressed{background-color:rgb(83,61,138);color: white;}
 QToolButton[BtnStyle="senatoradd"]{background-image:url(:/ui/wallet_ui/senator_add.png);background-repeat: no-repeat;background-position: center;border-style: flat;}
 QToolButton[BtnStyle="senatordel"]{background-image:url(:/ui/wallet_ui/senator_del.png);background-repeat: no-repeat;background-position: center;border-style: flat;}
+QToolButton[BtnStyle="swap"]{background-image:url(:/ui/wallet_ui/swap.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}
+QToolButton[BtnStyle="swap"]:hover{background-image:url(:/ui/wallet_ui/swap_hover.png);}
 
 QWidget[WidgetStyle="dialogBg"]{background-image:url(:/ui/wallet_ui/back_dialog.png);}
 QWidget[WidgetStyle="container"]{background-color:rgb(229,226,240);border-radius:4px;}

@@ -40,6 +40,8 @@ private slots:
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
     void pageChangeSlot(unsigned int page);
+    void on_swapBtn_clicked();
+
 private:
     Ui::OnchainOrderPage *ui;
     bool inited = false;
