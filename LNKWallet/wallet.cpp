@@ -17,12 +17,12 @@
 #include <QtMath>
 
 #ifdef  WIN32
-#define NODE_PROC_NAME      "hx_node.exe"
-#define CLIENT_PROC_NAME    "hx_client.exe"
+#define NODE_PROC_NAME      "hx_node"WALLET_EXE_SUFFIX".exe"
+#define CLIENT_PROC_NAME    "hx_client"WALLET_EXE_SUFFIX".exe"
 #define COPY_PROC_NAME      "Copy.exe"
 #else
-#define NODE_PROC_NAME      "./hx_node"
-#define CLIENT_PROC_NAME    "./hx_client"
+#define NODE_PROC_NAME      "./hx_node"WALLET_EXE_SUFFIX
+#define CLIENT_PROC_NAME    "./hx_client"WALLET_EXE_SUFFIX
 #define COPY_PROC_NAME      "./Copy"
 #endif
 
@@ -174,12 +174,12 @@ void HXChain:: startExe()
             ;
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay",true).toBool())
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay2",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/dbReplay",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay2",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
@@ -1258,6 +1258,31 @@ void HXChain::autoWithdrawSign()
             }
         }
 
+
+        keys = HXChain::getInstance()->ethFinalTrxMap.keys();
+        foreach (QString key, keys)
+        {
+            ETHFinalTrx eft = HXChain::getInstance()->ethFinalTrxMap.value(key);
+
+            foreach (QString account, HXChain::getInstance()->getMyFormalGuards())
+            {
+                AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(account);
+                QVector<GuardMultisigAddress> vector = HXChain::getInstance()->guardMultisigAddressesMap.value(eft.symbol + "-" + accountInfo.id);
+                foreach(const GuardMultisigAddress& gma, vector)
+                {
+                    if(gma.hotAddress == eft.signer)
+                    {
+                        HXChain::getInstance()->postRPC( "autosign-senator_sign_eths_final_trx", toJsonFormat( "senator_sign_eths_final_trx",
+                                                                         QJsonArray() << eft.trxId << account));
+                        singedAccountTrxs << account + "+++" + eft.trxId;
+                        logToFile( QStringList() << "senator_sign_eths_final_trx" << eft.trxId << account);
+                        signedCount++;
+                        if(signedCount >= 3)    return;
+                        break;
+                    }
+                }
+            }
+        }
     }
 }
 

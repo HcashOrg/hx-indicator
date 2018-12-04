@@ -35,10 +35,15 @@
 #define MULTISIG_ADDRESS_PREFIX "HXM"
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.1.8"           // 版本号
+#define WALLET_VERSION "1.1.10"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
+
+#ifdef TEST_WALLET
+#define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5006/api"
+#else
 #define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"
+#endif
 
 #ifdef  TEST_WALLET
 #define WALLET_EXE_SUFFIX   "_test"

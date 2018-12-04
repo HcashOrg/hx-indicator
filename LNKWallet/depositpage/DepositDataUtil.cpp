@@ -13,6 +13,11 @@ DepositDataUtil::DepositDataUtil()
 
 QImage DepositDataUtil::CreateQRcodeImage(const QString &data)
 {
+    if(data.isEmpty())
+    {
+        return QImage(1,1,QImage::Format_RGB32);
+    }
+
     QRcode *qr = QRcode_encodeString(data.toStdString().c_str(),1,QR_ECLEVEL_L,QR_MODE_8,1);
     if(!qr)
     {

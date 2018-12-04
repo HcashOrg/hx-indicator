@@ -17,6 +17,7 @@ public:
     ~DepositQrcodeWidget();
 public:
     void SetQRString(const QString &data);
+    void SetAddress(const QString &address);
     void SetSymbol(const QString &_symbol);
 private:
     void CopySlots();

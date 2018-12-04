@@ -27,7 +27,6 @@ void DepositQrcodeWidget::SetQRString(const QString &data)
 {
     QImage image = DepositDataUtil::CreateQRcodeImage(data);
     ui->label_qrcode->setPixmap(QPixmap::fromImage(image).scaled(ui->label_qrcode->size()));
-    ui->label_address->setText(data);
 
     if(symbol.startsWith("ERC"))
     {
@@ -38,6 +37,11 @@ void DepositQrcodeWidget::SetQRString(const QString &data)
     {
         ui->label_ercTip->hide();
     }
+}
+
+void DepositQrcodeWidget::SetAddress(const QString &address)
+{
+    ui->label_address->setText(address);
 }
 
 void DepositQrcodeWidget::SetSymbol(const QString &_symbol)

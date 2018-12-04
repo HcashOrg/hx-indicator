@@ -51,7 +51,7 @@ void HttpManager::requestFinished(QNetworkReply *reply)
     }
     else
     {
-
+        emit httpError(statusCode);
     }
 
     reply->deleteLater();

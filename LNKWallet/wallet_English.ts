@@ -1695,71 +1695,71 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="445"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="448"/>
         <source>please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="106"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="107"/>
         <source>please input withdraw address...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="96"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="443"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="97"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="446"/>
         <source>select withdraw to input address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="126"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="138"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="127"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="139"/>
         <source>Can not find tunnel address!</source>
         <oldsource>Cannot find tunnelAddress!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="156"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="168"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="158"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="170"/>
         <source>Can not find multi-address!</source>
         <oldsource>Cannot find multiAddress!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="210"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="212"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="217"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="219"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="242"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="244"/>
         <source>max:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="339"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="350"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="363"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="341"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="352"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="365"/>
         <source>number cannot less than </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="370"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="372"/>
         <source>balance left should not less than </source>
         <oldsource>balance less than </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="403"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="406"/>
         <source> %1 is pending!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="427"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="431"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="430"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="434"/>
         <source>about</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4058,32 +4058,38 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Record</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="82"/>
+        <location filename="depositpage/DepositPage.cpp" line="74"/>
+        <source>no %1 plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="depositpage/DepositPage.cpp" line="94"/>
+        <location filename="depositpage/DepositPage.cpp" line="216"/>
         <source>tunnel account checked!please update sys-time!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="106"/>
+        <location filename="depositpage/DepositPage.cpp" line="128"/>
         <source>private-key-missing!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="108"/>
+        <location filename="depositpage/DepositPage.cpp" line="130"/>
         <source>Cann&apos;t find pri-key in your wallet!Please contact official team for supportting!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="120"/>
+        <location filename="depositpage/DepositPage.cpp" line="143"/>
         <source>cannot generate tunnel account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="141"/>
+        <location filename="depositpage/DepositPage.cpp" line="169"/>
         <source>cannot bind tunnel address.%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="153"/>
+        <location filename="depositpage/DepositPage.cpp" line="186"/>
         <source>Wallet data updated! Please backup your wallet!</source>
         <oldsource>You Should Back Up Your Wallet!</oldsource>
         <translation type="unfinished"></translation>
@@ -4781,17 +4787,17 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2543"/>
+        <location filename="frame.cpp" line="2545"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2546"/>
+        <location filename="frame.cpp" line="2548"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2549"/>
+        <location filename="frame.cpp" line="2551"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5455,13 +5461,13 @@ Cover it or not?</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="213"/>
-        <location filename="wallet.cpp" line="237"/>
+        <location filename="wallet.cpp" line="214"/>
+        <location filename="wallet.cpp" line="238"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="664"/>
+        <location filename="wallet.cpp" line="675"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -6187,7 +6193,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="233"/>
+        <location filename="miner/minerpage.cpp" line="237"/>
         <source>Transaction of foreclose-asset has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6212,62 +6218,92 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="240"/>
+        <location filename="miner/minerpage.cpp" line="244"/>
         <source>Fail to foreclose asset from miner!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="282"/>
+        <location filename="miner/minerpage.cpp" line="286"/>
         <source>get income</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="322"/>
+        <location filename="miner/minerpage.cpp" line="326"/>
         <source>Transaction of get-income has been sent out!</source>
         <oldsource>Transaction of obtain-income has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="333"/>
+        <location filename="miner/minerpage.cpp" line="337"/>
         <source>This account&apos;s mining income is less than %1 %2 ! You can not get it.</source>
         <oldsource>This account&apos;s mining income is less than %1 %2 ! You can not obtain it.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="338"/>
+        <location filename="miner/minerpage.cpp" line="342"/>
         <source>Fail to get mining income!</source>
         <oldsource>Fail to obtain mining income!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="363"/>
+        <location filename="miner/minerpage.cpp" line="367"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="506"/>
+        <location filename="miner/minerpage.cpp" line="510"/>
         <source>total </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="517"/>
+        <location filename="miner/minerpage.cpp" line="521"/>
         <source>confirmed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="683"/>
+        <location filename="miner/minerpage.cpp" line="687"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="685"/>
+        <location filename="miner/minerpage.cpp" line="689"/>
         <source>MORTGAGE</source>
         <translation type="unfinished">pledge</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="900"/>
-        <location filename="miner/minerpage.cpp" line="1029"/>
+        <location filename="miner/minerpage.cpp" line="904"/>
+        <location filename="miner/minerpage.cpp" line="1033"/>
         <source>You need to pay %1 %2 for this operation. Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1082"/>
+        <source>Citizen:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1083"/>
+        <source>Fee:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1084"/>
+        <source>Weight:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1085"/>
+        <source>LastProduce:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1086"/>
+        <source>Missed:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1087"/>
+        <source>Total:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -9195,8 +9231,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="transfer/transferpage.ui" line="389"/>
-        <source>请输入对方地址</source>
-        <translation type="unfinished">input the address</translation>
+        <source>请输入对方地址或已注册账户名</source>
+        <oldsource>请输入对方地址</oldsource>
+        <translation type="unfinished">input the address or registered account name</translation>
     </message>
     <message>
         <location filename="transfer/transferpage.ui" line="237"/>
@@ -9240,43 +9277,55 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="279"/>
+        <location filename="transfer/transferpage.cpp" line="296"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="266"/>
+        <location filename="transfer/transferpage.cpp" line="283"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="275"/>
+        <location filename="transfer/transferpage.cpp" line="168"/>
+        <location filename="transfer/transferpage.cpp" line="171"/>
+        <location filename="transfer/transferpage.cpp" line="320"/>
+        <source>Invalid account name!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="transfer/transferpage.cpp" line="292"/>
         <source>Balance not enough!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="365"/>
+        <location filename="transfer/transferpage.cpp" line="326"/>
+        <source>Valid account name.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="transfer/transferpage.cpp" line="416"/>
         <source>Valid account address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="371"/>
+        <location filename="transfer/transferpage.cpp" line="422"/>
         <source>Valid multi-sig address.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="377"/>
+        <location filename="transfer/transferpage.cpp" line="428"/>
         <source>Sending coins to contract address is not supported currently.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="383"/>
-        <source>Invalid address.</source>
+        <location filename="transfer/transferpage.cpp" line="437"/>
+        <source>Checking the name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="transfer/transferpage.cpp" line="468"/>
-        <location filename="transfer/transferpage.cpp" line="477"/>
+        <location filename="transfer/transferpage.cpp" line="525"/>
+        <location filename="transfer/transferpage.cpp" line="534"/>
         <source>Max: %1</source>
         <oldsource>max muber:</oldsource>
         <translation type="unfinished"></translation>

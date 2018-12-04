@@ -22,6 +22,7 @@ public slots:
 
 signals:
     void httpReplied(QByteArray data, int statusCode);
+    void httpError(int statusCode);
 
 private:
     QNetworkRequest httpRequest;

@@ -9,6 +9,8 @@
 #include "windows.h"
 #endif
 
+#include "extra/HttpManager.h"
+
 //namespace Ui {
 //   class Frame;
 //}
@@ -129,6 +131,12 @@ private slots:
 
     void newAccount(QString name);
 
+private:
+    HttpManager httpManager;////用于查询通道账户余额
+    void enter();
+private slots:
+    void httpReplied(QByteArray _data, int _status);
+    void httpError(int _status);
 
 private slots:
     //显示通知气泡
@@ -183,6 +191,8 @@ private:
     QAction *quitAction;
     QMenu *trayIconMenu;
 //    ShowBottomBarWidget* showBottomBarWidget;
+
+
 
 #ifdef WIN32
     RECT rtConfined;   // 由于定义了 framelesswindowhint 为了不让鼠标拖动时能移到任务栏下

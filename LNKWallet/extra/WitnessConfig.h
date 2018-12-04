@@ -27,6 +27,8 @@ public:
     QStringList getMiners();
     bool isProductionEnabled();
     void setProductionEnabled(bool enabled);
+    QStringList getChainTypes();
+    void setChainTypes(QStringList chainTypes);
 signals:
 
 public slots:

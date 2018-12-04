@@ -88,6 +88,7 @@ void WitnessConfig::modify(QString key, QString value, bool isString)
 
             QStringList strList2 = str2.split('=');
             QString k = strList2.at(0);
+
             if(k == key)
             {
                 if(isString)
@@ -223,4 +224,29 @@ bool WitnessConfig::isProductionEnabled()
 void WitnessConfig::setProductionEnabled(bool enabled)
 {
     this->modify("enable-stale-production", enabled ? "true" : "false");
+}
+
+QStringList WitnessConfig::getChainTypes()
+{
+    QStringList result;
+    QString chainTypeArray = this->value("chain-type");
+    QJsonDocument document = QJsonDocument::fromJson(chainTypeArray.toUtf8());
+    QJsonArray array = document.array();
+    foreach(const QJsonValue& v, array)
+    {
+        if(!v.toString().isEmpty())     result += v.toString();
+    }
+
+    return result;
+}
+
+void WitnessConfig::setChainTypes(QStringList chainTypes)
+{
+    QJsonArray array;
+    foreach(const QString& type, chainTypes)
+    {
+        array << type;
+    }
+
+    this->modify("chain-type" , QString( QJsonDocument(array).toJson()).remove(" ").remove("\n"));
 }
