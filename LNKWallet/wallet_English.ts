@@ -4378,6 +4378,19 @@ Cover it or not?</source>
     </message>
 </context>
 <context>
+    <name>FavoritePairsWidget</name>
+    <message>
+        <location filename="exchange/FavoritePairsWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/FavoritePairsWidget.ui" line="30"/>
+        <source>常用</source>
+        <translation type="unfinished">MY FAVORITE</translation>
+    </message>
+</context>
+<context>
     <name>FeeChargeWidget</name>
     <message>
         <location filename="depositpage/FeeChargeWidget.ui" line="19"/>
@@ -6819,6 +6832,11 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">CREATE CONTRACT</translation>
     </message>
     <message>
+        <location filename="exchange/myexchangecontractpage.ui" line="325"/>
+        <source>swap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="exchange/myexchangecontractpage.cpp" line="58"/>
         <source>There are no orders!</source>
         <oldsource>There&apos;s no contract!</oldsource>
@@ -7153,60 +7171,80 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">ACCOUNT</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="46"/>
+        <location filename="exchange/OnchainOrderPage.ui" line="242"/>
+        <source>swap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/OnchainOrderPage.ui" line="261"/>
+        <source>switch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/OnchainOrderPage.ui" line="287"/>
+        <source>设为常用</source>
+        <translation type="unfinished">FAVORITE</translation>
+    </message>
+    <message>
+        <location filename="exchange/OnchainOrderPage.cpp" line="48"/>
         <source>There are no orders!</source>
         <oldsource>There&apos;s no contract!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="140"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="146"/>
         <source>buy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="149"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="155"/>
         <source>my order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="228"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="236"/>
         <source>SELL</source>
         <oldsource>Sell</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="229"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="237"/>
         <source>BUY</source>
         <oldsource>Buy</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="230"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="238"/>
         <source>PRICE</source>
         <oldsource>Price</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="234"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="242"/>
         <source>SELL / %1</source>
         <oldsource>Sell / %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="235"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="243"/>
         <source>BUY / %1</source>
         <oldsource>Buy / %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="236"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="244"/>
         <source>PRICE (%1/%2)</source>
         <oldsource>Price (%1/%2)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="278"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="286"/>
         <source>Please Import Or Create Account First!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/OnchainOrderPage.cpp" line="363"/>
+        <source>You can only set at most 6 favorite order pairs!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
