@@ -77,22 +77,8 @@ void PoundageShowWidget::InitData(const std::shared_ptr<PoundageSheet> &data)
         }
     }
 
-
     _p->blankWidget->setVisible(data->size() == 0);
-
-    //设置删除按钮
-    for(int i = 0;i < _p->tableModel->rowCount();++i)
-    {
-        ToolButtonWidget *toolButton = new ToolButtonWidget();
-        toolButton->setText(tr("delete"));
-        toolButton->setBackgroundColor(0==i%2?"rgb(243,241,250)":"rgb(238,236,245)"  );
-        connect(toolButton,&ToolButtonWidget::clicked,[i,this](){
-            emit DeletePoundageSignal(this->_p->tableModel->index(i,0).data(Qt::UserRole).value<std::shared_ptr<PoundageUnit>>()->poundageID,
-                                      HXChain::getInstance()->addressToName(this->_p->tableModel->index(i,0).data(Qt::UserRole).value<std::shared_ptr<PoundageUnit>>()->ownerAdress));
-        });
-
-        ui->tableView->setIndexWidget(_p->tableModel->index(i,7),toolButton);
-    }
+    setButtonWidget();
 }
 
 void PoundageShowWidget::DeletePoundageSlots()
@@ -124,7 +110,8 @@ void PoundageShowWidget::EnalbeDefaultAction(bool enable)
 
 void PoundageShowWidget::changeCurrentPageSlots(unsigned int currentPage)
 {
-    _p->tableModel->SetCurrentPage(static_cast<unsigned int>(currentPage));
+    _p->tableModel->SetCurrentPage(static_cast<int>(currentPage));
+    setButtonWidget();
 }
 
 void PoundageShowWidget::InitWidget()
@@ -195,6 +182,23 @@ void PoundageShowWidget::RefreshMenu()
     if(_p->isDefaultActionEnabled)
     {
         _p->contextMenu->addAction(_p->defaultAction);
+    }
+}
+
+void PoundageShowWidget::setButtonWidget()
+{
+    //设置删除按钮
+    for(int i = 0;i < _p->tableModel->rowCount();++i)
+    {
+        ToolButtonWidget *toolButton = new ToolButtonWidget();
+        toolButton->setText(tr("delete"));
+        toolButton->setBackgroundColor(0==i%2?"rgb(243,241,250)":"rgb(238,236,245)"  );
+        connect(toolButton,&ToolButtonWidget::clicked,[i,this](){
+            emit DeletePoundageSignal(this->_p->tableModel->index(i,0).data(Qt::UserRole).value<std::shared_ptr<PoundageUnit>>()->poundageID,
+                                      HXChain::getInstance()->addressToName(this->_p->tableModel->index(i,0).data(Qt::UserRole).value<std::shared_ptr<PoundageUnit>>()->ownerAdress));
+        });
+
+        ui->tableView->setIndexWidget(_p->tableModel->index(i,7),toolButton);
     }
 }
 
