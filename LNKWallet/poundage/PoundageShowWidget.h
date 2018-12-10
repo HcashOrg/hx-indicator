@@ -44,6 +44,8 @@ private:
     void InitStyle();
     void InitContextMenu();
     void RefreshMenu();
+
+    void setButtonWidget();//设置最后一列为删除按钮列
 protected:
     void contextMenuEvent(QContextMenuEvent *event);
     void paintEvent(QPaintEvent *event);
