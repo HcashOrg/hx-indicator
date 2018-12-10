@@ -570,6 +570,8 @@ QString getBigNumberString(unsigned long long number,int precision);
 QString decimalToIntegerStr(QString number, int precision);
 void tableWidgetSetItemZebraColor(QTableWidget* w, int alignment = Qt::AlignCenter);
 QString toLocalTime(QString timeStr);
+QString revertERCSymbol(QString symbol);
+QString getRealAssetSymbol(QString symbol);
 
 enum AddressType
 {

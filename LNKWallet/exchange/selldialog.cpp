@@ -58,19 +58,19 @@ void SellDialog::init()
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
-        ui->assetComboBox2->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
+        ui->assetComboBox2->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
 }
 
 void SellDialog::setSellAsset(QString _assetSymbol)
 {
-    ui->assetComboBox->setCurrentText(_assetSymbol);
+    ui->assetComboBox->setCurrentText( revertERCSymbol( _assetSymbol));
 }
 
 void SellDialog::setBuyAsset(QString _assetSymbol)
 {
-    ui->assetComboBox2->setCurrentText(_assetSymbol);
+    ui->assetComboBox2->setCurrentText( revertERCSymbol( _assetSymbol));
 }
 
 void SellDialog::jsonDataUpdated(QString id)
@@ -130,8 +130,8 @@ void SellDialog::jsonDataUpdated(QString id)
             AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
             AssetInfo assetInfo2 = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
 
-            QString params = QString("%1,%2,%3,%4").arg(ui->assetComboBox->currentText()).arg(decimalToIntegerStr(ui->sellAmountLineEdit->text(), assetInfo.precision))
-                   .arg(ui->assetComboBox2->currentText()).arg(decimalToIntegerStr(ui->buyAmountLineEdit->text(), assetInfo2.precision));
+            QString params = QString("%1,%2,%3,%4").arg( getRealAssetSymbol( ui->assetComboBox->currentText())).arg(decimalToIntegerStr(ui->sellAmountLineEdit->text(), assetInfo.precision))
+                   .arg( getRealAssetSymbol( ui->assetComboBox2->currentText())).arg(decimalToIntegerStr(ui->buyAmountLineEdit->text(), assetInfo2.precision));
             feeChoose->updatePoundageID();
             HXChain::getInstance()->postRPC( "id-invoke_contract-putOnSellOrder", toJsonFormat( "invoke_contract",
                                                                                    QJsonArray() << ui->accountNameLabel->text()
@@ -184,16 +184,16 @@ void SellDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
     ExchangeContractBalances balances = HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text());
 
     unsigned long long balanceAmount = 0;
-    if(balances.contains(ui->assetComboBox->currentText()))
+    if(balances.contains( getRealAssetSymbol( ui->assetComboBox->currentText())))
     {
-        balanceAmount = balances.value(ui->assetComboBox->currentText());
+        balanceAmount = balances.value( getRealAssetSymbol( ui->assetComboBox->currentText()));
     }
 
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText())));
 
     QString balanceStr = getBigNumberString(balanceAmount,assetInfo.precision);
 
-    ui->sellAmountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(balanceStr).arg(ui->assetComboBox->currentText()));
+    ui->sellAmountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(balanceStr).arg( revertERCSymbol( ui->assetComboBox->currentText())));
 
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(assetInfo.precision));
@@ -204,7 +204,7 @@ void SellDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 
 void SellDialog::on_assetComboBox2_currentIndexChanged(const QString &arg1)
 {
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox2->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox2->currentText())));
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(assetInfo.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
@@ -228,8 +228,8 @@ void SellDialog::estimateContractFee()
     AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
     AssetInfo assetInfo2 = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
 
-    QString params = QString("%1,%2,%3,%4").arg(ui->assetComboBox->currentText()).arg(decimalToIntegerStr(ui->sellAmountLineEdit->text(), assetInfo.precision))
-            .arg(ui->assetComboBox2->currentText()).arg(decimalToIntegerStr(ui->buyAmountLineEdit->text(), assetInfo2.precision));
+    QString params = QString("%1,%2,%3,%4").arg( getRealAssetSymbol( ui->assetComboBox->currentText())).arg(decimalToIntegerStr(ui->sellAmountLineEdit->text(), assetInfo.precision))
+            .arg( getRealAssetSymbol( ui->assetComboBox2->currentText())).arg(decimalToIntegerStr(ui->buyAmountLineEdit->text(), assetInfo2.precision));
     HXChain::getInstance()->postRPC( "id-invoke_contract_testing-putOnSellOrder", toJsonFormat( "invoke_contract_testing",
                                                                            QJsonArray() << ui->accountNameLabel->text()
                                                                            << contractAddress
@@ -240,12 +240,12 @@ void SellDialog::on_sellAmountLineEdit_textChanged(const QString &arg1)
 {
     ExchangeContractBalances balances = HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text());
     unsigned long long balanceAmount = 0;
-    if(balances.contains(ui->assetComboBox->currentText()))
+    if(balances.contains( getRealAssetSymbol( ui->assetComboBox->currentText())))
     {
-        balanceAmount = balances.value(ui->assetComboBox->currentText());
+        balanceAmount = balances.value( getRealAssetSymbol( ui->assetComboBox->currentText()));
     }
 
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText())));
     QString balanceStr = getBigNumberString(balanceAmount,assetInfo.precision);
     if(ui->sellAmountLineEdit->text().toDouble() > balanceStr.toDouble())
     {

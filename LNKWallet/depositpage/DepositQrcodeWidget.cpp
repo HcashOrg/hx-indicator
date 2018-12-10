@@ -47,9 +47,9 @@ void DepositQrcodeWidget::SetAddress(const QString &address)
 void DepositQrcodeWidget::SetSymbol(const QString &_symbol)
 {
     symbol = _symbol;
-    ui->label_warning->setText(ui->label_warning->text().replace("BTC",symbol));
+    ui->label_warning->setText(ui->label_warning->text().replace("BTC", revertERCSymbol(symbol)));
 
-    ui->tipLabel->setText(ui->tipLabel->text().replace("BTC",symbol));
+    ui->tipLabel->setText(ui->tipLabel->text().replace("BTC",revertERCSymbol(symbol)));
     if(leastDepositAmountMap.contains(symbol))
     {
         ui->tipLabel->setText(ui->tipLabel->text().replace("0.001",leastDepositAmountMap.value(symbol)));

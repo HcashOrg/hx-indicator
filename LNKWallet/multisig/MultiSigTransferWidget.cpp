@@ -35,7 +35,7 @@ MultiSigTransferWidget::MultiSigTransferWidget(QWidget *parent) :
     QStringList keys = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString key, keys)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(key).symbol);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(key).symbol));
     }
     connect(ui->assetComboBox,SIGNAL(currentIndexChanged(QString)),this,SLOT(onAssetComboBoxCurrentIndexChanged(QString)));
 
@@ -62,7 +62,8 @@ void MultiSigTransferWidget::setFromAddress(QString address)
 
 void MultiSigTransferWidget::setAsset(QString asset)
 {
-    ui->assetComboBox->setCurrentText(asset);
+    qDebug() << "aaaaaaaaaaaaaaaaa " << asset;
+    ui->assetComboBox->setCurrentText( revertERCSymbol( asset));
     onAssetComboBoxCurrentIndexChanged(ui->assetComboBox->currentText());
 }
 
@@ -130,7 +131,7 @@ void MultiSigTransferWidget::on_sendBtn_clicked()
         HXChain::getInstance()->postRPC( "MultiSigTransferWidget-transfer_from_to_address",
                                          toJsonFormat( "transfer_from_to_address",
                                                        QJsonArray() << ui->fromAddressLabel->text() << ui->sendtoLineEdit->text()
-                                                       << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                                                       << ui->amountLineEdit->text() << getRealAssetSymbol( ui->assetComboBox->currentText())
                                                        << memo ));
     }
 }
@@ -157,7 +158,7 @@ void MultiSigTransferWidget::InitStyle()
 void MultiSigTransferWidget::onAssetComboBoxCurrentIndexChanged(const QString &arg1)
 {
     MultiSigPage* page = static_cast<MultiSigPage*>(this->parent());
-    QString assetId = HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText());
+    QString assetId = HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText()));
     unsigned long long amount = page->multiSigBalancesMap.value(ui->fromAddressLabel->text()).value(assetId).amount;
     AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
     ui->amountLineEdit->setPlaceholderText(tr("Max: %1").arg(getBigNumberString(amount, assetInfo.precision)));

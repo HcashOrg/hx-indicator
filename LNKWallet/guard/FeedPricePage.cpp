@@ -96,7 +96,7 @@ void FeedPricePage::showAssetsPrice()
         ui->assetPriceTableWidget->setItem(i, 3, new QTableWidgetItem(tr("feed")));
 
         QString str = QString("%1 %2 = %3 %4").arg( getBigNumberString(info.baseAmount.amount, info.precision))
-                .arg(info.symbol)
+                .arg( revertERCSymbol( info.symbol))
                 .arg( getBigNumberString(info.quoteAmount.amount, ASSET_PRECISION))
                 .arg(ASSET_NAME);
         ui->assetPriceTableWidget->setItem(i, 2, new QTableWidgetItem(str));

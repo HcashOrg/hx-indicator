@@ -34,11 +34,11 @@ ForecloseDialog::ForecloseDialog(const QString &accountName, QString _assetSymbo
     ui->stackedWidget->currentWidget()->resize(ui->stackedWidget->size());
 
 
-    AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_assetSymbol));
+    AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( _assetSymbol)));
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(info.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
-    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(_maxAmount).arg(_assetSymbol));
+    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(_maxAmount).arg( revertERCSymbol( _assetSymbol)));
 
     ui->okBtn->setEnabled(false);
 }

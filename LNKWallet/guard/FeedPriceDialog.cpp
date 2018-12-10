@@ -28,8 +28,8 @@ FeedPriceDialog::FeedPriceDialog( QString _assetSymbol, QWidget *parent) :
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->closeBtn->setStyleSheet(CANCELBTN_STYLE);
 
-    ui->assetLabel->setText(_assetSymbol);
-    ui->assetLabel2->setText(QString("1 %1 =").arg(_assetSymbol));
+    ui->assetLabel->setText( revertERCSymbol( _assetSymbol));
+    ui->assetLabel2->setText(QString("1 %1 =").arg( revertERCSymbol( _assetSymbol)));
 
     init();
 }
@@ -52,7 +52,7 @@ void FeedPriceDialog::init()
 
     QStringList keys = HXChain::getInstance()->accountInfoMap.keys();
     QStringList publishers;
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetLabel->text()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetLabel->text())));
     foreach (QString key, keys)
     {
         AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(key);
@@ -126,7 +126,7 @@ void FeedPriceDialog::on_okBtn_clicked()
     }
 
 
-    AssetInfo baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetLabel->text()));
+    AssetInfo baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetLabel->text())));
     QJsonObject baseObject;
     baseObject.insert("amount", QString::number( qPow(10, baseAssetInfo.precision), 'f', 0));
     baseObject.insert("asset_id", baseAssetInfo.id);
@@ -142,10 +142,10 @@ void FeedPriceDialog::on_okBtn_clicked()
 //    object.insert("core_exchange_rate", settlementPriceObject);
 
     HXChain::getInstance()->postRPC( "id-publish_normal_asset_feed", toJsonFormat( "publish_normal_asset_feed",
-                            QJsonArray() << ui->accountComboBox->currentText() << ui->assetLabel->text() << object << true));
+                            QJsonArray() << ui->accountComboBox->currentText() << getRealAssetSymbol( ui->assetLabel->text()) << object << true));
 
     qDebug() << toJsonFormat( "publish_normal_asset_feed",
-                              QJsonArray() << ui->accountComboBox->currentText() << ui->assetLabel->text() << object << true);
+                              QJsonArray() << ui->accountComboBox->currentText() << getRealAssetSymbol( ui->assetLabel->text()) << object << true);
 }
 
 void FeedPriceDialog::on_closeBtn_clicked()

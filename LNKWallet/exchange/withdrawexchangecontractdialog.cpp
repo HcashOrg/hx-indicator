@@ -55,13 +55,13 @@ void WithdrawExchangeContractDialog::init()
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
 }
 
 void WithdrawExchangeContractDialog::setCurrentAsset(QString _assetSymbol)
 {
-    ui->assetComboBox->setCurrentText(_assetSymbol);
+    ui->assetComboBox->setCurrentText( revertERCSymbol( _assetSymbol));
 }
 
 void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
@@ -74,10 +74,10 @@ void WithdrawExchangeContractDialog::jsonDataUpdated(QString id)
 
         if( result == "\"result\":null")
         {
-            AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+            AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText())));
             QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
-            QString params = QString("%1,%2").arg(ui->assetComboBox->currentText())
+            QString params = QString("%1,%2").arg( getRealAssetSymbol( ui->assetComboBox->currentText()))
                     .arg(decimalToIntegerStr(ui->amountLineEdit->text(), assetInfo.precision));
 
             feeChoose->updatePoundageID();
@@ -158,7 +158,7 @@ void WithdrawExchangeContractDialog::on_cancelBtn_clicked()
 void WithdrawExchangeContractDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
     AssetAmountMap map = HXChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap;
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText())));
 
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(assetInfo.precision));
@@ -166,14 +166,14 @@ void WithdrawExchangeContractDialog::on_assetComboBox_currentIndexChanged(const 
     ui->amountLineEdit->setValidator(pReg1);
     ui->amountLineEdit->clear();
 
-    unsigned long long maxAmount = HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value(ui->assetComboBox->currentText());
-    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(getBigNumberString(maxAmount, assetInfo.precision)).arg(assetInfo.symbol));
+    unsigned long long maxAmount = HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value( getRealAssetSymbol( ui->assetComboBox->currentText()));
+    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(getBigNumberString(maxAmount, assetInfo.precision)).arg( revertERCSymbol( assetInfo.symbol)));
 }
 
 void WithdrawExchangeContractDialog::on_withdrawAllBtn_clicked()
 {
-    unsigned long long maxAmount = HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value(ui->assetComboBox->currentText());
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    unsigned long long maxAmount = HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value( getRealAssetSymbol( ui->assetComboBox->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText())));
 
     ui->amountLineEdit->setText(getBigNumberString(maxAmount, assetInfo.precision));
 }
@@ -185,10 +185,10 @@ void WithdrawExchangeContractDialog::on_closeBtn_clicked()
 
 void WithdrawExchangeContractDialog::estimateContractFee()
 {
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText())));
     QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
-    QString params = QString("%1,%2").arg(ui->assetComboBox->currentText())
+    QString params = QString("%1,%2").arg( getRealAssetSymbol( ui->assetComboBox->currentText()))
             .arg(decimalToIntegerStr(ui->amountLineEdit->text(), assetInfo.precision));
 
     HXChain::getInstance()->postRPC( "id-invoke_contract_testing-withdrawAsset", toJsonFormat( "invoke_contract_testing",

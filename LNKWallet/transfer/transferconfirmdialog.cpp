@@ -43,8 +43,8 @@ TransferConfirmDialog::TransferConfirmDialog(QString address, QString amount, QS
 
 
     ui->addressLabel->setText( address);
-    ui->amountLabel->setText( "<body><B>" + amount + "</B> " + assetSymbol + "</body>");
-    ui->feeLabel->setText( "<body>" + fee + " " + feeSymbol +"</body>");
+    ui->amountLabel->setText( "<body><B>" + amount + "</B> " + revertERCSymbol( assetSymbol) + "</body>");
+    ui->feeLabel->setText( "<body>" + fee + " " + revertERCSymbol( feeSymbol) +"</body>");
     ui->remarkLabel->setText( remark.isEmpty()?tr("none"):remark);
 
 

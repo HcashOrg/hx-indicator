@@ -185,7 +185,7 @@ void ContractBalanceWidget::showContractBalances()
         QString key = keys.at(i);
         AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(key));
 
-        ui->balancesTableWidget->setItem(i,0, new QTableWidgetItem(key));
+        ui->balancesTableWidget->setItem(i,0, new QTableWidgetItem( revertERCSymbol( key)));
         ui->balancesTableWidget->setItem(i,1, new QTableWidgetItem(getBigNumberString(balances.value(key), assetInfo.precision)));
         ui->balancesTableWidget->setItem(i,2, new QTableWidgetItem(tr("withdraw")));
 

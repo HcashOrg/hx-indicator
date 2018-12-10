@@ -58,7 +58,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
     getAssets();
     if(!assetType.isEmpty())
     {
-        ui->assetComboBox->setCurrentText(assetType);
+        ui->assetComboBox->setCurrentText(revertERCSymbol( assetType));
     }
 
     inited = true;
@@ -142,7 +142,7 @@ void TransferPage::on_sendBtn_clicked()
     AddressType type = checkAddress(ui->sendtoLineEdit->text(),AccountAddress | MultiSigAddress);
     if( type == AccountAddress || type == MultiSigAddress)
     {
-        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(),ui->amountLineEdit->text(), ui->assetComboBox->currentText(), feeWidget->GetFeeNumber(), feeWidget->GetFeeType(), remark);
+        TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(),ui->amountLineEdit->text(),getRealAssetSymbol( ui->assetComboBox->currentText()), feeWidget->GetFeeNumber(), feeWidget->GetFeeType(), remark);
         bool yOrN = transferConfirmDialog.pop();
         if( yOrN)
         {
@@ -158,7 +158,7 @@ void TransferPage::on_sendBtn_clicked()
             HXChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
                                              toJsonFormat( "transfer_to_address",
                                                            QJsonArray() << accountName << ui->sendtoLineEdit->text()
-                                                           << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                                                           << ui->amountLineEdit->text() << getRealAssetSymbol( ui->assetComboBox->currentText())
                                                            << remark << true ));
         }
 
@@ -176,7 +176,7 @@ void TransferPage::on_sendBtn_clicked()
             HXChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
                                              toJsonFormat( "transfer_to_address",
                                                            QJsonArray() << accountName << ui->addressLabel->text()
-                                                           << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                                                           << ui->amountLineEdit->text() << getRealAssetSymbol( ui->assetComboBox->currentText())
                                                            << remark << true ));
         }
     }
@@ -194,7 +194,7 @@ void TransferPage::refresh()
 
 void TransferPage::setAmountPrecision()
 {
-    AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText()) ));
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(info.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
@@ -263,7 +263,7 @@ void TransferPage::getAssets()
     QStringList keys = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString key, keys)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(key).symbol);
+        ui->assetComboBox->addItem(revertERCSymbol(HXChain::getInstance()->assetInfoMap.value(key).symbol));
     }
 
 
@@ -496,7 +496,7 @@ void TransferPage::selectContactSlots(const QString &name, const QString &addres
 void TransferPage::updateAmountSlots()
 {//根据当前账户、资产类型，判断最大转账数量
     QString name = ui->accountComboBox->currentText();
-    QString assetType = ui->assetComboBox->currentText();
+    QString assetType = getRealAssetSymbol(ui->assetComboBox->currentText());
 
     QString assetID ;
     int assetPrecision ;
@@ -586,7 +586,7 @@ void TransferPage::paintEvent(QPaintEvent *event)
 
 void TransferPage::on_amountLineEdit_textEdited(const QString &arg1)
 {
-    QString assetId = HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText());
+    QString assetId = HXChain::getInstance()->getAssetId(getRealAssetSymbol(ui->assetComboBox->currentText()));
     AssetAmount assetAmount = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).assetAmountMap.value(assetId);
     QString amountStr = getBigNumberString(assetAmount.amount, HXChain::getInstance()->assetInfoMap.value(assetId).precision);
 

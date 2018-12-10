@@ -56,14 +56,14 @@ void DepositExchangeContractDialog::init()
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
 
 }
 
 void DepositExchangeContractDialog::setCurrentAsset(QString _assetSymbol)
 {
-    ui->assetComboBox->setCurrentText(_assetSymbol);
+    ui->assetComboBox->setCurrentText( revertERCSymbol( _assetSymbol));
 }
 
 void DepositExchangeContractDialog::jsonDataUpdated(QString id)
@@ -80,7 +80,7 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
             feeChoose->updatePoundageID();
             HXChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
                                                                                    QJsonArray() << ui->accountNameLabel->text() << contractAddress
-                                                                                   << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                                                                                   << ui->amountLineEdit->text() << getRealAssetSymbol( ui->assetComboBox->currentText())
                                                                                    << "deposit to exchange contract"
                                                                                    << HXChain::getInstance()->currentContractFee() << stepCount
                                                                                    << true
@@ -163,7 +163,7 @@ void DepositExchangeContractDialog::on_cancelBtn_clicked()
 void DepositExchangeContractDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 {
     AssetAmountMap map = HXChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap;
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(ui->assetComboBox->currentText()));
+    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText())));
 
     ui->balanceLabel->setText(getBigNumberString(map.value(assetInfo.id).amount, assetInfo.precision) + " " + assetInfo.symbol );
 
@@ -184,7 +184,7 @@ void DepositExchangeContractDialog::estimateContractFee()
 
     HXChain::getInstance()->postRPC( "id-transfer_to_contract_testing-DepositExchangeContractDialog", toJsonFormat( "transfer_to_contract_testing",
                                                                            QJsonArray() << ui->accountNameLabel->text() << contractAddress
-                                                                           << ui->amountLineEdit->text() << ui->assetComboBox->currentText()
+                                                                           << ui->amountLineEdit->text() << getRealAssetSymbol( ui->assetComboBox->currentText())
                                                                            << "deposit to exchange contract"
                                                                            ));
 

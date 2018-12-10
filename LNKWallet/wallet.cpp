@@ -28,6 +28,7 @@
 
 HXChain* HXChain::goo = 0;
 static const QMap<QString,double>    defaultAutoWithdrawAmountMap = { {"BTC",10},{"LTC",1000},{"HC",10000},{"ETH",100} };
+const static QStringList ERCAssets = {"PAX"};
 
 HXChain::HXChain()
 {
@@ -1919,3 +1920,28 @@ QString toLocalTime(QString timeStr)
 
 
 
+
+QString revertERCSymbol(QString symbol)
+{
+    if(symbol.startsWith("ERC"))
+    {
+        return symbol.mid(QString("ERC").size());
+    }
+    else
+    {
+        return symbol;
+    }
+}
+
+QString getRealAssetSymbol(QString symbol)
+{
+    if(ERCAssets.contains(symbol))
+    {
+        return "ERC" + symbol;
+    }
+    else
+    {
+        return symbol;
+    }
+
+}

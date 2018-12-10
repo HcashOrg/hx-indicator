@@ -79,7 +79,7 @@ void AssetChangeHistoryWidget::init()
     foreach (QString assetId, assetIds)
     {
         if(assetId == "1.3.0")  continue;
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->changeHistoryTableWidget);
@@ -89,12 +89,12 @@ void AssetChangeHistoryWidget::init()
 
 void AssetChangeHistoryWidget::setAsset(QString _assetSymbol)
 {
-    ui->assetComboBox->setCurrentText(_assetSymbol);
+    ui->assetComboBox->setCurrentText( revertERCSymbol( _assetSymbol));
 }
 
 void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
 {
-    if( id == "id-get_multisig_account_pair-" + ui->assetComboBox->currentText())
+    if( id == "id-get_multisig_account_pair-" + getRealAssetSymbol( ui->assetComboBox->currentText()))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
@@ -122,7 +122,7 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
                 QString coldAddress = object.take("bind_account_cold").toString();
                 int effectiveBlock = object.take("effective_block_num").toInt();
 
-                ui->changeHistoryTableWidget->setItem(row,0,new QTableWidgetItem(ui->assetComboBox->currentText()));
+                ui->changeHistoryTableWidget->setItem(row,0,new QTableWidgetItem( getRealAssetSymbol( ui->assetComboBox->currentText())));
                 ui->changeHistoryTableWidget->setItem(row,1,new QTableWidgetItem(hotAddress));
                 ui->changeHistoryTableWidget->setItem(row,2,new QTableWidgetItem(coldAddress));
                 
@@ -138,7 +138,7 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
                 ui->changeHistoryTableWidget->setItem(row,4,new QTableWidgetItem(tr("checking")));
                 ui->changeHistoryTableWidget->setItem(row,5,new QTableWidgetItem(tr("export")));
 
-                GuardMultisigAddress gma = HXChain::getInstance()->getGuardMultisigByPairId(ui->assetComboBox->currentText(),
+                GuardMultisigAddress gma = HXChain::getInstance()->getGuardMultisigByPairId( getRealAssetSymbol( ui->assetComboBox->currentText()),
                                                                    ui->accountComboBox->currentText(), pairId);
                 ui->changeHistoryTableWidget->item(row,1)->setData(Qt::UserRole, gma.hotAddress);
                 ui->changeHistoryTableWidget->item(row,2)->setData(Qt::UserRole, gma.coldAddress);
@@ -274,8 +274,8 @@ void AssetChangeHistoryWidget::on_assetComboBox_currentIndexChanged(const QStrin
 
 void AssetChangeHistoryWidget::fetchMultisigAccountPair()
 {
-    HXChain::getInstance()->postRPC( "id-get_multisig_account_pair-" + ui->assetComboBox->currentText(), toJsonFormat( "get_multisig_account_pair",
-                                                                           QJsonArray() << ui->assetComboBox->currentText()));
+    HXChain::getInstance()->postRPC( "id-get_multisig_account_pair-" + getRealAssetSymbol( ui->assetComboBox->currentText()), toJsonFormat( "get_multisig_account_pair",
+                                                                           QJsonArray() << getRealAssetSymbol( ui->assetComboBox->currentText())));
 }
 
 void AssetChangeHistoryWidget::fetchCrosschainPrivateKey(QString address)

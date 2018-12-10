@@ -45,7 +45,7 @@ void PublishPoundageWidget::ConfirmPublishSlots()
     QString accountName = ui->comboBox_accounts->currentText();
     QString sourceNumber = ui->lineEdit_source->text();
     QString targetNumber = ui->lineEdit_target->text();
-    QString targetCoinType = ui->comboBox_targetType->currentText();
+    QString targetCoinType = getRealAssetSymbol( ui->comboBox_targetType->currentText());
     if(accountName.isEmpty() || targetCoinType.isEmpty()) return;
     
     //限定数量大于0
@@ -114,7 +114,7 @@ void PublishPoundageWidget::ChangeAssetSlots()
     ui->lineEdit_target->clear();
     int pre = ui->comboBox_targetType->currentData(Qt::UserRole).value<int>();
     installDoubleValidator(ui->lineEdit_target,0,1e20,pre);
-    ui->lineEdit_target->setPlaceholderText(tr("input ")+ui->comboBox_targetType->currentText()+tr(" number"));
+    ui->lineEdit_target->setPlaceholderText(tr("input ") + revertERCSymbol( ui->comboBox_targetType->currentText()) + tr(" number"));
     //ui->doubleSpinBox_targetNumber->setDecimals(pre);
 }
 
@@ -137,7 +137,7 @@ void PublishPoundageWidget::InitTargetCoin()
     foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
         if(asset.id == "1.3.0") continue;
 
-        ui->comboBox_targetType->addItem(asset.symbol,asset.precision);
+        ui->comboBox_targetType->addItem( revertERCSymbol( asset.symbol),asset.precision);
     }
 
     ui->comboBox_targetType->setCurrentIndex(0);

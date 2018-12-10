@@ -127,7 +127,7 @@ void FeeChooseWidget::jsonDataUpdated(QString id)
 
 void FeeChooseWidget::coinTypeChanged()
 {
-    QueryPoundage(ui->comboBox_coinType->currentText());
+    QueryPoundage( getRealAssetSymbol( ui->comboBox_coinType->currentText()));
 }
 
 void FeeChooseWidget::feeTypeChanged()
@@ -135,7 +135,7 @@ void FeeChooseWidget::feeTypeChanged()
     if(ui->checkBox->checkState() == Qt::Checked)
     {
 
-        QueryPoundage(ui->comboBox_coinType->currentText());
+        QueryPoundage( getRealAssetSymbol( ui->comboBox_coinType->currentText()));
     }
     else if(ui->checkBox->checkState() == Qt::Unchecked)
     {
@@ -200,7 +200,7 @@ void FeeChooseWidget::ParsePoundage(const std::shared_ptr<PoundageUnit> &poundag
                 break;
             }
         }
-        _p->poundageTip = tr("pay:") + QString::number(_p->coinNumber,'f',pre) + " " + _p->feeType + tr("  rate: 1:") + QString::number(rate,'f',ASSET_PRECISION);
+        _p->poundageTip = tr("pay:") + QString::number(_p->coinNumber,'f',pre) + " " + revertERCSymbol( _p->feeType) + tr("  rate: 1:") + QString::number(rate,'f',ASSET_PRECISION);
 
     }
 }
@@ -304,7 +304,7 @@ void FeeChooseWidget::InitCoinType()
     ui->comboBox_coinType->clear();
     foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
         if(asset.id == "1.3.0") continue;
-        ui->comboBox_coinType->addItem(asset.symbol,asset.id);
+        ui->comboBox_coinType->addItem( revertERCSymbol( asset.symbol),asset.id);
     }
     if(ui->comboBox_coinType->count() > 0)
     {
@@ -326,7 +326,7 @@ void FeeChooseWidget::InitWidget()
     {
         for(int i = 0;i < ui->comboBox_coinType->count();++i)
         {
-            if(_p->feeType == ui->comboBox_coinType->itemText(i))
+            if(_p->feeType == getRealAssetSymbol( ui->comboBox_coinType->itemText(i)))
             {
                 ui->comboBox_coinType->setCurrentIndex(i);
                 break;

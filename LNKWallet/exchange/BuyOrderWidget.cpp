@@ -59,14 +59,14 @@ void BuyOrderWidget::setOrderInfo(unsigned long long _buyAmount, QString _buySym
     buySymbol = _buySymbol;
     sellSymbol = _sellSymbol;
 
-    AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(buySymbol));
-    AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(sellSymbol));
+    AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(getRealAssetSymbol( buySymbol)));
+    AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(getRealAssetSymbol( sellSymbol)));
 
     double price = (double)buyAmount / qPow(10,buyAssetInfo.precision) / sellAmount * qPow(10,sellAssetInfo.precision);
 
-    ui->priceLabel->setText(QString::number(price,'g',8) + " " + tr("%1/%2").arg(buySymbol).arg(sellSymbol));
+    ui->priceLabel->setText(QString::number(price,'g',8) + " " + tr("%1/%2").arg(revertERCSymbol( buySymbol)).arg(revertERCSymbol( sellSymbol)));
 
-    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(HXChain::getInstance()->getAccountBalance(accountName,sellSymbol)).arg(sellSymbol));
+    ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(HXChain::getInstance()->getAccountBalance(accountName, revertERCSymbol( sellSymbol))).arg(revertERCSymbol( sellSymbol)));
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(sellAssetInfo.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
@@ -149,22 +149,22 @@ void BuyOrderWidget::estimateContractFee()
 
 
     // 计算实际能买到的数量
-    AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(buySymbol));
-    AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(sellSymbol));
+    AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(getRealAssetSymbol( buySymbol)));
+    AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(getRealAssetSymbol( sellSymbol)));
     double amount = (double)buyAmount / qPow(10,buyAssetInfo.precision) / sellAmount * qPow(10,sellAssetInfo.precision)
             * ui->amountLineEdit->text().toDouble();
 
 
     HXChain::getInstance()->postRPC( "id-transfer_to_contract_testing-BuyOrderWidget", toJsonFormat( "transfer_to_contract_testing",
                                                                            QJsonArray() << accountName << ui->contractAddressLabel->text()
-                                                                           << ui->amountLineEdit->text() << sellSymbol
-                                                                           << QString("%1,%2").arg(buySymbol).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
+                                                                           << ui->amountLineEdit->text() << getRealAssetSymbol( sellSymbol)
+                                                                           << QString("%1,%2").arg( getRealAssetSymbol( buySymbol)).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
                                                                            ));
 
     qDebug() << toJsonFormat( "transfer_to_contract_testing",
                               QJsonArray() << accountName << ui->contractAddressLabel->text()
-                              << ui->amountLineEdit->text() << sellSymbol
-                              << QString("%1,%2").arg(buySymbol).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
+                              << ui->amountLineEdit->text() << getRealAssetSymbol( sellSymbol)
+                              << QString("%1,%2").arg( getRealAssetSymbol( buySymbol)).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
                               );
 }
 
@@ -173,15 +173,15 @@ void BuyOrderWidget::on_okBtn_clicked()
     if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty() )   return;
 
     // 计算实际能买到的数量
-    AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(buySymbol));
-    AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(sellSymbol));
+    AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(getRealAssetSymbol( buySymbol)));
+    AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(getRealAssetSymbol( sellSymbol)));
     double amount = (double)buyAmount / qPow(10,buyAssetInfo.precision) / sellAmount * qPow(10,sellAssetInfo.precision)
             * ui->amountLineEdit->text().toDouble();
     feeChoose->updatePoundageID();
     HXChain::getInstance()->postRPC( "id-transfer_to_contract-BuyOrderWidget", toJsonFormat( "transfer_to_contract",
                                                                            QJsonArray() << accountName << ui->contractAddressLabel->text()
-                                                                           << ui->amountLineEdit->text() << sellSymbol
-                                                                           << QString("%1,%2").arg(buySymbol).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
+                                                                           << ui->amountLineEdit->text() << getRealAssetSymbol( sellSymbol)
+                                                                           << QString("%1,%2").arg(getRealAssetSymbol( buySymbol)).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
                                                                            << HXChain::getInstance()->currentContractFee() << stepCount
                                                                            << true
                                                                            ));
@@ -195,7 +195,7 @@ void BuyOrderWidget::on_cancelBtn_clicked()
 
 void BuyOrderWidget::on_allBtn_clicked()
 {
-    ui->amountLineEdit->setText(HXChain::getInstance()->getAccountBalance(accountName,sellSymbol));
+    ui->amountLineEdit->setText(HXChain::getInstance()->getAccountBalance(accountName,getRealAssetSymbol( sellSymbol)));
 }
 
 void BuyOrderWidget::on_amountLineEdit_textChanged(const QString &arg1)
@@ -205,8 +205,8 @@ void BuyOrderWidget::on_amountLineEdit_textChanged(const QString &arg1)
 
 void BuyOrderWidget::on_amountLineEdit_textEdited(const QString &arg1)
 {
-    if(ui->amountLineEdit->text().toDouble() > HXChain::getInstance()->getAccountBalance(accountName,sellSymbol).toDouble())
+    if(ui->amountLineEdit->text().toDouble() > HXChain::getInstance()->getAccountBalance(accountName,getRealAssetSymbol( sellSymbol)).toDouble())
     {
-        ui->amountLineEdit->setText(HXChain::getInstance()->getAccountBalance(accountName,sellSymbol));
+        ui->amountLineEdit->setText(HXChain::getInstance()->getAccountBalance(accountName,getRealAssetSymbol( sellSymbol)));
     }
 }

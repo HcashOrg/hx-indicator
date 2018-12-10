@@ -82,7 +82,7 @@ void PoundageWidget::autoRefreshSlots()
         {
             HXChain::getInstance()->postRPC("poundage_list_guarantee_order_",
                                             toJsonFormat("list_guarantee_order",
-                                                         QJsonArray()<<ui->comboBox_coinType->currentText()<<false
+                                                         QJsonArray() << getRealAssetSymbol( ui->comboBox_coinType->currentText()) << false
                                                          )
                                             );
         }
@@ -236,7 +236,7 @@ void PoundageWidget::jsonDataUpdated(QString id)
     }
     else if("poundage_finish_my_list" == id)
     {
-        _p->myPoundageSheet->filterByChainType(ui->comboBox_coinType->currentText());
+        _p->myPoundageSheet->filterByChainType( getRealAssetSymbol( ui->comboBox_coinType->currentText()));
         SortByStuffSlots();
         //_p->myPoundageWidget->InitData(_p->myPoundageSheet);
 
@@ -354,7 +354,7 @@ void PoundageWidget::InitCoinType()
     ui->comboBox_coinType->clear();
     foreach(AssetInfo asset,HXChain::getInstance()->assetInfoMap){
         if(asset.id == "1.3.0") continue;
-        ui->comboBox_coinType->addItem(asset.symbol,asset.id);
+        ui->comboBox_coinType->addItem( revertERCSymbol( asset.symbol),asset.id);
     }
     ui->comboBox_coinType->insertItem(0,"All","0");
     if(ui->comboBox_coinType->count() > 0)

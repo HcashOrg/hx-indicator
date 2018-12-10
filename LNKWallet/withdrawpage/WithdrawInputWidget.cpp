@@ -44,7 +44,7 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
                                                        number.toDouble(), assetInfo.precision, this);
     validator->setNotation(QDoubleValidator::StandardNotation);
     ui->lineEdit_ammount->setValidator( validator );
-    ui->label_symbol->setText(symbol);
+    ui->label_symbol->setText(revertERCSymbol(symbol));
     ui->label_tipNumber->setText(tr("Amount limits: %1 to %2").arg(validator->bottom()).arg(number));
 }
 

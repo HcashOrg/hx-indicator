@@ -73,8 +73,8 @@ void OnchainOrderPage::init()
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
-        ui->assetComboBox2->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
+        ui->assetComboBox2->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
 
     if(HXChain::getInstance()->currentSellAssetId.isEmpty() || HXChain::getInstance()->currentBuyAssetId.isEmpty())
@@ -85,20 +85,20 @@ void OnchainOrderPage::init()
         if(keys.size() > 0)
         {
             QStringList strList = keys.at(0).split("+");
-            ui->assetComboBox->setCurrentText(strList.at(0));
-            ui->assetComboBox2->setCurrentText(strList.at(1));
+            ui->assetComboBox->setCurrentText( revertERCSymbol( strList.at(0)));
+            ui->assetComboBox2->setCurrentText( revertERCSymbol( strList.at(1)));
         }
     }
     else
     {
         if(assetIds.contains(HXChain::getInstance()->currentSellAssetId))
         {
-            ui->assetComboBox->setCurrentText(HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentSellAssetId).symbol);
+            ui->assetComboBox->setCurrentText( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentSellAssetId).symbol));
         }
 
         if(assetIds.contains(HXChain::getInstance()->currentBuyAssetId))
         {
-            ui->assetComboBox2->setCurrentText(HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentBuyAssetId).symbol);
+            ui->assetComboBox2->setCurrentText( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentBuyAssetId).symbol));
         }
     }
 
@@ -238,8 +238,8 @@ void OnchainOrderPage::queryContractOrders()
     object.insert("id",45);
     object.insert("method","Zchain.Exchange.queryContracts");
     QJsonObject paramObject;
-    paramObject.insert("from_asset",ui->assetComboBox->currentText());
-    paramObject.insert("to_asset",ui->assetComboBox2->currentText());
+    paramObject.insert("from_asset", getRealAssetSymbol( ui->assetComboBox->currentText()));
+    paramObject.insert("to_asset", getRealAssetSymbol( ui->assetComboBox2->currentText()));
     paramObject.insert("limit",10);
     object.insert("params",paramObject);
     httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
@@ -317,8 +317,8 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
         buyOrderWidget->setAccount(ui->accountComboBox->currentText());
         QString contractAddress = ui->ordersTableWidget->item(_row,2)->data(Qt::UserRole).toString();
         buyOrderWidget->setContractAddress(contractAddress);
-        buyOrderWidget->setOrderInfo(ui->ordersTableWidget->item(_row,0)->data(Qt::UserRole).toULongLong(), ui->assetComboBox->currentText()
-                                     ,ui->ordersTableWidget->item(_row,1)->data(Qt::UserRole).toULongLong(), ui->assetComboBox2->currentText());
+        buyOrderWidget->setOrderInfo(ui->ordersTableWidget->item(_row,0)->data(Qt::UserRole).toULongLong(), getRealAssetSymbol( ui->assetComboBox->currentText())
+                                     ,ui->ordersTableWidget->item(_row,1)->data(Qt::UserRole).toULongLong(), getRealAssetSymbol( ui->assetComboBox2->currentText()));
 
         currentWidget = buyOrderWidget;
 
@@ -362,6 +362,7 @@ void OnchainOrderPage::on_swapBtn_clicked()
     inited = false;
     QString temp = ui->assetComboBox->currentText();
     ui->assetComboBox->setCurrentText(ui->assetComboBox2->currentText());
+    HXChain::getInstance()->currentSellAssetId = ui->assetComboBox->currentData().toString();
     inited = true;
     ui->assetComboBox2->setCurrentText(temp);
 }

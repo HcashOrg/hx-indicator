@@ -190,7 +190,7 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->lockBalancesTableWidget->setItem(i,0,new QTableWidgetItem(HXChain::getInstance()->getMinerNameFromId(minerId)));
 
             AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
-            ui->lockBalancesTableWidget->setItem(i,1,new QTableWidgetItem(assetInfo.symbol));
+            ui->lockBalancesTableWidget->setItem(i,1,new QTableWidgetItem( revertERCSymbol( assetInfo.symbol)));
 
             ui->lockBalancesTableWidget->setItem(i,2,new QTableWidgetItem(getBigNumberString(lockAmount,assetInfo.precision)));
 
@@ -851,7 +851,7 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
 
         LockToMinerDialog lockToMinerDialog(ui->accountComboBox->currentText());
         lockToMinerDialog.setMiner(ui->lockBalancesTableWidget->item(row,0)->text());
-        lockToMinerDialog.setAsset(ui->lockBalancesTableWidget->item(row,1)->text());
+        lockToMinerDialog.setAsset( getRealAssetSymbol( ui->lockBalancesTableWidget->item(row,1)->text()));
         lockToMinerDialog.pop();
         return;
     }
@@ -863,7 +863,7 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
             return;
 
         QString citizenName = ui->lockBalancesTableWidget->item(row,0)->text();
-        QString assetSymbol = ui->lockBalancesTableWidget->item(row,1)->text();
+        QString assetSymbol = getRealAssetSymbol( ui->lockBalancesTableWidget->item(row,1)->text());
         ForecloseDialog forecloseDialog(ui->accountComboBox->currentText(), assetSymbol,
                                         ui->lockBalancesTableWidget->item(row,2)->text());
         if(!forecloseDialog.pop())  return;
