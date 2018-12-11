@@ -41,7 +41,14 @@ void FavoritePairsWidget::init()
     }
     setBtns(keys);
 
-    adjustPosAndVisiable();
+    if(btnTexts.size() > 0)
+    {
+        setCurrentBtn(btnTexts.first());
+    }
+    else
+    {
+        adjustPosAndVisiable();
+    }
 }
 
 void FavoritePairsWidget::setBtns(QStringList texts)
@@ -53,6 +60,13 @@ void FavoritePairsWidget::setBtns(QStringList texts)
         if(btnTexts.contains(str))  continue;
         btnTexts.append(str);
     }
+}
+
+void FavoritePairsWidget::setCurrentBtn(QString text)
+{
+    if(!btnTexts.contains(text) || text.isEmpty())    return;
+    currentText = text;
+    adjustPosAndVisiable();
 }
 
 void FavoritePairsWidget::removeBtn(QString text)
@@ -72,6 +86,13 @@ void FavoritePairsWidget::adjustPosAndVisiable()
         btnVector.at(i)->show();
         btnVector.at(i)->adjustSize();
         btnVector.at(i)->move(x,5);
+
+        if(currentText == btnTexts.at(i))
+        {
+            ui->lineLabel->move( (x + (btnVector.at(i)->width() - ui->lineLabel->width()) / 2), 25 );
+            btnVector.at(i)->setChecked(true);
+        }
+
         x += btnVector.at(i)->width() + 40;
     }
 
@@ -83,8 +104,20 @@ void FavoritePairsWidget::adjustPosAndVisiable()
 
 void FavoritePairsWidget::onBtnClicked()
 {
-    QToolButton* btn = static_cast<QToolButton*>(sender());
-    showPair(btn->text());
+    foreach(QToolButton* btn, btnVector)
+    {
+        if(btn == sender())
+        {
+            btn->setChecked(true);
+            showPair(btn->text());
+            setCurrentBtn(btn->text());
+        }
+        else
+        {
+            btn->setChecked(false);
+        }
+    }
+
 }
 
 

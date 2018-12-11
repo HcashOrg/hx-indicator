@@ -61,8 +61,9 @@ QToolButton[BtnStyle="swap"]:hover{background-image:url(:/ui/wallet_ui/swap_hove
 QToolButton[BtnStyle="switch"]{background-image:url(:/ui/wallet_ui/switch_off.png);background-repeat: no-repeat;background-position: center;background-color:transparent;border:none;}
 QToolButton[BtnStyle="switch"]:checked{background-image:url(:/ui/wallet_ui/switch_on.png);}
 QToolButton[BtnStyle="switch"]:!checked{background-image:url(:/ui/wallet_ui/switch_off.png);}
-QToolButton[BtnStyle="favoritePair"]{background:transparent;border:none;color: rgb(137,129,161);font: 12px \"Microsoft YaHei UI Light\";}
-QToolButton[BtnStyle="favoritePair"]:hover{color: rgb(84,116,235);}
+QToolButton[BtnStyle="favoritePair"]{background:transparent;border:none;}
+QToolButton[BtnStyle="favoritePair"]:!checked{color: rgb(137,129,161);font: 12px \"微软雅黑\";}
+QToolButton[BtnStyle="favoritePair"]:checked{color: rgb(110,104,130);font: bold 12px \"微软雅黑\";}
 
 QWidget[WidgetStyle="dialogBg"]{background-image:url(:/ui/wallet_ui/back_dialog.png);}
 QWidget[WidgetStyle="container"]{background-color:rgb(229,226,240);border-radius:4px;}

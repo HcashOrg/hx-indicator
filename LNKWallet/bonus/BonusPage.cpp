@@ -69,6 +69,7 @@ void BonusPage::init()
     }
 
     checkObtainAllBtnVisible();
+    inited = true;
 }
 
 void BonusPage::refresh()
@@ -169,6 +170,8 @@ void BonusPage::jsonDataUpdated(QString id)
 
 void BonusPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
+    if(!inited)     return;
+    HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
     fetchBonusBalance();
 }
 
@@ -251,9 +254,10 @@ void BonusPage::on_obtainAllBtn_clicked()
 
         for(int i = 0; i < ui->bonusTableWidget->rowCount(); i++)
         {
+            QString amountStr = ui->bonusTableWidget->item(i,1)->data(Qt::UserRole).toString();
+            if(amountStr.toULongLong() < 1)     continue;
             QJsonArray array2;
             array2 << ui->bonusTableWidget->item(i,0)->text();
-            QString amountStr = ui->bonusTableWidget->item(i,1)->data(Qt::UserRole).toString();
             array2 << amountStr;
             array << array2;
         }
@@ -285,3 +289,4 @@ void BonusPage::pageChangeSlot(unsigned int page)
         }
     }
 }
+

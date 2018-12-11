@@ -18,6 +18,7 @@ public:
 
     void init();
     void setBtns(QStringList texts);
+    void setCurrentBtn(QString text);
     void removeBtn(QString text);
     void adjustPosAndVisiable();
 
@@ -31,6 +32,7 @@ private:
     int size = 0;
 
     QStringList btnTexts;
+    QString currentText;
     QVector<QToolButton*>   btnVector;
 };
 

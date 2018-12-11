@@ -30,8 +30,10 @@ private slots:
     void on_obtainAllBtn_clicked();
 
     void pageChangeSlot(unsigned int page);
+
 private:
     Ui::BonusPage *ui;
+    bool inited = false;
 
     void paintEvent(QPaintEvent*);
 

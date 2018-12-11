@@ -30,6 +30,22 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <string>常用</string>
    </property>
   </widget>
+  <widget class="QLabel" name="lineLabel">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>10</y>
+     <width>25</width>
+     <height>2</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(71,65,87);</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
