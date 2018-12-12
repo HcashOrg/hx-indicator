@@ -488,20 +488,22 @@ void AllTransactionWidget::showTransactions()
             break;
         case TRANSACTION_TYPE_REGISTER_ACCOUNT:
         {
+            QString payer = operationObject.value("payer").toString();
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("register account")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(payer, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_UPDATE_ACCOUNT:
         {
+            QString addr = operationObject.value("addr").toString();
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("citizen change mining fee")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(addr, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_BIND_TUNNEL:
@@ -545,11 +547,12 @@ void AllTransactionWidget::showTransactions()
             break;
         case TRANSACTION_TYPE_CREATE_MINER:
         {
+            QString minerAddress = operationObject.value("miner_address").toString();
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("create citizen")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(minerAddress, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_SPONSOR_PROPOSAL:
@@ -610,11 +613,12 @@ void AllTransactionWidget::showTransactions()
             break;
         case TRANSACTION_TYPE_CREATE_GUARD:
         {
+            QString feePayAddress = operationObject.value("fee_pay_address").toString();
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("create senator")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(feePayAddress, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_LOCKBALANCE:
@@ -738,6 +742,7 @@ void AllTransactionWidget::showTransactions()
             break;
         case TRANSACTION_TYPE_MINE_INCOME:
         {
+            QString payBackOwner = operationObject.value("pay_back_owner").toString();
             QJsonArray balanceArray = operationObject.value("pay_back_balance").toArray();
             if(balanceArray.size() > 0)
             {
@@ -763,7 +768,7 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("get mining income")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(payBackOwner, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_ISSUE_ASSET:
@@ -777,7 +782,8 @@ void AllTransactionWidget::showTransactions()
             break;
         case TRANSACTION_TYPE_CONTRACT_REGISTER:
         {
-            QString contractId = operationObject.take("contract_id").toString();
+            QString contractId = operationObject.value("contract_id").toString();
+            QString ownerAddress = operationObject.take("owner_addr").toString();
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(contractId));
 
@@ -787,11 +793,12 @@ void AllTransactionWidget::showTransactions()
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("register contract")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ownerAddress, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_CONTRACT_INVOKE:
         {
+            QString callerAddress = operationObject.value("caller_addr").toString();
             QString contractId = operationObject.take("contract_id").toString();
             QString contractAPI = operationObject.take("contract_api").toString();
             QString arguments = operationObject.take("contract_arg").toString();
@@ -819,11 +826,12 @@ void AllTransactionWidget::showTransactions()
                 ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("call contract")));
             }
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(callerAddress, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_CONTRACT_TRANSFER:
         {
+            QString callerAddress = operationObject.value("caller_addr").toString();
             QString contractId          = operationObject.take("contract_id").toString();
             QJsonObject amountObject    = operationObject.take("amount").toObject();
             unsigned long long amount   = jsonValueToULL( amountObject.take("amount"));
@@ -838,11 +846,12 @@ void AllTransactionWidget::showTransactions()
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("transfer to contract")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(callerAddress, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_CREATE_GUARANTEE:
         {
+            QString ownerAddress = operationObject.value("owner_addr").toString();
             QJsonObject amountObject    = operationObject.take("asset_origin").toObject();
             unsigned long long amount   = jsonValueToULL( amountObject.take("amount"));
             QString assetId             = amountObject.take("asset_id").toString();
@@ -857,11 +866,12 @@ void AllTransactionWidget::showTransactions()
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("create %1 acceptance").arg(acceptSymbol)));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ownerAddress, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_CANCEL_GUARANTEE:
         {
+            QString ownerAddress = operationObject.value("owner_addr").toString();
             QString cancelGuaranteeOrderId = operationObject.value("cancel_guarantee_id").toString();
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(cancelGuaranteeOrderId));
 
@@ -884,11 +894,12 @@ void AllTransactionWidget::showTransactions()
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("cancel acceptance")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(ownerAddress, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_OBTAIN_BONUS:
         {
+            QString bonusOwner = operationObject.value("bonus_owner").toString();
             QJsonArray bonusBalanceArray = operationObject.value("bonus_balance").toArray();
             QString str;
             foreach (QJsonValue v, bonusBalanceArray)
@@ -907,7 +918,7 @@ void AllTransactionWidget::showTransactions()
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("get bonus")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
+            useGuaranteeOrderType = checkUseGuaranteeOrderType(bonusOwner, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_SIGN_ETH_MULTI_CREATE:
@@ -918,7 +929,6 @@ void AllTransactionWidget::showTransactions()
             QString chainType = operationObject.value("chain_type").toString();
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator sign to create %1 multi-sig account").arg(chainType)));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_SIGN_ETH_FINAL:
@@ -927,7 +937,6 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator sign ETH trx")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_SIGN_ETH_COLDHOT_FINAL:
@@ -936,7 +945,6 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator sign ETH cold-hot trx")));
 
-            useGuaranteeOrderType = checkUseGuaranteeOrderType(ui->addressLabel->text(), ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }
             break;
         case TRANSACTION_TYPE_CITIZEN_PROPOSAL:
@@ -974,7 +982,7 @@ void AllTransactionWidget::showTransactions()
             GuaranteeOrder go = HXChain::getInstance()->transactionDB.getGuaranteeOrder(ts.guaranteeId);
             AssetInfo targetAssetInfo = HXChain::getInstance()->assetInfoMap.value(go.targetAssetAmount.assetId);
             QString str = QString("%1 %2 (%3)").arg(calculateGuaranteeOrderAmount(go.id, getBigNumberString(ts.feeAmount, ASSET_PRECISION).toDouble()), 0, 'g',targetAssetInfo.precision)
-                    .arg(targetAssetInfo.symbol).arg(go.id);
+                    .arg( revertERCSymbol( targetAssetInfo.symbol)).arg(go.id);
             ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(str));
         }
             break;
@@ -983,7 +991,7 @@ void AllTransactionWidget::showTransactions()
             GuaranteeOrder go = HXChain::getInstance()->transactionDB.getGuaranteeOrder(ts.guaranteeId);
             AssetInfo targetAssetInfo = HXChain::getInstance()->assetInfoMap.value(go.targetAssetAmount.assetId);
             QString str = QString("+%1 %2 (%3)").arg(calculateGuaranteeOrderAmount(go.id, getBigNumberString(ts.feeAmount, ASSET_PRECISION).toDouble()), 0, 'g',targetAssetInfo.precision)
-                    .arg(targetAssetInfo.symbol).arg(go.id);
+                    .arg( revertERCSymbol( targetAssetInfo.symbol)).arg(go.id);
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
@@ -996,7 +1004,7 @@ void AllTransactionWidget::showTransactions()
             GuaranteeOrder go = HXChain::getInstance()->transactionDB.getGuaranteeOrder(ts.guaranteeId);
             AssetInfo targetAssetInfo = HXChain::getInstance()->assetInfoMap.value(go.targetAssetAmount.assetId);
             QString str = QString("%1 %2 (%3)").arg(calculateGuaranteeOrderAmount(go.id, getBigNumberString(ts.feeAmount, ASSET_PRECISION).toDouble()), 0, 'g',targetAssetInfo.precision)
-                    .arg(targetAssetInfo.symbol).arg(go.id);
+                    .arg( revertERCSymbol( targetAssetInfo.symbol)).arg(go.id);
             ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(str));
         }
             break;
@@ -1010,38 +1018,6 @@ void AllTransactionWidget::showTransactions()
 
     hideFilteredTransactions();
 }
-
-int AllTransactionWidget::checkUseGuaranteeOrderType(QString payer, QString currentAddress, QString ownerAddress)
-{
-    int result = 0;
-    if(ownerAddress.isEmpty())
-    {
-        // 没使用承兑单
-        result = 0;
-    }
-    else if(currentAddress == ownerAddress)
-    {
-        if(payer == currentAddress)
-        {
-            // 手续费支付者是自己，说明是使用了自己的承兑单
-            result = 3;
-        }
-        else
-        {
-            // 手续费支付者不是自己，说明是别人使用了我的承兑单
-            result = 2;
-        }
-    }
-    else
-    {
-        // 当前账户不是承兑单发布者，说明使用了别人的承兑单
-        result = 1;
-    }
-
-    return result;
-}
-
-
 
 
 void AllTransactionWidget::on_accountComboBox_currentTextChanged(const QString &arg1)

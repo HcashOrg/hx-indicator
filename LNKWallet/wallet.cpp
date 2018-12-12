@@ -175,12 +175,12 @@ void HXChain:: startExe()
             ;
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay2",true).toBool())
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay3",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/dbReplay2",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay3",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
@@ -1944,4 +1944,34 @@ QString getRealAssetSymbol(QString symbol)
         return symbol;
     }
 
+}
+
+int checkUseGuaranteeOrderType(QString payer, QString currentAddress, QString ownerAddress)
+{
+    int result = 0;
+    if(ownerAddress.isEmpty())
+    {
+        // 没使用承兑单
+        result = 0;
+    }
+    else if(currentAddress == ownerAddress)
+    {
+        if(payer == currentAddress)
+        {
+            // 手续费支付者是自己，说明是使用了自己的承兑单
+            result = 3;
+        }
+        else
+        {
+            // 手续费支付者不是自己，说明是别人使用了我的承兑单
+            result = 2;
+        }
+    }
+    else
+    {
+        // 当前账户不是承兑单发布者，说明使用了别人的承兑单
+        result = 1;
+    }
+
+    return result;
 }

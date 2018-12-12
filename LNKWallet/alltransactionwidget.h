@@ -67,7 +67,6 @@ private:
     void hideFilteredTransactions();
 
     void showTransactions();
-    int  checkUseGuaranteeOrderType(QString payer, QString currentAddress, QString ownerAddress);
 
     void init();
 
