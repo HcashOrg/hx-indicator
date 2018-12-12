@@ -461,13 +461,13 @@ void CapitalTransferPage::InitWidget()
     if(_p->symbol == "ETH")
     {
 //        ui->label_fee->setText( tr("about") + " 0.00021 ETH");
-        ui->slider->setValue(5);
+        ui->slider->setValue(10);
         onSliderValueChanged(ui->slider->value());
     }
     else if(_p->symbol.startsWith("ERC"))
     {
 //        ui->label_fee->setText( tr("about") + " 0.00045 ETH");
-        ui->slider->setValue(5);
+        ui->slider->setValue(10);
         onSliderValueChanged(ui->slider->value());
     }
     else

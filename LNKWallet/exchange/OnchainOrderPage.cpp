@@ -50,6 +50,7 @@ OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
     favoritePairsWidget = new FavoritePairsWidget(6,this);
     connect(favoritePairsWidget, SIGNAL(showPair(QString)), this, SLOT(showPair(QString)));
     favoritePairsWidget->move(60,120);
+    favoritePairsWidget->init();
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->ordersTableWidget);
     init();
@@ -369,6 +370,7 @@ void OnchainOrderPage::on_swapBtn_clicked()
 
 void OnchainOrderPage::on_favoriteBtn_clicked()
 {
+    QString str = ui->assetComboBox->currentText() + "+" + ui->assetComboBox2->currentText();
     if(ui->favoriteBtn->isChecked())
     {
         HXChain::getInstance()->configFile->beginGroup("/FavoriteOrderPairs");
@@ -383,19 +385,18 @@ void OnchainOrderPage::on_favoriteBtn_clicked()
             return;
         }
 
-        QString str = ui->assetComboBox->currentText() + "+" + ui->assetComboBox2->currentText();
         HXChain::getInstance()->configFile->setValue("/FavoriteOrderPairs/" + str, 1);
         ui->favoriteBtn->setChecked(true);
 
     }
     else
     {
-        QString str = ui->assetComboBox->currentText() + "+" + ui->assetComboBox2->currentText();
         HXChain::getInstance()->configFile->remove("/FavoriteOrderPairs/" + str);
         ui->favoriteBtn->setChecked(false);
     }
 
     favoritePairsWidget->init();
+    favoritePairsWidget->setCurrentBtn(str.replace("+","/"));
 }
 
 void OnchainOrderPage::showPair(QString pairStr)
@@ -433,4 +434,6 @@ void OnchainOrderPage::checkFavorite()
     {
         ui->favoriteBtn->setChecked(false);
     }
+
+    favoritePairsWidget->setCurrentBtn(str.replace("+","/"));
 }

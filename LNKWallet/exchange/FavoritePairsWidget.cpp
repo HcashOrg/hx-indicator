@@ -32,6 +32,7 @@ FavoritePairsWidget::~FavoritePairsWidget()
 
 void FavoritePairsWidget::init()
 {
+    currentText.clear();
     HXChain::getInstance()->configFile->beginGroup("/FavoriteOrderPairs");
     QStringList keys = HXChain::getInstance()->configFile->childKeys();
     HXChain::getInstance()->configFile->endGroup();
@@ -41,7 +42,7 @@ void FavoritePairsWidget::init()
     }
     setBtns(keys);
 
-    if(btnTexts.size() > 0)
+    if(btnTexts.size() > 0 )
     {
         setCurrentBtn(btnTexts.first());
     }
@@ -64,8 +65,14 @@ void FavoritePairsWidget::setBtns(QStringList texts)
 
 void FavoritePairsWidget::setCurrentBtn(QString text)
 {
-    if(!btnTexts.contains(text) || text.isEmpty())    return;
-    currentText = text;
+    if(!btnTexts.contains(text) || text.isEmpty())
+    {
+        currentText.clear();
+    }
+    else
+    {
+        currentText = text;
+    }
     adjustPosAndVisiable();
 }
 
@@ -80,6 +87,8 @@ void FavoritePairsWidget::adjustPosAndVisiable()
 {
     int i = 0;
     int x = 90;
+
+    bool hasChecked = false;
     for(;i < btnTexts.size(); i++)
     {
         btnVector.at(i)->setText(btnTexts.at(i));
@@ -91,10 +100,17 @@ void FavoritePairsWidget::adjustPosAndVisiable()
         {
             ui->lineLabel->move( (x + (btnVector.at(i)->width() - ui->lineLabel->width()) / 2), 25 );
             btnVector.at(i)->setChecked(true);
+            hasChecked = true;
+        }
+        else
+        {
+            btnVector.at(i)->setChecked(false);
         }
 
         x += btnVector.at(i)->width() + 40;
     }
+
+    ui->lineLabel->setVisible(hasChecked);
 
     for(; i < size; i++)
     {

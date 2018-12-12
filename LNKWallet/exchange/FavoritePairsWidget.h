@@ -16,7 +16,7 @@ public:
     explicit FavoritePairsWidget( int _size, QWidget *parent = nullptr);
     ~FavoritePairsWidget();
 
-    void init();
+    void init(); // 是否setcheck
     void setBtns(QStringList texts);
     void setCurrentBtn(QString text);
     void removeBtn(QString text);
