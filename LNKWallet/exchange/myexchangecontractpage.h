@@ -61,6 +61,8 @@ private slots:
     void onItemClicked(int _row, int _column);
 
     void pageChangeSlot(unsigned int page);
+    void on_swapBtn_clicked();
+
 private:
     Ui::MyExchangeContractPage *ui;
     bool inited = false;

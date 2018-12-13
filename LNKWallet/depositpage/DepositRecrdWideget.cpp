@@ -86,7 +86,7 @@ void DepositRecrdWideget::showDepositRecord(QString _tunnelAddress)
 
         ui->depositRecordTableWidget->setItem(i,0, new QTableWidgetItem(QString::number(ts.blockNum)));
 
-        QTableWidgetItem* item = new QTableWidgetItem(amount + " " + assetSymbol);
+        QTableWidgetItem* item = new QTableWidgetItem(amount + " " + revertERCSymbol(assetSymbol));
         ui->depositRecordTableWidget->setItem(i,1, item);
         item->setTextColor(QColor(0,170,0));
 

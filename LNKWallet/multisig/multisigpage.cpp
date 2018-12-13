@@ -410,7 +410,7 @@ void MultiSigPage::on_balanceTableWidget_cellClicked(int row, int column)
 {
     if(column == 2)
     {
-        if(ui->balanceTableWidget->item(row,column))
+        if(ui->balanceTableWidget->item(row,0))
         {
             emit backBtnVisible(true);
 
@@ -419,7 +419,7 @@ void MultiSigPage::on_balanceTableWidget_cellClicked(int row, int column)
             multiSigTransferWidget->show();
             multiSigTransferWidget->raise();
             multiSigTransferWidget->setFromAddress(ui->multiSigAddressComboBox->currentText());
-            multiSigTransferWidget->setAsset(ui->balanceTableWidget->item(row,column)->data(Qt::UserRole).toString());
+            multiSigTransferWidget->setAsset( getRealAssetSymbol( ui->balanceTableWidget->item(row,0)->text()));
         }
 
     }

@@ -28,6 +28,7 @@
 
 HXChain* HXChain::goo = 0;
 static const QMap<QString,double>    defaultAutoWithdrawAmountMap = { {"BTC",10},{"LTC",1000},{"HC",10000},{"ETH",100} };
+const static QStringList ERCAssets = {"PAX"};
 
 HXChain::HXChain()
 {
@@ -174,12 +175,12 @@ void HXChain:: startExe()
             ;
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay2",true).toBool())
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay3",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/dbReplay2",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay3",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
@@ -1919,3 +1920,58 @@ QString toLocalTime(QString timeStr)
 
 
 
+
+QString revertERCSymbol(QString symbol)
+{
+    if(symbol.startsWith("ERC"))
+    {
+        return symbol.mid(QString("ERC").size());
+    }
+    else
+    {
+        return symbol;
+    }
+}
+
+QString getRealAssetSymbol(QString symbol)
+{
+    if(ERCAssets.contains(symbol))
+    {
+        return "ERC" + symbol;
+    }
+    else
+    {
+        return symbol;
+    }
+
+}
+
+int checkUseGuaranteeOrderType(QString payer, QString currentAddress, QString ownerAddress)
+{
+    int result = 0;
+    if(ownerAddress.isEmpty())
+    {
+        // 没使用承兑单
+        result = 0;
+    }
+    else if(currentAddress == ownerAddress)
+    {
+        if(payer == currentAddress)
+        {
+            // 手续费支付者是自己，说明是使用了自己的承兑单
+            result = 3;
+        }
+        else
+        {
+            // 手续费支付者不是自己，说明是别人使用了我的承兑单
+            result = 2;
+        }
+    }
+    else
+    {
+        // 当前账户不是承兑单发布者，说明使用了别人的承兑单
+        result = 1;
+    }
+
+    return result;
+}

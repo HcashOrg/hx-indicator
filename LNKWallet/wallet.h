@@ -35,7 +35,7 @@
 #define MULTISIG_ADDRESS_PREFIX "HXM"
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.2.0"           // 版本号
+#define WALLET_VERSION "1.2.1"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
@@ -52,7 +52,7 @@
 #endif
 
 #ifdef  WIN32
-#define WALLET_EXE_FILE     "HX"WALLET_EXE_SUFFIX".exe"
+#define WALLET_EXE_FILE     "HX" WALLET_EXE_SUFFIX ".exe"
 #else
 #define WALLET_EXE_FILE     "./HX" WALLET_EXE_SUFFIX
 #endif
@@ -570,6 +570,9 @@ QString getBigNumberString(unsigned long long number,int precision);
 QString decimalToIntegerStr(QString number, int precision);
 void tableWidgetSetItemZebraColor(QTableWidget* w, int alignment = Qt::AlignCenter);
 QString toLocalTime(QString timeStr);
+QString revertERCSymbol(QString symbol);
+QString getRealAssetSymbol(QString symbol);
+int  checkUseGuaranteeOrderType(QString payer, QString currentAddress, QString ownerAddress);
 
 enum AddressType
 {

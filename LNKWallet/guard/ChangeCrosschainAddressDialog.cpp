@@ -60,7 +60,7 @@ void ChangeCrosschainAddressDialog::init()
     foreach (QString assetId, assetIds)
     {
         if(assetId == "1.3.0")  continue;
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
 
     QIntValidator *validator = new QIntValidator(1, 60 * 60 * 24 * 365,this);
@@ -70,7 +70,7 @@ void ChangeCrosschainAddressDialog::init()
 
 void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
 {
-    if( id == "ChangeCrosschainAddressDialog-get_multisig_account_pair-" + ui->assetComboBox->currentText())
+    if( id == "ChangeCrosschainAddressDialog-get_multisig_account_pair-" + getRealAssetSymbol( ui->assetComboBox->currentText()))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
@@ -144,7 +144,7 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "ChangeCrosschainAddressDialog-get_eth_multi_account_trx-" + ui->assetComboBox->currentText())
+    if( id == "ChangeCrosschainAddressDialog-get_eth_multi_account_trx-" + getRealAssetSymbol( ui->assetComboBox->currentText()))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
@@ -162,7 +162,7 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
             {
                 QJsonObject object = v.toObject();
                 QString symbol = object.value("symbol").toString();
-                if(symbol == ui->assetComboBox->currentText())
+                if(symbol == getRealAssetSymbol( ui->assetComboBox->currentText()))
                 {
                     ethTrx.symbol = symbol;
                     ethTrx.trxId = object.value("multi_account_create_trx_id").toString();
@@ -207,7 +207,7 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
 
     }
 
-    if( id.startsWith("ChangeCrosschainAddressDialog-get_multi_address_obj-" + ui->assetComboBox->currentText()))
+    if( id.startsWith("ChangeCrosschainAddressDialog-get_multi_address_obj-" + getRealAssetSymbol( ui->assetComboBox->currentText())))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
@@ -244,7 +244,7 @@ void ChangeCrosschainAddressDialog::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "Finish-get_multi_address_obj-" + ui->assetComboBox->currentText())
+    if( id == "Finish-get_multi_address_obj-" + getRealAssetSymbol( ui->assetComboBox->currentText()))
     {
         if(signerId.isEmpty())      // 如果本钱包内没有signer
         {
@@ -344,7 +344,7 @@ void ChangeCrosschainAddressDialog::on_okBtn_clicked()
         }
 
         HXChain::getInstance()->postRPC( "id-account_change_for_crosschain", toJsonFormat( "account_change_for_crosschain",
-                                         QJsonArray() << ui->accountComboBox->currentText() << ui->assetComboBox->currentText()
+                                         QJsonArray() << ui->accountComboBox->currentText() << getRealAssetSymbol( ui->assetComboBox->currentText())
                                          << ui->hotAddressLabel->text() << ui->coldAddressLabel->text()
                                          << ui->timeLineEdit->text().toInt() << true ));
     }
@@ -369,9 +369,9 @@ void ChangeCrosschainAddressDialog::on_assetComboBox_currentIndexChanged(const Q
     hotBalance = 0;
     coldBalance = 0;
 
-    if(ui->assetComboBox->currentText() == "ETH" || ui->assetComboBox->currentText().startsWith("ERC"))
+    if( getRealAssetSymbol( ui->assetComboBox->currentText()) == "ETH" || getRealAssetSymbol( ui->assetComboBox->currentText()).startsWith("ERC"))
     {
-        HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_eth_multi_account_trx-" + ui->assetComboBox->currentText(),
+        HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_eth_multi_account_trx-" + getRealAssetSymbol( ui->assetComboBox->currentText()),
                                          toJsonFormat( "get_eth_multi_account_trx", QJsonArray() << 0));
 
         getSenatorMultiAddress();
@@ -392,8 +392,8 @@ void ChangeCrosschainAddressDialog::on_assetComboBox_currentIndexChanged(const Q
 
 void ChangeCrosschainAddressDialog::queryMultiAccountPair()
 {
-    HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_multisig_account_pair-" + ui->assetComboBox->currentText(),
-                                     toJsonFormat( "get_multisig_account_pair", QJsonArray() << ui->assetComboBox->currentText()));
+    HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_multisig_account_pair-" + getRealAssetSymbol( ui->assetComboBox->currentText()),
+                                     toJsonFormat( "get_multisig_account_pair", QJsonArray() << getRealAssetSymbol( ui->assetComboBox->currentText())));
 
 }
 
@@ -404,11 +404,11 @@ void ChangeCrosschainAddressDialog::getSenatorMultiAddress()
     foreach (QString guard, guards)
     {
         AccountInfo info = HXChain::getInstance()->accountInfoMap.value(guard);
-        HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_multi_address_obj-" + ui->assetComboBox->currentText() + "-" + info.id,
-                                         toJsonFormat( "get_multi_address_obj", QJsonArray() << ui->assetComboBox->currentText()
+        HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-get_multi_address_obj-" + getRealAssetSymbol( ui->assetComboBox->currentText()) + "-" + info.id,
+                                         toJsonFormat( "get_multi_address_obj", QJsonArray() << getRealAssetSymbol( ui->assetComboBox->currentText())
                                                                                 << info.id));
     }
 
-    HXChain::getInstance()->postRPC( "Finish-get_multi_address_obj-" + ui->assetComboBox->currentText(),
+    HXChain::getInstance()->postRPC( "Finish-get_multi_address_obj-" + getRealAssetSymbol( ui->assetComboBox->currentText()),
                                      toJsonFormat( "get_multi_address_obj", QJsonArray() ));
 }

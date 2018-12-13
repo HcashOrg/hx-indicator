@@ -190,7 +190,8 @@ SOURCES += main.cpp\
     capitalTransferPage/CaptialNotify.cpp \
     autoUpdate/AutoUpdateNotify.cpp \
     autoUpdate/AutoUpdateDialog.cpp\
-    extra/LogToFile.cpp
+    extra/LogToFile.cpp \
+    exchange/FavoritePairsWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -352,7 +353,8 @@ HEADERS  += firstlogin.h \
     capitalTransferPage/CaptialNotify.h \
     autoUpdate/AutoUpdateNotify.h \
     autoUpdate/AutoUpdateDialog.h\
-    extra/LogToFile.h
+    extra/LogToFile.h \
+    exchange/FavoritePairsWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -480,7 +482,8 @@ FORMS    += firstlogin.ui \
     guard/CreateSenatorDialog.ui \
     guard/SenatorChangeSenatorDialog.ui \
     citizen/ChangePayBackDialog.ui \
-    autoUpdate/AutoUpdateDialog.ui
+    autoUpdate/AutoUpdateDialog.ui \
+    exchange/FavoritePairsWidget.ui
 
 win32{
     DISTFILES += logo.rc

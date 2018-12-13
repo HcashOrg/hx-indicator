@@ -41,6 +41,8 @@ private slots:
     void numberChangeSlots(const QString &number);
 
     void addressChangeSlots(const QString &address);
+
+    void onSliderValueChanged(int value);
 private:
     bool validateAddress(const QString &address);
 

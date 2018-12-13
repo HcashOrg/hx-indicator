@@ -70,9 +70,9 @@ CapitalTransferPage::~CapitalTransferPage()
 void CapitalTransferPage::ConfirmSlots()
 {
     hide();
-    QString actualShow = _p->actualNumber + " "+_p->symbol;
+    QString actualShow = _p->actualNumber + " "+ revertERCSymbol( _p->symbol);
     QString feeShow = ui->label_fee->text();
-    QString totalShow = ui->lineEdit_number->text() + " "+_p->symbol;
+    QString totalShow = ui->lineEdit_number->text() + " "+ revertERCSymbol( _p->symbol);
     qDebug()<<"pppppppppppp"<<_p->actualNumber;
     CapitalConfirmWidget *confirmWidget = new CapitalConfirmWidget(CapitalConfirmWidget::CapitalConfirmInput(
                                                                    ui->radioButton_deposit->isChecked()?_p->account_address:ui->lineEdit_address->text(),
@@ -236,7 +236,7 @@ void CapitalTransferPage::httpReplied(QByteArray _data, int _status)
 
     double balance = jsonValueToDouble(object.value("balance"));
     _p->asset_max_ammount = QString::number(std::max<double>(0,balance),'f',_p->precision) ;
-    ui->label_number->setText(_p->asset_max_ammount + " "+_p->symbol);
+    ui->label_number->setText(_p->asset_max_ammount + " "+ revertERCSymbol(_p->symbol));
 
     QDoubleValidator *validator = new QDoubleValidator(0,_p->asset_max_ammount.toDouble(),_p->precision,this);
     validator->setNotation(QDoubleValidator::StandardNotation);
@@ -300,6 +300,21 @@ void CapitalTransferPage::addressChangeSlots(const QString &address)
     CreateTransaction();
 }
 
+void CapitalTransferPage::onSliderValueChanged(int value)
+{
+    ui->sliderValueLabel->setText( QString("%1 Gwei").arg(value));
+    if(_p->symbol == "ETH")
+    {
+        ui->label_fee->setText( tr("about") + QString(" %1 ETH").arg(0.00021 * value / 5));
+    }
+    else if(_p->symbol.startsWith("ERC"))
+    {
+        ui->label_fee->setText( tr("about") + QString(" %1 ETH").arg(0.00045 * value / 5));
+    }
+
+    CreateTransaction();
+}
+
 bool CapitalTransferPage::validateAddress(const QString &address)
 {
     return !address.isEmpty();
@@ -335,7 +350,7 @@ void CapitalTransferPage::CreateTransaction()
     AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
     if(_p->symbol == "ETH")
     {
-        _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - 0.00021,'f',_p->precision);
+        _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - 0.00021 * ui->slider->value() / 5,'f',_p->precision);
         if(ui->lineEdit_number->text().toDouble() < 0.001)
         {
             ui->label_tip->setText(tr("number cannot less than ") + "0.001");
@@ -377,12 +392,25 @@ void CapitalTransferPage::CreateTransaction()
     }
 
     ui->label_tip->setVisible(false);
+
+    QString numberStr;
+    if(_p->symbol == "ETH" || _p->symbol.startsWith("ERC"))
+    {
+        numberStr = QString("%1|%2").arg(_p->actualNumber).arg(ui->slider->value());
+    }
+    else
+    {
+        numberStr = _p->actualNumber;
+    }
+    qDebug() << "hhhhhhhhhhhhhh" << numberStr;
+
     if(ui->radioButton_deposit->isChecked())
     {//充值修改，发送充值指令问题
-        qDebug()<<"hhhhhhhhhhhhhh"<<_p->actualNumber;
+
         HXChain::getInstance()->postRPC( "captial-createrawtransaction",
                                          toJsonFormat( "createrawtransaction", QJsonArray()
-                                         << _p->tunnel_account_address<<_p->multisig_address<<_p->actualNumber<<_p->symbol ));
+                                         << _p->tunnel_account_address<<_p->multisig_address
+                                         << numberStr <<_p->symbol ));
     }
     else if(ui->radioButton_withdraw->isChecked())
     {//划转，账户不能时自己的账户
@@ -395,7 +423,8 @@ void CapitalTransferPage::CreateTransaction()
         {
             HXChain::getInstance()->postRPC( "captial-createrawtransaction",
                                              toJsonFormat( "createrawtransaction", QJsonArray()
-                                             << _p->tunnel_account_address<<ui->lineEdit_address->text()<<_p->actualNumber<<_p->symbol ));
+                                             << _p->tunnel_account_address<<ui->lineEdit_address->text()
+                                             << numberStr <<_p->symbol ));
         }
     }
 
@@ -424,19 +453,32 @@ void CapitalTransferPage::InitWidget()
     ui->label_tip->setWordWrap(true);
     ui->label_tip->setVisible(false);
 
+    ui->slider->setMinimum(5);
+    ui->slider->setMaximum(100);
+    ui->slider->setTickInterval(1);
+    connect(ui->slider, SIGNAL(valueChanged(int)), this, SLOT(onSliderValueChanged(int)));
 
     if(_p->symbol == "ETH")
     {
-        ui->label_fee->setText( tr("about") + " 0.00021 ETH");
+//        ui->label_fee->setText( tr("about") + " 0.00021 ETH");
+        ui->slider->setValue(10);
+        onSliderValueChanged(ui->slider->value());
     }
     else if(_p->symbol.startsWith("ERC"))
     {
-        ui->label_fee->setText( tr("about") + " 0.00045 ETH");
+//        ui->label_fee->setText( tr("about") + " 0.00045 ETH");
+        ui->slider->setValue(10);
+        onSliderValueChanged(ui->slider->value());
     }
     else
     {
         AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
         ui->label_fee->setText( getBigNumberString(assetInfo.fee, assetInfo.precision) + " " +_p->symbol);
+        ui->slider->hide();
+        ui->label_slow->hide();
+        ui->label_fast->hide();
+        ui->sliderValueLabel->hide();
+        ui->label_gas->hide();
     }
 
 

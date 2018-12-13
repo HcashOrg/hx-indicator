@@ -115,11 +115,11 @@ void WithdrawConfirmWidget::passwordChangeSlots(const QString &address)
 void WithdrawConfirmWidget::InitData()
 {
     ui->label_address->setText(_p->crosschain_account);
-    ui->label_totalNumber->setText(_p->ammount + "  " + _p->symbol);
+    ui->label_totalNumber->setText(_p->ammount + "  " + revertERCSymbol( _p->symbol));
     AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
-    ui->label_feeNumber->setText(getBigNumberString( info.fee, info.precision) + " " + _p->symbol);
+    ui->label_feeNumber->setText(getBigNumberString( info.fee, info.precision) + " " + revertERCSymbol( _p->symbol));
     ui->label_actualNumber->setText(QString::number(_p->ammount.toDouble() - getBigNumberString( info.fee, info.precision).toDouble()
-                                                    ,'f',info.precision) + " " + _p->symbol);
+                                                    ,'f',info.precision) + " " + revertERCSymbol( _p->symbol));
 }
 
 void WithdrawConfirmWidget::InitWidget()

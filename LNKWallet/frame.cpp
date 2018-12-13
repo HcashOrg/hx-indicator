@@ -1598,10 +1598,6 @@ void Frame::jsonDataUpdated(QString id)
                                 assetInfo.issuer = object.take("issuer").toString();
                                 assetInfo.precision = object.take("precision").toInt();
                                 assetInfo.symbol = object.take("symbol").toString();
-                                //                        if(assetInfo.symbol != ASSET_NAME)
-                                //                        {
-                                //                            assetInfo.symbol.prepend("link-");
-                                //                        }
 
                                 QJsonObject object2 = object.take("options").toObject();
 

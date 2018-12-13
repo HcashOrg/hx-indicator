@@ -117,14 +117,14 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
 
             if(toAddress == _accountAddress)    // 如果是自己转自己
             {
-                QTableWidgetItem* item = new QTableWidgetItem(getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
+                QTableWidgetItem* item = new QTableWidgetItem(getBigNumberString(amount, amountAssetInfo.precision) + " " + revertERCSymbol( amountAssetInfo.symbol));
                 ui->transferRecordTableWidget->setItem(rowCount,2, item);
-                item->setTextColor(QColor(255,255,0));
+                item->setTextColor(QColor(202,135,0));
             }
             else
             {
                 // 如果是转出
-                QTableWidgetItem* item = new QTableWidgetItem( "- " + getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
+                QTableWidgetItem* item = new QTableWidgetItem( "- " + getBigNumberString(amount, amountAssetInfo.precision) + " " + revertERCSymbol( amountAssetInfo.symbol));
                 ui->transferRecordTableWidget->setItem(rowCount,2, item);
                 item->setTextColor(QColor(255,0,0));
             }
@@ -134,7 +134,7 @@ void ContactInfoHistoryWidget::showTransferRecord(QString _accountAddress, QStri
             ui->transferRecordTableWidget->setItem(rowCount,1, new QTableWidgetItem(fromAddress));
 
             // 如果是转入
-            QTableWidgetItem* item = new QTableWidgetItem( "+ " + getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
+            QTableWidgetItem* item = new QTableWidgetItem( "+ " + getBigNumberString(amount, amountAssetInfo.precision) + " " + revertERCSymbol( amountAssetInfo.symbol));
             ui->transferRecordTableWidget->setItem(rowCount,2, item);
             item->setTextColor(QColor(0,170,0));
         }
@@ -170,7 +170,7 @@ void ContactInfoHistoryWidget::InitWidget()
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
 
     ui->stackedWidget->addWidget(_p->pageWidget);

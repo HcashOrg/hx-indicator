@@ -38,12 +38,19 @@ OnchainOrderPage::OnchainOrderPage(QWidget *parent) :
 
     ui->ordersTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
+    ui->favoriteBtn->setCheckable(true);
+
     pageWidget = new PageScrollWidget();
     ui->stackedWidget->addWidget(pageWidget);
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&OnchainOrderPage::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->ordersTableWidget);
     blankWidget->setTextTip(tr("There are no orders!"));
+
+    favoritePairsWidget = new FavoritePairsWidget(6,this);
+    connect(favoritePairsWidget, SIGNAL(showPair(QString)), this, SLOT(showPair(QString)));
+    favoritePairsWidget->move(60,120);
+    favoritePairsWidget->init();
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->ordersTableWidget);
     init();
@@ -67,19 +74,35 @@ void OnchainOrderPage::init()
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
-        ui->assetComboBox2->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
+        ui->assetComboBox2->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
 
-    if(assetIds.contains(HXChain::getInstance()->currentSellAssetId))
+    if(HXChain::getInstance()->currentSellAssetId.isEmpty() || HXChain::getInstance()->currentBuyAssetId.isEmpty())
     {
-        ui->assetComboBox->setCurrentText(HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentSellAssetId).symbol);
+        HXChain::getInstance()->configFile->beginGroup("/FavoriteOrderPairs");
+        QStringList keys = HXChain::getInstance()->configFile->childKeys();
+        HXChain::getInstance()->configFile->endGroup();
+        if(keys.size() > 0)
+        {
+            QStringList strList = keys.at(0).split("+");
+            ui->assetComboBox->setCurrentText( revertERCSymbol( strList.at(0)));
+            ui->assetComboBox2->setCurrentText( revertERCSymbol( strList.at(1)));
+        }
+    }
+    else
+    {
+        if(assetIds.contains(HXChain::getInstance()->currentSellAssetId))
+        {
+            ui->assetComboBox->setCurrentText( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentSellAssetId).symbol));
+        }
+
+        if(assetIds.contains(HXChain::getInstance()->currentBuyAssetId))
+        {
+            ui->assetComboBox2->setCurrentText( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentBuyAssetId).symbol));
+        }
     }
 
-    if(assetIds.contains(HXChain::getInstance()->currentBuyAssetId))
-    {
-        ui->assetComboBox2->setCurrentText(HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentBuyAssetId).symbol);
-    }
 
 
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
@@ -191,6 +214,7 @@ void OnchainOrderPage::on_assetComboBox_currentIndexChanged(const QString &arg1)
 //            || ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())       return;
 
     queryContractOrders();
+    checkFavorite();
 }
 
 void OnchainOrderPage::on_assetComboBox2_currentIndexChanged(const QString &arg1)
@@ -205,6 +229,7 @@ void OnchainOrderPage::on_assetComboBox2_currentIndexChanged(const QString &arg1
 //            || ui->assetComboBox->currentText() == ui->assetComboBox2->currentText())       return;
 
     queryContractOrders();
+    checkFavorite();
 }
 
 void OnchainOrderPage::queryContractOrders()
@@ -214,8 +239,8 @@ void OnchainOrderPage::queryContractOrders()
     object.insert("id",45);
     object.insert("method","Zchain.Exchange.queryContracts");
     QJsonObject paramObject;
-    paramObject.insert("from_asset",ui->assetComboBox->currentText());
-    paramObject.insert("to_asset",ui->assetComboBox2->currentText());
+    paramObject.insert("from_asset", getRealAssetSymbol( ui->assetComboBox->currentText()));
+    paramObject.insert("to_asset", getRealAssetSymbol( ui->assetComboBox2->currentText()));
     paramObject.insert("limit",10);
     object.insert("params",paramObject);
     httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
@@ -233,7 +258,7 @@ void OnchainOrderPage::updateTableHeaders()
     {
         ui->ordersTableWidget->horizontalHeaderItem(0)->setText(tr("SELL / %1").arg(ui->assetComboBox->currentText()));
         ui->ordersTableWidget->horizontalHeaderItem(1)->setText(tr("BUY / %1").arg(ui->assetComboBox2->currentText()));
-        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("PRICE (%1/%2)").arg(ui->assetComboBox2->currentText()).arg(ui->assetComboBox->currentText()));
+        ui->ordersTableWidget->horizontalHeaderItem(2)->setText(tr("PRICE (%1/%2)").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText()));
     }
 
 }
@@ -293,8 +318,8 @@ void OnchainOrderPage::onItemClicked(int _row, int _column)
         buyOrderWidget->setAccount(ui->accountComboBox->currentText());
         QString contractAddress = ui->ordersTableWidget->item(_row,2)->data(Qt::UserRole).toString();
         buyOrderWidget->setContractAddress(contractAddress);
-        buyOrderWidget->setOrderInfo(ui->ordersTableWidget->item(_row,0)->data(Qt::UserRole).toULongLong(), ui->assetComboBox->currentText()
-                                     ,ui->ordersTableWidget->item(_row,1)->data(Qt::UserRole).toULongLong(), ui->assetComboBox2->currentText());
+        buyOrderWidget->setOrderInfo(ui->ordersTableWidget->item(_row,0)->data(Qt::UserRole).toULongLong(), getRealAssetSymbol( ui->assetComboBox->currentText())
+                                     ,ui->ordersTableWidget->item(_row,1)->data(Qt::UserRole).toULongLong(), getRealAssetSymbol( ui->assetComboBox2->currentText()));
 
         currentWidget = buyOrderWidget;
 
@@ -331,4 +356,84 @@ void OnchainOrderPage::pageChangeSlot(unsigned int page)
         }
     }
 
+}
+
+void OnchainOrderPage::on_swapBtn_clicked()
+{
+    inited = false;
+    QString temp = ui->assetComboBox->currentText();
+    ui->assetComboBox->setCurrentText(ui->assetComboBox2->currentText());
+    HXChain::getInstance()->currentSellAssetId = ui->assetComboBox->currentData().toString();
+    inited = true;
+    ui->assetComboBox2->setCurrentText(temp);
+}
+
+void OnchainOrderPage::on_favoriteBtn_clicked()
+{
+    QString str = ui->assetComboBox->currentText() + "+" + ui->assetComboBox2->currentText();
+    if(ui->favoriteBtn->isChecked())
+    {
+        HXChain::getInstance()->configFile->beginGroup("/FavoriteOrderPairs");
+        QStringList keys = HXChain::getInstance()->configFile->childKeys();
+        HXChain::getInstance()->configFile->endGroup();
+        if(keys.size() >= 6)         // 最多6个常用
+        {
+            CommonDialog dia(CommonDialog::OkOnly);
+            dia.setText(tr("You can only set at most 6 favorite order pairs!"));
+            dia.pop();
+            ui->favoriteBtn->setChecked(false);
+            return;
+        }
+
+        HXChain::getInstance()->configFile->setValue("/FavoriteOrderPairs/" + str, 1);
+        ui->favoriteBtn->setChecked(true);
+
+    }
+    else
+    {
+        HXChain::getInstance()->configFile->remove("/FavoriteOrderPairs/" + str);
+        ui->favoriteBtn->setChecked(false);
+    }
+
+    favoritePairsWidget->init();
+    favoritePairsWidget->setCurrentBtn(str.replace("+","/"));
+}
+
+void OnchainOrderPage::showPair(QString pairStr)
+{
+    if(!pairStr.contains("/"))      return;
+    QStringList strList = pairStr.split("/");
+    inited = false;
+    ui->assetComboBox->setCurrentText(strList.at(0));
+    ui->assetComboBox2->setCurrentText(strList.at(1));
+    inited = true;
+    on_assetComboBox_currentIndexChanged(ui->assetComboBox->currentText());
+}
+
+void OnchainOrderPage::checkFavorite()
+{
+    if(ui->assetComboBox->currentText().isEmpty() || ui->assetComboBox2->currentText().isEmpty()
+            || ui->assetComboBox->currentText() == ui->assetComboBox2->currentText() )
+    {
+        ui->favoriteBtn->hide();
+        return;
+    }
+
+    ui->favoriteBtn->show();
+
+    HXChain::getInstance()->configFile->beginGroup("/FavoriteOrderPairs");
+    QStringList keys = HXChain::getInstance()->configFile->childKeys();
+    HXChain::getInstance()->configFile->endGroup();
+
+    QString str = ui->assetComboBox->currentText() + "+" + ui->assetComboBox2->currentText();
+    if(keys.contains(str))
+    {
+        ui->favoriteBtn->setChecked(true);
+    }
+    else
+    {
+        ui->favoriteBtn->setChecked(false);
+    }
+
+    favoritePairsWidget->setCurrentBtn(str.replace("+","/"));
 }

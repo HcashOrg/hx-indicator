@@ -56,7 +56,7 @@ void WithdrawRecordWidget::init()
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol(HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
     ui->stackedWidget->addWidget(pageWidget);
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&WithdrawRecordWidget::pageChangeSlot);
@@ -131,7 +131,7 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
         ui->withdrawRecordTableWidget->setItem(rowCount,1, new QTableWidgetItem(crossChainAddress));
 
         // 如果是转出
-        QTableWidgetItem* item = new QTableWidgetItem( "-" + amountStr + " " + assetInfo.symbol);
+        QTableWidgetItem* item = new QTableWidgetItem( "-" + amountStr + " " + revertERCSymbol(assetInfo.symbol));
         ui->withdrawRecordTableWidget->setItem(rowCount,2, item);
         item->setTextColor(QColor(255,0,0));
 

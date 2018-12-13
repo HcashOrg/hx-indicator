@@ -111,6 +111,7 @@ void TransactionDB::insertGuaranteeOrder(QString _guaranteeId, GuaranteeOrder _o
 
 GuaranteeOrder TransactionDB::getGuaranteeOrder(QString _guaranteeId)
 {
+    if(_guaranteeId.isEmpty())      return GuaranteeOrder();
     QByteArray value = readFromDB(m_guaranteeOrderDB, _guaranteeId);
 
     if(value.isEmpty())     return GuaranteeOrder();

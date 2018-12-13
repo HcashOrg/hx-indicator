@@ -29,7 +29,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>100</y>
+     <y>80</y>
      <width>121</width>
      <height>26</height>
     </rect>
@@ -54,7 +54,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>140</y>
+     <y>120</y>
      <width>160</width>
      <height>30</height>
     </rect>
@@ -73,7 +73,7 @@
    <property name="geometry">
     <rect>
      <x>430</x>
-     <y>140</y>
+     <y>120</y>
      <width>130</width>
      <height>30</height>
     </rect>
@@ -92,7 +92,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>263</y>
+     <y>243</y>
      <width>150</width>
      <height>16</height>
     </rect>
@@ -105,20 +105,20 @@
    <property name="geometry">
     <rect>
      <x>322</x>
-     <y>351</y>
+     <y>331</y>
      <width>171</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string/>
    </property>
   </widget>
   <widget class="QToolButton" name="toolButton_close">
    <property name="geometry">
     <rect>
      <x>540</x>
-     <y>90</y>
+     <y>70</y>
      <width>12</width>
      <height>12</height>
     </rect>
@@ -143,7 +143,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>288</y>
+     <y>268</y>
      <width>80</width>
      <height>18</height>
     </rect>
@@ -165,7 +165,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>316</y>
+     <y>296</y>
      <width>80</width>
      <height>18</height>
     </rect>
@@ -187,7 +187,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>220</y>
+     <y>200</y>
      <width>101</width>
      <height>16</height>
     </rect>
@@ -200,7 +200,7 @@
    <property name="geometry">
     <rect>
      <x>322</x>
-     <y>218</y>
+     <y>198</y>
      <width>231</width>
      <height>21</height>
     </rect>
@@ -219,7 +219,7 @@
    <property name="geometry">
     <rect>
      <x>322</x>
-     <y>316</y>
+     <y>296</y>
      <width>231</width>
      <height>21</height>
     </rect>
@@ -238,7 +238,7 @@
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>351</y>
+     <y>331</y>
      <width>100</width>
      <height>16</height>
     </rect>
@@ -251,7 +251,7 @@
    <property name="geometry">
     <rect>
      <x>337</x>
-     <y>389</y>
+     <y>410</y>
      <width>96</width>
      <height>30</height>
     </rect>
@@ -276,7 +276,7 @@
    <property name="geometry">
     <rect>
      <x>306</x>
-     <y>240</y>
+     <y>220</y>
      <width>241</width>
      <height>41</height>
     </rect>
@@ -296,7 +296,7 @@ font: 75 9pt &quot;Microsoft YaHei UI Light&quot;;</string>
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>100</y>
+     <y>80</y>
      <width>171</width>
      <height>20</height>
     </rect>
@@ -313,9 +313,9 @@ color: rgb(255, 0, 0);</string>
    <property name="geometry">
     <rect>
      <x>195</x>
-     <y>70</y>
+     <y>50</y>
      <width>380</width>
-     <height>370</height>
+     <height>410</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -330,7 +330,7 @@ border-radius:15px;</string>
    <property name="geometry">
     <rect>
      <x>222</x>
-     <y>180</y>
+     <y>160</y>
      <width>60</width>
      <height>20</height>
     </rect>
@@ -355,7 +355,7 @@ border-radius:15px;</string>
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>180</y>
+     <y>160</y>
      <width>281</width>
      <height>20</height>
     </rect>
@@ -379,6 +379,71 @@ border-radius:15px;</string>
     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
    </property>
   </widget>
+  <widget class="QLabel" name="label_gas">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>360</y>
+     <width>100</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Gas Price</string>
+   </property>
+  </widget>
+  <widget class="QSlider" name="slider">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>360</y>
+     <width>140</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_slow">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>360</y>
+     <width>30</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>慢</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_fast">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>360</y>
+     <width>30</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>快</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="sliderValueLabel">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>380</y>
+     <width>50</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>label_back</zorder>
   <zorder>label_title</zorder>
   <zorder>label_1</zorder>
@@ -397,6 +462,11 @@ border-radius:15px;</string>
   <zorder>label_marktip</zorder>
   <zorder>label_addressTitle_2</zorder>
   <zorder>label_tunnelAddress</zorder>
+  <zorder>label_gas</zorder>
+  <zorder>slider</zorder>
+  <zorder>label_slow</zorder>
+  <zorder>label_fast</zorder>
+  <zorder>sliderValueLabel</zorder>
  </widget>
  <resources/>
  <connections/>

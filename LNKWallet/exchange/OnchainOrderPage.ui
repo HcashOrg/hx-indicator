@@ -86,8 +86,8 @@
   <widget class="QComboBox" name="assetComboBox2">
    <property name="geometry">
     <rect>
-     <x>230</x>
-     <y>120</y>
+     <x>510</x>
+     <y>90</y>
      <width>80</width>
      <height>18</height>
     </rect>
@@ -109,8 +109,8 @@
   <widget class="QLabel" name="label_4">
    <property name="geometry">
     <rect>
-     <x>60</x>
-     <y>120</y>
+     <x>330</x>
+     <y>90</y>
      <width>70</width>
      <height>18</height>
     </rect>
@@ -138,8 +138,8 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
   <widget class="QComboBox" name="assetComboBox">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>120</y>
+     <x>400</x>
+     <y>90</y>
      <width>80</width>
      <height>18</height>
     </rect>
@@ -218,6 +218,76 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      <width>770</width>
      <height>41</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="swapBtn">
+   <property name="geometry">
+    <rect>
+     <x>487</x>
+     <y>92</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="BtnStyle" stdset="0">
+    <string>swap</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="favoriteBtn">
+   <property name="geometry">
+    <rect>
+     <x>680</x>
+     <y>92</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="BtnStyle" stdset="0">
+    <string>switch</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>90</y>
+     <width>70</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
+   </property>
+   <property name="text">
+    <string>设为常用</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
  </widget>

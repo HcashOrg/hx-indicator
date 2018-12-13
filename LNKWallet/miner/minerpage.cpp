@@ -190,7 +190,7 @@ void MinerPage::jsonDataUpdated(QString id)
             ui->lockBalancesTableWidget->setItem(i,0,new QTableWidgetItem(HXChain::getInstance()->getMinerNameFromId(minerId)));
 
             AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
-            ui->lockBalancesTableWidget->setItem(i,1,new QTableWidgetItem(assetInfo.symbol));
+            ui->lockBalancesTableWidget->setItem(i,1,new QTableWidgetItem( revertERCSymbol( assetInfo.symbol)));
 
             ui->lockBalancesTableWidget->setItem(i,2,new QTableWidgetItem(getBigNumberString(lockAmount,assetInfo.precision)));
 
@@ -447,6 +447,7 @@ void MinerPage::showIncomeRecord()
     QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
     TransactionTypeIds typeIds = HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(address,TRANSACTION_TYPE_MINE_INCOME);
 
+
     // 根据区块高度排序
     TransactionTypeIds sortedTypeIds;
     for(int i = 0; i < typeIds.size(); i++)
@@ -480,6 +481,7 @@ void MinerPage::showIncomeRecord()
     ui->incomeRecordTableWidget->setRowCount(0);
     ui->incomeRecordTableWidget->setRowCount(size);
 
+    int rowCount = 0;
     for(int i = 0; i < size; i++)
     {
         ui->incomeRecordTableWidget->setRowHeight(i,40);
@@ -495,12 +497,19 @@ void MinerPage::showIncomeRecord()
 
         QJsonObject object = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
 
+        QString payBackOwner = object.value("pay_back_owner").toString();
         QJsonArray balanceArray = object.value("pay_back_balance").toArray();
-//        if(balanceArray.size() <= 0)    continue;
+
+        AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value( ui->accountComboBox->currentText());
+        QString guaranteeOrderOwnerAddress = HXChain::getInstance()->transactionDB.getGuaranteeOrder(ts.guaranteeId).ownerAddress;
+        int useGuaranteeOrderType = checkUseGuaranteeOrderType(payBackOwner, accountInfo.address, guaranteeOrderOwnerAddress);
+        if(useGuaranteeOrderType == 2)  continue;
+
+        //        if(balanceArray.size() <= 0)    continue;
         unsigned long long amount = 0;
-        for(int i = 0; i < balanceArray.size(); i++)
+        for(int j = 0; j < balanceArray.size(); j++)
         {
-            QJsonArray minerAmountArray = balanceArray.at(i).toArray();
+            QJsonArray minerAmountArray = balanceArray.at(j).toArray();
             QJsonObject amountObject = minerAmountArray.at(1).toObject();
             amount += jsonValueToULL( amountObject.value("amount"));
         }
@@ -513,13 +522,16 @@ void MinerPage::showIncomeRecord()
         QJsonObject feeObject = object.value("fee").toObject();
         unsigned long long feeAmount = jsonValueToULL(feeObject.value("amount"));
 
-        ui->incomeRecordTableWidget->setItem(i,0, new QTableWidgetItem(QString::number(ts.blockNum)));
-        ui->incomeRecordTableWidget->setItem(i,1, new QTableWidgetItem(str));
-        ui->incomeRecordTableWidget->item(i,1)->setTextColor(QColor(0,170,0));
-        ui->incomeRecordTableWidget->setItem(i,2, new QTableWidgetItem(getBigNumberString(feeAmount, ASSET_PRECISION) + " " + ASSET_NAME));
-        ui->incomeRecordTableWidget->setItem(i,3, new QTableWidgetItem(transactionId));
-        ui->incomeRecordTableWidget->setItem(i,4, new QTableWidgetItem(tr("confirmed")));
+        ui->incomeRecordTableWidget->setItem(rowCount,0, new QTableWidgetItem(QString::number(ts.blockNum)));
+        ui->incomeRecordTableWidget->setItem(rowCount,1, new QTableWidgetItem(str));
+        ui->incomeRecordTableWidget->item(rowCount,1)->setTextColor(QColor(0,170,0));
+        ui->incomeRecordTableWidget->setItem(rowCount,2, new QTableWidgetItem(getBigNumberString(feeAmount, ASSET_PRECISION) + " " + ASSET_NAME));
+        ui->incomeRecordTableWidget->setItem(rowCount,3, new QTableWidgetItem(transactionId));
+        ui->incomeRecordTableWidget->setItem(rowCount,4, new QTableWidgetItem(tr("confirmed")));
+        rowCount++;
+
     }
+    ui->incomeTableWidget->setRowCount(rowCount);
     tableWidgetSetItemZebraColor(ui->incomeRecordTableWidget);
 
     unsigned int curPage = pageWidget_record->GetCurrentPage();
@@ -527,8 +539,8 @@ void MinerPage::showIncomeRecord()
     pageWidget_record->SetCurrentPage(curPage);
     pageWidget_record->setShowTip(ui->incomeRecordTableWidget->rowCount(),ROWNUMBER);
 
-    blankWidget_record->setVisible(0 == size);
-    pageWidget_record->setVisible(0 != size);
+    blankWidget_record->setVisible(0 == rowCount);
+    pageWidget_record->setVisible(0 != rowCount);
 }
 
 void MinerPage::showCitizenInfo()
@@ -851,7 +863,7 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
 
         LockToMinerDialog lockToMinerDialog(ui->accountComboBox->currentText());
         lockToMinerDialog.setMiner(ui->lockBalancesTableWidget->item(row,0)->text());
-        lockToMinerDialog.setAsset(ui->lockBalancesTableWidget->item(row,1)->text());
+        lockToMinerDialog.setAsset( getRealAssetSymbol( ui->lockBalancesTableWidget->item(row,1)->text()));
         lockToMinerDialog.pop();
         return;
     }
@@ -863,7 +875,7 @@ void MinerPage::on_lockBalancesTableWidget_cellPressed(int row, int column)
             return;
 
         QString citizenName = ui->lockBalancesTableWidget->item(row,0)->text();
-        QString assetSymbol = ui->lockBalancesTableWidget->item(row,1)->text();
+        QString assetSymbol = getRealAssetSymbol( ui->lockBalancesTableWidget->item(row,1)->text());
         ForecloseDialog forecloseDialog(ui->accountComboBox->currentText(), assetSymbol,
                                         ui->lockBalancesTableWidget->item(row,2)->text());
         if(!forecloseDialog.pop())  return;

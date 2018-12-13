@@ -27,7 +27,6 @@ TransferRecordWidget::TransferRecordWidget(QWidget *parent) :
 
 
     ui->transferRecordTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
-    ui->assetComboBox->setStyleSheet("QComboBox{color:black;}");
 //    ui->transferRecordTableWidget->setColumnWidth(0,90);
 //    ui->transferRecordTableWidget->setColumnWidth(1,70);
 //    ui->transferRecordTableWidget->setColumnWidth(2,100);
@@ -54,7 +53,7 @@ void TransferRecordWidget::init()
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
 
     ui->stackedWidget->addWidget(pageWidget);
@@ -145,14 +144,14 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
 
             if(toAddress == _accountAddress)    // 如果是自己转自己
             {
-                QTableWidgetItem* item = new QTableWidgetItem(getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
+                QTableWidgetItem* item = new QTableWidgetItem(getBigNumberString(amount, amountAssetInfo.precision) + " " + revertERCSymbol( amountAssetInfo.symbol));
                 ui->transferRecordTableWidget->setItem(rowCount,2, item);
                 item->setTextColor(QColor(202,135,0));
             }
             else
             {
                 // 如果是转出
-                QTableWidgetItem* item = new QTableWidgetItem( "- " + getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
+                QTableWidgetItem* item = new QTableWidgetItem( "- " + getBigNumberString(amount, amountAssetInfo.precision) + " " + revertERCSymbol( amountAssetInfo.symbol));
                 ui->transferRecordTableWidget->setItem(rowCount,2, item);
                 item->setTextColor(QColor(255,0,0));
             }
@@ -162,7 +161,7 @@ void TransferRecordWidget::showTransferRecord(QString _accountAddress, QString _
             ui->transferRecordTableWidget->setItem(rowCount,1, new QTableWidgetItem(fromAddress));
 
             // 如果是转入
-            QTableWidgetItem* item = new QTableWidgetItem( "+ " + getBigNumberString(amount, amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
+            QTableWidgetItem* item = new QTableWidgetItem( "+ " + getBigNumberString(amount, amountAssetInfo.precision) + " " + revertERCSymbol( amountAssetInfo.symbol));
             ui->transferRecordTableWidget->setItem(rowCount,2, item);
             item->setTextColor(QColor(0,170,0));
         }

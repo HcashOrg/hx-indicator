@@ -5,6 +5,7 @@
 #include <QJsonArray>
 
 #include "extra/HttpManager.h"
+#include "FavoritePairsWidget.h"
 
 namespace Ui {
 class OnchainOrderPage;
@@ -40,6 +41,15 @@ private slots:
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
     void pageChangeSlot(unsigned int page);
+    void on_swapBtn_clicked();
+
+public slots:
+    void on_favoriteBtn_clicked();
+    void showPair(QString pairStr);
+private:
+    void checkFavorite();
+    FavoritePairsWidget* favoritePairsWidget = NULL;
+
 private:
     Ui::OnchainOrderPage *ui;
     bool inited = false;
@@ -50,8 +60,9 @@ private:
     void queryContractOrders();
     void updateTableHeaders();
 
-    BlankDefaultWidget *blankWidget;
-    PageScrollWidget *pageWidget;
+    BlankDefaultWidget *blankWidget = NULL;
+    PageScrollWidget *pageWidget = NULL;
+
 
     QJsonArray sortArray(const QJsonArray &data,bool greater);
 };

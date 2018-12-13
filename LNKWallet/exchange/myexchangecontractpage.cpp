@@ -80,18 +80,18 @@ void MyExchangeContractPage::init()
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
-        ui->assetComboBox->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
-        ui->assetComboBox2->addItem(HXChain::getInstance()->assetInfoMap.value(assetId).symbol, assetId);
+        ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
+        ui->assetComboBox2->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
 
     if(assetIds.contains(HXChain::getInstance()->currentSellAssetId))
     {
-        ui->assetComboBox->setCurrentText(HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentSellAssetId).symbol);
+        ui->assetComboBox->setCurrentText( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentSellAssetId).symbol));
     }
 
     if(assetIds.contains(HXChain::getInstance()->currentBuyAssetId))
     {
-        ui->assetComboBox2->setCurrentText(HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentBuyAssetId).symbol);
+        ui->assetComboBox2->setCurrentText( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentBuyAssetId).symbol));
     }
 
     inited = true;
@@ -121,7 +121,7 @@ void MyExchangeContractPage::onBack()
 void MyExchangeContractPage::showOrders()
 {
     SellOrders orders = accountSellOrdersMap.value(ui->accountComboBox->currentText());
-    QVector<OrderAmount> vector = orders.value(ui->assetComboBox->currentText() + "," + ui->assetComboBox2->currentText());
+    QVector<OrderAmount> vector = orders.value( getRealAssetSymbol( ui->assetComboBox->currentText()) + "," + getRealAssetSymbol( ui->assetComboBox2->currentText()));
 
     AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString());
     AssetInfo assetInfo2 = HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox2->currentData().toString());
@@ -264,7 +264,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
     if( id.startsWith("id-invoke_contract_offline-sell_orders-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-//        qDebug() << id << result;
+        qDebug() << id << result;
 
         QString accountName = id.mid(QString("id-invoke_contract_offline-sell_orders-").size());
 
@@ -560,8 +560,8 @@ void MyExchangeContractPage::on_sellBtn_clicked()
     else
     {
         SellDialog sellDialog;
-        sellDialog.setSellAsset(ui->assetComboBox->currentText());
-        sellDialog.setBuyAsset(ui->assetComboBox2->currentText());
+        sellDialog.setSellAsset( getRealAssetSymbol( ui->assetComboBox->currentText()));
+        sellDialog.setBuyAsset( getRealAssetSymbol( ui->assetComboBox2->currentText()));
         sellDialog.pop();
 
         if(sellDialog.goToDeposit)
@@ -637,7 +637,7 @@ void MyExchangeContractPage::on_withdrawAllBtn_clicked()
     if(commonDialog.pop())
     {
         QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText());
-        QString params = QString("%1,%2").arg(ui->assetComboBox->currentText()).arg(ui->assetComboBox2->currentText());
+        QString params = QString("%1,%2").arg( getRealAssetSymbol( ui->assetComboBox->currentText())).arg( getRealAssetSymbol( ui->assetComboBox2->currentText()));
 
         HXChain::getInstance()->postRPC( "id-invoke_contract_testing-cancelSellOrderPair-" + params, toJsonFormat( "invoke_contract_testing",
                                                                                                  QJsonArray() << ui->accountComboBox->currentText()
@@ -673,8 +673,8 @@ void MyExchangeContractPage::onItemClicked(int _row, int _column)
     {
         if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
         SellDialog sellDialog;
-        sellDialog.setSellAsset(ui->assetComboBox->currentText());
-        sellDialog.setBuyAsset(ui->assetComboBox2->currentText());
+        sellDialog.setSellAsset( getRealAssetSymbol( ui->assetComboBox->currentText()));
+        sellDialog.setBuyAsset( getRealAssetSymbol( ui->assetComboBox2->currentText()));
         sellDialog.pop();
 
         if(sellDialog.goToDeposit)
@@ -704,4 +704,14 @@ void MyExchangeContractPage::pageChangeSlot(unsigned int page)
         }
     }
 
+}
+
+void MyExchangeContractPage::on_swapBtn_clicked()
+{
+    inited = false;
+    QString temp = ui->assetComboBox->currentText();
+    ui->assetComboBox->setCurrentText(ui->assetComboBox2->currentText());
+    HXChain::getInstance()->currentSellAssetId = ui->assetComboBox->currentData().toString();
+    inited = true;
+    ui->assetComboBox2->setCurrentText(temp);
 }
