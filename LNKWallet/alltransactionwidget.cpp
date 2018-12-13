@@ -592,6 +592,12 @@ void AllTransactionWidget::showTransactions()
             case TRANSACTION_TYPE_SET_LOCKBALANCE:
                 str += tr("set locked balance of senator");
                 break;
+            case TRANSACTION_TYPE_BLACKLIST:
+                str += tr("add to blacklist");
+                break;
+            case TRANSACTION_TYPE_PROPOSAL_CHANGE_GAS:
+                str += tr("change ETH gas");
+                break;
             default:
                 str += tr("%1 (unkown)").arg(opType);
                 break;

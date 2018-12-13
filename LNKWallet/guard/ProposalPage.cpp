@@ -133,6 +133,14 @@ void ProposalPage::showProposals()
         {
             typeStr = tr("set contract transfer fee");
         }
+        else if(info.proposalOperationType == TRANSACTION_TYPE_BLACKLIST)
+        {
+            typeStr = tr("add to blacklist");
+        }
+        else if(info.proposalOperationType == TRANSACTION_TYPE_PROPOSAL_CHANGE_GAS)
+        {
+            typeStr = tr("set gas price");
+        }
         else
         {
             typeStr = tr("unknown");

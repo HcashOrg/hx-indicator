@@ -48,5 +48,6 @@
 #define TRANSACTION_TYPE_CITIZEN_PROPOSAL       101     // citizen发起提案
 #define TRANSACTION_TYPE_CITIZEN_CHANGE_SENATOR 102     // citizen发起更换senator的提案
 #define TRANSACTION_TYPE_BLACKLIST              105     // 黑名单提案
+#define TRANSACTION_TYPE_PROPOSAL_CHANGE_GAS    115     // 改变eth gas提案
 
 #endif // TRANSACTIONTYPE_H

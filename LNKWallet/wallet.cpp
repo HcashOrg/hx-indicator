@@ -1225,7 +1225,8 @@ double HXChain::getAssetAutoWithdrawLimit(QString symbol)
 
 void HXChain::autoWithdrawSign()
 {
-    if(qrand() % 5 != 0)    return;
+    autoSignCount++;
+    if(autoSignCount % 5 != 0)    return;
 
     if(HXChain::getInstance()->walletInfo.blockAge.contains("second")
             && HXChain::getInstance()->walletInfo.blockHeight > lastSignBlock)
@@ -1239,6 +1240,19 @@ void HXChain::autoWithdrawSign()
             ApplyTransaction at = HXChain::getInstance()->applyTransactionMap.value(key);
             QString generatedTrxId = HXChain::getInstance()->lookupGeneratedTrxByApplyTrxId(at.trxId);
             QStringList guardAddresses = HXChain::getInstance()->lookupSignedGuardsByGeneratedTrxId(generatedTrxId);
+
+            if(!trxSignedGuardCountMap.contains(generatedTrxId))
+            {
+                trxSignedGuardCountMap.insert(generatedTrxId, guardAddresses.size());
+            }
+            else if( trxSignedGuardCountMap.value(generatedTrxId) == guardAddresses.size())
+            {
+                continue;       // 如果跟上次比数量没变 则跳过
+            }
+            else
+            {
+                trxSignedGuardCountMap[generatedTrxId] = guardAddresses.size();
+            }
 
             foreach (QString account, HXChain::getInstance()->getMyFormalGuards())
             {
@@ -1357,9 +1371,11 @@ void HXChain::fetchCitizenPayBack()
 
 void HXChain::fetchProposals()
 {
-    if(allGuardMap.size() < 1 || minerMap.size() < 1)   return;
-    postRPC( "senator-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << allGuardMap.keys().at(0)));
+    if(HXChain::getInstance()->getFormalGuards().size() < 1 || minerMap.size() < 1)   return;
+    postRPC( "senator-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << HXChain::getInstance()->getFormalGuards().first()));
     postRPC( "citizen-get_proposal_for_voter", toJsonFormat( "get_referendum_for_voter", QJsonArray() << minerMap.keys().at(0)));
+
+    qDebug() << "jjjjjjjjjjjjj " << toJsonFormat( "get_proposal_for_voter", QJsonArray() << HXChain::getInstance()->getFormalGuards().first());
 }
 
 QString HXChain::citizenAccountIdToName(QString citizenAccountId)

@@ -309,9 +309,20 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
 
     }
         break;
+    case TRANSACTION_TYPE_PROPOSAL_CHANGE_GAS:
+    {
+        ui->typeLabel->setText(tr("set gas price"));
+        ui->typeStackedWidget->setCurrentIndex(12);
+
+        QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
+        QString symbol = operationObject.value("symbol").toString();
+        ui->coinTypeLabel2->setText( symbol);
+        ui->gasPriceLabel->setText( getBigNumberString( jsonValueToULL(operationObject.value("new_gas_price")), 9) + " Gwei");
+    }
+        break;
     default:
         ui->typeLabel->setText(tr("unknown(%1)").arg(info.proposalOperationType));
-        ui->typeStackedWidget->setCurrentIndex(12);
+        ui->typeStackedWidget->setCurrentIndex(13);
         break;
     }
 }

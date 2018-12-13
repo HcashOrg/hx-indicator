@@ -510,8 +510,10 @@ public:
     void loadAutoWithdrawAmount();          // 从config.ini读取各币种自动提现限额 未设置的币种赋default值
     double getAssetAutoWithdrawLimit(QString symbol);
     void autoWithdrawSign();
+    int autoSignCount = 0;
     int lastSignBlock = -1;
     QStringList singedAccountTrxs;
+    QMap<QString,int>   trxSignedGuardCountMap;
 
     // 查询提现交易
     void fetchCrosschainTransactions();
@@ -519,6 +521,7 @@ public:
     QMap<QString,ApplyTransaction> pendingApplyTransactionMap;
     QMap<QString,GeneratedTransaction> generatedTransactionMap;
     QMap<QString,SignTransaction>   signTransactionMap;
+    int lastCrosschainTrxNum = -1;
     QString lookupGeneratedTrxByApplyTrxId(QString applyTrxId);
     QStringList lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId);
     QMap<QString,ETHFinalTrx> ethFinalTrxMap;

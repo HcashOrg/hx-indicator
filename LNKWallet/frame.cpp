@@ -1949,7 +1949,7 @@ void Frame::jsonDataUpdated(QString id)
     if(id == "senator-get_proposal_for_voter")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-//        qDebug() << id << result;
+        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -1964,6 +1964,8 @@ void Frame::jsonDataUpdated(QString id)
             foreach (QJsonValue v, array)
             {
                 QJsonObject object = v.toObject();
+                qDebug() << "ooooooooooooo " << object;
+
                 ProposalInfo info;
                 info.proposalId = object.take("id").toString();
                 info.proposer   = object.take("proposer").toString();
