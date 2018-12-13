@@ -21,8 +21,8 @@
 #define CLIENT_PROC_NAME    "hx_client"WALLET_EXE_SUFFIX".exe"
 #define COPY_PROC_NAME      "Copy.exe"
 #else
-#define NODE_PROC_NAME      "./hx_node"WALLET_EXE_SUFFIX
-#define CLIENT_PROC_NAME    "./hx_client"WALLET_EXE_SUFFIX
+#define NODE_PROC_NAME      "./hx_node" WALLET_EXE_SUFFIX
+#define CLIENT_PROC_NAME    "./hx_client" WALLET_EXE_SUFFIX
 #define COPY_PROC_NAME      "./Copy"
 #endif
 
