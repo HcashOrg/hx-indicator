@@ -498,6 +498,7 @@ public:
     QStringList getMyFormalGuards();
     QStringList getMyGuards();
     QStringList getFormalGuards();
+    QStringList getPermanentSenators();
     QMap<QString,QVector<GuardMultisigAddress>> guardMultisigAddressesMap;  // key是 资产名-guard账户Id 的形式 比如 BTC-1.2.23
     GuardMultisigAddress getGuardMultisigByPairId(QString assetSymbol, QString guardName, QString pairId);      // 从guardMultisigAddressesMap，找到对应的
     void fetchGuardAllMultisigAddresses(QString accountId);
@@ -571,6 +572,8 @@ double roundDown(double decimal, int precision = 0);        // 根据精度 向�
 QString removeLastZeros(QString number);        // qstring::number() 对小数的处理有问题  使用std::to_string() 然后把后面的0去掉
 QString getBigNumberString(unsigned long long number,int precision);
 QString decimalToIntegerStr(QString number, int precision);
+QString toEasyRead(unsigned long long number, int precision, int effectiveBitsNum = 4);
+
 void tableWidgetSetItemZebraColor(QTableWidget* w, int alignment = Qt::AlignCenter);
 QString toLocalTime(QString timeStr);
 QString revertERCSymbol(QString symbol);

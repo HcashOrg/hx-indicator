@@ -112,7 +112,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="incomePage">
     <widget class="QTableWidget" name="incomeTableWidget">
@@ -884,6 +884,36 @@
     </property>
    </item>
   </widget>
+  <widget class="QToolButton" name="forecloseAllBtn">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>129</y>
+     <width>80</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>赎回全部</string>
+   </property>
+  </widget>
   <zorder>title_label</zorder>
   <zorder>registerBtn</zorder>
   <zorder>accountComboBox</zorder>
@@ -896,6 +926,7 @@
   <zorder>obtainAllBtn</zorder>
   <zorder>citizenInfoBtn</zorder>
   <zorder>sortTypeComboBox</zorder>
+  <zorder>forecloseAllBtn</zorder>
  </widget>
  <resources/>
  <connections/>

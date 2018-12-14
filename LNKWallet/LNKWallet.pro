@@ -12,7 +12,7 @@ TARGET = HXIndicator
 TEMPLATE = app
 
 #DEFINES += TEST_WALLET
-DEFINES += SAFE_VERSION
+#DEFINES += SAFE_VERSION
 
 win32{
     QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"

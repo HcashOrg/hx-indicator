@@ -1114,6 +1114,21 @@ QStringList HXChain::getFormalGuards()
     return result;
 }
 
+QStringList HXChain::getPermanentSenators()
+{
+    QStringList result;
+
+    foreach (QString key, allGuardMap.keys())
+    {
+        if(allGuardMap.value(key).senatorType == "PERMANENT")
+        {
+            result += key;
+        }
+    }
+
+    return result;
+}
+
 
 GuardMultisigAddress HXChain::getGuardMultisigByPairId(QString assetSymbol, QString guardName, QString pairId)
 {
@@ -1371,11 +1386,10 @@ void HXChain::fetchCitizenPayBack()
 
 void HXChain::fetchProposals()
 {
-    if(HXChain::getInstance()->getFormalGuards().size() < 1 || minerMap.size() < 1)   return;
-    postRPC( "senator-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << HXChain::getInstance()->getFormalGuards().first()));
+    if(HXChain::getInstance()->getPermanentSenators().size() < 1 || minerMap.size() < 1)   return;
+    postRPC( "senator-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << HXChain::getInstance()->getPermanentSenators().first()));
     postRPC( "citizen-get_proposal_for_voter", toJsonFormat( "get_referendum_for_voter", QJsonArray() << minerMap.keys().at(0)));
 
-    qDebug() << "jjjjjjjjjjjjj " << toJsonFormat( "get_proposal_for_voter", QJsonArray() << HXChain::getInstance()->getFormalGuards().first());
 }
 
 QString HXChain::citizenAccountIdToName(QString citizenAccountId)
@@ -1990,4 +2004,27 @@ int checkUseGuaranteeOrderType(QString payer, QString currentAddress, QString ow
     }
 
     return result;
+}
+
+QString toEasyRead(unsigned long long number, int precision, int effectiveBitsNum)
+{
+    QString str = QString::number(number);
+    if(str.size() <= precision + 3)
+    {
+        return getBigNumberString(number, precision);
+    }
+    else if(str.size() <= precision + 6)
+    {
+        str = getBigNumberString(number, precision + 3);
+        str = str.left(effectiveBitsNum + 1);       // +1 是因为有小数点
+        str += "K";
+        return str;
+    }
+    else
+    {
+        str = getBigNumberString(number, precision + 6);
+        str = str.left(effectiveBitsNum + 1);       // +1 是因为有小数点
+        str += "M";
+        return str;
+    }
 }

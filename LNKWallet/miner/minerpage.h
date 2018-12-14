@@ -47,7 +47,10 @@ private slots:
 
     void on_obtainAllBtn_clicked();
 
+    void on_forecloseAllBtn_clicked();
+
     void on_sortTypeComboBox_currentIndexChanged(const QString &arg1);
+
 
 private:
     QString getCitizenTooltip(const QString &citizenName);
@@ -68,7 +71,7 @@ private:
     void InitStyle();
     void updateCheckState(int number);//0 1 2
 
-    void checkObtainAllBtnVisible();
+    void checkBtnVisible();
 
     int count = 0;
     void autoLockToCitizen();

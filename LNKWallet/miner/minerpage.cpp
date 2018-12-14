@@ -309,7 +309,7 @@ void MinerPage::jsonDataUpdated(QString id)
         pageWidget_income->setVisible(0 != size);
         blankWidget_income->setVisible( 0 == size);
 
-        checkObtainAllBtnVisible();
+        checkBtnVisible();
 
         return;
     }
@@ -394,7 +394,7 @@ void MinerPage::init()
     updateCheckState(0);
 
     refresh();
-    checkObtainAllBtnVisible();
+    checkBtnVisible();
     ui->sortTypeComboBox->hide();
 }
 
@@ -686,7 +686,7 @@ void MinerPage::showCitizenInfo()
         ui->citizenInfoTableWidget->setRowHeight(i,40);
         MinerInfo minerInfo = HXChain::getInstance()->minerMap.value(sortedKeys.at(i));
         ui->citizenInfoTableWidget->setItem(i,0, new QTableWidgetItem(sortedKeys.at(i)));
-        ui->citizenInfoTableWidget->setItem(i,1, new QTableWidgetItem( getBigNumberString(minerInfo.pledgeWeight,0)));
+        ui->citizenInfoTableWidget->setItem(i,1, new QTableWidgetItem( toEasyRead(minerInfo.pledgeWeight, 5, 4)));
         ui->citizenInfoTableWidget->setItem(i,2, new QTableWidgetItem( QString::number(minerInfo.totalProduced)));
         ui->citizenInfoTableWidget->setItem(i,3, new QTableWidgetItem( QString::number(minerInfo.totalMissed)));
         ui->citizenInfoTableWidget->setItem(i,4, new QTableWidgetItem( QString::number(minerInfo.lastBlock)));
@@ -748,6 +748,7 @@ void MinerPage::InitStyle()
     ui->obtainAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->lockToMinerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->registerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->forecloseAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 }
 
 void MinerPage::updateCheckState(int number)
@@ -758,27 +759,37 @@ void MinerPage::updateCheckState(int number)
     ui->citizenInfoBtn->setChecked(3 == number);
 }
 
-void MinerPage::checkObtainAllBtnVisible()
+void MinerPage::checkBtnVisible()
 {
     if(ui->stackedWidget->currentIndex() != 0 || ui->incomeTableWidget->rowCount() == 0)
     {
         ui->obtainAllBtn->hide();
-        return;
     }
-
-    bool visible = false;
-    for(int i = 0; i < ui->incomeTableWidget->rowCount(); i++)
+    else
     {
-        QTableWidgetItem* item = ui->incomeTableWidget->item(i, 2);
-        if(item)
+        bool visible = false;
+        for(int i = 0; i < ui->incomeTableWidget->rowCount(); i++)
         {
-            if(!item->text().isEmpty())
+            QTableWidgetItem* item = ui->incomeTableWidget->item(i, 2);
+            if(item)
             {
-                visible = true;
+                if(!item->text().isEmpty())
+                {
+                    visible = true;
+                }
             }
         }
+        ui->obtainAllBtn->setVisible(visible);
     }
-    ui->obtainAllBtn->setVisible(visible);
+
+    if(ui->stackedWidget->currentIndex() != 1 || ui->lockBalancesTableWidget->rowCount() == 0)
+    {
+        ui->forecloseAllBtn->hide();
+    }
+    else
+    {
+        ui->forecloseAllBtn->show();
+    }
 }
 
 void MinerPage::autoLockToCitizen()
@@ -943,7 +954,7 @@ void MinerPage::on_incomeInfoBtn_clicked()
     ui->stackedWidget->setCurrentIndex(0);
     updateCheckState(0);
 
-    checkObtainAllBtnVisible();
+    checkBtnVisible();
     ui->sortTypeComboBox->hide();
 }
 
@@ -952,7 +963,7 @@ void MinerPage::on_forecloseInfoBtn_clicked()
     ui->stackedWidget->setCurrentIndex(1);
     updateCheckState(1);
 
-    checkObtainAllBtnVisible();
+    checkBtnVisible();
     ui->sortTypeComboBox->hide();
 }
 
@@ -961,7 +972,7 @@ void MinerPage::on_incomeRecordBtn_clicked()
     ui->stackedWidget->setCurrentIndex(2);
     updateCheckState(2);
 
-    checkObtainAllBtnVisible();
+    checkBtnVisible();
     ui->sortTypeComboBox->hide();
 }
 
@@ -971,7 +982,7 @@ void MinerPage::on_citizenInfoBtn_clicked()
     ui->stackedWidget->setCurrentIndex(3);
     updateCheckState(3);
 
-    checkObtainAllBtnVisible();
+    checkBtnVisible();
     ui->sortTypeComboBox->show();
 }
 
@@ -1068,6 +1079,34 @@ void MinerPage::on_obtainAllBtn_clicked()
     }
 //    });
 //    feeCharge->show();
+}
+
+
+void MinerPage::on_forecloseAllBtn_clicked()
+{
+    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
+
+    CommonDialog commonDialog(CommonDialog::YesOrNo);
+    commonDialog.setText(tr("Sure to foreclose all assets that you have pledged?"));
+    if(commonDialog.pop())
+    {
+        // TODOTOMORROW
+    }
+
+//    QString citizenName = ui->lockBalancesTableWidget->item(row,0)->text();
+//    QString assetSymbol = getRealAssetSymbol( ui->lockBalancesTableWidget->item(row,1)->text());
+//    ForecloseDialog forecloseDialog(ui->accountComboBox->currentText(), assetSymbol,
+//                                    ui->lockBalancesTableWidget->item(row,2)->text());
+//    if(!forecloseDialog.pop())  return;
+
+//    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
+
+//    HXChain::getInstance()->postRPC( "id-foreclose_balance_from_citizen",
+//                                     toJsonFormat( "foreclose_balance_from_citizen",
+//                                                   QJsonArray() << citizenName
+//                                                   << ui->accountComboBox->currentText()
+//                                                   << forecloseDialog.amountStr << assetSymbol
+//                                                   << true ));
 }
 
 
