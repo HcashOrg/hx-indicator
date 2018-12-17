@@ -150,20 +150,29 @@ void RegisterDialog::jsonDataUpdated(QString id)
         if( id.mid(QString("id-get_account-").size()) != ui->registerNameLineEdit->text())  return;
 ;
 
-        if( result.startsWith("\"result\":{\"id\":\"0.0.0\""))
+        if( result != "\"result\":{}")
         {
-            if(FeeChooseWidget *feeWidget = qobject_cast<FeeChooseWidget*>(ui->stackedWidget_fee->currentWidget()))
-            {
-                ui->okBtn->setEnabled(feeWidget->isSufficient());
-            }
+            result.prepend("{");
+            result.append("}");
 
-            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#543D89>" + tr( "The name is available") + "</font></body>" );
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonObject object = jsonObject.value("result").toObject();
+            QString isOnline = object.value("online").toString();
+            if(isOnline == "true")
+            {
+                ui->okBtn->setEnabled(false);
+                ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#EB005E>" + tr( "This name has been used") + "</font></body>" );
+                return;
+            }
         }
-        else
+
+        if(FeeChooseWidget *feeWidget = qobject_cast<FeeChooseWidget*>(ui->stackedWidget_fee->currentWidget()))
         {
-            ui->okBtn->setEnabled(false);
-            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#EB005E>" + tr( "This name has been used") + "</font></body>" );
+            ui->okBtn->setEnabled(feeWidget->isSufficient());
         }
+
+        ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#543D89>" + tr( "The name is available") + "</font></body>" );
 
         return;
     }

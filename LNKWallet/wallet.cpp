@@ -2020,10 +2020,17 @@ QString toEasyRead(unsigned long long number, int precision, int effectiveBitsNu
         str += "K";
         return str;
     }
-    else
+    else if(str.size() <= precision + 9)
     {
         str = getBigNumberString(number, precision + 6);
         str = str.left(effectiveBitsNum + 1);       // +1 是因为有小数点
+        str += "M";
+        return str;
+    }
+    else
+    {
+        str = getBigNumberString(number, precision + 6);
+        str = str.left(str.indexOf("."));       // +1 是因为有小数点
         str += "M";
         return str;
     }

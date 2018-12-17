@@ -144,7 +144,7 @@ void NameDialog::jsonDataUpdated(QString id)
 
         ui->gifLabel->hide();
 
-        if( result.startsWith("\"result\":{\"id\":\"0.0.0\""))
+        if( result == "\"result\":{}")
         {
             ui->okBtn->setEnabled(true);
             ui->addressNameTipLabel2->setText("<body><font style=\"font-size:12px\" color=#543D89>" + tr( "The name is available") + "</font></body>" );

@@ -165,7 +165,7 @@ void TransferPage::on_sendBtn_clicked()
     }
     else
     {
-        if( ui->addressLabel->text().isEmpty() || ui->addressLabel->text() == tr("Invalid account name!"))
+        if( ui->addressLabel->text().isEmpty() || ui->tipLabel4->text() == tr("Invalid account name!"))
         {
             CommonDialog tipDialog(CommonDialog::OkOnly);
             tipDialog.setText( tr("Invalid account name!"));
@@ -312,10 +312,8 @@ void TransferPage::jsonDataUpdated(QString id)
             result.append("}");
 
             QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-            QJsonObject jsonObject = parse_doucment.object();
-            QString accountAddress = jsonObject.take("result").toObject().take("addr").toString();
-
-            if(accountAddress == "InvalidAddress")
+            QJsonObject object = parse_doucment.object().value("result").toObject();
+            if(object.isEmpty())
             {
                 ui->tipLabel4->setText(tr("Invalid account name!"));
                 ui->tipLabel4->setStyleSheet("color: rgb(255,0,0);");
@@ -323,6 +321,7 @@ void TransferPage::jsonDataUpdated(QString id)
             }
             else
             {
+                QString accountAddress = object.value("addr").toString();
                 ui->tipLabel4->setText(tr("Valid account name."));
                 ui->tipLabel4->setStyleSheet("color: rgb(0,170,0);");
                 ui->addressLabel->setText(accountAddress);
