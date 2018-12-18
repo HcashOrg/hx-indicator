@@ -1,12 +1,30 @@
 #include "ChangeSenatorSwitchWidget.h"
 #include "ui_ChangeSenatorSwitchWidget.h"
 
+#include <QJsonObject>
+#include <QJsonDocument>
+
 #include "wallet.h"
+#include "extra/HttpManager.h"
 
 Q_DECLARE_METATYPE(GuardInfo)
+
+class ChangeSenatorSwitchWidget::DataPrivate
+{
+public:
+  DataPrivate()
+  {
+
+  }
+public:
+  HttpManager httpManager;
+
+};
+
 ChangeSenatorSwitchWidget::ChangeSenatorSwitchWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ChangeSenatorSwitchWidget)
+    ui(new Ui::ChangeSenatorSwitchWidget),
+    _p(new DataPrivate())
 {
     ui->setupUi(this);
     InitWidget();
@@ -59,13 +77,44 @@ void ChangeSenatorSwitchWidget::RemoveProposalSlots()
     }
 }
 
+void ChangeSenatorSwitchWidget::httpReplied(QByteArray _data, int _status)
+{
+    ui->senator1->clear();
+    ui->senator2->clear();
+    ui->senator3->clear();
+    QJsonArray arr  = QJsonDocument::fromJson(_data).object().value("result").toArray();
+    foreach (QJsonValue val, arr) {
+        if(!val.isString()) continue;
+        QMap<QString,GuardInfo> allSenator(HXChain::getInstance()->allGuardMap);
+        QMapIterator<QString, GuardInfo> i(allSenator);
+        while (i.hasNext()) {
+            i.next();
+            if(i.value().isFormal)
+            {
+                if(val.toString() == i.value().accountId && "EXTERNAL" == i.value().senatorType)
+                {
+                    ui->senator1->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
+                    ui->senator2->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
+                    ui->senator3->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
+                    break;
+                }
+            }
+        }
+    }
+    if(0 == ui->senator1->count()  || 0 == ui->candidate1->count())
+    {
+        ui->addBtn->setVisible(false);
+    }
+
+}
+
 void ChangeSenatorSwitchWidget::InitWidget()
 {
-//    InitData();
     SetItemVisible(2,false);
     SetItemVisible(3,false);
     connect(ui->addBtn,&QToolButton::clicked,this,&ChangeSenatorSwitchWidget::AddProposalSlots);
     connect(ui->delBtn,&QToolButton::clicked,this,&ChangeSenatorSwitchWidget::RemoveProposalSlots);
+    connect(&_p->httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 }
 
 void ChangeSenatorSwitchWidget::InitData(bool showPermanent)
@@ -84,7 +133,7 @@ void ChangeSenatorSwitchWidget::InitData(bool showPermanent)
         i.next();
         if(i.value().isFormal)
         {
-            if((showPermanent && ("PERMANENT" == i.value().senatorType)) || (!showPermanent && ("EXTERNAL" == i.value().senatorType)))
+            if((showPermanent && ("PERMANENT" == i.value().senatorType)) /*|| (!showPermanent && ("EXTERNAL" == i.value().senatorType))*/)
             {
                 ui->senator1->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
                 ui->senator2->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
@@ -101,6 +150,11 @@ void ChangeSenatorSwitchWidget::InitData(bool showPermanent)
     if(0 == ui->senator1->count()  || 0 == ui->candidate1->count())
     {
         ui->addBtn->setVisible(false);
+    }
+    //citizen查询白名单
+    if(!showPermanent)
+    {
+        queryWhiteList();
     }
 }
 
@@ -137,4 +191,13 @@ void ChangeSenatorSwitchWidget::SetItemVisible(int n, bool vi)
 
     ui->addBtn->setVisible(!ui->senator3->isVisible());
     ui->delBtn->setVisible(ui->senator2->isVisible());
+}
+
+void ChangeSenatorSwitchWidget::queryWhiteList()
+{
+    QJsonObject object;
+    object.insert("jsonrpc","2.0");
+    object.insert("id",45);
+    object.insert("method","Zchain.Plugin.QueryWhiteListSenatorId");
+    _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }

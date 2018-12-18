@@ -2,6 +2,7 @@
 #define CITIZENPROPOSALPAGE_H
 
 #include <QWidget>
+#include "wallet.h"
 class PageScrollWidget;
 namespace Ui {
 class CitizenProposalPage;
@@ -38,6 +39,7 @@ private:
 
     void paintEvent(QPaintEvent*);
     PageScrollWidget *pageWidget;
+    QString calProposalWeight(const ProposalInfo &info) const;
 };
 
 #endif // CITIZENPROPOSALPAGE_H

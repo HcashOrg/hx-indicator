@@ -162,6 +162,19 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </column>
    <column>
     <property name="text">
+     <string>质押数量</string>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+     </font>
+    </property>
+    <property name="textAlignment">
+     <set>AlignCenter</set>
+    </property>
+   </column>
+   <column>
+    <property name="text">
      <string>我的投票</string>
     </property>
     <property name="font">

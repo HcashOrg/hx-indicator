@@ -2312,6 +2312,11 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="165"/>
+        <source>质押数量</source>
+        <translation type="unfinished">PLEDGE</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.ui" line="173"/>
         <source>我的投票</source>
         <translation type="unfinished">MY VOTE</translation>
     </message>
@@ -2320,82 +2325,78 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="obsolete">WEIGHT</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="237"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="245"/>
         <source>Citizen提案</source>
         <translation type="unfinished">Citizen Proposals</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="253"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="261"/>
         <source>更换senator</source>
         <translation type="unfinished">CHANGE SENATOR</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="95"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="96"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="119"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="120"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="126"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="127"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="180"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="181"/>
         <source>change senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="184"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="185"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="196"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="202"/>
         <source>no citizen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="200"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="206"/>
         <source>approved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="205"/>
-        <source>disapproved</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="210"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="211"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="216"/>
         <source>not voted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="216"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="222"/>
         <source>approve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="217"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="223"/>
         <source>disapprove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="218"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="224"/>
         <source>addPledge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="283"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="296"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="303"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="316"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
