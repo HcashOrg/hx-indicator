@@ -28,7 +28,7 @@
 #include "extra/transactiontype.h"
 #include "extra/WitnessConfig.h"
 #include "extra/LogToFile.h"
-
+//#define TEST_WALLET
 #define ASSET_NAME "HX"
 #define ACCOUNT_ADDRESS_PREFIX  "HXN"
 #define CONTRACT_ADDRESS_PREFIX "HXC"

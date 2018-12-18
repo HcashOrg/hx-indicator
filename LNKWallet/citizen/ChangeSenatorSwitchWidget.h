@@ -2,7 +2,7 @@
 #define CHANGESENATORSWITCHWIDGET_H
 
 #include <QWidget>
-
+class QComboBox;
 namespace Ui {
 class ChangeSenatorSwitchWidget;
 }
@@ -21,11 +21,15 @@ public:
 private slots:
     void AddProposalSlots();
     void RemoveProposalSlots();
+    void httpReplied(QByteArray _data, int _status);
 private:
     void InitWidget();
     void SetItemVisible(int n,bool vi);//n== 2,3
+    void queryWhiteList();
 private:
     Ui::ChangeSenatorSwitchWidget *ui;
+    class DataPrivate;
+    DataPrivate *_p;
 };
 
 #endif // CHANGESENATORSWITCHWIDGET_H
