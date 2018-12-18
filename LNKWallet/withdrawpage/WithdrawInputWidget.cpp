@@ -46,6 +46,13 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
     ui->lineEdit_ammount->setValidator( validator );
     ui->label_symbol->setText(revertERCSymbol(symbol));
     ui->label_tipNumber->setText(tr("Amount limits: %1 to %2").arg(validator->bottom()).arg(number));
+
+    if(symbol.startsWith("ERC") || symbol == "ETH")
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText(tr("If you want to withdraw %1s to coin exchange, be sure contract-trx is supported!").arg(symbol));
+        commonDialog.pop();
+    }
 }
 
 void WithdrawInputWidget::addressChangeSlots(const QString &address)

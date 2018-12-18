@@ -7,6 +7,7 @@
 #include "ToolButtonWidget.h"
 #include "control/BlankDefaultWidget.h"
 #include "poundage/PageScrollWidget.h"
+#include "ExchangeModeWidget.h"
 
 #include <QtMath>
 
@@ -110,6 +111,8 @@ void OnchainOrderPage::init()
     inited = true;
 
     on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
+
+    ui->exchangeModeBtn->hide();
 }
 
 void OnchainOrderPage::onBack()
@@ -436,4 +439,12 @@ void OnchainOrderPage::checkFavorite()
     }
 
     favoritePairsWidget->setCurrentBtn(str.replace("+","/"));
+}
+
+void OnchainOrderPage::on_exchangeModeBtn_clicked()
+{
+    ExchangeModeWidget* exchangeModeWidget = new ExchangeModeWidget(this);
+    exchangeModeWidget->setAttribute(Qt::WA_DeleteOnClose);
+    exchangeModeWidget->show();
+    exchangeModeWidget->raise();
 }

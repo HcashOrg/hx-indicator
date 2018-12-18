@@ -189,7 +189,7 @@ void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
 //    qDebug() << "message received: " << pendingRpcs.at(0) << _isLastFrame;
 
     m_buff += _message;
-
+    logToFile( QStringList() << QString::number(loopCount) << processingRpc);
     loopCount = 0;
 
     if(_isLastFrame)

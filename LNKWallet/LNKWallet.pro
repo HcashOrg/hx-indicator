@@ -191,7 +191,8 @@ SOURCES += main.cpp\
     autoUpdate/AutoUpdateNotify.cpp \
     autoUpdate/AutoUpdateDialog.cpp\
     extra/LogToFile.cpp \
-    exchange/FavoritePairsWidget.cpp
+    exchange/FavoritePairsWidget.cpp \
+    exchange/ExchangeModeWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -354,7 +355,8 @@ HEADERS  += firstlogin.h \
     autoUpdate/AutoUpdateNotify.h \
     autoUpdate/AutoUpdateDialog.h\
     extra/LogToFile.h \
-    exchange/FavoritePairsWidget.h
+    exchange/FavoritePairsWidget.h \
+    exchange/ExchangeModeWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -483,7 +485,8 @@ FORMS    += firstlogin.ui \
     guard/SenatorChangeSenatorDialog.ui \
     citizen/ChangePayBackDialog.ui \
     autoUpdate/AutoUpdateDialog.ui \
-    exchange/FavoritePairsWidget.ui
+    exchange/FavoritePairsWidget.ui \
+    exchange/ExchangeModeWidget.ui
 
 win32{
     DISTFILES += logo.rc

@@ -191,8 +191,10 @@ void MinerPage::jsonDataUpdated(QString id)
 
             AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(assetId);
             ui->lockBalancesTableWidget->setItem(i,1,new QTableWidgetItem( revertERCSymbol( assetInfo.symbol)));
+            ui->lockBalancesTableWidget->item(i,1)->setData(Qt::UserRole, assetId);
 
             ui->lockBalancesTableWidget->setItem(i,2,new QTableWidgetItem(getBigNumberString(lockAmount,assetInfo.precision)));
+            ui->lockBalancesTableWidget->item(i,2)->setData(Qt::UserRole, lockAmount);
 
             ui->lockBalancesTableWidget->setItem(i,3,new QTableWidgetItem(tr("add")));
 
@@ -353,6 +355,27 @@ void MinerPage::jsonDataUpdated(QString id)
         QString result = HXChain::getInstance()->jsonDataValue(id);
 
         qDebug() << id << result;
+        return;
+    }
+
+    if( id == "MinerPage+foreclose_balance_from_citizens")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+        if(result.startsWith("\"result\":{"))
+        {
+            TransactionResultDialog transactionResultDialog;
+            transactionResultDialog.setInfoText(tr("Transaction of foreclose-asset has been sent out!"));
+            transactionResultDialog.setDetailText(result);
+            transactionResultDialog.pop();
+        }
+        else
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Fail to foreclose asset from miner!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
+        }
         return;
     }
 }
@@ -1090,23 +1113,34 @@ void MinerPage::on_forecloseAllBtn_clicked()
     commonDialog.setText(tr("Sure to foreclose all assets that you have pledged?"));
     if(commonDialog.pop())
     {
-        // TODOTOMORROW
+        QJsonArray array;
+        for(int i = 0; i < ui->lockBalancesTableWidget->rowCount(); i++)
+        {
+            QJsonArray array2;
+            array2 << ui->lockBalancesTableWidget->item(i,0)->text();
+            QJsonObject object;
+            QString assetId = ui->lockBalancesTableWidget->item(i,1)->data(Qt::UserRole).toString();
+            unsigned long long amount = ui->lockBalancesTableWidget->item(i,2)->data(Qt::UserRole).toULongLong();
+            object.insert("amount", QString::number(amount));
+            object.insert("asset_id", assetId);
+            QJsonArray array3;
+            array3 << object;
+            array2 << array3;
+            array << array2;
+        }
+        HXChain::getInstance()->postRPC( "MinerPage+foreclose_balance_from_citizens",
+                                         toJsonFormat( "foreclose_balance_from_citizens",
+                                                       QJsonArray() << ui->accountComboBox->currentText()
+                                                       << array
+                                                       << true ));
+
+        qDebug() << toJsonFormat( "foreclose_balance_from_citizens",
+                                  QJsonArray() << ui->accountComboBox->currentText()
+                                  << array
+                                  << true );
     }
 
-//    QString citizenName = ui->lockBalancesTableWidget->item(row,0)->text();
-//    QString assetSymbol = getRealAssetSymbol( ui->lockBalancesTableWidget->item(row,1)->text());
-//    ForecloseDialog forecloseDialog(ui->accountComboBox->currentText(), assetSymbol,
-//                                    ui->lockBalancesTableWidget->item(row,2)->text());
-//    if(!forecloseDialog.pop())  return;
 
-//    if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
-
-//    HXChain::getInstance()->postRPC( "id-foreclose_balance_from_citizen",
-//                                     toJsonFormat( "foreclose_balance_from_citizen",
-//                                                   QJsonArray() << citizenName
-//                                                   << ui->accountComboBox->currentText()
-//                                                   << forecloseDialog.amountStr << assetSymbol
-//                                                   << true ));
 }
 
 

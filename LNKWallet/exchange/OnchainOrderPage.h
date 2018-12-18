@@ -43,6 +43,8 @@ private slots:
     void pageChangeSlot(unsigned int page);
     void on_swapBtn_clicked();
 
+    void on_exchangeModeBtn_clicked();
+
 public slots:
     void on_favoriteBtn_clicked();
     void showPair(QString pairStr);

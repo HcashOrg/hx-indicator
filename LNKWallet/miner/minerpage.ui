@@ -887,9 +887,9 @@
   <widget class="QToolButton" name="forecloseAllBtn">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>440</x>
      <y>129</y>
-     <width>80</width>
+     <width>100</width>
      <height>20</height>
     </rect>
    </property>
