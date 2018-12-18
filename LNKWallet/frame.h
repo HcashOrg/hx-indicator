@@ -43,6 +43,7 @@ class MyExchangeContractPage;
 class PoundageWidget;
 class GuardAccountPage;
 class GuardIncomePage;
+class LockContractPage;
 class AssetPage;
 class GuardKeyManagePage;
 class ProposalPage;
@@ -112,6 +113,7 @@ private slots:
     void showMyExchangeContractPage();
     void showGuardAccountPage();
     void showGuardIncomePage();
+    void showLockContractPage();
     void showAssetPage();
     void showKeyManagePage();
     void showProposalPage();
@@ -158,6 +160,7 @@ private:
     PoundageWidget *poundage;
     GuardAccountPage*   guardAccountPage;
     GuardIncomePage*    guardIncomePage;
+    LockContractPage*   lockContractPage;
     AssetPage*          assetPage;
     GuardKeyManagePage* guardKeyManagePage;
     ProposalPage*       proposalPage;
@@ -181,7 +184,7 @@ private:
                          //   6: onchainOrderPage   7:minerPage   8: assetPage     9: multiSigPage
                          //  11: poundage   12: guardKeyManagePage  13: proposalPage    14: withdrawConfirmPage  15: feedPricePage
                         //   16: coldHotTransferPage    17: guardAccountPage    18: guardIncomePage     19: bonusPage
-                        //   20: contractTokenPage  21: citizenAccountPage  22: citizenProposalPage
+                        //   20: contractTokenPage  21: citizenAccountPage  22: citizenProposalPage  23: lockContractPage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;
     void createTrayIconActions();

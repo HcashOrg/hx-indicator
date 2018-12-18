@@ -24,6 +24,7 @@ private:
 signals:
     void showGuardAccountSignal();
     void showGuardIncomeSignal();
+    void showLockContractSignal();
     void showAssetSignal();
     void showKeyManageSignal();
     void showProposalSignal();
@@ -36,6 +37,8 @@ private slots:
 
     void on_myIncomeBtn_clicked();
 
+    void on_lockContractBtn_clicked();
+
     void on_assetInfoBtn_clicked();
 
     void on_keyManageBtn_clicked();
@@ -47,6 +50,7 @@ private slots:
     void on_feedPriceBtn_clicked();
 
     void on_coldHotTransferBtn_clicked();
+
 
 private:
     Ui::FunctionGuardWidget *ui;

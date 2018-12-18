@@ -33,6 +33,7 @@ void FunctionGuardWidget::InitWidget()
     InitStyle();
     ui->accountInfoBtn->setCheckable(true);
     ui->myIncomeBtn->setCheckable(true);
+    ui->lockContractBtn->setCheckable(true);
     ui->assetInfoBtn->setCheckable(true);
     ui->keyManageBtn->setCheckable(true);
     ui->proposalBtn->setCheckable(true);
@@ -55,6 +56,7 @@ void FunctionGuardWidget::on_accountInfoBtn_clicked()
 {
     ui->accountInfoBtn->setChecked(true);
     ui->myIncomeBtn->setChecked(false);
+    ui->lockContractBtn->setChecked(false);
     ui->assetInfoBtn->setChecked(false);
     ui->keyManageBtn->setChecked(false);
     ui->proposalBtn->setChecked(false);
@@ -69,19 +71,35 @@ void FunctionGuardWidget::on_myIncomeBtn_clicked()
 {
     ui->accountInfoBtn->setChecked(false);
     ui->myIncomeBtn->setChecked(true);
+    ui->lockContractBtn->setChecked(false);
     ui->assetInfoBtn->setChecked(false);
     ui->keyManageBtn->setChecked(false);
     ui->proposalBtn->setChecked(false);
     ui->withdrawConfirmBtn->setChecked(false);
     ui->feedPriceBtn->setChecked(false);
     ui->coldHotTransferBtn->setChecked(false);
-    showGuardIncomeSignal();;
+    showGuardIncomeSignal();
+}
+
+void FunctionGuardWidget::on_lockContractBtn_clicked()
+{
+    ui->accountInfoBtn->setChecked(false);
+    ui->myIncomeBtn->setChecked(false);
+    ui->lockContractBtn->setChecked(true);
+    ui->assetInfoBtn->setChecked(false);
+    ui->keyManageBtn->setChecked(false);
+    ui->proposalBtn->setChecked(false);
+    ui->withdrawConfirmBtn->setChecked(false);
+    ui->feedPriceBtn->setChecked(false);
+    ui->coldHotTransferBtn->setChecked(false);
+    showLockContractSignal();
 }
 
 void FunctionGuardWidget::on_assetInfoBtn_clicked()
 {
     ui->accountInfoBtn->setChecked(false);
     ui->myIncomeBtn->setChecked(false);
+    ui->lockContractBtn->setChecked(false);
     ui->assetInfoBtn->setChecked(true);
     ui->keyManageBtn->setChecked(false);
     ui->proposalBtn->setChecked(false);
@@ -95,6 +113,7 @@ void FunctionGuardWidget::on_keyManageBtn_clicked()
 {
     ui->accountInfoBtn->setChecked(false);
     ui->myIncomeBtn->setChecked(false);
+    ui->lockContractBtn->setChecked(false);
     ui->assetInfoBtn->setChecked(false);
     ui->keyManageBtn->setChecked(true);
     ui->proposalBtn->setChecked(false);
@@ -108,6 +127,7 @@ void FunctionGuardWidget::on_proposalBtn_clicked()
 {
     ui->accountInfoBtn->setChecked(false);
     ui->myIncomeBtn->setChecked(false);
+    ui->lockContractBtn->setChecked(false);
     ui->assetInfoBtn->setChecked(false);
     ui->keyManageBtn->setChecked(false);
     ui->proposalBtn->setChecked(true);
@@ -121,6 +141,7 @@ void FunctionGuardWidget::on_withdrawConfirmBtn_clicked()
 {
     ui->accountInfoBtn->setChecked(false);
     ui->myIncomeBtn->setChecked(false);
+    ui->lockContractBtn->setChecked(false);
     ui->assetInfoBtn->setChecked(false);
     ui->keyManageBtn->setChecked(false);
     ui->proposalBtn->setChecked(false);
@@ -134,6 +155,7 @@ void FunctionGuardWidget::on_feedPriceBtn_clicked()
 {
     ui->accountInfoBtn->setChecked(false);
     ui->myIncomeBtn->setChecked(false);
+    ui->lockContractBtn->setChecked(false);
     ui->assetInfoBtn->setChecked(false);
     ui->keyManageBtn->setChecked(false);
     ui->proposalBtn->setChecked(false);
@@ -147,6 +169,7 @@ void FunctionGuardWidget::on_coldHotTransferBtn_clicked()
 {
     ui->accountInfoBtn->setChecked(false);
     ui->myIncomeBtn->setChecked(false);
+    ui->lockContractBtn->setChecked(false);
     ui->assetInfoBtn->setChecked(false);
     ui->keyManageBtn->setChecked(false);
     ui->proposalBtn->setChecked(false);
@@ -170,8 +193,10 @@ void FunctionGuardWidget::paintEvent(QPaintEvent *)
 
     painter.setPen(QColor(81,59,134));
     painter.drawLine(20,62,110,62);
-    painter.drawLine(20,202,110,202);
+    painter.drawLine(20,212,110,212);
     painter.drawLine(20,402,110,402);
 }
+
+
 
 

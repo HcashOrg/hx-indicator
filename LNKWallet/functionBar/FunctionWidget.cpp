@@ -274,6 +274,7 @@ void FunctionWidget::InitWidget()
 
     connect(_p->guardBar,&FunctionGuardWidget::showGuardAccountSignal,this,&FunctionWidget::showGuardAccountSignal);
     connect(_p->guardBar,&FunctionGuardWidget::showGuardIncomeSignal,this,&FunctionWidget::showGuardIncomeSignal);
+    connect(_p->guardBar,&FunctionGuardWidget::showLockContractSignal,this,&FunctionWidget::showLockContractSignal);
     connect(_p->guardBar,&FunctionGuardWidget::showAssetSignal,this,&FunctionWidget::showAssetSignal);
     connect(_p->guardBar,&FunctionGuardWidget::showKeyManageSignal,this,&FunctionWidget::showKeyManageSignal);
     connect(_p->guardBar,&FunctionGuardWidget::showProposalSignal,this,&FunctionWidget::showProposalSignal);

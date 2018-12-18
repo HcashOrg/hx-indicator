@@ -208,7 +208,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>提案</string>
+    <string>我的收益</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">

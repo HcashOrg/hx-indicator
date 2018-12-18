@@ -7,6 +7,7 @@
 #include "commondialog.h"
 
 #include "crossmark/AddressValidate.h"
+#include "dialog/RiskWarningDialog.h"
 
 class WithdrawInputWidget::DataPrivate
 {
@@ -49,9 +50,11 @@ void WithdrawInputWidget::InitData(const QString &number, const QString &symbol)
 
     if(symbol.startsWith("ERC") || symbol == "ETH")
     {
-        CommonDialog commonDialog(CommonDialog::OkOnly);
-        commonDialog.setText(tr("If you want to withdraw %1s to coin exchange, be sure contract-trx is supported!").arg(symbol));
-        commonDialog.pop();
+        RiskWarningDialog riskWarningDialog;
+        riskWarningDialog.setInfoText(tr("Due to on-chain reasons of ETH, withdrawing to the exchanges might fail because of unable to handle."
+                                         "We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). "));
+        riskWarningDialog.setReadingTime(3);
+        riskWarningDialog.pop();
     }
 }
 

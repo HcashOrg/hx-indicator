@@ -54,6 +54,7 @@ signals:
     void showContractTokenSignal();
     void showGuardAccountSignal();
     void showGuardIncomeSignal();
+    void showLockContractSignal();
     void showAssetSignal();
     void showKeyManageSignal();
     void showProposalSignal();

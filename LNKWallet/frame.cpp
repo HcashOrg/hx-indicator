@@ -43,6 +43,7 @@
 #include "guard/WithdrawConfirmPage.h"
 #include "guard/FeedPricePage.h"
 #include "guard/ColdHotTransferPage.h"
+#include "guard/LockContractPage.h"
 #include "bonus/BonusPage.h"
 #include "dapp/ContractTokenPage.h"
 #include "citizen/CitizenAccountPage.h"
@@ -72,6 +73,7 @@ Frame::Frame(): timer(NULL),
     bonusPage(NULL),
     guardAccountPage(NULL),
     guardIncomePage(NULL),
+    lockContractPage(NULL),
     assetPage(NULL),
     guardKeyManagePage(NULL),
     proposalPage(NULL),
@@ -364,6 +366,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showMyOrderSignal,this,&Frame::showMyExchangeContractPage);
     connect(functionBar,&FunctionWidget::showGuardAccountSignal,this,&Frame::showGuardAccountPage);
     connect(functionBar,&FunctionWidget::showGuardIncomeSignal,this,&Frame::showGuardIncomePage);
+    connect(functionBar,&FunctionWidget::showLockContractSignal,this,&Frame::showLockContractPage);
     connect(functionBar,&FunctionWidget::showAssetSignal,this,&Frame::showAssetPage);
     connect(functionBar,&FunctionWidget::showKeyManageSignal,this,&Frame::showKeyManagePage);
     connect(functionBar,&FunctionWidget::showProposalSignal,this,&Frame::showProposalPage);
@@ -810,6 +813,13 @@ void Frame::closeCurrentPage()
             citizenProposalPage = NULL;
         }
         break;
+    case 23:
+        if(lockContractPage)
+        {
+            lockContractPage->close();
+            lockContractPage = NULL;
+        }
+        break;
     default:
         break;
     }
@@ -1222,6 +1232,17 @@ void Frame::showGuardIncomePage()
     guardIncomePage->setAttribute(Qt::WA_DeleteOnClose);
     guardIncomePage->show();
     currentPageNum = 18;
+}
+
+void Frame::showLockContractPage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    lockContractPage = new LockContractPage(centralWidget);
+    lockContractPage->setAttribute(Qt::WA_DeleteOnClose);
+    lockContractPage->show();
+    currentPageNum = 23;
 }
 
 void Frame::showAssetPage()

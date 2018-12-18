@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = HXIndicator
 TEMPLATE = app
 
-#DEFINES += TEST_WALLET
+DEFINES += TEST_WALLET
 #DEFINES += SAFE_VERSION
 
 win32{
@@ -192,7 +192,9 @@ SOURCES += main.cpp\
     autoUpdate/AutoUpdateDialog.cpp\
     extra/LogToFile.cpp \
     exchange/FavoritePairsWidget.cpp \
-    exchange/ExchangeModeWidget.cpp
+    exchange/ExchangeModeWidget.cpp \
+    guard/LockContractPage.cpp \
+    dialog/RiskWarningDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -356,7 +358,9 @@ HEADERS  += firstlogin.h \
     autoUpdate/AutoUpdateDialog.h\
     extra/LogToFile.h \
     exchange/FavoritePairsWidget.h \
-    exchange/ExchangeModeWidget.h
+    exchange/ExchangeModeWidget.h \
+    guard/LockContractPage.h \
+    dialog/RiskWarningDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -486,7 +490,9 @@ FORMS    += firstlogin.ui \
     citizen/ChangePayBackDialog.ui \
     autoUpdate/AutoUpdateDialog.ui \
     exchange/FavoritePairsWidget.ui \
-    exchange/ExchangeModeWidget.ui
+    exchange/ExchangeModeWidget.ui \
+    guard/LockContractPage.ui \
+    dialog/RiskWarningDialog.ui
 
 win32{
     DISTFILES += logo.rc

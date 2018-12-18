@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LockContractPage</class>
+ <widget class="QWidget" name="LockContractPage">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>770</width>
+    <height>510</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>90</y>
+     <width>110</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
+   </property>
+   <property name="text">
+    <string>当前SENATOR账号</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="withdrawBtn">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>110</y>
+     <width>80</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>提取</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="accountComboBox">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>90</y>
+     <width>120</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="title_label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>50</y>
+     <width>200</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>12</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>锁仓合约</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_back">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>150</y>
+     <width>650</width>
+     <height>175</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 255, 255);
+border-radius:15px;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>167</y>
+     <width>120</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{font: 12px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);}</string>
+   </property>
+   <property name="text">
+    <string>已锁数量</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="stateLabel">
+   <property name="geometry">
+    <rect>
+     <x>385</x>
+     <y>197</y>
+     <width>290</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(229,229,229);font: 13px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);padding:0px 0px 0px 5px;}</string>
+   </property>
+   <property name="text">
+    <string>COMMON</string>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>229</y>
+     <width>120</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{font: 12px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);}</string>
+   </property>
+   <property name="text">
+    <string>解锁时间</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="amountLockedLabel">
+   <property name="geometry">
+    <rect>
+     <x>75</x>
+     <y>197</y>
+     <width>290</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(229,229,229);font: 13px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);padding:0px 0px 0px 5px;}</string>
+   </property>
+   <property name="text">
+    <string>100 HC</string>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="unlockedTimeLabel">
+   <property name="geometry">
+    <rect>
+     <x>75</x>
+     <y>259</y>
+     <width>300</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(229,229,229);font: 12px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);padding:0px 0px 0px 5px;}</string>
+   </property>
+   <property name="text">
+    <string>2018年12月28日15:54:08</string>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>167</y>
+     <width>120</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{font: 12px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);}</string>
+   </property>
+   <property name="text">
+    <string>账户状态</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="totalIncomeLabel">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>115</y>
+     <width>300</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
+   </property>
+   <property name="text">
+    <string>HXCMzpVF78XauxVNRD1wA3wqfuQY9Yfm61rU</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>115</y>
+     <width>110</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
+   </property>
+   <property name="text">
+    <string>锁仓合约地址</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="lockBtn">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>110</y>
+     <width>80</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>锁仓</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

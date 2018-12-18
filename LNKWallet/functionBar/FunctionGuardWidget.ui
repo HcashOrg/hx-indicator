@@ -83,7 +83,7 @@ padding-left: 15px;</string>
    <property name="geometry">
     <rect>
      <x>18</x>
-     <y>210</y>
+     <y>220</y>
      <width>112</width>
      <height>24</height>
     </rect>
@@ -101,7 +101,7 @@ padding-left: 15px;</string>
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>140</y>
+     <y>150</y>
      <width>120</width>
      <height>60</height>
     </rect>
@@ -197,7 +197,7 @@ padding-left: 15px;</string>
    <property name="geometry">
     <rect>
      <x>18</x>
-     <y>270</y>
+     <y>280</y>
      <width>112</width>
      <height>24</height>
     </rect>
@@ -215,7 +215,7 @@ padding-left: 15px;</string>
    <property name="geometry">
     <rect>
      <x>18</x>
-     <y>300</y>
+     <y>310</y>
      <width>112</width>
      <height>24</height>
     </rect>
@@ -233,7 +233,7 @@ padding-left: 15px;</string>
    <property name="geometry">
     <rect>
      <x>18</x>
-     <y>240</y>
+     <y>250</y>
      <width>112</width>
      <height>24</height>
     </rect>
@@ -247,6 +247,36 @@ padding-left: 15px;</string>
     <string>资产变更</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="lockContractBtn">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>130</y>
+     <width>112</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>锁仓合约</string>
+   </property>
+  </widget>
+  <zorder>label_normal_2</zorder>
+  <zorder>label_normal</zorder>
+  <zorder>assetInfoBtn</zorder>
+  <zorder>keyManageBtn</zorder>
+  <zorder>proposalBtn</zorder>
+  <zorder>label_normal_3</zorder>
+  <zorder>accountInfoBtn</zorder>
+  <zorder>myIncomeBtn</zorder>
+  <zorder>withdrawConfirmBtn</zorder>
+  <zorder>feedPriceBtn</zorder>
+  <zorder>coldHotTransferBtn</zorder>
+  <zorder>lockContractBtn</zorder>
  </widget>
  <resources/>
  <connections/>
