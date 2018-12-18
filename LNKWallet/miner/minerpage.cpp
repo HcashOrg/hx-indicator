@@ -2,6 +2,7 @@
 #include "ui_minerpage.h"
 
 #include <QPainter>
+#include <QScrollBar>
 #include <mutex>
 #include <QListView>
 #include "wallet.h"
@@ -56,15 +57,16 @@ MinerPage::MinerPage(QWidget *parent) :
 //    ui->incomeTableWidget->setFrameShape(QFrame::NoFrame);
     ui->incomeTableWidget->setMouseTracking(true);
     ui->incomeTableWidget->setShowGrid(false);//隐藏表格线
+    ui->incomeTableWidget->verticalScrollBar()->setVisible(false);
 
     ui->incomeTableWidget->horizontalHeader()->setSectionsClickable(true);
 //    ui->incomeTableWidget->horizontalHeader()->setFixedHeight(30);
     ui->incomeTableWidget->horizontalHeader()->setVisible(true);
-    ui->incomeTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+//    ui->incomeTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
-    ui->incomeTableWidget->setColumnWidth(0,140);
-    ui->incomeTableWidget->setColumnWidth(1,140);
-    ui->incomeTableWidget->setColumnWidth(2,120);
+    ui->incomeTableWidget->setColumnWidth(0,220);
+    ui->incomeTableWidget->setColumnWidth(1,220);
+    ui->incomeTableWidget->setColumnWidth(2,209);
 
     ui->incomeRecordTableWidget->installEventFilter(this);
     ui->incomeRecordTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
