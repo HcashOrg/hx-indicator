@@ -1556,22 +1556,27 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">Contract address</translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="67"/>
+        <location filename="exchange/BuyOrderWidget.ui" line="248"/>
+        <source>合约执行错误</source>
+        <translation type="unfinished">contract execution error</translation>
+    </message>
+    <message>
+        <location filename="exchange/BuyOrderWidget.cpp" line="68"/>
         <source>%1/%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="69"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="70"/>
         <source>Max: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="93"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="94"/>
         <source>Transaction of buy-order has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/BuyOrderWidget.cpp" line="100"/>
+        <location filename="exchange/BuyOrderWidget.cpp" line="101"/>
         <source>Transfer to exchange contract failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2316,7 +2321,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">PLEDGE</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="173"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="178"/>
         <source>我的投票</source>
         <translation type="unfinished">MY VOTE</translation>
     </message>
@@ -2325,12 +2330,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="obsolete">WEIGHT</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="245"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="250"/>
         <source>Citizen提案</source>
         <translation type="unfinished">Citizen Proposals</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="261"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="266"/>
         <source>更换senator</source>
         <translation type="unfinished">CHANGE SENATOR</translation>
     </message>

@@ -42,6 +42,7 @@ BuyOrderWidget::~BuyOrderWidget()
 void BuyOrderWidget::init()
 {
     ui->okBtn->setEnabled(false);
+    ui->tipLabel->hide();
 }
 
 void BuyOrderWidget::setAccount(QString _accountName)
@@ -113,6 +114,7 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
         if(result.startsWith("\"result\":"))
         {
             ui->okBtn->setEnabled(true);
+            ui->tipLabel->hide();
             HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
             stepCount = totalFee.step;
             unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * HXChain::getInstance()->contractFee / 100.0);
@@ -124,6 +126,7 @@ void BuyOrderWidget::jsonDataUpdated(QString id)
         else
         {
             ui->okBtn->setEnabled(false);
+            ui->tipLabel->show();
         }
 
         return;
@@ -144,6 +147,7 @@ void BuyOrderWidget::estimateContractFee()
     if(accountName.isEmpty() || ui->contractAddressLabel->text().isEmpty() || ui->amountLineEdit->text().isEmpty())
     {
         ui->okBtn->setEnabled(false);
+        ui->tipLabel->hide();
         return;
     }
 
@@ -161,11 +165,7 @@ void BuyOrderWidget::estimateContractFee()
                                                                            << QString("%1,%2").arg( getRealAssetSymbol( buySymbol)).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
                                                                            ));
 
-    qDebug() << toJsonFormat( "transfer_to_contract_testing",
-                              QJsonArray() << accountName << ui->contractAddressLabel->text()
-                              << ui->amountLineEdit->text() << getRealAssetSymbol( sellSymbol)
-                              << QString("%1,%2").arg( getRealAssetSymbol( buySymbol)).arg(decimalToIntegerStr(QString::number(amount,'g',8),buyAssetInfo.precision))
-                              );
+
 }
 
 void BuyOrderWidget::on_okBtn_clicked()

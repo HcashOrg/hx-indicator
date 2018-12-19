@@ -229,6 +229,25 @@ font: 11px &quot;微软雅黑&quot;;</string>
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
+   <widget class="QLabel" name="tipLabel">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>170</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>合约执行错误</string>
+    </property>
+   </widget>
   </widget>
   <zorder>widget</zorder>
   <zorder>label_5</zorder>
