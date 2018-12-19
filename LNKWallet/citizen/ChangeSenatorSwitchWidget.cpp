@@ -79,6 +79,7 @@ void ChangeSenatorSwitchWidget::RemoveProposalSlots()
 
 void ChangeSenatorSwitchWidget::httpReplied(QByteArray _data, int _status)
 {
+//    qDebug()<<"opop"<<_data;
     ui->senator1->clear();
     ui->senator2->clear();
     ui->senator3->clear();
@@ -89,6 +90,7 @@ void ChangeSenatorSwitchWidget::httpReplied(QByteArray _data, int _status)
         QMapIterator<QString, GuardInfo> i(allSenator);
         while (i.hasNext()) {
             i.next();
+//            qDebug()<<"qqq"<<i.value().accountId<<i.value().senatorType<<i.value().isFormal;
             if(i.value().isFormal)
             {
                 if(val.toString() == i.value().accountId && "EXTERNAL" == i.value().senatorType)
@@ -104,6 +106,10 @@ void ChangeSenatorSwitchWidget::httpReplied(QByteArray _data, int _status)
     if(0 == ui->senator1->count()  || 0 == ui->candidate1->count())
     {
         ui->addBtn->setVisible(false);
+    }
+    else
+    {
+        ui->addBtn->setVisible(true);
     }
 
 }
