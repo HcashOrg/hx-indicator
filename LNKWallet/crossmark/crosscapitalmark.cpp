@@ -16,7 +16,7 @@
 struct CrossMarkBaseData
 {
     QString accountName;
-    std::map<QString,std::map<QString,double>> transaction;
+    std::map<QString,std::map<QString,double>> transaction;//symbol,trxid,number
 };
 
 class CrossCapitalMark::DataPrivate
@@ -42,7 +42,10 @@ public:
 
     std::mutex httpMutex;
 
-    HttpManager httpManager;
+    HttpManager httpManager;//中间件查询交易
+
+    std::map<QString,int> currentBlockHeight;//symbol + blockheight主要针对erc eth => ETH
+    HttpManager ethHeightHttp;
 };
 
 CrossCapitalMark::CrossCapitalMark(QObject *parent)
@@ -53,7 +56,7 @@ CrossCapitalMark::CrossCapitalMark(QObject *parent)
     connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &CrossCapitalMark::jsonDataUpdated);
 
     connect(&_p->httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
-
+    connect(&_p->ethHeightHttp,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(ethHttpReplied(QByteArray,int)));
 }
 
 CrossCapitalMark::~CrossCapitalMark()
@@ -156,7 +159,7 @@ void CrossCapitalMark::InsertTransaction(const QString &accountName, const QStri
     std::lock_guard<std::mutex> mu(_p->dataMutex);
     for(auto it = _p->crossData.begin();it != _p->crossData.end();++it)
     {
-        if((*it)->accountName == accountName)
+        if((*it)->accountName == accountName && !tranID.isEmpty())
         {
             (*it)->transaction[chainType].insert(std::make_pair(tranID,number));
             return;
@@ -246,14 +249,33 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
     std::lock_guard<std::mutex> mu(_p->httpMutex);
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
-    QString hash = object.value("data").toObject().value("hash").toString();
-    unsigned long long confirm = object.value("data").toObject().value("confirmations").toInt();
-    if(confirm > 3)
+
+    QString hash = "";
+    int confirm = 0;
+
+    if(object.value("chainId").toString()=="hc")
+    {
+        hash = object.value("data").toObject().value("txid").toString();
+        confirm = object.value("data").toObject().value("vin").toArray().at(0).toObject().value("blockheight").toInt();
+    }
+    else if(object.value("chainId").toString().contains("erc")||object.value("chainId").toString().contains("eth"))
+    {
+        hash = object.value("data").toObject().value("source_trx").toObject().value("hash").toString();
+        confirm = _p->currentBlockHeight["ETH"] -  object.value("data").toObject().value("source_trx").toObject().value("blockNumber").toString().toInt(nullptr,16)>=0?100:0;
+    }
+    else
+    {
+        hash = object.value("data").toObject().value("hash").toString();
+        confirm = object.value("data").toObject().value("confirmations").toInt();
+    }
+
+    qDebug()<<"kkkkkkkkkkkk"<<hash<<confirm;
+    if(confirm >= 8)
     {
         RemoveTransaction(hash);
     }
 
-    if(!object.value("error_message").toString().isEmpty())
+    if(!object.value("error_message").toString().isEmpty() || hash.isEmpty())
     {
         if(!hash.isEmpty())
         {
@@ -264,6 +286,20 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
     qDebug()<<hash<<object;
 }
 
+void CrossCapitalMark::ethHttpReplied(QByteArray _data, int _status)
+{
+    int id = QJsonDocument::fromJson(_data).object().value("id").toInt();
+    if(!QJsonDocument::fromJson(_data).object().value("result").toObject().value("error_message").toString().isEmpty())
+    {
+        return;
+    }
+    int height  = QJsonDocument::fromJson(_data).object().value("result").toInt();
+    if(5748 == id)
+    {
+        _p->currentBlockHeight["ETH"] = height;
+    }
+}
+
 QString CrossCapitalMark::ParseTransactionID(const QString &jsonString)
 {
     QJsonParseError json_error;
@@ -271,7 +307,8 @@ QString CrossCapitalMark::ParseTransactionID(const QString &jsonString)
     if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return "";
     QJsonObject jsonObject = parse_doucment.object();
     qDebug()<<jsonObject;
-    return jsonObject.value("result").toObject().value("hash").toString();
+    QString trxid = jsonObject.value("result").toObject().value("hash").toString();
+    return trxid.isEmpty()?jsonObject.value("result").toObject().value("trxid").toString():trxid;
 }
 
 void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id)
@@ -285,7 +322,30 @@ void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id
     paramObject.insert("trxid",id);
     object.insert("params",paramObject);
     qDebug()<<"query transid"<<id;
+
     _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+}
+
+void CrossCapitalMark::QueryETHorERCHeight(const QString &symbol)
+{
+    int id = 0;
+    if(symbol.contains("erc",Qt::CaseInsensitive)||symbol.contains("eth",Qt::CaseInsensitive))
+    {
+        id = 5748;
+    }
+    else
+    {
+        id =45;
+    }
+    QJsonObject object;
+    object.insert("jsonrpc","2.0");
+    object.insert("id",id);
+    object.insert("method","Zchain.Query.getBlockHeight");
+    QJsonObject paramObject;
+    paramObject.insert("chainId",symbol);
+    object.insert("params",paramObject);
+    _p->ethHeightHttp.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+
 }
 
 void CrossCapitalMark::ParsePostID(const QString &postID, QString &name, QString &symbol, double &number)
@@ -318,6 +378,10 @@ double CrossCapitalMark::CalTransaction(const QString &accountName, const QStrin
 
 void CrossCapitalMark::checkUpData(const QString &accountName, const QString &chainType)
 {
+    if(chainType.contains("erc",Qt::CaseInsensitive) || chainType.contains("eth",Qt::CaseInsensitive))
+    {
+        QueryETHorERCHeight(chainType);
+    }
     for(auto it = _p->crossData.begin();it != _p->crossData.end();++it)
     {
         if(accountName != (*it)->accountName) continue;
@@ -331,7 +395,7 @@ void CrossCapitalMark::checkUpData(const QString &accountName, const QString &ch
             }
         }
     }
-    QTimer::singleShot(200,[this,chainType](){this->QueryTransaction(chainType,"finish");});
+    QTimer::singleShot(2000,[this,chainType](){this->QueryTransaction(chainType,"finish");});
 
 }
 

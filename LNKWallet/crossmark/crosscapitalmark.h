@@ -27,10 +27,12 @@ private:
 private slots:
     void jsonDataUpdated(const QString &id);
     void httpReplied(QByteArray _data, int _status);
+    void ethHttpReplied(QByteArray _data, int _status);
 
 private:
     QString ParseTransactionID(const QString &jsonStr);
     void QueryTransaction(const QString &symbol,const QString &id);
+    void QueryETHorERCHeight(const QString &symbol);
 
     void ParsePostID(const QString &postID,QString &name,QString &symbol,double &number);
 private:
