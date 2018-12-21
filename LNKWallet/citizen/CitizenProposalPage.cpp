@@ -365,6 +365,14 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
 
 void CitizenProposalPage::on_changeSenatorBtn_clicked()
 {
+    if(HXChain::getInstance()->walletInfo.blockHeight < 875000 )
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText(tr("Official Senator selection will begin on 8th January,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated."));
+        commonDialog.pop();
+        return;
+    }
+
     ChangeSenatorDialog dia;
     dia.exec();
 }
@@ -543,106 +551,6 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
     pageWidget->setVisible(0 != ui->proposalTableWidget->rowCount());
     tableWidgetSetItemZebraColor(ui->proposalTableWidget);
 
-
-}
-
-void CitizenProposalPage::paintEvent(QPaintEvent *)
-{
-    QPainter painter(this);
-    painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
-    painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
-
-    painter.drawRect(rect());
-}
-
-void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column)
-{
-    if(column == 2)
-    {
-        ProposalDetailDialog proposalDetailDialog;
-        proposalDetailDialog.setProposal(ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString());
-        proposalDetailDialog.pop();
-        return;
-    }
-
-    if(column == 6)
-    {
-        CommonDialog commonDialog(CommonDialog::YesOrNo);
-        commonDialog.setText(tr("Sure to approve this proposal?"));
-        if(commonDialog.pop())
-        {
-            QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
-            QJsonArray array;
-            array << address;
-            QJsonObject object;
-            object.insert("key_approvals_to_add", array);
-
-            HXChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_referendum",
-                                    QJsonArray() << ui->accountComboBox->currentText()
-                                    << ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString()
-                                    << object << true));
-        }
-        return;
-    }
-
-    if(column == 7)
-    {
-        CommonDialog commonDialog(CommonDialog::YesOrNo);
-        commonDialog.setText(tr("Sure to disapprove this proposal?"));
-        if(commonDialog.pop())
-        {
-            QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
-            QJsonArray array;
-            array << address;
-            QJsonObject object;
-            object.insert("key_approvals_to_remove", array);
-
-            HXChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_referendum",
-                                    QJsonArray() << ui->accountComboBox->currentText()
-                                    << ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString()
-                                    << object << true));
-        }
-        return;
-    }
-
-    if(8 == column)
-    {
-        AddPledgeDialog dia(ui->accountComboBox->currentText(),ui->proposalTableWidget->item(row,column)->data(Qt::UserRole).value<ProposalInfo>());
-        dia.exec();
-    }
-}
-
-void CitizenProposalPage::on_changeSenatorBtn_clicked()
-{
-    if(HXChain::getInstance()->walletInfo.blockHeight < 875000 )
-    {
-        CommonDialog commonDialog(CommonDialog::OkOnly);
-        commonDialog.setText(tr("Official Senator selection will begin on 8th January,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated."));
-        commonDialog.pop();
-        return;
-    }
-
-    ChangeSenatorDialog dia;
-    dia.exec();
-}
-
-void CitizenProposalPage::pageChangeSlot(unsigned int page)
-{
-    for(int i = 0;i < ui->proposalTableWidget->rowCount();++i)
-    {
-        if(i < page*ROWNUMBER)
-        {
-            ui->proposalTableWidget->setRowHidden(i,true);
-        }
-        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
-        {
-            ui->proposalTableWidget->setRowHidden(i,false);
-        }
-        else
-        {
-            ui->proposalTableWidget->setRowHidden(i,true);
-        }
-    }
 }
 
 
