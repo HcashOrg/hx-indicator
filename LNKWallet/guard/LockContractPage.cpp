@@ -35,7 +35,6 @@ LockContractPage::LockContractPage(QWidget *parent) :
     ui->lockFundTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->lockBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
-    ui->withdrawBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     init();
 }

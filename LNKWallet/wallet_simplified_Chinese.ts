@@ -2231,7 +2231,7 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="165"/>
-        <source>质押数量</source>
+        <source>竞价</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5618,37 +5618,32 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="72"/>
-        <source>提取</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="guard/LockContractPage.ui" line="120"/>
+        <location filename="guard/LockContractPage.ui" line="90"/>
         <source>锁仓合约</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="282"/>
+        <location filename="guard/LockContractPage.ui" line="252"/>
         <source>币种</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="295"/>
+        <location filename="guard/LockContractPage.ui" line="265"/>
         <source>已锁金额</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="308"/>
+        <location filename="guard/LockContractPage.ui" line="278"/>
         <source>解锁时间</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="178"/>
+        <location filename="guard/LockContractPage.ui" line="148"/>
         <source>锁仓合约地址</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="211"/>
+        <location filename="guard/LockContractPage.ui" line="181"/>
         <source>锁仓</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5657,12 +5652,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">钱包内没有senator账户</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.cpp" line="68"/>
+        <location filename="guard/LockContractPage.cpp" line="67"/>
         <source>There are no accounts in the wallet.</source>
         <translation type="unfinished">钱包内还没有账户</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.cpp" line="118"/>
+        <location filename="guard/LockContractPage.cpp" line="117"/>
         <source>withdraw</source>
         <translation type="unfinished">提取</translation>
     </message>

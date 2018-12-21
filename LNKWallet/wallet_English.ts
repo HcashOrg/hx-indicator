@@ -2317,8 +2317,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="165"/>
+        <source>竞价</source>
+        <translation type="unfinished">BIDDING</translation>
+    </message>
+    <message>
         <source>质押数量</source>
-        <translation type="unfinished">PLEDGE</translation>
+        <translation type="obsolete">PLEDGE</translation>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="178"/>
@@ -5778,47 +5782,46 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">CURRENT SENATOR</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="72"/>
         <source>提取</source>
-        <translation type="unfinished">WITHDRAW</translation>
+        <translation type="obsolete">WITHDRAW</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="120"/>
+        <location filename="guard/LockContractPage.ui" line="90"/>
         <source>锁仓合约</source>
         <translation type="unfinished">Lock Position</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="282"/>
+        <location filename="guard/LockContractPage.ui" line="252"/>
         <source>币种</source>
         <translation type="unfinished">CURRENCY</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="295"/>
+        <location filename="guard/LockContractPage.ui" line="265"/>
         <source>已锁金额</source>
         <translation type="unfinished">LOCKED AMOUNT</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="308"/>
+        <location filename="guard/LockContractPage.ui" line="278"/>
         <source>解锁时间</source>
         <translation type="unfinished">UNLOCK TIME</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="178"/>
+        <location filename="guard/LockContractPage.ui" line="148"/>
         <source>锁仓合约地址</source>
         <translation type="unfinished">CONTRACT ADDRESS</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="211"/>
+        <location filename="guard/LockContractPage.ui" line="181"/>
         <source>锁仓</source>
         <translation type="unfinished">LOCK</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.cpp" line="68"/>
+        <location filename="guard/LockContractPage.cpp" line="67"/>
         <source>There are no accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.cpp" line="118"/>
+        <location filename="guard/LockContractPage.cpp" line="117"/>
         <source>withdraw</source>
         <translation type="unfinished"></translation>
     </message>

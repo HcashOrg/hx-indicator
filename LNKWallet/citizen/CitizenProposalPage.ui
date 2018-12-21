@@ -162,7 +162,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </column>
    <column>
     <property name="text">
-     <string>质押数量</string>
+     <string>竞价</string>
     </property>
     <property name="font">
      <font>
