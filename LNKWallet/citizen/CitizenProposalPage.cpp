@@ -419,7 +419,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         }
         if(!isAllNewInWhiteList)
         {
-//            continue;
+            continue;
         }
 
         ui->proposalTableWidget->insertRow(ui->proposalTableWidget->rowCount());
