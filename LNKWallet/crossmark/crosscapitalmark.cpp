@@ -261,6 +261,7 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
     {
         hash = object.value("data").toObject().value("txid").toString();
         confirm = object.value("data").toObject().value("vin").toArray().at(0).toObject().value("blockheight").toInt();
+        //_p->currentBlockHeight["HC"] -  object.value("data").toObject().value("vin").toArray().at(0).toObject().value("blockheight").toInt()>=0?100:0;
     }
     else if(object.value("chainId").toString().contains("erc")||object.value("chainId").toString().contains("eth"))
     {
@@ -308,6 +309,10 @@ void CrossCapitalMark::ethHttpReplied(QByteArray _data, int _status)
     {
         _p->currentBlockHeight["ETH"] = height;
     }
+    else if(6748 == id)
+    {
+        _p->currentBlockHeight["HC"] = height;
+    }
 }
 
 QString CrossCapitalMark::ParseTransactionID(const QString &jsonString)
@@ -342,12 +347,16 @@ void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id
     _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
-void CrossCapitalMark::QueryETHorERCHeight(const QString &symbol)
+void CrossCapitalMark::QueryETHorHCHeight(const QString &symbol)
 {
     int id = 0;
     if(symbol.contains("erc",Qt::CaseInsensitive)||symbol.contains("eth",Qt::CaseInsensitive))
     {
         id = 5748;
+    }
+    else if(symbol.contains("hc",Qt::CaseInsensitive))
+    {
+        id = 6748;
     }
     else
     {
@@ -394,9 +403,9 @@ double CrossCapitalMark::CalTransaction(const QString &accountName, const QStrin
 
 void CrossCapitalMark::checkUpData(const QString &accountName, const QString &chainType)
 {
-    if(chainType.contains("erc",Qt::CaseInsensitive) || chainType.contains("eth",Qt::CaseInsensitive))
+    if(chainType.contains("erc",Qt::CaseInsensitive) || chainType.contains("eth",Qt::CaseInsensitive) || chainType.contains("hc",Qt::CaseInsensitive))
     {
-        QueryETHorERCHeight(chainType);
+        QueryETHorHCHeight(chainType);
     }
     for(auto it = _p->crossData.begin();it != _p->crossData.end();++it)
     {
