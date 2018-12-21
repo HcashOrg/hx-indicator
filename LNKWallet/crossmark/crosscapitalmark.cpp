@@ -1,5 +1,6 @@
 #include "crosscapitalmark.h"
 
+#include <atomic>
 #include <memory>
 #include <map>
 #include <mutex>
@@ -46,6 +47,8 @@ public:
 
     std::map<QString,int> currentBlockHeight;//symbol + blockheight主要针对erc eth => ETH
     HttpManager ethHeightHttp;
+
+    std::map<int,QString> queryIdTrxidMap;
 };
 
 CrossCapitalMark::CrossCapitalMark(QObject *parent)
@@ -249,6 +252,7 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
     std::lock_guard<std::mutex> mu(_p->httpMutex);
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
+    int queryID = QJsonDocument::fromJson(_data).object().value("id").toInt();
 
     QString hash = "";
     int confirm = 0;
@@ -269,7 +273,13 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
         confirm = object.value("data").toObject().value("confirmations").toInt();
     }
 
+    if(!_p->queryIdTrxidMap[queryID].isEmpty() && hash.isEmpty())
+    {
+        hash = _p->queryIdTrxidMap[queryID];
+        _p->queryIdTrxidMap.erase(_p->queryIdTrxidMap.find(queryID));
+    }
     qDebug()<<"kkkkkkkkkkkk"<<hash<<confirm;
+    qDebug()<<"jjjj"<<object;
     if(confirm >= 8)
     {
         RemoveTransaction(hash);
@@ -313,16 +323,22 @@ QString CrossCapitalMark::ParseTransactionID(const QString &jsonString)
 
 void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id)
 {
+    static std::atomic_int queryId = 0;
+    int queid = queryId.fetch_add(1);
+    if(id != "finish" && !id.isEmpty())
+    {
+        _p->queryIdTrxidMap[queid] = id;
+    }
     QJsonObject object;
     object.insert("jsonrpc","2.0");
-    object.insert("id",45);
+    object.insert("id",queid);
     object.insert("method","Zchain.Trans.queryTrans");
     QJsonObject paramObject;
     paramObject.insert("chainId",symbol);
     paramObject.insert("trxid",id);
     object.insert("params",paramObject);
     qDebug()<<"query transid"<<id;
-
+    qDebug()<<"bbbbb"<<object;
     _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
