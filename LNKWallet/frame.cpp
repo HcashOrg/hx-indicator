@@ -891,6 +891,9 @@ void Frame::autoRefresh()
     case 22:
         citizenProposalPage->refresh();
         break;
+    case 23:
+        lockContractPage->refresh();
+        break;
     default:
         break;
     }

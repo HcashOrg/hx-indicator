@@ -35,10 +35,10 @@
 #define MULTISIG_ADDRESS_PREFIX "HXM"
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.2.1"           // 版本号
+#define WALLET_VERSION "1.2.2"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
-#define LOCKFUND_CONTRACT_ADDRESS  "HXCTaX5N4t7X8yJ5rcuio1bccm6FboLjV2pZ"
+#define LOCKFUND_CONTRACT_ADDRESS  "HXCasJhJ43RC71toUNzs9hDb1pwb3KQ4Gq2f"
 
 #ifdef TEST_WALLET
 #define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5006/api"

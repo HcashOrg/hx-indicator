@@ -339,6 +339,14 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
 
 void CitizenProposalPage::on_changeSenatorBtn_clicked()
 {
+    if(HXChain::getInstance()->walletInfo.blockHeight < 875000 )
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText(tr("Official Senator selection will begin on 8th January,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated."));
+        commonDialog.pop();
+        return;
+    }
+
     ChangeSenatorDialog dia;
     dia.exec();
 }

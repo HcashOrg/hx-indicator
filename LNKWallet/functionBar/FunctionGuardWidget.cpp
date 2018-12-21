@@ -40,6 +40,8 @@ void FunctionGuardWidget::InitWidget()
     ui->withdrawConfirmBtn->setCheckable(true);
     ui->feedPriceBtn->setCheckable(true);
     ui->coldHotTransferBtn->setCheckable(true);
+
+    ui->lockContractBtn->hide();
 }
 
 void FunctionGuardWidget::InitStyle()
