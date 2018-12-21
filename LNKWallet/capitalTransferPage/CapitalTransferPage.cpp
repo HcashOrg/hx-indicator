@@ -513,7 +513,7 @@ void CapitalTransferPage::InitWidget()
                                      toJsonFormat( "get_current_multi_address", QJsonArray()
                                      << _p->symbol));
     //查询缓存提现,HC目前解析交易有问题（decoderawtransaction），不进行查询
-//    if("HC" != _p->symbol)
+    if("HC" != _p->symbol)
     {
         HXChain::getInstance()->mainFrame->crossMark->checkUpData(_p->account_name,_p->symbol);
     }
