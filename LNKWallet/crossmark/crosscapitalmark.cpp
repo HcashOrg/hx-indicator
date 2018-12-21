@@ -1,5 +1,6 @@
 #include "crosscapitalmark.h"
 
+#include <atomic>
 #include <memory>
 #include <map>
 #include <mutex>
@@ -278,6 +279,7 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
         _p->queryIdTrxidMap.erase(_p->queryIdTrxidMap.find(queryID));
     }
     qDebug()<<"kkkkkkkkkkkk"<<hash<<confirm;
+    qDebug()<<"jjjj"<<object;
     if(confirm >= 8)
     {
         RemoveTransaction(hash);
@@ -321,22 +323,22 @@ QString CrossCapitalMark::ParseTransactionID(const QString &jsonString)
 
 void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id)
 {
-    static int queryId = 0;
-    ++queryId;
+    static std::atomic_int queryId = 0;
+    int queid = queryId.fetch_add(1);
     if(id != "finish" && !id.isEmpty())
     {
-        _p->queryIdTrxidMap[queryId] = id;
+        _p->queryIdTrxidMap[queid] = id;
     }
     QJsonObject object;
     object.insert("jsonrpc","2.0");
-    object.insert("id",queryId);
+    object.insert("id",queid);
     object.insert("method","Zchain.Trans.queryTrans");
     QJsonObject paramObject;
     paramObject.insert("chainId",symbol);
     paramObject.insert("trxid",id);
     object.insert("params",paramObject);
     qDebug()<<"query transid"<<id;
-
+    qDebug()<<"bbbbb"<<object;
     _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
