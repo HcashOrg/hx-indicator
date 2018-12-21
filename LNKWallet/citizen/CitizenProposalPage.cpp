@@ -528,7 +528,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
                 if(address != proposalAddress)
                 {
                     qDebug()<<"3";
-                    ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("approve")));
+                    ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("addPledge")));
                     ToolButtonWidget *toolButton = new ToolButtonWidget();
                     toolButton->setText(ui->proposalTableWidget->item(i,6)->text());
                     ui->proposalTableWidget->setCellWidget(i,6,toolButton);
