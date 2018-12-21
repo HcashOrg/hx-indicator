@@ -191,16 +191,6 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      <string/>
     </property>
    </column>
-   <column>
-    <property name="text">
-     <string/>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string/>
-    </property>
-   </column>
   </widget>
   <widget class="QComboBox" name="accountComboBox">
    <property name="geometry">
