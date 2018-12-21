@@ -18,7 +18,8 @@ Q_DECLARE_METATYPE(ProposalInfo)
 
 CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::CitizenProposalPage)
+    ui(new Ui::CitizenProposalPage),
+    isCurrentTimeBigThanNextVoteTime(false)
 {
     ui->setupUi(this);
 
@@ -38,12 +39,12 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->proposalTableWidget->horizontalHeader()->setVisible(true);
     ui->proposalTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->proposalTableWidget->setColumnWidth(0,90);
-    ui->proposalTableWidget->setColumnWidth(1,90);
-    ui->proposalTableWidget->setColumnWidth(2,100);
-    ui->proposalTableWidget->setColumnWidth(3,100);
-    ui->proposalTableWidget->setColumnWidth(4,80);
-    ui->proposalTableWidget->setColumnWidth(5,60);
+    ui->proposalTableWidget->setColumnWidth(0,100);
+    ui->proposalTableWidget->setColumnWidth(1,100);
+    ui->proposalTableWidget->setColumnWidth(2,110);
+    ui->proposalTableWidget->setColumnWidth(3,110);
+    ui->proposalTableWidget->setColumnWidth(4,90);
+    ui->proposalTableWidget->setColumnWidth(5,90);
     ui->proposalTableWidget->setColumnWidth(6,60);
     ui->proposalTableWidget->setColumnWidth(7,60);
     ui->proposalTableWidget->setColumnWidth(8,60);
@@ -131,6 +132,26 @@ void CitizenProposalPage::jsonDataUpdated(QString id)
         }
         return;
     }
+    else if("query_object_state"==id)
+    {
+        QString result = HXChain::getInstance()->jsonDataValue( id);
+        if( result.isEmpty() )  return;
+
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonObject object = jsonObject.value("result").toArray().at(0).toObject();
+        QString nextTime = object.value("next_vote_time").toString();
+        isCurrentTimeBigThanNextVoteTime = QDateTime::fromString(HXChain::getInstance()->currentBlockTime,"yyyy-MM-ddThh:mm:ss") >
+                                           QDateTime::fromString(nextTime,"yyyy-MM-ddThh:mm:ss");
+
+        qDebug()<<"aaaa"<<object;
+        qDebug()<<"votetimessss"<<QDateTime::fromString(HXChain::getInstance()->currentBlockTime,"yyyy-MM-ddThh:mm:ss")<<QDateTime::fromString(nextTime,"yyyy-MM-ddThh:mm:ss")<<isCurrentTimeBigThanNextVoteTime;
+
+    }
 
 }
 
@@ -148,6 +169,9 @@ void CitizenProposalPage::on_accountComboBox_currentIndexChanged(const QString &
 
 void CitizenProposalPage::showProposals()
 {
+    //查询当前vote状态
+    HXChain::getInstance()->postRPC("query_object_state",toJsonFormat("get_object",QJsonArray()<<"2.1.0"));
+    //查询白名单
     queryWhiteList();
 //    QStringList keys = HXChain::getInstance()->citizenProposalInfoMap.keys();
 
@@ -395,7 +419,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         }
         if(!isAllNewInWhiteList)
         {
-            continue;
+//            continue;
         }
 
         ui->proposalTableWidget->insertRow(ui->proposalTableWidget->rowCount());
@@ -482,21 +506,30 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
             ui->proposalTableWidget->item(i,8)->setData(Qt::UserRole,QVariant::fromValue<ProposalInfo>(info));
             connect(tooButton3,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,8));
 
-            if(info.approvedKeys.contains(address))
+            if(!isCurrentTimeBigThanNextVoteTime)
             {
-                toolButton->setEnabled(false);
-                ui->proposalTableWidget->hideColumn(6);
-            }
-            else if(info.disapprovedKeys.contains(address))
-            {
-                ui->proposalTableWidget->hideColumn(7);
-                toolButton2->setEnabled(false);
+                if(info.approvedKeys.contains(address) )
+                {
+                    ui->proposalTableWidget->hideColumn(6);
+                    ui->proposalTableWidget->hideColumn(8);
+                }
+                else if(info.disapprovedKeys.contains(address))
+                {
+                    ui->proposalTableWidget->hideColumn(7);
+                    ui->proposalTableWidget->hideColumn(8);
+                }
+                else
+                {
+                    ui->proposalTableWidget->hideColumn(7);
+                    ui->proposalTableWidget->hideColumn(8);
+                }
             }
             else
             {
+                ui->proposalTableWidget->hideColumn(6);
                 ui->proposalTableWidget->hideColumn(7);
-                toolButton2->setEnabled(false);
             }
+
 
         }
     }

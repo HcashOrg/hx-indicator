@@ -65,6 +65,7 @@ void BottomBar::jsonDataUpdated(QString id)
         HXChain::getInstance()->walletInfo.chainId = object.take("chain_id").toString();
         HXChain::getInstance()->walletInfo.participation = object.take("participation").toString();
 
+        HXChain::getInstance()->postRPC("get_current_block_time",toJsonFormat("get_block",QJsonArray()<<HXChain::getInstance()->walletInfo.blockHeight));
 //        HXChain::getInstance()->walletInfo.activeMiners.clear();
 //        QJsonArray array = object.take("active_miners").toArray();
 //        foreach (QJsonValue v, array)
@@ -75,6 +76,21 @@ void BottomBar::jsonDataUpdated(QString id)
         ui->syncLabel->setText(QString::number(HXChain::getInstance()->walletInfo.blockHeight));
 
         return;
+    }
+    else if("get_current_block_time" == id)
+    {
+        QString result = HXChain::getInstance()->jsonDataValue( id);
+        if( result.isEmpty() )  return;
+
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonObject object = jsonObject.take("result").toObject();
+
+        HXChain::getInstance()->currentBlockTime = object.value("timestamp").toString();
     }
     else if("id-network_get_connected_peers" == id)
     {

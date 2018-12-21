@@ -44,6 +44,7 @@ private:
     QString calProposalWeight(const ProposalInfo &info) const;
     void queryWhiteList();
     HttpManager httpManager;
+    bool isCurrentTimeBigThanNextVoteTime;
 };
 
 #endif // CITIZENPROPOSALPAGE_H

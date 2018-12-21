@@ -28,7 +28,7 @@
 #include "extra/transactiontype.h"
 #include "extra/WitnessConfig.h"
 #include "extra/LogToFile.h"
-//#define TEST_WALLET
+#define TEST_WALLET
 #define ASSET_NAME "HX"
 #define ACCOUNT_ADDRESS_PREFIX  "HXN"
 #define CONTRACT_ADDRESS_PREFIX "HXC"
@@ -542,6 +542,8 @@ public:
     void fetchProposals();
     QString citizenAccountIdToName(QString citizenAccountId);
 
+    //当前块时间
+    QString currentBlockTime;//2018-11-16T12:14:15
 
 signals:
     void jsonDataUpdated(QString);
