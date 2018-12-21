@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "wallet.h"
+#include "extra/HttpManager.h"
 class PageScrollWidget;
 namespace Ui {
 class CitizenProposalPage;
@@ -30,6 +31,7 @@ private slots:
     void on_changeSenatorBtn_clicked();
 
     void pageChangeSlot(unsigned int page);
+    void httpReplied(QByteArray _data, int _status);
 
 private:
     Ui::CitizenProposalPage *ui;
@@ -40,6 +42,9 @@ private:
     void paintEvent(QPaintEvent*);
     PageScrollWidget *pageWidget;
     QString calProposalWeight(const ProposalInfo &info) const;
+    void queryWhiteList();
+    HttpManager httpManager;
+    bool isCurrentTimeBigThanNextVoteTime;
 };
 
 #endif // CITIZENPROPOSALPAGE_H

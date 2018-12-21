@@ -139,7 +139,7 @@ void ChangeSenatorSwitchWidget::InitData(bool showPermanent)
         i.next();
         if(i.value().isFormal)
         {
-            if((showPermanent && ("PERMANENT" == i.value().senatorType)) /*|| (!showPermanent && ("EXTERNAL" == i.value().senatorType))*/)
+            if((showPermanent && ("PERMANENT" == i.value().senatorType)) || (!showPermanent && ("EXTERNAL" == i.value().senatorType)))
             {
                 ui->senator1->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
                 ui->senator2->addItem(i.key(),QVariant::fromValue<GuardInfo>(i.value()));
@@ -157,11 +157,11 @@ void ChangeSenatorSwitchWidget::InitData(bool showPermanent)
     {
         ui->addBtn->setVisible(false);
     }
-    //citizen查询白名单
-    if(!showPermanent)
-    {
-        queryWhiteList();
-    }
+//    //citizen查询白名单
+//    if(!showPermanent)
+//    {
+//        queryWhiteList();
+//    }
 }
 
 void ChangeSenatorSwitchWidget::SetItemVisible(int n, bool vi)

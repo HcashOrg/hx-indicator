@@ -542,6 +542,8 @@ public:
     void fetchProposals();
     QString citizenAccountIdToName(QString citizenAccountId);
 
+    //当前块时间
+    QString currentBlockTime;//2018-11-16T12:14:15
 
 signals:
     void jsonDataUpdated(QString);
