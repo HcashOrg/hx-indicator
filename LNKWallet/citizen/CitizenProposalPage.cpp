@@ -45,9 +45,9 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->proposalTableWidget->setColumnWidth(3,100);
     ui->proposalTableWidget->setColumnWidth(4,90);
     ui->proposalTableWidget->setColumnWidth(5,90);
-    ui->proposalTableWidget->setColumnWidth(6,70);
-    ui->proposalTableWidget->setColumnWidth(7,70);
-    ui->proposalTableWidget->setColumnWidth(8,70);
+    ui->proposalTableWidget->setColumnWidth(6,60);
+//    ui->proposalTableWidget->setColumnWidth(7,70);
+//    ui->proposalTableWidget->setColumnWidth(8,70);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->changeSenatorBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
@@ -358,7 +358,7 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
 
     if(8 == column)
     {
-        AddPledgeDialog dia(ui->accountComboBox->currentText(),ui->proposalTableWidget->item(row,column)->data(Qt::UserRole).value<ProposalInfo>());
+        AddPledgeDialog dia(ui->accountComboBox->currentText(),ui->proposalTableWidget->item(row,6)->data(Qt::UserRole).value<ProposalInfo>());
         dia.exec();
     }
 }
@@ -485,52 +485,65 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
 //        ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(calProposalWeight(info)));
         if(!address.isEmpty())          // 如果有senator账户
         {
-            ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("approve")));
-            ui->proposalTableWidget->setItem(i,7,new QTableWidgetItem(tr("disapprove")));
-            ui->proposalTableWidget->setItem(i,8,new QTableWidgetItem(tr("addPledge")));
-
-
-            ToolButtonWidget *toolButton = new ToolButtonWidget();
-            toolButton->setText(ui->proposalTableWidget->item(i,6)->text());
-            ui->proposalTableWidget->setCellWidget(i,6,toolButton);
-            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,6));
-
-            ToolButtonWidget *toolButton2 = new ToolButtonWidget();
-            toolButton2->setText(ui->proposalTableWidget->item(i,7)->text());
-            ui->proposalTableWidget->setCellWidget(i,7,toolButton2);
-            connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,7));
-
-            ToolButtonWidget *tooButton3 = new ToolButtonWidget();
-            tooButton3->setText(ui->proposalTableWidget->item(i,8)->text());
-            ui->proposalTableWidget->setCellWidget(i,8,tooButton3);
-            ui->proposalTableWidget->item(i,8)->setData(Qt::UserRole,QVariant::fromValue<ProposalInfo>(info));
-            connect(tooButton3,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,8));
-
             if(isCurrentTimeBigThanNextVoteTime)
             {
-                if(info.approvedKeys.contains(address) )
+                if(info.disapprovedKeys.contains(address) )
                 {
-                    ui->proposalTableWidget->hideColumn(6);
-                    ui->proposalTableWidget->hideColumn(8);
-                }
-                else if(info.disapprovedKeys.contains(address))
-                {
-                    ui->proposalTableWidget->hideColumn(7);
-                    ui->proposalTableWidget->hideColumn(8);
+                    qDebug()<<"1";
+                    ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("approve")));
+                    ToolButtonWidget *toolButton = new ToolButtonWidget();
+                    toolButton->setText(ui->proposalTableWidget->item(i,6)->text());
+                    ui->proposalTableWidget->setCellWidget(i,6,toolButton);
+                    ui->proposalTableWidget->item(i,6)->setData(Qt::UserRole,QVariant::fromValue<ProposalInfo>(info));
+                    connect(toolButton,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,6));
                 }
                 else
                 {
-                    ui->proposalTableWidget->hideColumn(7);
-                    ui->proposalTableWidget->hideColumn(8);
+                    qDebug()<<"2";
+                    ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("disapprove")));
+        //            ui->proposalTableWidget->setItem(i,7,new QTableWidgetItem(tr("disapprove")));
+        //            ui->proposalTableWidget->setItem(i,8,new QTableWidgetItem(tr("addPledge")));
+
+
+                    ToolButtonWidget *toolButton = new ToolButtonWidget();
+                    toolButton->setText(ui->proposalTableWidget->item(i,6)->text());
+                    ui->proposalTableWidget->setCellWidget(i,6,toolButton);
+                    ui->proposalTableWidget->item(i,6)->setData(Qt::UserRole,QVariant::fromValue<ProposalInfo>(info));
+                    connect(toolButton,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,7));
                 }
+
             }
             else
             {
-                ui->proposalTableWidget->hideColumn(6);
-                ui->proposalTableWidget->hideColumn(7);
+                //提案人address
+                QString proposalAddress;
+                foreach (QString account, HXChain::getInstance()->allGuardMap.keys())
+                {
+                    if( HXChain::getInstance()->allGuardMap.value(account).accountId == info.proposer)
+                    {
+                        proposalAddress = HXChain::getInstance()->allGuardMap.value(account).address;
+                        break;
+                    }
+                }
+                if(address != proposalAddress)
+                {
+                    qDebug()<<"3";
+                    ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("approve")));
+                    ToolButtonWidget *toolButton = new ToolButtonWidget();
+                    toolButton->setText(ui->proposalTableWidget->item(i,6)->text());
+                    ui->proposalTableWidget->setCellWidget(i,6,toolButton);
+                    ui->proposalTableWidget->item(i,6)->setData(Qt::UserRole,QVariant::fromValue<ProposalInfo>(info));
+                    connect(toolButton,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,8));
+                }
+                else
+                {
+                    ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(("")));
+                }
             }
-
-
+        }
+        else
+        {
+            ui->proposalTableWidget->hideColumn(6);
         }
     }
 
