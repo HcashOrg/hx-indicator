@@ -41,13 +41,13 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
 
     ui->proposalTableWidget->setColumnWidth(0,100);
     ui->proposalTableWidget->setColumnWidth(1,100);
-    ui->proposalTableWidget->setColumnWidth(2,110);
-    ui->proposalTableWidget->setColumnWidth(3,110);
+    ui->proposalTableWidget->setColumnWidth(2,100);
+    ui->proposalTableWidget->setColumnWidth(3,100);
     ui->proposalTableWidget->setColumnWidth(4,90);
     ui->proposalTableWidget->setColumnWidth(5,90);
-    ui->proposalTableWidget->setColumnWidth(6,60);
-    ui->proposalTableWidget->setColumnWidth(7,60);
-    ui->proposalTableWidget->setColumnWidth(8,60);
+    ui->proposalTableWidget->setColumnWidth(6,70);
+    ui->proposalTableWidget->setColumnWidth(7,70);
+    ui->proposalTableWidget->setColumnWidth(8,70);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->changeSenatorBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
@@ -506,7 +506,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
             ui->proposalTableWidget->item(i,8)->setData(Qt::UserRole,QVariant::fromValue<ProposalInfo>(info));
             connect(tooButton3,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,8));
 
-            if(!isCurrentTimeBigThanNextVoteTime)
+            if(isCurrentTimeBigThanNextVoteTime)
             {
                 if(info.approvedKeys.contains(address) )
                 {
