@@ -46,6 +46,8 @@ public:
 
     std::map<QString,int> currentBlockHeight;//symbol + blockheight主要针对erc eth => ETH
     HttpManager ethHeightHttp;
+
+    std::map<int,QString> queryIdTrxidMap;
 };
 
 CrossCapitalMark::CrossCapitalMark(QObject *parent)
@@ -249,6 +251,7 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
     std::lock_guard<std::mutex> mu(_p->httpMutex);
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
+    int queryID = QJsonDocument::fromJson(_data).object().value("id").toInt();
 
     QString hash = "";
     int confirm = 0;
@@ -269,6 +272,11 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
         confirm = object.value("data").toObject().value("confirmations").toInt();
     }
 
+    if(!_p->queryIdTrxidMap[queryID].isEmpty() && hash.isEmpty())
+    {
+        hash = _p->queryIdTrxidMap[queryID];
+        _p->queryIdTrxidMap.erase(_p->queryIdTrxidMap.find(queryID));
+    }
     qDebug()<<"kkkkkkkkkkkk"<<hash<<confirm;
     if(confirm >= 8)
     {
@@ -313,9 +321,15 @@ QString CrossCapitalMark::ParseTransactionID(const QString &jsonString)
 
 void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id)
 {
+    static int queryId = 0;
+    ++queryId;
+    if(id != "finish" && !id.isEmpty())
+    {
+        _p->queryIdTrxidMap[queryId] = id;
+    }
     QJsonObject object;
     object.insert("jsonrpc","2.0");
-    object.insert("id",45);
+    object.insert("id",queryId);
     object.insert("method","Zchain.Trans.queryTrans");
     QJsonObject paramObject;
     paramObject.insert("chainId",symbol);
