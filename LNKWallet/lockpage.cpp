@@ -212,3 +212,8 @@ void LockPage::paintEvent(QPaintEvent *e)
 
     QWidget::paintEvent(e);
 }
+
+void LockPage::on_miniBtn_clicked()
+{
+    emit minimum();
+}
