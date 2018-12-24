@@ -316,8 +316,14 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
         return;
     }
 
+    QWidget *wi = ui->proposalTableWidget->cellWidget(row,6);
+    if(!wi || !dynamic_cast<ToolButtonWidget*>(wi))
+    {
+        return;
+    }
     if(column == 6)
     {
+
         CommonDialog commonDialog(CommonDialog::YesOrNo);
         commonDialog.setText(tr("Sure to approve this proposal?"));
         if(commonDialog.pop())
@@ -483,11 +489,12 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         }
 
 //        ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(calProposalWeight(info)));
+        qDebug()<<"proproadddd"<<address;
         if(!address.isEmpty())          // 如果有senator账户
         {
             if(isCurrentTimeBigThanNextVoteTime)
             {
-                if(info.disapprovedKeys.contains(address) )
+                if(!info.approvedKeys.contains(address))
                 {
                     qDebug()<<"1";
                     ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("approve")));
@@ -517,15 +524,17 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
             {
                 //提案人address
                 QString proposalAddress;
-                foreach (QString account, HXChain::getInstance()->allGuardMap.keys())
+                foreach (QString account, HXChain::getInstance()->minerMap.keys())
                 {
-                    if( HXChain::getInstance()->allGuardMap.value(account).accountId == info.proposer)
+                    if( HXChain::getInstance()->minerMap.value(account).accountId == info.proposer)
                     {
-                        proposalAddress = HXChain::getInstance()->allGuardMap.value(account).address;
+                        proposalAddress = HXChain::getInstance()->minerMap.value(account).address;
                         break;
                     }
+                    qDebug()<<"33333333"<<HXChain::getInstance()->minerMap.value(account).accountId<<info.proposer;
                 }
-                if(address != proposalAddress)
+                qDebug()<<"44444444"<<address<<proposalAddress;
+                if(address == proposalAddress)
                 {
                     qDebug()<<"3";
                     ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("addPledge")));
@@ -537,6 +546,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
                 }
                 else
                 {
+                    qDebug()<<"5";
                     ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(("")));
                 }
             }
