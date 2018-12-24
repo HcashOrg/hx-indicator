@@ -413,7 +413,6 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         ProposalInfo info = HXChain::getInstance()->citizenProposalInfoMap.value(keys.at(i));
         QJsonObject object = QJsonDocument::fromJson(info.transactionStr.toLatin1()).object();
         QJsonArray arr = object.value("operations").toArray().at(0).toArray().at(1).toObject().value("replace_queue").toArray();
-
         //获取提案的新成员
         bool isAllNewInWhiteList = true;
         foreach (QJsonValue val, arr) {
