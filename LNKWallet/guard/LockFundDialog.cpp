@@ -59,6 +59,8 @@ void LockFundDialog::init()
     {
         ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(key).symbol), key);
     }
+
+    ui->okBtn->setEnabled(false);
 }
 
 void LockFundDialog::setAccount(QString accountName)
@@ -80,6 +82,8 @@ void LockFundDialog::jsonDataUpdated(QString id)
 
             feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
             feeChoose->updateAccountNameSlots(ui->accountComboBox->currentText(),true);
+
+            checkOkBtnEnabled();
         }
 
         return;
@@ -174,8 +178,6 @@ void LockFundDialog::on_assetComboBox_currentIndexChanged(const QString &arg1)
 
 void LockFundDialog::resetAmountLineEdit()
 {
-    ui->amountLineEdit->clear();
-
     AssetAmount assetAmount = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).assetAmountMap.value(ui->assetComboBox->currentData().toString());
     QString amountStr = getBigNumberString(assetAmount.amount, HXChain::getInstance()->assetInfoMap.value(ui->assetComboBox->currentData().toString()).precision);
 
@@ -186,11 +188,30 @@ void LockFundDialog::resetAmountLineEdit()
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
     ui->amountLineEdit->clear();
+
+    stepCount = 0;
+    checkOkBtnEnabled();
+}
+
+void LockFundDialog::checkOkBtnEnabled()
+{
+    if(stepCount > 0 && !ui->pwdLineEdit->text().isEmpty())
+    {
+        ui->okBtn->setEnabled(true);
+    }
+    else
+    {
+        ui->okBtn->setEnabled(false);
+    }
 }
 
 
 void LockFundDialog::on_amountLineEdit_textEdited(const QString &arg1)
 {
+    stepCount = 0;
+    checkOkBtnEnabled();
+    if(ui->amountLineEdit->text().isEmpty())    return;
+
     QString assetId = HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText()));
     AssetAmount assetAmount = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).assetAmountMap.value(assetId);
     QString amountStr = getBigNumberString(assetAmount.amount, HXChain::getInstance()->assetInfoMap.value(assetId).precision);
@@ -207,4 +228,10 @@ void LockFundDialog::on_amountLineEdit_textEdited(const QString &arg1)
                                                    << ui->amountLineEdit->text()
                                                    << getRealAssetSymbol( ui->assetComboBox->currentText())
                                                    << "" ));
+}
+
+void LockFundDialog::on_pwdLineEdit_textChanged(const QString &arg1)
+{
+    ui->tipLabel->clear();
+    checkOkBtnEnabled();
 }

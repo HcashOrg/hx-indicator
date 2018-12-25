@@ -37,12 +37,15 @@ private slots:
 
     void on_amountLineEdit_textEdited(const QString &arg1);
 
+    void on_pwdLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::LockFundDialog *ui;
     FeeChooseWidget *feeChoose = NULL;
     int stepCount = 0;      // 合约执行步数
 
     void resetAmountLineEdit();
+    void checkOkBtnEnabled();
 };
 
 #endif // LOCKFUNDDIALOG_H

@@ -55,6 +55,8 @@ void LockContractWithdrawDialog::init()
 {
     ui->accountNameLabel->setText(m_accountName);
     ui->assetLabel->setText( revertERCSymbol( m_asset));
+
+    ui->okBtn->setEnabled(false);
 }
 
 void LockContractWithdrawDialog::setMaxAmount(unsigned long long _amount)
@@ -84,10 +86,40 @@ void LockContractWithdrawDialog::jsonDataUpdated(QString id)
 
             feeChoose->updateFeeNumberSlots(getBigNumberString(totalAmount, ASSET_PRECISION).toDouble());
             feeChoose->updateAccountNameSlots(m_accountName,true);
+
+            checkOkBtnEnabled();
         }
 
         return;
     }
+
+    if( id == "LockContractWithdrawDialog+unlock" )
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result == "\"result\":null")
+        {
+            AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId(m_asset));
+            QString param = QString("%1,%2").arg(decimalToIntegerStr(ui->amountLineEdit->text(), assetInfo.precision)).arg(m_asset);
+            HXChain::getInstance()->postRPC( "LockContractWithdrawDialog+invoke_contract",
+                                             toJsonFormat( "invoke_contract",
+                                                           QJsonArray() << m_accountName
+                                                           << HXChain::getInstance()->currentContractFee() << stepCount
+                                                           << LOCKFUND_CONTRACT_ADDRESS
+                                                           << "withdraw"
+                                                           << param));
+
+        }
+        else if(result.startsWith("\"error\":"))
+        {
+            ui->okBtn->setEnabled(true);
+            ui->tipLabel->setText("<body><font style=\"font-size:12px\" color=#ff224c>" + tr("Wrong password!") + "</font></body>" );
+        }
+
+        return;
+    }
+
 
     if( id == "LockContractWithdrawDialog+invoke_contract")
     {
@@ -117,15 +149,15 @@ void LockContractWithdrawDialog::jsonDataUpdated(QString id)
 
 void LockContractWithdrawDialog::on_okBtn_clicked()
 {
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId(m_asset));
-    QString param = QString("%1,%2").arg(decimalToIntegerStr(ui->amountLineEdit->text(), assetInfo.precision)).arg(m_asset);
-    HXChain::getInstance()->postRPC( "LockContractWithdrawDialog+invoke_contract",
-                                     toJsonFormat( "invoke_contract",
-                                                   QJsonArray() << m_accountName
-                                                   << HXChain::getInstance()->currentContractFee() << stepCount
-                                                   << LOCKFUND_CONTRACT_ADDRESS
-                                                   << "withdraw"
-                                                   << param));
+    if(!HXChain::getInstance()->ValidateOnChainOperation())     return;
+
+    if(ui->amountLineEdit->text().toDouble() <= 0)  return;
+    if(ui->pwdLineEdit->text().isEmpty())           return;
+
+    ui->okBtn->setEnabled(false);
+    HXChain::getInstance()->postRPC( "LockContractWithdrawDialog+unlock", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text()
+                                               ));
+
 }
 
 void LockContractWithdrawDialog::on_cancelBtn_clicked()
@@ -146,6 +178,9 @@ void LockContractWithdrawDialog::on_withdrawAllBtn_clicked()
 
 void LockContractWithdrawDialog::on_amountLineEdit_textChanged(const QString &arg1)
 {
+    stepCount = 0;
+    checkOkBtnEnabled();
+
     if(ui->amountLineEdit->text().toDouble() <= 0)  return;
 
     AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId(m_asset));
@@ -162,4 +197,22 @@ void LockContractWithdrawDialog::on_amountLineEdit_textChanged(const QString &ar
                               << LOCKFUND_CONTRACT_ADDRESS
                               << "withdraw"
                               << param);
+}
+
+void LockContractWithdrawDialog::checkOkBtnEnabled()
+{
+    if(stepCount > 0 && !ui->pwdLineEdit->text().isEmpty())
+    {
+        ui->okBtn->setEnabled(true);
+    }
+    else
+    {
+        ui->okBtn->setEnabled(false);
+    }
+}
+
+void LockContractWithdrawDialog::on_pwdLineEdit_textChanged(const QString &arg1)
+{
+    ui->tipLabel->clear();
+    checkOkBtnEnabled();
 }

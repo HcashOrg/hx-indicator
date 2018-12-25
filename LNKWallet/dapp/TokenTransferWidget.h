@@ -40,6 +40,8 @@ private slots:
 
     void on_amountLineEdit_textChanged(const QString &arg1);
 
+    void setTokenBalance();
+
 private:
     Ui::TokenTransferWidget *ui;
     bool inited = false;
@@ -47,7 +49,6 @@ private:
     int stepCount = 0;
     FeeChooseWidget* transferFeeWidget = NULL;
 
-    void setTokenBalance();
     void calculateTransferFee();
 };
 

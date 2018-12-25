@@ -38,7 +38,12 @@
 #define WALLET_VERSION "1.2.3"           // 版本号
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
+
+#ifdef TEST_WALLET
 #define LOCKFUND_CONTRACT_ADDRESS  "HXCQwZ9pM9Zur1E5Bny924W5ngcChs4wRAeS"
+#else
+#define LOCKFUND_CONTRACT_ADDRESS  ""
+#endif
 
 #ifdef TEST_WALLET
 #define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5006/api"

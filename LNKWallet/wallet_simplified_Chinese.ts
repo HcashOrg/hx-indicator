@@ -2277,22 +2277,27 @@ better not transfer or upgrade</source>
         <translation type="obsolete">设置senator保证金</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="455"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="377"/>
+        <source>Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
+        <translation type="unfinished">Senator官方竞选预计在2月8号Citizen正式开始，为避免影响首次竞选进度，请勿在2月8号前发起竞选提案。</translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="460"/>
         <source>change senator</source>
         <translation type="unfinished">更换senator</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="459"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="464"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="476"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="481"/>
         <source>no citizen</source>
         <translation type="unfinished">无citizen</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="480"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="485"/>
         <source>approved</source>
         <translation type="unfinished">已赞成</translation>
     </message>
@@ -2301,40 +2306,39 @@ better not transfer or upgrade</source>
         <translation type="obsolete">已反对</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="485"/>
         <location filename="citizen/CitizenProposalPage.cpp" line="490"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="495"/>
         <source>not voted</source>
         <translation type="unfinished">未投票</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="501"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="507"/>
         <source>approve</source>
         <translation type="unfinished">赞成</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="511"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="517"/>
         <source>disapprove</source>
         <translation type="unfinished">取消赞成</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="539"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="547"/>
         <source>addPledge</source>
         <translation type="unfinished">追加</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="322"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="328"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished">确定赞成这个提案吗？</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="342"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="348"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished">确定反对这个提案吗？</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="371"/>
         <source>Official Senator selection will begin on 8th January,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
-        <translation type="unfinished">Senator官方竞选预计在1月8号Citizen正式开始，为避免影响首次竞选进度，请勿在1月8号前发起竞选提案。</translation>
+        <translation type="obsolete">Senator官方竞选预计在1月8号Citizen正式开始，为避免影响首次竞选进度，请勿在1月8号前发起竞选提案。</translation>
     </message>
 </context>
 <context>
@@ -5710,17 +5714,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractWithdrawDialog.cpp" line="65"/>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="67"/>
         <source>Max: %1 %2</source>
         <translation type="unfinished">最大: %1 %2</translation>
     </message>
     <message>
-        <location filename="guard/LockContractWithdrawDialog.cpp" line="102"/>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="117"/>
+        <source>Wrong password!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="134"/>
         <source>Transaction of withdrawing lock position has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractWithdrawDialog.cpp" line="109"/>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="141"/>
         <source>Fail to withdrawing lock position!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5768,22 +5777,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockFundDialog.cpp" line="110"/>
+        <location filename="guard/LockFundDialog.cpp" line="114"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockFundDialog.cpp" line="126"/>
+        <location filename="guard/LockFundDialog.cpp" line="130"/>
         <source>Transaction of deposit has been sent out!</source>
         <translation type="unfinished">充值交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/LockFundDialog.cpp" line="133"/>
+        <location filename="guard/LockFundDialog.cpp" line="137"/>
         <source>Fail to deposit to the contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockFundDialog.cpp" line="182"/>
+        <location filename="guard/LockFundDialog.cpp" line="184"/>
         <source>Max: %1 %2</source>
         <translation type="unfinished">最大: %1 %2</translation>
     </message>

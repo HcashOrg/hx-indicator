@@ -153,6 +153,7 @@ void TokenTransferWidget::on_sendBtn_clicked()
 void TokenTransferWidget::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     if(!inited) return;
+    page->setAccount(arg1);
     setTokenBalance();
     transferFeeWidget->updateAccountNameSlots(ui->accountComboBox->currentText(), true);
 }

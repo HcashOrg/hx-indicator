@@ -2359,59 +2359,59 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="455"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="377"/>
+        <source>Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="460"/>
         <source>change senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="459"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="464"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="476"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="481"/>
         <source>no citizen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="480"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="485"/>
         <source>approved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="485"/>
         <location filename="citizen/CitizenProposalPage.cpp" line="490"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="495"/>
         <source>not voted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="501"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="507"/>
         <source>approve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="511"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="517"/>
         <source>disapprove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="539"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="547"/>
         <source>addPledge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="322"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="328"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="342"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="348"/>
         <source>Sure to disapprove this proposal?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="371"/>
-        <source>Official Senator selection will begin on 8th January,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5874,17 +5874,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">all</translation>
     </message>
     <message>
-        <location filename="guard/LockContractWithdrawDialog.cpp" line="65"/>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="67"/>
         <source>Max: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractWithdrawDialog.cpp" line="102"/>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="117"/>
+        <source>Wrong password!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="134"/>
         <source>Transaction of withdrawing lock position has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractWithdrawDialog.cpp" line="109"/>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="141"/>
         <source>Fail to withdrawing lock position!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5932,22 +5937,22 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Password</translation>
     </message>
     <message>
-        <location filename="guard/LockFundDialog.cpp" line="110"/>
+        <location filename="guard/LockFundDialog.cpp" line="114"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockFundDialog.cpp" line="126"/>
+        <location filename="guard/LockFundDialog.cpp" line="130"/>
         <source>Transaction of deposit has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockFundDialog.cpp" line="133"/>
+        <location filename="guard/LockFundDialog.cpp" line="137"/>
         <source>Fail to deposit to the contract!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockFundDialog.cpp" line="182"/>
+        <location filename="guard/LockFundDialog.cpp" line="184"/>
         <source>Max: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>

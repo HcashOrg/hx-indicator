@@ -38,11 +38,14 @@ private slots:
 
     void on_amountLineEdit_textChanged(const QString &arg1);
 
+    void on_pwdLineEdit_textChanged(const QString &arg1);
+
 private:
     Ui::LockContractWithdrawDialog *ui;
     FeeChooseWidget *feeChoose = NULL;
     int stepCount = 0;      // 合约执行步数
 
+    void checkOkBtnEnabled();
 };
 
 #endif // LOCKCONTRACTWITHDRAWDIALOG_H

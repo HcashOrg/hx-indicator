@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QMap>
+#include <QTime>
 
 namespace Ui {
 class ContractTokenPage;
@@ -35,6 +36,7 @@ public:
 
     void init();
     void refresh();
+    void setAccount(QString accountName);
 
     QMap<QString,ContractTokenInfo> contractTokenInfoMap;
     QMap<QString,QMap<QString,TokenBalance>>    accountContractTokenBalanceMap;
@@ -42,6 +44,7 @@ public:
 
 signals:
     void backBtnVisible(bool isShow);
+    void accountContractTokenBalanceUpdated();
 private slots:
     void on_createTokenBtn_clicked();
 
@@ -58,6 +61,7 @@ private slots:
 private:
     Ui::ContractTokenPage *ui;
     bool inited = false;
+    QTime time;
     void paintEvent(QPaintEvent*);
 
     void showAccountTokens();
