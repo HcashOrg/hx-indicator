@@ -2240,27 +2240,27 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="250"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="240"/>
         <source>Citizen提案</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="266"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="256"/>
         <source>更换senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="96"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="98"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished">钱包内没有citizen账户。</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="120"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="122"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished">包含提案投票的交易已发出，请等待确认</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="127"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="129"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
@@ -2277,22 +2277,22 @@ better not transfer or upgrade</source>
         <translation type="obsolete">设置senator保证金</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="181"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="455"/>
         <source>change senator</source>
         <translation type="unfinished">更换senator</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="185"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="459"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="202"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="476"/>
         <source>no citizen</source>
         <translation type="unfinished">无citizen</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="206"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="480"/>
         <source>approved</source>
         <translation type="unfinished">已赞成</translation>
     </message>
@@ -2301,38 +2301,38 @@ better not transfer or upgrade</source>
         <translation type="obsolete">已反对</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="211"/>
-        <location filename="citizen/CitizenProposalPage.cpp" line="216"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="485"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="490"/>
         <source>not voted</source>
         <translation type="unfinished">未投票</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="222"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="501"/>
         <source>approve</source>
         <translation type="unfinished">赞成</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="223"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="511"/>
         <source>disapprove</source>
         <translation type="unfinished">取消赞成</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="224"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="539"/>
         <source>addPledge</source>
         <translation type="unfinished">追加</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="296"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="322"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished">确定赞成这个提案吗？</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="316"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="342"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished">确定反对这个提案吗？</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="345"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="371"/>
         <source>Official Senator selection will begin on 8th January,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
         <translation type="unfinished">Senator官方竞选预计在1月8号Citizen正式开始，为避免影响首次竞选进度，请勿在1月8号前发起竞选提案。</translation>
     </message>
@@ -8300,9 +8300,14 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dialog/RiskWarningDialog.ui" line="79"/>
+        <location filename="dialog/RiskWarningDialog.ui" line="80"/>
         <source>风险提示</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Due to on-chain reasons of ETH, withdrawing to the exchanges &lt;span style=&quot; color:#ff0000;&quot;&gt;might fail because of unable to handle&lt;/span&gt;.We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="obsolete">由于eth链上原因，提现至交易所可能因无法解析而无法入账。因此建议您先提现到HX的充值地址，然后在划转界面中将币转给交易所充值地址。
+此风险适用范围为ETH和ERC20代币（PAX）。</translation>
     </message>
     <message>
         <location filename="dialog/RiskWarningDialog.cpp" line="47"/>
@@ -10098,9 +10103,9 @@ update or not?</source>
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.cpp" line="54"/>
-        <source>Due to on-chain reasons of ETH, withdrawing to the exchanges might fail because of unable to handle.We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). </source>
-        <translation type="unfinished">由于eth链上原因，提现至交易所可能因无法解析而无法入账。因此建议您先提现到HX的充值地址，然后在划转界面中将币转给交易所充值地址。
-此风险适用范围为ETH和ERC20代币（PAX）。</translation>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;Due to on-chain reasons of ETH, withdrawing to the exchanges &lt;/span&gt;&lt;span style=&quot; font-size:14px; font-weight:600; color:#ff0000;&quot;&gt;might fail because of unable to handle&lt;/span&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;.We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;Due to on-chain reasons of ETH, withdrawing to the exchanges &lt;/span&gt;&lt;span style=&quot; font-size:14px; color:#ff0000;&quot;&gt;might fail because of unable to handle&lt;/span&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;.We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;由于eth链上原因，提现至交易所可能因无法解析而&lt;/span&gt;&lt;span style=&quot; font-size:14px; font-weight:600; color:#ff0000;&quot;&gt;无法入账&lt;/span&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;。因此建议您先提现到HX的充值地址，然后在划转界面中将币转给交易所充值地址。 此风险适用范围为ETH和ERC20代币（PAX）。&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.cpp" line="119"/>

@@ -2334,83 +2334,83 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="obsolete">WEIGHT</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="250"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="240"/>
         <source>Citizen提案</source>
         <translation type="unfinished">Citizen Proposals</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="266"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="256"/>
         <source>更换senator</source>
         <translation type="unfinished">CHANGE SENATOR</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="96"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="98"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="120"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="122"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="127"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="129"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="181"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="455"/>
         <source>change senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="185"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="459"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="202"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="476"/>
         <source>no citizen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="206"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="480"/>
         <source>approved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="211"/>
-        <location filename="citizen/CitizenProposalPage.cpp" line="216"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="485"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="490"/>
         <source>not voted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="222"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="501"/>
         <source>approve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="223"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="511"/>
         <source>disapprove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="224"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="539"/>
         <source>addPledge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="296"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="322"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="316"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="342"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="345"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="371"/>
         <source>Official Senator selection will begin on 8th January,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8421,7 +8421,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">I know</translation>
     </message>
     <message>
-        <location filename="dialog/RiskWarningDialog.ui" line="79"/>
+        <location filename="dialog/RiskWarningDialog.ui" line="80"/>
         <source>风险提示</source>
         <translation type="unfinished">RISK WARNING</translation>
     </message>
@@ -10314,7 +10314,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.cpp" line="54"/>
-        <source>Due to on-chain reasons of ETH, withdrawing to the exchanges might fail because of unable to handle.We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). </source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;Due to on-chain reasons of ETH, withdrawing to the exchanges &lt;/span&gt;&lt;span style=&quot; font-size:14px; font-weight:600; color:#ff0000;&quot;&gt;might fail because of unable to handle&lt;/span&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;.We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;Due to on-chain reasons of ETH, withdrawing to the exchanges &lt;/span&gt;&lt;span style=&quot; font-size:14px; color:#ff0000;&quot;&gt;might fail because of unable to handle&lt;/span&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;.We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
