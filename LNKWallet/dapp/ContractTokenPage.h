@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QMap>
-#include <QTime>
 
 namespace Ui {
 class ContractTokenPage;
@@ -61,7 +60,6 @@ private slots:
 private:
     Ui::ContractTokenPage *ui;
     bool inited = false;
-    QTime time;
     void paintEvent(QPaintEvent*);
 
     void showAccountTokens();

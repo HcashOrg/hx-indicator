@@ -328,7 +328,7 @@ QString CrossCapitalMark::ParseTransactionID(const QString &jsonString)
 
 void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id)
 {
-    static std::atomic_int queryId = 0;
+    static std::atomic_int queryId(0);
     int queid = queryId.fetch_add(1);
     if(id != "finish" && !id.isEmpty())
     {

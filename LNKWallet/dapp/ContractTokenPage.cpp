@@ -66,7 +66,6 @@ void ContractTokenPage::init()
 
 void ContractTokenPage::refresh()
 {
-    time.restart();
     fetchTokensBalance();
 }
 
@@ -90,8 +89,6 @@ void ContractTokenPage::fetchTokensInfo()
     QStringList contractIds = HXChain::getInstance()->configFile->childKeys();
     HXChain::getInstance()->configFile->endGroup();
 
-    time.restart();
-    qDebug() << "TTTTTTTTTTTTTT " <<  time.currentTime();
     foreach (QString contractId, contractIds)
     {
         HXChain::getInstance()->postRPC( "ContractTokenPage-invoke_contract_offline-tokenSymbol-" + contractId, toJsonFormat( "invoke_contract_offline",
@@ -183,7 +180,6 @@ void ContractTokenPage::jsonDataUpdated(QString id)
         QString result = HXChain::getInstance()->jsonDataValue(id);
         QString contractId = id.mid( QString("ContractTokenPage-invoke_contract_offline-tokenSymbol-").size());
 //        qDebug() << id << result;
-        qDebug() << id << time.elapsed();
 
         if(result.startsWith(QString("\"result\":")))
         {
@@ -205,7 +201,6 @@ void ContractTokenPage::jsonDataUpdated(QString id)
         QString result = HXChain::getInstance()->jsonDataValue(id);
         QString contractId = id.mid( QString("ContractTokenPage-invoke_contract_offline-precision-").size());
 //        qDebug() << id << result;
-        qDebug() << id << time.elapsed();
 
         if(result.startsWith(QString("\"result\":")))
         {
@@ -225,7 +220,6 @@ void ContractTokenPage::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         QString contractId = id.mid( QString("ContractTokenPage-get_contract_info-").size());
-        qDebug() << id << time.elapsed();
 
         if(result.startsWith(QString("\"result\":")))
         {
@@ -244,7 +238,6 @@ void ContractTokenPage::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result;
-        qDebug() << id << time.elapsed();
 
         QString str = id.mid( QString("ContractTokenPage-invoke_contract_offline-balanceOf-").size());
         QString contractId = str.split("###").at(0);
@@ -277,8 +270,6 @@ void ContractTokenPage::jsonDataUpdated(QString id)
 
     if( id == "ContractTokenPage-invoke_contract_offline-fetchTokensBalance-finish")
     {
-        qDebug() << id << time.elapsed();
-
         showAccountTokens();
 
         return;
