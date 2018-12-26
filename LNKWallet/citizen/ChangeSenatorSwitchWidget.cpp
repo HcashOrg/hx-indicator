@@ -111,6 +111,8 @@ void ChangeSenatorSwitchWidget::httpReplied(QByteArray _data, int _status)
     {
         ui->addBtn->setVisible(true);
     }
+    //强制不显示增加按钮
+    ui->addBtn->setVisible(false);
 
 }
 
@@ -157,6 +159,8 @@ void ChangeSenatorSwitchWidget::InitData(bool showPermanent)
     {
         ui->addBtn->setVisible(false);
     }
+    //强制不显示增加按钮
+    ui->addBtn->setVisible(false);
 //    //citizen查询白名单
 //    if(!showPermanent)
 //    {

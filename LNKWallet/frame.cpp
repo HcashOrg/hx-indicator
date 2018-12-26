@@ -1900,6 +1900,7 @@ void Frame::jsonDataUpdated(QString id)
 
     if( id == "Finish+get_citizen")
     {
+//        qDebug() << id <<HXChain::getInstance()->jsonDataValue(id);
         HXChain::getInstance()->fetchCitizensFinished = true;
         return;
     }
@@ -1907,7 +1908,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id.startsWith("id-get_citizen-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-//        qDebug() << id ;
+        qDebug() << id <<result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -1940,7 +1941,7 @@ void Frame::jsonDataUpdated(QString id)
             }
 
         }
-
+        qDebug()<<"11111111111111--"<< HXChain::getInstance()->minerMap.size();
         return;
     }
 
