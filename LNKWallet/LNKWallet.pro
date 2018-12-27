@@ -194,7 +194,9 @@ SOURCES += main.cpp\
     exchange/FavoritePairsWidget.cpp \
     exchange/ExchangeModeWidget.cpp \
     guard/LockContractPage.cpp \
-    dialog/RiskWarningDialog.cpp
+    dialog/RiskWarningDialog.cpp \
+    guard/LockFundDialog.cpp \
+    guard/LockContractWithdrawDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -360,7 +362,9 @@ HEADERS  += firstlogin.h \
     exchange/FavoritePairsWidget.h \
     exchange/ExchangeModeWidget.h \
     guard/LockContractPage.h \
-    dialog/RiskWarningDialog.h
+    dialog/RiskWarningDialog.h \
+    guard/LockFundDialog.h \
+    guard/LockContractWithdrawDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -492,7 +496,9 @@ FORMS    += firstlogin.ui \
     exchange/FavoritePairsWidget.ui \
     exchange/ExchangeModeWidget.ui \
     guard/LockContractPage.ui \
-    dialog/RiskWarningDialog.ui
+    dialog/RiskWarningDialog.ui \
+    guard/LockFundDialog.ui \
+    guard/LockContractWithdrawDialog.ui
 
 win32{
     DISTFILES += logo.rc

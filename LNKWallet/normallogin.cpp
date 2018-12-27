@@ -204,3 +204,8 @@ void NormalLogin::paintEvent(QPaintEvent *e)
 
     QWidget::paintEvent(e);
 }
+
+void NormalLogin::on_miniBtn_clicked()
+{
+    emit minimum();
+}

@@ -214,9 +214,9 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>320</x>
+     <x>330</x>
      <y>90</y>
-     <width>80</width>
+     <width>60</width>
      <height>18</height>
     </rect>
    </property>
@@ -243,7 +243,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
   <widget class="QLabel" name="totalIncomeLabel">
    <property name="geometry">
     <rect>
-     <x>400</x>
+     <x>390</x>
      <y>90</y>
      <width>160</width>
      <height>18</height>

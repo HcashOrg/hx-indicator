@@ -371,6 +371,14 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
 
 void CitizenProposalPage::on_changeSenatorBtn_clicked()
 {
+    if(HXChain::getInstance()->walletInfo.blockHeight < 1400000 )
+    {
+        CommonDialog commonDialog(CommonDialog::OkOnly);
+        commonDialog.setText(tr("Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated."));
+        commonDialog.pop();
+        return;
+    }
+
     ChangeSenatorDialog dia;
     dia.exec();
 }
@@ -522,18 +530,8 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
             else
             {
                 //提案人address
-                QString proposalAddress;
-                foreach (QString account, HXChain::getInstance()->minerMap.keys())
-                {
-                    if( HXChain::getInstance()->minerMap.value(account).accountId == info.proposer)
-                    {
-                        proposalAddress = HXChain::getInstance()->minerMap.value(account).address;
-                        break;
-                    }
-                    qDebug()<<"33333333"<<HXChain::getInstance()->minerMap.value(account).accountId<<info.proposer;
-                }
-                qDebug()<<"44444444"<<address<<proposalAddress;
-                if(address == proposalAddress)
+                QString proposeAccountID = info.proposer;
+                if(HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).id == proposeAccountID)
                 {
                     qDebug()<<"3";
                     ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("addPledge")));

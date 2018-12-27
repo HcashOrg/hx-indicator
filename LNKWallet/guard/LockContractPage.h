@@ -17,6 +17,8 @@ public:
 
     void init();
 
+    void refresh();
+
 private slots:
     void jsonDataUpdated(QString id);
 
@@ -24,12 +26,14 @@ private slots:
 
     void on_lockFundTableWidget_cellClicked(int row, int column);
 
+    void on_lockBtn_clicked();
+
 private:
     Ui::LockContractPage *ui;
 
     void paintEvent(QPaintEvent*);
 
-    void getUserLockInfo(QString address);
+    void getUserLockInfo(QString accountName);
 };
 
 #endif // LOCKCONTRACTPAGE_H

@@ -2317,8 +2317,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="165"/>
+        <source>竞价</source>
+        <translation type="unfinished">BIDDING</translation>
+    </message>
+    <message>
         <source>质押数量</source>
-        <translation type="unfinished">PLEDGE</translation>
+        <translation type="obsolete">PLEDGE</translation>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.ui" line="178"/>
@@ -2330,78 +2334,83 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="obsolete">WEIGHT</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="250"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="240"/>
         <source>Citizen提案</source>
         <translation type="unfinished">Citizen Proposals</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.ui" line="266"/>
+        <location filename="citizen/CitizenProposalPage.ui" line="256"/>
         <source>更换senator</source>
         <translation type="unfinished">CHANGE SENATOR</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="96"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="98"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="120"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="122"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="127"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="129"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="181"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="377"/>
+        <source>Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="460"/>
         <source>change senator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="185"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="464"/>
         <source>unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="202"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="481"/>
         <source>no citizen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="206"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="485"/>
         <source>approved</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="211"/>
-        <location filename="citizen/CitizenProposalPage.cpp" line="216"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="490"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="495"/>
         <source>not voted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="222"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="507"/>
         <source>approve</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="223"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="517"/>
         <source>disapprove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="224"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="547"/>
         <source>addPledge</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="296"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="328"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="316"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="348"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4833,27 +4842,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1199"/>
+        <location filename="frame.cpp" line="1202"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1436"/>
+        <location filename="frame.cpp" line="1439"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2564"/>
+        <location filename="frame.cpp" line="2567"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2567"/>
+        <location filename="frame.cpp" line="2570"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2570"/>
+        <location filename="frame.cpp" line="2573"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5129,7 +5138,7 @@ Cover it or not?</source>
     <message>
         <location filename="functionBar/FunctionGuardWidget.ui" line="265"/>
         <source>锁仓合约</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lock Position</translation>
     </message>
 </context>
 <context>
@@ -5297,7 +5306,7 @@ Cover it or not?</source>
     <message>
         <location filename="guard/GuardIncomePage.ui" line="237"/>
         <source>总计收益</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">TOTAL</translation>
     </message>
     <message>
         <location filename="guard/GuardIncomePage.ui" line="299"/>
@@ -5773,63 +5782,178 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">CURRENT SENATOR</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="72"/>
         <source>提取</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">WITHDRAW</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="120"/>
+        <location filename="guard/LockContractPage.ui" line="90"/>
         <source>锁仓合约</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Lock Position</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="153"/>
-        <source>已锁数量</source>
-        <translation type="unfinished"></translation>
+        <location filename="guard/LockContractPage.ui" line="252"/>
+        <source>币种</source>
+        <translation type="unfinished">CURRENCY</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="169"/>
-        <source>COMMON</source>
-        <translation type="unfinished"></translation>
+        <location filename="guard/LockContractPage.ui" line="265"/>
+        <source>已锁金额</source>
+        <translation type="unfinished">LOCKED AMOUNT</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="188"/>
+        <location filename="guard/LockContractPage.ui" line="278"/>
         <source>解锁时间</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">UNLOCK TIME</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="204"/>
-        <source>100 HC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="guard/LockContractPage.ui" line="223"/>
-        <source>2018年12月28日15:54:08</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="guard/LockContractPage.ui" line="242"/>
-        <source>账户状态</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="guard/LockContractPage.ui" line="268"/>
-        <source>HXCMzpVF78XauxVNRD1wA3wqfuQY9Yfm61rU</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="guard/LockContractPage.ui" line="300"/>
+        <location filename="guard/LockContractPage.ui" line="148"/>
         <source>锁仓合约地址</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">CONTRACT ADDRESS</translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.ui" line="333"/>
+        <location filename="guard/LockContractPage.ui" line="181"/>
         <source>锁仓</source>
+        <translation type="unfinished">LOCK</translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractPage.cpp" line="67"/>
+        <source>There are no accounts in the wallet.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/LockContractPage.cpp" line="43"/>
-        <source>There are no senator accounts in the wallet.</source>
+        <location filename="guard/LockContractPage.cpp" line="117"/>
+        <source>withdraw</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LockContractWithdrawDialog</name>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.ui" line="54"/>
+        <source>提取账户</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.ui" line="84"/>
+        <source>取消</source>
+        <translation type="unfinished">Cancel</translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.ui" line="111"/>
+        <source>确定</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.ui" line="146"/>
+        <source>提取数量</source>
+        <translation type="unfinished">Amount to withdraw</translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.ui" line="162"/>
+        <source>提取币种</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.ui" line="202"/>
+        <source>锁仓提取</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.ui" line="218"/>
+        <source>输入钱包密码</source>
+        <translation type="unfinished">Password</translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.ui" line="303"/>
+        <source>提取全部</source>
+        <translation type="unfinished">all</translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="67"/>
+        <source>Max: %1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="117"/>
+        <source>Wrong password!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="134"/>
+        <source>Transaction of withdrawing lock position has been sent out!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockContractWithdrawDialog.cpp" line="141"/>
+        <source>Fail to withdrawing lock position!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LockFundDialog</name>
+    <message>
+        <location filename="guard/LockFundDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.ui" line="49"/>
+        <source>锁仓账户</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.ui" line="79"/>
+        <source>取消</source>
+        <translation type="unfinished">Cancel</translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.ui" line="106"/>
+        <source>确定</source>
+        <translation type="unfinished">Ok</translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.ui" line="164"/>
+        <source>锁仓数量</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.ui" line="180"/>
+        <source>锁仓币种</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.ui" line="262"/>
+        <source>锁仓</source>
+        <translation type="unfinished">LOCK</translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.ui" line="278"/>
+        <source>输入钱包密码</source>
+        <translation type="unfinished">Password</translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.cpp" line="114"/>
+        <source>Wrong password!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.cpp" line="130"/>
+        <source>Transaction of deposit has been sent out!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.cpp" line="137"/>
+        <source>Fail to deposit to the contract!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/LockFundDialog.cpp" line="184"/>
+        <source>Max: %1 %2</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -5936,17 +6060,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Asset to pledge</translation>
     </message>
     <message>
-        <location filename="miner/locktominerdialog.cpp" line="88"/>
+        <location filename="miner/locktominerdialog.cpp" line="87"/>
         <source>Transaction of lock-to-miner has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/locktominerdialog.cpp" line="95"/>
+        <location filename="miner/locktominerdialog.cpp" line="94"/>
         <source>Fail to lock balance to miner!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="miner/locktominerdialog.cpp" line="126"/>
+        <location filename="miner/locktominerdialog.cpp" line="125"/>
         <source>Max: %1 %2</source>
         <oldsource>total %1 %2</oldsource>
         <translation type="unfinished"></translation>
@@ -8302,7 +8426,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">I know</translation>
     </message>
     <message>
-        <location filename="dialog/RiskWarningDialog.ui" line="79"/>
+        <location filename="dialog/RiskWarningDialog.ui" line="80"/>
         <source>风险提示</source>
         <translation type="unfinished">RISK WARNING</translation>
     </message>
@@ -10195,7 +10319,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="withdrawpage/WithdrawInputWidget.cpp" line="54"/>
-        <source>Due to on-chain reasons of ETH, withdrawing to the exchanges might fail because of unable to handle.We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). </source>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;Due to on-chain reasons of ETH, withdrawing to the exchanges &lt;/span&gt;&lt;span style=&quot; font-size:14px; font-weight:600; color:#ff0000;&quot;&gt;might fail because of unable to handle&lt;/span&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;.We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <oldsource>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;Due to on-chain reasons of ETH, withdrawing to the exchanges &lt;/span&gt;&lt;span style=&quot; font-size:14px; color:#ff0000;&quot;&gt;might fail because of unable to handle&lt;/span&gt;&lt;span style=&quot; font-size:14px;&quot;&gt;.We suggest you firstly withdraw to HX deposit address and alot to deposit address of the exchange. This operation applies to ETH and ERC20 token (PAX). &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -32,6 +32,8 @@ private slots:
 
     void pwdConfirmed(QString id);
 
+    void on_miniBtn_clicked();
+
 signals:
     void login();
     void minimum();

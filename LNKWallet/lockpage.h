@@ -37,6 +37,8 @@ private slots:
     void on_pwdLineEdit_textChanged(const QString &arg1);
 
     void jsonDataUpdated(QString id);
+    void on_miniBtn_clicked();
+
 private:
     void InitWidget();
     void InitStyle();

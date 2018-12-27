@@ -69,6 +69,11 @@ void ContractTokenPage::refresh()
     fetchTokensBalance();
 }
 
+void ContractTokenPage::setAccount(QString accountName)
+{
+    ui->accountComboBox->setCurrentText(accountName);
+}
+
 void ContractTokenPage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
@@ -109,16 +114,16 @@ void ContractTokenPage::fetchTokensBalance()
 
     foreach (QString contractId, contractIds)
     {
-        foreach (QString account, accounts)
-        {
-            QString accountAddress = HXChain::getInstance()->accountInfoMap.value(account).address;
+//        foreach (QString account, accounts)
+//        {
+            QString accountAddress = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
 
-            HXChain::getInstance()->postRPC( "ContractTokenPage-invoke_contract_offline-balanceOf-" + contractId + "###" + account,
+            HXChain::getInstance()->postRPC( "ContractTokenPage-invoke_contract_offline-balanceOf-" + contractId + "###" + ui->accountComboBox->currentText(),
                                              toJsonFormat( "invoke_contract_offline",
-                                                           QJsonArray() << account << contractId
+                                                           QJsonArray() << ui->accountComboBox->currentText() << contractId
                                                            << "balanceOf"  << accountAddress));
 
-        }
+//        }
     }
 
     HXChain::getInstance()->postRPC( "ContractTokenPage-invoke_contract_offline-fetchTokensBalance-finish",
@@ -249,6 +254,8 @@ void ContractTokenPage::jsonDataUpdated(QString id)
 
             accountContractTokenBalanceMap[accountName][contractId].contractId = contractId;
             accountContractTokenBalanceMap[accountName][contractId].amount = amount;
+
+            emit accountContractTokenBalanceUpdated();
         }
         return;
     }
@@ -275,7 +282,8 @@ void ContractTokenPage::on_accountComboBox_currentIndexChanged(const QString &ar
     if(!inited)     return;
     HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
 
-    showAccountTokens();
+//    showAccountTokens();
+    refresh();
 }
 
 void ContractTokenPage::on_addTokenBtn_clicked()
@@ -314,6 +322,7 @@ void ContractTokenPage::on_tokenTableWidget_cellClicked(int row, int column)
         emit backBtnVisible(true);
         TokenTransferWidget* tokenTransferWidget = new TokenTransferWidget( ui->accountComboBox->currentText(),
                                                                             ui->tokenTableWidget->item(row,0)->text(), this);
+        connect(this, SIGNAL(accountContractTokenBalanceUpdated()), tokenTransferWidget, SLOT(setTokenBalance()));
         tokenTransferWidget->setAttribute(Qt::WA_DeleteOnClose);
         tokenTransferWidget->show();
         tokenTransferWidget->raise();

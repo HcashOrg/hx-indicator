@@ -4,6 +4,8 @@
 #include "wallet.h"
 #include "control/AssetIconItem.h"
 #include "ToolButtonWidget.h"
+#include "LockFundDialog.h"
+#include "LockContractWithdrawDialog.h"
 
 LockContractPage::LockContractPage(QWidget *parent) :
     QWidget(parent),
@@ -33,7 +35,6 @@ LockContractPage::LockContractPage(QWidget *parent) :
     ui->lockFundTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
 
     ui->lockBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
-    ui->withdrawBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     init();
 }
@@ -46,7 +47,7 @@ LockContractPage::~LockContractPage()
 void LockContractPage::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = HXChain::getInstance()->getMyGuards();
+    QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
@@ -63,10 +64,15 @@ void LockContractPage::init()
 
         QLabel* label = new QLabel(this);
         label->setGeometry(QRect(ui->label->pos(), QSize(300,18)));
-        label->setText(tr("There are no senator accounts in the wallet."));
+        label->setText(tr("There are no accounts in the wallet."));
     }
 
     ui->contractAddressLabel->setText(LOCKFUND_CONTRACT_ADDRESS);
+    getUserLockInfo(ui->accountComboBox->currentText());
+}
+
+void LockContractPage::refresh()
+{
     getUserLockInfo(ui->accountComboBox->currentText());
 }
 
@@ -102,6 +108,7 @@ void LockContractPage::jsonDataUpdated(QString id)
 
                 AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId(key));
                 ui->lockFundTableWidget->setItem(i, 1, new QTableWidgetItem( getBigNumberString(amount,assetInfo.precision)));
+                ui->lockFundTableWidget->item(i,1)->setData(Qt::UserRole,amount);
 
                 QDateTime utc;
                 utc.setSecsSinceEpoch(depositTime + 14 * 24 * 3600);
@@ -157,5 +164,23 @@ void LockContractPage::on_accountComboBox_currentIndexChanged(const QString &arg
 
 void LockContractPage::on_lockFundTableWidget_cellClicked(int row, int column)
 {
+    if(column == 3)
+    {
+        if(ui->lockFundTableWidget->item(row,0) && ui->lockFundTableWidget->item(row,1))
+        {
+            LockContractWithdrawDialog lockContractWithdrawDialog(ui->accountComboBox->currentText(),
+                                                                  ui->lockFundTableWidget->item(row,0)->text());
+            lockContractWithdrawDialog.setMaxAmount(ui->lockFundTableWidget->item(row,1)->data(Qt::UserRole).toULongLong());
+            lockContractWithdrawDialog.pop();
+        }
 
+        return;
+    }
+
+}
+
+void LockContractPage::on_lockBtn_clicked()
+{
+    LockFundDialog lockFundDialog;
+    lockFundDialog.pop();
 }

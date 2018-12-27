@@ -30,7 +30,6 @@ LockToMinerDialog::LockToMinerDialog(QString _accountName, QWidget *parent) :
 
     connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    qDebug()<<_accountName;
     ui->stackedWidget->addWidget(new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.minerForeCloseFee.toDouble(),
                                                      HXChain::getInstance()->feeType,_accountName));
     ui->stackedWidget->setCurrentIndex(0);
