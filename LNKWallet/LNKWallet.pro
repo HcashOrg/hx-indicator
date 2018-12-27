@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = HXIndicator
 TEMPLATE = app
 
-#DEFINES += TEST_WALLET
+DEFINES += TEST_WALLET
 #DEFINES += SAFE_VERSION
 
 win32{
@@ -196,7 +196,9 @@ SOURCES += main.cpp\
     guard/LockContractPage.cpp \
     dialog/RiskWarningDialog.cpp \
     guard/LockFundDialog.cpp \
-    guard/LockContractWithdrawDialog.cpp
+    guard/LockContractWithdrawDialog.cpp \
+    exchange/ExchangePairSelectDialog.cpp \
+    exchange/ExchangePairWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -364,7 +366,9 @@ HEADERS  += firstlogin.h \
     guard/LockContractPage.h \
     dialog/RiskWarningDialog.h \
     guard/LockFundDialog.h \
-    guard/LockContractWithdrawDialog.h
+    guard/LockContractWithdrawDialog.h \
+    exchange/ExchangePairSelectDialog.h \
+    exchange/ExchangePairWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -498,7 +502,9 @@ FORMS    += firstlogin.ui \
     guard/LockContractPage.ui \
     dialog/RiskWarningDialog.ui \
     guard/LockFundDialog.ui \
-    guard/LockContractWithdrawDialog.ui
+    guard/LockContractWithdrawDialog.ui \
+    exchange/ExchangePairSelectDialog.ui \
+    exchange/ExchangePairWidget.ui
 
 win32{
     DISTFILES += logo.rc
