@@ -1,7 +1,6 @@
 #include "ExchangeModeWidget.h"
 #include "ui_ExchangeModeWidget.h"
 
-#include "wallet.h"
 #include "ExchangePairSelectDialog.h"
 
 ExchangeModeWidget::ExchangeModeWidget(QWidget *parent) :
@@ -13,8 +12,6 @@ ExchangeModeWidget::ExchangeModeWidget(QWidget *parent) :
     ui->widget->setObjectName("framewidget");
     ui->widget->setStyleSheet("#framewidget{background-color:white;border:1px solid white;border-radius:15px;}");
 
-
-    exchangePairWidget = new ExchangePairWidget(this);
     init();
 }
 
@@ -49,6 +46,7 @@ void ExchangeModeWidget::on_orderModeBtn_clicked()
 void ExchangeModeWidget::on_favoriteMarketBtn_clicked()
 {
     ExchangePairSelectDialog dialog;
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModeWidget::onPairSelected);
     dialog.move(ui->favoriteMarketBtn->mapToGlobal( QPoint(ui->favoriteMarketBtn->width() / 2 - dialog.width() / 2,ui->favoriteMarketBtn->height())));
 
     dialog.exec();
@@ -56,10 +54,12 @@ void ExchangeModeWidget::on_favoriteMarketBtn_clicked()
 
 void ExchangeModeWidget::on_marketBtn1_clicked()
 {
-    exchangePairWidget->move(ui->marketBtn1->mapToGlobal( QPoint(ui->marketBtn1->width() / 2 - exchangePairWidget->width() / 2,ui->marketBtn1->height())));
 
-    exchangePairWidget->raise();
-    exchangePairWidget->show();
-
-    qDebug() << "1111111111 " << exchangePairWidget->pos();
 }
+
+void ExchangeModeWidget::onPairSelected(const ExchangePair &_pair)
+{
+    HXChain::getInstance()->currentExchangePair = _pair;
+}
+
+

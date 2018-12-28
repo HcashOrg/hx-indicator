@@ -2,12 +2,13 @@
 #define EXCHANGEMODEWIDGET_H
 
 #include <QWidget>
-#include "ExchangePairWidget.h"
+#include "wallet.h"
 
 
 namespace Ui {
 class ExchangeModeWidget;
 }
+
 
 class ExchangeModeWidget : public QWidget
 {
@@ -24,9 +25,12 @@ private slots:
 
     void on_marketBtn1_clicked();
 
+
+public slots:
+    void onPairSelected(const ExchangePair& _pair);
+
 private:
     Ui::ExchangeModeWidget *ui;
-    ExchangePairWidget* exchangePairWidget = nullptr;
 
     void init();
     void paintEvent(QPaintEvent*);
