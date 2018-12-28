@@ -41,11 +41,7 @@ void FunctionGuardWidget::InitWidget()
     ui->feedPriceBtn->setCheckable(true);
     ui->coldHotTransferBtn->setCheckable(true);
 
-<<<<<<< HEAD
     ui->lockContractBtn->hide();
-=======
-//    ui->lockContractBtn->hide();
->>>>>>> c636352784fc64424e21a3edbd50322baeee1814
 }
 
 void FunctionGuardWidget::InitStyle()
