@@ -519,7 +519,7 @@ public:
     void autoWithdrawSign();
     int autoSignCount = 0;
     int lastSignBlock = -1;
-    QStringList singedAccountTrxs;
+    QMap<QString,int> singedAccountTrxsCountMap;
     QMap<QString,int>   trxSignedGuardCountMap;
 
     // 查询提现交易
