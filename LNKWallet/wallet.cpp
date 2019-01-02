@@ -1271,15 +1271,28 @@ void HXChain::autoWithdrawSign()
 
             foreach (QString account, HXChain::getInstance()->getMyFormalGuards())
             {
-                if(singedAccountTrxs.contains(account + "+++" + generatedTrxId))    continue;
+
                 QString accountAddress = HXChain::getInstance()->accountInfoMap.value(account).address;
                 if(!guardAddresses.contains(accountAddress))
                 {
                     if(at.amount.toDouble() <= getAssetAutoWithdrawLimit(at.assetSymbol))
                     {
+                        if(singedAccountTrxsCountMap.contains(account + "+++" + generatedTrxId))
+                        {
+                            if(singedAccountTrxsCountMap.value(account + "+++" + generatedTrxId) < 24)
+                            {
+                                ++singedAccountTrxsCountMap[account + "+++" + generatedTrxId];
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            singedAccountTrxsCountMap.insert(account + "+++" + generatedTrxId, 0);
+                        }
+
                         HXChain::getInstance()->postRPC( "id-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
                                                                                                                  QJsonArray() << generatedTrxId << account));
-                        singedAccountTrxs << account + "+++" + generatedTrxId;
+
                         logToFile( QStringList() << "senator_sign_crosschain_transaction" << generatedTrxId << account);
                         signedCount++;
                         if(signedCount >= 3)    return;
@@ -1302,9 +1315,21 @@ void HXChain::autoWithdrawSign()
                 {
                     if(gma.hotAddress == eft.signer)
                     {
+                        if(singedAccountTrxsCountMap.contains(account + "+++" + eft.trxId))
+                        {
+                            if(singedAccountTrxsCountMap.value(account + "+++" + eft.trxId) < 24)
+                            {
+                                ++singedAccountTrxsCountMap[account + "+++" + eft.trxId];
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            singedAccountTrxsCountMap.insert(account + "+++" + eft.trxId, 0);
+                        }
+
                         HXChain::getInstance()->postRPC( "autosign-senator_sign_eths_final_trx", toJsonFormat( "senator_sign_eths_final_trx",
                                                                          QJsonArray() << eft.trxId << account));
-                        singedAccountTrxs << account + "+++" + eft.trxId;
                         logToFile( QStringList() << "senator_sign_eths_final_trx" << eft.trxId << account);
                         signedCount++;
                         if(signedCount >= 3)    return;
