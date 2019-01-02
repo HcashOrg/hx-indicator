@@ -1666,7 +1666,7 @@ void HXChain::postRPC(QString _rpcId, QString _rpcCmd, int _priority)
 //        emit rpcPosted(_rpcId, _rpcCmd);
 //    }
 
-    emit rpcPosted(_rpcId, _rpcCmd);
+    emit rpcPosted(_rpcId, _rpcCmd, _priority);
 }
 
 double roundDown(double decimal, int precision)
