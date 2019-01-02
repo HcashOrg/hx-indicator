@@ -1565,7 +1565,7 @@ void Frame::jsonDataUpdated(QString id)
 #endif
         }
         HXChain::getInstance()->isExiting = true;
-        HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()));
+        HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()), -1);
         exitingWidget = new ExitingWidget(this);
         exitingWidget->show();
         resize(exitingWidget->size());
