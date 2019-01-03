@@ -148,7 +148,7 @@ struct GuardInfo
     QString guardId;
     QString accountId;
     QString voteId;
-    bool    isFormal = true;
+    bool    isFormal = false;
     QString address;
     QString senatorType;//EXTERNAL or PERMANENT
 };
