@@ -74,6 +74,7 @@ void SenatorChangeSenatorDialog::jsonDataUpdated(QString id)
 
 void SenatorChangeSenatorDialog::InitWidget()
 {
+    ui->label_3->setVisible(false);
     setParent(HXChain::getInstance()->mainFrame);
     move(0,0);
 
