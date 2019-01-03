@@ -11,6 +11,7 @@
 #include "citizen/ChangeSenatorDialog.h"
 #include "citizen/AddPledgeDialog.h"
 #include "poundage/PageScrollWidget.h"
+#include "control/IconRightDelegate.h"
 
 static const int ROWNUMBER = 7;
 
@@ -39,16 +40,19 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->proposalTableWidget->horizontalHeader()->setVisible(true);
     ui->proposalTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->proposalTableWidget->setColumnWidth(0,100);
-    ui->proposalTableWidget->setColumnWidth(1,100);
+    ui->proposalTableWidget->setColumnWidth(0,140);
+    ui->proposalTableWidget->setColumnWidth(1,90);
     ui->proposalTableWidget->setColumnWidth(2,100);
-    ui->proposalTableWidget->setColumnWidth(3,100);
+    ui->proposalTableWidget->setColumnWidth(3,90);
     ui->proposalTableWidget->setColumnWidth(4,90);
-    ui->proposalTableWidget->setColumnWidth(5,90);
+    ui->proposalTableWidget->setColumnWidth(5,80);
     ui->proposalTableWidget->setColumnWidth(6,60);
 //    ui->proposalTableWidget->setColumnWidth(7,70);
 //    ui->proposalTableWidget->setColumnWidth(8,70);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+
+    IconRightDelegate *delegate = new IconRightDelegate(ui->proposalTableWidget);
+    ui->proposalTableWidget->setItemDelegate(delegate);
 
     ui->changeSenatorBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
@@ -59,12 +63,6 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->stackedWidget->addWidget(pageWidget);
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&CitizenProposalPage::pageChangeSlot);
 
-//    pageWidget = new PageScrollWidget();
-//    ui->stackedWidget->addWidget(pageWidget);
-//    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ProposalPage::pageChangeSlot);
-
-//    blankWidget = new BlankDefaultWidget(ui->proposalTableWidget);
-//    blankWidget->setTextTip(tr("There are no proposals currently!"));
     init();
 }
 
@@ -302,15 +300,16 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         QJsonArray arr = object.value("operations").toArray().at(0).toArray().at(1).toObject().value("replace_queue").toArray();
         //获取提案的新成员
         bool isAllNewInWhiteList = true;
+//        whiteList<<"1.2.79";//test whitelist
         foreach (QJsonValue val, arr) {
             qDebug()<<"rrrrrrrrrrr"<<val.toArray().at(0).toString()<<whiteList;
-            if(isCurrentTimeBigThanNextVoteTime && !whiteList.contains(val.toArray().at(0).toString()))
+            if(!whiteList.contains(val.toArray().at(0).toString()))
             {
                 isAllNewInWhiteList = false;
                 break;
             }
         }
-        if(!isAllNewInWhiteList)
+        if(!isAllNewInWhiteList && isCurrentTimeBigThanNextVoteTime)
         {
             continue;
         }
@@ -320,6 +319,11 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
 
         ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(toLocalTime(info.expirationTime)));
         ui->proposalTableWidget->item(i,0)->setData(Qt::UserRole,info.proposalId);
+        ui->proposalTableWidget->item(i,0)->setTextAlignment(Qt::AlignLeft);
+        if(isAllNewInWhiteList)
+        {
+            ui->proposalTableWidget->item(i,0)->setIcon(QIcon(":/ui/wallet_ui/whiteList_proposal.png"));
+        }
 
         QMap<QString,MinerInfo> allCitizen(HXChain::getInstance()->minerMap);
         QMapIterator<QString, MinerInfo> it(allCitizen);
@@ -471,7 +475,7 @@ QString CitizenProposalPage::calProposalWeight(const ProposalInfo &info) const
     }
     else
     {
-        return "0";
+        return "0.00%";
     }
 }
 

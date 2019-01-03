@@ -196,7 +196,8 @@ SOURCES += main.cpp\
     guard/LockContractPage.cpp \
     dialog/RiskWarningDialog.cpp \
     guard/LockFundDialog.cpp \
-    guard/LockContractWithdrawDialog.cpp
+    guard/LockContractWithdrawDialog.cpp \
+    control/IconRightDelegate.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -364,7 +365,8 @@ HEADERS  += firstlogin.h \
     guard/LockContractPage.h \
     dialog/RiskWarningDialog.h \
     guard/LockFundDialog.h \
-    guard/LockContractWithdrawDialog.h
+    guard/LockContractWithdrawDialog.h \
+    control/IconRightDelegate.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \

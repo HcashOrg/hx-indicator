@@ -152,6 +152,7 @@
         <file>wallet_ui/swap_hover.png</file>
         <file>wallet_ui/switch_off.png</file>
         <file>wallet_ui/switch_on.png</file>
+        <file>wallet_ui/whiteList_proposal.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>
