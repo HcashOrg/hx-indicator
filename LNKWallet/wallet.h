@@ -35,7 +35,9 @@
 #define MULTISIG_ADDRESS_PREFIX "HXM"
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
-#define WALLET_VERSION "1.2.4"           // 版本号
+
+#define WALLET_VERSION "1.2.5"           // 版本号
+
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
@@ -148,7 +150,7 @@ struct GuardInfo
     QString guardId;
     QString accountId;
     QString voteId;
-    bool    isFormal = true;
+    bool    isFormal = false;
     QString address;
     QString senatorType;//EXTERNAL or PERMANENT
 };
@@ -342,6 +344,8 @@ struct SignTransaction
     QString guardAddress;
 };
 
+typedef QPair<QString,QString>  ExchangePair;
+
 class HXChain : public QObject
 {
     Q_OBJECT
@@ -396,6 +400,8 @@ public:
     QString currentAccount; // 保存当前账户  切换页面的时候默认选择当前账户
     QString currentSellAssetId;
     QString currentBuyAssetId;
+
+    ExchangePair currentExchangePair;
 
     unsigned long long contractFee;     // 合约单步执行费用
     QString currentContractFee();

@@ -26,6 +26,8 @@ QCheckBox::indicator:checked{ image:url(:/ui/wallet_ui/checkBox_checked.png);bac
 QLineEdit{min-height:18px;max-height:24px;background: rgb(243,241,250);color: rgb(84,61,137);font: 11px \"Microsoft YaHei UI Light\";border:1px solid rgb(84,61,137);padding: 0px 10px 0px 6px;border-radius:4px;}
 QLineEdit:focus{border:1px solid rgb(84,61,137);}
 QLineEdit:disabled{color: rgb(151,151,151);}
+QLineEdit[LineEditStyle="red"]{background: transparent;color: rgb(235,0,94);font:bold 12px \"微软雅黑\";border:1px solid rgb(84,61,137);padding: 0px 10px 0px 6px;border-radius:8px;}
+QLineEdit[LineEditStyle="green"]{background: transparent;color: rgb(44,202,148);font:bold 12px \"微软雅黑\";border:1px solid rgb(84,61,137);padding: 0px 10px 0px 6px;border-radius:8px;}
 
 
 QSpinBox{background: rgb(243,241,250);color: rgb(84,61,137);border:1px solid rgb(84,61,137);padding: 0px 0px 0px 6px;border-radius:4px;}
@@ -65,8 +67,12 @@ QToolButton[BtnStyle="favoritePair"]{background:transparent;border:none;}
 QToolButton[BtnStyle="favoritePair"]:!checked{color: rgb(137,129,161);font: 12px \"微软雅黑\";}
 QToolButton[BtnStyle="favoritePair"]:checked{color: rgb(110,104,130);font: bold 12px \"微软雅黑\";}
 
+QPushButton[BtnStyle="dropDown"]{background-image: url(:/ui/wallet_ui/dropDown.png);background-repeat: no-repeat;background-position: right;border:none;margin:0 5 0 0;text-align: left;color: rgb(110,104,130);font: bold 12px \"微软雅黑\";}
+
+
 QWidget[WidgetStyle="dialogBg"]{background-image:url(:/ui/wallet_ui/back_dialog.png);}
 QWidget[WidgetStyle="container"]{background-color:rgb(229,226,240);border-radius:4px;}
+QWidget[WidgetStyle="container2"]{background-color:rgb(243,241,250);border:1px solid rgb(243,241,250);border-radius:8px;}
 QLabel[WidgetStyle="container"]{color:rgb(51,51,51);}
 
 

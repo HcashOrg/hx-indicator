@@ -112,7 +112,7 @@ void OnchainOrderPage::init()
 
     on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
 
-    ui->exchangeModeBtn->hide();
+//    ui->exchangeModeBtn->hide();
 }
 
 void OnchainOrderPage::onBack()
