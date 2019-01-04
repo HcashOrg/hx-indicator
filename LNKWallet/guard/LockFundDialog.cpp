@@ -127,14 +127,14 @@ void LockFundDialog::jsonDataUpdated(QString id)
             close();
 
             TransactionResultDialog transactionResultDialog;
-            transactionResultDialog.setInfoText(tr("Transaction of deposit has been sent out!"));
+            transactionResultDialog.setInfoText(tr("Transaction of lock-position has been sent out!"));
             transactionResultDialog.setDetailText(result);
             transactionResultDialog.pop();
         }
         else if(result.startsWith("\"error\":"))
         {
             ErrorResultDialog errorResultDialog;
-            errorResultDialog.setInfoText(tr("Fail to deposit to the contract!"));
+            errorResultDialog.setInfoText(tr("Fail to lock position to the contract!"));
             errorResultDialog.setDetailText(result);
             errorResultDialog.pop();
         }

@@ -5884,12 +5884,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="guard/LockContractWithdrawDialog.cpp" line="134"/>
         <source>Transaction of withdrawing lock position has been sent out!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">提取锁仓资产的交易已发出！</translation>
     </message>
     <message>
         <location filename="guard/LockContractWithdrawDialog.cpp" line="141"/>
         <source>Fail to withdrawing lock position!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">提取锁仓资产失败</translation>
     </message>
 </context>
 <context>
@@ -5941,13 +5941,15 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/LockFundDialog.cpp" line="130"/>
-        <source>Transaction of deposit has been sent out!</source>
-        <translation type="unfinished">充值交易已发出！</translation>
+        <source>Transaction of lock-position has been sent out!</source>
+        <oldsource>Transaction of deposit has been sent out!</oldsource>
+        <translation type="unfinished">锁仓交易已发出！</translation>
     </message>
     <message>
         <location filename="guard/LockFundDialog.cpp" line="137"/>
-        <source>Fail to deposit to the contract!</source>
-        <translation type="unfinished"></translation>
+        <source>Fail to lock position to the contract!</source>
+        <oldsource>Fail to deposit to the contract!</oldsource>
+        <translation type="unfinished">锁仓失败！</translation>
     </message>
     <message>
         <location filename="guard/LockFundDialog.cpp" line="184"/>

@@ -726,7 +726,7 @@ font: 12px &quot;微软雅黑&quot;;</string>
     </property>
    </widget>
   </widget>
-  <widget class="QComboBox" name="accountComboBox">
+  <widget class="QComboBox" name="positionComboBox">
    <property name="geometry">
     <rect>
      <x>510</x>
@@ -770,6 +770,26 @@ font: 12px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="styleSheet">
     <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QTableView" name="sellPositionTableView">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>250</y>
+     <width>200</width>
+     <height>110</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTableView" name="buyPositionTableView">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>360</y>
+     <width>200</width>
+     <height>110</height>
+    </rect>
    </property>
   </widget>
  </widget>

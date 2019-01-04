@@ -6097,12 +6097,14 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/LockFundDialog.cpp" line="130"/>
-        <source>Transaction of deposit has been sent out!</source>
+        <source>Transaction of lock-position has been sent out!</source>
+        <oldsource>Transaction of deposit has been sent out!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="guard/LockFundDialog.cpp" line="137"/>
-        <source>Fail to deposit to the contract!</source>
+        <source>Fail to lock position to the contract!</source>
+        <oldsource>Fail to deposit to the contract!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
