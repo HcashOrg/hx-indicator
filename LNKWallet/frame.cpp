@@ -1998,6 +1998,7 @@ void Frame::jsonDataUpdated(QString id)
                 QJsonValue proposedTransactionValue = object.take("proposed_transaction");
                 info.transactionStr = QJsonDocument(proposedTransactionValue.toObject()).toJson();
                 info.type       = object.take("type").toString();
+                info.proposalFinished = object.value("finished").toBool();
 
                 QJsonArray array2 = object.take("approved_key_approvals").toArray();
                 foreach (QJsonValue v2, array2)
