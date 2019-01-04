@@ -878,12 +878,14 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="643"/>
-        <source>lock asset to miner</source>
+        <source>lock asset to citizen</source>
+        <oldsource>lock asset to miner</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="659"/>
-        <source>foreclose asset from miner</source>
+        <source>foreclose asset from citizen</source>
+        <oldsource>foreclose asset from miner</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2360,11 +2362,6 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="254"/>
-        <source>Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="citizen/CitizenProposalPage.cpp" line="344"/>
         <source>change senator</source>
         <translation type="unfinished"></translation>
@@ -3222,44 +3219,44 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="350"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="353"/>
         <source>Warning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="350"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="353"/>
         <source>Cannot Rename Group!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="428"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="432"/>
         <source>MoveToGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="430"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="434"/>
         <source>AddGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="432"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="436"/>
         <source>EditGroup</source>
         <oldsource>EidtGroup</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="433"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="437"/>
         <source>DeleteGroup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="435"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="439"/>
         <source>EditContact</source>
         <oldsource>EditPerson</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="436"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="440"/>
         <source>DeleteContact</source>
         <oldsource>DeletePerson</oldsource>
         <translation type="unfinished"></translation>
@@ -6219,12 +6216,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/locktominerdialog.cpp" line="87"/>
         <source>Transaction of lock-to-miner has been sent out!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Transaction of lock-to-citizen has been sent out!</translation>
     </message>
     <message>
         <location filename="miner/locktominerdialog.cpp" line="94"/>
         <source>Fail to lock balance to miner!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fail to lock balance to citizen!</translation>
     </message>
     <message>
         <location filename="miner/locktominerdialog.cpp" line="125"/>
@@ -6642,7 +6639,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.cpp" line="248"/>
         <location filename="miner/minerpage.cpp" line="377"/>
-        <source>Fail to foreclose asset from miner!</source>
+        <source>Fail to foreclose asset from citizen!</source>
+        <oldsource>Fail to foreclose asset from miner!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

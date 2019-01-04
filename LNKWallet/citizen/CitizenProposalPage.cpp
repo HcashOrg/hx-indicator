@@ -248,13 +248,13 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
 
 void CitizenProposalPage::on_changeSenatorBtn_clicked()
 {
-    if(HXChain::getInstance()->walletInfo.blockHeight < 1400000 )
-    {
-        CommonDialog commonDialog(CommonDialog::OkOnly);
-        commonDialog.setText(tr("Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated."));
-        commonDialog.pop();
-        return;
-    }
+//    if(HXChain::getInstance()->walletInfo.blockHeight < 1400000 )
+//    {
+//        CommonDialog commonDialog(CommonDialog::OkOnly);
+//        commonDialog.setText(tr("Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated."));
+//        commonDialog.pop();
+//        return;
+//    }
 
     ChangeSenatorDialog dia;
     dia.exec();
@@ -287,6 +287,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         if(!val.isString()) continue;
         whiteList.append(val.toString());
     }
+//    whiteList<<"1.2.45";//test whitelist
 
 
     QStringList keys = HXChain::getInstance()->citizenProposalInfoMap.keys();
@@ -300,10 +301,9 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         QJsonArray arr = object.value("operations").toArray().at(0).toArray().at(1).toObject().value("replace_queue").toArray();
         //获取提案的新成员
         bool isAllNewInWhiteList = true;
-//        whiteList<<"1.2.79";//test whitelist
         foreach (QJsonValue val, arr) {
-            qDebug()<<"rrrrrrrrrrr"<<val.toArray().at(0).toString()<<whiteList;
-            if(!whiteList.contains(val.toArray().at(0).toString()))
+            qDebug()<<"rrrrrrrrrrr"<<val.toArray().at(1).toString()<<whiteList;
+            if(!whiteList.contains(val.toArray().at(1).toString()))
             {
                 isAllNewInWhiteList = false;
                 break;

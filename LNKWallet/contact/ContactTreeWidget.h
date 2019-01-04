@@ -64,7 +64,7 @@ private slots:
 
     void moveToGroupSlots(bool checked);
 
-    void editGroupFinishSlots();
+    void editGroupFinishSlots(/*QTreeWidgetItem *groupItem*/);
     void editPersonFinishSlots();
 public:
     //////////////////////////////////////////////////////////////////////////

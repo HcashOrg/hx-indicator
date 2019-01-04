@@ -67,7 +67,7 @@ void GuardAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg
         ui->guardLabel->setPixmap(QPixmap(":/ui/wallet_ui/guard_normal.png"));
     }
 
-    if("PERMANENT" == info.senatorType)
+    if("PERMANENT" == info.senatorType && info.isFormal)
     {
         ui->changeSenator->setVisible(true);
     }

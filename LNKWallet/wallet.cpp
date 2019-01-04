@@ -1117,12 +1117,13 @@ QStringList HXChain::getFormalGuards()
 QStringList HXChain::getPermanentSenators()
 {
     QStringList result;
-
-    foreach (QString key, allGuardMap.keys())
+    QStringList allKeys = allGuardMap.keys();
+    foreach (QString key, allKeys)
     {
-        if(allGuardMap.value(key).senatorType == "PERMANENT")
+//        qDebug()<<"nnnnnnn"<<key<<allGuardMap.value(key).isFormal<<allGuardMap.value(key).senatorType;
+        if(allGuardMap.value(key).isFormal && allGuardMap.value(key).senatorType == "PERMANENT")
         {
-            result += key;
+            result << key;
         }
     }
 
