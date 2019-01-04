@@ -74,7 +74,6 @@ void SenatorChangeSenatorDialog::jsonDataUpdated(QString id)
 
 void SenatorChangeSenatorDialog::InitWidget()
 {
-    ui->label_3->setVisible(false);
     setParent(HXChain::getInstance()->mainFrame);
     move(0,0);
 
@@ -91,6 +90,7 @@ void SenatorChangeSenatorDialog::InitWidget()
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     installDoubleValidator(ui->lineEdit_expTime,0,720.0,1);
+    ui->lineEdit_expTime->setText("1");
 
     InitData();
     if(ui->account->currentText().isEmpty())

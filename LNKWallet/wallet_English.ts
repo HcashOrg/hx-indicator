@@ -8823,8 +8823,9 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="198"/>
-        <source>（一次提议最多可更换三人）</source>
-        <translation type="unfinished">(Three Nominations At Most)</translation>
+        <source>（失效时间不得超过720小时）</source>
+        <oldsource>（一次提议最多可更换三人）</oldsource>
+        <translation type="unfinished">(Expiration time must less than 720 hours)</translation>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="225"/>

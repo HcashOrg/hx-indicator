@@ -8700,7 +8700,8 @@ update or not?</source>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="198"/>
-        <source>（一次提议最多可更换三人）</source>
+        <source>（失效时间不得超过720小时）</source>
+        <oldsource>（一次提议最多可更换三人）</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
