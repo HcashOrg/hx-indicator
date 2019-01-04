@@ -90,6 +90,7 @@ void SenatorChangeSenatorDialog::InitWidget()
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     installDoubleValidator(ui->lineEdit_expTime,0,720.0,1);
+    ui->lineEdit_expTime->setText("1");
 
     InitData();
     if(ui->account->currentText().isEmpty())

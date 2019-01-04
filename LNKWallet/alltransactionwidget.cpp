@@ -584,7 +584,7 @@ void AllTransactionWidget::showTransactions()
                 str += tr("set contract transfer fee");
                 break;
             case TRANSACTION_TYPE_FORMAL_GUARD:
-                str += tr("set senator formal/informal");
+                str += tr("change permanent senator");
                 break;
             case TRANSACTION_TYPE_CROSSCHAIN_FEE:
                 str += tr("set crosschain fee");

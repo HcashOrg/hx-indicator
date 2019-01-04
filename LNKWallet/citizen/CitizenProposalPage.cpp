@@ -11,6 +11,7 @@
 #include "citizen/ChangeSenatorDialog.h"
 #include "citizen/AddPledgeDialog.h"
 #include "poundage/PageScrollWidget.h"
+#include "control/IconRightDelegate.h"
 
 static const int ROWNUMBER = 7;
 
@@ -39,16 +40,19 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->proposalTableWidget->horizontalHeader()->setVisible(true);
     ui->proposalTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->proposalTableWidget->setColumnWidth(0,100);
-    ui->proposalTableWidget->setColumnWidth(1,100);
+    ui->proposalTableWidget->setColumnWidth(0,140);
+    ui->proposalTableWidget->setColumnWidth(1,90);
     ui->proposalTableWidget->setColumnWidth(2,100);
-    ui->proposalTableWidget->setColumnWidth(3,100);
+    ui->proposalTableWidget->setColumnWidth(3,90);
     ui->proposalTableWidget->setColumnWidth(4,90);
-    ui->proposalTableWidget->setColumnWidth(5,90);
+    ui->proposalTableWidget->setColumnWidth(5,80);
     ui->proposalTableWidget->setColumnWidth(6,60);
 //    ui->proposalTableWidget->setColumnWidth(7,70);
 //    ui->proposalTableWidget->setColumnWidth(8,70);
     ui->proposalTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
+
+    IconRightDelegate *delegate = new IconRightDelegate(ui->proposalTableWidget);
+    ui->proposalTableWidget->setItemDelegate(delegate);
 
     ui->changeSenatorBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
@@ -59,12 +63,6 @@ CitizenProposalPage::CitizenProposalPage(QWidget *parent) :
     ui->stackedWidget->addWidget(pageWidget);
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&CitizenProposalPage::pageChangeSlot);
 
-//    pageWidget = new PageScrollWidget();
-//    ui->stackedWidget->addWidget(pageWidget);
-//    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ProposalPage::pageChangeSlot);
-
-//    blankWidget = new BlankDefaultWidget(ui->proposalTableWidget);
-//    blankWidget->setTextTip(tr("There are no proposals currently!"));
     init();
 }
 
@@ -150,6 +148,8 @@ void CitizenProposalPage::jsonDataUpdated(QString id)
 
         qDebug()<<"aaaa"<<object;
         qDebug()<<"votetimessss"<<QDateTime::fromString(HXChain::getInstance()->currentBlockTime,"yyyy-MM-ddThh:mm:ss")<<QDateTime::fromString(nextTime,"yyyy-MM-ddThh:mm:ss")<<isCurrentTimeBigThanNextVoteTime;
+        //查询白名单
+        queryWhiteList();
 
     }
 
@@ -171,129 +171,6 @@ void CitizenProposalPage::showProposals()
 {
     //查询当前vote状态
     HXChain::getInstance()->postRPC("query_object_state",toJsonFormat("get_object",QJsonArray()<<"2.1.0"));
-    //查询白名单
-    queryWhiteList();
-//    QStringList keys = HXChain::getInstance()->citizenProposalInfoMap.keys();
-
-//    int size = keys.size();
-//    ui->proposalTableWidget->setRowCount(0);
-//    ui->proposalTableWidget->setRowCount(size);
-
-//    for(int i = 0; i < size; i++)
-//    {
-//        ui->proposalTableWidget->setRowHeight(i,40);
-
-//        ProposalInfo info = HXChain::getInstance()->citizenProposalInfoMap.value(keys.at(i));
-
-//        ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(toLocalTime(info.expirationTime)));
-//        ui->proposalTableWidget->item(i,0)->setData(Qt::UserRole,info.proposalId);
-
-//        QMap<QString,MinerInfo> allCitizen(HXChain::getInstance()->minerMap);
-//        QMapIterator<QString, MinerInfo> it(allCitizen);
-//        QString citizenName = "";
-//        while (it.hasNext()) {
-//            it.next();
-//            if(info.proposer == it.value().accountId)
-//            {
-//                citizenName = it.key();
-//                break;
-//            }
-//        }
-//        ui->proposalTableWidget->setItem(i,1,new QTableWidgetItem(citizenName));
-
-//        QString typeStr;
-//        if(TRANSACTION_TYPE_CITIZEN_CHANGE_SENATOR == info.proposalOperationType)
-//        {
-//            typeStr = tr("change senator");
-//        }
-//        else
-//        {
-//            typeStr = tr("unknown");
-//        }
-//        ui->proposalTableWidget->setItem(i,2,new QTableWidgetItem(typeStr));
-//        ui->proposalTableWidget->item(i,2)->setTextColor(QColor(84,116,235));
-
-//        //投票状态
-//        ui->proposalTableWidget->setItem(i,3,new QTableWidgetItem(calProposalWeight(info)));
-////        VoteStateLabel* voteStateLabel = new VoteStateLabel;
-////        voteStateLabel->setVoteNum(info.approvedKeys.size(), info.disapprovedKeys.size(), info.requiredAccounts.size());
-////        ui->proposalTableWidget->setCellWidget(i,3,voteStateLabel);
-
-//        //质押数量
-//        ui->proposalTableWidget->setItem(i,4,new QTableWidgetItem(info.pledge));
-//        //我的投票状态
-//        QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
-//        if(address.isEmpty())
-//        {
-//            ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(tr("no citizen")));
-//        }
-//        else if(info.approvedKeys.contains(address))
-//        {
-//            ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(tr("approved")));
-//            ui->proposalTableWidget->item(i,5)->setTextColor(QColor(0,170,0));
-//        }
-//        else if(info.disapprovedKeys.contains(address))
-//        {
-//            ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(tr("not voted")));
-//            ui->proposalTableWidget->item(i,5)->setTextColor(QColor(255,0,0));
-//        }
-//        else
-//        {
-//            ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(tr("not voted")));
-//        }
-
-////        ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(calProposalWeight(info)));
-//        if(!address.isEmpty())          // 如果有senator账户
-//        {
-//            ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("approve")));
-//            ui->proposalTableWidget->setItem(i,7,new QTableWidgetItem(tr("disapprove")));
-//            ui->proposalTableWidget->setItem(i,8,new QTableWidgetItem(tr("addPledge")));
-
-
-//            ToolButtonWidget *toolButton = new ToolButtonWidget();
-//            toolButton->setText(ui->proposalTableWidget->item(i,6)->text());
-//            ui->proposalTableWidget->setCellWidget(i,6,toolButton);
-//            connect(toolButton,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,6));
-
-//            ToolButtonWidget *toolButton2 = new ToolButtonWidget();
-//            toolButton2->setText(ui->proposalTableWidget->item(i,7)->text());
-//            ui->proposalTableWidget->setCellWidget(i,7,toolButton2);
-//            connect(toolButton2,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,7));
-
-//            ToolButtonWidget *tooButton3 = new ToolButtonWidget();
-//            tooButton3->setText(ui->proposalTableWidget->item(i,8)->text());
-//            ui->proposalTableWidget->setCellWidget(i,8,tooButton3);
-//            ui->proposalTableWidget->item(i,8)->setData(Qt::UserRole,QVariant::fromValue<ProposalInfo>(info));
-//            connect(tooButton3,&ToolButtonWidget::clicked,std::bind(&CitizenProposalPage::on_proposalTableWidget_cellClicked,this,i,8));
-
-//            if(info.approvedKeys.contains(address))
-//            {
-//                toolButton->setEnabled(false);
-//                ui->proposalTableWidget->hideColumn(6);
-//            }
-//            else if(info.disapprovedKeys.contains(address))
-//            {
-//                ui->proposalTableWidget->hideColumn(7);
-//                toolButton2->setEnabled(false);
-//            }
-//            else
-//            {
-//                ui->proposalTableWidget->hideColumn(7);
-//                toolButton2->setEnabled(false);
-//            }
-
-//        }
-//    }
-
-//    int page = (ui->proposalTableWidget->rowCount()%ROWNUMBER==0 && ui->proposalTableWidget->rowCount() != 0) ?
-//                ui->proposalTableWidget->rowCount()/ROWNUMBER : ui->proposalTableWidget->rowCount()/ROWNUMBER+1;
-//    pageWidget->SetTotalPage(page);
-//    pageWidget->setShowTip(ui->proposalTableWidget->rowCount(),ROWNUMBER);
-//    pageChangeSlot(0);
-
-//    pageWidget->setVisible(0 != ui->proposalTableWidget->rowCount());
-//    tableWidgetSetItemZebraColor(ui->proposalTableWidget);
-
 
 }
 
@@ -423,14 +300,16 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         QJsonArray arr = object.value("operations").toArray().at(0).toArray().at(1).toObject().value("replace_queue").toArray();
         //获取提案的新成员
         bool isAllNewInWhiteList = true;
+//        whiteList<<"1.2.79";//test whitelist
         foreach (QJsonValue val, arr) {
+            qDebug()<<"rrrrrrrrrrr"<<val.toArray().at(0).toString()<<whiteList;
             if(!whiteList.contains(val.toArray().at(0).toString()))
             {
                 isAllNewInWhiteList = false;
                 break;
             }
         }
-        if(!isAllNewInWhiteList)
+        if(!isAllNewInWhiteList && isCurrentTimeBigThanNextVoteTime)
         {
             continue;
         }
@@ -440,6 +319,11 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
 
         ui->proposalTableWidget->setItem(i,0,new QTableWidgetItem(toLocalTime(info.expirationTime)));
         ui->proposalTableWidget->item(i,0)->setData(Qt::UserRole,info.proposalId);
+        ui->proposalTableWidget->item(i,0)->setTextAlignment(Qt::AlignLeft);
+        if(isAllNewInWhiteList)
+        {
+            ui->proposalTableWidget->item(i,0)->setIcon(QIcon(":/ui/wallet_ui/whiteList_proposal.png"));
+        }
 
         QMap<QString,MinerInfo> allCitizen(HXChain::getInstance()->minerMap);
         QMapIterator<QString, MinerInfo> it(allCitizen);
@@ -591,7 +475,7 @@ QString CitizenProposalPage::calProposalWeight(const ProposalInfo &info) const
     }
     else
     {
-        return "0";
+        return "0.00%";
     }
 }
 

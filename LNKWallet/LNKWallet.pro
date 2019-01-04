@@ -196,7 +196,10 @@ SOURCES += main.cpp\
     guard/LockContractPage.cpp \
     dialog/RiskWarningDialog.cpp \
     guard/LockFundDialog.cpp \
-    guard/LockContractWithdrawDialog.cpp
+    guard/LockContractWithdrawDialog.cpp \
+    control/IconRightDelegate.cpp \
+    exchange/ExchangePairSelectDialog.cpp \
+    exchange/ExchangeSinglePairCellWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -364,7 +367,10 @@ HEADERS  += firstlogin.h \
     guard/LockContractPage.h \
     dialog/RiskWarningDialog.h \
     guard/LockFundDialog.h \
-    guard/LockContractWithdrawDialog.h
+    guard/LockContractWithdrawDialog.h \
+    control/IconRightDelegate.h \
+    exchange/ExchangePairSelectDialog.h \
+    exchange/ExchangeSinglePairCellWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -498,7 +504,10 @@ FORMS    += firstlogin.ui \
     guard/LockContractPage.ui \
     dialog/RiskWarningDialog.ui \
     guard/LockFundDialog.ui \
-    guard/LockContractWithdrawDialog.ui
+    guard/LockContractWithdrawDialog.ui \
+    exchange/ExchangePairSelectDialog.ui \
+    exchange/ExchangePairWidget.ui \
+    exchange/ExchangeSinglePairCellWidget.ui
 
 win32{
     DISTFILES += logo.rc

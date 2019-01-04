@@ -212,12 +212,56 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
         break;
     case TRANSACTION_TYPE_FORMAL_GUARD:
     {
-        ui->typeLabel->setText(tr("set senator formal/informal"));
+        ui->typeLabel->setText(tr("change permanent senator"));
         ui->typeStackedWidget->setCurrentIndex(8);
 
+        QString changeStr = tr("%1      replaced by        %2");
         QJsonObject operationObject = object.value("operations").toArray().at(0).toArray().at(1).toObject();
-        ui->senatorAddressLabel->setText( operationObject.value("owner_addr").toString());
-        ui->isFormalLabel->setText( operationObject.value("formal").toBool()?"true":"false");
+        QJsonArray arr = operationObject.value("replace_queue").toArray();
+
+        QMap<QString,GuardInfo> allGuard(HXChain::getInstance()->allGuardMap);
+        QMap<QString,QString> replaceMap;
+        foreach (QJsonValue val, arr) {
+            QString oldSenator ,newSenator;
+            QMapIterator<QString, GuardInfo> it(allGuard);
+            while (it.hasNext()) {
+                it.next();
+                if(val.toArray().at(1).toString() == it.value().accountId)
+                {
+                    oldSenator = it.key();
+                }
+                else if(val.toArray().at(0).toString() == it.value().accountId)
+                {
+                    newSenator = it.key();
+                }
+            }
+            replaceMap[oldSenator] = newSenator;
+        }
+
+        int i = 0;
+        ui->label_change1_2->setVisible(false);
+        ui->label_change2_2->setVisible(false);
+        ui->label_change3_2->setVisible(false);
+        QMapIterator<QString, QString> it(replaceMap);
+        while (it.hasNext()) {
+            it.next();
+            if(0 == i)
+            {
+                ui->label_change1_2->setText(changeStr.arg(it.key()).arg(it.value()));
+                ui->label_change1_2->setVisible(true);
+            }
+            else if(1 == i)
+            {
+                ui->label_change2_2->setText(changeStr.arg(it.key()).arg(it.value()));
+                ui->label_change2_2->setVisible(true);
+            }
+            else if(2 == i)
+            {
+                ui->label_change3_2->setText(changeStr.arg(it.key()).arg(it.value()));
+                ui->label_change3_2->setVisible(true);
+            }
+            ++i;
+        }
     }
         break;
     case TRANSACTION_TYPE_CROSSCHAIN_FEE:

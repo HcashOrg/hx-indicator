@@ -1115,21 +1115,27 @@ void MinerPage::on_forecloseAllBtn_clicked()
     commonDialog.setText(tr("Sure to foreclose all assets that you have pledged?"));
     if(commonDialog.pop())
     {
-        QJsonArray array;
+        QMap<QString,QJsonArray>    map;
         for(int i = 0; i < ui->lockBalancesTableWidget->rowCount(); i++)
         {
-            QJsonArray array2;
-            array2 << ui->lockBalancesTableWidget->item(i,0)->text();
             QJsonObject object;
             QString assetId = ui->lockBalancesTableWidget->item(i,1)->data(Qt::UserRole).toString();
             unsigned long long amount = ui->lockBalancesTableWidget->item(i,2)->data(Qt::UserRole).toULongLong();
             object.insert("amount", QString::number(amount));
             object.insert("asset_id", assetId);
-            QJsonArray array3;
-            array3 << object;
-            array2 << array3;
+
+            QString citizen = ui->lockBalancesTableWidget->item(i,0)->text();
+            map[citizen] << object;
+        }
+
+        QJsonArray array;
+        foreach(QString key, map.keys())
+        {
+            QJsonArray array2;
+            array2 << key << map.value(key);
             array << array2;
         }
+
         HXChain::getInstance()->postRPC( "MinerPage+foreclose_balance_from_citizens",
                                          toJsonFormat( "foreclose_balance_from_citizens",
                                                        QJsonArray() << ui->accountComboBox->currentText()
