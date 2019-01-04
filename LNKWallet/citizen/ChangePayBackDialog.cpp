@@ -116,6 +116,11 @@ void ChangePayBackDialog::InitData()
             ui->account->addItem(info,rate);
         }
     }
+    int num = ui->account->findText(citizenName,Qt::MatchExactly);
+    if(-1 != num)
+    {
+        ui->account->setCurrentIndex(num);
+    }
     //初始化label
     if(!ui->account->currentData().toString().isEmpty())
     {

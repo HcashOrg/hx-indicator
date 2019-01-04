@@ -141,6 +141,10 @@ void ProposalPage::showProposals()
         {
             typeStr = tr("set gas price");
         }
+        else if(TRANSACTION_TYPE_FORMAL_GUARD == info.proposalOperationType)
+        {
+            typeStr = tr("change senator");
+        }
         else
         {
             typeStr = tr("unknown");
@@ -173,7 +177,7 @@ void ProposalPage::showProposals()
         }
 
 
-        if(!address.isEmpty())          // 如果有senator账户
+        if(!address.isEmpty() && false == info.proposalFinished)          // 如果有senator账户
         {
             ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(tr("approve")));
             ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("disapprove")));
@@ -198,6 +202,11 @@ void ProposalPage::showProposals()
             {
                 toolButton2->setEnabled(false);
             }
+        }
+        else
+        {
+            ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(tr("")));
+            ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(tr("")));
         }
     }
 
@@ -245,6 +254,11 @@ void ProposalPage::jsonDataUpdated(QString id)
 
 void ProposalPage::on_proposalTableWidget_cellClicked(int row, int column)
 {
+    QWidget *wi = ui->proposalTableWidget->cellWidget(row,column);
+    if(!wi || !dynamic_cast<ToolButtonWidget*>(wi))
+    {
+        return;
+    }
     if(column == 5)
     {
         CommonDialog commonDialog(CommonDialog::YesOrNo);

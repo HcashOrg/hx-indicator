@@ -71,7 +71,7 @@ void ColdKeyPathDialog::on_pathBtn_clicked()
 
 void ColdKeyPathDialog::checkOkBtnEnabled()
 {
-    if(ui->pkFileLineEdit->text().isEmpty() || ui->pwdLineEdit->text().isEmpty())
+    if(ui->pkFileLineEdit->text().isEmpty() || ui->pwdLineEdit->text().isEmpty() || !QFileInfo(ui->pkFileLineEdit->text()).dir().exists())
     {
         ui->okBtn->setEnabled(false);
     }

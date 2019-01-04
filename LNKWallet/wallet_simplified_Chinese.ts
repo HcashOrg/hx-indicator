@@ -806,8 +806,9 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="587"/>
-        <source>set senator formal/informal</source>
-        <translation type="unfinished">设置senator为正式/非正式</translation>
+        <source>change permanent senator</source>
+        <oldsource>set senator formal/informal</oldsource>
+        <translation type="unfinished">更换正式Senator</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="590"/>
@@ -852,13 +853,15 @@
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="643"/>
-        <source>lock asset to miner</source>
-        <translation type="unfinished">质押资产给miner</translation>
+        <source>lock asset to citizen</source>
+        <oldsource>lock asset to miner</oldsource>
+        <translation type="unfinished">质押资产给citizen</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="659"/>
-        <source>foreclose asset from miner</source>
-        <translation type="unfinished">从miner赎回资产</translation>
+        <source>foreclose asset from citizen</source>
+        <oldsource>foreclose asset from miner</oldsource>
+        <translation type="unfinished">从citizen赎回资产</translation>
     </message>
     <message>
         <location filename="alltransactionwidget.cpp" line="674"/>
@@ -2277,9 +2280,8 @@ better not transfer or upgrade</source>
         <translation type="obsolete">设置senator保证金</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="254"/>
         <source>Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
-        <translation type="unfinished">Senator官方竞选预计在2月8号Citizen正式开始，为避免影响首次竞选进度，请勿在2月8号前发起竞选提案。</translation>
+        <translation type="obsolete">Senator官方竞选预计在2月8号Citizen正式开始，为避免影响首次竞选进度，请勿在2月8号前发起竞选提案。</translation>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.cpp" line="344"/>
@@ -3128,44 +3130,44 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="350"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="353"/>
         <source>Warning</source>
         <translation type="unfinished">警告</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="350"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="353"/>
         <source>Cannot Rename Group!</source>
         <translation type="unfinished">不能重命名分组</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="428"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="432"/>
         <source>MoveToGroup</source>
         <translation type="unfinished">移动分组</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="430"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="434"/>
         <source>AddGroup</source>
         <translation type="unfinished">添加分组</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="432"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="436"/>
         <source>EditGroup</source>
         <oldsource>EidtGroup</oldsource>
         <translation type="unfinished">编辑分组</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="433"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="437"/>
         <source>DeleteGroup</source>
         <translation type="unfinished">删除分组</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="435"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="439"/>
         <source>EditContact</source>
         <oldsource>EditPerson</oldsource>
         <translation type="unfinished">编辑联系人</translation>
     </message>
     <message>
-        <location filename="contact/ContactTreeWidget.cpp" line="436"/>
+        <location filename="contact/ContactTreeWidget.cpp" line="440"/>
         <source>DeleteContact</source>
         <oldsource>DeletePerson</oldsource>
         <translation type="unfinished">删除联系人</translation>
@@ -4865,17 +4867,17 @@ Cover it or not?</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2568"/>
+        <location filename="frame.cpp" line="2569"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2571"/>
+        <location filename="frame.cpp" line="2572"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2574"/>
+        <location filename="frame.cpp" line="2575"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -6097,12 +6099,12 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/locktominerdialog.cpp" line="87"/>
         <source>Transaction of lock-to-miner has been sent out!</source>
-        <translation type="unfinished">质押资产给miner的交易已发出！</translation>
+        <translation type="unfinished">质押资产给citizen的交易已发出！</translation>
     </message>
     <message>
         <location filename="miner/locktominerdialog.cpp" line="94"/>
         <source>Fail to lock balance to miner!</source>
-        <translation type="unfinished">质押资产给miner失败！</translation>
+        <translation type="unfinished">质押资产给citizen失败！</translation>
     </message>
     <message>
         <location filename="miner/locktominerdialog.cpp" line="125"/>
@@ -6549,8 +6551,9 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.cpp" line="248"/>
         <location filename="miner/minerpage.cpp" line="377"/>
-        <source>Fail to foreclose asset from miner!</source>
-        <translation type="unfinished">从miner赎回资产失败！</translation>
+        <source>Fail to foreclose asset from citizen!</source>
+        <oldsource>Fail to foreclose asset from miner!</oldsource>
+        <translation type="unfinished">从citizen赎回资产失败！</translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="290"/>
@@ -7785,7 +7788,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="136"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1275"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1278"/>
         <source>投票状态</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7877,76 +7880,70 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="756"/>
-        <source>Senator地址</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="785"/>
-        <source>是否正式</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="816"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="819"/>
         <source>跨链费用</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="845"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1163"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="848"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1166"/>
         <source>币种</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="934"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="937"/>
         <source>保证金币种</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="947"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="950"/>
         <source>保证金金额</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="971"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="974"/>
         <source>质押资产(HX)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="997"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1000"/>
         <source>投票结果</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1010"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1023"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1039"/>
-        <location filename="guard/ProposalDetailDialog.ui" line="1055"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="756"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="772"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="788"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1013"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1026"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1042"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1058"/>
         <source>投票中</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1071"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="804"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1074"/>
         <source>更换名单：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1100"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1103"/>
         <source>投票占比(%):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1134"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1137"/>
         <source>Gas价格</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1181"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1184"/>
         <source>未知的提案类型</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.ui" line="1262"/>
+        <location filename="guard/ProposalDetailDialog.ui" line="1265"/>
         <source>所需投票者</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8010,36 +8007,38 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.cpp" line="215"/>
-        <source>set senator formal/informal</source>
-        <translation type="unfinished">设置senator为正式/非正式</translation>
+        <source>change permanent senator</source>
+        <oldsource>set senator formal/informal</oldsource>
+        <translation type="unfinished">更换正式 Senator</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="225"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="269"/>
         <source>set crosschain fee</source>
         <translation type="unfinished">设置跨链提现手续费</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="237"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="281"/>
         <source>set locked balance of senator</source>
         <translation type="unfinished">设置senator保证金</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="257"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="301"/>
         <source>citizen vote for changing senator</source>
         <translation type="unfinished">更换Senator提案</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="261"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="218"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="305"/>
         <source>%1      replaced by        %2</source>
         <translation type="unfinished">%1      更换为        %2</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="314"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="358"/>
         <source>set gas price</source>
         <translation type="unfinished">设置gas价格</translation>
     </message>
     <message>
-        <location filename="guard/ProposalDetailDialog.cpp" line="324"/>
+        <location filename="guard/ProposalDetailDialog.cpp" line="368"/>
         <source>unknown(%1)</source>
         <translation type="unfinished">未知(%1)</translation>
     </message>
@@ -8155,57 +8154,62 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalPage.cpp" line="146"/>
+        <source>change senator</source>
+        <translation type="unfinished">更换senator</translation>
+    </message>
+    <message>
+        <location filename="guard/ProposalPage.cpp" line="150"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="158"/>
+        <location filename="guard/ProposalPage.cpp" line="162"/>
         <source>no senator</source>
         <oldsource>no guard</oldsource>
         <translation type="unfinished">无senator</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="162"/>
+        <location filename="guard/ProposalPage.cpp" line="166"/>
         <source>approved</source>
         <translation type="unfinished">已赞成</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="167"/>
+        <location filename="guard/ProposalPage.cpp" line="171"/>
         <source>disapproved</source>
         <translation type="unfinished">已反对</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="172"/>
+        <location filename="guard/ProposalPage.cpp" line="176"/>
         <source>not voted</source>
         <translation type="unfinished">未投票</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="178"/>
+        <location filename="guard/ProposalPage.cpp" line="182"/>
         <source>approve</source>
         <translation type="unfinished">赞成</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="179"/>
+        <location filename="guard/ProposalPage.cpp" line="183"/>
         <source>disapprove</source>
         <translation type="unfinished">反对</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="231"/>
+        <location filename="guard/ProposalPage.cpp" line="240"/>
         <source>Transaction of voting for the proposal has been sent,please wait for confirmation</source>
         <translation type="unfinished">包含提案投票的交易已发出，请等待确认</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="238"/>
+        <location filename="guard/ProposalPage.cpp" line="247"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="251"/>
+        <location filename="guard/ProposalPage.cpp" line="265"/>
         <source>Sure to approve this proposal?</source>
         <translation type="unfinished">确定赞成这个提案吗？</translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="271"/>
+        <location filename="guard/ProposalPage.cpp" line="285"/>
         <source>Sure to disapprove this proposal?</source>
         <translation type="unfinished">确定反对这个提案吗？</translation>
     </message>
@@ -8700,7 +8704,8 @@ update or not?</source>
     </message>
     <message>
         <location filename="guard/SenatorChangeSenatorDialog.ui" line="198"/>
-        <source>（一次提议最多可更换三人）</source>
+        <source>（失效时间不得超过720小时）</source>
+        <oldsource>（一次提议最多可更换三人）</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -9778,12 +9783,12 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>VoteStateLabel</name>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="355"/>
+        <location filename="guard/ProposalPage.cpp" line="369"/>
         <source>not passed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ProposalPage.cpp" line="366"/>
+        <location filename="guard/ProposalPage.cpp" line="380"/>
         <source>voting</source>
         <translation type="unfinished"></translation>
     </message>

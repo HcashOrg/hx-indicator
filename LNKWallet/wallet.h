@@ -191,6 +191,7 @@ struct ProposalInfo
     QStringList    disapprovedKeys;    // 已投反对票的人
     QStringList    requiredAccounts;   // 需要的投票人
     QString type;
+    bool proposalFinished = false;
     int proposalOperationType = -1;
 };
 

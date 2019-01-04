@@ -245,7 +245,7 @@ void MinerPage::jsonDataUpdated(QString id)
         else
         {
             ErrorResultDialog errorResultDialog;
-            errorResultDialog.setInfoText(tr("Fail to foreclose asset from miner!"));
+            errorResultDialog.setInfoText(tr("Fail to foreclose asset from citizen!"));
             errorResultDialog.setDetailText(result);
             errorResultDialog.pop();
         }
@@ -374,7 +374,7 @@ void MinerPage::jsonDataUpdated(QString id)
         else
         {
             ErrorResultDialog errorResultDialog;
-            errorResultDialog.setInfoText(tr("Fail to foreclose asset from miner!"));
+            errorResultDialog.setInfoText(tr("Fail to foreclose asset from citizen!"));
             errorResultDialog.setDetailText(result);
             errorResultDialog.pop();
         }

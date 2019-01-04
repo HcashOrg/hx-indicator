@@ -195,7 +195,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
 font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      </property>
      <property name="text">
-      <string>（一次提议最多可更换三人）</string>
+      <string>（失效时间不得超过720小时）</string>
      </property>
     </widget>
     <widget class="ChangeSenatorSwitchWidget" name="replaceWidget" native="true">

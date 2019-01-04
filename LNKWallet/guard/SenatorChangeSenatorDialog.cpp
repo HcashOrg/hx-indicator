@@ -90,6 +90,7 @@ void SenatorChangeSenatorDialog::InitWidget()
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
 
     installDoubleValidator(ui->lineEdit_expTime,0,720.0,1);
+    ui->lineEdit_expTime->setText("1");
 
     InitData();
     if(ui->account->currentText().isEmpty())
@@ -111,7 +112,7 @@ void SenatorChangeSenatorDialog::InitData()
     foreach (QString acc, accounts) {
 
         GuardInfo info = HXChain::getInstance()->allGuardMap.value(acc);
-        if("PERMANENT" == info.senatorType)
+        if(info.isFormal && "PERMANENT" == info.senatorType)
         {
             ui->account->addItem(acc);
         }
