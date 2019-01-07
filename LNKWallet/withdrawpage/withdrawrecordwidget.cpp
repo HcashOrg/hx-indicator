@@ -56,6 +56,7 @@ void WithdrawRecordWidget::init()
     QStringList assetIds = HXChain::getInstance()->assetInfoMap.keys();
     foreach (QString assetId, assetIds)
     {
+        if(ASSET_NAME == HXChain::getInstance()->assetInfoMap.value(assetId).symbol) continue;
         ui->assetComboBox->addItem( revertERCSymbol(HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
     ui->stackedWidget->addWidget(pageWidget);
@@ -157,6 +158,8 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
 
         rowCount++;
     }
+    ui->withdrawRecordTableWidget->hideColumn(3);
+    ui->withdrawRecordTableWidget->hideColumn(5);
     tableWidgetSetItemZebraColor(ui->withdrawRecordTableWidget);
 
     int page = (ui->withdrawRecordTableWidget->rowCount()%ROWNUMBER==0 && ui->withdrawRecordTableWidget->rowCount() != 0) ?
@@ -164,11 +167,7 @@ void WithdrawRecordWidget::showWithdrawRecord(QString _accountAddress, QString _
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->withdrawRecordTableWidget->rowCount(),ROWNUMBER);
     pageChangeSlot(0);
-    if(0 == ui->withdrawRecordTableWidget->rowCount())
-    {
-        pageWidget->setVisible(false);
-    }
-
+    pageWidget->setVisible(ui->withdrawRecordTableWidget->rowCount()>0);
     blankWidget->setVisible(ui->withdrawRecordTableWidget->rowCount() == 0);
 
 }

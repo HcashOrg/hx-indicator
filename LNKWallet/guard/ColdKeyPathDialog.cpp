@@ -25,6 +25,7 @@ ColdKeyPathDialog::ColdKeyPathDialog(QString _accountName, QWidget *parent) :
     ui->closeBtn->setStyleSheet(CLOSEBTN_STYLE);
     ui->pathBtn->setStyleSheet(OKBTN_STYLE);
 
+    ui->pkFileLineEdit->setReadOnly(true);
     checkOkBtnEnabled();
 }
 
@@ -71,7 +72,7 @@ void ColdKeyPathDialog::on_pathBtn_clicked()
 
 void ColdKeyPathDialog::checkOkBtnEnabled()
 {
-    if(ui->pkFileLineEdit->text().isEmpty() || ui->pwdLineEdit->text().isEmpty() || !QFileInfo(ui->pkFileLineEdit->text()).dir().exists())
+    if(ui->pkFileLineEdit->text().isEmpty() || ui->pwdLineEdit->text().isEmpty())
     {
         ui->okBtn->setEnabled(false);
     }

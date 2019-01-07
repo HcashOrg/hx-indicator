@@ -140,7 +140,7 @@
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
-       <x>35</x>
+       <x>50</x>
        <y>81</y>
        <width>81</width>
        <height>21</height>
@@ -157,7 +157,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <widget class="QLabel" name="currentPledge">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>140</x>
        <y>80</y>
        <width>211</width>
        <height>21</height>
@@ -170,7 +170,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <widget class="QStackedWidget" name="stackedWidget_fee">
      <property name="geometry">
       <rect>
-       <x>70</x>
+       <x>50</x>
        <y>140</y>
        <width>221</width>
        <height>151</height>
@@ -182,7 +182,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
       <rect>
        <x>50</x>
        <y>110</y>
-       <width>81</width>
+       <width>91</width>
        <height>21</height>
       </rect>
      </property>
@@ -197,7 +197,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <widget class="QLineEdit" name="lineEdit_feeNumber">
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>140</x>
        <y>110</y>
        <width>171</width>
        <height>20</height>
