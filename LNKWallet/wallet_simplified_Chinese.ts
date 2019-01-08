@@ -2184,17 +2184,17 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="81"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="83"/>
         <source>There are no citizen accounts in the wallet.</source>
         <translation type="unfinished">钱包内没有citizen账户。</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="119"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="121"/>
         <source>Mining configuration has been written. This citizen account will start mining when the wallet is launched next time.</source>
         <translation type="unfinished">挖矿配置已被写入。该citizen账户会在下次钱包启动时开始挖矿。</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenAccountPage.cpp" line="202"/>
+        <location filename="citizen/CitizenAccountPage.cpp" line="206"/>
         <source>Sure to open the mining function of this citizen account?</source>
         <translation type="unfinished">确认打开该citizen账户的挖矿功能吗？</translation>
     </message>
@@ -2373,8 +2373,8 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="guard/ColdHotInfoDialog.ui" line="200"/>
-        <source>已签名sentor</source>
-        <oldsource>已签名guard</oldsource>
+        <source>已签名senator</source>
+        <oldsource>已签名sentor</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2389,8 +2389,9 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="guard/ColdHotInfoDialog.cpp" line="60"/>
-        <source>%1 guards have signed. %2 guards have not yet.</source>
-        <translation type="unfinished">%1 个guard已签名，%2 个guard还未签名。</translation>
+        <source>%1 senators have signed. %2 senators have not yet.</source>
+        <oldsource>%1 guards have signed. %2 guards have not yet.</oldsource>
+        <translation type="unfinished">%1 个senator已签名，%2 个senator还未签名。</translation>
     </message>
 </context>
 <context>
@@ -2700,7 +2701,7 @@ better not transfer or upgrade</source>
         <translation type="obsolete">选择路径</translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.cpp" line="61"/>
+        <location filename="guard/ColdKeyPathDialog.cpp" line="62"/>
         <source>Select the path to save the private key of the cold wallet</source>
         <oldsource>Select the path to save the private key of the cold address</oldsource>
         <translation type="unfinished">选择路径保存冷钱包私钥</translation>
@@ -4891,27 +4892,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1202"/>
+        <location filename="frame.cpp" line="1203"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1439"/>
+        <location filename="frame.cpp" line="1440"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2569"/>
+        <location filename="frame.cpp" line="2571"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2572"/>
+        <location filename="frame.cpp" line="2574"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2575"/>
+        <location filename="frame.cpp" line="2577"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -5317,23 +5318,23 @@ add an account first</source>
         <translation type="unfinished">领取挖矿收入交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="128"/>
+        <location filename="guard/GuardIncomePage.cpp" line="130"/>
         <source>This account&apos;s mining income is less than %1 %2 ! You can not get it.</source>
         <translation type="unfinished">该账户的挖矿收益还不到 %1 %2，还不能领取！</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="133"/>
+        <location filename="guard/GuardIncomePage.cpp" line="135"/>
         <source>Fail to get mining income!</source>
         <translation type="unfinished">领取挖矿收益失败！</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="176"/>
+        <location filename="guard/GuardIncomePage.cpp" line="178"/>
         <source>obtain</source>
         <translation type="unfinished">领取</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="224"/>
-        <location filename="guard/GuardIncomePage.cpp" line="281"/>
+        <location filename="guard/GuardIncomePage.cpp" line="226"/>
+        <location filename="guard/GuardIncomePage.cpp" line="283"/>
         <source>You need to pay %1 %2 for this operation. Continue?</source>
         <translation type="unfinished">你需要支付 %1 %2 手续费。是否继续？</translation>
     </message>
@@ -10472,17 +10473,17 @@ update or not?</source>
         <translation type="obsolete">已被取消</translation>
     </message>
     <message>
-        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="147"/>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="148"/>
         <source>waiting for signature</source>
         <translation type="unfinished">等待签名中</translation>
     </message>
     <message>
-        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="151"/>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="152"/>
         <source>being signed</source>
         <translation type="unfinished">正在签名</translation>
     </message>
     <message>
-        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="155"/>
+        <location filename="withdrawpage/withdrawrecordwidget.cpp" line="156"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>
