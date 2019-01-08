@@ -476,7 +476,14 @@ void WithdrawConfirmPage::showEthFinalTrxs()
         assetIconItem->setAsset(ui->ethFinalTrxTableWidget->item(i,0)->text());
         ui->ethFinalTrxTableWidget->setCellWidget(i, 0, assetIconItem);
 
-        ui->ethFinalTrxTableWidget->setItem(i, 1, new QTableWidgetItem(eft.signer));
+        QString item1Str = eft.signer;
+        QString senatorName = HXChain::getInstance()->getGuardNameByHotColdAddress(eft.signer);
+        if(!senatorName.isEmpty())
+        {
+            item1Str.append("("+senatorName+")");
+        }
+
+        ui->ethFinalTrxTableWidget->setItem(i, 1, new QTableWidgetItem(item1Str));
         ui->ethFinalTrxTableWidget->item(i,1)->setData(Qt::UserRole, eft.trxId);
 
         ui->ethFinalTrxTableWidget->setItem(i, 2, new QTableWidgetItem(eft.nonce));

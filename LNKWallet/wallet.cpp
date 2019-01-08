@@ -1148,6 +1148,30 @@ GuardMultisigAddress HXChain::getGuardMultisigByPairId(QString assetSymbol, QStr
     return result;
 }
 
+QString HXChain::getGuardNameByHotColdAddress(const QString &hotcoldaddress) const
+{
+    QMapIterator<QString,QVector<GuardMultisigAddress>> i(guardMultisigAddressesMap);
+    while (i.hasNext()) {
+        i.next();
+        foreach (GuardMultisigAddress gma, i.value()) {
+            if(hotcoldaddress == gma.coldAddress || hotcoldaddress == gma.hotAddress){
+                QString senatorID = i.key().split("-").back();
+                if(senatorID.isEmpty()) return "";
+                QMapIterator<QString,GuardInfo> tt(allGuardMap);
+                while(tt.hasNext()){
+                    tt.next();
+                    if(senatorID == tt.value().accountId){
+                        return tt.key();
+                    }
+
+                }
+            }
+        }
+    }
+
+    return "";
+}
+
 void HXChain::fetchGuardAllMultisigAddresses(QString accountId)
 {
     QStringList keys = assetInfoMap.keys();

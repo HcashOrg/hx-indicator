@@ -6,6 +6,7 @@
 #include "dialog/ErrorResultDialog.h"
 #include "selectwalletpathwidget.h"
 #include "commondialog.h"
+#include "SelectColdKeyFileDialog.h"
 
 ChangeCrosschainAddressDialog::ChangeCrosschainAddressDialog(QWidget *parent) :
     QDialog(parent),
@@ -322,9 +323,18 @@ void ChangeCrosschainAddressDialog::on_okBtn_clicked()
         commonDialog.setText(tr("Sure to sign this trx?"));
         if(commonDialog.pop())
         {
-            HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-senator_sign_eths_multi_account_create_trx", toJsonFormat( "senator_sign_eths_multi_account_create_trx",
-                                             QJsonArray() << ui->trxIdLabel->text() << ui->signerLabel->text()
-                                             << "" << ""));
+            //以太需要选择冷钱包私钥+密码
+            SelectColdKeyFileDialog selectColdKeyFileDialog;
+            selectColdKeyFileDialog.pop();
+            if(!selectColdKeyFileDialog.filePath.isEmpty() && !selectColdKeyFileDialog.pwd.isEmpty())
+            {
+                HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-senator_sign_eths_multi_account_create_trx", toJsonFormat( "senator_sign_eths_multi_account_create_trx",
+                                                 QJsonArray() << ui->trxIdLabel->text() << ui->signerLabel->text()
+                                                 << selectColdKeyFileDialog.filePath << selectColdKeyFileDialog.pwd));
+            }
+//            HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-senator_sign_eths_multi_account_create_trx", toJsonFormat( "senator_sign_eths_multi_account_create_trx",
+//                                             QJsonArray() << ui->trxIdLabel->text() << ui->signerLabel->text()
+//                                             << "" << ""));
         }
     }
     else
