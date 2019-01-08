@@ -2280,8 +2280,9 @@ better not transfer or upgrade</source>
         <translation type="obsolete">设置senator保证金</translation>
     </message>
     <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="254"/>
         <source>Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
-        <translation type="obsolete">Senator官方竞选预计在2月8号Citizen正式开始，为避免影响首次竞选进度，请勿在2月8号前发起竞选提案。</translation>
+        <translation type="unfinished">Senator官方竞选预计在2月8号Citizen正式开始，为避免影响首次竞选进度，请勿在2月8号前发起竞选提案。</translation>
     </message>
     <message>
         <location filename="citizen/CitizenProposalPage.cpp" line="344"/>
@@ -2608,14 +2609,12 @@ better not transfer or upgrade</source>
         <translation type="unfinished">交易已发出！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="369"/>
         <source>no key</source>
-        <translation type="unfinished">无私钥</translation>
+        <translation type="obsolete">无私钥</translation>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="467"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="587"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="674"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="675"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
@@ -2626,9 +2625,9 @@ better not transfer or upgrade</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="377"/>
         <location filename="guard/ColdHotTransferPage.cpp" line="476"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="598"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="587"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="599"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
@@ -2639,7 +2638,7 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="545"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="667"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="668"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
@@ -2649,14 +2648,19 @@ better not transfer or upgrade</source>
         <translation type="unfinished">未签名</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="670"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="671"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished">%1已经签名了该冷热钱包转账交易！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="677"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="678"/>
         <source>Wait for checking the signature of %1!</source>
         <translation type="unfinished">正在检查%1的签名！</translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="835"/>
+        <source>This account is not the signer!</source>
+        <translation type="unfinished">该账户不是签名账户！</translation>
     </message>
 </context>
 <context>
@@ -4261,14 +4265,44 @@ Contract created successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="63"/>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="64"/>
+        <location filename="exchange/ExchangeModeWidget.ui" line="786"/>
+        <source>卖</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.ui" line="791"/>
+        <source>价格</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.ui" line="796"/>
+        <source>深度</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.ui" line="801"/>
+        <source>深度图</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.ui" line="838"/>
+        <source>当前账户</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.cpp" line="120"/>
+        <source>Sell%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.cpp" line="169"/>
+        <location filename="exchange/ExchangeModeWidget.cpp" line="170"/>
         <source>Price (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="65"/>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="66"/>
+        <location filename="exchange/ExchangeModeWidget.cpp" line="171"/>
+        <location filename="exchange/ExchangeModeWidget.cpp" line="172"/>
         <source>Amount (%1)</source>
         <translation type="unfinished"></translation>
     </message>

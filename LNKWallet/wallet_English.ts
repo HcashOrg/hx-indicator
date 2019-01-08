@@ -2362,6 +2362,11 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="citizen/CitizenProposalPage.cpp" line="254"/>
+        <source>Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="citizen/CitizenProposalPage.cpp" line="344"/>
         <source>change senator</source>
         <translation type="unfinished"></translation>
@@ -2699,14 +2704,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="369"/>
-        <source>no key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="467"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="587"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="674"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="675"/>
         <source>checking</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2717,9 +2716,9 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="377"/>
         <location filename="guard/ColdHotTransferPage.cpp" line="476"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="598"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="587"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="599"/>
         <source>sign</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2730,7 +2729,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="guard/ColdHotTransferPage.cpp" line="545"/>
-        <location filename="guard/ColdHotTransferPage.cpp" line="667"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="668"/>
         <source>signed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2740,13 +2739,18 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="670"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="671"/>
         <source>%1 has already signed this cold-hot transaction!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferPage.cpp" line="677"/>
+        <location filename="guard/ColdHotTransferPage.cpp" line="678"/>
         <source>Wait for checking the signature of %1!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="guard/ColdHotTransferPage.cpp" line="835"/>
+        <source>This account is not the signer!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4414,14 +4418,44 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="63"/>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="64"/>
+        <location filename="exchange/ExchangeModeWidget.ui" line="786"/>
+        <source>卖</source>
+        <translation type="unfinished">SELL</translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.ui" line="791"/>
+        <source>价格</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.ui" line="796"/>
+        <source>深度</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.ui" line="801"/>
+        <source>深度图</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.ui" line="838"/>
+        <source>当前账户</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.cpp" line="120"/>
+        <source>Sell%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModeWidget.cpp" line="169"/>
+        <location filename="exchange/ExchangeModeWidget.cpp" line="170"/>
         <source>Price (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="65"/>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="66"/>
+        <location filename="exchange/ExchangeModeWidget.cpp" line="171"/>
+        <location filename="exchange/ExchangeModeWidget.cpp" line="172"/>
         <source>Amount (%1)</source>
         <translation type="unfinished"></translation>
     </message>

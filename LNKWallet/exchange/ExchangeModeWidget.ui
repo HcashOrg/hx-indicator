@@ -772,7 +772,7 @@ font: 12px &quot;微软雅黑&quot;;</string>
     <string notr="true"/>
    </property>
   </widget>
-  <widget class="QTableView" name="sellPositionTableView">
+  <widget class="QTableWidget" name="sellPositionTableWidget">
    <property name="geometry">
     <rect>
      <x>510</x>
@@ -781,8 +781,28 @@ font: 12px &quot;微软雅黑&quot;;</string>
      <height>110</height>
     </rect>
    </property>
+   <column>
+    <property name="text">
+     <string>卖</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>价格</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>深度</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>深度图</string>
+    </property>
+   </column>
   </widget>
-  <widget class="QTableView" name="buyPositionTableView">
+  <widget class="QTableWidget" name="buyPositionTableWidget">
    <property name="geometry">
     <rect>
      <x>510</x>
@@ -790,6 +810,58 @@ font: 12px &quot;微软雅黑&quot;;</string>
      <width>200</width>
      <height>110</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>80</y>
+     <width>70</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: rgb(137,129,161);
+font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
+   </property>
+   <property name="text">
+    <string>当前账户</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="accountComboBox">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>80</y>
+     <width>100</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑 Light</family>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
   </widget>
  </widget>
