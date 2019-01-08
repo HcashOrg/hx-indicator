@@ -75,6 +75,8 @@ void CitizenAccountPage::init()
         ui->accountComboBox->hide();
         ui->idLabel->hide();
         ui->idLabel2->hide();
+        ui->startMineBtn->hide();
+        ui->changeFeeBtn->hide();
 
         QLabel* label = new QLabel(this);
         label->setGeometry(QRect(ui->label->pos(), QSize(300,30)));
@@ -181,10 +183,12 @@ void CitizenAccountPage::on_accountComboBox_currentIndexChanged(const QString &a
         {
             ui->startMineBtn->show();
         }
+        ui->changeFeeBtn->show();
     }
     else
     {
         ui->startMineBtn->hide();
+        ui->changeFeeBtn->hide();
     }
 
     showLockBalance();

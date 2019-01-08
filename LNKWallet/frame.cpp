@@ -51,6 +51,7 @@
 #include "dialog/ExitingWidget.h"
 #include "multisig/MultiSigPage.h"
 #include "autoUpdate/AutoUpdateNotify.h"
+#include "websocketmanager.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -2054,6 +2055,7 @@ void Frame::jsonDataUpdated(QString id)
                 QJsonValue proposedTransactionValue = object.take("proposed_transaction");
                 info.transactionStr = QJsonDocument(proposedTransactionValue.toObject()).toJson();
                 info.type       = object.take("type").toString();
+                info.proposalFinished = object.value("finished").toBool();
 
                 QJsonArray array2 = object.take("approved_key_approvals").toArray();
                 foreach (QJsonValue v2, array2)
@@ -2723,6 +2725,11 @@ void Frame::onCloseWallet()
 {
     qDebug()<<"closeclose";
     HXChain::getInstance()->postRPC( "id-lock-onCloseWallet", toJsonFormat( "lock", QJsonArray()));
+    //如果当前还未链接client，则说明是在前期准备阶段，直接关闭qt即可
+    if(!HXChain::getInstance()->wsManager || !HXChain::getInstance()->wsManager->isConnected)
+    {
+        qApp->quit();
+    }
 }
 
 void Frame::ShowBubbleMessage(const QString &title, const QString &context,QSystemTrayIcon::MessageIcon icon, int msecs)

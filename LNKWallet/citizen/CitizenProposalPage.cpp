@@ -287,7 +287,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         if(!val.isString()) continue;
         whiteList.append(val.toString());
     }
-//    whiteList<<"1.2.45";//test whitelist
+//    whiteList<<"1.2.41";//test whitelist
 
 
     QStringList keys = HXChain::getInstance()->citizenProposalInfoMap.keys();
@@ -372,7 +372,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         else if(info.disapprovedKeys.contains(address))
         {
             ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(tr("not voted")));
-            ui->proposalTableWidget->item(i,5)->setTextColor(QColor(255,0,0));
+//            ui->proposalTableWidget->item(i,5)->setTextColor(QColor(255,0,0));
         }
         else
         {
@@ -381,7 +381,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
 
 //        ui->proposalTableWidget->setItem(i,5,new QTableWidgetItem(calProposalWeight(info)));
         qDebug()<<"proproadddd"<<address;
-        if(!address.isEmpty())          // 如果有senator账户
+        if(!address.isEmpty() && false == info.proposalFinished)          // 如果有senator账户
         {
             if(isCurrentTimeBigThanNextVoteTime)
             {
@@ -434,7 +434,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         }
         else
         {
-            ui->proposalTableWidget->hideColumn(6);
+            ui->proposalTableWidget->setItem(i,6,new QTableWidgetItem(("")));
         }
     }
 
@@ -455,20 +455,21 @@ QString CitizenProposalPage::calProposalWeight(const ProposalInfo &info) const
     unsigned long long allWeight = 0;
     unsigned long long alreadyWeight = 0;
     QMap<QString,MinerInfo> allMiner(HXChain::getInstance()->minerMap);
-    foreach(QString requireAddress,info.requiredAccounts){//该requireaccounts
-        QMapIterator<QString, MinerInfo> i(allMiner);
-        while (i.hasNext()) {
-            i.next();
-            if(requireAddress == i.value().address)
-            {
-                allWeight += i.value().pledgeWeight;
-            }
-            if(info.approvedKeys.contains(i.value().address))
-            {
-                alreadyWeight += i.value().pledgeWeight;
-            }
+    QMapIterator<QString, MinerInfo> i(allMiner);
+    while (i.hasNext()) {
+        i.next();
+        if(info.requiredAccounts.contains(i.value().address))
+        {
+            allWeight += i.value().pledgeWeight;
+            qDebug()<<"pppppppppppp"<<i.value().address<<i.value().pledgeWeight;
+        }
+        if(info.approvedKeys.contains(i.value().address))
+        {
+            alreadyWeight += i.value().pledgeWeight;
+            qDebug()<<"qqqqqqqqqqqq"<<i.value().address<<i.value().pledgeWeight;
         }
     }
+    qDebug()<<"wwwwwwwwwwwww"<<allWeight<<alreadyWeight;
     if(0 != allWeight)
     {
         return QString::number(alreadyWeight*1.0/allWeight,'f',2)+"%";
