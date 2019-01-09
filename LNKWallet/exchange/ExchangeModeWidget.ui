@@ -781,6 +781,9 @@ font: 12px &quot;微软雅黑&quot;;</string>
      <height>110</height>
     </rect>
    </property>
+   <property name="TableStyle" stdset="0">
+    <string>table2</string>
+   </property>
    <column>
     <property name="text">
      <string>卖</string>
@@ -811,6 +814,29 @@ font: 12px &quot;微软雅黑&quot;;</string>
      <height>110</height>
     </rect>
    </property>
+   <property name="TableStyle" stdset="0">
+    <string>table2</string>
+   </property>
+   <column>
+    <property name="text">
+     <string>买</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>价格</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>深度</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>深度图</string>
+    </property>
+   </column>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">

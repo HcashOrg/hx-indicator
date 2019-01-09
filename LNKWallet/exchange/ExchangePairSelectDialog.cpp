@@ -7,8 +7,9 @@
 #include "ExchangeSinglePairCellWidget.h"
 #include "ExchangeModeWidget.h"
 
-ExchangePairSelectDialog::ExchangePairSelectDialog(QWidget *parent) :
+ExchangePairSelectDialog::ExchangePairSelectDialog(bool _showAddBtn, QWidget *parent) :
     QDialog(parent),
+    showAddBtn(_showAddBtn),
     ui(new Ui::ExchangePairSelectDialog)
 {
     ui->setupUi(this);
@@ -36,10 +37,20 @@ ExchangePairSelectDialog::ExchangePairSelectDialog(QWidget *parent) :
                                "QScrollBar::sub-page:vertical {background: transparent;}"
                                "QScrollBar::add-page:vertical {background: transparent;}");
 
-    tableWidget->setGeometry(7,40,110,90);
     tableWidget->setColumnCount(1);
     tableWidget->setColumnWidth(0,110);
     connect(tableWidget, &QTableWidget::cellClicked, this, &ExchangePairSelectDialog::onCellWidgetClicked);
+
+    if(showAddBtn)
+    {
+        ui->addBtn->show();
+        tableWidget->setGeometry(7,40,110,90);
+    }
+    else
+    {
+        ui->addBtn->hide();
+        tableWidget->setGeometry(7,10,110,120);
+    }
 
     showPairs();
 }
@@ -77,7 +88,6 @@ void ExchangePairSelectDialog::showPairs()
 
 void ExchangePairSelectDialog::onCellWidgetClicked(int _row, int _column)
 {
-    qDebug() << "ccccccccccccc " << _row << _column ;
     ExchangeSinglePairCellWidget* cellWidget = static_cast<ExchangeSinglePairCellWidget*>(tableWidget->cellWidget(_row,_column));
     if(cellWidget)
     {

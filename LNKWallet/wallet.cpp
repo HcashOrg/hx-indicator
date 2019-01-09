@@ -175,12 +175,12 @@ void HXChain:: startExe()
             ;
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay4",true).toBool())
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay5",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/dbReplay4",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay5",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;

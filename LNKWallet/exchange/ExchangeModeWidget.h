@@ -42,9 +42,20 @@ private slots:
 
     void on_marketBtn1_clicked();
 
+    void on_marketBtn2_clicked();
+
+    void on_marketBtn3_clicked();
+
     void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
+    void on_buyBtn_clicked();
+
+    void on_sellBtn_clicked();
+
+
 private:
+    void getExchangePairs();
+
     void getUserBalances();
     QMap<QString,ExchangeBalance>   assetExchangeBalanceMap;
     void getSellOrders(const ExchangePair& _pair);
