@@ -28,7 +28,7 @@
 
 HXChain* HXChain::goo = 0;
 static const QMap<QString,double>    defaultAutoWithdrawAmountMap = { {"BTC",10},{"LTC",1000},{"HC",10000},{"ETH",100} };
-const static QStringList ERCAssets = {"PAX"};
+const static QStringList ERCAssets = {"PAX","ELF"};
 
 HXChain::HXChain()
 {
