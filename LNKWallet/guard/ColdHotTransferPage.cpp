@@ -472,7 +472,6 @@ void ColdHotTransferPage::showColdHotTransactions()
             ui->coldHotTransactionTableWidget->setCellWidget(i,5,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,5));
 
-
             ui->coldHotTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
             ToolButtonWidget *toolButton2 = new ToolButtonWidget();
             toolButton2->setText(ui->coldHotTransactionTableWidget->item(i,6)->text());
@@ -578,7 +577,13 @@ void ColdHotTransferPage::showEthFinalTrxs()
         assetIconItem->setAsset(ui->ethFinalTrxTableWidget->item(i,0)->text());
         ui->ethFinalTrxTableWidget->setCellWidget(i, 0, assetIconItem);
 
-        ui->ethFinalTrxTableWidget->setItem(i, 1, new QTableWidgetItem(eft.signer));
+        QString item1Str = eft.signer;
+        QString senatorName = HXChain::getInstance()->getGuardNameByHotColdAddress(eft.signer);
+        if(!senatorName.isEmpty())
+        {
+            item1Str.append("("+senatorName+")");
+        }
+        ui->ethFinalTrxTableWidget->setItem(i, 1, new QTableWidgetItem(item1Str));
         ui->ethFinalTrxTableWidget->item(i,1)->setData(Qt::UserRole, eft.trxId);
 
         ui->ethFinalTrxTableWidget->setItem(i, 2, new QTableWidgetItem(eft.nonce));

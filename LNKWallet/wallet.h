@@ -516,6 +516,7 @@ public:
     QStringList getPermanentSenators();
     QMap<QString,QVector<GuardMultisigAddress>> guardMultisigAddressesMap;  // key是 资产名-guard账户Id 的形式 比如 BTC-1.2.23
     GuardMultisigAddress getGuardMultisigByPairId(QString assetSymbol, QString guardName, QString pairId);      // 从guardMultisigAddressesMap，找到对应的
+    QString getGuardNameByHotColdAddress(const QString &hotcoldaddress)const;//根据冷热地址，查找senator名称--服务于guard页面显示
     void fetchGuardAllMultisigAddresses(QString accountId);
     QStringList getAssetMultisigUpdatedGuards(QString assetSymbol);         // 获取多签地址正在更新的guardId
     QString guardAccountIdToName(QString guardAccountId);

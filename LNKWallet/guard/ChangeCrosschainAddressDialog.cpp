@@ -323,6 +323,7 @@ void ChangeCrosschainAddressDialog::on_okBtn_clicked()
         selectColdKeyFileDialog.pop();
         if(!selectColdKeyFileDialog.filePath.isEmpty() && !selectColdKeyFileDialog.pwd.isEmpty())
         {
+
             HXChain::getInstance()->postRPC( "ChangeCrosschainAddressDialog-senator_sign_eths_multi_account_create_trx", toJsonFormat( "senator_sign_eths_multi_account_create_trx",
                                              QJsonArray() << ui->trxIdLabel->text() << ui->signerLabel->text()
                                              << selectColdKeyFileDialog.filePath << selectColdKeyFileDialog.pwd));
