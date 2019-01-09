@@ -197,7 +197,7 @@
 </string>
      </property>
      <property name="text">
-      <string>已签名sentor</string>
+      <string>已签名senator</string>
      </property>
     </widget>
     <widget class="QLabel" name="signedGuardsLabel">

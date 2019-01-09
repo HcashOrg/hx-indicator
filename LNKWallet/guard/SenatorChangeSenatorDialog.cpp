@@ -112,7 +112,7 @@ void SenatorChangeSenatorDialog::InitData()
     foreach (QString acc, accounts) {
 
         GuardInfo info = HXChain::getInstance()->allGuardMap.value(acc);
-        if("PERMANENT" == info.senatorType)
+        if(info.isFormal && "PERMANENT" == info.senatorType)
         {
             ui->account->addItem(acc);
         }

@@ -175,12 +175,12 @@ void HXChain:: startExe()
             ;
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay4",true).toBool())
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay5",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/dbReplay4",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay5",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
@@ -1117,12 +1117,13 @@ QStringList HXChain::getFormalGuards()
 QStringList HXChain::getPermanentSenators()
 {
     QStringList result;
-
-    foreach (QString key, allGuardMap.keys())
+    QStringList allKeys = allGuardMap.keys();
+    foreach (QString key, allKeys)
     {
-        if(allGuardMap.value(key).senatorType == "PERMANENT")
+//        qDebug()<<"nnnnnnn"<<key<<allGuardMap.value(key).isFormal<<allGuardMap.value(key).senatorType;
+        if(allGuardMap.value(key).isFormal && allGuardMap.value(key).senatorType == "PERMANENT")
         {
-            result += key;
+            result << key;
         }
     }
 
@@ -1145,6 +1146,30 @@ GuardMultisigAddress HXChain::getGuardMultisigByPairId(QString assetSymbol, QStr
     }
 
     return result;
+}
+
+QString HXChain::getGuardNameByHotColdAddress(const QString &hotcoldaddress) const
+{
+    QMapIterator<QString,QVector<GuardMultisigAddress>> i(guardMultisigAddressesMap);
+    while (i.hasNext()) {
+        i.next();
+        foreach (GuardMultisigAddress gma, i.value()) {
+            if(hotcoldaddress == gma.coldAddress || hotcoldaddress == gma.hotAddress){
+                QString senatorID = i.key().split("-").back();
+                if(senatorID.isEmpty()) return "";
+                QMapIterator<QString,GuardInfo> tt(allGuardMap);
+                while(tt.hasNext()){
+                    tt.next();
+                    if(senatorID == tt.value().accountId){
+                        return tt.key();
+                    }
+
+                }
+            }
+        }
+    }
+
+    return "";
 }
 
 void HXChain::fetchGuardAllMultisigAddresses(QString accountId)

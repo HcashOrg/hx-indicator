@@ -350,41 +350,41 @@ void ColdHotTransferPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if(id.startsWith("ColdHotTransferPage+dump_crosschain_private_key+"))
-    {
-        QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//    if(id.startsWith("ColdHotTransferPage+dump_crosschain_private_key+"))
+//    {
+//        QString result = HXChain::getInstance()->jsonDataValue(id);
+//        qDebug() << id << result;
 
-        QStringList strList = id.mid(QString("ColdHotTransferPage+dump_crosschain_private_key+").size()).split("+");
-        QString signer = strList.at(0);
-        QString rowStr = strList.at(1);
-        int row = rowStr.toInt();
+//        QStringList strList = id.mid(QString("ColdHotTransferPage+dump_crosschain_private_key+").size()).split("+");
+//        QString signer = strList.at(0);
+//        QString rowStr = strList.at(1);
+//        int row = rowStr.toInt();
 
-        if(ui->ethFinalTrxTableWidget->item(row,1) && ui->ethFinalTrxTableWidget->item(row,3))
-        {
-            if(ui->ethFinalTrxTableWidget->item(row,1)->text() == signer)
-            {
-                if(result == "\"result\":[]")       // 钱包内无对应私钥
-                {
-                    ui->ethFinalTrxTableWidget->item(row,3)->setText(tr("no key"));
+//        if(ui->ethFinalTrxTableWidget->item(row,1) && ui->ethFinalTrxTableWidget->item(row,3))
+//        {
+//            if(ui->ethFinalTrxTableWidget->item(row,1)->text() == signer)
+//            {
+//                if(result == "\"result\":[]")       // 钱包内无对应私钥
+//                {
+//                    ui->ethFinalTrxTableWidget->item(row,3)->setText(tr("no key"));
 
-                    ToolButtonWidget* tbw = static_cast<ToolButtonWidget*>(ui->ethFinalTrxTableWidget->cellWidget(row,3));
-                    tbw->setText(ui->ethFinalTrxTableWidget->item(row,3)->text());
-                    tbw->setEnabled(false);
-                }
-                else if(result.startsWith("\"result\":[["))     //有私钥
-                {
-                    ui->ethFinalTrxTableWidget->item(row,3)->setText(tr("sign"));
+//                    ToolButtonWidget* tbw = static_cast<ToolButtonWidget*>(ui->ethFinalTrxTableWidget->cellWidget(row,3));
+//                    tbw->setText(ui->ethFinalTrxTableWidget->item(row,3)->text());
+//                    tbw->setEnabled(false);
+//                }
+//                else if(result.startsWith("\"result\":[["))     //有私钥
+//                {
+//                    ui->ethFinalTrxTableWidget->item(row,3)->setText(tr("sign"));
 
-                    ToolButtonWidget* tbw = static_cast<ToolButtonWidget*>(ui->ethFinalTrxTableWidget->cellWidget(row,3));
-                    tbw->setText(ui->ethFinalTrxTableWidget->item(row,3)->text());
-                    tbw->setEnabled(true);
-                }
-            }
-        }
+//                    ToolButtonWidget* tbw = static_cast<ToolButtonWidget*>(ui->ethFinalTrxTableWidget->cellWidget(row,3));
+//                    tbw->setText(ui->ethFinalTrxTableWidget->item(row,3)->text());
+//                    tbw->setEnabled(true);
+//                }
+//            }
+//        }
 
-        return;
-    }
+//        return;
+//    }
 }
 
 void ColdHotTransferPage::httpReplied(QByteArray _data, int _status)
@@ -471,7 +471,6 @@ void ColdHotTransferPage::showColdHotTransactions()
             toolButton->setText(ui->coldHotTransactionTableWidget->item(i,5)->text());
             ui->coldHotTransactionTableWidget->setCellWidget(i,5,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_coldHotTransactionTableWidget_cellClicked,this,i,5));
-
 
             ui->coldHotTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("sign")));
             ToolButtonWidget *toolButton2 = new ToolButtonWidget();
@@ -578,22 +577,29 @@ void ColdHotTransferPage::showEthFinalTrxs()
         assetIconItem->setAsset(ui->ethFinalTrxTableWidget->item(i,0)->text());
         ui->ethFinalTrxTableWidget->setCellWidget(i, 0, assetIconItem);
 
-        ui->ethFinalTrxTableWidget->setItem(i, 1, new QTableWidgetItem(eft.signer));
+        QString item1Str = eft.signer;
+        QString senatorName = HXChain::getInstance()->getGuardNameByHotColdAddress(eft.signer);
+        if(!senatorName.isEmpty())
+        {
+            item1Str.append("("+senatorName+")");
+        }
+        ui->ethFinalTrxTableWidget->setItem(i, 1, new QTableWidgetItem(item1Str));
         ui->ethFinalTrxTableWidget->item(i,1)->setData(Qt::UserRole, eft.trxId);
 
         ui->ethFinalTrxTableWidget->setItem(i, 2, new QTableWidgetItem(eft.nonce));
 
 #ifndef SAFE_VERSION
-        ui->ethFinalTrxTableWidget->setItem(i, 3, new QTableWidgetItem(tr("checking")));
+        ui->ethFinalTrxTableWidget->setItem(i, 3, new QTableWidgetItem(tr("sign")));
         ToolButtonWidget *toolButton = new ToolButtonWidget();
         toolButton->setText(ui->ethFinalTrxTableWidget->item(i,3)->text());
         toolButton->setEnabled(false);
         ui->ethFinalTrxTableWidget->setCellWidget(i,3,toolButton);
         connect(toolButton,&ToolButtonWidget::clicked,std::bind(&ColdHotTransferPage::on_ethFinalTrxTableWidget_cellClicked,this,i,3));
 
-        HXChain::getInstance()->postRPC( "ColdHotTransferPage+dump_crosschain_private_key+" + QString("%1+%2").arg(eft.signer).arg(i),
-                                         toJsonFormat( "dump_crosschain_private_key",
-                                                       QJsonArray() << eft.signer));
+
+//        HXChain::getInstance()->postRPC( "ColdHotTransferPage+dump_crosschain_private_key+" + QString("%1+%2").arg(eft.signer).arg(i),
+//                                         toJsonFormat( "dump_crosschain_private_key",
+//                                                       QJsonArray() << eft.signer));
 #else
         ui->ethFinalTrxTableWidget->setItem(i, 3, new QTableWidgetItem(tr("sign")));
         ToolButtonWidget *toolButton = new ToolButtonWidget();
@@ -805,15 +811,35 @@ void ColdHotTransferPage::on_ethFinalTrxTableWidget_cellClicked(int row, int col
     {
         if(ui->ethFinalTrxTableWidget->item(row,1))
         {
+            QString signer = ui->ethFinalTrxTableWidget->item(row,1)->text();
             QString trxId = ui->ethFinalTrxTableWidget->item(row,1)->data(Qt::UserRole).toString();
 
-            qDebug() << trxId;
-
-            HXChain::getInstance()->postRPC( "id-senator_sign_eths_coldhot_final_trx",
-                                             toJsonFormat( "senator_sign_eths_coldhot_final_trx",
-                                                           QJsonArray() << trxId << ui->accountComboBox->currentText()
-                                                           << "" << ""));
-
+            if(signer.isEmpty())    return;
+            if(ui->hotAddressBalanceLabel->text().startsWith(signer))
+            {
+                HXChain::getInstance()->postRPC( "id-senator_sign_eths_coldhot_final_trx",
+                                                 toJsonFormat( "senator_sign_eths_coldhot_final_trx",
+                                                               QJsonArray() << trxId << ui->accountComboBox->currentText()
+                                                               << "" << ""));
+            }
+            else if( ui->coldAddressBalanceLabel->text().startsWith(signer))
+            {
+                SelectColdKeyFileDialog selectColdKeyFileDialog;
+                selectColdKeyFileDialog.pop();
+                if(!selectColdKeyFileDialog.filePath.isEmpty() && !selectColdKeyFileDialog.pwd.isEmpty())
+                {
+                    HXChain::getInstance()->postRPC( "id-senator_sign_eths_coldhot_final_trx",
+                                                     toJsonFormat( "senator_sign_eths_coldhot_final_trx",
+                                                                   QJsonArray() << trxId << ui->accountComboBox->currentText()
+                                                                   << selectColdKeyFileDialog.filePath << selectColdKeyFileDialog.pwd));
+                }
+            }
+            else
+            {
+                CommonDialog dialog(CommonDialog::OkOnly);
+                dialog.setText(tr("This account is not the signer!"));
+                dialog.pop();
+            }
         }
 
         return;

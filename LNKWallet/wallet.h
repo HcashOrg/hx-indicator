@@ -36,15 +36,17 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.5"           // 版本号
+#define WALLET_VERSION "1.2.6"           // 版本号
 
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
 #ifdef TEST_WALLET
-#define LOCKFUND_CONTRACT_ADDRESS  "HXCQwZ9pM9Zur1E5Bny924W5ngcChs4wRAeS"
+#define LOCKFUND_CONTRACT_ADDRESS  "HXCRYtwTBjTLnh6NAiFpiAtquHBFWZUCLz3u"
+#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCWTYboSc3yR5EAvkTpBgt8BCpbq3rEWkYX"
 #else
 #define LOCKFUND_CONTRACT_ADDRESS  ""
+#define EXCHANGE_MODE_CONTRACT_ADDRESS  ""
 #endif
 
 #ifdef TEST_WALLET
@@ -514,6 +516,7 @@ public:
     QStringList getPermanentSenators();
     QMap<QString,QVector<GuardMultisigAddress>> guardMultisigAddressesMap;  // key是 资产名-guard账户Id 的形式 比如 BTC-1.2.23
     GuardMultisigAddress getGuardMultisigByPairId(QString assetSymbol, QString guardName, QString pairId);      // 从guardMultisigAddressesMap，找到对应的
+    QString getGuardNameByHotColdAddress(const QString &hotcoldaddress)const;//根据冷热地址，查找senator名称--服务于guard页面显示
     void fetchGuardAllMultisigAddresses(QString accountId);
     QStringList getAssetMultisigUpdatedGuards(QString assetSymbol);         // 获取多签地址正在更新的guardId
     QString guardAccountIdToName(QString guardAccountId);

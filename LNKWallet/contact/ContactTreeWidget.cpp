@@ -123,13 +123,14 @@ bool ContactTreeWidget::addGroup(const QString &groupName)
     std::shared_ptr<ContactGroup> group = std::make_shared<ContactGroup>();
     group->groupType = ContactGroup::GroupType_Normal;
     group->groupName = groupName;
-    group->number = _p->contactSheet->groups.size();
+    group->number = static_cast<int>(_p->contactSheet->groups.size());
     _p->contactSheet->addGroup(group);
 
     QTreeWidgetItem *topItem = createItemWithGroup(group);
     addTopLevelItem(topItem);
 
     emit SaveContact();
+    setCurrentItem(topItem);
     return editGroup(topItem);
 }
 
@@ -140,6 +141,7 @@ bool ContactTreeWidget::editGroup(QTreeWidgetItem *topItem)
     if(!group) return false;
     QLineEdit *lineEdit = new QLineEdit(group->groupName);
     lineEdit->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    lineEdit->setAttribute(Qt::WA_DeleteOnClose);
 
     lineEdit->setGeometry(QRect(mapToGlobal(pos())+visualRect(currentIndex()).topLeft(),
                                 visualRect(currentIndex()).size()));
@@ -199,6 +201,7 @@ bool ContactTreeWidget::editPerson(QTreeWidgetItem *personItem)
     if(!person) return false;
     QLineEdit *lineEdit = new QLineEdit(person->name);
     lineEdit->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+    lineEdit->setAttribute(Qt::WA_DeleteOnClose);
 
     lineEdit->setGeometry(QRect(mapToGlobal(pos())+visualRect(currentIndex()).topLeft(),
                                 visualRect(currentIndex()).size()));
@@ -324,13 +327,13 @@ void ContactTreeWidget::moveToGroupSlots(bool checked)
     moveToGroup(currentItem,toItem);
 }
 
-void ContactTreeWidget::editGroupFinishSlots()
+void ContactTreeWidget::editGroupFinishSlots(/*QTreeWidgetItem *groupItem*/)
 {
     QLineEdit * lineEdit =qobject_cast<QLineEdit *>(sender());
     if(!lineEdit) return;
 
-    disconnect(lineEdit,&QLineEdit::editingFinished,this,&ContactTreeWidget::editGroupFinishSlots);
     QString newName = lineEdit->text();
+    if(!currentItem()) return;
 
     std::shared_ptr<ContactGroup> group = currentItem()->data(0,Qt::UserRole).value<std::shared_ptr<ContactGroup>>();
     if(!group)
@@ -361,6 +364,7 @@ void ContactTreeWidget::editPersonFinishSlots()
     disconnect(lineEdit,&QLineEdit::editingFinished,this,&ContactTreeWidget::editPersonFinishSlots);
     QString newName = lineEdit->text();
 
+    if(!currentItem()) return;
     std::shared_ptr<ContactPerson> person = currentItem()->data(0,Qt::UserRole).value<std::shared_ptr<ContactPerson>>();
     if(!person)
     {

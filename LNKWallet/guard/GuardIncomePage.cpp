@@ -117,6 +117,8 @@ void GuardIncomePage::jsonDataUpdated(QString id)
             transactionResultDialog.setInfoText(tr("Transaction of get-income has been sent out!"));
             transactionResultDialog.setDetailText(result);
             transactionResultDialog.pop();
+
+            on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
         }
         else
         {

@@ -15,7 +15,7 @@ class ExchangePairSelectDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ExchangePairSelectDialog(QWidget *parent = nullptr);
+    explicit ExchangePairSelectDialog(bool _showAddBtn = true, QWidget *parent = nullptr);
     ~ExchangePairSelectDialog();
 
 private slots:
@@ -31,6 +31,7 @@ private slots:
 
 private:
     Ui::ExchangePairSelectDialog *ui;
+    bool showAddBtn = true;
 
     bool event(QEvent *event);
     void paintEvent(QPaintEvent* event);

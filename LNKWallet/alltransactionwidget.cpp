@@ -640,7 +640,7 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,3, item);
             item->setTextColor(QColor(255,0,0));
 
-            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("lock asset to miner")));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("lock asset to citizen")));
         }
             break;
         case TRANSACTION_TYPE_FORECLOSE:
@@ -656,7 +656,7 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,3, item);
             item->setTextColor(QColor(0,170,0));
 
-            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("foreclose asset from miner")));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("foreclose asset from citizen")));
         }
             break;
         case TRANSACTION_TYPE_SENATOR_LOCK_BALANCE:
