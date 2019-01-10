@@ -14,7 +14,7 @@
 #include "wallet.h"
 #include "frame.h"
 #ifdef _DEBUG
-//#include "VisualLeakDetector/include/vld.h"
+#include "VisualLeakDetector/include/vld.h"
 #endif
 
 #ifdef WIN32
