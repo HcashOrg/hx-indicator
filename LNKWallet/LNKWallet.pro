@@ -22,14 +22,23 @@ win32{
 #    LIBS += -limm32
     LIBS += -lShLwApi
     LIBS += User32.Lib
+CONFIG(debug, debug|release) {
+    LIBS += -L$$PWD -lqrencoded
+    LIBS += -L$$PWD/leveldb -lleveldbd
+    INCLUDEPATH += VisualLeakDetector/include
+    LIBS += -L$$PWD/VisualLeakDetector/lib/Win64 -lvld
+}
 }
 macx{
     ICON = HX.icns
     QMAKE_MAC_SDK = macosx10.12
 }
-LIBS += -L$$PWD -lqrencode
 
-LIBS += -L$$PWD/leveldb -lleveldb
+CONFIG(release, debug|release) {
+    LIBS += -L$$PWD -lqrencode
+    LIBS += -L$$PWD/leveldb -lleveldb
+}
+
 INCLUDEPATH += $$PWD/leveldb/include/
 
 
@@ -524,8 +533,10 @@ TRANSLATIONS +=   wallet_simplified_Chinese.ts  wallet_English.ts
 DISTFILES += \
     contact/search.png \
     leveldb/leveldb.lib \
+    leveldb/leveldbd.lib \
     libqrencode.a \
     qrencode.lib \
+    qrencoded.lib \
     pic2/Thumbs.db \
     pic2/copyBtn.png \
     HX.ico \
@@ -534,5 +545,8 @@ DISTFILES += \
     wallet_English.ts \
     wallet_simplified_Chinese.ts
 
-QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
-QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
+
+CONFIG(release,debug|release){
+    QMAKE_CXXFLAGS_RELEASE = $$QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO
+    QMAKE_LFLAGS_RELEASE = $$QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO
+}
