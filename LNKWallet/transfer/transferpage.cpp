@@ -500,6 +500,7 @@ void TransferPage::updateAmountSlots()
     QString assetID ;
     int assetPrecision ;
     foreach (AssetInfo in, HXChain::getInstance()->assetInfoMap) {
+        qDebug() << in.id << in.symbol << in.precision << assetType;
         if(in.symbol == assetType){
             assetID = in.id;
             assetPrecision = in.precision;
