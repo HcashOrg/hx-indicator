@@ -16,7 +16,7 @@ UpdateProgressUtil::UpdateProgressUtil()
 UpdateProgressUtil::VersionEnum UpdateProgressUtil::CompareVersion(const QString &oldVersion, const QString &newVersion)
 {
 
-    if(oldVersion == newVersion) return EQUAL;
+    if(oldVersion == newVersion || oldVersion.isEmpty() || newVersion.isEmpty()) return EQUAL;
 
     QStringList aList = oldVersion.split(".");
     QStringList bList = newVersion.split(".");
@@ -133,6 +133,10 @@ bool UpdateProgressUtil::ParseXmlDoc(const QDomDocument &doc, VersionInfoPtr &da
             else if("ForceUpdate" == e.tagName())
             {
                 data->isUpdateForced = (e.text()=="true");
+            }
+            else if("MinimalVersion" == e.tagName())
+            {
+                data->minimalVersion = e.text();
             }
 
         }

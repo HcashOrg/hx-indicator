@@ -24,6 +24,7 @@ class VersionInfo
 {
 public:
     QString version;//总版本
+    QString minimalVersion;//最小可接受版本，如果低于该版本，则强制更新（由于是后期增加的功能，可用此更改isUpdateForced，尽量减小程序修改量）
     bool isUpdateForced=false;//是否是强制更新版本
     QString serverPath;
     QString updateVersion;//更新器版本
