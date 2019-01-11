@@ -28,6 +28,8 @@ void AutoUpdateDialog::setVersion(const QString &version, bool isForceUpdate)
 //    ui->label_version->setText(version);
     if(isForceUpdate)
     {
+        ui->okBtn->move(ui->okBtn->geometry().topLeft().x()+70,ui->okBtn->geometry().topLeft().y());
+
         ui->cancelBtn->setVisible(false);
         ui->closeBtn->setVisible(false);
     }

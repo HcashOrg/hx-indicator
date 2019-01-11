@@ -176,6 +176,16 @@ void UpdateProcess::DownLoadVersionConfigFinsihed(const QString &dstFilename)
                                               _p->downloadPath+QDir::separator()+COPY_DIR_NAME,_p->downloadPath,
                                               _p->updateList);
         qDebug()<<"download size---"<<_p->updateList.size()<<_p->serverVersionData->version;
+        //修改强制更新等级，，根据服务器可接受最小版本与当前软件版本比较，调整是否强制更新
+        if(UpdateProgressUtil::CompareVersion( _p->localVersionData->version, _p->serverVersionData->minimalVersion)
+                == UpdateProgressUtil::AFTER)
+        {
+            _p->serverVersionData->isUpdateForced = true;
+        }
+        else
+        {
+            _p->serverVersionData->isUpdateForced = false;
+        }
         //发送版本信息
         emit NewstVersionSignal(_p->updateList.empty()?"":_p->serverVersionData->version,_p->serverVersionData->isUpdateForced);
     }
