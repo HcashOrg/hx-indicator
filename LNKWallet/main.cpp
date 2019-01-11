@@ -1,20 +1,20 @@
 ﻿#include <QApplication>
 #ifdef WIN32
 #include <windows.h>
-#include "DbgHelp.h"
-#include "tchar.h"
-#include "ShlObj.h"
+//#include "DbgHelp.h"
+//#include "tchar.h"
+//#include "ShlObj.h"
 #endif
 
 #include <qapplication.h>
 #include <QTranslator>
 #include <QThread>
 
-
 #include "wallet.h"
 #include "frame.h"
+
 #ifdef _DEBUG
-#include "VisualLeakDetector/include/vld.h"
+#include <vld.h>
 #endif
 
 #ifdef WIN32
@@ -35,20 +35,20 @@ bool checkOnly()
         return true;
 }
 
-LONG WINAPI TopLevelExceptionFilter(struct _EXCEPTION_POINTERS *pExceptionInfo)
-{
-    qDebug() << "Enter TopLevelExceptionFilter Function" ;
-    HANDLE hFile = CreateFile(  _T("project.dmp"),GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
-    MINIDUMP_EXCEPTION_INFORMATION stExceptionParam;
-    stExceptionParam.ThreadId    = GetCurrentThreadId();
-    stExceptionParam.ExceptionPointers = pExceptionInfo;
-    stExceptionParam.ClientPointers    = FALSE;
-    MiniDumpWriteDump(GetCurrentProcess(),GetCurrentProcessId(),hFile,MiniDumpWithFullMemory,&stExceptionParam,NULL,NULL);
-    CloseHandle(hFile);
+//LONG WINAPI TopLevelExceptionFilter(struct _EXCEPTION_POINTERS *pExceptionInfo)
+//{
+//    qDebug() << "Enter TopLevelExceptionFilter Function" ;
+//    HANDLE hFile = CreateFile(  _T("project.dmp"),GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+//    MINIDUMP_EXCEPTION_INFORMATION stExceptionParam;
+//    stExceptionParam.ThreadId    = GetCurrentThreadId();
+//    stExceptionParam.ExceptionPointers = pExceptionInfo;
+//    stExceptionParam.ClientPointers    = FALSE;
+//    MiniDumpWriteDump(GetCurrentProcess(),GetCurrentProcessId(),hFile,MiniDumpWithFullMemory,&stExceptionParam,NULL,NULL);
+//    CloseHandle(hFile);
 
-    qDebug() << "End TopLevelExceptionFilter Function" ;
-    return EXCEPTION_EXECUTE_HANDLER;
-}
+//    qDebug() << "End TopLevelExceptionFilter Function" ;
+//    return EXCEPTION_EXECUTE_HANDLER;
+//}
 
 LPWSTR ConvertCharToLPWSTR(const char * szString)
 {
@@ -143,21 +143,23 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 
 int main(int argc, char *argv[])
 {
+#ifdef WIN32
+    //提前加载libeay32库
+//    QString libeay = "D:\\SoftWare\\Visual Leak Detector\\bin\\Win64\\dbghelp.dll";
+//    QString libeay = QCoreApplication::applicationDirPath()+"/libeay32.dll";
+//    QString ssl = QCoreApplication::applicationDirPath()+"/ssleay32.dll";
+//    qDebug()<<libeay;
+//    ::LoadLibrary(LPCWSTR(libeay.utf16()));
+//    ::LoadLibrary(LPCWSTR(ssl.utf16()));
+
+#endif
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
 
     QApplication a(argc, argv);
 
     qDebug()<<QDir::currentPath()<<QCoreApplication::applicationDirPath()<<QCoreApplication::applicationFilePath();
-#ifdef WIN32
-    //提前加载libeay32库
-    QString libeay = QCoreApplication::applicationDirPath()+"/libeay32.dll";
-    QString ssl = QCoreApplication::applicationDirPath()+"/ssleay32.dll";
-    qDebug()<<libeay;
-//    ::LoadLibrary(LPCWSTR(libeay.utf16()));
-//    ::LoadLibrary(LPCWSTR(ssl.utf16()));
 
-#endif
 #ifdef TARGET_OS_MAC
     QDir::setCurrent( QCoreApplication::applicationDirPath());
 #endif
@@ -195,5 +197,5 @@ int main(int argc, char *argv[])
     int result = a.exec();
     HXChain::getInstance()->quit();
 
-    return result;
+    return 0;
 }
