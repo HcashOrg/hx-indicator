@@ -7,9 +7,9 @@
 #include "ExchangeSinglePairCellWidget.h"
 #include "ExchangeModeWidget.h"
 
-ExchangePairSelectDialog::ExchangePairSelectDialog(bool _showAddBtn, QWidget *parent) :
+ExchangePairSelectDialog::ExchangePairSelectDialog(QString _quoteAssetSymbol, QWidget *parent) :
     QDialog(parent),
-    showAddBtn(_showAddBtn),
+    quoteAssetSymbol(_quoteAssetSymbol),
     ui(new Ui::ExchangePairSelectDialog)
 {
     ui->setupUi(this);
@@ -41,7 +41,7 @@ ExchangePairSelectDialog::ExchangePairSelectDialog(bool _showAddBtn, QWidget *pa
     tableWidget->setColumnWidth(0,110);
     connect(tableWidget, &QTableWidget::cellClicked, this, &ExchangePairSelectDialog::onCellWidgetClicked);
 
-    if(showAddBtn)
+    if(quoteAssetSymbol.isEmpty())
     {
         ui->addBtn->show();
         tableWidget->setGeometry(7,40,110,90);
@@ -58,30 +58,62 @@ ExchangePairSelectDialog::ExchangePairSelectDialog(bool _showAddBtn, QWidget *pa
 ExchangePairSelectDialog::~ExchangePairSelectDialog()
 {
     delete ui;
+
+    if(tableWidget)
+    {
+        delete tableWidget;
+        tableWidget = nullptr;
+    }
 }
 
 void ExchangePairSelectDialog::on_addBtn_clicked()
 {
-
+    close();
+    Q_EMIT addFavoriteClicked();
 }
 
 void ExchangePairSelectDialog::showPairs()
 {
-    HXChain::getInstance()->configFile->beginGroup("/FavoriteOrderPairs");
-    QStringList keys = HXChain::getInstance()->configFile->childKeys();
-    HXChain::getInstance()->configFile->endGroup();
-
-    tableWidget->setRowCount(0);
-    tableWidget->setRowCount(keys.size());
-
-    for(int i = 0; i < keys.size(); i++)
+    if(quoteAssetSymbol.isEmpty())
     {
+        QList<ExchangePair> pairs = HXChain::getInstance()->getExchangePairsByQuoteAsset();
 
-        ExchangeSinglePairCellWidget* cellWidget = new ExchangeSinglePairCellWidget;
-        tableWidget->setCellWidget( i, 0, cellWidget);
+        HXChain::getInstance()->configFile->beginGroup("/MyExchangePairs");
+        QStringList keys = HXChain::getInstance()->configFile->childKeys();
+        HXChain::getInstance()->configFile->endGroup();
 
-        QStringList strList = keys.at(i).split("+");
-        cellWidget->setPair( qMakePair(strList.at(0), strList.at(1)));
+        tableWidget->setRowCount(0);
+        int count = 0;
+        for(int i = 0; i < keys.size(); i++)
+        {
+            QStringList strList = keys.at(i).split("+");
+            ExchangePair pair = qMakePair(strList.at(0), strList.at(1));
+
+            if(pairs.contains(pair))
+            {
+                count++;
+                tableWidget->setRowCount(count);
+
+                ExchangeSinglePairCellWidget* cellWidget = new ExchangeSinglePairCellWidget;
+                tableWidget->setCellWidget( i, 0, cellWidget);
+                cellWidget->setPair( pair);
+            }
+        }
+    }
+    else
+    {
+        QList<ExchangePair> pairs = HXChain::getInstance()->getExchangePairsByQuoteAsset(quoteAssetSymbol);
+
+        int size = pairs.size();
+        tableWidget->setRowCount(0);
+        tableWidget->setRowCount(size);
+
+        for(int i = 0; i < size; i++)
+        {
+            ExchangeSinglePairCellWidget* cellWidget = new ExchangeSinglePairCellWidget;
+            tableWidget->setCellWidget( i, 0, cellWidget);
+            cellWidget->setPair( pairs.at(i));
+        }
     }
 
 }

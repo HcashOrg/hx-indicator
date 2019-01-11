@@ -1462,6 +1462,7 @@ void Frame::jsonDataUpdated(QString id)
         }
 
         HXChain::getInstance()->fetchMyContracts();
+        HXChain::getInstance()->getExchangePairs();
 
         return;
     }
@@ -2487,6 +2488,41 @@ void Frame::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
+
+        return;
+    }
+
+    if( id == "id+invoke_contract_offline+getExchangePairs")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QString resultStr = parse_doucment.object().value("result").toString();
+            QJsonObject resultObject = QJsonDocument::fromJson(resultStr.toLatin1()).object();
+
+            QStringList keys = resultObject.keys();
+            HXChain::getInstance()->pairInfoMap.clear();
+            foreach (QString key, keys)
+            {
+                QStringList strList = key.split("/");
+                ExchangePair pair;
+                pair.first = strList.at(0);
+                pair.second = strList.at(1);
+
+                QJsonObject object = resultObject.value(key).toObject();
+                PairInfo info;
+                info.state = object.value("state").toString();
+                info.contractAddress = object.value("conAddr").toString();
+                HXChain::getInstance()->pairInfoMap.insert(pair,info);
+            }
+
+        }
 
         return;
     }
