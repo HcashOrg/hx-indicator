@@ -54,8 +54,6 @@ private slots:
 
 
 private:
-    void getExchangePairs();
-
     void getUserBalances();
     QMap<QString,ExchangeBalance>   assetExchangeBalanceMap;
     void getSellOrders(const ExchangePair& _pair);
@@ -65,6 +63,7 @@ private:
 
 public slots:
     void onPairSelected(const ExchangePair& _pair);
+    void onAddFavoriteClicked();
 
 private:
     Ui::ExchangeModeWidget *ui;

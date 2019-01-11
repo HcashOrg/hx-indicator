@@ -36,7 +36,7 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.7"           // 版本号
+#define WALLET_VERSION "1.2.8"           // 版本号
 
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
@@ -348,6 +348,11 @@ struct SignTransaction
 };
 
 typedef QPair<QString,QString>  ExchangePair;
+struct PairInfo
+{
+    QString state;
+    QString contractAddress;
+};
 
 class HXChain : public QObject
 {
@@ -404,7 +409,6 @@ public:
     QString currentSellAssetId;
     QString currentBuyAssetId;
 
-    ExchangePair currentExchangePair;
 
     unsigned long long contractFee;     // 合约单步执行费用
     QString currentContractFee();
@@ -483,6 +487,12 @@ public:
 
     const QStringList &getOfficialMiddleWareUrls()const{return officialMiddleWareUrl;}
     void setOfficialMiddleWareUrls(const QStringList &urls){officialMiddleWareUrl = urls;}
+
+    ExchangePair currentExchangePair;
+    void getExchangePairs();
+    QMap<ExchangePair,PairInfo> pairInfoMap;
+    QList<ExchangePair> getExchangePairsByQuoteAsset(QString quoteAssetSymbol = "");    // 如果为空 返回所有状态为COMMON的交易对
+    bool isMyFavoritePair(const ExchangePair& pair);
 private:
     bool isBlockSyncFinish;
     QStringList officialMiddleWareUrl;//官方的中间件地址集(目前写死，将来可能可以通过服务获取，调用set接口修改即可)

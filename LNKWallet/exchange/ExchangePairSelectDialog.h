@@ -15,7 +15,7 @@ class ExchangePairSelectDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ExchangePairSelectDialog(bool _showAddBtn = true, QWidget *parent = nullptr);
+    explicit ExchangePairSelectDialog(QString _quoteAssetSymbol, QWidget *parent = nullptr);
     ~ExchangePairSelectDialog();
 
 private slots:
@@ -23,6 +23,7 @@ private slots:
 
 signals:
     void pairSelected(ExchangePair);
+    void addFavoriteClicked();
 private:
     QTableWidget* tableWidget = nullptr;
     void showPairs();
@@ -31,7 +32,7 @@ private slots:
 
 private:
     Ui::ExchangePairSelectDialog *ui;
-    bool showAddBtn = true;
+    QString quoteAssetSymbol;       // 如果为空则显示自选 显示addBtn
 
     bool event(QEvent *event);
     void paintEvent(QPaintEvent* event);

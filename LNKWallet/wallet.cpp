@@ -665,6 +665,42 @@ QStringList HXChain::getETHAssets()
     return result;
 }
 
+void HXChain::getExchangePairs()
+{
+    if(HXChain::getInstance()->accountInfoMap.size() < 1)   return;
+    HXChain::getInstance()->postRPC( "id+invoke_contract_offline+getExchangePairs",
+                                     toJsonFormat( "invoke_contract_offline",
+                                     QJsonArray() << HXChain::getInstance()->accountInfoMap.keys().first() << EXCHANGE_MODE_CONTRACT_ADDRESS
+                                                   << "getExchangePairs"  << ""));
+}
+
+QList<ExchangePair> HXChain::getExchangePairsByQuoteAsset(QString quoteAssetSymbol)
+{
+    QList<ExchangePair> result;
+    foreach (ExchangePair pair, pairInfoMap.keys())
+    {
+        if( quoteAssetSymbol.isEmpty() || pair.second == quoteAssetSymbol)
+        {
+            if(pairInfoMap.value(pair).state == "COMMON")
+            {
+                result.append(pair);
+            }
+        }
+    }
+
+    return result;
+}
+
+bool HXChain::isMyFavoritePair(const ExchangePair &pair)
+{
+    configFile->beginGroup("/MyExchangePairs");
+    QStringList keys = HXChain::getInstance()->configFile->childKeys();
+    configFile->endGroup();
+
+    QString str = pair.first + "+" + pair.second;
+    return keys.contains(str);
+}
+
 
 bool HXChain::ValidateOnChainOperation()
 {
