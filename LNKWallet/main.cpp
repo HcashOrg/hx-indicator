@@ -1,9 +1,9 @@
 ﻿#include <QApplication>
 #ifdef WIN32
 #include <windows.h>
-//#include "DbgHelp.h"
-//#include "tchar.h"
-//#include "ShlObj.h"
+#include "DbgHelp.h"
+#include "tchar.h"
+#include "ShlObj.h"
 #endif
 
 #include <qapplication.h>
@@ -35,20 +35,20 @@ bool checkOnly()
         return true;
 }
 
-//LONG WINAPI TopLevelExceptionFilter(struct _EXCEPTION_POINTERS *pExceptionInfo)
-//{
-//    qDebug() << "Enter TopLevelExceptionFilter Function" ;
-//    HANDLE hFile = CreateFile(  _T("project.dmp"),GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
-//    MINIDUMP_EXCEPTION_INFORMATION stExceptionParam;
-//    stExceptionParam.ThreadId    = GetCurrentThreadId();
-//    stExceptionParam.ExceptionPointers = pExceptionInfo;
-//    stExceptionParam.ClientPointers    = FALSE;
-//    MiniDumpWriteDump(GetCurrentProcess(),GetCurrentProcessId(),hFile,MiniDumpWithFullMemory,&stExceptionParam,NULL,NULL);
-//    CloseHandle(hFile);
+LONG WINAPI TopLevelExceptionFilter(struct _EXCEPTION_POINTERS *pExceptionInfo)
+{
+    qDebug() << "Enter TopLevelExceptionFilter Function" ;
+    HANDLE hFile = CreateFile(  _T("project.dmp"),GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+    MINIDUMP_EXCEPTION_INFORMATION stExceptionParam;
+    stExceptionParam.ThreadId    = GetCurrentThreadId();
+    stExceptionParam.ExceptionPointers = pExceptionInfo;
+    stExceptionParam.ClientPointers    = FALSE;
+    MiniDumpWriteDump(GetCurrentProcess(),GetCurrentProcessId(),hFile,MiniDumpWithFullMemory,&stExceptionParam,NULL,NULL);
+    CloseHandle(hFile);
 
-//    qDebug() << "End TopLevelExceptionFilter Function" ;
-//    return EXCEPTION_EXECUTE_HANDLER;
-//}
+    qDebug() << "End TopLevelExceptionFilter Function" ;
+    return EXCEPTION_EXECUTE_HANDLER;
+}
 
 LPWSTR ConvertCharToLPWSTR(const char * szString)
 {
@@ -197,5 +197,5 @@ int main(int argc, char *argv[])
     int result = a.exec();
     HXChain::getInstance()->quit();
 
-    return 0;
+    return result;
 }

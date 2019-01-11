@@ -4,6 +4,7 @@
 #include "ExchangePairSelectDialog.h"
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
+#include "AddMyExchangePairsDialog.h"
 
 ExchangeModeWidget::ExchangeModeWidget(QWidget *parent) :
     QWidget(parent),
@@ -71,8 +72,6 @@ void ExchangeModeWidget::init()
     {
         ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
-
-    getExchangePairs();
 }
 
 void ExchangeModeWidget::jsonDataUpdated(QString id)
@@ -257,13 +256,7 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "ExchangeModeWidget+invoke_contract_offline+getExchangePairs")
-    {
-        QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
 
-        return;
-    }
 }
 
 void ExchangeModeWidget::paintEvent(QPaintEvent *)
@@ -282,8 +275,9 @@ void ExchangeModeWidget::on_orderModeBtn_clicked()
 
 void ExchangeModeWidget::on_favoriteMarketBtn_clicked()
 {
-    ExchangePairSelectDialog dialog;
+    ExchangePairSelectDialog dialog("");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModeWidget::onPairSelected);
+    connect(&dialog, &ExchangePairSelectDialog::addFavoriteClicked, this, &ExchangeModeWidget::onAddFavoriteClicked);
     dialog.move(ui->favoriteMarketBtn->mapToGlobal( QPoint(ui->favoriteMarketBtn->width() / 2 - dialog.width() / 2,ui->favoriteMarketBtn->height())));
 
     dialog.exec();
@@ -291,7 +285,7 @@ void ExchangeModeWidget::on_favoriteMarketBtn_clicked()
 
 void ExchangeModeWidget::on_marketBtn1_clicked()
 {
-    ExchangePairSelectDialog dialog(false);
+    ExchangePairSelectDialog dialog("HX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModeWidget::onPairSelected);
     dialog.move(ui->marketBtn1->mapToGlobal( QPoint(ui->marketBtn1->width() / 2 - dialog.width() / 2,ui->marketBtn1->height())));
 
@@ -300,7 +294,7 @@ void ExchangeModeWidget::on_marketBtn1_clicked()
 
 void ExchangeModeWidget::on_marketBtn2_clicked()
 {
-    ExchangePairSelectDialog dialog(false);
+    ExchangePairSelectDialog dialog("BTC");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModeWidget::onPairSelected);
     dialog.move(ui->marketBtn2->mapToGlobal( QPoint(ui->marketBtn2->width() / 2 - dialog.width() / 2,ui->marketBtn2->height())));
 
@@ -309,7 +303,7 @@ void ExchangeModeWidget::on_marketBtn2_clicked()
 
 void ExchangeModeWidget::on_marketBtn3_clicked()
 {
-    ExchangePairSelectDialog dialog(false);
+    ExchangePairSelectDialog dialog("ERCPAX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModeWidget::onPairSelected);
     dialog.move(ui->marketBtn3->mapToGlobal( QPoint(ui->marketBtn3->width() / 2 - dialog.width() / 2,ui->marketBtn3->height())));
 
@@ -341,7 +335,11 @@ qDebug() << "aaaaaaaaaaaaaaa " << assetExchangeBalanceMap.keys();
     getBuyOrders(_pair);
 }
 
-
+void ExchangeModeWidget::onAddFavoriteClicked()
+{
+    AddMyExchangePairsDialog dialog;
+    dialog.pop();
+}
 
 void ExchangeModeWidget::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
@@ -412,11 +410,5 @@ void ExchangeModeWidget::on_sellBtn_clicked()
                                                    << "putOnSellOrder"  << params));
 }
 
-void ExchangeModeWidget::getExchangePairs()
-{
-    HXChain::getInstance()->postRPC( "ExchangeModeWidget+invoke_contract_offline+getExchangePairs",
-                                     toJsonFormat( "invoke_contract_offline",
-                                     QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
-                                                   << "getExchangePairs"  << ""));
-}
+
 
