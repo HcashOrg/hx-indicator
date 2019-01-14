@@ -294,10 +294,19 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    <property name="geometry">
     <rect>
      <x>630</x>
-     <y>30</y>
+     <y>40</y>
      <width>80</width>
-     <height>20</height>
+     <height>24</height>
     </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 61, 138);
+color: rgb(255, 255, 255);
+border-radius:12px;
+font: 12px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
     <string>交易区模式</string>

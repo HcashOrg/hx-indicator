@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = HXIndicator
 TEMPLATE = app
 
-DEFINES += TEST_WALLET
+#DEFINES += TEST_WALLET
 #DEFINES += SAFE_VERSION
 
 win32{
@@ -211,7 +211,8 @@ SOURCES += main.cpp\
     exchange/ExchangePairSelectDialog.cpp \
     exchange/ExchangeSinglePairCellWidget.cpp \
     exchange/AddMyExchangePairsDialog.cpp \
-    control/CheckExchangePairWidget.cpp
+    control/CheckExchangePairWidget.cpp \
+    control/PriceDepthWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -384,7 +385,8 @@ HEADERS  += firstlogin.h \
     exchange/ExchangePairSelectDialog.h \
     exchange/ExchangeSinglePairCellWidget.h \
     exchange/AddMyExchangePairsDialog.h \
-    control/CheckExchangePairWidget.h
+    control/CheckExchangePairWidget.h \
+    control/PriceDepthWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -523,7 +525,8 @@ FORMS    += firstlogin.ui \
     exchange/ExchangePairWidget.ui \
     exchange/ExchangeSinglePairCellWidget.ui \
     exchange/AddMyExchangePairsDialog.ui \
-    control/CheckExchangePairWidget.ui
+    control/CheckExchangePairWidget.ui \
+    control/PriceDepthWidget.ui
 
 win32{
     DISTFILES += logo.rc

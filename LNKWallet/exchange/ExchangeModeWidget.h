@@ -57,8 +57,10 @@ private:
     void getUserBalances();
     QMap<QString,ExchangeBalance>   assetExchangeBalanceMap;
     void getSellOrders(const ExchangePair& _pair);
+    unsigned long long getMaxSellAmount();
     QVector<OrderInfo>  sellOrdersVector;
     void getBuyOrders(const ExchangePair& _pair);
+    unsigned long long getMaxBuyAmount();
     QVector<OrderInfo>  buyOrdersVector;
 
 public slots:
