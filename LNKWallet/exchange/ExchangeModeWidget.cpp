@@ -5,6 +5,7 @@
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
 #include "AddMyExchangePairsDialog.h"
+#include "control/PriceDepthWidget.h"
 
 ExchangeModeWidget::ExchangeModeWidget(QWidget *parent) :
     QWidget(parent),
@@ -140,18 +141,25 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
             int size = sellOrdersVector.size();
             ui->sellPositionTableWidget->setRowCount(0);
             ui->sellPositionTableWidget->setRowCount(size);
+            unsigned long long maxAmount = getMaxSellAmount();
             for(int i = 0; i < size; i++)
             {
+                ui->sellPositionTableWidget->setRowHeight( size - i - 1, 22);
+
                 const OrderInfo& orderInfo = sellOrdersVector.at(i);
                 ui->sellPositionTableWidget->setItem( size - i - 1,0, new QTableWidgetItem(tr("Sell %1").arg(i + 1)));
 
                 double price = (double)orderInfo.quoteAmount / qPow(10,quoteAssetInfo.precision) / orderInfo.baseAmount * qPow(10,baseAssetInfo.precision);
-                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f',5));
+                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f',4));
 //                item->setData(Qt::UserRole,contractAddress);
                 ui->sellPositionTableWidget->setItem( size - i - 1,1,item);
 
                 ui->sellPositionTableWidget->setItem( size - i - 1,2, new QTableWidgetItem( getBigNumberString(orderInfo.baseAmount, baseAssetInfo.precision)));
 
+                PriceDepthWidget* pdw = new PriceDepthWidget;
+                pdw->setType(0);
+                pdw->setLength( (double)orderInfo.baseAmount / maxAmount);
+                ui->sellPositionTableWidget->setCellWidget( size - i -1, 3, pdw);
             }
         }
 
@@ -192,18 +200,25 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
             int size = buyOrdersVector.size();
             ui->buyPositionTableWidget->setRowCount(0);
             ui->buyPositionTableWidget->setRowCount(size);
+            unsigned long long maxAmount = getMaxSellAmount();
             for(int i = 0; i < size; i++)
             {
+                ui->buyPositionTableWidget->setRowHeight( i, 22);
+
                 const OrderInfo& orderInfo = buyOrdersVector.at(i);
                 ui->buyPositionTableWidget->setItem(i,0, new QTableWidgetItem(tr("Buy %1").arg(i + 1)));
 
                 double price = (double)orderInfo.quoteAmount / qPow(10,quoteAssetInfo.precision) / orderInfo.baseAmount * qPow(10,baseAssetInfo.precision);
-                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f',5));
+                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f',4));
 //                item->setData(Qt::UserRole,contractAddress);
                 ui->buyPositionTableWidget->setItem(i,1,item);
 
                 ui->buyPositionTableWidget->setItem(i,2, new QTableWidgetItem( getBigNumberString(orderInfo.baseAmount, baseAssetInfo.precision)));
 
+                PriceDepthWidget* pdw = new PriceDepthWidget;
+                pdw->setType(1);
+                pdw->setLength( (double)orderInfo.baseAmount / maxAmount);
+                ui->buyPositionTableWidget->setCellWidget( size - i -1, 3, pdw);
             }
         }
 
@@ -366,6 +381,17 @@ void ExchangeModeWidget::getSellOrders(const ExchangePair &_pair)
 
 }
 
+unsigned long long ExchangeModeWidget::getMaxSellAmount()
+{
+    unsigned long long result = 0;
+    foreach (const OrderInfo& order, sellOrdersVector)
+    {
+        if(order.baseAmount > result)   result = order.baseAmount;
+    }
+
+    return result;
+}
+
 void ExchangeModeWidget::getBuyOrders(const ExchangePair &_pair)
 {
     QString params = QString("%1,%2,%3,%4").arg(_pair.first).arg(_pair.second).arg(20).arg(0);
@@ -373,6 +399,17 @@ void ExchangeModeWidget::getBuyOrders(const ExchangePair &_pair)
                                      toJsonFormat( "invoke_contract_offline",
                                      QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
                                                    << "getBuyOrders"  << params));
+}
+
+unsigned long long ExchangeModeWidget::getMaxBuyAmount()
+{
+    unsigned long long result = 0;
+    foreach (const OrderInfo& order, buyOrdersVector)
+    {
+        if(order.baseAmount > result)   result = order.baseAmount;
+    }
+
+    return result;
 }
 
 void ExchangeModeWidget::on_buyBtn_clicked()

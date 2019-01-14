@@ -18,16 +18,17 @@ win32{
     QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
     QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
 
-#    LIBS += -lDbgHelp
-#    LIBS += -limm32
-    LIBS += -lShLwApi
-    LIBS += User32.Lib
 CONFIG(debug, debug|release) {
+    DEFINES += _DEBUG
     LIBS += -L$$PWD -lqrencoded
     LIBS += -L$$PWD/leveldb -lleveldbd
     INCLUDEPATH += VisualLeakDetector/include
     LIBS += -L$$PWD/VisualLeakDetector/lib/Win64 -lvld
 }
+#    LIBS += -lDbgHelp
+#    LIBS += -limm32
+    LIBS += -lShLwApi
+    LIBS += User32.Lib
 }
 macx{
     ICON = HX.icns
@@ -210,7 +211,8 @@ SOURCES += main.cpp\
     exchange/ExchangePairSelectDialog.cpp \
     exchange/ExchangeSinglePairCellWidget.cpp \
     exchange/AddMyExchangePairsDialog.cpp \
-    control/CheckExchangePairWidget.cpp
+    control/CheckExchangePairWidget.cpp \
+    control/PriceDepthWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -383,7 +385,8 @@ HEADERS  += firstlogin.h \
     exchange/ExchangePairSelectDialog.h \
     exchange/ExchangeSinglePairCellWidget.h \
     exchange/AddMyExchangePairsDialog.h \
-    control/CheckExchangePairWidget.h
+    control/CheckExchangePairWidget.h \
+    control/PriceDepthWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -522,7 +525,8 @@ FORMS    += firstlogin.ui \
     exchange/ExchangePairWidget.ui \
     exchange/ExchangeSinglePairCellWidget.ui \
     exchange/AddMyExchangePairsDialog.ui \
-    control/CheckExchangePairWidget.ui
+    control/CheckExchangePairWidget.ui \
+    control/PriceDepthWidget.ui
 
 win32{
     DISTFILES += logo.rc
@@ -536,20 +540,20 @@ RESOURCES += \
 
 TRANSLATIONS +=   wallet_simplified_Chinese.ts  wallet_English.ts
 
-DISTFILES += \
-    contact/search.png \
-    leveldb/leveldb.lib \
-    leveldb/leveldbd.lib \
-    libqrencode.a \
-    qrencode.lib \
-    qrencoded.lib \
-    pic2/Thumbs.db \
-    pic2/copyBtn.png \
-    HX.ico \
-    .gitignore \
-    LICENSE \
-    wallet_English.ts \
-    wallet_simplified_Chinese.ts
+#DISTFILES += \
+#    contact/search.png \
+#    leveldb/leveldb.lib \
+#    leveldb/leveldbd.lib \
+#    libqrencode.a \
+#    qrencode.lib \
+#    qrencoded.lib \
+#    pic2/Thumbs.db \
+#    pic2/copyBtn.png \
+#    HX.ico \
+#    .gitignore \
+#    LICENSE \
+#    wallet_English.ts \
+#    wallet_simplified_Chinese.ts
 
 
 CONFIG(release,debug|release){

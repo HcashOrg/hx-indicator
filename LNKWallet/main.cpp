@@ -10,11 +10,11 @@
 #include <QTranslator>
 #include <QThread>
 
-
 #include "wallet.h"
 #include "frame.h"
+
 #ifdef _DEBUG
-#include "VisualLeakDetector/include/vld.h"
+#include <vld.h>
 #endif
 
 #ifdef WIN32
@@ -143,21 +143,23 @@ void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QS
 
 int main(int argc, char *argv[])
 {
+#ifdef WIN32
+    //提前加载libeay32库
+//    QString libeay = "D:\\SoftWare\\Visual Leak Detector\\bin\\Win64\\dbghelp.dll";
+//    QString libeay = QCoreApplication::applicationDirPath()+"/libeay32.dll";
+//    QString ssl = QCoreApplication::applicationDirPath()+"/ssleay32.dll";
+//    qDebug()<<libeay;
+//    ::LoadLibrary(LPCWSTR(libeay.utf16()));
+//    ::LoadLibrary(LPCWSTR(ssl.utf16()));
+
+#endif
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     qputenv("QT_AUTO_SCREEN_SCALE_FACTOR", "1");
 
     QApplication a(argc, argv);
 
     qDebug()<<QDir::currentPath()<<QCoreApplication::applicationDirPath()<<QCoreApplication::applicationFilePath();
-#ifdef WIN32
-    //提前加载libeay32库
-    QString libeay = QCoreApplication::applicationDirPath()+"/libeay32.dll";
-    QString ssl = QCoreApplication::applicationDirPath()+"/ssleay32.dll";
-    qDebug()<<libeay;
-//    ::LoadLibrary(LPCWSTR(libeay.utf16()));
-//    ::LoadLibrary(LPCWSTR(ssl.utf16()));
 
-#endif
 #ifdef TARGET_OS_MAC
     QDir::setCurrent( QCoreApplication::applicationDirPath());
 #endif

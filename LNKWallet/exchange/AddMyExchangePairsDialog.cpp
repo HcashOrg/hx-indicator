@@ -66,6 +66,7 @@ void AddMyExchangePairsDialog::showPairsByQuoteAsset(QString quoteAsset)
     foreach (const ExchangePair& pair, pairs)
     {
         CheckExchangePairWidget* w = new CheckExchangePairWidget(ui->scrollAreaWidgetContents);
+        connect(w, &CheckExchangePairWidget::stateChanged, this, &AddMyExchangePairsDialog::onCheckStateChanged);
         w->setAttribute(Qt::WA_DeleteOnClose);
         w->setPair(pair);
         w->setChecked( HXChain::getInstance()->isMyFavoritePair(pair));
@@ -88,7 +89,7 @@ void AddMyExchangePairsDialog::showPairsByQuoteAsset(QString quoteAsset)
 
 void AddMyExchangePairsDialog::on_okBtn_clicked()
 {
-
+    close();
 }
 
 void AddMyExchangePairsDialog::on_cancelBtn_clicked()
@@ -98,5 +99,13 @@ void AddMyExchangePairsDialog::on_cancelBtn_clicked()
 
 void AddMyExchangePairsDialog::onCheckStateChanged(ExchangePair pair, bool isChecked)
 {
-
+    QString str = pair.first + "+" + pair.second;
+    if(isChecked)
+    {
+        HXChain::getInstance()->configFile->setValue("/MyExchangePairs/" + str, 1);
+    }
+    else
+    {
+        HXChain::getInstance()->configFile->remove("/MyExchangePairs/" + str);
+    }
 }
