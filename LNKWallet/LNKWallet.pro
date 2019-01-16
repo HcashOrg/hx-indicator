@@ -19,7 +19,6 @@ win32{
     QMAKE_LFLAGS_WINDOWS = /SUBSYSTEM:WINDOWS,5.01
 
 CONFIG(debug, debug|release) {
-    DEFINES += _DEBUG
     LIBS += -L$$PWD -lqrencoded
     LIBS += -L$$PWD/leveldb -lleveldbd
     INCLUDEPATH += VisualLeakDetector/include

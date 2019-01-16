@@ -1,9 +1,14 @@
 ﻿#include <QApplication>
+
 #ifdef WIN32
 #include <windows.h>
+#ifdef QT_NO_DEBUG
 #include "DbgHelp.h"
 #include "tchar.h"
 #include "ShlObj.h"
+#else
+#include "VisualLeakDetector/include/vld.h"
+#endif
 #endif
 
 #include <qapplication.h>
@@ -13,9 +18,6 @@
 #include "wallet.h"
 #include "frame.h"
 
-#ifdef _DEBUG
-#include <vld.h>
-#endif
 
 #ifdef WIN32
 bool checkOnly()
@@ -34,7 +36,7 @@ bool checkOnly()
     else
         return true;
 }
-
+#ifdef QT_NO_DEBUG
 LONG WINAPI TopLevelExceptionFilter(struct _EXCEPTION_POINTERS *pExceptionInfo)
 {
     qDebug() << "Enter TopLevelExceptionFilter Function" ;
@@ -49,6 +51,7 @@ LONG WINAPI TopLevelExceptionFilter(struct _EXCEPTION_POINTERS *pExceptionInfo)
     qDebug() << "End TopLevelExceptionFilter Function" ;
     return EXCEPTION_EXECUTE_HANDLER;
 }
+#endif
 
 LPWSTR ConvertCharToLPWSTR(const char * szString)
 {

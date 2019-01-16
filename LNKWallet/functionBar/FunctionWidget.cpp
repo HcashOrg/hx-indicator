@@ -26,6 +26,14 @@ public:
     {
 
     }
+    ~FunctionWidgetPrivate()
+    {
+        if(contextMenu)
+        {
+            delete contextMenu;
+            contextMenu = nullptr;
+        }
+    }
 public:
     FunctionAccountWidget *accountBar;
     FunctionAdvanceWidget *advanceBar;
