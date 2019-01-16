@@ -8,6 +8,7 @@ class UpdateProcess : public QObject
     Q_OBJECT
 public:
     explicit UpdateProcess(QObject *parent = 0);
+    ~UpdateProcess();
 signals:
     void NewstVersionSignal(const QString &version,bool isUpdateForced = false);//没有更新则为空,,true则表示强制更新版本
     void updateFinish();

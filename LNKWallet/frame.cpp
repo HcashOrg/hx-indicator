@@ -301,7 +301,11 @@ Frame::~Frame()
         functionBar = NULL;
     }
 
-
+    if(autoupdate)
+    {
+        delete autoupdate;
+        autoupdate = nullptr;
+    }
 qDebug() << "~Frame end;";
 
 }
