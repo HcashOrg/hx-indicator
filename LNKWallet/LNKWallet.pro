@@ -212,7 +212,8 @@ SOURCES += main.cpp\
     exchange/ExchangeSinglePairCellWidget.cpp \
     exchange/AddMyExchangePairsDialog.cpp \
     control/CheckExchangePairWidget.cpp \
-    control/PriceDepthWidget.cpp
+    control/PriceDepthWidget.cpp \
+    exchange/ExchangeBalancesWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -386,7 +387,8 @@ HEADERS  += firstlogin.h \
     exchange/ExchangeSinglePairCellWidget.h \
     exchange/AddMyExchangePairsDialog.h \
     control/CheckExchangePairWidget.h \
-    control/PriceDepthWidget.h
+    control/PriceDepthWidget.h \
+    exchange/ExchangeBalancesWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -526,7 +528,8 @@ FORMS    += firstlogin.ui \
     exchange/ExchangeSinglePairCellWidget.ui \
     exchange/AddMyExchangePairsDialog.ui \
     control/CheckExchangePairWidget.ui \
-    control/PriceDepthWidget.ui
+    control/PriceDepthWidget.ui \
+    exchange/ExchangeBalancesWidget.ui
 
 win32{
     DISTFILES += logo.rc

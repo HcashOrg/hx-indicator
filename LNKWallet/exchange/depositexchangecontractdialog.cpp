@@ -7,8 +7,9 @@
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
 
-DepositExchangeContractDialog::DepositExchangeContractDialog(QWidget *parent) :
+DepositExchangeContractDialog::DepositExchangeContractDialog(bool _isExchangeMode, QWidget *parent) :
     QDialog(parent),
+    isExchangeMode(_isExchangeMode),
     ui(new Ui::DepositExchangeContractDialog)
 {
     ui->setupUi(this);
@@ -75,7 +76,8 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
 
         if( result == "\"result\":null")
         {
-            QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+            QString contractAddress = isExchangeMode ? EXCHANGE_MODE_CONTRACT_ADDRESS
+                                                     : HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
             feeChoose->updatePoundageID();
             HXChain::getInstance()->postRPC( "id-transfer_to_contract", toJsonFormat( "transfer_to_contract",
@@ -180,7 +182,8 @@ void DepositExchangeContractDialog::on_closeBtn_clicked()
 
 void DepositExchangeContractDialog::estimateContractFee()
 {
-    QString contractAddress = HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
+    QString contractAddress = isExchangeMode ? EXCHANGE_MODE_CONTRACT_ADDRESS
+                                             : HXChain::getInstance()->getExchangeContractAddress(ui->accountNameLabel->text());
 
     HXChain::getInstance()->postRPC( "id-transfer_to_contract_testing-DepositExchangeContractDialog", toJsonFormat( "transfer_to_contract_testing",
                                                                            QJsonArray() << ui->accountNameLabel->text() << contractAddress

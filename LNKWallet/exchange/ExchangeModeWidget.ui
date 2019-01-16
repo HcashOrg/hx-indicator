@@ -29,7 +29,7 @@
     <string notr="true">background-color: rgb(83, 61, 138);
 color: rgb(255, 255, 255);
 border-radius:12px;
-font: 12px &quot;微软雅黑&quot;;</string>
+font:12px &quot;微软雅黑 Light&quot;;</string>
    </property>
    <property name="text">
     <string>挂单模式</string>
@@ -734,6 +734,46 @@ font: 12px &quot;微软雅黑&quot;;</string>
      <string>我要卖出</string>
     </property>
    </widget>
+   <widget class="QLabel" name="estimatedBuyLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>160</y>
+      <width>200</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12px &quot;微软雅黑&quot;;
+color: rgb(137, 129, 161);</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额：&lt;span style=&quot; color:#eb005e;&quot;&gt;0.00&lt;/span&gt; HX&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="estimateSellLabel">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>160</y>
+      <width>200</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 12px &quot;微软雅黑&quot;;
+color: rgb(137, 129, 161);</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额：&lt;span style=&quot; color:#2cca94;&quot;&gt;0.00&lt;/span&gt; HX&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QComboBox" name="positionComboBox">
    <property name="geometry">
@@ -757,6 +797,26 @@ font: 12px &quot;微软雅黑&quot;;</string>
    <property name="styleSheet">
     <string notr="true"/>
    </property>
+   <item>
+    <property name="text">
+     <string>默认档位</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>5档</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>10档</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>20档</string>
+    </property>
+   </item>
   </widget>
   <widget class="QComboBox" name="depthComboBox">
    <property name="geometry">
@@ -780,6 +840,16 @@ font: 12px &quot;微软雅黑&quot;;</string>
    <property name="styleSheet">
     <string notr="true"/>
    </property>
+   <item>
+    <property name="text">
+     <string>默认深度</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>0.0001</string>
+    </property>
+   </item>
   </widget>
   <widget class="QTableWidget" name="sellPositionTableWidget">
    <property name="geometry">
@@ -818,7 +888,7 @@ font: 12px &quot;微软雅黑&quot;;</string>
    <property name="geometry">
     <rect>
      <x>510</x>
-     <y>360</y>
+     <y>363</y>
      <width>200</width>
      <height>110</height>
     </rect>
@@ -897,6 +967,28 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </property>
    <property name="styleSheet">
     <string notr="true"/>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="balanceBtn">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>40</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 61, 138);
+color: rgb(255, 255, 255);
+border-radius:12px;
+font:12px &quot;微软雅黑 Light&quot;;</string>
+   </property>
+   <property name="text">
+    <string>我的资产</string>
    </property>
   </widget>
  </widget>
