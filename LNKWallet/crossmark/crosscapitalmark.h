@@ -35,6 +35,10 @@ private:
     void QueryETHorHCHeight(const QString &symbol);
 
     void ParsePostID(const QString &postID,QString &name,QString &symbol,double &number);
+
+    void setLastNonce(int nonce);
+    int getLastNonce()const;
+    int ParseDecodeNonce(const QString &jsonStr )const;
 private:
     class DataPrivate;
     DataPrivate *_p;
