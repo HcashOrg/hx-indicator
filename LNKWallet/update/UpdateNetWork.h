@@ -11,7 +11,7 @@ public:
 
 public:
     explicit UpdateNetWork(QObject *parent = 0);
-
+    ~UpdateNetWork();
 public:
     void DownLoadFile(const DownLoadData &data);
     void DownLoadFile(const QList<DownLoadData> &data);

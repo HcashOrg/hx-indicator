@@ -12,7 +12,7 @@ class WithdrawExchangeContractDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit WithdrawExchangeContractDialog(QWidget *parent = 0);
+    explicit WithdrawExchangeContractDialog( bool _isExchangeMode = false, QWidget *parent = 0);
     ~WithdrawExchangeContractDialog();
 
     void pop();
@@ -38,6 +38,7 @@ private slots:
 
 private:
     Ui::WithdrawExchangeContractDialog *ui;
+    bool isExchangeMode = nullptr;
     int stepCount = 0;      // 合约执行步数
 
     void estimateContractFee();

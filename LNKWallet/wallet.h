@@ -36,16 +36,17 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.9"           // 版本号
+#define WALLET_VERSION "1.2.10"           // 版本号
 
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
 #ifdef TEST_WALLET
-#define LOCKFUND_CONTRACT_ADDRESS  "HXCRYtwTBjTLnh6NAiFpiAtquHBFWZUCLz3u"
-#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCTRKvAuEMZnACbrSGveRsrB6swKrUKeA56"
+//#define LOCKFUND_CONTRACT_ADDRESS  "HXCRYtwTBjTLnh6NAiFpiAtquHBFWZUCLz3u"
+#define LOCKFUND_CONTRACT_ADDRESS  "HXCaT326NDoaZX6FH8rmdMJpaCLnkME4eRRP"   // cyy
+#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCVxQzP5Bg1pmGnp9ddDf8B7pv2A79QqqTu"
 #else
-#define LOCKFUND_CONTRACT_ADDRESS  ""
+#define LOCKFUND_CONTRACT_ADDRESS  "HXCVpKXx86vohkvQFEo7LkaKmnhMT9JCjTLj"
 #define EXCHANGE_MODE_CONTRACT_ADDRESS  ""
 #endif
 
@@ -353,6 +354,11 @@ struct PairInfo
     QString state;
     QString contractAddress;
 };
+struct ExchangeBalance
+{
+    unsigned long long locked = 0;
+    unsigned long long available = 0;
+};
 
 class HXChain : public QObject
 {
@@ -489,7 +495,9 @@ public:
     void setOfficialMiddleWareUrls(const QStringList &urls){officialMiddleWareUrl = urls;}
 
     ExchangePair currentExchangePair;
+    QMap<QString,ExchangeBalance>   assetExchangeBalanceMap;
     void getExchangePairs();
+    QStringList getAllExchangeAssets();
     QMap<ExchangePair,PairInfo> pairInfoMap;
     QList<ExchangePair> getExchangePairsByQuoteAsset(QString quoteAssetSymbol = "");    // 如果为空 返回所有状态为COMMON的交易对
     bool isMyFavoritePair(const ExchangePair& pair);

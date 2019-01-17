@@ -20,6 +20,19 @@ public:
     {
 
     }
+    ~DataPrivate()
+    {
+        if(networkManager)
+        {
+            delete networkManager;
+            networkManager = nullptr;
+        }
+        if(currentFile)
+        {
+            delete currentFile;
+            currentFile = nullptr;
+        }
+    }
 public:
     QNetworkAccessManager   *networkManager;
 
@@ -34,6 +47,12 @@ UpdateNetWork::UpdateNetWork(QObject *parent) : QObject(parent)
   ,_p(new DataPrivate())
 {
 
+}
+
+UpdateNetWork::~UpdateNetWork()
+{
+    delete _p;
+    _p = nullptr;
 }
 
 void UpdateNetWork::DownLoadFile(const DownLoadData &data)

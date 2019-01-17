@@ -35,6 +35,19 @@ public:
     {
         qDebug()<<downloadPath;
     }
+    ~DataPrivate()
+    {
+        if(updateNetwork)
+        {
+            delete updateNetwork;
+            updateNetwork = nullptr;
+        }
+        if(networkManager)
+        {
+            delete networkManager;
+            networkManager = nullptr;
+        }
+    }
 public:
     UpdateNetWork *updateNetwork;
     QNetworkAccessManager   *networkManager;
@@ -60,6 +73,12 @@ UpdateProcess::UpdateProcess(QObject *parent)
     ,_p(new DataPrivate())
 {
     InitData();
+}
+
+UpdateProcess::~UpdateProcess()
+{
+    delete _p;
+    _p = nullptr;
 }
 
 void UpdateProcess::InitServerURL(const QString &url)

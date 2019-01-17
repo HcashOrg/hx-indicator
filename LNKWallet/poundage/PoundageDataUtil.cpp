@@ -30,11 +30,11 @@ bool PoundageDataUtil::ParseJsonObjToUnit(QJsonObject jsonObj,std::shared_ptr<Po
     poundageUnit->targetCoinID = tarObj.value("asset_id").toString();
 
     QJsonObject finishObj = jsonObj.value("asset_finished").toObject();
-    poundageUnit->balanceNumber = poundageUnit->targetCoinNumber - finishObj.value("amount").toDouble()/pow(10,tarPre);
+    poundageUnit->balanceNumber = poundageUnit->targetCoinNumber - (double)jsonValueToULL(finishObj.value("amount"))/pow(10,tarPre);
 
     poundageUnit->poundageFinished = jsonObj.value("finished").toBool();
 
-    qDebug()<<poundageUnit->sourceCoinNumber << poundageUnit->targetCoinNumber;
+    qDebug()<<poundageUnit->sourceCoinNumber << poundageUnit->targetCoinNumber<<poundageUnit->balanceNumber;
     return true;
 }
 

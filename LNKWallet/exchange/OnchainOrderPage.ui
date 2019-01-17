@@ -306,7 +306,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <string notr="true">background-color: rgb(83, 61, 138);
 color: rgb(255, 255, 255);
 border-radius:12px;
-font: 12px &quot;微软雅黑&quot;;</string>
+font:12px &quot;微软雅黑 Light&quot;;</string>
    </property>
    <property name="text">
     <string>交易区模式</string>

@@ -38,7 +38,7 @@ void PriceDepthWidget::paintEvent(QPaintEvent *event)
     {
         painter.setBrush(QColor(235,0,94));
     }
-    painter.drawRect(0,3, length * this->width(), 16);
+    painter.drawRect(0,3, (length * this->width() > 1 ? length * this->width() : 1) , 16);
 
     QWidget::paintEvent(event);
 }

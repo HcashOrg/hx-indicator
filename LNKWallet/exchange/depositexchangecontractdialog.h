@@ -12,7 +12,7 @@ class DepositExchangeContractDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit DepositExchangeContractDialog(QWidget *parent = 0);
+    explicit DepositExchangeContractDialog( bool _isExchangeMode = false, QWidget *parent = 0);
     ~DepositExchangeContractDialog();
 
     void  pop();
@@ -36,6 +36,7 @@ private slots:
 
 private:
     Ui::DepositExchangeContractDialog *ui;
+    bool isExchangeMode = nullptr;
     int stepCount = 0;      // 合约执行步数
 
     void estimateContractFee();

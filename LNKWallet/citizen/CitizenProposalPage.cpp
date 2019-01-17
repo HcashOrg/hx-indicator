@@ -248,6 +248,7 @@ void CitizenProposalPage::on_proposalTableWidget_cellClicked(int row, int column
 
 void CitizenProposalPage::on_changeSenatorBtn_clicked()
 {
+#ifndef TEST_WALLET
     if(HXChain::getInstance()->walletInfo.blockHeight < 1400000 )
     {
         CommonDialog commonDialog(CommonDialog::OkOnly);
@@ -255,6 +256,7 @@ void CitizenProposalPage::on_changeSenatorBtn_clicked()
         commonDialog.pop();
         return;
     }
+#endif
 
     ChangeSenatorDialog dia;
     dia.exec();

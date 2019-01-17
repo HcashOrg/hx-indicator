@@ -674,6 +674,21 @@ void HXChain::getExchangePairs()
                                                    << "getExchangePairs"  << ""));
 }
 
+QStringList HXChain::getAllExchangeAssets()
+{
+    QStringList result;
+    foreach (const ExchangePair& pair, pairInfoMap.keys())
+    {
+        if( pairInfoMap.value(pair).state != "NOT_INITED")
+        {
+            if(!result.contains(pair.first))    result.append(pair.first);
+            if(!result.contains(pair.second))    result.append(pair.second);
+        }
+    }
+
+    return result;
+}
+
 QList<ExchangePair> HXChain::getExchangePairsByQuoteAsset(QString quoteAssetSymbol)
 {
     QList<ExchangePair> result;
@@ -1346,10 +1361,8 @@ void HXChain::autoWithdrawSign()
                                 continue;
                             }
                         }
-                        else
-                        {
-                            singedAccountTrxsCountMap.insert(account + "+++" + generatedTrxId, 0);
-                        }
+
+                        singedAccountTrxsCountMap[account + "+++" + generatedTrxId] = 0;
 
                         HXChain::getInstance()->postRPC( "id-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
                                                                                                                  QJsonArray() << generatedTrxId << account));
@@ -1384,10 +1397,8 @@ void HXChain::autoWithdrawSign()
                                 continue;
                             }
                         }
-                        else
-                        {
-                            singedAccountTrxsCountMap.insert(account + "+++" + eft.trxId, 0);
-                        }
+
+                        singedAccountTrxsCountMap[account + "+++" + eft.trxId] = 0;
 
                         HXChain::getInstance()->postRPC( "autosign-senator_sign_eths_final_trx", toJsonFormat( "senator_sign_eths_final_trx",
                                                                          QJsonArray() << eft.trxId << account));

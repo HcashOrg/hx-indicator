@@ -4,16 +4,9 @@
 #include <QWidget>
 #include "wallet.h"
 
-
 namespace Ui {
 class ExchangeModeWidget;
 }
-
-struct ExchangeBalance
-{
-    unsigned long long locked = 0;
-    unsigned long long available = 0;
-};
 
 struct OrderInfo
 {
@@ -46,23 +39,43 @@ private slots:
 
     void on_marketBtn3_clicked();
 
-    void on_accountComboBox_currentIndexChanged(const QString &arg1);
+    void onAccountComboBoxCurrentIndexChanged(const QString &arg1);
 
     void on_buyBtn_clicked();
 
     void on_sellBtn_clicked();
 
 
-private:
+    void on_sellPositionTableWidget_cellPressed(int row, int column);
+
+    void on_buyPositionTableWidget_cellPressed(int row, int column);
+
+    void on_buyPriceLineEdit_textEdited(const QString &arg1);
+
+    void on_buyAmountLineEdit_textEdited(const QString &arg1);
+
+    void on_sellPriceLineEdit_textEdited(const QString &arg1);
+
+    void on_sellAmountLineEdit_textEdited(const QString &arg1);
+
+    void on_balanceBtn_clicked();
+
+public:
     void getUserBalances();
-    QMap<QString,ExchangeBalance>   assetExchangeBalanceMap;
     void getSellOrders(const ExchangePair& _pair);
-    unsigned long long getMaxSellAmount();
+    unsigned long long getMaxOrderAmount();
     QVector<OrderInfo>  sellOrdersVector;
     void getBuyOrders(const ExchangePair& _pair);
-    unsigned long long getMaxBuyAmount();
     QVector<OrderInfo>  buyOrdersVector;
+    void mergeDepth(QVector<OrderInfo>& orders, const ExchangePair& pair);        // 合并深度
+    int getExchangePairPrecision(const ExchangePair& pair);    // 返回交易对显示价格时的小数位数
+    int getExchangeAmountPrecision(QString assetSymbol);
 
+    void calculateAbleToBuy();
+    void calculateAbleToSell();
+
+    void estimateBuyValue();
+    void estimateSellValue();
 public slots:
     void onPairSelected(const ExchangePair& _pair);
     void onAddFavoriteClicked();
