@@ -24,6 +24,7 @@ class CrossCapitalMark::DataPrivate
 {
 public:
     DataPrivate()
+        :nonceNumber(-1)
     {
         if( HXChain::getInstance()->configFile->contains("/settings/chainPath"))
         {
@@ -49,6 +50,8 @@ public:
     HttpManager ethHeightHttp;
 
     std::map<int,QString> queryIdTrxidMap;
+
+    int nonceNumber;//erc类型的需要通过当前nonce值判断该交易是否合法，，nonce必须不重复
 };
 
 CrossCapitalMark::CrossCapitalMark(QObject *parent)
@@ -237,6 +240,21 @@ void CrossCapitalMark::jsonDataUpdated(const QString &id)
         result.append("}");
         QString trid = ParseTransactionID(result);
         qDebug()<<trid;
+        //如果是eth erc之类的，需要判断交易是否合法，nonce是否等于上一次，不等则合法
+        if(symbol.contains("erc",Qt::CaseInsensitive)||symbol.contains("eth",Qt::CaseInsensitive))
+        {
+            int nonce = ParseDecodeNonce(result);
+            if(nonce != getLastNonce())
+            {
+                qDebug()<<"currentnonce"<<nonce;
+                setLastNonce(nonce);
+            }
+            else
+            {//如果两次nonce一样，说明交易不合法，不进行记录
+                return;
+            }
+        }
+
         //加入队列，
         InsertTransaction(accountName,symbol,trid,number);
         //向中间件请求交易详情
@@ -379,6 +397,28 @@ void CrossCapitalMark::ParsePostID(const QString &postID, QString &name, QString
     name = listStr.at(1);
     symbol = listStr.at(2);
     number = listStr.at(3).toDouble();
+}
+
+void CrossCapitalMark::setLastNonce(int nonce)
+{
+    std::lock_guard<std::mutex> mu(_p->dataMutex);
+    _p->nonceNumber = nonce;
+}
+
+int CrossCapitalMark::getLastNonce() const
+{
+    std::lock_guard<std::mutex> mu(_p->dataMutex);
+    return _p->nonceNumber;
+}
+
+int CrossCapitalMark::ParseDecodeNonce(const QString &jsonString) const
+{
+    QJsonParseError json_error;
+    QJsonDocument parse_doucment = QJsonDocument::fromJson(jsonString.toLatin1(),&json_error);
+    if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject()) return -1;
+    QJsonObject jsonObject = parse_doucment.object();
+    qDebug()<<jsonObject;
+    return static_cast<int>(jsonValueToULL(jsonObject.value("result").toObject().value("nonce")));
 }
 
 double CrossCapitalMark::CalTransaction(const QString &accountName, const QString &chainType) const
