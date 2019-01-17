@@ -1,5 +1,5 @@
-#include "ExchangeModeWidget.h"
-#include "ui_ExchangeModeWidget.h"
+#include "ExchangeModePage.h"
+#include "ui_ExchangeModePage.h"
 
 #include "ExchangePairSelectDialog.h"
 #include "dialog/ErrorResultDialog.h"
@@ -7,10 +7,11 @@
 #include "AddMyExchangePairsDialog.h"
 #include "control/PriceDepthWidget.h"
 #include "ExchangeBalancesWidget.h"
+#include "ExchangeMyOrdersWidget.h"
 
-ExchangeModeWidget::ExchangeModeWidget(QWidget *parent) :
+ExchangeModePage::ExchangeModePage(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ExchangeModeWidget)
+    ui(new Ui::ExchangeModePage)
 {
     ui->setupUi(this);
     connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
@@ -62,12 +63,12 @@ ExchangeModeWidget::ExchangeModeWidget(QWidget *parent) :
     init();
 }
 
-ExchangeModeWidget::~ExchangeModeWidget()
+ExchangeModePage::~ExchangeModePage()
 {
     delete ui;
 }
 
-void ExchangeModeWidget::init()
+void ExchangeModePage::init()
 {
     setAutoFillBackground(true);
     QPalette palette;
@@ -85,9 +86,10 @@ void ExchangeModeWidget::init()
 
 }
 
-void ExchangeModeWidget::jsonDataUpdated(QString id)
+
+void ExchangeModePage::jsonDataUpdated(QString id)
 {
-    if( id == "ExchangeModeWidget+invoke_contract_offline+getUserBalances+" + ui->accountComboBox->currentText())
+    if( id == "ExchangeModePage+invoke_contract_offline+getUserBalances+" + ui->accountComboBox->currentText())
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
@@ -117,7 +119,7 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "ExchangeModeWidget+invoke_contract_offline+getSellOrders+" +
+    if( id == "ExchangeModePage+invoke_contract_offline+getSellOrders+" +
             HXChain::getInstance()->currentExchangePair.first + "+" + HXChain::getInstance()->currentExchangePair.second)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
@@ -155,7 +157,7 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
             int size = sellOrdersVector.size();
             ui->sellPositionTableWidget->setRowCount(0);
             ui->sellPositionTableWidget->setRowCount(size);
-            unsigned long long maxAmount = getMaxOrderAmount();
+
             for(int i = 0; i < size; i++)
             {
                 ui->sellPositionTableWidget->setRowHeight( size - i - 1, 22);
@@ -165,17 +167,13 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
                 ui->sellPositionTableWidget->item(size - i - 1,0)->setTextColor(QColor(44,202,148));
 
                 double price = (double)orderInfo.quoteAmount / qPow(10,quoteAssetInfo.precision) / orderInfo.baseAmount * qPow(10,baseAssetInfo.precision);
-                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f',getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)));
+                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)));
                 item->setTextColor(QColor(83,61,138));
                 ui->sellPositionTableWidget->setItem( size - i - 1,1,item);
 
                 ui->sellPositionTableWidget->setItem( size - i - 1,2, new QTableWidgetItem( getBigNumberString(orderInfo.baseAmount, baseAssetInfo.precision)));
                 ui->sellPositionTableWidget->item(size - i - 1,2)->setTextColor(QColor(83,61,138));
-
-                PriceDepthWidget* pdw = new PriceDepthWidget;
-                pdw->setType(0);
-                pdw->setLength( (double)orderInfo.baseAmount / maxAmount);
-                ui->sellPositionTableWidget->setCellWidget( size - i -1, 3, pdw);
+                ui->sellPositionTableWidget->item(size - i - 1,2)->setData(Qt::UserRole, orderInfo.baseAmount);
             }
 
             ui->sellPositionTableWidget->scrollToBottom();
@@ -184,7 +182,7 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "ExchangeModeWidget+invoke_contract_offline+getBuyOrders+" +
+    if( id == "ExchangeModePage+invoke_contract_offline+getBuyOrders+" +
             HXChain::getInstance()->currentExchangePair.first + "+" + HXChain::getInstance()->currentExchangePair.second)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
@@ -222,7 +220,7 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
             int size = buyOrdersVector.size();
             ui->buyPositionTableWidget->setRowCount(0);
             ui->buyPositionTableWidget->setRowCount(size);
-            unsigned long long maxAmount = getMaxOrderAmount();
+
             for(int i = 0; i < size; i++)
             {
                 ui->buyPositionTableWidget->setRowHeight( i, 22);
@@ -232,24 +230,22 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
                 ui->buyPositionTableWidget->item(i,0)->setTextColor(QColor(235,0,94));
 
                 double price = (double)orderInfo.quoteAmount / qPow(10,quoteAssetInfo.precision) / orderInfo.baseAmount * qPow(10,baseAssetInfo.precision);
-                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f',getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)));
+                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)));
                 item->setTextColor(QColor(83,61,138));
                 ui->buyPositionTableWidget->setItem(i,1,item);
 
                 ui->buyPositionTableWidget->setItem(i,2, new QTableWidgetItem( getBigNumberString(orderInfo.baseAmount, baseAssetInfo.precision)));
                 ui->buyPositionTableWidget->item(i,2)->setTextColor(QColor(83,61,138));
-
-                PriceDepthWidget* pdw = new PriceDepthWidget;
-                pdw->setType(1);
-                pdw->setLength( (double)orderInfo.baseAmount / maxAmount);
-                ui->buyPositionTableWidget->setCellWidget( size - i -1, 3, pdw);
+                ui->buyPositionTableWidget->item(i,2)->setData(Qt::UserRole, orderInfo.baseAmount);
             }
+
+            showDepth();    // 后查的买单 所以在查完后显示深度
         }
 
         return;
     }
 
-    if( id == "ExchangeModeWidget+invoke_contract+putOnBuyOrder")
+    if( id == "ExchangeModePage+invoke_contract+putOnBuyOrder")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
@@ -272,7 +268,7 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "ExchangeModeWidget+invoke_contract+putOnSellOrder")
+    if( id == "ExchangeModePage+invoke_contract+putOnSellOrder")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
@@ -298,7 +294,7 @@ void ExchangeModeWidget::jsonDataUpdated(QString id)
 
 }
 
-void ExchangeModeWidget::paintEvent(QPaintEvent *)
+void ExchangeModePage::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     painter.setPen(QPen(QColor(229,226,240),Qt::SolidLine));
@@ -307,49 +303,49 @@ void ExchangeModeWidget::paintEvent(QPaintEvent *)
     painter.drawRect(rect());
 }
 
-void ExchangeModeWidget::on_orderModeBtn_clicked()
+void ExchangeModePage::on_orderModeBtn_clicked()
 {
-    close();
+    Q_EMIT showOnchainOrderPage();
 }
 
-void ExchangeModeWidget::on_favoriteMarketBtn_clicked()
+void ExchangeModePage::on_favoriteMarketBtn_clicked()
 {
     ExchangePairSelectDialog dialog("");
-    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModeWidget::onPairSelected);
-    connect(&dialog, &ExchangePairSelectDialog::addFavoriteClicked, this, &ExchangeModeWidget::onAddFavoriteClicked);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
+    connect(&dialog, &ExchangePairSelectDialog::addFavoriteClicked, this, &ExchangeModePage::onAddFavoriteClicked);
     dialog.move(ui->favoriteMarketBtn->mapToGlobal( QPoint(ui->favoriteMarketBtn->width() / 2 - dialog.width() / 2,ui->favoriteMarketBtn->height())));
 
     dialog.exec();
 }
 
-void ExchangeModeWidget::on_marketBtn1_clicked()
+void ExchangeModePage::on_marketBtn1_clicked()
 {
     ExchangePairSelectDialog dialog("HX");
-    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModeWidget::onPairSelected);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
     dialog.move(ui->marketBtn1->mapToGlobal( QPoint(ui->marketBtn1->width() / 2 - dialog.width() / 2,ui->marketBtn1->height())));
 
     dialog.exec();
 }
 
-void ExchangeModeWidget::on_marketBtn2_clicked()
+void ExchangeModePage::on_marketBtn2_clicked()
 {
     ExchangePairSelectDialog dialog("BTC");
-    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModeWidget::onPairSelected);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
     dialog.move(ui->marketBtn2->mapToGlobal( QPoint(ui->marketBtn2->width() / 2 - dialog.width() / 2,ui->marketBtn2->height())));
 
     dialog.exec();
 }
 
-void ExchangeModeWidget::on_marketBtn3_clicked()
+void ExchangeModePage::on_marketBtn3_clicked()
 {
     ExchangePairSelectDialog dialog("ERCPAX");
-    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModeWidget::onPairSelected);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
     dialog.move(ui->marketBtn3->mapToGlobal( QPoint(ui->marketBtn3->width() / 2 - dialog.width() / 2,ui->marketBtn3->height())));
 
     dialog.exec();
 }
 
-void ExchangeModeWidget::onPairSelected(const ExchangePair &_pair)
+void ExchangeModePage::onPairSelected(const ExchangePair &_pair)
 {
     HXChain::getInstance()->currentExchangePair = _pair;
     ui->currentPairLabel->setText( QString("%1 / %2").arg(revertERCSymbol(_pair.first)).arg(revertERCSymbol(_pair.second)));
@@ -370,14 +366,14 @@ void ExchangeModeWidget::onPairSelected(const ExchangePair &_pair)
     ui->ableToBuyLabel->setText(assetInfo1.symbol);
     ui->ableToSellLabel->setText(assetInfo2.symbol);
 
-    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(getExchangePairPrecision(_pair)));
+    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg( HXChain::getInstance()->getExchangePairPrecision(_pair)));
     QRegExpValidator* validator = new QRegExpValidator(rx1, this);
     ui->sellPriceLineEdit->setValidator(validator);
     ui->sellPriceLineEdit->clear();
     ui->buyPriceLineEdit->setValidator(validator);
     ui->buyPriceLineEdit->clear();
 
-    QRegExp rx2(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(getExchangeAmountPrecision(_pair.first)));
+    QRegExp rx2(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg( HXChain::getInstance()->getExchangeAmountPrecision(_pair.first)));
     QRegExpValidator* validator2 = new QRegExpValidator(rx2, this);
     ui->sellAmountLineEdit->setValidator(validator2);
     ui->sellAmountLineEdit->clear();
@@ -388,39 +384,62 @@ void ExchangeModeWidget::onPairSelected(const ExchangePair &_pair)
     getBuyOrders(_pair);
 }
 
-void ExchangeModeWidget::onAddFavoriteClicked()
+void ExchangeModePage::onAddFavoriteClicked()
 {
     AddMyExchangePairsDialog dialog;
     dialog.pop();
 }
 
-void ExchangeModeWidget::onAccountComboBoxCurrentIndexChanged(const QString &arg1)
+void ExchangeModePage::showDepth()
+{
+    unsigned long long maxAmount = getMaxOrderAmount();
+
+    for(int i = 0; i < ui->sellPositionTableWidget->rowCount(); i++)
+    {
+        unsigned long long baseAmount = ui->sellPositionTableWidget->item(i,2)->data(Qt::UserRole).toULongLong();
+        PriceDepthWidget* pdw = new PriceDepthWidget;
+        pdw->setType(0);
+        pdw->setLength( (double)baseAmount / maxAmount);
+        ui->sellPositionTableWidget->setCellWidget( i, 3, pdw);
+    }
+
+    for(int i = 0; i < ui->buyPositionTableWidget->rowCount(); i++)
+    {
+        unsigned long long baseAmount = ui->buyPositionTableWidget->item(i,2)->data(Qt::UserRole).toULongLong();
+        PriceDepthWidget* pdw = new PriceDepthWidget;
+        pdw->setType(1);
+        pdw->setLength( (double)baseAmount / maxAmount);
+        ui->buyPositionTableWidget->setCellWidget( i, 3, pdw);
+    }
+}
+
+void ExchangeModePage::onAccountComboBoxCurrentIndexChanged(const QString &arg1)
 {
     HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
     HXChain::getInstance()->assetExchangeBalanceMap.clear();
     getUserBalances();
 }
 
-void ExchangeModeWidget::getUserBalances()
+void ExchangeModePage::getUserBalances()
 {
     AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
-    HXChain::getInstance()->postRPC( "ExchangeModeWidget+invoke_contract_offline+getUserBalances+" + ui->accountComboBox->currentText(),
+    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract_offline+getUserBalances+" + ui->accountComboBox->currentText(),
                                      toJsonFormat( "invoke_contract_offline",
                                      QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
                                                    << "getUserBalances"  << accountInfo.address));
 }
 
-void ExchangeModeWidget::getSellOrders(const ExchangePair &_pair)
+void ExchangeModePage::getSellOrders(const ExchangePair &_pair)
 {
-    QString params = QString("%1,%2,%3,%4").arg(_pair.first).arg(_pair.second).arg(20).arg(0);
-    HXChain::getInstance()->postRPC( "ExchangeModeWidget+invoke_contract_offline+getSellOrders+" + _pair.first + "+" + _pair.second,
+    QString params = QString("%1,%2,%3,%4,%5").arg(_pair.first).arg(_pair.second).arg(20).arg(0).arg("sell");
+    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract_offline+getSellOrders+" + _pair.first + "+" + _pair.second,
                                      toJsonFormat( "invoke_contract_offline",
                                      QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
-                                                   << "getSellOrders"  << params));
+                                                   << "getOrders"  << params));
 
 }
 
-unsigned long long ExchangeModeWidget::getMaxOrderAmount()
+unsigned long long ExchangeModePage::getMaxOrderAmount()
 {
     unsigned long long result = 0;
     foreach (const OrderInfo& order, sellOrdersVector)
@@ -436,20 +455,20 @@ unsigned long long ExchangeModeWidget::getMaxOrderAmount()
 }
 
 
-void ExchangeModeWidget::getBuyOrders(const ExchangePair &_pair)
+void ExchangeModePage::getBuyOrders(const ExchangePair &_pair)
 {
-    QString params = QString("%1,%2,%3,%4").arg(_pair.first).arg(_pair.second).arg(20).arg(0);
-    HXChain::getInstance()->postRPC( "ExchangeModeWidget+invoke_contract_offline+getBuyOrders+" + _pair.first + "+" + _pair.second,
+    QString params = QString("%1,%2,%3,%4,%5").arg(_pair.first).arg(_pair.second).arg(20).arg(0).arg("buy");
+    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract_offline+getBuyOrders+" + _pair.first + "+" + _pair.second,
                                      toJsonFormat( "invoke_contract_offline",
                                      QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
-                                                   << "getBuyOrders"  << params));
+                                                   << "getOrders"  << params));
 }
 
-void ExchangeModeWidget::mergeDepth(QVector<OrderInfo> &orders, const ExchangePair& pair)
+void ExchangeModePage::mergeDepth(QVector<OrderInfo> &orders, const ExchangePair& pair)
 {
     const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(pair.first));
     const AssetInfo& quoteAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(pair.second));
-    int precision = getExchangePairPrecision(pair);
+    int precision = HXChain::getInstance()->getExchangePairPrecision(pair);
     QString lastPrice;
     QVector<OrderInfo> mergedOrders;
     for(int i = 0; i < orders.size(); i++)
@@ -473,34 +492,7 @@ void ExchangeModeWidget::mergeDepth(QVector<OrderInfo> &orders, const ExchangePa
     orders = mergedOrders;
 }
 
-int ExchangeModeWidget::getExchangePairPrecision(const ExchangePair &pair)
-{
-    QMap<QString,int> map = { {"BTC",5}, {"ETH",3}, {"HC",1}, {"HX",0}, {"LTC",3}, {"ERCPAX",1}, {"ERCELF",0}};
-
-    int precision = map.value(pair.second) - map.value(pair.first) + 4;
-    if(precision > 8)
-    {
-        precision = 8;
-    }
-    else if(precision < 2)
-    {
-        precision = 2;
-    }
-
-    return  precision;
-}
-
-int ExchangeModeWidget::getExchangeAmountPrecision(QString assetSymbol)
-{
-    QMap<QString,int> map = { {"BTC",4}, {"ETH",3}, {"HC",2}, {"HX",2}, {"LTC",3}, {"ERCPAX",2}, {"ERCELF",2}};
-
-    int precision = 2;
-    if(map.contains(assetSymbol))   precision = map.value(assetSymbol);
-
-    return precision;
-}
-
-void ExchangeModeWidget::calculateAbleToBuy()
+void ExchangeModePage::calculateAbleToBuy()
 {
     if(sellOrdersVector.size() < 1)
     {
@@ -521,7 +513,7 @@ void ExchangeModeWidget::calculateAbleToBuy()
     }
 }
 
-void ExchangeModeWidget::calculateAbleToSell()
+void ExchangeModePage::calculateAbleToSell()
 {
     if(buyOrdersVector.size() < 1)
     {
@@ -540,7 +532,7 @@ void ExchangeModeWidget::calculateAbleToSell()
     }
 }
 
-void ExchangeModeWidget::estimateBuyValue()
+void ExchangeModePage::estimateBuyValue()
 {
     double price = ui->buyPriceLineEdit->text().toDouble();
     double amount = ui->buyAmountLineEdit->text().toDouble();
@@ -549,7 +541,7 @@ void ExchangeModeWidget::estimateBuyValue()
     const AssetInfo& assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
     double available = getBigNumberString( HXChain::getInstance()->assetExchangeBalanceMap.value( HXChain::getInstance()->currentExchangePair.second).available, assetInfo.precision).toDouble();
 
-    int precision = getExchangePairPrecision( HXChain::getInstance()->currentExchangePair) + getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first);
+    int precision = HXChain::getInstance()->getExchangePairPrecision( HXChain::getInstance()->currentExchangePair) + HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first);
     if(available >= estimatedValue)
     {
         ui->estimatedBuyLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#eb005e;\">%1</span> %2</p></body></html>")
@@ -560,7 +552,7 @@ void ExchangeModeWidget::estimateBuyValue()
     else
     {
         double maxAmount = available / price;
-        QString maxAmountStr = QString::number( maxAmount, 'f', getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
+        QString maxAmountStr = QString::number( maxAmount, 'f', HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
         ui->buyAmountLineEdit->setText(maxAmountStr);
 
         ui->estimatedBuyLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#eb005e;\">%1</span> %2</p></body></html>")
@@ -571,7 +563,7 @@ void ExchangeModeWidget::estimateBuyValue()
 
 }
 
-void ExchangeModeWidget::estimateSellValue()
+void ExchangeModePage::estimateSellValue()
 {
     double price = ui->sellPriceLineEdit->text().toDouble();
     double amount = ui->sellAmountLineEdit->text().toDouble();
@@ -579,7 +571,7 @@ void ExchangeModeWidget::estimateSellValue()
     const AssetInfo& assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
     double available = getBigNumberString( HXChain::getInstance()->assetExchangeBalanceMap.value( HXChain::getInstance()->currentExchangePair.first).available, assetInfo.precision).toDouble();
 
-    int precision = getExchangePairPrecision( HXChain::getInstance()->currentExchangePair) + getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first);
+    int precision = HXChain::getInstance()->getExchangePairPrecision( HXChain::getInstance()->currentExchangePair) + HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first);
     if(available >= amount)
     {
         ui->estimateSellLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#2cca94;\">%1</span> %2</p></body></html>")
@@ -589,7 +581,7 @@ void ExchangeModeWidget::estimateSellValue()
     }
     else
     {
-        QString avaiableStr = QString::number( available, 'f', getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
+        QString avaiableStr = QString::number( available, 'f', HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
         ui->sellAmountLineEdit->setText(avaiableStr);
 
         ui->estimateSellLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#eb005e;\">%1</span> %2</p></body></html>")
@@ -600,7 +592,7 @@ void ExchangeModeWidget::estimateSellValue()
 }
 
 
-void ExchangeModeWidget::on_buyBtn_clicked()
+void ExchangeModePage::on_buyBtn_clicked()
 {
     if(ui->buyPriceLineEdit->text().toDouble() <= 0 || ui->buyAmountLineEdit->text().toDouble() <= 0)   return;
 
@@ -611,14 +603,14 @@ void ExchangeModeWidget::on_buyBtn_clicked()
     QString quoteAmountStr = decimalToIntegerStr(QString::number(ui->buyAmountLineEdit->text().toDouble() * ui->buyPriceLineEdit->text().toDouble(), 'f', quoteAssetInfo.precision), quoteAssetInfo.precision);
 
     QString params = QString("%1,%2,%3,%4").arg(HXChain::getInstance()->currentExchangePair.first).arg(baseAmountStr).arg(HXChain::getInstance()->currentExchangePair.second).arg(quoteAmountStr);
-    HXChain::getInstance()->postRPC( "ExchangeModeWidget+invoke_contract+putOnBuyOrder",
+    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnBuyOrder",
                                      toJsonFormat( "invoke_contract",
                                      QJsonArray() << ui->accountComboBox->currentText() << "0.00001" << 100000 << EXCHANGE_MODE_CONTRACT_ADDRESS
                                                    << "putOnBuyOrder"  << params));
 
 }
 
-void ExchangeModeWidget::on_sellBtn_clicked()
+void ExchangeModePage::on_sellBtn_clicked()
 {
     if(ui->sellPriceLineEdit->text().toDouble() <= 0 || ui->sellAmountLineEdit->text().toDouble() <= 0)   return;
 
@@ -629,7 +621,7 @@ void ExchangeModeWidget::on_sellBtn_clicked()
     QString quoteAmountStr = decimalToIntegerStr(QString::number(ui->sellAmountLineEdit->text().toDouble() * ui->sellPriceLineEdit->text().toDouble(), 'f', quoteAssetInfo.precision), quoteAssetInfo.precision);
 
     QString params = QString("%1,%2,%3,%4").arg(HXChain::getInstance()->currentExchangePair.first).arg(baseAmountStr).arg(HXChain::getInstance()->currentExchangePair.second).arg(quoteAmountStr);
-    HXChain::getInstance()->postRPC( "ExchangeModeWidget+invoke_contract+putOnSellOrder",
+    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnSellOrder",
                                      toJsonFormat( "invoke_contract",
                                      QJsonArray() << ui->accountComboBox->currentText() << "0.00001" << 100000 << EXCHANGE_MODE_CONTRACT_ADDRESS
                                                    << "putOnSellOrder"  << params));
@@ -638,7 +630,7 @@ void ExchangeModeWidget::on_sellBtn_clicked()
 
 
 
-void ExchangeModeWidget::on_sellPositionTableWidget_cellPressed(int row, int column)
+void ExchangeModePage::on_sellPositionTableWidget_cellPressed(int row, int column)
 {
     if(ui->sellPositionTableWidget->item(row,1))
     {
@@ -649,7 +641,7 @@ void ExchangeModeWidget::on_sellPositionTableWidget_cellPressed(int row, int col
     }
 }
 
-void ExchangeModeWidget::on_buyPositionTableWidget_cellPressed(int row, int column)
+void ExchangeModePage::on_buyPositionTableWidget_cellPressed(int row, int column)
 {
     if(ui->buyPositionTableWidget->item(row,1))
     {
@@ -660,30 +652,42 @@ void ExchangeModeWidget::on_buyPositionTableWidget_cellPressed(int row, int colu
     }
 }
 
-void ExchangeModeWidget::on_buyPriceLineEdit_textEdited(const QString &arg1)
+void ExchangeModePage::on_buyPriceLineEdit_textEdited(const QString &arg1)
 {
     estimateBuyValue();
 }
 
-void ExchangeModeWidget::on_buyAmountLineEdit_textEdited(const QString &arg1)
+void ExchangeModePage::on_buyAmountLineEdit_textEdited(const QString &arg1)
 {
     estimateBuyValue();
 }
 
-void ExchangeModeWidget::on_sellPriceLineEdit_textEdited(const QString &arg1)
+void ExchangeModePage::on_sellPriceLineEdit_textEdited(const QString &arg1)
 {
     estimateSellValue();
 }
 
-void ExchangeModeWidget::on_sellAmountLineEdit_textEdited(const QString &arg1)
+void ExchangeModePage::on_sellAmountLineEdit_textEdited(const QString &arg1)
 {
     estimateSellValue();
 }
 
-void ExchangeModeWidget::on_balanceBtn_clicked()
+void ExchangeModePage::on_balanceBtn_clicked()
 {
+    Q_EMIT backBtnVisible(true);
+
     ExchangeBalancesWidget* exchangeBalancesWidget = new ExchangeBalancesWidget(this);
     exchangeBalancesWidget->setAttribute(Qt::WA_DeleteOnClose);
     exchangeBalancesWidget->show();
     exchangeBalancesWidget->raise();
+}
+
+void ExchangeModePage::on_myOrdersBtn_clicked()
+{
+    Q_EMIT backBtnVisible(true);
+
+    ExchangeMyOrdersWidget* exchangeMyOrdersWidget = new ExchangeMyOrdersWidget(this);
+    exchangeMyOrdersWidget->setAttribute(Qt::WA_DeleteOnClose);
+    exchangeMyOrdersWidget->show();
+    exchangeMyOrdersWidget->raise();
 }

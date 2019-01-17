@@ -1,11 +1,11 @@
-#ifndef EXCHANGEMODEWIDGET_H
-#define EXCHANGEMODEWIDGET_H
+#ifndef EXCHANGEMODEPAGE_H
+#define EXCHANGEMODEPAGE_H
 
 #include <QWidget>
 #include "wallet.h"
 
 namespace Ui {
-class ExchangeModeWidget;
+class ExchangeModePage;
 }
 
 struct OrderInfo
@@ -14,17 +14,25 @@ struct OrderInfo
     unsigned long long quoteAmount = 0;
     QString address;
     QString trxId;
+    unsigned long long completedBaseAmount = 0;
+    unsigned long long completedQuoteAmount = 0;
+    unsigned long long lastDealBaseAmount = 0;
+    unsigned long long lastDealQuoteAmount = 0;
 };
 
-class ExchangeModeWidget : public QWidget
+class ExchangeModePage : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit ExchangeModeWidget(QWidget *parent = nullptr);
-    ~ExchangeModeWidget();
+    explicit ExchangeModePage(QWidget *parent = nullptr);
+    ~ExchangeModePage();
 
     void init();
+
+signals:
+    void backBtnVisible(bool isShow);
+    void showOnchainOrderPage();
 
 private slots:
     void jsonDataUpdated(QString id);
@@ -60,6 +68,8 @@ private slots:
 
     void on_balanceBtn_clicked();
 
+    void on_myOrdersBtn_clicked();
+
 public:
     void getUserBalances();
     void getSellOrders(const ExchangePair& _pair);
@@ -68,8 +78,6 @@ public:
     void getBuyOrders(const ExchangePair& _pair);
     QVector<OrderInfo>  buyOrdersVector;
     void mergeDepth(QVector<OrderInfo>& orders, const ExchangePair& pair);        // 合并深度
-    int getExchangePairPrecision(const ExchangePair& pair);    // 返回交易对显示价格时的小数位数
-    int getExchangeAmountPrecision(QString assetSymbol);
 
     void calculateAbleToBuy();
     void calculateAbleToSell();
@@ -81,10 +89,13 @@ public slots:
     void onAddFavoriteClicked();
 
 private:
-    Ui::ExchangeModeWidget *ui;
+    void showDepth();
+
+private:
+    Ui::ExchangeModePage *ui;
 
     void paintEvent(QPaintEvent*);
 
 };
 
-#endif // EXCHANGEMODEWIDGET_H
+#endif // EXCHANGEMODEPAGE_H

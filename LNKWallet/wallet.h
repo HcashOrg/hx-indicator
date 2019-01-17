@@ -42,9 +42,9 @@
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
 #ifdef TEST_WALLET
-//#define LOCKFUND_CONTRACT_ADDRESS  "HXCRYtwTBjTLnh6NAiFpiAtquHBFWZUCLz3u"
-#define LOCKFUND_CONTRACT_ADDRESS  "HXCaT326NDoaZX6FH8rmdMJpaCLnkME4eRRP"   // cyy
-#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCVxQzP5Bg1pmGnp9ddDf8B7pv2A79QqqTu"
+#define LOCKFUND_CONTRACT_ADDRESS  "HXCRYtwTBjTLnh6NAiFpiAtquHBFWZUCLz3u"
+//#define LOCKFUND_CONTRACT_ADDRESS  "HXCaT326NDoaZX6FH8rmdMJpaCLnkME4eRRP"   // cyy
+#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCLZhTZLCUhPkurTmqYJip7y52ubjy1FD88"
 #else
 #define LOCKFUND_CONTRACT_ADDRESS  "HXCVpKXx86vohkvQFEo7LkaKmnhMT9JCjTLj"
 #define EXCHANGE_MODE_CONTRACT_ADDRESS  ""
@@ -497,6 +497,8 @@ public:
     ExchangePair currentExchangePair;
     QMap<QString,ExchangeBalance>   assetExchangeBalanceMap;
     void getExchangePairs();
+    int getExchangePairPrecision(const ExchangePair& pair);    // 返回交易对显示价格时的小数位数
+    int getExchangeAmountPrecision(QString assetSymbol);
     QStringList getAllExchangeAssets();
     QMap<ExchangePair,PairInfo> pairInfoMap;
     QList<ExchangePair> getExchangePairsByQuoteAsset(QString quoteAssetSymbol = "");    // 如果为空 返回所有状态为COMMON的交易对

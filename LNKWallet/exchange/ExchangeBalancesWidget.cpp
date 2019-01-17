@@ -1,7 +1,7 @@
 #include "ExchangeBalancesWidget.h"
 #include "ui_ExchangeBalancesWidget.h"
 
-#include "ExchangeModeWidget.h"
+#include "ExchangeModePage.h"
 #include "control/AssetIconItem.h"
 #include "ToolButtonWidget.h"
 #include "depositexchangecontractdialog.h"

@@ -674,6 +674,33 @@ void HXChain::getExchangePairs()
                                                    << "getExchangePairs"  << ""));
 }
 
+int HXChain::getExchangePairPrecision(const ExchangePair &pair)
+{
+    QMap<QString,int> map = { {"BTC",5}, {"ETH",3}, {"HC",1}, {"HX",0}, {"LTC",3}, {"ERCPAX",1}, {"ERCELF",0}};
+
+    int precision = map.value(pair.second) - map.value(pair.first) + 4;
+    if(precision > 8)
+    {
+        precision = 8;
+    }
+    else if(precision < 2)
+    {
+        precision = 2;
+    }
+
+    return  precision;
+}
+
+int HXChain::getExchangeAmountPrecision(QString assetSymbol)
+{
+    QMap<QString,int> map = { {"BTC",4}, {"ETH",3}, {"HC",2}, {"HX",2}, {"LTC",3}, {"ERCPAX",2}, {"ERCELF",2}};
+
+    int precision = 2;
+    if(map.contains(assetSymbol))   precision = map.value(assetSymbol);
+
+    return precision;
+}
+
 QStringList HXChain::getAllExchangeAssets()
 {
     QStringList result;

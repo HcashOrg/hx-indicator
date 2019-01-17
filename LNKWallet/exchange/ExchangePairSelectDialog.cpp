@@ -5,7 +5,7 @@
 #include <QHeaderView>
 
 #include "ExchangeSinglePairCellWidget.h"
-#include "ExchangeModeWidget.h"
+#include "ExchangeModePage.h"
 
 ExchangePairSelectDialog::ExchangePairSelectDialog(QString _quoteAssetSymbol, QWidget *parent) :
     QDialog(parent),

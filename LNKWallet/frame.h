@@ -39,6 +39,7 @@ class FunctionWidget;
 class MinerPage;
 class BonusPage;
 class OnchainOrderPage;
+class ExchangeModePage;
 class MyExchangeContractPage;
 class PoundageWidget;
 class GuardAccountPage;
@@ -110,6 +111,7 @@ private slots:
     void showMultiSigPage();
     void showPoundagePage();//显示手续费承税单--朱正天
     void showOnchainOrderPage();
+    void showExchangeModePage();
     void showMyExchangeContractPage();
     void showGuardAccountPage();
     void showGuardIncomePage();
@@ -155,8 +157,9 @@ private:
     MultiSigPage* multiSigPage;
     MinerPage* minerPage;
     BonusPage* bonusPage;
-    OnchainOrderPage* onchainOrderPage;
-    MyExchangeContractPage* myExchangeContractPage;
+    OnchainOrderPage* onchainOrderPage = nullptr;
+    ExchangeModePage* exchangeModePage = nullptr;
+    MyExchangeContractPage* myExchangeContractPage = nullptr;
     PoundageWidget *poundage;
     GuardAccountPage*   guardAccountPage;
     GuardIncomePage*    guardIncomePage;
@@ -180,11 +183,12 @@ private:
     WaitingForSync* waitingForSync;
     NewOrImportWalletWidget* newOrImportWalletWidget;
 
-    int currentPageNum;  //  0:mainPage   1:  2:delegatePgae  3:transferPage    4:contactPage    5:myExchangeContractPage
+    int currentPageNum;  //  0:mainPage    3:transferPage    4:contactPage    5:myExchangeContractPage
                          //   6: onchainOrderPage   7:minerPage   8: assetPage     9: multiSigPage
                          //  11: poundage   12: guardKeyManagePage  13: proposalPage    14: withdrawConfirmPage  15: feedPricePage
                         //   16: coldHotTransferPage    17: guardAccountPage    18: guardIncomePage     19: bonusPage
                         //   20: contractTokenPage  21: citizenAccountPage  22: citizenProposalPage  23: lockContractPage
+                        //   24: exchangeModePage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;
     void createTrayIconActions();

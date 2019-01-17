@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = HXIndicator
 TEMPLATE = app
 
-#DEFINES += TEST_WALLET
+DEFINES += TEST_WALLET
 #DEFINES += SAFE_VERSION
 
 win32{
@@ -201,7 +201,7 @@ SOURCES += main.cpp\
     autoUpdate/AutoUpdateDialog.cpp\
     extra/LogToFile.cpp \
     exchange/FavoritePairsWidget.cpp \
-    exchange/ExchangeModeWidget.cpp \
+    exchange/ExchangeModePage.cpp \
     guard/LockContractPage.cpp \
     dialog/RiskWarningDialog.cpp \
     guard/LockFundDialog.cpp \
@@ -212,7 +212,8 @@ SOURCES += main.cpp\
     exchange/AddMyExchangePairsDialog.cpp \
     control/CheckExchangePairWidget.cpp \
     control/PriceDepthWidget.cpp \
-    exchange/ExchangeBalancesWidget.cpp
+    exchange/ExchangeBalancesWidget.cpp \
+    exchange/ExchangeMyOrdersWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -376,7 +377,7 @@ HEADERS  += firstlogin.h \
     autoUpdate/AutoUpdateDialog.h\
     extra/LogToFile.h \
     exchange/FavoritePairsWidget.h \
-    exchange/ExchangeModeWidget.h \
+    exchange/ExchangeModePage.h \
     guard/LockContractPage.h \
     dialog/RiskWarningDialog.h \
     guard/LockFundDialog.h \
@@ -387,7 +388,8 @@ HEADERS  += firstlogin.h \
     exchange/AddMyExchangePairsDialog.h \
     control/CheckExchangePairWidget.h \
     control/PriceDepthWidget.h \
-    exchange/ExchangeBalancesWidget.h
+    exchange/ExchangeBalancesWidget.h \
+    exchange/ExchangeMyOrdersWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -517,7 +519,7 @@ FORMS    += firstlogin.ui \
     citizen/ChangePayBackDialog.ui \
     autoUpdate/AutoUpdateDialog.ui \
     exchange/FavoritePairsWidget.ui \
-    exchange/ExchangeModeWidget.ui \
+    exchange/ExchangeModePage.ui \
     guard/LockContractPage.ui \
     dialog/RiskWarningDialog.ui \
     guard/LockFundDialog.ui \
@@ -528,7 +530,8 @@ FORMS    += firstlogin.ui \
     exchange/AddMyExchangePairsDialog.ui \
     control/CheckExchangePairWidget.ui \
     control/PriceDepthWidget.ui \
-    exchange/ExchangeBalancesWidget.ui
+    exchange/ExchangeBalancesWidget.ui \
+    exchange/ExchangeMyOrdersWidget.ui
 
 win32{
     DISTFILES += logo.rc

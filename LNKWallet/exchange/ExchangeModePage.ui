@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ExchangeModeWidget</class>
- <widget class="QWidget" name="ExchangeModeWidget">
+ <class>ExchangeModePage</class>
+ <widget class="QWidget" name="ExchangeModePage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -185,7 +185,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
 </string>
     </property>
     <property name="text">
-     <string>123</string>
+     <string>-</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -220,7 +220,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
 </string>
     </property>
     <property name="text">
-     <string>123</string>
+     <string>-</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -290,7 +290,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
 </string>
     </property>
     <property name="text">
-     <string>123</string>
+     <string>-</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -360,7 +360,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
 </string>
     </property>
     <property name="text">
-     <string>123</string>
+     <string>-</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -989,6 +989,28 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    </property>
    <property name="text">
     <string>我的资产</string>
+   </property>
+  </widget>
+  <widget class="QToolButton" name="myOrdersBtn">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>40</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 61, 138);
+color: rgb(255, 255, 255);
+border-radius:12px;
+font:12px &quot;微软雅黑 Light&quot;;</string>
+   </property>
+   <property name="text">
+    <string>我的委托</string>
    </property>
   </widget>
  </widget>
