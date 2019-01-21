@@ -8,6 +8,7 @@
 #include "control/PriceDepthWidget.h"
 #include "ExchangeBalancesWidget.h"
 #include "ExchangeMyOrdersWidget.h"
+#include "ExchangeContractFeeDialog.h"
 
 ExchangeModePage::ExchangeModePage(QWidget *parent) :
     QWidget(parent),
@@ -279,6 +280,27 @@ void ExchangeModePage::jsonDataUpdated(QString id)
         return;
     }
 
+    if( id.startsWith("ExchangeModePage+invoke_contract_testing+putOnBuyOrder+"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
+        unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * 1.2 * HXChain::getInstance()->contractFee / 100.0);
+
+        ExchangeContractFeeDialog exchangeContractFeeDialog(totalAmount, ui->accountComboBox->currentText());
+        if(exchangeContractFeeDialog.pop())
+        {
+            QString params = id.mid( QString("ExchangeModePage+invoke_contract_testing+putOnBuyOrder+").size());
+            exchangeContractFeeDialog.updatePoundageID();
+            HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnBuyOrder",
+                                             toJsonFormat( "invoke_contract",
+                                                           QJsonArray() << ui->accountComboBox->currentText() << HXChain::getInstance()->currentContractFee()
+                                                           << ceil(totalFee.step * 1.2) << EXCHANGE_MODE_CONTRACT_ADDRESS
+                                                           << "putOnBuyOrder"  << params));
+        }
+    }
+
     if( id == "ExchangeModePage+invoke_contract+putOnSellOrder")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
@@ -304,7 +326,26 @@ void ExchangeModePage::jsonDataUpdated(QString id)
         return;
     }
 
+    if( id.startsWith("ExchangeModePage+invoke_contract_testing+putOnSellOrder+"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
 
+        HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
+        unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * 1.2 * HXChain::getInstance()->contractFee / 100.0);
+
+        ExchangeContractFeeDialog exchangeContractFeeDialog(totalAmount, ui->accountComboBox->currentText());
+        if(exchangeContractFeeDialog.pop())
+        {
+            QString params = id.mid( QString("ExchangeModePage+invoke_contract_testing+putOnSellOrder+").size());
+            exchangeContractFeeDialog.updatePoundageID();
+            HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnSellOrder",
+                                             toJsonFormat( "invoke_contract",
+                                                           QJsonArray() << ui->accountComboBox->currentText() << HXChain::getInstance()->currentContractFee()
+                                                           << ceil(totalFee.step * 1.2) << EXCHANGE_MODE_CONTRACT_ADDRESS
+                                                           << "putOnSellOrder"  << params));
+        }
+    }
 }
 
 void ExchangeModePage::paintEvent(QPaintEvent *)
@@ -629,11 +670,15 @@ void ExchangeModePage::on_buyBtn_clicked()
     QString quoteAmountStr = decimalToIntegerStr(QString::number(ui->buyAmountLineEdit->text().toDouble() * ui->buyPriceLineEdit->text().toDouble(), 'f', quoteAssetInfo.precision), quoteAssetInfo.precision);
 
     QString params = QString("%1,%2,%3,%4").arg(HXChain::getInstance()->currentExchangePair.first).arg(baseAmountStr).arg(HXChain::getInstance()->currentExchangePair.second).arg(quoteAmountStr);
-    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnBuyOrder",
-                                     toJsonFormat( "invoke_contract",
-                                     QJsonArray() << ui->accountComboBox->currentText() << "0.00001" << 1000000 << EXCHANGE_MODE_CONTRACT_ADDRESS
-                                                   << "putOnBuyOrder"  << params));
+//    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnBuyOrder",
+//                                     toJsonFormat( "invoke_contract",
+//                                     QJsonArray() << ui->accountComboBox->currentText() << "0.00001" << 1000000 << EXCHANGE_MODE_CONTRACT_ADDRESS
+//                                                   << "putOnBuyOrder"  << params));
 
+    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract_testing+putOnBuyOrder+" + params,
+                                     toJsonFormat( "invoke_contract_testing",
+                                     QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
+                                                   << "putOnBuyOrder"  << params));
 }
 
 void ExchangeModePage::on_sellBtn_clicked()
@@ -647,9 +692,14 @@ void ExchangeModePage::on_sellBtn_clicked()
     QString quoteAmountStr = decimalToIntegerStr(QString::number(ui->sellAmountLineEdit->text().toDouble() * ui->sellPriceLineEdit->text().toDouble(), 'f', quoteAssetInfo.precision), quoteAssetInfo.precision);
 
     QString params = QString("%1,%2,%3,%4").arg(HXChain::getInstance()->currentExchangePair.first).arg(baseAmountStr).arg(HXChain::getInstance()->currentExchangePair.second).arg(quoteAmountStr);
-    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnSellOrder",
-                                     toJsonFormat( "invoke_contract",
-                                     QJsonArray() << ui->accountComboBox->currentText() << "0.00001" << 1000000 << EXCHANGE_MODE_CONTRACT_ADDRESS
+//    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnSellOrder",
+//                                     toJsonFormat( "invoke_contract",
+//                                     QJsonArray() << ui->accountComboBox->currentText() << "0.00001" << 1000000 << EXCHANGE_MODE_CONTRACT_ADDRESS
+//                                                   << "putOnSellOrder"  << params));
+
+    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract_testing+putOnSellOrder+" + params,
+                                     toJsonFormat( "invoke_contract_testing",
+                                     QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
                                                    << "putOnSellOrder"  << params));
 }
 
