@@ -32,6 +32,8 @@ private slots:
 
     void on_myOrdersTableWidget_cellClicked(int row, int column);
 
+    void on_currentOrdersBtn_clicked();
+
 public:
     void getUserOrders(const ExchangePair& _pair);   // 0: sell  1: buy
     QMap<QString,OrderInfo>     mySellOrdersMap;    // key是交易id

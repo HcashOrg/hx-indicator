@@ -480,7 +480,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <rect>
      <x>60</x>
      <y>225</y>
-     <width>440</width>
+     <width>420</width>
      <height>248</height>
     </rect>
    </property>
@@ -492,7 +492,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      <rect>
       <x>10</x>
       <y>15</y>
-      <width>200</width>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
@@ -509,9 +509,9 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLineEdit" name="sellPriceLineEdit">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>220</x>
       <y>15</y>
-      <width>200</width>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
@@ -530,7 +530,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      <rect>
       <x>10</x>
       <y>65</y>
-      <width>200</width>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
@@ -547,9 +547,9 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLineEdit" name="sellAmountLineEdit">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>220</x>
       <y>65</y>
-      <width>200</width>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
@@ -633,7 +633,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLabel" name="sellPriceLabel">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>230</x>
       <y>19</y>
       <width>80</width>
       <height>20</height>
@@ -665,7 +665,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLabel" name="sellAmountLabel">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>230</x>
       <y>69</y>
       <width>80</width>
       <height>20</height>
@@ -699,7 +699,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      <rect>
       <x>30</x>
       <y>190</y>
-      <width>160</width>
+      <width>150</width>
       <height>28</height>
      </rect>
     </property>
@@ -717,9 +717,9 @@ font: 12px &quot;微软雅黑&quot;;</string>
    <widget class="QToolButton" name="sellBtn">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>240</x>
       <y>190</y>
-      <width>160</width>
+      <width>150</width>
       <height>28</height>
      </rect>
     </property>
@@ -739,7 +739,7 @@ font: 12px &quot;微软雅黑&quot;;</string>
      <rect>
       <x>10</x>
       <y>160</y>
-      <width>200</width>
+      <width>190</width>
       <height>20</height>
      </rect>
     </property>
@@ -757,9 +757,9 @@ color: rgb(137, 129, 161);</string>
    <widget class="QLabel" name="estimateSellLabel">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>220</x>
       <y>160</y>
-      <width>200</width>
+      <width>190</width>
       <height>20</height>
      </rect>
     </property>
@@ -778,9 +778,9 @@ color: rgb(137, 129, 161);</string>
   <widget class="QComboBox" name="positionComboBox">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>490</x>
      <y>225</y>
-     <width>100</width>
+     <width>110</width>
      <height>22</height>
     </rect>
    </property>
@@ -821,9 +821,9 @@ color: rgb(137, 129, 161);</string>
   <widget class="QComboBox" name="depthComboBox">
    <property name="geometry">
     <rect>
-     <x>610</x>
+     <x>600</x>
      <y>225</y>
-     <width>100</width>
+     <width>110</width>
      <height>22</height>
     </rect>
    </property>
@@ -854,9 +854,9 @@ color: rgb(137, 129, 161);</string>
   <widget class="QTableWidget" name="sellPositionTableWidget">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>490</x>
      <y>250</y>
-     <width>200</width>
+     <width>220</width>
      <height>110</height>
     </rect>
    </property>
@@ -887,9 +887,9 @@ color: rgb(137, 129, 161);</string>
   <widget class="QTableWidget" name="buyPositionTableWidget">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>490</x>
      <y>363</y>
-     <width>200</width>
+     <width>220</width>
      <height>110</height>
     </rect>
    </property>

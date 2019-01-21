@@ -25,9 +25,9 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     ui->sellPositionTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->sellPositionTableWidget->horizontalHeader()->setVisible(false);
     ui->sellPositionTableWidget->verticalHeader()->setVisible(false);
-    ui->sellPositionTableWidget->setColumnWidth(0,35);
+    ui->sellPositionTableWidget->setColumnWidth(0,50);
     ui->sellPositionTableWidget->setColumnWidth(1,65);
-    ui->sellPositionTableWidget->setColumnWidth(2,60);
+    ui->sellPositionTableWidget->setColumnWidth(2,65);
     ui->sellPositionTableWidget->setColumnWidth(3,36);
 
     ui->buyPositionTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -39,9 +39,9 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     ui->buyPositionTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->buyPositionTableWidget->horizontalHeader()->setVisible(false);
     ui->buyPositionTableWidget->verticalHeader()->setVisible(false);
-    ui->buyPositionTableWidget->setColumnWidth(0,35);
+    ui->buyPositionTableWidget->setColumnWidth(0,50);
     ui->buyPositionTableWidget->setColumnWidth(1,65);
-    ui->buyPositionTableWidget->setColumnWidth(2,60);
+    ui->buyPositionTableWidget->setColumnWidth(2,65);
     ui->buyPositionTableWidget->setColumnWidth(3,36);
 
     setStyleSheet("QTableView{background-color:rgb(243,241,250);border:none;border-radius:0px;font: 11px \"微软雅黑\";color:rgb(52,37,90);}"
@@ -86,13 +86,19 @@ void ExchangeModePage::init()
 
 }
 
+void ExchangeModePage::refresh()
+{
+    getSellOrders(HXChain::getInstance()->currentExchangePair);
+    getBuyOrders(HXChain::getInstance()->currentExchangePair);
+}
+
 
 void ExchangeModePage::jsonDataUpdated(QString id)
 {
     if( id == "ExchangeModePage+invoke_contract_offline+getUserBalances+" + ui->accountComboBox->currentText())
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -123,7 +129,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
             HXChain::getInstance()->currentExchangePair.first + "+" + HXChain::getInstance()->currentExchangePair.second)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -175,6 +181,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
                 ui->sellPositionTableWidget->item(size - i - 1,2)->setTextColor(QColor(83,61,138));
                 ui->sellPositionTableWidget->item(size - i - 1,2)->setData(Qt::UserRole, orderInfo.baseAmount);
             }
+            tableWidgetSetItemZebraColor(ui->sellPositionTableWidget);
 
             ui->sellPositionTableWidget->scrollToBottom();
         }
@@ -186,7 +193,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
             HXChain::getInstance()->currentExchangePair.first + "+" + HXChain::getInstance()->currentExchangePair.second)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -238,8 +245,10 @@ void ExchangeModePage::jsonDataUpdated(QString id)
                 ui->buyPositionTableWidget->item(i,2)->setTextColor(QColor(83,61,138));
                 ui->buyPositionTableWidget->item(i,2)->setData(Qt::UserRole, orderInfo.baseAmount);
             }
+            tableWidgetSetItemZebraColor(ui->buyPositionTableWidget);
 
             showDepth();    // 后查的买单 所以在查完后显示深度
+            on_positionComboBox_currentIndexChanged(ui->positionComboBox->currentIndex());
         }
 
         return;
@@ -256,6 +265,8 @@ void ExchangeModePage::jsonDataUpdated(QString id)
             transactionResultDialog.setInfoText(tr("Transaction of buy-order has been sent out!"));
             transactionResultDialog.setDetailText(result);
             transactionResultDialog.pop();
+
+            getUserBalances();
         }
         else if(result.startsWith("\"error\":"))
         {
@@ -279,6 +290,8 @@ void ExchangeModePage::jsonDataUpdated(QString id)
             transactionResultDialog.setInfoText(tr("Transaction of sell-order has been sent out!"));
             transactionResultDialog.setDetailText(result);
             transactionResultDialog.pop();
+
+            getUserBalances();
         }
         else if(result.startsWith("\"error\":"))
         {
@@ -413,6 +426,19 @@ void ExchangeModePage::showDepth()
     }
 }
 
+void ExchangeModePage::showPosition(int num)
+{
+    for(int i = 0; i < ui->sellPositionTableWidget->rowCount(); i++)
+    {
+        ui->sellPositionTableWidget->setRowHidden(i, i < ui->sellPositionTableWidget->rowCount() - num);
+    }
+
+    for(int i = 0; i < ui->buyPositionTableWidget->rowCount(); i++)
+    {
+        ui->buyPositionTableWidget->setRowHidden(i, i >= num);
+    }
+}
+
 void ExchangeModePage::onAccountComboBoxCurrentIndexChanged(const QString &arg1)
 {
     HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
@@ -431,7 +457,7 @@ void ExchangeModePage::getUserBalances()
 
 void ExchangeModePage::getSellOrders(const ExchangePair &_pair)
 {
-    QString params = QString("%1,%2,%3,%4,%5").arg(_pair.first).arg(_pair.second).arg(20).arg(0).arg("sell");
+    QString params = QString("%1,%2,%3,%4,%5").arg(_pair.first).arg(_pair.second).arg(100).arg(0).arg("sell");
     HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract_offline+getSellOrders+" + _pair.first + "+" + _pair.second,
                                      toJsonFormat( "invoke_contract_offline",
                                      QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
@@ -457,7 +483,7 @@ unsigned long long ExchangeModePage::getMaxOrderAmount()
 
 void ExchangeModePage::getBuyOrders(const ExchangePair &_pair)
 {
-    QString params = QString("%1,%2,%3,%4,%5").arg(_pair.first).arg(_pair.second).arg(20).arg(0).arg("buy");
+    QString params = QString("%1,%2,%3,%4,%5").arg(_pair.first).arg(_pair.second).arg(100).arg(0).arg("buy");
     HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract_offline+getBuyOrders+" + _pair.first + "+" + _pair.second,
                                      toJsonFormat( "invoke_contract_offline",
                                      QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
@@ -605,7 +631,7 @@ void ExchangeModePage::on_buyBtn_clicked()
     QString params = QString("%1,%2,%3,%4").arg(HXChain::getInstance()->currentExchangePair.first).arg(baseAmountStr).arg(HXChain::getInstance()->currentExchangePair.second).arg(quoteAmountStr);
     HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnBuyOrder",
                                      toJsonFormat( "invoke_contract",
-                                     QJsonArray() << ui->accountComboBox->currentText() << "0.00001" << 100000 << EXCHANGE_MODE_CONTRACT_ADDRESS
+                                     QJsonArray() << ui->accountComboBox->currentText() << "0.00001" << 1000000 << EXCHANGE_MODE_CONTRACT_ADDRESS
                                                    << "putOnBuyOrder"  << params));
 
 }
@@ -623,7 +649,7 @@ void ExchangeModePage::on_sellBtn_clicked()
     QString params = QString("%1,%2,%3,%4").arg(HXChain::getInstance()->currentExchangePair.first).arg(baseAmountStr).arg(HXChain::getInstance()->currentExchangePair.second).arg(quoteAmountStr);
     HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnSellOrder",
                                      toJsonFormat( "invoke_contract",
-                                     QJsonArray() << ui->accountComboBox->currentText() << "0.00001" << 100000 << EXCHANGE_MODE_CONTRACT_ADDRESS
+                                     QJsonArray() << ui->accountComboBox->currentText() << "0.00001" << 1000000 << EXCHANGE_MODE_CONTRACT_ADDRESS
                                                    << "putOnSellOrder"  << params));
 }
 
@@ -690,4 +716,20 @@ void ExchangeModePage::on_myOrdersBtn_clicked()
     exchangeMyOrdersWidget->setAttribute(Qt::WA_DeleteOnClose);
     exchangeMyOrdersWidget->show();
     exchangeMyOrdersWidget->raise();
+}
+
+void ExchangeModePage::on_positionComboBox_currentIndexChanged(int index)
+{
+    if(index == 0 || index == 1)
+    {
+        showPosition(5);
+    }
+    else if(index == 2)
+    {
+        showPosition(10);
+    }
+    else if(index == 3)
+    {
+        showPosition(20);
+    }
 }

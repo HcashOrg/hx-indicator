@@ -30,6 +30,8 @@ public:
 
     void init();
 
+    void refresh();
+
 signals:
     void backBtnVisible(bool isShow);
     void showOnchainOrderPage();
@@ -70,6 +72,8 @@ private slots:
 
     void on_myOrdersBtn_clicked();
 
+    void on_positionComboBox_currentIndexChanged(int index);
+
 public:
     void getUserBalances();
     void getSellOrders(const ExchangePair& _pair);
@@ -90,6 +94,8 @@ public slots:
 
 private:
     void showDepth();
+
+    void showPosition(int num);
 
 private:
     Ui::ExchangeModePage *ui;

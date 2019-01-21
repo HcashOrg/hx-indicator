@@ -28,6 +28,9 @@ ExchangeMyOrdersWidget::ExchangeMyOrdersWidget(QWidget *parent) :
     ui->myOrdersTableWidget->setColumnWidth(3,170);
     ui->myOrdersTableWidget->setColumnWidth(4,80);
 
+    ui->currentOrdersBtn->setCheckable(true);
+    ui->currentOrdersBtn->setChecked(true);
+
     init();
 }
 
@@ -38,7 +41,7 @@ ExchangeMyOrdersWidget::~ExchangeMyOrdersWidget()
 
 void ExchangeMyOrdersWidget::init()
 {
-    getUserOrders(HXChain::getInstance()->currentExchangePair);
+    onPairSelected(HXChain::getInstance()->currentExchangePair);
 }
 
 void ExchangeMyOrdersWidget::jsonDataUpdated(QString id)
@@ -375,4 +378,9 @@ void ExchangeMyOrdersWidget::on_myOrdersTableWidget_cellClicked(int row, int col
 
         return;
     }
+}
+
+void ExchangeMyOrdersWidget::on_currentOrdersBtn_clicked()
+{
+    ui->currentOrdersBtn->setChecked(true);
 }

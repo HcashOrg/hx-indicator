@@ -164,7 +164,7 @@
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>150</y>
+     <y>140</y>
      <width>650</width>
      <height>310</height>
     </rect>
@@ -291,6 +291,38 @@
      <set>AlignCenter</set>
     </property>
    </column>
+  </widget>
+  <widget class="QPushButton" name="currentOrdersBtn">
+   <property name="geometry">
+    <rect>
+     <x>240</x>
+     <y>110</y>
+     <width>50</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{font:11px &quot;微软雅黑&quot;;background:transparent;border:none;color: rgb(137,129,161);}
+QPushButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}</string>
+   </property>
+   <property name="text">
+    <string>当前委托</string>
+   </property>
   </widget>
  </widget>
  <resources/>

@@ -410,7 +410,9 @@ void Frame::alreadyLogin()
     //自动更新
 //    AutoUpdateNotify *autoupdate = new AutoUpdateNotify();
 #ifndef SAFE_VERSION
+#ifndef TEST_WALLET
     autoupdate->startAutoDetect();
+#endif
 #endif
 }
 
@@ -924,6 +926,9 @@ void Frame::autoRefresh()
         break;
     case 23:
         lockContractPage->refresh();
+        break;
+    case 24:
+        exchangeModePage->refresh();
         break;
     default:
         break;
@@ -2018,7 +2023,7 @@ void Frame::jsonDataUpdated(QString id)
     if(id == "senator-get_proposal_for_voter")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -2564,6 +2569,17 @@ void Frame::jsonDataUpdated(QString id)
                 HXChain::getInstance()->pairInfoMap.insert(pair,info);
             }
 
+            if(HXChain::getInstance()->pairInfoMap.size() > 0)
+            {
+                if(HXChain::getInstance()->pairInfoMap.contains( qMakePair(QString("HC"),QString(ASSET_NAME))))
+                {
+                    HXChain::getInstance()->currentExchangePair = qMakePair(QString("HC"),QString(ASSET_NAME));
+                }
+                else
+                {
+                    HXChain::getInstance()->currentExchangePair = HXChain::getInstance()->pairInfoMap.keys().first();
+                }
+            }
         }
 
         return;
