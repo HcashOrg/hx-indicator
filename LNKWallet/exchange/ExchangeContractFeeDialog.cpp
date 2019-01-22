@@ -48,8 +48,10 @@ bool ExchangeContractFeeDialog::pop()
 
 void ExchangeContractFeeDialog::init()
 {
-    feeChoose->updateFeeNumberSlots(getBigNumberString(ceil(feeAmount * HXChain::getInstance()->contractFee / 100.0), ASSET_PRECISION).toDouble());
+    feeChoose->updateFeeNumberSlots(getBigNumberString(feeAmount, ASSET_PRECISION).toDouble());
     feeChoose->updateAccountNameSlots(account);
+
+    ui->label->setText(tr("You need to pay a fee of %1 %2").arg(getBigNumberString(feeAmount, ASSET_PRECISION)).arg(ASSET_NAME));
 }
 
 void ExchangeContractFeeDialog::updatePoundageID()

@@ -2569,7 +2569,7 @@ void Frame::jsonDataUpdated(QString id)
                 HXChain::getInstance()->pairInfoMap.insert(pair,info);
             }
 
-            if(HXChain::getInstance()->pairInfoMap.size() > 0)
+            if(HXChain::getInstance()->pairInfoMap.size() > 0 && HXChain::getInstance()->currentExchangePair.first.isEmpty())
             {
                 if(HXChain::getInstance()->pairInfoMap.contains( qMakePair(QString("HC"),QString(ASSET_NAME))))
                 {

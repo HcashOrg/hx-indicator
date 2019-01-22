@@ -287,7 +287,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
 
         HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
         unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * 1.2 * HXChain::getInstance()->contractFee / 100.0);
-
+qDebug() << "Xxxxxxxxxxxxxxxxxx " << totalAmount << totalFee.baseAmount << ceil(totalFee.step * 1.2 * HXChain::getInstance()->contractFee / 100.0);
         ExchangeContractFeeDialog exchangeContractFeeDialog(totalAmount, ui->accountComboBox->currentText());
         if(exchangeContractFeeDialog.pop())
         {

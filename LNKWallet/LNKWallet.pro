@@ -214,7 +214,8 @@ SOURCES += main.cpp\
     control/PriceDepthWidget.cpp \
     exchange/ExchangeBalancesWidget.cpp \
     exchange/ExchangeMyOrdersWidget.cpp \
-    exchange/ExchangeContractFeeDialog.cpp
+    exchange/ExchangeContractFeeDialog.cpp \
+    control/BottomLine.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -391,7 +392,8 @@ HEADERS  += firstlogin.h \
     control/PriceDepthWidget.h \
     exchange/ExchangeBalancesWidget.h \
     exchange/ExchangeMyOrdersWidget.h \
-    exchange/ExchangeContractFeeDialog.h
+    exchange/ExchangeContractFeeDialog.h \
+    control/BottomLine.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \

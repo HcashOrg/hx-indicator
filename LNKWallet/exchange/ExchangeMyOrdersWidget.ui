@@ -317,8 +317,7 @@
     <enum>Qt::NoFocus</enum>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton{font:11px &quot;微软雅黑&quot;;background:transparent;border:none;color: rgb(137,129,161);}
-QPushButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137);}</string>
+    <string notr="true">QPushButton{font:11px &quot;微软雅黑&quot;;background:transparent;border:none;color: rgb(137,129,161);}</string>
    </property>
    <property name="text">
     <string>当前委托</string>

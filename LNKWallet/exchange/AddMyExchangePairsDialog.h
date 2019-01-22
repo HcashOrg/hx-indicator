@@ -8,6 +8,7 @@ class AddMyExchangePairsDialog;
 }
 
 class CheckExchangePairWidget;
+class BottomLine;
 typedef QPair<QString,QString>  ExchangePair;
 
 class AddMyExchangePairsDialog : public QDialog
@@ -35,6 +36,7 @@ private slots:
 
 private:
     Ui::AddMyExchangePairsDialog *ui;
+    BottomLine* bottomLine = nullptr;
 
     QList<CheckExchangePairWidget*> pairWidgetList;
     void closeAllPairWidgets();

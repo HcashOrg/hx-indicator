@@ -5,6 +5,7 @@
 #include "AddMyExchangePairsDialog.h"
 #include "ToolButtonWidget.h"
 #include "commondialog.h"
+#include "control/BottomLine.h"
 
 ExchangeMyOrdersWidget::ExchangeMyOrdersWidget(QWidget *parent) :
     QWidget(parent),
@@ -30,6 +31,9 @@ ExchangeMyOrdersWidget::ExchangeMyOrdersWidget(QWidget *parent) :
 
     ui->currentOrdersBtn->setCheckable(true);
     ui->currentOrdersBtn->setChecked(true);
+
+    bottomLine = new BottomLine(this);
+    bottomLine->attachToWidget(ui->currentOrdersBtn);
 
     init();
 }

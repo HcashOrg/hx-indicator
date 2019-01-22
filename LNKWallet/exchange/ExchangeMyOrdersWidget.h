@@ -8,7 +8,7 @@ namespace Ui {
 class ExchangeMyOrdersWidget;
 }
 
-
+class BottomLine;
 class ExchangeMyOrdersWidget : public QWidget
 {
     Q_OBJECT
@@ -47,6 +47,7 @@ public slots:
 
 private:
     Ui::ExchangeMyOrdersWidget *ui;
+    BottomLine* bottomLine = nullptr;
 
     void paintEvent(QPaintEvent*);
 

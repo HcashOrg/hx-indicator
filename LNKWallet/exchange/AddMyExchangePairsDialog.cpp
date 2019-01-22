@@ -3,6 +3,7 @@
 
 #include "wallet.h"
 #include "control/CheckExchangePairWidget.h"
+#include "control/BottomLine.h"
 
 AddMyExchangePairsDialog::AddMyExchangePairsDialog(QWidget *parent) :
     QDialog(parent),
@@ -18,10 +19,13 @@ AddMyExchangePairsDialog::AddMyExchangePairsDialog(QWidget *parent) :
     ui->widget->setObjectName("widget");
     ui->widget->setStyleSheet(BACKGROUNDWIDGET_STYLE);
     ui->containerWidget->setObjectName("containerwidget");
-    ui->containerWidget->setStyleSheet(CONTAINERWIDGET_STYLE);
+    ui->containerWidget->setStyleSheet("#containerwidget{background-color:white;border-radius:4px;}"
+                                       "QLabel{color:rgb(51,51,51);}");
 
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
+
+    bottomLine = new BottomLine(ui->containerWidget);
 
     on_marketBtn1_clicked();
 }
@@ -40,16 +44,19 @@ void AddMyExchangePairsDialog::pop()
 void AddMyExchangePairsDialog::on_marketBtn1_clicked()
 {
     showPairsByQuoteAsset("HX");
+    bottomLine->attachToWidget(ui->marketBtn1);
 }
 
 void AddMyExchangePairsDialog::on_marketBtn2_clicked()
 {
     showPairsByQuoteAsset("BTC");
+    bottomLine->attachToWidget(ui->marketBtn2);
 }
 
 void AddMyExchangePairsDialog::on_marketBtn3_clicked()
 {
     showPairsByQuoteAsset("ERCPAX");
+    bottomLine->attachToWidget(ui->marketBtn3);
 }
 
 void AddMyExchangePairsDialog::showPairsByQuoteAsset(QString quoteAsset)
