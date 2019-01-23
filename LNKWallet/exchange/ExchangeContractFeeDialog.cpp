@@ -51,7 +51,7 @@ void ExchangeContractFeeDialog::init()
     feeChoose->updateFeeNumberSlots(getBigNumberString(feeAmount, ASSET_PRECISION).toDouble());
     feeChoose->updateAccountNameSlots(account);
 
-    ui->label->setText(tr("You need to pay a fee of %1 %2").arg(getBigNumberString(feeAmount, ASSET_PRECISION)).arg(ASSET_NAME));
+    ui->label->setText(tr("You need to pay a fee of about %1 %2").arg(getBigNumberString(feeAmount, ASSET_PRECISION)).arg(ASSET_NAME));
 }
 
 void ExchangeContractFeeDialog::updatePoundageID()

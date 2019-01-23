@@ -6,6 +6,7 @@
 #include "ToolButtonWidget.h"
 #include "commondialog.h"
 #include "control/BottomLine.h"
+#include "ExchangeContractFeeDialog.h"
 
 ExchangeMyOrdersWidget::ExchangeMyOrdersWidget(QWidget *parent) :
     QWidget(parent),
@@ -46,6 +47,8 @@ ExchangeMyOrdersWidget::~ExchangeMyOrdersWidget()
 void ExchangeMyOrdersWidget::init()
 {
     onPairSelected(HXChain::getInstance()->currentExchangePair);
+
+    ui->historyBtn->setEnabled(false);
 }
 
 void ExchangeMyOrdersWidget::jsonDataUpdated(QString id)
@@ -129,6 +132,30 @@ void ExchangeMyOrdersWidget::jsonDataUpdated(QString id)
             }
 
             showMyOrders();
+        }
+
+        return;
+    }
+
+    if( id.startsWith("ExchangeMyOrdersWidget+invoke_contract_testing+cancelOrder+"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+
+        HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
+        unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * 1.2 * HXChain::getInstance()->contractFee / 100.0);
+
+        ExchangeContractFeeDialog exchangeContractFeeDialog(totalAmount, HXChain::getInstance()->currentAccount);
+        if(exchangeContractFeeDialog.pop())
+        {
+            QString params = id.mid( QString("ExchangeMyOrdersWidget+invoke_contract_testing+cancelOrder+").size());
+            exchangeContractFeeDialog.updatePoundageID();
+            HXChain::getInstance()->postRPC( "ExchangeMyOrdersWidget+invoke_contract+cancelOrder",
+                                             toJsonFormat( "invoke_contract",
+                                                           QJsonArray() << HXChain::getInstance()->currentAccount << HXChain::getInstance()->currentContractFee()
+                                                           << ceil(totalFee.step * 1.2) << EXCHANGE_MODE_CONTRACT_ADDRESS
+                                                           << "cancelOrder"  << params));
         }
 
         return;
@@ -373,9 +400,13 @@ void ExchangeMyOrdersWidget::on_myOrdersTableWidget_cellClicked(int row, int col
                         .arg(HXChain::getInstance()->currentExchangePair.second)
                         .arg(orderInfo.trxId)
                         .arg(type);
-                HXChain::getInstance()->postRPC( "ExchangeMyOrdersWidget+invoke_contract+cancelOrder",
-                                                 toJsonFormat( "invoke_contract",
-                                                 QJsonArray() << HXChain::getInstance()->currentAccount << "0.00001" << 100000 << EXCHANGE_MODE_CONTRACT_ADDRESS
+//                HXChain::getInstance()->postRPC( "ExchangeMyOrdersWidget+invoke_contract+cancelOrder",
+//                                                 toJsonFormat( "invoke_contract",
+//                                                 QJsonArray() << HXChain::getInstance()->currentAccount << "0.00001" << 100000 << EXCHANGE_MODE_CONTRACT_ADDRESS
+//                                                               << "cancelOrder"  << params));
+                HXChain::getInstance()->postRPC( "ExchangeMyOrdersWidget+invoke_contract_testing+cancelOrder+" + params,
+                                                 toJsonFormat( "invoke_contract_testing",
+                                                               QJsonArray() << HXChain::getInstance()->currentAccount << EXCHANGE_MODE_CONTRACT_ADDRESS
                                                                << "cancelOrder"  << params));
             }
         }

@@ -38,7 +38,6 @@ void FunctionExchangeWidget::InitWidget()
 void FunctionExchangeWidget::InitStyle()
 {
     setStyleSheet(FUNCTIONBAR_PUSHBUTTON_STYLE);
-
 }
 
 

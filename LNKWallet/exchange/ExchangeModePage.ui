@@ -455,7 +455,7 @@
     <rect>
      <x>190</x>
      <y>80</y>
-     <width>70</width>
+     <width>80</width>
      <height>18</height>
     </rect>
    </property>
@@ -472,9 +472,9 @@
   <widget class="QPushButton" name="marketBtn2">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>300</x>
      <y>80</y>
-     <width>70</width>
+     <width>90</width>
      <height>18</height>
     </rect>
    </property>
@@ -488,9 +488,9 @@
   <widget class="QPushButton" name="marketBtn3">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>420</x>
      <y>80</y>
-     <width>70</width>
+     <width>90</width>
      <height>18</height>
     </rect>
    </property>

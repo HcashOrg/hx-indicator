@@ -483,6 +483,11 @@ void ExchangeModePage::onPairSelected(const ExchangePair &_pair)
     ui->buyAmountLineEdit->setValidator(validator2);
     ui->buyAmountLineEdit->clear();
 
+    ui->buyAmountLineEdit->setEnabled(true);
+    ui->buyPriceLineEdit->setEnabled(true);
+    ui->sellAmountLineEdit->setEnabled(true);
+    ui->sellPriceLineEdit->setEnabled(true);
+
     refresh();
 }
 
@@ -532,6 +537,12 @@ void ExchangeModePage::onAccountComboBoxCurrentIndexChanged(const QString &arg1)
 {
     HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
     HXChain::getInstance()->assetExchangeBalanceMap.clear();
+
+    ui->buyAmountLineEdit->setEnabled(false);
+    ui->buyPriceLineEdit->setEnabled(false);
+    ui->sellAmountLineEdit->setEnabled(false);
+    ui->sellPriceLineEdit->setEnabled(false);
+
     getUserBalances();
 }
 

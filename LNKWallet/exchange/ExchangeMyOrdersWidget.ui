@@ -16,9 +16,9 @@
   <widget class="QPushButton" name="marketBtn3">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>420</x>
      <y>80</y>
-     <width>70</width>
+     <width>90</width>
      <height>18</height>
     </rect>
    </property>
@@ -42,7 +42,7 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>委托记录</string>
+    <string>我的委托</string>
    </property>
   </widget>
   <widget class="QPushButton" name="favoriteMarketBtn">
@@ -66,7 +66,7 @@
     <rect>
      <x>190</x>
      <y>80</y>
-     <width>70</width>
+     <width>80</width>
      <height>18</height>
     </rect>
    </property>
@@ -83,9 +83,9 @@
   <widget class="QPushButton" name="marketBtn2">
    <property name="geometry">
     <rect>
-     <x>290</x>
+     <x>300</x>
      <y>80</y>
-     <width>70</width>
+     <width>90</width>
      <height>18</height>
     </rect>
    </property>
@@ -321,6 +321,39 @@
    </property>
    <property name="text">
     <string>当前委托</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="historyBtn">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>110</y>
+     <width>50</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{font:11px &quot;微软雅黑&quot;;background:transparent;border:none;color: rgb(137,129,161);}
+QPushButton:disabled{color: rgb(200, 200, 200);}
+</string>
+   </property>
+   <property name="text">
+    <string>历史委托</string>
    </property>
   </widget>
  </widget>
