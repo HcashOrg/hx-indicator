@@ -26,6 +26,7 @@ public:
 signals:
     void backBtnVisible(bool isShow);
     void showExchangeModePage();
+    void showMyOrdersPage();
 
 private slots:
     void jsonDataUpdated(QString id);
@@ -44,6 +45,8 @@ private slots:
     void on_swapBtn_clicked();
 
     void on_exchangeModeBtn_clicked();
+
+    void on_myOrdersBtn_clicked();
 
 public slots:
     void on_favoriteBtn_clicked();

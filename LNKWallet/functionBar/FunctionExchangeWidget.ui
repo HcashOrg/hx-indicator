@@ -47,24 +47,6 @@ padding-left: 15px;</string>
    <property name="geometry">
     <rect>
      <x>18</x>
-     <y>70</y>
-     <width>112</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>挂单中心</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="myOrderBtn">
-   <property name="geometry">
-    <rect>
-     <x>18</x>
      <y>110</y>
      <width>112</width>
      <height>24</height>
@@ -76,7 +58,25 @@ padding-left: 15px;</string>
     </font>
    </property>
    <property name="text">
-    <string>我的挂单</string>
+    <string>OTC</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="exchangeBtn">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>70</y>
+     <width>112</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>交易所</string>
    </property>
   </widget>
   <widget class="QPushButton" name="contractTokenBtn">

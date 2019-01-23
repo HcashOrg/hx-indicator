@@ -22,16 +22,20 @@ private:
     void InitStyle();
 
 signals:
+    void showExchangeModeSignal();
     void showOnchainOrderSignal();
     void showMyOrderSignal();
     void showContractTokenSignal();
 
 private slots:
+    void on_exchangeBtn_clicked();
+
     void on_onchainOrderBtn_clicked();
 
     void on_myOrderBtn_clicked();
 
     void on_contractTokenBtn_clicked();
+
 
 private:
     Ui::FunctionExchangeWidget *ui;

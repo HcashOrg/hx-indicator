@@ -715,3 +715,8 @@ void MyExchangeContractPage::on_swapBtn_clicked()
     inited = true;
     ui->assetComboBox2->setCurrentText(temp);
 }
+
+void MyExchangeContractPage::on_onchainOrderBtn_clicked()
+{
+    Q_EMIT showOnchainOrderPage();
+}

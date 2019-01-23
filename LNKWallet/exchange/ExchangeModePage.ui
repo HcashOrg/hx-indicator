@@ -13,28 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QToolButton" name="orderModeBtn">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>40</y>
-     <width>80</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(83, 61, 138);
-color: rgb(255, 255, 255);
-border-radius:12px;
-font:12px &quot;微软雅黑 Light&quot;;</string>
-   </property>
-   <property name="text">
-    <string>挂单模式</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
@@ -48,7 +26,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>挂单中心</string>
+    <string>交易所</string>
    </property>
   </widget>
   <widget class="QWidget" name="widget" native="true">
@@ -1036,7 +1014,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
   <widget class="QToolButton" name="balanceBtn">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>630</x>
      <y>40</y>
      <width>80</width>
      <height>24</height>
@@ -1058,7 +1036,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
   <widget class="QToolButton" name="myOrdersBtn">
    <property name="geometry">
     <rect>
-     <x>430</x>
+     <x>530</x>
      <y>40</y>
      <width>80</width>
      <height>24</height>

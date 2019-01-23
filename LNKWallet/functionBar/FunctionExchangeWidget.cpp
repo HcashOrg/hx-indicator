@@ -24,14 +24,14 @@ void FunctionExchangeWidget::retranslator()
 
 void FunctionExchangeWidget::DefaultShow()
 {
-    on_onchainOrderBtn_clicked();
+    on_exchangeBtn_clicked();
 }
 
 void FunctionExchangeWidget::InitWidget()
 {
     InitStyle();
+    ui->exchangeBtn->setCheckable(true);
     ui->onchainOrderBtn->setCheckable(true);
-    ui->myOrderBtn->setCheckable(true);
     ui->contractTokenBtn->setCheckable(true);
 }
 
@@ -41,28 +41,38 @@ void FunctionExchangeWidget::InitStyle()
 
 }
 
+
+void FunctionExchangeWidget::on_exchangeBtn_clicked()
+{
+    ui->exchangeBtn->setChecked(true);
+    ui->onchainOrderBtn->setChecked(false);
+    ui->contractTokenBtn->setChecked(false);
+    Q_EMIT showExchangeModeSignal();
+}
+
+
 void FunctionExchangeWidget::on_onchainOrderBtn_clicked()
 {
+    ui->exchangeBtn->setChecked(false);
     ui->onchainOrderBtn->setChecked(true);
-    ui->myOrderBtn->setChecked(false);
     ui->contractTokenBtn->setChecked(false);
-    emit showOnchainOrderSignal();
+    Q_EMIT showOnchainOrderSignal();
 }
 
 void FunctionExchangeWidget::on_myOrderBtn_clicked()
 {
+    ui->exchangeBtn->setChecked(false);
     ui->onchainOrderBtn->setChecked(false);
-    ui->myOrderBtn->setChecked(true);    
     ui->contractTokenBtn->setChecked(false);
-    emit showMyOrderSignal();
+    Q_EMIT showMyOrderSignal();
 }
 
 void FunctionExchangeWidget::on_contractTokenBtn_clicked()
 {
+    ui->exchangeBtn->setChecked(false);
     ui->onchainOrderBtn->setChecked(false);
-    ui->myOrderBtn->setChecked(false);
     ui->contractTokenBtn->setChecked(true);
-    emit showContractTokenSignal();
+    Q_EMIT showContractTokenSignal();
 }
 
 

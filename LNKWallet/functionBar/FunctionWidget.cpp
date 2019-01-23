@@ -276,6 +276,7 @@ void FunctionWidget::InitWidget()
     connect(_p->advanceBar,&FunctionAdvanceWidget::showPoundageSignal,this,&FunctionWidget::showPoundageSignal);
     connect(_p->advanceBar,&FunctionAdvanceWidget::showMultiSigSignal,this,&FunctionWidget::showMultiSigSignal);
 
+    connect(_p->exchangeBar,&FunctionExchangeWidget::showExchangeModeSignal,this,&FunctionWidget::showExchangeModeSignal);
     connect(_p->exchangeBar,&FunctionExchangeWidget::showOnchainOrderSignal,this,&FunctionWidget::showOnchainOrderSignal);
     connect(_p->exchangeBar,&FunctionExchangeWidget::showMyOrderSignal,this,&FunctionWidget::showMyOrderSignal);
     connect(_p->exchangeBar,&FunctionExchangeWidget::showContractTokenSignal,this,&FunctionWidget::showContractTokenSignal);

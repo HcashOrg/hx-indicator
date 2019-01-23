@@ -58,6 +58,8 @@ void WithdrawExchangeContractDialog::init()
     {
         ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
+
+    ui->exchangeTipLabel->setVisible(isExchangeMode);
 }
 
 void WithdrawExchangeContractDialog::setCurrentAsset(QString _assetSymbol)

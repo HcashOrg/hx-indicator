@@ -445,3 +445,8 @@ void OnchainOrderPage::on_exchangeModeBtn_clicked()
 //    exchangeModePage->raise();
 
 }
+
+void OnchainOrderPage::on_myOrdersBtn_clicked()
+{
+    Q_EMIT showMyOrdersPage();
+}

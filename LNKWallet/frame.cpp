@@ -368,6 +368,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showPoundageSignal,this,&Frame::showPoundagePage);
     connect(functionBar,&FunctionWidget::ShrinkSignal,this,&Frame::EnlargeRightPart);
     connect(functionBar,&FunctionWidget::RestoreSignal,this,&Frame::RestoreRightPart);
+    connect(functionBar,&FunctionWidget::showExchangeModeSignal,this,&Frame::showExchangeModePage);
     connect(functionBar,&FunctionWidget::showOnchainOrderSignal,this,&Frame::showOnchainOrderPage);
     connect(functionBar,&FunctionWidget::showMyOrderSignal,this,&Frame::showMyExchangeContractPage);
     connect(functionBar,&FunctionWidget::showGuardAccountSignal,this,&Frame::showGuardAccountPage);
@@ -1224,7 +1225,7 @@ void Frame::showOnchainOrderPage()
     closeCurrentPage();
     onchainOrderPage = new OnchainOrderPage(centralWidget);
     connect(onchainOrderPage,&OnchainOrderPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
-    connect(onchainOrderPage,&OnchainOrderPage::showExchangeModePage,this,&Frame::showExchangeModePage);
+    connect(onchainOrderPage,&OnchainOrderPage::showMyOrdersPage,this,&Frame::showMyExchangeContractPage);
     onchainOrderPage->setAttribute(Qt::WA_DeleteOnClose);
     onchainOrderPage->show();
     currentPageNum = 6;
@@ -1236,7 +1237,7 @@ void Frame::showExchangeModePage()
     closeCurrentPage();
     exchangeModePage = new ExchangeModePage(centralWidget);
     connect(exchangeModePage,&ExchangeModePage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
-    connect(exchangeModePage,&ExchangeModePage::showOnchainOrderPage,this,&Frame::showOnchainOrderPage);
+//    connect(exchangeModePage,&ExchangeModePage::showOnchainOrderPage,this,&Frame::showOnchainOrderPage);
     exchangeModePage->setAttribute(Qt::WA_DeleteOnClose);
     exchangeModePage->show();
     currentPageNum = 24;
@@ -1257,6 +1258,7 @@ void Frame::showMyExchangeContractPage()
     closeCurrentPage();
     myExchangeContractPage = new MyExchangeContractPage(centralWidget);
     connect(myExchangeContractPage,&MyExchangeContractPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
+    connect(myExchangeContractPage,&MyExchangeContractPage::showOnchainOrderPage,this,&Frame::showOnchainOrderPage);
     myExchangeContractPage->setAttribute(Qt::WA_DeleteOnClose);
     myExchangeContractPage->show();
     currentPageNum = 5;
