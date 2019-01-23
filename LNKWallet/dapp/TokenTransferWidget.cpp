@@ -79,6 +79,19 @@ void TokenTransferWidget::init()
 
     setTokenBalance();
     ui->sendBtn->setEnabled(false);
+
+    connect(ui->amountLineEdit,&QLineEdit::textChanged,[this](const QString &number){
+        QDoubleValidator* via = dynamic_cast<QDoubleValidator*>(const_cast<QValidator*>(ui->amountLineEdit->validator()));
+        if(!via)
+        {
+            return;
+        }
+        if(ui->amountLineEdit->text().toDouble() > via->top())
+        {
+            ui->amountLineEdit->setText(ui->amountLineEdit->text().remove(ui->amountLineEdit->text().length()-1,1));
+        }
+    });
+
 }
 
 void TokenTransferWidget::jsonDataUpdated(QString id)
@@ -166,7 +179,7 @@ void TokenTransferWidget::on_tokenComboBox_currentIndexChanged(const QString &ar
 
 void TokenTransferWidget::setTokenBalance()
 {
-    ui->amountLineEdit->clear();
+//    ui->amountLineEdit->clear();
 
     QString contractId = ui->tokenComboBox->currentData(Qt::UserRole).toString();
     ContractTokenInfo tokenInfo = page->contractTokenInfoMap.value(contractId);
@@ -174,9 +187,14 @@ void TokenTransferWidget::setTokenBalance()
     ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(getBigNumberString(balance.amount.toULongLong(), tokenInfo.precision.size() - 1))
                                            .arg(tokenInfo.symbol));
 
-    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(tokenInfo.precision.size() - 1));
-    QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
-    ui->amountLineEdit->setValidator(pReg1);
+//    QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(tokenInfo.precision.size() - 1));
+//    QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
+//    ui->amountLineEdit->setValidator(pReg1);
+
+    QDoubleValidator *validator = new QDoubleValidator(0,getBigNumberString(balance.amount.toULongLong(), tokenInfo.precision.size() - 1).toDouble(),
+                                                       tokenInfo.precision.size() - 1, this);
+    validator->setNotation(QDoubleValidator::StandardNotation);
+    ui->amountLineEdit->setValidator( validator );
 }
 
 void TokenTransferWidget::calculateTransferFee()
