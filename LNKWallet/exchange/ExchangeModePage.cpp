@@ -91,6 +91,7 @@ void ExchangeModePage::refresh()
 {
     getSellOrders(HXChain::getInstance()->currentExchangePair);
     getBuyOrders(HXChain::getInstance()->currentExchangePair);
+    getRecentTransactions();
 }
 
 
@@ -126,6 +127,54 @@ void ExchangeModePage::jsonDataUpdated(QString id)
         return;
     }
 
+    if( id == "ExchangeModePage+invoke_contract_offline+getRecentTranctions")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QString resultStr = parse_doucment.object().value("result").toString();
+            QJsonObject resultObject = QJsonDocument::fromJson(resultStr.toLatin1()).object();
+
+            QString str = HXChain::getInstance()->currentExchangePair.first + "/" + HXChain::getInstance()->currentExchangePair.second;
+            if(resultObject.contains(str))
+            {
+                QJsonObject object = resultObject.value(str).toObject();
+                QString orderStr = object.value("order").toString();
+                QStringList orderStrList = orderStr.split(",");
+                if(orderStrList.size() == 8)
+                {
+                    const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
+                    const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
+                    unsigned long long baseAmount = orderStrList.at(6).toULongLong();
+                    unsigned long long quoteAmount = orderStrList.at(7).toULongLong();
+                    double price = double(quoteAmount) / qPow(10,quoteAssetInfo.precision) / baseAmount * qPow(10,baseAssetInfo.precision);
+                    ui->currentPriceLabel->setText( QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair))
+                                                    + " " + revertERCSymbol(HXChain::getInstance()->currentExchangePair.second));
+
+                    const ExchangeBalance& assetAmount2 = HXChain::getInstance()->assetExchangeBalanceMap.value(HXChain::getInstance()->currentExchangePair.second);
+                    unsigned long long ableToBuyAmount = assetAmount2.available * baseAmount / quoteAmount;
+                    QString str = QString::number( getBigNumberString(ableToBuyAmount, baseAssetInfo.precision).toDouble(), 'f', 4);
+                    ui->ableToBuyLabel->setText( QString("%1 %2").arg(str).arg( revertERCSymbol( baseAssetInfo.symbol)));
+
+                    const ExchangeBalance& assetAmount1 = HXChain::getInstance()->assetExchangeBalanceMap.value(HXChain::getInstance()->currentExchangePair.first);
+                    unsigned long long ableToSellAmount = assetAmount1.available * quoteAmount / baseAmount;
+                    QString str2 = QString::number( getBigNumberString(ableToSellAmount, quoteAssetInfo.precision).toDouble(), 'f', 4);
+                    ui->ableToSellLabel->setText( QString("%1 %2").arg(str2).arg( revertERCSymbol( quoteAssetInfo.symbol)));
+                }
+            }
+
+
+        }
+
+        return;
+    }
+
     if( id == "ExchangeModePage+invoke_contract_offline+getSellOrders+" +
             HXChain::getInstance()->currentExchangePair.first + "+" + HXChain::getInstance()->currentExchangePair.second)
     {
@@ -154,7 +203,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
                 sellOrdersVector.append(orderInfo);
             }
 
-            calculateAbleToBuy();
+//            calculateAbleToBuy();
 
             mergeDepth(sellOrdersVector, HXChain::getInstance()->currentExchangePair);
 
@@ -218,7 +267,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
                 buyOrdersVector.append(orderInfo);
             }
 
-            calculateAbleToSell();
+//            calculateAbleToSell();
 
             mergeDepth(buyOrdersVector, HXChain::getInstance()->currentExchangePair);
 
@@ -287,7 +336,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
 
         HXChain::TotalContractFee totalFee = HXChain::getInstance()->parseTotalContractFee(result);
         unsigned long long totalAmount = totalFee.baseAmount + ceil(totalFee.step * 1.2 * HXChain::getInstance()->contractFee / 100.0);
-qDebug() << "Xxxxxxxxxxxxxxxxxx " << totalAmount << totalFee.baseAmount << ceil(totalFee.step * 1.2 * HXChain::getInstance()->contractFee / 100.0);
+
         ExchangeContractFeeDialog exchangeContractFeeDialog(totalAmount, ui->accountComboBox->currentText());
         if(exchangeContractFeeDialog.pop())
         {
@@ -434,8 +483,7 @@ void ExchangeModePage::onPairSelected(const ExchangePair &_pair)
     ui->buyAmountLineEdit->setValidator(validator2);
     ui->buyAmountLineEdit->clear();
 
-    getSellOrders(_pair);
-    getBuyOrders(_pair);
+    refresh();
 }
 
 void ExchangeModePage::onAddFavoriteClicked()
@@ -494,6 +542,14 @@ void ExchangeModePage::getUserBalances()
                                      toJsonFormat( "invoke_contract_offline",
                                      QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
                                                    << "getUserBalances"  << accountInfo.address));
+}
+
+void ExchangeModePage::getRecentTransactions()
+{
+    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract_offline+getRecentTranctions",
+                                     toJsonFormat( "invoke_contract_offline",
+                                     QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
+                                                   << "getRecentTranctions"  << ""));
 }
 
 void ExchangeModePage::getSellOrders(const ExchangePair &_pair)

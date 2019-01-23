@@ -57,7 +57,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      <x>60</x>
      <y>115</y>
      <width>650</width>
-     <height>100</height>
+     <height>90</height>
     </rect>
    </property>
    <property name="WidgetStyle" stdset="0">
@@ -66,8 +66,8 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLabel" name="currentPairLabel2">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>0</y>
+      <x>20</x>
+      <y>10</y>
       <width>60</width>
       <height>20</height>
      </rect>
@@ -82,7 +82,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QLabel{color: rgb(137,129,161);font: 11px &quot;微软雅黑&quot;;}
+     <string notr="true">QLabel{color: rgb(137,129,161);font: 12px &quot;微软雅黑&quot;;}
 </string>
     </property>
     <property name="text">
@@ -98,8 +98,8 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLabel" name="currentPairLabel">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>0</y>
+      <x>80</x>
+      <y>10</y>
       <width>70</width>
       <height>20</height>
      </rect>
@@ -114,7 +114,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QLabel{color: rgb(137,129,161);font: 11px &quot;微软雅黑&quot;;}
+     <string notr="true">QLabel{color: rgb(137,129,161);font: 12px &quot;微软雅黑&quot;;}
 </string>
     </property>
     <property name="text">
@@ -166,7 +166,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>30</y>
+      <y>40</y>
       <width>140</width>
       <height>20</height>
      </rect>
@@ -201,7 +201,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>30</y>
+      <y>40</y>
       <width>140</width>
       <height>20</height>
      </rect>
@@ -271,7 +271,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>30</y>
+      <y>40</y>
       <width>140</width>
       <height>20</height>
      </rect>
@@ -341,7 +341,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>30</y>
+      <y>40</y>
       <width>140</width>
       <height>20</height>
      </rect>
@@ -402,6 +402,70 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::TextSelectableByMouse</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="currentPairLabel2_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>10</y>
+      <width>80</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>-1</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{color: rgb(137,129,161);font: 12px &quot;微软雅黑&quot;;}
+</string>
+    </property>
+    <property name="text">
+     <string>最近成交价</string>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::TextSelectableByMouse</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="currentPriceLabel">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>10</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>-1</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{color: rgb(137,129,161);font: 12px &quot;微软雅黑&quot;;}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
     <property name="textInteractionFlags">
      <set>Qt::TextSelectableByMouse</set>
@@ -479,7 +543,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>225</y>
+     <y>215</y>
      <width>420</width>
      <height>248</height>
     </rect>
@@ -779,7 +843,7 @@ color: rgb(137, 129, 161);</string>
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>225</y>
+     <y>215</y>
      <width>110</width>
      <height>22</height>
     </rect>
@@ -822,7 +886,7 @@ color: rgb(137, 129, 161);</string>
    <property name="geometry">
     <rect>
      <x>600</x>
-     <y>225</y>
+     <y>215</y>
      <width>110</width>
      <height>22</height>
     </rect>
@@ -855,7 +919,7 @@ color: rgb(137, 129, 161);</string>
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>250</y>
+     <y>240</y>
      <width>220</width>
      <height>110</height>
     </rect>
@@ -888,7 +952,7 @@ color: rgb(137, 129, 161);</string>
    <property name="geometry">
     <rect>
      <x>490</x>
-     <y>363</y>
+     <y>353</y>
      <width>220</width>
      <height>110</height>
     </rect>

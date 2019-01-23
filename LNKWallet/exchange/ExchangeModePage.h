@@ -76,6 +76,9 @@ private slots:
 
 public:
     void getUserBalances();
+
+    void getRecentTransactions();
+
     void getSellOrders(const ExchangePair& _pair);
     unsigned long long getMaxOrderAmount();
     QVector<OrderInfo>  sellOrdersVector;
