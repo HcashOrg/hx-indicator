@@ -305,6 +305,15 @@ void FunctionWidget::InitWidget()
 //    ui->toolButton_exchange->installEventFilter(this);
 //    ui->toolButton_guard->installEventFilter(this);
 //    ui->toolButton_more->installEventFilter(this);
+
+    //设置tooltip
+    ui->toolButton_account->setToolTip(tr("ACCOUNT"));
+    ui->toolButton_exchange->setToolTip(tr("EXCHANGE"));
+    ui->toolButton_contact->setToolTip(tr("CONTACT"));
+    ui->toolButton_advanced->setToolTip(tr("ADVANCED"));
+    ui->toolButton_citizen->setToolTip(tr("CITIZEN"));
+    ui->toolButton_guard->setToolTip(tr("SENATOR"));
+    ui->toolButton_more->setToolTip(tr("SETTINGS"));
 }
 
 void FunctionWidget::InitStyle()
@@ -345,19 +354,26 @@ void FunctionWidget::InitStyle()
 //    ui->toolButton_more->setIcon(QIcon(":/functionBar/more.png"));
 
     ui->toolButton_account->setStyleSheet("QToolButton{background-image:url(:/functionBar/account.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                          "QToolButton:checked{background-image:url(:/functionBar/account_checked.png);}");
+                                          "QToolButton:hover{background-color:rgba(31,22,59,0.3);}"
+                                          "QToolButton:checked{background-color:transparent;background-image:url(:/functionBar/account_checked.png);}");
     ui->toolButton_exchange->setStyleSheet("QToolButton{background-image:url(:/functionBar/exchange.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                          "QToolButton:checked{background-image:url(:/functionBar/exchange_checked.png);}");
+                                           "QToolButton:hover{background-color:rgba(31,22,59,0.3);}"
+                                           "QToolButton:checked{background-color:transparent;background-image:url(:/functionBar/exchange_checked.png);}");
     ui->toolButton_advanced->setStyleSheet("QToolButton{background-image:url(:/functionBar/advance.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                          "QToolButton:checked{background-image:url(:/functionBar/advance_checked.png);}");
+                                           "QToolButton:hover{background-color:rgba(31,22,59,0.3);}"
+                                           "QToolButton:checked{background-color:transparent;background-image:url(:/functionBar/advance_checked.png);}");
     ui->toolButton_contact->setStyleSheet("QToolButton{background-image:url(:/functionBar/contact.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                          "QToolButton:checked{background-image:url(:/functionBar/contact_checked.png);}");
+                                          "QToolButton:hover{background-color:rgba(31,22,59,0.3);}"
+                                          "QToolButton:checked{background-color:transparent;background-image:url(:/functionBar/contact_checked.png);}");
     ui->toolButton_guard->setStyleSheet("QToolButton{background-image:url(:/functionBar/guard.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                          "QToolButton:checked{background-image:url(:/functionBar/guard_checked.png);}");
+                                        "QToolButton:hover{background-color:rgba(31,22,59,0.3);}"
+                                        "QToolButton:checked{background-color:transparent;background-image:url(:/functionBar/guard_checked.png);}");
     ui->toolButton_citizen->setStyleSheet("QToolButton{background-image:url(:/functionBar/citizen.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                          "QToolButton:checked{background-image:url(:/functionBar/citizen_checked.png);}");
+                                          "QToolButton:hover{background-color:rgba(31,22,59,0.3);}"
+                                          "QToolButton:checked{background-color:transparent;background-image:url(:/functionBar/citizen_checked.png);}");
     ui->toolButton_more->setStyleSheet("QToolButton{background-image:url(:/functionBar/more.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
-                                          "QToolButton:checked{background-color:rgb(199,19,106);background-image:url(:/functionBar/more_checked.png);}");
+                                       "QToolButton:hover{background-color:rgba(31,22,59,0.3);}"
+                                       "QToolButton:checked{background-color:transparent;background-color:rgb(199,19,106);background-image:url(:/functionBar/more_checked.png);}");
 }
 
 bool FunctionWidget::eventFilter(QObject *watched,QEvent *e)

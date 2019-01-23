@@ -356,6 +356,44 @@
     </message>
 </context>
 <context>
+    <name>AddMyExchangePairsDialog</name>
+    <message>
+        <location filename="exchange/AddMyExchangePairsDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished">确定</translation>
+    </message>
+    <message>
+        <location filename="exchange/AddMyExchangePairsDialog.ui" line="55"/>
+        <source>取消</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <location filename="exchange/AddMyExchangePairsDialog.ui" line="74"/>
+        <source>确定</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/AddMyExchangePairsDialog.ui" line="91"/>
+        <source>请选择需要设为常用的交易对</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/AddMyExchangePairsDialog.ui" line="121"/>
+        <source>HX交易区</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/AddMyExchangePairsDialog.ui" line="142"/>
+        <source>PAX交易区</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/AddMyExchangePairsDialog.ui" line="163"/>
+        <source>BTC交易区</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddNodeDialog</name>
     <message>
         <source>Dialog</source>
@@ -2038,6 +2076,19 @@ better not transfer or upgrade</source>
     </message>
 </context>
 <context>
+    <name>CheckExchangePairWidget</name>
+    <message>
+        <location filename="control/CheckExchangePairWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="control/CheckExchangePairWidget.ui" line="58"/>
+        <source>BTC/HX</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CheckPwdDialog</name>
     <message>
         <location filename="dialog/checkpwddialog.ui" line="14"/>
@@ -2279,27 +2330,27 @@ better not transfer or upgrade</source>
         <translation type="obsolete">设置senator保证金</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="254"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="255"/>
         <source>Official Senator selection will begin on 8th February,2019. Please do no initiate any selection proposal before 8th in order to keep a friendly selection process. Your understanding is much appreciated.</source>
         <translation type="unfinished">Senator官方竞选预计在2月8号Citizen正式开始，为避免影响首次竞选进度，请勿在2月8号前发起竞选提案。</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="344"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="346"/>
         <source>change senator</source>
         <translation type="unfinished">更换senator</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="348"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="350"/>
         <source>unknown</source>
         <translation type="unfinished">未知</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="365"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="367"/>
         <source>no citizen</source>
         <translation type="unfinished">无citizen</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="369"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="371"/>
         <source>approved</source>
         <translation type="unfinished">已赞成</translation>
     </message>
@@ -2308,23 +2359,23 @@ better not transfer or upgrade</source>
         <translation type="obsolete">已反对</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="374"/>
-        <location filename="citizen/CitizenProposalPage.cpp" line="379"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="376"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="381"/>
         <source>not voted</source>
         <translation type="unfinished">未投票</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="391"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="393"/>
         <source>approve</source>
         <translation type="unfinished">赞成</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="401"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="403"/>
         <source>disapprove</source>
         <translation type="unfinished">取消赞成</translation>
     </message>
     <message>
-        <location filename="citizen/CitizenProposalPage.cpp" line="421"/>
+        <location filename="citizen/CitizenProposalPage.cpp" line="423"/>
         <source>addPledge</source>
         <translation type="unfinished">追加</translation>
     </message>
@@ -3929,17 +3980,17 @@ Contract created successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.cpp" line="93"/>
+        <location filename="exchange/depositexchangecontractdialog.cpp" line="95"/>
         <source>Wrong password!</source>
         <translation type="unfinished">错误的密码！</translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.cpp" line="110"/>
+        <location filename="exchange/depositexchangecontractdialog.cpp" line="112"/>
         <source>Transaction of deposit has been sent out!</source>
         <translation type="unfinished">充值交易已发出！</translation>
     </message>
     <message>
-        <location filename="exchange/depositexchangecontractdialog.cpp" line="117"/>
+        <location filename="exchange/depositexchangecontractdialog.cpp" line="119"/>
         <source>Fail to deposit to the contract!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4143,206 +4194,456 @@ Contract created successfully!</source>
     </message>
 </context>
 <context>
-    <name>ExchangeModeWidget</name>
+    <name>ExchangeBalancesWidget</name>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="14"/>
+        <location filename="exchange/ExchangeBalancesWidget.ui" line="14"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="26"/>
+        <location filename="exchange/ExchangeBalancesWidget.ui" line="29"/>
+        <source>我的资产</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeBalancesWidget.ui" line="100"/>
+        <source>币种</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeBalancesWidget.ui" line="113"/>
+        <source>可用余额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeBalancesWidget.ui" line="126"/>
+        <source>冻结余额</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeBalancesWidget.ui" line="144"/>
+        <source>操作</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeBalancesWidget.ui" line="174"/>
+        <source>隐藏余额为0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeBalancesWidget.cpp" line="64"/>
+        <source>deposit</source>
+        <translation type="unfinished">充值</translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeBalancesWidget.cpp" line="65"/>
+        <source>withdraw</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeBalancesWidget.cpp" line="66"/>
+        <source>history</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExchangeContractFeeDialog</name>
+    <message>
+        <location filename="exchange/ExchangeContractFeeDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished">确定</translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeContractFeeDialog.ui" line="60"/>
+        <source>取消</source>
+        <translation type="unfinished">取消</translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeContractFeeDialog.ui" line="79"/>
+        <source>确定</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeContractFeeDialog.ui" line="92"/>
+        <source>需支付手续费</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeContractFeeDialog.cpp" line="54"/>
+        <source>You need to pay a fee of %1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExchangeModePage</name>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="35"/>
         <source>挂单模式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="42"/>
+        <location filename="exchange/ExchangeModePage.ui" line="51"/>
         <source>挂单中心</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="55"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="479"/>
+        <location filename="exchange/ExchangeModePage.ui" line="64"/>
+        <location filename="exchange/ExchangeModePage.ui" line="488"/>
         <source>container2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="80"/>
+        <location filename="exchange/ExchangeModePage.ui" line="89"/>
         <source>交易对</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="144"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="249"/>
+        <location filename="exchange/ExchangeModePage.ui" line="153"/>
+        <location filename="exchange/ExchangeModePage.ui" line="258"/>
         <source>可用</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="179"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="214"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="284"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="354"/>
-        <source>123</source>
+        <location filename="exchange/ExchangeModePage.ui" line="188"/>
+        <location filename="exchange/ExchangeModePage.ui" line="223"/>
+        <location filename="exchange/ExchangeModePage.ui" line="293"/>
+        <location filename="exchange/ExchangeModePage.ui" line="363"/>
+        <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="319"/>
+        <location filename="exchange/ExchangeModePage.ui" line="328"/>
         <source>可买</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="389"/>
+        <location filename="exchange/ExchangeModePage.ui" line="398"/>
         <source>可卖</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="415"/>
+        <location filename="exchange/ExchangeModePage.ui" line="424"/>
         <source>HX交易区</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="418"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="434"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="450"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="466"/>
+        <location filename="exchange/ExchangeModePage.ui" line="427"/>
+        <location filename="exchange/ExchangeModePage.ui" line="443"/>
+        <location filename="exchange/ExchangeModePage.ui" line="459"/>
+        <location filename="exchange/ExchangeModePage.ui" line="475"/>
         <source>dropDown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="431"/>
+        <location filename="exchange/ExchangeModePage.ui" line="440"/>
         <source>BTC交易区</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="447"/>
+        <location filename="exchange/ExchangeModePage.ui" line="456"/>
         <source>PAX交易区</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="463"/>
+        <location filename="exchange/ExchangeModePage.ui" line="472"/>
         <source>常用交易区</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="497"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="535"/>
+        <location filename="exchange/ExchangeModePage.ui" line="506"/>
+        <location filename="exchange/ExchangeModePage.ui" line="544"/>
         <source>red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="516"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="557"/>
+        <location filename="exchange/ExchangeModePage.ui" line="525"/>
+        <location filename="exchange/ExchangeModePage.ui" line="566"/>
         <source>green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="583"/>
+        <location filename="exchange/ExchangeModePage.ui" line="592"/>
         <source>买入价</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="615"/>
+        <location filename="exchange/ExchangeModePage.ui" line="624"/>
         <source>买入量</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="647"/>
+        <location filename="exchange/ExchangeModePage.ui" line="656"/>
         <source>卖出价</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="679"/>
+        <location filename="exchange/ExchangeModePage.ui" line="688"/>
         <source>卖出量</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="705"/>
+        <location filename="exchange/ExchangeModePage.ui" line="714"/>
         <source>我要买入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="725"/>
+        <location filename="exchange/ExchangeModePage.ui" line="734"/>
         <source>我要卖出</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="785"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="818"/>
+        <location filename="exchange/ExchangeModePage.ui" line="751"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额：&lt;span style=&quot; color:#eb005e;&quot;&gt;0.00&lt;/span&gt; HX&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="771"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额：&lt;span style=&quot; color:#2cca94;&quot;&gt;0.00&lt;/span&gt; HX&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="802"/>
+        <source>默认档位</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="807"/>
+        <source>5档</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="812"/>
+        <source>10档</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="817"/>
+        <source>20档</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="845"/>
+        <source>默认深度</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="850"/>
+        <source>0.0001</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="864"/>
+        <location filename="exchange/ExchangeModePage.ui" line="897"/>
         <source>table2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="789"/>
+        <location filename="exchange/ExchangeModePage.ui" line="868"/>
         <source>卖</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="794"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="827"/>
+        <location filename="exchange/ExchangeModePage.ui" line="873"/>
+        <location filename="exchange/ExchangeModePage.ui" line="906"/>
         <source>价格</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="799"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="832"/>
+        <location filename="exchange/ExchangeModePage.ui" line="878"/>
+        <location filename="exchange/ExchangeModePage.ui" line="911"/>
         <source>深度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="804"/>
-        <location filename="exchange/ExchangeModeWidget.ui" line="837"/>
+        <location filename="exchange/ExchangeModePage.ui" line="883"/>
+        <location filename="exchange/ExchangeModePage.ui" line="916"/>
         <source>深度图</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="822"/>
+        <location filename="exchange/ExchangeModePage.ui" line="901"/>
         <source>买</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.ui" line="864"/>
+        <location filename="exchange/ExchangeModePage.ui" line="943"/>
         <source>当前账户</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="147"/>
+        <location filename="exchange/ExchangeModePage.ui" line="991"/>
+        <source>我的资产</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.ui" line="1013"/>
+        <source>我的委托</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.cpp" line="173"/>
         <source>Sell %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="199"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="237"/>
         <source>Buy %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="222"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="266"/>
         <source>Transaction of buy-order has been sent out!</source>
         <translation type="unfinished">买入交易已发出！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="229"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="275"/>
         <source>Fail to create buy-order!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="245"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="312"/>
         <source>Transaction of sell-order has been sent out!</source>
         <translation type="unfinished">卖单交易已发出！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="252"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="321"/>
         <source>Fail to create sell-order!</source>
         <translation type="unfinished">创建卖单失败！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="324"/>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="325"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="407"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="408"/>
         <source>Price (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="326"/>
-        <location filename="exchange/ExchangeModeWidget.cpp" line="327"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="409"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="410"/>
         <source>Amount (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.cpp" line="614"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="625"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="654"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estimated: &lt;span style=&quot; color:#eb005e;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.cpp" line="644"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estimated: &lt;span style=&quot; color:#2cca94;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExchangeModeWidget</name>
+    <message>
+        <source>Transaction of buy-order has been sent out!</source>
+        <translation type="obsolete">买入交易已发出！</translation>
+    </message>
+    <message>
+        <source>Transaction of sell-order has been sent out!</source>
+        <translation type="obsolete">卖单交易已发出！</translation>
+    </message>
+    <message>
+        <source>Fail to create sell-order!</source>
+        <translation type="obsolete">创建卖单失败！</translation>
+    </message>
+</context>
+<context>
+    <name>ExchangeMyOrdersWidget</name>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="26"/>
+        <source>PAX交易区</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="29"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="61"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="80"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="96"/>
+        <source>dropDown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="45"/>
+        <source>委托记录</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="58"/>
+        <source>常用交易区</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="77"/>
+        <source>HX交易区</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="93"/>
+        <source>BTC交易区</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="122"/>
+        <source>交易对</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="231"/>
+        <source>委托时间</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="244"/>
+        <source>类型</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="257"/>
+        <source>委托数量/已成交</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="270"/>
+        <source>委托价/成交均价</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="323"/>
+        <source>当前委托</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="235"/>
+        <source>sell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="257"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="309"/>
+        <source>cancel</source>
+        <translation type="unfinished">撤销</translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="287"/>
+        <source>buy</source>
+        <translation type="unfinished">买</translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="369"/>
+        <source>Sure to cancel this order?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4930,27 +5231,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1203"/>
+        <location filename="frame.cpp" line="1251"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1440"/>
+        <location filename="frame.cpp" line="1488"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2571"/>
+        <location filename="frame.cpp" line="2668"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2574"/>
+        <location filename="frame.cpp" line="2671"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2577"/>
+        <location filename="frame.cpp" line="2674"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -5209,34 +5510,69 @@ add an account first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="155"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="163"/>
         <source>Setting</source>
         <translation type="unfinished">设   置</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="157"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="165"/>
         <source>Lock</source>
         <translation type="unfinished">锁   定</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="159"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="167"/>
         <source>Console</source>
         <translation type="unfinished">控制台</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="161"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="169"/>
         <source>Help</source>
         <translation type="unfinished">帮   助</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="171"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="179"/>
         <source>About Us</source>
         <translation type="unfinished">关于我们</translation>
     </message>
     <message>
-        <location filename="functionBar/FunctionWidget.cpp" line="173"/>
+        <location filename="functionBar/FunctionWidget.cpp" line="181"/>
         <source>Update</source>
         <translation type="unfinished">软件更新</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="310"/>
+        <source>ACCOUNT</source>
+        <translation type="unfinished">账户</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="311"/>
+        <source>EXCHANGE</source>
+        <translation type="unfinished">挂单</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="312"/>
+        <source>CONTACT</source>
+        <translation type="unfinished">联系人</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="313"/>
+        <source>ADVANCED</source>
+        <translation type="unfinished">高级</translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="314"/>
+        <source>CITIZEN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="315"/>
+        <source>SENATOR</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="functionBar/FunctionWidget.cpp" line="316"/>
+        <source>SETTINGS</source>
+        <translation type="unfinished">设置</translation>
     </message>
 </context>
 <context>
@@ -5556,7 +5892,7 @@ add an account first</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="676"/>
+        <location filename="wallet.cpp" line="754"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -5849,7 +6185,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/LockContractPage.ui" line="39"/>
-        <source>当前SENATOR账号</source>
+        <source>当前账户</source>
+        <oldsource>当前SENATOR账号</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7554,12 +7891,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.ui" line="303"/>
+        <location filename="exchange/OnchainOrderPage.ui" line="312"/>
         <source>交易区模式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="166"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="160"/>
         <source>buy</source>
         <translation type="unfinished">买</translation>
     </message>
@@ -7574,53 +7911,53 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">当前没有挂单！</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="175"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="169"/>
         <source>my order</source>
         <translation type="unfinished">我的挂单</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="256"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="250"/>
         <source>SELL</source>
         <oldsource>Sell</oldsource>
         <translation type="unfinished">卖</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="257"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="251"/>
         <source>BUY</source>
         <oldsource>Buy</oldsource>
         <translation type="unfinished">买</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="258"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="252"/>
         <source>PRICE</source>
         <oldsource>Price</oldsource>
         <translation type="unfinished">价格</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="262"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="256"/>
         <source>SELL / %1</source>
         <oldsource>Sell / %1</oldsource>
         <translation type="unfinished">卖 / %1</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="263"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="257"/>
         <source>BUY / %1</source>
         <oldsource>Buy / %1</oldsource>
         <translation type="unfinished">买 / %1</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="264"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="258"/>
         <source>PRICE (%1/%2)</source>
         <oldsource>Price (%1/%2)</oldsource>
         <translation type="unfinished">价格 (%1/%2)</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="306"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="300"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="385"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="379"/>
         <source>You can only set at most 6 favorite order pairs!</source>
         <translation type="unfinished">最多添加6个常用交易对！</translation>
     </message>
@@ -7834,6 +8171,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="poundage/PoundageWidget.cpp" line="305"/>
         <source>汇率由高到低</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PriceDepthWidget</name>
+    <message>
+        <location filename="control/PriceDepthWidget.ui" line="14"/>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -10209,17 +10554,17 @@ update or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="93"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="96"/>
         <source>Wrong password!</source>
         <translation type="unfinished">错误的密码！</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="109"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="112"/>
         <source>Transaction of withdraw-balance from the exchange contract has been sent out!</source>
         <translation type="unfinished">兑换合约余额提取交易已发出！</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="116"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="119"/>
         <source>Fail to withdraw balance from the exchange contract!</source>
         <translation type="unfinished">提取兑换合约余额失败！</translation>
     </message>
@@ -10228,7 +10573,7 @@ update or not?</source>
         <translation type="obsolete">兑换合约余额提取交易已发出！</translation>
     </message>
     <message>
-        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="170"/>
+        <location filename="exchange/withdrawexchangecontractdialog.cpp" line="174"/>
         <source>Max: %1 %2</source>
         <oldsource>total %1 %2</oldsource>
         <translation type="unfinished">最大: %1 %2</translation>
