@@ -119,6 +119,8 @@ void DepositExchangeContractDialog::jsonDataUpdated(QString id)
             errorResultDialog.setInfoText(tr("Fail to deposit to the contract!"));
             errorResultDialog.setDetailText(result);
             errorResultDialog.pop();
+
+            ui->okBtn->setEnabled(true);
         }
 
         return;
@@ -167,7 +169,7 @@ void DepositExchangeContractDialog::on_assetComboBox_currentIndexChanged(const Q
     AssetAmountMap map = HXChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap;
     AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText())));
 
-    ui->balanceLabel->setText(getBigNumberString(map.value(assetInfo.id).amount, assetInfo.precision) + " " + assetInfo.symbol );
+    ui->balanceLabel->setText(getBigNumberString(map.value(assetInfo.id).amount, assetInfo.precision) + " " + revertERCSymbol( assetInfo.symbol) );
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(assetInfo.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);

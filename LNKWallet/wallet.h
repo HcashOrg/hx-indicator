@@ -44,7 +44,7 @@
 #ifdef TEST_WALLET
 #define LOCKFUND_CONTRACT_ADDRESS  "HXCRYtwTBjTLnh6NAiFpiAtquHBFWZUCLz3u"
 //#define LOCKFUND_CONTRACT_ADDRESS  "HXCaT326NDoaZX6FH8rmdMJpaCLnkME4eRRP"   // cyy
-#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCM4TZJitstnxNPBn74pxk8qaNL3PmrrjbR"
+#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCVcCcxPuAbEue2VnJh7eeQYqoGJUd9ad8K"
 #else
 #define LOCKFUND_CONTRACT_ADDRESS  "HXCVpKXx86vohkvQFEo7LkaKmnhMT9JCjTLj"
 #define EXCHANGE_MODE_CONTRACT_ADDRESS  ""
@@ -353,6 +353,8 @@ struct PairInfo
 {
     QString state;
     QString contractAddress;
+    unsigned long long leastBaseAmount = 0;
+    unsigned long long leastQuoteAmount = 0;
 };
 struct ExchangeBalance
 {
@@ -477,6 +479,7 @@ public:
     void parseAccountInfo();
     void fetchAccountBalances(QString _accountName);
     void fetchAccountPubKey(QString _accountName);
+    int myContractsQueryCount = 0;
     void fetchMyContracts();
     bool    isMyAddress(QString _address);
     QString addressToName(QString _address);
@@ -496,6 +499,7 @@ public:
 
     ExchangePair currentExchangePair;
     QMap<QString,ExchangeBalance>   assetExchangeBalanceMap;
+    int exchangeQueryCount = 0;
     void getExchangePairs();
     int getExchangePairPrecision(const ExchangePair& pair);    // 返回交易对显示价格时的小数位数
     int getExchangeAmountPrecision(QString assetSymbol);

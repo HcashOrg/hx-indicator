@@ -3992,7 +3992,7 @@ Contract created successfully!</source>
     <message>
         <location filename="exchange/depositexchangecontractdialog.cpp" line="119"/>
         <source>Fail to deposit to the contract!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">充值失败！</translation>
     </message>
 </context>
 <context>
@@ -4487,58 +4487,64 @@ Contract created successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="222"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="223"/>
         <source>Sell %1</source>
         <translation type="unfinished">卖 %1</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="286"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="287"/>
         <source>Buy %1</source>
         <translation type="unfinished">买 %1</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="315"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="316"/>
         <source>Transaction of buy-order has been sent out!</source>
         <translation type="unfinished">买入交易已发出！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="324"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="325"/>
         <source>Fail to create buy-order!</source>
         <translation type="unfinished">创建买单失败！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="361"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="362"/>
         <source>Transaction of sell-order has been sent out!</source>
         <translation type="unfinished">卖单交易已发出！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="370"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="371"/>
         <source>Fail to create sell-order!</source>
         <translation type="unfinished">创建卖单失败！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="456"/>
         <location filename="exchange/ExchangeModePage.cpp" line="457"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="458"/>
         <source>Price (%1)</source>
         <translation type="unfinished">价格（%1）</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="458"/>
         <location filename="exchange/ExchangeModePage.cpp" line="459"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="460"/>
         <source>Amount (%1)</source>
         <translation type="unfinished">数量（%1）</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="670"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="681"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="710"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="682"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="693"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="722"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estimated: &lt;span style=&quot; color:#eb005e;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额： &lt;span style=&quot; color:#eb005e;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="700"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="712"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estimated: &lt;span style=&quot; color:#2cca94;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额： &lt;span style=&quot; color:#2cca94;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeModePage.cpp" line="744"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="775"/>
+        <source>The order amount is too small!</source>
+        <translation type="unfinished">交易金额太小了！</translation>
     </message>
 </context>
 <context>
@@ -5248,17 +5254,17 @@ Cover it or not?</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2670"/>
+        <location filename="frame.cpp" line="2672"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2673"/>
+        <location filename="frame.cpp" line="2675"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2676"/>
+        <location filename="frame.cpp" line="2678"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -9680,17 +9686,17 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="dapp/TokenTransferWidget.cpp" line="187"/>
+        <location filename="dapp/TokenTransferWidget.cpp" line="189"/>
         <source>Max: %1 %2</source>
         <translation type="unfinished">最大: %1 %2</translation>
     </message>
     <message>
-        <location filename="dapp/TokenTransferWidget.cpp" line="270"/>
+        <location filename="dapp/TokenTransferWidget.cpp" line="272"/>
         <source>Valid account address.</source>
         <translation type="unfinished">有效的账户地址</translation>
     </message>
     <message>
-        <location filename="dapp/TokenTransferWidget.cpp" line="276"/>
+        <location filename="dapp/TokenTransferWidget.cpp" line="278"/>
         <source>Invalid address.</source>
         <translation type="unfinished">无效地址</translation>
     </message>

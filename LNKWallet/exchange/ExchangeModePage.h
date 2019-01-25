@@ -30,8 +30,6 @@ public:
 
     void init();
 
-    void refresh();
-
 signals:
     void backBtnVisible(bool isShow);
     void showOnchainOrderPage();
@@ -95,6 +93,7 @@ public slots:
     void onPairSelected(const ExchangePair& _pair);
     void onAddFavoriteClicked();
 
+    void refresh();
 private:
     void showDepth();
 

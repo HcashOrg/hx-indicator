@@ -2568,6 +2568,8 @@ void Frame::jsonDataUpdated(QString id)
                 PairInfo info;
                 info.state = object.value("state").toString();
                 info.contractAddress = object.value("conAddr").toString();
+                info.leastBaseAmount = jsonValueToULL( object.value("leastBaseAmount"));
+                info.leastQuoteAmount = jsonValueToULL( object.value("leastQuoteAmount"));
                 HXChain::getInstance()->pairInfoMap.insert(pair,info);
             }
 

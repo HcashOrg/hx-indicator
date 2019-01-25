@@ -9,6 +9,7 @@
 #include "ExchangeBalancesWidget.h"
 #include "ExchangeMyOrdersWidget.h"
 #include "ExchangeContractFeeDialog.h"
+#include "commondialog.h"
 
 ExchangeModePage::ExchangeModePage(QWidget *parent) :
     QWidget(parent),
@@ -84,7 +85,7 @@ void ExchangeModePage::init()
     {
         ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
     }
-
+    onAccountComboBoxCurrentIndexChanged(ui->accountComboBox->currentText());
 }
 
 void ExchangeModePage::refresh()
@@ -100,7 +101,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
     if( id == "ExchangeModePage+invoke_contract_offline+getUserBalances+" + ui->accountComboBox->currentText())
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-//        qDebug() << id << result;
+        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -118,6 +119,8 @@ void ExchangeModePage::jsonDataUpdated(QString id)
                 ExchangeBalance balance;
                 if(object.contains("locked"))   balance.locked = jsonValueToULL( object.value("locked"));
                 if(object.contains("available"))   balance.available = jsonValueToULL( object.value("available"));
+
+                qDebug() << "bbbbbbbbbbbbb " << balance.locked << balance.available;
                 HXChain::getInstance()->assetExchangeBalanceMap.insert(assetSymbol, balance);
             }
 
@@ -466,8 +469,8 @@ void ExchangeModePage::onPairSelected(const ExchangePair &_pair)
     ui->availableLabel1->setText( QString("%1 %2").arg(getBigNumberString(assetAmount2.available, assetInfo2.precision)).arg(revertERCSymbol( assetInfo2.symbol)));
     ui->availableLabel2->setText( QString("%1 %2").arg(getBigNumberString(assetAmount1.available, assetInfo1.precision)).arg(revertERCSymbol( assetInfo1.symbol)));
 
-    ui->ableToBuyLabel->setText(assetInfo1.symbol);
-    ui->ableToSellLabel->setText(assetInfo2.symbol);
+    ui->ableToBuyLabel->setText( revertERCSymbol( assetInfo1.symbol));
+    ui->ableToSellLabel->setText( revertERCSymbol( assetInfo2.symbol));
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg( HXChain::getInstance()->getExchangePairPrecision(_pair)));
     QRegExpValidator* validator = new QRegExpValidator(rx1, this);
@@ -487,6 +490,16 @@ void ExchangeModePage::onPairSelected(const ExchangePair &_pair)
     ui->buyPriceLineEdit->setEnabled(true);
     ui->sellAmountLineEdit->setEnabled(true);
     ui->sellPriceLineEdit->setEnabled(true);
+
+    ui->estimatedBuyLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#eb005e;\">%1</span> %2</p></body></html>")
+                                    .arg(QString::number( 0, 'f', assetInfo2.precision))
+                                    .arg( revertERCSymbol( _pair.second))
+                                    );
+
+    ui->estimateSellLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#eb005e;\">%1</span> %2</p></body></html>")
+                                    .arg(QString::number( 0, 'f', assetInfo2.precision))
+                                    .arg( revertERCSymbol( _pair.second))
+                                    );
 
     refresh();
 }
@@ -672,26 +685,28 @@ void ExchangeModePage::estimateBuyValue()
     double amount = ui->buyAmountLineEdit->text().toDouble();
     double estimatedValue = price * amount;
 
-    const AssetInfo& assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
-    double available = getBigNumberString( HXChain::getInstance()->assetExchangeBalanceMap.value( HXChain::getInstance()->currentExchangePair.second).available, assetInfo.precision).toDouble();
+    const AssetInfo& assetInfo2 = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
+    double available = getBigNumberString( HXChain::getInstance()->assetExchangeBalanceMap.value( HXChain::getInstance()->currentExchangePair.second).available, assetInfo2.precision).toDouble();
 
     int precision = HXChain::getInstance()->getExchangePairPrecision( HXChain::getInstance()->currentExchangePair) + HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first);
+    if(precision > assetInfo2.precision)    precision = assetInfo2.precision;
     if(available >= estimatedValue)
     {
         ui->estimatedBuyLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#eb005e;\">%1</span> %2</p></body></html>")
-                                        .arg(QString::number( price * amount, 'f', precision))
-                                        .arg(HXChain::getInstance()->currentExchangePair.second)
+                                        .arg(QString::number( roundDown(price * amount, precision), 'f', precision))
+                                        .arg( revertERCSymbol( HXChain::getInstance()->currentExchangePair.second))
                                         );
     }
     else
     {
-        double maxAmount = available / price;
+        double maxAmount = roundDown( available / price, HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
         QString maxAmountStr = QString::number( maxAmount, 'f', HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
+
         ui->buyAmountLineEdit->setText(maxAmountStr);
 
         ui->estimatedBuyLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#eb005e;\">%1</span> %2</p></body></html>")
-                                        .arg(QString::number( price * maxAmountStr.toDouble(), 'f', precision))
-                                        .arg(HXChain::getInstance()->currentExchangePair.second)
+                                        .arg(QString::number( roundDown(price * maxAmountStr.toDouble(), precision), 'f', precision))
+                                        .arg( revertERCSymbol( HXChain::getInstance()->currentExchangePair.second))
                                         );
     }
 
@@ -702,25 +717,27 @@ void ExchangeModePage::estimateSellValue()
     double price = ui->sellPriceLineEdit->text().toDouble();
     double amount = ui->sellAmountLineEdit->text().toDouble();
 
-    const AssetInfo& assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
-    double available = getBigNumberString( HXChain::getInstance()->assetExchangeBalanceMap.value( HXChain::getInstance()->currentExchangePair.first).available, assetInfo.precision).toDouble();
+    const AssetInfo& assetInfo1 = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
+    const AssetInfo& assetInfo2 = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
+    double available = getBigNumberString( HXChain::getInstance()->assetExchangeBalanceMap.value( HXChain::getInstance()->currentExchangePair.first).available, assetInfo1.precision).toDouble();
 
     int precision = HXChain::getInstance()->getExchangePairPrecision( HXChain::getInstance()->currentExchangePair) + HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first);
+    if(precision > assetInfo2.precision)    precision = assetInfo2.precision;
     if(available >= amount)
     {
         ui->estimateSellLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#2cca94;\">%1</span> %2</p></body></html>")
-                                        .arg(QString::number( price * amount, 'f', precision))
-                                        .arg(HXChain::getInstance()->currentExchangePair.second)
+                                        .arg(QString::number( roundDown(price * amount, precision), 'f', precision))
+                                        .arg( revertERCSymbol( HXChain::getInstance()->currentExchangePair.second))
                                         );
     }
     else
     {
-        QString avaiableStr = QString::number( available, 'f', HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
+        QString avaiableStr = QString::number( roundDown( available), 'f', HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
         ui->sellAmountLineEdit->setText(avaiableStr);
 
         ui->estimateSellLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#eb005e;\">%1</span> %2</p></body></html>")
-                                        .arg(QString::number( price * avaiableStr.toDouble(), 'f', precision))
-                                        .arg(HXChain::getInstance()->currentExchangePair.second)
+                                        .arg(QString::number( roundDown(price * avaiableStr.toDouble(), precision), 'f', precision))
+                                        .arg( revertERCSymbol( HXChain::getInstance()->currentExchangePair.second))
                                         );
     }
 }
@@ -735,6 +752,15 @@ void ExchangeModePage::on_buyBtn_clicked()
 
     QString baseAmountStr = decimalToIntegerStr(ui->buyAmountLineEdit->text(), baseAssetInfo.precision);
     QString quoteAmountStr = decimalToIntegerStr(QString::number(ui->buyAmountLineEdit->text().toDouble() * ui->buyPriceLineEdit->text().toDouble(), 'f', quoteAssetInfo.precision), quoteAssetInfo.precision);
+
+    PairInfo pairInfo = HXChain::getInstance()->pairInfoMap.value(HXChain::getInstance()->currentExchangePair);
+    if(baseAmountStr.toULongLong() < pairInfo.leastBaseAmount || quoteAmountStr.toULongLong() < pairInfo.leastQuoteAmount)
+    {
+        CommonDialog dialog(CommonDialog::OkOnly);
+        dialog.setText(tr("The order amount is too small!"));
+        dialog.pop();
+        return;
+    }
 
     QString params = QString("%1,%2,%3,%4").arg(HXChain::getInstance()->currentExchangePair.first).arg(baseAmountStr).arg(HXChain::getInstance()->currentExchangePair.second).arg(quoteAmountStr);
 //    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnBuyOrder",
@@ -757,6 +783,15 @@ void ExchangeModePage::on_sellBtn_clicked()
 
     QString baseAmountStr = decimalToIntegerStr(ui->sellAmountLineEdit->text(), baseAssetInfo.precision);
     QString quoteAmountStr = decimalToIntegerStr(QString::number(ui->sellAmountLineEdit->text().toDouble() * ui->sellPriceLineEdit->text().toDouble(), 'f', quoteAssetInfo.precision), quoteAssetInfo.precision);
+
+    PairInfo pairInfo = HXChain::getInstance()->pairInfoMap.value(HXChain::getInstance()->currentExchangePair);
+    if(baseAmountStr.toULongLong() < pairInfo.leastBaseAmount || quoteAmountStr.toULongLong() < pairInfo.leastQuoteAmount)
+    {
+        CommonDialog dialog(CommonDialog::OkOnly);
+        dialog.setText(tr("The order amount is too small!"));
+        dialog.pop();
+        return;
+    }
 
     QString params = QString("%1,%2,%3,%4").arg(HXChain::getInstance()->currentExchangePair.first).arg(baseAmountStr).arg(HXChain::getInstance()->currentExchangePair.second).arg(quoteAmountStr);
 //    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract+putOnSellOrder",
@@ -820,6 +855,8 @@ void ExchangeModePage::on_balanceBtn_clicked()
     Q_EMIT backBtnVisible(true);
 
     ExchangeBalancesWidget* exchangeBalancesWidget = new ExchangeBalancesWidget(this);
+//    connect(exchangeBalancesWidget, SIGNAL(back()), this, SLOT(refresh()));
+//    connect(exchangeBalancesWidget, &ExchangeBalancesWidget::back, [this]{ Q_EMIT backBtnVisible(false);});
     exchangeBalancesWidget->setAttribute(Qt::WA_DeleteOnClose);
     exchangeBalancesWidget->show();
     exchangeBalancesWidget->raise();

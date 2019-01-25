@@ -667,6 +667,7 @@ QStringList HXChain::getETHAssets()
 
 void HXChain::getExchangePairs()
 {
+    if( exchangeQueryCount++ % 10 != 0)     return;
     if(HXChain::getInstance()->accountInfoMap.size() < 1)   return;
     HXChain::getInstance()->postRPC( "id+invoke_contract_offline+getExchangePairs",
                                      toJsonFormat( "invoke_contract_offline",
@@ -1533,6 +1534,7 @@ QString HXChain::citizenAccountIdToName(QString citizenAccountId)
 
 void HXChain::fetchMyContracts()
 {
+    if( myContractsQueryCount++ % 10 != 0)     return;
     foreach (QString accountName, accountInfoMap.keys())
     {
         postRPC( "id-get_contracts_hash_entry_by_owner-" + accountName, toJsonFormat( "get_contracts_hash_entry_by_owner", QJsonArray() << accountName));
