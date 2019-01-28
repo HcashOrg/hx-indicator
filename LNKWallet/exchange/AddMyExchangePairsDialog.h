@@ -24,7 +24,7 @@ public:
 private slots:
     void on_marketBtn1_clicked();
 
-    void on_marketBtn2_clicked();
+//    void on_marketBtn2_clicked();
 
     void on_marketBtn3_clicked();
 

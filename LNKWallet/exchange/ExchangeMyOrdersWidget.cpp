@@ -191,14 +191,14 @@ void ExchangeMyOrdersWidget::on_marketBtn1_clicked()
     dialog.exec();
 }
 
-void ExchangeMyOrdersWidget::on_marketBtn2_clicked()
-{
-    ExchangePairSelectDialog dialog("BTC");
-    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeMyOrdersWidget::onPairSelected);
-    dialog.move(ui->marketBtn2->mapToGlobal( QPoint(ui->marketBtn2->width() / 2 - dialog.width() / 2,ui->marketBtn2->height())));
+//void ExchangeMyOrdersWidget::on_marketBtn2_clicked()
+//{
+//    ExchangePairSelectDialog dialog("BTC");
+//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeMyOrdersWidget::onPairSelected);
+//    dialog.move(ui->marketBtn2->mapToGlobal( QPoint(ui->marketBtn2->width() / 2 - dialog.width() / 2,ui->marketBtn2->height())));
 
-    dialog.exec();
-}
+//    dialog.exec();
+//}
 
 void ExchangeMyOrdersWidget::on_marketBtn3_clicked()
 {

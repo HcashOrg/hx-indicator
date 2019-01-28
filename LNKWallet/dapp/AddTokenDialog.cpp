@@ -4,9 +4,9 @@
 #include "wallet.h"
 #include "commondialog.h"
 
-static QStringList tokenContractAbis = {"transfer", "transferFrom", "approve"};
-static QStringList tokenContractOfflineAbis = {"precision", "totalSupply", "balanceOf", "approvedBalanceFrom", "allApprovedFromUser"};
-static QStringList codeHashList = {"3e96f4a1fa3b647afb8cbb5aae08beaa50e4d9ba"};
+static const QStringList tokenContractAbis = {"transfer", "transferFrom", "approve"};
+static const QStringList tokenContractOfflineAbis = {"precision", "totalSupply", "balanceOf", "approvedBalanceFrom", "allApprovedFromUser"};
+static const QStringList codeHashList = {"3e96f4a1fa3b647afb8cbb5aae08beaa50e4d9ba"};
 
 AddTokenDialog::AddTokenDialog(QWidget *parent) :
     QDialog(parent),

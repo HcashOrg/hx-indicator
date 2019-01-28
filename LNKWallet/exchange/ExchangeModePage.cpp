@@ -130,7 +130,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id == "ExchangeModePage+invoke_contract_offline+getRecentTranctions")
+    if( id == "ExchangeModePage+invoke_contract_offline+getRecentTransactions")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
@@ -433,14 +433,14 @@ void ExchangeModePage::on_marketBtn1_clicked()
     dialog.exec();
 }
 
-void ExchangeModePage::on_marketBtn2_clicked()
-{
-    ExchangePairSelectDialog dialog("BTC");
-    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
-    dialog.move(ui->marketBtn2->mapToGlobal( QPoint(ui->marketBtn2->width() / 2 - dialog.width() / 2,ui->marketBtn2->height())));
+//void ExchangeModePage::on_marketBtn2_clicked()
+//{
+//    ExchangePairSelectDialog dialog("BTC");
+//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
+//    dialog.move(ui->marketBtn2->mapToGlobal( QPoint(ui->marketBtn2->width() / 2 - dialog.width() / 2,ui->marketBtn2->height())));
 
-    dialog.exec();
-}
+//    dialog.exec();
+//}
 
 void ExchangeModePage::on_marketBtn3_clicked()
 {
@@ -570,10 +570,10 @@ void ExchangeModePage::getUserBalances()
 
 void ExchangeModePage::getRecentTransactions()
 {
-    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract_offline+getRecentTranctions",
+    HXChain::getInstance()->postRPC( "ExchangeModePage+invoke_contract_offline+getRecentTransactions",
                                      toJsonFormat( "invoke_contract_offline",
                                      QJsonArray() << ui->accountComboBox->currentText() << EXCHANGE_MODE_CONTRACT_ADDRESS
-                                                   << "getRecentTranctions"  << ""));
+                                                   << "getRecentTransactions"  << ""));
 }
 
 void ExchangeModePage::getSellOrders(const ExchangePair &_pair)
