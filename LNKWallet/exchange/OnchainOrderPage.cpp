@@ -112,7 +112,6 @@ void OnchainOrderPage::init()
 
     on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
 
-
 }
 
 
