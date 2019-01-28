@@ -112,9 +112,7 @@ void OnchainOrderPage::init()
 
     on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
 
-#ifndef TEST_WALLET
-    ui->exchangeModeBtn->hide();
-#endif
+
 }
 
 
