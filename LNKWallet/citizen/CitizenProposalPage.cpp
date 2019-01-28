@@ -304,8 +304,8 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
         //获取提案的新成员
         bool isAllNewInWhiteList = true;
         foreach (QJsonValue val, arr) {
-            qDebug()<<"rrrrrrrrrrr"<<val.toArray().at(2).toString()<<whiteList;
-            if(!whiteList.contains(val.toArray().at(2).toString()))
+            qDebug()<<"rrrrrrrrrrr"<<val.toArray().at(0).toString()<<whiteList;
+            if(!whiteList.contains(val.toArray().at(0).toString()))
             {
                 isAllNewInWhiteList = false;
                 break;
