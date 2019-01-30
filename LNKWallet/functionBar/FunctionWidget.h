@@ -49,6 +49,7 @@ signals:
     void showMyExchangeContractSignal();
     void showMinerSignal();
     void showBonusSignal();
+    void showExchangeModeSignal();
     void showOnchainOrderSignal();
     void showMyOrderSignal();
     void showContractTokenSignal();

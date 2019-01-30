@@ -7,7 +7,7 @@
 #include "ToolButtonWidget.h"
 #include "control/BlankDefaultWidget.h"
 #include "poundage/PageScrollWidget.h"
-#include "ExchangeModeWidget.h"
+#include "ExchangeModePage.h"
 
 #include <QtMath>
 
@@ -112,19 +112,8 @@ void OnchainOrderPage::init()
 
     on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
 
-#ifndef TEST_WALLET
-    ui->exchangeModeBtn->hide();
-#endif
 }
 
-void OnchainOrderPage::onBack()
-{
-    if(currentWidget)
-    {
-        currentWidget->close();
-        currentWidget = NULL;
-    }
-}
 
 void OnchainOrderPage::jsonDataUpdated(QString id)
 {
@@ -445,8 +434,16 @@ void OnchainOrderPage::checkFavorite()
 
 void OnchainOrderPage::on_exchangeModeBtn_clicked()
 {
-    ExchangeModeWidget* exchangeModeWidget = new ExchangeModeWidget(this);
-    exchangeModeWidget->setAttribute(Qt::WA_DeleteOnClose);
-    exchangeModeWidget->show();
-    exchangeModeWidget->raise();
+    Q_EMIT showExchangeModePage();
+//    ExchangeModePage* exchangeModePage = new ExchangeModePage(this);
+//    connect( exchangeModePage, SIGNAL(backBtnVisible(bool)), this , SIGNAL(backBtnVisible(bool)));
+//    exchangeModePage->setAttribute(Qt::WA_DeleteOnClose);
+//    exchangeModePage->show();
+//    exchangeModePage->raise();
+
+}
+
+void OnchainOrderPage::on_myOrdersBtn_clicked()
+{
+    Q_EMIT showMyOrdersPage();
 }

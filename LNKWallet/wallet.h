@@ -36,17 +36,17 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.10"           // 版本号
+#define WALLET_VERSION "1.2.11"           // 版本号
 
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
 #ifdef TEST_WALLET
-//#define LOCKFUND_CONTRACT_ADDRESS  "HXCRYtwTBjTLnh6NAiFpiAtquHBFWZUCLz3u"
-#define LOCKFUND_CONTRACT_ADDRESS  "HXCaT326NDoaZX6FH8rmdMJpaCLnkME4eRRP"   // cyy
-#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCVxQzP5Bg1pmGnp9ddDf8B7pv2A79QqqTu"
+#define LOCKFUND_CONTRACT_ADDRESS  "HXCRYtwTBjTLnh6NAiFpiAtquHBFWZUCLz3u"
+//#define LOCKFUND_CONTRACT_ADDRESS  "HXCaT326NDoaZX6FH8rmdMJpaCLnkME4eRRP"   // cyy
+#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCWFNtx9PdwSVVmNWoF46kwAgXaU95voRqy"
 #else
-#define LOCKFUND_CONTRACT_ADDRESS  "HXCVpKXx86vohkvQFEo7LkaKmnhMT9JCjTLj"
+#define LOCKFUND_CONTRACT_ADDRESS  "HXCPHA7vA91zV6r7iJ8oadFgj97PHAy3dKRa"
 #define EXCHANGE_MODE_CONTRACT_ADDRESS  ""
 #endif
 
@@ -353,6 +353,8 @@ struct PairInfo
 {
     QString state;
     QString contractAddress;
+    unsigned long long leastBaseAmount = 0;
+    unsigned long long leastQuoteAmount = 0;
 };
 struct ExchangeBalance
 {
@@ -477,6 +479,7 @@ public:
     void parseAccountInfo();
     void fetchAccountBalances(QString _accountName);
     void fetchAccountPubKey(QString _accountName);
+    int myContractsQueryCount = 0;
     void fetchMyContracts();
     bool    isMyAddress(QString _address);
     QString addressToName(QString _address);
@@ -496,7 +499,10 @@ public:
 
     ExchangePair currentExchangePair;
     QMap<QString,ExchangeBalance>   assetExchangeBalanceMap;
+    int exchangeQueryCount = 0;
     void getExchangePairs();
+    int getExchangePairPrecision(const ExchangePair& pair);    // 返回交易对显示价格时的小数位数
+    int getExchangeAmountPrecision(QString assetSymbol);
     QStringList getAllExchangeAssets();
     QMap<ExchangePair,PairInfo> pairInfoMap;
     QList<ExchangePair> getExchangePairsByQuoteAsset(QString quoteAssetSymbol = "");    // 如果为空 返回所有状态为COMMON的交易对

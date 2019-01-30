@@ -160,6 +160,7 @@ void TransferPage::on_sendBtn_clicked()
                                                            QJsonArray() << accountName << ui->sendtoLineEdit->text()
                                                            << ui->amountLineEdit->text() << getRealAssetSymbol( ui->assetComboBox->currentText())
                                                            << remark << true ));
+            ui->sendBtn->setEnabled(false);
         }
 
     }
@@ -178,6 +179,7 @@ void TransferPage::on_sendBtn_clicked()
                                                            QJsonArray() << accountName << ui->addressLabel->text()
                                                            << ui->amountLineEdit->text() << getRealAssetSymbol( ui->assetComboBox->currentText())
                                                            << remark << true ));
+            ui->sendBtn->setEnabled(false);
         }
     }
 }
@@ -277,6 +279,8 @@ void TransferPage::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
+
+        ui->sendBtn->setEnabled(true);
         if( result.startsWith("\"result\":{"))             // 成功
         {
             TransactionResultDialog transactionResultDialog;

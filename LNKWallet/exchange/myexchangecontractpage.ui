@@ -325,6 +325,28 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
     <string>swap</string>
    </property>
   </widget>
+  <widget class="QToolButton" name="onchainOrderBtn">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>40</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 61, 138);
+color: rgb(255, 255, 255);
+border-radius:12px;
+font:12px &quot;微软雅黑 Light&quot;;</string>
+   </property>
+   <property name="text">
+    <string>挂单中心</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

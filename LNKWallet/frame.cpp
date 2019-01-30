@@ -31,6 +31,7 @@
 #include "commondialog.h"
 #include "neworimportwalletwidget.h"
 #include "exchange/OnchainOrderPage.h"
+#include "exchange/ExchangeModePage.h"
 #include "exchange/myexchangecontractpage.h"
 #include "extra/transactiondb.h"
 #include "crossmark/crosscapitalmark.h"
@@ -367,6 +368,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showPoundageSignal,this,&Frame::showPoundagePage);
     connect(functionBar,&FunctionWidget::ShrinkSignal,this,&Frame::EnlargeRightPart);
     connect(functionBar,&FunctionWidget::RestoreSignal,this,&Frame::RestoreRightPart);
+    connect(functionBar,&FunctionWidget::showExchangeModeSignal,this,&Frame::showExchangeModePage);
     connect(functionBar,&FunctionWidget::showOnchainOrderSignal,this,&Frame::showOnchainOrderPage);
     connect(functionBar,&FunctionWidget::showMyOrderSignal,this,&Frame::showMyExchangeContractPage);
     connect(functionBar,&FunctionWidget::showGuardAccountSignal,this,&Frame::showGuardAccountPage);
@@ -409,7 +411,9 @@ void Frame::alreadyLogin()
     //自动更新
 //    AutoUpdateNotify *autoupdate = new AutoUpdateNotify();
 #ifndef SAFE_VERSION
+#ifndef TEST_WALLET
     autoupdate->startAutoDetect();
+#endif
 #endif
 }
 
@@ -702,8 +706,11 @@ void Frame::closeCurrentPage()
     case 2:
         break;
     case 3:
-        transferPage->close();
-        transferPage = NULL;
+        if(transferPage)
+        {
+            transferPage->close();
+            transferPage = NULL;
+        }
         break;
     case 4:
         if(contactPage)
@@ -713,24 +720,39 @@ void Frame::closeCurrentPage()
         }
         break;
     case 5:
-        myExchangeContractPage->close();
-        myExchangeContractPage = NULL;
+        if(myExchangeContractPage)
+        {
+            myExchangeContractPage->close();
+            myExchangeContractPage = NULL;
+        }
         break;
     case 6:
-        onchainOrderPage->close();
-        onchainOrderPage = NULL;
+        if(onchainOrderPage)
+        {
+            onchainOrderPage->close();
+            onchainOrderPage = NULL;
+        }
         break;
     case 7:
-        minerPage->close();
-        minerPage = NULL;
+        if(minerPage)
+        {
+            minerPage->close();
+            minerPage = NULL;
+        }
         break;
     case 8:
-        assetPage->close();
-        assetPage = NULL;
+        if(assetPage)
+        {
+            assetPage->close();
+            assetPage = NULL;
+        }
         break;
     case 9:
-        multiSigPage->close();
-        multiSigPage = NULL;
+        if(multiSigPage)
+        {
+            multiSigPage->close();
+            multiSigPage = NULL;
+        }
         break;
     case 10:
         break;
@@ -825,6 +847,13 @@ void Frame::closeCurrentPage()
             lockContractPage = NULL;
         }
         break;
+    case 24:
+        if(exchangeModePage)
+        {
+            exchangeModePage->close();
+            exchangeModePage = NULL;
+        }
+        break;
     default:
         break;
     }
@@ -898,6 +927,9 @@ void Frame::autoRefresh()
         break;
     case 23:
         lockContractPage->refresh();
+        break;
+    case 24:
+        exchangeModePage->refresh();
         break;
     default:
         break;
@@ -1110,6 +1142,12 @@ void Frame::setLanguage(QString language)
         case 22:
             showCitizenProposalPage();
             break;
+        case 23:
+            showLockContractPage();
+            break;
+        case 24:
+            showExchangeModePage();
+            break;
         default:
             break;
         }
@@ -1193,9 +1231,22 @@ void Frame::showOnchainOrderPage()
     closeCurrentPage();
     onchainOrderPage = new OnchainOrderPage(centralWidget);
     connect(onchainOrderPage,&OnchainOrderPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
+    connect(onchainOrderPage,&OnchainOrderPage::showMyOrdersPage,this,&Frame::showMyExchangeContractPage);
     onchainOrderPage->setAttribute(Qt::WA_DeleteOnClose);
     onchainOrderPage->show();
     currentPageNum = 6;
+}
+
+void Frame::showExchangeModePage()
+{
+    emit titleBackVisible(false);
+    closeCurrentPage();
+    exchangeModePage = new ExchangeModePage(centralWidget);
+    connect(exchangeModePage,&ExchangeModePage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
+//    connect(exchangeModePage,&ExchangeModePage::showOnchainOrderPage,this,&Frame::showOnchainOrderPage);
+    exchangeModePage->setAttribute(Qt::WA_DeleteOnClose);
+    exchangeModePage->show();
+    currentPageNum = 24;
 }
 
 void Frame::showMyExchangeContractPage()
@@ -1213,6 +1264,7 @@ void Frame::showMyExchangeContractPage()
     closeCurrentPage();
     myExchangeContractPage = new MyExchangeContractPage(centralWidget);
     connect(myExchangeContractPage,&MyExchangeContractPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
+    connect(myExchangeContractPage,&MyExchangeContractPage::showOnchainOrderPage,this,&Frame::showOnchainOrderPage);
     myExchangeContractPage->setAttribute(Qt::WA_DeleteOnClose);
     myExchangeContractPage->show();
     currentPageNum = 5;
@@ -1947,7 +1999,6 @@ void Frame::jsonDataUpdated(QString id)
             }
 
         }
-        qDebug()<<"11111111111111--"<< HXChain::getInstance()->minerMap.size();
         return;
     }
 
@@ -1980,7 +2031,7 @@ void Frame::jsonDataUpdated(QString id)
     if(id == "senator-get_proposal_for_voter")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -2499,7 +2550,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id == "id+invoke_contract_offline+getExchangePairs")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -2523,9 +2574,22 @@ void Frame::jsonDataUpdated(QString id)
                 PairInfo info;
                 info.state = object.value("state").toString();
                 info.contractAddress = object.value("conAddr").toString();
+                info.leastBaseAmount = jsonValueToULL( object.value("leastBaseAmount"));
+                info.leastQuoteAmount = jsonValueToULL( object.value("leastQuoteAmount"));
                 HXChain::getInstance()->pairInfoMap.insert(pair,info);
             }
 
+            if(HXChain::getInstance()->pairInfoMap.size() > 0 && HXChain::getInstance()->currentExchangePair.first.isEmpty())
+            {
+                if(HXChain::getInstance()->pairInfoMap.contains( qMakePair(QString("HC"),QString(ASSET_NAME))))
+                {
+                    HXChain::getInstance()->currentExchangePair = qMakePair(QString("HC"),QString(ASSET_NAME));
+                }
+                else
+                {
+                    HXChain::getInstance()->currentExchangePair = HXChain::getInstance()->pairInfoMap.keys().first();
+                }
+            }
         }
 
         return;
@@ -2575,6 +2639,9 @@ void Frame::onBack()
         break;
     case 20:
         showContractTokenPage();
+        break;
+    case 24:
+        showExchangeModePage();
         break;
     default:
         break;

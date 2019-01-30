@@ -23,7 +23,7 @@ void ExchangeSinglePairCellWidget::setPair(const ExchangePair &_pair)
 {
     pair = _pair;
     ui->iconLabel->setStyleSheet(QString("border-image: url(:/ui/wallet_ui/coin_%1.png);").arg(getRealAssetSymbol( _pair.first)));
-    ui->pairLabel->setText(QString("%1/%2").arg(_pair.first).arg(pair.second));
+    ui->pairLabel->setText(QString("%1/%2").arg( revertERCSymbol( _pair.first)).arg( revertERCSymbol( pair.second)));
 
     ui->checkLabel->setVisible(HXChain::getInstance()->currentExchangePair == _pair);
 }

@@ -48,7 +48,7 @@ private:
     int stepCount = 0;      // 合约执行步数
 
     void estimateContractFee();
-    FeeChooseWidget *feeChoose;
+    FeeChooseWidget *feeChoose = nullptr;
 };
 
 #endif // SELLDIALOG_H

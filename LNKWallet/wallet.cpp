@@ -667,11 +667,39 @@ QStringList HXChain::getETHAssets()
 
 void HXChain::getExchangePairs()
 {
+    if( exchangeQueryCount++ % 10 != 0)     return;
     if(HXChain::getInstance()->accountInfoMap.size() < 1)   return;
     HXChain::getInstance()->postRPC( "id+invoke_contract_offline+getExchangePairs",
                                      toJsonFormat( "invoke_contract_offline",
                                      QJsonArray() << HXChain::getInstance()->accountInfoMap.keys().first() << EXCHANGE_MODE_CONTRACT_ADDRESS
                                                    << "getExchangePairs"  << ""));
+}
+
+int HXChain::getExchangePairPrecision(const ExchangePair &pair)
+{
+    QMap<QString,int> map = { {"BTC",5}, {"ETH",3}, {"HC",1}, {"HX",0}, {"LTC",3}, {"ERCPAX",1}, {"ERCELF",0}};
+
+    int precision = map.value(pair.second) - map.value(pair.first) + 4;
+    if(precision > 8)
+    {
+        precision = 8;
+    }
+    else if(precision < 2)
+    {
+        precision = 2;
+    }
+
+    return  precision;
+}
+
+int HXChain::getExchangeAmountPrecision(QString assetSymbol)
+{
+    QMap<QString,int> map = { {"BTC",4}, {"ETH",3}, {"HC",2}, {"HX",2}, {"LTC",3}, {"ERCPAX",2}, {"ERCELF",2}};
+
+    int precision = 2;
+    if(map.contains(assetSymbol))   precision = map.value(assetSymbol);
+
+    return precision;
 }
 
 QStringList HXChain::getAllExchangeAssets()
@@ -1506,6 +1534,7 @@ QString HXChain::citizenAccountIdToName(QString citizenAccountId)
 
 void HXChain::fetchMyContracts()
 {
+    if( myContractsQueryCount++ % 10 != 0)     return;
     foreach (QString accountName, accountInfoMap.keys())
     {
         postRPC( "id-get_contracts_hash_entry_by_owner-" + accountName, toJsonFormat( "get_contracts_hash_entry_by_owner", QJsonArray() << accountName));
@@ -1769,7 +1798,8 @@ void HXChain::postRPC(QString _rpcId, QString _rpcCmd, int _priority)
 double roundDown(double decimal, int precision)
 {
     double result = QString::number(decimal,'f',precision).toDouble();
-    if( result > decimal)
+    qDebug() << result << decimal << (result > decimal + 1e-9);
+    if( result > decimal + 1e-9)
     {
         result = result - qPow(10, 0 - precision);
     }

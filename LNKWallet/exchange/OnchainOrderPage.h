@@ -12,6 +12,7 @@ class OnchainOrderPage;
 }
 class PageScrollWidget;
 class BlankDefaultWidget;
+class ExchangeModePage;
 class OnchainOrderPage : public QWidget
 {
     Q_OBJECT
@@ -22,10 +23,10 @@ public:
 
     void init();
 
-    void onBack();
-
 signals:
     void backBtnVisible(bool isShow);
+    void showExchangeModePage();
+    void showMyOrdersPage();
 
 private slots:
     void jsonDataUpdated(QString id);
@@ -44,6 +45,8 @@ private slots:
     void on_swapBtn_clicked();
 
     void on_exchangeModeBtn_clicked();
+
+    void on_myOrdersBtn_clicked();
 
 public slots:
     void on_favoriteBtn_clicked();

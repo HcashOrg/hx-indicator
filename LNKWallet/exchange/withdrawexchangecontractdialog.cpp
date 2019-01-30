@@ -58,6 +58,8 @@ void WithdrawExchangeContractDialog::init()
     {
         ui->assetComboBox->addItem( revertERCSymbol( HXChain::getInstance()->assetInfoMap.value(assetId).symbol), assetId);
     }
+
+    ui->exchangeTipLabel->setVisible(isExchangeMode);
 }
 
 void WithdrawExchangeContractDialog::setCurrentAsset(QString _assetSymbol)
@@ -169,14 +171,14 @@ void WithdrawExchangeContractDialog::on_assetComboBox_currentIndexChanged(const 
     ui->amountLineEdit->setValidator(pReg1);
     ui->amountLineEdit->clear();
 
-    unsigned long long maxAmount = isExchangeMode ? HXChain::getInstance()->assetExchangeBalanceMap.value( ui->assetComboBox->currentText()).available
+    unsigned long long maxAmount = isExchangeMode ? HXChain::getInstance()->assetExchangeBalanceMap.value( getRealAssetSymbol( ui->assetComboBox->currentText())).available
               : HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value( getRealAssetSymbol( ui->assetComboBox->currentText()));
     ui->amountLineEdit->setPlaceholderText(tr("Max: %1 %2").arg(getBigNumberString(maxAmount, assetInfo.precision)).arg( revertERCSymbol( assetInfo.symbol)));
 }
 
 void WithdrawExchangeContractDialog::on_withdrawAllBtn_clicked()
 {
-    unsigned long long maxAmount = isExchangeMode ? HXChain::getInstance()->assetExchangeBalanceMap.value( ui->assetComboBox->currentText()).available
+    unsigned long long maxAmount = isExchangeMode ? HXChain::getInstance()->assetExchangeBalanceMap.value( getRealAssetSymbol( ui->assetComboBox->currentText())).available
               : HXChain::getInstance()->accountExchangeContractBalancesMap.value(ui->accountNameLabel->text()).value( getRealAssetSymbol( ui->assetComboBox->currentText()));
     AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText())));
 

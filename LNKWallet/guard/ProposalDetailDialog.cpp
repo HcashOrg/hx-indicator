@@ -409,7 +409,7 @@ QString ProposalDetailDialog::calProposalWeight(const ProposalInfo &info) const
     }
     if(0 != allWeight)
     {
-        return QString::number(alreadyWeight*1.0/allWeight,'f',2)+"%";
+        return QString::number(alreadyWeight * 100.0 / allWeight,'f',2)+"%";
     }
     else
     {

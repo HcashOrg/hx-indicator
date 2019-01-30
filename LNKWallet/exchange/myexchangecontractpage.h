@@ -33,6 +33,7 @@ public:
 
 signals:
     void backBtnVisible(bool isShow);
+    void showOnchainOrderPage();
 
 private:
     QMap<QString,SellOrders> accountSellOrdersMap;
@@ -62,6 +63,8 @@ private slots:
 
     void pageChangeSlot(unsigned int page);
     void on_swapBtn_clicked();
+
+    void on_onchainOrderBtn_clicked();
 
 private:
     Ui::MyExchangeContractPage *ui;

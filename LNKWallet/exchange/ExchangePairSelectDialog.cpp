@@ -5,7 +5,7 @@
 #include <QHeaderView>
 
 #include "ExchangeSinglePairCellWidget.h"
-#include "ExchangeModeWidget.h"
+#include "ExchangeModePage.h"
 
 ExchangePairSelectDialog::ExchangePairSelectDialog(QString _quoteAssetSymbol, QWidget *parent) :
     QDialog(parent),
@@ -95,7 +95,7 @@ void ExchangePairSelectDialog::showPairs()
                 tableWidget->setRowCount(count);
 
                 ExchangeSinglePairCellWidget* cellWidget = new ExchangeSinglePairCellWidget;
-                tableWidget->setCellWidget( i, 0, cellWidget);
+                tableWidget->setCellWidget( count - 1, 0, cellWidget);
                 cellWidget->setPair( pair);
             }
         }

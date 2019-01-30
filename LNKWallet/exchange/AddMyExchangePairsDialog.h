@@ -8,6 +8,7 @@ class AddMyExchangePairsDialog;
 }
 
 class CheckExchangePairWidget;
+class BottomLine;
 typedef QPair<QString,QString>  ExchangePair;
 
 class AddMyExchangePairsDialog : public QDialog
@@ -23,7 +24,7 @@ public:
 private slots:
     void on_marketBtn1_clicked();
 
-    void on_marketBtn2_clicked();
+//    void on_marketBtn2_clicked();
 
     void on_marketBtn3_clicked();
 
@@ -35,6 +36,7 @@ private slots:
 
 private:
     Ui::AddMyExchangePairsDialog *ui;
+    BottomLine* bottomLine = nullptr;
 
     QList<CheckExchangePairWidget*> pairWidgetList;
     void closeAllPairWidgets();

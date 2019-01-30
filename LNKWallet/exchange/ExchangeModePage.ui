@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ExchangeModeWidget</class>
- <widget class="QWidget" name="ExchangeModeWidget">
+ <class>ExchangeModePage</class>
+ <widget class="QWidget" name="ExchangeModePage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,28 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QToolButton" name="orderModeBtn">
-   <property name="geometry">
-    <rect>
-     <x>630</x>
-     <y>40</y>
-     <width>80</width>
-     <height>24</height>
-    </rect>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(83, 61, 138);
-color: rgb(255, 255, 255);
-border-radius:12px;
-font:12px &quot;微软雅黑 Light&quot;;</string>
-   </property>
-   <property name="text">
-    <string>挂单模式</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
@@ -48,7 +26,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>挂单中心</string>
+    <string>交易所</string>
    </property>
   </widget>
   <widget class="QWidget" name="widget" native="true">
@@ -57,7 +35,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      <x>60</x>
      <y>115</y>
      <width>650</width>
-     <height>100</height>
+     <height>90</height>
     </rect>
    </property>
    <property name="WidgetStyle" stdset="0">
@@ -66,8 +44,8 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLabel" name="currentPairLabel2">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>0</y>
+      <x>20</x>
+      <y>10</y>
       <width>60</width>
       <height>20</height>
      </rect>
@@ -82,7 +60,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QLabel{color: rgb(137,129,161);font: 11px &quot;微软雅黑&quot;;}
+     <string notr="true">QLabel{color: rgb(137,129,161);font: 12px &quot;微软雅黑&quot;;}
 </string>
     </property>
     <property name="text">
@@ -98,8 +76,8 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLabel" name="currentPairLabel">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>0</y>
+      <x>80</x>
+      <y>10</y>
       <width>70</width>
       <height>20</height>
      </rect>
@@ -114,7 +92,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">QLabel{color: rgb(137,129,161);font: 11px &quot;微软雅黑&quot;;}
+     <string notr="true">QLabel{color: rgb(137,129,161);font: 12px &quot;微软雅黑&quot;;}
 </string>
     </property>
     <property name="text">
@@ -166,7 +144,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>30</y>
+      <y>40</y>
       <width>140</width>
       <height>20</height>
      </rect>
@@ -185,7 +163,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
 </string>
     </property>
     <property name="text">
-     <string>123</string>
+     <string>-</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -201,7 +179,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>30</y>
+      <y>40</y>
       <width>140</width>
       <height>20</height>
      </rect>
@@ -220,7 +198,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
 </string>
     </property>
     <property name="text">
-     <string>123</string>
+     <string>-</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -271,7 +249,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>30</y>
+      <y>40</y>
       <width>140</width>
       <height>20</height>
      </rect>
@@ -290,7 +268,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
 </string>
     </property>
     <property name="text">
-     <string>123</string>
+     <string>-</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -341,7 +319,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>30</y>
+      <y>40</y>
       <width>140</width>
       <height>20</height>
      </rect>
@@ -360,7 +338,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
 </string>
     </property>
     <property name="text">
-     <string>123</string>
+     <string>-</string>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -407,13 +385,77 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      <set>Qt::TextSelectableByMouse</set>
     </property>
    </widget>
+   <widget class="QLabel" name="currentPairLabel2_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>10</y>
+      <width>80</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>-1</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{color: rgb(137,129,161);font: 12px &quot;微软雅黑&quot;;}
+</string>
+    </property>
+    <property name="text">
+     <string>最近成交价</string>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::TextSelectableByMouse</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="currentPriceLabel">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>10</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>微软雅黑</family>
+      <pointsize>-1</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel{color: rgb(137,129,161);font: 12px &quot;微软雅黑&quot;;}
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::TextSelectableByMouse</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QPushButton" name="marketBtn1">
    <property name="geometry">
     <rect>
      <x>190</x>
      <y>80</y>
-     <width>70</width>
+     <width>80</width>
      <height>18</height>
     </rect>
    </property>
@@ -427,28 +469,12 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <string>dropDown</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="marketBtn2">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>80</y>
-     <width>70</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>BTC交易区</string>
-   </property>
-   <property name="BtnStyle" stdset="0">
-    <string>dropDown</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="marketBtn3">
    <property name="geometry">
     <rect>
-     <x>390</x>
+     <x>300</x>
      <y>80</y>
-     <width>70</width>
+     <width>90</width>
      <height>18</height>
     </rect>
    </property>
@@ -479,8 +505,8 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>225</y>
-     <width>440</width>
+     <y>210</y>
+     <width>420</width>
      <height>248</height>
     </rect>
    </property>
@@ -492,7 +518,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      <rect>
       <x>10</x>
       <y>15</y>
-      <width>200</width>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
@@ -509,9 +535,9 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLineEdit" name="sellPriceLineEdit">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>220</x>
       <y>15</y>
-      <width>200</width>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
@@ -530,7 +556,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      <rect>
       <x>10</x>
       <y>65</y>
-      <width>200</width>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
@@ -547,9 +573,9 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLineEdit" name="sellAmountLineEdit">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>220</x>
       <y>65</y>
-      <width>200</width>
+      <width>190</width>
       <height>30</height>
      </rect>
     </property>
@@ -633,7 +659,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLabel" name="sellPriceLabel">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>230</x>
       <y>19</y>
       <width>80</width>
       <height>20</height>
@@ -665,7 +691,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
    <widget class="QLabel" name="sellAmountLabel">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>230</x>
       <y>69</y>
       <width>80</width>
       <height>20</height>
@@ -699,7 +725,7 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
      <rect>
       <x>30</x>
       <y>190</y>
-      <width>160</width>
+      <width>150</width>
       <height>28</height>
      </rect>
     </property>
@@ -717,9 +743,9 @@ font: 12px &quot;微软雅黑&quot;;</string>
    <widget class="QToolButton" name="sellBtn">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>240</x>
       <y>190</y>
-      <width>160</width>
+      <width>150</width>
       <height>28</height>
      </rect>
     </property>
@@ -739,7 +765,7 @@ font: 12px &quot;微软雅黑&quot;;</string>
      <rect>
       <x>10</x>
       <y>160</y>
-      <width>200</width>
+      <width>190</width>
       <height>20</height>
      </rect>
     </property>
@@ -748,7 +774,7 @@ font: 12px &quot;微软雅黑&quot;;</string>
 color: rgb(137, 129, 161);</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额：&lt;span style=&quot; color:#eb005e;&quot;&gt;0.00&lt;/span&gt; HX&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额：&lt;span style=&quot; color:#eb005e;&quot;&gt;0.00&lt;/span&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -757,9 +783,9 @@ color: rgb(137, 129, 161);</string>
    <widget class="QLabel" name="estimateSellLabel">
     <property name="geometry">
      <rect>
-      <x>230</x>
+      <x>220</x>
       <y>160</y>
-      <width>200</width>
+      <width>190</width>
       <height>20</height>
      </rect>
     </property>
@@ -768,7 +794,7 @@ color: rgb(137, 129, 161);</string>
 color: rgb(137, 129, 161);</string>
     </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额：&lt;span style=&quot; color:#2cca94;&quot;&gt;0.00&lt;/span&gt; HX&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额：&lt;span style=&quot; color:#2cca94;&quot;&gt;0.00&lt;/span&gt; &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -778,9 +804,9 @@ color: rgb(137, 129, 161);</string>
   <widget class="QComboBox" name="positionComboBox">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>225</y>
-     <width>100</width>
+     <x>490</x>
+     <y>210</y>
+     <width>110</width>
      <height>22</height>
     </rect>
    </property>
@@ -821,9 +847,9 @@ color: rgb(137, 129, 161);</string>
   <widget class="QComboBox" name="depthComboBox">
    <property name="geometry">
     <rect>
-     <x>610</x>
-     <y>225</y>
-     <width>100</width>
+     <x>600</x>
+     <y>210</y>
+     <width>110</width>
      <height>22</height>
     </rect>
    </property>
@@ -854,9 +880,9 @@ color: rgb(137, 129, 161);</string>
   <widget class="QTableWidget" name="sellPositionTableWidget">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>250</y>
-     <width>200</width>
+     <x>490</x>
+     <y>235</y>
+     <width>220</width>
      <height>110</height>
     </rect>
    </property>
@@ -887,9 +913,9 @@ color: rgb(137, 129, 161);</string>
   <widget class="QTableWidget" name="buyPositionTableWidget">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>363</y>
-     <width>200</width>
+     <x>490</x>
+     <y>348</y>
+     <width>220</width>
      <height>110</height>
     </rect>
    </property>
@@ -972,7 +998,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
   <widget class="QToolButton" name="balanceBtn">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>630</x>
      <y>40</y>
      <width>80</width>
      <height>24</height>
@@ -991,7 +1017,77 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <string>我的资产</string>
    </property>
   </widget>
+  <widget class="QToolButton" name="myOrdersBtn">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>40</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 61, 138);
+color: rgb(255, 255, 255);
+border-radius:12px;
+font:12px &quot;微软雅黑 Light&quot;;</string>
+   </property>
+   <property name="text">
+    <string>我的委托</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="widget_2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>770</width>
+     <height>510</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(229, 226, 240);</string>
+   </property>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>205</y>
+      <width>300</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14px &quot;微软雅黑&quot;;
+color: rgb(84,61,137);</string>
+    </property>
+    <property name="text">
+     <string>敬请期待</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>buyPriceLineEdit</tabstop>
+  <tabstop>buyAmountLineEdit</tabstop>
+  <tabstop>sellPriceLineEdit</tabstop>
+  <tabstop>sellAmountLineEdit</tabstop>
+  <tabstop>buyPositionTableWidget</tabstop>
+  <tabstop>balanceBtn</tabstop>
+  <tabstop>myOrdersBtn</tabstop>
+  <tabstop>marketBtn1</tabstop>
+  <tabstop>favoriteMarketBtn</tabstop>
+  <tabstop>marketBtn3</tabstop>
+  <tabstop>sellPositionTableWidget</tabstop>
+  <tabstop>buyBtn</tabstop>
+  <tabstop>sellBtn</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
