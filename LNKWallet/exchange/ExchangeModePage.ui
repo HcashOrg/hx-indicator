@@ -1039,7 +1039,55 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <string>我的委托</string>
    </property>
   </widget>
+  <widget class="QWidget" name="widget_2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>770</width>
+     <height>510</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(229, 226, 240);</string>
+   </property>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>245</x>
+      <y>205</y>
+      <width>300</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 14px &quot;微软雅黑&quot;;
+color: rgb(84,61,137);</string>
+    </property>
+    <property name="text">
+     <string>敬请期待</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+  </widget>
  </widget>
+ <tabstops>
+  <tabstop>buyPriceLineEdit</tabstop>
+  <tabstop>buyAmountLineEdit</tabstop>
+  <tabstop>sellPriceLineEdit</tabstop>
+  <tabstop>sellAmountLineEdit</tabstop>
+  <tabstop>buyPositionTableWidget</tabstop>
+  <tabstop>balanceBtn</tabstop>
+  <tabstop>myOrdersBtn</tabstop>
+  <tabstop>marketBtn1</tabstop>
+  <tabstop>favoriteMarketBtn</tabstop>
+  <tabstop>marketBtn3</tabstop>
+  <tabstop>sellPositionTableWidget</tabstop>
+  <tabstop>buyBtn</tabstop>
+  <tabstop>sellBtn</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

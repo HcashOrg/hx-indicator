@@ -1798,7 +1798,8 @@ void HXChain::postRPC(QString _rpcId, QString _rpcCmd, int _priority)
 double roundDown(double decimal, int precision)
 {
     double result = QString::number(decimal,'f',precision).toDouble();
-    if( result > decimal)
+    qDebug() << result << decimal << (result > decimal + 1e-9);
+    if( result > decimal + 1e-9)
     {
         result = result - qPow(10, 0 - precision);
     }

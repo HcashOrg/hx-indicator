@@ -62,7 +62,7 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->sellPositionTableWidget);
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->buyPositionTableWidget);
 
-    init();
+//    init();
 }
 
 ExchangeModePage::~ExchangeModePage()
@@ -725,6 +725,7 @@ void ExchangeModePage::estimateSellValue()
     if(precision > assetInfo2.precision)    precision = assetInfo2.precision;
     if(available >= amount)
     {
+        qDebug() <<"aaaaaaaaaaaaaaaaaa " <<price << amount << precision << price * amount << roundDown(price * amount, precision);
         ui->estimateSellLabel->setText( tr("<html><head/><body><p>Estimated: <span style=\" color:#2cca94;\">%1</span> %2</p></body></html>")
                                         .arg(QString::number( roundDown(price * amount, precision), 'f', precision))
                                         .arg( revertERCSymbol( HXChain::getInstance()->currentExchangePair.second))

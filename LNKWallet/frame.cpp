@@ -1142,6 +1142,12 @@ void Frame::setLanguage(QString language)
         case 22:
             showCitizenProposalPage();
             break;
+        case 23:
+            showLockContractPage();
+            break;
+        case 24:
+            showExchangeModePage();
+            break;
         default:
             break;
         }

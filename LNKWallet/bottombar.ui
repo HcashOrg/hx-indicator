@@ -51,7 +51,7 @@
     </font>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel{color: rgb(192,196,212);}</string>
+    <string notr="true">QLabel{color: rgb(72,97,220);}</string>
    </property>
    <property name="text">
     <string/>
@@ -86,7 +86,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QLabel{color: rgb(192,196,212);}</string>
+    <string notr="true">QLabel{color: rgb(72,97,220);}</string>
    </property>
    <property name="text">
     <string>0</string>
