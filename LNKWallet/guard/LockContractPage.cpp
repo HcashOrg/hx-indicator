@@ -105,7 +105,6 @@ void LockContractPage::jsonDataUpdated(QString id)
                 bool isWithdrawable = object.value("isWithdrawable").toBool();
 
                 ui->lockFundTableWidget->setItem(i, 0, new QTableWidgetItem(key));
-
                 AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId(key));
                 ui->lockFundTableWidget->setItem(i, 1, new QTableWidgetItem( getBigNumberString(amount,assetInfo.precision)));
                 ui->lockFundTableWidget->item(i,1)->setData(Qt::UserRole,amount);
@@ -153,7 +152,7 @@ void LockContractPage::getUserLockInfo(QString accountName)
     AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(accountName);
     HXChain::getInstance()->postRPC( "LockContractPage+invoke_contract_offline+getUser+" + accountName, toJsonFormat( "invoke_contract_offline",
                                                                            QJsonArray() << accountName << LOCKFUND_CONTRACT_ADDRESS
-                                                                           << "getUser"  << accountInfo.address));
+                                                                           << "getUser"  << "HXNUoGDwGBSFsYpmeUw8JFZyDH1i2ED3UMTY"));
 }
 
 void LockContractPage::on_accountComboBox_currentIndexChanged(const QString &arg1)

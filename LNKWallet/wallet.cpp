@@ -1984,7 +1984,7 @@ unsigned long long jsonValueToULL(QJsonValue v)
     }
     else
     {
-        result = QString::number(v.toDouble(),'g',12).toULongLong();
+        result = QString::number(v.toDouble(),'g',16).toULongLong();
     }
 
     return result;
