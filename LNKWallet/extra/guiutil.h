@@ -44,6 +44,9 @@ namespace GUIUtil
         void mouseReleaseEvent(QMouseEvent *event);
     };
 
+    QString getFileMd5(const QString &sourceFilePath);
+    void checkAndLogMd5(const QString &nodePath,const QString &nodeMd5,const QString &clientPath,const QString &clientMd5);
+
 } // namespace GUIUtil
 
 #endif // BITCOIN_QT_GUIUTIL_H

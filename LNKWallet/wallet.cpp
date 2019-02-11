@@ -5,6 +5,7 @@
 #include "ToolButtonWidget.h"
 #include "control/AssetIconItem.h"
 #include "control/FeeGuaranteeWidget.h"
+#include "extra/guiutil.h"
 
 #ifdef WIN32
 #include <Windows.h>
@@ -20,10 +21,26 @@
 #define NODE_PROC_NAME      "hx_node"WALLET_EXE_SUFFIX".exe"
 #define CLIENT_PROC_NAME    "hx_client"WALLET_EXE_SUFFIX".exe"
 #define COPY_PROC_NAME      "Copy.exe"
+//定义node client的md5值，用于版本判定（很多用户升级后，实际node、client并未替换成功，原因是进程未结束，文件无法替换，
+//但是该问题很难发现，因此采用md5标记一下，每次启动时进行对比，将异常情况打入log日志中，方便排查,记得更换后台的时候同时更新该值）
+#ifdef TEST_WALLET//windows测试链
+#define NODE_PROC_MD5 "284c59254e41b0a6eadcc0c685345142"
+#define CLIENT_PROC_MD5 "d9c0cdf1fd04ca0e83fc90ab224a45e1"
+#else//windows正式链
+#define NODE_PROC_MD5 "f52a38c331790adf9e27bd7bdb990935"
+#define CLIENT_PROC_MD5 "f73e35c983364a14831291fab7cfac4d"
+#endif
 #else
 #define NODE_PROC_NAME      "./hx_node" WALLET_EXE_SUFFIX
 #define CLIENT_PROC_NAME    "./hx_client" WALLET_EXE_SUFFIX
 #define COPY_PROC_NAME      "./Copy"
+#ifdef TEST_WALLET//mac测试链
+#define NODE_PROC_MD5 "tttttttttttttt"
+#define CLIENT_PROC_MD5 "tttttttttttttt"
+#else//mac正式链
+#define NODE_PROC_MD5 "tttttttttttttt"
+#define CLIENT_PROC_MD5 "tttttttttttttt"
+#endif
 #endif
 
 HXChain* HXChain::goo = 0;
@@ -164,6 +181,10 @@ HXChain*   HXChain::getInstance()
 
 void HXChain:: startExe()
 {
+    //启动前校验一下md5，方便排查某些无法连接等错误
+    GUIUtil::checkAndLogMd5(QCoreApplication::applicationDirPath()+ "/"+NODE_PROC_NAME,NODE_PROC_MD5,
+                            QCoreApplication::applicationDirPath()+ "/"+CLIENT_PROC_NAME,CLIENT_PROC_MD5);
+
     connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
     QStringList strList;
