@@ -73,7 +73,7 @@ void CapitalTransferPage::ConfirmSlots()
     QString actualShow = _p->actualNumber + " "+ revertERCSymbol( _p->symbol);
     QString feeShow = ui->label_fee->text();
     QString totalShow = ui->lineEdit_number->text() + " "+ revertERCSymbol( _p->symbol);
-    qDebug()<<"pppppppppppp"<<_p->actualNumber;
+//    qDebug()<<"pppppppppppp"<<_p->actualNumber;
     CapitalConfirmWidget *confirmWidget = new CapitalConfirmWidget(CapitalConfirmWidget::CapitalConfirmInput(
                                                                    ui->radioButton_deposit->isChecked()?_p->account_address:ui->lineEdit_address->text(),
                                                                    actualShow,feeShow,totalShow),HXChain::getInstance()->mainFrame);

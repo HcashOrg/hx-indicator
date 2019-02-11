@@ -34,8 +34,8 @@
 #ifdef MD5CHECK
 #ifdef WIN32
 #ifdef TEST_WALLET//windows测试链
-static const QString NODE_PROC_MD5 = "284c59254e41b0a6eadcc0c685345142";
-static const QString CLIENT_PROC_MD5 = "d9c0cdf1fd04ca0e83fc90ab224a45e1";
+static const QString NODE_PROC_MD5 = "79f462f3e29256ab60399b32464bd5f1";
+static const QString CLIENT_PROC_MD5 = "05b40a9ec576cbdcba4ea5ffcf239534";
 #else//windows正式链
 static const QString NODE_PROC_MD5 = "f52a38c331790adf9e27bd7bdb990935";
 static const QString CLIENT_PROC_MD5 = "f73e35c983364a14831291fab7cfac4d";
@@ -2014,7 +2014,7 @@ unsigned long long jsonValueToULL(QJsonValue v)
     }
     else
     {
-        result = QString::number(v.toDouble(),'g',12).toULongLong();
+        result = QString::number(v.toDouble(),'g',16).toULongLong();
     }
 
     return result;
