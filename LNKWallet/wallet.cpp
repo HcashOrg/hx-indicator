@@ -149,8 +149,8 @@ HXChain::HXChain()
 //  });
 #ifdef MD5CHECK
     //启动前校验一下md5，方便排查某些无法连接等错误
-    GUIUtil::checkAndLogMd5(QCoreApplication::applicationDirPath()+ "/./"+NODE_PROC_NAME,NODE_PROC_MD5,
-                            QCoreApplication::applicationDirPath()+ "/./"+CLIENT_PROC_NAME,CLIENT_PROC_MD5);
+    GUIUtil::checkAndLogMd5(QCoreApplication::applicationDirPath()+ "/"+NODE_PROC_NAME,NODE_PROC_MD5,
+                            QCoreApplication::applicationDirPath()+ "/"+CLIENT_PROC_NAME,CLIENT_PROC_MD5);
 #endif
 }
 
