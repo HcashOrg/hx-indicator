@@ -251,6 +251,24 @@ public:
     friend QDataStream& operator <<(QDataStream &out,const GuaranteeOrder& data);
 };
 
+struct ContractInvokeObject
+{
+    QString id;
+    QString trxId;
+    QString invoker;
+    bool execSucceed = true;
+    unsigned long long actualFee = 0;
+
+public:
+    bool operator ==(const ContractInvokeObject &_contractInvokeObject) const
+    {
+        return this->trxId == _contractInvokeObject.trxId;
+    }
+
+    friend QDataStream& operator >>(QDataStream &in,ContractInvokeObject& data);
+    friend QDataStream& operator <<(QDataStream &out,const ContractInvokeObject& data);
+};
+
 struct Entry
 {
     QString fromAccount;

@@ -2404,6 +2404,39 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
+    if( id == "Transaction-get_contract_invoke_object")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result ;
+
+        if(result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonArray array = jsonObject.take("result").toArray();
+
+            // 如果是构造的交易 数组可能有多项  暂时不考虑
+            if(array.size() > 0)
+            {
+                QJsonObject object = array.at(0).toObject();
+                ContractInvokeObject cio;
+                cio.id = object.value("id").toString();
+                cio.trxId = object.value("trx_id").toString();
+                cio.invoker = object.value("invoker").toString();
+                cio.execSucceed = object.value("exec_succeed").toBool();
+                cio.actualFee = jsonValueToULL( object.value("acctual_fee"));
+
+                HXChain::getInstance()->transactionDB.insertContractInvokeObject(cio.trxId, cio);
+            }
+
+        }
+
+        return;
+    }
+
     if(id.startsWith("id-get_crosschain_transaction-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);

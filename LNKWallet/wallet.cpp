@@ -901,6 +901,14 @@ void HXChain::parseTransaction(QString result)
         postRPC( "Transaction-get_guarantee_order-", toJsonFormat( "get_guarantee_order", QJsonArray() << canceledId));
     }
 
+    if(ts.type == TRANSACTION_TYPE_CONTRACT_TRANSFER)
+    {
+        if(transactionDB.getContractInvokeObject(ts.transactionId).trxId.isEmpty())
+        {
+            postRPC( "Transaction-get_contract_invoke_object", toJsonFormat( "get_contract_invoke_object", QJsonArray() << ts.transactionId));
+        }
+    }
+
     transactionDB.insertTransactionStruct(ts.transactionId,ts);
     qDebug() << "ttttttttttttt " << ts.type << ts.transactionId  << ts.feeAmount;
 
@@ -2004,6 +2012,17 @@ QDataStream &operator <<(QDataStream &out, const GuaranteeOrder &data)
     return out;
 }
 
+QDataStream &operator >>(QDataStream &in, ContractInvokeObject &data)
+{
+    in >> data.id >> data.trxId >> data.invoker >> data.execSucceed >> data.actualFee;
+    return in;
+}
+
+QDataStream &operator <<(QDataStream &out, const ContractInvokeObject &data)
+{
+    out << data.id << data.trxId << data.invoker << data.execSucceed << data.actualFee;
+    return out;
+}
 
 unsigned long long jsonValueToULL(QJsonValue v)
 {
@@ -2192,3 +2211,5 @@ QString toEasyRead(unsigned long long number, int precision, int effectiveBitsNu
         return str;
     }
 }
+
+
