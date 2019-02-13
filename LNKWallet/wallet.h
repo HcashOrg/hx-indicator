@@ -562,6 +562,7 @@ public:
     QStringList getAssetMultisigUpdatedGuards(QString assetSymbol);         // 获取多签地址正在更新的guardId
     QString guardAccountIdToName(QString guardAccountId);
     QString guardAddressToName(QString guardAddress);
+    QString guardOrCitizenAddressToName(QString address);
 
     // 自动提现
     QMap<QString,double>    senatorAutoWithdrawAmountMap;

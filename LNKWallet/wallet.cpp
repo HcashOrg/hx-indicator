@@ -1353,6 +1353,27 @@ QString HXChain::guardAddressToName(QString guardAddress)
     return result;
 }
 
+QString HXChain::guardOrCitizenAddressToName(QString address)
+{
+    foreach (QString account, allGuardMap.keys())
+    {
+        if( allGuardMap.value(account).address == address)
+        {
+            return account;
+        }
+    }
+
+    foreach (QString account, minerMap.keys())
+    {
+        if( minerMap.value(account).address == address)
+        {
+            return account;
+        }
+    }
+
+    return "";
+}
+
 void HXChain::loadAutoWithdrawAmount()
 {
     configFile->beginGroup("/AutoWithdrawAmount");
