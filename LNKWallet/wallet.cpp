@@ -2060,6 +2060,22 @@ unsigned long long jsonValueToULL(QJsonValue v)
     return result;
 }
 
+
+long long jsonValueToLL(QJsonValue v)
+{
+    long long result = 0;
+    if(v.isString())
+    {
+        result = v.toString().toLongLong();
+    }
+    else
+    {
+        result = QString::number(v.toDouble(),'g',16).toLongLong();
+    }
+
+    return result;
+}
+
 double jsonValueToDouble(QJsonValue v)
 {
     double result = 0;
@@ -2232,5 +2248,6 @@ QString toEasyRead(unsigned long long number, int precision, int effectiveBitsNu
         return str;
     }
 }
+
 
 

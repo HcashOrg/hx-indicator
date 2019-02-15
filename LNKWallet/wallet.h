@@ -51,8 +51,10 @@
 
 #ifdef TEST_WALLET
 #define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5006/api"
+#define MIDDLE_EXCHANGE_URL     "http://192.168.1.121:15000/api"
 #else
 #define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"
+#define MIDDLE_EXCHANGE_URL     ""
 #endif
 
 #ifdef  TEST_WALLET
@@ -656,6 +658,7 @@ void moveWidgetToScreenCenter(QWidget* w);
 
 QString toJsonFormat(QString instruction, QJsonArray parameters);
 unsigned long long jsonValueToULL(QJsonValue v);
+long long jsonValueToLL(QJsonValue v);
 double jsonValueToDouble(QJsonValue v);
 
 #endif // WALLET_H

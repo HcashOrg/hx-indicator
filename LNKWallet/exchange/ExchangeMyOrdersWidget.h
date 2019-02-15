@@ -3,12 +3,28 @@
 
 #include <QWidget>
 #include "ExchangeModePage.h"
+#include "extra/HttpManager.h"
 
 namespace Ui {
 class ExchangeMyOrdersWidget;
 }
 
 class BottomLine;
+class PageScrollWidget;
+
+struct HistoryOrderInfo
+{
+    QString trxId;
+    long long currentBaseAmount = 0;
+    long long currentQuoteAmount = 0;
+    unsigned long long originBaseAmount = 0;
+    unsigned long long originQuoteAmount = 0;
+    ExchangePair pair;
+    QString type;
+    int state = 0;
+    QDateTime dateTime;
+};
+
 class ExchangeMyOrdersWidget : public QWidget
 {
     Q_OBJECT
@@ -34,6 +50,21 @@ private slots:
 
     void on_currentOrdersBtn_clicked();
 
+    void on_historyBtn_clicked();
+
+private:
+    void queryOrders(int page, int pageCount);
+    void showHistoryOrders();
+    int recordCount = 0;
+    int currentSliderPos = 0;
+    int currentPage = 0;
+    HttpManager httpManager;
+    QMap<QString,HistoryOrderInfo> historyOrdersInfoMap;
+private slots:
+    void pageChangeSlot(unsigned int page);
+    void httpReplied(QByteArray _data, int _status);
+    void onSliderValueChanged(int _value);
+
 public:
     void getUserOrders(const ExchangePair& _pair);   // 0: sell  1: buy
     QMap<QString,OrderInfo>     mySellOrdersMap;    // key是交易id
@@ -48,6 +79,7 @@ public slots:
 private:
     Ui::ExchangeMyOrdersWidget *ui;
     BottomLine* bottomLine = nullptr;
+    PageScrollWidget *pageWidget = nullptr;
 
     void paintEvent(QPaintEvent*);
 
