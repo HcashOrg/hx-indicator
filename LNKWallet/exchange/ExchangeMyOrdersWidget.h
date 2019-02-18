@@ -53,7 +53,7 @@ private slots:
     void on_historyBtn_clicked();
 
 private:
-    void queryOrders(int page, int pageCount);
+    void queryOrders(int page, int pageCount, QString id);
     void showHistoryOrders();
     int recordCount = 0;
     int currentSliderPos = 0;
@@ -63,7 +63,7 @@ private:
 private slots:
     void pageChangeSlot(unsigned int page);
     void httpReplied(QByteArray _data, int _status);
-    void onSliderValueChanged(int _value);
+//    void onSliderValueChanged(int _value);
 
 public:
     void getUserOrders(const ExchangePair& _pair);   // 0: sell  1: buy
