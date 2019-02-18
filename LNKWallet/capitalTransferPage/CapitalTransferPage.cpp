@@ -15,14 +15,13 @@
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
 
-static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001},{"HC",0.001}};
-//static const QMap<QString,QString> fee_charge = {{"BTC","0.001"},{"LTC","0.001"},{"HC","0.01"},{"ETH","0.001"}};
+//通道账户剩余金额不得小于 dust_number，认为规定的值（用于防止粉尘交易）
+static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001},{"HC",0.001},{"USDT",0.001}};
 class CapitalTransferPage::CapitalTransferPagePrivate
 {
 public:
     CapitalTransferPagePrivate(const CapitalTransferInput &data)
         :account_name(data.account_name),account_address(data.account_address),symbol(data.symbol)
-//        ,fee(fee_charge.value(data.symbol))
         ,actualNumber("0")
         ,precision(5)
     {
@@ -30,6 +29,8 @@ public:
             if(asset.symbol == symbol)
             {
                 precision = asset.precision;
+                fee = getBigNumberString(asset.fee,asset.precision);
+                withdrawLimit = getBigNumberString(asset.withdrawLimit,asset.precision);
                 break;
             }
         }
@@ -41,9 +42,11 @@ public:
 
     QString tunnel_account_address;
     QString asset_max_ammount;
-//    QString fee;
 
     int precision;
+    QString fee;
+    QString withdrawLimit;
+
 
     QString multisig_address;
 
@@ -79,13 +82,6 @@ void CapitalTransferPage::ConfirmSlots()
                                                                    actualShow,feeShow,totalShow),HXChain::getInstance()->mainFrame);
     connect(confirmWidget,&CapitalConfirmWidget::ConfirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
     connect(confirmWidget,&CapitalConfirmWidget::CancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
-    //PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget(HXChain::getInstance()->mainFrame);
-    //connect(confirmWidget,&PasswordConfirmWidget::confirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
-    //connect(confirmWidget,&PasswordConfirmWidget::cancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
-    //confirmWidget->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
-    //confirmWidget->setWindowModality(Qt::WindowModal);
-    //confirmWidget->setAttribute(Qt::WA_DeleteOnClose);
-    //confirmWidget->move(mapToGlobal(QPoint(-190,-50)));
     confirmWidget->show();
     emit backBtnVisible(false);
 }
@@ -161,7 +157,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         result.prepend("{");
         result.append("}");
     //提取多签地址
-        _p->multisig_address = CapitalTransferDataUtil::parseMutiAddress(result);\
+        _p->multisig_address = CapitalTransferDataUtil::parseMutiAddress(result);
         if( _p->multisig_address.isEmpty())
         {
             ui->radioButton_deposit->setEnabled(false);
@@ -220,10 +216,6 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             errorResultDialog.setDetailText(result);
             errorResultDialog.pop();
         }
-
-//        CommonDialog dia(CommonDialog::OkOnly);
-//        dia.setText(HXChain::getInstance()->jsonDataValue( id));
-//        dia.pop();
         close();
     }
 }
@@ -347,7 +339,6 @@ void CapitalTransferPage::CreateTransaction()
         return;
     }
 
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
     if(_p->symbol == "ETH")
     {
         _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - 0.00021 * ui->slider->value() / 5,'f',_p->precision);
@@ -372,17 +363,16 @@ void CapitalTransferPage::CreateTransaction()
     }
     else
     {
-        _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - getBigNumberString( assetInfo.fee, assetInfo.precision).toDouble(),'f',_p->precision);
-        double extraNumber = _p->asset_max_ammount.toDouble() - ui->lineEdit_number->text().toDouble();
-        //qDebug()<<_p->actualNumber<<extraNumber<<dust_number[_p->symbol];
-        if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
+        _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble(),'f',_p->precision);//实际金额
+        double extraNumber = _p->asset_max_ammount.toDouble() - ui->lineEdit_number->text().toDouble();//剩余金额
+        if(ui->lineEdit_number->text().toDouble() < _p->withdrawLimit.toDouble())
         {
-            ui->label_tip->setText(tr("number cannot less than ") + QString::number(dust_number[_p->symbol] + getBigNumberString( assetInfo.fee, assetInfo.precision).toDouble(),'f',_p->precision));
+            ui->label_tip->setText(tr("number cannot less than ") + _p->withdrawLimit);
             ui->label_tip->setVisible(true);
             ui->toolButton_confirm->setEnabled(false);
             return;
         }
-        else if(extraNumber > 1e-10 && extraNumber < dust_number[_p->symbol])
+        else if(extraNumber < dust_number[_p->symbol])
         {
             ui->label_tip->setText(tr("balance left should not less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
             ui->label_tip->setVisible(true);
@@ -402,7 +392,6 @@ void CapitalTransferPage::CreateTransaction()
     {
         numberStr = _p->actualNumber;
     }
-    qDebug() << "hhhhhhhhhhhhhh" << numberStr;
 
     if(ui->radioButton_deposit->isChecked())
     {//充值修改，发送充值指令问题
@@ -434,7 +423,7 @@ void CapitalTransferPage::getMarkNumber()
 {
     QString tip = tr(" %1 is pending!");
     double number = HXChain::getInstance()->mainFrame->crossMark->CalTransaction(_p->account_name,_p->symbol);
-    qDebug()<<"get---get---"<<number;
+//    qDebug()<<"get---get---"<<number;
     if(number > dust_number[_p->symbol])
     {//说明有划出去钱，显示提示
         ui->label_marktip->setText(tip.arg(QString::number(number,'g',_p->precision)));
@@ -472,8 +461,7 @@ void CapitalTransferPage::InitWidget()
     }
     else
     {
-        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
-        ui->label_fee->setText( getBigNumberString(assetInfo.fee, assetInfo.precision) + " " +_p->symbol);
+        ui->label_fee->setText( _p->fee + " " +_p->symbol);
         ui->slider->hide();
         ui->label_slow->hide();
         ui->label_fast->hide();
