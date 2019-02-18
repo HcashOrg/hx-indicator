@@ -4779,21 +4779,25 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="exchange/ExchangeMyOrdersWidget.ui" line="215"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="421"/>
         <source>委托时间</source>
         <translation type="unfinished">TIME</translation>
     </message>
     <message>
         <location filename="exchange/ExchangeMyOrdersWidget.ui" line="228"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="434"/>
         <source>类型</source>
         <translation type="unfinished">TYPE</translation>
     </message>
     <message>
         <location filename="exchange/ExchangeMyOrdersWidget.ui" line="241"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="447"/>
         <source>委托数量/已成交</source>
         <translation type="unfinished">AMOUNT/FINISHED</translation>
     </message>
     <message>
         <location filename="exchange/ExchangeMyOrdersWidget.ui" line="254"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="460"/>
         <source>委托价/成交均价</source>
         <translation type="unfinished">PRICE/AVG</translation>
     </message>
@@ -4808,24 +4812,51 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">History</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="262"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.ui" line="473"/>
+        <source>当前状态</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="288"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="506"/>
         <source>sell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="284"/>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="336"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="310"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="362"/>
         <source>cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="314"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="340"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="505"/>
         <source>buy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="396"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="422"/>
         <source>Sure to cancel this order?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="534"/>
+        <source>no deal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="537"/>
+        <source>partial deal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="540"/>
+        <source>total deal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="543"/>
+        <source>withdrawed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
