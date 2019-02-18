@@ -372,7 +372,7 @@ void CapitalTransferPage::CreateTransaction()
             ui->toolButton_confirm->setEnabled(false);
             return;
         }
-        else if(extraNumber < dust_number[_p->symbol])
+        else if(extraNumber>1e-10 && extraNumber < dust_number[_p->symbol])
         {
             ui->label_tip->setText(tr("balance left should not less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
             ui->label_tip->setVisible(true);
@@ -469,8 +469,6 @@ void CapitalTransferPage::InitWidget()
         ui->label_gas->hide();
     }
 
-
-//    ui->toolButton_confirm->setVisible(false);
     ui->toolButton_confirm->setEnabled(false);
     ui->radioButton_deposit->setChecked(true);
     ui->lineEdit_address->setPlaceholderText(tr("select withdraw to input address"));
@@ -516,44 +514,7 @@ void CapitalTransferPage::InitStyle()
     palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
 
-//    ui->toolButton_close->setIconSize(QSize(12,12));
-//    ui->toolButton_close->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-
     ui->toolButton_close->setStyleSheet(CLOSEBTN_STYLE);
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
-//    setStyleSheet("QToolButton#toolButton_confirm{color:white;\
-//                                      border-top-left-radius:10px;  \
-//                                      border-top-right-radius:10px; \
-//                                      border-bottom-left-radius:10px;  \
-//                                      border-bottom-right-radius:10px; \
-//                                      border:none;\
-//                                      background-color:#4861DC;}"
-//                  "QToolButton#toolButton_close::hover,QToolButton#toolButton_confirm::hover{background-color:#00D2FF;}"
-//                  "QToolButton#toolButton_close{border:none;background:transparent;color:#4861DC;}"
-//                  "QRadioButton{color:#4861DC;}"
-//                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-//                  );
-}
-
-void CapitalTransferPage::paintEvent(QPaintEvent *event)
-{
-//    QPainter painter(this);
-
-////    painter.setPen(Qt::NoPen);
-////    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
-////    painter.drawRect(rect());
-
-//    painter.setPen(Qt::NoPen);
-//    painter.setBrush(QColor(255,255,255,255));
-//    painter.drawRoundedRect(QRect(195,80,380,370),10,10);
-
-//    QRadialGradient radial(385, 385, 390, 385,385);
-//    radial.setColorAt(0, QColor(0,0,0,15));
-//    radial.setColorAt(1, QColor(218,255,248,15));
-//    painter.setBrush(radial);
-//    painter.setPen(Qt::NoPen);
-//    painter.drawRoundedRect(QRect(190,75,390,380),10,10);
-
-    QWidget::paintEvent(event);
 }
