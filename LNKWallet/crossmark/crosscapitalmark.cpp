@@ -220,8 +220,6 @@ void CrossCapitalMark::RemoveTransaction(const QString &tranID)
                     ++tra;
                 }
             }
-
-
             ++it;
         }
     }
@@ -297,8 +295,7 @@ void CrossCapitalMark::httpReplied(QByteArray _data, int _status)
         hash = _p->queryIdTrxidMap[queryID];
         _p->queryIdTrxidMap.erase(_p->queryIdTrxidMap.find(queryID));
     }
-    qDebug()<<"kkkkkkkkkkkk"<<hash<<confirm;
-    qDebug()<<"jjjj"<<object;
+    qDebug()<<"query trans result: obj:"<<object<<"hash:"<<hash<<"confirm:"<<confirm;
     if(confirm >= 8)
     {
         RemoveTransaction(hash);
@@ -361,7 +358,7 @@ void CrossCapitalMark::QueryTransaction(const QString &symbol, const QString &id
     paramObject.insert("trxid",id);
     object.insert("params",paramObject);
     qDebug()<<"query transid"<<id;
-    qDebug()<<"bbbbb"<<object;
+    qDebug()<<"query transobj:"<<object;
     _p->httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 }
 
