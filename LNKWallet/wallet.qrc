@@ -158,6 +158,7 @@
         <file>wallet_ui/dropDown.png</file>
         <file>wallet_ui/dialogBorder.png</file>
         <file>wallet_ui/coin_ERCELF.png</file>
+        <file>wallet_ui/coin_USDT.png</file>
     </qresource>
     <qresource prefix="/">
         <file>notifyWidget/close.png</file>
