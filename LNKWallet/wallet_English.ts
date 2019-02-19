@@ -1769,71 +1769,71 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished">fast</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="490"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="476"/>
         <source>please wait</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="107"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="103"/>
         <source>please input withdraw address...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="97"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="488"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="93"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="474"/>
         <source>select withdraw to input address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="127"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="139"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="123"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="135"/>
         <source>Can not find tunnel address!</source>
         <oldsource>Cannot find tunnelAddress!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="158"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="170"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="154"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="166"/>
         <source>Can not find multi-address!</source>
         <oldsource>Cannot find multiAddress!</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="212"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="208"/>
         <source>Transaction has been sent,please wait for confirmation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="219"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="215"/>
         <source>Fail to transfer!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="244"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="236"/>
         <source>max:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="356"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="367"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="380"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="347"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="358"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="370"/>
         <source>number cannot less than </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="387"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="377"/>
         <source>balance left should not less than </source>
         <oldsource>balance less than </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="435"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="424"/>
         <source> %1 is pending!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="308"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="312"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="300"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="304"/>
         <source>about</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4150,38 +4150,38 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Record</translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="74"/>
+        <location filename="depositpage/DepositPage.cpp" line="78"/>
         <source>no %1 plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="94"/>
-        <location filename="depositpage/DepositPage.cpp" line="216"/>
+        <location filename="depositpage/DepositPage.cpp" line="98"/>
+        <location filename="depositpage/DepositPage.cpp" line="220"/>
         <source>tunnel account checked!please update sys-time!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="128"/>
+        <location filename="depositpage/DepositPage.cpp" line="132"/>
         <source>private-key-missing!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="130"/>
+        <location filename="depositpage/DepositPage.cpp" line="134"/>
         <source>Cann&apos;t find pri-key in your wallet!Please contact official team for supportting!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="143"/>
+        <location filename="depositpage/DepositPage.cpp" line="147"/>
         <source>cannot generate tunnel account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="169"/>
+        <location filename="depositpage/DepositPage.cpp" line="173"/>
         <source>cannot bind tunnel address.%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="depositpage/DepositPage.cpp" line="186"/>
+        <location filename="depositpage/DepositPage.cpp" line="190"/>
         <source>Wallet data updated! Please backup your wallet!</source>
         <oldsource>You Should Back Up Your Wallet!</oldsource>
         <translation type="unfinished"></translation>
@@ -4817,45 +4817,45 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="288"/>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="506"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="289"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="511"/>
         <source>sell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="310"/>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="362"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="311"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="363"/>
         <source>cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="340"/>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="505"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="341"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="510"/>
         <source>buy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="422"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="423"/>
         <source>Sure to cancel this order?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="534"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="540"/>
         <source>no deal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="537"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="544"/>
         <source>partial deal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="540"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="548"/>
         <source>total deal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="543"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="552"/>
         <source>withdrawed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6148,7 +6148,7 @@ Cover it or not?</source>
         <location filename="guard/GuardKeyUpdatingInfoDialog.ui" line="200"/>
         <source>已更新sentor</source>
         <oldsource>已更新guard</oldsource>
-        <translation type="unfinished">Updated Sentor</translation>
+        <translation type="unfinished">Updated Senator</translation>
     </message>
     <message>
         <location filename="guard/GuardKeyUpdatingInfoDialog.cpp" line="42"/>
@@ -10900,7 +10900,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="guard/WithdrawInfoDialog.ui" line="200"/>
         <source>已签名guard</source>
-        <translation type="unfinished">Signed Sentors</translation>
+        <translation type="unfinished">Signed Senators</translation>
     </message>
     <message>
         <location filename="guard/WithdrawInfoDialog.ui" line="242"/>
@@ -10916,7 +10916,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <location filename="guard/WithdrawInfoDialog.cpp" line="59"/>
         <source>%1 sentors have signed. %2 sentors have not yet.</source>
         <oldsource>%1 guards have signed. %2 guards have not yet.</oldsource>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 sentaors have signed. %2 sentaors have not yet.</translation>
     </message>
 </context>
 <context>

@@ -236,7 +236,6 @@ QStringList WitnessConfig::getChainTypes()
     {
         if(!v.toString().isEmpty())     result += v.toString();
     }
-
     return result;
 }
 

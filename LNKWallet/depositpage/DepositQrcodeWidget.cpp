@@ -27,6 +27,11 @@ void DepositQrcodeWidget::SetQRString(const QString &data)
 {
     QImage image = DepositDataUtil::CreateQRcodeImage(data);
     ui->label_qrcode->setPixmap(QPixmap::fromImage(image).scaled(ui->label_qrcode->size()));
+    if(data.isEmpty())
+    {
+        ui->label_ercTip->hide();
+        return;
+    }
 
     if(symbol.startsWith("ERC"))
     {
@@ -78,6 +83,7 @@ void DepositQrcodeWidget::PostQueryTunnelMoney(const QString &symbol, const QStr
     paramObject.insert("addr",tunnelAddress);
     object.insert("params",paramObject);
     httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+    qDebug()<<"pppp"<<object;
 
 }
 
