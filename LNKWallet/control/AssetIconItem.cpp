@@ -5,7 +5,7 @@
 
 //QMap<QString,QString> AssetIconItem::assetColorMap.insert("BTC","#F5A623");
 QMap<QString,QString> AssetIconItem::assetColorMap = {{"HX","#4F3B8D"}, {"BTC","#F5A623"}, {"LTC","#4A4A4A"}, {"ETH","#4f7795"}, {"UB","#38BDE9"},
-                                                      {"HC","#5c4d93"},{"ERCPAX","#005120"},{"ERCELF","#2055b7"}};
+                                                      {"HC","#5c4d93"},{"ERCPAX","#005120"},{"ERCELF","#2055b7"},{"USDT","#259F7A"}};
 
 AssetIconItem::AssetIconItem(QWidget *parent) :
     QWidget(parent),

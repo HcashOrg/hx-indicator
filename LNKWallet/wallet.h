@@ -36,15 +36,14 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.11"           // 版本号
+#define WALLET_VERSION "1.2.12"           // 版本号
 
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
 #ifdef TEST_WALLET
 #define LOCKFUND_CONTRACT_ADDRESS  "HXCRYtwTBjTLnh6NAiFpiAtquHBFWZUCLz3u"
-//#define LOCKFUND_CONTRACT_ADDRESS  "HXCaT326NDoaZX6FH8rmdMJpaCLnkME4eRRP"   // cyy
-#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCWFNtx9PdwSVVmNWoF46kwAgXaU95voRqy"
+#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCXGWuLefoZN6ACF4FCE6C3f4XKUFgXjAHr"
 #else
 #define LOCKFUND_CONTRACT_ADDRESS  "HXCPHA7vA91zV6r7iJ8oadFgj97PHAy3dKRa"
 #define EXCHANGE_MODE_CONTRACT_ADDRESS  ""
@@ -52,8 +51,10 @@
 
 #ifdef TEST_WALLET
 #define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5006/api"
+#define MIDDLE_EXCHANGE_URL     "http://192.168.1.121:15000/api"
 #else
 #define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"
+#define MIDDLE_EXCHANGE_URL     ""
 #endif
 
 #ifdef  TEST_WALLET
@@ -250,6 +251,24 @@ public:
 
     friend QDataStream& operator >>(QDataStream &in,GuaranteeOrder& data);
     friend QDataStream& operator <<(QDataStream &out,const GuaranteeOrder& data);
+};
+
+struct ContractInvokeObject
+{
+    QString id;
+    QString trxId;
+    QString invoker;
+    bool execSucceed = true;
+    unsigned long long actualFee = 0;
+
+public:
+    bool operator ==(const ContractInvokeObject &_contractInvokeObject) const
+    {
+        return this->trxId == _contractInvokeObject.trxId;
+    }
+
+    friend QDataStream& operator >>(QDataStream &in,ContractInvokeObject& data);
+    friend QDataStream& operator <<(QDataStream &out,const ContractInvokeObject& data);
 };
 
 struct Entry
@@ -545,6 +564,7 @@ public:
     QStringList getAssetMultisigUpdatedGuards(QString assetSymbol);         // 获取多签地址正在更新的guardId
     QString guardAccountIdToName(QString guardAccountId);
     QString guardAddressToName(QString guardAddress);
+    QString guardOrCitizenAddressToName(QString address);
 
     // 自动提现
     QMap<QString,double>    senatorAutoWithdrawAmountMap;
@@ -638,6 +658,7 @@ void moveWidgetToScreenCenter(QWidget* w);
 
 QString toJsonFormat(QString instruction, QJsonArray parameters);
 unsigned long long jsonValueToULL(QJsonValue v);
+long long jsonValueToLL(QJsonValue v);
 double jsonValueToDouble(QJsonValue v);
 
 #endif // WALLET_H

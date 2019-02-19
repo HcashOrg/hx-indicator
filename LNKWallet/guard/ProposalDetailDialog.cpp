@@ -106,7 +106,7 @@ void ProposalDetailDialog::setProposal(QString _proposalId)
 
         QString address = info.requiredAccounts.at(i);
         ui->voteStateTableWidget->setItem(i, 0, new QTableWidgetItem(QString("%1\n%2").
-                                  arg(HXChain::getInstance()->guardAddressToName(address)).arg(address)));
+                                  arg(HXChain::getInstance()->guardOrCitizenAddressToName(address)).arg(address)));
 
         if(info.approvedKeys.contains(address))
         {

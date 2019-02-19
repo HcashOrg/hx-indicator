@@ -14,6 +14,7 @@ TransactionDB::~TransactionDB()
     if(m_transactionStructDB)  delete m_transactionStructDB;
     if(m_accountTransactionIdsDB)  delete m_accountTransactionIdsDB;
     if(m_guaranteeOrderDB)  delete m_guaranteeOrderDB;
+    if(m_contractInvokeObjectDB)    delete m_contractInvokeObjectDB;
 }
 
 bool TransactionDB::init()
@@ -31,9 +32,11 @@ bool TransactionDB::init()
     leveldb::Status status = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/transactionStruct").toStdString(), &m_transactionStructDB);
     leveldb::Status status2 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/accountTransactionIds").toStdString(), &m_accountTransactionIdsDB);
     leveldb::Status status3 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/guaranteeOrder").toStdString(), &m_guaranteeOrderDB);
+    leveldb::Status status4 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/contractInvokeObject").toStdString(), &m_contractInvokeObjectDB);
     qDebug() << "transactionstruct db init" << status.ok() << QString::fromStdString( status.ToString())
                                             << status2.ok() << QString::fromStdString( status2.ToString())
-                                            << status2.ok() << QString::fromStdString( status2.ToString());
+                                            << status3.ok() << QString::fromStdString( status3.ToString())
+                                            << status4.ok() << QString::fromStdString( status4.ToString());
 
     inited = true;
     if(status.ok() && status2.ok() && status3.ok())
@@ -127,6 +130,40 @@ GuaranteeOrder TransactionDB::getGuaranteeOrder(QString _guaranteeId)
     buffer.close();
 
     return guaranteeOrder;
+}
+
+void TransactionDB::insertContractInvokeObject(QString _trxId, ContractInvokeObject _object)
+{
+    QByteArray ba;
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::WriteOnly);
+
+    QDataStream out(&buffer);
+    //序列化对象信息
+    out << _object;
+    buffer.close();
+
+    writeToDB(m_contractInvokeObjectDB, _trxId, ba);
+}
+
+ContractInvokeObject TransactionDB::getContractInvokeObject(QString _trxId)
+{
+    if(_trxId.isEmpty())      return ContractInvokeObject();
+    QByteArray value = readFromDB(m_contractInvokeObjectDB, _trxId);
+
+    if(value.isEmpty())     return ContractInvokeObject();
+
+    //读取文件流信息
+    QBuffer buffer(&value);
+    buffer.open(QIODevice::ReadOnly);
+
+    QDataStream in(&buffer);
+    //反序列化，获取对象信息
+    ContractInvokeObject object;
+    in >> object;
+    buffer.close();
+
+    return object;
 }
 
 QVector<TransactionStruct> TransactionDB::lookupTransactionStruct(QString _address, int _type)
@@ -313,6 +350,7 @@ bool TransactionDB::clearAllDBs()
     if(m_transactionStructDB)  delete m_transactionStructDB;
     if(m_accountTransactionIdsDB)  delete m_accountTransactionIdsDB;
     if(m_guaranteeOrderDB)  delete m_guaranteeOrderDB;
+    if(m_contractInvokeObjectDB)    delete m_contractInvokeObjectDB;
 
     leveldb::Options options;
     leveldb::DestroyDB((HXChain::getInstance()->walletConfigPath + "/transactionDB/transactionStruct").toStdString(), options);

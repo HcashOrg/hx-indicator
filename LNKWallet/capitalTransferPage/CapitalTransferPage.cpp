@@ -15,14 +15,13 @@
 #include "dialog/ErrorResultDialog.h"
 #include "dialog/TransactionResultDialog.h"
 
-static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001},{"HC",0.001}};
-//static const QMap<QString,QString> fee_charge = {{"BTC","0.001"},{"LTC","0.001"},{"HC","0.01"},{"ETH","0.001"}};
+//通道账户剩余金额不得小于 dust_number，认为规定的值（用于防止粉尘交易）
+static const QMap<QString,double> dust_number = {{"BTC",0.00001},{"LTC",0.001},{"HC",0.001},{"USDT",0.001}};
 class CapitalTransferPage::CapitalTransferPagePrivate
 {
 public:
     CapitalTransferPagePrivate(const CapitalTransferInput &data)
         :account_name(data.account_name),account_address(data.account_address),symbol(data.symbol)
-//        ,fee(fee_charge.value(data.symbol))
         ,actualNumber("0")
         ,precision(5)
     {
@@ -30,6 +29,8 @@ public:
             if(asset.symbol == symbol)
             {
                 precision = asset.precision;
+                fee = getBigNumberString(asset.fee,asset.precision);
+                withdrawLimit = getBigNumberString(asset.withdrawLimit,asset.precision);
                 break;
             }
         }
@@ -41,9 +42,11 @@ public:
 
     QString tunnel_account_address;
     QString asset_max_ammount;
-//    QString fee;
 
     int precision;
+    QString fee;
+    QString withdrawLimit;
+
 
     QString multisig_address;
 
@@ -73,19 +76,12 @@ void CapitalTransferPage::ConfirmSlots()
     QString actualShow = _p->actualNumber + " "+ revertERCSymbol( _p->symbol);
     QString feeShow = ui->label_fee->text();
     QString totalShow = ui->lineEdit_number->text() + " "+ revertERCSymbol( _p->symbol);
-    qDebug()<<"pppppppppppp"<<_p->actualNumber;
+//    qDebug()<<"pppppppppppp"<<_p->actualNumber;
     CapitalConfirmWidget *confirmWidget = new CapitalConfirmWidget(CapitalConfirmWidget::CapitalConfirmInput(
                                                                    ui->radioButton_deposit->isChecked()?_p->account_address:ui->lineEdit_address->text(),
                                                                    actualShow,feeShow,totalShow),HXChain::getInstance()->mainFrame);
     connect(confirmWidget,&CapitalConfirmWidget::ConfirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
     connect(confirmWidget,&CapitalConfirmWidget::CancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
-    //PasswordConfirmWidget *confirmWidget = new PasswordConfirmWidget(HXChain::getInstance()->mainFrame);
-    //connect(confirmWidget,&PasswordConfirmWidget::confirmSignal,this,&CapitalTransferPage::passwordConfirmSlots);
-    //connect(confirmWidget,&PasswordConfirmWidget::cancelSignal,this,&CapitalTransferPage::passwordCancelSlots);
-    //confirmWidget->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
-    //confirmWidget->setWindowModality(Qt::WindowModal);
-    //confirmWidget->setAttribute(Qt::WA_DeleteOnClose);
-    //confirmWidget->move(mapToGlobal(QPoint(-190,-50)));
     confirmWidget->show();
     emit backBtnVisible(false);
 }
@@ -101,12 +97,20 @@ void CapitalTransferPage::radioChangedSlots()
             //ui->lineEdit_address->setText(_p->tunnel_account_address);
         }
         ui->lineEdit_address->setEnabled(false);
+        if(_p->symbol=="USDT")
+        {
+            ui->label_fee->setText("0.001 BTC");
+        }
     }
     else if(ui->radioButton_withdraw->isChecked())
     {
         ui->lineEdit_address->setPlaceholderText(tr("please input withdraw address..."));
         ui->lineEdit_address->setEnabled(true);
         ui->lineEdit_address->clear();
+        if(_p->symbol=="USDT")
+        {
+            ui->label_fee->setText(_p->fee+" USDT");
+        }
     }
 
     ui->lineEdit_number->clear();
@@ -161,7 +165,7 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         result.prepend("{");
         result.append("}");
     //提取多签地址
-        _p->multisig_address = CapitalTransferDataUtil::parseMutiAddress(result);\
+        _p->multisig_address = CapitalTransferDataUtil::parseMutiAddress(result);
         if( _p->multisig_address.isEmpty())
         {
             ui->radioButton_deposit->setEnabled(false);
@@ -220,10 +224,6 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
             errorResultDialog.setDetailText(result);
             errorResultDialog.pop();
         }
-
-//        CommonDialog dia(CommonDialog::OkOnly);
-//        dia.setText(HXChain::getInstance()->jsonDataValue( id));
-//        dia.pop();
         close();
     }
 }
@@ -347,7 +347,6 @@ void CapitalTransferPage::CreateTransaction()
         return;
     }
 
-    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
     if(_p->symbol == "ETH")
     {
         _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - 0.00021 * ui->slider->value() / 5,'f',_p->precision);
@@ -370,19 +369,29 @@ void CapitalTransferPage::CreateTransaction()
             return;
         }
     }
-    else
+    else if("USDT"==_p->symbol)
     {
-        _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - getBigNumberString( assetInfo.fee, assetInfo.precision).toDouble(),'f',_p->precision);
-        double extraNumber = _p->asset_max_ammount.toDouble() - ui->lineEdit_number->text().toDouble();
-        //qDebug()<<_p->actualNumber<<extraNumber<<dust_number[_p->symbol];
-        if(_p->actualNumber.toDouble() < dust_number[_p->symbol])
+        _p->actualNumber = ui->lineEdit_number->text();
+        if(ui->lineEdit_number->text().toDouble() < _p->withdrawLimit.toDouble())
         {
-            ui->label_tip->setText(tr("number cannot less than ") + QString::number(dust_number[_p->symbol] + getBigNumberString( assetInfo.fee, assetInfo.precision).toDouble(),'f',_p->precision));
+            ui->label_tip->setText(tr("number cannot less than ") + _p->withdrawLimit);
             ui->label_tip->setVisible(true);
             ui->toolButton_confirm->setEnabled(false);
             return;
         }
-        else if(extraNumber > 1e-10 && extraNumber < dust_number[_p->symbol])
+    }
+    else
+    {
+        _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble(),'f',_p->precision);//实际金额
+        double extraNumber = _p->asset_max_ammount.toDouble() - ui->lineEdit_number->text().toDouble();//剩余金额
+        if(ui->lineEdit_number->text().toDouble() < _p->withdrawLimit.toDouble())
+        {
+            ui->label_tip->setText(tr("number cannot less than ") + _p->withdrawLimit);
+            ui->label_tip->setVisible(true);
+            ui->toolButton_confirm->setEnabled(false);
+            return;
+        }
+        else if(extraNumber>1e-10 && extraNumber < dust_number[_p->symbol])
         {
             ui->label_tip->setText(tr("balance left should not less than ")+QString::number(dust_number[_p->symbol],'f',_p->precision));
             ui->label_tip->setVisible(true);
@@ -402,7 +411,6 @@ void CapitalTransferPage::CreateTransaction()
     {
         numberStr = _p->actualNumber;
     }
-    qDebug() << "hhhhhhhhhhhhhh" << numberStr;
 
     if(ui->radioButton_deposit->isChecked())
     {//充值修改，发送充值指令问题
@@ -434,7 +442,7 @@ void CapitalTransferPage::getMarkNumber()
 {
     QString tip = tr(" %1 is pending!");
     double number = HXChain::getInstance()->mainFrame->crossMark->CalTransaction(_p->account_name,_p->symbol);
-    qDebug()<<"get---get---"<<number;
+//    qDebug()<<"get---get---"<<number;
     if(number > dust_number[_p->symbol])
     {//说明有划出去钱，显示提示
         ui->label_marktip->setText(tip.arg(QString::number(number,'g',_p->precision)));
@@ -472,8 +480,7 @@ void CapitalTransferPage::InitWidget()
     }
     else
     {
-        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(_p->symbol));
-        ui->label_fee->setText( getBigNumberString(assetInfo.fee, assetInfo.precision) + " " +_p->symbol);
+        ui->label_fee->setText( _p->fee + " " +_p->symbol);
         ui->slider->hide();
         ui->label_slow->hide();
         ui->label_fast->hide();
@@ -481,8 +488,6 @@ void CapitalTransferPage::InitWidget()
         ui->label_gas->hide();
     }
 
-
-//    ui->toolButton_confirm->setVisible(false);
     ui->toolButton_confirm->setEnabled(false);
     ui->radioButton_deposit->setChecked(true);
     ui->lineEdit_address->setPlaceholderText(tr("select withdraw to input address"));
@@ -518,6 +523,18 @@ void CapitalTransferPage::InitWidget()
         HXChain::getInstance()->mainFrame->crossMark->checkUpData(_p->account_name,_p->symbol);
     }
 
+    //usdt资产添加通道账户提示，提示必须有0.001BTC
+    if(_p->symbol.startsWith("USDT"))
+    {
+        ui->label_fee->setText("0.001 BTC");
+        ui->label_tunneltip->setText(tr("make sure there's 0.001 BTC at least in tunnel address"));
+        ui->label_tunneltip->setVisible(false);
+    }
+    else
+    {
+        ui->label_tunneltip->setVisible(false);
+    }
+
 
 }
 
@@ -528,44 +545,7 @@ void CapitalTransferPage::InitStyle()
     palette.setColor(QPalette::Window, QColor(229,226,240));
     setPalette(palette);
 
-//    ui->toolButton_close->setIconSize(QSize(12,12));
-//    ui->toolButton_close->setIcon(QIcon(":/ui/wallet_ui/close.png"));
-
     ui->toolButton_close->setStyleSheet(CLOSEBTN_STYLE);
     ui->toolButton_confirm->setStyleSheet(OKBTN_STYLE);
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
-//    setStyleSheet("QToolButton#toolButton_confirm{color:white;\
-//                                      border-top-left-radius:10px;  \
-//                                      border-top-right-radius:10px; \
-//                                      border-bottom-left-radius:10px;  \
-//                                      border-bottom-right-radius:10px; \
-//                                      border:none;\
-//                                      background-color:#4861DC;}"
-//                  "QToolButton#toolButton_close::hover,QToolButton#toolButton_confirm::hover{background-color:#00D2FF;}"
-//                  "QToolButton#toolButton_close{border:none;background:transparent;color:#4861DC;}"
-//                  "QRadioButton{color:#4861DC;}"
-//                  "QLineEdit{border:none;background:transparent;color:#5474EB;font-size:12pt;margin-left:2px;}"
-//                  );
-}
-
-void CapitalTransferPage::paintEvent(QPaintEvent *event)
-{
-//    QPainter painter(this);
-
-////    painter.setPen(Qt::NoPen);
-////    painter.setBrush(QColor(255,255,255,240));//最后一位是设置透明属性（在0-255取值）
-////    painter.drawRect(rect());
-
-//    painter.setPen(Qt::NoPen);
-//    painter.setBrush(QColor(255,255,255,255));
-//    painter.drawRoundedRect(QRect(195,80,380,370),10,10);
-
-//    QRadialGradient radial(385, 385, 390, 385,385);
-//    radial.setColorAt(0, QColor(0,0,0,15));
-//    radial.setColorAt(1, QColor(218,255,248,15));
-//    painter.setBrush(radial);
-//    painter.setPen(Qt::NoPen);
-//    painter.drawRoundedRect(QRect(190,75,390,380),10,10);
-
-    QWidget::paintEvent(event);
 }

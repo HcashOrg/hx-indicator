@@ -23,6 +23,10 @@ public:
         {
             actualAssetSymbol = "ETH";
         }
+        else if( "USDT" == actualAssetSymbol)
+        {
+            actualAssetSymbol = "BTC";
+        }
     }
 public:
     QString address;//地址

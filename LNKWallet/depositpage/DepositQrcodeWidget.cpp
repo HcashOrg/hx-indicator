@@ -27,11 +27,21 @@ void DepositQrcodeWidget::SetQRString(const QString &data)
 {
     QImage image = DepositDataUtil::CreateQRcodeImage(data);
     ui->label_qrcode->setPixmap(QPixmap::fromImage(image).scaled(ui->label_qrcode->size()));
+    if(data.isEmpty())
+    {
+        ui->label_ercTip->hide();
+        return;
+    }
 
     if(symbol.startsWith("ERC"))
     {
         ui->label_ercTip->show();
         PostQueryTunnelMoney("ETH",data);
+    }
+    else if(symbol.startsWith("USDT"))
+    {
+        ui->label_ercTip->show();
+        PostQueryTunnelMoney("BTC",data);
     }
     else
     {
@@ -48,14 +58,12 @@ void DepositQrcodeWidget::SetSymbol(const QString &_symbol)
 {
     symbol = _symbol;
     ui->label_warning->setText(ui->label_warning->text().replace("BTC", revertERCSymbol(symbol)));
-
     ui->tipLabel->setText(ui->tipLabel->text().replace("BTC",revertERCSymbol(symbol)));
+
     if(leastDepositAmountMap.contains(symbol))
     {
         ui->tipLabel->setText(ui->tipLabel->text().replace("0.001",leastDepositAmountMap.value(symbol)));
     }
-
-
 }
 
 void DepositQrcodeWidget::CopySlots()
@@ -75,6 +83,7 @@ void DepositQrcodeWidget::PostQueryTunnelMoney(const QString &symbol, const QStr
     paramObject.insert("addr",tunnelAddress);
     object.insert("params",paramObject);
     httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+    qDebug()<<"pppp"<<object;
 
 }
 
@@ -85,7 +94,15 @@ void DepositQrcodeWidget::httpReplied(QByteArray _data, int _status)
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
 
     QString balance = object.value("balance").toString();
-    ui->label_ercTip->setText(ui->label_ercTip->text().replace("0 ETH", balance + "ETH"));
+
+    if(symbol=="USDT")
+    {
+        ui->label_ercTip->setText(ui->label_ercTip->text().replace("0.00045 ETH","0.001 BTC").replace("0 ETH", balance + "BTC").replace("ETH","BTC"));
+    }
+    else
+    {
+        ui->label_ercTip->setText(ui->label_ercTip->text().replace("0 ETH", balance + "ETH"));
+    }
 }
 
 void DepositQrcodeWidget::InitWidget()

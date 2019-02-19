@@ -146,7 +146,7 @@ void CitizenProposalPage::jsonDataUpdated(QString id)
         isCurrentTimeBigThanNextVoteTime = QDateTime::fromString(HXChain::getInstance()->currentBlockTime,"yyyy-MM-ddThh:mm:ss") >
                                            QDateTime::fromString(nextTime,"yyyy-MM-ddThh:mm:ss");
 
-        qDebug()<<"aaaa"<<object;
+//        qDebug()<<"aaaa"<<object;
         qDebug()<<"votetimessss"<<QDateTime::fromString(HXChain::getInstance()->currentBlockTime,"yyyy-MM-ddThh:mm:ss")<<QDateTime::fromString(nextTime,"yyyy-MM-ddThh:mm:ss")<<isCurrentTimeBigThanNextVoteTime;
         //查询白名单
         queryWhiteList();
@@ -463,15 +463,15 @@ QString CitizenProposalPage::calProposalWeight(const ProposalInfo &info) const
         if(info.requiredAccounts.contains(i.value().address))
         {
             allWeight += i.value().pledgeWeight;
-            qDebug()<<"pppppppppppp"<<i.value().address<<i.value().pledgeWeight;
+//            qDebug()<<"pppppppppppp"<<i.value().address<<i.value().pledgeWeight;
         }
         if(info.approvedKeys.contains(i.value().address))
         {
             alreadyWeight += i.value().pledgeWeight;
-            qDebug()<<"qqqqqqqqqqqq"<<i.value().address<<i.value().pledgeWeight;
+//            qDebug()<<"qqqqqqqqqqqq"<<i.value().address<<i.value().pledgeWeight;
         }
     }
-    qDebug()<<"wwwwwwwwwwwww"<<allWeight<<alreadyWeight;
+//    qDebug()<<"wwwwwwwwwwwww"<<allWeight<<alreadyWeight;
     if(0 != allWeight)
     {
         return QString::number(alreadyWeight * 100.0 / allWeight,'f',2)+"%";

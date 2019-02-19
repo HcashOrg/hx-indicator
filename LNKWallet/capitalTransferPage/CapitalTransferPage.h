@@ -51,8 +51,6 @@ private:
     void CreateTransaction();
 
     void getMarkNumber();
-protected:
-    void paintEvent(QPaintEvent *event);
 private:
     void InitWidget();
     void InitStyle();

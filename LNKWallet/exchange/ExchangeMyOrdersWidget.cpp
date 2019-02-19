@@ -1,13 +1,17 @@
 #include "ExchangeMyOrdersWidget.h"
 #include "ui_ExchangeMyOrdersWidget.h"
 
+#include <QScrollBar>
+
 #include "ExchangePairSelectDialog.h"
 #include "AddMyExchangePairsDialog.h"
 #include "ToolButtonWidget.h"
 #include "commondialog.h"
 #include "control/BottomLine.h"
 #include "ExchangeContractFeeDialog.h"
+#include "poundage/PageScrollWidget.h"
 
+static const int ROWNUMBER = 7;
 ExchangeMyOrdersWidget::ExchangeMyOrdersWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ExchangeMyOrdersWidget)
@@ -30,11 +34,27 @@ ExchangeMyOrdersWidget::ExchangeMyOrdersWidget(QWidget *parent) :
     ui->myOrdersTableWidget->setColumnWidth(3,170);
     ui->myOrdersTableWidget->setColumnWidth(4,80);
 
-    ui->currentOrdersBtn->setCheckable(true);
-    ui->currentOrdersBtn->setChecked(true);
+    ui->historyOrdersTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->historyOrdersTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->historyOrdersTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->historyOrdersTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->historyOrdersTableWidget->setMouseTracking(true);
+    ui->historyOrdersTableWidget->setShowGrid(false);//隐藏表格线
+    ui->historyOrdersTableWidget->horizontalHeader()->setSectionsClickable(true);
+    ui->historyOrdersTableWidget->horizontalHeader()->setVisible(true);
+    ui->historyOrdersTableWidget->verticalHeader()->setVisible(false);
+    ui->historyOrdersTableWidget->setColumnWidth(0,140);
+    ui->historyOrdersTableWidget->setColumnWidth(1,80);
+    ui->historyOrdersTableWidget->setColumnWidth(2,170);
+    ui->historyOrdersTableWidget->setColumnWidth(3,170);
+    ui->historyOrdersTableWidget->setColumnWidth(4,80);
 
     bottomLine = new BottomLine(this);
-    bottomLine->attachToWidget(ui->currentOrdersBtn);
+    on_currentOrdersBtn_clicked();
+
+    pageWidget = new PageScrollWidget();
+    ui->stackedWidget->addWidget(pageWidget);
+    connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&ExchangeMyOrdersWidget::pageChangeSlot);
 
     init();
 }
@@ -46,9 +66,16 @@ ExchangeMyOrdersWidget::~ExchangeMyOrdersWidget()
 
 void ExchangeMyOrdersWidget::init()
 {
+    connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
+//    connect(ui->historyOrdersTableWidget->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(onSliderValueChanged(int)));
+
     onPairSelected(HXChain::getInstance()->currentExchangePair);
 
-    ui->historyBtn->setEnabled(false);
+//    ui->historyBtn->setEnabled(false);
+
+
+    queryOrders(1, 14, "first");    // 查两次 第一次获取总数 并显示一部分
+
 }
 
 void ExchangeMyOrdersWidget::jsonDataUpdated(QString id)
@@ -418,4 +445,257 @@ void ExchangeMyOrdersWidget::on_myOrdersTableWidget_cellClicked(int row, int col
 void ExchangeMyOrdersWidget::on_currentOrdersBtn_clicked()
 {
     ui->currentOrdersBtn->setChecked(true);
+    ui->historyBtn->setChecked(false);
+
+    bottomLine->attachToWidget(ui->currentOrdersBtn);
+
+    ui->myOrdersTableWidget->show();
+    ui->historyOrdersTableWidget->hide();
+
+    ui->stackedWidget->hide();
 }
+
+void ExchangeMyOrdersWidget::on_historyBtn_clicked()
+{
+    ui->currentOrdersBtn->setChecked(false);
+    ui->historyBtn->setChecked(true);
+
+    bottomLine->attachToWidget(ui->historyBtn);
+
+    ui->myOrdersTableWidget->hide();
+    ui->historyOrdersTableWidget->show();
+
+    ui->stackedWidget->show();
+}
+
+void ExchangeMyOrdersWidget::queryOrders(int page, int pageCount, QString id)
+{
+    AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value( HXChain::getInstance()->currentAccount);
+    QJsonObject object;
+    object.insert("jsonrpc","2.0");
+    object.insert("id",id);
+    object.insert("method","hx.fdxqs.exchange.deal.query");
+    QJsonObject paramObject;
+    paramObject.insert("addr", accountInfo.address);
+    paramObject.insert("pair", QString("%1/%2").arg(HXChain::getInstance()->currentExchangePair.first).arg(HXChain::getInstance()->currentExchangePair.second));
+    paramObject.insert("page", page);
+    paramObject.insert("page_count", pageCount);
+    object.insert("params",paramObject);
+    httpManager.post(MIDDLE_EXCHANGE_URL,QJsonDocument(object).toJson());
+}
+
+void ExchangeMyOrdersWidget::showHistoryOrders()
+{
+    const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
+    const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
+
+    QStringList keys = historyOrdersInfoMap.keys();
+    int size = keys.size();
+    ui->historyOrdersTableWidget->setRowCount(0);
+    ui->historyOrdersTableWidget->setRowCount(size);
+    for(int i = 0; i < size; i++)
+    {
+        ui->historyOrdersTableWidget->setRowHeight(i,40);
+
+        const HistoryOrderInfo& info = historyOrdersInfoMap.value( keys.at(i));
+
+        QDateTime dateTime = info.dateTime;
+        dateTime = dateTime.addSecs( -600);
+        dateTime.setTimeSpec(Qt::UTC);
+        dateTime = dateTime.toLocalTime();
+        ui->historyOrdersTableWidget->setItem( i, 0, new QTableWidgetItem( dateTime.toString("yyyy-MM-dd hh:mm:ss")));
+
+        QString typeStr;
+        QColor color;
+        if(info.type == "buy")  { typeStr = tr("buy"); color = QColor(235,0,94);}
+        if(info.type == "sell")  { typeStr = tr("sell"); color = QColor(44,202,148);}
+        ui->historyOrdersTableWidget->setItem( i, 1, new QTableWidgetItem( typeStr));
+        ui->historyOrdersTableWidget->item(i,1)->setTextColor(color);
+        ui->historyOrdersTableWidget->item(i,1)->setData(Qt::UserRole, info.trxId);
+
+        unsigned long long completedBaseAmount = info.originBaseAmount - info.currentBaseAmount;    // currentBaseAmount 可能是负数  已成交肯定是正数
+        unsigned long long completedQuoteAmount = info.originQuoteAmount - info.currentQuoteAmount;    // currentBaseAmount 可能是负数  已成交肯定是正数
+        ui->historyOrdersTableWidget->setItem( i, 2, new QTableWidgetItem( getBigNumberString( info.originBaseAmount, baseAssetInfo.precision)
+                                                                      + " / "
+                                                                      + getBigNumberString( completedBaseAmount, baseAssetInfo.precision)));
+
+        double price = double(info.originQuoteAmount) / qPow(10,quoteAssetInfo.precision) / info.originBaseAmount * qPow(10,baseAssetInfo.precision);
+        double completedPrice = 0;
+        if(completedBaseAmount != 0)
+        {
+            completedPrice = double(completedQuoteAmount) / qPow(10,quoteAssetInfo.precision) / completedBaseAmount * qPow(10,baseAssetInfo.precision);
+        }
+        QTableWidgetItem* item = new QTableWidgetItem( QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair))
+                                                       + " / "
+                                                       + ((completedBaseAmount == 0) ? "-" : QString::number(completedPrice,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)))
+                                                       );
+        item->setTextColor(QColor(83,61,138));
+        ui->historyOrdersTableWidget->setItem( i,3,item);
+
+        QString stateStr;
+        QColor stateColor;
+        switch (info.state)
+        {
+        case 1:
+            stateStr = tr("no deal");
+            stateColor = QColor(153,153,153);
+            break;
+        case 2:
+            stateStr = tr("partial deal");
+            stateColor = QColor(202,135,0);
+            break;
+        case 3:
+            stateStr = tr("total deal");
+            stateColor = QColor(44,202,148);
+            break;
+        case 4:
+            stateStr = tr("withdrawed");
+            stateColor = QColor(235,0,94);
+            break;
+        }
+        ui->historyOrdersTableWidget->setItem( i, 4, new QTableWidgetItem( stateStr));
+        ui->historyOrdersTableWidget->item(i,4)->setTextColor(stateColor);
+    }
+
+    tableWidgetSetItemZebraColor(ui->historyOrdersTableWidget);
+
+    ui->historyOrdersTableWidget->horizontalScrollBar()->setSliderPosition(currentSliderPos);
+}
+
+void ExchangeMyOrdersWidget::pageChangeSlot(unsigned int page)
+{
+    for(int i = 0;i < ui->historyOrdersTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->historyOrdersTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->historyOrdersTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->historyOrdersTableWidget->setRowHidden(i,true);
+        }
+    }
+}
+
+void ExchangeMyOrdersWidget::httpReplied(QByteArray _data, int _status)
+{
+    QJsonObject object  = QJsonDocument::fromJson(_data).object();
+    QString id = object.value("id").toString();
+
+    QJsonObject resultObject = object.value("result").toObject();
+    recordCount = resultObject.value("total_records").toInt();
+    currentPage = resultObject.value("current_page").toInt();
+
+    QJsonArray  array   = resultObject.value("data").toArray();
+    for( QJsonValue v : array)
+    {
+        QJsonObject orderObject = v.toObject();
+        HistoryOrderInfo info;
+        info.trxId = orderObject.value("tx_id").toString();
+        info.currentBaseAmount = jsonValueToLL(  orderObject.value("current_base_amount"));
+        info.currentQuoteAmount = jsonValueToLL( orderObject.value("current_quote_amount"));
+        info.originBaseAmount = jsonValueToULL( orderObject.value("origin_base_amount"));
+        info.originQuoteAmount = jsonValueToULL( orderObject.value("origin_quote_amount"));
+        info.state = orderObject.value("stat").toInt();
+        info.type = orderObject.value("ex_type").toString();
+        info.dateTime = QDateTime::fromString(orderObject.value("timestamp").toString(),"yyyy-MM-dd hh:mm:ss");
+        QStringList pairStrList = orderObject.value("ex_pair").toString().split("/");
+        if(pairStrList.size() > 1)
+        {
+            info.pair.first = pairStrList.at(0);
+            info.pair.second = pairStrList.at(1);
+        }
+
+        historyOrdersInfoMap.insert(info.trxId, info);
+    }
+
+    showHistoryOrders();
+qDebug() << "iiiiiiiiiiiiiiiiiii " << id << ui->historyOrdersTableWidget->rowCount();
+    if(id == "first")
+    {
+        queryOrders(1,recordCount, "second");
+    }
+    else
+    {
+        int page = (ui->historyOrdersTableWidget->rowCount()%ROWNUMBER==0 && ui->historyOrdersTableWidget->rowCount() != 0) ?
+                    ui->historyOrdersTableWidget->rowCount()/ROWNUMBER : ui->historyOrdersTableWidget->rowCount()/ROWNUMBER+1;
+        pageWidget->SetTotalPage(page);
+        pageWidget->setShowTip(ui->historyOrdersTableWidget->rowCount(),ROWNUMBER);
+        pageChangeSlot(0);
+        pageWidget->setVisible(0 != ui->historyOrdersTableWidget->rowCount());
+    }
+
+//    int size = array.size();
+//    ui->historyOrdersTableWidget->setRowCount(size);
+//    for(int i = 0; i < size; i++)
+//    {
+//        ui->historyOrdersTableWidget->setRowHeight(i,40);
+
+//        QJsonObject dataObject = array.at(i).toObject();
+//        QString contractAddress = dataObject.take("contract_address").toString();
+//        unsigned long long sellAmount = jsonValueToULL(dataObject.take("from_supply"));
+//        QString sellSymbol = dataObject.take("from_asset").toString();
+//        unsigned long long buyAmount = jsonValueToULL(dataObject.take("to_supply"));
+//        QString buySymbol = dataObject.take("to_asset").toString();
+//        int state = dataObject.take("state").toInt();
+
+//        AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(sellSymbol));
+//        AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(buySymbol));
+
+//        ui->ordersTableWidget->setItem(i,0, new QTableWidgetItem(getBigNumberString(sellAmount,sellAssetInfo.precision)));
+//        ui->ordersTableWidget->item(i,0)->setData(Qt::UserRole,sellAmount);
+
+//        ui->ordersTableWidget->setItem(i,1, new QTableWidgetItem(getBigNumberString(buyAmount,buyAssetInfo.precision)));
+//        ui->ordersTableWidget->item(i,1)->setData(Qt::UserRole,buyAmount);
+
+//        double price = (double)sellAmount / qPow(10,sellAssetInfo.precision) / buyAmount * qPow(10,buyAssetInfo.precision);
+//        QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'g',8));
+//        item->setData(Qt::UserRole,contractAddress);
+//        ui->ordersTableWidget->setItem(i,2,item);
+
+//        ui->ordersTableWidget->setItem(i,3, new QTableWidgetItem(tr("buy")));
+
+//        for(int j = 3;j < 4;++j)
+//        {
+//            ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
+
+//            if(HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText()) == contractAddress)
+//            {
+//                toolButtonItem->setEnabled(false);
+//                toolButtonItem->setText(tr("my order"));
+//                toolButtonItem->setButtonFixSize(80,20);
+//            }
+//            else
+//            {
+//                toolButtonItem->setText(ui->ordersTableWidget->item(i,j)->text());
+//            }
+
+//            ui->ordersTableWidget->setCellWidget(i,j,toolButtonItem);
+//            connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
+//        }
+//    }
+//    tableWidgetSetItemZebraColor(ui->ordersTableWidget);
+
+//    int page = (ui->ordersTableWidget->rowCount()%ROWNUMBER==0 && ui->ordersTableWidget->rowCount() != 0) ?
+//                ui->ordersTableWidget->rowCount()/ROWNUMBER : ui->ordersTableWidget->rowCount()/ROWNUMBER+1;
+//    pageWidget->SetTotalPage(page);
+//    pageWidget->setShowTip(ui->ordersTableWidget->rowCount(),ROWNUMBER);
+//    pageChangeSlot(0);
+//    pageWidget->setVisible(0 != size);
+
+    //    blankWidget->setVisible(0 == size);
+}
+
+//void ExchangeMyOrdersWidget::onSliderValueChanged(int _value)
+//{
+//    if( ui->historyOrdersTableWidget->rowCount() >= recordCount)    return;
+//    if(ui->historyOrdersTableWidget->horizontalScrollBar()->sliderPosition() + 7 >= ui->historyOrdersTableWidget->rowCount())
+//    {
+//        currentSliderPos = ui->historyOrdersTableWidget->horizontalScrollBar()->sliderPosition();
+//        queryOrders(currentPage++, 14);
+//    }
+//}

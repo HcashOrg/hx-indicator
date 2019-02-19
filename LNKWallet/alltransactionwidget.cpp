@@ -846,11 +846,24 @@ void AllTransactionWidget::showTransactions()
 
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(contractId));
 
-            QTableWidgetItem* item = new QTableWidgetItem( "- " + getBigNumberString(amount,assetInfo.precision) + " " + revertERCSymbol( assetInfo.symbol));
-            ui->transactionsTableWidget->setItem(i,3, item);
-            item->setTextColor(QColor(255,0,0));
+            ContractInvokeObject cio = HXChain::getInstance()->transactionDB.getContractInvokeObject(ts.transactionId);
+            qDebug() << "cccccccccccccccc " << ts.transactionId << cio.trxId << cio.execSucceed;
+            if(cio.trxId.isEmpty() || cio.execSucceed)
+            {
+                QTableWidgetItem* item = new QTableWidgetItem( "- " + getBigNumberString(amount,assetInfo.precision) + " " + revertERCSymbol( assetInfo.symbol));
+                ui->transactionsTableWidget->setItem(i,3, item);
+                item->setTextColor(QColor(255,0,0));
 
-            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("transfer to contract")));
+                ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("transfer to contract")));
+            }
+            else
+            {
+                QTableWidgetItem* item = new QTableWidgetItem( getBigNumberString(amount,assetInfo.precision) + " " + revertERCSymbol( assetInfo.symbol));
+                ui->transactionsTableWidget->setItem(i,3, item);
+                item->setTextColor(QColor(202,135,0));
+
+                ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("transfer to contract failed")));
+            }
 
             useGuaranteeOrderType = checkUseGuaranteeOrderType(callerAddress, ui->addressLabel->text(), guaranteeOrderOwnerAddress);
         }

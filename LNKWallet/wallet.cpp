@@ -5,6 +5,7 @@
 #include "ToolButtonWidget.h"
 #include "control/AssetIconItem.h"
 #include "control/FeeGuaranteeWidget.h"
+#include "extra/guiutil.h"
 
 #ifdef WIN32
 #include <Windows.h>
@@ -24,6 +25,30 @@
 #define NODE_PROC_NAME      "./hx_node" WALLET_EXE_SUFFIX
 #define CLIENT_PROC_NAME    "./hx_client" WALLET_EXE_SUFFIX
 #define COPY_PROC_NAME      "./Copy"
+#endif
+
+#define MD5CHECK
+//定义node client的md5值，用于版本判定（很多用户升级后，实际node、client并未替换成功，原因是进程未结束，文件无法替换，
+//但是该问题很难发现，因此采用md5标记一下，每次启动时进行对比，将异常情况打入log日志中，方便排查,记得更换后台的时候同时更新该值）
+//如果想取消该校验，注释 #define MD5CHECK即可
+#ifdef MD5CHECK
+#ifdef WIN32
+#ifdef TEST_WALLET//windows测试链
+static const QString NODE_PROC_MD5 = "79f462f3e29256ab60399b32464bd5f1";
+static const QString CLIENT_PROC_MD5 = "05b40a9ec576cbdcba4ea5ffcf239534";
+#else//windows正式链
+static const QString NODE_PROC_MD5 = "f52a38c331790adf9e27bd7bdb990935";
+static const QString CLIENT_PROC_MD5 = "f73e35c983364a14831291fab7cfac4d";
+#endif
+#else
+#ifdef TEST_WALLET//mac测试链
+static const QString NODE_PROC_MD5 = "tttttttttttttt";
+static const QString CLIENT_PROC_MD5 = "tttttttttttttt";
+#else//mac正式链
+static const QString NODE_PROC_MD5 = "tttttttttttttt";
+static const QString CLIENT_PROC_MD5 = "tttttttttttttt";
+#endif
+#endif
 #endif
 
 HXChain* HXChain::goo = 0;
@@ -122,6 +147,11 @@ HXChain::HXChain()
 //   connect(updateProcess,&UpdateProcess::updateWrong,[this](){
 //       this->isUpdateNeeded = false;
 //  });
+#ifdef MD5CHECK
+    //启动前校验一下md5，方便排查某些无法连接等错误
+    GUIUtil::checkAndLogMd5(QCoreApplication::applicationDirPath()+ "/"+NODE_PROC_NAME,NODE_PROC_MD5,
+                            QCoreApplication::applicationDirPath()+ "/"+CLIENT_PROC_NAME,CLIENT_PROC_MD5);
+#endif
 }
 
 HXChain::~HXChain()
@@ -169,6 +199,7 @@ void HXChain:: startExe()
     QStringList strList;
     strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << "--all-plugin-start"
 #ifndef SAFE_VERSION
 //            << "--rewind-on-close"
 #endif
@@ -871,6 +902,14 @@ void HXChain::parseTransaction(QString result)
         postRPC( "Transaction-get_guarantee_order-", toJsonFormat( "get_guarantee_order", QJsonArray() << canceledId));
     }
 
+    if(ts.type == TRANSACTION_TYPE_CONTRACT_TRANSFER)
+    {
+        if(transactionDB.getContractInvokeObject(ts.transactionId).trxId.isEmpty())
+        {
+            postRPC( "Transaction-get_contract_invoke_object", toJsonFormat( "get_contract_invoke_object", QJsonArray() << ts.transactionId));
+        }
+    }
+
     transactionDB.insertTransactionStruct(ts.transactionId,ts);
     qDebug() << "ttttttttttttt " << ts.type << ts.transactionId  << ts.feeAmount;
 
@@ -1313,6 +1352,27 @@ QString HXChain::guardAddressToName(QString guardAddress)
     }
 
     return result;
+}
+
+QString HXChain::guardOrCitizenAddressToName(QString address)
+{
+    foreach (QString account, allGuardMap.keys())
+    {
+        if( allGuardMap.value(account).address == address)
+        {
+            return account;
+        }
+    }
+
+    foreach (QString account, minerMap.keys())
+    {
+        if( minerMap.value(account).address == address)
+        {
+            return account;
+        }
+    }
+
+    return "";
 }
 
 void HXChain::loadAutoWithdrawAmount()
@@ -1974,6 +2034,17 @@ QDataStream &operator <<(QDataStream &out, const GuaranteeOrder &data)
     return out;
 }
 
+QDataStream &operator >>(QDataStream &in, ContractInvokeObject &data)
+{
+    in >> data.id >> data.trxId >> data.invoker >> data.execSucceed >> data.actualFee;
+    return in;
+}
+
+QDataStream &operator <<(QDataStream &out, const ContractInvokeObject &data)
+{
+    out << data.id << data.trxId << data.invoker << data.execSucceed << data.actualFee;
+    return out;
+}
 
 unsigned long long jsonValueToULL(QJsonValue v)
 {
@@ -1984,7 +2055,23 @@ unsigned long long jsonValueToULL(QJsonValue v)
     }
     else
     {
-        result = QString::number(v.toDouble(),'g',12).toULongLong();
+        result = QString::number(v.toDouble(),'g',16).toULongLong();
+    }
+
+    return result;
+}
+
+
+long long jsonValueToLL(QJsonValue v)
+{
+    long long result = 0;
+    if(v.isString())
+    {
+        result = v.toString().toLongLong();
+    }
+    else
+    {
+        result = QString::number(v.toDouble(),'g',16).toLongLong();
     }
 
     return result;
@@ -2162,3 +2249,6 @@ QString toEasyRead(unsigned long long number, int precision, int effectiveBitsNu
         return str;
     }
 }
+
+
+
