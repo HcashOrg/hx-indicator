@@ -1676,17 +1676,17 @@ better not transfer or upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="392"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="395"/>
         <source>Gas Price</source>
         <translation type="unfinished">Gas 价格</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="418"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="421"/>
         <source>慢</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="431"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="434"/>
         <source>快</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1751,6 +1751,12 @@ better not transfer or upgrade</source>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="424"/>
         <source> %1 is pending!</source>
         <translation type="unfinished">%1 已划出，尚未到账！</translation>
+    </message>
+    <message>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="510"/>
+        <source>make sure there&apos;s 0.001 BTC at least in tunnel address</source>
+        <oldsource>make sure there&apos;s 0.00045 ETH at least in tunnel address</oldsource>
+        <translation type="unfinished">请确保通道地址内至少有0.001BTC</translation>
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="300"/>
