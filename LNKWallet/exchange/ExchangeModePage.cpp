@@ -62,7 +62,7 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->sellPositionTableWidget);
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->buyPositionTableWidget);
 
-    ui->widget_2->hide();
+//    ui->widget_2->hide();
     init();
 }
 
