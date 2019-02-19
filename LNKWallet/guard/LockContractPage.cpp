@@ -152,7 +152,7 @@ void LockContractPage::getUserLockInfo(QString accountName)
     AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(accountName);
     HXChain::getInstance()->postRPC( "LockContractPage+invoke_contract_offline+getUser+" + accountName, toJsonFormat( "invoke_contract_offline",
                                                                            QJsonArray() << accountName << LOCKFUND_CONTRACT_ADDRESS
-                                                                           << "getUser"  << "HXNUoGDwGBSFsYpmeUw8JFZyDH1i2ED3UMTY"));
+                                                                           << "getUser"  << accountInfo.address));
 }
 
 void LockContractPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
