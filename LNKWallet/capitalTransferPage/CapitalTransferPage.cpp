@@ -97,12 +97,20 @@ void CapitalTransferPage::radioChangedSlots()
             //ui->lineEdit_address->setText(_p->tunnel_account_address);
         }
         ui->lineEdit_address->setEnabled(false);
+        if(_p->symbol=="USDT")
+        {
+            ui->label_fee->setText("0.001 BTC");
+        }
     }
     else if(ui->radioButton_withdraw->isChecked())
     {
         ui->lineEdit_address->setPlaceholderText(tr("please input withdraw address..."));
         ui->lineEdit_address->setEnabled(true);
         ui->lineEdit_address->clear();
+        if(_p->symbol=="USDT")
+        {
+            ui->label_fee->setText(_p->fee+" USDT");
+        }
     }
 
     ui->lineEdit_number->clear();
@@ -502,6 +510,18 @@ void CapitalTransferPage::InitWidget()
 //    if("HC" != _p->symbol)
     {
         HXChain::getInstance()->mainFrame->crossMark->checkUpData(_p->account_name,_p->symbol);
+    }
+
+    //usdt资产添加通道账户提示，提示必须有0.001BTC
+    if(_p->symbol.startsWith("USDT"))
+    {
+        ui->label_fee->setText("0.001 BTC");
+        ui->label_tunneltip->setText(tr("make sure there's 0.001 BTC at least in tunnel address"));
+        ui->label_tunneltip->setVisible(false);
+    }
+    else
+    {
+        ui->label_tunneltip->setVisible(false);
     }
 
 

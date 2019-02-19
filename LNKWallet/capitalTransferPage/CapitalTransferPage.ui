@@ -375,6 +375,9 @@ border-radius:15px;</string>
    <property name="text">
     <string>empty</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
    <property name="textInteractionFlags">
     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
    </property>
@@ -444,6 +447,37 @@ border-radius:15px;</string>
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="label_tunneltip">
+   <property name="geometry">
+    <rect>
+     <x>278</x>
+     <y>268</y>
+     <width>291</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <pointsize>-1</pointsize>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 11px &quot;微软雅黑&quot;;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="textInteractionFlags">
+    <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+   </property>
+  </widget>
   <zorder>label_back</zorder>
   <zorder>label_title</zorder>
   <zorder>label_1</zorder>
@@ -467,6 +501,7 @@ border-radius:15px;</string>
   <zorder>label_slow</zorder>
   <zorder>label_fast</zorder>
   <zorder>sliderValueLabel</zorder>
+  <zorder>label_tunneltip</zorder>
  </widget>
  <resources/>
  <connections/>

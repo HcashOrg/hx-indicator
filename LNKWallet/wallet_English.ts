@@ -1754,17 +1754,17 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="392"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="395"/>
         <source>Gas Price</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="418"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="421"/>
         <source>慢</source>
         <translation type="unfinished">slow</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="431"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.ui" line="434"/>
         <source>快</source>
         <translation type="unfinished">fast</translation>
     </message>
@@ -1829,6 +1829,12 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="424"/>
         <source> %1 is pending!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="510"/>
+        <source>make sure there&apos;s 0.001 BTC at least in tunnel address</source>
+        <oldsource>make sure there&apos;s 0.00045 ETH at least in tunnel address</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
