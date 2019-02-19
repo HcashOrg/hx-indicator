@@ -11,6 +11,7 @@
 #include "ExchangeContractFeeDialog.h"
 #include "poundage/PageScrollWidget.h"
 
+static const int ROWNUMBER = 7;
 ExchangeMyOrdersWidget::ExchangeMyOrdersWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ExchangeMyOrdersWidget)
@@ -66,14 +67,14 @@ ExchangeMyOrdersWidget::~ExchangeMyOrdersWidget()
 void ExchangeMyOrdersWidget::init()
 {
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
-    connect(ui->historyOrdersTableWidget->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(onSliderValueChanged(int)));
+//    connect(ui->historyOrdersTableWidget->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(onSliderValueChanged(int)));
 
     onPairSelected(HXChain::getInstance()->currentExchangePair);
 
 //    ui->historyBtn->setEnabled(false);
 
 
-    queryOrders(1, 14);
+    queryOrders(1, 14, "first");    // 查两次 第一次获取总数 并显示一部分
 
 }
 
@@ -450,6 +451,8 @@ void ExchangeMyOrdersWidget::on_currentOrdersBtn_clicked()
 
     ui->myOrdersTableWidget->show();
     ui->historyOrdersTableWidget->hide();
+
+    ui->stackedWidget->hide();
 }
 
 void ExchangeMyOrdersWidget::on_historyBtn_clicked()
@@ -461,14 +464,16 @@ void ExchangeMyOrdersWidget::on_historyBtn_clicked()
 
     ui->myOrdersTableWidget->hide();
     ui->historyOrdersTableWidget->show();
+
+    ui->stackedWidget->show();
 }
 
-void ExchangeMyOrdersWidget::queryOrders(int page, int pageCount)
+void ExchangeMyOrdersWidget::queryOrders(int page, int pageCount, QString id)
 {
     AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value( HXChain::getInstance()->currentAccount);
     QJsonObject object;
     object.insert("jsonrpc","2.0");
-    object.insert("id",45);
+    object.insert("id",id);
     object.insert("method","hx.fdxqs.exchange.deal.query");
     QJsonObject paramObject;
     paramObject.insert("addr", accountInfo.address);
@@ -528,22 +533,28 @@ void ExchangeMyOrdersWidget::showHistoryOrders()
         ui->historyOrdersTableWidget->setItem( i,3,item);
 
         QString stateStr;
+        QColor stateColor;
         switch (info.state)
         {
         case 1:
             stateStr = tr("no deal");
+            stateColor = QColor(153,153,153);
             break;
         case 2:
             stateStr = tr("partial deal");
+            stateColor = QColor(202,135,0);
             break;
         case 3:
             stateStr = tr("total deal");
+            stateColor = QColor(44,202,148);
             break;
         case 4:
             stateStr = tr("withdrawed");
+            stateColor = QColor(235,0,94);
             break;
         }
         ui->historyOrdersTableWidget->setItem( i, 4, new QTableWidgetItem( stateStr));
+        ui->historyOrdersTableWidget->item(i,4)->setTextColor(stateColor);
     }
 
     tableWidgetSetItemZebraColor(ui->historyOrdersTableWidget);
@@ -553,12 +564,27 @@ void ExchangeMyOrdersWidget::showHistoryOrders()
 
 void ExchangeMyOrdersWidget::pageChangeSlot(unsigned int page)
 {
-
+    for(int i = 0;i < ui->historyOrdersTableWidget->rowCount();++i)
+    {
+        if(i < page*ROWNUMBER)
+        {
+            ui->historyOrdersTableWidget->setRowHidden(i,true);
+        }
+        else if(page * ROWNUMBER <= i && i < page*ROWNUMBER + ROWNUMBER)
+        {
+            ui->historyOrdersTableWidget->setRowHidden(i,false);
+        }
+        else
+        {
+            ui->historyOrdersTableWidget->setRowHidden(i,true);
+        }
+    }
 }
 
 void ExchangeMyOrdersWidget::httpReplied(QByteArray _data, int _status)
 {
     QJsonObject object  = QJsonDocument::fromJson(_data).object();
+    QString id = object.value("id").toString();
 
     QJsonObject resultObject = object.value("result").toObject();
     recordCount = resultObject.value("total_records").toInt();
@@ -588,6 +614,20 @@ void ExchangeMyOrdersWidget::httpReplied(QByteArray _data, int _status)
     }
 
     showHistoryOrders();
+qDebug() << "iiiiiiiiiiiiiiiiiii " << id << ui->historyOrdersTableWidget->rowCount();
+    if(id == "first")
+    {
+        queryOrders(1,recordCount, "second");
+    }
+    else
+    {
+        int page = (ui->historyOrdersTableWidget->rowCount()%ROWNUMBER==0 && ui->historyOrdersTableWidget->rowCount() != 0) ?
+                    ui->historyOrdersTableWidget->rowCount()/ROWNUMBER : ui->historyOrdersTableWidget->rowCount()/ROWNUMBER+1;
+        pageWidget->SetTotalPage(page);
+        pageWidget->setShowTip(ui->historyOrdersTableWidget->rowCount(),ROWNUMBER);
+        pageChangeSlot(0);
+        pageWidget->setVisible(0 != ui->historyOrdersTableWidget->rowCount());
+    }
 
 //    int size = array.size();
 //    ui->historyOrdersTableWidget->setRowCount(size);
@@ -650,13 +690,12 @@ void ExchangeMyOrdersWidget::httpReplied(QByteArray _data, int _status)
     //    blankWidget->setVisible(0 == size);
 }
 
-void ExchangeMyOrdersWidget::onSliderValueChanged(int _value)
-{
-qDebug() << "ssssssssssssss " << _value;
-    if( ui->historyOrdersTableWidget->rowCount() >= recordCount)    return;
-    if(ui->historyOrdersTableWidget->horizontalScrollBar()->sliderPosition() + 7 >= ui->historyOrdersTableWidget->rowCount())
-    {
-        currentSliderPos = ui->historyOrdersTableWidget->horizontalScrollBar()->sliderPosition();
-        queryOrders(currentPage++, 14);
-    }
-}
+//void ExchangeMyOrdersWidget::onSliderValueChanged(int _value)
+//{
+//    if( ui->historyOrdersTableWidget->rowCount() >= recordCount)    return;
+//    if(ui->historyOrdersTableWidget->horizontalScrollBar()->sliderPosition() + 7 >= ui->historyOrdersTableWidget->rowCount())
+//    {
+//        currentSliderPos = ui->historyOrdersTableWidget->horizontalScrollBar()->sliderPosition();
+//        queryOrders(currentPage++, 14);
+//    }
+//}
