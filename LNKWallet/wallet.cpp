@@ -199,6 +199,7 @@ void HXChain:: startExe()
     QStringList strList;
     strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << "--all-plugin-start"
 #ifndef SAFE_VERSION
 //            << "--rewind-on-close"
 #endif
