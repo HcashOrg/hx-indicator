@@ -369,6 +369,17 @@ void CapitalTransferPage::CreateTransaction()
             return;
         }
     }
+    else if("USDT"==_p->symbol)
+    {
+        _p->actualNumber = ui->lineEdit_number->text();
+        if(ui->lineEdit_number->text().toDouble() < _p->withdrawLimit.toDouble())
+        {
+            ui->label_tip->setText(tr("number cannot less than ") + _p->withdrawLimit);
+            ui->label_tip->setVisible(true);
+            ui->toolButton_confirm->setEnabled(false);
+            return;
+        }
+    }
     else
     {
         _p->actualNumber = QString::number(ui->lineEdit_number->text().toDouble() - _p->fee.toDouble(),'f',_p->precision);//实际金额
