@@ -34,6 +34,7 @@ private:
     void paintEvent(QPaintEvent*);
 
     void getUserLockInfo(QString accountName);
+    void getUsers();
 };
 
 #endif // LOCKCONTRACTPAGE_H

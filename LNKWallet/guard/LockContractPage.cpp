@@ -6,6 +6,8 @@
 #include "ToolButtonWidget.h"
 #include "LockFundDialog.h"
 #include "LockContractWithdrawDialog.h"
+#include "showcontentdialog.h"
+
 
 LockContractPage::LockContractPage(QWidget *parent) :
     QWidget(parent),
@@ -28,8 +30,8 @@ LockContractPage::LockContractPage(QWidget *parent) :
     ui->lockFundTableWidget->horizontalHeader()->setVisible(true);
     ui->lockFundTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->lockFundTableWidget->setColumnWidth(0,180);
-    ui->lockFundTableWidget->setColumnWidth(1,120);
+    ui->lockFundTableWidget->setColumnWidth(0,160);
+    ui->lockFundTableWidget->setColumnWidth(1,140);
     ui->lockFundTableWidget->setColumnWidth(2,180);
     ui->lockFundTableWidget->setColumnWidth(3,150);
     ui->lockFundTableWidget->setStyleSheet(TABLEWIDGET_STYLE_1);
@@ -47,33 +49,21 @@ LockContractPage::~LockContractPage()
 void LockContractPage::init()
 {
     ui->accountComboBox->clear();
+    ui->accountComboBox->addItem(tr("ALL"));
     QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
     if(accounts.size() > 0)
     {
         ui->accountComboBox->addItems(accounts);
-
-        if(accounts.contains(HXChain::getInstance()->currentAccount))
-        {
-            ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
-        }
-    }
-    else
-    {
-        ui->label->hide();
-        ui->accountComboBox->hide();
-
-        QLabel* label = new QLabel(this);
-        label->setGeometry(QRect(ui->label->pos(), QSize(300,18)));
-        label->setText(tr("There are no accounts in the wallet."));
     }
 
     ui->contractAddressLabel->setText(LOCKFUND_CONTRACT_ADDRESS);
-    getUserLockInfo(ui->accountComboBox->currentText());
+
+    ui->accountComboBox->setCurrentIndex(0);
 }
 
 void LockContractPage::refresh()
 {
-    getUserLockInfo(ui->accountComboBox->currentText());
+//    on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
 }
 
 void LockContractPage::jsonDataUpdated(QString id)
@@ -93,10 +83,12 @@ void LockContractPage::jsonDataUpdated(QString id)
             QJsonObject resultObject = QJsonDocument::fromJson(resultStr.toLatin1()).object();
             QStringList keys = resultObject.keys();
 
+            ui->lockFundTableWidget->horizontalHeaderItem(3)->setText("");
             ui->lockFundTableWidget->setRowCount(0);
             ui->lockFundTableWidget->setRowCount(keys.size());
             for(int i = 0; i < keys.size(); i++)
             {
+                ui->lockFundTableWidget->setRowHeight(i,40);
                 QString key = keys.at(i);
                 QJsonObject object = resultObject.value(key).toObject();
 
@@ -129,9 +121,83 @@ void LockContractPage::jsonDataUpdated(QString id)
             tableWidgetSetItemZebraColor(ui->lockFundTableWidget);
 
         }
-        else
-        {
 
+        return;
+    }
+
+    if( id == "LockContractPage+invoke_contract_offline+getUsers")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QString resultStr = parse_doucment.object().value("result").toString();
+
+            QJsonObject resultObject = QJsonDocument::fromJson(resultStr.toLatin1()).object();
+            QStringList keys = resultObject.keys();
+
+            ui->lockFundTableWidget->horizontalHeaderItem(3)->setText(tr("ACCOUNT"));
+            ui->lockFundTableWidget->setRowCount(0);
+            int rowCount = 0;       // 如果一个地址质押了多个币种  分成多行显示
+            int row = 0;
+            for(int i = 0; i < keys.size(); i++)
+            {
+                QString number = keys.at(i);
+                QJsonObject object = QJsonDocument::fromJson( resultObject.value(number).toString().toLatin1()).object();
+                QStringList keys2 = object.keys();
+                QString address = keys2.at(0);
+                QJsonObject object2 = object.value(address).toObject();
+                QStringList keys3 = object2.keys();
+                rowCount += keys3.size();
+                ui->lockFundTableWidget->setRowCount(rowCount);
+qDebug() << "33333333333333 " << rowCount ;
+
+                for(int j = 0; j < keys3.size(); j++)
+                {
+                    ui->lockFundTableWidget->setRowHeight(row,40);
+
+                    QString symbol = keys3.at(j);
+                    QJsonObject object3 = object2.value(symbol).toObject();
+                    qDebug() << "44444444444 " << symbol << i << j ;
+
+                    unsigned long long amount = jsonValueToULL( object3.value("amount"));
+                    int depositTime = object3.value("despositTime").toInt();
+
+                    ui->lockFundTableWidget->setItem(row, 0, new QTableWidgetItem(symbol));
+                    AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId(symbol));
+                    ui->lockFundTableWidget->setItem(row, 1, new QTableWidgetItem( getBigNumberString(amount,assetInfo.precision)));
+                    ui->lockFundTableWidget->item(row,1)->setData(Qt::UserRole,amount);
+
+                    QDateTime utc;
+                    utc.setSecsSinceEpoch(depositTime + 14 * 24 * 3600);
+                    qDebug()  << depositTime << utc << utc.toLocalTime() << utc.toLocalTime().toString("yyyy-MM-dd hh:mm:ss");
+                    ui->lockFundTableWidget->setItem(row, 2, new QTableWidgetItem(utc.toLocalTime().toString("yyyy-MM-dd hh:mm:ss")));
+
+                    QString account = address;
+                    if(!HXChain::getInstance()->addressToName(address).isEmpty())
+                    {
+                        account = HXChain::getInstance()->addressToName(address);
+                    }
+                    else if(!HXChain::getInstance()->guardOrCitizenAddressToName(address).isEmpty())
+                    {
+                        account = HXChain::getInstance()->guardOrCitizenAddressToName(address);
+                    }
+                    ui->lockFundTableWidget->setItem(row, 3, new QTableWidgetItem(account));
+
+                    AssetIconItem* assetIconItem = new AssetIconItem();
+                    assetIconItem->setAsset(ui->lockFundTableWidget->item(row,0)->text());
+                    ui->lockFundTableWidget->setCellWidget(row, 0, assetIconItem);
+
+                    row++;
+                }
+            }
+
+            tableWidgetSetItemZebraColor(ui->lockFundTableWidget);
         }
 
         return;
@@ -149,16 +215,33 @@ void LockContractPage::paintEvent(QPaintEvent *)
 
 void LockContractPage::getUserLockInfo(QString accountName)
 {
+    if(accountName.isEmpty() || accountName == tr("ALL"))   return;
     AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(accountName);
     HXChain::getInstance()->postRPC( "LockContractPage+invoke_contract_offline+getUser+" + accountName, toJsonFormat( "invoke_contract_offline",
                                                                            QJsonArray() << accountName << LOCKFUND_CONTRACT_ADDRESS
                                                                            << "getUser"  << accountInfo.address));
 }
 
+void LockContractPage::getUsers()
+{
+    HXChain::getInstance()->postRPC( "LockContractPage+invoke_contract_offline+getUsers", toJsonFormat( "invoke_contract_offline",
+                                                                           QJsonArray() << HXChain::getInstance()->accountInfoMap.keys().first()
+                                                                           << LOCKFUND_CONTRACT_ADDRESS
+                                                                           << "getUsers"  << "1000,0"));
+
+}
+
 void LockContractPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     ui->lockFundTableWidget->setRowCount(0);
-    getUserLockInfo(arg1);
+    if(arg1 == "ALL")
+    {
+        getUsers();
+    }
+    else
+    {
+        getUserLockInfo(arg1);
+    }
 }
 
 void LockContractPage::on_lockFundTableWidget_cellClicked(int row, int column)
@@ -167,10 +250,25 @@ void LockContractPage::on_lockFundTableWidget_cellClicked(int row, int column)
     {
         if(ui->lockFundTableWidget->item(row,0) && ui->lockFundTableWidget->item(row,1))
         {
-            LockContractWithdrawDialog lockContractWithdrawDialog(ui->accountComboBox->currentText(),
-                                                                  ui->lockFundTableWidget->item(row,0)->text());
-            lockContractWithdrawDialog.setMaxAmount(ui->lockFundTableWidget->item(row,1)->data(Qt::UserRole).toULongLong());
-            lockContractWithdrawDialog.pop();
+            if(ui->accountComboBox->currentIndex() == 0)
+            {
+                ShowContentDialog showContentDialog( ui->lockFundTableWidget->item(row, column)->text(),this);
+
+                int x = ui->lockFundTableWidget->columnViewportPosition(column) + ui->lockFundTableWidget->columnWidth(column) / 2
+                        - showContentDialog.width() / 2;
+                int y = ui->lockFundTableWidget->rowViewportPosition(row) - 10 + ui->lockFundTableWidget->horizontalHeader()->height();
+
+                showContentDialog.move( ui->lockFundTableWidget->mapToGlobal( QPoint(x, y)));
+                showContentDialog.exec();
+            }
+            else
+            {
+                LockContractWithdrawDialog lockContractWithdrawDialog(ui->accountComboBox->currentText(),
+                                                                      ui->lockFundTableWidget->item(row,0)->text());
+                lockContractWithdrawDialog.setMaxAmount(ui->lockFundTableWidget->item(row,1)->data(Qt::UserRole).toULongLong());
+                lockContractWithdrawDialog.pop();
+            }
+
         }
 
         return;
