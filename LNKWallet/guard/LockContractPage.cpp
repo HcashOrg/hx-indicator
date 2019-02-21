@@ -234,7 +234,7 @@ void LockContractPage::getUsers()
 void LockContractPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     ui->lockFundTableWidget->setRowCount(0);
-    if(arg1 == "ALL")
+    if(arg1 == tr("ALL"))
     {
         getUsers();
     }
