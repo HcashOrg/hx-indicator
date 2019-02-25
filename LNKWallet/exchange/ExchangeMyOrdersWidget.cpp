@@ -474,7 +474,7 @@ void ExchangeMyOrdersWidget::queryOrders(int page, int pageCount, QString id)
     QJsonObject object;
     object.insert("jsonrpc","2.0");
     object.insert("id",id);
-    object.insert("method","hx.fdxqs.exchange.deal.query");
+    object.insert("method","hx.fdxqs.exchange.order.query");
     QJsonObject paramObject;
     paramObject.insert("addr", accountInfo.address);
     paramObject.insert("pair", QString("%1/%2").arg(HXChain::getInstance()->currentExchangePair.first).arg(HXChain::getInstance()->currentExchangePair.second));

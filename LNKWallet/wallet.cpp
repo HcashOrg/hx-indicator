@@ -1,4 +1,4 @@
-﻿#include "wallet.h"
+﻿ #include "wallet.h"
 
 #include "websocketmanager.h"
 #include "commondialog.h"
@@ -79,8 +79,8 @@ HXChain::HXChain()
         lockMinutes     = 5;
         configFile->setValue("/settings/notAutoLock",false);
         notProduce      =  true;
-        configFile->setValue("/settings/language","Simplified Chinese");
-        language = "Simplified Chinese";
+        configFile->setValue("/settings/language","English");
+        language = "English";
         configFile->setValue("/settings/feeType","HX");
         feeType = "HX";
         configFile->setValue("/settings/feeOrderID","");
@@ -199,7 +199,6 @@ void HXChain:: startExe()
     QStringList strList;
     strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
-            << "--all-plugin-start"
 #ifndef SAFE_VERSION
 //            << "--rewind-on-close"
 #endif
@@ -911,7 +910,8 @@ void HXChain::parseTransaction(QString result)
     }
 
     transactionDB.insertTransactionStruct(ts.transactionId,ts);
-    qDebug() << "ttttttttttttt " << ts.type << ts.transactionId  << ts.feeAmount;
+    qDebug() << "TTTTTTTTTTTTTTT " << ts.type << ts.transactionId  << ts.feeAmount;
+    qDebug() << result;
 
     TransactionTypeId typeId;
     typeId.type = ts.type;

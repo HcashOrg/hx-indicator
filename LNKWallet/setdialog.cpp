@@ -121,7 +121,7 @@ SetDialog::SetDialog(QWidget *parent) :
     }
     else
     {
-        ui->languageComboBox->setCurrentIndex(0);
+        ui->languageComboBox->setCurrentIndex(1);
     }
 
     QString fee = HXChain::getInstance()->feeType;

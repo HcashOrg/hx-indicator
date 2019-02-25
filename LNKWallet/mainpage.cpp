@@ -63,17 +63,6 @@ MainPage::MainPage(QWidget *parent) :
     ui->accountTableWidget->setColumnWidth(5,80);
     ui->accountTableWidget->horizontalHeader()->setStretchLastSection(true);
 
-//    QString language = HXChain::getInstance()->language;
-//    if( language.isEmpty())
-//    {
-//        retranslator("Simplified Chinese");
-//    }
-//    else
-//    {
-//        retranslator(language);
-//    }
-
-
     blankWidget = new BlankDefaultWidget(ui->accountTableWidget);
     blankWidget->setTextTip(tr("there's no account or assest!"));
     // 由于首页是第一个页面，第一次打开先等待x秒钟 再 updateAccountList
@@ -329,14 +318,6 @@ void MainPage::retranslator(QString language)
 {
     ui->retranslateUi(this);
 
-    if( language == "Simplified Chinese")
-    {
-
-    }
-    else if( language == "English")
-    {
-
-    }
 }
 
 void MainPage::jsonDataUpdated(QString id)

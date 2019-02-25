@@ -72,6 +72,8 @@ private slots:
 
     void on_positionComboBox_currentIndexChanged(int index);
 
+    void on_KLineBtn_clicked();
+
 public:
     void getUserBalances();
 

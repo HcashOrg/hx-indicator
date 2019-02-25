@@ -273,10 +273,11 @@ void FirstLogin::InitStyle()
     ui->createBtn->setStyleSheet("QToolButton{font: 12px \"Microsoft YaHei UI Light\";background-color:rgb(255,255,255); border:none;border-radius:3px;color: rgb(59, 22, 136);}" \
                                  );
 
-    ui->pwdLineEdit->setStyleSheet("QLineEdit{max-height:32px;background: transparent;color: rgb(243,241,250);font: 10px \"Microsoft YaHei UI Light\";border:none;border-radius:0px;border-bottom:1px solid rgb(243,241,250);padding: 0px 10px 0px 6px;}"
+    ui->pwdLineEdit->setStyleSheet("QLineEdit{max-height:32px;background: transparent;color: rgb(243,241,250);font: 12px \"Microsoft YaHei UI Light\";border:none;border-radius:0px;border-bottom:1px solid rgb(243,241,250);padding: 0px 10px 0px 6px;}"
                                    "QLineEdit:disabled{color: rgb(151,151,151);}");
-    ui->pwdLineEdit2->setStyleSheet("QLineEdit{max-height:32px;background: transparent;color: rgb(243,241,250);font: 10px \"Microsoft YaHei UI Light\";border:none;border-radius:0px;border-bottom:1px solid rgb(243,241,250);padding: 0px 10px 0px 6px;}"
+    ui->pwdLineEdit2->setStyleSheet("QLineEdit{max-height:32px;background: transparent;color: rgb(243,241,250);font: 12px \"Microsoft YaHei UI Light\";border:none;border-radius:0px;border-bottom:1px solid rgb(243,241,250);padding: 0px 10px 0px 6px;}"
                                     "QLineEdit:disabled{color: rgb(151,151,151);}");
+
 }
 
 void FirstLogin::keyPressEvent(QKeyEvent *e)

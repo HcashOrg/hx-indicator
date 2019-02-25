@@ -129,8 +129,8 @@ Frame::Frame(): timer(NULL),
     QString language = HXChain::getInstance()->language;
     if( language.isEmpty())
     {
-        setLanguage("Simplified Chinese");
-//        setLanguage("English");
+//        setLanguage("Simplified Chinese");
+        setLanguage("English");
     }
     else
     {
@@ -186,8 +186,6 @@ Frame::Frame(): timer(NULL),
             HXChain::getInstance()->lockMinutes     = 5;
             HXChain::getInstance()->configFile->setValue("/settings/notAutoLock",false);
             HXChain::getInstance()->notProduce      =  true;
-            HXChain::getInstance()->configFile->setValue("/settings/language","Simplified Chinese");
-            HXChain::getInstance()->language = "Simplified Chinese";
             HXChain::getInstance()->configFile->setValue("/settings/feeType","HX");
             HXChain::getInstance()->feeType = "HX";
 
@@ -595,7 +593,7 @@ void Frame::settingSaved()
     QString language = HXChain::getInstance()->language;
     if( language.isEmpty())
     {
-        setLanguage("Simplified Chinese");
+        setLanguage("English");
     }
     else
     {
@@ -1045,8 +1043,6 @@ void Frame::showTransferPageWithAddress(QString address, QString name)
 
 void Frame::setLanguage(QString language)
 {
-
-
     menuTranslator.load(QString(":/qm/qt_zh_cn"));
     translatorForTextBrowser.load(":/language/widgets.qm");
 
@@ -2312,7 +2308,7 @@ void Frame::jsonDataUpdated(QString id)
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result ;
 
-        if(result.startsWith("\"result\":"))
+        if(result.startsWith("\"result\":") && result != "\"result\":null")
         {
             HXChain::getInstance()->parseTransaction(result);
         }

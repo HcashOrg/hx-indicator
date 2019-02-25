@@ -27,6 +27,10 @@ void SelectWalletPathWidget::on_okBtn_clicked()
     HXChain::getInstance()->configFile->setValue("/settings/chainPath", ui->pathLineEdit->text());
     HXChain::getInstance()->appDataPath = ui->pathLineEdit->text();
 
+    QString language = (ui->languageComboBox->currentIndex() == 0) ? "Simplified Chinese" : "English";
+    HXChain::getInstance()->configFile->setValue("/settings/language",language);
+    HXChain::getInstance()->language = language;
+
     QString path = ui->pathLineEdit->text() + "/wallet.json";
     QFileInfo info(path);
     if(info.exists())
@@ -56,6 +60,9 @@ void SelectWalletPathWidget::paintEvent(QPaintEvent *e)
 void SelectWalletPathWidget::InitWidget()
 {
     InitStyle();
+
+    ui->languageComboBox->setCurrentIndex(1);
+    connect(ui->languageComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(onLanguageChanged(QString)));
 
     ui->pathLineEdit->setText( HXChain::getInstance()->appDataPath);
 
@@ -101,3 +108,19 @@ void SelectWalletPathWidget::on_pathBtn_clicked()
         ui->pathLineEdit->setText( file);
     }
 }
+
+void SelectWalletPathWidget::onLanguageChanged(const QString &arg1)
+{
+    if(ui->languageComboBox->currentIndex() == 0)
+    {
+        HXChain::getInstance()->mainFrame->setLanguage("Simplified Chinese");
+    }
+    else if(ui->languageComboBox->currentIndex() == 1)
+    {
+        HXChain::getInstance()->mainFrame->setLanguage("English");
+    }
+
+    ui->retranslateUi(this);
+    ui->label_version->setText(QString("v") + WALLET_VERSION);
+}
+

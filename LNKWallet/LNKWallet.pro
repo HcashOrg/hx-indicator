@@ -6,12 +6,12 @@
 
 QT       += core gui xml network websockets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = HXIndicator
 TEMPLATE = app
 
-#DEFINES += TEST_WALLET
+DEFINES += TEST_WALLET
 #DEFINES += SAFE_VERSION
 
 win32{
@@ -215,7 +215,9 @@ SOURCES += main.cpp\
     exchange/ExchangeBalancesWidget.cpp \
     exchange/ExchangeMyOrdersWidget.cpp \
     exchange/ExchangeContractFeeDialog.cpp \
-    control/BottomLine.cpp
+    control/BottomLine.cpp \
+    extra/qcustomplot.cpp \
+    exchange/KLineWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -393,7 +395,9 @@ HEADERS  += firstlogin.h \
     exchange/ExchangeBalancesWidget.h \
     exchange/ExchangeMyOrdersWidget.h \
     exchange/ExchangeContractFeeDialog.h \
-    control/BottomLine.h
+    control/BottomLine.h \
+    extra/qcustomplot.h \
+    exchange/KLineWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -536,7 +540,8 @@ FORMS    += firstlogin.ui \
     control/PriceDepthWidget.ui \
     exchange/ExchangeBalancesWidget.ui \
     exchange/ExchangeMyOrdersWidget.ui \
-    exchange/ExchangeContractFeeDialog.ui
+    exchange/ExchangeContractFeeDialog.ui \
+    exchange/KLineWidget.ui
 
 win32{
     DISTFILES += logo.rc

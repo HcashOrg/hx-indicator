@@ -187,7 +187,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 10px &quot;微软雅黑&quot;;
+    <string notr="true">font: 12px &quot;微软雅黑&quot;;
 color:white;</string>
    </property>
    <property name="text">
@@ -204,7 +204,7 @@ color:white;</string>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 10px &quot;微软雅黑&quot;;
+    <string notr="true">font: 12px &quot;微软雅黑&quot;;
 color:white;</string>
    </property>
    <property name="text">
