@@ -2055,7 +2055,8 @@ unsigned long long jsonValueToULL(QJsonValue v)
     }
     else
     {
-        result = QString::number(v.toDouble(),'g',16).toULongLong();
+//        result = QString::number(v.toDouble(),'g',16).toULongLong();
+        result = v.toVariant().toULongLong();
     }
 
     return result;
@@ -2071,7 +2072,8 @@ long long jsonValueToLL(QJsonValue v)
     }
     else
     {
-        result = QString::number(v.toDouble(),'g',16).toLongLong();
+//        result = QString::number(v.toDouble(),'g',16).toLongLong();
+        result = v.toVariant().toLongLong();
     }
 
     return result;

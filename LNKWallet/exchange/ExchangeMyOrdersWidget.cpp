@@ -489,15 +489,14 @@ void ExchangeMyOrdersWidget::showHistoryOrders()
     const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
     const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
 
-    QStringList keys = historyOrdersInfoMap.keys();
-    int size = keys.size();
+    int size = historyOrders.size();
     ui->historyOrdersTableWidget->setRowCount(0);
     ui->historyOrdersTableWidget->setRowCount(size);
     for(int i = 0; i < size; i++)
     {
         ui->historyOrdersTableWidget->setRowHeight(i,40);
 
-        const HistoryOrderInfo& info = historyOrdersInfoMap.value( keys.at(i));
+        const HistoryOrderInfo& info = historyOrders.at(i);
 
         QDateTime dateTime = info.dateTime;
         dateTime = dateTime.addSecs( -600);
@@ -591,6 +590,7 @@ void ExchangeMyOrdersWidget::httpReplied(QByteArray _data, int _status)
     currentPage = resultObject.value("current_page").toInt();
 
     QJsonArray  array   = resultObject.value("data").toArray();
+    historyOrders.clear();
     for( QJsonValue v : array)
     {
         QJsonObject orderObject = v.toObject();
@@ -610,11 +610,11 @@ void ExchangeMyOrdersWidget::httpReplied(QByteArray _data, int _status)
             info.pair.second = pairStrList.at(1);
         }
 
-        historyOrdersInfoMap.insert(info.trxId, info);
+        historyOrders << info;
     }
 
     showHistoryOrders();
-qDebug() << "iiiiiiiiiiiiiiiiiii " << id << ui->historyOrdersTableWidget->rowCount();
+
     if(id == "first")
     {
         queryOrders(1,recordCount, "second");

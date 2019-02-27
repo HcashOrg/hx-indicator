@@ -9,8 +9,24 @@ KLineWidget::KLineWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->recentDealsTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->recentDealsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->recentDealsTableWidget->setFocusPolicy(Qt::NoFocus);
+//    ui->recentDealsTableWidget->setFrameShape(QFrame::NoFrame);
+    ui->recentDealsTableWidget->setMouseTracking(true);
+    ui->recentDealsTableWidget->setShowGrid(false);//隐藏表格线
+    ui->recentDealsTableWidget->horizontalHeader()->setSectionsClickable(true);
+    ui->recentDealsTableWidget->horizontalHeader()->setVisible(false);
+    ui->recentDealsTableWidget->verticalHeader()->setVisible(false);
+    ui->recentDealsTableWidget->setColumnWidth(0,50);
+    ui->recentDealsTableWidget->setColumnWidth(1,50);
+    ui->recentDealsTableWidget->setColumnWidth(2,40);
+
     customPlot = new QCustomPlot(this);
-    customPlot->setGeometry(QRect(60, 110, 480, 354));
+//    customPlot->setGeometry(QRect(60, 110, 480, 354));
+    customPlot->setGeometry(QRect(10, 10, 480, 354));
+    customPlot->legend->setVisible(true);
+    customPlot->setInteractions( QCP::iRangeZoom);
 
     init();
 }
@@ -25,14 +41,27 @@ void KLineWidget::init()
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
     queryKLineData(4,100);
+    queryRecentDeals(20);
+}
+
+void KLineWidget::queryRecentDeals(int count)
+{
+    QJsonObject object;
+    object.insert("jsonrpc","2.0");
+    object.insert("id","deal");
+    object.insert("method","hx.fdxqs.exchange.deal.query");
+    QJsonObject paramObject;
+    paramObject.insert("pair", QString("%1/%2").arg(HXChain::getInstance()->currentExchangePair.first).arg(HXChain::getInstance()->currentExchangePair.second));
+    paramObject.insert("count", count);
+    object.insert("params",paramObject);
+    httpManager.post(MIDDLE_EXCHANGE_URL,QJsonDocument(object).toJson());
 }
 
 void KLineWidget::queryKLineData(int type, int count)
 {
-    AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value( HXChain::getInstance()->currentAccount);
     QJsonObject object;
     object.insert("jsonrpc","2.0");
-    object.insert("id","886");
+    object.insert("id","kline");
     object.insert("method","hx.fdxqs.exchange.kline.query");
     QJsonObject paramObject;
     paramObject.insert("pair", QString("%1/%2").arg(HXChain::getInstance()->currentExchangePair.first).arg(HXChain::getInstance()->currentExchangePair.second));
@@ -40,7 +69,6 @@ void KLineWidget::queryKLineData(int type, int count)
     paramObject.insert("count", count);
     object.insert("params",paramObject);
     httpManager.post(MIDDLE_EXCHANGE_URL,QJsonDocument(object).toJson());
-
 }
 
 void KLineWidget::drawKLine()
@@ -56,8 +84,22 @@ void KLineWidget::drawKLine()
         time[i] = QDateTime::fromString( kPoints.at(i).dateTime, "yyyy-MM-dd hh:mm:ss").toTime_t();
         value[i] = kPoints.at(i).kOpen;
     }
-    qDebug() << time;
-    qDebug() << value;
+
+//    int num = 500;
+//    QVector<double> time(num), value(num), value2(num);
+//    QDateTime start = QDateTime(QDate(2014, 6, 11));
+//    start.setTimeSpec(Qt::UTC);
+//    double startTime = start.toTime_t();
+//    double binSize = 3600*24; // bin data in 1 day intervals
+//    time[0] = startTime;
+//    value[0] = 60;
+//    qsrand(9);
+//    for (int i=1; i<num; ++i)
+//    {
+//      time[i] = startTime + 3600*i;
+//      value[i] = value[i-1] + (qrand()/(double)RAND_MAX-0.5)*10;
+//    }
+
     // create candlestick chart:
     QCPFinancial *candlesticks = new QCPFinancial(customPlot->xAxis, customPlot->yAxis);
     candlesticks->setName("Candlestick");
@@ -120,33 +162,94 @@ void KLineWidget::drawKLine()
     QCPMarginGroup *group = new QCPMarginGroup(customPlot);
     customPlot->axisRect()->setMarginGroup(QCP::msLeft|QCP::msRight, group);
     volumeAxisRect->setMarginGroup(QCP::msLeft|QCP::msRight, group);
+
+    customPlot->replot();
+}
+
+void KLineWidget::showRecentDeals()
+{
+    ui->recentDealsTableWidget->setRowCount(0);
+    ui->recentDealsTableWidget->setRowCount(deals.size());
+    for(int i = 0; i < deals.size(); i++)
+    {
+        ExchangeDeal deal = deals.at(i);
+
+        QString str = QDateTime::fromString(deal.dateTime, "yyyy-MM-dd hh:mm:ss").toString("hh:mm:ss");
+        ui->recentDealsTableWidget->setItem( i, 0, new QTableWidgetItem(str));
+
+        const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
+        const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
+        unsigned long long baseAmount = deal.baseAmount;
+        unsigned long long quoteAmount = deal.quoteAmount;
+        double price = double(quoteAmount) / qPow(10,quoteAssetInfo.precision) / baseAmount * qPow(10,baseAssetInfo.precision);
+        QString priceStr =  QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair));
+        ui->recentDealsTableWidget->setItem( i, 1, new QTableWidgetItem(priceStr));
+        ui->recentDealsTableWidget->item(i,1)->setTextColor( (deal.type == "buy") ? QColor(1,215,26) : QColor(215,1,1));
+
+        ui->recentDealsTableWidget->setItem( i, 2, new QTableWidgetItem( getBigNumberString( baseAmount, baseAssetInfo.precision)));
+
+        for(int j : {0,1,2})
+        {
+            ui->recentDealsTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
+        }
+    }
 }
 
 void KLineWidget::httpReplied(QByteArray _data, int _status)
 {
     QJsonObject object  = QJsonDocument::fromJson(_data).object();
-    QJsonObject resultObject = object.value("result").toObject();
-    QJsonArray  array   = resultObject.value("data").toArray();
+    QString id = object.value("id").toString();
+    qDebug() << "ooooooooooooo " << _data << _status;
 
-    kPoints.clear();
-    for( QJsonValue v : array)
+    if(id == "deal")
     {
-        QJsonObject kObject = v.toObject();
-        KPointInfo info;
-        info.baseAmount = jsonValueToULL( kObject.value("base_amount"));
-        info.quoteAmount = jsonValueToULL( kObject.value("quote_amount"));
-        info.blockNum = kObject.value("block_num").toInt();
-        info.pairStr = kObject.value("ex_pair").toString();
-        info.kOpen = kObject.value("k_open").toDouble();
-        info.kClose = kObject.value("k_close").toDouble();
-        info.kHigh = kObject.value("k_high").toDouble();
-        info.kLow = kObject.value("k_low").toDouble();
-        info.dateTime = kObject.value("timestamp").toString();
+        QJsonObject resultObject = object.value("result").toObject();
+        QJsonArray  array   = resultObject.value("data").toArray();
 
-        kPoints << info;
+        deals.clear();
+        for( QJsonValue v : array)
+        {
+            QJsonObject dealObject = v.toObject();
+            ExchangeDeal deal;
+            deal.address = dealObject.value("addr").toString();
+            deal.baseAmount = jsonValueToULL( dealObject.value("base_amount"));
+            deal.quoteAmount = jsonValueToULL( dealObject.value("quote_amount"));
+            deal.pairStr = dealObject.value("pair").toString();
+            deal.blockNum = dealObject.value("block_num").toInt();
+            deal.type = dealObject.value("ex_type").toString();
+            deal.dateTime = dealObject.value("timestamp").toString();
+
+            deals << deal;
+        }
+
+        showRecentDeals();
+    }
+    else if(id == "kline")
+    {
+        QJsonObject resultObject = object.value("result").toObject();
+        QJsonArray  array   = resultObject.value("data").toArray();
+
+        kPoints.clear();
+        for( QJsonValue v : array)
+        {
+            QJsonObject kObject = v.toObject();
+            KPointInfo info;
+            info.baseAmount = jsonValueToULL( kObject.value("base_amount"));
+            info.quoteAmount = jsonValueToULL( kObject.value("quote_amount"));
+            info.blockNum = kObject.value("block_num").toInt();
+            info.pairStr = kObject.value("ex_pair").toString();
+            info.kOpen = kObject.value("k_open").toDouble();
+            info.kClose = kObject.value("k_close").toDouble();
+            info.kHigh = kObject.value("k_high").toDouble();
+            info.kLow = kObject.value("k_low").toDouble();
+            info.dateTime = kObject.value("timestamp").toString();
+
+            kPoints << info;
+        }
+
+        drawKLine();
     }
 
-    drawKLine();
 }
 
 void KLineWidget::paintEvent(QPaintEvent *)

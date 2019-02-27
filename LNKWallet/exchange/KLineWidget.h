@@ -23,6 +23,17 @@ struct KPointInfo
     QString dateTime;
 };
 
+struct ExchangeDeal
+{
+    QString address;
+    unsigned long long baseAmount = 0;
+    unsigned long long quoteAmount = 0;
+    QString pairStr;
+    int blockNum = 0;
+    QString type;
+    QString dateTime;
+};
+
 class KLineWidget : public QWidget
 {
     Q_OBJECT
@@ -34,10 +45,14 @@ public:
     void init();
 
 private:
+    void queryRecentDeals(int count);
     void queryKLineData(int type, int count);
     void drawKLine();
+    void showRecentDeals();
     HttpManager httpManager;
     QVector<KPointInfo>    kPoints;
+    QVector<ExchangeDeal>   deals;
+
 private slots:
     void httpReplied(QByteArray _data, int _status);
 

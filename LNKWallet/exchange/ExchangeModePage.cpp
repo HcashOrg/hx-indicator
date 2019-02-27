@@ -64,7 +64,7 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->buyPositionTableWidget);
 
 //    ui->widget_2->hide();
-    ui->KLineBtn->hide();
+//    ui->KLineBtn->hide();
     init();
 }
 
@@ -104,7 +104,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
     if( id == "ExchangeModePage+invoke_contract_offline+getUserBalances+" + ui->accountComboBox->currentText())
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -123,7 +123,6 @@ void ExchangeModePage::jsonDataUpdated(QString id)
                 if(object.contains("locked"))   balance.locked = jsonValueToULL( object.value("locked"));
                 if(object.contains("available"))   balance.available = jsonValueToULL( object.value("available"));
 
-                qDebug() << "bbbbbbbbbbbbb " << balance.locked << balance.available;
                 HXChain::getInstance()->assetExchangeBalanceMap.insert(assetSymbol, balance);
             }
 
@@ -136,7 +135,7 @@ void ExchangeModePage::jsonDataUpdated(QString id)
     if( id == "ExchangeModePage+invoke_contract_offline+getRecentTransactions")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+//        qDebug() << id << result;
 
         if(result.startsWith("\"result\":"))
         {

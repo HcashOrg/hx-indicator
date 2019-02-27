@@ -59,7 +59,7 @@ private:
     int currentSliderPos = 0;
     int currentPage = 0;
     HttpManager httpManager;
-    QMap<QString,HistoryOrderInfo> historyOrdersInfoMap;
+    QVector<HistoryOrderInfo> historyOrders;
 private slots:
     void pageChangeSlot(unsigned int page);
     void httpReplied(QByteArray _data, int _status);

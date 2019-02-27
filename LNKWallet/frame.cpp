@@ -225,6 +225,7 @@ Frame::Frame(): timer(NULL),
             object.insert("method","Zchain.Plugin.QuerySymbol");
             QJsonObject paramObject;
             object.insert("params",paramObject);
+            httpManager.setTimeoutSeconds(5);
             httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 
             qDebug() <<  HXChain::getInstance()->middlewarePath << QJsonDocument(object).toJson();
@@ -2854,6 +2855,8 @@ void Frame::httpReplied(QByteArray _data, int _status)
 void Frame::httpError(int _status)
 {
     qDebug() << "Frame::httpError " <<   _status  ;
+    disconnect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
+    disconnect(&httpManager,SIGNAL(httpError(int)),this,SLOT(httpError(int)));
     enter();
 }
 

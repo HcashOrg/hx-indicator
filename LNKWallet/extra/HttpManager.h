@@ -5,6 +5,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
+#include <QTimer>
 
 class HttpManager: public QObject
 {
@@ -23,6 +24,12 @@ public slots:
 signals:
     void httpReplied(QByteArray data, int statusCode);
     void httpError(int statusCode);
+
+public:
+    void setTimeoutSeconds(int _second);
+private:
+    QTimer timer;
+    int timeoutSeconds = 0;
 
 private:
     QNetworkRequest httpRequest;
