@@ -1,7 +1,12 @@
 #include "KLineWidget.h"
 #include "ui_KLineWidget.h"
 
-#include "wallet.h"
+#include "ExchangePairSelectDialog.h"
+#include "AddMyExchangePairsDialog.h"
+
+static const QMap<int,int>  kLineTypeMap = { {0,60}, {1,300}, {2,900}, {3,1800}, {4,3600}, {5,7200}, {6,21600}, {7,43200}, {8,86400}, {9,604800}, {10,2592000}};
+static const QMap<int,int>  kLineQueryCountMap = { {0, /*3600 * 36 / 60*/ 10}, {1,3600 * 24 * 7 / 300}, {2,3600 * 24 * 7 / 900}, {3,3600 * 24 * 7 / 1800}, {4,3600 * 24 * 30 / 3600},
+                                                   {5,1000}, {6,1000}, {7,1000}, {8,1000}, {9,1000}, {10,1000}};
 
 KLineWidget::KLineWidget(QWidget *parent) :
     QWidget(parent),
@@ -24,9 +29,21 @@ KLineWidget::KLineWidget(QWidget *parent) :
 
     customPlot = new QCustomPlot(this);
 //    customPlot->setGeometry(QRect(60, 110, 480, 354));
-    customPlot->setGeometry(QRect(10, 10, 480, 354));
-    customPlot->legend->setVisible(true);
-    customPlot->setInteractions( QCP::iRangeZoom);
+    customPlot->setGeometry(QRect(50, 130, 480, 354));
+    customPlot->legend->setVisible(false);
+    customPlot->setInteractions( QCP::iRangeDrag | QCP::iRangeZoom);
+    customPlot->axisRects().at(0)->setRangeDrag(Qt::Horizontal);
+    customPlot->axisRects().at(0)->setRangeZoom(Qt::Horizontal);
+    customPlot->axisRects().at(0)->setRangeZoomFactor(1.1,1);
+
+    QBrush backRole;
+    backRole.setColor(QColor(243,241,250));
+    backRole.setStyle(Qt::SolidPattern);
+    customPlot->setBackground(backRole);
+
+//    customPlot->addGraph();
+//    customPlot->addGraph();
+    connect(customPlot,&QCustomPlot::mouseMove,this, &KLineWidget::mouseMoveEvent);
 
     init();
 }
@@ -40,8 +57,11 @@ void KLineWidget::init()
 {
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
-    queryKLineData(4,100);
+    queryKLineData(ui->periodComboBox->currentIndex(),kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
     queryRecentDeals(20);
+
+    ui->title_label->setText(QString("%1 / %2").arg(revertERCSymbol(HXChain::getInstance()->currentExchangePair.first))
+                                  .arg(revertERCSymbol(HXChain::getInstance()->currentExchangePair.second)));
 }
 
 void KLineWidget::queryRecentDeals(int count)
@@ -73,16 +93,28 @@ void KLineWidget::queryKLineData(int type, int count)
 
 void KLineWidget::drawKLine()
 {
-    int num = kPoints.size();
+    QList<uint>   keys = kPointMap.keys();
+    int num = keys.size();
     if(num < 1)     return;
     QVector<double> time(num);
-    QVector<double> value(num);
-    double binSize = 3600; // bin data in 1 day intervals
+    QVector<double> open(num);
+    QVector<double> high(num);
+    QVector<double> low(num);
+    QVector<double> close(num);
+//    double binSize = 3600 * 12;
+    double binSize = kLineTypeMap.value( ui->periodComboBox->currentIndex());
 
+    const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
+    const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
+    int precisionCompensation = qPow(10,baseAssetInfo.precision - quoteAssetInfo.precision);
     for(int i = 0; i < num; i++)
     {
-        time[i] = QDateTime::fromString( kPoints.at(i).dateTime, "yyyy-MM-dd hh:mm:ss").toTime_t();
-        value[i] = kPoints.at(i).kOpen;
+        KPointInfo kPoint = kPointMap.value( keys.at(i));
+        time[i] = QDateTime::fromString( kPoint.dateTime, "yyyy-MM-dd hh:mm:ss").toTime_t();
+        open[i] = kPoint.kOpen * precisionCompensation;
+        high[i] = kPoint.kHigh * precisionCompensation;
+        low[i] = kPoint.kLow * precisionCompensation;
+        close[i] = kPoint.kClose * precisionCompensation;
     }
 
 //    int num = 500;
@@ -101,10 +133,11 @@ void KLineWidget::drawKLine()
 //    }
 
     // create candlestick chart:
-    QCPFinancial *candlesticks = new QCPFinancial(customPlot->xAxis, customPlot->yAxis);
+    candlesticks = new QCPFinancial(customPlot->xAxis, customPlot->yAxis);
     candlesticks->setName("Candlestick");
     candlesticks->setChartStyle(QCPFinancial::csCandlestick);
-    candlesticks->data()->set(QCPFinancial::timeSeriesToOhlc(time, value, binSize, time.at(0)));
+//    candlesticks->data()->set(QCPFinancial::timeSeriesToOhlc(time, value, binSize, time.at(0)));
+    candlesticks->setData(time,open,high,low,close);
     candlesticks->setWidth(binSize*0.9);
     candlesticks->setTwoColored(true);
     candlesticks->setBrushPositive(QColor(183, 8, 8));
@@ -122,15 +155,23 @@ void KLineWidget::drawKLine()
     customPlot->plotLayout()->setRowSpacing(0);
     volumeAxisRect->setAutoMargins(QCP::msLeft|QCP::msRight|QCP::msBottom);
     volumeAxisRect->setMargins(QMargins(0, 0, 0, 0));
+
+    volumeAxisRect->setRangeDrag(Qt::Horizontal);
+    volumeAxisRect->setRangeZoom(Qt::Horizontal);
+    customPlot->axisRects().at(0)->axis(QCPAxis::atBottom)->setRange(time[0],time[num - 1]);
+    volumeAxisRect->axis(QCPAxis::atBottom)->setRange(time[0],time[num - 1]);
+
     // create two bar plottables, for positive (green) and negative (red) volume bars:
     customPlot->setAutoAddPlottableToLegend(false);
     QCPBars *volumePos = new QCPBars(volumeAxisRect->axis(QCPAxis::atBottom), volumeAxisRect->axis(QCPAxis::atLeft));
     QCPBars *volumeNeg = new QCPBars(volumeAxisRect->axis(QCPAxis::atBottom), volumeAxisRect->axis(QCPAxis::atLeft));
     for(int i = 0; i < num; i++)
     {
-        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->currentExchangePair.first);
-        double v = getBigNumberString( kPoints.at(i).baseAmount, assetInfo.precision).toDouble();
-        (kPoints.at(i).kClose < kPoints.at(i).kOpen ? volumeNeg : volumePos)->addData(time.at(i), v); // add data to either volumeNeg or volumePos, depending on sign of v
+        KPointInfo kPoint = kPointMap.value( keys.at(i));
+        AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId( HXChain::getInstance()->currentExchangePair.first));
+        double v = getBigNumberString( kPoint.baseAmount, assetInfo.precision).toDouble();
+
+        (kPoint.kClose < kPoint.kOpen ? volumeNeg : volumePos)->addData(time.at(i), v); // add data to either volumeNeg or volumePos, depending on sign of v
     }
 
 
@@ -192,14 +233,66 @@ void KLineWidget::showRecentDeals()
         {
             ui->recentDealsTableWidget->item(i,j)->setTextAlignment(Qt::AlignCenter);
         }
+
+        // 显示最新价格
+        if(i == 0)
+        {
+            ui->priceLabel->setText(priceStr);
+        }
     }
+
+
+}
+
+const KPointInfo &KLineWidget::getKPointInfoByTime(uint time_t, uint interval)
+{
+    QVector<uint> keys = QVector<uint>::fromList( kPointMap.keys());
+    uint left = time_t - time_t % interval;
+    if(keys.contains(left))
+    {
+        return kPointMap.value(left);
+    }
+    else
+    {
+        return KPointInfo();
+    }
+
+}
+
+void KLineWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    QVector<double> vx,vy;
+    uint x = uint( customPlot->xAxis->pixelToCoord(event->pos().x()));
+    double y = customPlot->yAxis->pixelToCoord(event->pos().y());
+//    vx << 0 << x << customPlot->xAxis->range().maxRange;
+//    vy << y << y << y;
+//    customPlot->graph(0)->setData(vx,vy);
+//    customPlot->graph(0)->setPen(QPen(Qt::red));
+//    vx.clear();
+//    vy.clear();
+//    vx << x << x << x;
+//    vy << 0 << y << customPlot->yAxis->range().maxRange;
+//    customPlot->graph(1)->setData(vx,vy);
+//    customPlot->graph(1)->setPen(QPen(Qt::red));
+//    customPlot->replot();
+
+    const KPointInfo kpInfo = getKPointInfoByTime(x, uint(kLineTypeMap.value(ui->periodComboBox->currentIndex())));
+
+    const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
+    const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
+    double precisionCompensation = qPow(10,baseAssetInfo.precision - quoteAssetInfo.precision);
+    int showPrecision = HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair);
+    double changeRate = (kpInfo.kOpen == 0) ? 0 : (kpInfo.kClose - kpInfo.kOpen) / kpInfo.kOpen;
+    QString str = tr("CHANGE:%1%  O:%2  H:%3  L:%4  C:%5").arg( QString::number(changeRate * 100, 'f', 2))
+            .arg( QString::number(kpInfo.kOpen * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kHigh * precisionCompensation,'f',showPrecision))
+            .arg(QString::number(kpInfo.kLow * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kClose * precisionCompensation,'f',showPrecision));
+    ui->infoLabel->setText(str);
 }
 
 void KLineWidget::httpReplied(QByteArray _data, int _status)
 {
     QJsonObject object  = QJsonDocument::fromJson(_data).object();
     QString id = object.value("id").toString();
-    qDebug() << "ooooooooooooo " << _data << _status;
 
     if(id == "deal")
     {
@@ -229,7 +322,7 @@ void KLineWidget::httpReplied(QByteArray _data, int _status)
         QJsonObject resultObject = object.value("result").toObject();
         QJsonArray  array   = resultObject.value("data").toArray();
 
-        kPoints.clear();
+        kPointMap.clear();
         for( QJsonValue v : array)
         {
             QJsonObject kObject = v.toObject();
@@ -244,7 +337,9 @@ void KLineWidget::httpReplied(QByteArray _data, int _status)
             info.kLow = kObject.value("k_low").toDouble();
             info.dateTime = kObject.value("timestamp").toString();
 
-            kPoints << info;
+           uint time_t = QDateTime::fromString( kObject.value("timestamp").toString(), "yyyy-MM-dd hh:mm:ss").toTime_t();
+
+            kPointMap.insert(time_t, info);
         }
 
         drawKLine();
@@ -259,4 +354,58 @@ void KLineWidget::paintEvent(QPaintEvent *)
     painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
 
     painter.drawRect(rect());
+}
+
+void KLineWidget::on_favoriteMarketBtn_clicked()
+{
+    ExchangePairSelectDialog dialog("");
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
+    connect(&dialog, &ExchangePairSelectDialog::addFavoriteClicked, this, &KLineWidget::onAddFavoriteClicked);
+    dialog.move(ui->favoriteMarketBtn->mapToGlobal( QPoint(ui->favoriteMarketBtn->width() / 2 - dialog.width() / 2,ui->favoriteMarketBtn->height())));
+
+    dialog.exec();
+}
+
+void KLineWidget::on_marketBtn1_clicked()
+{
+    ExchangePairSelectDialog dialog("HX");
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
+    dialog.move(ui->marketBtn1->mapToGlobal( QPoint(ui->marketBtn1->width() / 2 - dialog.width() / 2,ui->marketBtn1->height())));
+
+    dialog.exec();
+}
+
+void KLineWidget::on_marketBtn3_clicked()
+{
+    ExchangePairSelectDialog dialog("ERCPAX");
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
+    dialog.move(ui->marketBtn3->mapToGlobal( QPoint(ui->marketBtn3->width() / 2 - dialog.width() / 2,ui->marketBtn3->height())));
+
+    dialog.exec();
+}
+
+void KLineWidget::onPairSelected(const ExchangePair &_pair)
+{
+    HXChain::getInstance()->currentExchangePair = _pair;
+    ui->title_label->setText( QString("%1 / %2").arg(revertERCSymbol(_pair.first)).arg(revertERCSymbol(_pair.second)));
+    ui->priceLabel->clear();
+    ui->infoLabel->clear();
+
+    customPlot->clearPlottables();
+//    customPlot->graph(0)->data().clear();
+    queryKLineData(ui->periodComboBox->currentIndex(), kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
+    queryRecentDeals(20);
+}
+
+void KLineWidget::onAddFavoriteClicked()
+{
+    AddMyExchangePairsDialog dialog;
+    dialog.pop();
+}
+
+void KLineWidget::on_periodComboBox_currentIndexChanged(const QString &arg1)
+{
+    ui->infoLabel->clear();
+    customPlot->clearPlottables();
+    queryKLineData(ui->periodComboBox->currentIndex(), kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
 }

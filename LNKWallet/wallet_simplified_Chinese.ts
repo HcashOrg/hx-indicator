@@ -4657,7 +4657,7 @@ Contract created successfully!</source>
     </message>
     <message>
         <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="289"/>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="511"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="510"/>
         <source>sell</source>
         <translation type="unfinished">卖</translation>
     </message>
@@ -4669,7 +4669,7 @@ Contract created successfully!</source>
     </message>
     <message>
         <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="341"/>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="510"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="509"/>
         <source>buy</source>
         <translation type="unfinished">买</translation>
     </message>
@@ -4679,22 +4679,22 @@ Contract created successfully!</source>
         <translation type="unfinished">确定撤销该挂单？</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="540"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="539"/>
         <source>no deal</source>
         <translation type="unfinished">未成交</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="544"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="543"/>
         <source>partial deal</source>
         <translation type="unfinished">部分成交</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="548"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="547"/>
         <source>total deal</source>
         <translation type="unfinished">全部成交</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="552"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="551"/>
         <source>withdrawed</source>
         <translation type="unfinished">已撤销</translation>
     </message>
@@ -5206,7 +5206,7 @@ Cover it or not?</source>
     </message>
     <message>
         <location filename="firstlogin.cpp" line="49"/>
-        <location filename="firstlogin.cpp" line="289"/>
+        <location filename="firstlogin.cpp" line="290"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
@@ -5247,7 +5247,7 @@ Cover it or not?</source>
         <translation type="obsolete">确定关闭 Goopal 钱包</translation>
     </message>
     <message>
-        <location filename="firstlogin.cpp" line="294"/>
+        <location filename="firstlogin.cpp" line="295"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -5283,27 +5283,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1254"/>
+        <location filename="frame.cpp" line="1255"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished">请先导入或创建账户！</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1492"/>
+        <location filename="frame.cpp" line="1493"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2707"/>
+        <location filename="frame.cpp" line="2708"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2710"/>
+        <location filename="frame.cpp" line="2711"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2713"/>
+        <location filename="frame.cpp" line="2714"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -5730,8 +5730,9 @@ add an account first</source>
     </message>
     <message>
         <location filename="guard/GuardIncomePage.cpp" line="44"/>
-        <source>There are no proposals currently!</source>
-        <translation type="unfinished">当前没有提案</translation>
+        <source>There are no incomes currently!</source>
+        <oldsource>There are no proposals currently!</oldsource>
+        <translation type="unfinished">当前没有收益！</translation>
     </message>
     <message>
         <location filename="guard/GuardIncomePage.cpp" line="73"/>
@@ -5754,13 +5755,13 @@ add an account first</source>
         <translation type="unfinished">领取挖矿收益失败！</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="178"/>
+        <location filename="guard/GuardIncomePage.cpp" line="179"/>
         <source>obtain</source>
         <translation type="unfinished">领取</translation>
     </message>
     <message>
-        <location filename="guard/GuardIncomePage.cpp" line="226"/>
-        <location filename="guard/GuardIncomePage.cpp" line="283"/>
+        <location filename="guard/GuardIncomePage.cpp" line="227"/>
+        <location filename="guard/GuardIncomePage.cpp" line="284"/>
         <source>You need to pay %1 %2 for this operation. Continue?</source>
         <translation type="unfinished">你需要支付 %1 %2 手续费。是否继续？</translation>
     </message>
@@ -6235,6 +6236,48 @@ p, li { white-space: pre-wrap; }
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="27"/>
+        <source>时间</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="32"/>
+        <source>新建列</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="37"/>
+        <source>数量</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="51"/>
+        <source>最近成交</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="80"/>
+        <source>PAX交易区</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="83"/>
+        <location filename="exchange/KLineWidget.ui" line="99"/>
+        <location filename="exchange/KLineWidget.ui" line="118"/>
+        <source>dropDown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="96"/>
+        <source>常用交易区</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="115"/>
+        <source>HX交易区</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LockContractPage</name>
@@ -6458,7 +6501,7 @@ p, li { white-space: pre-wrap; }
         <location filename="lockpage.ui" line="158"/>
         <location filename="lockpage.cpp" line="178"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">设置密码</translation>
     </message>
     <message>
         <location filename="lockpage.ui" line="85"/>
@@ -7826,7 +7869,7 @@ p, li { white-space: pre-wrap; }
         <location filename="normallogin.ui" line="51"/>
         <location filename="normallogin.cpp" line="169"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">设置密码</translation>
     </message>
     <message>
         <location filename="normallogin.ui" line="76"/>
