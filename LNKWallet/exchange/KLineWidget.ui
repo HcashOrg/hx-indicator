@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KLineWidget</class>
+ <widget class="QWidget" name="KLineWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>770</width>
+    <height>510</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QTableWidget" name="recentDealsTableWidget">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>100</y>
+     <width>160</width>
+     <height>354</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>时间</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>新建列</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>数量</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>600</x>
+     <y>70</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>最近成交</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="title_label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>50</y>
+     <width>200</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="marketBtn3">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>80</y>
+     <width>90</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PAX交易区</string>
+   </property>
+   <property name="BtnStyle" stdset="0">
+    <string>dropDown</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="favoriteMarketBtn">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>80</y>
+     <width>100</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>常用交易区</string>
+   </property>
+   <property name="BtnStyle" stdset="0">
+    <string>dropDown</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="marketBtn1">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>80</y>
+     <width>80</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>HX交易区</string>
+   </property>
+   <property name="BtnStyle" stdset="0">
+    <string>dropDown</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="periodComboBox">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>80</y>
+     <width>72</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>1 min</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>5 min</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>15 min</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>30 min</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1 h</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>2 h</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>6 h</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>12 h</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1 day</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1 week</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>1 month</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="infoLabel">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>100</y>
+     <width>400</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(38, 25, 50);
+font: 10px &quot;微软雅黑&quot;;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="priceLabel">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>100</y>
+     <width>90</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(1, 215, 26);
+font: 16px &quot;微软雅黑&quot;;</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

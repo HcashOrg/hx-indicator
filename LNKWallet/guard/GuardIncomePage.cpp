@@ -41,7 +41,7 @@ GuardIncomePage::GuardIncomePage(QWidget *parent) :
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&GuardIncomePage::pageChangeSlot);
 
     blankWidget = new BlankDefaultWidget(ui->senatorIncomeTableWidget);
-    blankWidget->setTextTip(tr("There are no proposals currently!"));
+    blankWidget->setTextTip(tr("There are no incomes currently!"));
     init();
 }
 
@@ -162,7 +162,8 @@ void GuardIncomePage::showIncomes()
 {
     QStringList citizens = incomeFromCitizenMap.keys();
     int size = citizens.size();
-    ui->senatorIncomeTableWidget->setRowCount(size + 1);
+    ui->senatorIncomeTableWidget->setRowCount(0);
+    ui->senatorIncomeTableWidget->setRowCount(size);
 
     totalAmount = 0;
     for(int i = 0; i < size; i++)

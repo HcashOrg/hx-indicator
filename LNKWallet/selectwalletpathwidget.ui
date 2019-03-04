@@ -45,9 +45,9 @@
   <widget class="QLineEdit" name="pathLineEdit">
    <property name="geometry">
     <rect>
-     <x>25</x>
+     <x>20</x>
      <y>250</y>
-     <width>131</width>
+     <width>140</width>
      <height>32</height>
     </rect>
    </property>
@@ -88,9 +88,9 @@
   <widget class="QToolButton" name="okBtn">
    <property name="geometry">
     <rect>
-     <x>25</x>
+     <x>20</x>
      <y>290</y>
-     <width>135</width>
+     <width>140</width>
      <height>34</height>
     </rect>
    </property>
@@ -129,16 +129,16 @@
     <string notr="true">font: 14px &quot;微软雅黑&quot;;</string>
    </property>
    <property name="text">
-    <string>v1.0.1</string>
+    <string/>
    </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>215</y>
-     <width>210</width>
-     <height>21</height>
+     <y>220</y>
+     <width>180</width>
+     <height>30</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -148,6 +148,52 @@ font: 12px &quot;微软雅黑&quot;;</string>
    <property name="text">
     <string>Select the path of the wallet data</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>350</y>
+     <width>60</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(243, 241, 250);
+font: 12px &quot;微软雅黑&quot;;</string>
+   </property>
+   <property name="text">
+    <string>Language</string>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="languageComboBox">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>350</y>
+     <width>80</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>简体中文</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>English</string>
+    </property>
+   </item>
   </widget>
   <zorder>pathLineEdit</zorder>
   <zorder>pathBtn</zorder>
@@ -155,6 +201,8 @@ font: 12px &quot;微软雅黑&quot;;</string>
   <zorder>okBtn</zorder>
   <zorder>label_version</zorder>
   <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>languageComboBox</zorder>
  </widget>
  <resources/>
  <connections/>

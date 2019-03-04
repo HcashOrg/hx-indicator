@@ -1044,8 +1044,8 @@ font:12px &quot;微软雅黑 Light&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>770</width>
-     <height>510</height>
+     <width>0</width>
+     <height>0</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -1072,6 +1072,44 @@ color: white;</string>
     </property>
    </widget>
   </widget>
+  <widget class="QToolButton" name="KLineBtn">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>40</y>
+     <width>80</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(83, 61, 138);
+color: rgb(255, 255, 255);
+border-radius:12px;
+font:12px &quot;微软雅黑 Light&quot;;</string>
+   </property>
+   <property name="text">
+    <string>K线走势</string>
+   </property>
+  </widget>
+  <zorder>widget_2</zorder>
+  <zorder>title_label</zorder>
+  <zorder>widget</zorder>
+  <zorder>marketBtn1</zorder>
+  <zorder>marketBtn3</zorder>
+  <zorder>favoriteMarketBtn</zorder>
+  <zorder>widget2</zorder>
+  <zorder>positionComboBox</zorder>
+  <zorder>depthComboBox</zorder>
+  <zorder>sellPositionTableWidget</zorder>
+  <zorder>buyPositionTableWidget</zorder>
+  <zorder>label</zorder>
+  <zorder>accountComboBox</zorder>
+  <zorder>balanceBtn</zorder>
+  <zorder>myOrdersBtn</zorder>
+  <zorder>KLineBtn</zorder>
  </widget>
  <tabstops>
   <tabstop>buyPriceLineEdit</tabstop>

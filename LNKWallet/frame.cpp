@@ -129,8 +129,8 @@ Frame::Frame(): timer(NULL),
     QString language = HXChain::getInstance()->language;
     if( language.isEmpty())
     {
-        setLanguage("Simplified Chinese");
-//        setLanguage("English");
+//        setLanguage("Simplified Chinese");
+        setLanguage("English");
     }
     else
     {
@@ -186,8 +186,6 @@ Frame::Frame(): timer(NULL),
             HXChain::getInstance()->lockMinutes     = 5;
             HXChain::getInstance()->configFile->setValue("/settings/notAutoLock",false);
             HXChain::getInstance()->notProduce      =  true;
-            HXChain::getInstance()->configFile->setValue("/settings/language","Simplified Chinese");
-            HXChain::getInstance()->language = "Simplified Chinese";
             HXChain::getInstance()->configFile->setValue("/settings/feeType","HX");
             HXChain::getInstance()->feeType = "HX";
 
@@ -227,6 +225,7 @@ Frame::Frame(): timer(NULL),
             object.insert("method","Zchain.Plugin.QuerySymbol");
             QJsonObject paramObject;
             object.insert("params",paramObject);
+            httpManager.setTimeoutSeconds(5);
             httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
 
             qDebug() <<  HXChain::getInstance()->middlewarePath << QJsonDocument(object).toJson();
@@ -595,7 +594,7 @@ void Frame::settingSaved()
     QString language = HXChain::getInstance()->language;
     if( language.isEmpty())
     {
-        setLanguage("Simplified Chinese");
+        setLanguage("English");
     }
     else
     {
@@ -1045,8 +1044,6 @@ void Frame::showTransferPageWithAddress(QString address, QString name)
 
 void Frame::setLanguage(QString language)
 {
-
-
     menuTranslator.load(QString(":/qm/qt_zh_cn"));
     translatorForTextBrowser.load(":/language/widgets.qm");
 
@@ -1966,7 +1963,7 @@ void Frame::jsonDataUpdated(QString id)
     if( id.startsWith("id-get_citizen-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id <<result;
+//        qDebug() << id <<result;
 
         if(result.startsWith("\"result\":"))
         {
@@ -2312,7 +2309,7 @@ void Frame::jsonDataUpdated(QString id)
         QString result = HXChain::getInstance()->jsonDataValue(id);
 //        qDebug() << id << result ;
 
-        if(result.startsWith("\"result\":"))
+        if(result.startsWith("\"result\":") && result != "\"result\":null")
         {
             HXChain::getInstance()->parseTransaction(result);
         }
@@ -2858,6 +2855,8 @@ void Frame::httpReplied(QByteArray _data, int _status)
 void Frame::httpError(int _status)
 {
     qDebug() << "Frame::httpError " <<   _status  ;
+    disconnect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
+    disconnect(&httpManager,SIGNAL(httpError(int)),this,SLOT(httpError(int)));
     enter();
 }
 

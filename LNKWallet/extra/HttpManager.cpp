@@ -22,6 +22,18 @@ void HttpManager::get(const QString url)
 
 void HttpManager::post(const QString url, const QByteArray &data)
 {
+    if(timeoutSeconds > 0)
+    {
+//        timer.singleShot(timeoutSeconds * 1000, [this](){
+//            qDebug() << "cccccccccccccc ";
+//            Q_EMIT httpError(0);});
+        connect(&timer, &QTimer::timeout, [&](){
+            Q_EMIT httpError(0);
+            timer.stop();
+        });
+        timer.start(timeoutSeconds * 1000);
+    }
+
     httpRequest.setUrl(QUrl(url));
     networkAccessManager.post(httpRequest, data);
 }
@@ -41,6 +53,7 @@ void HttpManager::fetchCoinBalance(int id, QString chainId, QString address)
 
 void HttpManager::requestFinished(QNetworkReply *reply)
 {
+    timer.stop();
     int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
 //    qDebug() << "HttpManager statusCode: " << statusCode;
@@ -55,4 +68,9 @@ void HttpManager::requestFinished(QNetworkReply *reply)
     }
 
     reply->deleteLater();
+}
+
+void HttpManager::setTimeoutSeconds(int _second)
+{
+    timeoutSeconds = _second;
 }

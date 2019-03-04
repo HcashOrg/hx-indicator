@@ -23,6 +23,8 @@ private slots:
 
     void on_pathBtn_clicked();
 
+    void onLanguageChanged(const QString &arg1);
+
 signals:
     void enter();
     void newOrImportWallet();

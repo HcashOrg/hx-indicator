@@ -847,7 +847,6 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(contractId));
 
             ContractInvokeObject cio = HXChain::getInstance()->transactionDB.getContractInvokeObject(ts.transactionId);
-            qDebug() << "cccccccccccccccc " << ts.transactionId << cio.trxId << cio.execSucceed;
             if(cio.trxId.isEmpty() || cio.execSucceed)
             {
                 QTableWidgetItem* item = new QTableWidgetItem( "- " + getBigNumberString(amount,assetInfo.precision) + " " + revertERCSymbol( assetInfo.symbol));

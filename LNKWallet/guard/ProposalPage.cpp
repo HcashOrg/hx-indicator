@@ -261,21 +261,47 @@ void ProposalPage::on_proposalTableWidget_cellClicked(int row, int column)
     }
     if(column == 5)
     {
-        CommonDialog commonDialog(CommonDialog::YesOrNo);
-        commonDialog.setText(tr("Sure to approve this proposal?"));
-        if(commonDialog.pop())
-        {
-            QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
-            QJsonArray array;
-            array << address;
-            QJsonObject object;
-            object.insert("key_approvals_to_add", array);
+        QJsonArray array;
+        QJsonObject object;
 
-            HXChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_proposal",
-                                    QJsonArray() << ui->accountComboBox->currentText()
-                                    << ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString()
-                                    << object << true));
+        QStringList senators = HXChain::getInstance()->getMyFormalGuards();
+        if(senators.size() > 1)
+        {
+            CommonDialog commonDialog(CommonDialog::YesOrNo);
+            commonDialog.setText(tr("There are %1 senators in this wallet. Do you want all of them to approve?").arg(senators.size()));
+            if(commonDialog.pop())
+            {
+                foreach (QString senator, senators)
+                {
+                    QString address = HXChain::getInstance()->accountInfoMap.value(senator).address;
+                    array << address;
+                }
+            }
+            else
+            {
+                return;
+            }
         }
+        else
+        {
+            CommonDialog commonDialog(CommonDialog::YesOrNo);
+            commonDialog.setText(tr("Sure to approve this proposal?"));
+            if(commonDialog.pop())
+            {
+                QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
+                array << address;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        object.insert("key_approvals_to_add", array);
+        HXChain::getInstance()->postRPC( "id-approve_proposal", toJsonFormat( "approve_proposal",
+                                QJsonArray() << ui->accountComboBox->currentText()
+                                << ui->proposalTableWidget->item(row,0)->data(Qt::UserRole).toString()
+                                << object << true));
         return;
     }
 

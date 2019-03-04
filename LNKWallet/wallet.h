@@ -36,7 +36,7 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.12"           // 版本号
+#define WALLET_VERSION "1.2.13"           // 版本号
 
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
@@ -46,15 +46,15 @@
 #define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCXGWuLefoZN6ACF4FCE6C3f4XKUFgXjAHr"
 #else
 #define LOCKFUND_CONTRACT_ADDRESS  "HXCPHA7vA91zV6r7iJ8oadFgj97PHAy3dKRa"
-#define EXCHANGE_MODE_CONTRACT_ADDRESS  ""
+#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCRCnJ8AV624UZBLNKz4UBweVbhVXkQfNe7"  // 交易所模式合约地址
 #endif
 
 #ifdef TEST_WALLET
 #define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5006/api"
-#define MIDDLE_EXCHANGE_URL     "http://192.168.1.121:15000/api"
+#define MIDDLE_EXCHANGE_URL     "http://192.168.1.154:15000/api"
 #else
 #define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"
-#define MIDDLE_EXCHANGE_URL     ""
+#define MIDDLE_EXCHANGE_URL     "http://wallet.hx.cash:15000/api"               // 查询交易所信息的URL
 #endif
 
 #ifdef  TEST_WALLET
@@ -69,9 +69,13 @@
 #define WALLET_EXE_FILE     "./HX" WALLET_EXE_SUFFIX
 #endif
 
-
+#ifdef TEST_WALLET
+#define NODE_RPC_PORT   50420
+#define CLIENT_RPC_PORT 50421
+#else
 #define NODE_RPC_PORT   50320
 #define CLIENT_RPC_PORT 50321
+#endif
 
 class WorkerThreadManager;
 class WebSocketManager;

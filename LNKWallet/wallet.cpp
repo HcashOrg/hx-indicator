@@ -1,4 +1,4 @@
-﻿#include "wallet.h"
+﻿ #include "wallet.h"
 
 #include "websocketmanager.h"
 #include "commondialog.h"
@@ -79,8 +79,8 @@ HXChain::HXChain()
         lockMinutes     = 5;
         configFile->setValue("/settings/notAutoLock",false);
         notProduce      =  true;
-        configFile->setValue("/settings/language","Simplified Chinese");
-        language = "Simplified Chinese";
+        configFile->setValue("/settings/language","English");
+        language = "English";
         configFile->setValue("/settings/feeType","HX");
         feeType = "HX";
         configFile->setValue("/settings/feeOrderID","");
@@ -199,19 +199,18 @@ void HXChain:: startExe()
     QStringList strList;
     strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
-            << "--all-plugin-start"
 #ifndef SAFE_VERSION
 //            << "--rewind-on-close"
 #endif
             ;
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay6",true).toBool())
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay7",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/dbReplay6",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay7",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
@@ -911,7 +910,8 @@ void HXChain::parseTransaction(QString result)
     }
 
     transactionDB.insertTransactionStruct(ts.transactionId,ts);
-    qDebug() << "ttttttttttttt " << ts.type << ts.transactionId  << ts.feeAmount;
+    qDebug() << "TTTTTTTTTTTTTTT " << ts.type << ts.transactionId  << ts.feeAmount;
+    qDebug() << result;
 
     TransactionTypeId typeId;
     typeId.type = ts.type;
@@ -2055,7 +2055,8 @@ unsigned long long jsonValueToULL(QJsonValue v)
     }
     else
     {
-        result = QString::number(v.toDouble(),'g',16).toULongLong();
+//        result = QString::number(v.toDouble(),'g',16).toULongLong();
+        result = v.toVariant().toULongLong();
     }
 
     return result;
@@ -2071,7 +2072,8 @@ long long jsonValueToLL(QJsonValue v)
     }
     else
     {
-        result = QString::number(v.toDouble(),'g',16).toLongLong();
+//        result = QString::number(v.toDouble(),'g',16).toLongLong();
+        result = v.toVariant().toLongLong();
     }
 
     return result;

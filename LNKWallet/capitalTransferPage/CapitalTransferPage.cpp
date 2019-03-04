@@ -109,7 +109,7 @@ void CapitalTransferPage::radioChangedSlots()
         ui->lineEdit_address->clear();
         if(_p->symbol=="USDT")
         {
-            ui->label_fee->setText(_p->fee+" USDT");
+            ui->label_fee->setText("0.001 BTC");
         }
     }
 
@@ -372,13 +372,13 @@ void CapitalTransferPage::CreateTransaction()
     else if("USDT"==_p->symbol)
     {
         _p->actualNumber = ui->lineEdit_number->text();
-        if(ui->lineEdit_number->text().toDouble() < _p->withdrawLimit.toDouble())
-        {
-            ui->label_tip->setText(tr("number cannot less than ") + _p->withdrawLimit);
-            ui->label_tip->setVisible(true);
-            ui->toolButton_confirm->setEnabled(false);
-            return;
-        }
+//        if(ui->lineEdit_number->text().toDouble() < _p->withdrawLimit.toDouble())
+//        {
+//            ui->label_tip->setText(tr("number cannot less than ") + _p->withdrawLimit);
+//            ui->label_tip->setVisible(true);
+//            ui->toolButton_confirm->setEnabled(false);
+//            return;
+//        }
     }
     else
     {
