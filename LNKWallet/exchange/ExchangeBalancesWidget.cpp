@@ -56,7 +56,7 @@ void ExchangeBalancesWidget::showBalances()
 
         QString symbol = assets.at(i);
         ui->balancesTableWidget->setItem( i, 0, new QTableWidgetItem(symbol));
-qDebug() << "ssssssssss " << symbol;
+
         const AssetInfo& assetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId(symbol));
         ExchangeBalance balance = HXChain::getInstance()->assetExchangeBalanceMap.value(symbol);
         ui->balancesTableWidget->setItem( i, 1, new QTableWidgetItem( getBigNumberString( balance.available, assetInfo.precision)));
