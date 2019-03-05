@@ -41,8 +41,8 @@ KLineWidget::KLineWidget(QWidget *parent) :
     backRole.setStyle(Qt::SolidPattern);
     customPlot->setBackground(backRole);
 
-//    customPlot->addGraph();
-//    customPlot->addGraph();
+    customPlot->addGraph();     // 鼠标移动时的横竖线
+    customPlot->addGraph();
     connect(customPlot,&QCustomPlot::mouseMove,this, &KLineWidget::mouseMoveEvent);
 
     init();
@@ -264,17 +264,6 @@ void KLineWidget::mouseMoveEvent(QMouseEvent *event)
     QVector<double> vx,vy;
     uint x = uint( customPlot->xAxis->pixelToCoord(event->pos().x()));
     double y = customPlot->yAxis->pixelToCoord(event->pos().y());
-//    vx << 0 << x << customPlot->xAxis->range().maxRange;
-//    vy << y << y << y;
-//    customPlot->graph(0)->setData(vx,vy);
-//    customPlot->graph(0)->setPen(QPen(Qt::red));
-//    vx.clear();
-//    vy.clear();
-//    vx << x << x << x;
-//    vy << 0 << y << customPlot->yAxis->range().maxRange;
-//    customPlot->graph(1)->setData(vx,vy);
-//    customPlot->graph(1)->setPen(QPen(Qt::red));
-//    customPlot->replot();
 
     const KPointInfo kpInfo = getKPointInfoByTime(x, uint(kLineTypeMap.value(ui->periodComboBox->currentIndex())));
 
@@ -287,6 +276,18 @@ void KLineWidget::mouseMoveEvent(QMouseEvent *event)
             .arg( QString::number(kpInfo.kOpen * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kHigh * precisionCompensation,'f',showPrecision))
             .arg(QString::number(kpInfo.kLow * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kClose * precisionCompensation,'f',showPrecision));
     ui->infoLabel->setText(str);
+
+    vx << 0 << x << customPlot->xAxis->range().maxRange;
+    vy << y << y << y;
+    customPlot->graph(0)->setData(vx,vy);
+    customPlot->graph(0)->setPen(QPen(Qt::red));
+    vx.clear();
+    vy.clear();
+    vx << x << x << x;
+    vy << 0 << y << customPlot->yAxis->range().maxRange;
+    customPlot->graph(1)->setData(vx,vy);
+    customPlot->graph(1)->setPen(QPen(Qt::red));
+    customPlot->replot();
 }
 
 void KLineWidget::httpReplied(QByteArray _data, int _status)
@@ -392,7 +393,9 @@ void KLineWidget::onPairSelected(const ExchangePair &_pair)
     ui->infoLabel->clear();
 
     customPlot->clearPlottables();
-//    customPlot->graph(0)->data().clear();
+    customPlot->addGraph();
+    customPlot->addGraph();
+
     queryKLineData(ui->periodComboBox->currentIndex(), kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
     queryRecentDeals(20);
 }
@@ -407,5 +410,7 @@ void KLineWidget::on_periodComboBox_currentIndexChanged(const QString &arg1)
 {
     ui->infoLabel->clear();
     customPlot->clearPlottables();
+    customPlot->addGraph();
+    customPlot->addGraph();
     queryKLineData(ui->periodComboBox->currentIndex(), kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
 }
