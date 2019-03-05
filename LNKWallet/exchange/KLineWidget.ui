@@ -16,8 +16,8 @@
   <widget class="QTableWidget" name="recentDealsTableWidget">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>100</y>
+     <x>550</x>
+     <y>110</y>
      <width>160</width>
      <height>354</height>
     </rect>
@@ -121,8 +121,8 @@
   <widget class="QComboBox" name="periodComboBox">
    <property name="geometry">
     <rect>
-     <x>480</x>
-     <y>80</y>
+     <x>460</x>
+     <y>120</y>
      <width>72</width>
      <height>22</height>
     </rect>
@@ -183,40 +183,61 @@
     </property>
    </item>
   </widget>
-  <widget class="QLabel" name="infoLabel">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>100</y>
-     <width>400</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(38, 25, 50);
-font: 10px &quot;微软雅黑&quot;;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-  </widget>
-  <widget class="QLabel" name="priceLabel">
+  <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
      <x>60</x>
-     <y>100</y>
-     <width>90</width>
-     <height>20</height>
+     <y>110</y>
+     <width>480</width>
+     <height>354</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(1, 215, 26);
+    <string notr="true">background-color: rgb(243, 241, 250);</string>
+   </property>
+   <widget class="QLabel" name="priceLabel">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>90</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(1, 215, 26);
 font: 16px &quot;微软雅黑&quot;;</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="infoLabel">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>0</y>
+      <width>400</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(38, 25, 50);
+font: 10px &quot;微软雅黑&quot;;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
+  <zorder>widget</zorder>
+  <zorder>recentDealsTableWidget</zorder>
+  <zorder>label</zorder>
+  <zorder>title_label</zorder>
+  <zorder>marketBtn3</zorder>
+  <zorder>favoriteMarketBtn</zorder>
+  <zorder>marketBtn1</zorder>
+  <zorder>periodComboBox</zorder>
  </widget>
  <resources/>
  <connections/>

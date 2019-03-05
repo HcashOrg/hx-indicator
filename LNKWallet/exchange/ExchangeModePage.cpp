@@ -64,7 +64,9 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->buyPositionTableWidget);
 
 //    ui->widget_2->hide();
+#ifndef TEST_WALLET
     ui->KLineBtn->hide();
+#endif
     init();
 }
 

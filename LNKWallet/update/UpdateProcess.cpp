@@ -160,13 +160,13 @@ void UpdateProcess::GetLatestVersionInfoSlots()
 
 void UpdateProcess::DownLoadVersionConfigFinsihed(const QString &dstFilename)
 {
-    qDebug()<<"ddddddddddddd"<<dstFilename;
+    qDebug()<<"DownLoadVersionConfigFinsihed"<<dstFilename;
     if(dstFilename.contains(UPDATE_LOG_INFO))
     {
         QFile file(dstFilename);
         if(!file.open(QIODevice::ReadOnly)) return;
         _p->updateLogInfo = file.readAll();
-        qDebug()<<"iiiiiiiiiiiiii"<<_p->updateLogInfo;
+        qDebug()<<"DownLoadVersionConfigFinsihed"<<_p->updateLogInfo;
         file.close();
         return;
     }
