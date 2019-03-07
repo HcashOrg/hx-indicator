@@ -37,8 +37,6 @@ signals:
 private slots:
     void jsonDataUpdated(QString id);
 
-    void on_orderModeBtn_clicked();
-
     void on_favoriteMarketBtn_clicked();
 
     void on_marketBtn1_clicked();

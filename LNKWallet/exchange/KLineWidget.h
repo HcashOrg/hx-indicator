@@ -50,12 +50,17 @@ private:
     void queryKLineData(int type, int count);
     void drawKLine();
     void showRecentDeals();
-    const KPointInfo& getKPointInfoByTime(uint time_t, uint interval);   // 查找time_t属于哪个时间段
+    KPointInfo getKPointInfoByTime(uint time_t, uint interval);   // 查找time_t属于哪个时间段
     HttpManager httpManager;
     QMap<uint,KPointInfo>   kPointMap;
     QVector<ExchangeDeal>   deals;
+    double lower = 0;
+    double upper = 0;
+private slots:
+    void onXRangeChanged(const QCPRange &range);
 private slots:
     void mouseMoveEvent(QMouseEvent *event);
+    bool eventFilter(QObject *watched, QEvent *e);
 
 private slots:
     void httpReplied(QByteArray _data, int _status);
@@ -77,6 +82,8 @@ private:
     Ui::KLineWidget *ui;
     QCustomPlot* customPlot = nullptr;
     QCPFinancial* candlesticks = nullptr;
+    QCPAxisRect *volumeAxisRect = nullptr;
+    QLabel* tipLabel = nullptr; // 显示鼠标所在坐标
 
     void paintEvent(QPaintEvent*);
 };
