@@ -413,11 +413,6 @@ void ExchangeModePage::paintEvent(QPaintEvent *)
     painter.drawRect(rect());
 }
 
-void ExchangeModePage::on_orderModeBtn_clicked()
-{
-    Q_EMIT showOnchainOrderPage();
-}
-
 void ExchangeModePage::on_favoriteMarketBtn_clicked()
 {
     ExchangePairSelectDialog dialog("");

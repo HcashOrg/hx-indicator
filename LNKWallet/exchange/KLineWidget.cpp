@@ -5,8 +5,10 @@
 #include "AddMyExchangePairsDialog.h"
 
 static const QMap<int,int>  kLineTypeMap = { {0,60}, {1,300}, {2,900}, {3,1800}, {4,3600}, {5,7200}, {6,21600}, {7,43200}, {8,86400}, {9,604800}, {10,2592000}};
-static const QMap<int,int>  kLineQueryCountMap = { {0, /*3600 * 36 / 60*/ 10}, {1,3600 * 24 * 7 / 300}, {2,3600 * 24 * 7 / 900}, {3,3600 * 24 * 7 / 1800}, {4,3600 * 24 * 30 / 3600},
+static const QMap<int,int>  kLineQueryCountMap = { {0, 3600 * 36 / 60}, {1,3600 * 24 * 7 / 300}, {2,3600 * 24 * 7 / 900}, {3,3600 * 24 * 7 / 1800}, {4,3600 * 24 * 30 / 3600},
                                                    {5,1000}, {6,1000}, {7,1000}, {8,1000}, {9,1000}, {10,1000}};
+static const QMap<int,double>  kLineScaleFactorMap = { {0,0.1}, {1,0.1}, {2,0.2}, {3,0.2}, {4,0.4}, {5,0.4}, {6,0.4}, {7,0.4}, {8,0.4}, {9,0.4}, {10,1}};
+
 
 KLineWidget::KLineWidget(QWidget *parent) :
     QWidget(parent),
@@ -27,23 +29,39 @@ KLineWidget::KLineWidget(QWidget *parent) :
     ui->recentDealsTableWidget->setColumnWidth(1,50);
     ui->recentDealsTableWidget->setColumnWidth(2,40);
 
-    customPlot = new QCustomPlot(this);
+    customPlot = new QCustomPlot(ui->widget);
 //    customPlot->setGeometry(QRect(60, 110, 480, 354));
-    customPlot->setGeometry(QRect(50, 130, 480, 354));
+    customPlot->setGeometry(QRect(0, 34, 480, 320));
     customPlot->legend->setVisible(false);
     customPlot->setInteractions( QCP::iRangeDrag | QCP::iRangeZoom);
     customPlot->axisRects().at(0)->setRangeDrag(Qt::Horizontal);
     customPlot->axisRects().at(0)->setRangeZoom(Qt::Horizontal);
     customPlot->axisRects().at(0)->setRangeZoomFactor(1.1,1);
 
+    // create bottom axis rect for volume bar chart:
+    volumeAxisRect = new QCPAxisRect(customPlot);
+    customPlot->plotLayout()->addElement(1, 0, volumeAxisRect);
+    volumeAxisRect->setMaximumSize(QSize(QWIDGETSIZE_MAX, 100));
+    volumeAxisRect->axis(QCPAxis::atBottom)->setLayer("axes");
+    volumeAxisRect->axis(QCPAxis::atBottom)->grid()->setLayer("grid");
+    // bring bottom and main axis rect closer together:
+    customPlot->plotLayout()->setRowSpacing(0);
+    volumeAxisRect->setAutoMargins(QCP::msLeft|QCP::msRight|QCP::msBottom);
+    volumeAxisRect->setMargins(QMargins(0, 0, 0, 0));
+    volumeAxisRect->setRangeDrag(Qt::Horizontal);
+    volumeAxisRect->setRangeZoom(Qt::Horizontal);
+
     QBrush backRole;
     backRole.setColor(QColor(243,241,250));
     backRole.setStyle(Qt::SolidPattern);
     customPlot->setBackground(backRole);
 
-    customPlot->addGraph();     // 鼠标移动时的横竖线
-    customPlot->addGraph();
     connect(customPlot,&QCustomPlot::mouseMove,this, &KLineWidget::mouseMoveEvent);
+
+    customPlot->installEventFilter(this);
+
+    tipLabel = new QLabel(this);
+    tipLabel->raise();
 
     init();
 }
@@ -116,6 +134,13 @@ void KLineWidget::drawKLine()
         low[i] = kPoint.kLow * precisionCompensation;
         close[i] = kPoint.kClose * precisionCompensation;
     }
+    lower = time[0];
+    upper = time[num - 1];
+
+    disconnect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(onXRangeChanged(QCPRange)));
+
+
+
 
 //    int num = 500;
 //    QVector<double> time(num), value(num), value2(num);
@@ -145,24 +170,13 @@ void KLineWidget::drawKLine()
     candlesticks->setPenPositive(QPen(QColor(183, 8, 8)));
     candlesticks->setPenNegative(QPen(QColor(38, 118, 24)));
 
-    // create bottom axis rect for volume bar chart:
-    QCPAxisRect *volumeAxisRect = new QCPAxisRect(customPlot);
-    customPlot->plotLayout()->addElement(1, 0, volumeAxisRect);
-    volumeAxisRect->setMaximumSize(QSize(QWIDGETSIZE_MAX, 100));
-    volumeAxisRect->axis(QCPAxis::atBottom)->setLayer("axes");
-    volumeAxisRect->axis(QCPAxis::atBottom)->grid()->setLayer("grid");
-    // bring bottom and main axis rect closer together:
-    customPlot->plotLayout()->setRowSpacing(0);
-    volumeAxisRect->setAutoMargins(QCP::msLeft|QCP::msRight|QCP::msBottom);
-    volumeAxisRect->setMargins(QMargins(0, 0, 0, 0));
 
-    volumeAxisRect->setRangeDrag(Qt::Horizontal);
-    volumeAxisRect->setRangeZoom(Qt::Horizontal);
+
     customPlot->axisRects().at(0)->axis(QCPAxis::atBottom)->setRange(time[0],time[num - 1]);
     volumeAxisRect->axis(QCPAxis::atBottom)->setRange(time[0],time[num - 1]);
 
     // create two bar plottables, for positive (green) and negative (red) volume bars:
-    customPlot->setAutoAddPlottableToLegend(false);
+    customPlot->setAutoAddPlottableToLegend(true);
     QCPBars *volumePos = new QCPBars(volumeAxisRect->axis(QCPAxis::atBottom), volumeAxisRect->axis(QCPAxis::atLeft));
     QCPBars *volumeNeg = new QCPBars(volumeAxisRect->axis(QCPAxis::atBottom), volumeAxisRect->axis(QCPAxis::atLeft));
     for(int i = 0; i < num; i++)
@@ -170,21 +184,17 @@ void KLineWidget::drawKLine()
         KPointInfo kPoint = kPointMap.value( keys.at(i));
         AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value( HXChain::getInstance()->getAssetId( HXChain::getInstance()->currentExchangePair.first));
         double v = getBigNumberString( kPoint.baseAmount, assetInfo.precision).toDouble();
-
         (kPoint.kClose < kPoint.kOpen ? volumeNeg : volumePos)->addData(time.at(i), v); // add data to either volumeNeg or volumePos, depending on sign of v
     }
 
 
-    volumePos->setWidth(3600*4);
+    volumePos->setWidth(binSize*0.9);
     volumePos->setPen(Qt::NoPen);
     volumePos->setBrush(QColor(100, 180, 110));
-    volumeNeg->setWidth(3600*4);
+    volumeNeg->setWidth(binSize*0.9);
     volumeNeg->setPen(Qt::NoPen);
     volumeNeg->setBrush(QColor(180, 90, 90));
 
-    // interconnect x axis ranges of main and bottom axis rects:
-    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), volumeAxisRect->axis(QCPAxis::atBottom), SLOT(setRange(QCPRange)));
-    connect(volumeAxisRect->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis, SLOT(setRange(QCPRange)));
     // configure axes of both main and bottom axis rect:
     QSharedPointer<QCPAxisTickerDateTime> dateTimeTicker(new QCPAxisTickerDateTime);
     dateTimeTicker->setDateTimeSpec(Qt::UTC);
@@ -196,8 +206,15 @@ void KLineWidget::drawKLine()
     customPlot->xAxis->setTicks(false); // only want vertical grid in main axis rect, so hide xAxis backbone, ticks, and labels
     customPlot->xAxis->setTicker(dateTimeTicker);
     customPlot->rescaleAxes();
-    customPlot->xAxis->scaleRange(1.025, customPlot->xAxis->range().center());
+    double factor = kLineScaleFactorMap.value(ui->periodComboBox->currentIndex());
+    customPlot->xAxis->scaleRange(factor, customPlot->xAxis->range().lower * factor * 0.5 + customPlot->xAxis->range().upper * (1 - factor * 0.5));
     customPlot->yAxis->scaleRange(1.1, customPlot->yAxis->range().center());
+
+    // interconnect x axis ranges of main and bottom axis rects:
+//    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(onXRangeChanged(QCPRange)));
+    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), volumeAxisRect->axis(QCPAxis::atBottom), SLOT(setRange(QCPRange)));
+//    connect(volumeAxisRect->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis, SLOT(setRange(QCPRange)));
+
 
     // 设置两个坐标轴矩形左右对齐
     QCPMarginGroup *group = new QCPMarginGroup(customPlot);
@@ -244,7 +261,7 @@ void KLineWidget::showRecentDeals()
 
 }
 
-const KPointInfo &KLineWidget::getKPointInfoByTime(uint time_t, uint interval)
+KPointInfo KLineWidget::getKPointInfoByTime(uint time_t, uint interval)
 {
     QVector<uint> keys = QVector<uint>::fromList( kPointMap.keys());
     uint left = time_t - time_t % interval;
@@ -259,8 +276,26 @@ const KPointInfo &KLineWidget::getKPointInfoByTime(uint time_t, uint interval)
 
 }
 
+void KLineWidget::onXRangeChanged(const QCPRange &range)
+{
+    if(lower < 1.5e+9 || upper < 1.5e+9)    return;
+    QCPRange boundedRange = range;
+
+    if(range.lower < lower)
+    {
+        boundedRange.lower = lower;
+    }
+
+    if(range.upper > upper)
+    {
+        boundedRange.upper = upper;
+    }
+    customPlot->xAxis->setRange(boundedRange);
+}
+
 void KLineWidget::mouseMoveEvent(QMouseEvent *event)
 {
+    if(customPlot->graphCount() < 2)    return;
     QVector<double> vx,vy;
     uint x = uint( customPlot->xAxis->pixelToCoord(event->pos().x()));
     double y = customPlot->yAxis->pixelToCoord(event->pos().y());
@@ -288,6 +323,40 @@ void KLineWidget::mouseMoveEvent(QMouseEvent *event)
     customPlot->graph(1)->setData(vx,vy);
     customPlot->graph(1)->setPen(QPen(Qt::red));
     customPlot->replot();
+
+    tipLabel->move( customPlot->mapTo(this, event->pos() + QPoint(12,5)));
+    QString timeStr = QDateTime::fromTime_t(x).toString("hh:mm");
+    tipLabel->setText(QString("(%1 , %2)").arg(timeStr).arg(y));
+    tipLabel->adjustSize();
+}
+
+bool KLineWidget::eventFilter(QObject *watched, QEvent *e)
+{
+    if(watched == customPlot)
+    {
+        if(e->type() == QEvent::Enter)
+        {
+            if(customPlot->graphCount() == 0)
+            {
+                customPlot->addGraph();
+                customPlot->addGraph();
+
+                tipLabel->show();
+            }
+        }
+        else if(e->type() == QEvent::Leave)
+        {
+            if(customPlot->graphCount() >= 2)
+            {
+                customPlot->clearGraphs();
+                customPlot->replot();
+
+                tipLabel->hide();
+            }
+        }
+    }
+
+    return QWidget::eventFilter(watched,e);
 }
 
 void KLineWidget::httpReplied(QByteArray _data, int _status)
@@ -393,8 +462,6 @@ void KLineWidget::onPairSelected(const ExchangePair &_pair)
     ui->infoLabel->clear();
 
     customPlot->clearPlottables();
-    customPlot->addGraph();
-    customPlot->addGraph();
 
     queryKLineData(ui->periodComboBox->currentIndex(), kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
     queryRecentDeals(20);
@@ -410,7 +477,5 @@ void KLineWidget::on_periodComboBox_currentIndexChanged(const QString &arg1)
 {
     ui->infoLabel->clear();
     customPlot->clearPlottables();
-    customPlot->addGraph();
-    customPlot->addGraph();
     queryKLineData(ui->periodComboBox->currentIndex(), kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
 }

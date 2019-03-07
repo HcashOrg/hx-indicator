@@ -193,13 +193,14 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(243, 241, 250);</string>
+    <string notr="true">#widget{background-color: rgb(243, 241, 250);
+border-radius:8px;}</string>
    </property>
    <widget class="QLabel" name="priceLabel">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
+      <x>10</x>
+      <y>10</y>
       <width>90</width>
       <height>20</height>
      </rect>
@@ -215,9 +216,9 @@ font: 16px &quot;微软雅黑&quot;;</string>
    <widget class="QLabel" name="infoLabel">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>0</y>
-      <width>400</width>
+      <x>100</x>
+      <y>10</y>
+      <width>300</width>
       <height>20</height>
      </rect>
     </property>

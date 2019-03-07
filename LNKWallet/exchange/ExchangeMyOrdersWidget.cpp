@@ -499,7 +499,7 @@ void ExchangeMyOrdersWidget::showHistoryOrders()
         const HistoryOrderInfo& info = historyOrders.at(i);
 
         QDateTime dateTime = info.dateTime;
-        dateTime = dateTime.addSecs( -600);
+//        dateTime = dateTime.addSecs( -600);
         dateTime.setTimeSpec(Qt::UTC);
         dateTime = dateTime.toLocalTime();
         ui->historyOrdersTableWidget->setItem( i, 0, new QTableWidgetItem( dateTime.toString("yyyy-MM-dd hh:mm:ss")));
