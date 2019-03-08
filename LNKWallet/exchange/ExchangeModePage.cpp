@@ -890,6 +890,8 @@ void ExchangeModePage::on_positionComboBox_currentIndexChanged(int index)
 
 void ExchangeModePage::on_KLineBtn_clicked()
 {
+    Q_EMIT backBtnVisible(true);
+
     KLineWidget* klw = new KLineWidget(this);
     klw->setAttribute(Qt::WA_DeleteOnClose);
     klw->show();

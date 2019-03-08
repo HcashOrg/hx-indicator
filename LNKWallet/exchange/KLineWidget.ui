@@ -13,44 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTableWidget" name="recentDealsTableWidget">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>110</y>
-     <width>160</width>
-     <height>354</height>
-    </rect>
-   </property>
-   <column>
-    <property name="text">
-     <string>时间</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>新建列</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>数量</string>
-    </property>
-   </column>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>70</y>
-     <width>161</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>最近成交</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="title_label">
    <property name="geometry">
     <rect>
@@ -212,6 +174,9 @@ font: 16px &quot;微软雅黑&quot;;</string>
     <property name="text">
      <string/>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+    </property>
    </widget>
    <widget class="QLabel" name="infoLabel">
     <property name="geometry">
@@ -229,11 +194,72 @@ font: 10px &quot;微软雅黑&quot;;</string>
     <property name="text">
      <string/>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+    </property>
    </widget>
   </widget>
+  <widget class="QWidget" name="widget2" native="true">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>110</y>
+     <width>180</width>
+     <height>354</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">#widget2{background-color: rgb(243, 241, 250);
+border-radius:8px;}</string>
+   </property>
+   <widget class="QTableWidget" name="recentDealsTableWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>26</y>
+      <width>180</width>
+      <height>320</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>委托时间</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>委托价格</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>数量</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>2</y>
+      <width>100</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(83, 61, 138);
+font: 12px &quot;微软雅黑&quot;;</string>
+    </property>
+    <property name="text">
+     <string>最近成交</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignBottom|Qt::AlignHCenter</set>
+    </property>
+   </widget>
+  </widget>
+  <zorder>widget2</zorder>
   <zorder>widget</zorder>
-  <zorder>recentDealsTableWidget</zorder>
-  <zorder>label</zorder>
   <zorder>title_label</zorder>
   <zorder>marketBtn3</zorder>
   <zorder>favoriteMarketBtn</zorder>
