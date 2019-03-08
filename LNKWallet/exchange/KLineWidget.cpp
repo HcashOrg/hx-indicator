@@ -22,16 +22,16 @@ KLineWidget::KLineWidget(QWidget *parent) :
 //    ui->recentDealsTableWidget->setFrameShape(QFrame::NoFrame);
     ui->recentDealsTableWidget->setMouseTracking(true);
     ui->recentDealsTableWidget->setShowGrid(false);//隐藏表格线
-    ui->recentDealsTableWidget->horizontalHeader()->setSectionsClickable(true);
-    ui->recentDealsTableWidget->horizontalHeader()->setVisible(false);
+    ui->recentDealsTableWidget->horizontalHeader()->setSectionsClickable(false);
+    ui->recentDealsTableWidget->horizontalHeader()->setVisible(true);
     ui->recentDealsTableWidget->verticalHeader()->setVisible(false);
-    ui->recentDealsTableWidget->setColumnWidth(0,50);
-    ui->recentDealsTableWidget->setColumnWidth(1,50);
-    ui->recentDealsTableWidget->setColumnWidth(2,40);
+    ui->recentDealsTableWidget->setColumnWidth(0,55);
+    ui->recentDealsTableWidget->setColumnWidth(1,60);
+    ui->recentDealsTableWidget->setColumnWidth(2,60);
 
     customPlot = new QCustomPlot(ui->widget);
 //    customPlot->setGeometry(QRect(60, 110, 480, 354));
-    customPlot->setGeometry(QRect(0, 34, 480, 320));
+    customPlot->setGeometry(QRect(0, 34, 480, 310));
     customPlot->legend->setVisible(false);
     customPlot->setInteractions( QCP::iRangeDrag | QCP::iRangeZoom);
     customPlot->axisRects().at(0)->setRangeDrag(Qt::Horizontal);
@@ -165,10 +165,10 @@ void KLineWidget::drawKLine()
     candlesticks->setData(time,open,high,low,close);
     candlesticks->setWidth(binSize*0.9);
     candlesticks->setTwoColored(true);
-    candlesticks->setBrushPositive(QColor(183, 8, 8));
-    candlesticks->setBrushNegative(QColor(38, 118, 24));
-    candlesticks->setPenPositive(QPen(QColor(183, 8, 8)));
-    candlesticks->setPenNegative(QPen(QColor(38, 118, 24)));
+    candlesticks->setBrushPositive(QColor(1, 215, 26));
+    candlesticks->setBrushNegative(QColor(215, 1, 1));
+    candlesticks->setPenPositive(QPen(QColor(1, 215, 26)));
+    candlesticks->setPenNegative(QPen(QColor(215, 1, 1)));
 
 
 
@@ -190,36 +190,47 @@ void KLineWidget::drawKLine()
 
     volumePos->setWidth(binSize*0.9);
     volumePos->setPen(Qt::NoPen);
-    volumePos->setBrush(QColor(100, 180, 110));
+    volumePos->setBrush(QColor(1, 215, 26));
     volumeNeg->setWidth(binSize*0.9);
     volumeNeg->setPen(Qt::NoPen);
-    volumeNeg->setBrush(QColor(180, 90, 90));
+    volumeNeg->setBrush(QColor(215, 1, 1));
 
     // configure axes of both main and bottom axis rect:
     QSharedPointer<QCPAxisTickerDateTime> dateTimeTicker(new QCPAxisTickerDateTime);
     dateTimeTicker->setDateTimeSpec(Qt::UTC);
-    dateTimeTicker->setDateTimeFormat("dd. MMMM");
+    dateTimeTicker->setDateTimeFormat("dd.MMMM");
     volumeAxisRect->axis(QCPAxis::atBottom)->setTicker(dateTimeTicker);
     volumeAxisRect->axis(QCPAxis::atBottom)->setTickLabelRotation(0);
     customPlot->xAxis->setBasePen(Qt::NoPen);
     customPlot->xAxis->setTickLabels(false);
     customPlot->xAxis->setTicks(false); // only want vertical grid in main axis rect, so hide xAxis backbone, ticks, and labels
-    customPlot->xAxis->setTicker(dateTimeTicker);
+//    customPlot->xAxis->setTicker(dateTimeTicker);
+
     customPlot->rescaleAxes();
     double factor = kLineScaleFactorMap.value(ui->periodComboBox->currentIndex());
     customPlot->xAxis->scaleRange(factor, customPlot->xAxis->range().lower * factor * 0.5 + customPlot->xAxis->range().upper * (1 - factor * 0.5));
+    if(customPlot->yAxis->range().lower < 0)
+    {
+        customPlot->yAxis->setRangeLower(0);
+    }
     customPlot->yAxis->scaleRange(1.1, customPlot->yAxis->range().center());
+
+    if(volumeAxisRect->axis(QCPAxis::atLeft)->range().lower < 0)
+    {
+        volumeAxisRect->axis(QCPAxis::atLeft)->setRangeLower(0);
+    }
 
     // interconnect x axis ranges of main and bottom axis rects:
 //    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(onXRangeChanged(QCPRange)));
     connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), volumeAxisRect->axis(QCPAxis::atBottom), SLOT(setRange(QCPRange)));
-//    connect(volumeAxisRect->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis, SLOT(setRange(QCPRange)));
+    connect(volumeAxisRect->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis, SLOT(setRange(QCPRange)));
 
 
     // 设置两个坐标轴矩形左右对齐
     QCPMarginGroup *group = new QCPMarginGroup(customPlot);
     customPlot->axisRect()->setMarginGroup(QCP::msLeft|QCP::msRight, group);
     volumeAxisRect->setMarginGroup(QCP::msLeft|QCP::msRight, group);
+
 
     customPlot->replot();
 }
@@ -230,6 +241,8 @@ void KLineWidget::showRecentDeals()
     ui->recentDealsTableWidget->setRowCount(deals.size());
     for(int i = 0; i < deals.size(); i++)
     {
+        ui->recentDealsTableWidget->setRowHeight(i, 22);
+
         ExchangeDeal deal = deals.at(i);
 
         QString str = QDateTime::fromString(deal.dateTime, "yyyy-MM-dd hh:mm:ss").toString("hh:mm:ss");
