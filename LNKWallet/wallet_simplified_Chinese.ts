@@ -1737,7 +1737,6 @@ better not transfer or upgrade</source>
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="355"/>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="366"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="377"/>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="389"/>
         <source>number cannot less than </source>
         <translation type="unfinished">数量不能小于 </translation>
@@ -4499,64 +4498,64 @@ Contract created successfully!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="227"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="229"/>
         <source>Sell %1</source>
         <translation type="unfinished">卖 %1</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="291"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="293"/>
         <source>Buy %1</source>
         <translation type="unfinished">买 %1</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="320"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="322"/>
         <source>Transaction of buy-order has been sent out!</source>
         <translation type="unfinished">买入交易已发出！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="329"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="331"/>
         <source>Fail to create buy-order!</source>
         <translation type="unfinished">创建买单失败！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="366"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="368"/>
         <source>Transaction of sell-order has been sent out!</source>
         <translation type="unfinished">卖单交易已发出！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="375"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="377"/>
         <source>Fail to create sell-order!</source>
         <translation type="unfinished">创建卖单失败！</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="461"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="462"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="458"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="459"/>
         <source>Price (%1)</source>
         <translation type="unfinished">价格（%1）</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="463"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="464"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="460"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="461"/>
         <source>Amount (%1)</source>
         <translation type="unfinished">数量（%1）</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="496"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="501"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="697"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="709"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="741"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="493"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="498"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="694"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="706"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="738"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estimated: &lt;span style=&quot; color:#eb005e;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额： &lt;span style=&quot; color:#eb005e;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="731"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="728"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estimated: &lt;span style=&quot; color:#2cca94;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额： &lt;span style=&quot; color:#2cca94;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="763"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="794"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="760"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="791"/>
         <source>The order amount is too small!</source>
         <translation type="unfinished">交易金额太小了！</translation>
     </message>
@@ -6237,46 +6236,106 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.ui" line="27"/>
-        <source>时间</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="exchange/KLineWidget.ui" line="32"/>
-        <source>新建列</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="exchange/KLineWidget.ui" line="37"/>
+        <location filename="exchange/KLineWidget.ui" line="249"/>
         <source>数量</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.ui" line="51"/>
+        <location filename="exchange/KLineWidget.ui" line="267"/>
         <source>最近成交</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.ui" line="80"/>
+        <location filename="exchange/KLineWidget.ui" line="43"/>
         <source>PAX交易区</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.ui" line="83"/>
-        <location filename="exchange/KLineWidget.ui" line="99"/>
-        <location filename="exchange/KLineWidget.ui" line="118"/>
+        <location filename="exchange/KLineWidget.ui" line="46"/>
+        <location filename="exchange/KLineWidget.ui" line="62"/>
+        <location filename="exchange/KLineWidget.ui" line="81"/>
         <source>dropDown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.ui" line="96"/>
+        <location filename="exchange/KLineWidget.ui" line="59"/>
         <source>常用交易区</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.ui" line="115"/>
+        <location filename="exchange/KLineWidget.ui" line="78"/>
         <source>HX交易区</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="107"/>
+        <source>1min</source>
+        <translation type="unfinished">1分钟</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="112"/>
+        <source>5min</source>
+        <translation type="unfinished">5分钟</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="117"/>
+        <source>15min</source>
+        <translation type="unfinished">15分钟</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="122"/>
+        <source>30min</source>
+        <translation type="unfinished">30分钟</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="127"/>
+        <source>1h</source>
+        <translation type="unfinished">1小时</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="132"/>
+        <source>2h</source>
+        <translation type="unfinished">2小时</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="137"/>
+        <source>6h</source>
+        <translation type="unfinished">6小时</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="142"/>
+        <source>12h</source>
+        <translation type="unfinished">12小时</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="147"/>
+        <source>1day</source>
+        <translation type="unfinished">1天</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="152"/>
+        <source>1week</source>
+        <translation type="unfinished">1周</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="157"/>
+        <source>1month</source>
+        <translation type="unfinished">1月</translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="239"/>
+        <source>委托时间</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.ui" line="244"/>
+        <source>委托价格</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="exchange/KLineWidget.cpp" line="328"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%6;&quot;&gt;CHANGE: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;O:%2 H:%3 L:%4 C:%5&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%6;&quot;&gt;涨幅: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;开:%2 高:%3 低:%4 收:%5&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
 </context>
 <context>

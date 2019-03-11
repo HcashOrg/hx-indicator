@@ -75,10 +75,12 @@ void KLineWidget::init()
 {
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
+    ui->periodComboBox->setCurrentIndex(4);
+    connect(ui->periodComboBox,SIGNAL(currentIndexChanged(QString)),this,SLOT(onPeriodComboBoxCurrentIndexChanged(QString)));
     queryKLineData(ui->periodComboBox->currentIndex(),kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
     queryRecentDeals(20);
 
-    ui->title_label->setText(QString("%1 / %2").arg(revertERCSymbol(HXChain::getInstance()->currentExchangePair.first))
+    ui->currentPairLabel->setText(QString("%1 / %2").arg(revertERCSymbol(HXChain::getInstance()->currentExchangePair.first))
                                   .arg(revertERCSymbol(HXChain::getInstance()->currentExchangePair.second)));
 }
 
@@ -268,6 +270,9 @@ void KLineWidget::showRecentDeals()
         if(i == 0)
         {
             ui->priceLabel->setText(priceStr);
+            ui->priceLabel->adjustSize();
+            ui->priceLabel->setGeometry(ui->priceLabel->x(), ui->priceLabel->y(), ui->priceLabel->width(), 20);
+            ui->infoLabel->move(ui->priceLabel->x() + ui->priceLabel->width() + 10, ui->infoLabel->y());
         }
     }
 
@@ -278,6 +283,8 @@ KPointInfo KLineWidget::getKPointInfoByTime(uint time_t, uint interval)
 {
     QVector<uint> keys = QVector<uint>::fromList( kPointMap.keys());
     uint left = time_t - time_t % interval;
+//    qDebug() << "xxxxxxxxxxxx " << time_t << left << keys.contains(left);
+//    qDebug() << keys;
     if(keys.contains(left))
     {
         return kPointMap.value(left);
@@ -314,15 +321,16 @@ void KLineWidget::mouseMoveEvent(QMouseEvent *event)
     double y = customPlot->yAxis->pixelToCoord(event->pos().y());
 
     const KPointInfo kpInfo = getKPointInfoByTime(x, uint(kLineTypeMap.value(ui->periodComboBox->currentIndex())));
-
     const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
     const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
     double precisionCompensation = qPow(10,baseAssetInfo.precision - quoteAssetInfo.precision);
     int showPrecision = HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair);
     double changeRate = (kpInfo.kOpen == 0) ? 0 : (kpInfo.kClose - kpInfo.kOpen) / kpInfo.kOpen;
-    QString str = tr("CHANGE:%1%  O:%2  H:%3  L:%4  C:%5").arg( QString::number(changeRate * 100, 'f', 2))
+    QString str = tr("<html><head/><body><p><span style=\" font-size:10px; color:%6;\">CHANGE: %1%    </span><span style=\" font-size:10px; color:#261932;\">O:%2 H:%3 L:%4 C:%5</span></p></body></html>").arg( QString::number(changeRate * 100, 'f', 2))
             .arg( QString::number(kpInfo.kOpen * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kHigh * precisionCompensation,'f',showPrecision))
-            .arg(QString::number(kpInfo.kLow * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kClose * precisionCompensation,'f',showPrecision));
+            .arg(QString::number(kpInfo.kLow * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kClose * precisionCompensation,'f',showPrecision))
+            .arg( (changeRate > 0) ? "rgb(1,215,26)" : "rgb(215,1,1)" );
+
     ui->infoLabel->setText(str);
 
     vx << 0 << x << customPlot->xAxis->range().maxRange;
@@ -420,8 +428,10 @@ void KLineWidget::httpReplied(QByteArray _data, int _status)
             info.kLow = kObject.value("k_low").toDouble();
             info.dateTime = kObject.value("timestamp").toString();
 
-           uint time_t = QDateTime::fromString( kObject.value("timestamp").toString(), "yyyy-MM-dd hh:mm:ss").toTime_t();
-
+            QDateTime dateTime = QDateTime::fromString( kObject.value("timestamp").toString(), "yyyy-MM-dd hh:mm:ss");
+            dateTime.setTimeSpec(Qt::UTC);
+            uint time_t = dateTime.toTime_t();
+qDebug() << "tttttttttttt" << time_t << info.dateTime;
             kPointMap.insert(time_t, info);
         }
 
@@ -470,7 +480,7 @@ void KLineWidget::on_marketBtn3_clicked()
 void KLineWidget::onPairSelected(const ExchangePair &_pair)
 {
     HXChain::getInstance()->currentExchangePair = _pair;
-    ui->title_label->setText( QString("%1 / %2").arg(revertERCSymbol(_pair.first)).arg(revertERCSymbol(_pair.second)));
+    ui->currentPairLabel->setText( QString("%1 / %2").arg(revertERCSymbol(_pair.first)).arg(revertERCSymbol(_pair.second)));
     ui->priceLabel->clear();
     ui->infoLabel->clear();
 
@@ -486,7 +496,7 @@ void KLineWidget::onAddFavoriteClicked()
     dialog.pop();
 }
 
-void KLineWidget::on_periodComboBox_currentIndexChanged(const QString &arg1)
+void KLineWidget::onPeriodComboBoxCurrentIndexChanged(const QString &arg1)
 {
     ui->infoLabel->clear();
     customPlot->clearPlottables();

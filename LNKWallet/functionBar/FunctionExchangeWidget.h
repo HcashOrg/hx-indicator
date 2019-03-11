@@ -32,8 +32,6 @@ private slots:
 
     void on_onchainOrderBtn_clicked();
 
-    void on_myOrderBtn_clicked();
-
     void on_contractTokenBtn_clicked();
 
 

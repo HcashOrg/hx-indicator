@@ -51,7 +51,7 @@
 
 #ifdef TEST_WALLET
 #define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5006/api"
-#define MIDDLE_EXCHANGE_URL     "http://192.168.1.154:15000/api"
+#define MIDDLE_EXCHANGE_URL     "http://192.168.1.121:15000/api"
 #else
 #define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"
 #define MIDDLE_EXCHANGE_URL     "http://wallet.hx.cash:15000/api"               // 查询交易所信息的URL

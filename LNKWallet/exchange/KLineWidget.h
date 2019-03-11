@@ -76,7 +76,7 @@ private slots:
     void onAddFavoriteClicked();
 
 
-    void on_periodComboBox_currentIndexChanged(const QString &arg1);
+    void onPeriodComboBoxCurrentIndexChanged(const QString &arg1);
 
 private:
     Ui::KLineWidget *ui;
