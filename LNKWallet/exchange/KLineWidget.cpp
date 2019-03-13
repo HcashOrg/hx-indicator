@@ -84,6 +84,11 @@ void KLineWidget::init()
                                   .arg(revertERCSymbol(HXChain::getInstance()->currentExchangePair.second)));
 }
 
+void KLineWidget::refresh()
+{
+    queryRecentDeals(20);
+}
+
 void KLineWidget::queryRecentDeals(int count)
 {
     QJsonObject object;
@@ -127,10 +132,14 @@ void KLineWidget::drawKLine()
     const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
     const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
     int precisionCompensation = qPow(10,baseAssetInfo.precision - quoteAssetInfo.precision);
+
+    int offset = QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime());
     for(int i = 0; i < num; i++)
     {
         KPointInfo kPoint = kPointMap.value( keys.at(i));
-        time[i] = QDateTime::fromString( kPoint.dateTime, "yyyy-MM-dd hh:mm:ss").toTime_t();
+        QDateTime dateTime =  QDateTime::fromString( kPoint.dateTime, "yyyy-MM-dd hh:mm:ss");
+        dateTime.setTimeSpec(Qt::UTC);
+        time[i] = dateTime.toTime_t() + offset;
         open[i] = kPoint.kOpen * precisionCompensation;
         high[i] = kPoint.kHigh * precisionCompensation;
         low[i] = kPoint.kLow * precisionCompensation;
@@ -139,7 +148,7 @@ void KLineWidget::drawKLine()
     lower = time[0];
     upper = time[num - 1];
 
-    disconnect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(onXRangeChanged(QCPRange)));
+//    disconnect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(onXRangeChanged(QCPRange)));
 
 
 
@@ -198,9 +207,17 @@ void KLineWidget::drawKLine()
     volumeNeg->setBrush(QColor(215, 1, 1));
 
     // configure axes of both main and bottom axis rect:
-    QSharedPointer<QCPAxisTickerDateTime> dateTimeTicker(new QCPAxisTickerDateTime);
+    QSharedPointer<MyQCPAxisTickerDateTime> dateTimeTicker(new MyQCPAxisTickerDateTime);
     dateTimeTicker->setDateTimeSpec(Qt::UTC);
-    dateTimeTicker->setDateTimeFormat("dd.MMMM");
+//    dateTimeTicker->setDateTimeFormat("dd.MMMM");
+//    switch (ui->periodComboBox->currentIndex())
+//    {
+//    case 0:
+//    case 1:
+//    case 2:
+//    }
+    dateTimeTicker->setTickTimePointType(MyQCPAxisTickerDateTime::tpDay);
+    dateTimeTicker->setDateTimeFormat("hh:mm");
     volumeAxisRect->axis(QCPAxis::atBottom)->setTicker(dateTimeTicker);
     volumeAxisRect->axis(QCPAxis::atBottom)->setTickLabelRotation(0);
     customPlot->xAxis->setBasePen(Qt::NoPen);
@@ -209,8 +226,19 @@ void KLineWidget::drawKLine()
 //    customPlot->xAxis->setTicker(dateTimeTicker);
 
     customPlot->rescaleAxes();
-    double factor = kLineScaleFactorMap.value(ui->periodComboBox->currentIndex());
+    double factor = kLineScaleFactorMap.value(ui->periodComboBox->currentIndex()) / 10.0;
+//    double factor = 0.5;
     customPlot->xAxis->scaleRange(factor, customPlot->xAxis->range().lower * factor * 0.5 + customPlot->xAxis->range().upper * (1 - factor * 0.5));
+    qDebug() << "Xxxxxxxxxxxxx " << uint(customPlot->xAxis->range().lower)
+             << uint(customPlot->xAxis->range().upper)
+             ;
+
+
+    double span = kLineTypeMap.value( ui->periodComboBox->currentIndex()) * kLineQueryCountMap.value( ui->periodComboBox->currentIndex())
+            * kLineScaleFactorMap.value( ui->periodComboBox->currentIndex());
+    customPlot->xAxis->setRangeUpper(upper);
+    customPlot->xAxis->setRangeLower(upper - span);
+
     if(customPlot->yAxis->range().lower < 0)
     {
         customPlot->yAxis->setRangeLower(0);
@@ -223,10 +251,9 @@ void KLineWidget::drawKLine()
     }
 
     // interconnect x axis ranges of main and bottom axis rects:
-//    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(onXRangeChanged(QCPRange)));
+    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(onXRangeChanged(QCPRange)));
     connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), volumeAxisRect->axis(QCPAxis::atBottom), SLOT(setRange(QCPRange)));
     connect(volumeAxisRect->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis, SLOT(setRange(QCPRange)));
-
 
     // 设置两个坐标轴矩形左右对齐
     QCPMarginGroup *group = new QCPMarginGroup(customPlot);
@@ -247,7 +274,9 @@ void KLineWidget::showRecentDeals()
 
         ExchangeDeal deal = deals.at(i);
 
-        QString str = QDateTime::fromString(deal.dateTime, "yyyy-MM-dd hh:mm:ss").toString("hh:mm:ss");
+        QDateTime utcDateTime = QDateTime::fromString(deal.dateTime, "yyyy-MM-dd hh:mm:ss");
+        utcDateTime.setTimeSpec(Qt::UTC);
+        QString str = utcDateTime.toLocalTime().toString("hh:mm:ss");
         ui->recentDealsTableWidget->setItem( i, 0, new QTableWidgetItem(str));
 
         const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
@@ -279,12 +308,46 @@ void KLineWidget::showRecentDeals()
 
 }
 
+void KLineWidget::rescaleYAxis()
+{
+    //get visible min and max y values
+    if (candlesticks)
+    {
+        QSharedPointer<QCPFinancialDataContainer> data = candlesticks->data();
+
+        double dHigh = 0;
+        double dLow = 99999999;
+
+        for (int i = 0; i < customPlot->xAxis->tickVector().size(); ++i)
+        {
+            double dTick = customPlot->xAxis->tickVector().at(i);
+            QCPFinancialDataContainer::const_iterator it = data->findBegin(dTick);
+            if (it != data->end())
+            {
+                if (it->high > dHigh)
+                    dHigh = it->high;
+                if (it->low < dLow && it->low > 0)
+                    dLow = it->low;
+            }
+        }
+
+        customPlot->yAxis->setRange(dLow * 0.5, dHigh * 2);
+    }
+}
+
 KPointInfo KLineWidget::getKPointInfoByTime(uint time_t, uint interval)
 {
     QVector<uint> keys = QVector<uint>::fromList( kPointMap.keys());
-    uint left = time_t - time_t % interval;
-//    qDebug() << "xxxxxxxxxxxx " << time_t << left << keys.contains(left);
-//    qDebug() << keys;
+    uint left = 0;
+    if(time_t % interval > interval / 2)
+    {
+        left = time_t - time_t % interval + interval;
+    }
+    else
+    {
+        left = time_t - time_t % interval;
+    }
+
     if(keys.contains(left))
     {
         return kPointMap.value(left);
@@ -298,19 +361,20 @@ KPointInfo KLineWidget::getKPointInfoByTime(uint time_t, uint interval)
 
 void KLineWidget::onXRangeChanged(const QCPRange &range)
 {
-    if(lower < 1.5e+9 || upper < 1.5e+9)    return;
-    QCPRange boundedRange = range;
+//    if(lower < 1.5e+9 || upper < 1.5e+9)    return;
+//    QCPRange boundedRange = range;
 
-    if(range.lower < lower)
-    {
-        boundedRange.lower = lower;
-    }
+//    if(range.lower < lower)
+//    {
+//        boundedRange.lower = lower;
+//    }
 
-    if(range.upper > upper)
-    {
-        boundedRange.upper = upper;
-    }
-    customPlot->xAxis->setRange(boundedRange);
+//    if(range.upper > upper)
+//    {
+//        boundedRange.upper = upper;
+//    }
+//    customPlot->xAxis->setRange(boundedRange);
+    rescaleYAxis();
 }
 
 void KLineWidget::mouseMoveEvent(QMouseEvent *event)
@@ -320,7 +384,8 @@ void KLineWidget::mouseMoveEvent(QMouseEvent *event)
     uint x = uint( customPlot->xAxis->pixelToCoord(event->pos().x()));
     double y = customPlot->yAxis->pixelToCoord(event->pos().y());
 
-    const KPointInfo kpInfo = getKPointInfoByTime(x, uint(kLineTypeMap.value(ui->periodComboBox->currentIndex())));
+    int offset = QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime());
+    const KPointInfo kpInfo = getKPointInfoByTime(x - offset, uint(kLineTypeMap.value(ui->periodComboBox->currentIndex())));
     const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
     const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
     double precisionCompensation = qPow(10,baseAssetInfo.precision - quoteAssetInfo.precision);
@@ -346,7 +411,7 @@ void KLineWidget::mouseMoveEvent(QMouseEvent *event)
     customPlot->replot();
 
     tipLabel->move( customPlot->mapTo(this, event->pos() + QPoint(12,5)));
-    QString timeStr = QDateTime::fromTime_t(x).toString("hh:mm");
+    QString timeStr = QDateTime::fromTime_t(x - offset).toString("hh:mm");
     tipLabel->setText(QString("(%1 , %2)").arg(timeStr).arg(y));
     tipLabel->adjustSize();
 }
@@ -431,7 +496,6 @@ void KLineWidget::httpReplied(QByteArray _data, int _status)
             QDateTime dateTime = QDateTime::fromString( kObject.value("timestamp").toString(), "yyyy-MM-dd hh:mm:ss");
             dateTime.setTimeSpec(Qt::UTC);
             uint time_t = dateTime.toTime_t();
-qDebug() << "tttttttttttt" << time_t << info.dateTime;
             kPointMap.insert(time_t, info);
         }
 

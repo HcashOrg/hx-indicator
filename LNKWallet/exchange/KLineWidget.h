@@ -4,7 +4,7 @@
 #include <QWidget>
 
 #include "wallet.h"
-#include "extra/qcustomplot.h"
+#include "extra/mycustomplot.h"
 #include "extra/HttpManager.h"
 
 namespace Ui {
@@ -45,11 +45,14 @@ public:
 
     void init();
 
+    void refresh();
+
 private:
     void queryRecentDeals(int count);
     void queryKLineData(int type, int count);
     void drawKLine();
     void showRecentDeals();
+    void rescaleYAxis();
     KPointInfo getKPointInfoByTime(uint time_t, uint interval);   // 查找time_t属于哪个时间段
     HttpManager httpManager;
     QMap<uint,KPointInfo>   kPointMap;

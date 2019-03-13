@@ -8,6 +8,7 @@ namespace Ui {
 class ExchangeModePage;
 }
 
+class KLineWidget;
 struct OrderInfo
 {
     unsigned long long baseAmount = 0;
@@ -101,6 +102,7 @@ private:
 
 private:
     Ui::ExchangeModePage *ui;
+    KLineWidget* klw = nullptr;
 
     void paintEvent(QPaintEvent*);
 

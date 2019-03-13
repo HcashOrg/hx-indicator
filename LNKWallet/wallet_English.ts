@@ -4573,7 +4573,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="exchange/ExchangeModePage.ui" line="1094"/>
         <source>K线走势</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">K-Line</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;预计交易额：&lt;span style=&quot; color:#eb005e;&quot;&gt;0.00&lt;/span&gt; HX&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
@@ -4663,64 +4663,64 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">My Orders</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="229"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="234"/>
         <source>Sell %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="293"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="298"/>
         <source>Buy %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="322"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="327"/>
         <source>Transaction of buy-order has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="331"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="336"/>
         <source>Fail to create buy-order!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="368"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="373"/>
         <source>Transaction of sell-order has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="377"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="382"/>
         <source>Fail to create sell-order!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="458"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="459"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="463"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="464"/>
         <source>Price (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="460"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="461"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="465"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="466"/>
         <source>Amount (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="493"/>
         <location filename="exchange/ExchangeModePage.cpp" line="498"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="694"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="706"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="738"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="503"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="699"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="711"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="743"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estimated: &lt;span style=&quot; color:#eb005e;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="728"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="733"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Estimated: &lt;span style=&quot; color:#2cca94;&quot;&gt;%1&lt;/span&gt; %2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeModePage.cpp" line="760"/>
-        <location filename="exchange/ExchangeModePage.cpp" line="791"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="765"/>
+        <location filename="exchange/ExchangeModePage.cpp" line="796"/>
         <source>The order amount is too small!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6513,7 +6513,7 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">PRICE</translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.cpp" line="328"/>
+        <location filename="exchange/KLineWidget.cpp" line="352"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%6;&quot;&gt;CHANGE: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;O:%2 H:%3 L:%4 C:%5&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9065,6 +9065,14 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="poundage/PublishPoundageWidget.cpp" line="206"/>
         <source>max:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="extra/mycustomplot.cpp" line="21"/>
+        <source>dd.MMMM</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

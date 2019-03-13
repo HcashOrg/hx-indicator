@@ -217,7 +217,8 @@ SOURCES += main.cpp\
     exchange/ExchangeContractFeeDialog.cpp \
     control/BottomLine.cpp \
     extra/qcustomplot.cpp \
-    exchange/KLineWidget.cpp
+    exchange/KLineWidget.cpp \
+    extra/mycustomplot.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -397,7 +398,8 @@ HEADERS  += firstlogin.h \
     exchange/ExchangeContractFeeDialog.h \
     control/BottomLine.h \
     extra/qcustomplot.h \
-    exchange/KLineWidget.h
+    exchange/KLineWidget.h \
+    extra/mycustomplot.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
