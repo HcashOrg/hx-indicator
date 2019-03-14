@@ -233,11 +233,11 @@ void KLineWidget::drawKLine()
              << uint(customPlot->xAxis->range().upper)
              ;
 
-
-    double span = kLineTypeMap.value( ui->periodComboBox->currentIndex()) * kLineQueryCountMap.value( ui->periodComboBox->currentIndex())
-            * kLineScaleFactorMap.value( ui->periodComboBox->currentIndex());
-    customPlot->xAxis->setRangeUpper(upper);
-    customPlot->xAxis->setRangeLower(upper - span);
+    double span = kLineTypeMap.value( ui->periodComboBox->currentIndex()) * 40;
+//    double span = kLineTypeMap.value( ui->periodComboBox->currentIndex()) * kLineQueryCountMap.value( ui->periodComboBox->currentIndex())
+//            * kLineScaleFactorMap.value( ui->periodComboBox->currentIndex());
+    customPlot->xAxis->setRangeUpper(upper + span * 0.05);
+    customPlot->xAxis->setRangeLower(upper - span * 1.05);
 
     if(customPlot->yAxis->range().lower < 0)
     {
@@ -390,10 +390,11 @@ void KLineWidget::mouseMoveEvent(QMouseEvent *event)
     const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
     double precisionCompensation = qPow(10,baseAssetInfo.precision - quoteAssetInfo.precision);
     int showPrecision = HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair);
-    double changeRate = (kpInfo.kOpen == 0) ? 0 : (kpInfo.kClose - kpInfo.kOpen) / kpInfo.kOpen;
-    QString str = tr("<html><head/><body><p><span style=\" font-size:10px; color:%6;\">CHANGE: %1%    </span><span style=\" font-size:10px; color:#261932;\">O:%2 H:%3 L:%4 C:%5</span></p></body></html>").arg( QString::number(changeRate * 100, 'f', 2))
+    double changeRate = (kpInfo.kOpen < 1e-9) ? 0 : (kpInfo.kClose - kpInfo.kOpen) / kpInfo.kOpen;
+    QString str = tr("<html><head/><body><p><span style=\" font-size:10px; color:%7;\">CHANGE: %1%    </span><span style=\" font-size:10px; color:#261932;\">O:%2 H:%3 L:%4 C:%5 V:%6</span></p></body></html>").arg( QString::number(changeRate * 100, 'f', 2))
             .arg( QString::number(kpInfo.kOpen * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kHigh * precisionCompensation,'f',showPrecision))
             .arg(QString::number(kpInfo.kLow * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kClose * precisionCompensation,'f',showPrecision))
+            .arg( getBigNumberString(kpInfo.baseAmount, baseAssetInfo.precision))
             .arg( (changeRate > 0) ? "rgb(1,215,26)" : "rgb(215,1,1)" );
 
     ui->infoLabel->setText(str);

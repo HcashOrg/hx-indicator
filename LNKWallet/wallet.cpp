@@ -910,8 +910,7 @@ void HXChain::parseTransaction(QString result)
     }
 
     transactionDB.insertTransactionStruct(ts.transactionId,ts);
-    qDebug() << "TTTTTTTTTTTTTTT " << ts.type << ts.transactionId  << ts.feeAmount;
-    qDebug() << result;
+    qDebug() << "TTTTTTTTTTTTTTT " << ts.type << ts.transactionId  << ts.feeAmount << ts.blockNum;
 
     TransactionTypeId typeId;
     typeId.type = ts.type;

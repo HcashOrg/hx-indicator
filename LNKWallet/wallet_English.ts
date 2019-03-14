@@ -5446,22 +5446,22 @@ Cover it or not?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1493"/>
+        <location filename="frame.cpp" line="1499"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2708"/>
+        <location filename="frame.cpp" line="2714"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2711"/>
+        <location filename="frame.cpp" line="2717"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2714"/>
+        <location filename="frame.cpp" line="2720"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6513,8 +6513,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">PRICE</translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.cpp" line="352"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%6;&quot;&gt;CHANGE: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;O:%2 H:%3 L:%4 C:%5&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <location filename="exchange/KLineWidget.cpp" line="394"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%7;&quot;&gt;CHANGE: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;O:%2 H:%3 L:%4 C:%5 V:%6&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

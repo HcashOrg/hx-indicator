@@ -84,7 +84,7 @@ color: rgb(83, 61, 138);</string>
   <widget class="QComboBox" name="periodComboBox">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>470</x>
      <y>120</y>
      <width>60</width>
      <height>20</height>
@@ -196,13 +196,13 @@ font: 16px &quot;微软雅黑&quot;;</string>
      <rect>
       <x>104</x>
       <y>10</y>
-      <width>250</width>
+      <width>330</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(38, 25, 50);
-font: 10px &quot;微软雅黑&quot;;</string>
+font: 10px &quot;宋体&quot;;</string>
     </property>
     <property name="text">
      <string/>
