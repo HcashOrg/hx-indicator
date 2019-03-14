@@ -34,8 +34,8 @@ int WitnessConfig::init()
     }
 
     file = new QFile(filePath);
-    bool readOk = file->open(QIODevice::ReadOnly);
-    if(readOk)
+    inited = file->open(QIODevice::ReadOnly);
+    if(inited)
     {
         QString str = file->readAll();
         file->close();
@@ -47,11 +47,12 @@ int WitnessConfig::init()
         qDebug() << "read witness config file error: " << file->errorString();
     }
 
-    return readOk;
+    return inited;
 }
 
 void WitnessConfig::save()
 {
+    if(!inited)     return;
     mutex.lock();
     if(file->open(QIODevice::WriteOnly))
     {
@@ -73,6 +74,7 @@ void WitnessConfig::save()
 
 void WitnessConfig::modify(QString key, QString value, bool isString)
 {
+    if(!inited)     return;
     if(this->value(key).isEmpty())
     {
         this->append(key,value,isString);
@@ -106,6 +108,7 @@ void WitnessConfig::modify(QString key, QString value, bool isString)
 
 void WitnessConfig::append(QString key, QString value, bool isString)
 {
+    if(!inited)     return;
     if(isString)
     {
         value.prepend("\"");
@@ -117,6 +120,7 @@ void WitnessConfig::append(QString key, QString value, bool isString)
 
 void WitnessConfig::remove(QString key)
 {
+    if(!inited)     return;
     for (QString& str : data)
     {
         QString str2 = str;
