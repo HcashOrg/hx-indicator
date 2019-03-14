@@ -35,8 +35,6 @@ NormalLogin::NormalLogin(QWidget *parent) :
     }
 #endif
 
-
-
 }
 
 NormalLogin::~NormalLogin()

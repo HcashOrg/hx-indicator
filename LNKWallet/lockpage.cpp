@@ -37,7 +37,12 @@ LockPage::LockPage(QWidget *parent) :
     }
 #endif
 
-	
+    ui->syncLabel->setText("Block: " + QString::number(HXChain::getInstance()->walletInfo.blockHeight));
+    QTimer* timer = new QTimer(this);
+    timer->start(1000);
+    connect(timer, &QTimer::timeout, [this](){
+        ui->syncLabel->setText("Block: " + QString::number(HXChain::getInstance()->walletInfo.blockHeight));
+    });
 }
 
 LockPage::~LockPage()
