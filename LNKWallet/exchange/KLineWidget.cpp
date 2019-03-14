@@ -318,12 +318,14 @@ void KLineWidget::rescaleYAxis()
         double dHigh = 0;
         double dLow = 99999999;
 
-        for (int i = 0; i < customPlot->xAxis->tickVector().size(); ++i)
+        QCPRange range = customPlot->xAxis->range();
+        int count = 0;
+        for (int i = 0; i < data->size(); ++i)
         {
-            double dTick = customPlot->xAxis->tickVector().at(i);
-            QCPFinancialDataContainer::const_iterator it = data->findBegin(dTick);
-            if (it != data->end())
+            QCPFinancialDataContainer::const_iterator it = data->at(i);
+            if(range.contains(it->key))
             {
+                count++;
                 if (it->high > dHigh)
                     dHigh = it->high;
                 if (it->low < dLow && it->low > 0)
