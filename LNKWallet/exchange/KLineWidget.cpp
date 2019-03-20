@@ -75,9 +75,9 @@ void KLineWidget::init()
 {
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
-    ui->periodComboBox->setCurrentIndex(4);
+    ui->periodComboBox->setCurrentIndex(HXChain::getInstance()->kLinePeriodIndex);
     connect(ui->periodComboBox,SIGNAL(currentIndexChanged(QString)),this,SLOT(onPeriodComboBoxCurrentIndexChanged(QString)));
-    queryKLineData(ui->periodComboBox->currentIndex(),kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
+    queryKLineData(HXChain::getInstance()->kLinePeriodIndex,kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
     queryRecentDeals(20);
 
     ui->currentPairLabel->setText(QString("%1 / %2").arg(revertERCSymbol(HXChain::getInstance()->currentExchangePair.first))
@@ -86,6 +86,15 @@ void KLineWidget::init()
 
 void KLineWidget::refresh()
 {
+    refreshCount++;
+    if(refreshCount % (kLineTypeMap.value(ui->periodComboBox->currentIndex()) / 5) == 0)
+    {
+        if( customPlot->xAxis->range().upper >= upper)      // 如果用户往前拖动了横坐标 则不刷新
+        {
+            refreshCount = 0;
+            queryKLineData(HXChain::getInstance()->kLinePeriodIndex,kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
+        }
+    }
     queryRecentDeals(20);
 }
 
@@ -206,6 +215,11 @@ void KLineWidget::drawKLine()
     volumeNeg->setPen(Qt::NoPen);
     volumeNeg->setBrush(QColor(215, 1, 1));
 
+    // interconnect x axis ranges of main and bottom axis rects:
+    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(onXRangeChanged(QCPRange)));
+    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), volumeAxisRect->axis(QCPAxis::atBottom), SLOT(setRange(QCPRange)));
+    connect(volumeAxisRect->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis, SLOT(setRange(QCPRange)));
+
     // configure axes of both main and bottom axis rect:
     QSharedPointer<MyQCPAxisTickerDateTime> dateTimeTicker(new MyQCPAxisTickerDateTime);
     dateTimeTicker->setDateTimeSpec(Qt::UTC);
@@ -229,9 +243,6 @@ void KLineWidget::drawKLine()
     double factor = kLineScaleFactorMap.value(ui->periodComboBox->currentIndex()) / 10.0;
 //    double factor = 0.5;
     customPlot->xAxis->scaleRange(factor, customPlot->xAxis->range().lower * factor * 0.5 + customPlot->xAxis->range().upper * (1 - factor * 0.5));
-    qDebug() << "Xxxxxxxxxxxxx " << uint(customPlot->xAxis->range().lower)
-             << uint(customPlot->xAxis->range().upper)
-             ;
 
     double span = kLineTypeMap.value( ui->periodComboBox->currentIndex()) * 40;
 //    double span = kLineTypeMap.value( ui->periodComboBox->currentIndex()) * kLineQueryCountMap.value( ui->periodComboBox->currentIndex())
@@ -250,16 +261,12 @@ void KLineWidget::drawKLine()
         volumeAxisRect->axis(QCPAxis::atLeft)->setRangeLower(0);
     }
 
-    // interconnect x axis ranges of main and bottom axis rects:
-    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), this, SLOT(onXRangeChanged(QCPRange)));
-    connect(customPlot->xAxis, SIGNAL(rangeChanged(QCPRange)), volumeAxisRect->axis(QCPAxis::atBottom), SLOT(setRange(QCPRange)));
-    connect(volumeAxisRect->axis(QCPAxis::atBottom), SIGNAL(rangeChanged(QCPRange)), customPlot->xAxis, SLOT(setRange(QCPRange)));
+
 
     // 设置两个坐标轴矩形左右对齐
     QCPMarginGroup *group = new QCPMarginGroup(customPlot);
     customPlot->axisRect()->setMarginGroup(QCP::msLeft|QCP::msRight, group);
     volumeAxisRect->setMarginGroup(QCP::msLeft|QCP::msRight, group);
-
 
     customPlot->replot();
 }
@@ -288,7 +295,9 @@ void KLineWidget::showRecentDeals()
         ui->recentDealsTableWidget->setItem( i, 1, new QTableWidgetItem(priceStr));
         ui->recentDealsTableWidget->item(i,1)->setTextColor( (deal.type == "buy") ? QColor(1,215,26) : QColor(215,1,1));
 
-        ui->recentDealsTableWidget->setItem( i, 2, new QTableWidgetItem( getBigNumberString( baseAmount, baseAssetInfo.precision)));
+        double amount = roundDown( getBigNumberString(baseAmount, baseAssetInfo.precision).toDouble(), HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
+        QString amountStr = QString::number( amount, 'f', HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
+        ui->recentDealsTableWidget->setItem( i, 2, new QTableWidgetItem( amountStr));
 
         for(int j : {0,1,2})
         {
@@ -310,34 +319,37 @@ void KLineWidget::showRecentDeals()
 
 void KLineWidget::rescaleYAxis()
 {
-    //get visible min and max y values
     if (candlesticks)
     {
         QSharedPointer<QCPFinancialDataContainer> data = candlesticks->data();
 
         double dHigh = 0;
         double dLow = 99999999;
-
-        QCPRange range = customPlot->xAxis->range();
+        unsigned long long volumeHigh = 0;
         int count = 0;
+        QCPRange range = customPlot->xAxis->range();
         for (int i = 0; i < data->size(); ++i)
         {
             QCPFinancialDataContainer::const_iterator it = data->at(i);
             if(range.contains(it->key))
             {
+                if (it->high > dHigh)       dHigh = it->high;
+                if (it->low < dLow && it->low > 0)      dLow = it->low;
+
+                const KPointInfo& kPoint = kPointMap.value( uint(it->key) - 3600 * 8);
                 count++;
-                if (it->high > dHigh)
-                    dHigh = it->high;
-                if (it->low < dLow && it->low > 0)
-                    dLow = it->low;
+                if(kPoint.baseAmount > volumeHigh)      volumeHigh = kPoint.baseAmount;
             }
         }
 
-        customPlot->yAxis->setRange(dLow * 0.5, dHigh * 2);
+        customPlot->yAxis->setRange(dLow / 1.5, dHigh * 1.5);
+
+        const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
+        volumeAxisRect->axis(QCPAxis::atLeft)->setRange(0, getBigNumberString(volumeHigh, baseAssetInfo.precision).toDouble() * 1.5);
     }
 }
 
-KPointInfo KLineWidget::getKPointInfoByTime(uint time_t, uint interval)
+uint KLineWidget::getTimeLeftValue(uint time_t, uint interval)
 {
     QVector<uint> keys = QVector<uint>::fromList( kPointMap.keys());
     uint left = 0;
@@ -350,15 +362,7 @@ KPointInfo KLineWidget::getKPointInfoByTime(uint time_t, uint interval)
         left = time_t - time_t % interval;
     }
 
-    if(keys.contains(left))
-    {
-        return kPointMap.value(left);
-    }
-    else
-    {
-        return KPointInfo();
-    }
-
+    return left;
 }
 
 void KLineWidget::onXRangeChanged(const QCPRange &range)
@@ -381,42 +385,88 @@ void KLineWidget::onXRangeChanged(const QCPRange &range)
 
 void KLineWidget::mouseMoveEvent(QMouseEvent *event)
 {
-    if(customPlot->graphCount() < 2)    return;
+    if(kPointMap.size() < 1)            return;
+//    if(customPlot->graphCount() < 4)    return;
     QVector<double> vx,vy;
     uint x = uint( customPlot->xAxis->pixelToCoord(event->pos().x()));
     double y = customPlot->yAxis->pixelToCoord(event->pos().y());
-
+    double y2 = volumeAxisRect->axis(QCPAxis::atLeft)->pixelToCoord(event->pos().y());
     int offset = QTimeZone::systemTimeZone().standardTimeOffset(QDateTime::currentDateTime());
-    const KPointInfo kpInfo = getKPointInfoByTime(x - offset, uint(kLineTypeMap.value(ui->periodComboBox->currentIndex())));
+    uint left = getTimeLeftValue(x - offset, uint(kLineTypeMap.value(ui->periodComboBox->currentIndex())));
+    const KPointInfo kpInfo = kPointMap.value(left);
     const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
     const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
     double precisionCompensation = qPow(10,baseAssetInfo.precision - quoteAssetInfo.precision);
     int showPrecision = HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair);
     double changeRate = (kpInfo.kOpen < 1e-9) ? 0 : (kpInfo.kClose - kpInfo.kOpen) / kpInfo.kOpen;
+    double amount = roundDown( getBigNumberString(kpInfo.baseAmount, baseAssetInfo.precision).toDouble(), HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
+    QString amountStr = QString::number( amount, 'f', HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
     QString str = tr("<html><head/><body><p><span style=\" font-size:10px; color:%7;\">CHANGE: %1%    </span><span style=\" font-size:10px; color:#261932;\">O:%2 H:%3 L:%4 C:%5 V:%6</span></p></body></html>").arg( QString::number(changeRate * 100, 'f', 2))
             .arg( QString::number(kpInfo.kOpen * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kHigh * precisionCompensation,'f',showPrecision))
             .arg(QString::number(kpInfo.kLow * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kClose * precisionCompensation,'f',showPrecision))
-            .arg( getBigNumberString(kpInfo.baseAmount, baseAssetInfo.precision))
+            .arg( amountStr)
             .arg( (changeRate > 0) ? "rgb(1,215,26)" : "rgb(215,1,1)" );
 
     ui->infoLabel->setText(str);
 
-    vx << 0 << x << customPlot->xAxis->range().maxRange;
-    vy << y << y << y;
-    customPlot->graph(0)->setData(vx,vy);
-    customPlot->graph(0)->setPen(QPen(Qt::red));
-    vx.clear();
-    vy.clear();
-    vx << x << x << x;
-    vy << 0 << y << customPlot->yAxis->range().maxRange;
-    customPlot->graph(1)->setData(vx,vy);
-    customPlot->graph(1)->setPen(QPen(Qt::red));
-    customPlot->replot();
+//    customPlot->graph(0)->data().data()->clear();
 
-    tipLabel->move( customPlot->mapTo(this, event->pos() + QPoint(12,5)));
-    QString timeStr = QDateTime::fromTime_t(x - offset).toString("hh:mm");
-    tipLabel->setText(QString("(%1 , %2)").arg(timeStr).arg(y));
-    tipLabel->adjustSize();
+    customPlot->clearGraphs();
+    customPlot->addGraph();
+    customPlot->addGraph();
+
+    if(event->pos().y() < volumeAxisRect->top())
+    {
+        // 如果鼠标在上面的图
+        vx << 0 << x << customPlot->xAxis->range().maxRange;
+        vy << y << y << y;
+        customPlot->graph(0)->setData(vx,vy);
+        customPlot->graph(0)->setPen(QPen(Qt::blue));
+
+        vx.clear();
+        vy.clear();
+        vx << x << x << x;
+        vy << 0 << y << customPlot->yAxis->range().maxRange;
+
+        customPlot->graph(1)->setData(vx,vy);
+        customPlot->graph(1)->setPen(QPen(Qt::blue));
+        customPlot->replot();
+
+        tipLabel->move( customPlot->mapTo(this, event->pos() + QPoint(12,5)));
+        QString timeStr = QDateTime::fromTime_t(left).toString("hh:mm");
+        tipLabel->setText(QString("(%1 , %2)").arg(timeStr).arg(y));
+        tipLabel->adjustSize();
+    }
+    else
+    {
+        // 如果鼠标在volume图
+        QCPGraph *volumeGraphH = new QCPGraph(volumeAxisRect->axis(QCPAxis::atBottom), volumeAxisRect->axis(QCPAxis::atLeft));
+        QCPGraph *volumeGraphV = new QCPGraph(volumeAxisRect->axis(QCPAxis::atBottom), volumeAxisRect->axis(QCPAxis::atLeft));
+
+        vx << 0 << x << volumeAxisRect->axis(QCPAxis::atBottom)->range().maxRange;
+        vy << y2 << y2 << y2;
+        volumeGraphH->setData(vx,vy);
+        volumeGraphH->setPen(QPen(Qt::blue));
+//        customPlot->graph(2)->setData(vx,vy);
+//        customPlot->graph(2)->setPen(QPen(Qt::blue));
+
+        vx.clear();
+        vy.clear();
+        vx << x << x << x;
+        vy << 0 << y2 << volumeAxisRect->axis(QCPAxis::atLeft)->range().maxRange;
+
+        volumeGraphV->setData(vx,vy);
+        volumeGraphV->setPen(QPen(Qt::blue));
+//        customPlot->graph(3)->setData(vx,vy);
+//        customPlot->graph(3)->setPen(QPen(Qt::blue));
+        customPlot->replot();
+
+        tipLabel->move( customPlot->mapTo(this, event->pos() + QPoint(12,5)));
+        QString timeStr = QDateTime::fromTime_t(left).toString("hh:mm");
+        tipLabel->setText(QString("(%1 , %2)").arg(timeStr).arg(y2));
+        tipLabel->adjustSize();
+    }
+
 }
 
 bool KLineWidget::eventFilter(QObject *watched, QEvent *e)
@@ -427,8 +477,13 @@ bool KLineWidget::eventFilter(QObject *watched, QEvent *e)
         {
             if(customPlot->graphCount() == 0)
             {
-                customPlot->addGraph();
-                customPlot->addGraph();
+//                customPlot->addGraph();
+//                customPlot->addGraph();
+//                if(volumeAxisRect)
+//                {
+//                    customPlot->addGraph(volumeAxisRect->axis(QCPAxis::atBottom,QCPAxis::atLeft));
+//                    customPlot->addGraph(volumeAxisRect->axis(QCPAxis::atBottom,QCPAxis::atLeft));
+//                }
 
                 tipLabel->show();
             }
@@ -553,7 +608,7 @@ void KLineWidget::onPairSelected(const ExchangePair &_pair)
 
     customPlot->clearPlottables();
 
-    queryKLineData(ui->periodComboBox->currentIndex(), kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
+    queryKLineData(HXChain::getInstance()->kLinePeriodIndex, kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
     queryRecentDeals(20);
 }
 
@@ -565,7 +620,9 @@ void KLineWidget::onAddFavoriteClicked()
 
 void KLineWidget::onPeriodComboBoxCurrentIndexChanged(const QString &arg1)
 {
+    refreshCount = 0;
+    HXChain::getInstance()->kLinePeriodIndex = ui->periodComboBox->currentIndex();
     ui->infoLabel->clear();
     customPlot->clearPlottables();
-    queryKLineData(ui->periodComboBox->currentIndex(), kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
+    queryKLineData(HXChain::getInstance()->kLinePeriodIndex, kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
 }

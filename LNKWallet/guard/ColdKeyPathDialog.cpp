@@ -42,7 +42,10 @@ void ColdKeyPathDialog::pop()
 
 void ColdKeyPathDialog::on_okBtn_clicked()
 {
-    filePath = ui->pkFileLineEdit->text();
+    QTextCodec* gbkCodec = QTextCodec::codecForName("GBK");
+    filePath = gbkCodec->fromUnicode(ui->pkFileLineEdit->text());
+qDebug() << "fffffffffffff " << ui->pkFileLineEdit->text()  << filePath;
+//    filePath = ui->pkFileLineEdit->text();
     pwd = ui->pwdLineEdit->text();
     close();
 }

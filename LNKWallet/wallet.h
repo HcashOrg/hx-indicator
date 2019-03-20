@@ -36,14 +36,14 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.16"           // 版本号
+#define WALLET_VERSION "1.2.17"           // 版本号
 
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
 #ifdef TEST_WALLET
-#define LOCKFUND_CONTRACT_ADDRESS  "HXCRYtwTBjTLnh6NAiFpiAtquHBFWZUCLz3u"
-#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCXGWuLefoZN6ACF4FCE6C3f4XKUFgXjAHr"
+#define LOCKFUND_CONTRACT_ADDRESS  "HXCYz5JbktyW9ybi2DLF3ETkhmMVoAThurTU"
+#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCZXisggrbv8wgF4qGyJFttQuv7P8GG3H6E"
 #else
 #define LOCKFUND_CONTRACT_ADDRESS  "HXCPHA7vA91zV6r7iJ8oadFgj97PHAy3dKRa"
 #define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCRCnJ8AV624UZBLNKz4UBweVbhVXkQfNe7"  // 交易所模式合约地址
@@ -51,7 +51,7 @@
 
 #ifdef TEST_WALLET
 #define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5006/api"
-#define MIDDLE_EXCHANGE_URL     "http://192.168.1.121:15000/api"
+#define MIDDLE_EXCHANGE_URL     "http://192.168.1.124:15000/api"
 #else
 #define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"
 #define MIDDLE_EXCHANGE_URL     "http://wallet.hx.cash:15000/api"               // 查询交易所信息的URL
@@ -520,6 +520,7 @@ public:
     const QStringList &getOfficialMiddleWareUrls()const{return officialMiddleWareUrl;}
     void setOfficialMiddleWareUrls(const QStringList &urls){officialMiddleWareUrl = urls;}
 
+    int kLinePeriodIndex = 4;
     ExchangePair currentExchangePair;
     QMap<QString,ExchangeBalance>   assetExchangeBalanceMap;
     int exchangeQueryCount = 0;

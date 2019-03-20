@@ -45,7 +45,11 @@ public:
 
     void init();
 
+public:
     void refresh();
+private:
+    int refreshCount = 0;
+
 
 private:
     void queryRecentDeals(int count);
@@ -53,7 +57,7 @@ private:
     void drawKLine();
     void showRecentDeals();
     void rescaleYAxis();
-    KPointInfo getKPointInfoByTime(uint time_t, uint interval);   // 查找time_t属于哪个时间段
+    uint getTimeLeftValue(uint time_t, uint interval);   // 查找time_t属于哪个时间段
     HttpManager httpManager;
     QMap<uint,KPointInfo>   kPointMap;
     QVector<ExchangeDeal>   deals;
