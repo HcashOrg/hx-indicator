@@ -91,8 +91,9 @@ void KLineWidget::refresh()
     {
         if( customPlot->xAxis->range().upper >= upper)      // 如果用户往前拖动了横坐标 则不刷新
         {
-            refreshCount = 0;
-            queryKLineData(HXChain::getInstance()->kLinePeriodIndex,kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
+//            refreshCount = 0;
+//            queryKLineData(HXChain::getInstance()->kLinePeriodIndex,kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
+            onPeriodComboBoxCurrentIndexChanged(ui->periodComboBox->currentText());
         }
     }
     queryRecentDeals(20);
@@ -365,6 +366,31 @@ uint KLineWidget::getTimeLeftValue(uint time_t, uint interval)
     return left;
 }
 
+void KLineWidget::showLatestInfo()
+{
+    if(kPointMap.size() < 1)
+    {
+        ui->infoLabel->clear();
+        return;
+    }
+
+    const KPointInfo kpInfo = kPointMap.last();
+    const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
+    const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
+    double precisionCompensation = qPow(10,baseAssetInfo.precision - quoteAssetInfo.precision);
+    int showPrecision = HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair);
+    double changeRate = (kpInfo.kOpen < 1e-9) ? 0 : (kpInfo.kClose - kpInfo.kOpen) / kpInfo.kOpen;
+    double amount = roundDown( getBigNumberString(kpInfo.baseAmount, baseAssetInfo.precision).toDouble(), HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
+    QString amountStr = QString::number( amount, 'f', HXChain::getInstance()->getExchangeAmountPrecision(HXChain::getInstance()->currentExchangePair.first));
+    QString str = tr("<html><head/><body><p><span style=\" font-size:10px; color:%7;\">CHANGE: %1%    </span><span style=\" font-size:10px; color:#261932;\">O:%2 H:%3 L:%4 C:%5 V:%6</span></p></body></html>").arg( QString::number(changeRate * 100, 'f', 2))
+            .arg( QString::number(kpInfo.kOpen * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kHigh * precisionCompensation,'f',showPrecision))
+            .arg(QString::number(kpInfo.kLow * precisionCompensation,'f',showPrecision)).arg(QString::number(kpInfo.kClose * precisionCompensation,'f',showPrecision))
+            .arg( amountStr)
+            .arg( (changeRate > 0) ? "rgb(1,215,26)" : "rgb(215,1,1)" );
+
+    ui->infoLabel->setText(str);
+}
+
 void KLineWidget::onXRangeChanged(const QCPRange &range)
 {
 //    if(lower < 1.5e+9 || upper < 1.5e+9)    return;
@@ -380,6 +406,7 @@ void KLineWidget::onXRangeChanged(const QCPRange &range)
 //        boundedRange.upper = upper;
 //    }
 //    customPlot->xAxis->setRange(boundedRange);
+    if(kPointMap.size() < 1)    return;
     rescaleYAxis();
 }
 
@@ -436,6 +463,7 @@ void KLineWidget::mouseMoveEvent(QMouseEvent *event)
         QString timeStr = QDateTime::fromTime_t(left).toString("hh:mm");
         tipLabel->setText(QString("(%1 , %2)").arg(timeStr).arg(y));
         tipLabel->adjustSize();
+        tipLabel->show();
     }
     else
     {
@@ -465,6 +493,7 @@ void KLineWidget::mouseMoveEvent(QMouseEvent *event)
         QString timeStr = QDateTime::fromTime_t(left).toString("hh:mm");
         tipLabel->setText(QString("(%1 , %2)").arg(timeStr).arg(y2));
         tipLabel->adjustSize();
+        tipLabel->show();
     }
 
 }
@@ -485,7 +514,7 @@ bool KLineWidget::eventFilter(QObject *watched, QEvent *e)
 //                    customPlot->addGraph(volumeAxisRect->axis(QCPAxis::atBottom,QCPAxis::atLeft));
 //                }
 
-                tipLabel->show();
+//                tipLabel->show();
             }
         }
         else if(e->type() == QEvent::Leave)
@@ -496,6 +525,7 @@ bool KLineWidget::eventFilter(QObject *watched, QEvent *e)
                 customPlot->replot();
 
                 tipLabel->hide();
+                showLatestInfo();
             }
         }
     }
@@ -558,6 +588,7 @@ void KLineWidget::httpReplied(QByteArray _data, int _status)
         }
 
         drawKLine();
+        showLatestInfo();
     }
 
 }
@@ -605,8 +636,12 @@ void KLineWidget::onPairSelected(const ExchangePair &_pair)
     ui->currentPairLabel->setText( QString("%1 / %2").arg(revertERCSymbol(_pair.first)).arg(revertERCSymbol(_pair.second)));
     ui->priceLabel->clear();
     ui->infoLabel->clear();
+    tipLabel->hide();
 
     customPlot->clearPlottables();
+    customPlot->replot();
+
+    kPointMap.clear();
 
     queryKLineData(HXChain::getInstance()->kLinePeriodIndex, kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
     queryRecentDeals(20);
@@ -623,6 +658,8 @@ void KLineWidget::onPeriodComboBoxCurrentIndexChanged(const QString &arg1)
     refreshCount = 0;
     HXChain::getInstance()->kLinePeriodIndex = ui->periodComboBox->currentIndex();
     ui->infoLabel->clear();
+    tipLabel->hide();
     customPlot->clearPlottables();
+    kPointMap.clear();
     queryKLineData(HXChain::getInstance()->kLinePeriodIndex, kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
 }

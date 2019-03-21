@@ -58,6 +58,7 @@ private:
     void showRecentDeals();
     void rescaleYAxis();
     uint getTimeLeftValue(uint time_t, uint interval);   // 查找time_t属于哪个时间段
+    void showLatestInfo();
     HttpManager httpManager;
     QMap<uint,KPointInfo>   kPointMap;
     QVector<ExchangeDeal>   deals;
