@@ -229,7 +229,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
    </column>
    <column>
     <property name="text">
-     <string>当前已质押金额</string>
+     <string>当前已投票金额</string>
     </property>
     <property name="font">
      <font>

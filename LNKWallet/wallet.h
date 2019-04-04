@@ -324,7 +324,7 @@ struct FeeChargeInfo
 
     QString accountRegisterFee;//账号注册手续费
     QString minerIncomeFee;//领取收益手续费
-    QString minerForeCloseFee;//质押资产手续费
+    QString minerForeCloseFee;//投票资产手续费
     QString minerRedeemFee;//赎回资产手续费
     QString tunnelBindFee;//绑定通道账户手续费
     QString poundagePublishFee;//发布承兑单手续费

@@ -1022,7 +1022,7 @@ void HXChain::parseTransaction(QString result)
         break;
     case TRANSACTION_TYPE_LOCKBALANCE:
     {
-        // 质押资产给miner
+        // 投票资产给miner
         QString addr = operationObject.take("lock_balance_addr").toString();
 
         transactionDB.addAccountTransactionId(addr, typeId);
@@ -1030,7 +1030,7 @@ void HXChain::parseTransaction(QString result)
         break;
     case TRANSACTION_TYPE_FORECLOSE:
     {
-        // 赎回质押资产
+        // 赎回投票资产
         QString addr = operationObject.take("foreclose_addr").toString();
 
         transactionDB.addAccountTransactionId(addr, typeId);
@@ -1069,7 +1069,7 @@ void HXChain::parseTransaction(QString result)
         break;
     case TRANSACTION_TYPE_MINE_INCOME:
     {
-        // 质押挖矿收入
+        // 投票挖矿收入
         QString owner = operationObject.take("pay_back_owner").toString();
 
         if(isMyAddress(owner))

@@ -438,7 +438,8 @@
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="154"/>
-        <source>当前质押费用:</source>
+        <source>当前投票费用:</source>
+        <oldsource>当前质押费用:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2211,7 +2212,8 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="citizen/CitizenAccountPage.ui" line="232"/>
-        <source>当前已质押金额</source>
+        <source>当前已投票金额</source>
+        <oldsource>当前已质押金额</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6651,7 +6653,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="49"/>
-        <source>质押账户</source>
+        <source>投票账户</source>
+        <oldsource>质押账户</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6666,18 +6669,20 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="160"/>
-        <source>质押Citizen</source>
-        <oldsource>质押CITIZEN</oldsource>
+        <source>投票Citizen</source>
+        <oldsource>质押Citizen</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="199"/>
-        <source>质押数量</source>
+        <source>投票数量</source>
+        <oldsource>质押数量</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="215"/>
-        <source>质押币种</source>
+        <source>投票币种</source>
+        <oldsource>质押币种</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6936,7 +6941,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.ui" line="102"/>
         <location filename="miner/minerpage.ui" line="622"/>
-        <source>质押资产</source>
+        <source>投票资产</source>
+        <oldsource>质押资产</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6959,18 +6965,20 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="294"/>
-        <source>质押CITIZEN账户</source>
-        <oldsource>质押miner账户</oldsource>
+        <source>投票CITIZEN账户</source>
+        <oldsource>质押CITIZEN账户</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="307"/>
-        <source>质押币种</source>
+        <source>投票币种</source>
+        <oldsource>质押币种</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="320"/>
-        <source>质押数量</source>
+        <source>投票数量</source>
+        <oldsource>质押数量</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7030,7 +7038,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="700"/>
-        <source>质押信息</source>
+        <source>投票信息</source>
+        <oldsource>质押信息</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7119,7 +7128,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.cpp" line="118"/>
         <source>There&apos;s no foreclose information!</source>
-        <translation type="unfinished">当前没有质押信息！</translation>
+        <translation type="unfinished">当前没有投票信息！</translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="120"/>
@@ -7190,7 +7199,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.cpp" line="726"/>
         <source>MORTGAGE</source>
-        <translation type="unfinished">质押</translation>
+        <translation type="unfinished">投票</translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="952"/>
@@ -7201,7 +7210,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.cpp" line="1115"/>
         <source>Sure to foreclose all assets that you have pledged?</source>
-        <translation type="unfinished">确定要赎回所有您质押的资产？</translation>
+        <translation type="unfinished">确定要赎回所有您投票的资产？</translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="1175"/>
@@ -8505,7 +8514,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="974"/>
-        <source>质押资产(HX)</source>
+        <source>投票资产(HX)</source>
+        <oldsource>质押资产(HX)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

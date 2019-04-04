@@ -46,7 +46,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>质押账户</string>
+      <string>投票账户</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -157,7 +157,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>质押Citizen</string>
+      <string>投票Citizen</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -196,7 +196,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>质押数量</string>
+      <string>投票数量</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -212,7 +212,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>质押币种</string>
+      <string>投票币种</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

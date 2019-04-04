@@ -471,7 +471,8 @@
     </message>
     <message>
         <location filename="citizen/AddPledgeDialog.ui" line="154"/>
-        <source>当前质押费用:</source>
+        <source>当前投票费用:</source>
+        <oldsource>当前质押费用:</oldsource>
         <translation type="unfinished">Current Pledge:</translation>
     </message>
     <message>
@@ -2297,7 +2298,8 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="citizen/CitizenAccountPage.ui" line="232"/>
-        <source>当前已质押金额</source>
+        <source>当前已投票金额</source>
+        <oldsource>当前已质押金额</oldsource>
         <translation type="unfinished">PLEDGE AMOUNT</translation>
     </message>
     <message>
@@ -6791,7 +6793,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="49"/>
-        <source>质押账户</source>
+        <source>投票账户</source>
+        <oldsource>质押账户</oldsource>
         <translation type="unfinished">Account</translation>
     </message>
     <message>
@@ -6806,18 +6809,20 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="160"/>
-        <source>质押Citizen</source>
-        <oldsource>质押CITIZEN</oldsource>
+        <source>投票Citizen</source>
+        <oldsource>质押Citizen</oldsource>
         <translation type="unfinished">Citizen</translation>
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="199"/>
-        <source>质押数量</source>
+        <source>投票数量</source>
+        <oldsource>质押数量</oldsource>
         <translation type="unfinished">Amount to pledge</translation>
     </message>
     <message>
         <location filename="miner/locktominerdialog.ui" line="215"/>
-        <source>质押币种</source>
+        <source>投票币种</source>
+        <oldsource>质押币种</oldsource>
         <translation type="unfinished">Asset to pledge</translation>
     </message>
     <message>
@@ -7051,7 +7056,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.ui" line="102"/>
         <location filename="miner/minerpage.ui" line="622"/>
-        <source>质押资产</source>
+        <source>投票资产</source>
+        <oldsource>质押资产</oldsource>
         <translation type="unfinished">PLEDGE</translation>
     </message>
     <message>
@@ -7078,18 +7084,20 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="294"/>
-        <source>质押CITIZEN账户</source>
-        <oldsource>质押miner账户</oldsource>
+        <source>投票CITIZEN账户</source>
+        <oldsource>质押CITIZEN账户</oldsource>
         <translation type="unfinished">CITIZEN PLEDGE TO</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="307"/>
-        <source>质押币种</source>
+        <source>投票币种</source>
+        <oldsource>质押币种</oldsource>
         <translation type="unfinished">COIN</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="320"/>
-        <source>质押数量</source>
+        <source>投票数量</source>
+        <oldsource>质押数量</oldsource>
         <translation type="unfinished">AMOUNT PLEDGE</translation>
     </message>
     <message>
@@ -7149,7 +7157,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="700"/>
-        <source>质押信息</source>
+        <source>投票信息</source>
+        <oldsource>质押信息</oldsource>
         <translation type="unfinished">PLEDGE</translation>
     </message>
     <message>
@@ -8661,7 +8670,8 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="guard/ProposalDetailDialog.ui" line="974"/>
-        <source>质押资产(HX)</source>
+        <source>投票资产(HX)</source>
+        <oldsource>质押资产(HX)</oldsource>
         <translation type="unfinished">Pledge(HX)</translation>
     </message>
     <message>

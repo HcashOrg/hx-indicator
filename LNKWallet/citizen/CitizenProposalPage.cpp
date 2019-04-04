@@ -358,7 +358,7 @@ void CitizenProposalPage::httpReplied(QByteArray _data, int _status)
 //        voteStateLabel->setVoteNum(info.approvedKeys.size(), info.disapprovedKeys.size(), info.requiredAccounts.size());
 //        ui->proposalTableWidget->setCellWidget(i,3,voteStateLabel);
 
-        //质押数量
+        //投票数量
         ui->proposalTableWidget->setItem(i,4,new QTableWidgetItem(info.pledge));
         //我的投票状态
         QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
