@@ -1625,11 +1625,15 @@ void Frame::jsonDataUpdated(QString id)
             autoupdate->stopAutoDetect();
 #endif
         }
+#ifndef LIGHT_MODE
         HXChain::getInstance()->isExiting = true;
         HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()), -1);
         exitingWidget = new ExitingWidget(this);
         exitingWidget->show();
         resize(exitingWidget->size());
+#else
+        QTimer::singleShot(1,qApp,SLOT(quit()));
+#endif
 
         return;
     }

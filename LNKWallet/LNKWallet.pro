@@ -13,6 +13,7 @@ TEMPLATE = app
 
 DEFINES += TEST_WALLET
 #DEFINES += SAFE_VERSION
+#DEFINES += LIGHT_MODE
 
 win32{
     QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"

@@ -2533,7 +2533,8 @@ better not transfer or upgrade</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="guard/ColdHotTransferDialog.cpp" line="111"/>
+        <location filename="guard/ColdHotTransferDialog.cpp" line="127"/>
+        <location filename="guard/ColdHotTransferDialog.cpp" line="132"/>
         <source>max:</source>
         <translation type="unfinished">最大:</translation>
     </message>
@@ -2757,7 +2758,7 @@ better not transfer or upgrade</source>
         <translation type="obsolete">选择路径</translation>
     </message>
     <message>
-        <location filename="guard/ColdKeyPathDialog.cpp" line="62"/>
+        <location filename="guard/ColdKeyPathDialog.cpp" line="65"/>
         <source>Select the path to save the private key of the cold wallet</source>
         <oldsource>Select the path to save the private key of the cold address</oldsource>
         <translation type="unfinished">选择路径保存冷钱包私钥</translation>
@@ -4656,7 +4657,7 @@ Contract created successfully!</source>
     </message>
     <message>
         <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="289"/>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="510"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="511"/>
         <source>sell</source>
         <translation type="unfinished">卖</translation>
     </message>
@@ -4668,32 +4669,32 @@ Contract created successfully!</source>
     </message>
     <message>
         <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="341"/>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="509"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="510"/>
         <source>buy</source>
         <translation type="unfinished">买</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="423"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="424"/>
         <source>Sure to cancel this order?</source>
         <translation type="unfinished">确定撤销该挂单？</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="539"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="540"/>
         <source>no deal</source>
         <translation type="unfinished">未成交</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="543"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="544"/>
         <source>partial deal</source>
         <translation type="unfinished">部分成交</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="547"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="548"/>
         <source>total deal</source>
         <translation type="unfinished">全部成交</translation>
     </message>
     <message>
-        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="551"/>
+        <location filename="exchange/ExchangeMyOrdersWidget.cpp" line="552"/>
         <source>withdrawed</source>
         <translation type="unfinished">已撤销</translation>
     </message>
@@ -5292,17 +5293,17 @@ Cover it or not?</source>
         <translation type="unfinished">这是一个新导入的钱包，会在下次启动时重新扫描区块链数据。在此之后钱包内账户的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2714"/>
+        <location filename="frame.cpp" line="2718"/>
         <source>Minimize</source>
         <translation type="unfinished">最小化</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2717"/>
+        <location filename="frame.cpp" line="2721"/>
         <source>Restore</source>
         <translation type="unfinished">恢复</translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2720"/>
+        <location filename="frame.cpp" line="2724"/>
         <source>Quit</source>
         <translation type="unfinished">退出</translation>
     </message>
@@ -5938,13 +5939,13 @@ add an account first</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="245"/>
-        <location filename="wallet.cpp" line="269"/>
+        <location filename="wallet.cpp" line="257"/>
+        <location filename="wallet.cpp" line="281"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="785"/>
+        <location filename="wallet.cpp" line="797"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -6337,7 +6338,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%6;&quot;&gt;涨幅: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;开:%2 高:%3 低:%4 收:%5&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.cpp" line="394"/>
+        <location filename="exchange/KLineWidget.cpp" line="385"/>
+        <location filename="exchange/KLineWidget.cpp" line="431"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%7;&quot;&gt;CHANGE: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;O:%2 H:%3 L:%4 C:%5 V:%6&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%7;&quot;&gt;涨幅: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;开:%2 高:%3 低:%4 收:%5 量:%6&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -6562,7 +6564,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="lockpage.ui" line="158"/>
-        <location filename="lockpage.cpp" line="178"/>
+        <location filename="lockpage.cpp" line="183"/>
         <source>Password</source>
         <translation type="unfinished">设置密码</translation>
     </message>
@@ -6573,22 +6575,22 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="lockpage.cpp" line="36"/>
-        <location filename="lockpage.cpp" line="191"/>
+        <location filename="lockpage.cpp" line="196"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="57"/>
+        <location filename="lockpage.cpp" line="62"/>
         <source>Empty!</source>
         <translation type="unfinished">请输入登录密码！</translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="63"/>
+        <location filename="lockpage.cpp" line="68"/>
         <source>At least 8 letters!</source>
         <translation type="unfinished">密码输入错误，至少8位</translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="97"/>
+        <location filename="lockpage.cpp" line="102"/>
         <source>Sure to close the Wallet?</source>
         <oldsource>Sure to close Hcash Wallet?</oldsource>
         <translation type="unfinished">确定关闭钱包?</translation>
@@ -6618,7 +6620,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">确定关闭 Goopal 钱包</translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="143"/>
+        <location filename="lockpage.cpp" line="148"/>
         <source>Wrong password!</source>
         <translation type="unfinished">错误的密码！</translation>
     </message>
@@ -6635,7 +6637,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">锁定剩余</translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="196"/>
+        <location filename="lockpage.cpp" line="201"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -7930,7 +7932,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="normallogin.ui" line="51"/>
-        <location filename="normallogin.cpp" line="169"/>
+        <location filename="normallogin.cpp" line="167"/>
         <source>Password</source>
         <translation type="unfinished">设置密码</translation>
     </message>
@@ -7949,7 +7951,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">欢迎，</translation>
     </message>
     <message>
-        <location filename="normallogin.cpp" line="61"/>
+        <location filename="normallogin.cpp" line="59"/>
         <source>At least 8 letters!</source>
         <translation type="unfinished">密码输入错误，至少8位</translation>
     </message>
@@ -7959,12 +7961,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="normallogin.cpp" line="34"/>
-        <location filename="normallogin.cpp" line="182"/>
+        <location filename="normallogin.cpp" line="180"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished">大写锁定已打开!</translation>
     </message>
     <message>
-        <location filename="normallogin.cpp" line="54"/>
+        <location filename="normallogin.cpp" line="52"/>
         <source>Empty!</source>
         <translation type="unfinished">请输入登录密码！</translation>
     </message>
@@ -7998,7 +8000,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">确定关闭 Goopal 钱包</translation>
     </message>
     <message>
-        <location filename="normallogin.cpp" line="135"/>
+        <location filename="normallogin.cpp" line="133"/>
         <source>Wrong password!</source>
         <translation type="unfinished">错误的密码！</translation>
     </message>
@@ -8015,7 +8017,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">锁定剩余</translation>
     </message>
     <message>
-        <location filename="normallogin.cpp" line="187"/>
+        <location filename="normallogin.cpp" line="185"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished">大写锁定已关闭!</translation>
     </message>
@@ -10563,13 +10565,14 @@ update or not?</source>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="160"/>
         <location filename="guard/WithdrawConfirmPage.cpp" line="216"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="274"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="210"/>
         <source>Transaction of senator-sign-eth-withdraw-final has been sent out!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">senator签名ETH交易已发出！</translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="240"/>
@@ -10577,32 +10580,42 @@ update or not?</source>
         <translation type="unfinished">无私钥</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="318"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="268"/>
+        <source>Transaction of cancel-withdraw has been sent out!</source>
+        <translation type="unfinished">撤销提现交易已发出！</translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="341"/>
         <source>%1 has already signed!</source>
         <translation type="unfinished">%1 已经签名过了！</translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="364"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="492"/>
+        <source>Sure to cancel?</source>
+        <translation type="unfinished">确定撤销该笔提现？</translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="409"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="547"/>
         <source>checking</source>
         <translation type="unfinished">检查中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="366"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="406"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="411"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="451"/>
         <source>check</source>
         <translation type="unfinished">查看</translation>
     </message>
     <message>
         <location filename="guard/WithdrawConfirmPage.cpp" line="248"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="372"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="503"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="417"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="558"/>
         <source>sign</source>
         <translation type="unfinished">签名</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="315"/>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="442"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="338"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="497"/>
         <source>signed</source>
         <translation type="unfinished">已签名</translation>
     </message>
@@ -10612,12 +10625,17 @@ update or not?</source>
         <translation type="unfinished">钱包内没有senator账户</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="404"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="449"/>
         <source>waiting</source>
         <translation type="unfinished">等待中</translation>
     </message>
     <message>
-        <location filename="guard/WithdrawConfirmPage.cpp" line="446"/>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="460"/>
+        <source>cancel</source>
+        <translation type="unfinished">撤销</translation>
+    </message>
+    <message>
+        <location filename="guard/WithdrawConfirmPage.cpp" line="501"/>
         <source>unsigned</source>
         <translation type="unfinished">未签名</translation>
     </message>

@@ -194,6 +194,7 @@ HXChain*   HXChain::getInstance()
 
 void HXChain:: startExe()
 {
+#ifndef LIGHT_MODE
     connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
     QStringList strList;
@@ -215,6 +216,17 @@ void HXChain:: startExe()
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
     logToFile( QStringList() << "start" << NODE_PROC_NAME << strList);
+
+#else
+    connect(clientProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onClientExeStateChanged()));
+
+    QStringList strList;
+    strList << "--wallet-file=" + HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/") + "/wallet.json"
+            << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
+
+    clientProc->start(CLIENT_PROC_NAME,strList);
+#endif
 
 //    HXChain::getInstance()->initWebSocketManager();
 //    emit exeStarted();
@@ -850,12 +862,13 @@ void HXChain::autoSaveWalletFile()
 
 void HXChain::fetchTransactions()
 {
+#ifndef LIGHT_MODE
     if(trxQueryingFinished)
     {
         postRPC( "id+list_transactions+" + QString::number(walletInfo.blockHeight), toJsonFormat( "list_transactions", QJsonArray() << blockTrxFetched << -1));
         trxQueryingFinished = false;
     }
-
+#endif
 }
 
 void HXChain::parseTransaction(QString result)
@@ -1857,7 +1870,7 @@ void HXChain::postRPC(QString _rpcId, QString _rpcCmd, int _priority)
 double roundDown(double decimal, int precision)
 {
     double result = QString::number(decimal,'f',precision).toDouble();
-    qDebug() << result << decimal << (result > decimal + 1e-9);
+
     if( result > decimal + 1e-9)
     {
         result = result - qPow(10, 0 - precision);
