@@ -18,6 +18,7 @@
 #define TRANSACTION_TYPE_LOCKBALANCE            55      // 投票资产给miner
 #define TRANSACTION_TYPE_FORECLOSE              56      // 赎回投票资产
 #define TRANSACTION_TYPE_SENATOR_LOCK_BALANCE   57      // senator交保证金
+#define TRANSACTION_TYPE_CANCEL_WITHDRAW        59      // 取消提现
 #define TRANSACTION_TYPE_DEPOSIT                60      // 充值交易（多签转HX-BTC）
 #define TRANSACTION_TYPE_WITHDRAW               61      // 提现交易
 #define TRANSACTION_TYPE_WITHDRAW_CROSSCHAIN    62

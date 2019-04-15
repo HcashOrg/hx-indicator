@@ -715,53 +715,53 @@
         <translation type="unfinished">当前没有交易记录！</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="424"/>
-        <location filename="alltransactionwidget.cpp" line="718"/>
+        <location filename="alltransactionwidget.cpp" line="425"/>
+        <location filename="alltransactionwidget.cpp" line="742"/>
         <source>confirmed</source>
         <translation type="unfinished">已确认</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="462"/>
+        <location filename="alltransactionwidget.cpp" line="463"/>
         <source>transfer to self</source>
         <translation type="unfinished">转账给自己</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="471"/>
+        <location filename="alltransactionwidget.cpp" line="472"/>
         <source>transfer-out</source>
         <translation type="unfinished">转出</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="483"/>
+        <location filename="alltransactionwidget.cpp" line="484"/>
         <source>transfer-in</source>
         <translation type="unfinished">转入</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="494"/>
+        <location filename="alltransactionwidget.cpp" line="495"/>
         <source>register account</source>
         <translation type="unfinished">注册账户</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="504"/>
+        <location filename="alltransactionwidget.cpp" line="505"/>
         <source>citizen change mining fee</source>
         <translation type="unfinished">citizen变更挖矿管理费</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="514"/>
+        <location filename="alltransactionwidget.cpp" line="515"/>
         <source>bind %1 address: %2</source>
         <translation type="unfinished">绑定%1地址: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="516"/>
+        <location filename="alltransactionwidget.cpp" line="517"/>
         <source>bind tunnel address</source>
         <translation type="unfinished">绑定tunnel地址</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="524"/>
+        <location filename="alltransactionwidget.cpp" line="525"/>
         <source>unbind %1 address: %2</source>
         <translation type="unfinished">解绑%1地址: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="526"/>
+        <location filename="alltransactionwidget.cpp" line="527"/>
         <source>unbind tunnel address</source>
         <translation type="unfinished">解绑tunnel地址</translation>
     </message>
@@ -770,56 +770,56 @@
         <translation type="obsolete">喂价</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="540"/>
+        <location filename="alltransactionwidget.cpp" line="541"/>
         <source>asset feed price: %1:%2  %3:%4</source>
         <oldsource>asset quote: %1:%2  %3:%4</oldsource>
         <translation type="unfinished">资产喂价： %1:%2  %3:%4</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="545"/>
+        <location filename="alltransactionwidget.cpp" line="546"/>
         <source>asset feed price</source>
         <oldsource>asset quote</oldsource>
         <translation type="unfinished">资产喂价</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="553"/>
+        <location filename="alltransactionwidget.cpp" line="554"/>
         <source>create citizen</source>
         <translation type="unfinished">创建citizen</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="562"/>
-        <location filename="alltransactionwidget.cpp" line="972"/>
+        <location filename="alltransactionwidget.cpp" line="563"/>
+        <location filename="alltransactionwidget.cpp" line="996"/>
         <source>type: </source>
         <translation type="unfinished">类型： </translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="566"/>
+        <location filename="alltransactionwidget.cpp" line="567"/>
         <source>cold-hot wallet trx</source>
         <translation type="unfinished">冷热钱包互转</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="569"/>
+        <location filename="alltransactionwidget.cpp" line="570"/>
         <source>change cold-hot wallet multisig-address</source>
         <translation type="unfinished">变更冷热钱包多签地址</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="572"/>
+        <location filename="alltransactionwidget.cpp" line="573"/>
         <source>set price feeder</source>
         <oldsource>set publisher</oldsource>
         <translation type="unfinished">设置喂价人</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="575"/>
+        <location filename="alltransactionwidget.cpp" line="576"/>
         <source>cancel cold-hot trx</source>
         <translation type="unfinished">取消冷热钱包转账</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="578"/>
+        <location filename="alltransactionwidget.cpp" line="579"/>
         <source>cancel withdraw trx</source>
         <translation type="unfinished">取消提现交易</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="625"/>
+        <location filename="alltransactionwidget.cpp" line="626"/>
         <source>create senator</source>
         <translation type="unfinished">创建senator</translation>
     </message>
@@ -829,102 +829,108 @@
         <translation type="obsolete">设置senator是否为formal</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="581"/>
+        <location filename="alltransactionwidget.cpp" line="582"/>
         <source>resign senator</source>
         <translation type="unfinished">senator辞职</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="584"/>
+        <location filename="alltransactionwidget.cpp" line="585"/>
         <source>set contract transfer fee</source>
         <translation type="unfinished">设置合约转账费用</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="587"/>
+        <location filename="alltransactionwidget.cpp" line="588"/>
         <source>change permanent senator</source>
         <oldsource>set senator formal/informal</oldsource>
         <translation type="unfinished">更换正式Senator</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="590"/>
+        <location filename="alltransactionwidget.cpp" line="591"/>
         <source>set crosschain fee</source>
         <translation type="unfinished">设置跨链提现手续费</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="593"/>
+        <location filename="alltransactionwidget.cpp" line="594"/>
         <source>set locked balance of senator</source>
         <translation type="unfinished">设置senator保证金</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="596"/>
+        <location filename="alltransactionwidget.cpp" line="597"/>
         <source>add to blacklist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="599"/>
+        <location filename="alltransactionwidget.cpp" line="600"/>
         <source>change ETH gas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="602"/>
-        <location filename="alltransactionwidget.cpp" line="979"/>
+        <location filename="alltransactionwidget.cpp" line="603"/>
+        <location filename="alltransactionwidget.cpp" line="1003"/>
         <source>%1 (unkown)</source>
         <translation type="unfinished">%1 （未知）</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="608"/>
+        <location filename="alltransactionwidget.cpp" line="609"/>
         <source>sponsor a proposal</source>
         <translation type="unfinished">发起提案</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="615"/>
+        <location filename="alltransactionwidget.cpp" line="616"/>
         <source>proposal ID: %1</source>
         <translation type="unfinished">提案ID： %1</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="617"/>
+        <location filename="alltransactionwidget.cpp" line="618"/>
         <source>vote for a proposal</source>
         <translation type="unfinished">提案投票</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="643"/>
+        <location filename="alltransactionwidget.cpp" line="644"/>
         <source>lock asset to citizen</source>
         <oldsource>lock asset to miner</oldsource>
         <translation type="unfinished">质押资产给citizen</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="659"/>
+        <location filename="alltransactionwidget.cpp" line="660"/>
         <source>foreclose asset from citizen</source>
         <oldsource>foreclose asset from miner</oldsource>
         <translation type="unfinished">从citizen赎回资产</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="674"/>
+        <location filename="alltransactionwidget.cpp" line="675"/>
         <source>senator lock balance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="685"/>
-        <location filename="alltransactionwidget.cpp" line="700"/>
+        <location filename="alltransactionwidget.cpp" line="691"/>
+        <location filename="alltransactionwidget.cpp" line="709"/>
+        <location filename="alltransactionwidget.cpp" line="724"/>
         <source>%1 account: %2</source>
         <translation type="unfinished">%1账户: %2</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="691"/>
+        <location filename="alltransactionwidget.cpp" line="698"/>
+        <source>cancel withdraw</source>
+        <translation type="unfinished">取消提现</translation>
+    </message>
+    <message>
+        <location filename="alltransactionwidget.cpp" line="715"/>
         <source>deposit %1</source>
         <translation type="unfinished">%1充值</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="706"/>
+        <location filename="alltransactionwidget.cpp" line="730"/>
         <source>withdraw %1</source>
         <translation type="unfinished">%1提现</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="864"/>
+        <location filename="alltransactionwidget.cpp" line="888"/>
         <source>transfer to contract failed</source>
         <translation type="unfinished">转账到合约失败</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="1139"/>
+        <location filename="alltransactionwidget.cpp" line="1163"/>
         <source>Sure to clear the cache and recollect trxs? This will not affect you assets on chain.</source>
         <translation type="unfinished">确定要清空缓存并且重新采集交易吗？这不会影响您的链上资产。</translation>
     </message>
@@ -933,72 +939,72 @@
         <translation type="obsolete">已被取消</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="710"/>
+        <location filename="alltransactionwidget.cpp" line="734"/>
         <source>waiting for signature</source>
         <translation type="unfinished">等待签名中</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="714"/>
+        <location filename="alltransactionwidget.cpp" line="738"/>
         <source>being signed</source>
         <translation type="unfinished">正在签名</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="766"/>
+        <location filename="alltransactionwidget.cpp" line="790"/>
         <source>total </source>
         <translation type="unfinished">总计 </translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="775"/>
+        <location filename="alltransactionwidget.cpp" line="799"/>
         <source>get mining income</source>
         <translation type="unfinished">获取挖矿收入</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="784"/>
+        <location filename="alltransactionwidget.cpp" line="808"/>
         <source>issue &quot;%1&quot;</source>
         <translation type="unfinished">发行 &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="786"/>
+        <location filename="alltransactionwidget.cpp" line="810"/>
         <source>issue asset</source>
         <translation type="unfinished">发行资产</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="800"/>
+        <location filename="alltransactionwidget.cpp" line="824"/>
         <source>register contract</source>
         <translation type="unfinished">注册合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="824"/>
+        <location filename="alltransactionwidget.cpp" line="848"/>
         <source>exechange contract withdrawAsset</source>
         <translation type="unfinished">兑换合约提取余额</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="832"/>
+        <location filename="alltransactionwidget.cpp" line="856"/>
         <source>call contract</source>
         <translation type="unfinished">合约调用</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="856"/>
+        <location filename="alltransactionwidget.cpp" line="880"/>
         <source>transfer to contract</source>
         <translation type="unfinished">转账到合约</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="885"/>
+        <location filename="alltransactionwidget.cpp" line="909"/>
         <source>create %1 acceptance</source>
         <translation type="unfinished">创建%1承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="913"/>
+        <location filename="alltransactionwidget.cpp" line="937"/>
         <source>cancel acceptance</source>
         <translation type="unfinished">撤销承兑单</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="937"/>
+        <location filename="alltransactionwidget.cpp" line="961"/>
         <source>get bonus</source>
         <translation type="unfinished">领取分红</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="948"/>
+        <location filename="alltransactionwidget.cpp" line="972"/>
         <source>senator sign to create %1 multi-sig account</source>
         <translation type="unfinished">senator签名创建%1多签账户</translation>
     </message>
@@ -1007,27 +1013,27 @@
         <translation type="obsolete">senator签名创建以太多签账户</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="956"/>
+        <location filename="alltransactionwidget.cpp" line="980"/>
         <source>senator sign ETH trx</source>
         <translation type="unfinished">senator签名以太交易</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="964"/>
+        <location filename="alltransactionwidget.cpp" line="988"/>
         <source>senator sign ETH cold-hot trx</source>
         <translation type="unfinished">senator签名以太冷热钱包转账交易</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="976"/>
+        <location filename="alltransactionwidget.cpp" line="1000"/>
         <source>change senator</source>
         <translation type="unfinished">更换senator</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="985"/>
+        <location filename="alltransactionwidget.cpp" line="1009"/>
         <source>citizen sponsor a proposal</source>
         <translation type="unfinished">citizen发起提案</translation>
     </message>
     <message>
-        <location filename="alltransactionwidget.cpp" line="1017"/>
+        <location filename="alltransactionwidget.cpp" line="1041"/>
         <source>acceptance is used</source>
         <translation type="unfinished">承兑单被使用</translation>
     </message>
@@ -5941,13 +5947,13 @@ add an account first</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="257"/>
-        <location filename="wallet.cpp" line="281"/>
+        <location filename="wallet.cpp" line="258"/>
+        <location filename="wallet.cpp" line="282"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished">启动 %1 失败!</translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="797"/>
+        <location filename="wallet.cpp" line="798"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished">你还没有同步至最新区块。你创建的交易是过时的且不会被承认！</translation>
@@ -7198,8 +7204,12 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="726"/>
-        <source>MORTGAGE</source>
+        <source>VOTE</source>
         <translation type="unfinished">投票</translation>
+    </message>
+    <message>
+        <source>MORTGAGE</source>
+        <translation type="obsolete">投票</translation>
     </message>
     <message>
         <location filename="miner/minerpage.cpp" line="952"/>
@@ -7208,37 +7218,41 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">你需要支付 %1 %2 手续费。是否继续？</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="1115"/>
-        <source>Sure to foreclose all assets that you have pledged?</source>
+        <location filename="miner/minerpage.cpp" line="1116"/>
+        <source>Sure to foreclose all assets that you have voted?</source>
         <translation type="unfinished">确定要赎回所有您投票的资产？</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="1175"/>
+        <source>Sure to foreclose all assets that you have pledged?</source>
+        <translation type="obsolete">确定要赎回所有您投票的资产？</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.cpp" line="1176"/>
         <source>Citizen:</source>
         <translation type="unfinished">Citizen:</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="1176"/>
+        <location filename="miner/minerpage.cpp" line="1177"/>
         <source>Fee:</source>
         <translation type="unfinished">手续费:</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="1177"/>
+        <location filename="miner/minerpage.cpp" line="1178"/>
         <source>Weight:</source>
         <translation type="unfinished">权重:</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="1178"/>
+        <location filename="miner/minerpage.cpp" line="1179"/>
         <source>LastProduce:</source>
         <translation type="unfinished">上次产块高度:</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="1179"/>
+        <location filename="miner/minerpage.cpp" line="1180"/>
         <source>Missed:</source>
         <translation type="unfinished">Miss块数:</translation>
     </message>
     <message>
-        <location filename="miner/minerpage.cpp" line="1180"/>
+        <location filename="miner/minerpage.cpp" line="1181"/>
         <source>Total:</source>
         <translation type="unfinished">总产块数:</translation>
     </message>

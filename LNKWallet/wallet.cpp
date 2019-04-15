@@ -200,18 +200,19 @@ void HXChain:: startExe()
     QStringList strList;
     strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << "--all-plugin-start"
 #ifndef SAFE_VERSION
 //            << "--rewind-on-close"
 #endif
             ;
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay8",true).toBool())
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay9",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/dbReplay8",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay9",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
@@ -1040,6 +1041,14 @@ void HXChain::parseTransaction(QString result)
     {
         // senator交保证金
         QString addr = operationObject.take("lock_address").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_CANCEL_WITHDRAW:
+    {
+        // senator交保证金
+        QString addr = operationObject.take("refund_addr").toString();
 
         transactionDB.addAccountTransactionId(addr, typeId);
     }

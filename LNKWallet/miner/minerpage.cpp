@@ -723,7 +723,7 @@ void MinerPage::showCitizenInfo()
         {
             ui->citizenInfoTableWidget->setItem(i,5, new QTableWidgetItem( tr("unknown")));
         }
-        ui->citizenInfoTableWidget->setItem(i,6,new QTableWidgetItem(tr("MORTGAGE")));
+        ui->citizenInfoTableWidget->setItem(i,6,new QTableWidgetItem(tr("VOTE")));
 
         ToolButtonWidget *buttonInc = new ToolButtonWidget();
         buttonInc->setText(ui->citizenInfoTableWidget->item(i,6)->text());
@@ -1084,6 +1084,7 @@ void MinerPage::on_obtainAllBtn_clicked()
         QJsonArray array;
         for(int i = 0; i < ui->incomeTableWidget->rowCount(); i++)
         {
+            if(ui->incomeTableWidget->item(i,0) == NULL || ui->incomeTableWidget->item(i,1) == NULL)    continue;
             QJsonArray array2;
             array2 << ui->incomeTableWidget->item(i,0)->text();
             QJsonObject object;
@@ -1112,7 +1113,7 @@ void MinerPage::on_forecloseAllBtn_clicked()
     if(!HXChain::getInstance()->ValidateOnChainOperation()) return;
 
     CommonDialog commonDialog(CommonDialog::YesOrNo);
-    commonDialog.setText(tr("Sure to foreclose all assets that you have pledged?"));
+    commonDialog.setText(tr("Sure to foreclose all assets that you have voted?"));
     if(commonDialog.pop())
     {
         QMap<QString,QJsonArray>    map;

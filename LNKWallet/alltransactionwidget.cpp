@@ -299,7 +299,8 @@ void AllTransactionWidget::showTransactions()
         typeIds = HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_DEPOSIT);
         break;
     case WithdrawType:
-        typeIds = HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_WITHDRAW);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_WITHDRAW);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CANCEL_WITHDRAW);
         break;
     case ContractType:
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CONTRACT_REGISTER);
@@ -672,6 +673,29 @@ void AllTransactionWidget::showTransactions()
             item->setTextColor(QColor(255,0,0));
 
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("senator lock balance")));
+        }
+            break;
+        case TRANSACTION_TYPE_CANCEL_WITHDRAW:
+        {
+            QString withdrawTrxId = operationObject.value("txid").toString();
+            const TransactionStruct& ts = HXChain::getInstance()->transactionDB.getTransactionStruct(withdrawTrxId);
+
+            if(!ts.transactionId.isEmpty())
+            {
+                QJsonObject operationObject2 = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
+
+                QString     crosschainAccount   = operationObject2.take("crosschain_account").toString();
+                QString     amountStr           = operationObject2.take("amount").toString();
+                QString     assetSymbol         = operationObject2.take("asset_symbol").toString();
+
+                ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(tr("%1 account: %2").arg(assetSymbol).arg(crosschainAccount)));
+
+                QTableWidgetItem* item = new QTableWidgetItem( "+ " + amountStr + " " + revertERCSymbol( assetSymbol));
+                ui->transactionsTableWidget->setItem(i,3, item);
+                item->setTextColor(QColor(0,170,0));
+            }
+
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("cancel withdraw")));
         }
             break;
         case TRANSACTION_TYPE_DEPOSIT:
