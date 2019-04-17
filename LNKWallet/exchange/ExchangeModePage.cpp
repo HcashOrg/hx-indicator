@@ -65,7 +65,7 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
 
 //    ui->widget_2->hide();
 #ifndef TEST_WALLET
-    ui->KLineBtn->hide();
+//    ui->KLineBtn->hide();
 #endif
     init();
 }

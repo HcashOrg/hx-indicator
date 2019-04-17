@@ -21,7 +21,7 @@
 #define TRANSACTION_TYPE_CANCEL_WITHDRAW        59      // 取消提现
 #define TRANSACTION_TYPE_DEPOSIT                60      // 充值交易（多签转HX-BTC）
 #define TRANSACTION_TYPE_WITHDRAW               61      // 提现交易
-#define TRANSACTION_TYPE_WITHDRAW_CROSSCHAIN    62
+#define TRANSACTION_TYPE_WITHDRAW_CROSSCHAIN    62      // 取消提现
 #define TRANSACTION_TYPE_WITHDRAW_SIGN          63      // 提现交易签名
 #define TRANSACTION_TYPE_WITHDRAW_FINAL         64      // 提现交易final
 #define TRANSACTION_TYPE_COLDHOT                66      // 冷热钱包转账
