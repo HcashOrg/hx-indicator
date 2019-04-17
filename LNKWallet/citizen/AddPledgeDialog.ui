@@ -151,7 +151,7 @@
 font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
      </property>
      <property name="text">
-      <string>当前质押费用:</string>
+      <string>当前投票费用:</string>
      </property>
     </widget>
     <widget class="QLabel" name="currentPledge">

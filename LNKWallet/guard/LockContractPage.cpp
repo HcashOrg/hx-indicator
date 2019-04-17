@@ -143,7 +143,7 @@ void LockContractPage::jsonDataUpdated(QString id)
 
             ui->lockFundTableWidget->horizontalHeaderItem(3)->setText(tr("ACCOUNT"));
             ui->lockFundTableWidget->setRowCount(0);
-            int rowCount = 0;       // 如果一个地址质押了多个币种  分成多行显示
+            int rowCount = 0;       // 如果一个地址投票了多个币种  分成多行显示
             int row = 0;
             for(int i = 0; i < keys.size(); i++)
             {

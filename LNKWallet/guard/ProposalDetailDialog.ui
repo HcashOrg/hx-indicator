@@ -971,7 +971,7 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
           </rect>
          </property>
          <property name="text">
-          <string>质押资产(HX)</string>
+          <string>投票资产(HX)</string>
          </property>
         </widget>
         <widget class="QLabel" name="label_fee">

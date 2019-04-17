@@ -46,7 +46,7 @@ TransferPage::TransferPage(QString name,QWidget *parent,QString assettype) :
 
     ui->amountLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
 
-    QRegExp regx("[a-zA-Z0-9\-]{0,63}");
+    QRegExp regx("[a-zA-Z0-9\-\ ]{0,63}");
     QValidator *validator = new QRegExpValidator(regx, this);
     ui->sendtoLineEdit->setValidator( validator );
     ui->sendtoLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
@@ -400,7 +400,7 @@ void TransferPage::assetComboBox_currentIndexChanged(int index)
 void TransferPage::sendtoLineEdit_textChanged(const QString &arg1)
 {
     ui->addressLabel->clear();
-
+qDebug() << "aaaaaa " << arg1;
     if( ui->sendtoLineEdit->text().contains(" ") || ui->sendtoLineEdit->text().contains("\n"))   // 不判断就remove的话 右键菜单撤销看起来等于不能用
     {
         ui->sendtoLineEdit->setText( ui->sendtoLineEdit->text().simplified().remove(" "));

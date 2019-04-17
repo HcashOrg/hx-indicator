@@ -1432,6 +1432,9 @@ void Frame::jsonDataUpdated(QString id)
 
             setGeometry(0,0, normalLogin->width(), normalLogin->height());
             moveWidgetToScreenCenter(this);
+
+            // 如果一开始node的config.ini文件不存在 则会init失败  再init一次
+            if(!HXChain::getInstance()->witnessConfig->inited)  HXChain::getInstance()->witnessConfig->init();
         }
         else
         {
@@ -1446,6 +1449,9 @@ void Frame::jsonDataUpdated(QString id)
 
             setGeometry(0,0, firstLogin->width(), firstLogin->height());
             moveWidgetToScreenCenter(this);
+
+            // 如果一开始node的config.ini文件不存在 则会init失败  再init一次
+            if(!HXChain::getInstance()->witnessConfig->inited)  HXChain::getInstance()->witnessConfig->init();
         }
 //        else
 //        {
@@ -1619,11 +1625,15 @@ void Frame::jsonDataUpdated(QString id)
             autoupdate->stopAutoDetect();
 #endif
         }
+#ifndef LIGHT_MODE
         HXChain::getInstance()->isExiting = true;
         HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()), -1);
         exitingWidget = new ExitingWidget(this);
         exitingWidget->show();
         resize(exitingWidget->size());
+#else
+        QTimer::singleShot(1,qApp,SLOT(quit()));
+#endif
 
         return;
     }

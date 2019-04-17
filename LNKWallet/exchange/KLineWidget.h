@@ -4,7 +4,7 @@
 #include <QWidget>
 
 #include "wallet.h"
-#include "extra/qcustomplot.h"
+#include "extra/mycustomplot.h"
 #include "extra/HttpManager.h"
 
 namespace Ui {
@@ -45,12 +45,20 @@ public:
 
     void init();
 
+public:
+    void refresh();
+private:
+    int refreshCount = 0;
+
+
 private:
     void queryRecentDeals(int count);
     void queryKLineData(int type, int count);
     void drawKLine();
     void showRecentDeals();
-    KPointInfo getKPointInfoByTime(uint time_t, uint interval);   // 查找time_t属于哪个时间段
+    void rescaleYAxis();
+    uint getTimeLeftValue(uint time_t, uint interval);   // 查找time_t属于哪个时间段
+    void showLatestInfo();
     HttpManager httpManager;
     QMap<uint,KPointInfo>   kPointMap;
     QVector<ExchangeDeal>   deals;
@@ -76,7 +84,7 @@ private slots:
     void onAddFavoriteClicked();
 
 
-    void on_periodComboBox_currentIndexChanged(const QString &arg1);
+    void onPeriodComboBoxCurrentIndexChanged(const QString &arg1);
 
 private:
     Ui::KLineWidget *ui;

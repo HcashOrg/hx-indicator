@@ -154,7 +154,7 @@ void TokenHistoryWidget::showContractEvents()
         QString memo = argObject.value("memo").toString();
 
         ui->tokenRecordTableWidget->setItem(row, 4, new QTableWidgetItem(memo));
-
+qDebug() << "aaaaaaaaaaaaaaa" << event.block <<  fromAddress << toAddress << accountAddress;
         if(toAddress == accountAddress)
         {
             if(fromAddress == accountAddress)
@@ -175,7 +175,7 @@ void TokenHistoryWidget::showContractEvents()
         else
         {
             // 转出
-            ui->tokenRecordTableWidget->setItem(row, 2, new QTableWidgetItem(toAddress.isEmpty()?"-":fromAddress));
+            ui->tokenRecordTableWidget->setItem(row, 2, new QTableWidgetItem(toAddress.isEmpty()?"-":toAddress));
             ui->tokenRecordTableWidget->setItem(row, 3, new QTableWidgetItem( "-" + getBigNumberString(amount, tokenInfo.precision.size() - 1) ));
             ui->tokenRecordTableWidget->item(row,3)->setTextColor(QColor(255,0,0));
         }

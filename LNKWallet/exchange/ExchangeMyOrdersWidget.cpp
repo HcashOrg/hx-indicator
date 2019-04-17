@@ -74,7 +74,7 @@ void ExchangeMyOrdersWidget::init()
 //    ui->historyBtn->setEnabled(false);
 
 
-    queryOrders(1, 14, "first");    // 查两次 第一次获取总数 并显示一部分
+//    queryOrders(1, 14, "first");    // 查两次 第一次获取总数 并显示一部分
 
 }
 
@@ -378,6 +378,7 @@ void ExchangeMyOrdersWidget::onPairSelected(const ExchangePair &_pair)
     ui->currentPairLabel->setText( QString("%1 / %2").arg(revertERCSymbol(_pair.first)).arg(revertERCSymbol(_pair.second)));
 
     getUserOrders(_pair);
+    queryOrders(1, 14, "first");    // 查两次 第一次获取总数 并显示一部分
 }
 
 void ExchangeMyOrdersWidget::onAddFavoriteClicked()

@@ -98,6 +98,11 @@ void ExchangeModePage::refresh()
     getSellOrders(HXChain::getInstance()->currentExchangePair);
     getBuyOrders(HXChain::getInstance()->currentExchangePair);
     getRecentTransactions();
+
+    if(klw)
+    {
+        klw->refresh();
+    }
 }
 
 
@@ -892,7 +897,7 @@ void ExchangeModePage::on_KLineBtn_clicked()
 {
     Q_EMIT backBtnVisible(true);
 
-    KLineWidget* klw = new KLineWidget(this);
+    klw = new KLineWidget(this);
     klw->setAttribute(Qt::WA_DeleteOnClose);
     klw->show();
     klw->raise();

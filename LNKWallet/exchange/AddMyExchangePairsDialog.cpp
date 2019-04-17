@@ -77,7 +77,7 @@ void AddMyExchangePairsDialog::showPairsByQuoteAsset(QString quoteAsset)
         w->setAttribute(Qt::WA_DeleteOnClose);
         w->setPair(pair);
         w->setChecked( HXChain::getInstance()->isMyFavoritePair(pair));
-        w->move( (count % 3) * 125, count / 3 * 40);
+        w->move( (count % 3) * 120, count / 3 * 40);
         w->show();
 
         pairWidgetList.append(w);

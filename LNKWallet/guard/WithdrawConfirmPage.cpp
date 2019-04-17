@@ -256,6 +256,28 @@ void WithdrawConfirmPage::jsonDataUpdated(QString id)
 
         return;
     }
+
+    if(id == "WithdrawConfirmPage-refund_request")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if(result.startsWith("\"result\":"))
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("Transaction of cancel-withdraw has been sent out!"));
+            commonDialog.pop();
+        }
+        else if(result.startsWith("\"error\":"))
+        {
+            ErrorResultDialog errorResultDialog;
+            errorResultDialog.setInfoText(tr("Failed!"));
+            errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
+        }
+
+        return;
+    }
 }
 
 void WithdrawConfirmPage::httpReplied(QByteArray _data, int _status)
@@ -309,29 +331,52 @@ void WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked(int ro
 
     if(column == 6)
     {
-        if(currentType != 1)    return;
-        if(ui->crosschainTransactionTableWidget->item(row,0) && ui->crosschainTransactionTableWidget->item(row,4))
+        if(currentType == 1)
         {
-            if(ui->crosschainTransactionTableWidget->item(row,4)->text() == tr("signed"))
+            if(ui->crosschainTransactionTableWidget->item(row,0) && ui->crosschainTransactionTableWidget->item(row,4))
             {
-                CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText(tr("%1 has already signed!").arg(ui->accountComboBox->currentText()));
-                commonDialog.pop();
+                if(ui->crosschainTransactionTableWidget->item(row,4)->text() == tr("signed"))
+                {
+                    CommonDialog commonDialog(CommonDialog::OkOnly);
+                    commonDialog.setText(tr("%1 has already signed!").arg(ui->accountComboBox->currentText()));
+                    commonDialog.pop();
 
-                return;
+                    return;
+                }
+
+                QString trxId = ui->crosschainTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
+
+                QString generatedTrxId = HXChain::getInstance()->lookupGeneratedTrxByApplyTrxId(trxId);
+
+                if(!generatedTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
+                {
+                    HXChain::getInstance()->postRPC( "WithdrawConfirmPage-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
+                                                     QJsonArray() << generatedTrxId << ui->accountComboBox->currentText()));
+
+                }
             }
-
-            QString trxId = ui->crosschainTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
-
-            QString generatedTrxId = HXChain::getInstance()->lookupGeneratedTrxByApplyTrxId(trxId);
-
-            if(!generatedTrxId.isEmpty() && !ui->accountComboBox->currentText().isEmpty())
+        }
+        else if(currentType == 0)
+        {
+            if(ui->crosschainTransactionTableWidget->item(row,0) && ui->crosschainTransactionTableWidget->item(row,2))
             {
-                HXChain::getInstance()->postRPC( "WithdrawConfirmPage-senator_sign_crosschain_transaction", toJsonFormat( "senator_sign_crosschain_transaction",
-                                                 QJsonArray() << generatedTrxId << ui->accountComboBox->currentText()));
+                CommonDialog commonDialog(CommonDialog::YesOrNo);
+                commonDialog.setText(tr("Sure to cancel?"));
+                if(commonDialog.pop())
+                {
+                    QString trxId = ui->crosschainTransactionTableWidget->item(row,0)->data(Qt::UserRole).toString();
+                    QString withdrawAddress = ui->crosschainTransactionTableWidget->item(row,2)->text();
+                    QString accountName = HXChain::getInstance()->addressToName(withdrawAddress);
+                    if(!accountName.isEmpty())
+                    {
+                        HXChain::getInstance()->postRPC( "WithdrawConfirmPage-refund_request", toJsonFormat( "refund_request",
+                                                         QJsonArray() << accountName << trxId << true));
+                    }
+                }
 
             }
         }
+
 
         return;
     }
@@ -408,6 +453,16 @@ void WithdrawConfirmPage::showCrosschainTransactions()
             toolButton->setText(ui->crosschainTransactionTableWidget->item(i,5)->text());
             ui->crosschainTransactionTableWidget->setCellWidget(i,5,toolButton);
             connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,5));
+
+            QString accountName = HXChain::getInstance()->addressToName(at.withdrawAddress);
+            if(!accountName.isEmpty())
+            {
+                ui->crosschainTransactionTableWidget->setItem(i, 6, new QTableWidgetItem(tr("cancel")));
+                ToolButtonWidget *toolButton = new ToolButtonWidget();
+                toolButton->setText(ui->crosschainTransactionTableWidget->item(i,6)->text());
+                ui->crosschainTransactionTableWidget->setCellWidget(i,6,toolButton);
+                connect(toolButton,&ToolButtonWidget::clicked,std::bind(&WithdrawConfirmPage::on_crosschainTransactionTableWidget_cellClicked,this,i,6));
+            }
 
         }
 

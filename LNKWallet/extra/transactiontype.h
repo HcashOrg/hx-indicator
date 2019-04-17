@@ -15,9 +15,10 @@
 #define TRANSACTION_TYPE_CREATE_GUARD           35      // 创建senator
 #define TRANSACTION_TYPE_FORMAL_GUARD           36      // 成为正式guard
 #define TRANSACTION_TYPE_RESIGN_GUARD           38      // 使guard辞职
-#define TRANSACTION_TYPE_LOCKBALANCE            55      // 质押资产给miner
-#define TRANSACTION_TYPE_FORECLOSE              56      // 赎回质押资产
+#define TRANSACTION_TYPE_LOCKBALANCE            55      // 投票资产给miner
+#define TRANSACTION_TYPE_FORECLOSE              56      // 赎回投票资产
 #define TRANSACTION_TYPE_SENATOR_LOCK_BALANCE   57      // senator交保证金
+#define TRANSACTION_TYPE_CANCEL_WITHDRAW        59      // 取消提现
 #define TRANSACTION_TYPE_DEPOSIT                60      // 充值交易（多签转HX-BTC）
 #define TRANSACTION_TYPE_WITHDRAW               61      // 提现交易
 #define TRANSACTION_TYPE_WITHDRAW_CROSSCHAIN    62
@@ -28,7 +29,7 @@
 #define TRANSACTION_TYPE_COLDHOT_SIGN           68      // 冷热钱包转账签名
 #define TRANSACTION_TYPE_COLDHOT_FINAL          69      // 冷热钱包转账final
 #define TRANSACTION_TYPE_COLDHOT_CANCEL         72      // guard取消冷热钱包互转提案
-#define TRANSACTION_TYPE_MINE_INCOME            73      // 质押挖矿收入
+#define TRANSACTION_TYPE_MINE_INCOME            73      // 投票挖矿收入
 #define TRANSACTION_TYPE_CHANGE_ASSET_ACCOUNT   74      // 变更冷热钱包多签地址 （只在提案的子op中）
 #define TRANSACTION_TYPE_ISSUE_ASSET            75      // 发行资产
 #define TRANSACTION_TYPE_CONTRACT_REGISTER      76      // 注册合约

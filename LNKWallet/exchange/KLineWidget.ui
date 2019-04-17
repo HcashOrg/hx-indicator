@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="title_label">
+  <widget class="QLabel" name="currentPairLabel">
    <property name="geometry">
     <rect>
      <x>60</x>
@@ -23,7 +23,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">font: 20px &quot;微软雅黑&quot;;
+color: rgb(83, 61, 138);</string>
    </property>
    <property name="text">
     <string/>
@@ -83,65 +84,77 @@
   <widget class="QComboBox" name="periodComboBox">
    <property name="geometry">
     <rect>
-     <x>460</x>
+     <x>470</x>
      <y>120</y>
-     <width>72</width>
-     <height>22</height>
+     <width>60</width>
+     <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox{background-color:rgb(135,80,179);border:none;color: white;padding-left: 6px;font: 12px &quot;Microsoft YaHei UI Light&quot;;border-top-left-radius:0px;border-bottom-left-radius:0px;border-top-right-radius:0px;border-bottom-right-radius:0px;}
+QComboBox::drop-down {background:rgb(135,80,179);border:none;}
+QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}
+QComboBox QAbstractItemView {outline: 0px;}
+QComboBox QAbstractItemView{ color:rgb(83,61,138);selection-color: white;background-color: rgb(243,241,250);selection-background-color: rgb(164,77,179);}
+
+</string>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
    </property>
    <item>
     <property name="text">
-     <string>1 min</string>
+     <string>1min</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>5 min</string>
+     <string>5min</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>15 min</string>
+     <string>15min</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>30 min</string>
+     <string>30min</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>1 h</string>
+     <string>1h</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>2 h</string>
+     <string>2h</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>6 h</string>
+     <string>6h</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>12 h</string>
+     <string>12h</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>1 day</string>
+     <string>1day</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>1 week</string>
+     <string>1week</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>1 month</string>
+     <string>1month</string>
     </property>
    </item>
   </widget>
@@ -161,8 +174,8 @@ border-radius:8px;}</string>
    <widget class="QLabel" name="priceLabel">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
+      <x>14</x>
+      <y>12</y>
       <width>90</width>
       <height>20</height>
      </rect>
@@ -181,15 +194,15 @@ font: 16px &quot;微软雅黑&quot;;</string>
    <widget class="QLabel" name="infoLabel">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>104</x>
       <y>10</y>
-      <width>300</width>
+      <width>330</width>
       <height>20</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">color: rgb(38, 25, 50);
-font: 10px &quot;微软雅黑&quot;;</string>
+font: 10px &quot;宋体&quot;;</string>
     </property>
     <property name="text">
      <string/>
@@ -260,7 +273,7 @@ font: 12px &quot;微软雅黑&quot;;</string>
   </widget>
   <zorder>widget2</zorder>
   <zorder>widget</zorder>
-  <zorder>title_label</zorder>
+  <zorder>currentPairLabel</zorder>
   <zorder>marketBtn3</zorder>
   <zorder>favoriteMarketBtn</zorder>
   <zorder>marketBtn1</zorder>

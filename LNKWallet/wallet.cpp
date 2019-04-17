@@ -194,27 +194,40 @@ HXChain*   HXChain::getInstance()
 
 void HXChain:: startExe()
 {
+#ifndef LIGHT_MODE
     connect(nodeProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onNodeExeStateChanged()));
 
     QStringList strList;
     strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << "--all-plugin-start"
 #ifndef SAFE_VERSION
 //            << "--rewind-on-close"
 #endif
             ;
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay8",true).toBool())
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay9",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/dbReplay8",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay9",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
     logToFile( QStringList() << "start" << NODE_PROC_NAME << strList);
+
+#else
+    connect(clientProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onClientExeStateChanged()));
+
+    QStringList strList;
+    strList << "--wallet-file=" + HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/") + "/wallet.json"
+            << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
+
+    clientProc->start(CLIENT_PROC_NAME,strList);
+#endif
 
 //    HXChain::getInstance()->initWebSocketManager();
 //    emit exeStarted();
@@ -850,12 +863,13 @@ void HXChain::autoSaveWalletFile()
 
 void HXChain::fetchTransactions()
 {
+#ifndef LIGHT_MODE
     if(trxQueryingFinished)
     {
         postRPC( "id+list_transactions+" + QString::number(walletInfo.blockHeight), toJsonFormat( "list_transactions", QJsonArray() << blockTrxFetched << -1));
         trxQueryingFinished = false;
     }
-
+#endif
 }
 
 void HXChain::parseTransaction(QString result)
@@ -910,8 +924,7 @@ void HXChain::parseTransaction(QString result)
     }
 
     transactionDB.insertTransactionStruct(ts.transactionId,ts);
-    qDebug() << "TTTTTTTTTTTTTTT " << ts.type << ts.transactionId  << ts.feeAmount;
-    qDebug() << result;
+    qDebug() << "TTTTTTTTTTTTTTT " << ts.type << ts.transactionId  << ts.feeAmount << ts.blockNum;
 
     TransactionTypeId typeId;
     typeId.type = ts.type;
@@ -1010,7 +1023,7 @@ void HXChain::parseTransaction(QString result)
         break;
     case TRANSACTION_TYPE_LOCKBALANCE:
     {
-        // 质押资产给miner
+        // 投票资产给miner
         QString addr = operationObject.take("lock_balance_addr").toString();
 
         transactionDB.addAccountTransactionId(addr, typeId);
@@ -1018,7 +1031,7 @@ void HXChain::parseTransaction(QString result)
         break;
     case TRANSACTION_TYPE_FORECLOSE:
     {
-        // 赎回质押资产
+        // 赎回投票资产
         QString addr = operationObject.take("foreclose_addr").toString();
 
         transactionDB.addAccountTransactionId(addr, typeId);
@@ -1028,6 +1041,14 @@ void HXChain::parseTransaction(QString result)
     {
         // senator交保证金
         QString addr = operationObject.take("lock_address").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_CANCEL_WITHDRAW:
+    {
+        // senator交保证金
+        QString addr = operationObject.take("refund_addr").toString();
 
         transactionDB.addAccountTransactionId(addr, typeId);
     }
@@ -1057,7 +1078,7 @@ void HXChain::parseTransaction(QString result)
         break;
     case TRANSACTION_TYPE_MINE_INCOME:
     {
-        // 质押挖矿收入
+        // 投票挖矿收入
         QString owner = operationObject.take("pay_back_owner").toString();
 
         if(isMyAddress(owner))
@@ -1858,7 +1879,7 @@ void HXChain::postRPC(QString _rpcId, QString _rpcCmd, int _priority)
 double roundDown(double decimal, int precision)
 {
     double result = QString::number(decimal,'f',precision).toDouble();
-    qDebug() << result << decimal << (result > decimal + 1e-9);
+
     if( result > decimal + 1e-9)
     {
         result = result - qPow(10, 0 - precision);

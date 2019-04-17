@@ -58,14 +58,6 @@ void FunctionExchangeWidget::on_onchainOrderBtn_clicked()
     Q_EMIT showOnchainOrderSignal();
 }
 
-void FunctionExchangeWidget::on_myOrderBtn_clicked()
-{
-    ui->exchangeBtn->setChecked(false);
-    ui->onchainOrderBtn->setChecked(false);
-    ui->contractTokenBtn->setChecked(false);
-    Q_EMIT showMyOrderSignal();
-}
-
 void FunctionExchangeWidget::on_contractTokenBtn_clicked()
 {
     ui->exchangeBtn->setChecked(false);

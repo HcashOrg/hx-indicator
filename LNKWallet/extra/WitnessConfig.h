@@ -12,6 +12,7 @@ public:
     explicit WitnessConfig(QObject *parent = 0);
     ~WitnessConfig();
 
+    bool inited = false;
     int init();
     void save();                                // 所有操作调用save后才保存
     void modify(QString key, QString value, bool isString = false);    // 如果有key有多项 只修改了第一个 如果没有则append

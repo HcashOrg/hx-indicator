@@ -180,6 +180,30 @@
     <string/>
    </property>
   </widget>
+  <widget class="QLabel" name="syncLabel">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>445</y>
+     <width>120</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Microsoft YaHei UI Light</family>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: white;}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

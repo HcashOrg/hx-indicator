@@ -100,16 +100,38 @@ void ColdHotTransferDialog::httpReplied(QByteArray _data, int _status)
     if(assetSymbol != ui->assetComboBox->currentText())     return;
 
     AssetInfo info = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(assetSymbol));
-    queriedBalance = jsonValueToDouble( object.value("balance"));
-    qDebug() << assetSymbol << info.symbol << queriedBalance << info.precision << QString::number( roundDown( queriedBalance, info.precision), 'g', info.precision);
+//    queriedBalance = jsonValueToDouble( object.value("balance"));
+
+//    qDebug() << assetSymbol << info.symbol << queriedBalance << info.precision << QString::number( roundDown( queriedBalance, info.precision), 'f', info.precision);
 
     QRegExp rx1(QString("^([0]|[1-9][0-9]{0,10})(?:\\.\\d{0,%1})?$|(^\\t?$)").arg(info.precision));
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
     ui->amountLineEdit->clear();
 
-    ui->amountLineEdit->setPlaceholderText(tr("max:") + QString::number(roundDown( queriedBalance, info.precision), 'f', info.precision));
-//    ui->amountLineEdit->setPlaceholderText("ssss");
+    // ETH 小数精度有18位 小数点8位以后去掉
+    if(object.value("balance").isString())
+    {
+        QString balanceStr = object.value("balance").toString();
+        if(balanceStr.contains("."))
+        {
+            QStringList strList = balanceStr.split(".");
+            if(strList.size() == 2)
+            {
+                QString str = strList.at(1);
+                if(str.size() > info.precision)  str = str.left(info.precision);
+                balanceStr = strList.at(0) + "." + str;
+            }
+        }
+        queriedBalance = balanceStr.toDouble();
+        ui->amountLineEdit->setPlaceholderText(tr("max:") + balanceStr);
+    }
+    else
+    {
+        queriedBalance = object.value("balance").toDouble();
+        ui->amountLineEdit->setPlaceholderText(tr("max:") + QString::number(roundDown( queriedBalance, info.precision), 'f', info.precision));
+    }
+
 }
 
 void ColdHotTransferDialog::on_okBtn_clicked()

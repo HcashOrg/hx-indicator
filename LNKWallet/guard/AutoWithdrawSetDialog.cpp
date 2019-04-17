@@ -74,7 +74,7 @@ void AutoWithdrawSetDialog::showLimitAmount()
         lineEdit->setValidator( validator1 );
 
         ui->tableWidget->setCellWidget(i,1, lineEdit);
-        lineEdit->setText( QString::number( HXChain::getInstance()->getAssetAutoWithdrawLimit(info.symbol)));
+        lineEdit->setText( QString::number( HXChain::getInstance()->getAssetAutoWithdrawLimit(info.symbol), 'g', 12));
     }
     tableWidgetSetItemZebraColor(ui->tableWidget);
 }
