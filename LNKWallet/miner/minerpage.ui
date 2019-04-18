@@ -99,7 +99,7 @@
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>投票资产</string>
+    <string>投票</string>
    </property>
   </widget>
   <widget class="QStackedWidget" name="stackedWidget">
@@ -112,7 +112,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="incomePage">
     <widget class="QTableWidget" name="incomeTableWidget">
@@ -619,7 +619,7 @@
      </column>
      <column>
       <property name="text">
-       <string>投票资产</string>
+       <string>投票</string>
       </property>
       <property name="textAlignment">
        <set>AlignCenter</set>

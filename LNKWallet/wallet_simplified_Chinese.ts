@@ -6346,8 +6346,8 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%6;&quot;&gt;涨幅: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;开:%2 高:%3 低:%4 收:%5&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.cpp" line="385"/>
-        <location filename="exchange/KLineWidget.cpp" line="431"/>
+        <location filename="exchange/KLineWidget.cpp" line="390"/>
+        <location filename="exchange/KLineWidget.cpp" line="436"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%7;&quot;&gt;CHANGE: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;O:%2 H:%3 L:%4 C:%5 V:%6&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%7;&quot;&gt;涨幅: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;开:%2 高:%3 低:%4 收:%5 量:%6&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -6947,14 +6947,20 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.ui" line="102"/>
         <location filename="miner/minerpage.ui" line="622"/>
-        <source>投票资产</source>
-        <oldsource>质押资产</oldsource>
+        <source>投票</source>
+        <oldsource>投票资产</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="186"/>
         <source>来自CITIZEN</source>
         <oldsource>来自miner</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="102"/>
+        <location filename="miner/minerpage.ui" line="622"/>
+        <source>投票</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
