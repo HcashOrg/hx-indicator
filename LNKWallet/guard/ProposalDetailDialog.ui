@@ -289,7 +289,7 @@ QToolButton::checked{color:rgb(84,61,137);border-bottom:2px solid rgb(84,61,137)
         </rect>
        </property>
        <property name="currentIndex">
-        <number>8</number>
+        <number>11</number>
        </property>
        <widget class="QWidget" name="hotColdTransferPage">
         <widget class="QLabel" name="label_3">

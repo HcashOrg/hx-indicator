@@ -6522,8 +6522,8 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">PRICE</translation>
     </message>
     <message>
-        <location filename="exchange/KLineWidget.cpp" line="385"/>
-        <location filename="exchange/KLineWidget.cpp" line="431"/>
+        <location filename="exchange/KLineWidget.cpp" line="390"/>
+        <location filename="exchange/KLineWidget.cpp" line="436"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10px; color:%7;&quot;&gt;CHANGE: %1%    &lt;/span&gt;&lt;span style=&quot; font-size:10px; color:#261932;&quot;&gt;O:%2 H:%3 L:%4 C:%5 V:%6&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7062,8 +7062,8 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="miner/minerpage.ui" line="102"/>
         <location filename="miner/minerpage.ui" line="622"/>
-        <source>投票资产</source>
-        <oldsource>质押资产</oldsource>
+        <source>投票</source>
+        <oldsource>投票资产</oldsource>
         <translation type="unfinished">VOTE</translation>
     </message>
     <message>
@@ -7206,6 +7206,12 @@ p, li { white-space: pre-wrap; }
         <location filename="miner/minerpage.ui" line="863"/>
         <source>权重由高到低</source>
         <translation type="unfinished">Weight high-low</translation>
+    </message>
+    <message>
+        <location filename="miner/minerpage.ui" line="102"/>
+        <location filename="miner/minerpage.ui" line="622"/>
+        <source>投票</source>
+        <translation type="unfinished">vote</translation>
     </message>
     <message>
         <location filename="miner/minerpage.ui" line="868"/>
