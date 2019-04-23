@@ -84,6 +84,13 @@ void TitleBar::backBtnVis(bool isVisible)
 
 }
 
+void TitleBar::extendToWidth(int _width)
+{
+    setGeometry(this->x(), this->y(), _width, this->height());
+    ui->minBtn->move(_width - 64, 0);
+    ui->closeBtn->move(_width - 32, 0);
+}
+
 void TitleBar::jsonDataUpdated(QString id)
 {
 

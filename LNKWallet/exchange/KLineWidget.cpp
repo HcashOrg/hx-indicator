@@ -19,7 +19,22 @@ KLineWidget::KLineWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::KLineWidget)
 {
+
     ui->setupUi(this);
+
+    setStyleSheet("QTableView{background-color:rgb(243,241,250);border:none;border-radius:0px;font: 11px \"微软雅黑\";color:rgb(52,37,90);}"
+                  "QScrollBar:vertical{border:none; width:2px;background:transparent;padding:0px 0px 0px 0px;}"
+                  "QScrollBar::handle:vertical{width:2px;background:rgb(202,196,223);border-radius:0px;min-height:14px;}"
+                  "QScrollBar::add-line:vertical{height:0px;}"
+                  "QScrollBar::sub-line:vertical{height:0px;}"
+                  "QScrollBar::sub-page:vertical {background: transparent;}"
+                  "QScrollBar::add-page:vertical {background: transparent;}"
+//                  "QComboBox{background-color:rgb(135,80,179);border:none;color: white;padding-left: 6px;font: 12px \"Microsoft YaHei UI Light\";border-top-left-radius:0px;border-bottom-left-radius:0px;border-top-right-radius:0px;border-bottom-right-radius:0px;}"
+//                  "QComboBox::drop-down {background:rgb(135,80,179);border:none;}"
+//                  "QComboBox::down-arrow {image: url(:/ui/wallet_ui/downArrow.png);}"
+//                  "QComboBox QAbstractItemView {outline: 0px;}"
+//                  "QComboBox QAbstractItemView{ color:rgb(83,61,138);selection-color: white;background-color: rgb(243,241,250);selection-background-color: rgb(164,77,179);}"
+                  );
 
     ui->recentDealsTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->recentDealsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -87,6 +102,11 @@ void KLineWidget::init()
 
     ui->currentPairLabel->setText(QString("%1 / %2").arg(revertERCSymbol(HXChain::getInstance()->currentExchangePair.first))
                                   .arg(revertERCSymbol(HXChain::getInstance()->currentExchangePair.second)));
+}
+
+void KLineWidget::onPairChanged(const ExchangePair &_pair)
+{
+    onPairSelected(_pair);
 }
 
 void KLineWidget::refresh()
@@ -611,6 +631,7 @@ void KLineWidget::on_favoriteMarketBtn_clicked()
 {
     ExchangePairSelectDialog dialog("");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
+//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
     connect(&dialog, &ExchangePairSelectDialog::addFavoriteClicked, this, &KLineWidget::onAddFavoriteClicked);
     dialog.move(ui->favoriteMarketBtn->mapToGlobal( QPoint(ui->favoriteMarketBtn->width() / 2 - dialog.width() / 2,ui->favoriteMarketBtn->height())));
 
@@ -621,6 +642,7 @@ void KLineWidget::on_marketBtn1_clicked()
 {
     ExchangePairSelectDialog dialog("HX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
+//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
     dialog.move(ui->marketBtn1->mapToGlobal( QPoint(ui->marketBtn1->width() / 2 - dialog.width() / 2,ui->marketBtn1->height())));
 
     dialog.exec();
@@ -630,6 +652,7 @@ void KLineWidget::on_marketBtn3_clicked()
 {
     ExchangePairSelectDialog dialog("ERCPAX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
+//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
     dialog.move(ui->marketBtn3->mapToGlobal( QPoint(ui->marketBtn3->width() / 2 - dialog.width() / 2,ui->marketBtn3->height())));
 
     dialog.exec();

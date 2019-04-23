@@ -34,6 +34,7 @@ public:
 signals:
     void backBtnVisible(bool isShow);
     void showOnchainOrderPage();
+    void pairChanged(ExchangePair);
 
 private slots:
     void jsonDataUpdated(QString id);

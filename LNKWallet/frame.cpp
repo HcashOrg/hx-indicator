@@ -2881,6 +2881,16 @@ void Frame::onCloseWallet()
     }
 }
 
+void Frame::extendToWidth(int _width)
+{
+    this->setGeometry(this->x(), this->y(), centralWidget->x() + _width, this->height());
+    if(titleBar)    titleBar->extendToWidth(_width);
+    if(centralWidget)
+    {
+        centralWidget->setGeometry(centralWidget->x(), centralWidget->y(), _width, centralWidget->height());
+    }
+}
+
 void Frame::ShowBubbleMessage(const QString &title, const QString &context,QSystemTrayIcon::MessageIcon icon, int msecs)
 {
     trayIcon->showMessage(title,context,icon,msecs);

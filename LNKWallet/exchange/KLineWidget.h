@@ -45,6 +45,12 @@ public:
 
     void init();
 
+signals:
+    void pairChanged(ExchangePair);
+public slots:
+    void onPairChanged(const ExchangePair& _pair);
+
+
 public:
     void refresh();
 private:
@@ -81,8 +87,8 @@ private slots:
     void on_marketBtn3_clicked();
 
     void onPairSelected(const ExchangePair& _pair);
-    void onAddFavoriteClicked();
 
+    void onAddFavoriteClicked();
 
     void onPeriodComboBoxCurrentIndexChanged(const QString &arg1);
 

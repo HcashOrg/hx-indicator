@@ -27,6 +27,7 @@ signals:
     void back();
 public slots:
     void backBtnVis(bool isVisible = true);
+    void extendToWidth(int _width);
 private slots:
     void on_minBtn_clicked();
 

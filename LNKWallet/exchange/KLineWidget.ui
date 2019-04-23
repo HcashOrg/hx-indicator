@@ -87,7 +87,7 @@ color: rgb(83, 61, 138);</string>
      <x>470</x>
      <y>120</y>
      <width>60</width>
-     <height>20</height>
+     <height>24</height>
     </rect>
    </property>
    <property name="styleSheet">
