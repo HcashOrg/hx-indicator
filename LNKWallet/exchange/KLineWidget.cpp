@@ -631,7 +631,7 @@ void KLineWidget::on_favoriteMarketBtn_clicked()
 {
     ExchangePairSelectDialog dialog("");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
-//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
     connect(&dialog, &ExchangePairSelectDialog::addFavoriteClicked, this, &KLineWidget::onAddFavoriteClicked);
     dialog.move(ui->favoriteMarketBtn->mapToGlobal( QPoint(ui->favoriteMarketBtn->width() / 2 - dialog.width() / 2,ui->favoriteMarketBtn->height())));
 
@@ -642,7 +642,7 @@ void KLineWidget::on_marketBtn1_clicked()
 {
     ExchangePairSelectDialog dialog("HX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
-//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
     dialog.move(ui->marketBtn1->mapToGlobal( QPoint(ui->marketBtn1->width() / 2 - dialog.width() / 2,ui->marketBtn1->height())));
 
     dialog.exec();
@@ -652,7 +652,7 @@ void KLineWidget::on_marketBtn3_clicked()
 {
     ExchangePairSelectDialog dialog("ERCPAX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
-//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
     dialog.move(ui->marketBtn3->mapToGlobal( QPoint(ui->marketBtn3->width() / 2 - dialog.width() / 2,ui->marketBtn3->height())));
 
     dialog.exec();
