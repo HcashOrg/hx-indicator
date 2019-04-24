@@ -36,7 +36,7 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.18"           // 版本号
+#define WALLET_VERSION "1.2.19"           // 版本号
 
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"

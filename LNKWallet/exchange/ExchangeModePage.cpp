@@ -63,6 +63,9 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->sellPositionTableWidget);
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->buyPositionTableWidget);
 
+    ui->KLineBtn->setCheckable(false);
+//    ui->KLineBtn->setChecked(false);
+
 //    ui->widget_2->hide();
 #ifndef TEST_WALLET
 //    ui->KLineBtn->hide();
@@ -99,10 +102,10 @@ void ExchangeModePage::refresh()
     getBuyOrders(HXChain::getInstance()->currentExchangePair);
     getRecentTransactions();
 
-    if(klw)
-    {
-        klw->refresh();
-    }
+//    if(klw)
+//    {
+//        klw->refresh();
+//    }
 }
 
 
@@ -422,6 +425,7 @@ void ExchangeModePage::on_favoriteMarketBtn_clicked()
 {
     ExchangePairSelectDialog dialog("");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
+//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::pairChanged);
     connect(&dialog, &ExchangePairSelectDialog::addFavoriteClicked, this, &ExchangeModePage::onAddFavoriteClicked);
     dialog.move(ui->favoriteMarketBtn->mapToGlobal( QPoint(ui->favoriteMarketBtn->width() / 2 - dialog.width() / 2,ui->favoriteMarketBtn->height())));
 
@@ -432,6 +436,7 @@ void ExchangeModePage::on_marketBtn1_clicked()
 {
     ExchangePairSelectDialog dialog("HX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
+//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::pairChanged);
     dialog.move(ui->marketBtn1->mapToGlobal( QPoint(ui->marketBtn1->width() / 2 - dialog.width() / 2,ui->marketBtn1->height())));
 
     dialog.exec();
@@ -450,6 +455,7 @@ void ExchangeModePage::on_marketBtn3_clicked()
 {
     ExchangePairSelectDialog dialog("ERCPAX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
+//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::pairChanged);
     dialog.move(ui->marketBtn3->mapToGlobal( QPoint(ui->marketBtn3->width() / 2 - dialog.width() / 2,ui->marketBtn3->height())));
 
     dialog.exec();
@@ -895,10 +901,30 @@ void ExchangeModePage::on_positionComboBox_currentIndexChanged(int index)
 
 void ExchangeModePage::on_KLineBtn_clicked()
 {
-    Q_EMIT backBtnVisible(true);
+//    if(ui->KLineBtn->isChecked())
+//    {
+        Q_EMIT backBtnVisible(true);
 
-    klw = new KLineWidget(this);
-    klw->setAttribute(Qt::WA_DeleteOnClose);
-    klw->show();
-    klw->raise();
+        klw = new KLineWidget;
+        connect(klw, &KLineWidget::pairChanged, this, &ExchangeModePage::onPairSelected);
+//        connect(this, &ExchangeModePage::pairChanged, klw, &KLineWidget::onPairChanged);
+        klw->setAttribute(Qt::WA_DeleteOnClose);
+        klw->setWindowTitle("K-Line");
+        klw->show();
+        klw->raise();
+        klw->move( HXChain::getInstance()->mainFrame->x() + HXChain::getInstance()->mainFrame->width(), HXChain::getInstance()->mainFrame->y());
+
+//        HXChain::getInstance()->mainFrame->extendToWidth(1540);
+//    }
+//    else
+//    {
+//        if(klw)
+//        {
+//            klw->close();
+//            klw = nullptr;
+//        }
+
+//        HXChain::getInstance()->mainFrame->extendToWidth(770);
+
+//    }
 }

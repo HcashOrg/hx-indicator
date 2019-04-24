@@ -1327,7 +1327,7 @@ void HXChain::fetchGuardAllMultisigAddresses(QString accountId)
 QStringList HXChain::getAssetMultisigUpdatedGuards(QString assetSymbol)
 {
     QStringList result;
-    QStringList keys = allGuardMap.keys();
+    QStringList keys = HXChain::getInstance()->getFormalGuards();
     foreach (QString key, keys)
     {
         QString accountId = allGuardMap.value(key).accountId;

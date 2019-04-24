@@ -82,6 +82,8 @@ public slots:
     void ShowMainPageSlot();
 
     void onCloseWallet();
+
+    void extendToWidth(int _width);
 signals:
     void delegateListUpdated();
     void titleBackVisible(bool);
