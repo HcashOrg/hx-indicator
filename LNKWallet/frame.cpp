@@ -516,6 +516,8 @@ void Frame::showLockPage()
     }
     else
     {
+        hideKLineWidget();
+
         lockPage = new LockPage(this);
         lockPage->setAttribute(Qt::WA_DeleteOnClose);
         lockPage->move(0,0);
@@ -2888,6 +2890,15 @@ void Frame::extendToWidth(int _width)
     if(centralWidget)
     {
         centralWidget->setGeometry(centralWidget->x(), centralWidget->y(), _width, centralWidget->height());
+    }
+}
+
+void Frame::hideKLineWidget()
+{
+    if(currentPageNum == 24 && exchangeModePage != NULL)
+    {
+        extendToWidth(770);
+        exchangeModePage->hideKLineWidget();
     }
 }
 

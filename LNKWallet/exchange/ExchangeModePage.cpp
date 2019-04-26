@@ -66,6 +66,28 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     ui->KLineBtn->setCheckable(true);
     ui->KLineBtn->setChecked(false);
 
+    separatorLabel = new QLabel(this);
+    separatorLabel->setGeometry(745, 0, 1, this->height());
+    separatorLabel->setStyleSheet("background-color:rgb(209,206,220);border:none;");
+//    closeKLineWidget = new QLabel(this);
+//    closeKLineWidget->setGeometry(separatorLabel->x(), 0, 120, 30);
+//    closeKLineWidget->setStyleSheet("QLabel{background-color:white;border:1px solid rgb(209,206,220);border-top:none;}");
+//    closeKLineWidget->setAlignment(Qt::AlignCenter);
+//    closeKLineWidget->setText(tr("K-Line  "));
+
+//    closeKLineWidget->raise();
+    separatorLabel->raise();
+
+//    QToolButton* closeKLineBtn = new QToolButton(closeKLineWidget);
+//    closeKLineBtn->setGeometry(closeKLineWidget->width() - 25, 7, 16, 16);
+//    closeKLineBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+//                                 "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
+//    connect(closeKLineBtn, &QToolButton::clicked, this, &ExchangeModePage::hideKLineWidget);
+
+//    closeKLineWidget->hide();
+    separatorLabel->hide();
+
+
 //    ui->widget_2->hide();
 #ifndef TEST_WALLET
 //    ui->KLineBtn->hide();
@@ -559,6 +581,56 @@ void ExchangeModePage::showPosition(int num)
     }
 }
 
+void ExchangeModePage::showSeparator()
+{
+//    closeKLineWidget->raise();
+    separatorLabel->raise();
+    separatorLabel->show();
+//    closeKLineWidget->show();
+}
+
+void ExchangeModePage::hideSeparator()
+{
+    separatorLabel->hide();
+//    closeKLineWidget->hide();
+}
+
+void ExchangeModePage::showKLineWidget()
+{
+    klw = new KLineWidget(this);
+    connect(klw, &KLineWidget::pairChanged, this, &ExchangeModePage::onPairSelected);
+    connect(this, &ExchangeModePage::pairChanged, klw, &KLineWidget::onPairChanged);
+    connect(klw, &KLineWidget::onClose, this, &ExchangeModePage::hideKLineWidget);
+
+    klw->setAttribute(Qt::WA_DeleteOnClose);
+    klw->setWindowTitle("K-Line");
+    klw->show();
+    klw->raise();
+//        klw->move( HXChain::getInstance()->mainFrame->x() + HXChain::getInstance()->mainFrame->width(), HXChain::getInstance()->mainFrame->y());
+
+    klw->move(this->width(), 0);
+    this->setGeometry(this->x(), this->y(), 1490, this->height());
+    HXChain::getInstance()->mainFrame->extendToWidth(1490);
+
+    showSeparator();
+}
+
+void ExchangeModePage::hideKLineWidget()
+{
+    if(klw)
+    {
+        klw->close();
+        klw = nullptr;
+    }
+
+    this->setGeometry(this->x(), this->y(), 770, this->height());
+    HXChain::getInstance()->mainFrame->extendToWidth(770);
+
+    hideSeparator();
+
+    ui->KLineBtn->setChecked(false);
+}
+
 void ExchangeModePage::onAccountComboBoxCurrentIndexChanged(const QString &arg1)
 {
     HXChain::getInstance()->currentAccount = ui->accountComboBox->currentText();
@@ -761,6 +833,8 @@ void ExchangeModePage::on_buyBtn_clicked()
 {
     if(ui->buyPriceLineEdit->text().toDouble() <= 0 || ui->buyAmountLineEdit->text().toDouble() <= 0)   return;
 
+    hideKLineWidget();
+
     const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
     const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
 
@@ -791,6 +865,8 @@ void ExchangeModePage::on_buyBtn_clicked()
 void ExchangeModePage::on_sellBtn_clicked()
 {
     if(ui->sellPriceLineEdit->text().toDouble() <= 0 || ui->sellAmountLineEdit->text().toDouble() <= 0)   return;
+
+    hideKLineWidget();
 
     const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
     const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
@@ -866,6 +942,8 @@ void ExchangeModePage::on_sellAmountLineEdit_textEdited(const QString &arg1)
 
 void ExchangeModePage::on_balanceBtn_clicked()
 {
+    hideKLineWidget();
+
     Q_EMIT backBtnVisible(true);
 
     ExchangeBalancesWidget* exchangeBalancesWidget = new ExchangeBalancesWidget(this);
@@ -878,6 +956,8 @@ void ExchangeModePage::on_balanceBtn_clicked()
 
 void ExchangeModePage::on_myOrdersBtn_clicked()
 {
+    hideKLineWidget();
+
     Q_EMIT backBtnVisible(true);
 
     ExchangeMyOrdersWidget* exchangeMyOrdersWidget = new ExchangeMyOrdersWidget(this);
@@ -908,29 +988,10 @@ void ExchangeModePage::on_KLineBtn_clicked()
     {
 //        Q_EMIT backBtnVisible(true);
 
-        klw = new KLineWidget(this);
-        connect(klw, &KLineWidget::pairChanged, this, &ExchangeModePage::onPairSelected);
-        connect(this, &ExchangeModePage::pairChanged, klw, &KLineWidget::onPairChanged);
-        klw->setAttribute(Qt::WA_DeleteOnClose);
-        klw->setWindowTitle("K-Line");
-        klw->show();
-        klw->raise();
-//        klw->move( HXChain::getInstance()->mainFrame->x() + HXChain::getInstance()->mainFrame->width(), HXChain::getInstance()->mainFrame->y());
-
-        klw->move(this->width(), 0);
-        this->setGeometry(this->x(), this->y(), 1540, this->height());
-        HXChain::getInstance()->mainFrame->extendToWidth(1540);
+        showKLineWidget();
     }
     else
     {
-        if(klw)
-        {
-            klw->close();
-            klw = nullptr;
-        }
-
-        this->setGeometry(this->x(), this->y(), 770, this->height());
-        HXChain::getInstance()->mainFrame->extendToWidth(770);
-
+        hideKLineWidget();
     }
 }

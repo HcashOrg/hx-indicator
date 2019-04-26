@@ -84,6 +84,7 @@ public slots:
     void onCloseWallet();
 
     void extendToWidth(int _width);
+    void hideKLineWidget();
 signals:
     void delegateListUpdated();
     void titleBackVisible(bool);

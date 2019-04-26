@@ -98,12 +98,25 @@ public slots:
     void refresh();
 private:
     void showDepth();
-
     void showPosition(int num);
+
+private slots:
+    void showSeparator();
+    void hideSeparator();
+private:
+    QLabel* separatorLabel = nullptr;
+    QLabel* closeKLineWidget = nullptr;
+
+public slots:
+    void showKLineWidget();
+    void hideKLineWidget();
+private:
+    KLineWidget* klw = nullptr;
 
 private:
     Ui::ExchangeModePage *ui;
-    KLineWidget* klw = nullptr;
+
+
 
     void paintEvent(QPaintEvent*);
 

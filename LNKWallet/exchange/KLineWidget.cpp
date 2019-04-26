@@ -36,6 +36,10 @@ KLineWidget::KLineWidget(QWidget *parent) :
 //                  "QComboBox QAbstractItemView{ color:rgb(83,61,138);selection-color: white;background-color: rgb(243,241,250);selection-background-color: rgb(164,77,179);}"
                   );
 
+    ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
+
+
     ui->recentDealsTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->recentDealsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->recentDealsTableWidget->setFocusPolicy(Qt::NoFocus);
@@ -690,4 +694,9 @@ void KLineWidget::onPeriodComboBoxCurrentIndexChanged(const QString &arg1)
     customPlot->clearPlottables();
     kPointMap.clear();
     queryKLineData(HXChain::getInstance()->kLinePeriodIndex, kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
+}
+
+void KLineWidget::on_closeBtn_clicked()
+{
+    Q_EMIT onClose();
 }

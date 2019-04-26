@@ -30,7 +30,6 @@ CommonDialog::CommonDialog(commonDialogType _type, QWidget *parent) :
     ui->okBtn->setStyleSheet(OKBTN_STYLE);
     ui->cancelBtn->setStyleSheet(CANCELBTN_STYLE);
 
-
     yesOrNO = false;
 
     if( _type == OkAndCancel)

@@ -57,6 +57,8 @@ void TitleBar::on_closeBtn_clicked()
     }
     else
     {
+        HXChain::getInstance()->mainFrame->hideKLineWidget();
+
         CommonDialog commonDialog(CommonDialog::OkAndCancel);
         commonDialog.setText( tr( "Sure to close the Wallet?"));
         bool choice = commonDialog.pop();

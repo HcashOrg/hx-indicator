@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>770</width>
+    <width>720</width>
     <height>510</height>
    </rect>
   </property>
@@ -16,7 +16,7 @@
   <widget class="QLabel" name="currentPairLabel">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>10</x>
      <y>50</y>
      <width>200</width>
      <height>26</height>
@@ -33,7 +33,7 @@ color: rgb(83, 61, 138);</string>
   <widget class="QPushButton" name="marketBtn3">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>250</x>
      <y>80</y>
      <width>90</width>
      <height>18</height>
@@ -49,7 +49,7 @@ color: rgb(83, 61, 138);</string>
   <widget class="QPushButton" name="favoriteMarketBtn">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>10</x>
      <y>80</y>
      <width>100</width>
      <height>18</height>
@@ -65,7 +65,7 @@ color: rgb(83, 61, 138);</string>
   <widget class="QPushButton" name="marketBtn1">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>140</x>
      <y>80</y>
      <width>80</width>
      <height>18</height>
@@ -84,7 +84,7 @@ color: rgb(83, 61, 138);</string>
   <widget class="QComboBox" name="periodComboBox">
    <property name="geometry">
     <rect>
-     <x>470</x>
+     <x>420</x>
      <y>120</y>
      <width>60</width>
      <height>24</height>
@@ -161,7 +161,7 @@ QComboBox QAbstractItemView{ color:rgb(83,61,138);selection-color: white;backgro
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>60</x>
+     <x>10</x>
      <y>110</y>
      <width>480</width>
      <height>354</height>
@@ -215,7 +215,7 @@ font: 10px &quot;宋体&quot;;</string>
   <widget class="QWidget" name="widget2" native="true">
    <property name="geometry">
     <rect>
-     <x>550</x>
+     <x>500</x>
      <y>110</y>
      <width>180</width>
      <height>354</height>
@@ -271,6 +271,25 @@ font: 12px &quot;微软雅黑&quot;;</string>
     </property>
    </widget>
   </widget>
+  <widget class="QToolButton" name="closeBtn">
+   <property name="geometry">
+    <rect>
+     <x>688</x>
+     <y>0</y>
+     <width>32</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
   <zorder>widget2</zorder>
   <zorder>widget</zorder>
   <zorder>currentPairLabel</zorder>
@@ -278,6 +297,7 @@ font: 12px &quot;微软雅黑&quot;;</string>
   <zorder>favoriteMarketBtn</zorder>
   <zorder>marketBtn1</zorder>
   <zorder>periodComboBox</zorder>
+  <zorder>closeBtn</zorder>
  </widget>
  <resources/>
  <connections/>
