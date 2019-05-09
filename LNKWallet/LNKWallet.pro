@@ -219,7 +219,8 @@ SOURCES += main.cpp\
     control/BottomLine.cpp \
     extra/qcustomplot.cpp \
     exchange/KLineWidget.cpp \
-    extra/mycustomplot.cpp
+    extra/mycustomplot.cpp \
+    control/OrderDepthWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -400,7 +401,8 @@ HEADERS  += firstlogin.h \
     control/BottomLine.h \
     extra/qcustomplot.h \
     exchange/KLineWidget.h \
-    extra/mycustomplot.h
+    extra/mycustomplot.h \
+    control/OrderDepthWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -544,7 +546,8 @@ FORMS    += firstlogin.ui \
     exchange/ExchangeBalancesWidget.ui \
     exchange/ExchangeMyOrdersWidget.ui \
     exchange/ExchangeContractFeeDialog.ui \
-    exchange/KLineWidget.ui
+    exchange/KLineWidget.ui \
+    control/OrderDepthWidget.ui
 
 win32{
     DISTFILES += logo.rc
