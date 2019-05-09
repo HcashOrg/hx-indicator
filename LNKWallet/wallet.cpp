@@ -1445,10 +1445,10 @@ void HXChain::autoWithdrawSign()
             {
                 trxSignedGuardCountMap.insert(generatedTrxId, guardAddresses.size());
             }
-            else if( trxSignedGuardCountMap.value(generatedTrxId) == guardAddresses.size())
-            {
-                continue;       // 如果跟上次比数量没变 则跳过
-            }
+//            else if( trxSignedGuardCountMap.value(generatedTrxId) == guardAddresses.size())
+//            {
+//                continue;       // 如果跟上次比数量没变 则跳过
+//            }
             else
             {
                 trxSignedGuardCountMap[generatedTrxId] = guardAddresses.size();
