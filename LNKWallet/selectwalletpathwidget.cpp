@@ -111,6 +111,9 @@ void SelectWalletPathWidget::on_pathBtn_clicked()
 
 void SelectWalletPathWidget::onLanguageChanged(const QString &arg1)
 {
+    // disconnect & connect,  because lower version of qt(before 5.11 tested) will clear combobox when you call retranslateUi()
+    disconnect(ui->languageComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(onLanguageChanged(QString)));
+
     if(ui->languageComboBox->currentIndex() == 0)
     {
         HXChain::getInstance()->mainFrame->setLanguage("Simplified Chinese");
@@ -122,5 +125,9 @@ void SelectWalletPathWidget::onLanguageChanged(const QString &arg1)
 
     ui->retranslateUi(this);
     ui->label_version->setText(QString("v") + WALLET_VERSION);
+
+    ui->languageComboBox->setCurrentText(arg1);
+    connect(ui->languageComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(onLanguageChanged(QString)));
+
 }
 

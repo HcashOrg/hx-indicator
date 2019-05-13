@@ -131,6 +131,7 @@ void ExchangePairSelectDialog::onCellWidgetClicked(int _row, int _column)
 
 bool ExchangePairSelectDialog::event(QEvent *event)
 {
+#ifdef WIN32
     static bool class_amended = false;
     if (event->type() == QEvent::WinIdChange)
     {
@@ -143,6 +144,7 @@ bool ExchangePairSelectDialog::event(QEvent *event)
             ::SetClassLong(hwnd, GCL_STYLE, class_style); // windows系统函数
         }
     }
+#endif
     return QWidget::event(event);
 }
 
