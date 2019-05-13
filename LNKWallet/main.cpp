@@ -219,8 +219,10 @@ int main(int argc, char *argv[])
 
     CommonHelper::setStyle(":/ui/qss/style.qss");
 
+#ifndef LIGHT_MODE
 #ifdef WIN32
     SetUnhandledExceptionFilter(ApplicationCrashHandler);
+#endif
 #endif
 
     int result = a.exec();

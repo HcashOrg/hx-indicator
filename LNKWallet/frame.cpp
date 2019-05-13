@@ -53,6 +53,7 @@
 #include "multisig/MultiSigPage.h"
 #include "autoUpdate/AutoUpdateNotify.h"
 #include "websocketmanager.h"
+#include "LightModeConfig.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -144,6 +145,18 @@ Frame::Frame(): timer(NULL),
     shadowWidget->hide();
     shadowWidget->init(this->size());
 
+#ifdef LIGHT_MODE
+    LightModeConfig* lightModeConfig = new LightModeConfig(this);
+    lightModeConfig->setAttribute(Qt::WA_DeleteOnClose);
+    lightModeConfig->move(0,0);
+    connect( lightModeConfig,SIGNAL(closeWallet()),qApp,SLOT(quit()));
+
+    setGeometry(0,0, lightModeConfig->width(), lightModeConfig->height());
+    moveWidgetToScreenCenter(this);
+
+
+#else
+
     //  如果是第一次使用(未设置 blockchain 路径)
     mutexForConfigFile.lock();
 
@@ -234,6 +247,7 @@ Frame::Frame(): timer(NULL),
 
     }
     mutexForConfigFile.unlock();
+#endif
 
     trayIcon = new QSystemTrayIcon(this);
     //放在托盘提示信息、托盘图标

@@ -220,7 +220,8 @@ SOURCES += main.cpp\
     extra/qcustomplot.cpp \
     exchange/KLineWidget.cpp \
     extra/mycustomplot.cpp \
-    control/OrderDepthWidget.cpp
+    control/OrderDepthWidget.cpp \
+    LightModeConfig.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -402,7 +403,8 @@ HEADERS  += firstlogin.h \
     extra/qcustomplot.h \
     exchange/KLineWidget.h \
     extra/mycustomplot.h \
-    control/OrderDepthWidget.h
+    control/OrderDepthWidget.h \
+    LightModeConfig.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -547,7 +549,8 @@ FORMS    += firstlogin.ui \
     exchange/ExchangeMyOrdersWidget.ui \
     exchange/ExchangeContractFeeDialog.ui \
     exchange/KLineWidget.ui \
-    control/OrderDepthWidget.ui
+    control/OrderDepthWidget.ui \
+    LightModeConfig.ui
 
 win32{
     DISTFILES += logo.rc
