@@ -8,12 +8,27 @@ QT       += core gui xml network websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
-TARGET = HXIndicator
 TEMPLATE = app
 
 DEFINES += TEST_WALLET
 #DEFINES += SAFE_VERSION
-#DEFINES += LIGHT_MODE
+DEFINES += LIGHT_MODE
+
+
+if(contains(DEFINES,TEST_WALLET)){
+    if(contains(DEFINES,LIGHT_MODE)){
+        TARGET = HXIndicator_light_test
+    }else{
+        TARGET = HXIndicator_test
+    }
+}else{
+    if(contains(DEFINES,LIGHT_MODE)){
+        TARGET = HXIndicator_light
+    }else{
+        TARGET = HXIndicator
+    }
+}
+
 
 win32{
     QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
@@ -221,7 +236,8 @@ SOURCES += main.cpp\
     exchange/KLineWidget.cpp \
     extra/mycustomplot.cpp \
     control/OrderDepthWidget.cpp \
-    LightModeConfig.cpp
+    LightModeConfig.cpp \
+    extra/RegularExpression.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -404,7 +420,8 @@ HEADERS  += firstlogin.h \
     exchange/KLineWidget.h \
     extra/mycustomplot.h \
     control/OrderDepthWidget.h \
-    LightModeConfig.h
+    LightModeConfig.h \
+    extra/RegularExpression.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \

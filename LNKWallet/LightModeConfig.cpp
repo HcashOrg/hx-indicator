@@ -2,6 +2,8 @@
 #include "ui_LightModeConfig.h"
 
 #include "wallet.h"
+#include "commondialog.h"
+#include "extra/RegularExpression.h"
 
 LightModeConfig::LightModeConfig(QWidget *parent) :
     QWidget(parent),
@@ -17,11 +19,24 @@ LightModeConfig::~LightModeConfig()
     delete ui;
 }
 
+QString LightModeConfig::getIP()
+{
+    return ui->ipComboBox->currentText();
+}
+
+QString LightModeConfig::getPort()
+{
+    return ui->portLineEdit->text();
+}
+
 void LightModeConfig::InitWidget()
 {
     InitStyle();
 
     ui->label_version->setText(QString("v") + WALLET_VERSION);
+
+    ui->ipComboBox->setValidator( new QRegExpValidator(RegularExpression::getRegExp_IPV4()));
+    ui->portLineEdit->setValidator( new QRegExpValidator(RegularExpression::getRegExp_port()));
 }
 
 void LightModeConfig::InitStyle()
@@ -52,4 +67,27 @@ void LightModeConfig::on_closeBtn_clicked()
 void LightModeConfig::on_miniBtn_clicked()
 {
     emit minimum();
+}
+
+void LightModeConfig::on_enterBtn_clicked()
+{
+    if(!RegularExpression::testRegExp_IPV4(ui->ipComboBox->currentText()))
+    {
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr("Wrong IP!"));
+        dia.pop();
+
+        return;
+    }
+
+    if(!RegularExpression::testRegExp_port(ui->portLineEdit->text()))
+    {
+        CommonDialog dia(CommonDialog::OkOnly);
+        dia.setText(tr("Wrong port!"));
+        dia.pop();
+
+        return;
+    }
+
+    emit enter();
 }

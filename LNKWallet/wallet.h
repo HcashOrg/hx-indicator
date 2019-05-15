@@ -396,6 +396,7 @@ public:
 public:
     // 启动底层节点程序和client程序
     void startExe();
+    void startClient(QString ip, QString port);
     qint64 write(QString);
     bool isExiting;
     void quit();

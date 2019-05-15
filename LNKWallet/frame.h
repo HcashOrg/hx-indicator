@@ -27,6 +27,7 @@ class WaitingForSync;
 class UpgradePage;
 class ApplyDelegatePage;
 class SelectWalletPathWidget;
+class LightModeConfig;
 class ShadowWidget;
 class SmartContractPage;
 class MultiSigPage;
@@ -140,8 +141,8 @@ private slots:
 
 private:
     HttpManager httpManager;////用于查询通道账户余额
-    void enter();
 private slots:
+    void enter();
     void httpReplied(QByteArray _data, int _status);
     void httpError(int _status);
 
@@ -154,6 +155,7 @@ private:
     SelectWalletPathWidget*   selectWalletPathWidget;
     FirstLogin* firstLogin;
     NormalLogin* normalLogin;
+    LightModeConfig* lightModeConfig = nullptr;
 
     MainPage*   mainPage;
     TransferPage* transferPage;

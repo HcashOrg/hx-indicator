@@ -146,10 +146,11 @@ Frame::Frame(): timer(NULL),
     shadowWidget->init(this->size());
 
 #ifdef LIGHT_MODE
-    LightModeConfig* lightModeConfig = new LightModeConfig(this);
+    lightModeConfig = new LightModeConfig(this);
     lightModeConfig->setAttribute(Qt::WA_DeleteOnClose);
     lightModeConfig->move(0,0);
     connect( lightModeConfig,SIGNAL(closeWallet()),qApp,SLOT(quit()));
+    connect( lightModeConfig,SIGNAL(enter()),this,SLOT(enter()));
 
     setGeometry(0,0, lightModeConfig->width(), lightModeConfig->height());
     moveWidgetToScreenCenter(this);
@@ -2837,7 +2838,14 @@ void Frame::newAccount(QString name)
 
 void Frame::enter()
 {
+#ifdef LIGHT_MODE
+    if(lightModeConfig)
+    {
+        HXChain::getInstance()->startClient(lightModeConfig->getIP(), lightModeConfig->getPort());
+    }
+#else
     HXChain::getInstance()->startExe();
+#endif
 
     waitingForSync = new WaitingForSync(this);
     waitingForSync->setAttribute(Qt::WA_DeleteOnClose);

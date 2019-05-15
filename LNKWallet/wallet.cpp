@@ -219,18 +219,23 @@ void HXChain:: startExe()
     logToFile( QStringList() << "start" << NODE_PROC_NAME << strList);
 
 #else
+
+#endif
+
+//    HXChain::getInstance()->initWebSocketManager();
+    //    emit exeStarted();
+}
+
+void HXChain::startClient(QString ip, QString port)
+{
     connect(clientProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onClientExeStateChanged()));
 
     QStringList strList;
     strList << "--wallet-file=" + HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/") + "/wallet.json"
-            << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << QString("--server-rpc-endpoint=ws://%1:%2").arg(ip).arg(port)
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
 
     clientProc->start(CLIENT_PROC_NAME,strList);
-#endif
-
-//    HXChain::getInstance()->initWebSocketManager();
-//    emit exeStarted();
 }
 
 void HXChain::onNodeExeStateChanged()
