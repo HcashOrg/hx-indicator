@@ -31,7 +31,8 @@ void WebSocketManager::processRPC(QString _rpcId, QString _rpcCmd)
     m_rpcId = _rpcId;
     m_buff.clear();
     m_webSocket->sendTextMessage(_rpcCmd);
-
+qDebug() << _rpcId ;
+qDebug() << _rpcCmd;
 //    logToFile( QStringList() << QString("rpc posted: %1 %2").arg(_rpcId)
 //               .arg(_rpcCmd) );
 

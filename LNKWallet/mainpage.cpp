@@ -5,7 +5,7 @@
 #include <QScrollBar>
 #include <QMovie>
 #include <QClipboard>
-
+#include <QDesktopServices>
 
 #include "mainpage.h"
 #include "ui_mainpage.h"
@@ -340,7 +340,7 @@ void MainPage::jsonDataUpdated(QString id)
             BackupWalletDialog backupWalletDialog;
             backupWalletDialog.pop();
 
-
+#ifndef LIGHT_MODE
             // 写入 track-address
             result.prepend("{");
             result.append("}");
@@ -349,7 +349,7 @@ void MainPage::jsonDataUpdated(QString id)
             QString address = jsonObject.take("result").toString();
             HXChain::getInstance()->witnessConfig->addTrackAddress(address);
             HXChain::getInstance()->witnessConfig->save();
-
+#endif
 
             QTimer::singleShot(5000,this,&MainPage::init);
         }
@@ -489,12 +489,17 @@ void MainPage::InitStyle()
 
 void MainPage::on_allTransactionBtn_clicked()
 {
+#ifdef LIGHT_MODE
+    QString url = "http://explorer.hx.cash/#/address?address=" + ui->addressLabel->text();
+    QDesktopServices::openUrl(url);
+#else
     emit backBtnVisible(true);
 
     AllTransactionWidget* allTransactionWidget = new AllTransactionWidget(this);
     allTransactionWidget->setAttribute(Qt::WA_DeleteOnClose);
     allTransactionWidget->show();
     allTransactionWidget->raise();
+#endif
 }
 
 void MainPage::on_backupBtn_clicked()

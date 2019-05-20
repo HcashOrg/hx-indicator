@@ -45,6 +45,10 @@ CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
     ui->stackedWidget->addWidget(pageWidget);
     connect(pageWidget,&PageScrollWidget::currentPageChangeSignal,this,&CitizenAccountPage::pageChangeSlot);
 
+#ifdef LIGHT_MODE
+    ui->startMineBtn->hide();
+    ui->changeFeeBtn->hide();
+#endif
     init();
 }
 
@@ -172,7 +176,7 @@ void CitizenAccountPage::on_accountComboBox_currentIndexChanged(const QString &a
     ui->idLabel->setText(minerInfo.minerId);
     ui->totalProducedLabel->setText(QString::number(minerInfo.totalProduced));
     ui->lastBlockLabel->setText(QString::number(minerInfo.lastBlock));
-
+#ifndef LIGHT_MODE
     if(!minerInfo.minerId.isEmpty())
     {
         if(HXChain::getInstance()->witnessConfig->isProductionEnabled() && HXChain::getInstance()->witnessConfig->getMiners().contains(minerInfo.minerId))
@@ -190,7 +194,7 @@ void CitizenAccountPage::on_accountComboBox_currentIndexChanged(const QString &a
         ui->startMineBtn->hide();
         ui->changeFeeBtn->hide();
     }
-
+#endif
     showLockBalance();
 }
 
@@ -202,6 +206,13 @@ void CitizenAccountPage::on_newCitizenBtn_clicked()
 
 void CitizenAccountPage::on_startMineBtn_clicked()
 {
+//#ifdef LIGHT_MODE
+//    CommonDialog commonDialog(CommonDialog::OkOnly);
+//    commonDialog.setText(tr("Citizens can not start mining in light mode wallet!"));
+//    commonDialog.pop();
+
+//#else
+
     CommonDialog commonDialog(CommonDialog::OkAndCancel);
     commonDialog.setText(tr("Sure to open the mining function of this citizen account?"));
     if(commonDialog.pop())
@@ -210,6 +221,7 @@ void CitizenAccountPage::on_startMineBtn_clicked()
                                          toJsonFormat( "dump_private_key", QJsonArray() << ui->accountComboBox->currentText() ));
 
     }
+//#endif
 }
 
 void CitizenAccountPage::on_changeFeeBtn_clicked()

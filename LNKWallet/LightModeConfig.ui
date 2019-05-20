@@ -13,30 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="tipLabel">
-   <property name="geometry">
-    <rect>
-     <x>23</x>
-     <y>319</y>
-     <width>200</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Microsoft YaHei UI Light</family>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(255,34,76);</string>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QToolButton" name="enterBtn">
    <property name="geometry">
     <rect>
@@ -168,7 +144,7 @@ color: rgb(255, 255, 255);</string>
     <string notr="true"/>
    </property>
    <property name="text">
-    <string>50320</string>
+    <string>60038</string>
    </property>
    <property name="echoMode">
     <enum>QLineEdit::Normal</enum>
@@ -226,11 +202,6 @@ color:white;</string>
    <property name="editable">
     <bool>true</bool>
    </property>
-   <item>
-    <property name="text">
-     <string>127.0.0.1</string>
-    </property>
-   </item>
   </widget>
  </widget>
  <resources/>

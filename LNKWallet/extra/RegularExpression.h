@@ -10,6 +10,8 @@ namespace RegularExpression {
 
     bool testRegExp_port(QString str);
     QRegExp getRegExp_port();
+
+    void test();
 }
 
 

@@ -50,7 +50,7 @@
 #endif
 
 #ifdef TEST_WALLET
-#define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5006/api"
+#define MIDDLE_DEFAULT_URL      "http://129.204.162.249:5005/api"
 #define MIDDLE_EXCHANGE_URL     "http://192.168.1.124:15000/api"
 #else
 #define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"

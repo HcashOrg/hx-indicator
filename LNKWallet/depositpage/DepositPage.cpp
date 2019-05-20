@@ -72,13 +72,14 @@ void DepositPage::jsonDataUpdated(QString id)
         _p->tunnle_address = DepositDataUtil::parseTunnelAddress(result);
         if(_p->tunnle_address.isEmpty())
         {
+#ifndef LIGHT_MODE
             if(!HXChain::getInstance()->witnessConfig->getChainTypes().contains(_p->assetSymbol))
             {
                 _p->qrcodeWidget->SetQRString("");
                 _p->qrcodeWidget->SetAddress(tr("no %1 plugin").arg(_p->assetSymbol));
                 return;
             }
-
+#endif
             if(_p->actualAssetSymbol == _p->assetSymbol)
             {
                 QString tunn = HXChain::getInstance()->configFile->value(QString("/tunnel/%1%2").arg(_p->address).arg(_p->actualAssetSymbol)).toString();

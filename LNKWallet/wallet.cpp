@@ -71,7 +71,9 @@ HXChain::HXChain()
     currentPort = CLIENT_RPC_PORT;
     currentAccount = "";
 
+#ifndef LIGHT_MODE
     witnessConfig = new WitnessConfig;
+#endif
     configFile = new QSettings( walletConfigPath + "/config.ini", QSettings::IniFormat);
     if( configFile->value("/settings/lockMinutes").toInt() == 0)   // 如果第一次，没有config.ini
     {
@@ -725,7 +727,7 @@ void HXChain::getExchangePairs()
 
 int HXChain::getExchangePairPrecision(const ExchangePair &pair)
 {
-    QMap<QString,int> map = { {"BTC",5}, {"ETH",3}, {"HC",1}, {"HX",0}, {"LTC",3}, {"ERCPAX",1}, {"ERCELF",0}};
+    QMap<QString,int> map = { {"BTC",5}, {"ETH",3}, {"HC",1}, {"HX",0}, {"LTC",3}, {"ERCPAX",1}, {"ERCELF",0}, {"BCH",3}};
 
     int precision = map.value(pair.second) - map.value(pair.first) + 4;
     if(precision > 8)
@@ -742,7 +744,7 @@ int HXChain::getExchangePairPrecision(const ExchangePair &pair)
 
 int HXChain::getExchangeAmountPrecision(QString assetSymbol)
 {
-    QMap<QString,int> map = { {"BTC",4}, {"ETH",3}, {"HC",2}, {"HX",2}, {"LTC",3}, {"ERCPAX",2}, {"ERCELF",2}};
+    QMap<QString,int> map = { {"BTC",4}, {"ETH",3}, {"HC",2}, {"HX",2}, {"LTC",3}, {"ERCPAX",2}, {"ERCELF",2}, {"BCH",3}};
 
     int precision = 2;
     if(map.contains(assetSymbol))   precision = map.value(assetSymbol);

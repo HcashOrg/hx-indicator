@@ -530,8 +530,10 @@ void MultiSigPage::on_addMultiSigBtn_clicked()
         HXChain::getInstance()->configFile->setValue("/multisigAddresses/" + addMultiSigAddressDialog.multiSigAddress, 1);
         init();
 
+#ifndef LIGHT_MODE
         HXChain::getInstance()->witnessConfig->addTrackAddress(addMultiSigAddressDialog.multiSigAddress);
         HXChain::getInstance()->witnessConfig->save();
+#endif
 
         HXChain::getInstance()->resyncNextTime = true;
         HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);

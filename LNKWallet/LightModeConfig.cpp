@@ -11,6 +11,9 @@ LightModeConfig::LightModeConfig(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    default_ip_port_vector.append(IP_Port("127.0.0.1", "50420"));
+    default_ip_port_vector.append(IP_Port("192.168.1.121", "60038"));
+
     InitWidget();
 }
 
@@ -37,6 +40,11 @@ void LightModeConfig::InitWidget()
 
     ui->ipComboBox->setValidator( new QRegExpValidator(RegularExpression::getRegExp_IPV4()));
     ui->portLineEdit->setValidator( new QRegExpValidator(RegularExpression::getRegExp_port()));
+
+    foreach (const IP_Port& v, default_ip_port_vector)
+    {
+        ui->ipComboBox->addItem(QString("%1:%2").arg(v.ip).arg(v.port), QVariant::fromValue(v));
+    }
 }
 
 void LightModeConfig::InitStyle()
@@ -90,4 +98,11 @@ void LightModeConfig::on_enterBtn_clicked()
     }
 
     emit enter();
+}
+
+void LightModeConfig::on_ipComboBox_currentIndexChanged(const QString &arg1)
+{
+    IP_Port v = ui->ipComboBox->currentData().value<IP_Port>();
+    ui->ipComboBox->setCurrentText(v.ip);
+    ui->portLineEdit->setText(v.port);
 }
