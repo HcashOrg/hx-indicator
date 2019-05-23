@@ -2922,7 +2922,6 @@ void Frame::onCloseWallet()
 
 void Frame::extendToWidth(int _width)
 {
-    qDebug()  << "eeeeeeeeeeeee " << _width << centralWidget->x();
     this->setGeometry(this->x(), this->y(), 190 + _width, this->height());
     if(titleBar)    titleBar->extendToWidth(_width);
     if(centralWidget)
