@@ -71,6 +71,7 @@ MainPage::MainPage(QWidget *parent) :
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->accountTableWidget);
 
     activeTunnelMoneyNotify();
+
 }
 
 MainPage::~MainPage()

@@ -145,7 +145,12 @@ void CapitalTransferPage::jsonDataUpdated(QString id)
         }
         if(ui->radioButton_deposit->isChecked())
         {
-            ui->label_tunnelAddress->setText(_p->tunnel_account_address);
+            QString str = _p->tunnel_account_address;
+            if(str.size() > 45)
+            {
+                str = str.insert(str.size() / 2, "\n");
+            }
+            ui->label_tunnelAddress->setText(str);
         }
         //查询tunnel地址的余额
         PostQueryTunnelMoney(_p->symbol,_p->tunnel_account_address);
@@ -534,8 +539,6 @@ void CapitalTransferPage::InitWidget()
     {
         ui->label_tunneltip->setVisible(false);
     }
-
-
 }
 
 void CapitalTransferPage::InitStyle()

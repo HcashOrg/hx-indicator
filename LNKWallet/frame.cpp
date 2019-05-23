@@ -2922,11 +2922,12 @@ void Frame::onCloseWallet()
 
 void Frame::extendToWidth(int _width)
 {
-    this->setGeometry(this->x(), this->y(), centralWidget->x() + _width, this->height());
+    qDebug()  << "eeeeeeeeeeeee " << _width << centralWidget->x();
+    this->setGeometry(this->x(), this->y(), 190 + _width, this->height());
     if(titleBar)    titleBar->extendToWidth(_width);
     if(centralWidget)
     {
-        centralWidget->setGeometry(centralWidget->x(), centralWidget->y(), _width, centralWidget->height());
+        centralWidget->setGeometry(centralWidget->x(), centralWidget->y(), _width + 190 - centralWidget->x(), centralWidget->height());
     }
 }
 

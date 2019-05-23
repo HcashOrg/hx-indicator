@@ -128,7 +128,16 @@ void WithdrawInputWidget::confirmButtonSlots()
     }
     else
     {
-        emit withdrawSignal(ui->lineEdit_address->text(),ui->lineEdit_ammount->text());
+        if(_p->chainType == "HC" && ui->lineEdit_address->text().startsWith("Hb"))
+        {
+            CommonDialog dia(CommonDialog::OkOnly);
+            dia.setText(tr("This is an unacceptable HC address!"));
+            dia.pop();
+        }
+        else
+        {
+            emit withdrawSignal(ui->lineEdit_address->text(),ui->lineEdit_ammount->text());
+        }
     }
 
 }
@@ -172,7 +181,7 @@ void WithdrawInputWidget::InitWidget()
     ui->label_tipNumber->setVisible(false);
     ui->label_tipAddr->setVisible(false);
 
-    QRegExp regx("[a-zA-Z0-9]+$");
+    QRegExp regx("[a-zA-Z0-9\:]+$");
     QValidator *validator1 = new QRegExpValidator(regx, this);
     ui->lineEdit_address->setValidator( validator1 );
 
