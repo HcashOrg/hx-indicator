@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TEMPLATE = app
 
-#DEFINES += TEST_WALLET
+DEFINES += TEST_WALLET
 #DEFINES += SAFE_VERSION
 #DEFINES += LIGHT_MODE
 

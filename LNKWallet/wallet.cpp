@@ -286,8 +286,14 @@ void HXChain::onClientExeStateChanged()
     {
         qDebug() << "client not running" + clientProc->errorString();
         CommonDialog commonDialog(CommonDialog::OkOnly);
+#ifdef LIGHT_MODE
+        commonDialog.setText(tr("Connection interruption!"));
+        commonDialog.pop();
+        qApp->quit();
+#else
         commonDialog.setText(tr("Fail to launch %1 !").arg(CLIENT_PROC_NAME));
         commonDialog.pop();
+#endif
     }
 }
 
