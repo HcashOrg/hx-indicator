@@ -354,8 +354,8 @@ void Frame::alreadyLogin()
     centralWidget->show();
 
     bottomBar = new BottomBar(this);
-    bottomBar->resize(160,40);
-    bottomBar->move(800,503);
+    bottomBar->resize(220,40);
+    bottomBar->move(740,503);
     bottomBar->raise();
     bottomBar->show();
 

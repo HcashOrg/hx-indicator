@@ -1467,15 +1467,14 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="bottombar.cpp" line="21"/>
-        <location filename="bottombar.cpp" line="40"/>
         <source>Number of connected nodes</source>
         <translation type="unfinished">已连接节点数</translation>
     </message>
     <message>
         <location filename="bottombar.cpp" line="22"/>
-        <location filename="bottombar.cpp" line="41"/>
-        <source>Local block height</source>
-        <translation type="unfinished">本地区块高度</translation>
+        <source>Local block height / Network block height</source>
+        <oldsource>Local block height</oldsource>
+        <translation type="unfinished">本地区块高度 / 网络区块高度</translation>
     </message>
     <message>
         <source>Local block height / Network block height(estimated)</source>

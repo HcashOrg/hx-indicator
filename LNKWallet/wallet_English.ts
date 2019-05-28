@@ -1549,14 +1549,13 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="bottombar.cpp" line="21"/>
-        <location filename="bottombar.cpp" line="40"/>
         <source>Number of connected nodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="bottombar.cpp" line="22"/>
-        <location filename="bottombar.cpp" line="41"/>
-        <source>Local block height</source>
+        <source>Local block height / Network block height</source>
+        <oldsource>Local block height</oldsource>
         <translation type="unfinished"></translation>
     </message>
 </context>

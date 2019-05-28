@@ -21,7 +21,7 @@ public:
 private slots:
     void jsonDataUpdated(QString id);
 private:
-    void CheckBlockSync(const QString &res);
+    void CheckBlockSync();
 private:
     Ui::BottomBar *ui;
     int numOfConnections;

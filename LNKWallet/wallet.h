@@ -122,6 +122,7 @@ struct AccountInfo
 struct WalletInfo
 {
     int blockHeight = 0;
+    int targetBlockHeight = 0;
     QString blockId;
     QString blockAge;
     QString chainId;
