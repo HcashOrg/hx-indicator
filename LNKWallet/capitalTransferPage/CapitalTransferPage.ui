@@ -355,9 +355,9 @@ border-radius:15px;</string>
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>160</y>
+     <y>150</y>
      <width>281</width>
-     <height>20</height>
+     <height>40</height>
     </rect>
    </property>
    <property name="font">
@@ -377,6 +377,9 @@ border-radius:15px;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
    </property>
    <property name="textInteractionFlags">
     <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>

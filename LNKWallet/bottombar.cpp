@@ -19,7 +19,7 @@ BottomBar::BottomBar(QWidget *parent) :
     ui->setupUi(this);
 
     ui->nodeNumLabel->setToolTip(tr("Number of connected nodes"));
-    ui->syncLabel->setToolTip(tr("Local block height"));
+    ui->syncLabel->setToolTip(tr("Local block height / Network block height"));
 
     connect(HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)),this, SLOT(jsonDataUpdated(QString)));
 
@@ -38,7 +38,7 @@ void BottomBar::retranslator()
     ui->retranslateUi(this);
 
     ui->nodeNumLabel->setToolTip(tr("Number of connected nodes"));
-    ui->syncLabel->setToolTip(tr("Local block height"));
+    ui->syncLabel->setToolTip(tr("Local block height / Network block height"));
 }
 
 void BottomBar::jsonDataUpdated(QString id)
@@ -49,7 +49,6 @@ void BottomBar::jsonDataUpdated(QString id)
 
         QString result = HXChain::getInstance()->jsonDataValue( id);
 
-        CheckBlockSync(result);
         if( result.isEmpty() )  return;
 
 
@@ -59,7 +58,7 @@ void BottomBar::jsonDataUpdated(QString id)
         QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
         QJsonObject jsonObject = parse_doucment.object();
         QJsonObject object = jsonObject.take("result").toObject();
-        HXChain::getInstance()->walletInfo.blockHeight = object.take("head_block_num").toInt();
+//        HXChain::getInstance()->walletInfo.blockHeight = object.take("head_block_num").toInt();
         HXChain::getInstance()->walletInfo.blockId = object.take("head_block_id").toString();
         HXChain::getInstance()->walletInfo.blockAge = object.take("head_block_age").toString();
         HXChain::getInstance()->walletInfo.chainId = object.take("chain_id").toString();
@@ -73,7 +72,6 @@ void BottomBar::jsonDataUpdated(QString id)
 //            HXChain::getInstance()->walletInfo.activeMiners += v.toString();
 //        }
 
-        ui->syncLabel->setText(QString::number(HXChain::getInstance()->walletInfo.blockHeight));
 
         return;
     }
@@ -92,7 +90,7 @@ void BottomBar::jsonDataUpdated(QString id)
 
         HXChain::getInstance()->currentBlockTime = object.value("timestamp").toString();
     }
-    else if("id-network_get_connected_peers" == id)
+    else if("id-network_get_info" == id)
     {
         QString result = HXChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() )
@@ -105,35 +103,29 @@ void BottomBar::jsonDataUpdated(QString id)
         result.append("}");
         QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
         QJsonObject jsonObject = parse_doucment.object();
-        ui->nodeNumLabel->setText(QString::number(jsonObject.value("result").toArray().size()));
+        QJsonObject resultObject = jsonObject.value("result").toObject();
+        ui->nodeNumLabel->setText(QString::number(resultObject.value("connections").toInt()));
+        HXChain::getInstance()->walletInfo.blockHeight = resultObject.value("current_block_height").toInt();
+        HXChain::getInstance()->walletInfo.targetBlockHeight = resultObject.value("target_block_height").toInt();
 
+        ui->syncLabel->setText(QString::number(HXChain::getInstance()->walletInfo.blockHeight) + " / "
+                               + QString::number(HXChain::getInstance()->walletInfo.targetBlockHeight));
+
+        CheckBlockSync();
     }
 
 
 }
 
-void BottomBar::CheckBlockSync(const QString &res)
+void BottomBar::CheckBlockSync()
 {
-    if(res.isEmpty())
-    {
-        HXChain::getInstance()->SetBlockSyncFinish(false);
-        return;
-    }
-    QString data = res;
-    data.prepend("{");
-    data.append("}");
-    QJsonParseError json_error;
-    QJsonDocument parse_doucment = QJsonDocument::fromJson(data.toLatin1(),&json_error);
-    if(json_error.error != QJsonParseError::NoError || !parse_doucment.isObject())
+    if(HXChain::getInstance()->walletInfo.blockHeight == 0 || !HXChain::getInstance()->walletInfo.blockAge.contains("second"))
     {
         HXChain::getInstance()->SetBlockSyncFinish(false);
         return;
     }
 
-    QJsonObject jsonObject = parse_doucment.object();
-    QJsonObject object = jsonObject.value("result").toObject();
-    QString blockAge = object.take("head_block_age").toString();
-    if(blockAge.contains("second"))
+    if(HXChain::getInstance()->walletInfo.blockHeight + 50 > HXChain::getInstance()->walletInfo.targetBlockHeight)
     {
         HXChain::getInstance()->SetBlockSyncFinish(true);
     }
@@ -164,7 +156,7 @@ void BottomBar::refresh()
 {
     HXChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QJsonArray()));
 
-    HXChain::getInstance()->postRPC( "id-network_get_connected_peers", toJsonFormat( "network_get_connected_peers", QJsonArray()));
+    HXChain::getInstance()->postRPC( "id-network_get_info", toJsonFormat( "network_get_info", QJsonArray()));
 
 
 }

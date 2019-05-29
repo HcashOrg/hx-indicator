@@ -71,14 +71,16 @@ HXChain::HXChain()
     currentPort = CLIENT_RPC_PORT;
     currentAccount = "";
 
+#ifndef LIGHT_MODE
     witnessConfig = new WitnessConfig;
+#endif
     configFile = new QSettings( walletConfigPath + "/config.ini", QSettings::IniFormat);
     if( configFile->value("/settings/lockMinutes").toInt() == 0)   // 如果第一次，没有config.ini
     {
         configFile->setValue("/settings/lockMinutes",5);
         lockMinutes     = 5;
-        configFile->setValue("/settings/notAutoLock",false);
-        notProduce      =  true;
+        configFile->setValue("/settings/notAutoLock",true);
+        notProduce      =  false;
         configFile->setValue("/settings/language","English");
         language = "English";
         configFile->setValue("/settings/feeType","HX");
@@ -207,30 +209,35 @@ void HXChain:: startExe()
             ;
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay9",true).toBool())
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay10",true).toBool())
     {
         strList << "--replay";
     }
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/dbReplay9",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay10",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
     logToFile( QStringList() << "start" << NODE_PROC_NAME << strList);
 
 #else
+
+#endif
+
+//    HXChain::getInstance()->initWebSocketManager();
+    //    emit exeStarted();
+}
+
+void HXChain::startClient(QString ip, QString port)
+{
     connect(clientProc,SIGNAL(stateChanged(QProcess::ProcessState)),this,SLOT(onClientExeStateChanged()));
 
     QStringList strList;
     strList << "--wallet-file=" + HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/") + "/wallet.json"
-            << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
+            << QString("--server-rpc-endpoint=ws://%1:%2").arg(ip).arg(port)
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
 
     clientProc->start(CLIENT_PROC_NAME,strList);
-#endif
-
-//    HXChain::getInstance()->initWebSocketManager();
-//    emit exeStarted();
 }
 
 void HXChain::onNodeExeStateChanged()
@@ -279,8 +286,14 @@ void HXChain::onClientExeStateChanged()
     {
         qDebug() << "client not running" + clientProc->errorString();
         CommonDialog commonDialog(CommonDialog::OkOnly);
+#ifdef LIGHT_MODE
+        commonDialog.setText(tr("Connection interruption!"));
+        commonDialog.pop();
+        qApp->quit();
+#else
         commonDialog.setText(tr("Fail to launch %1 !").arg(CLIENT_PROC_NAME));
         commonDialog.pop();
+#endif
     }
 }
 
@@ -720,7 +733,7 @@ void HXChain::getExchangePairs()
 
 int HXChain::getExchangePairPrecision(const ExchangePair &pair)
 {
-    QMap<QString,int> map = { {"BTC",5}, {"ETH",3}, {"HC",1}, {"HX",0}, {"LTC",3}, {"ERCPAX",1}, {"ERCELF",0}};
+    QMap<QString,int> map = { {"BTC",5}, {"ETH",3}, {"HC",1}, {"HX",0}, {"LTC",3}, {"ERCPAX",1}, {"ERCELF",0}, {"BCH",3}};
 
     int precision = map.value(pair.second) - map.value(pair.first) + 4;
     if(precision > 8)
@@ -737,7 +750,7 @@ int HXChain::getExchangePairPrecision(const ExchangePair &pair)
 
 int HXChain::getExchangeAmountPrecision(QString assetSymbol)
 {
-    QMap<QString,int> map = { {"BTC",4}, {"ETH",3}, {"HC",2}, {"HX",2}, {"LTC",3}, {"ERCPAX",2}, {"ERCELF",2}};
+    QMap<QString,int> map = { {"BTC",4}, {"ETH",3}, {"HC",2}, {"HX",2}, {"LTC",3}, {"ERCPAX",2}, {"ERCELF",2}, {"BCH",3}};
 
     int precision = 2;
     if(map.contains(assetSymbol))   precision = map.value(assetSymbol);
@@ -1445,10 +1458,10 @@ void HXChain::autoWithdrawSign()
             {
                 trxSignedGuardCountMap.insert(generatedTrxId, guardAddresses.size());
             }
-            else if( trxSignedGuardCountMap.value(generatedTrxId) == guardAddresses.size())
-            {
-                continue;       // 如果跟上次比数量没变 则跳过
-            }
+//            else if( trxSignedGuardCountMap.value(generatedTrxId) == guardAddresses.size())
+//            {
+//                continue;       // 如果跟上次比数量没变 则跳过
+//            }
             else
             {
                 trxSignedGuardCountMap[generatedTrxId] = guardAddresses.size();

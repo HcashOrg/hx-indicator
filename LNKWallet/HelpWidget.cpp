@@ -95,11 +95,17 @@ void HelpWidget::InitWidget()
     ui->label_updatetip->setVisible(false);
 
 #ifdef WIN64
-    ui->label_version->setText(QString("windows 64bit v") + WALLET_VERSION);
-#elif defined(TARGET_OS_MAC)
-    ui->label_version->setText(QString("mac v") + WALLET_VERSION);
+#ifdef LIGHT_MODE
+    ui->label_version->setText(QString("windows light mode v") + WALLET_VERSION);
 #else
-    ui->label_version->setText(QString("windows 32bit v") + WALLET_VERSION);
+    ui->label_version->setText(QString("windows v") + WALLET_VERSION);
+#endif
+#elif defined(TARGET_OS_MAC)
+#ifdef LIGHT_MODE
+    ui->label_version->setText(QString("mac light mode v") + WALLET_VERSION);
+#else
+    ui->label_version->setText(QString("mac v") + WALLET_VERSION);
+#endif
 #endif
 
     _p->updateProcess->InitServerURL(HXChain::getInstance()->middlewarePath);

@@ -213,6 +213,10 @@ color:white;</string>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>pwdLineEdit</tabstop>
+  <tabstop>pwdLineEdit2</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

@@ -8,12 +8,27 @@ QT       += core gui xml network websockets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
-TARGET = HXIndicator
 TEMPLATE = app
 
-DEFINES += TEST_WALLET
+#DEFINES += TEST_WALLET
 #DEFINES += SAFE_VERSION
 #DEFINES += LIGHT_MODE
+
+
+if(contains(DEFINES,TEST_WALLET)){
+    if(contains(DEFINES,LIGHT_MODE)){
+        TARGET = HXIndicator_light_test
+    }else{
+        TARGET = HXIndicator_test
+    }
+}else{
+    if(contains(DEFINES,LIGHT_MODE)){
+        TARGET = HXIndicator_light
+    }else{
+        TARGET = HXIndicator
+    }
+}
+
 
 win32{
     QMAKE_LFLAGS += /MANIFESTUAC:\"level=\'requireAdministrator\' uiAccess=\'false\'\"
@@ -219,7 +234,10 @@ SOURCES += main.cpp\
     control/BottomLine.cpp \
     extra/qcustomplot.cpp \
     exchange/KLineWidget.cpp \
-    extra/mycustomplot.cpp
+    extra/mycustomplot.cpp \
+    control/OrderDepthWidget.cpp \
+    LightModeConfig.cpp \
+    extra/RegularExpression.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -400,7 +418,10 @@ HEADERS  += firstlogin.h \
     control/BottomLine.h \
     extra/qcustomplot.h \
     exchange/KLineWidget.h \
-    extra/mycustomplot.h
+    extra/mycustomplot.h \
+    control/OrderDepthWidget.h \
+    LightModeConfig.h \
+    extra/RegularExpression.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -544,7 +565,9 @@ FORMS    += firstlogin.ui \
     exchange/ExchangeBalancesWidget.ui \
     exchange/ExchangeMyOrdersWidget.ui \
     exchange/ExchangeContractFeeDialog.ui \
-    exchange/KLineWidget.ui
+    exchange/KLineWidget.ui \
+    control/OrderDepthWidget.ui \
+    LightModeConfig.ui
 
 win32{
     DISTFILES += logo.rc

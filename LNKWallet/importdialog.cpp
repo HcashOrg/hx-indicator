@@ -335,8 +335,10 @@ qDebug()  << id << result;
         QJsonObject jsonObject = parse_doucment.object();
         QString accountAddress = jsonObject.take("result").toObject().take("addr").toString();
 
+#ifndef LIGHT_MODE
         HXChain::getInstance()->witnessConfig->addTrackAddress(accountAddress);
         HXChain::getInstance()->witnessConfig->save();
+#endif
 
         HXChain::getInstance()->resyncNextTime = true;
         HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime", true);

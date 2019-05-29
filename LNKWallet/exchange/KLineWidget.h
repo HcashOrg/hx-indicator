@@ -47,6 +47,7 @@ public:
 
 signals:
     void pairChanged(ExchangePair);
+    void onClose();
 public slots:
     void onPairChanged(const ExchangePair& _pair);
 
@@ -91,6 +92,8 @@ private slots:
     void onAddFavoriteClicked();
 
     void onPeriodComboBoxCurrentIndexChanged(const QString &arg1);
+
+    void on_closeBtn_clicked();
 
 private:
     Ui::KLineWidget *ui;

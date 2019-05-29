@@ -894,21 +894,6 @@ color: rgb(137, 129, 161);</string>
      <string>卖</string>
     </property>
    </column>
-   <column>
-    <property name="text">
-     <string>价格</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>深度</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>深度图</string>
-    </property>
-   </column>
   </widget>
   <widget class="QTableWidget" name="buyPositionTableWidget">
    <property name="geometry">
@@ -925,21 +910,6 @@ color: rgb(137, 129, 161);</string>
    <column>
     <property name="text">
      <string>买</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>价格</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>深度</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>深度图</string>
     </property>
    </column>
   </widget>

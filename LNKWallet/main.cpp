@@ -14,6 +14,7 @@
 #include <qapplication.h>
 #include <QTranslator>
 #include <QThread>
+#include <QMessageBox>
 
 #include "wallet.h"
 #include "frame.h"
@@ -40,6 +41,21 @@ bool checkOnly()
     else
         return true;
 }
+
+LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException)        // 捕获异常
+{
+    // 向node发送stop指令  防止数据损坏需要replay
+    HXChain::getInstance()->isExiting = true;
+    HXChain::getInstance()->postRPC( "id-witness_node_stop", toJsonFormat( "witness_node_stop", QJsonArray()), -1);
+
+    EXCEPTION_RECORD* record = pException->ExceptionRecord;
+    QString errCode(QString::number(record->ExceptionCode,16)),errAdr(QString::number((uint)record->ExceptionAddress,16)),errMod;
+    QMessageBox::critical(NULL,"GUI CRASHED",
+        QString("error code: %1 \nerror position: %2").arg(errCode).arg(errAdr),
+        QMessageBox::Ok);
+    return EXCEPTION_EXECUTE_HANDLER;
+}
+
 #ifdef QT_NO_DEBUG
 LONG WINAPI TopLevelExceptionFilter(struct _EXCEPTION_POINTERS *pExceptionInfo)
 {
@@ -65,6 +81,8 @@ LPWSTR ConvertCharToLPWSTR(const char * szString)
     MultiByteToWideChar(CP_ACP, 0, szString, dwLen, lpszPath, nwLen);
     return lpszPath;
 }
+
+
 
 
 #endif
@@ -200,6 +218,12 @@ int main(int argc, char *argv[])
     a.installEventFilter(&frame);
 
     CommonHelper::setStyle(":/ui/qss/style.qss");
+
+#ifndef LIGHT_MODE
+#ifdef WIN32
+    SetUnhandledExceptionFilter(ApplicationCrashHandler);
+#endif
+#endif
 
     int result = a.exec();
     HXChain::getInstance()->quit();

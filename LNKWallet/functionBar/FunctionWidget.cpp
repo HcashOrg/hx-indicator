@@ -199,6 +199,8 @@ void FunctionWidget::ShowMoreWidgetSlots()
 
 void FunctionWidget::ShowSettingWidgetSlots()
 {
+    HXChain::getInstance()->mainFrame->hideKLineWidget();
+
     SetDialog setDialog;
     connect(&setDialog,SIGNAL(settingSaved()),HXChain::getInstance()->mainFrame,SLOT(settingSaved()));
     setDialog.pop();
@@ -212,6 +214,8 @@ void FunctionWidget::ShowConsoleWidgetSlots()
 
 void FunctionWidget::ShowAboutWidgetSlots()
 {
+    HXChain::getInstance()->mainFrame->hideKLineWidget();
+
     SetDialog setDialog;
     setDialog.setHelpFirst(false);
     connect(&setDialog,SIGNAL(settingSaved()),HXChain::getInstance()->mainFrame,SLOT(settingSaved()));
@@ -221,6 +225,8 @@ void FunctionWidget::ShowAboutWidgetSlots()
 
 void FunctionWidget::ShowUpdateWidgetSlots()
 {
+    HXChain::getInstance()->mainFrame->hideKLineWidget();
+
     SetDialog setDialog;
     setDialog.setHelpFirst(true);
     connect(&setDialog,SIGNAL(settingSaved()),HXChain::getInstance()->mainFrame,SLOT(settingSaved()));

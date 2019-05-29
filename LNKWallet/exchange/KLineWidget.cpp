@@ -36,6 +36,10 @@ KLineWidget::KLineWidget(QWidget *parent) :
 //                  "QComboBox QAbstractItemView{ color:rgb(83,61,138);selection-color: white;background-color: rgb(243,241,250);selection-background-color: rgb(164,77,179);}"
                   );
 
+    ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+                                "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
+
+
     ui->recentDealsTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->recentDealsTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->recentDealsTableWidget->setFocusPolicy(Qt::NoFocus);
@@ -631,7 +635,7 @@ void KLineWidget::on_favoriteMarketBtn_clicked()
 {
     ExchangePairSelectDialog dialog("");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
-//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
     connect(&dialog, &ExchangePairSelectDialog::addFavoriteClicked, this, &KLineWidget::onAddFavoriteClicked);
     dialog.move(ui->favoriteMarketBtn->mapToGlobal( QPoint(ui->favoriteMarketBtn->width() / 2 - dialog.width() / 2,ui->favoriteMarketBtn->height())));
 
@@ -642,7 +646,7 @@ void KLineWidget::on_marketBtn1_clicked()
 {
     ExchangePairSelectDialog dialog("HX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
-//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
     dialog.move(ui->marketBtn1->mapToGlobal( QPoint(ui->marketBtn1->width() / 2 - dialog.width() / 2,ui->marketBtn1->height())));
 
     dialog.exec();
@@ -652,7 +656,7 @@ void KLineWidget::on_marketBtn3_clicked()
 {
     ExchangePairSelectDialog dialog("ERCPAX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::onPairSelected);
-//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &KLineWidget::pairChanged);
     dialog.move(ui->marketBtn3->mapToGlobal( QPoint(ui->marketBtn3->width() / 2 - dialog.width() / 2,ui->marketBtn3->height())));
 
     dialog.exec();
@@ -690,4 +694,9 @@ void KLineWidget::onPeriodComboBoxCurrentIndexChanged(const QString &arg1)
     customPlot->clearPlottables();
     kPointMap.clear();
     queryKLineData(HXChain::getInstance()->kLinePeriodIndex, kLineQueryCountMap.value(ui->periodComboBox->currentIndex()));
+}
+
+void KLineWidget::on_closeBtn_clicked()
+{
+    Q_EMIT onClose();
 }

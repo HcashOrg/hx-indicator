@@ -1082,7 +1082,8 @@ void MinerPage::on_obtainAllBtn_clicked()
     if(commonDialog.pop())
     {
         QJsonArray array;
-        for(int i = 0; i < ui->incomeTableWidget->rowCount(); i++)
+        int i = 0;
+        for(; i < ui->incomeTableWidget->rowCount(); i++)
         {
             if(ui->incomeTableWidget->item(i,0) == NULL || ui->incomeTableWidget->item(i,1) == NULL)    continue;
             QJsonArray array2;
@@ -1095,6 +1096,8 @@ void MinerPage::on_obtainAllBtn_clicked()
             object.insert("asset_id", HXChain::getInstance()->getAssetId(amountStringList.at(1)));
             array2 << object;
             array << array2;
+
+            if(i >= 99)     break;
         }
 
         HXChain::getInstance()->postRPC( "id-obtain_pay_back_balance",
@@ -1102,6 +1105,13 @@ void MinerPage::on_obtainAllBtn_clicked()
                                                        QJsonArray() << address
                                                        << array
                                                        << true ));
+
+        if( i >= 99)
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("You can obtain income from at most 100 citizens at one time!"));
+            commonDialog.pop();
+        }
     }
 //    });
 //    feeCharge->show();
@@ -1129,9 +1139,12 @@ void MinerPage::on_forecloseAllBtn_clicked()
             map[citizen] << object;
         }
 
+        int count = 0;
         QJsonArray array;
         foreach(QString key, map.keys())
         {
+            count++;
+            if(count >= 100)    break;
             QJsonArray array2;
             array2 << key << map.value(key);
             array << array2;
@@ -1147,6 +1160,13 @@ void MinerPage::on_forecloseAllBtn_clicked()
                                   QJsonArray() << ui->accountComboBox->currentText()
                                   << array
                                   << true );
+
+        if(count >= 100)
+        {
+            CommonDialog commonDialog(CommonDialog::OkOnly);
+            commonDialog.setText(tr("You can foreclose assets from at most 100 citizens at one time!"));
+            commonDialog.pop();
+        }
     }
 
 

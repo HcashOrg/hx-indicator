@@ -36,21 +36,21 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.19"           // 版本号
+#define WALLET_VERSION "1.2.20"           // 版本号
 
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
 #ifdef TEST_WALLET
 #define LOCKFUND_CONTRACT_ADDRESS  "HXCYz5JbktyW9ybi2DLF3ETkhmMVoAThurTU"
-#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCZXisggrbv8wgF4qGyJFttQuv7P8GG3H6E"
+#define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCbXhiANMHKGmJqN5TBxmTs3sfq3UGnonFf"
 #else
 #define LOCKFUND_CONTRACT_ADDRESS  "HXCPHA7vA91zV6r7iJ8oadFgj97PHAy3dKRa"
 #define EXCHANGE_MODE_CONTRACT_ADDRESS  "HXCRCnJ8AV624UZBLNKz4UBweVbhVXkQfNe7"  // 交易所模式合约地址
 #endif
 
 #ifdef TEST_WALLET
-#define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5006/api"
+#define MIDDLE_DEFAULT_URL      "http://192.168.1.121:5005/api"
 #define MIDDLE_EXCHANGE_URL     "http://192.168.1.124:15000/api"
 #else
 #define MIDDLE_DEFAULT_URL      "http://47.74.2.123:5005/api"
@@ -122,6 +122,7 @@ struct AccountInfo
 struct WalletInfo
 {
     int blockHeight = 0;
+    int targetBlockHeight = 0;
     QString blockId;
     QString blockAge;
     QString chainId;
@@ -396,6 +397,7 @@ public:
 public:
     // 启动底层节点程序和client程序
     void startExe();
+    void startClient(QString ip, QString port);
     qint64 write(QString);
     bool isExiting;
     void quit();

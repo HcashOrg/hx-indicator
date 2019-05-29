@@ -53,6 +53,7 @@
 #include "multisig/MultiSigPage.h"
 #include "autoUpdate/AutoUpdateNotify.h"
 #include "websocketmanager.h"
+#include "LightModeConfig.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -119,9 +120,12 @@ Frame::Frame(): timer(NULL),
     currentPageNum = 0;
     currentAccount = "";
 
+#ifndef LIGHT_MODE
     qDebug() <<  "witnessConfig init: " << HXChain::getInstance()->witnessConfig->init();
+
     connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
     connect(&httpManager,SIGNAL(httpError(int)),this,SLOT(httpError(int)));
+#endif
 
     connect(HXChain::getInstance(),SIGNAL(jsonDataUpdated(QString)),this,SLOT(jsonDataUpdated(QString)));
 
@@ -143,6 +147,19 @@ Frame::Frame(): timer(NULL),
     shadowWidget = new ShadowWidget(this);
     shadowWidget->hide();
     shadowWidget->init(this->size());
+
+#ifdef LIGHT_MODE
+    lightModeConfig = new LightModeConfig(this);
+    lightModeConfig->setAttribute(Qt::WA_DeleteOnClose);
+    lightModeConfig->move(0,0);
+    connect( lightModeConfig,SIGNAL(closeWallet()),qApp,SLOT(quit()));
+    connect( lightModeConfig,SIGNAL(enter()),this,SLOT(enter()));
+
+    setGeometry(0,0, lightModeConfig->width(), lightModeConfig->height());
+    moveWidgetToScreenCenter(this);
+
+
+#else
 
     //  如果是第一次使用(未设置 blockchain 路径)
     mutexForConfigFile.lock();
@@ -184,8 +201,8 @@ Frame::Frame(): timer(NULL),
             HXChain::getInstance()->configFile->clear();
             HXChain::getInstance()->configFile->setValue("/settings/lockMinutes",5);
             HXChain::getInstance()->lockMinutes     = 5;
-            HXChain::getInstance()->configFile->setValue("/settings/notAutoLock",false);
-            HXChain::getInstance()->notProduce      =  true;
+            HXChain::getInstance()->configFile->setValue("/settings/notAutoLock",true);
+            HXChain::getInstance()->notProduce      =  false;
             HXChain::getInstance()->configFile->setValue("/settings/feeType","HX");
             HXChain::getInstance()->feeType = "HX";
 
@@ -234,10 +251,15 @@ Frame::Frame(): timer(NULL),
 
     }
     mutexForConfigFile.unlock();
+#endif
 
     trayIcon = new QSystemTrayIcon(this);
     //放在托盘提示信息、托盘图标
+#ifdef LIGHT_MODE
+    trayIcon ->setToolTip(QString("HXIndicator light mode ") + WALLET_VERSION);
+#else
     trayIcon ->setToolTip(QString("HXIndicator ") + WALLET_VERSION);
+#endif
     trayIcon ->setIcon(QIcon(":/ui/wallet_ui/HX.ico"));
     //点击托盘执行的事件
     connect(trayIcon , SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
@@ -332,8 +354,8 @@ void Frame::alreadyLogin()
     centralWidget->show();
 
     bottomBar = new BottomBar(this);
-    bottomBar->resize(160,40);
-    bottomBar->move(800,503);
+    bottomBar->resize(220,40);
+    bottomBar->move(740,503);
     bottomBar->raise();
     bottomBar->show();
 
@@ -446,15 +468,16 @@ void Frame::getAccountInfo()
 
     HXChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QJsonArray()));
 
-    HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
     HXChain::getInstance()->fetchTransactions();
 
-    HXChain::getInstance()->fetchAllGuards();
-
     if(getInfoCount % 10 == 0)
     {
+        HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
+
         HXChain::getInstance()->fetchMiners();
+
+        HXChain::getInstance()->fetchAllGuards();
     }
 
     HXChain::getInstance()->fetchCrosschainTransactions();
@@ -516,6 +539,8 @@ void Frame::showLockPage()
     }
     else
     {
+        hideKLineWidget();
+
         lockPage = new LockPage(this);
         lockPage->setAttribute(Qt::WA_DeleteOnClose);
         lockPage->move(0,0);
@@ -1433,8 +1458,10 @@ void Frame::jsonDataUpdated(QString id)
             setGeometry(0,0, normalLogin->width(), normalLogin->height());
             moveWidgetToScreenCenter(this);
 
+#ifndef LIGHT_MODE
             // 如果一开始node的config.ini文件不存在 则会init失败  再init一次
             if(!HXChain::getInstance()->witnessConfig->inited)  HXChain::getInstance()->witnessConfig->init();
+#endif
         }
         else
         {
@@ -1450,8 +1477,10 @@ void Frame::jsonDataUpdated(QString id)
             setGeometry(0,0, firstLogin->width(), firstLogin->height());
             moveWidgetToScreenCenter(this);
 
+#ifndef LIGHT_MODE
             // 如果一开始node的config.ini文件不存在 则会init失败  再init一次
             if(!HXChain::getInstance()->witnessConfig->inited)  HXChain::getInstance()->witnessConfig->init();
+#endif
         }
 //        else
 //        {
@@ -1500,17 +1529,20 @@ void Frame::jsonDataUpdated(QString id)
                                     " After that the transactions of the accounts in this wallet will be shown.") );
             commonDialog.pop();
         }
-
+#ifndef LIGHT_MODE
         QStringList trackAddresses = HXChain::getInstance()->witnessConfig->getTrackAddresses();
+#endif
         foreach (QString accountName, HXChain::getInstance()->accountInfoMap.keys())
         {
             // 检查track-address
             QString address = HXChain::getInstance()->accountInfoMap.value(accountName).address;
+#ifndef LIGHT_MODE
             if(!trackAddresses.contains(address))
             {
                 HXChain::getInstance()->witnessConfig->addTrackAddress(address);
                 HXChain::getInstance()->witnessConfig->save();
             }
+#endif
 
             HXChain::getInstance()->fetchAccountBalances(accountName);
 
@@ -2821,7 +2853,14 @@ void Frame::newAccount(QString name)
 
 void Frame::enter()
 {
+#ifdef LIGHT_MODE
+    if(lightModeConfig)
+    {
+        HXChain::getInstance()->startClient(lightModeConfig->getIP(), lightModeConfig->getPort());
+    }
+#else
     HXChain::getInstance()->startExe();
+#endif
 
     waitingForSync = new WaitingForSync(this);
     waitingForSync->setAttribute(Qt::WA_DeleteOnClose);
@@ -2883,11 +2922,20 @@ void Frame::onCloseWallet()
 
 void Frame::extendToWidth(int _width)
 {
-    this->setGeometry(this->x(), this->y(), centralWidget->x() + _width, this->height());
+    this->setGeometry(this->x(), this->y(), 190 + _width, this->height());
     if(titleBar)    titleBar->extendToWidth(_width);
     if(centralWidget)
     {
-        centralWidget->setGeometry(centralWidget->x(), centralWidget->y(), _width, centralWidget->height());
+        centralWidget->setGeometry(centralWidget->x(), centralWidget->y(), _width + 190 - centralWidget->x(), centralWidget->height());
+    }
+}
+
+void Frame::hideKLineWidget()
+{
+    if(currentPageNum == 24 && exchangeModePage != NULL)
+    {
+        extendToWidth(770);
+        exchangeModePage->hideKLineWidget();
     }
 }
 

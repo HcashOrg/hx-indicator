@@ -268,7 +268,7 @@ font: 11px &quot;Microsoft YaHei UI Light&quot;;}</string>
   <customwidget>
    <class>ChangeSenatorSwitchWidget</class>
    <extends>QWidget</extends>
-   <header>changesenatorswitchwidget.h</header>
+   <header>citizen/ChangeSenatorSwitchWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

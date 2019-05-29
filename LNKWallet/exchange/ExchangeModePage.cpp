@@ -11,6 +11,7 @@
 #include "ExchangeContractFeeDialog.h"
 #include "commondialog.h"
 #include "KLineWidget.h"
+#include "control/OrderDepthWidget.h"
 
 ExchangeModePage::ExchangeModePage(QWidget *parent) :
     QWidget(parent),
@@ -28,10 +29,7 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     ui->sellPositionTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->sellPositionTableWidget->horizontalHeader()->setVisible(false);
     ui->sellPositionTableWidget->verticalHeader()->setVisible(false);
-    ui->sellPositionTableWidget->setColumnWidth(0,50);
-    ui->sellPositionTableWidget->setColumnWidth(1,65);
-    ui->sellPositionTableWidget->setColumnWidth(2,65);
-    ui->sellPositionTableWidget->setColumnWidth(3,36);
+    ui->sellPositionTableWidget->setColumnWidth(0,216);
 
     ui->buyPositionTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->buyPositionTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -42,10 +40,7 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     ui->buyPositionTableWidget->horizontalHeader()->setSectionsClickable(true);
     ui->buyPositionTableWidget->horizontalHeader()->setVisible(false);
     ui->buyPositionTableWidget->verticalHeader()->setVisible(false);
-    ui->buyPositionTableWidget->setColumnWidth(0,50);
-    ui->buyPositionTableWidget->setColumnWidth(1,65);
-    ui->buyPositionTableWidget->setColumnWidth(2,65);
-    ui->buyPositionTableWidget->setColumnWidth(3,36);
+    ui->buyPositionTableWidget->setColumnWidth(0,216);
 
     setStyleSheet("QTableView{background-color:rgb(243,241,250);border:none;border-radius:0px;font: 11px \"微软雅黑\";color:rgb(52,37,90);}"
                   "QScrollBar:vertical{border:none; width:2px;background:transparent;padding:0px 0px 0px 0px;}"
@@ -63,8 +58,30 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->sellPositionTableWidget);
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->buyPositionTableWidget);
 
-    ui->KLineBtn->setCheckable(false);
-//    ui->KLineBtn->setChecked(false);
+    ui->KLineBtn->setCheckable(true);
+    ui->KLineBtn->setChecked(false);
+
+    separatorLabel = new QLabel(this);
+    separatorLabel->setGeometry(745, 0, 1, this->height());
+    separatorLabel->setStyleSheet("background-color:rgb(209,206,220);border:none;");
+//    closeKLineWidget = new QLabel(this);
+//    closeKLineWidget->setGeometry(separatorLabel->x(), 0, 120, 30);
+//    closeKLineWidget->setStyleSheet("QLabel{background-color:white;border:1px solid rgb(209,206,220);border-top:none;}");
+//    closeKLineWidget->setAlignment(Qt::AlignCenter);
+//    closeKLineWidget->setText(tr("K-Line  "));
+
+//    closeKLineWidget->raise();
+    separatorLabel->raise();
+
+//    QToolButton* closeKLineBtn = new QToolButton(closeKLineWidget);
+//    closeKLineBtn->setGeometry(closeKLineWidget->width() - 25, 7, 16, 16);
+//    closeKLineBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
+//                                 "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
+//    connect(closeKLineBtn, &QToolButton::clicked, this, &ExchangeModePage::hideKLineWidget);
+
+//    closeKLineWidget->hide();
+    separatorLabel->hide();
+
 
 //    ui->widget_2->hide();
 #ifndef TEST_WALLET
@@ -76,6 +93,9 @@ ExchangeModePage::ExchangeModePage(QWidget *parent) :
 ExchangeModePage::~ExchangeModePage()
 {
     delete ui;
+
+    HXChain::getInstance()->mainFrame->extendToWidth(770);
+
 }
 
 void ExchangeModePage::init()
@@ -234,17 +254,25 @@ void ExchangeModePage::jsonDataUpdated(QString id)
                 ui->sellPositionTableWidget->setRowHeight( size - i - 1, 22);
 
                 const OrderInfo& orderInfo = sellOrdersVector.at(i);
-                ui->sellPositionTableWidget->setItem( size - i - 1,0, new QTableWidgetItem(tr("Sell %1").arg(i + 1)));
-                ui->sellPositionTableWidget->item(size - i - 1,0)->setTextColor(QColor(44,202,148));
+//                ui->sellPositionTableWidget->setItem( size - i - 1,0, new QTableWidgetItem(tr("Sell %1").arg(i + 1)));
+//                ui->sellPositionTableWidget->item(size - i - 1,0)->setTextColor(QColor(44,202,148));
 
                 double price = (double)orderInfo.quoteAmount / qPow(10,quoteAssetInfo.precision) / orderInfo.baseAmount * qPow(10,baseAssetInfo.precision);
-                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)));
-                item->setTextColor(QColor(83,61,138));
-                ui->sellPositionTableWidget->setItem( size - i - 1,1,item);
+//                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)));
+//                item->setTextColor(QColor(83,61,138));
+//                ui->sellPositionTableWidget->setItem( size - i - 1,1,item);
 
-                ui->sellPositionTableWidget->setItem( size - i - 1,2, new QTableWidgetItem( getBigNumberString(orderInfo.baseAmount, baseAssetInfo.precision)));
-                ui->sellPositionTableWidget->item(size - i - 1,2)->setTextColor(QColor(83,61,138));
-                ui->sellPositionTableWidget->item(size - i - 1,2)->setData(Qt::UserRole, orderInfo.baseAmount);
+//                ui->sellPositionTableWidget->setItem( size - i - 1,2, new QTableWidgetItem( getBigNumberString(orderInfo.baseAmount, baseAssetInfo.precision)));
+//                ui->sellPositionTableWidget->item(size - i - 1,2)->setTextColor(QColor(83,61,138));
+//                ui->sellPositionTableWidget->item(size - i - 1,2)->setData(Qt::UserRole, orderInfo.baseAmount);
+
+                OrderDepthWidget* odw = new OrderDepthWidget;
+                odw->setType(true);
+                odw->setNumber(i + 1);
+                odw->setPrice(QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)));
+                odw->setAmount(getBigNumberString(orderInfo.baseAmount, baseAssetInfo.precision));
+                odw->setBaseAmount(orderInfo.baseAmount);
+                ui->sellPositionTableWidget->setCellWidget(size - i - 1, 0, odw);
             }
             tableWidgetSetItemZebraColor(ui->sellPositionTableWidget);
 
@@ -298,17 +326,25 @@ void ExchangeModePage::jsonDataUpdated(QString id)
                 ui->buyPositionTableWidget->setRowHeight( i, 22);
 
                 const OrderInfo& orderInfo = buyOrdersVector.at(i);
-                ui->buyPositionTableWidget->setItem(i,0, new QTableWidgetItem(tr("Buy %1").arg(i + 1)));
-                ui->buyPositionTableWidget->item(i,0)->setTextColor(QColor(235,0,94));
+//                ui->buyPositionTableWidget->setItem(i,0, new QTableWidgetItem(tr("Buy %1").arg(i + 1)));
+//                ui->buyPositionTableWidget->item(i,0)->setTextColor(QColor(235,0,94));
 
                 double price = (double)orderInfo.quoteAmount / qPow(10,quoteAssetInfo.precision) / orderInfo.baseAmount * qPow(10,baseAssetInfo.precision);
-                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)));
-                item->setTextColor(QColor(83,61,138));
-                ui->buyPositionTableWidget->setItem(i,1,item);
+//                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)));
+//                item->setTextColor(QColor(83,61,138));
+//                ui->buyPositionTableWidget->setItem(i,1,item);
 
-                ui->buyPositionTableWidget->setItem(i,2, new QTableWidgetItem( getBigNumberString(orderInfo.baseAmount, baseAssetInfo.precision)));
-                ui->buyPositionTableWidget->item(i,2)->setTextColor(QColor(83,61,138));
-                ui->buyPositionTableWidget->item(i,2)->setData(Qt::UserRole, orderInfo.baseAmount);
+//                ui->buyPositionTableWidget->setItem(i,2, new QTableWidgetItem( getBigNumberString(orderInfo.baseAmount, baseAssetInfo.precision)));
+//                ui->buyPositionTableWidget->item(i,2)->setTextColor(QColor(83,61,138));
+//                ui->buyPositionTableWidget->item(i,2)->setData(Qt::UserRole, orderInfo.baseAmount);
+
+                OrderDepthWidget* odw = new OrderDepthWidget;
+                odw->setType(false);
+                odw->setNumber(i + 1);
+                odw->setPrice(QString::number(price,'f', HXChain::getInstance()->getExchangePairPrecision(HXChain::getInstance()->currentExchangePair)));
+                odw->setAmount(getBigNumberString(orderInfo.baseAmount, baseAssetInfo.precision));
+                odw->setBaseAmount(orderInfo.baseAmount);
+                ui->buyPositionTableWidget->setCellWidget(i, 0, odw);
             }
             tableWidgetSetItemZebraColor(ui->buyPositionTableWidget);
 
@@ -425,7 +461,7 @@ void ExchangeModePage::on_favoriteMarketBtn_clicked()
 {
     ExchangePairSelectDialog dialog("");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
-//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::pairChanged);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::pairChanged);
     connect(&dialog, &ExchangePairSelectDialog::addFavoriteClicked, this, &ExchangeModePage::onAddFavoriteClicked);
     dialog.move(ui->favoriteMarketBtn->mapToGlobal( QPoint(ui->favoriteMarketBtn->width() / 2 - dialog.width() / 2,ui->favoriteMarketBtn->height())));
 
@@ -436,7 +472,7 @@ void ExchangeModePage::on_marketBtn1_clicked()
 {
     ExchangePairSelectDialog dialog("HX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
-//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::pairChanged);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::pairChanged);
     dialog.move(ui->marketBtn1->mapToGlobal( QPoint(ui->marketBtn1->width() / 2 - dialog.width() / 2,ui->marketBtn1->height())));
 
     dialog.exec();
@@ -455,7 +491,7 @@ void ExchangeModePage::on_marketBtn3_clicked()
 {
     ExchangePairSelectDialog dialog("ERCPAX");
     connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::onPairSelected);
-//    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::pairChanged);
+    connect(&dialog, &ExchangePairSelectDialog::pairSelected, this, &ExchangeModePage::pairChanged);
     dialog.move(ui->marketBtn3->mapToGlobal( QPoint(ui->marketBtn3->width() / 2 - dialog.width() / 2,ui->marketBtn3->height())));
 
     dialog.exec();
@@ -522,24 +558,43 @@ void ExchangeModePage::onAddFavoriteClicked()
 
 void ExchangeModePage::showDepth()
 {
-    unsigned long long maxAmount = getMaxOrderAmount();
+    unsigned long long sellSumAmount = getSumOrderAmount(true);
+    unsigned long long buySumAmount = getSumOrderAmount(false);
 
+    unsigned long long amount = 0;
     for(int i = 0; i < ui->sellPositionTableWidget->rowCount(); i++)
     {
-        unsigned long long baseAmount = ui->sellPositionTableWidget->item(i,2)->data(Qt::UserRole).toULongLong();
-        PriceDepthWidget* pdw = new PriceDepthWidget;
-        pdw->setType(0);
-        pdw->setLength( (double)baseAmount / maxAmount);
-        ui->sellPositionTableWidget->setCellWidget( i, 3, pdw);
+//        unsigned long long baseAmount = ui->sellPositionTableWidget->item(i,2)->data(Qt::UserRole).toULongLong();
+//        PriceDepthWidget* pdw = new PriceDepthWidget;
+//        pdw->setType(0);
+//        pdw->setLength( (double)baseAmount / maxAmount);
+//        ui->sellPositionTableWidget->setCellWidget( i, 3, pdw);
+
+        OrderDepthWidget* odw = static_cast<OrderDepthWidget*>(ui->sellPositionTableWidget->cellWidget(ui->sellPositionTableWidget->rowCount() - i - 1,0));
+        if(odw)
+        {
+            amount += odw->baseAmount;
+            odw->setLength( (double)amount / sellSumAmount);
+            qDebug() << odw->baseAmount << amount << buySumAmount;
+        }
     }
 
+    amount = 0;
     for(int i = 0; i < ui->buyPositionTableWidget->rowCount(); i++)
     {
-        unsigned long long baseAmount = ui->buyPositionTableWidget->item(i,2)->data(Qt::UserRole).toULongLong();
-        PriceDepthWidget* pdw = new PriceDepthWidget;
-        pdw->setType(1);
-        pdw->setLength( (double)baseAmount / maxAmount);
-        ui->buyPositionTableWidget->setCellWidget( i, 3, pdw);
+//        unsigned long long baseAmount = ui->buyPositionTableWidget->item(i,2)->data(Qt::UserRole).toULongLong();
+//        PriceDepthWidget* pdw = new PriceDepthWidget;
+//        pdw->setType(1);
+//        pdw->setLength( (double)baseAmount / maxAmount);
+//        ui->buyPositionTableWidget->setCellWidget( i, 3, pdw);
+
+        OrderDepthWidget* odw = static_cast<OrderDepthWidget*>(ui->buyPositionTableWidget->cellWidget(i,0));
+        if(odw)
+        {
+            amount += odw->baseAmount;
+            odw->setLength( (double)amount / buySumAmount);
+            qDebug() << odw->baseAmount << amount << buySumAmount;
+        }
     }
 }
 
@@ -554,6 +609,56 @@ void ExchangeModePage::showPosition(int num)
     {
         ui->buyPositionTableWidget->setRowHidden(i, i >= num);
     }
+}
+
+void ExchangeModePage::showSeparator()
+{
+//    closeKLineWidget->raise();
+    separatorLabel->raise();
+    separatorLabel->show();
+//    closeKLineWidget->show();
+}
+
+void ExchangeModePage::hideSeparator()
+{
+    separatorLabel->hide();
+//    closeKLineWidget->hide();
+}
+
+void ExchangeModePage::showKLineWidget()
+{
+    klw = new KLineWidget(this);
+    connect(klw, &KLineWidget::pairChanged, this, &ExchangeModePage::onPairSelected);
+    connect(this, &ExchangeModePage::pairChanged, klw, &KLineWidget::onPairChanged);
+    connect(klw, &KLineWidget::onClose, this, &ExchangeModePage::hideKLineWidget);
+
+    klw->setAttribute(Qt::WA_DeleteOnClose);
+    klw->setWindowTitle("K-Line");
+    klw->show();
+    klw->raise();
+//        klw->move( HXChain::getInstance()->mainFrame->x() + HXChain::getInstance()->mainFrame->width(), HXChain::getInstance()->mainFrame->y());
+
+    klw->move(this->width(), 0);
+    this->setGeometry(this->x(), this->y(), 1490, this->height());
+    HXChain::getInstance()->mainFrame->extendToWidth(1490);
+
+    showSeparator();
+}
+
+void ExchangeModePage::hideKLineWidget()
+{
+    if(klw)
+    {
+        klw->close();
+        klw = nullptr;
+    }
+
+    this->setGeometry(this->x(), this->y(), 770, this->height());
+    HXChain::getInstance()->mainFrame->extendToWidth(770);
+
+    hideSeparator();
+
+    ui->KLineBtn->setChecked(false);
 }
 
 void ExchangeModePage::onAccountComboBoxCurrentIndexChanged(const QString &arg1)
@@ -606,6 +711,27 @@ unsigned long long ExchangeModePage::getMaxOrderAmount()
     foreach (const OrderInfo& order, buyOrdersVector)
     {
         if(order.baseAmount > result)   result = order.baseAmount;
+    }
+
+    return result;
+}
+
+unsigned long long ExchangeModePage::getSumOrderAmount(bool sellOrNot)
+{
+    unsigned long long result = 0;
+    if(sellOrNot)
+    {
+        foreach (const OrderInfo& order, sellOrdersVector)
+        {
+            result += order.baseAmount;
+        }
+    }
+    else
+    {
+        foreach (const OrderInfo& order, buyOrdersVector)
+        {
+            result += order.baseAmount;
+        }
     }
 
     return result;
@@ -758,6 +884,8 @@ void ExchangeModePage::on_buyBtn_clicked()
 {
     if(ui->buyPriceLineEdit->text().toDouble() <= 0 || ui->buyAmountLineEdit->text().toDouble() <= 0)   return;
 
+    hideKLineWidget();
+
     const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
     const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
 
@@ -788,6 +916,8 @@ void ExchangeModePage::on_buyBtn_clicked()
 void ExchangeModePage::on_sellBtn_clicked()
 {
     if(ui->sellPriceLineEdit->text().toDouble() <= 0 || ui->sellAmountLineEdit->text().toDouble() <= 0)   return;
+
+    hideKLineWidget();
 
     const AssetInfo& baseAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.first));
     const AssetInfo& quoteAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(HXChain::getInstance()->currentExchangePair.second));
@@ -821,10 +951,11 @@ void ExchangeModePage::on_sellBtn_clicked()
 
 void ExchangeModePage::on_sellPositionTableWidget_cellPressed(int row, int column)
 {
-    if(ui->sellPositionTableWidget->item(row,1))
+    OrderDepthWidget* odw = static_cast<OrderDepthWidget*>(ui->sellPositionTableWidget->cellWidget(row,0));
+    if(odw)
     {
-        ui->sellPriceLineEdit->setText( ui->sellPositionTableWidget->item(row,1)->text());
-        ui->buyPriceLineEdit->setText( ui->sellPositionTableWidget->item(row,1)->text());
+        ui->sellPriceLineEdit->setText( odw->price);
+        ui->buyPriceLineEdit->setText( odw->price);
         on_sellPriceLineEdit_textEdited(ui->sellPriceLineEdit->text());
         on_buyPriceLineEdit_textEdited(ui->buyPriceLineEdit->text());
     }
@@ -832,10 +963,11 @@ void ExchangeModePage::on_sellPositionTableWidget_cellPressed(int row, int colum
 
 void ExchangeModePage::on_buyPositionTableWidget_cellPressed(int row, int column)
 {
-    if(ui->buyPositionTableWidget->item(row,1))
+    OrderDepthWidget* odw = static_cast<OrderDepthWidget*>(ui->buyPositionTableWidget->cellWidget(row,0));
+    if(odw)
     {
-        ui->sellPriceLineEdit->setText( ui->buyPositionTableWidget->item(row,1)->text());
-        ui->buyPriceLineEdit->setText( ui->buyPositionTableWidget->item(row,1)->text());
+        ui->sellPriceLineEdit->setText( odw->price);
+        ui->buyPriceLineEdit->setText( odw->price);
         on_sellPriceLineEdit_textEdited(ui->sellPriceLineEdit->text());
         on_buyPriceLineEdit_textEdited(ui->buyPriceLineEdit->text());
     }
@@ -863,6 +995,8 @@ void ExchangeModePage::on_sellAmountLineEdit_textEdited(const QString &arg1)
 
 void ExchangeModePage::on_balanceBtn_clicked()
 {
+    hideKLineWidget();
+
     Q_EMIT backBtnVisible(true);
 
     ExchangeBalancesWidget* exchangeBalancesWidget = new ExchangeBalancesWidget(this);
@@ -875,6 +1009,8 @@ void ExchangeModePage::on_balanceBtn_clicked()
 
 void ExchangeModePage::on_myOrdersBtn_clicked()
 {
+    hideKLineWidget();
+
     Q_EMIT backBtnVisible(true);
 
     ExchangeMyOrdersWidget* exchangeMyOrdersWidget = new ExchangeMyOrdersWidget(this);
@@ -901,30 +1037,14 @@ void ExchangeModePage::on_positionComboBox_currentIndexChanged(int index)
 
 void ExchangeModePage::on_KLineBtn_clicked()
 {
-//    if(ui->KLineBtn->isChecked())
-//    {
-        Q_EMIT backBtnVisible(true);
+    if(ui->KLineBtn->isChecked())
+    {
+//        Q_EMIT backBtnVisible(true);
 
-        klw = new KLineWidget;
-        connect(klw, &KLineWidget::pairChanged, this, &ExchangeModePage::onPairSelected);
-//        connect(this, &ExchangeModePage::pairChanged, klw, &KLineWidget::onPairChanged);
-        klw->setAttribute(Qt::WA_DeleteOnClose);
-        klw->setWindowTitle("K-Line");
-        klw->show();
-        klw->raise();
-        klw->move( HXChain::getInstance()->mainFrame->x() + HXChain::getInstance()->mainFrame->width(), HXChain::getInstance()->mainFrame->y());
-
-//        HXChain::getInstance()->mainFrame->extendToWidth(1540);
-//    }
-//    else
-//    {
-//        if(klw)
-//        {
-//            klw->close();
-//            klw = nullptr;
-//        }
-
-//        HXChain::getInstance()->mainFrame->extendToWidth(770);
-
-//    }
+        showKLineWidget();
+    }
+    else
+    {
+        hideKLineWidget();
+    }
 }
