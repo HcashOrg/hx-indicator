@@ -201,8 +201,8 @@ Frame::Frame(): timer(NULL),
             HXChain::getInstance()->configFile->clear();
             HXChain::getInstance()->configFile->setValue("/settings/lockMinutes",5);
             HXChain::getInstance()->lockMinutes     = 5;
-            HXChain::getInstance()->configFile->setValue("/settings/notAutoLock",false);
-            HXChain::getInstance()->notProduce      =  true;
+            HXChain::getInstance()->configFile->setValue("/settings/notAutoLock",true);
+            HXChain::getInstance()->notProduce      =  false;
             HXChain::getInstance()->configFile->setValue("/settings/feeType","HX");
             HXChain::getInstance()->feeType = "HX";
 

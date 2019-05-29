@@ -79,8 +79,8 @@ HXChain::HXChain()
     {
         configFile->setValue("/settings/lockMinutes",5);
         lockMinutes     = 5;
-        configFile->setValue("/settings/notAutoLock",false);
-        notProduce      =  true;
+        configFile->setValue("/settings/notAutoLock",true);
+        notProduce      =  false;
         configFile->setValue("/settings/language","English");
         language = "English";
         configFile->setValue("/settings/feeType","HX");
