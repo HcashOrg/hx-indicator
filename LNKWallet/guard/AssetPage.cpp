@@ -84,7 +84,7 @@ void AssetPage::showAssetsInfo()
                 ui->assetTableWidget->rowCount()/ROWNUMBER : ui->assetTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->assetTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
 
     pageWidget->setVisible(0 != ui->assetTableWidget->rowCount());
     blankWidget->setVisible(ui->assetTableWidget->rowCount() == 0);

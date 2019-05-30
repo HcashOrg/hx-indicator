@@ -166,7 +166,7 @@ void AssetChangeHistoryWidget::jsonDataUpdated(QString id)
                         ui->changeHistoryTableWidget->rowCount()/ROWNUMBER : ui->changeHistoryTableWidget->rowCount()/ROWNUMBER+1;
             pageWidget->SetTotalPage(page);
             pageWidget->setShowTip(ui->changeHistoryTableWidget->rowCount(),ROWNUMBER);
-            pageChangeSlot(0);
+            pageChangeSlot(pageWidget->GetCurrentPage());
 
             pageWidget->setVisible(0 != ui->changeHistoryTableWidget->rowCount());
             blankWidget->setVisible(ui->changeHistoryTableWidget->rowCount() == 0);

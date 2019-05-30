@@ -117,7 +117,7 @@ void FeedPricePage::showAssetsPrice()
                 ui->assetPriceTableWidget->rowCount()/ROWNUMBER : ui->assetPriceTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->assetPriceTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
 
     pageWidget->setVisible(0 != ui->assetPriceTableWidget->rowCount());
     blankWidget->setVisible(ui->assetPriceTableWidget->rowCount() == 0);

@@ -626,7 +626,7 @@ void ExchangeMyOrdersWidget::httpReplied(QByteArray _data, int _status)
                     ui->historyOrdersTableWidget->rowCount()/ROWNUMBER : ui->historyOrdersTableWidget->rowCount()/ROWNUMBER+1;
         pageWidget->SetTotalPage(page);
         pageWidget->setShowTip(ui->historyOrdersTableWidget->rowCount(),ROWNUMBER);
-        pageChangeSlot(0);
+        pageChangeSlot(pageWidget->GetCurrentPage());
         pageWidget->setVisible(0 != ui->historyOrdersTableWidget->rowCount());
     }
 

@@ -174,7 +174,7 @@ void GuardKeyManagePage::showMultisigInfo()
                 ui->multisigTableWidget->rowCount()/ROWNUMBER : ui->multisigTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->multisigTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
 
     pageWidget->setVisible(0 != ui->multisigTableWidget->rowCount());
     blankWidget->setVisible(ui->multisigTableWidget->rowCount() == 0);

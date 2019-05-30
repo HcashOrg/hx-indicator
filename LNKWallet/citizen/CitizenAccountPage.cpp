@@ -159,7 +159,7 @@ void CitizenAccountPage::showLockBalance()
                 ui->lockBalanceTableWidget->rowCount()/ROWNUMBER : ui->lockBalanceTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->lockBalanceTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
 
     pageWidget->setVisible(0 != ui->lockBalanceTableWidget->rowCount());
 

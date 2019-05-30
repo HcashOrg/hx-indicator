@@ -216,7 +216,7 @@ void ProposalPage::showProposals()
                 ui->proposalTableWidget->rowCount()/ROWNUMBER : ui->proposalTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->proposalTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
 
     pageWidget->setVisible(0 != ui->proposalTableWidget->rowCount());
     blankWidget->setVisible(ui->proposalTableWidget->rowCount() == 0);

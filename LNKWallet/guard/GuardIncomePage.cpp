@@ -193,7 +193,7 @@ void GuardIncomePage::showIncomes()
                 ui->senatorIncomeTableWidget->rowCount()/ROWNUMBER : ui->senatorIncomeTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->senatorIncomeTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
 
     pageWidget->setVisible(0 != ui->senatorIncomeTableWidget->rowCount());
     blankWidget->setVisible(ui->senatorIncomeTableWidget->rowCount() == 0);

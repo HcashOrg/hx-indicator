@@ -202,7 +202,7 @@ void ContractBalanceWidget::showContractBalances()
                 ui->balancesTableWidget->rowCount()/ROWNUMBER : ui->balancesTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->balancesTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
     pageWidget->setVisible(0 != size);
 
     blankWidget->setVisible(0 == size);

@@ -133,7 +133,7 @@ void BonusPage::jsonDataUpdated(QString id)
                     ui->bonusTableWidget->rowCount()/ROWNUMBER : ui->bonusTableWidget->rowCount()/ROWNUMBER+1;
         pageWidget->SetTotalPage(page);
         pageWidget->setShowTip(ui->bonusTableWidget->rowCount(),ROWNUMBER);
-        pageChangeSlot(0);
+        pageChangeSlot(pageWidget->GetCurrentPage());
 
         pageWidget->setVisible(0 != ui->bonusTableWidget->rowCount());
         blankWidget->setVisible(ui->bonusTableWidget->rowCount() == 0);

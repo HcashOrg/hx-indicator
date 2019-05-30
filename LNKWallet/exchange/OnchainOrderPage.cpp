@@ -181,7 +181,7 @@ void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
                 ui->ordersTableWidget->rowCount()/ROWNUMBER : ui->ordersTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->ordersTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
     pageWidget->setVisible(0 != size);
 
     blankWidget->setVisible(0 == size);

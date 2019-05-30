@@ -55,7 +55,7 @@ PageScrollWidget::~PageScrollWidget()
 void PageScrollWidget::SetTotalPage(unsigned int number)
 {
     _p->totalPage = std::max<unsigned int>(number,1);
-    _p->currentPage = 0;
+    if(int(_p->totalPage) < _p->currentPage ) _p->currentPage = 0;
 
     QIntValidator *validator = new QIntValidator(1,_p->totalPage,this);
     ui->lineEdit->setValidator( validator );

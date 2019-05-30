@@ -276,7 +276,7 @@ void AllTransactionWidget::hideFilteredTransactions()
                 showRows.size()/ROWNUMBER : showRows.size()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(showRows.size(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
     pageWidget->setVisible(showRows.size() != 0);
 
     blankWidget->setVisible(showRows.size() == 0);

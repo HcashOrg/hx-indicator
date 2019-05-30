@@ -519,7 +519,7 @@ void ColdHotTransferPage::showColdHotTransactions()
                 ui->coldHotTransactionTableWidget->rowCount()/ROWNUMBER : ui->coldHotTransactionTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->coldHotTransactionTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
 
     pageWidget->setVisible(0 != ui->coldHotTransactionTableWidget->rowCount());
     blankWidget->setVisible(ui->coldHotTransactionTableWidget->rowCount() == 0);

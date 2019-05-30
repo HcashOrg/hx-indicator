@@ -472,7 +472,7 @@ void WithdrawConfirmPage::showCrosschainTransactions()
                 ui->crosschainTransactionTableWidget->rowCount()/ROWNUMBER : ui->crosschainTransactionTableWidget->rowCount()/ROWNUMBER+1;
     pageWidget->SetTotalPage(page);
     pageWidget->setShowTip(ui->crosschainTransactionTableWidget->rowCount(),ROWNUMBER);
-    pageChangeSlot(0);
+    pageChangeSlot(pageWidget->GetCurrentPage());
 
     pageWidget->setVisible(0 != ui->crosschainTransactionTableWidget->rowCount());
     blankWidget->setVisible(ui->crosschainTransactionTableWidget->rowCount() == 0);
