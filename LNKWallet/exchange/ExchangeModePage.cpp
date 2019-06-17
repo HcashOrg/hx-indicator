@@ -558,8 +558,7 @@ void ExchangeModePage::onAddFavoriteClicked()
 
 void ExchangeModePage::showDepth()
 {
-    unsigned long long sellSumAmount = getSumOrderAmount(true);
-    unsigned long long buySumAmount = getSumOrderAmount(false);
+    unsigned long long benchmark = getBenchmarkOfOrders();
 
     unsigned long long amount = 0;
     for(int i = 0; i < ui->sellPositionTableWidget->rowCount(); i++)
@@ -574,8 +573,8 @@ void ExchangeModePage::showDepth()
         if(odw)
         {
             amount += odw->baseAmount;
-            odw->setLength( (double)amount / sellSumAmount);
-            qDebug() << odw->baseAmount << amount << buySumAmount;
+            odw->setLength( (double)amount / benchmark);
+            qDebug() << odw->baseAmount << amount << benchmark;
         }
     }
 
@@ -592,8 +591,8 @@ void ExchangeModePage::showDepth()
         if(odw)
         {
             amount += odw->baseAmount;
-            odw->setLength( (double)amount / buySumAmount);
-            qDebug() << odw->baseAmount << amount << buySumAmount;
+            odw->setLength( (double)amount / benchmark);
+            qDebug() << odw->baseAmount << amount << benchmark;
         }
     }
 }
@@ -716,25 +715,21 @@ unsigned long long ExchangeModePage::getMaxOrderAmount()
     return result;
 }
 
-unsigned long long ExchangeModePage::getSumOrderAmount(bool sellOrNot)
+unsigned long long ExchangeModePage::getBenchmarkOfOrders()
 {
-    unsigned long long result = 0;
-    if(sellOrNot)
+    unsigned long long sellSumAmount = 0;
+    foreach (const OrderInfo& order, sellOrdersVector)
     {
-        foreach (const OrderInfo& order, sellOrdersVector)
-        {
-            result += order.baseAmount;
-        }
-    }
-    else
-    {
-        foreach (const OrderInfo& order, buyOrdersVector)
-        {
-            result += order.baseAmount;
-        }
+        sellSumAmount += order.baseAmount;
     }
 
-    return result;
+    unsigned long long buySumAmount = 0;
+    foreach (const OrderInfo& order, buyOrdersVector)
+    {
+        buySumAmount += order.baseAmount;
+    }
+
+    return sellSumAmount > buySumAmount ? sellSumAmount : buySumAmount;
 }
 
 

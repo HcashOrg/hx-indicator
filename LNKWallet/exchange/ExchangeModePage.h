@@ -81,7 +81,7 @@ public:
 
     void getSellOrders(const ExchangePair& _pair);
     unsigned long long getMaxOrderAmount();
-    unsigned long long getSumOrderAmount(bool sellOrNot);
+    unsigned long long getBenchmarkOfOrders();
     QVector<OrderInfo>  sellOrdersVector;
     void getBuyOrders(const ExchangePair& _pair);
     QVector<OrderInfo>  buyOrdersVector;

@@ -39,6 +39,11 @@ private slots:
     void jsonDataUpdated(QString id);
     void on_miniBtn_clicked();
 
+private slots:
+    void onTimer();
+private:
+    QTimer* unlockTimer = nullptr;
+
 private:
     void InitWidget();
     void InitStyle();

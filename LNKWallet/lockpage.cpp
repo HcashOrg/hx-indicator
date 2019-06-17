@@ -76,7 +76,7 @@ void LockPage::on_enterBtn_clicked()
     emit showShadowWidget();
     ui->pwdLineEdit->setEnabled(false);
 
-	
+    unlockTimer->start(20000);
 }
 
 
@@ -131,6 +131,8 @@ void LockPage::jsonDataUpdated(QString id)
 {
     if( id == "id-unlock-lockpage")
     {
+        unlockTimer->stop();
+
         emit hideShadowWidget();
         ui->pwdLineEdit->clear();
         ui->pwdLineEdit->setEnabled(true);
@@ -159,6 +161,10 @@ void LockPage::InitWidget()
     InitStyle();
 
     ui->label_version->setText(QString("v") + WALLET_VERSION);
+
+    unlockTimer = new QTimer(this);
+    connect(unlockTimer, &QTimer::timeout, this, &LockPage::onTimer);
+    unlockTimer->setSingleShot(true);
 }
 
 void LockPage::InitStyle()
@@ -221,4 +227,10 @@ void LockPage::paintEvent(QPaintEvent *e)
 void LockPage::on_miniBtn_clicked()
 {
     emit minimum();
+}
+
+void LockPage::onTimer()
+{
+    emit hideShadowWidget();
+    ui->pwdLineEdit->setEnabled(true);
 }
