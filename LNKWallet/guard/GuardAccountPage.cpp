@@ -47,6 +47,8 @@ void GuardAccountPage::init()
     }
 
     HXChain::getInstance()->mainFrame->installBlurEffect(ui->label_back);
+
+    ui->reloadBtn->hide();
 }
 
 void GuardAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
@@ -97,4 +99,9 @@ void GuardAccountPage::paintEvent(QPaintEvent *)
     painter.setBrush(QBrush(QColor(229,226,240),Qt::SolidPattern));
 
     painter.drawRect(rect());
+}
+
+void GuardAccountPage::on_reloadBtn_clicked()
+{
+    HXChain::getInstance()->loadWalletFile();
 }

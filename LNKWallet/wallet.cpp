@@ -874,6 +874,12 @@ void HXChain::autoSaveWalletFile()
 
 }
 
+void HXChain::loadWalletFile()
+{
+    postRPC( "id+load_wallet_file", toJsonFormat( "load_wallet_file",
+                                    QJsonArray() << HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/")));
+}
+
 void HXChain::fetchTransactions()
 {
 #ifndef LIGHT_MODE

@@ -23,6 +23,8 @@ private slots:
     void on_newSenatorBtn_clicked();
 
     void on_changeSenator_clicked();
+    void on_reloadBtn_clicked();
+
 private:
     Ui::GuardAccountPage *ui;
 

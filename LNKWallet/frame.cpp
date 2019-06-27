@@ -2666,6 +2666,14 @@ void Frame::jsonDataUpdated(QString id)
 
         return;
     }
+
+
+    if(id == "id+load_wallet_file")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+        return;
+    }
 }
 
 void Frame::onBack()

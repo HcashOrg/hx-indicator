@@ -222,9 +222,10 @@ void CreateTokenDialog::on_registerBtn_clicked()
 {
     if(!registerFeeWidget)     return;
     registerFeeWidget->updatePoundageID();
+    QString filePath = "contracts/token.lua.gpc";
     HXChain::getInstance()->postRPC( "CreateTokenDialog-register_contract", toJsonFormat( "register_contract",
                                                                            QJsonArray() << ui->accountComboBox->currentText() << HXChain::getInstance()->currentContractFee()
-                                                                           << stepCount  << ui->gpcPathLineEdit->text()));
+                                                                           << stepCount  << filePath));
     ui->registerBtn->setEnabled(false);
 }
 
@@ -237,9 +238,11 @@ void CreateTokenDialog::calculateRegisterFee()
 {
     QFileInfo fileInfo(ui->gpcPathLineEdit->text());
     if(!fileInfo.exists())  return;
+    QString filePath = "contracts/token.lua.gpc";
     HXChain::getInstance()->postRPC("CreateTokenDialog-register_contract_testing",
                                     toJsonFormat( "register_contract_testing",
-                                    QJsonArray() << ui->accountComboBox->currentText() << ui->gpcPathLineEdit->text()));
+                                    QJsonArray() << ui->accountComboBox->currentText() << filePath));
+
 }
 
 void CreateTokenDialog::calculateInitFee()

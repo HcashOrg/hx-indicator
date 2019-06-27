@@ -443,7 +443,7 @@ void MyExchangeContractPage::jsonDataUpdated(QString id)
             //fee->SetTitle(tr("Register Contract"));
             fee->SetInfo(tr("register contract!"));
             connect(fee,&FeeChargeWidget::confirmSignal,[this,stepCount,fee](){
-                QString filePath = QDir::currentPath() + "/contracts/hx_exchange.lua.gpc";
+                QString filePath = "contracts/hx_exchange.lua.gpc";
                 QFileInfo fileInfo(filePath);
                 if(fileInfo.exists())
                 {
