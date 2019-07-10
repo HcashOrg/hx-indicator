@@ -36,7 +36,7 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.22"           // 版本号
+#define WALLET_VERSION "1.2.23"           // 版本号
 
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
@@ -335,6 +335,7 @@ struct FeeChargeInfo
     QString ChangeSenatorFee;//citizen发起更换senator手续费
     QString createSenatorFee;//创建senator手续费
     QString changePaybackFee;//修改citizen矿池管理费用
+    QString citizenResolution; // citizen投票手续费
 
     QString withDrawFee;//提现手续费--
     QString capitalFee;//资金划转手续费

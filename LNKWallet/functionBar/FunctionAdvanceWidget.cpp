@@ -22,7 +22,6 @@ void FunctionAdvanceWidget::retranslator()
 }
 void FunctionAdvanceWidget::DefaultShow()
 {
-//    PoundageShowSlots();
     MultiSigShowSlots();
 }
 
@@ -30,6 +29,7 @@ void FunctionAdvanceWidget::PoundageShowSlots()
 {
     ui->pushButton_poundage->setChecked(true);
     ui->pushButton_multiSig->setChecked(false);
+    ui->pushButton_nameTransfer->setChecked(false);
     emit showPoundageSignal();
 }
 
@@ -37,7 +37,16 @@ void FunctionAdvanceWidget::MultiSigShowSlots()
 {
     ui->pushButton_poundage->setChecked(false);
     ui->pushButton_multiSig->setChecked(true);
+    ui->pushButton_nameTransfer->setChecked(false);
     emit showMultiSigSignal();
+}
+
+void FunctionAdvanceWidget::NameTransferShowSlots()
+{
+    ui->pushButton_poundage->setChecked(false);
+    ui->pushButton_multiSig->setChecked(false);
+    ui->pushButton_nameTransfer->setChecked(true);
+    emit showNameTransferSignal();
 }
 
 void FunctionAdvanceWidget::InitWidget()
@@ -45,8 +54,12 @@ void FunctionAdvanceWidget::InitWidget()
     InitStyle();
     ui->pushButton_poundage->setCheckable(true);
     ui->pushButton_multiSig->setCheckable(true);
+    ui->pushButton_nameTransfer->setCheckable(true);
     connect(ui->pushButton_poundage,&QPushButton::clicked,this,&FunctionAdvanceWidget::PoundageShowSlots);
     connect(ui->pushButton_multiSig,&QPushButton::clicked,this,&FunctionAdvanceWidget::MultiSigShowSlots);
+    connect(ui->pushButton_nameTransfer,&QPushButton::clicked,this,&FunctionAdvanceWidget::NameTransferShowSlots);
+
+    ui->pushButton_nameTransfer->hide();
 }
 
 void FunctionAdvanceWidget::InitStyle()
@@ -69,3 +82,5 @@ void FunctionAdvanceWidget::paintEvent(QPaintEvent *)
     painter.setPen(QColor(81,59,134));
     painter.drawLine(20,62,110,62);
 }
+
+

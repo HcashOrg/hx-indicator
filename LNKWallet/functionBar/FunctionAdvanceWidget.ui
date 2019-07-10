@@ -98,6 +98,31 @@ padding-left: 15px;</string>
     <string>手续费承兑单</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="pushButton_nameTransfer">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>150</y>
+     <width>112</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>112</width>
+     <height>24</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>120</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="text">
+    <string>账户名转让</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

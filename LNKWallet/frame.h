@@ -55,6 +55,8 @@ class ColdHotTransferPage;
 class ContractTokenPage;
 class CitizenAccountPage;
 class CitizenProposalPage;
+class CitizenPolicyPage;
+class NameTransferPage;
 
 class CrossCapitalMark;
 class CustomShadowEffect;
@@ -114,6 +116,7 @@ private slots:
     void showContactPage();
     void showMultiSigPage();
     void showPoundagePage();//显示手续费承税单--朱正天
+    void showNameTransferPage();
     void showOnchainOrderPage();
     void showExchangeModePage();
     void showMyExchangeContractPage();
@@ -129,6 +132,7 @@ private slots:
     void showContractTokenPage();
     void showCitizenAccountPage();
     void showCitizenProposalPage();
+    void showCitizenPolicyPage();
 
     void showWaittingForSyncWidget();
     void showNewOrImportWalletWidget();
@@ -178,6 +182,8 @@ private:
     ContractTokenPage*  contractTokenPage;
     CitizenAccountPage* citizenAccountPage;
     CitizenProposalPage* citizenProposalPage;
+    CitizenPolicyPage*  citizenPolicyPage = nullptr;
+    NameTransferPage*   nameTransferPage = nullptr;
 
     BottomBar* bottomBar;
     QWidget* centralWidget;
@@ -193,7 +199,7 @@ private:
                          //  11: poundage   12: guardKeyManagePage  13: proposalPage    14: withdrawConfirmPage  15: feedPricePage
                         //   16: coldHotTransferPage    17: guardAccountPage    18: guardIncomePage     19: bonusPage
                         //   20: contractTokenPage  21: citizenAccountPage  22: citizenProposalPage  23: lockContractPage
-                        //   24: exchangeModePage
+                        //   24: exchangeModePage   25: nameTransferPage    26: citizenPolicyPage
     ShadowWidget* shadowWidget;
     QSystemTrayIcon* trayIcon;
     void createTrayIconActions();

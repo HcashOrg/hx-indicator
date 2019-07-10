@@ -20,9 +20,12 @@ public slots:
 signals:
     void showPoundageSignal();
     void showMultiSigSignal();
+    void showNameTransferSignal();
 private slots:
     void PoundageShowSlots();
     void MultiSigShowSlots();
+    void NameTransferShowSlots();
+
 private:
     void InitWidget();
     void InitStyle();

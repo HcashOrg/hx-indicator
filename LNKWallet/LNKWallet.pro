@@ -237,7 +237,12 @@ SOURCES += main.cpp\
     extra/mycustomplot.cpp \
     control/OrderDepthWidget.cpp \
     LightModeConfig.cpp \
-    extra/RegularExpression.cpp
+    extra/RegularExpression.cpp \
+    nameTransfer/NameTransferPage.cpp \
+    nameTransfer/NameTransferDialog.cpp \
+    nameTransfer/ShowTrxCodeDialog.cpp \
+    citizen/CitizenPolicyPage.cpp \
+    citizen/CitizenResolutionDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -421,7 +426,12 @@ HEADERS  += firstlogin.h \
     extra/mycustomplot.h \
     control/OrderDepthWidget.h \
     LightModeConfig.h \
-    extra/RegularExpression.h
+    extra/RegularExpression.h \
+    nameTransfer/NameTransferPage.h \
+    nameTransfer/NameTransferDialog.h \
+    nameTransfer/ShowTrxCodeDialog.h \
+    citizen/CitizenPolicyPage.h \
+    citizen/CitizenResolutionDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -567,7 +577,12 @@ FORMS    += firstlogin.ui \
     exchange/ExchangeContractFeeDialog.ui \
     exchange/KLineWidget.ui \
     control/OrderDepthWidget.ui \
-    LightModeConfig.ui
+    LightModeConfig.ui \
+    nameTransfer/NameTransferPage.ui \
+    nameTransfer/NameTransferDialog.ui \
+    nameTransfer/ShowTrxCodeDialog.ui \
+    citizen/CitizenPolicyPage.ui \
+    citizen/CitizenResolutionDialog.ui
 
 win32{
     DISTFILES += logo.rc

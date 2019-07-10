@@ -336,6 +336,7 @@ void AllTransactionWidget::showTransactions()
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SPONSOR_PROPOSAL);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_PROPOSAL_APPROVE);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CITIZEN_PROPOSAL);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_CITIZEN_RESOLUTION_VOTE);
         break;
     case BonusType:
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_OBTAIN_BONUS);
@@ -1007,6 +1008,14 @@ void AllTransactionWidget::showTransactions()
             ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(str));
             ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
             ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("citizen sponsor a proposal")));
+        }
+            break;
+        case TRANSACTION_TYPE_CITIZEN_RESOLUTION_VOTE:
+        {
+            ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,3, new QTableWidgetItem("-"));
+            ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("citizen resolution voting")));
+
         }
             break;
         default:

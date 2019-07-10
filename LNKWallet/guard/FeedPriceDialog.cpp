@@ -111,6 +111,7 @@ void FeedPriceDialog::jsonDataUpdated(QString id)
             ErrorResultDialog errorResultDialog;
             errorResultDialog.setInfoText(tr("Failed!"));
             errorResultDialog.setDetailText(result);
+            errorResultDialog.pop();
         }
 
 

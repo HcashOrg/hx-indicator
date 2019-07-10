@@ -96,6 +96,8 @@ void WebSocketManager::run()
     m_webSocket = new QWebSocket;
     connect(m_webSocket,SIGNAL(connected()),this,SLOT(onConnected()));
     connect(m_webSocket,SIGNAL(textFrameReceived(QString,bool)),this,SLOT(onTextFrameReceived(QString,bool)));
+//    connect(m_webSocket,SIGNAL(binaryFrameReceived(QByteArray,bool)),this,SLOT(onBinaryFrameReceived(QByteArray,bool)));
+
     connect(m_webSocket,SIGNAL(stateChanged(QAbstractSocket::SocketState)),this,SLOT(onStateChanged(QAbstractSocket::SocketState)));
 
     connectToClient();
@@ -194,7 +196,51 @@ void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
 
     if(_isLastFrame)
     {
+        QString result = m_buff.mid( QString("{\"id\":32800,\"jsonrpc\":\"2.0\",").size());
+        result = result.left( result.size() - 1);
 
+        HXChain::getInstance()->updateJsonDataMap(processingRpc.split("***").at(0), result);
+
+//        pendingRpcs.removeFirst();
+        processingRpc.clear();
+
+        m_buff.clear();
+
+        busy = false;
+    }
+}
+
+void WebSocketManager::onBinaryFrameReceived(QByteArray _message, bool _isLastFrame)
+{
+    if(m_rpcId == "testrpc+info")
+    {
+        // 如果 rpc还能连接 则丢弃当前 继续处理余下的rpc指令
+        m_buff.clear();
+        m_rpcId.clear();
+        loopCount = 0;
+        processingRpc.clear();
+        busy = false;
+
+        logToFile( QStringList() << QString("test rpc connect: successfully "));
+
+        return;
+    }
+
+//    if(processingRpc.startsWith("NameTransferPage-decode_multisig_transaction-"))
+//    {
+        qDebug() <<"bbbbbbbbbbbb " << _isLastFrame <<_message;
+//    }
+
+    if(processingRpc.isEmpty())   return;
+//    if(pendingRpcs.size() <= 0)   return;
+//    qDebug() << "message received: " << pendingRpcs.at(0) << _isLastFrame;
+
+    m_buff += _message;
+//    logToFile( QStringList() << QString::number(loopCount) << processingRpc);
+    loopCount = 0;
+
+    if(_isLastFrame)
+    {
         QString result = m_buff.mid( QString("{\"id\":32800,\"jsonrpc\":\"2.0\",").size());
         result = result.left( result.size() - 1);
 

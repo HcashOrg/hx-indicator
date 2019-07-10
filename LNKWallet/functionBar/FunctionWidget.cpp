@@ -281,6 +281,7 @@ void FunctionWidget::InitWidget()
 
     connect(_p->advanceBar,&FunctionAdvanceWidget::showPoundageSignal,this,&FunctionWidget::showPoundageSignal);
     connect(_p->advanceBar,&FunctionAdvanceWidget::showMultiSigSignal,this,&FunctionWidget::showMultiSigSignal);
+    connect(_p->advanceBar,&FunctionAdvanceWidget::showNameTransferSignal,this,&FunctionWidget::showNameTransferSignal);
 
     connect(_p->exchangeBar,&FunctionExchangeWidget::showExchangeModeSignal,this,&FunctionWidget::showExchangeModeSignal);
     connect(_p->exchangeBar,&FunctionExchangeWidget::showOnchainOrderSignal,this,&FunctionWidget::showOnchainOrderSignal);
@@ -299,6 +300,7 @@ void FunctionWidget::InitWidget()
 
     connect(_p->citizenBar,&FunctionCitizenWidget::showCitizenAccountSignal,this,&FunctionWidget::showCitizenAccountSignal);
     connect(_p->citizenBar,&FunctionCitizenWidget::showCitizenProposalSignal,this,&FunctionWidget::showCitizenProposalSignal);
+    connect(_p->citizenBar,&FunctionCitizenWidget::showCitizenPolicySignal,this,&FunctionWidget::showCitizenPolicySignal);
 
     //链接二级菜单默认单击情况
     connect(this,&FunctionWidget::AccountDefaultSignal,_p->accountBar,&FunctionAccountWidget::DefaultShow);

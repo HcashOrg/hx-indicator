@@ -845,6 +845,7 @@ void HXChain::InitFeeCharge()
     feeChargeInfo.ChangeSenatorFee = feeObj.value("ChangeSenator").toString();
     feeChargeInfo.createSenatorFee = feeObj.value("CreateSenator").toString();
     feeChargeInfo.changePaybackFee = feeObj.value("ChangePayback").toString();
+    feeChargeInfo.citizenResolution = feeObj.value("CitizenResolution").toString();
 
     //其他费用
     QJsonObject crossfeeObj = jsonObject.value("CrossFee").toObject();
@@ -1185,6 +1186,13 @@ void HXChain::parseTransaction(QString result)
     }
         break;
     case TRANSACTION_TYPE_CITIZEN_PROPOSAL:
+    {
+        QString addr = operationObject.take("fee_paying_account").toString();
+
+        transactionDB.addAccountTransactionId(addr, typeId);
+    }
+        break;
+    case TRANSACTION_TYPE_CITIZEN_RESOLUTION_VOTE:
     {
         QString addr = operationObject.take("fee_paying_account").toString();
 

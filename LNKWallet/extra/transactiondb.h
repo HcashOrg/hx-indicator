@@ -41,19 +41,25 @@ public:
     void insertContractInvokeObject(QString _trxId, ContractInvokeObject _object);
     ContractInvokeObject getContractInvokeObject(QString _trxId);
 
+    void insertNameTransferTrx(QString _trxCode, QString _trxStr);
+    QString getNameTransferTrx(QString _trxCode);
+    void removeNameTransferTrx(QString _trxCode);
+    QStringList getNameTransferTrxsCode();
+
+    bool clearAllDBs();
+
+private:
     bool writeToDB(leveldb::DB* _db, QString _key, QByteArray _value);
     QByteArray readFromDB(leveldb::DB* _db, QString _key);
     bool removeFromDB(leveldb::DB* _db, QString _key);
 
     QStringList getKeys(leveldb::DB* _db);
 
-    bool clearAllDBs();
-
-private:
-    leveldb::DB* m_transactionStructDB = NULL;
-    leveldb::DB* m_accountTransactionIdsDB = NULL;
-    leveldb::DB* m_guaranteeOrderDB = NULL;
-    leveldb::DB* m_contractInvokeObjectDB = NULL;
+    leveldb::DB* m_transactionStructDB = nullptr;
+    leveldb::DB* m_accountTransactionIdsDB = nullptr;
+    leveldb::DB* m_guaranteeOrderDB = nullptr;
+    leveldb::DB* m_contractInvokeObjectDB = nullptr;
+    leveldb::DB* m_nameTransferTrxDB = nullptr;
 };
 
 #endif // TransactionDB_H

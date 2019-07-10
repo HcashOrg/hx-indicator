@@ -54,6 +54,8 @@
 #include "autoUpdate/AutoUpdateNotify.h"
 #include "websocketmanager.h"
 #include "LightModeConfig.h"
+#include "nameTransfer/NameTransferPage.h"
+#include "citizen/CitizenPolicyPage.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -387,6 +389,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showExchangeSignal,this,&Frame::showMainPage);
     connect(functionBar,&FunctionWidget::showMultiSigSignal,this,&Frame::showMultiSigPage);
     connect(functionBar,&FunctionWidget::showPoundageSignal,this,&Frame::showPoundagePage);
+    connect(functionBar,&FunctionWidget::showNameTransferSignal,this,&Frame::showNameTransferPage);
     connect(functionBar,&FunctionWidget::ShrinkSignal,this,&Frame::EnlargeRightPart);
     connect(functionBar,&FunctionWidget::RestoreSignal,this,&Frame::RestoreRightPart);
     connect(functionBar,&FunctionWidget::showExchangeModeSignal,this,&Frame::showExchangeModePage);
@@ -404,6 +407,7 @@ void Frame::alreadyLogin()
     connect(functionBar,&FunctionWidget::showContractTokenSignal,this,&Frame::showContractTokenPage);
     connect(functionBar,&FunctionWidget::showCitizenAccountSignal,this,&Frame::showCitizenAccountPage);
     connect(functionBar,&FunctionWidget::showCitizenProposalSignal,this,&Frame::showCitizenProposalPage);
+    connect(functionBar,&FunctionWidget::showCitizenPolicySignal,this,&Frame::showCitizenPolicyPage);
 
     getAccountInfo();
 
@@ -878,6 +882,20 @@ void Frame::closeCurrentPage()
             exchangeModePage = NULL;
         }
         break;
+    case 25:
+        if(nameTransferPage)
+        {
+            nameTransferPage->close();
+            nameTransferPage = NULL;
+        }
+        break;
+    case 26:
+        if(citizenPolicyPage)
+        {
+            citizenPolicyPage->close();
+            citizenPolicyPage = NULL;
+        }
+        break;
     default:
         break;
     }
@@ -954,6 +972,11 @@ void Frame::autoRefresh()
         break;
     case 24:
         exchangeModePage->refresh();
+        break;
+    case 25:
+        break;
+    case 26:
+        citizenPolicyPage->refresh();
         break;
     default:
         break;
@@ -1170,6 +1193,12 @@ void Frame::setLanguage(QString language)
         case 24:
             showExchangeModePage();
             break;
+        case 25:
+            showNameTransferPage();
+            break;
+        case 26:
+            showCitizenPolicyPage();
+            break;
         default:
             break;
         }
@@ -1245,6 +1274,17 @@ void Frame::showPoundagePage()
     poundage->setAttribute(Qt::WA_DeleteOnClose);
     poundage->show();
     currentPageNum = 11;
+}
+
+void Frame::showNameTransferPage()
+{
+    emit titleBackVisible(false);
+    closeCurrentPage();
+    nameTransferPage = new NameTransferPage(centralWidget);
+    connect(nameTransferPage,&NameTransferPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
+    nameTransferPage->setAttribute(Qt::WA_DeleteOnClose);
+    nameTransferPage->show();
+    currentPageNum = 25;
 }
 
 void Frame::showOnchainOrderPage()
@@ -1426,6 +1466,17 @@ void Frame::showCitizenProposalPage()
     citizenProposalPage->setAttribute(Qt::WA_DeleteOnClose);
     citizenProposalPage->show();
     currentPageNum = 22;
+}
+
+void Frame::showCitizenPolicyPage()
+{
+    emit titleBackVisible(false);
+
+    closeCurrentPage();
+    citizenPolicyPage = new CitizenPolicyPage(centralWidget);
+    citizenPolicyPage->setAttribute(Qt::WA_DeleteOnClose);
+    citizenPolicyPage->show();
+    currentPageNum = 26;
 }
 
 
@@ -2722,6 +2773,9 @@ void Frame::onBack()
         break;
     case 24:
         showExchangeModePage();
+        break;
+    case 25:
+        showNameTransferPage();
         break;
     default:
         break;

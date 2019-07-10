@@ -46,6 +46,7 @@ signals:
     //点击二级按钮的信号
     void showPoundageSignal();
     void showMultiSigSignal();
+    void showNameTransferSignal();
     void showMyExchangeContractSignal();
     void showMinerSignal();
     void showBonusSignal();
@@ -64,7 +65,7 @@ signals:
     void showColdHotTransferSignal();
     void showCitizenAccountSignal();
     void showCitizenProposalSignal();
-
+    void showCitizenPolicySignal();
 signals:
     void ShrinkSignal();
     void RestoreSignal();

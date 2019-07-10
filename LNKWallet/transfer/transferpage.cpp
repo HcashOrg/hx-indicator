@@ -400,7 +400,7 @@ void TransferPage::assetComboBox_currentIndexChanged(int index)
 void TransferPage::sendtoLineEdit_textChanged(const QString &arg1)
 {
     ui->addressLabel->clear();
-qDebug() << "aaaaaa " << arg1;
+
     if( ui->sendtoLineEdit->text().contains(" ") || ui->sendtoLineEdit->text().contains("\n"))   // 不判断就remove的话 右键菜单撤销看起来等于不能用
     {
         ui->sendtoLineEdit->setText( ui->sendtoLineEdit->text().simplified().remove(" "));

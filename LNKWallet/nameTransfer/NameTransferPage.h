@@ -1,0 +1,48 @@
+#ifndef NAMETRANSFERPAGE_H
+#define NAMETRANSFERPAGE_H
+
+#include <QWidget>
+
+namespace Ui {
+class NameTransferPage;
+}
+
+class FeeChooseWidget;
+class NameTransferPage : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit NameTransferPage(QWidget *parent = nullptr);
+    ~NameTransferPage();
+
+signals:
+    void backBtnVisible(bool isShow);
+    void usePoundage();
+
+private slots:
+    void jsonDataUpdated(QString id);
+
+    void on_typeTrxBtn_clicked();
+
+    void on_typeSignBtn_clicked();
+
+    void on_createTrxBtn_clicked();
+
+    void on_trxTableWidget_cellClicked(int row, int column);
+
+    void on_trxCodeLineEdit_textChanged(const QString &arg1);
+
+
+    void on_signBtn_clicked();
+
+private:
+    Ui::NameTransferPage *ui;
+    FeeChooseWidget *feeWidget = nullptr;
+
+    void showNameTransferTrxs();
+
+    void paintEvent(QPaintEvent*);
+};
+
+#endif // NAMETRANSFERPAGE_H

@@ -30,10 +30,10 @@
    <widget class="QWidget" name="containerWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>85</y>
-      <width>481</width>
-      <height>321</height>
+      <x>240</x>
+      <y>111</y>
+      <width>480</width>
+      <height>320</height>
      </rect>
     </property>
     <property name="font">
@@ -265,7 +265,7 @@ color: rgb(52,37,90);</string>
     <widget class="QToolButton" name="cancelBtn">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>254</x>
        <y>260</y>
        <width>96</width>
        <height>30</height>

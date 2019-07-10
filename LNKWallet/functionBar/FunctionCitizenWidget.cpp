@@ -31,6 +31,7 @@ void FunctionCitizenWidget::InitWidget()
     InitStyle();
     ui->accountInfoBtn->setCheckable(true);
     ui->proposalBtn->setCheckable(true);
+    ui->policyBtn->setCheckable(true);
 }
 
 void FunctionCitizenWidget::InitStyle()
@@ -61,6 +62,7 @@ void FunctionCitizenWidget::on_accountInfoBtn_clicked()
 {
     ui->accountInfoBtn->setChecked(true);
     ui->proposalBtn->setChecked(false);
+    ui->policyBtn->setChecked(false);
     showCitizenAccountSignal();
 }
 
@@ -68,5 +70,15 @@ void FunctionCitizenWidget::on_proposalBtn_clicked()
 {
     ui->accountInfoBtn->setChecked(false);
     ui->proposalBtn->setChecked(true);
+    ui->policyBtn->setChecked(false);
     showCitizenProposalSignal();
 }
+
+void FunctionCitizenWidget::on_policyBtn_clicked()
+{
+    ui->accountInfoBtn->setChecked(false);
+    ui->proposalBtn->setChecked(false);
+    ui->policyBtn->setChecked(true);
+    showCitizenPolicySignal();
+}
+

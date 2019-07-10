@@ -24,11 +24,14 @@ private:
 signals:
     void showCitizenAccountSignal();
     void showCitizenProposalSignal();
+    void showCitizenPolicySignal();
 private slots:
 
     void on_accountInfoBtn_clicked();
 
     void on_proposalBtn_clicked();
+
+    void on_policyBtn_clicked();
 
 private:
     Ui::FunctionCitizenWidget *ui;

@@ -1,7 +1,7 @@
 #include "showcontentdialog.h"
 #include "ui_showcontentdialog.h"
-#include <QClipboard>
 
+#include <QClipboard>
 #include <QDebug>
 
 ShowContentDialog::ShowContentDialog(QString text, QWidget *parent) :

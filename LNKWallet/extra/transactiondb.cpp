@@ -15,6 +15,7 @@ TransactionDB::~TransactionDB()
     if(m_accountTransactionIdsDB)  delete m_accountTransactionIdsDB;
     if(m_guaranteeOrderDB)  delete m_guaranteeOrderDB;
     if(m_contractInvokeObjectDB)    delete m_contractInvokeObjectDB;
+    if(m_nameTransferTrxDB) delete m_nameTransferTrxDB;
 }
 
 bool TransactionDB::init()
@@ -33,10 +34,12 @@ bool TransactionDB::init()
     leveldb::Status status2 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/accountTransactionIds").toStdString(), &m_accountTransactionIdsDB);
     leveldb::Status status3 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/guaranteeOrder").toStdString(), &m_guaranteeOrderDB);
     leveldb::Status status4 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/contractInvokeObject").toStdString(), &m_contractInvokeObjectDB);
+    leveldb::Status status5 = leveldb::DB::Open(options,QString(HXChain::getInstance()->walletConfigPath + "/transactionDB/nameTransferTrx").toStdString(), &m_nameTransferTrxDB);
     qDebug() << "transactionstruct db init" << status.ok() << QString::fromStdString( status.ToString())
                                             << status2.ok() << QString::fromStdString( status2.ToString())
                                             << status3.ok() << QString::fromStdString( status3.ToString())
-                                            << status4.ok() << QString::fromStdString( status4.ToString());
+                                            << status4.ok() << QString::fromStdString( status4.ToString())
+                                            << status5.ok() << QString::fromStdString( status5.ToString());
 
     inited = true;
     if(status.ok() && status2.ok() && status3.ok())
@@ -164,6 +167,53 @@ ContractInvokeObject TransactionDB::getContractInvokeObject(QString _trxId)
     buffer.close();
 
     return object;
+}
+
+void TransactionDB::insertNameTransferTrx(QString _trxCode, QString _trxStr)
+{
+    QByteArray ba;
+    QBuffer buffer(&ba);
+    buffer.open(QIODevice::WriteOnly);
+
+    QDataStream out(&buffer);
+    //序列化对象信息
+    out << _trxStr;
+    buffer.close();
+
+    writeToDB(m_nameTransferTrxDB, _trxCode, ba);
+}
+
+QString TransactionDB::getNameTransferTrx(QString _trxCode)
+{
+    if(_trxCode.isEmpty())      return "";
+    QByteArray value = readFromDB(m_nameTransferTrxDB, _trxCode);
+
+    if(value.isEmpty())     return "";
+
+    //读取文件流信息
+    QBuffer buffer(&value);
+    buffer.open(QIODevice::ReadOnly);
+
+    QDataStream in(&buffer);
+    //反序列化，获取对象信息
+    QString trxStr;
+    in >> trxStr;
+    buffer.close();
+
+    return trxStr;
+}
+
+void TransactionDB::removeNameTransferTrx(QString _trxCode)
+{
+    if(m_nameTransferTrxDB)
+    {
+        removeFromDB(m_nameTransferTrxDB, _trxCode);
+    }
+}
+
+QStringList TransactionDB::getNameTransferTrxsCode()
+{
+    return getKeys(m_nameTransferTrxDB);
 }
 
 QVector<TransactionStruct> TransactionDB::lookupTransactionStruct(QString _address, int _type)

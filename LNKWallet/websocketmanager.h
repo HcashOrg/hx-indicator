@@ -33,6 +33,7 @@ private slots:
     void onTimer();
     void onConnected();
     void onTextFrameReceived(QString _message, bool _isLastFrame);
+    void onBinaryFrameReceived(QByteArray _message, bool _isLastFrame);
 
 
     void onStateChanged(QAbstractSocket::SocketState _state);
