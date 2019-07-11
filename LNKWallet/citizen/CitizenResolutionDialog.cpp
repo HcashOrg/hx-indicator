@@ -35,7 +35,7 @@ CitizenResolutionDialog::CitizenResolutionDialog(const ResolutionInfo& _info, QS
     // 根据选项数量生成qradiobutton
     foreach (int index, info.optionsMap.keys())
     {
-        QRadioButton* rb = new QRadioButton(info.optionsMap.value(index), ui->scrollAreaWidgetContents);
+        QRadioButton* rb = new QRadioButton(info.optionsMap.value(index) + " (" + calProposalWeight(info,index) + ")", ui->scrollAreaWidgetContents);
         bgGroup->addButton( rb);
         bgGroup->setId(rb, index);
 
@@ -112,6 +112,12 @@ void CitizenResolutionDialog::jsonDataUpdated(QString id)
 void CitizenResolutionDialog::on_okBtn_clicked()
 {
     if(account.isEmpty())   return;
+
+    if(FeeChooseWidget* feeWidget = dynamic_cast<FeeChooseWidget*>(this->ui->stackedWidget_fee->currentWidget()))
+    {
+        feeWidget->updatePoundageID();
+    }
+
     HXChain::getInstance()->postRPC("CitizenResolutionDialog-cast_vote",toJsonFormat("cast_vote",
                                     QJsonArray() << account << info.id << bgGroup->checkedId() << true));
 
@@ -130,5 +136,31 @@ void CitizenResolutionDialog::on_closeBtn_clicked()
 
 void CitizenResolutionDialog::on_bgGroup_toggled(int id, bool status)
 {
-qDebug() << id << status;
+    qDebug() << id << status;
+}
+
+QString CitizenResolutionDialog::calProposalWeight(const ResolutionInfo &info, int option) const
+{
+    unsigned long long allWeight = 0;
+    unsigned long long alreadyWeight = 0;
+    QMap<QString,MinerInfo> allMiner(HXChain::getInstance()->minerMap);
+    QMapIterator<QString, MinerInfo> i(allMiner);
+    while (i.hasNext()) {
+        i.next();
+        allWeight += i.value().pledgeWeight;
+    }
+
+    if(info.pledgeMap.contains(option))
+    {
+        alreadyWeight += info.pledgeMap.value(option).toULongLong();
+    }
+
+    if(0 != allWeight)
+    {
+        return QString::number(alreadyWeight * 100.0 / allWeight,'f',2)+"%";
+    }
+    else
+    {
+        return "0.00%";
+    }
 }

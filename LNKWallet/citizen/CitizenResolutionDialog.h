@@ -36,6 +36,9 @@ private:
     QString account;
 
     QButtonGroup* bgGroup = nullptr;
+
+    QString calProposalWeight(const ResolutionInfo &info, int option) const;
+
 };
 
 #endif // CITIZENRESOLUTIONDIALOG_H
