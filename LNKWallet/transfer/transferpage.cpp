@@ -174,12 +174,18 @@ void TransferPage::on_sendBtn_clicked()
         }
         else
         {
-            HXChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
-                                             toJsonFormat( "transfer_to_address",
-                                                           QJsonArray() << accountName << ui->addressLabel->text()
-                                                           << ui->amountLineEdit->text() << getRealAssetSymbol( ui->assetComboBox->currentText())
-                                                           << remark << true ));
-            ui->sendBtn->setEnabled(false);
+            TransferConfirmDialog transferConfirmDialog( ui->sendtoLineEdit->text(),ui->amountLineEdit->text(),getRealAssetSymbol( ui->assetComboBox->currentText()), feeWidget->GetFeeNumber(), feeWidget->GetFeeType(), remark);
+            bool yOrN = transferConfirmDialog.pop();
+            if( yOrN)
+            {
+                emit usePoundage();
+                HXChain::getInstance()->postRPC( "id-transfer_to_address-" + accountName,
+                                                 toJsonFormat( "transfer_to_address",
+                                                               QJsonArray() << accountName << ui->addressLabel->text()
+                                                               << ui->amountLineEdit->text() << getRealAssetSymbol( ui->assetComboBox->currentText())
+                                                               << remark << true ));
+                ui->sendBtn->setEnabled(false);
+            }
         }
     }
 }
