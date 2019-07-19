@@ -169,26 +169,26 @@ ContractInvokeObject TransactionDB::getContractInvokeObject(QString _trxId)
     return object;
 }
 
-void TransactionDB::insertNameTransferTrx(QString _trxCode, QString _trxStr)
+void TransactionDB::insertNameTransferTrx(QString _trxCode, QStringList _trxStrAndId)
 {
     QByteArray ba;
     QBuffer buffer(&ba);
     buffer.open(QIODevice::WriteOnly);
-
+qDebug() << "bbbbbbbbbb " << _trxStrAndId;
     QDataStream out(&buffer);
     //序列化对象信息
-    out << _trxStr;
+    out << _trxStrAndId;
     buffer.close();
 
     writeToDB(m_nameTransferTrxDB, _trxCode, ba);
 }
 
-QString TransactionDB::getNameTransferTrx(QString _trxCode)
+QStringList TransactionDB::getNameTransferTrx(QString _trxCode)
 {
-    if(_trxCode.isEmpty())      return "";
+    if(_trxCode.isEmpty())      return QStringList();
     QByteArray value = readFromDB(m_nameTransferTrxDB, _trxCode);
 
-    if(value.isEmpty())     return "";
+    if(value.isEmpty())     return QStringList();
 
     //读取文件流信息
     QBuffer buffer(&value);
@@ -196,7 +196,7 @@ QString TransactionDB::getNameTransferTrx(QString _trxCode)
 
     QDataStream in(&buffer);
     //反序列化，获取对象信息
-    QString trxStr;
+    QStringList trxStr;
     in >> trxStr;
     buffer.close();
 

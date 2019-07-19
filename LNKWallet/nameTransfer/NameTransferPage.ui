@@ -116,7 +116,7 @@
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>创建转让交易</string>
+      <string>生成转让交易</string>
      </property>
      <property name="BtnStyle" stdset="0">
       <string>btn1</string>
@@ -258,6 +258,19 @@
      </column>
      <column>
       <property name="text">
+       <string>状态</string>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string/>
       </property>
      </column>
@@ -337,7 +350,7 @@
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>30</x>
         <y>10</y>
         <width>100</width>
         <height>30</height>
@@ -362,7 +375,7 @@
      <widget class="QLabel" name="fromLabel">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>30</x>
         <y>40</y>
         <width>150</width>
         <height>30</height>
@@ -393,7 +406,7 @@
      <widget class="QLabel" name="sendtoLabel">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>260</x>
         <y>100</y>
         <width>300</width>
         <height>30</height>
@@ -424,7 +437,7 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>260</x>
         <y>70</y>
         <width>100</width>
         <height>30</height>
@@ -449,8 +462,8 @@
      <widget class="QLabel" name="amountLabel">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>40</y>
+        <x>30</x>
+        <y>100</y>
         <width>150</width>
         <height>30</height>
        </rect>
@@ -477,20 +490,10 @@
        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
       </property>
      </widget>
-     <widget class="QStackedWidget" name="feeStackedWidget">
-      <property name="geometry">
-       <rect>
-        <x>370</x>
-        <y>10</y>
-        <width>240</width>
-        <height>121</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="expirationLabel">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>260</x>
         <y>160</y>
         <width>300</width>
         <height>30</height>
@@ -521,8 +524,8 @@
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>10</y>
+        <x>30</x>
+        <y>70</y>
         <width>100</width>
         <height>30</height>
        </rect>
@@ -546,7 +549,7 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>260</x>
         <y>130</y>
         <width>100</width>
         <height>30</height>
@@ -563,6 +566,118 @@
       </property>
       <property name="text">
        <string>失效时间</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="fromAddressLabel">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>40</y>
+        <width>300</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑 Light</family>
+        <pointsize>-1</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(229,229,229);font: 13px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);padding:0px 0px 0px 5px;}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <property name="textInteractionFlags">
+       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>10</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>-1</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>转让者地址</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="feeLabel">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>160</y>
+        <width>150</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑 Light</family>
+        <pointsize>-1</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel{border-top:none;border-left:none;border-right:none;border-bottom:1px solid rgb(229,229,229);font: 13px &quot;微软雅黑 Light&quot;;color: rgb(51, 51, 51);padding:0px 0px 0px 5px;}</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <property name="textInteractionFlags">
+       <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>130</y>
+        <width>100</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>微软雅黑</family>
+        <pointsize>-1</pointsize>
+        <weight>50</weight>
+        <italic>false</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>手续费</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>

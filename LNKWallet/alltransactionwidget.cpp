@@ -328,6 +328,7 @@ void AllTransactionWidget::showTransactions()
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SIGN_ETH_MULTI_CREATE);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SIGN_ETH_FINAL);
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_SIGN_ETH_COLDHOT_FINAL);
+        typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_NAME_TRANSFER);
         break;
     case FeedPriceType:
         typeIds += HXChain::getInstance()->transactionDB.getAccountTransactionTypeIdsByType(ui->addressLabel->text(), TRANSACTION_TYPE_FEED_PRICE);
@@ -435,7 +436,7 @@ void AllTransactionWidget::showTransactions()
 //                                                                            , transactionId);
 //            ui->transactionsTableWidget->setCellWidget(i,4, feeGuaranteeWidget);
 //        }
-        int useGuaranteeOrderType = 0;  // 0:未使用承兑单  1:使用别人的承兑单  2:别人使用我的承兑单  3:使用了自己的承兑单
+        int useGuaranteeOrderType = 0;  // -1:多op交易 0:未使用承兑单  1:使用别人的承兑单  2:别人使用我的承兑单  3:使用了自己的承兑单
         QString guaranteeOrderOwnerAddress = HXChain::getInstance()->transactionDB.getGuaranteeOrder(ts.guaranteeId).ownerAddress;
 
         QJsonObject operationObject = QJsonDocument::fromJson(ts.operationStr.toLatin1()).object();
@@ -1018,11 +1019,54 @@ void AllTransactionWidget::showTransactions()
 
         }
             break;
+        case TRANSACTION_TYPE_NAME_TRANSFER:
+        {
+            QString maker = operationObject.value("maker").toString();
+            QString taker = operationObject.value("taker").toString();
+            QJsonObject makerOpObject = operationObject.value("maker_op").toArray().at(0).toObject().value("op").toArray().at(1).toObject();
+            QJsonObject takerOpObject = operationObject.value("taker_op").toArray().at(0).toObject().value("op").toArray().at(1).toObject();
+            QJsonObject amountObject    = takerOpObject.value("amount").toObject();
+            unsigned long long amount   = jsonValueToULL( amountObject.value("amount"));
+            QString assetId             = amountObject.value("asset_id").toString();
+            AssetInfo assetInfo         = HXChain::getInstance()->assetInfoMap.value(assetId);
+
+            if(maker == ui->addressLabel->text())
+            {
+                ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(taker));
+
+                QTableWidgetItem* item = new QTableWidgetItem( "+" + getBigNumberString(amount,assetInfo.precision) + " " + revertERCSymbol( assetInfo.symbol));
+                ui->transactionsTableWidget->setItem(i,3, item);
+                item->setTextColor(QColor(0,170,0));
+
+                ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("sell account name")));
+
+                useGuaranteeOrderType = -1;
+                ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(getBigNumberString(ts.feeAmount + jsonValueToULL( makerOpObject.value("fee").toObject().value("amount")), ASSET_PRECISION)));
+            }
+            else if(taker == ui->addressLabel->text())
+            {
+                ui->transactionsTableWidget->setItem(i,2, new QTableWidgetItem(maker));
+
+                QTableWidgetItem* item = new QTableWidgetItem( "-" + getBigNumberString(amount,assetInfo.precision) + " " + revertERCSymbol( assetInfo.symbol));
+                ui->transactionsTableWidget->setItem(i,3, item);
+                item->setTextColor(QColor(255,0,0));
+
+                ui->transactionsTableWidget->setItem(i,7, new QTableWidgetItem(tr("buy account name")));
+
+                useGuaranteeOrderType = -1;
+                ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(getBigNumberString( jsonValueToULL( takerOpObject.value("fee").toObject().value("amount")), ASSET_PRECISION)));
+            }
+        }
+            break;
         default:
             break;
         }
 
         switch (useGuaranteeOrderType) {
+        case -1:
+        {
+        }
+            break;
         case 0:
         {
             ui->transactionsTableWidget->setItem(i,4, new QTableWidgetItem(getBigNumberString(ts.feeAmount, ASSET_PRECISION)));

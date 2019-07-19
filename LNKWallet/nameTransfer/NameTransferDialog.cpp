@@ -47,7 +47,7 @@ void NameTransferDialog::pop()
 void NameTransferDialog::init()
 {
     ui->accountComboBox->clear();
-    QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
+    QStringList accounts = HXChain::getInstance()->getRegisteredAccounts();
     ui->accountComboBox->addItems(accounts);
 
     if(accounts.contains(HXChain::getInstance()->currentAccount))
@@ -88,7 +88,6 @@ void NameTransferDialog::jsonDataUpdated(QString id)
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
 
-        qDebug() << result;
         if(result.startsWith("\"result\":"))
         {
             result.prepend("{");
@@ -111,16 +110,33 @@ void NameTransferDialog::jsonDataUpdated(QString id)
     if( id.startsWith("NameTransferDialog-decode_multisig_transaction-"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        QString decodedStr = id.mid(QString("NameTransferDialog-decode_multisig_transaction-").size());
+        _decodedStr = id.mid(QString("NameTransferDialog-decode_multisig_transaction-").size());
 
-        qDebug() << result;
         result.prepend("{");
         result.append("}");
         QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
-        QString trxCode = QJsonDocument( object.value("result").toObject()).toJson();
-        HXChain::getInstance()->transactionDB.insertNameTransferTrx(decodedStr, trxCode);
+        QJsonObject trxObject = object.value("result").toObject();
+        _trxCode = QJsonDocument(trxObject).toJson();
+
+        HXChain::getInstance()->postRPC( "NameTransferDialog-get_transaction_id", toJsonFormat( "get_transaction_id", QJsonArray() << trxObject));
+
+        return;
+    }
+
+    if( id == "NameTransferDialog-get_transaction_id")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+qDebug() << id << result;
+
+        result.prepend("{");
+        result.append("}");
+        QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
+        QString trxId = object.value("result").toString();
+
+        HXChain::getInstance()->transactionDB.insertNameTransferTrx(_decodedStr, QStringList() << _trxCode << trxId);
 
         close();
+
         return;
     }
 }
@@ -138,10 +154,6 @@ void NameTransferDialog::on_okBtn_clicked()
                                                                                     QJsonArray() << ui->accountComboBox->currentText()
                                                                                     << ui->toAddressLineEdit->text() << assetObject
                                                                                     << ui->newNameLineEdit->text()));
-    qDebug() << toJsonFormat( "name_transfer_to_address",
-                              QJsonArray() << ui->accountComboBox->currentText()
-                              << ui->toAddressLineEdit->text() << assetObject
-                              << ui->newNameLineEdit->text());
 }
 
 void NameTransferDialog::on_closeBtn_clicked()

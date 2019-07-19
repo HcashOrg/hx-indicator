@@ -36,6 +36,8 @@ private slots:
 
 private:
     Ui::NameTransferDialog *ui;
+    QString _decodedStr;
+    QString _trxCode;
 
     bool newNameOk = false;
     void checkOkBtnEnabled();

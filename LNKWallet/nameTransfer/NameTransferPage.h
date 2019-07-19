@@ -7,7 +7,6 @@ namespace Ui {
 class NameTransferPage;
 }
 
-class FeeChooseWidget;
 class NameTransferPage : public QWidget
 {
     Q_OBJECT
@@ -18,7 +17,6 @@ public:
 
 signals:
     void backBtnVisible(bool isShow);
-    void usePoundage();
 
 private slots:
     void jsonDataUpdated(QString id);
@@ -38,7 +36,6 @@ private slots:
 
 private:
     Ui::NameTransferPage *ui;
-    FeeChooseWidget *feeWidget = nullptr;
 
     void showNameTransferTrxs();
 

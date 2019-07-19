@@ -65,33 +65,54 @@ void CreateMultisigWidget::showPubKeys()
 
 void CreateMultisigWidget::jsonDataUpdated(QString id)
 {
-    if( id == "CreateMultisigWidget-create_multisignature_address" )
+    if( id.startsWith("CreateMultisigWidget-create_multisignature_address-") )
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+        qDebug() << id  << result;
+
+        QString paramsStr = id.mid(QString("CreateMultisigWidget-create_multisignature_address-").size());
+        QJsonArray params = QJsonDocument::fromJson( paramsStr.toUtf8()).array();
 
         if( result.startsWith("\"result\":"))
         {
             result.prepend("{");
             result.append("}");
             QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
-            QString pubKey = object.value("result").toString();
-            HXChain::getInstance()->configFile->setValue("/multisigAddresses/" + pubKey, 1);
+            QJsonArray array = object.value("result").toArray().at(0).toArray();
+            QString multiAddress = array.at(1).toString();
+            HXChain::getInstance()->configFile->setValue("/multisigAddresses/" + multiAddress, 1);
 
-            CommonDialog commonDialog(CommonDialog::OkOnly);
-            commonDialog.setText(tr("Multi-sig address created: %1").arg(pubKey));
-            commonDialog.pop();
+            if(paramsStr.size() > 0)
+            {
+                CommonDialog commonDialog(CommonDialog::OkOnly);
+                commonDialog.setText(tr("Multi-sig address created: %1").arg(multiAddress));
+                commonDialog.pop();
+            }
+            else
+            {
+                CommonDialog commonDialog(CommonDialog::OkOnly);
+                commonDialog.setText(tr("Multi-sig address has been added: %1").arg(multiAddress));
+                commonDialog.pop();
+            }
         }
         else
         {
             if(result.contains("unspecified: Assert Exception: !itr->multisignatures.valid():") && result.contains("\"multisignature\":\""))
             {
-                int pos = result.indexOf("\"multisignature\":\"");
+                int pos = result.indexOf("\"multisignature\":") + QString("\"multisignature\":").size();
                 QString address = result.mid( pos, result.indexOf(',',pos) - pos);
 
-                CommonDialog commonDialog(CommonDialog::OkOnly);
-                commonDialog.setText(tr("Multi-sig address %1 has already been created in the past. You can not create it again.").arg(address));
-                commonDialog.pop();
+                CommonDialog commonDialog(CommonDialog::YesOrNo);
+                commonDialog.setText(tr("Multi-sig address %1 has already been created in the past.Do you want to add it to your wallet?").arg(address));
+                if(commonDialog.pop())
+                {
+                    params << false;
+                    HXChain::getInstance()->postRPC( "CreateMultisigWidget-create_multisignature_address-",
+                                                     toJsonFormat( "create_multisignature_address",
+                                                                   params ));
+
+                }
+
             }
             else
             {
@@ -172,10 +193,13 @@ void CreateMultisigWidget::on_createBtn_clicked()
         }
 
 
-        HXChain::getInstance()->postRPC( "CreateMultisigWidget-create_multisignature_address",
+        QJsonArray params = QJsonArray() << confirmCreateMultiSigDialog.account << pubKeysArray
+                                         << ui->requiredLineEdit->text().toInt();
+        QString str = QJsonDocument(params).toJson();
+        params << true;
+        HXChain::getInstance()->postRPC( "CreateMultisigWidget-create_multisignature_address-" + str,
                                          toJsonFormat( "create_multisignature_address",
-                                                       QJsonArray() << confirmCreateMultiSigDialog.account << pubKeysArray
-                                                       << ui->requiredLineEdit->text().toInt() << true ));
+                                                       params));
 
     }
 }

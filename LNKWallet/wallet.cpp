@@ -1199,6 +1199,15 @@ void HXChain::parseTransaction(QString result)
         transactionDB.addAccountTransactionId(addr, typeId);
     }
         break;
+    case TRANSACTION_TYPE_NAME_TRANSFER:
+    {
+        QString maker = operationObject.take("maker").toString();
+        QString taker = operationObject.take("taker").toString();
+
+        transactionDB.addAccountTransactionId(maker, typeId);
+        transactionDB.addAccountTransactionId(taker, typeId);
+    }
+        break;
     default:
         break;
     }

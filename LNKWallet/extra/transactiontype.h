@@ -51,5 +51,6 @@
 #define TRANSACTION_TYPE_BLACKLIST              105     // 黑名单提案
 #define TRANSACTION_TYPE_PROPOSAL_CHANGE_GAS    115     // 改变eth gas提案
 #define TRANSACTION_TYPE_CITIZEN_RESOLUTION_VOTE    123     // citizen投票
+#define TRANSACTION_TYPE_NAME_TRANSFER          124     // 名字转让
 
 #endif // TRANSACTIONTYPE_H

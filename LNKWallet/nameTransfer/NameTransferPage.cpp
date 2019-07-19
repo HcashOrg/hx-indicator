@@ -18,13 +18,6 @@ NameTransferPage::NameTransferPage(QWidget *parent) :
 
     connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
 
-    feeWidget = new FeeChooseWidget(HXChain::getInstance()->feeChargeInfo.transferFee.toDouble(),HXChain::getInstance()->feeType);
-    ui->feeStackedWidget->addWidget(feeWidget);
-    ui->feeStackedWidget->setCurrentWidget(feeWidget);
-    ui->feeStackedWidget->currentWidget()->resize(ui->feeStackedWidget->size());
-
-    connect(this,&NameTransferPage::usePoundage,feeWidget,&FeeChooseWidget::updatePoundageID);
-
     ui->trxTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
     ui->trxTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->trxTableWidget->setFocusPolicy(Qt::NoFocus);
@@ -35,12 +28,13 @@ NameTransferPage::NameTransferPage(QWidget *parent) :
     ui->trxTableWidget->horizontalHeader()->setVisible(true);
     ui->trxTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->trxTableWidget->setColumnWidth(0,80);
-    ui->trxTableWidget->setColumnWidth(1,260);
-    ui->trxTableWidget->setColumnWidth(2,80);
-    ui->trxTableWidget->setColumnWidth(3,70);
-    ui->trxTableWidget->setColumnWidth(4,80);
-    ui->trxTableWidget->setColumnWidth(5,70);
+    ui->trxTableWidget->setColumnWidth(0,70);
+    ui->trxTableWidget->setColumnWidth(1,240);
+    ui->trxTableWidget->setColumnWidth(2,70);
+    ui->trxTableWidget->setColumnWidth(3,60);
+    ui->trxTableWidget->setColumnWidth(4,70);
+    ui->trxTableWidget->setColumnWidth(5,80);
+    ui->trxTableWidget->setColumnWidth(6,50);
     ui->trxTableWidget->horizontalHeader()->setStretchLastSection(true);
 
     ui->typeTrxBtn->setCheckable(true);
@@ -59,6 +53,8 @@ NameTransferPage::NameTransferPage(QWidget *parent) :
 
     ui->widget->hide();
     ui->signBtn->setEnabled(false);
+
+    ui->feeLabel->setText(QString::number(HXChain::getInstance()->feeChargeInfo.transferFee.toDouble(),'f',ASSET_PRECISION) + " " + ASSET_NAME);
 }
 
 NameTransferPage::~NameTransferPage()
@@ -71,7 +67,6 @@ void NameTransferPage::jsonDataUpdated(QString id)
     if( id == "NameTransferPage-decode_multisig_transaction-" + ui->trxCodeLineEdit->text())
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << result;
 
         if(result.startsWith("\"result\"") && !result.startsWith("\"result\":{\"ref_block_num\":0"))
         {
@@ -96,7 +91,7 @@ void NameTransferPage::jsonDataUpdated(QString id)
             QString amountAssetId = amountObject.value("asset_id").toString();
             AssetInfo amountAssetInfo = HXChain::getInstance()->assetInfoMap.value(amountAssetId);
 
-            ui->fromLabel->setText(HXChain::getInstance()->addressToName(from));
+            ui->fromAddressLabel->setText(from);
             ui->sendtoLabel->setText(to);
             ui->amountLabel->setText(getBigNumberString(amount,amountAssetInfo.precision) + " " + amountAssetInfo.symbol);
             ui->expirationLabel->setText(toLocalTime(expiration));
@@ -107,12 +102,13 @@ void NameTransferPage::jsonDataUpdated(QString id)
             if(HXChain::getInstance()->isMyAddress(to))
             {
                 ui->signBtn->setEnabled(true);
-                feeWidget->updateAccountNameSlots(HXChain::getInstance()->addressToName(to),true);
             }
             else
             {
                 ui->signBtn->setEnabled(false);
             }
+
+            HXChain::getInstance()->postRPC( "NameTransferPage-get_account_by_addr-" + ui->trxCodeLineEdit->text(), toJsonFormat( "get_account_by_addr", QJsonArray() << from));
         }
         else
         {
@@ -123,19 +119,26 @@ void NameTransferPage::jsonDataUpdated(QString id)
         return;
     }
 
+    if( id == "NameTransferPage-get_account_by_addr-" + ui->trxCodeLineEdit->text())
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+
+        result.prepend("{");
+        result.append("}");
+        QJsonObject resultObject = QJsonDocument::fromJson(result.toUtf8()).object().value("result").toObject();
+        QString name = resultObject.value("name").toString();
+        ui->fromLabel->setText(name);
+
+        return;
+    }
+
     if( id == "NameTransferPage-confirm_name_transfer")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
 
         if( result.startsWith("\"result\":{"))             // 成功
         {
-
-
-            TransactionResultDialog transactionResultDialog;
-            transactionResultDialog.setInfoText(tr(""));
-            transactionResultDialog.setDetailText(result);
-            transactionResultDialog.pop();
+            HXChain::getInstance()->postRPC( "NameTransferPage-info", toJsonFormat( "info", QJsonArray()));
         }
         else
         {
@@ -145,6 +148,59 @@ void NameTransferPage::jsonDataUpdated(QString id)
             errorResultDialog.pop();
         }
         return;
+    }
+
+    if( id == "NameTransferPage-info")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+
+        result.prepend("{");
+        result.append("}");
+        QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
+        QString maintenanceTime = object.value("result").toObject().value("next_maintenance_time").toString();
+        maintenanceTime.remove(" in the future");
+
+        TransactionResultDialog transactionResultDialog;
+        transactionResultDialog.setInfoText(tr("The account name change will take effect %1 in the future!").arg(maintenanceTime));
+        transactionResultDialog.setDetailText(result);
+        transactionResultDialog.pop();
+
+        return;
+    }
+
+    if( id.startsWith("NameTransferPage-get_transaction-"))
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        int row = id.mid(QString("NameTransferPage-get_transaction-").size()).toInt();
+
+        if(result == "\"result\":null")
+        {
+            if(ui->trxTableWidget->item(row,5) && ui->trxTableWidget->item(row,4))
+            {
+                QString trxCode = ui->trxTableWidget->item(row,4)->data(Qt::UserRole).toString();
+                QString trxStr = HXChain::getInstance()->transactionDB.getNameTransferTrx(trxCode).at(0);
+                QJsonObject object = QJsonDocument::fromJson(trxStr.toUtf8()).object();
+                QString expirationTime = object.value("expiration").toString();
+                QDateTime dateTime = QDateTime::fromString(expirationTime,"yyyy-MM-ddThh:mm:ss");
+                dateTime.setTimeSpec(Qt::UTC);
+                QDateTime localTime = dateTime.toLocalTime();
+                if(dateTime <= QDateTime::currentDateTime())
+                {
+                    ui->trxTableWidget->item(row,5)->setText(tr("expired"));
+                }
+                else
+                {
+                    ui->trxTableWidget->item(row,5)->setText(tr("unconfirmed"));
+                }
+            }
+        }
+        else
+        {
+            if(ui->trxTableWidget->item(row,5))
+            {
+                ui->trxTableWidget->item(row,5)->setText(tr("confirmed"));
+            }
+        }
     }
 }
 
@@ -193,8 +249,9 @@ void NameTransferPage::showNameTransferTrxs()
         ui->trxTableWidget->setRowHeight(i,40);
 
         QString trxCode = trxCodeList.at(i);
-        QString trxStr = HXChain::getInstance()->transactionDB.getNameTransferTrx(trxCode);
-        QJsonObject object = QJsonDocument::fromJson(trxStr.toUtf8()).object();
+        QStringList trxStrList = HXChain::getInstance()->transactionDB.getNameTransferTrx(trxCode);
+        qDebug() << "cccccccccccc " << trxStrList;
+        QJsonObject object = QJsonDocument::fromJson(trxStrList.at(0).toUtf8()).object();
 
         QJsonArray opsArray = object.value("operations").toArray();
         QJsonObject opsObject = opsArray.at(0).toArray().at(1).toObject();
@@ -217,8 +274,10 @@ void NameTransferPage::showNameTransferTrxs()
         ui->trxTableWidget->setItem(i,3, new QTableWidgetItem( getBigNumberString(amount,amountAssetInfo.precision) + " " + revertERCSymbol(amountAssetInfo.symbol) ));
         ui->trxTableWidget->setItem(i,4, new QTableWidgetItem( trxCode.left(5) + "..."));
         ui->trxTableWidget->item(i,4)->setData(Qt::UserRole, trxCode);
-        ui->trxTableWidget->setItem(i,5, new QTableWidgetItem( tr("delete")));
+        ui->trxTableWidget->setItem(i,5, new QTableWidgetItem());
+        ui->trxTableWidget->setItem(i,6, new QTableWidgetItem( tr("delete")));
 
+        HXChain::getInstance()->postRPC( "NameTransferPage-get_transaction-" + QString::number(i), toJsonFormat( "get_transaction", QJsonArray() << trxStrList.at(1)));
     }
     tableWidgetSetItemZebraColor(ui->trxTableWidget);
 
@@ -258,7 +317,7 @@ void NameTransferPage::on_trxTableWidget_cellClicked(int row, int column)
         return;
     }
 
-    if(column == 5)
+    if(column == 6)
     {
         if( !ui->trxTableWidget->item(row, 4))    return;
 
@@ -281,14 +340,13 @@ void NameTransferPage::on_trxCodeLineEdit_textChanged(const QString &arg1)
 
 void NameTransferPage::on_signBtn_clicked()
 {
-    Q_EMIT usePoundage();
     QStringList strList = ui->amountLabel->text().split(" ");
     QString amountStr = strList.size() > 1 ? strList.at(0) : "";
     QString symbol = strList.size() > 1 ? strList.at(1) : "";
 
-    TransferConfirmDialog transferConfirmDialog( ui->sendtoLabel->text(), amountStr,
+    TransferConfirmDialog transferConfirmDialog( ui->fromAddressLabel->text(), amountStr,
                                                  getRealAssetSymbol( symbol),
-                                                 feeWidget->GetFeeNumber(), feeWidget->GetFeeType(), "");
+                                                 QString::number(HXChain::getInstance()->feeChargeInfo.transferFee.toDouble(),'f',ASSET_PRECISION), ASSET_NAME, "");
     bool yOrN = transferConfirmDialog.pop();
     if(yOrN)
     {

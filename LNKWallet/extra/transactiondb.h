@@ -41,8 +41,8 @@ public:
     void insertContractInvokeObject(QString _trxId, ContractInvokeObject _object);
     ContractInvokeObject getContractInvokeObject(QString _trxId);
 
-    void insertNameTransferTrx(QString _trxCode, QString _trxStr);
-    QString getNameTransferTrx(QString _trxCode);
+    void insertNameTransferTrx(QString _trxCode, QStringList _trxStrAndId);     // qstringlist 第一个qstring为交易字符串  第二个为交易id
+    QStringList getNameTransferTrx(QString _trxCode);
     void removeNameTransferTrx(QString _trxCode);
     QStringList getNameTransferTrxsCode();
 
