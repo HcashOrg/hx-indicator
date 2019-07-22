@@ -7749,27 +7749,37 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="323"/>
+        <location filename="multisig/MultiSigPage.cpp" line="339"/>
         <source>Sign multi-sig trx failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="337"/>
+        <location filename="multisig/MultiSigPage.cpp" line="367"/>
+        <source>Duplicate signature!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="multisig/MultiSigPage.cpp" line="378"/>
+        <source>Signed: %1  Required: %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="multisig/MultiSigPage.cpp" line="395"/>
         <source>Signature of multi-sig trx has been sent out!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="344"/>
+        <location filename="multisig/MultiSigPage.cpp" line="402"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="541"/>
+        <location filename="multisig/MultiSigPage.cpp" line="605"/>
         <source>Everytime a new multi-sig address is added, the wallet will rescan the blockchain data when launched next time. After that the transactions of this multi-sig address will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="552"/>
+        <location filename="multisig/MultiSigPage.cpp" line="616"/>
         <source>Sure to delete this multi-sig address locally? This operation won&apos;t affect the data on the chain.</source>
         <translation type="unfinished"></translation>
     </message>

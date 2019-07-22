@@ -168,7 +168,7 @@
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page">
       <widget class="QTableWidget" name="balanceTableWidget">
@@ -517,7 +517,7 @@
       <rect>
        <x>400</x>
        <y>10</y>
-       <width>200</width>
+       <width>140</width>
        <height>18</height>
       </rect>
      </property>
@@ -718,6 +718,55 @@
       <string>copy</string>
      </property>
     </widget>
+    <widget class="QLabel" name="signedNumLabel">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>10</y>
+       <width>100</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="signedNumLabel2">
+     <property name="geometry">
+      <rect>
+       <x>570</x>
+       <y>200</y>
+       <width>100</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="requireInfoLabel">
+     <property name="geometry">
+      <rect>
+       <x>285</x>
+       <y>330</y>
+       <width>200</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+    <zorder>requireInfoLabel</zorder>
     <zorder>trxSignedextBrowser</zorder>
     <zorder>noAccountLabel</zorder>
     <zorder>trxCodeTextBrowser</zorder>
@@ -730,6 +779,8 @@
     <zorder>signBtn</zorder>
     <zorder>sendSignatureBtn</zorder>
     <zorder>copyBtn2</zorder>
+    <zorder>signedNumLabel</zorder>
+    <zorder>signedNumLabel2</zorder>
    </widget>
   </widget>
   <zorder>stackedWidget2</zorder>

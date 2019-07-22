@@ -58,6 +58,10 @@ void FunctionAdvanceWidget::InitWidget()
     connect(ui->pushButton_poundage,&QPushButton::clicked,this,&FunctionAdvanceWidget::PoundageShowSlots);
     connect(ui->pushButton_multiSig,&QPushButton::clicked,this,&FunctionAdvanceWidget::MultiSigShowSlots);
     connect(ui->pushButton_nameTransfer,&QPushButton::clicked,this,&FunctionAdvanceWidget::NameTransferShowSlots);
+
+#ifndef TEST_WALLET
+    ui->pushButton_nameTransfer->hide();
+#endif
 }
 
 void FunctionAdvanceWidget::InitStyle()

@@ -7631,12 +7631,12 @@ LastProduce:%4 Fee:%5%</oldsource>
     <message>
         <location filename="multisig/MultiSigPage.cpp" line="91"/>
         <source>Required / Total   %1 / %2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">需要签名数/总数</translation>
     </message>
     <message>
         <location filename="multisig/MultiSigPage.cpp" line="105"/>
         <source>non local account</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">非本钱包账户</translation>
     </message>
     <message>
         <location filename="multisig/MultiSigPage.cpp" line="146"/>
@@ -7644,29 +7644,39 @@ LastProduce:%4 Fee:%5%</oldsource>
         <translation type="unfinished">转账</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="323"/>
+        <location filename="multisig/MultiSigPage.cpp" line="339"/>
         <source>Sign multi-sig trx failed!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">签名多签交易失败！</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="337"/>
+        <location filename="multisig/MultiSigPage.cpp" line="367"/>
+        <source>Duplicate signature!</source>
+        <translation type="unfinished">重复的签名！</translation>
+    </message>
+    <message>
+        <location filename="multisig/MultiSigPage.cpp" line="378"/>
+        <source>Signed: %1  Required: %2</source>
+        <translation type="unfinished">已签名:%1  未签名:%2</translation>
+    </message>
+    <message>
+        <location filename="multisig/MultiSigPage.cpp" line="395"/>
         <source>Signature of multi-sig trx has been sent out!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">签名多签交易已发送！</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="344"/>
+        <location filename="multisig/MultiSigPage.cpp" line="402"/>
         <source>Failed!</source>
         <translation type="unfinished">失败！</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="541"/>
+        <location filename="multisig/MultiSigPage.cpp" line="605"/>
         <source>Everytime a new multi-sig address is added, the wallet will rescan the blockchain data when launched next time. After that the transactions of this multi-sig address will be shown.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">每当一个新的多签地址被添加，钱包会在下次启动时重新扫描区块链数据。在此之后该多签地址的交易将被显示。</translation>
     </message>
     <message>
-        <location filename="multisig/MultiSigPage.cpp" line="552"/>
+        <location filename="multisig/MultiSigPage.cpp" line="616"/>
         <source>Sure to delete this multi-sig address locally? This operation won&apos;t affect the data on the chain.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">确定要从本地钱包删除该多签地址吗?该操作不会影响链上数据。</translation>
     </message>
 </context>
 <context>

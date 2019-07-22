@@ -233,16 +233,18 @@ void MultiSigPage::jsonDataUpdated(QString id)
         return;
     }
 
-    if( id.startsWith("SignMultiSigTrx+get_multisig_address+"))
+    if( id.startsWith("SignMultiSigTrx+get_multisig_address"))
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
         qDebug() << id << result;
+
         result.prepend("{");
         result.append("}");
         QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
         QJsonObject resultObject = object.value("result").toObject();
         QJsonArray array = resultObject.value("multisignatures").toArray().at(0).toArray();
 
+        requiredNum = array.at(0).toInt();
         QJsonArray array2 = array.at(1).toArray();
         QStringList signerAccounts;
         foreach (QJsonValue v, array2)
@@ -262,6 +264,8 @@ void MultiSigPage::jsonDataUpdated(QString id)
 
             ui->accountComboBox->clear();
             ui->accountComboBox->addItems(signerAccounts);
+
+            ui->signedNumLabel->setText(QString("%1 / %2").arg(signedNum).arg(array2.size()));
         }
         else
         {
@@ -287,9 +291,18 @@ void MultiSigPage::jsonDataUpdated(QString id)
             QJsonObject resultObject = object.value("result").toObject();
             ui->trxStructTextBrowser->setText( QJsonDocument(resultObject).toJson());
 
+            QJsonArray signaturesArray = resultObject.value("signatures").toArray();
+            QStringList strList;
+            foreach (const QJsonValue& v, signaturesArray)
+            {
+                strList << v.toString();
+            }
+            strList.removeDuplicates();
+            signedNum = strList.size();
+
             QJsonObject operationObject = resultObject.value("operations").toArray().at(0).toArray().at(1).toObject();
             QString fromAddress = operationObject.value("from_addr").toString();
-            HXChain::getInstance()->postRPC( "SignMultiSigTrx+get_multisig_address+" + fromAddress,
+            HXChain::getInstance()->postRPC( "SignMultiSigTrx+get_multisig_address",
                                              toJsonFormat( "get_multisig_address", QJsonArray() << fromAddress ));
 
         }
@@ -315,7 +328,10 @@ void MultiSigPage::jsonDataUpdated(QString id)
             ui->trxSignedextBrowser->show();
             ui->copyBtn2->show();
             ui->signBtn->hide();
-            ui->sendSignatureBtn->show();
+
+            HXChain::getInstance()->postRPC( "SignedTrx+decode_multisig_transaction",
+                                             toJsonFormat( "decode_multisig_transaction",
+                                                           QJsonArray() << signedCode ));
         }
         else
         {
@@ -323,6 +339,48 @@ void MultiSigPage::jsonDataUpdated(QString id)
             commonDialog.setText(tr("Sign multi-sig trx failed!"));
             commonDialog.pop();
         }
+        return;
+    }
+
+    if( id == "SignedTrx+decode_multisig_transaction")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
+
+        if( result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+            QJsonObject object = QJsonDocument::fromJson(result.toUtf8()).object();
+            QJsonObject resultObject = object.value("result").toObject();
+
+            QJsonArray signaturesArray = resultObject.value("signatures").toArray();
+            QStringList strList;
+            foreach (const QJsonValue& v, signaturesArray)
+            {
+                strList << v.toString();
+            }
+            strList.removeDuplicates();
+            if(strList.size() <= signedNum)
+            {
+                CommonDialog commonDialog(CommonDialog::OkOnly);
+                commonDialog.setText( tr("Duplicate signature!") );
+                commonDialog.pop();
+            }
+
+            if(strList.size() >= requiredNum)
+            {
+                ui->requireInfoLabel->clear();
+                ui->sendSignatureBtn->show();
+            }
+            else
+            {
+                ui->requireInfoLabel->setText(tr("Signed: %1  Required: %2").arg(strList.size()).arg(requiredNum));
+                ui->sendSignatureBtn->hide();
+            }
+
+        }
+
         return;
     }
 
@@ -473,10 +531,15 @@ void MultiSigPage::on_trxCodeTextBrowser_textChanged()
     ui->addressLabel->hide();
     ui->noAccountLabel->hide();
     ui->trxStructTextBrowser->clear();
+    ui->signedNumLabel->clear();
     ui->signBtn->hide();
     ui->trxSignedextBrowser->hide();
     ui->copyBtn2->hide();
     ui->sendSignatureBtn->hide();
+    ui->requireInfoLabel->clear();
+
+    signedNum = 0;
+    requiredNum = 0;
 
     if(!ui->trxCodeTextBrowser->toPlainText().isEmpty())
     {
@@ -495,6 +558,7 @@ void MultiSigPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
     ui->trxSignedextBrowser->hide();
     ui->copyBtn2->hide();
     ui->sendSignatureBtn->hide();
+    ui->requireInfoLabel->clear();
 }
 
 void MultiSigPage::on_signBtn_clicked()

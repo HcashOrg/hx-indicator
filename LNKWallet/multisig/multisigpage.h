@@ -72,6 +72,8 @@ private slots:
 
 private:
     Ui::MultiSigPage *ui;
+    int signedNum = 0;
+    int requiredNum = 0;
 
     void init();
     void paintEvent(QPaintEvent*);
