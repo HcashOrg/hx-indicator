@@ -57,6 +57,7 @@ class CitizenAccountPage;
 class CitizenProposalPage;
 class CitizenPolicyPage;
 class NameTransferPage;
+class CoverWidget;
 
 class CrossCapitalMark;
 class CustomShadowEffect;
@@ -249,6 +250,11 @@ public:
     AutoUpdateNotify *autoupdate;//自动更新
 public:
     void installBlurEffect(QWidget *widget);
+
+private:
+    CoverWidget* coverWidget = nullptr;
+private slots:
+    void showCoverWidget();
 };
 
 

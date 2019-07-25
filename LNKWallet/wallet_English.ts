@@ -1550,7 +1550,7 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="bottombar.ui" line="92"/>
+        <location filename="bottombar.ui" line="95"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1564,13 +1564,13 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
     </message>
     <message>
         <location filename="bottombar.cpp" line="21"/>
-        <location filename="bottombar.cpp" line="40"/>
+        <location filename="bottombar.cpp" line="42"/>
         <source>Number of connected nodes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="bottombar.cpp" line="22"/>
-        <location filename="bottombar.cpp" line="41"/>
+        <location filename="bottombar.cpp" line="43"/>
         <source>Local block height / Network block height</source>
         <oldsource>Local block height</oldsource>
         <translation type="unfinished"></translation>
@@ -3660,6 +3660,53 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>CoverWidget</name>
+    <message>
+        <location filename="control/CoverWidget.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="control/CoverWidget.ui" line="49"/>
+        <source>计算中...</source>
+        <translation type="unfinished">Calculating...</translation>
+    </message>
+    <message>
+        <location filename="control/CoverWidget.ui" line="71"/>
+        <source>隐藏</source>
+        <translation type="unfinished">HIDE</translation>
+    </message>
+    <message>
+        <location filename="control/CoverWidget.ui" line="84"/>
+        <source>还未同步至最新区块，当前余额可能不准确。
+
+此时发出的交易将不被网络接受。</source>
+        <translation type="unfinished">This wallet has not synchronized to the latest block. Your balance might be incorrect.
+Transactions sent out at this time will not be accepted by the network.</translation>
+    </message>
+    <message>
+        <location filename="control/CoverWidget.ui" line="102"/>
+        <source>上一区块年龄</source>
+        <translation type="unfinished">LAST BLOCK AGE</translation>
+    </message>
+    <message>
+        <location filename="control/CoverWidget.ui" line="115"/>
+        <source>已同步区块高度</source>
+        <translation type="unfinished">LAST BLOCK HEIGHT</translation>
+    </message>
+    <message>
+        <location filename="control/CoverWidget.ui" line="128"/>
+        <location filename="control/CoverWidget.ui" line="141"/>
+        <source>获取中...</source>
+        <translation type="unfinished">Query...</translation>
+    </message>
+    <message>
+        <location filename="control/CoverWidget.cpp" line="39"/>
+        <source>Calculating...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CreateAssetDialog</name>
     <message>
         <source>取消</source>
@@ -5559,27 +5606,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1320"/>
+        <location filename="frame.cpp" line="1336"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1579"/>
+        <location filename="frame.cpp" line="1595"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2812"/>
+        <location filename="frame.cpp" line="2828"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2815"/>
+        <location filename="frame.cpp" line="2831"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2818"/>
+        <location filename="frame.cpp" line="2834"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>

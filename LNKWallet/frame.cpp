@@ -56,6 +56,7 @@
 #include "LightModeConfig.h"
 #include "nameTransfer/NameTransferPage.h"
 #include "citizen/CitizenPolicyPage.h"
+#include "control/CoverWidget.h"
 
 Frame::Frame(): timer(NULL),
     firstLogin(NULL),
@@ -330,6 +331,13 @@ Frame::~Frame()
         delete autoupdate;
         autoupdate = nullptr;
     }
+
+    if(coverWidget)
+    {
+        delete coverWidget;
+        coverWidget = nullptr;
+    }
+
 qDebug() << "~Frame end;";
 
 }
@@ -360,6 +368,13 @@ void Frame::alreadyLogin()
     bottomBar->move(740,503);
     bottomBar->raise();
     bottomBar->show();
+    coverWidget = new CoverWidget(this);
+    coverWidget->raise();
+    coverWidget->show();
+    coverWidget->move(centralWidget->x(),centralWidget->y());
+    connect(bottomBar,SIGNAL(showCoverWidget()),this,SLOT(showCoverWidget()));
+    connect(bottomBar,SIGNAL(walletInfoUpdated()),coverWidget,SLOT(updateData()));
+
 
 //    showBottomBarWidget = new ShowBottomBarWidget(centralWidget);
 //    showBottomBarWidget->setGeometry(0,525,827,20);
@@ -1117,6 +1132,7 @@ void Frame::setLanguage(QString language)
         titleBar->retranslator();
         bottomBar->retranslator();
         shadowWidget->retranslator();
+        coverWidget->retranslator();
 
         switch (currentPageNum) {
         case 0:
@@ -2906,6 +2922,12 @@ void Frame::installBlurEffect(QWidget *widget)
     bodyShadow->setDistance(5.0);
     bodyShadow->setColor(QColor(150, 150, 150, 35));
     widget->setGraphicsEffect(bodyShadow);
+}
+
+void Frame::showCoverWidget()
+{
+    coverWidget->raise();
+    coverWidget->show();
 }
 
 void Frame::newAccount(QString name)

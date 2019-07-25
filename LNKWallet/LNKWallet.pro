@@ -242,7 +242,8 @@ SOURCES += main.cpp\
     nameTransfer/NameTransferDialog.cpp \
     nameTransfer/ShowTrxCodeDialog.cpp \
     citizen/CitizenPolicyPage.cpp \
-    citizen/CitizenResolutionDialog.cpp
+    citizen/CitizenResolutionDialog.cpp \
+    control/CoverWidget.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -431,7 +432,8 @@ HEADERS  += firstlogin.h \
     nameTransfer/NameTransferDialog.h \
     nameTransfer/ShowTrxCodeDialog.h \
     citizen/CitizenPolicyPage.h \
-    citizen/CitizenResolutionDialog.h
+    citizen/CitizenResolutionDialog.h \
+    control/CoverWidget.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -582,7 +584,8 @@ FORMS    += firstlogin.ui \
     nameTransfer/NameTransferDialog.ui \
     nameTransfer/ShowTrxCodeDialog.ui \
     citizen/CitizenPolicyPage.ui \
-    citizen/CitizenResolutionDialog.ui
+    citizen/CitizenResolutionDialog.ui \
+    control/CoverWidget.ui
 
 win32{
     DISTFILES += logo.rc

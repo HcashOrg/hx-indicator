@@ -18,6 +18,10 @@ public:
     void retranslator();
     void refresh();
 
+signals:
+    void showCoverWidget();
+    void walletInfoUpdated();
+
 private slots:
     void jsonDataUpdated(QString id);
 private:
@@ -27,6 +31,8 @@ private:
     int numOfConnections;
 
     void paintEvent(QPaintEvent*);
+    bool eventFilter(QObject *watched, QEvent *e);
+
 };
 
 #endif // BOTTOMBAR_H

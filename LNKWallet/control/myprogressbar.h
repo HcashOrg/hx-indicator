@@ -3,27 +3,23 @@
 
 #include <QWidget>
 #include <QProgressBar>
-#include <QLabel>
+#include <QTimer>
 
-class MyProgressBar : public QWidget
+class MyProgressBar : public QProgressBar
 {
     Q_OBJECT
 public:
     MyProgressBar(QWidget* parent = 0);
     ~MyProgressBar();
 
-    void setSize(int width,int height);
 
-    void setValue(int value);
-
-    int value();
-
-signals:
-    void valueChanged(int);
+protected:
+    void paintEvent(QPaintEvent* e);
 
 private:
-    QProgressBar* progressBar;
-    QLabel* signLabel;
+    int m_cacheValue = 1;
+    QTimer m_timer;
+
 
 };
 

@@ -24,6 +24,8 @@ BottomBar::BottomBar(QWidget *parent) :
     connect(HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)),this, SLOT(jsonDataUpdated(QString)));
 
     this->setAttribute(Qt::WA_TranslucentBackground);
+
+    ui->syncLabel->installEventFilter(this);
 //    ui->networkLabel->setPixmap(QPixmap(":/ui/wallet_ui/net.png").scaled(20,20));
 }
 
@@ -112,6 +114,8 @@ void BottomBar::jsonDataUpdated(QString id)
                                + QString::number(HXChain::getInstance()->walletInfo.targetBlockHeight));
 
         CheckBlockSync();
+
+        Q_EMIT walletInfoUpdated();
     }
 
 
@@ -149,7 +153,23 @@ void BottomBar::paintEvent(QPaintEvent *)
 //        painter.setBrush(QColor(24,28,45));
 //        painter.setPen(QColor(24,28,45));
 //        painter.drawRect(0,0,124,40);
-//    }
+    //    }
+}
+
+bool BottomBar::eventFilter(QObject *watched, QEvent *e)
+{
+    if( watched == ui->syncLabel)
+    {
+        if( e->type() == QEvent::MouseButtonPress)
+        {
+//            if(!HXChain::getInstance()->GetBlockSyncFinish())
+//            {
+                Q_EMIT showCoverWidget();
+//            }
+            return true;
+        }
+        return false;
+    }
 }
 
 void BottomBar::refresh()
