@@ -53,7 +53,7 @@ static const QString CLIENT_PROC_MD5 = "tttttttttttttt";
 
 HXChain* HXChain::goo = 0;
 static const QMap<QString,double>    defaultAutoWithdrawAmountMap = { {"BTC",10},{"LTC",1000},{"HC",10000},{"ETH",100} };
-extern const QStringList ERCAssets = {"PAX","ELF"};
+extern const QStringList ERCAssets = {"PAX","ELF","TITAN"};
 
 HXChain::HXChain()
 {
@@ -203,16 +203,18 @@ void HXChain:: startExe()
     strList << QString("--data-dir=\"%1\"").arg(HXChain::getInstance()->configFile->value("/settings/chainPath").toString().replace("\\","/"))
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(NODE_RPC_PORT)
             << "--all-plugin-start"
-#ifndef SAFE_VERSION
-//            << "--rewind-on-close"
-#endif
             ;
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay12",true).toBool())
+#ifndef SAFE_VERSION
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay12",true).toBool()
+#endif
+            )
     {
         strList << "--replay";
     }
+
+
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
     HXChain::getInstance()->configFile->setValue("/settings/dbReplay12",false);
 
@@ -733,7 +735,7 @@ void HXChain::getExchangePairs()
 
 int HXChain::getExchangePairPrecision(const ExchangePair &pair)
 {
-    QMap<QString,int> map = { {"BTC",5}, {"ETH",3}, {"HC",1}, {"HX",0}, {"LTC",3}, {"ERCPAX",1}, {"ERCELF",0}, {"BCH",3}};
+    QMap<QString,int> map = { {"BTC",5}, {"ETH",3}, {"HC",1}, {"HX",0}, {"LTC",3}, {"ERCPAX",1}, {"ERCELF",0}, {"BCH",3}, {"ERCTITAN",3}};
 
     int precision = map.value(pair.second) - map.value(pair.first) + 4;
     if(precision > 8)
@@ -750,7 +752,7 @@ int HXChain::getExchangePairPrecision(const ExchangePair &pair)
 
 int HXChain::getExchangeAmountPrecision(QString assetSymbol)
 {
-    QMap<QString,int> map = { {"BTC",4}, {"ETH",3}, {"HC",2}, {"HX",2}, {"LTC",3}, {"ERCPAX",2}, {"ERCELF",2}, {"BCH",3}};
+    QMap<QString,int> map = { {"BTC",4}, {"ETH",3}, {"HC",2}, {"HX",2}, {"LTC",3}, {"ERCPAX",2}, {"ERCELF",2}, {"BCH",3}, {"ERCTITAN",3}};
 
     int precision = 2;
     if(map.contains(assetSymbol))   precision = map.value(assetSymbol);

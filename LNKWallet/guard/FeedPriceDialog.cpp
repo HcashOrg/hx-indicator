@@ -53,6 +53,12 @@ void FeedPriceDialog::init()
     QStringList keys = HXChain::getInstance()->accountInfoMap.keys();
     QStringList publishers;
     AssetInfo assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetLabel->text())));
+#ifdef SAFE_VERSION
+    if(assetInfo.id.isEmpty())
+    {
+        assetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId( "ERC" + ui->assetLabel->text()));
+    }
+#endif
     foreach (QString key, keys)
     {
         AccountInfo accountInfo = HXChain::getInstance()->accountInfoMap.value(key);

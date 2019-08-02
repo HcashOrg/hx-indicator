@@ -1550,6 +1550,11 @@ This name will be registered in the Goopal blockchain,permanently and immutably.
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="bottombar.ui" line="60"/>
+        <source>获取中...</source>
+        <translation type="unfinished">Querying...</translation>
+    </message>
+    <message>
         <location filename="bottombar.ui" line="95"/>
         <source>0</source>
         <translation type="unfinished"></translation>
@@ -3698,10 +3703,10 @@ Transactions sent out at this time will not be accepted by the network.</transla
         <location filename="control/CoverWidget.ui" line="128"/>
         <location filename="control/CoverWidget.ui" line="141"/>
         <source>获取中...</source>
-        <translation type="unfinished">Query...</translation>
+        <translation type="unfinished">Querying...</translation>
     </message>
     <message>
-        <location filename="control/CoverWidget.cpp" line="39"/>
+        <location filename="control/CoverWidget.cpp" line="47"/>
         <source>Calculating...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5430,13 +5435,13 @@ Cover it or not?</source>
         <translation type="obsolete">Balance:</translation>
     </message>
     <message>
-        <location filename="guard/FeedPriceDialog.cpp" line="105"/>
+        <location filename="guard/FeedPriceDialog.cpp" line="111"/>
         <source>Transaction of feed-price has been sent out.</source>
         <oldsource>Transaction of quote-price has been sent out.</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="guard/FeedPriceDialog.cpp" line="112"/>
+        <location filename="guard/FeedPriceDialog.cpp" line="118"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8491,7 +8496,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="nameTransfer/NameTransferPage.cpp" line="278"/>
+        <location filename="nameTransfer/NameTransferPage.cpp" line="279"/>
+        <source>querying</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="nameTransfer/NameTransferPage.cpp" line="280"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>

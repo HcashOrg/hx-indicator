@@ -28,10 +28,10 @@ NameTransferPage::NameTransferPage(QWidget *parent) :
     ui->trxTableWidget->horizontalHeader()->setVisible(true);
     ui->trxTableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    ui->trxTableWidget->setColumnWidth(0,70);
-    ui->trxTableWidget->setColumnWidth(1,240);
+    ui->trxTableWidget->setColumnWidth(0,150);
+    ui->trxTableWidget->setColumnWidth(1,150);
     ui->trxTableWidget->setColumnWidth(2,70);
-    ui->trxTableWidget->setColumnWidth(3,60);
+    ui->trxTableWidget->setColumnWidth(3,70);
     ui->trxTableWidget->setColumnWidth(4,70);
     ui->trxTableWidget->setColumnWidth(5,80);
     ui->trxTableWidget->setColumnWidth(6,50);
@@ -244,13 +244,15 @@ void NameTransferPage::showNameTransferTrxs()
     QStringList trxCodeList = HXChain::getInstance()->transactionDB.getNameTransferTrxsCode();
     ui->trxTableWidget->setRowCount(0);
     ui->trxTableWidget->setRowCount(trxCodeList.size());
+    qDebug() << "cccccccccccc " << trxCodeList;
+
     for(int i = 0; i < trxCodeList.size(); i++)
     {
         ui->trxTableWidget->setRowHeight(i,40);
 
         QString trxCode = trxCodeList.at(i);
         QStringList trxStrList = HXChain::getInstance()->transactionDB.getNameTransferTrx(trxCode);
-        qDebug() << "cccccccccccc " << trxStrList;
+
         QJsonObject object = QJsonDocument::fromJson(trxStrList.at(0).toUtf8()).object();
 
         QJsonArray opsArray = object.value("operations").toArray();
@@ -258,6 +260,7 @@ void NameTransferPage::showNameTransferTrxs()
         QJsonObject makerOpObject = opsObject.value("maker_op").toArray().at(0).toObject().value("op").toArray().at(1).toObject();
         QString from = makerOpObject.value("from").toString();
         QString to = makerOpObject.value("to").toString();
+        QString original = makerOpObject.value("original").toString();
         QString newName = makerOpObject.value("newname").toString();
         QJsonObject feeObject = makerOpObject.value("fee").toObject();
         unsigned long long feeAmount = jsonValueToULL(feeObject.value("amount"));
@@ -268,13 +271,13 @@ void NameTransferPage::showNameTransferTrxs()
         QString amountAssetId = amountObject.value("asset_id").toString();
         AssetInfo amountAssetInfo = HXChain::getInstance()->assetInfoMap.value(amountAssetId);
 
-        ui->trxTableWidget->setItem(i,0, new QTableWidgetItem(HXChain::getInstance()->addressToName(from)));
+        ui->trxTableWidget->setItem(i,0, new QTableWidgetItem( original + " (" + from + ")"));
         ui->trxTableWidget->setItem(i,1, new QTableWidgetItem(to));
         ui->trxTableWidget->setItem(i,2, new QTableWidgetItem(newName));
         ui->trxTableWidget->setItem(i,3, new QTableWidgetItem( getBigNumberString(amount,amountAssetInfo.precision) + " " + revertERCSymbol(amountAssetInfo.symbol) ));
         ui->trxTableWidget->setItem(i,4, new QTableWidgetItem( trxCode.left(5) + "..."));
         ui->trxTableWidget->item(i,4)->setData(Qt::UserRole, trxCode);
-        ui->trxTableWidget->setItem(i,5, new QTableWidgetItem());
+        ui->trxTableWidget->setItem(i,5, new QTableWidgetItem(tr("querying")));
         ui->trxTableWidget->setItem(i,6, new QTableWidgetItem( tr("delete")));
 
         HXChain::getInstance()->postRPC( "NameTransferPage-get_transaction-" + QString::number(i), toJsonFormat( "get_transaction", QJsonArray() << trxStrList.at(1)));
@@ -285,6 +288,22 @@ void NameTransferPage::showNameTransferTrxs()
 
 void NameTransferPage::on_trxTableWidget_cellClicked(int row, int column)
 {
+    if(column == 0)
+    {
+        if( !ui->trxTableWidget->item(row, column))    return;
+
+        ShowContentDialog showContentDialog( ui->trxTableWidget->item(row, column)->text(),this);
+
+        int x = ui->trxTableWidget->columnViewportPosition(column) + ui->trxTableWidget->columnWidth(column) / 2
+                - showContentDialog.width() / 2;
+        int y = ui->trxTableWidget->rowViewportPosition(row) - 10 + ui->trxTableWidget->horizontalHeader()->height();
+
+        showContentDialog.move( ui->trxTableWidget->mapToGlobal( QPoint(x, y)));
+        showContentDialog.exec();
+
+        return;
+    }
+
     if(column == 1)
     {
         if( !ui->trxTableWidget->item(row, column))    return;

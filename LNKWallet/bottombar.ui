@@ -57,7 +57,7 @@
     <string notr="true">QLabel{color: rgb(72,97,220);}</string>
    </property>
    <property name="text">
-    <string/>
+    <string>获取中...</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
