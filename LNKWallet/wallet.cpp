@@ -207,7 +207,7 @@ void HXChain:: startExe()
 
     if( HXChain::getInstance()->configFile->value("/settings/resyncNextTime",false).toBool()
 #ifndef SAFE_VERSION
-            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay12",true).toBool()
+            ||  HXChain::getInstance()->configFile->value("/settings/dbReplay13",true).toBool()
 #endif
             )
     {
@@ -216,7 +216,7 @@ void HXChain:: startExe()
 
 
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/dbReplay12",false);
+    HXChain::getInstance()->configFile->setValue("/settings/dbReplay13",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
@@ -1616,7 +1616,7 @@ void HXChain::fetchMiners()
 {
     if(!fetchCitizensFinished)  return;
     fetchCitizensFinished = false;
-    postRPC( "id-list_citizens", toJsonFormat( "list_citizens", QJsonArray() << "A" << 1000));
+    postRPC( "id-list_citizens", toJsonFormat( "list_citizens", QJsonArray() << "A" << 1000), 1);
 }
 
 void HXChain::fetchCitizenPayBack()

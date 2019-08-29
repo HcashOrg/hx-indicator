@@ -490,7 +490,7 @@ void Frame::getAccountInfo()
 
     HXChain::getInstance()->fetchTransactions();
 
-    if(getInfoCount % 10 == 0)
+    if(getInfoCount % 100 == 1)
     {
         HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
@@ -571,7 +571,7 @@ void Frame::showLockPage()
         setGeometry(0,0, lockPage->width(), lockPage->height());
         moveWidgetToScreenCenter(this);
     }
-    HXChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray()));
+    HXChain::getInstance()->postRPC( "id-lock", toJsonFormat( "lock", QJsonArray()), -1);
 qDebug() << "lock ";
 
 }
@@ -602,7 +602,7 @@ void Frame::unlock()
     if( lockPage)
     {
         lockPage->close();
-        lockPage = NULL;
+        lockPage = nullptr;
     }
 
 qDebug() << "unlock showCurrentDialog";
@@ -1801,8 +1801,8 @@ void Frame::jsonDataUpdated(QString id)
 
                                 if(assetInfo.symbol != ASSET_NAME)
                                 {
-                                    HXChain::getInstance()->postRPC( "id-get_current_multi_address-" + assetInfo.symbol, toJsonFormat( "get_current_multi_address", QJsonArray() << assetInfo.symbol));
-                                    HXChain::getInstance()->postRPC( "id-get_asset_imp-" + assetInfo.symbol, toJsonFormat( "get_asset_imp", QJsonArray() << assetInfo.symbol));
+                                    HXChain::getInstance()->postRPC( "id-get_current_multi_address-" + assetInfo.symbol, toJsonFormat( "get_current_multi_address", QJsonArray() << assetInfo.symbol), 2);
+                                    HXChain::getInstance()->postRPC( "id-get_asset_imp-" + assetInfo.symbol, toJsonFormat( "get_asset_imp", QJsonArray() << assetInfo.symbol), 1);
                                 }
 
 
@@ -2855,16 +2855,18 @@ void Frame::showNormalAndActive()
 // 提前载入，防止切换到别的界面显示不出来
 void Frame::init()
 {
-    HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
+//    HXChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QJsonArray()));
 
-    //HXChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.195:5444") ));
+//    HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
 
-    HXChain::getInstance()->fetchTransactions();
+//    //HXChain::getInstance()->postRPC( "id-network_add_nodes", toJsonFormat( "network_add_nodes", QJsonArray() << (QJsonArray() << "192.168.1.195:5444") ));
 
-//    HXChain::getInstance()->fetchFormalGuards();
-    HXChain::getInstance()->fetchAllGuards();
+//    HXChain::getInstance()->fetchTransactions();
 
-    HXChain::getInstance()->fetchMiners();
+////    HXChain::getInstance()->fetchFormalGuards();
+//    HXChain::getInstance()->fetchAllGuards();
+
+//    HXChain::getInstance()->fetchMiners();
 }
 
 
@@ -2996,7 +2998,7 @@ void Frame::httpError(int _status)
 void Frame::onCloseWallet()
 {
     qDebug()<<"closeclose";
-    HXChain::getInstance()->postRPC( "id-lock-onCloseWallet", toJsonFormat( "lock", QJsonArray()));
+    HXChain::getInstance()->postRPC( "id-lock-onCloseWallet", toJsonFormat( "lock", QJsonArray()), -1);
     //如果当前还未链接client，则说明是在前期准备阶段，直接关闭qt即可
     if(!HXChain::getInstance()->wsManager || !HXChain::getInstance()->wsManager->isConnected)
     {

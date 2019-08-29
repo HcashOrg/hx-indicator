@@ -129,8 +129,6 @@ void LockToMinerDialog::on_assetComboBox_currentIndexChanged(const QString &arg1
     QRegExpValidator *pReg1 = new QRegExpValidator(rx1, this);
     ui->amountLineEdit->setValidator(pReg1);
     ui->amountLineEdit->clear();
-
-qDebug() << "mmmmmmmmmmmmmmmmmmmm " << assetInfo.precision << assetInfo.symbol << ui->assetComboBox->currentData().toString();
 }
 
 void LockToMinerDialog::on_closeBtn_clicked()
@@ -143,7 +141,6 @@ void LockToMinerDialog::on_amountLineEdit_textEdited(const QString &arg1)
     QString assetId = HXChain::getInstance()->getAssetId( getRealAssetSymbol( ui->assetComboBox->currentText()));
     AssetAmount assetAmount = HXChain::getInstance()->accountInfoMap.value(ui->accountNameLabel->text()).assetAmountMap.value(assetId);
     QString amountStr = getBigNumberString(assetAmount.amount, HXChain::getInstance()->assetInfoMap.value(assetId).precision);
-    qDebug() << "nnnnnnnnnnnnn " << ui->amountLineEdit->text().toDouble() << amountStr.toDouble() << assetId;
 
     if(ui->amountLineEdit->text().toDouble() > amountStr.toDouble())
     {

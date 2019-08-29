@@ -256,7 +256,7 @@ void MinerPage::jsonDataUpdated(QString id)
     if( id == "id-get_address_pay_back_balance-" + ui->accountComboBox->currentText())
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
-
+qDebug() << id <<result;
         result.prepend("{");
         result.append("}");
 
@@ -464,7 +464,7 @@ void MinerPage::fetchAccountIncome()
 {
     QString address = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText()).address;
     HXChain::getInstance()->postRPC( "id-get_address_pay_back_balance-" + ui->accountComboBox->currentText(),
-                                     toJsonFormat( "get_address_pay_back_balance",QJsonArray() << address << ""));
+                                     toJsonFormat( "get_address_pay_back_balance",QJsonArray() << address << "") ,-1);
 }
 
 void MinerPage::showIncomeRecord()

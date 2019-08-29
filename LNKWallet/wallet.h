@@ -36,9 +36,14 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.24"           // 版本号
+#define WALLET_VERSION "1.2.25"           // 版本号
 
+#ifdef  LIGHT_MODE
+#define AUTO_REFRESH_TIME 10000
+#else
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
+#endif
+
 #define EXCHANGE_CONTRACT_HASH  "c0192642072e9ca233df0fd2aa99ee1c50f7ba17"
 
 #ifdef TEST_WALLET
@@ -305,7 +310,7 @@ struct TransactionInfo
 typedef QVector<TransactionInfo>  TransactionsInfoVector;
 
 
-//朱正天---手续费
+
 struct FeeChargeInfo
 {
     FeeChargeInfo()

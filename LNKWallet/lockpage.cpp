@@ -71,8 +71,9 @@ void LockPage::on_enterBtn_clicked()
     }
 
 
-    HXChain::getInstance()->postRPC( "id-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text() ));
- qDebug() << "id_unlock_lockpage" ;
+    HXChain::getInstance()->postRPC( "id-unlock-lockpage", toJsonFormat( "unlock", QJsonArray() << ui->pwdLineEdit->text() ), -1);
+
+    logToFile( QStringList() << "lockpage unlock");
     emit showShadowWidget();
     ui->pwdLineEdit->setEnabled(false);
 
@@ -139,7 +140,9 @@ void LockPage::jsonDataUpdated(QString id)
         ui->pwdLineEdit->setFocus();
 
         QString  result = HXChain::getInstance()->jsonDataValue(id);
-        qDebug() << id << result;
+
+        logToFile( QStringList() << "lockpage unlock result:" << result);
+
 
         if( result == "\"result\":null")
         {
