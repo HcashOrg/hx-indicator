@@ -24,8 +24,8 @@
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>-2</y>
+     <x>-10</x>
+     <y>10</y>
      <width>960</width>
      <height>543</height>
     </rect>
@@ -353,9 +353,9 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>310</x>
-           <y>129</y>
+           <y>120</y>
            <width>240</width>
-           <height>21</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -378,9 +378,9 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>310</x>
-           <y>150</y>
+           <y>140</y>
            <width>240</width>
-           <height>21</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -403,9 +403,9 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>310</x>
-           <y>172</y>
+           <y>160</y>
            <width>240</width>
-           <height>21</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -483,7 +483,7 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>310</x>
-           <y>96</y>
+           <y>90</y>
            <width>221</width>
            <height>25</height>
           </rect>
@@ -577,7 +577,7 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>310</x>
-           <y>76</y>
+           <y>70</y>
            <width>221</width>
            <height>20</height>
           </rect>
@@ -677,9 +677,9 @@ color:rgb(137,129,161);</string>
          <property name="geometry">
           <rect>
            <x>310</x>
-           <y>194</y>
+           <y>200</y>
            <width>240</width>
-           <height>21</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="font">
@@ -725,6 +725,31 @@ color:rgb(137,129,161);</string>
           <bool>true</bool>
          </property>
         </widget>
+        <widget class="QCheckBox" name="contractReplayCheckBox">
+         <property name="geometry">
+          <rect>
+           <x>310</x>
+           <y>180</y>
+           <width>240</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>微软雅黑</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="text">
+          <string>下次启动时以合约修复模式启动</string>
+         </property>
+        </widget>
         <zorder>contractFeeLineEdit</zorder>
         <zorder>saveBtn</zorder>
         <zorder>label_2</zorder>
@@ -747,6 +772,7 @@ color:rgb(137,129,161);</string>
         <zorder>label_14</zorder>
         <zorder>checkbox_AutoBackup</zorder>
         <zorder>middlewareCombobox</zorder>
+        <zorder>contractReplayCheckBox</zorder>
        </widget>
        <widget class="QWidget" name="page_2">
         <widget class="QLineEdit" name="newPwdLineEdit">

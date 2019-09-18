@@ -106,7 +106,7 @@ void OnchainOrderPage::init()
 
 
 
-    connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
+//    connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
     inited = true;
 
@@ -117,7 +117,84 @@ void OnchainOrderPage::init()
 
 void OnchainOrderPage::jsonDataUpdated(QString id)
 {
+    if( id == "OnchainOrderPage-get_otc_contract")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        qDebug() << id << result;
 
+        if(result.startsWith("\"result\":"))
+        {
+            result.prepend("{");
+            result.append("}");
+
+            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+            QJsonObject jsonObject = parse_doucment.object();
+            QJsonArray arr = jsonObject.take("result").toArray();
+            QJsonArray  array = sortArray(arr,false);
+            int size = array.size();
+            ui->ordersTableWidget->setRowCount(size);
+            for(int i = 0; i < size; i++)
+            {
+                ui->ordersTableWidget->setRowHeight(i,40);
+
+                QJsonObject dataObject = array.at(i).toObject();
+                QString contractAddress = dataObject.take("contract_address").toString();
+                unsigned long long sellAmount = jsonValueToULL(dataObject.take("from_supply"));
+                QString sellSymbol = dataObject.take("from_asset").toString();
+                unsigned long long buyAmount = jsonValueToULL(dataObject.take("to_supply"));
+                QString buySymbol = dataObject.take("to_asset").toString();
+                int state = dataObject.take("state").toInt();
+
+                AssetInfo sellAssetInfo = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(sellSymbol));
+                AssetInfo buyAssetInfo  = HXChain::getInstance()->assetInfoMap.value(HXChain::getInstance()->getAssetId(buySymbol));
+
+                ui->ordersTableWidget->setItem(i,0, new QTableWidgetItem(getBigNumberString(sellAmount,sellAssetInfo.precision)));
+                ui->ordersTableWidget->item(i,0)->setData(Qt::UserRole,sellAmount);
+
+                ui->ordersTableWidget->setItem(i,1, new QTableWidgetItem(getBigNumberString(buyAmount,buyAssetInfo.precision)));
+                ui->ordersTableWidget->item(i,1)->setData(Qt::UserRole,buyAmount);
+
+                double price = (double)sellAmount / qPow(10,sellAssetInfo.precision) / buyAmount * qPow(10,buyAssetInfo.precision);
+                QTableWidgetItem* item = new QTableWidgetItem(QString::number(price,'g',8));
+                item->setData(Qt::UserRole,contractAddress);
+                ui->ordersTableWidget->setItem(i,2,item);
+
+                ui->ordersTableWidget->setItem(i,3, new QTableWidgetItem(tr("buy")));
+
+                for(int j = 3;j < 4;++j)
+                {
+                    ToolButtonWidgetItem *toolButtonItem = new ToolButtonWidgetItem(i,j);
+
+                    if(HXChain::getInstance()->getExchangeContractAddress(ui->accountComboBox->currentText()) == contractAddress)
+                    {
+                        toolButtonItem->setEnabled(false);
+                        toolButtonItem->setText(tr("my order"));
+                        toolButtonItem->setButtonFixSize(80,20);
+                    }
+                    else
+                    {
+                        toolButtonItem->setText(ui->ordersTableWidget->item(i,j)->text());
+                    }
+
+                    ui->ordersTableWidget->setCellWidget(i,j,toolButtonItem);
+                    connect(toolButtonItem,SIGNAL(itemClicked(int,int)),this,SLOT(onItemClicked(int,int)));
+                }
+            }
+            tableWidgetSetItemZebraColor(ui->ordersTableWidget);
+
+            int page = (ui->ordersTableWidget->rowCount()%ROWNUMBER==0 && ui->ordersTableWidget->rowCount() != 0) ?
+                        ui->ordersTableWidget->rowCount()/ROWNUMBER : ui->ordersTableWidget->rowCount()/ROWNUMBER+1;
+            pageWidget->SetTotalPage(page);
+            pageWidget->setShowTip(ui->ordersTableWidget->rowCount(),ROWNUMBER);
+            pageChangeSlot(pageWidget->GetCurrentPage());
+            pageWidget->setVisible(0 != size);
+
+            blankWidget->setVisible(0 == size);
+
+        }
+
+        return;
+    }
 }
 
 void OnchainOrderPage::httpReplied(QByteArray _data, int _status)
@@ -228,16 +305,20 @@ void OnchainOrderPage::on_assetComboBox2_currentIndexChanged(const QString &arg1
 
 void OnchainOrderPage::queryContractOrders()
 {
-    QJsonObject object;
-    object.insert("jsonrpc","2.0");
-    object.insert("id",45);
-    object.insert("method","Zchain.Exchange.queryContracts");
-    QJsonObject paramObject;
-    paramObject.insert("from_asset", getRealAssetSymbol( ui->assetComboBox->currentText()));
-    paramObject.insert("to_asset", getRealAssetSymbol( ui->assetComboBox2->currentText()));
-    paramObject.insert("limit",10);
-    object.insert("params",paramObject);
-    httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+//    QJsonObject object;
+//    object.insert("jsonrpc","2.0");
+//    object.insert("id",45);
+//    object.insert("method","Zchain.Exchange.queryContracts");
+//    QJsonObject paramObject;
+//    paramObject.insert("from_asset", getRealAssetSymbol( ui->assetComboBox->currentText()));
+//    paramObject.insert("to_asset", getRealAssetSymbol( ui->assetComboBox2->currentText()));
+//    paramObject.insert("limit",10);
+//    object.insert("params",paramObject);
+//    httpManager.post(HXChain::getInstance()->middlewarePath,QJsonDocument(object).toJson());
+
+    HXChain::getInstance()->postRPC( "OnchainOrderPage-get_otc_contract", toJsonFormat( "get_otc_contract", QJsonArray() << getRealAssetSymbol( ui->assetComboBox->currentText())
+                                                                                        << getRealAssetSymbol( ui->assetComboBox2->currentText()) << 10));
+
 }
 
 void OnchainOrderPage::updateTableHeaders()

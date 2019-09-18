@@ -25,6 +25,7 @@ signals:
     void tray();
 
     void back();
+    void refresh();
 public slots:
     void backBtnVis(bool isVisible = true);
     void extendToWidth(int _width);
@@ -35,10 +36,17 @@ private slots:
 
     void jsonDataUpdated(QString id);
 
+    void on_refreshBtn_clicked();
+
+    void gifPlayOnce(int num);
 
 private:
     Ui::TitleBar *ui;
-    QTimer* timer;
+
+    QTimer* refreshTimer = nullptr;
+    bool refreshing = false;
+    QMovie* gif = nullptr;
+    QTimer* gifTimer = nullptr;
 
     void paintEvent(QPaintEvent*);
 };

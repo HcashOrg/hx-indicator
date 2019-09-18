@@ -5611,27 +5611,27 @@ Cover it or not?</source>
 <context>
     <name>Frame</name>
     <message>
-        <location filename="frame.cpp" line="1336"/>
+        <location filename="frame.cpp" line="1361"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="1595"/>
+        <location filename="frame.cpp" line="1620"/>
         <source>This wallet is newly imported. It will rescan the blockchain data when launched next time. After that the transactions of the accounts in this wallet will be shown.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2828"/>
+        <location filename="frame.cpp" line="2877"/>
         <source>Minimize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2831"/>
+        <location filename="frame.cpp" line="2880"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="frame.cpp" line="2834"/>
+        <location filename="frame.cpp" line="2883"/>
         <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6356,18 +6356,18 @@ Cover it or not?</source>
 <context>
     <name>HXChain</name>
     <message>
-        <location filename="wallet.cpp" line="265"/>
-        <location filename="wallet.cpp" line="294"/>
+        <location filename="wallet.cpp" line="275"/>
+        <location filename="wallet.cpp" line="304"/>
         <source>Fail to launch %1 !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="290"/>
+        <location filename="wallet.cpp" line="300"/>
         <source>Connection interruption!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="wallet.cpp" line="811"/>
+        <location filename="wallet.cpp" line="821"/>
         <source>You have not synchronized the latest block. The transaction you create will be outdated and not confirmed!</source>
         <oldsource>Cannot operate online transaction,please wait for block sync finished!</oldsource>
         <translation type="unfinished"></translation>
@@ -6973,7 +6973,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="lockpage.ui" line="158"/>
-        <location filename="lockpage.cpp" line="189"/>
+        <location filename="lockpage.cpp" line="192"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6988,7 +6988,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="lockpage.cpp" line="36"/>
-        <location filename="lockpage.cpp" line="202"/>
+        <location filename="lockpage.cpp" line="205"/>
         <source>Caps lock opened!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7003,18 +7003,18 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="102"/>
+        <location filename="lockpage.cpp" line="103"/>
         <source>Sure to close the Wallet?</source>
         <oldsource>Sure to close Hcash Wallet?</oldsource>
         <translation type="unfinished">Are you sure you would like to close the wallet?</translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="150"/>
+        <location filename="lockpage.cpp" line="153"/>
         <source>Wrong password!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="lockpage.cpp" line="207"/>
+        <location filename="lockpage.cpp" line="210"/>
         <source>Caps lock closed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7232,18 +7232,18 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="360"/>
+        <location filename="mainpage.cpp" line="368"/>
         <source>Fail to create account!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="471"/>
-        <location filename="mainpage.cpp" line="474"/>
+        <location filename="mainpage.cpp" line="479"/>
+        <location filename="mainpage.cpp" line="482"/>
         <source>copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainpage.cpp" line="521"/>
+        <location filename="mainpage.cpp" line="529"/>
         <source>There are no unregistered accounts in the wallet!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8496,12 +8496,12 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="nameTransfer/NameTransferPage.cpp" line="279"/>
+        <location filename="nameTransfer/NameTransferPage.cpp" line="280"/>
         <source>querying</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="nameTransfer/NameTransferPage.cpp" line="280"/>
+        <location filename="nameTransfer/NameTransferPage.cpp" line="281"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8694,58 +8694,58 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="157"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="164"/>
         <source>buy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="166"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="173"/>
         <source>my order</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="247"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="258"/>
         <source>SELL</source>
         <oldsource>Sell</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="248"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="259"/>
         <source>BUY</source>
         <oldsource>Buy</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="249"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="260"/>
         <source>PRICE</source>
         <oldsource>Price</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="253"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="264"/>
         <source>SELL / %1</source>
         <oldsource>Sell / %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="254"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="265"/>
         <source>BUY / %1</source>
         <oldsource>Buy / %1</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="255"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="266"/>
         <source>PRICE (%1/%2)</source>
         <oldsource>Price (%1/%2)</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="297"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="308"/>
         <source>Please Import Or Create Account First!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="exchange/OnchainOrderPage.cpp" line="376"/>
+        <location filename="exchange/OnchainOrderPage.cpp" line="387"/>
         <source>You can only set at most 6 favorite order pairs!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10004,7 +10004,7 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="setdialog.ui" line="176"/>
-        <location filename="setdialog.ui" line="816"/>
+        <location filename="setdialog.ui" line="842"/>
         <source>保存</source>
         <translation type="unfinished">Save</translation>
     </message>
@@ -10028,12 +10028,12 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Transaction fee</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="892"/>
+        <location filename="setdialog.ui" line="918"/>
         <source>旧密码：</source>
         <translation type="unfinished">Old:</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="942"/>
+        <location filename="setdialog.ui" line="968"/>
         <source>新密码：</source>
         <translation type="unfinished">New:</translation>
     </message>
@@ -10083,7 +10083,7 @@ p, li { white-space: pre-wrap; }
     <message>
         <location filename="setdialog.ui" line="570"/>
         <location filename="setdialog.cpp" line="48"/>
-        <location filename="setdialog.cpp" line="373"/>
+        <location filename="setdialog.cpp" line="377"/>
         <source>on</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10115,45 +10115,50 @@ p, li { white-space: pre-wrap; }
         <translation type="unfinished">Auto Backup Wallet(in the config path)</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="842"/>
+        <location filename="setdialog.ui" line="750"/>
+        <source>下次启动时以合约修复模式启动</source>
+        <translation type="unfinished">Launch in contract replay mode next time</translation>
+    </message>
+    <message>
+        <location filename="setdialog.ui" line="868"/>
         <source>再次输入：</source>
         <translation type="unfinished">Again:</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1013"/>
+        <location filename="setdialog.ui" line="1039"/>
         <source>修改钱包密码</source>
         <translation type="unfinished">Modify the password</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1039"/>
+        <location filename="setdialog.ui" line="1065"/>
         <source>钱包数据路径：</source>
         <translation type="unfinished">Wallet Data Path</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1085"/>
-        <location filename="setdialog.ui" line="1116"/>
-        <location filename="setdialog.ui" line="1178"/>
+        <location filename="setdialog.ui" line="1111"/>
+        <location filename="setdialog.ui" line="1142"/>
+        <location filename="setdialog.ui" line="1204"/>
         <source>默认数据备份路径，请勿删除</source>
         <translation type="unfinished">Default Backup Folder,Please Don&apos;t Delete.</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1092"/>
+        <location filename="setdialog.ui" line="1118"/>
         <source>钱包配置路径：</source>
         <translation type="unfinished">Wallet Config Path</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1150"/>
-        <location filename="setdialog.ui" line="1184"/>
+        <location filename="setdialog.ui" line="1176"/>
+        <location filename="setdialog.ui" line="1210"/>
         <source>打开</source>
         <translation type="unfinished">open</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1232"/>
+        <location filename="setdialog.ui" line="1258"/>
         <source>安全设置</source>
         <translation type="unfinished">Safety</translation>
     </message>
     <message>
-        <location filename="setdialog.ui" line="1263"/>
+        <location filename="setdialog.ui" line="1289"/>
         <source>账户管理</source>
         <translation type="unfinished">Account</translation>
     </message>
@@ -10215,30 +10220,30 @@ p, li { white-space: pre-wrap; }
     </message>
     <message>
         <location filename="setdialog.cpp" line="48"/>
-        <location filename="setdialog.cpp" line="378"/>
+        <location filename="setdialog.cpp" line="382"/>
         <source>off</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="422"/>
-        <location filename="setdialog.cpp" line="475"/>
+        <location filename="setdialog.cpp" line="426"/>
+        <location filename="setdialog.cpp" line="479"/>
         <source>at least 8 letters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="449"/>
-        <location filename="setdialog.cpp" line="474"/>
-        <location filename="setdialog.cpp" line="494"/>
+        <location filename="setdialog.cpp" line="453"/>
+        <location filename="setdialog.cpp" line="478"/>
+        <location filename="setdialog.cpp" line="498"/>
         <source>not consistent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="523"/>
+        <location filename="setdialog.cpp" line="527"/>
         <source>wrong password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="setdialog.cpp" line="542"/>
+        <location filename="setdialog.cpp" line="546"/>
         <source>Fail to modify the password!</source>
         <oldsource>Fail to set password!</oldsource>
         <translation type="unfinished"></translation>
@@ -10509,7 +10514,7 @@ p, li { white-space: pre-wrap; }
         <translation type="obsolete">Console</translation>
     </message>
     <message>
-        <location filename="titlebar.cpp" line="63"/>
+        <location filename="titlebar.cpp" line="72"/>
         <source>Sure to close the Wallet?</source>
         <translation type="unfinished">Are you sure you would like to close the wallet?</translation>
     </message>

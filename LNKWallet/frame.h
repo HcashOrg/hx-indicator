@@ -144,6 +144,8 @@ private slots:
 
     void newAccount(QString name);
 
+    void lightModeRefresh();
+
 private:
     HttpManager httpManager;////用于查询通道账户余额
 private slots:

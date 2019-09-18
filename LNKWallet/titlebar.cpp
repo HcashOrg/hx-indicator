@@ -1,5 +1,5 @@
 ﻿#include <QDebug>
-
+#include <QMovie>
 
 #include "titlebar.h"
 #include "ui_titlebar.h"
@@ -18,6 +18,13 @@ TitleBar::TitleBar(QWidget *parent) :
                               "QToolButton:hover{background-image:url(:/ui/wallet_ui/minimizeBtn_hover.png);}");
     ui->closeBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/closeBtn.png);background-repeat: no-repeat;background-position: center;border-style: flat;}"
                                 "QToolButton:hover{background-image:url(:/ui/wallet_ui/closeBtn_hover.png);}");
+    ui->refreshBtn->setStyleSheet("QToolButton{background-image:url(:/ui/wallet_ui/refresh.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}"
+                                  "QToolButton:hover{background-image:url(:/ui/wallet_ui/refresh_hover.png);background-repeat: no-repeat;background-position: center;background-attachment: fixed;background-clip: padding;border-style: flat;}");
+
+    gif = new QMovie(":/ui/wallet_ui/refresh.gif");
+    connect(gif,SIGNAL(frameChanged(int)),this,SLOT( gifPlayOnce(int)));
+    ui->gifLabel->setMovie(gif);
+    ui->gifLabel->hide();
 
 //    ui->divLineLabel->setPixmap(QPixmap("pic2/divLine.png"));
 //    ui->divLineLabel->setScaledContents(true);
@@ -27,7 +34,9 @@ TitleBar::TitleBar(QWidget *parent) :
     connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
     connect(ui->backBtn,&QToolButton::clicked,this,&TitleBar::back);
 
-
+#ifndef LIGHT_MODE
+    ui->refreshBtn->hide();
+#endif
 }
 
 TitleBar::~TitleBar()
@@ -106,4 +115,32 @@ void TitleBar::paintEvent(QPaintEvent *)
     painter.setPen(QColor(215,211,229));
     painter.drawRect( -1, -1, this->width() + 2, this->height());
 
+}
+
+void TitleBar::on_refreshBtn_clicked()
+{
+    ui->gifLabel->show();
+    ui->refreshBtn->hide();
+    gif->start();
+
+    if(!refreshing)
+    {
+        if(!refreshTimer)   refreshTimer = new QTimer;
+        refreshing = true;
+        refreshTimer->singleShot(10000, [this](){
+            refreshing = false;
+        });
+
+        Q_EMIT refresh();
+    }
+}
+
+void TitleBar::gifPlayOnce(int num)
+{
+    if( gif->frameCount() == num + 1)
+    {
+        gif->stop();
+        ui->gifLabel->hide();
+        ui->refreshBtn->show();
+    }
 }

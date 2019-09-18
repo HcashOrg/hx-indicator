@@ -143,7 +143,7 @@ void MinerPage::refresh()
     showIncomeRecord();
     showCitizenInfo();
 
-    HXChain::getInstance()->fetchCitizenPayBack();
+//    HXChain::getInstance()->fetchCitizenPayBack();
 
 //    count++;
 //    if(count > 50)

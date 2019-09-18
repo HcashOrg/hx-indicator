@@ -271,8 +271,10 @@ Frame::Frame(): timer(NULL),
     createTrayIconActions();
     createTrayIcon();
 
+#ifndef LIGHT_MODE
     //朱正天--自动转账
     autoDeposit = new DepositAutomatic(this);
+#endif
     //自动记录链外资金划转
     crossMark = new CrossCapitalMark(this);
 }
@@ -356,6 +358,7 @@ void Frame::alreadyLogin()
     connect(titleBar,SIGNAL(closeWallet()),this,SLOT(onCloseWallet()));
     connect(titleBar,SIGNAL(tray()),this,SLOT(hide()));
     connect(titleBar,&TitleBar::back,this,&Frame::onBack);
+    connect(titleBar,&TitleBar::refresh,this,&Frame::lightModeRefresh);
     connect(this,&Frame::titleBackVisible,titleBar,&TitleBar::backBtnVis);
 
     centralWidget = new QWidget(this);
@@ -484,22 +487,44 @@ QString toThousandFigure( int number)     // 转换为0001,0015  这种数字格
 
 void Frame::getAccountInfo()
 {
+    if(getInfoCount % 5 == 1)
+    {
+#ifdef LIGHT_MODE
+        if(!HXChain::getInstance()->lightModeMark.listAccountMark)
+        {
+            HXChain::getInstance()->lightModeMark.listAccountMark = true;
+#endif
+            HXChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QJsonArray()));
+            HXChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QJsonArray()));
+#ifdef LIGHT_MODE
+        }
+#endif
 
-    HXChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QJsonArray()));
-
+    }
 
     HXChain::getInstance()->fetchTransactions();
 
     if(getInfoCount % 100 == 1)
     {
-        HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
+#ifdef LIGHT_MODE
+        if(!HXChain::getInstance()->lightModeMark.listAssetsMark)
+        {
+            HXChain::getInstance()->lightModeMark.listAssetsMark = true;
+#endif
+            HXChain::getInstance()->postRPC( "id-list_assets", toJsonFormat( "list_assets", QJsonArray() << "A" << "100"));
+#ifdef LIGHT_MODE
+        }
+#endif
 
         HXChain::getInstance()->fetchMiners();
 
         HXChain::getInstance()->fetchAllGuards();
     }
 
-    HXChain::getInstance()->fetchCrosschainTransactions();
+    if(getInfoCount % 10 == 1)
+    {
+        HXChain::getInstance()->fetchCrosschainTransactions();
+    }
 }
 
 
@@ -1999,33 +2024,6 @@ void Frame::jsonDataUpdated(QString id)
         return;
     }
 
-//    if( id == "id-list_all_senators")
-//    {
-//        QString result = HXChain::getInstance()->jsonDataValue(id);
-////        qDebug() << id << result;
-
-//        if(result.startsWith("\"result\":"))
-//        {
-//            result.prepend("{");
-//            result.append("}");
-
-//            QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-//            QJsonObject jsonObject = parse_doucment.object();
-//            QJsonArray array = jsonObject.take("result").toArray();
-
-//            HXChain::getInstance()->allGuardMap.clear();
-//            foreach (QJsonValue v, array)
-//            {
-//                QJsonArray array2 = v.toArray();
-//                HXChain::getInstance()->allGuardMap.insert(array2.at(0).toString(),array2.at(1).toString());
-//            }
-
-
-//        }
-
-//        return;
-//    }
-
     if( id == "id-list_citizens")
     {
         QString result = HXChain::getInstance()->jsonDataValue(id);
@@ -2741,6 +2739,57 @@ void Frame::jsonDataUpdated(QString id)
         qDebug() << id << result;
         return;
     }
+
+    if( id == "id-info")
+    {
+//        HXChain::getInstance()->parseBalance();
+
+        QString result = HXChain::getInstance()->jsonDataValue( id);
+
+        if( result.isEmpty() )  return;
+
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonObject object = jsonObject.take("result").toObject();
+//        HXChain::getInstance()->walletInfo.blockHeight = object.take("head_block_num").toInt();
+        HXChain::getInstance()->walletInfo.blockId = object.take("head_block_id").toString();
+        HXChain::getInstance()->walletInfo.blockAge = object.take("head_block_age").toString();
+        HXChain::getInstance()->walletInfo.chainId = object.take("chain_id").toString();
+        HXChain::getInstance()->walletInfo.participation = object.take("participation").toString();
+
+        HXChain::getInstance()->postRPC("get_current_block_time",toJsonFormat("get_block",QJsonArray()<<HXChain::getInstance()->walletInfo.blockHeight));
+//        HXChain::getInstance()->walletInfo.activeMiners.clear();
+//        QJsonArray array = object.take("active_miners").toArray();
+//        foreach (QJsonValue v, array)
+//        {
+//            HXChain::getInstance()->walletInfo.activeMiners += v.toString();
+//        }
+
+
+        return;
+    }
+
+    if("get_current_block_time" == id)
+    {
+        QString result = HXChain::getInstance()->jsonDataValue( id);
+        if( result.isEmpty() )  return;
+
+
+        result.prepend("{");
+        result.append("}");
+
+        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
+        QJsonObject jsonObject = parse_doucment.object();
+        QJsonObject object = jsonObject.take("result").toObject();
+
+        HXChain::getInstance()->currentBlockTime = object.value("timestamp").toString();
+        return;
+    }
+
 }
 
 void Frame::onBack()
@@ -2935,6 +2984,71 @@ void Frame::showCoverWidget()
 void Frame::newAccount(QString name)
 {
     getAccountInfo();
+}
+
+void Frame::lightModeRefresh()
+{
+    switch (currentPageNum) {
+    case 0:
+        HXChain::getInstance()->lightModeMark.queryTunnelAddressMark = false;
+        HXChain::getInstance()->lightModeMark.getMyContractMark = false;
+        HXChain::getInstance()->lightModeMark.listAccountMark = false;
+        HXChain::getInstance()->postRPC( "id-list_my_accounts", toJsonFormat( "list_my_accounts", QJsonArray()));
+        HXChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QJsonArray()));
+
+        HXChain::getInstance()->lightModeMark.listAssetsMark = false;
+        break;
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    case 4:
+        break;
+    case 5:
+        break;
+    case 6:
+        break;
+    case 7:
+        HXChain::getInstance()->lightModeMark.listCitizensMark = false;
+        HXChain::getInstance()->fetchMiners();
+        break;
+    case 8:
+        break;
+    case 9:
+        break;
+    case 10:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+        HXChain::getInstance()->lightModeMark.listSenatorsMark = false;
+        HXChain::getInstance()->fetchAllGuards();
+        break;
+    case 19:
+        break;
+    case 20:
+        break;
+    case 21:
+        HXChain::getInstance()->lightModeMark.citizenGetAccountMark = false;
+        break;
+    case 22:
+        break;
+    case 23:
+        break;
+    case 24:
+        break;
+    case 25:
+        break;
+    case 26:
+        break;
+    default:
+        break;
+    }
 }
 
 void Frame::enter()

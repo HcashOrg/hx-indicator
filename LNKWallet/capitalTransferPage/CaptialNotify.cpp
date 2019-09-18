@@ -137,8 +137,7 @@ bool CaptialNotify::isAccountTunnelMoneyEmpty(const QString &accountName, const 
 void CaptialNotify::startCheckTunnelMoney()
 {
     _p->isNotifyOn = true;
-    _p->timer->start(1);
-    _p->timer->setInterval(15000);
+    _p->timer->start(100);
 }
 
 void CaptialNotify::stopCheckTunnelMoney()
@@ -150,6 +149,7 @@ void CaptialNotify::jsonDataUpdated(const QString &id)
 {
     if(id.startsWith("CaptialNotify-get_binding_account-"))
     {
+        qDebug() << "cccccccccccccc" << id;
         QString result = HXChain::getInstance()->jsonDataValue( id);
         result.prepend("{");
         result.append("}");
@@ -200,6 +200,17 @@ void CaptialNotify::updateData()
 {
     if(_p->isInUpdate || !_p->isNotifyOn) return;
 
+#ifdef LIGHT_MODE
+    if(HXChain::getInstance()->lightModeMark.queryTunnelAddressMark)
+    {
+        return;
+    }
+    else
+    {
+        HXChain::getInstance()->lightModeMark.queryTunnelAddressMark = true;
+    }
+#endif
+
     //清空数据
     _p->SetInUpdateTrue();
     _p->clearAccount();
@@ -233,6 +244,8 @@ void CaptialNotify::updateData()
         PostQueryTunnelAddress(in->accountName,in->assetSymbol);
     }
     FinishQueryTunnel();
+
+    _p->timer->setInterval(300000);
 }
 
 void CaptialNotify::PostQueryTunnelAddress(const QString &accountName, const QString &symbol)

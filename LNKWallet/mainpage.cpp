@@ -265,6 +265,14 @@ int tableWidgetPosToRow(QPoint pos, QTableWidget* table);
 
 void MainPage::refresh()
 {
+    if(HXChain::getInstance()->accountInfoMap.size() != ui->accountComboBox->count())
+    {
+        inited = false;
+        init();
+        return;
+    }
+
+
 //    qDebug() << "mainpage refresh"   << refreshOrNot;
 //    if( !refreshOrNot) return;
     ui->backupBtn->setVisible(HXChain::getInstance()->IsBackupNeeded);

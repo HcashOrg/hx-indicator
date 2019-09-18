@@ -36,10 +36,10 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.2.25"           // 版本号
+#define WALLET_VERSION "1.3.0"           // 版本号
 
 #ifdef  LIGHT_MODE
-#define AUTO_REFRESH_TIME 10000
+#define AUTO_REFRESH_TIME 15000
 #else
 #define AUTO_REFRESH_TIME 5000           // 自动刷新时间(ms)
 #endif
@@ -81,6 +81,8 @@
 #define NODE_RPC_PORT   50320
 #define CLIENT_RPC_PORT 50321
 #endif
+
+#define STABLE_MINER  "1.2.10"
 
 class WorkerThreadManager;
 class WebSocketManager;
@@ -392,6 +394,17 @@ struct ExchangeBalance
     unsigned long long available = 0;
 };
 
+struct LightModeMark
+{
+    bool citizenGetAccountMark = false;
+    bool queryTunnelAddressMark = false;
+    bool getMyContractMark = false;
+    bool listCitizensMark = false;
+    bool listAccountMark = false;
+    bool listSenatorsMark = false;
+    bool listAssetsMark = false;
+};
+
 class HXChain : public QObject
 {
     Q_OBJECT
@@ -435,6 +448,7 @@ public:
     bool minimizeToTray;  // 是否最小化到托盘
     bool closeToMinimize; // 是否点击关闭最小化
     bool resyncNextTime;    // 下次启动时是否重新同步
+    bool contractReplayNextTime;
     QString language;   // 语言
     QString feeType;//手续费币种
     bool IsBackupNeeded;//是否需要备份钱包
@@ -617,6 +631,8 @@ public:
 
     //当前块时间
     QString currentBlockTime;//2018-11-16T12:14:15
+
+    LightModeMark lightModeMark;
 
 signals:
     void jsonDataUpdated(QString);

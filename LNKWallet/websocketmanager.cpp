@@ -2,6 +2,12 @@
 
 #include "wallet.h"
 
+#ifdef LIGHT_MODE
+#define RPC_TIMEOUT  3000
+#else
+#define RPC_TIMEOUT  1000       // rpc超时时间
+#endif
+
 WebSocketManager::WebSocketManager(QObject *parent)
     : QThread(parent)
     , busy(true)
@@ -130,13 +136,51 @@ void WebSocketManager::onTimer()
 ////        }
 //    }
 
+#ifdef PERFORMANCE_ANALYSIS
+   timeElapse += timer->interval();
+
+//   if(timeElapse % (1000 * 60 * 1) == 0)
+//   {
+//       logToFile( QStringList() << "1 minute:" << formatStaticsInfoMap(), 0, "performance_analysis.txt");
+//   }
+
+   if(timeElapse % (1000 * 60 * 5) == 0)
+   {
+       logToFile( QStringList() << "5 minutes:" << formatStaticsInfoMap(), 0, "performance_analysis.txt");
+   }
+
+   if(timeElapse % (1000 * 60 * 60) == 0)
+   {
+       QStringList keys = rpcStatisticsInfoMap.keys();
+       int totalTime = 0;
+       int tatalTimeOutCount = 0;
+       foreach (QString key, keys)
+       {
+           StatisticInfo info = rpcStatisticsInfoMap.value(key);
+           totalTime += info.consumingTime;
+           tatalTimeOutCount += info.timeOutCount;
+       }
+
+       logToFile( QStringList() << "1 hour data summary:" << QString("total time consumed: %1,\n total time out:%2,\n time elapse:%3,\n ratio: %4\n")
+                  .arg(totalTime).arg(tatalTimeOutCount).arg(timeElapse).arg(double(totalTime) / timeElapse),
+                  0, "performance_analysis.txt");
+   }
+
+
+#endif
+
     if( !processingRpc.isEmpty())
     {
         loopCount++;
-        if(loopCount >= 1000 && loopCount % 1000 == 0 )
+        if(loopCount >= RPC_TIMEOUT && loopCount % RPC_TIMEOUT == 0 )
         {
             logToFile( QStringList() << QString("rpc timeout: %1 %2").arg(QString::number(loopCount / 1000))
                        .arg(processingRpc) );
+
+#ifdef PERFORMANCE_ANALYSIS
+            QStringList rpc = processingRpc.split("***");
+            rpcStatisticsInfoMap[formatRpcKey(rpc.at(0))].timeOutCount += 1;
+#endif
         }
 
         if(loopCount >= 60000 && loopCount % 60000 == 0)
@@ -157,6 +201,10 @@ void WebSocketManager::onTimer()
             processingRpc = rpcs.takeFirst();
             QStringList rpc = processingRpc.split("***");
             processRPC(rpc.at(0),rpc.at(1));
+
+#ifdef PERFORMANCE_ANALYSIS
+            rpcStatisticsInfoMap[formatRpcKey(rpc.at(0))].callCount += 1;
+#endif
 
             return;
         }
@@ -187,11 +235,14 @@ void WebSocketManager::onTextFrameReceived(QString _message, bool _isLastFrame)
     }
 
     if(processingRpc.isEmpty())   return;
-//    if(pendingRpcs.size() <= 0)   return;
-//    qDebug() << "message received: " << pendingRpcs.at(0) << _isLastFrame;
 
     m_buff += _message;
-//    logToFile( QStringList() << QString::number(loopCount) << processingRpc);
+
+#ifdef PERFORMANCE_ANALYSIS
+    QStringList rpc = processingRpc.split("***");
+    rpcStatisticsInfoMap[formatRpcKey(rpc.at(0))].consumingTime += loopCount;
+#endif
+
     loopCount = 0;
 
     if(_isLastFrame)
@@ -264,3 +315,34 @@ void WebSocketManager::onStateChanged(QAbstractSocket::SocketState _state)
         connectToClient();
     }
 }
+
+#ifdef PERFORMANCE_ANALYSIS
+QString WebSocketManager::formatStaticsInfoMap()
+{
+    QJsonObject object;
+    QStringList keys = rpcStatisticsInfoMap.keys();
+    foreach (QString key, keys)
+    {
+        StatisticInfo info = rpcStatisticsInfoMap.value(key);
+        QString str = QString("%1  %2  %3, %4").arg(info.callCount).arg(info.consumingTime).arg(info.timeOutCount).arg(double(info.consumingTime) / info.callCount);
+        object.insert(key, str);
+    }
+
+    return QJsonDocument(object).toJson();
+}
+
+QString WebSocketManager::formatRpcKey(QString rpcId)
+{
+    QString result = rpcId;
+    if(rpcId.count("-") >=2)
+    {
+        result = rpcId.left(rpcId.indexOf("-",rpcId.indexOf("-") + 1));
+    }
+    else if(rpcId.count("+") >= 2)
+    {
+        result = rpcId.left(rpcId.indexOf("+",rpcId.indexOf("+") + 1));
+    }
+
+    return result;
+}
+#endif

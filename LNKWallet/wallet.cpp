@@ -97,6 +97,8 @@ HXChain::HXChain()
         configFile->setValue("/settings/closeToMinimize",false);
         resyncNextTime = false;
         configFile->setValue("settings/resyncNextTime",false);
+        contractReplayNextTime = false;
+        configFile->setValue("settings/contractReplayNextTime",false);
         contractFee = 1;
         configFile->setValue("settings/contractFee",1);
         middlewarePath = MIDDLE_DEFAULT_URL;
@@ -119,6 +121,7 @@ HXChain::HXChain()
         IsBackupNeeded  = configFile->value("/settings/backupNeeded",false).toBool();
         autoDeposit     = configFile->value("/settings/autoDeposit",false).toBool();
         resyncNextTime  = configFile->value("/settings/resyncNextTime",false).toBool();
+        contractReplayNextTime  = configFile->value("/settings/contractReplayNextTime",false).toBool();
         contractFee     = configFile->value("/settings/contractFee",1).toULongLong();
         middlewarePath  = configFile->value("/settings/middlewarePath",MIDDLE_DEFAULT_URL).toString();
 //        middlewarePath  = configFile->value("/settings/middlewarePath","http://192.168.1.164:5000/api").toString();
@@ -211,12 +214,20 @@ void HXChain:: startExe()
 #endif
             )
     {
-        strList << "--replay";
+        strList << "--replay-blockchain";
+    }
+
+    if( HXChain::getInstance()->configFile->value("/settings/contractReplayNextTime",false).toBool()
+            ||  HXChain::getInstance()->configFile->value("/settings/contractReplay1",true).toBool())
+    {
+        strList << "--replay-withoutContract";
     }
 
 
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
     HXChain::getInstance()->configFile->setValue("/settings/dbReplay13",false);
+    HXChain::getInstance()->configFile->setValue("/settings/contractReplayNextTime",false);
+    HXChain::getInstance()->configFile->setValue("/settings/contractReplay1",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
@@ -587,7 +598,7 @@ void HXChain::parseAccountInfo()
 
                 accountInfoMap.insert(accountInfo.name,accountInfo);
 
-                fetchAccountBalances(accountInfo.name);
+//                fetchAccountBalances(accountInfo.name);
 
                 accountNameList.append(accountInfo.name);
             }
@@ -1233,6 +1244,17 @@ void HXChain::checkPendingTransactions()
 
 void HXChain::fetchAllGuards()
 {
+#ifdef LIGHT_MODE
+    if(HXChain::getInstance()->lightModeMark.listSenatorsMark)
+    {
+        return;
+    }
+    else
+    {
+        HXChain::getInstance()->lightModeMark.listSenatorsMark = true;
+    }
+#endif
+
     postRPC( "id-list_all_senators", toJsonFormat( "list_all_senators", QJsonArray() << "A" << 100));
 }
 
@@ -1614,6 +1636,17 @@ QStringList HXChain::lookupSignedGuardsByGeneratedTrxId(QString generatedTrxId)
 
 void HXChain::fetchMiners()
 {
+#ifdef LIGHT_MODE
+    if(HXChain::getInstance()->lightModeMark.listCitizensMark)
+    {
+        return;
+    }
+    {
+        HXChain::getInstance()->lightModeMark.listCitizensMark = true;
+    }
+#endif
+
+
     if(!fetchCitizensFinished)  return;
     fetchCitizensFinished = false;
     postRPC( "id-list_citizens", toJsonFormat( "list_citizens", QJsonArray() << "A" << 1000), 1);
@@ -1621,6 +1654,17 @@ void HXChain::fetchMiners()
 
 void HXChain::fetchCitizenPayBack()
 {
+#ifdef LIGHT_MODE
+    if(lightModeMark.citizenGetAccountMark)
+    {
+        return;
+    }
+    else
+    {
+        lightModeMark.citizenGetAccountMark = true;
+    }
+#endif
+
     QStringList citizens = minerMap.keys();
     foreach (QString citizen, citizens)
     {
@@ -1632,7 +1676,7 @@ void HXChain::fetchProposals()
 {
     if(HXChain::getInstance()->getPermanentSenators().size() < 1 || minerMap.size() < 1)   return;
     postRPC( "senator-get_proposal_for_voter", toJsonFormat( "get_proposal_for_voter", QJsonArray() << HXChain::getInstance()->getPermanentSenators().first()));
-    postRPC( "citizen-get_proposal_for_voter", toJsonFormat( "get_referendum_for_voter", QJsonArray() << minerMap.keys().at(0)));
+    postRPC( "citizen-get_proposal_for_voter", toJsonFormat( "get_referendum_for_voter", QJsonArray() << STABLE_MINER));
 
 }
 
@@ -1653,7 +1697,20 @@ QString HXChain::citizenAccountIdToName(QString citizenAccountId)
 
 void HXChain::fetchMyContracts()
 {
+#ifdef LIGHT_MODE
+    if(HXChain::getInstance()->lightModeMark.getMyContractMark)
+    {
+        return;
+    }
+    else
+    {
+        HXChain::getInstance()->lightModeMark.getMyContractMark = true;
+    }
+#else
     if( myContractsQueryCount++ % 10 != 0)     return;
+#endif
+
+
     foreach (QString accountName, accountInfoMap.keys())
     {
         postRPC( "id-get_contracts_hash_entry_by_owner-" + accountName, toJsonFormat( "get_contracts_hash_entry_by_owner", QJsonArray() << accountName));

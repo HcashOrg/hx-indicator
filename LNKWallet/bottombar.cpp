@@ -45,54 +45,7 @@ void BottomBar::retranslator()
 
 void BottomBar::jsonDataUpdated(QString id)
 {
-    if( id == "id-info")
-    {
-//        HXChain::getInstance()->parseBalance();
-
-        QString result = HXChain::getInstance()->jsonDataValue( id);
-
-        if( result.isEmpty() )  return;
-
-
-        result.prepend("{");
-        result.append("}");
-
-        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-        QJsonObject jsonObject = parse_doucment.object();
-        QJsonObject object = jsonObject.take("result").toObject();
-//        HXChain::getInstance()->walletInfo.blockHeight = object.take("head_block_num").toInt();
-        HXChain::getInstance()->walletInfo.blockId = object.take("head_block_id").toString();
-        HXChain::getInstance()->walletInfo.blockAge = object.take("head_block_age").toString();
-        HXChain::getInstance()->walletInfo.chainId = object.take("chain_id").toString();
-        HXChain::getInstance()->walletInfo.participation = object.take("participation").toString();
-
-        HXChain::getInstance()->postRPC("get_current_block_time",toJsonFormat("get_block",QJsonArray()<<HXChain::getInstance()->walletInfo.blockHeight));
-//        HXChain::getInstance()->walletInfo.activeMiners.clear();
-//        QJsonArray array = object.take("active_miners").toArray();
-//        foreach (QJsonValue v, array)
-//        {
-//            HXChain::getInstance()->walletInfo.activeMiners += v.toString();
-//        }
-
-
-        return;
-    }
-    else if("get_current_block_time" == id)
-    {
-        QString result = HXChain::getInstance()->jsonDataValue( id);
-        if( result.isEmpty() )  return;
-
-
-        result.prepend("{");
-        result.append("}");
-
-        QJsonDocument parse_doucment = QJsonDocument::fromJson(result.toLatin1());
-        QJsonObject jsonObject = parse_doucment.object();
-        QJsonObject object = jsonObject.take("result").toObject();
-
-        HXChain::getInstance()->currentBlockTime = object.value("timestamp").toString();
-    }
-    else if("id-network_get_info" == id)
+    if("id-network_get_info" == id)
     {
         QString result = HXChain::getInstance()->jsonDataValue( id);
         if( result.isEmpty() )
@@ -174,9 +127,5 @@ bool BottomBar::eventFilter(QObject *watched, QEvent *e)
 
 void BottomBar::refresh()
 {
-    HXChain::getInstance()->postRPC( "id-info", toJsonFormat( "info", QJsonArray()));
-
     HXChain::getInstance()->postRPC( "id-network_get_info", toJsonFormat( "network_get_info", QJsonArray()));
-
-
 }

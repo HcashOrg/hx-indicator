@@ -135,6 +135,7 @@ SetDialog::SetDialog(QWidget *parent) :
     ui->minimizeCheckBox->setChecked( HXChain::getInstance()->minimizeToTray);
     ui->closeCheckBox->setChecked( HXChain::getInstance()->closeToMinimize);
     ui->resyncCheckBox->setChecked( HXChain::getInstance()->resyncNextTime);
+    ui->contractReplayCheckBox->setChecked( HXChain::getInstance()->contractReplayNextTime);
 
     ui->contractFeeLineEdit->setAttribute(Qt::WA_InputMethodEnabled, false);
     ui->contractFeeLineEdit->setText( getBigNumberString(HXChain::getInstance()->contractFee,ASSET_PRECISION));
@@ -290,6 +291,9 @@ void SetDialog::on_saveBtn_clicked()
 
     HXChain::getInstance()->resyncNextTime = ui->resyncCheckBox->isChecked();
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime", HXChain::getInstance()->resyncNextTime);
+
+    HXChain::getInstance()->contractReplayNextTime = ui->contractReplayCheckBox->isChecked();
+    HXChain::getInstance()->configFile->setValue("/settings/contractReplayNextTime", HXChain::getInstance()->contractReplayNextTime);
 
     HXChain::getInstance()->contractFee = ui->contractFeeLineEdit->text().toDouble() * qPow(10,ASSET_PRECISION);
     HXChain::getInstance()->configFile->setValue("/settings/contractFee", HXChain::getInstance()->contractFee);

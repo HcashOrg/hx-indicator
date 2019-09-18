@@ -5,6 +5,7 @@
 #include <QWebSocket>
 #include <QTimer>
 
+//#define PERFORMANCE_ANALYSIS
 
 class WebSocketManager : public QThread
 {
@@ -47,6 +48,19 @@ private:
     QString processingRpc;
 
     bool busy;
+
+#ifdef PERFORMANCE_ANALYSIS
+    struct StatisticInfo
+    {
+        int callCount = 0;
+        int consumingTime = 0;
+        int timeOutCount = 0;
+    };
+   QMap<QString,StatisticInfo>    rpcStatisticsInfoMap;
+   int timeElapse = 0;
+   QString formatStaticsInfoMap();
+   QString formatRpcKey(QString rpcId);    // 为了同一类的rpcid一起统计
+#endif
 };
 
 #endif // WEBSOCKETMANAGER_H

@@ -147,7 +147,7 @@ DepositAutomatic::DepositAutomatic(QObject *parent)
 {
     _p->timer = new QTimer(this);
     connect(_p->timer,&QTimer::timeout,this,&DepositAutomatic::autoDeposit);
-    _p->timer->start(30000);
+    _p->timer->start(300000);
 
     connect( HXChain::getInstance(), &HXChain::jsonDataUpdated, this, &DepositAutomatic::jsonDataUpdated);
 
