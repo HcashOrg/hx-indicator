@@ -7,6 +7,7 @@ CONFIG += c++11
 TARGET = Copy
 #CONFIG += console
 #CONFIG -= app_bundle
+DEFINES += LIGHT_MODE
 
 TEMPLATE = app
 

@@ -136,7 +136,11 @@ void UpdateProcess::GetLatestVersionInfoSlots()
     UpdateProgressUtil::ParseVersion(QString(reply->readAll()),serverVersion);
 
 #ifdef TARGET_OS_MAC
-    serverVersion.url.replace(".xml","_mac.xml");//"http://192.168.1.161/down/hyperexchange_wallet_upgrade.xml";//测试用，本地文件
+    serverVersion.url.replace(".xml","_mac.xml");
+#endif
+
+#ifdef LIGHT_MODE
+    serverVersion.url.replace(".xml","_light.xml");
 #endif
 
     //下载config配置
@@ -145,7 +149,7 @@ void UpdateProcess::GetLatestVersionInfoSlots()
     up.fileName = UPDATE_DOC_NAME;
     up.url = _p->serverAddr + serverVersion.url;
 //    up.url.replace(".xml","_test.xml");
-    qDebug()<<up.url;
+    qDebug() << up.url << serverVersion.url;
     up.filePath = _p->downloadPath + QDir::separator() + up.fileName;
     connect(_p->updateNetwork,&UpdateNetWork::DownLoadFinish,this,&UpdateProcess::DownLoadVersionConfigFinsihed);
     //更新日志

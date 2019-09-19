@@ -950,7 +950,6 @@ void Frame::autoRefresh()
     getAccountInfo();
 
     bottomBar->refresh();
-   //朱正天 functionBar->refresh();
 
     switch (currentPageNum) {
     case 0:

@@ -24,12 +24,20 @@
 static const QString TEMP_FOLDER_NAME = "temp";
 static const QString PACKAGE_UN = "hyperexchange";
 static const QString PACKAGE_NAME = "hyperexchange.zip";
+
+#ifndef LIGHT_MODE
 #ifdef TARGET_OS_MAC
-static const QString MAINEXE_NAME = "./HXIndicator";
+static const QString MAINEXE_NAME = "HXIndicator";
 #else
 static const QString MAINEXE_NAME = "HXIndicator.exe";
 #endif
-
+#else
+#ifdef TARGET_OS_MAC
+static const QString MAINEXE_NAME = "HXIndicator_light";
+#else
+static const QString MAINEXE_NAME = "HXIndicator_light.exe";
+#endif
+#endif
 
 UpdateWidget::UpdateWidget(QWidget *parent) :
     QWidget(parent),
@@ -79,12 +87,14 @@ void UpdateWidget::restartWallet()
 #ifdef TARGET_OS_MAC
     //mac平台需要获取权限
         QProcess::execute("chmod",QStringList()<<"777"<<QCoreApplication::applicationDirPath()+"/hx_client");
+#ifndef LIGHT
         QProcess::execute("chmod",QStringList()<<"777"<<QCoreApplication::applicationDirPath()+"/hx_node");
-        QProcess::execute("chmod",QStringList()<<"777"<<QCoreApplication::applicationDirPath()+"/HXIndicator");
+#endif
+        QProcess::execute("chmod",QStringList()<<"777"<<QCoreApplication::applicationDirPath()+ "/" + MAINEXE_NAME);
 #endif
     //启动外部复制程序
     QProcess *copproc = new QProcess();
-    copproc->startDetached(QCoreApplication::applicationDirPath()+"/HXIndicator");
+    copproc->startDetached(QCoreApplication::applicationDirPath()+ "/" + MAINEXE_NAME);
     close();
 }
 
