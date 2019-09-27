@@ -218,7 +218,7 @@ void HXChain:: startExe()
     }
 
     if( HXChain::getInstance()->configFile->value("/settings/contractReplayNextTime",false).toBool()
-            ||  HXChain::getInstance()->configFile->value("/settings/contractReplay1",true).toBool())
+            ||  HXChain::getInstance()->configFile->value("/settings/contractReplay2",true).toBool())
     {
         strList << "--replay-withoutContract";
     }
@@ -227,7 +227,7 @@ void HXChain:: startExe()
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
     HXChain::getInstance()->configFile->setValue("/settings/dbReplay13",false);
     HXChain::getInstance()->configFile->setValue("/settings/contractReplayNextTime",false);
-    HXChain::getInstance()->configFile->setValue("/settings/contractReplay1",false);
+    HXChain::getInstance()->configFile->setValue("/settings/contractReplay2",false);
 
     nodeProc->start(NODE_PROC_NAME,strList);
     qDebug() << "start" << NODE_PROC_NAME << strList;
