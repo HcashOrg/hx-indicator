@@ -8,6 +8,9 @@
 #include "showcontentdialog.h"
 #include "TokenTransferWidget.h"
 #include "TokenHistoryWidget.h"
+#include "applyExchange/ApplyChoiceDialog.h"
+#include "applyExchange/ApplyExchangeDialog.h"
+#include "applyExchange/ApplyExchangeInfoDialog.h"
 
 ContractTokenPage::ContractTokenPage(QWidget *parent) :
     QWidget(parent),
@@ -16,6 +19,7 @@ ContractTokenPage::ContractTokenPage(QWidget *parent) :
     ui->setupUi(this);
 
     connect( HXChain::getInstance(), SIGNAL(jsonDataUpdated(QString)), this, SLOT(jsonDataUpdated(QString)));
+
 
     ui->tokenTableWidget->installEventFilter(this);
     ui->tokenTableWidget->setSelectionMode(QAbstractItemView::NoSelection);
@@ -39,6 +43,7 @@ ContractTokenPage::ContractTokenPage(QWidget *parent) :
     ui->addTokenBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->createTokenBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->historyBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->applyBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 
     init();
 }
@@ -338,4 +343,23 @@ void ContractTokenPage::on_historyBtn_clicked()
     tokenHistoryWidget->show();
     tokenHistoryWidget->raise();
     tokenHistoryWidget->setAccount(ui->accountComboBox->currentText());
+}
+
+void ContractTokenPage::on_applyBtn_clicked()
+{    
+    ApplyChoiceDialog acDialog;
+    int choice = acDialog.pop();
+    if(choice == 1)
+    {
+        ApplyExchangeDialog dialog;
+        dialog.setParentPage(this);
+        dialog.pop();
+    }
+    else if(choice == 2)
+    {
+        ApplyExchangeInfoDialog dialog;
+        dialog.setParentPage(this);
+        dialog.pop();
+    }
+
 }

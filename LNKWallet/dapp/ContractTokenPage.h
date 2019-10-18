@@ -44,6 +44,8 @@ public:
 signals:
     void backBtnVisible(bool isShow);
     void accountContractTokenBalanceUpdated();
+    void gotoTransferPage(QString,QString,QString,QString);     // fromAccount, toAddress, amount, memo
+
 private slots:
     void on_createTokenBtn_clicked();
 
@@ -67,6 +69,7 @@ private:
 private slots:
     void fetchTokensInfo();
     void fetchTokensBalance();
+    void on_applyBtn_clicked();
 };
 
 #endif // CONTRACTTOKENPAGE_H

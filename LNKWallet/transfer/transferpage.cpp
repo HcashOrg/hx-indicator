@@ -263,6 +263,16 @@ void TransferPage::setAddress(QString address)
     ui->sendtoLineEdit->setText(address);
 }
 
+void TransferPage::setAmount(QString amount)
+{
+    ui->amountLineEdit->setText(amount);
+}
+
+void TransferPage::setMemo(QString memo)
+{
+    ui->memoTextEdit->setText(memo);
+}
+
 
 void TransferPage::getAssets()
 {

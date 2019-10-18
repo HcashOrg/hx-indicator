@@ -20,6 +20,8 @@ public:
 
     QString getCurrentAccount();
     void setAddress(QString);
+    void setAmount(QString amount);
+    void setMemo(QString memo);
 
     void getAssets();
 

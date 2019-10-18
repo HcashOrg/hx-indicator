@@ -112,6 +112,7 @@ private slots:
 
     void showTransferPage();
     void showTransferPage(QString,QString);
+    void showTransferPage(QString fromAccount,QString toAddress,QString amount,QString memo);
     void showTransferPageWithAddress(QString, QString remark = "");//对方地址、名称
 
     void showContactPage();

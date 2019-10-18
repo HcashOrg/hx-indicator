@@ -569,6 +569,21 @@ void Frame::showTransferPage(QString accountName,QString assetType)
 
 }
 
+void Frame::showTransferPage(QString fromAccount, QString toAddress, QString amount, QString memo)
+{
+    emit titleBackVisible(true);
+    closeCurrentPage();
+    getAccountInfo();
+    transferPage = new TransferPage(fromAccount,centralWidget);
+    transferPage->setAttribute(Qt::WA_DeleteOnClose);
+    transferPage->setAddress(toAddress);
+    transferPage->setAmount(amount);
+    transferPage->setMemo(memo);
+//    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
+    transferPage->show();
+    currentPageNum = 3;
+}
+
 
 void Frame::showLockPage()
 {
@@ -1116,7 +1131,6 @@ void Frame::shadowWidgetHide()
 
 void Frame::showTransferPageWithAddress(QString address, QString name)
 {
-    qDebug()<<"transssss"<<HXChain::getInstance()->currentAccount;
     emit titleBackVisible(true);
     closeCurrentPage();
     getAccountInfo();
@@ -1126,7 +1140,7 @@ void Frame::showTransferPageWithAddress(QString address, QString name)
 //    connect(transferPage,SIGNAL(accountChanged(QString)),this,SLOT(showTransferPage(QString)));
     transferPage->show();
     currentPageNum = 3;
-   //朱正天 functionBar->choosePage(2);
+   // functionBar->choosePage(2);
 }
 
 void Frame::setLanguage(QString language)
@@ -1481,6 +1495,8 @@ void Frame::showContractTokenPage()
     closeCurrentPage();
     contractTokenPage = new ContractTokenPage(centralWidget);
     connect(contractTokenPage,&ContractTokenPage::backBtnVisible,titleBar,&TitleBar::backBtnVis);
+    connect(contractTokenPage,SIGNAL(gotoTransferPage(QString,QString,QString,QString)),functionBar,SLOT(contactShowTransferPageSlots()));
+    connect(contractTokenPage,SIGNAL(gotoTransferPage(QString,QString,QString,QString)),this,SLOT(showTransferPage(QString,QString,QString,QString)));//address name
     contractTokenPage->setAttribute(Qt::WA_DeleteOnClose);
     contractTokenPage->show();
     currentPageNum = 20;

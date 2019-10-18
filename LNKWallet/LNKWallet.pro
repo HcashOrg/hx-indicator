@@ -243,7 +243,10 @@ SOURCES += main.cpp\
     nameTransfer/ShowTrxCodeDialog.cpp \
     citizen/CitizenPolicyPage.cpp \
     citizen/CitizenResolutionDialog.cpp \
-    control/CoverWidget.cpp
+    control/CoverWidget.cpp \
+    dapp/applyExchange/ApplyExchangeDialog.cpp \
+    dapp/applyExchange/ApplyChoiceDialog.cpp \
+    dapp/applyExchange/ApplyExchangeInfoDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -433,7 +436,11 @@ HEADERS  += firstlogin.h \
     nameTransfer/ShowTrxCodeDialog.h \
     citizen/CitizenPolicyPage.h \
     citizen/CitizenResolutionDialog.h \
-    control/CoverWidget.h
+    control/CoverWidget.h \
+    dapp/ApplyExchangeDialog.h \
+    dapp/applyExchange/ApplyExchangeDialog.h \
+    dapp/applyExchange/ApplyChoiceDialog.h \
+    dapp/applyExchange/ApplyExchangeInfoDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -585,7 +592,10 @@ FORMS    += firstlogin.ui \
     nameTransfer/ShowTrxCodeDialog.ui \
     citizen/CitizenPolicyPage.ui \
     citizen/CitizenResolutionDialog.ui \
-    control/CoverWidget.ui
+    control/CoverWidget.ui \
+    dapp/applyExchange/ApplyExchangeDialog.ui \
+    dapp/applyExchange/ApplyChoiceDialog.ui \
+    dapp/applyExchange/ApplyExchangeInfoDialog.ui
 
 win32{
     DISTFILES += logo.rc
