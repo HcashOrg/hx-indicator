@@ -346,7 +346,7 @@ void ContractTokenPage::on_historyBtn_clicked()
 }
 
 void ContractTokenPage::on_applyBtn_clicked()
-{    
+{
     ApplyChoiceDialog acDialog;
     int choice = acDialog.pop();
     if(choice == 1)

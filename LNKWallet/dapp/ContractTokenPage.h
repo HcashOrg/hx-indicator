@@ -30,7 +30,7 @@ class ContractTokenPage : public QWidget
     Q_OBJECT
 
 public:
-    explicit ContractTokenPage(QWidget *parent = 0);
+    explicit ContractTokenPage(QWidget *parent = nullptr);
     ~ContractTokenPage();
 
     void init();

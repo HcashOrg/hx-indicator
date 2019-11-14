@@ -34,9 +34,12 @@ private slots:
 
     void on_contractComboBox_currentIndexChanged(const QString &arg1);
 
-    void on_accountComboBox_currentIndexChanged(const QString &arg1);
 
     void on_copyBtn_clicked();
+
+    void on_hxCheckBox_stateChanged(int arg1);
+
+    void on_paxCheckBox_stateChanged(int arg1);
 
 private:
     Ui::ApplyExchangeDialog *ui;

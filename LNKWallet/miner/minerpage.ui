@@ -914,6 +914,36 @@
     <string>赎回全部</string>
    </property>
   </widget>
+  <widget class="QToolButton" name="totalInfoAllBtn">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>129</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+     <weight>50</weight>
+     <italic>false</italic>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="focusPolicy">
+    <enum>Qt::NoFocus</enum>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string>投票资产总览</string>
+   </property>
+  </widget>
   <zorder>title_label</zorder>
   <zorder>registerBtn</zorder>
   <zorder>accountComboBox</zorder>
@@ -927,6 +957,7 @@
   <zorder>citizenInfoBtn</zorder>
   <zorder>sortTypeComboBox</zorder>
   <zorder>forecloseAllBtn</zorder>
+  <zorder>totalInfoAllBtn</zorder>
  </widget>
  <resources/>
  <connections/>

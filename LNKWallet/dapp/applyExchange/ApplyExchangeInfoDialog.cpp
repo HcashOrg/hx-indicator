@@ -3,12 +3,15 @@
 
 #include "wallet.h"
 #include "dapp/ContractTokenPage.h"
+#include "commondialog.h"
 
 ApplyExchangeInfoDialog::ApplyExchangeInfoDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ApplyExchangeInfoDialog)
 {
     ui->setupUi(this);
+
+    connect(&httpManager,SIGNAL(httpReplied(QByteArray,int)),this,SLOT(httpReplied(QByteArray,int)));
 
     setParent(HXChain::getInstance()->mainFrame);
 
@@ -40,13 +43,7 @@ void ApplyExchangeInfoDialog::pop()
 
 void ApplyExchangeInfoDialog::init()
 {
-    ui->accountComboBox->clear();
-    QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
-    ui->accountComboBox->addItems(accounts);
-    if(accounts.contains(HXChain::getInstance()->currentAccount))
-    {
-        ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
-    }
+
 }
 
 void ApplyExchangeInfoDialog::setParentPage(ContractTokenPage *p)
@@ -63,9 +60,59 @@ void ApplyExchangeInfoDialog::setParentPage(ContractTokenPage *p)
 
 }
 
+void ApplyExchangeInfoDialog::httpReplied(QByteArray _data, int _status)
+{
+    QJsonObject object  = QJsonDocument::fromJson(_data).object();
+    qDebug() << "11111111111 " << object;
+    int id = object.value("id").toInt();
+
+    if(id == 1024)
+    {
+        bool result = object.value("result").toBool();
+        if(result)
+        {
+            CommonDialog dialog(CommonDialog::OkOnly);
+            dialog.setText(tr("Your application has been submitted."));
+            dialog.pop();
+            close();
+        }
+        else
+        {
+            CommonDialog dialog(CommonDialog::OkOnly);
+            dialog.setText(tr("Failed!"));
+            dialog.pop();
+        }
+    }
+}
+
 void ApplyExchangeInfoDialog::on_okBtn_clicked()
 {
+    if(ui->contractComboBox->currentText().isEmpty())    return;
+    if(ui->memoLineEdit->text().size() != 8)
+    {
+        CommonDialog dialog(CommonDialog::OkOnly);
+        dialog.setText(tr("Please enter the pay code!"));
+        dialog.pop();
+        return;
+    }
 
+    QJsonObject object;
+    object.insert("jsonrpc","2.0");
+    object.insert("id",1024);
+    object.insert("method","Zchain.Coin.Add.Request");
+    QJsonObject paramObject;
+    paramObject.insert("chainId", "HX");
+
+    QString contractId = ui->contractComboBox->currentData().toString();
+    ContractTokenInfo tokenInfo = page->contractTokenInfoMap.value(contractId);
+    paramObject.insert("coinName", tokenInfo.symbol);
+
+    paramObject.insert("desc", ui->descriptionLineEdit->text());
+    paramObject.insert("contractAddr", ui->contractComboBox->currentText());
+    paramObject.insert("contact", ui->phoneLineEdit->text());
+    paramObject.insert("payCode", ui->memoLineEdit->text());
+    object.insert("params",paramObject);
+    httpManager.post(MIDDLE_DEFAULT_URL,QJsonDocument(object).toJson());
 }
 
 void ApplyExchangeInfoDialog::on_cancelBtn_clicked()

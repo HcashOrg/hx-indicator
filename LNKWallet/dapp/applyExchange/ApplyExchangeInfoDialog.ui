@@ -35,7 +35,7 @@
       <x>280</x>
       <y>110</y>
       <width>460</width>
-      <height>320</height>
+      <height>360</height>
      </rect>
     </property>
     <property name="font">
@@ -121,7 +121,7 @@
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>260</y>
+       <y>300</y>
        <width>96</width>
        <height>30</height>
       </rect>
@@ -152,7 +152,7 @@
      <property name="geometry">
       <rect>
        <x>250</x>
-       <y>260</y>
+       <y>300</y>
        <width>96</width>
        <height>30</height>
       </rect>
@@ -167,23 +167,6 @@
       <string>取消</string>
      </property>
     </widget>
-    <widget class="QLabel" name="tipLabel">
-     <property name="geometry">
-      <rect>
-       <x>45</x>
-       <y>110</y>
-       <width>261</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{font: 11px &quot;微软雅黑&quot;;color: rgb(255,0,0);}
-</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
     <widget class="QComboBox" name="contractComboBox">
      <property name="geometry">
       <rect>
@@ -192,33 +175,6 @@
        <width>300</width>
        <height>24</height>
       </rect>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="accountComboBox">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>110</y>
-       <width>120</width>
-       <height>24</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>110</y>
-       <width>80</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{font: 11px &quot;微软雅黑&quot;;color: rgb(137, 129, 161);}
-</string>
-     </property>
-     <property name="text">
-      <string>选择申请账户</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_4">
@@ -244,6 +200,60 @@
        <x>130</x>
        <y>150</y>
        <width>300</width>
+       <height>24</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_5">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>190</y>
+       <width>80</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font: 11px &quot;微软雅黑&quot;;color: rgb(137, 129, 161);}
+</string>
+     </property>
+     <property name="text">
+      <string>币种介绍</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="descriptionLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>190</y>
+       <width>300</width>
+       <height>24</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>110</y>
+       <width>80</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel{font: 11px &quot;微软雅黑&quot;;color: rgb(137, 129, 161);}
+</string>
+     </property>
+     <property name="text">
+      <string>转账识别码</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="memoLineEdit">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>110</y>
+       <width>100</width>
        <height>24</height>
       </rect>
      </property>

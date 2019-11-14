@@ -11,8 +11,13 @@ LightModeConfig::LightModeConfig(QWidget *parent) :
 {
     ui->setupUi(this);
 
+#ifdef TEST_WALLET
     default_ip_port_vector.append(IP_Port("106.13.107.239", "19035"));
     default_ip_port_vector.append(IP_Port("127.0.0.1", "50420"));
+#else
+    default_ip_port_vector.append(IP_Port("106.13.107.239", "19035"));
+    default_ip_port_vector.append(IP_Port("127.0.0.1", "50320"));
+#endif
 
     InitWidget();
 }

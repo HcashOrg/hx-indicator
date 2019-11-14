@@ -18,7 +18,7 @@
 #include "depositpage/FeeChargeWidget.h"
 #include "showcontentdialog.h"
 #include "control/BlankDefaultWidget.h"
-
+#include "TotalLockedDialog.h"
 
 static const int ROWNUMBER = 6;
 static std::mutex calMutex;
@@ -774,6 +774,7 @@ void MinerPage::InitStyle()
     ui->lockToMinerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->registerBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
     ui->forecloseAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
+    ui->totalInfoAllBtn->setStyleSheet(TOOLBUTTON_STYLE_1);
 }
 
 void MinerPage::updateCheckState(int number)
@@ -1243,4 +1244,11 @@ void MinerPage::modifyStringLength(QString &first, QString &second, bool fillApp
             }
         }
     }
+}
+
+void MinerPage::on_totalInfoAllBtn_clicked()
+{
+    TotalLockedDialog dialog;
+    dialog.move(ui->totalInfoAllBtn->mapToGlobal(QPoint(-120,24)));
+    dialog.exec();
 }

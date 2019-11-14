@@ -217,12 +217,13 @@ void HXChain:: startExe()
         strList << "--replay-blockchain";
     }
 
+#ifndef TEST_WALLET
     if( HXChain::getInstance()->configFile->value("/settings/contractReplayNextTime",false).toBool()
             ||  HXChain::getInstance()->configFile->value("/settings/contractReplay1",true).toBool())
     {
         strList << "--replay-withoutContract";
     }
-
+#endif
 
     HXChain::getInstance()->configFile->setValue("/settings/resyncNextTime",false);
     HXChain::getInstance()->configFile->setValue("/settings/dbReplay14",false);
@@ -2370,3 +2371,12 @@ QString toEasyRead(unsigned long long number, int precision, int effectiveBitsNu
 
 
 
+
+QString calculateMd5(QString source)
+{
+    QByteArray byte_array;
+    byte_array.append(source.toUtf8());
+    QByteArray hash_byte_array = QCryptographicHash::hash(byte_array, QCryptographicHash::Md5);
+    QString md5 = hash_byte_array.toHex();
+    return md5;
+}

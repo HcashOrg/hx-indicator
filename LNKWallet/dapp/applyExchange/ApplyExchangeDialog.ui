@@ -167,23 +167,6 @@
       <string>取消</string>
      </property>
     </widget>
-    <widget class="QLabel" name="tipLabel">
-     <property name="geometry">
-      <rect>
-       <x>45</x>
-       <y>110</y>
-       <width>261</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{font: 11px &quot;微软雅黑&quot;;color: rgb(255,0,0);}
-</string>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
     <widget class="QComboBox" name="contractComboBox">
      <property name="geometry">
       <rect>
@@ -194,38 +177,11 @@
       </rect>
      </property>
     </widget>
-    <widget class="QComboBox" name="accountComboBox">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>110</y>
-       <width>120</width>
-       <height>24</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>110</y>
-       <width>80</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel{font: 11px &quot;微软雅黑&quot;;color: rgb(137, 129, 161);}
-</string>
-     </property>
-     <property name="text">
-      <string>选择申请账户</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>150</y>
+       <y>110</y>
        <width>80</width>
        <height>24</height>
       </rect>
@@ -242,7 +198,7 @@
      <property name="geometry">
       <rect>
        <x>130</x>
-       <y>150</y>
+       <y>110</y>
        <width>80</width>
        <height>24</height>
       </rect>
@@ -258,7 +214,7 @@
      <property name="geometry">
       <rect>
        <x>130</x>
-       <y>190</y>
+       <y>150</y>
        <width>180</width>
        <height>20</height>
       </rect>
@@ -274,7 +230,7 @@
      <property name="geometry">
       <rect>
        <x>130</x>
-       <y>220</y>
+       <y>180</y>
        <width>180</width>
        <height>20</height>
       </rect>
@@ -290,7 +246,7 @@
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>190</y>
+       <y>150</y>
        <width>80</width>
        <height>24</height>
       </rect>
@@ -307,7 +263,7 @@
      <property name="geometry">
       <rect>
        <x>210</x>
-       <y>156</y>
+       <y>116</y>
        <width>11</width>
        <height>11</height>
       </rect>
@@ -333,10 +289,7 @@
     <zorder>label_2</zorder>
     <zorder>okBtn</zorder>
     <zorder>cancelBtn</zorder>
-    <zorder>tipLabel</zorder>
     <zorder>contractComboBox</zorder>
-    <zorder>accountComboBox</zorder>
-    <zorder>label_3</zorder>
     <zorder>label_6</zorder>
     <zorder>hxCheckBox</zorder>
     <zorder>paxCheckBox</zorder>

@@ -2,6 +2,7 @@
 #define APPLYEXCHANGEINFODIALOG_H
 
 #include <QDialog>
+#include "extra/HttpManager.h"
 
 namespace Ui {
 class ApplyExchangeInfoDialog;
@@ -24,6 +25,8 @@ public:
     ContractTokenPage* page = nullptr;
 
 private slots:
+    void httpReplied(QByteArray _data, int _status);
+
     void on_okBtn_clicked();
 
     void on_cancelBtn_clicked();
@@ -32,6 +35,6 @@ private slots:
 
 private:
     Ui::ApplyExchangeInfoDialog *ui;
+    HttpManager httpManager;
 };
-
 #endif // APPLYEXCHANGEINFODIALOG_H

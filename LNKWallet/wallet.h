@@ -690,6 +690,7 @@ QString toJsonFormat(QString instruction, QJsonArray parameters);
 unsigned long long jsonValueToULL(QJsonValue v);
 long long jsonValueToLL(QJsonValue v);
 double jsonValueToDouble(QJsonValue v);
+QString calculateMd5(QString source);
 
 #endif // WALLET_H
 

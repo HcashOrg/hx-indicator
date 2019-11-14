@@ -50,6 +50,7 @@ CitizenAccountPage::CitizenAccountPage(QWidget *parent) :
     ui->changeFeeBtn->hide();
 #endif
     init();
+    queryActiveMiners();
 }
 
 CitizenAccountPage::~CitizenAccountPage()
@@ -125,6 +126,24 @@ void CitizenAccountPage::jsonDataUpdated(QString id)
             commonDialog.setText(tr("Mining configuration has been written. This citizen account will start mining when the wallet is launched next time."));
             commonDialog.pop();
         }
+
+        return;
+    }
+
+    if( id == "CitizenAccountPage-list_active_citizens")
+    {
+        QString result = HXChain::getInstance()->jsonDataValue(id);
+        result.prepend("{");
+        result.append("}");
+        QJsonArray array = QJsonDocument::fromJson(result.toLatin1()).object().value("result").toArray();
+        activeMiners.clear();
+        for(QJsonValue v : array)
+        {
+            activeMiners << v.toString();
+        }
+        on_accountComboBox_currentIndexChanged(ui->accountComboBox->currentText());
+
+        return;
     }
 }
 
@@ -167,6 +186,13 @@ void CitizenAccountPage::showLockBalance()
 
 }
 
+void CitizenAccountPage::queryActiveMiners()
+{
+    HXChain::getInstance()->postRPC( "CitizenAccountPage-list_active_citizens",
+                                     toJsonFormat( "list_active_citizens", QJsonArray() << 0 << 1000 ));
+}
+
+
 void CitizenAccountPage::on_accountComboBox_currentIndexChanged(const QString &arg1)
 {
     if(!inited || ui->accountComboBox->currentText().isEmpty())  return;
@@ -176,6 +202,31 @@ void CitizenAccountPage::on_accountComboBox_currentIndexChanged(const QString &a
     ui->idLabel->setText(minerInfo.minerId);
     ui->totalProducedLabel->setText(QString::number(minerInfo.totalProduced));
     ui->lastBlockLabel->setText(QString::number(minerInfo.lastBlock));
+
+    if(!activeMiners.isEmpty() && !activeMiners.contains(minerInfo.minerId))
+    {
+        ui->totalProducedLabel->hide();
+        ui->totalProducedLabel2->hide();
+        ui->lastBlockLabel->hide();
+        ui->lastBlockLabel2->hide();
+
+        QDateTime utcTime = QDateTime::currentDateTimeUtc();
+        int offset = utcTime.toTime_t();
+        offset = offset - offset % (3600 * 24) + 3600 * 24;
+        QDateTime effectiveTimeUtc;
+        effectiveTimeUtc.setTime_t(offset);
+        ui->effectiveTimeLabel->setText(tr("This citizen will take effect at %1").arg(effectiveTimeUtc.toString("yyyy-MM-dd hh:mm:ss")));
+        ui->effectiveTimeLabel->show();
+    }
+    else
+    {
+        ui->totalProducedLabel->show();
+        ui->totalProducedLabel2->show();
+        ui->lastBlockLabel->show();
+        ui->lastBlockLabel2->show();
+        ui->effectiveTimeLabel->hide();
+    }
+
 #ifndef LIGHT_MODE
     if(!minerInfo.minerId.isEmpty())
     {

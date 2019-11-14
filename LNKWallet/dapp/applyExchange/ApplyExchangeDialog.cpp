@@ -50,13 +50,6 @@ void ApplyExchangeDialog::pop()
 
 void ApplyExchangeDialog::init()
 {
-    ui->accountComboBox->clear();
-    QStringList accounts = HXChain::getInstance()->accountInfoMap.keys();
-    ui->accountComboBox->addItems(accounts);
-    if(accounts.contains(HXChain::getInstance()->currentAccount))
-    {
-        ui->accountComboBox->setCurrentText(HXChain::getInstance()->currentAccount);
-    }
 
 }
 
@@ -107,24 +100,21 @@ void ApplyExchangeDialog::on_okBtn_clicked()
         if(ui->paxCheckBox->isChecked())    amount += 10000;
 
         close();
-        if(page)    page->gotoTransferPage(ui->accountComboBox->currentText(), APPLY_EXCHANGE_ADDRESS, QString::number(amount), ui->memoLabel->text());
+        if(page)    page->gotoTransferPage("", APPLY_EXCHANGE_ADDRESS, QString::number(amount), ui->memoLabel->text());
     }
 }
 
 void ApplyExchangeDialog::calculateMemo()
 {
     QString contractAddress = ui->contractComboBox->currentData().toString();
-    AccountInfo info = HXChain::getInstance()->accountInfoMap.value(ui->accountComboBox->currentText());
 
     ui->memoLabel->clear();
-    if(contractAddress.isEmpty() || info.address.isEmpty())     return;
+    if(contractAddress.isEmpty() || (!ui->hxCheckBox->isChecked() && !ui->paxCheckBox->isChecked()))     return;
+    QString str;
+    if(ui->hxCheckBox->isChecked())     str += "HX";
+    if(ui->paxCheckBox->isChecked())     str += "PAX";
 
-    QByteArray byte_array;
-    byte_array.append((contractAddress + info.address).toUtf8());
-    QByteArray hash_byte_array = QCryptographicHash::hash(byte_array, QCryptographicHash::Md5);
-    QString md5 = hash_byte_array.toHex();
-    qDebug() <<"mmmmmmmm " << md5;
-    ui->memoLabel->setText(md5.left(8));
+    ui->memoLabel->setText(calculateMd5(contractAddress + str).left(8));
 }
 
 
@@ -135,14 +125,19 @@ void ApplyExchangeDialog::on_contractComboBox_currentIndexChanged(const QString 
     calculateMemo();
 }
 
-void ApplyExchangeDialog::on_accountComboBox_currentIndexChanged(const QString &arg1)
-{
-    if(!inited)     return;
-    calculateMemo();
-}
 
 void ApplyExchangeDialog::on_copyBtn_clicked()
 {
     QClipboard* clipBoard = QApplication::clipboard();
     clipBoard->setText(ui->memoLabel->text());
+}
+
+void ApplyExchangeDialog::on_hxCheckBox_stateChanged(int arg1)
+{
+    calculateMemo();
+}
+
+void ApplyExchangeDialog::on_paxCheckBox_stateChanged(int arg1)
+{
+    calculateMemo();
 }

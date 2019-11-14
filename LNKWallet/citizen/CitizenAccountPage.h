@@ -38,6 +38,9 @@ private:
     void paintEvent(QPaintEvent*);
     void showLockBalance();
     PageScrollWidget *pageWidget;
+
+    void queryActiveMiners();
+    QStringList activeMiners;
 };
 
 #endif // CITIZENACCOUNTPAGE_H

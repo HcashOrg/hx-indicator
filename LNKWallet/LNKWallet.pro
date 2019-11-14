@@ -10,9 +10,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TEMPLATE = app
 
-#DEFINES += TEST_WALLET
+DEFINES += TEST_WALLET
 #DEFINES += SAFE_VERSION
-DEFINES += LIGHT_MODE
+#DEFINES += LIGHT_MODE
 
 
 if(contains(DEFINES,TEST_WALLET)){
@@ -246,7 +246,8 @@ SOURCES += main.cpp\
     control/CoverWidget.cpp \
     dapp/applyExchange/ApplyExchangeDialog.cpp \
     dapp/applyExchange/ApplyChoiceDialog.cpp \
-    dapp/applyExchange/ApplyExchangeInfoDialog.cpp
+    dapp/applyExchange/ApplyExchangeInfoDialog.cpp \
+    miner/TotalLockedDialog.cpp
 
 
 HEADERS  += firstlogin.h \
@@ -440,7 +441,8 @@ HEADERS  += firstlogin.h \
     dapp/ApplyExchangeDialog.h \
     dapp/applyExchange/ApplyExchangeDialog.h \
     dapp/applyExchange/ApplyChoiceDialog.h \
-    dapp/applyExchange/ApplyExchangeInfoDialog.h
+    dapp/applyExchange/ApplyExchangeInfoDialog.h \
+    miner/TotalLockedDialog.h
 
 FORMS    += firstlogin.ui \
     normallogin.ui \
@@ -595,7 +597,8 @@ FORMS    += firstlogin.ui \
     control/CoverWidget.ui \
     dapp/applyExchange/ApplyExchangeDialog.ui \
     dapp/applyExchange/ApplyChoiceDialog.ui \
-    dapp/applyExchange/ApplyExchangeInfoDialog.ui
+    dapp/applyExchange/ApplyExchangeInfoDialog.ui \
+    miner/TotalLockedDialog.ui
 
 win32{
     DISTFILES += logo.rc
