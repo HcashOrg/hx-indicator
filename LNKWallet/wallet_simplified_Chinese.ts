@@ -1861,7 +1861,7 @@ better not transfer or upgrade</source>
         <translation type="obsolete">%1地址</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="500"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="499"/>
         <source>please wait</source>
         <translation type="unfinished">请稍等</translation>
     </message>
@@ -1872,7 +1872,7 @@ better not transfer or upgrade</source>
     </message>
     <message>
         <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="93"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="498"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="497"/>
         <source>select withdraw to input address</source>
         <translation type="unfinished">选择提现并输入提现地址</translation>
     </message>
@@ -1901,32 +1901,32 @@ better not transfer or upgrade</source>
         <translation type="unfinished">转账失败！</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="360"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="371"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="394"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="359"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="370"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="393"/>
         <source>number cannot less than </source>
         <translation type="unfinished">数量不能小于 </translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="401"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="400"/>
         <source>balance left should not less than </source>
         <oldsource>balance less than </oldsource>
         <translation type="unfinished">剩余金额不能少于 </translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="448"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="447"/>
         <source> %1 is pending!</source>
         <translation type="unfinished">%1 已划出，尚未到账！</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="535"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="534"/>
         <source>make sure there&apos;s 0.001 BTC at least in tunnel address</source>
         <oldsource>make sure there&apos;s 0.00045 ETH at least in tunnel address</oldsource>
         <translation type="unfinished">请确保通道地址内至少有0.001BTC</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="313"/>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="317"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="312"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="316"/>
         <source>about</source>
         <translation type="unfinished">约</translation>
     </message>
@@ -1935,7 +1935,7 @@ better not transfer or upgrade</source>
         <translation type="obsolete">操作完成！</translation>
     </message>
     <message>
-        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="249"/>
+        <location filename="capitalTransferPage/CapitalTransferPage.cpp" line="248"/>
         <source>max:</source>
         <translation type="unfinished">最大:</translation>
     </message>

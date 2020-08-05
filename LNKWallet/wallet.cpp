@@ -18,8 +18,8 @@
 #include <QtMath>
 
 #ifdef  WIN32
-#define NODE_PROC_NAME      "hx_node"WALLET_EXE_SUFFIX".exe"
-#define CLIENT_PROC_NAME    "hx_client"WALLET_EXE_SUFFIX".exe"
+#define NODE_PROC_NAME      "hx_node" WALLET_EXE_SUFFIX ".exe"
+#define CLIENT_PROC_NAME    "hx_client" WALLET_EXE_SUFFIX ".exe"
 #define COPY_PROC_NAME      "Copy.exe"
 #else
 #define NODE_PROC_NAME      "./hx_node" WALLET_EXE_SUFFIX
@@ -51,7 +51,7 @@ static const QString CLIENT_PROC_MD5 = "tttttttttttttt";
 #endif
 #endif
 
-HXChain* HXChain::goo = 0;
+HXChain* HXChain::goo = nullptr;
 static const QMap<QString,double>    defaultAutoWithdrawAmountMap = { {"BTC",10},{"LTC",1000},{"HC",10000},{"ETH",100} };
 extern const QStringList ERCAssets = {"PAX","ELF","TITAN"};
 
@@ -63,11 +63,11 @@ HXChain::HXChain()
     clientProc = new QProcess;
     isExiting = false;
     isBlockSyncFinish = false;
-    wsManager = NULL;
+    wsManager = nullptr;
 
     getSystemEnvironmentPath();
 
-    currentDialog = NULL;
+    currentDialog = nullptr;
     currentPort = CLIENT_RPC_PORT;
     currentAccount = "";
 
@@ -136,8 +136,7 @@ HXChain::HXChain()
     file.open(QIODevice::Truncate | QIODevice::WriteOnly);
     file.close();
 
-//    contactsFile = new QFile( "contacts.dat");
-    contactsFile = NULL;
+    contactsFile = nullptr;
 
     pendingFile  = new QFile( walletConfigPath + "/pending.dat");
 
@@ -251,6 +250,7 @@ void HXChain::startClient(QString ip, QString port)
             << QString("--server-rpc-endpoint=ws://%1:%2").arg(ip).arg(port)
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
 
+    logToFile(strList);
     clientProc->start(CLIENT_PROC_NAME,strList);
 }
 
@@ -320,6 +320,7 @@ void HXChain::delayedLaunchClient()
             << QString("--server-rpc-endpoint=ws://127.0.0.1:%1").arg(NODE_RPC_PORT)
             << QString("--rpc-endpoint=127.0.0.1:%1").arg(CLIENT_RPC_PORT);
 
+    logToFile(strList);
     clientProc->start(CLIENT_PROC_NAME,strList);
 }
 
@@ -1983,6 +1984,21 @@ double roundDown(double decimal, int precision)
 
     return result;
 }
+
+QString roundDownStr(QString decimal, int precision)
+{
+    if(!decimal.contains(".") || precision < 0)  return decimal;
+    int index = decimal.indexOf(".");
+    if(index + precision < decimal.size())
+    {
+        return decimal.mid(0,index + precision + 1);
+    }
+    else
+    {
+        return decimal;
+    }
+}
+
 
 QString removeLastZeros(QString number)     // 去掉小数最后面的0
 {

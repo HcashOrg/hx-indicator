@@ -1,6 +1,7 @@
 #include "CaptialNotify.h"
 
 #include <mutex>
+#include <memory>
 #include <QTimer>
 #include "extra/HttpManager.h"
 #include "wallet.h"

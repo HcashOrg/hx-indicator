@@ -816,6 +816,11 @@ void MinerPage::checkBtnVisible()
     {
         ui->forecloseAllBtn->show();
     }
+    if (ui->stackedWidget->currentIndex() == 3) {
+        ui->totalInfoAllBtn->show();
+    } else {
+        ui->totalInfoAllBtn->hide();
+    }
 }
 
 void MinerPage::autoLockToCitizen()

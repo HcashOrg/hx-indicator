@@ -9,7 +9,7 @@ class WitnessConfig : public QObject
 {
     Q_OBJECT
 public:
-    explicit WitnessConfig(QObject *parent = 0);
+    explicit WitnessConfig(QObject *parent = nullptr);
     ~WitnessConfig();
 
     bool inited = false;
@@ -35,7 +35,7 @@ signals:
 public slots:
 
 private:
-    QFile* file = NULL;
+    QFile* file = nullptr;
     QStringList data;
     QMutex mutex;
 };

@@ -36,7 +36,7 @@
 #define PUBKEY_PREFIX "HX"
 #define ASSET_PRECISION 5
 
-#define WALLET_VERSION "1.3.1"           // 版本号
+#define WALLET_VERSION "1.3.4"           // 版本号
 
 #ifdef  LIGHT_MODE
 #define AUTO_REFRESH_TIME 15000
@@ -661,6 +661,7 @@ private:
 
 QString doubleTo5Decimals(double number);
 double roundDown(double decimal, int precision = 0);        // 根据精度 向下取"整"
+QString roundDownStr(QString decimal, int precision);       // 向下取整 返回precision位小数
 QString removeLastZeros(QString number);        // qstring::number() 对小数的处理有问题  使用std::to_string() 然后把后面的0去掉
 QString getBigNumberString(unsigned long long number,int precision);
 QString decimalToIntegerStr(QString number, int precision);

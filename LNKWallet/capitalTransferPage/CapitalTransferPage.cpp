@@ -239,8 +239,7 @@ void CapitalTransferPage::httpReplied(QByteArray _data, int _status)
 
     QJsonObject object  = QJsonDocument::fromJson(_data).object().value("result").toObject();
 
-    double balance = jsonValueToDouble(object.value("balance"));
-    _p->asset_max_ammount = QString::number(std::max<double>(0,balance),'f',_p->precision) ;
+    _p->asset_max_ammount = roundDownStr(object.value("balance").toString(), _p->precision);
     ui->label_number->setText(_p->asset_max_ammount + " "+ revertERCSymbol(_p->symbol));
 
     QDoubleValidator *validator = new QDoubleValidator(0,_p->asset_max_ammount.toDouble(),_p->precision,this);
